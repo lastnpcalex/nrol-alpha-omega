@@ -1,3 +1,10 @@
 __pycache__/
 *.pyc
 logs/
+briefs/
+dashboards/
+
+# Topic instance data (domain-specific, not the framework)
+# Only _template.json is tracked — active topics are local working data
+topics/*.json
+!topics/_template.json

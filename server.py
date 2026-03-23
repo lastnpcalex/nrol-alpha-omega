@@ -18,6 +18,7 @@ PORT = int(os.environ.get("ALPHA_OMEGA_PORT", 8098))
 DIR = Path(__file__).parent
 TOPICS_DIR = DIR / "topics"
 BRIEFS_DIR = DIR / "briefs"
+DASHBOARDS_DIR = DIR / "dashboards"
 
 
 class Handler(http.server.SimpleHTTPRequestHandler):
@@ -63,6 +64,26 @@ class Handler(http.server.SimpleHTTPRequestHandler):
                 self.end_headers()
                 self.wfile.write(brief_path.read_bytes())
                 return
+            self.send_error(404)
+            return
+
+        # Dashboard snapshots list
+        if path == "/dashboards" or path == "/dashboards/":
+            return self._serve_dashboards_list()
+
+        # Dashboard snapshot file
+        if path.startswith("/dashboards/") and path.endswith(".html"):
+            parts = path.split("/")
+            if len(parts) >= 4:
+                slug = parts[2]
+                filename = parts[3]
+                dash_path = DASHBOARDS_DIR / slug / filename
+                if dash_path.exists():
+                    self.send_response(200)
+                    self.send_header("Content-Type", "text/html; charset=utf-8")
+                    self.end_headers()
+                    self.wfile.write(dash_path.read_bytes())
+                    return
             self.send_error(404)
             return
 
@@ -121,6 +142,14 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             self.wfile.write(json.dumps(report, ensure_ascii=False).encode("utf-8"))
         except Exception as e:
             self.send_error(500, str(e))
+
+    def _serve_dashboards_list(self):
+        from engine import list_dashboards
+        dashboards = list_dashboards()
+        self.send_response(200)
+        self.send_header("Content-Type", "application/json")
+        self.end_headers()
+        self.wfile.write(json.dumps(dashboards, ensure_ascii=False).encode("utf-8"))
 
     def _serve_briefs_list(self, slug):
         brief_dir = BRIEFS_DIR / slug

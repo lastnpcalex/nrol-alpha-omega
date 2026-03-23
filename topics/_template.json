@@ -1,23 +1,25 @@
 {
+  "_protocol": "See PROTOCOL.md for full scaffolding instructions",
+
   "meta": {
     "slug": "CHANGE-ME",
     "title": "Topic Title",
     "question": "What specific, measurable thing are we estimating?",
-    "resolution": "Observable criterion that resolves the question",
+    "resolution": "Observable criterion that resolves the question (must be verifiable by third party)",
     "created": "",
     "lastUpdated": "",
     "status": "ACTIVE",
     "dayCount": 0,
-    "startDate": "2026-01-01T00:00:00Z",
+    "startDate": "",
     "classification": "ROUTINE"
   },
 
   "model": {
     "hypotheses": {
-      "H1": { "label": "Outcome A", "midpoint": 0, "unit": "weeks", "posterior": 0.25 },
+      "H1": { "label": "Outcome A (shortest/lowest)", "midpoint": 0, "unit": "weeks", "posterior": 0.25 },
       "H2": { "label": "Outcome B", "midpoint": 0, "unit": "weeks", "posterior": 0.25 },
       "H3": { "label": "Outcome C", "midpoint": 0, "unit": "weeks", "posterior": 0.25 },
-      "H4": { "label": "Outcome D", "midpoint": 0, "unit": "weeks", "posterior": 0.25 }
+      "H4": { "label": "Outcome D (longest/highest)", "midpoint": 0, "unit": "weeks", "posterior": 0.25 }
     },
     "expectedValue": 0,
     "expectedUnit": "weeks",
@@ -27,38 +29,47 @@
   "subModels": {},
 
   "indicators": {
+    "_design_rules": [
+      "Each indicator must be OBSERVABLE — actions, not opinions",
+      "Each must have a clear fired/not-fired threshold",
+      "Every hypothesis needs at least one pro AND one anti indicator",
+      "Governor flags unfalsifiable hypotheses as DEGRADED"
+    ],
     "tiers": {
       "tier1_critical": [
-        { "id": "example_t1", "desc": "Near-certain indicator of resolution", "status": "NOT_FIRED", "firedDate": null, "note": null, "posteriorEffect": "Major shift toward H1" }
+        { "id": "t1_example", "desc": "Near-certain signal of [outcome]. MUST be observable action, not rhetoric.", "status": "NOT_FIRED", "firedDate": null, "note": null, "posteriorEffect": "Major shift: [which H] +15-30pp" }
       ],
       "tier2_strong": [
-        { "id": "example_t2", "desc": "Strong signal indicator", "status": "NOT_FIRED", "firedDate": null, "note": null, "posteriorEffect": "Moderate shift" }
+        { "id": "t2_example", "desc": "Strong signal. Observable, verifiable.", "status": "NOT_FIRED", "firedDate": null, "note": null, "posteriorEffect": "Moderate shift: [which H] +5-15pp" }
       ],
       "tier3_suggestive": [
-        { "id": "example_t3", "desc": "Suggestive indicator", "status": "NOT_FIRED", "firedDate": null, "note": null, "posteriorEffect": "Minor shift or thesis confirmation" }
+        { "id": "t3_example", "desc": "Suggestive signal or thesis confirmation.", "status": "NOT_FIRED", "firedDate": null, "note": null, "posteriorEffect": "Minor shift: [which H] +1-5pp" }
       ],
       "anti_indicators": [
-        { "id": "example_anti", "desc": "Indicator that reduces primary thesis probability", "status": "NOT_FIRED", "firedDate": null, "note": null, "posteriorEffect": "Reduces primary hypothesis" }
+        { "id": "anti_h1", "desc": "Evidence that would REDUCE H1 probability", "status": "NOT_FIRED", "firedDate": null, "note": null, "posteriorEffect": "H1 -Xpp" },
+        { "id": "anti_h2", "desc": "Evidence that would REDUCE H2 probability", "status": "NOT_FIRED", "firedDate": null, "note": null, "posteriorEffect": "H2 -Xpp" },
+        { "id": "anti_h3", "desc": "Evidence that would REDUCE H3 probability", "status": "NOT_FIRED", "firedDate": null, "note": null, "posteriorEffect": "H3 -Xpp" },
+        { "id": "anti_h4", "desc": "Evidence that would REDUCE H4 probability", "status": "NOT_FIRED", "firedDate": null, "note": null, "posteriorEffect": "H4 -Xpp" }
       ]
     }
   },
 
   "actorModel": {
-    "description": "Decision-theoretic framework for the key actors driving this outcome",
+    "description": "Decision-theoretic framework: who makes the decisions that drive this outcome?",
     "actors": {
       "actor1": {
         "name": "Key Decision Maker",
         "role": "Primary actor whose decisions drive the outcome",
-        "decisionStyle": "Describe their decision-making pattern",
-        "biases": ["Known bias 1", "Known bias 2"],
-        "filters": ["Institutional filter 1"],
-        "overrides": ["Condition where filters are bypassed"]
+        "decisionStyle": "How they decide (rational/impulsive/institutional/etc.)",
+        "biases": ["Known bias 1"],
+        "filters": ["Institutional constraint on behavior"],
+        "overrides": ["Condition where filters get bypassed"]
       }
     },
     "methodology": [
       "ACTIONS OVER RHETORIC — only verified events move posteriors",
-      "TAG EVERYTHING — separate rhetoric from action",
-      "DON'T FRONT-RUN — let indicators confirm, don't predict ahead",
+      "TAG EVERYTHING — separate rhetoric from action in evidence log",
+      "DON'T FRONT-RUN — set tripwires and let news confirm",
       "SOCIALIZATION DETECTION — recognize narrative prep patterns"
     ]
   },
@@ -66,8 +77,8 @@
   "evidenceLog": [],
 
   "dataFeeds": {
-    "example_feed": {
-      "label": "Key Metric",
+    "primary_metric": {
+      "label": "Primary Metric",
       "value": 0,
       "unit": "units",
       "baseline": 0,

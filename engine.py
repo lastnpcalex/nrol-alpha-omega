@@ -14,6 +14,7 @@ from typing import Optional
 
 TOPICS_DIR = Path(__file__).parent / "topics"
 BRIEFS_DIR = Path(__file__).parent / "briefs"
+DASHBOARDS_DIR = Path(__file__).parent / "dashboards"
 
 
 # ---------------------------------------------------------------------------
@@ -74,6 +75,11 @@ def create_topic(config: dict) -> dict:
     else:
         topic = _empty_topic()
 
+    # Remove protocol notes from template
+    topic.pop("_protocol", None)
+    if "indicators" in topic:
+        topic["indicators"].pop("_design_rules", None)
+
     # Overlay config onto template
     _deep_merge(topic, config)
 
@@ -89,6 +95,41 @@ def create_topic(config: dict) -> dict:
     validate_topic(topic)
     save_topic(topic)
     return topic
+
+
+def scaffold_topic(slug: str) -> str:
+    """
+    Create a new topic scaffold from template. Does NOT validate — the user
+    needs to fill in the blanks first. Returns the file path.
+    """
+    template_path = TOPICS_DIR / "_template.json"
+    if template_path.exists():
+        with open(template_path, "r", encoding="utf-8") as f:
+            topic = json.load(f)
+    else:
+        topic = _empty_topic()
+
+    # Set the slug and timestamps
+    now = _now_iso()
+    topic["meta"]["slug"] = slug
+    topic["meta"]["created"] = now
+    topic["meta"]["lastUpdated"] = now
+    topic["meta"]["startDate"] = now
+
+    # Write initial prior to history
+    hypotheses = topic.get("model", {}).get("hypotheses", {})
+    if hypotheses:
+        history_entry = {"date": now[:10], "note": "Prior (uniform — fill in domain knowledge)"}
+        for k, h in hypotheses.items():
+            history_entry[k] = h["posterior"]
+        topic["model"]["posteriorHistory"] = [history_entry]
+
+    # Save without validation (user needs to fill in)
+    path = TOPICS_DIR / f"{slug}.json"
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(topic, f, indent=2, ensure_ascii=False)
+
+    return str(path)
 
 
 # ---------------------------------------------------------------------------
@@ -521,6 +562,119 @@ def _empty_topic() -> dict:
 
 
 # ---------------------------------------------------------------------------
+# Dashboard Snapshot Generation
+# ---------------------------------------------------------------------------
+
+def generate_dashboard(topic: dict, event_label: str = None) -> str:
+    """
+    Generate a standalone HTML dashboard snapshot with topic state baked in.
+    Returns the saved file path.
+    """
+    slug = topic["meta"]["slug"]
+    now = datetime.now(timezone.utc)
+    timestamp = now.strftime("%Y-%m-%d-%H%M")
+    label = event_label or "snapshot"
+    safe_label = "".join(c if c.isalnum() or c in "-_" else "-" for c in label)
+
+    # Read the dashboard template
+    template_path = Path(__file__).parent / "dashboard.html"
+    template = template_path.read_text(encoding="utf-8")
+
+    # Inject state directly into the HTML so it works standalone
+    state_json = json.dumps(topic, ensure_ascii=False, indent=2)
+
+    # Build governance report if available
+    gov_json = "null"
+    try:
+        from governor import governance_report
+        gov_json = json.dumps(governance_report(topic), ensure_ascii=False, indent=2)
+    except Exception:
+        pass
+
+    # Replace the dynamic loading with baked-in state
+    injection = f"""<script>
+// --- BAKED-IN STATE (snapshot: {timestamp} / {label}) ---
+const SNAPSHOT_MODE = true;
+const SNAPSHOT_STATE = {state_json};
+const SNAPSHOT_GOV = {gov_json};
+const SNAPSHOT_META = {{
+  generated: "{now.isoformat(timespec='seconds')}",
+  event: "{label}",
+  slug: "{slug}"
+}};
+</script>"""
+
+    # Replace the init script block to use baked-in data
+    snapshot_init = """<script>
+// --- Snapshot overrides ---
+if (typeof SNAPSHOT_MODE !== 'undefined' && SNAPSHOT_MODE) {
+  // Override fetch-based loading with baked-in state
+  async function loadTopics() {
+    const sel = document.getElementById('topicSelect');
+    sel.innerHTML = '<option value="">Select topic...</option>';
+    const opt = document.createElement('option');
+    opt.value = SNAPSHOT_META.slug;
+    opt.textContent = SNAPSHOT_STATE.meta.title;
+    opt.selected = true;
+    sel.appendChild(opt);
+    switchTopic(SNAPSHOT_META.slug);
+  }
+  async function switchTopic(slug) {
+    if (!slug) return;
+    currentSlug = slug;
+    state = SNAPSHOT_STATE;
+    document.getElementById('emptyState').style.display = 'none';
+    document.getElementById('mainGrid').style.display = '';
+    document.getElementById('topicHeader').style.display = '';
+    render();
+    if (SNAPSHOT_GOV) { govData = SNAPSHOT_GOV; renderGovernance(); renderVoI(); }
+  }
+  // Add snapshot banner
+  document.addEventListener('DOMContentLoaded', function() {
+    const banner = document.createElement('div');
+    banner.style.cssText = 'background:#1e293b;border-bottom:2px solid #f59e0b;padding:8px 24px;font-size:12px;color:#f59e0b;text-align:center;letter-spacing:1px;';
+    banner.textContent = 'SNAPSHOT: ' + SNAPSHOT_META.event + ' — ' + SNAPSHOT_META.generated;
+    document.body.insertBefore(banner, document.body.firstChild);
+    loadTopics();
+  });
+}
+</script>"""
+
+    # Insert injection before </head> and snapshot_init before </body>
+    html = template.replace("</head>", injection + "\n</head>")
+    html = html.replace("</body>", snapshot_init + "\n</body>")
+
+    # Save to dashboards/{slug}/{timestamp}-{label}.html
+    out_dir = DASHBOARDS_DIR / slug
+    out_dir.mkdir(parents=True, exist_ok=True)
+    filename = f"{timestamp}-{safe_label}.html"
+    out_path = out_dir / filename
+    out_path.write_text(html, encoding="utf-8")
+
+    return str(out_path)
+
+
+def list_dashboards(slug: str = None) -> list[dict]:
+    """List generated dashboard snapshots, optionally filtered by topic slug."""
+    results = []
+    if not DASHBOARDS_DIR.exists():
+        return results
+    search_dirs = [DASHBOARDS_DIR / slug] if slug else DASHBOARDS_DIR.iterdir()
+    for d in search_dirs:
+        if not d.is_dir():
+            continue
+        topic_slug = d.name
+        for p in sorted(d.glob("*.html"), reverse=True):
+            results.append({
+                "slug": topic_slug,
+                "filename": p.name,
+                "path": str(p),
+                "url": f"/dashboards/{topic_slug}/{p.name}",
+            })
+    return results
+
+
+# ---------------------------------------------------------------------------
 # CLI entry point (for testing)
 # ---------------------------------------------------------------------------
 
@@ -530,6 +684,7 @@ if __name__ == "__main__":
     if len(sys.argv) < 2:
         print("Usage: python engine.py <command> [args]")
         print("Commands: list, show <slug>, brief <slug>, validate <slug>, govern <slug>")
+        print("          scaffold <slug>, dashboard <slug> [event-label], dashboards [slug]")
         sys.exit(1)
 
     cmd = sys.argv[1]
@@ -590,6 +745,36 @@ if __name__ == "__main__":
             print(f"  {sys.argv[2]}: valid")
         except (ValueError, FileNotFoundError) as e:
             print(f"  {sys.argv[2]}: INVALID — {e}")
+
+    elif cmd == "scaffold" and len(sys.argv) > 2:
+        slug = sys.argv[2]
+        existing = TOPICS_DIR / f"{slug}.json"
+        if existing.exists():
+            print(f"  Topic already exists: {slug}")
+            sys.exit(1)
+        path = scaffold_topic(slug)
+        print(f"  Scaffolded: {path}")
+        print(f"  Next steps:")
+        print(f"    1. Edit topics/{slug}.json — fill in question, hypotheses, indicators")
+        print(f"    2. python engine.py validate {slug}")
+        print(f"    3. python engine.py govern {slug}")
+        print(f"    4. python engine.py dashboard {slug} initial")
+        print(f"  See PROTOCOL.md for full instructions.")
+
+    elif cmd == "dashboard" and len(sys.argv) > 2:
+        topic = load_topic(sys.argv[2])
+        update_day_count(topic)
+        label = sys.argv[3] if len(sys.argv) > 3 else None
+        path = generate_dashboard(topic, event_label=label)
+        print(f"  Dashboard saved: {path}")
+
+    elif cmd == "dashboards":
+        slug = sys.argv[2] if len(sys.argv) > 2 else None
+        dashes = list_dashboards(slug)
+        if not dashes:
+            print("  No dashboards generated yet.")
+        for d in dashes:
+            print(f"  {d['slug']:20s} {d['filename']}")
 
     else:
         print(f"Unknown command: {cmd}")
