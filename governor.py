@@ -255,11 +255,23 @@ def assess_claim_state(entry: dict, evidence_log: list) -> str:
       RETRIEVED → starts as PROPOSED (needs corroboration)
       USER_PROVIDED → starts as SUPPORTED (trusted source)
       DERIVED → starts as PROPOSED (analytical claim)
+
+    Override: predictions about the future are always PROPOSED regardless
+    of provenance. A trusted source saying "X will happen" is still a
+    prediction, not an observation.
     """
     provenance = entry.get("provenance", "RETRIEVED")
+    tag = entry.get("tag", "")
+    text_lower = entry.get("text", "").lower()
 
-    # Direct observations and user-provided start as SUPPORTED
-    if provenance in ("OBSERVED", "USER_PROVIDED"):
+    # Prediction override: future-tense claims are PROPOSED regardless of source.
+    # A prediction is not an observation — trust the source, not the forecast.
+    if _is_prediction(text_lower, tag):
+        # Still check for corroboration/contradiction below,
+        # but start from PROPOSED instead of SUPPORTED
+        pass
+    elif provenance in ("OBSERVED", "USER_PROVIDED"):
+        # Direct observations and user-provided facts start as SUPPORTED
         return "SUPPORTED"
 
     # Check for corroboration: another entry with similar content from different source
@@ -579,6 +591,13 @@ FAILURE_MODES = [
         "desc": "Major conclusion drawn from single source without corroboration",
         "severity": "MEDIUM",
     },
+    {
+        "id": "rhetoric_as_evidence",
+        "name": "Rhetoric as Evidence",
+        "desc": "RHETORIC-tagged evidence used to justify posterior shift — "
+                "actions over rhetoric violated",
+        "severity": "HIGH",
+    },
 ]
 
 
@@ -675,14 +694,42 @@ def check_update_proposal(topic: dict, proposed_posteriors: dict[str, float],
     else:
         results["checks"]["circular_reasoning"] = {"passed": True}
 
-    # 6. Modal Confusion
-    modal_markers = ["could", "might", "may", "possible", "potentially"]
-    certainty_markers = ["will", "certain", "inevitable", "guaranteed"]
+    # 6. Modal Confusion — check BOTH reason text AND referenced evidence
+    modal_markers = ["could", "might", "may", "possible", "potentially",
+                     "suggests", "indicates"]
+    certainty_markers = ["will", "certain", "inevitable", "guaranteed",
+                         "will be", "will have", "will achieve"]
+    modal_fail = False
+    modal_detail = ""
+
+    # Check reason text (original behavior)
     if (any(m in reason_lower for m in modal_markers) and
             any(m in reason_lower for m in certainty_markers)):
+        modal_fail = True
+        modal_detail = "Reason mixes possibility and certainty language"
+
+    # Check referenced evidence text (new: scan the evidence itself)
+    if has_evidence and not modal_fail:
+        for ref in evidence_refs:
+            for e in evidence_log:
+                if e.get("time") == ref:
+                    ev_text = e.get("text", "").lower()
+                    has_modal = any(m in ev_text for m in modal_markers)
+                    has_certain = any(m in ev_text for m in certainty_markers)
+                    if has_modal and has_certain:
+                        modal_fail = True
+                        modal_detail = (
+                            f"Evidence text mixes possibility and certainty: "
+                            f"'{e.get('text', '')[:80]}...'"
+                        )
+                        break
+            if modal_fail:
+                break
+
+    if modal_fail:
         results["checks"]["modal_confusion"] = {
             "passed": False,
-            "detail": "Reason mixes possibility language with certainty language",
+            "detail": modal_detail,
         }
         results["warnings"].append("modal_confusion")
     else:
@@ -705,6 +752,43 @@ def check_update_proposal(topic: dict, proposed_posteriors: dict[str, float],
             results["checks"]["quorum_failure"] = {"passed": True}
     else:
         results["checks"]["quorum_failure"] = {"passed": True}
+
+    # 8. Rhetoric as Evidence — ACTIONS OVER RHETORIC enforcement
+    #    If any referenced evidence has tag=RHETORIC, warn that posteriors
+    #    are being moved on talk rather than action.
+    if has_evidence and max_shift > 0.01:
+        rhetoric_refs = []
+        for ref in evidence_refs:
+            for e in evidence_log:
+                if e.get("time") == ref and e.get("tag") in ("RHETORIC",):
+                    rhetoric_refs.append(e.get("text", "")[:60])
+        if rhetoric_refs:
+            # Check if ALL refs are rhetoric (worse) vs some (less bad)
+            all_rhetoric = len(rhetoric_refs) == len(evidence_refs)
+            if all_rhetoric:
+                results["checks"]["rhetoric_as_evidence"] = {
+                    "passed": False,
+                    "detail": (
+                        f"ALL {len(rhetoric_refs)} evidence ref(s) are RHETORIC-tagged. "
+                        f"Per methodology: actions over rhetoric — only verified events "
+                        f"should move posteriors."
+                    ),
+                }
+                results["warnings"].append("rhetoric_as_evidence")
+            else:
+                results["checks"]["rhetoric_as_evidence"] = {
+                    "passed": False,
+                    "detail": (
+                        f"{len(rhetoric_refs)}/{len(evidence_refs)} evidence refs are "
+                        f"RHETORIC-tagged. Posterior shift partially grounded in talk, "
+                        f"not action."
+                    ),
+                }
+                results["warnings"].append("rhetoric_as_evidence")
+        else:
+            results["checks"]["rhetoric_as_evidence"] = {"passed": True}
+    else:
+        results["checks"]["rhetoric_as_evidence"] = {"passed": True}
 
     # Fill remaining checks as passed (need runtime context to fully evaluate)
     for mode in FAILURE_MODES:
@@ -819,6 +903,48 @@ def governance_report(topic: dict) -> dict:
 # ===========================================================================
 # Helpers
 # ===========================================================================
+
+# Future-tense markers that indicate a prediction rather than an observation.
+# These override provenance-based trust: a trusted source making a prediction
+# is still making a prediction, not reporting a fact.
+_PREDICTION_MARKERS = [
+    "will be", "will have", "will achieve", "will arrive", "will emerge",
+    "will replace", "will disrupt", "will enable",
+    "by 2026", "by 2027", "by 2028", "by 2029", "by 2030", "by 2031",
+    "by 2032", "by 2033", "by 2034", "by 2035",
+    "in 2 years", "in 3 years", "in 5 years", "in 10 years",
+    "within a year", "within 2 years", "within 5 years",
+    "expect", "predict", "forecast", "anticipate",
+    "is likely to", "is expected to", "is projected to",
+]
+
+# Tags that are inherently predictive/analytical rather than factual
+_PREDICTIVE_TAGS = {"RHETORIC", "INTEL"}
+
+
+def _is_prediction(text_lower: str, tag: str = "") -> bool:
+    """
+    Detect whether an evidence entry is a prediction about the future
+    rather than an observation of the present or past.
+
+    Predictions are always PROPOSED regardless of provenance because
+    the source's trustworthiness doesn't make the future more certain.
+    """
+    # Tag-based: RHETORIC and INTEL entries with future language are predictions
+    if tag in _PREDICTIVE_TAGS:
+        if any(marker in text_lower for marker in _PREDICTION_MARKERS):
+            return True
+
+    # Strong future markers regardless of tag
+    strong_markers = [
+        "will be able to", "will have achieved", "will be achieved",
+        "predict", "forecast", "by 203", "by 202",
+    ]
+    if any(marker in text_lower for marker in strong_markers):
+        return True
+
+    return False
+
 
 def _hours_since(iso_str: str) -> float:
     """Hours elapsed since an ISO8601 timestamp."""

@@ -2,19 +2,48 @@
 NRL-Alpha Omega — Generalized Epistemic Bayesian Estimator Engine
 
 Core engine for loading, updating, and managing topic state files.
-No external dependencies — Python stdlib only.
+Governor integration: epistemic governance is a hard gate on mutations,
+not an optional lint pass. The governor vets both data and thinking.
+
+No external dependencies — Python stdlib + governor.py only.
 """
 
 import json
 import os
 import copy
+import warnings
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Optional
 
+from governor import (
+    check_update_proposal,
+    classify_evidence,
+    assess_claim_state,
+    get_effective_weight,
+    validate_hypotheses,
+    compute_topic_rt,
+    compute_entropy,
+    compute_max_entropy,
+    compute_uncertainty_ratio,
+    audit_evidence_freshness,
+)
+
 TOPICS_DIR = Path(__file__).parent / "topics"
 BRIEFS_DIR = Path(__file__).parent / "briefs"
 DASHBOARDS_DIR = Path(__file__).parent / "dashboards"
+
+
+# ---------------------------------------------------------------------------
+# Governance Exception
+# ---------------------------------------------------------------------------
+
+class GovernanceError(Exception):
+    """Raised when a governor check blocks an operation."""
+    def __init__(self, message: str, failures: list = None, warnings: list = None):
+        super().__init__(message)
+        self.failures = failures or []
+        self.warnings = warnings or []
 
 
 # ---------------------------------------------------------------------------
@@ -33,9 +62,63 @@ def load_topic(slug: str) -> dict:
 
 
 def save_topic(topic: dict) -> None:
-    """Write topic state back to disk."""
+    """Write topic state back to disk with embedded governance snapshot."""
     slug = topic["meta"]["slug"]
     topic["meta"]["lastUpdated"] = _now_iso()
+
+    # Compute and embed governance snapshot
+    try:
+        rt = compute_topic_rt(topic)
+        entropy = compute_entropy(topic)
+        max_entropy = compute_max_entropy(topic)
+        uncertainty = compute_uncertainty_ratio(topic)
+        freshness = audit_evidence_freshness(topic)
+        admissibility = validate_hypotheses(topic)
+
+        # Count issues (mirrors governance_report logic)
+        issues = []
+        if rt["regime"] in ("DANGEROUS", "RUNAWAY"):
+            issues.append(f"R_t in {rt['regime']} — needs fresh evidence")
+        if freshness["stale"] > freshness["fresh"]:
+            issues.append(f"Majority stale evidence ({freshness['stale']}/{freshness['total']})")
+        inadmissible = [k for k, v in admissibility.items() if v["grade"] == "INADMISSIBLE"]
+        if inadmissible:
+            issues.append(f"Inadmissible hypotheses: {', '.join(inadmissible)}")
+        unfalsifiable = [k for k, v in admissibility.items() if v["falsifiability"] == "NO"]
+        if unfalsifiable:
+            issues.append(f"Unfalsifiable hypotheses: {', '.join(unfalsifiable)}")
+        if uncertainty > 0.9:
+            issues.append("Near-maximum uncertainty — model is not discriminating")
+        elif uncertainty < 0.1:
+            issues.append("Near-zero uncertainty — check for overconfidence")
+
+        health = "HEALTHY" if len(issues) == 0 else "DEGRADED" if len(issues) <= 2 else "CRITICAL"
+
+        topic["governance"] = {
+            "health": health,
+            "issues": issues,
+            "rt": {
+                "rt": rt["rt"],
+                "regime": rt["regime"],
+                "worst_hypothesis": rt.get("worst_hypothesis"),
+            },
+            "entropy": entropy,
+            "maxEntropy": max_entropy,
+            "uncertaintyRatio": uncertainty,
+            "evidenceFreshness": {
+                "fresh": freshness["fresh"],
+                "stale": freshness["stale"],
+                "total": freshness["total"],
+            },
+            "hypothesisAdmissibility": {
+                k: v["grade"] for k, v in admissibility.items()
+            },
+            "lastComputed": _now_iso(),
+        }
+    except Exception:
+        # Governor computation must never prevent saving state
+        pass
+
     path = TOPICS_DIR / f"{slug}.json"
     with open(path, "w", encoding="utf-8") as f:
         json.dump(topic, f, indent=2, ensure_ascii=False)
@@ -53,6 +136,7 @@ def list_topics() -> list[dict]:
             with open(p, "r", encoding="utf-8") as f:
                 t = json.load(f)
             meta = t.get("meta", {})
+            gov = t.get("governance", {})
             results.append({
                 "slug": meta.get("slug", p.stem),
                 "title": meta.get("title", p.stem),
@@ -60,6 +144,7 @@ def list_topics() -> list[dict]:
                 "classification": meta.get("classification", "ROUTINE"),
                 "question": meta.get("question", ""),
                 "lastUpdated": meta.get("lastUpdated", ""),
+                "governanceHealth": gov.get("health") if gov else None,
             })
         except (json.JSONDecodeError, KeyError):
             continue
@@ -67,7 +152,12 @@ def list_topics() -> list[dict]:
 
 
 def create_topic(config: dict) -> dict:
-    """Create a new topic from a config dict. Returns the initialized state."""
+    """
+    Create a new topic from a config dict. Returns the initialized state.
+
+    Governor gate: INADMISSIBLE hypotheses block creation.
+    MARGINAL hypotheses generate a warning in the evidence log.
+    """
     template_path = TOPICS_DIR / "_template.json"
     if template_path.exists():
         with open(template_path, "r", encoding="utf-8") as f:
@@ -92,7 +182,44 @@ def create_topic(config: dict) -> dict:
     topic["meta"].setdefault("dayCount", 0)
     topic["meta"].setdefault("classification", "ROUTINE")
 
+    # Structural validation
     validate_topic(topic)
+
+    # Governor hard gate: admissibility
+    admissibility = validate_hypotheses(topic)
+    inadmissible = {k: v for k, v in admissibility.items()
+                    if v["grade"] == "INADMISSIBLE"}
+    marginal = {k: v for k, v in admissibility.items()
+                if v["grade"] == "MARGINAL"}
+
+    if inadmissible:
+        details = "; ".join(
+            f"{k}: {v['passed']}/{v['total']} checks "
+            f"(clarity={v['setpoint_clarity']}, "
+            f"observable={v['observability']}, "
+            f"falsifiable={v['falsifiability']})"
+            for k, v in inadmissible.items()
+        )
+        raise GovernanceError(
+            f"Cannot create topic: INADMISSIBLE hypotheses — {details}",
+            failures=list(inadmissible.keys()),
+        )
+
+    if marginal:
+        for k, v in marginal.items():
+            failed_checks = [c for c, passed in v["checks"].items() if not passed]
+            topic.setdefault("evidenceLog", []).append({
+                "time": _now_iso(),
+                "tag": "INTEL",
+                "text": (f"GOVERNANCE: Hypothesis {k} is MARGINAL at creation "
+                         f"(failed: {', '.join(failed_checks)})"),
+                "provenance": "DERIVED",
+                "posteriorImpact": "NONE",
+                "ledger": "DECISION",
+                "claimState": "PROPOSED",
+                "effectiveWeight": 0.5,
+            })
+
     save_topic(topic)
     return topic
 
@@ -139,11 +266,15 @@ def scaffold_topic(slug: str) -> str:
 def update_posteriors(topic: dict, new_posteriors: dict[str, float],
                       reason: str, evidence_refs: list[str] = None) -> dict:
     """
-    Apply a posterior update. Enforces sum-to-1 and logs the change.
+    Apply a posterior update with governor pre-commit gate.
 
     new_posteriors: {"H1": 0.30, "H2": 0.40, ...}
     reason: why the update happened
     evidence_refs: list of evidence log timestamps/IDs supporting this update
+
+    Governor gate: runs hallucination failure mode checklist before applying.
+    CRITICAL failures block the update (GovernanceError).
+    Warnings are logged to the evidence log but the update proceeds.
     """
     hypotheses = topic["model"]["hypotheses"]
 
@@ -166,7 +297,35 @@ def update_posteriors(topic: dict, new_posteriors: dict[str, float],
     for k in merged:
         merged[k] = round(merged[k] / total, 4)
 
-    # Confidence gate: check for large shifts without high-tier indicator support
+    # === GOVERNOR HARD GATE: Hallucination Checklist ===
+    proposal_check = check_update_proposal(
+        topic, merged, evidence_refs=evidence_refs, reason=reason
+    )
+
+    if not proposal_check["passed"]:
+        raise GovernanceError(
+            f"Posterior update blocked by governance: "
+            f"{', '.join(proposal_check['failures'])}",
+            failures=proposal_check["failures"],
+            warnings=proposal_check["warnings"],
+        )
+
+    # Non-critical warnings: log them but proceed
+    if proposal_check["warnings"]:
+        _add_evidence_raw(topic, {
+            "time": _now_iso(),
+            "tag": "INTEL",
+            "text": (f"GOVERNANCE WARNING on posterior update: "
+                     f"{', '.join(proposal_check['warnings'])}. "
+                     f"Reason: {reason}"),
+            "provenance": "DERIVED",
+            "posteriorImpact": "NONE",
+            "ledger": "DECISION",
+            "claimState": "PROPOSED",
+            "effectiveWeight": 0.5,
+        })
+
+    # Belt-and-suspenders: original confidence gate
     max_shift = max(abs(merged[k] - hypotheses[k]["posterior"]) for k in merged)
     if max_shift > 0.10 and evidence_refs is None:
         raise ValueError(
@@ -195,7 +354,6 @@ def update_posteriors(topic: dict, new_posteriors: dict[str, float],
 
 def hold_posteriors(topic: dict, reason: str = "No new indicators") -> dict:
     """Record that posteriors were reviewed but not changed."""
-    # Just log it — no history entry needed for holds
     add_evidence(topic, {
         "tag": "INTEL",
         "text": f"Posteriors HELD: {reason}",
@@ -288,9 +446,15 @@ def get_indicator_summary(topic: dict) -> dict:
 
 def add_evidence(topic: dict, entry: dict) -> dict:
     """
-    Add an evidence entry to the log.
+    Add an evidence entry to the log with governor enrichment.
+
     Required fields: tag, text
     Optional: provenance, source, posteriorImpact
+
+    Governor enrichment (auto-computed, caller can override):
+      - ledger: FACT or DECISION (from tag classification)
+      - claimState: PROPOSED/SUPPORTED/CONTESTED/INVALIDATED
+      - effectiveWeight: 0.0-1.0 (from claim state)
     """
     if "tag" not in entry or "text" not in entry:
         raise ValueError("Evidence entry requires 'tag' and 'text'")
@@ -310,7 +474,26 @@ def add_evidence(topic: dict, entry: dict) -> dict:
         if existing.get("text") == full_entry["text"]:
             return topic  # Skip duplicate
 
+    # Governor enrichment: classify and weight the evidence
+    evidence_log = topic.get("evidenceLog", [])
+    full_entry["ledger"] = entry.get("ledger") or classify_evidence(full_entry)
+    full_entry["claimState"] = entry.get("claimState") or assess_claim_state(
+        full_entry, evidence_log
+    )
+    full_entry["effectiveWeight"] = entry.get("effectiveWeight") or get_effective_weight(
+        full_entry, evidence_log
+    )
+
     topic.setdefault("evidenceLog", []).append(full_entry)
+    return topic
+
+
+def _add_evidence_raw(topic: dict, entry: dict) -> dict:
+    """
+    Append a pre-built evidence entry directly (no enrichment, no dedup).
+    Used internally by governance warnings to avoid recursion.
+    """
+    topic.setdefault("evidenceLog", []).append(entry)
     return topic
 
 
@@ -333,7 +516,7 @@ def update_feed(topic: dict, feed_id: str, value, as_of: str = None) -> dict:
 
 def generate_brief(topic: dict, mode: str = "routine",
                    developments: list[str] = None) -> str:
-    """Generate a structured briefing markdown string."""
+    """Generate a structured briefing markdown string with governance health."""
     meta = topic["meta"]
     model = topic["model"]
     hypotheses = model["hypotheses"]
@@ -421,6 +604,37 @@ def generate_brief(topic: dict, mode: str = "routine",
         lines.append("**HELD** — no new indicators")
     lines.append("")
 
+    # Epistemic Health (from embedded governance snapshot)
+    gov = topic.get("governance")
+    if gov:
+        lines.append("### EPISTEMIC HEALTH")
+        rt = gov.get("rt", {})
+        lines.append(
+            f"- **Status**: {gov.get('health', '?')} | "
+            f"R_t={rt.get('rt', '?'):.2f} ({rt.get('regime', '?')}) | "
+            f"Entropy={gov.get('entropy', 0):.2f}/{gov.get('maxEntropy', 0):.2f} "
+            f"({gov.get('uncertaintyRatio', 0):.0%} uncertainty)"
+        )
+        fresh = gov.get("evidenceFreshness", {})
+        if fresh:
+            lines.append(
+                f"- **Evidence**: {fresh.get('fresh', '?')} fresh / "
+                f"{fresh.get('stale', '?')} stale / "
+                f"{fresh.get('total', '?')} total"
+            )
+        admissibility = gov.get("hypothesisAdmissibility", {})
+        inadmissible_h = [k for k, v in admissibility.items() if v == "INADMISSIBLE"]
+        marginal_h = [k for k, v in admissibility.items() if v == "MARGINAL"]
+        if inadmissible_h:
+            lines.append(f"- **WARNING**: Inadmissible hypotheses: {', '.join(inadmissible_h)}")
+        if marginal_h:
+            lines.append(f"- **NOTE**: Marginal hypotheses: {', '.join(marginal_h)}")
+        gov_issues = gov.get("issues", [])
+        if gov_issues:
+            for issue in gov_issues:
+                lines.append(f"- {issue}")
+        lines.append("")
+
     # Sub-models
     if topic.get("subModels"):
         lines.append("### SUB-MODELS")
@@ -461,8 +675,12 @@ def save_brief(topic: dict, brief_text: str) -> str:
 # Validation
 # ---------------------------------------------------------------------------
 
-def validate_topic(topic: dict) -> None:
-    """Validate a topic state file. Raises ValueError on issues."""
+def validate_topic(topic: dict) -> dict:
+    """
+    Validate a topic state file.
+    Raises ValueError on structural issues.
+    Returns admissibility report for informational use.
+    """
     if "meta" not in topic:
         raise ValueError("Topic missing 'meta' section")
     if "model" not in topic:
@@ -482,6 +700,19 @@ def validate_topic(topic: dict) -> None:
     total = sum(h["posterior"] for h in hypotheses.values())
     if abs(total - 1.0) > 0.02:
         raise ValueError(f"Posteriors sum to {total:.4f}, expected ~1.0")
+
+    # Governor: admissibility check (non-blocking on load)
+    admissibility = validate_hypotheses(topic)
+    inadmissible = [k for k, v in admissibility.items()
+                    if v["grade"] == "INADMISSIBLE"]
+    if inadmissible:
+        warnings.warn(
+            f"Topic '{meta.get('slug', '?')}' has INADMISSIBLE hypotheses: "
+            f"{', '.join(inadmissible)}. Consider revising.",
+            stacklevel=2,
+        )
+
+    return admissibility
 
 
 # ---------------------------------------------------------------------------
@@ -558,6 +789,7 @@ def _empty_topic() -> dict:
         "evidenceLog": [],
         "dataFeeds": {},
         "watchpoints": [],
+        "governance": None,
     }
 
 
@@ -697,7 +929,8 @@ if __name__ == "__main__":
             cls_color = {"ALERT": "!", "ELEVATED": "*", "ROUTINE": " "}.get(
                 t["classification"], " "
             )
-            print(f"  [{status_icon}]{cls_color} {t['slug']:20s} {t['title']}")
+            gov_health = t.get("governanceHealth") or "?"
+            print(f"  [{status_icon}]{cls_color} {t['slug']:20s} {t['title']:30s} [{gov_health}]")
 
     elif cmd == "govern" and len(sys.argv) > 2:
         from governor import governance_report
@@ -716,9 +949,11 @@ if __name__ == "__main__":
         topic = load_topic(sys.argv[2])
         meta = topic["meta"]
         model = topic["model"]
+        gov = topic.get("governance", {})
         print(f"\n  {meta['title']}")
         print(f"  {meta['question']}")
-        print(f"  Status: {meta['status']} | Classification: {meta['classification']}")
+        print(f"  Status: {meta['status']} | Classification: {meta['classification']}"
+              f" | Health: {gov.get('health', 'not computed')}")
         print(f"  Day {meta['dayCount']} | Last updated: {meta['lastUpdated']}")
         print()
         for k, h in model["hypotheses"].items():

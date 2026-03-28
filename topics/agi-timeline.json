@@ -1,0 +1,758 @@
+{
+  "meta": {
+    "slug": "agi-timeline",
+    "title": "AGI TIMELINE & NEAR-TERM AI IMPACT",
+    "question": "When will artificial general intelligence be achieved, and what will be the dominant near-term (5-year) impact of AI on the economy and society?",
+    "resolution": "A frontier AI lab publicly announces a system that autonomously performs the work of an expert-level AI researcher (end-to-end: hypothesis generation, experiment design, implementation, interpretation) at or above the speed and quality of top human researchers — as validated by independent evaluation (e.g., Metaculus AGI resolution, third-party benchmarks, or demonstrated autonomous scientific discovery). Partial resolution: system achieves this in narrow domains but not generally.",
+    "created": "2026-03-27T00:00:00Z",
+    "lastUpdated": "2026-03-28T16:18:17+00:00",
+    "status": "ACTIVE",
+    "dayCount": 1,
+    "startDate": "2026-03-27T00:00:00Z",
+    "classification": "ELEVATED"
+  },
+  "model": {
+    "hypotheses": {
+      "H1": {
+        "label": "AGI by end of 2027",
+        "midpoint": 15,
+        "unit": "months",
+        "posterior": 0.1
+      },
+      "H2": {
+        "label": "AGI in 2028-2029",
+        "midpoint": 33,
+        "unit": "months",
+        "posterior": 0.25
+      },
+      "H3": {
+        "label": "AGI in 2030-2031",
+        "midpoint": 51,
+        "unit": "months",
+        "posterior": 0.3
+      },
+      "H4": {
+        "label": "AGI after 2031 or not achieved",
+        "midpoint": 78,
+        "unit": "months",
+        "posterior": 0.35
+      }
+    },
+    "expectedValue": 52.35,
+    "expectedUnit": "months",
+    "posteriorHistory": [
+      {
+        "date": "2026-03-27",
+        "H1": 0.1,
+        "H2": 0.25,
+        "H3": 0.3,
+        "H4": 0.35,
+        "note": "Initial prior. Weighted toward caution despite aggressive lab-leader rhetoric. Amodei predicts late 2026/early 2027 but has incentive bias. Metaculus community: 25% by 2029, 50% by 2033. 76% of AI researchers say scaling gains have plateaued. AI 2027 scenario tracking at ~65% of predicted pace. Samotsvety superforecasters: ~28% by 2030. Historical base rate: AGI predictions have consistently been over-optimistic. Counterbalanced by genuine capability jumps (Mythos leak, GPT-5.3-Codex) and massive infrastructure investment."
+      }
+    ]
+  },
+  "subModels": {
+    "laborImpact": {
+      "description": "What is the dominant labor market impact of AI by 2031?",
+      "scenarios": {
+        "augmentation": {
+          "label": "Augmentation dominant — AI boosts productivity, minimal net job loss, new roles created",
+          "prob": 0.3
+        },
+        "bifurcation": {
+          "label": "Bifurcated economy — AI-skilled workers thrive, task-based workers displaced, GDP grows but inequality widens",
+          "prob": 0.35
+        },
+        "massDisplacement": {
+          "label": "Mass displacement — >20% knowledge worker unemployment, social disruption, policy crisis",
+          "prob": 0.15
+        },
+        "slowBurn": {
+          "label": "Slower than expected — adoption friction, regulation, and organizational inertia limit impact to <10% job displacement",
+          "prob": 0.2
+        }
+      },
+      "notes": "WEF projects 170M new roles vs 92M displaced by 2030 (net +78M). But Amodei at Davos 2026: 50% white-collar jobs disrupted in 1-5 years. Software engineering is the canary — junior dev postings already -23% over 2 years. Key tension: productivity gains vs employment losses. McKinsey: AI could add $13T in global economic activity by 2030.",
+      "conditionals": {
+        "laborConditionalAGI": {
+          "description": "If AGI is achieved (H1/H2), labor impact shifts dramatically",
+          "augmentation": 0.1,
+          "bifurcation": 0.3,
+          "massDisplacement": 0.45,
+          "slowBurn": 0.15
+        }
+      }
+    },
+    "scalingTrajectory": {
+      "description": "Does pre-training scaling continue delivering capability gains, or has the paradigm shifted?",
+      "scenarios": {
+        "scalingContinues": {
+          "label": "Scaling laws hold — more compute = better models, Amodei/Altman vindicated",
+          "prob": 0.2
+        },
+        "paradigmShift": {
+          "label": "New paradigms dominate — test-time compute, agents, reasoning chains, tool use deliver gains where pre-training plateaus",
+          "prob": 0.4
+        },
+        "diminishingReturns": {
+          "label": "Plateau — both pre-training and new paradigms show diminishing returns within 2 years",
+          "prob": 0.25
+        },
+        "surpriseBreakthrough": {
+          "label": "Qualitative breakthrough — new architecture or training method delivers step-change (like transformers did in 2017)",
+          "prob": 0.15
+        }
+      },
+      "notes": "76% of AI researchers say scaling gains have plateaued. Ilya Sutskever says pre-training scaling results have plateaued. But Amodei says scaling 'probably going to continue' and Altman says 'there is no wall.' MIT paper (Jan 2026): exponentially more expensive training yields single-digit-percent benchmark improvements. Key: labs are already pivoting to test-time compute, agent frameworks, and reasoning chains. The question is whether these new paradigms deliver AGI-grade capability gains."
+    },
+    "regulatoryResponse": {
+      "description": "What is the dominant regulatory posture toward frontier AI by 2028?",
+      "scenarios": {
+        "lightTouch": {
+          "label": "Light-touch — voluntary commitments, minimal binding regulation (US status quo + Trump EO)",
+          "prob": 0.3
+        },
+        "patchwork": {
+          "label": "Patchwork — EU AI Act enforced, US state-level laws, no global coordination",
+          "prob": 0.35
+        },
+        "coordinated": {
+          "label": "Coordinated governance — international framework, mandatory safety evals, compute governance",
+          "prob": 0.15
+        },
+        "crackdown": {
+          "label": "Restrictive crackdown — triggered by AI incident (cyber, bio, or economic), severe constraints on frontier development",
+          "prob": 0.2
+        }
+      },
+      "notes": "EU AI Act phasing in through 2027. Trump EO (Dec 2025) preempts state-level AI laws, signals light federal touch. California AI Transparency Act effective Jan 2026. Korea, Vietnam, Taiwan all passing AI laws in 2026. Key dynamic: US deregulatory stance vs EU regulatory ambition vs potential for an AI incident to trigger emergency action. The Mythos leak is a test case — does it trigger regulatory response?"
+    },
+    "softwareEngineering": {
+      "description": "What happens to the software engineering profession by 2028?",
+      "scenarios": {
+        "toolAssist": {
+          "label": "AI as powerful tool — engineers 2-5x more productive, same headcount, higher output",
+          "prob": 0.25
+        },
+        "juniorCrush": {
+          "label": "Junior roles eliminated — entry-level coding automated, senior engineers do architecture+prompting, -30-50% headcount",
+          "prob": 0.35
+        },
+        "majorReduction": {
+          "label": "Major workforce reduction — AI handles 80%+ of implementation, -50-70% engineering headcount",
+          "prob": 0.2
+        },
+        "newEquilibrium": {
+          "label": "New equilibrium — AI creates as many new engineering challenges as it automates, net neutral employment",
+          "prob": 0.2
+        }
+      },
+      "notes": "Claude Code creator quoted Feb 2026: 'the job title of software engineer could be gone by the end of this year.' Altman: AI writes >50% of code in many orgs. Junior dev postings -23% over 2 years. Gartner: 80% of engineers will need to upskill by 2027. Counter: Jevons paradox — cheaper code production may increase total demand for software. Software engineering is the leading indicator for broader knowledge work disruption."
+    },
+    "existentialRisk": {
+      "description": "Does an AI system cause or nearly cause a catastrophic-scale incident by 2031?",
+      "scenarios": {
+        "noIncident": {
+          "label": "No catastrophic AI incident — risks remain theoretical or contained to minor events",
+          "prob": 0.55
+        },
+        "nearMiss": {
+          "label": "Near-miss — AI system causes significant harm (cyber, bio, economic) but is contained before catastrophe",
+          "prob": 0.25
+        },
+        "majorIncident": {
+          "label": "Major incident — AI-enabled attack or accident causes >$100B damage or >1,000 deaths",
+          "prob": 0.12
+        },
+        "existentialThreat": {
+          "label": "Existential-class event — uncontrolled ASI, engineered pandemic, or systemic economic collapse",
+          "prob": 0.08
+        }
+      },
+      "notes": "AI 2027 scenario describes misaligned ASI by late 2027 as plausible. Anthropic's own Mythos docs warn of 'unprecedented cybersecurity risks.' State-sponsored actors already attempting to exploit Claude (Anthropic disclosed Nov 2025). The probability compounds with capability: each new model generation expands the attack surface. 8% existential risk over 5 years is aggressive but reflects genuine expert concern — survey data shows ~5-10% p(doom by 2100) among AI researchers."
+    }
+  },
+  "indicators": {
+    "tiers": {
+      "tier1_critical": [
+        {
+          "id": "autonomous_research",
+          "desc": "AI system demonstrated autonomously conducting and publishing novel scientific research that passes peer review without human guidance",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "Major shift toward H1/H2 — core AGI resolution criterion approaching"
+        },
+        {
+          "id": "lab_declares_agi",
+          "desc": "OpenAI, Anthropic, or DeepMind formally announces achievement of AGI (not marketing — with technical substantiation)",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "Resolves question if validated by independent evaluation"
+        },
+        {
+          "id": "recursive_improvement",
+          "desc": "Confirmed evidence of AI system substantially improving its own capabilities without human direction (recursive self-improvement)",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "Major shift toward H1 — implies rapid capability acceleration"
+        },
+        {
+          "id": "catastrophic_ai_incident",
+          "desc": "AI-enabled event causing >$10B damage or >100 deaths (cyber, bio, infrastructure, or military)",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "Shifts existential risk sub-model; may trigger regulatory crackdown that delays AGI deployment"
+        }
+      ],
+      "tier2_strong": [
+        {
+          "id": "full_swe_automation",
+          "desc": "AI system demonstrated completing full software engineering projects (spec to deploy) autonomously, validated by independent audit",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "Strong signal of approaching AGI — shift toward H1/H2. Major shift in software engineering sub-model."
+        },
+        {
+          "id": "major_benchmark_saturation",
+          "desc": "Frontier model saturates (>95%) on MMLU, HumanEval, MATH, and ARC-AGI simultaneously",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "Moderate shift toward H1/H2 — benchmarks becoming inadequate suggests capability approaching human ceiling"
+        },
+        {
+          "id": "million_gpu_cluster",
+          "desc": "Confirmed >1M GPU training cluster operational (Stargate, xAI Memphis, or equivalent)",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "Moderate shift toward H1/H2 — infrastructure for next-gen training runs exists"
+        },
+        {
+          "id": "mass_layoffs_ai",
+          "desc": "Major tech company (>10K employees) announces >20% workforce reduction explicitly citing AI automation",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "Strong signal for labor impact sub-model; shifts bifurcation/mass displacement upward"
+        },
+        {
+          "id": "international_ai_treaty",
+          "desc": "Binding international agreement on frontier AI development (not voluntary commitments)",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "Strong signal for regulatory sub-model; may slow AGI timeline (shift toward H3/H4)"
+        },
+        {
+          "id": "new_architecture",
+          "desc": "Publication of fundamentally new architecture (not transformer variant) that demonstrates substantial capability gains",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "Strong shift toward surprise breakthrough in scaling sub-model; could accelerate or reset AGI timeline"
+        }
+      ],
+      "tier3_suggestive": [
+        {
+          "id": "ai2027_pace",
+          "desc": "AI 2027 scenario predictions exceed 80% of predicted pace (currently at 65%)",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "Currently tracking at ~65% pace as of early 2026",
+          "posteriorEffect": "Minor shift toward H1 — scenario becoming more plausible"
+        },
+        {
+          "id": "metaculus_shift",
+          "desc": "Metaculus AGI median forecast moves inside 2028",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "Currently: 25% by 2029, 50% by 2033",
+          "posteriorEffect": "Minor shift toward H1/H2 — aggregated forecaster wisdom updating"
+        },
+        {
+          "id": "coding_job_decline",
+          "desc": "Software engineering job postings decline >40% year-over-year",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "Currently -23% over 2 years for junior roles",
+          "posteriorEffect": "Suggestive for labor and SWE sub-models"
+        },
+        {
+          "id": "capybara_release",
+          "desc": "Anthropic publicly releases Capybara/Mythos tier model",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "See mythos-release topic for detailed tracking",
+          "posteriorEffect": "Confirms capability escalation continuing — minor shift toward H1/H2"
+        },
+        {
+          "id": "reasoning_breakthrough",
+          "desc": "Major improvement in AI reasoning (mathematical proof, scientific hypothesis generation) demonstrated on novel problems",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "Minor shift toward earlier AGI — reasoning is key gap"
+        },
+        {
+          "id": "agentic_deployment",
+          "desc": "Major enterprise deployment of autonomous AI agents handling end-to-end business processes (not copilots)",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "Suggestive of approaching automation threshold"
+        },
+        {
+          "id": "compute_governance",
+          "desc": "US or international body implements compute reporting requirements or licensing for frontier training runs",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "Shifts regulatory sub-model; could slow or redirect AGI development"
+        },
+        {
+          "id": "open_source_frontier",
+          "desc": "Open-source model (Llama, Mistral, etc.) reaches within 5% of frontier closed-model performance",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "Complicates governance, accelerates diffusion of capabilities"
+        },
+        {
+          "id": "robotics_integration",
+          "desc": "AI-controlled robot demonstrates general-purpose physical task competence (not single-task)",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "Addresses Metaculus AGI definition robotics requirement — shift toward earlier resolution"
+        }
+      ],
+      "anti_indicators": [
+        {
+          "id": "scaling_wall_confirmed",
+          "desc": "Multiple frontier labs publicly acknowledge diminishing returns from both pre-training and test-time compute scaling",
+          "status": "PARTIAL",
+          "firedDate": null,
+          "note": "76% of researchers say scaling plateaued; Ilya Sutskever confirms pre-training plateau. But labs pivoting to new paradigms — not full wall yet.",
+          "posteriorEffect": "Falsifies H1 and H2 — no near-term AGI without scaling or equivalent breakthrough. Shifts mass to H3/H4."
+        },
+        {
+          "id": "benchmark_gaming",
+          "desc": "Major benchmark contamination or gaming scandal undermines reported capability gains",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "Deflates H1 and H2 capability claims — apparent progress was illusory. Shifts toward H4."
+        },
+        {
+          "id": "investment_pullback",
+          "desc": "Major reduction in AI infrastructure investment (>30% decline in announced compute buildout)",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "Reduces H1 and H2 probability — less compute = slower progress. Shifts to H3/H4."
+        },
+        {
+          "id": "safety_pause",
+          "desc": "Frontier lab voluntarily pauses training of next-gen model due to safety concerns",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "Directly falsifies H1 timeline, reduces H2. Shifts AGI right; increases coordinated governance probability."
+        },
+        {
+          "id": "definition_collapse",
+          "desc": "Consensus emerges that AGI is ill-defined and no single system will meet all proposed criteria simultaneously",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "Already partially true — Altman calls AGI a very sloppy term. But labs still using it as a goalpost.",
+          "posteriorEffect": "Undermines H1 and H2 framing — if AGI is ill-defined, near-term claims are unfalsifiable marketing. Shifts to H4."
+        },
+        {
+          "id": "ai_winter_signals",
+          "desc": "Multiple frontier AI companies report declining revenue growth or fail to monetize capabilities",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "Reduces H1 and H2 — funding drought slows research. Echoes dot-com bust pattern. Shifts to H4."
+        },
+        {
+          "id": "amodei_window_miss",
+          "desc": "End of 2027 passes without Anthropic demonstrating Nobel-level AI as Amodei predicted — the most specific near-term AGI claim falsified",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "Amodei's OSTP submission: 'powerful AI systems in late 2026 or early 2027.' This is the most concrete testable claim.",
+          "posteriorEffect": "Directly falsifies H1. Most publicly committed near-term AGI prediction fails. Cascading credibility damage to H2."
+        },
+        {
+          "id": "altman_sloppy_pivot",
+          "desc": "OpenAI formally redefines AGI to a lower bar and declares it achieved — without meeting our resolution criterion",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "Altman already calling AGI 'a very sloppy term' — narrative prep for soft-definition victory lap.",
+          "posteriorEffect": "Reduces H1/H2 for hard AGI. Lab declares victory on soft definition while autonomous research remains unachieved."
+        }
+      ]
+    }
+  },
+  "actorModel": {
+    "description": "Decision-theoretic framework for the actors who will determine AGI development pace and societal impact",
+    "actors": {
+      "anthropic": {
+        "name": "Anthropic (Dario & Daniela Amodei)",
+        "role": "Frontier lab. Self-positioned as safety-first but in commercial arms race. Building Mythos/Capybara. Pre-IPO.",
+        "decisionStyle": "Safety rhetoric with commercial pragmatism. RSP framework provides structure but competitive pressure creates tension. Dario is the most publicly bullish on near-term AGI among major lab leaders.",
+        "biases": [
+          "Dario predicts AGI 2026-2027 — incentive to be right (credibility) and to be bullish (IPO valuation)",
+          "Safety-first brand constrains reckless releases but also creates pressure to demonstrate that safety and capability coexist",
+          "Mythos leak undermines safety credibility"
+        ],
+        "filters": [
+          "RSP safety evaluation gates",
+          "Board oversight including safety-focused members",
+          "Legal/regulatory exposure awareness"
+        ],
+        "overrides": [
+          "IPO timeline pressure",
+          "Competitive pressure from OpenAI and Google",
+          "Personal conviction that AGI is imminent"
+        ]
+      },
+      "openai": {
+        "name": "OpenAI (Sam Altman)",
+        "role": "Largest frontier lab by revenue and deployment. GPT-5.3-Codex released Feb 2026. Capped-profit structure under pressure.",
+        "decisionStyle": "Aggressive release cadence. Altman is a masterful narrative controller — frames AGI as inevitable but gentle (The Gentle Singularity). Pushes no-wall narrative despite evidence.",
+        "biases": [
+          "There is no wall commitment — publicly staked on continued scaling",
+          "Revenue growth depends on capability marketing",
+          "Board restructuring removed safety-focused members"
+        ],
+        "filters": [
+          "Microsoft partnership constrains some decisions",
+          "Public scrutiny post-Altman drama",
+          "Preparedness framework (weaker than Anthropic RSP)"
+        ],
+        "overrides": [
+          "Altman personal ambition to build AGI",
+          "Revenue pressure from massive infrastructure commitments"
+        ]
+      },
+      "google_deepmind": {
+        "name": "Google DeepMind (Demis Hassabis)",
+        "role": "Largest compute resources. Hassabis is more cautious — 50% AGI by 2030. Gemini line competing with GPT and Claude.",
+        "decisionStyle": "More measured than OpenAI/Anthropic on timelines. Scientific rigor emphasis. Has the most compute and the longest research track record.",
+        "biases": [
+          "Hassabis is a scientist first — less prone to hype than Altman/Amodei",
+          "But Google commercial pressure is immense — search monopoly threatened by AI"
+        ],
+        "filters": [
+          "Google legal and regulatory team is large and cautious",
+          "Academic culture provides some check on recklessness"
+        ],
+        "overrides": [
+          "If competitors demonstrate clear AGI-adjacent capabilities, Google will accelerate regardless of Hassabis caution"
+        ]
+      },
+      "us_government": {
+        "name": "US Government (Trump administration)",
+        "role": "Regulatory posture setter. Current stance: pro-AI, anti-regulation, preempting state laws. National security interest in AI superiority over China.",
+        "decisionStyle": "Deregulatory by default. Views AI primarily through national security and economic competitiveness lens. Dec 2025 EO preempts state AI laws.",
+        "biases": [
+          "Pro-business, anti-regulation ideology",
+          "National security framing dominates safety framing",
+          "Tech industry lobbying influence"
+        ],
+        "filters": [
+          "Congressional bipartisan AI safety concern provides some check",
+          "National security establishment may push for controls on frontier models"
+        ],
+        "overrides": [
+          "Major AI incident would trigger emergency response regardless of deregulatory posture",
+          "China competition narrative overrides all other considerations"
+        ]
+      },
+      "china": {
+        "name": "China (State AI Development)",
+        "role": "Primary geopolitical competitor. Massive GPU concentration. Different safety norms.",
+        "decisionStyle": "State-directed, less constrained by safety concerns or public opinion. Willing to concentrate resources. Behind on frontier models but closing gap.",
+        "biases": [
+          "Will not accept permanent inferiority to US in AI capabilities",
+          "Less transparency means less external accountability",
+          "Military applications are first-class priority"
+        ],
+        "filters": [
+          "Chip export controls limit hardware access",
+          "Brain drain of Chinese AI researchers to US labs"
+        ],
+        "overrides": [
+          "If US achieves clear AGI lead, China may take extreme measures (chip smuggling, espionage, forced timelines)"
+        ]
+      }
+    },
+    "methodology": [
+      "ACTIONS OVER RHETORIC — Lab leaders AGI predictions are marketing. Track: model releases, benchmark jumps, deployment patterns, hiring, and infrastructure investment.",
+      "INCENTIVE MAPPING — Every AGI prediction comes from someone with financial incentive to be bullish. Discount accordingly. Weight independent forecasters (Metaculus, Samotsvety) over lab leaders.",
+      "CAPABILITY VS DEPLOYMENT — A model that can do X in a lab does not equal X happening in the economy. Adoption friction, organizational inertia, and regulation create lag.",
+      "BASE RATE SKEPTICISM — AGI has been 10 years away for 70 years. Prior should be skeptical until extraordinary evidence appears. Extraordinary evidence = autonomous scientific discovery, not benchmark scores.",
+      "FOLLOW THE COMPUTE — Infrastructure investment is the hardest signal to fake. Track GPU orders, datacenter construction, power contracts.",
+      "DEFINITION MATTERS — AGI means different things to different actors. Altman AGI is not Metaculus AGI is not public AGI. Track against our specific resolution criterion."
+    ]
+  },
+  "evidenceLog": [
+    {
+      "time": "2026-03-27T00:00-07:00",
+      "tag": "DATA",
+      "text": "Metaculus AGI forecast as of Feb 2026: 25% probability by 2029, 50% by 2033. Median has dropped from ~50 years (2020) to ~7 years. All major forecasting groups have substantially shortened timelines in recent years.",
+      "provenance": "RETRIEVED",
+      "source": "Metaculus, 80,000 Hours analysis (Mar 2025)",
+      "posteriorImpact": "MODERATE"
+    },
+    {
+      "time": "2026-03-27T00:00-07:00",
+      "tag": "RHETORIC",
+      "text": "Dario Amodei at Davos 2026: AGI-level AI in ~2 years (2027-2028), software engineers replaced in 6-12 months, 50% white-collar jobs disrupted in 1-5 years. Anthropic March 2025 OSTP submission: powerful AI systems will emerge in late 2026 or early 2027. Defines powerful AI as matching Nobel Prize winners across most disciplines.",
+      "provenance": "RETRIEVED",
+      "source": "Davos 2026 interview, Anthropic OSTP submission",
+      "posteriorImpact": "MINOR"
+    },
+    {
+      "time": "2026-03-27T00:00-07:00",
+      "tag": "RHETORIC",
+      "text": "Sam Altman: AGI probably developed during Trump term (by Jan 2029). Published The Gentle Singularity blog post. Predicts 2026: systems that can figure out novel insights. 2027: robots doing real-world tasks. Calls AGI a very sloppy term. AI currently writes >50% of code in many organizations.",
+      "provenance": "RETRIEVED",
+      "source": "Bloomberg interview, blog post, various 2025-2026 statements",
+      "posteriorImpact": "MINOR"
+    },
+    {
+      "time": "2026-03-27T00:00-07:00",
+      "tag": "RHETORIC",
+      "text": "Demis Hassabis maintains ~50% probability of AGI by end of decade (2030). More cautious than Altman/Amodei. Eric Schmidt: AGI within 3-5 years (as of Apr 2025). Elon Musk: AI smarter than smartest human by 2026.",
+      "provenance": "RETRIEVED",
+      "source": "Various interviews and public statements",
+      "posteriorImpact": "MINOR"
+    },
+    {
+      "time": "2026-03-27T00:00-07:00",
+      "tag": "DATA",
+      "text": "AI 2027 scenario predictions tracking at approximately 65% of predicted pace as of early 2026. Scenario predicts expert-level AI research automation by early 2027 and potential ASI by late 2027. Two endings modeled: slowdown (governance works) and race (misalignment catastrophe).",
+      "provenance": "RETRIEVED",
+      "source": "AI 2027 project, blog.ai-futures.org grading",
+      "posteriorImpact": "MODERATE"
+    },
+    {
+      "time": "2026-03-27T00:00-07:00",
+      "tag": "DATA",
+      "text": "Scaling wall evidence: 76% of AI researchers say gains from scaling have plateaued. Ilya Sutskever states pre-training scaling results have plateaued. MIT paper (Jan 2026): exponentially more expensive training yields single-digit-percent benchmark improvements. Counter: Amodei says scaling probably going to continue, Altman says there is no wall.",
+      "provenance": "RETRIEVED",
+      "source": "Multiple surveys, MIT paper, lab leader statements",
+      "posteriorImpact": "MODERATE"
+    },
+    {
+      "time": "2026-03-27T00:00-07:00",
+      "tag": "DATA",
+      "text": "Samotsvety superforecasters (2023, updated): ~28% chance of AGI by 2030. ~25% chance of superhuman coders by 2027. These forecasters have superior track records to AI researchers on calibration.",
+      "provenance": "RETRIEVED",
+      "source": "Samotsvety forecasting group via 80,000 Hours",
+      "posteriorImpact": "MODERATE"
+    },
+    {
+      "time": "2026-03-27T00:00-07:00",
+      "tag": "ECON",
+      "text": "Labor market signals: WEF projects 170M new roles, 92M displaced by 2030 (net +78M). McKinsey: AI could add $13T global economic activity by 2030. 89% of HR leaders expect AI to impact jobs in 2026. Junior dev postings -23% over 2 years. Workers with AI skills earn 56% premium. 59% of global workforce will need training (WEF).",
+      "provenance": "RETRIEVED",
+      "source": "WEF, McKinsey, CNBC survey, various labor market reports",
+      "posteriorImpact": "MINOR"
+    },
+    {
+      "time": "2026-03-27T00:00-07:00",
+      "tag": "POLICY",
+      "text": "Regulatory landscape: EU AI Act phasing in through 2027 (but EU proposed simplification in Nov 2025). Trump EO (Dec 2025) preempts state AI laws, signals light-touch federal approach. California AI Transparency Act effective Jan 2026. Korea, Vietnam, Taiwan passing AI laws in 2026. No binding international AI treaty exists.",
+      "provenance": "RETRIEVED",
+      "source": "Multiple regulatory analysis sources",
+      "posteriorImpact": "MINOR"
+    },
+    {
+      "time": "2026-03-27T00:00-07:00",
+      "tag": "EVENT",
+      "text": "Anthropic Claude Mythos/Capybara leak (Mar 26-27): New model tier above Opus, step change in capabilities, unprecedented cybersecurity risks. Cybersecurity stocks crashed (CRWD -7%, OKTA -7.39%). Demonstrates frontier capability acceleration is ongoing despite scaling wall narrative. See mythos-release topic for detailed tracking.",
+      "provenance": "RETRIEVED",
+      "source": "Fortune, multiple outlets (see mythos-release topic)",
+      "posteriorImpact": "MODERATE"
+    },
+    {
+      "time": "2026-03-27T00:00-07:00",
+      "tag": "DATA",
+      "text": "Published AI researcher survey (Katja Grace, 2023): 25% chance of high-level machine intelligence by early 2030s, 50% by 2047. Estimates shortened by 13 years from 2022 to 2023 due to ChatGPT impact. Note: researchers are poorly calibrated forecasters compared to superforecasters.",
+      "provenance": "RETRIEVED",
+      "source": "Grace et al. survey of AI researchers",
+      "posteriorImpact": "MINOR"
+    },
+    {
+      "time": "2026-03-27T00:00-07:00",
+      "tag": "EVENT",
+      "text": "OpenAI released GPT-5.3-Codex in February 2026. Anthropic released Opus 4.6 in same timeframe. Both flagged cybersecurity risks. Capability pace: major model releases every 3-6 months from frontier labs. Each generation narrows gap to human-level on more tasks.",
+      "provenance": "RETRIEVED",
+      "source": "Fortune, industry tracking",
+      "posteriorImpact": "MINOR"
+    },
+    {
+      "time": "2026-03-27T00:00-07:00",
+      "tag": "RHETORIC",
+      "text": "Claude Code creator quoted Feb 2026: the job title of software engineer could be gone by the end of this year. Satya Nadella counter-view: AI will not replace programmers, but it will become an essential tool. Gartner: 80% of engineers will need to upskill by 2027, generative AI will create new SWE roles.",
+      "provenance": "RETRIEVED",
+      "source": "Fortune (Feb 2026), Microsoft, Gartner",
+      "posteriorImpact": "MINOR"
+    }
+  ],
+  "dataFeeds": {
+    "metaculus_agi_median": {
+      "label": "Metaculus AGI Median Forecast",
+      "value": 2033,
+      "unit": "year",
+      "baseline": 2040,
+      "asOf": "2026-03-27"
+    },
+    "metaculus_agi_25pct": {
+      "label": "Metaculus AGI 25th Percentile",
+      "value": 2029,
+      "unit": "year",
+      "baseline": 2035,
+      "asOf": "2026-03-27"
+    },
+    "ai2027_pace": {
+      "label": "AI 2027 Prediction Tracking",
+      "value": 65,
+      "unit": "% of predicted pace",
+      "baseline": 100,
+      "asOf": "2026-03-27"
+    },
+    "junior_dev_postings": {
+      "label": "Junior Dev Job Postings",
+      "value": -23,
+      "unit": "% change (2yr)",
+      "baseline": 0,
+      "asOf": "2026-03-27"
+    },
+    "ai_skill_premium": {
+      "label": "AI Skills Wage Premium",
+      "value": 56,
+      "unit": "% above peers",
+      "baseline": 0,
+      "asOf": "2026-03-27"
+    },
+    "wef_net_jobs": {
+      "label": "WEF Net Job Impact by 2030",
+      "value": 78,
+      "unit": "million (net new)",
+      "baseline": 0,
+      "asOf": "2026-03-27"
+    },
+    "researchers_scaling_plateau": {
+      "label": "AI Researchers: Scaling Plateaued",
+      "value": 76,
+      "unit": "% agree",
+      "baseline": 0,
+      "asOf": "2026-03-27"
+    }
+  },
+  "watchpoints": [
+    {
+      "time": "2026-Q2",
+      "event": "Anthropic Mythos/Capybara public release or expanded early access",
+      "watch": "Does the Mythos leak accelerate or delay public release? If released by Q2, strong signal that capability acceleration continues despite scaling wall narrative. Track via mythos-release topic."
+    },
+    {
+      "time": "2026-Q2-Q3",
+      "event": "Next frontier model releases (GPT-6, Gemini 3, Claude next)",
+      "watch": "Do next-generation models show step-change improvement or incremental gains? The answer directly addresses the scaling wall question. Watch benchmark saturation patterns and novel capability demonstrations."
+    },
+    {
+      "time": "2026-Q2-Q3",
+      "event": "AI 2027 prediction tracking update",
+      "watch": "Does the AI 2027 scenario tracking pace increase from 65% toward 80%+? If yes, the aggressive AGI timeline becomes more plausible. If it stalls or declines, H3/H4 strengthens."
+    },
+    {
+      "time": "2026-H2",
+      "event": "Software engineering employment data",
+      "watch": "BLS, Indeed, and LinkedIn data on software engineering job postings, employment, and compensation. If junior roles decline >40% YoY, the canary in the coal mine for broader knowledge work disruption is confirmed."
+    },
+    {
+      "time": "2026-H2",
+      "event": "EU AI Act enforcement actions",
+      "watch": "First enforcement actions under the EU AI Act for frontier models. Sets precedent for whether regulation can actually constrain frontier development or is merely compliance theater."
+    },
+    {
+      "time": "2026-2027",
+      "event": "Autonomous AI agent deployment at scale",
+      "watch": "Are enterprises deploying truly autonomous AI agents (not copilots)? End-to-end business process automation by AI is a leading indicator of AGI-adjacent capability. Watch for: agent-mode deployments, autonomous coding systems, AI-managed infrastructure."
+    },
+    {
+      "time": "2026-2027",
+      "event": "Major compute infrastructure milestones",
+      "watch": "Track: Stargate buildout progress, xAI Memphis expansion, Google/Meta datacenter announcements. >1M GPU cluster operational would be Tier 2 indicator. Power contracts and grid connections are leading signals."
+    },
+    {
+      "time": "2027-H1",
+      "event": "Amodei powerful AI prediction window opens",
+      "watch": "CRITICAL: Amodei predicted powerful AI (Nobel Prize-winner level) by late 2026/early 2027. If this materializes, H1 probability spikes. If it does not, credibility and AGI narrative take a hit. Watch for: specific capability demonstrations, not marketing claims."
+    },
+    {
+      "time": "2027",
+      "event": "AI 2027 scenario decision point",
+      "watch": "The AI 2027 scenario predicts expert-level AI research automation by early 2027 and potential ASI by late 2027. This is the most aggressive mainstream AGI scenario. Either it materializes (H1 confirmed) or it does not (shifts probability mass to H2-H4)."
+    },
+    {
+      "time": "2027-2028",
+      "event": "Metaculus AGI forecast evolution",
+      "watch": "If Metaculus median moves inside 2028, strong signal from the best-calibrated forecasting community. If it moves back out past 2035, the AGI skeptics are winning."
+    },
+    {
+      "time": "2026-2031",
+      "event": "AI-enabled cyber, bio, or economic incident",
+      "watch": "CRITICAL ANTI-INDICATOR for smooth transition. Any confirmed AI-enabled catastrophic incident would reshape the entire trajectory — triggering regulatory crackdown, potential development pause, and public backlash."
+    }
+  ],
+  "searchQueries": [
+    "AGI announcement breakthrough {date}",
+    "AI model benchmark new record {date}",
+    "software engineering jobs AI impact {date}",
+    "AI regulation executive order legislation {date}",
+    "Anthropic OpenAI Google AI model release {date}",
+    "AI scaling laws compute efficiency {date}",
+    "autonomous AI agent deployment enterprise {date}",
+    "AI safety incident exploit {date}",
+    "Metaculus AGI forecast update {date}",
+    "AI replacing jobs layoffs automation {date}"
+  ],
+  "governance": {
+    "health": "DEGRADED",
+    "issues": [
+      "Near-maximum uncertainty — model is not discriminating"
+    ],
+    "rt": {
+      "rt": 0.0,
+      "regime": "SAFE",
+      "worst_hypothesis": "H1"
+    },
+    "entropy": 1.8834,
+    "maxEntropy": 2.0,
+    "uncertaintyRatio": 0.9417,
+    "evidenceFreshness": {
+      "fresh": 9,
+      "stale": 4,
+      "total": 13
+    },
+    "hypothesisAdmissibility": {
+      "H1": "ADMISSIBLE",
+      "H2": "ADMISSIBLE",
+      "H3": "ADMISSIBLE",
+      "H4": "ADMISSIBLE"
+    },
+    "lastComputed": "2026-03-28T16:18:17+00:00"
+  }
+}

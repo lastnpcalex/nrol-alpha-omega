@@ -91,5 +91,7 @@
   "searchQueries": [
     "topic keyword latest {date}",
     "specific search query {date}"
-  ]
+  ],
+
+  "governance": null
 }

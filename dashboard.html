@@ -389,6 +389,38 @@ function renderSubModels() {
         ${sm.status ? `<div style="color:var(--dim);font-size:11px;">Status: ${sm.status}</div>` : ''}
       </div>`;
     }
+    // Conditionals (e.g. khargConditionalHormuz)
+    if (sm.conditionals) {
+      for (const [ck, cv] of Object.entries(sm.conditionals)) {
+        html += `<div style="margin-top:8px;padding:8px;background:var(--surface2);border-radius:4px;">
+          <div style="color:var(--cyan);font-size:10px;letter-spacing:1px;margin-bottom:4px;">CONDITIONAL: ${ck}</div>`;
+        const condKeys = Object.keys(cv).filter(k => k.startsWith('H'));
+        if (condKeys.length) {
+          html += '<div style="display:flex;gap:8px;flex-wrap:wrap;">';
+          for (const hk of condKeys) {
+            html += `<span style="font-size:11px;color:var(--dim);">${hk}=${(cv[hk]*100).toFixed(0)}%</span>`;
+          }
+          html += '</div>';
+        }
+        if (cv.expectedDurationWeeks) {
+          html += `<div style="color:var(--amber);font-size:12px;margin-top:4px;">E[duration] = ${cv.expectedDurationWeeks} weeks</div>`;
+        }
+        html += '</div>';
+      }
+    }
+    // Timeline data (e.g. khargTimeline)
+    if (sm.assaultWindow || sm.boxerETA || sm.overlapWindow) {
+      html += `<div style="margin-top:8px;padding:8px;background:rgba(239,68,68,0.05);border:1px solid var(--border);border-radius:4px;">
+        <div style="color:var(--red);font-size:10px;letter-spacing:1px;margin-bottom:4px;">OPERATIONAL TIMELINE</div>`;
+      if (sm.assaultWindow) html += `<div style="font-size:11px;margin:2px 0;"><span style="color:var(--dim);">Assault window:</span> <span style="color:var(--red);font-weight:bold;">${sm.assaultWindow}</span></div>`;
+      if (sm.boxerETA) html += `<div style="font-size:11px;margin:2px 0;"><span style="color:var(--dim);">Boxer ARG ETA:</span> ${sm.boxerETA}</div>`;
+      if (sm.overlapWindow) html += `<div style="font-size:11px;margin:2px 0;"><span style="color:var(--dim);">Overlap window:</span> ${sm.overlapWindow}</div>`;
+      html += '</div>';
+    }
+    // Note field
+    if (sm.note) {
+      html += `<div style="margin-top:8px;padding:8px;background:var(--surface2);border-left:3px solid var(--accent);border-radius:0 4px 4px 0;font-size:11px;color:var(--dim);line-height:1.5;">${sm.note}</div>`;
+    }
     html += '</div>';
     el.innerHTML += html;
   }

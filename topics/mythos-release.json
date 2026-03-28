@@ -1,0 +1,576 @@
+{
+  "meta": {
+    "slug": "mythos-release",
+    "title": "CLAUDE MYTHOS PUBLIC RELEASE",
+    "question": "When will Anthropic publicly release Claude Mythos (Capybara tier) for general API/product access?",
+    "resolution": "Anthropic announces general availability of Mythos/Capybara-tier model via API or Claude.ai — not restricted early-access or defender-only programs",
+    "created": "2026-03-27T00:00:00Z",
+    "lastUpdated": "2026-03-28T16:18:17+00:00",
+    "status": "ACTIVE",
+    "dayCount": 1,
+    "startDate": "2026-03-27T00:00:00Z",
+    "classification": "ELEVATED"
+  },
+  "model": {
+    "hypotheses": {
+      "H1": {
+        "label": "By June 2026",
+        "midpoint": 8,
+        "unit": "weeks",
+        "posterior": 0.1
+      },
+      "H2": {
+        "label": "Q3 2026 (Jul-Sep)",
+        "midpoint": 20,
+        "unit": "weeks",
+        "posterior": 0.25
+      },
+      "H3": {
+        "label": "Q4 2026 (Oct-Dec)",
+        "midpoint": 32,
+        "unit": "weeks",
+        "posterior": 0.4
+      },
+      "H4": {
+        "label": "2027 or restricted indefinitely",
+        "midpoint": 52,
+        "unit": "weeks",
+        "posterior": 0.25
+      }
+    },
+    "expectedValue": 31.6,
+    "expectedUnit": "weeks",
+    "posteriorHistory": [
+      {
+        "date": "2026-03-27",
+        "H1": 0.1,
+        "H2": 0.25,
+        "H3": 0.4,
+        "H4": 0.25,
+        "note": "Initial prior. Leak reveals model in early-access testing. Anthropic says 'deliberate' release; one source estimates Oct 2026. Cybersecurity concerns could delay. Early-access customers already active suggests model is functional, but unprecedented cyber risk framing + market panic create political pressure toward caution."
+      }
+    ]
+  },
+  "subModels": {
+    "leakFallout": {
+      "description": "What becomes the dominant consequence of the accidental data leak?",
+      "scenarios": {
+        "contained": {
+          "label": "Contained PR incident — buzz fades in <2 weeks",
+          "prob": 0.25
+        },
+        "regulatory": {
+          "label": "Regulatory catalyst — triggers mandatory pre-deployment audits or new AI safety rules",
+          "prob": 0.3
+        },
+        "armsRace": {
+          "label": "Arms race acceleration — competitors rush releases to match",
+          "prob": 0.2
+        },
+        "reputational": {
+          "label": "Reputational damage to Anthropic's safety-first brand",
+          "prob": 0.25
+        }
+      },
+      "notes": "Anthropic's entire brand proposition is safety-first AI. Leaking a model they themselves flag as an unprecedented cybersecurity risk from an unsecured public data store is acutely ironic. The question is whether the market and regulators treat this as a one-off or systemic."
+    },
+    "cyberImpact": {
+      "description": "Does Mythos actually shift the cyber offense-defense balance?",
+      "scenarios": {
+        "overblown": {
+          "label": "Overstated — incremental improvement, normal capability scaling",
+          "prob": 0.3
+        },
+        "defenderEdge": {
+          "label": "Net defender advantage — Anthropic's strategy of arming defenders first works",
+          "prob": 0.25
+        },
+        "offenseWins": {
+          "label": "Net offense advantage — vulnerability discovery outpaces patching",
+          "prob": 0.25
+        },
+        "catalystRegulation": {
+          "label": "Triggers AI-in-cyber regulation regardless of actual capability",
+          "prob": 0.2
+        }
+      },
+      "notes": "Anthropic's own leaked docs say Mythos is 'currently far ahead of any other AI model in cyber capabilities' and 'presages an upcoming wave of models that can exploit vulnerabilities in ways that far outpace the efforts of defenders.' This is the company's internal assessment, not marketing."
+    },
+    "marketRecovery": {
+      "description": "How quickly do cybersecurity stocks recover from the Mar 27 selloff?",
+      "scenarios": {
+        "quickBounce": {
+          "label": "Recovery within 1 week",
+          "prob": 0.35
+        },
+        "slowRecovery": {
+          "label": "Recovery in 2-4 weeks",
+          "prob": 0.3
+        },
+        "newBaseline": {
+          "label": "Permanent repricing — AI-driven cyber risk priced in",
+          "prob": 0.2
+        },
+        "deeperSelloff": {
+          "label": "Selloff deepens on further revelations",
+          "prob": 0.15
+        }
+      },
+      "notes": "CRWD -7%, PANW -6%, ZS -4.5%, OKTA -7.39%, S -6.49%, FTNT -4.47% on Mar 27. IGV ETF -3%. Crypto also hit. Question is whether this is panic-selling or legitimate repricing of AI disruption to cybersecurity moats."
+    }
+  },
+  "indicators": {
+    "tiers": {
+      "tier1_critical": [
+        {
+          "id": "public_api",
+          "desc": "Anthropic announces general API access for Mythos/Capybara tier",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "Resolves question — shift all posterior to whichever Hx contains the date"
+        },
+        {
+          "id": "regulatory_block",
+          "desc": "Government agency (US, EU, UK) issues order blocking or conditioning Mythos release",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "Major shift toward H4 (2027/indefinite)"
+        },
+        {
+          "id": "safety_incident",
+          "desc": "Confirmed real-world exploit using Mythos capabilities (from early access leak or jailbreak)",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "Major shift toward H4; would force Anthropic to pause"
+        }
+      ],
+      "tier2_strong": [
+        {
+          "id": "expanded_early_access",
+          "desc": "Anthropic significantly expands early-access program beyond cyber defenders",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "Moderate shift toward H1/H2 — signals confidence in safety profile"
+        },
+        {
+          "id": "congressional_hearing",
+          "desc": "US Congressional hearing specifically referencing Mythos or AI cyber capabilities",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "Moderate shift toward H3/H4 — political friction slows release"
+        },
+        {
+          "id": "competitor_response",
+          "desc": "OpenAI, Google, or Meta announce competing model explicitly citing Mythos benchmarks",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "Moderate shift toward H1/H2 — competitive pressure accelerates timeline"
+        },
+        {
+          "id": "pricing_announced",
+          "desc": "Anthropic publishes Capybara tier pricing or model card",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "Strong signal of imminent release — shift toward nearest Hx"
+        },
+        {
+          "id": "amodei_public",
+          "desc": "Dario Amodei makes public statement on Mythos release timeline",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "Calibrate based on specificity — vague = shift toward H3/H4, concrete date = adjust accordingly"
+        }
+      ],
+      "tier3_suggestive": [
+        {
+          "id": "blog_post_official",
+          "desc": "Anthropic publishes official blog post on Mythos (the one that leaked in draft)",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "Minor — confirms they're moving toward transparency"
+        },
+        {
+          "id": "benchmark_leak",
+          "desc": "Specific benchmark scores for Capybara appear on LMSYS, Chatbot Arena, or similar",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "Minor shift toward earlier release — suggests model is in broader testing"
+        },
+        {
+          "id": "safety_eval_published",
+          "desc": "Anthropic or third party publishes RSP/safety evaluation for Mythos",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "Confirms approaching release gate — shift toward H2/H3"
+        },
+        {
+          "id": "enterprise_chatter",
+          "desc": "Reports of enterprise customers discussing Mythos capabilities from early access",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "Confirms model is production-viable — minor shift toward earlier release"
+        },
+        {
+          "id": "ipo_filing",
+          "desc": "Anthropic files for IPO (reportedly anticipated, Mythos could be key to valuation story)",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "IPO pressure could accelerate release to demonstrate revenue potential"
+        },
+        {
+          "id": "eu_ai_act_enforcement",
+          "desc": "EU AI Act enforcement action or inquiry referencing Mythos specifically",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "Minor shift toward H4 — EU compliance adds friction"
+        },
+        {
+          "id": "media_cycle_dies",
+          "desc": "Mythos drops out of major tech news cycle for >7 days",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "Suggests 'contained' leak scenario — reduces pressure both ways"
+        }
+      ],
+      "anti_indicators": [
+        {
+          "id": "anthropic_downplays",
+          "desc": "Anthropic publicly downplays Mythos capabilities or calls leak exaggerated",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "Falsifies H1 urgency — if capabilities are overstated, less pressure to rush release. Reduces H1/H2, shifts to H3/H4."
+        },
+        {
+          "id": "model_renamed",
+          "desc": "Anthropic releases a different-named model that appears to be Mythos rebrand",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "Complicates H1/H2/H3 tracking — partial resolution under different name"
+        },
+        {
+          "id": "internal_pause",
+          "desc": "Reports that Anthropic has paused Mythos development or deployment",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "Directly falsifies H1, strongly reduces H2. Major shift toward H4."
+        },
+        {
+          "id": "cyber_nothingburger",
+          "desc": "Independent security researchers test early-access Mythos, find cyber capabilities overstated",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "Reduces H4 probability (less reason to delay); accelerates H1/H2/H3."
+        },
+        {
+          "id": "regulatory_friction",
+          "desc": "Congressional inquiry, EU investigation, or executive action specifically targeting Mythos release",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "Directly reduces H1 probability, moderately reduces H2. Shifts mass to H3/H4."
+        },
+        {
+          "id": "early_access_revoked",
+          "desc": "Anthropic pulls early-access program or significantly restricts it after discovering misuse",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "Falsifies H1 timeline, reduces H2/H3. Signals safety concerns are worse than public messaging."
+        }
+      ]
+    }
+  },
+  "actorModel": {
+    "description": "Decision-theoretic framework for actors who will determine Mythos release timing and impact",
+    "actors": {
+      "anthropic_leadership": {
+        "name": "Anthropic Leadership (Dario Amodei, Daniela Amodei)",
+        "role": "Primary decision-maker on release timing, safety policy, and commercial strategy",
+        "decisionStyle": "Safety-first framing with commercial pragmatism. Historically cautious on capability releases but responsive to competitive pressure. Pre-IPO incentives create tension between safety brand and revenue demonstration.",
+        "biases": [
+          "Institutional commitment to RSP framework constrains rapid release",
+          "IPO timeline creates pressure to demonstrate flagship capability",
+          "Leak embarrassment may trigger overcorrection toward caution OR rushed official release to control narrative"
+        ],
+        "filters": [
+          "RSP safety evaluation gates",
+          "Board oversight",
+          "Legal review of regulatory exposure"
+        ],
+        "overrides": [
+          "Competitive pressure from OpenAI/Google could accelerate timeline",
+          "IPO valuation narrative may override safety caution"
+        ]
+      },
+      "regulators": {
+        "name": "US/EU/UK Regulators",
+        "role": "Can condition or block release through executive action, legislation, or enforcement",
+        "decisionStyle": "Reactive to headlines. AI regulation still primarily voluntary in US; EU AI Act has teeth but enforcement is slow. Congressional hearings are theater unless paired with legislation.",
+        "biases": [
+          "Headline-driven attention span — Mythos buzz may fade before action materializes",
+          "AI safety is bipartisan concern but partisan on approach"
+        ],
+        "filters": [
+          "Legislative process is slow",
+          "Enforcement requires legal basis that may not yet exist for pre-release AI models"
+        ],
+        "overrides": [
+          "Confirmed real-world cyber exploit using Mythos would trigger emergency response"
+        ]
+      },
+      "competitors": {
+        "name": "OpenAI, Google DeepMind, Meta AI",
+        "role": "Competitive pressure on Anthropic's release timeline; may release competing models",
+        "decisionStyle": "OpenAI historically aggressive on releases, Google more measured, Meta open-source oriented. All are in capability race.",
+        "biases": [
+          "GPT-5.3-Codex already released Feb 2026 — OpenAI has less urgency",
+          "Google may use Mythos leak to justify accelerating Gemini releases"
+        ],
+        "filters": [
+          "Own safety evaluation processes",
+          "Commercial partnerships constrain recklessness"
+        ],
+        "overrides": [
+          "If Mythos benchmarks are as dramatic as leaked, competitors may rush sub-par releases"
+        ]
+      },
+      "market": {
+        "name": "Financial Markets & Investors",
+        "role": "Price signal for AI disruption of cybersecurity; pressure on Anthropic's valuation story",
+        "decisionStyle": "Reactive, herd-driven, short attention span. Cybersecurity selloff may be panic or repricing.",
+        "biases": [
+          "Overreacts to narrative, underreacts to gradual capability scaling",
+          "Tech selloff contagion from unrelated macro"
+        ],
+        "filters": [
+          "Earnings reports will provide reality check on actual AI impact"
+        ],
+        "overrides": [
+          "Confirmed cyber exploit → sustained repricing, not bounce"
+        ]
+      }
+    },
+    "methodology": [
+      "ACTIONS OVER RHETORIC — Anthropic's actual deployment decisions matter, not their safety messaging",
+      "LEAK ≠ RELEASE — the model exists in early access, but leak does not change underlying release timeline unless it triggers external forcing functions",
+      "FOLLOW THE MONEY — IPO timeline and competitive dynamics are stronger predictors than safety philosophy",
+      "REGULATORY LAG — assume regulators are 3-6 months behind headlines unless specific enforcement action occurs",
+      "MARKET OVERREACTION — initial selloff is noise; watch for sustained repricing or earnings impact as signal"
+    ]
+  },
+  "evidenceLog": [
+    {
+      "time": "2026-03-26T21:00-07:00",
+      "tag": "EVENT",
+      "text": "Fortune discovers ~3,000 unpublished assets in unsecured, publicly-searchable data cache linked to Anthropic's CMS. Draft blog post describes Claude Mythos as 'by far the most powerful AI model we've ever developed' with 'unprecedented cybersecurity risks.' Security researchers Roy Paz (LayerX Security) and Alexandre Pauwels (University of Cambridge) reviewed materials. Anthropic informed Thursday evening.",
+      "provenance": "RETRIEVED",
+      "source": "Fortune exclusive, Mar 26 2026",
+      "posteriorImpact": "MAJOR"
+    },
+    {
+      "time": "2026-03-26T23:00-07:00",
+      "tag": "RHETORIC",
+      "text": "Anthropic spokesperson confirms: 'We're developing a general purpose model with meaningful advances in reasoning, coding, and cybersecurity. Given the strength of its capabilities, we're being deliberate about how we release it.' Attributes leak to 'human error' in CMS configuration — digital assets defaulted to public unless explicitly set private.",
+      "provenance": "RETRIEVED",
+      "source": "Anthropic spokesperson via Fortune",
+      "posteriorImpact": "MODERATE"
+    },
+    {
+      "time": "2026-03-27T06:00-07:00",
+      "tag": "DATA",
+      "text": "Leaked draft reveals new 'Capybara' model tier above Opus. Mythos/Capybara achieves 'dramatically higher scores' on software coding, academic reasoning, and cybersecurity benchmarks vs Opus 4.6. Described as 'currently far ahead of any other AI model in cyber capabilities.' Six core capabilities identified: cybersecurity analysis, code generation, academic reasoning, complex multi-step reasoning, agent workflow consistency, vulnerability discovery.",
+      "provenance": "RETRIEVED",
+      "source": "Multiple sources synthesizing leaked draft content",
+      "posteriorImpact": "MODERATE"
+    },
+    {
+      "time": "2026-03-27T06:00-07:00",
+      "tag": "ECON",
+      "text": "Cybersecurity stocks selloff: CRWD -7%, PANW -6%, ZS -4.5%, OKTA -7.39%, S (SentinelOne) -6.49%, FTNT -4.47%. iShares Expanded Tech-Software Sector ETF (IGV) -3%. Crypto also fell — BTC back to $66,000. Market interprets Mythos as existential threat to cybersecurity vendor moats.",
+      "provenance": "RETRIEVED",
+      "source": "Investing.com, CoinDesk, Mar 27 2026",
+      "posteriorImpact": "MINOR"
+    },
+    {
+      "time": "2026-03-27T08:00-07:00",
+      "tag": "RHETORIC",
+      "text": "Leaked draft states Anthropic's release plan focuses on cyber defenders first: 'We're releasing it in early access to organizations, giving them a head start in improving the robustness of their codebases against the impending wave of AI-driven exploits.' Model already being trialed by 'early access customers.' No public release planned near-term.",
+      "provenance": "RETRIEVED",
+      "source": "Fortune, Mar 27 2026",
+      "posteriorImpact": "MODERATE"
+    },
+    {
+      "time": "2026-03-27T08:00-07:00",
+      "tag": "EVENT",
+      "text": "AI safety commentators note acute irony: Anthropic, the self-styled safety-first AI lab, leaked details of a model they internally flagged as an unprecedented cybersecurity risk — from an unsecured public data store. This undermines the very safety framework Anthropic champions and is likely to intensify calls for mandatory security audits of AI developers.",
+      "provenance": "DERIVED",
+      "source": "Synthesis of CybersecurityNews, Fortune, multiple commentators",
+      "posteriorImpact": "MINOR"
+    },
+    {
+      "time": "2026-03-27T09:00-07:00",
+      "tag": "INTEL",
+      "text": "Context: Anthropic previously documented state-sponsored hacking groups (including Chinese government-linked actors) attempting to exploit Claude in real-world attacks. In November 2025, Anthropic disrupted a documented large-scale AI cyberattack. Mythos capabilities would represent a significant escalation of this threat surface.",
+      "provenance": "RETRIEVED",
+      "source": "Fortune background reporting",
+      "posteriorImpact": "NONE"
+    },
+    {
+      "time": "2026-03-27T09:00-07:00",
+      "tag": "INTEL",
+      "text": "Context: OpenAI released GPT-5.3-Codex in February 2026; Anthropic released Opus 4.6 in same timeframe. Both flagged cybersecurity risks. Mythos/Capybara represents next escalation in capability ladder. One source estimates possible public release October 2026, potentially aligned with anticipated Anthropic IPO.",
+      "provenance": "RETRIEVED",
+      "source": "Apiyi.com analysis, Fortune background",
+      "posteriorImpact": "MINOR"
+    },
+    {
+      "time": "2026-03-27T10:00-07:00",
+      "tag": "EVENT",
+      "text": "CEO Dario Amodei reportedly scheduled to attend invite-only European CEO summit described as 'intimate gathering' at 18th-century English countryside estate to discuss AI adoption. Timing unclear but proximate to leak — could become venue for Mythos messaging.",
+      "provenance": "RETRIEVED",
+      "source": "Fortune",
+      "posteriorImpact": "NONE"
+    }
+  ],
+  "dataFeeds": {
+    "crwd": {
+      "label": "CrowdStrike (CRWD)",
+      "value": -7.0,
+      "unit": "% change",
+      "baseline": 0,
+      "asOf": "2026-03-27"
+    },
+    "panw": {
+      "label": "Palo Alto Networks (PANW)",
+      "value": -6.0,
+      "unit": "% change",
+      "baseline": 0,
+      "asOf": "2026-03-27"
+    },
+    "okta": {
+      "label": "Okta (OKTA)",
+      "value": -7.39,
+      "unit": "% change",
+      "baseline": 0,
+      "asOf": "2026-03-27"
+    },
+    "igv": {
+      "label": "iShares Tech-Software ETF (IGV)",
+      "value": -3.0,
+      "unit": "% change",
+      "baseline": 0,
+      "asOf": "2026-03-27"
+    },
+    "btc": {
+      "label": "Bitcoin",
+      "value": 66000,
+      "unit": "$/BTC",
+      "baseline": 0,
+      "asOf": "2026-03-27"
+    },
+    "leakAssets": {
+      "label": "Leaked Assets Discovered",
+      "value": 3000,
+      "unit": "unpublished files",
+      "baseline": 0,
+      "asOf": "2026-03-27"
+    }
+  },
+  "watchpoints": [
+    {
+      "time": "2026-03-28-31",
+      "event": "Anthropic official response beyond spokesperson statement",
+      "watch": "Does Anthropic publish an official blog post, hold a press briefing, or issue a formal statement? Speed and tone of response indicates whether they treat this as crisis management or controlled narrative. Watch for whether they publish the leaked blog post officially (would signal moving toward transparency) or try to suppress."
+    },
+    {
+      "time": "2026-03-28-04-03",
+      "event": "Cybersecurity stock recovery pattern",
+      "watch": "Do CRWD, PANW, OKTA bounce within 1 week (panic selling) or continue declining (legitimate repricing of AI disruption to cybersecurity moats)? Watch for analyst notes specifically addressing AI-driven vulnerability discovery as structural threat."
+    },
+    {
+      "time": "2026-03-28-04-10",
+      "event": "Congressional/regulatory response",
+      "watch": "Watch for: US Senate Commerce or Armed Services committee statements, EU AI Office commentary, UK DSIT response. A Congressional hearing request would be Tier 2 indicator. Executive order or formal inquiry would be Tier 1."
+    },
+    {
+      "time": "2026-04-01-15",
+      "event": "Competitor response",
+      "watch": "OpenAI, Google, or Meta announcements referencing Mythos or accelerating their own capability releases. GPT-5.3-Codex already out — does OpenAI counter-program? Does Google use this to justify Gemini escalation?"
+    },
+    {
+      "time": "2026-04-01-30",
+      "event": "Early access customer reports",
+      "watch": "Enterprise customers in early-access program leak or publish assessments of Mythos capabilities. Independent security researchers attempting to validate the 'dramatically higher' benchmark claims. Watch LMSYS Chatbot Arena for anomalous new model entries."
+    },
+    {
+      "time": "2026-04-TBD",
+      "event": "Dario Amodei European CEO summit",
+      "watch": "What does Amodei say about Mythos at the summit? Public remarks vs off-record briefings. Tone: apologetic about leak, bullish on capabilities, cautious on timeline? Any concrete release timeline hints."
+    },
+    {
+      "time": "2026-04-15-06-30",
+      "event": "Anthropic IPO signals",
+      "watch": "IPO filing or pre-IPO fundraising activity. Mythos is the key capability story for valuation — IPO pressure could accelerate release. Watch for S-1 filing or late-stage private round that references Capybara tier."
+    },
+    {
+      "time": "2026-04-01-ongoing",
+      "event": "Real-world cyber exploitation attempts",
+      "watch": "CRITICAL: Any confirmed attempt to use Mythos-derived capabilities for real-world exploitation — via early-access leak, model extraction, or inspired copycats. This is the scenario that would trigger emergency regulatory response and force Anthropic's hand."
+    }
+  ],
+  "searchQueries": [
+    "Anthropic Mythos release date {date}",
+    "Claude Capybara model announcement {date}",
+    "Anthropic Mythos cybersecurity reaction {date}",
+    "Anthropic IPO 2026 {date}",
+    "AI cybersecurity regulation Mythos {date}",
+    "CrowdStrike PANW Anthropic AI threat {date}",
+    "Dario Amodei Mythos statement {date}",
+    "Claude Mythos benchmark Chatbot Arena {date}"
+  ],
+  "governance": {
+    "health": "DEGRADED",
+    "issues": [
+      "Near-maximum uncertainty — model is not discriminating"
+    ],
+    "rt": {
+      "rt": 0.0,
+      "regime": "SAFE",
+      "worst_hypothesis": "H1"
+    },
+    "entropy": 1.861,
+    "maxEntropy": 2.0,
+    "uncertaintyRatio": 0.9305,
+    "evidenceFreshness": {
+      "fresh": 7,
+      "stale": 2,
+      "total": 9
+    },
+    "hypothesisAdmissibility": {
+      "H1": "ADMISSIBLE",
+      "H2": "ADMISSIBLE",
+      "H3": "ADMISSIBLE",
+      "H4": "ADMISSIBLE"
+    },
+    "lastComputed": "2026-03-28T16:18:17+00:00"
+  }
+}
