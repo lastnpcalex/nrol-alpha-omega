@@ -2,7 +2,7 @@
   <img src="logo.png" width="300" alt="NROL-αΩ mission patch — DELENDA EST CURRENT THING" />
 </p>
 
-# NROL-αΩ — Necrorationalist Research Operations Lab: αΩ
+# Necrorationalist Research Operations-αΩ
 
 **Generalized epistemic Bayesian estimator for Current Thing.**
 
