@@ -30,10 +30,10 @@ python governor.py chain hormuz-closure H3
 ## Architecture
 
 ```
-engine.py          Bayesian update engine — posteriors, indicators, evidence log
+engine.py          Bayesian update engine — governor-gated posteriors, evidence enrichment
 governor.py        Epistemic governor — R_t scoring, claim lifecycle, admissibility, VoI
 server.py          Multi-topic HTTP server (port 8098)
-dashboard.html     Dark-theme intelligence dashboard
+dashboard.html     Dark-theme intelligence dashboard with governance health display
 topics/            One JSON state file per active topic
 briefs/            Generated briefings per topic
 ```
@@ -44,6 +44,17 @@ briefs/            Generated briefings per topic
 2. Fill in: question, resolution criterion, hypotheses, indicators, actor model
 3. Reload the dashboard — it auto-discovers topics
 
+## Governor-Gated Engine
+
+The governor is not a read-only linter — it is a hard gate on all engine mutations. Every hypothesis creation, posterior update, and evidence addition passes through governance checks before being accepted.
+
+- **Topic creation** — `validate_hypotheses()` runs admissibility checks; INADMISSIBLE topics are blocked
+- **Posterior updates** — `check_update_proposal()` gates all shifts; critical failures (no evidence, circular reasoning) raise `GovernanceError`
+- **Evidence enrichment** — `add_evidence()` auto-classifies entries with ledger type, claim state, and effective weight
+- **Governance snapshots** — every `save_topic()` embeds a live governance health report (R_t, entropy, admissibility)
+- **Prediction detection** — future-tense claims are auto-downgraded to PROPOSED (0.5 weight) regardless of provenance
+- **Rhetoric guard** — RHETORIC-tagged evidence used to justify posterior shifts triggers a warning
+
 ## Epistemic Governance
 
 The governor (`governor.py`) enforces analytical discipline:
@@ -53,7 +64,7 @@ The governor (`governor.py`) enforces analytical discipline:
 - **Claim lifecycle** — PROPOSED → SUPPORTED → CONTESTED → INVALIDATED
 - **Admissibility gating** — validates hypothesis quality (setpoint clarity, observability, falsifiability)
 - **Value of Information** — prioritizes search queries by expected information gain
-- **Hallucination checklist** — 10 failure modes checked before any posterior update
+- **Hallucination checklist** — 11 failure modes checked before any posterior update
 - **Constraint chain** — full audit trail of how each hypothesis moved from prior to current
 
 ## Acknowledgments
@@ -65,7 +76,7 @@ The epistemic governance layer is built on patterns from **[@unpingable](https:/
 - The **claim lifecycle** (PROPOSED → SUPPORTED → CONTESTED → INVALIDATED) for tracking evidence state
 - **Admissibility gating** for hypothesis quality validation (setpoint clarity + observability)
 - **Value of Information** prioritization for directing search effort
-- The **10 hallucination failure modes** as a pre-commit checklist for posterior updates
+- The **hallucination failure modes** (extended to 11) as a pre-commit checklist for posterior updates
 - The **monotonic constraint compiler** pattern adapted as constraint chain auditing
 
 Agent Governor is a control and evidence layer for supervising tool-using AI agents. Its core insight — "natural language is a proposal, not an authority" — translates directly to Bayesian estimation: rhetoric is a proposal, only verified evidence moves posteriors.

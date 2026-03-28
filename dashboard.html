@@ -16,6 +16,8 @@
 
   /* Header */
   .header { background: linear-gradient(135deg, #1a1a2e, #16213e); border-bottom: 2px solid var(--accent); padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+  .header-left { display: flex; align-items: center; gap: 14px; }
+  .header-left .logo { width: 48px; height: 48px; border-radius: 50%; border: 1px solid var(--accent); object-fit: cover; }
   .header-left h1 { font-size: 16px; letter-spacing: 2px; color: var(--accent); }
   .header-left .subtitle { font-size: 11px; color: var(--dim); letter-spacing: 1px; margin-top: 2px; }
   .header-right { display: flex; align-items: center; gap: 12px; }
@@ -160,8 +162,11 @@
 
 <div class="header">
   <div class="header-left">
+    <img src="logo.png" alt="NROL-αΩ" class="logo">
+    <div>
     <h1>NRL-ALPHA OMEGA</h1>
     <div class="subtitle">GENERALIZED EPISTEMIC BAYESIAN ESTIMATOR</div>
+    </div>
   </div>
   <div class="header-right">
     <select class="topic-select" id="topicSelect" onchange="switchTopic(this.value)">
