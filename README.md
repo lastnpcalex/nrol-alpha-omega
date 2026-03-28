@@ -18,13 +18,13 @@ python server.py
 
 # Check a topic from the CLI
 python engine.py list
-python engine.py show hormuz-closure
+python engine.py show my-topic
 
 # Run the epistemic governor
-python governor.py report hormuz-closure
-python governor.py rt hormuz-closure
-python governor.py voi hormuz-closure
-python governor.py chain hormuz-closure H3
+python governor.py report my-topic
+python governor.py rt my-topic
+python governor.py voi my-topic
+python governor.py chain my-topic H3
 ```
 
 ## Architecture
