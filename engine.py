@@ -66,6 +66,28 @@ def save_topic(topic: dict) -> None:
     slug = topic["meta"]["slug"]
     topic["meta"]["lastUpdated"] = _now_iso()
 
+    # Guard: enrich any evidence entries that bypassed the governor
+    _GOVERNOR_FIELDS = ("ledger", "claimState", "effectiveWeight")
+    evidence_log = topic.get("evidenceLog", [])
+    enriched_count = 0
+    for entry in evidence_log:
+        if any(field not in entry for field in _GOVERNOR_FIELDS):
+            entry["ledger"] = entry.get("ledger") or classify_evidence(entry)
+            entry["claimState"] = entry.get("claimState") or assess_claim_state(
+                entry, evidence_log
+            )
+            entry["effectiveWeight"] = entry.get("effectiveWeight") or get_effective_weight(
+                entry, evidence_log
+            )
+            enriched_count += 1
+    if enriched_count:
+        warnings.warn(
+            f"Governor guard: {enriched_count} evidence entries were missing "
+            f"governor fields — enriched retroactively on save. "
+            f"Use engine.add_evidence() to avoid this.",
+            stacklevel=2,
+        )
+
     # Compute and embed governance snapshot
     try:
         rt = compute_topic_rt(topic)
