@@ -385,6 +385,115 @@ def hold_posteriors(topic: dict, reason: str = "No new indicators") -> dict:
     return topic
 
 
+def update_submodel(topic: dict, submodel_id: str,
+                    new_probs: dict[str, float], reason: str,
+                    evidence_refs: list[str] = None) -> dict:
+    """
+    Update sub-model scenario probabilities with governor gate.
+
+    submodel_id: key in topic["subModels"] (e.g. "meuMission")
+    new_probs: {"kharg": 0.60, "declareVictory": 0.12, ...}
+    reason: why the update happened
+    evidence_refs: list of evidence timestamps supporting this update
+
+    Governor gate: runs hallucination checklist (same as posterior updates).
+    CRITICAL failures block the update. Warnings are logged.
+    Evidence trail is always recorded.
+    """
+    submodels = topic.get("subModels", {})
+    if submodel_id not in submodels:
+        raise ValueError(f"Unknown sub-model: {submodel_id}")
+
+    sm = submodels[submodel_id]
+    scenarios = sm.get("scenarios", {})
+
+    # Validate all keys exist
+    for k in new_probs:
+        if k not in scenarios:
+            raise ValueError(f"Unknown scenario in {submodel_id}: {k}")
+
+    # Build merged probabilities
+    merged = {}
+    for k in scenarios:
+        merged[k] = new_probs.get(k, scenarios[k]["prob"])
+
+    # Enforce sum-to-1
+    total = sum(merged.values())
+    if abs(total - 1.0) > 0.01:
+        raise ValueError(f"Sub-model probs sum to {total:.4f}, must be ~1.0")
+
+    # Normalize
+    for k in merged:
+        merged[k] = round(merged[k] / total, 4)
+
+    # === GOVERNOR HARD GATE ===
+    # Use the same hallucination checklist as posteriors — sub-model shifts
+    # are posterior shifts on a nested question, same epistemic discipline applies.
+    # Pass current posteriors unchanged so governor checks run without
+    # flagging a phantom shift on the main model.
+    current_posteriors = {
+        k: v["posterior"] for k, v in topic["model"]["hypotheses"].items()
+    }
+    proposal_check = check_update_proposal(
+        topic, current_posteriors, evidence_refs=evidence_refs, reason=reason
+    )
+
+    if not proposal_check["passed"]:
+        raise GovernanceError(
+            f"Sub-model update ({submodel_id}) blocked by governance: "
+            f"{', '.join(proposal_check['failures'])}",
+            failures=proposal_check["failures"],
+            warnings=proposal_check["warnings"],
+        )
+
+    # Non-critical warnings: log them
+    if proposal_check["warnings"]:
+        _add_evidence_raw(topic, {
+            "time": _now_iso(),
+            "tag": "INTEL",
+            "text": (f"GOVERNANCE WARNING on sub-model update ({submodel_id}): "
+                     f"{', '.join(proposal_check['warnings'])}. "
+                     f"Reason: {reason}"),
+            "provenance": "DERIVED",
+            "posteriorImpact": "NONE",
+            "ledger": "DECISION",
+            "claimState": "PROPOSED",
+            "effectiveWeight": 0.5,
+        })
+
+    # Require evidence refs for large shifts
+    max_shift = max(abs(merged[k] - scenarios[k]["prob"]) for k in merged)
+    if max_shift > 0.10 and evidence_refs is None:
+        raise ValueError(
+            f"Major sub-model shift ({max_shift:.0%}) requires evidence_refs."
+        )
+
+    # Record old values for audit trail
+    old_probs = {k: scenarios[k]["prob"] for k in scenarios}
+
+    # Apply
+    for k in merged:
+        scenarios[k]["prob"] = merged[k]
+
+    # Log the update as governor-enriched evidence
+    shifts = []
+    for k in merged:
+        delta = merged[k] - old_probs[k]
+        if abs(delta) >= 0.005:
+            shifts.append(f"{k}: {old_probs[k]:.0%}->{merged[k]:.0%}")
+    shift_str = ", ".join(shifts) if shifts else "no change"
+
+    add_evidence(topic, {
+        "tag": "INTEL",
+        "text": (f"SUB-MODEL UPDATE ({submodel_id}): {shift_str}. "
+                 f"Reason: {reason}"),
+        "provenance": "DERIVED",
+        "posteriorImpact": "MODERATE",
+    })
+
+    return topic
+
+
 # ---------------------------------------------------------------------------
 # Indicators
 # ---------------------------------------------------------------------------
