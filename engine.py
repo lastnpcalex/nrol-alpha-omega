@@ -602,7 +602,7 @@ def add_evidence(topic: dict, entry: dict) -> dict:
     # Deduplication: don't add if identical text exists in last 10 entries
     recent = topic.get("evidenceLog", [])[-10:]
     for existing in recent:
-        if existing.get("text") == full_entry["text"]:
+        if existing.get("text", "").strip() == full_entry["text"].strip():
             return topic  # Skip duplicate
 
     # Governor enrichment: classify and weight the evidence
