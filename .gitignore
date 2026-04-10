@@ -8,3 +8,18 @@ dashboards/
 # Only _template.json is tracked — active topics are local working data
 topics/*.json
 !topics/_template.json
+
+# Agent instructions (agent-specific, not part of the framework)
+CLAUDE.md
+.claude/
+
+# Calibration data (runtime calibration history, not part of framework)
+calibration/
+
+# Framework working files (not part of broader project)
+# These should be tracked as part of NRL-Alpha Omega core
+# See framework/README.md for framework usage
+7e004f2d922e49a79c994d9e061e9a0a.png
+add_evidence.py
+bc12c685cc194151ad6f16eeaac69c15.md
+"C\357\200\272UsersexastOneDriveDocumentsHormuzNRL-Alpha"
