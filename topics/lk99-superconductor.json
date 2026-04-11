@@ -1,0 +1,1997 @@
+{
+  "_protocol": "Historical reconstruction: LK-99 room-temperature superconductor claim, July-August 2023",
+  "meta": {
+    "slug": "lk99-superconductor",
+    "title": "LK-99: Room-Temperature Superconductor or Not?",
+    "question": "Is LK-99 (copper-substituted lead apatite) a room-temperature, ambient-pressure superconductor as claimed by Lee & Kim (2023)?",
+    "resolution": "Resolved when: (a) 3+ independent labs replicate zero-resistance AND diamagnetic levitation in LK-99 samples, OR (b) 3+ independent labs fail to replicate AND a credible structural/electronic explanation for the original observations emerges.",
+    "created": "2023-07-22T00:00:00Z",
+    "lastUpdated": "2026-04-11T17:47:50+00:00",
+    "status": "RESOLVED",
+    "dayCount": 25,
+    "startDate": "2023-07-22T00:00:00Z",
+    "classification": "ROUTINE",
+    "topicType": "science"
+  },
+  "tagConfig": {
+    "availableTags": [
+      "EXPERIMENTAL",
+      "SCIENTIFIC",
+      "TECHNICAL",
+      "DATA",
+      "EVENT",
+      "RHETORIC",
+      "ANALYSIS",
+      "EDITORIAL",
+      "CORPORATE"
+    ],
+    "directionHints": {
+      "EXPERIMENTAL": {
+        "H1": 1,
+        "H2": 1,
+        "H3": -1,
+        "H4": -1
+      },
+      "SCIENTIFIC": {
+        "H1": 1,
+        "H2": 1,
+        "H3": -1
+      },
+      "TECHNICAL": {},
+      "DATA": {},
+      "ANALYSIS": {},
+      "RHETORIC": {},
+      "EVENT": {},
+      "EDITORIAL": {},
+      "CORPORATE": {}
+    },
+    "escalationTags": [
+      "EXPERIMENTAL",
+      "SCIENTIFIC"
+    ],
+    "deescalationTags": []
+  },
+  "model": {
+    "hypotheses": {
+      "H1": {
+        "label": "Genuine RTSC — LK-99 is a room-temp superconductor",
+        "midpoint": 4,
+        "unit": "weeks",
+        "posterior": 0.01,
+        "description": "The Lee & Kim claim is correct. LK-99 exhibits zero resistance and Meissner effect at room temperature and ambient pressure. Would be Nobel-tier discovery."
+      },
+      "H2": {
+        "label": "Partial — real but not full SC (e.g., filamentary, diamagnetic, but not bulk SC)",
+        "midpoint": 6,
+        "unit": "weeks",
+        "posterior": 0.02,
+        "description": "Something genuinely novel is happening in the material (unusual diamagnetism, resistivity drop) but it falls short of true superconductivity. Could be a phase transition, Cu2S impurity effect, or structural anomaly."
+      },
+      "H3": {
+        "label": "Not SC — mundane explanation (impurities, measurement error, Cu2S)",
+        "midpoint": 4,
+        "unit": "weeks",
+        "posterior": 0.9,
+        "description": "The observations have a conventional explanation: Cu2S phase transition at ~104C, ferromagnetism mimicking levitation, resistivity artifacts from sample geometry. No superconductivity."
+      },
+      "H4": {
+        "label": "Fraud or severe methodological failure",
+        "midpoint": 8,
+        "unit": "weeks",
+        "posterior": 0.07,
+        "description": "The original claim is based on fabricated data, cherry-picked samples, or fundamental measurement errors so severe they constitute scientific misconduct."
+      }
+    },
+    "expectedValue": 0,
+    "expectedUnit": "probability_of_SC",
+    "posteriorHistory": [
+      {
+        "date": "2023-07-22T12:00:00Z",
+        "posteriors": {
+          "H1": 0.1,
+          "H2": 0.2,
+          "H3": 0.5,
+          "H4": 0.2
+        },
+        "note": "Initial priors - skeptical base rate"
+      },
+      {
+        "date": "2023-07-28T10:00:00Z",
+        "posteriors": {
+          "H1": 0.12,
+          "H2": 0.28,
+          "H3": 0.42,
+          "H4": 0.18
+        },
+        "note": "Partial levitation video + social media hype shifts H2 up slightly"
+      },
+      {
+        "date": "2023-08-01T09:00:00Z",
+        "posteriors": {
+          "H1": 0.15,
+          "H2": 0.3,
+          "H3": 0.38,
+          "H4": 0.17
+        },
+        "note": "DFT flat bands provide some theoretical support"
+      },
+      {
+        "date": "2023-08-03T20:00:00Z",
+        "posteriors": {
+          "H1": 0.08,
+          "H2": 0.2,
+          "H3": 0.55,
+          "H4": 0.17
+        },
+        "note": "Multiple failed replications + Cu2S explanation emerging"
+      },
+      {
+        "date": "2023-08-08T15:00:00Z",
+        "posteriors": {
+          "H1": 0.02,
+          "H2": 0.05,
+          "H3": 0.83,
+          "H4": 0.1
+        },
+        "note": "IBS single crystal definitively negative. Cu2S explains everything."
+      },
+      {
+        "date": "2023-08-16T10:00:00Z",
+        "posteriors": {
+          "H1": 0.01,
+          "H2": 0.02,
+          "H3": 0.9,
+          "H4": 0.07
+        },
+        "note": "RESOLVED: Scientific consensus - not a superconductor. Cu2S impurity."
+      }
+    ]
+  },
+  "subModels": {
+    "replicationTracker": {
+      "label": "Independent Replication Attempts",
+      "value": "0/8 successful (0% replication rate)",
+      "description": "Tracks labs attempting replication and their results. Key metric: ratio of successful to failed replications.",
+      "history": []
+    },
+    "theoreticalSupport": {
+      "label": "Theoretical Plausibility",
+      "value": "DFT shows flat bands but Cu2S impurity explains all observations",
+      "description": "Do DFT/ab-initio calculations support flat bands at the Fermi level? Is the proposed mechanism (Cu substitution creating hole-doped Pb-P network) physically plausible?",
+      "history": []
+    }
+  },
+  "indicators": {
+    "tiers": {
+      "tier1_critical": [
+        {
+          "id": "t1_independent_zero_resistance",
+          "desc": "Independent lab measures zero resistance in LK-99 sample below critical temperature",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 +25pp, H3 -15pp, H4 -10pp"
+        },
+        {
+          "id": "t1_meissner_confirmed",
+          "desc": "Independent lab confirms full Meissner effect (flux expulsion, not just partial levitation)",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 +30pp"
+        },
+        {
+          "id": "t1_bulk_failure",
+          "desc": "3+ independent labs fail to observe any SC signatures in high-quality samples",
+          "status": "FIRED",
+          "firedDate": "2023-08-08T15:00:00Z",
+          "note": "6+ labs failed replication including IBS single-crystal study",
+          "posteriorEffect": "H3 +25pp, H1 -20pp"
+        }
+      ],
+      "tier2_strong": [
+        {
+          "id": "t2_partial_levitation",
+          "desc": "Lab observes partial levitation or diamagnetic response but not full Meissner",
+          "status": "FIRED",
+          "firedDate": "2023-07-28T10:00:00Z",
+          "note": "Huazhong University video showed partial levitation (later explained by ferromagnetic Cu2S)",
+          "posteriorEffect": "H2 +15pp"
+        },
+        {
+          "id": "t2_resistivity_drop",
+          "desc": "Lab observes sharp resistivity drop but not zero resistance",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H2 +10pp, H3 -5pp"
+        },
+        {
+          "id": "t2_cu2s_explanation",
+          "desc": "Cu2S structural phase transition identified as explanation for observed effects",
+          "status": "FIRED",
+          "firedDate": "2023-08-06T10:00:00Z",
+          "note": "UMD identified Cu2S phase transition at 104C as cause of resistivity drop",
+          "posteriorEffect": "H3 +15pp, H1 -10pp, H2 -5pp"
+        },
+        {
+          "id": "t2_dft_flat_bands",
+          "desc": "DFT calculations show flat bands near Fermi level in Cu-substituted lead apatite",
+          "status": "FIRED",
+          "firedDate": "2023-08-01T09:00:00Z",
+          "note": "Sinead Griffin (LBNL) DFT showed flat bands, but this alone doesn't prove SC",
+          "posteriorEffect": "H1 +5pp, H2 +5pp"
+        }
+      ],
+      "tier3_suggestive": [
+        {
+          "id": "t3_social_media_video",
+          "desc": "Viral video showing levitation/resistance drop (unvetted lab, no peer review)",
+          "status": "FIRED",
+          "firedDate": "2023-07-28T10:00:00Z",
+          "note": "Multiple viral videos from Chinese labs, none showing definitive SC",
+          "posteriorEffect": "Weak signal only: H1 +2pp if corroborated"
+        },
+        {
+          "id": "t3_preprint_posted",
+          "desc": "New preprint with replication attempt (positive or negative)",
+          "status": "FIRED",
+          "firedDate": "2023-08-02T11:00:00Z",
+          "note": "Dozens of preprints posted, overwhelmingly negative replications",
+          "posteriorEffect": "Direction depends on content"
+        },
+        {
+          "id": "t3_expert_skepticism",
+          "desc": "Prominent condensed matter physicists express skepticism on specific technical grounds",
+          "status": "FIRED",
+          "firedDate": "2023-07-26T14:00:00Z",
+          "note": "Multiple condensed matter physicists flagged methodological issues from day one",
+          "posteriorEffect": "H3 +3pp"
+        }
+      ],
+      "anti_indicators": [
+        {
+          "id": "anti_h1",
+          "desc": "Failed replication by well-resourced lab (e.g., Argonne, Max Planck)",
+          "status": "FIRED",
+          "firedDate": "2023-08-08T15:00:00Z",
+          "note": "6+ well-resourced labs failed replication",
+          "posteriorEffect": "H1 -10pp per failure"
+        },
+        {
+          "id": "anti_h2",
+          "desc": "Diamagnetic signal fully explained by ferromagnetic impurity (Cu2S or similar)",
+          "status": "FIRED",
+          "firedDate": "2023-08-07T09:00:00Z",
+          "note": "Diamagnetic signal fully explained by ferromagnetic Cu2S impurity",
+          "posteriorEffect": "H2 -15pp"
+        },
+        {
+          "id": "anti_h3",
+          "desc": "Clean single-crystal LK-99 shows any SC signature",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H3 -20pp"
+        },
+        {
+          "id": "anti_h4",
+          "desc": "Original authors publish detailed methods allowing reproduction",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H4 -10pp"
+        }
+      ]
+    }
+  },
+  "actorModel": {
+    "description": "Scientific claim evaluation: who are the key actors and what drives their behavior?",
+    "actors": {
+      "originalAuthors": {
+        "name": "Lee Sukbae & Kim Ji-Hoon (Q-Centre, Korea University)",
+        "role": "Original claimants — published two arXiv preprints with competing author lists",
+        "decisionStyle": "Small lab, limited resources, long-running project (1999-2023), internal disputes visible in competing preprints",
+        "biases": [
+          "Sunk cost (20+ years on this material)",
+          "Confirmation bias (interpreting ambiguous signals as SC)"
+        ],
+        "filters": [
+          "Peer review (bypassed by going to arXiv)",
+          "Replication by others"
+        ],
+        "overrides": [
+          "If data is fabricated, no filter catches it until replication fails"
+        ]
+      },
+      "replicationLabs": {
+        "name": "Independent replication labs worldwide",
+        "role": "The actual resolution mechanism — their results determine truth",
+        "decisionStyle": "Institutional, methodical, but operating under social media time pressure",
+        "biases": [
+          "Publication bias (positive results more publishable)",
+          "Hype pressure (labs rushing synthesis, cutting corners)"
+        ],
+        "filters": [
+          "Peer review (slow)",
+          "Materials quality (synthesis is hard, impure samples give false signals)"
+        ],
+        "overrides": [
+          "Well-resourced national labs (Argonne, NIMS) can produce clean samples"
+        ]
+      },
+      "socialMedia": {
+        "name": "Twitter/X, Reddit, YouTube commentary ecosystem",
+        "role": "Amplification and narrative formation — not evidence producers but massive influence on attention and framing",
+        "decisionStyle": "Viral, hype-driven, rewards sensationalism",
+        "biases": [
+          "Novelty bias",
+          "Anchoring on earliest claims",
+          "Confusing enthusiasm with evidence"
+        ],
+        "filters": [
+          "None — no editorial filter on social media"
+        ],
+        "overrides": [
+          "Expert voices can cut through but are often drowned out"
+        ]
+      }
+    },
+    "methodology": [
+      "REPLICATION OVER RHETORIC — only independent lab results move posteriors, not social media videos or takes",
+      "SAMPLE QUALITY MATTERS — failed replications from impure samples are weak evidence; clean single-crystal results are strong",
+      "SEPARATE THE PHENOMENA — partial levitation, resistivity drops, and diamagnetism are different things with different explanations",
+      "CONSIDER BASE RATES — room-temperature superconductor claims have a ~0% historical success rate",
+      "WATCH FOR CU2S — copper sulfide is a known contaminant with a phase transition at 104C that mimics SC signatures"
+    ]
+  },
+  "evidenceLog": [
+    {
+      "time": "2023-07-22T12:00:00Z",
+      "tag": "SCIENTIFIC",
+      "text": "Two arXiv preprints posted by Lee Sukbae, Kim Ji-Hoon et al. claiming LK-99 (Pb10-xCux(PO4)6O) is a room-temperature, ambient-pressure superconductor. Papers have competing author lists suggesting internal dispute.",
+      "provenance": "OBSERVED",
+      "source": "arXiv (Lee & Kim)",
+      "posteriorImpact": "H1 +5pp initial claim",
+      "ledger": "FACT",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2023-07-25T08:00:00Z",
+      "tag": "RHETORIC",
+      "text": "Social media explosion on Twitter/X and Reddit. LK-99 trending worldwide. Viral hype but no independent verification yet. Multiple unvetted videos circulating.",
+      "provenance": "OBSERVED",
+      "source": "Twitter/Reddit",
+      "posteriorImpact": "NONE - social media noise, not evidence",
+      "ledger": "DECISION",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2023-07-26T14:00:00Z",
+      "tag": "ANALYSIS",
+      "text": "Condensed matter physicists note methodological concerns: no AC susceptibility measurement, no Meissner effect demonstration, resistance measurements on polycrystalline samples are unreliable. Base rate for RT superconductor claims is effectively 0%.",
+      "provenance": "DERIVED",
+      "source": "Physics community (multiple)",
+      "posteriorImpact": "H3 +3pp, H4 +2pp",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.25
+    },
+    {
+      "time": "2023-07-28T10:00:00Z",
+      "tag": "EXPERIMENTAL",
+      "text": "Huazhong University of Science and Technology (China) posts video showing partial levitation of a dark sample on a magnet. Sample rocks but does not fully levitate - consistent with diamagnetism, not Meissner effect.",
+      "provenance": "OBSERVED",
+      "source": "Huazhong University",
+      "posteriorImpact": "H2 +5pp partial signal only",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2023-07-31T16:00:00Z",
+      "tag": "EXPERIMENTAL",
+      "text": "Multiple Chinese labs report synthesis attempts. Most produce non-superconducting samples. One lab (unverified) claims resistivity drop but no zero resistance.",
+      "provenance": "OBSERVED",
+      "source": "Chinese labs (multiple unverified)",
+      "posteriorImpact": "H2 +3pp, weak signal",
+      "ledger": "FACT",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2023-08-01T09:00:00Z",
+      "tag": "SCIENTIFIC",
+      "text": "Sinead Griffin (Lawrence Berkeley National Lab) publishes DFT calculation showing flat bands near Fermi level in Cu-substituted lead apatite structure. Theoretical plausibility for electronic correlation effects, but flat bands alone do not guarantee superconductivity.",
+      "provenance": "OBSERVED",
+      "source": "LBNL (Sinead Griffin)",
+      "posteriorImpact": "H1 +3pp, H2 +3pp theoretical support",
+      "ledger": "FACT",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2023-08-02T11:00:00Z",
+      "tag": "EXPERIMENTAL",
+      "text": "Southeast University (Nanjing) reports failed replication: synthesized LK-99 samples show no superconducting signatures. Resistivity is semiconducting, not metallic.",
+      "provenance": "OBSERVED",
+      "source": "Southeast University",
+      "posteriorImpact": "H3 +5pp",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2023-08-03T14:00:00Z",
+      "tag": "EXPERIMENTAL",
+      "text": "IBS (Institute for Basic Science, Korea) reports synthesis of LK-99 but finds no zero resistance and no Meissner effect. Sample is a dark semiconductor.",
+      "provenance": "OBSERVED",
+      "source": "IBS Korea",
+      "posteriorImpact": "H3 +5pp",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2023-08-03T20:00:00Z",
+      "tag": "SCIENTIFIC",
+      "text": "Multiple condensed matter theory groups note that the partial levitation videos are consistent with ferromagnetism from Cu2S (copper sulfide) impurity, not diamagnetic Meissner levitation. Cu2S has a structural phase transition at ~104C.",
+      "provenance": "DERIVED",
+      "source": "Multiple theory groups",
+      "posteriorImpact": "H3 +8pp - Cu2S explanation emerging",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2023-08-06T10:00:00Z",
+      "tag": "EXPERIMENTAL",
+      "text": "University of Maryland team identifies Cu2S as a significant impurity phase in LK-99 synthesis. Cu2S undergoes a phase transition at 104C that produces a sharp resistivity drop - matching the original claim's 'superconducting transition'.",
+      "provenance": "OBSERVED",
+      "source": "University of Maryland",
+      "posteriorImpact": "H3 +10pp - smoking gun for Cu2S",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2023-08-07T09:00:00Z",
+      "tag": "SCIENTIFIC",
+      "text": "Prashant Jain (UIUC) et al. publish analysis showing the partial levitation is explained by ferromagnetic Cu2S impurities interacting with the permanent magnet. Not diamagnetic levitation.",
+      "provenance": "OBSERVED",
+      "source": "UIUC (Jain et al.)",
+      "posteriorImpact": "H2 -5pp, H3 +5pp",
+      "ledger": "FACT",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2023-08-08T15:00:00Z",
+      "tag": "EXPERIMENTAL",
+      "text": "IBS publishes results on high-quality single-crystal LK-99 (not polycrystalline). Single crystal shows NO superconductivity whatsoever - high resistivity semiconductor with no anomalous diamagnetism. This is the cleanest test possible.",
+      "provenance": "OBSERVED",
+      "source": "IBS Korea (single crystal)",
+      "posteriorImpact": "H1 -8pp, H3 +10pp - definitive",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2023-08-08T16:00:00Z",
+      "tag": "DATA",
+      "text": "Replication scoreboard: 0 successful replications of zero resistance, 0 Meissner effect confirmations, 6+ failed replications from independent labs worldwide. No lab has reproduced the core SC claims.",
+      "provenance": "OBSERVED",
+      "source": "Aggregated lab results",
+      "posteriorImpact": "H3 +5pp cumulative",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2023-08-14T12:00:00Z",
+      "tag": "SCIENTIFIC",
+      "text": "Comprehensive analysis published: ALL observed effects in LK-99 are explained by Cu2S impurity. Resistivity drop = Cu2S phase transition at 104C. Partial levitation = ferromagnetic Cu2S on permanent magnet. No superconductivity. Multiple independent groups converge on same explanation.",
+      "provenance": "OBSERVED",
+      "source": "Multiple groups (consensus)",
+      "posteriorImpact": "H3 dominant - mundane explanation confirmed",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2023-08-16T10:00:00Z",
+      "tag": "SCIENTIFIC",
+      "text": "Nature publishes summary: LK-99 is not a superconductor. Scientific consensus reached. Original observations fully explained by Cu2S copper sulfide impurity phase. The rapid open-science replication effort is praised but the claim is definitively debunked.",
+      "provenance": "OBSERVED",
+      "source": "Nature (news feature)",
+      "posteriorImpact": "Resolution: H3 confirmed",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    }
+  ],
+  "dataFeeds": {
+    "replication_attempts": {
+      "label": "Replication Attempts",
+      "value": 8,
+      "unit": "labs",
+      "baseline": 0,
+      "asOf": "2023-08-16T00:00:00Z"
+    },
+    "replication_positive": {
+      "label": "Positive Replications (any SC signature)",
+      "value": 0,
+      "unit": "labs",
+      "baseline": 0,
+      "asOf": "2023-08-16T00:00:00Z"
+    },
+    "replication_negative": {
+      "label": "Negative Replications",
+      "value": 6,
+      "unit": "labs",
+      "baseline": 0,
+      "asOf": "2023-08-16T00:00:00Z"
+    },
+    "preprints": {
+      "label": "Related Preprints",
+      "value": 25,
+      "unit": "papers",
+      "baseline": 2,
+      "asOf": "2023-08-16T00:00:00Z"
+    },
+    "day_count": {
+      "label": "Days Since Claim",
+      "value": 25,
+      "unit": "days",
+      "baseline": 0,
+      "asOf": "2023-08-16T00:00:00Z"
+    }
+  },
+  "watchpoints": [
+    "First independent replication attempt results",
+    "DFT calculations from condensed matter theory groups",
+    "Any lab reporting zero resistance (not just levitation)",
+    "Cu2S impurity analysis in synthesized samples",
+    "Response from original authors to failed replications"
+  ],
+  "searchQueries": [
+    "LK-99 replication {date}",
+    "LK-99 superconductor lab results",
+    "copper-substituted lead apatite superconductivity",
+    "LK-99 Cu2S impurity",
+    "LK-99 resistance measurement"
+  ],
+  "governance": {
+    "health": "DEGRADED",
+    "issues": [
+      "Majority stale evidence (15/15)",
+      "100 unresolved contradictions"
+    ],
+    "rt": {
+      "rt": 0.0,
+      "regime": "SAFE",
+      "worst_hypothesis": "H1"
+    },
+    "entropy": 0.5847,
+    "maxEntropy": 2.0,
+    "uncertaintyRatio": 0.2923,
+    "evidenceFreshness": {
+      "fresh": 0,
+      "stale": 15,
+      "total": 15
+    },
+    "hypothesisAdmissibility": {
+      "H1": "ADMISSIBLE",
+      "H2": "ADMISSIBLE",
+      "H3": "ADMISSIBLE",
+      "H4": "ADMISSIBLE"
+    },
+    "lastComputed": "2026-04-11T17:47:50+00:00",
+    "calibrationHealth": "ACCEPTABLE",
+    "unresolvedContradictions": 100
+  },
+  "predictionScoring": {
+    "snapshots": [],
+    "outcomes": [],
+    "brierScores": []
+  },
+  "contradictionTracker": {
+    "unresolved": [
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-07-26T14:00:00Z",
+        "entry_a_text": "Condensed matter physicists note methodological concerns: no AC susceptibility measurement, no Meissner effect demonstration, resistance measurements on polycrystalline samples are unreliable. Base rate for RT superconductor claims is effectively 0%.",
+        "entry_b_time": "2026-04-11T17:41:36+00:00",
+        "entry_b_text": "Huazhong University of Science and Technology (China) posts video showing partial levitation of a dark sample on a magnet. Sample rocks but does not fully levitate - consistent with diamagnetism, not Meissner effect.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: effect, meissner",
+        "detected": "2026-04-11T17:41:36Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-07-31T16:00:00Z",
+        "entry_a_text": "Multiple Chinese labs report synthesis attempts. Most produce non-superconducting samples. One lab (unverified) claims resistivity drop but no zero resistance.",
+        "entry_b_time": "2026-04-11T17:41:36+00:00",
+        "entry_b_text": "Southeast University (Nanjing) reports failed replication: synthesized LK-99 samples show no superconducting signatures. Resistivity is semiconducting, not metallic.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: resistivity, samples, superconducting",
+        "detected": "2026-04-11T17:41:36Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-07-28T10:00:00Z",
+        "entry_a_text": "Huazhong University of Science and Technology (China) posts video showing partial levitation of a dark sample on a magnet. Sample rocks but does not fully levitate - consistent with diamagnetism, not Meissner effect.",
+        "entry_b_time": "2026-04-11T17:41:36+00:00",
+        "entry_b_text": "IBS (Institute for Basic Science, Korea) reports synthesis of LK-99 but finds no zero resistance and no Meissner effect. Sample is a dark semiconductor.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: dark, effect, meissner, sample, science",
+        "detected": "2026-04-11T17:41:36Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-07-25T08:00:00Z",
+        "entry_a_text": "Social media explosion on Twitter/X and Reddit. LK-99 trending worldwide. Viral hype but no independent verification yet. Multiple unvetted videos circulating.",
+        "entry_b_time": "2026-04-11T17:41:36+00:00",
+        "entry_b_text": "Multiple condensed matter theory groups note that the partial levitation videos are consistent with ferromagnetism from Cu2S (copper sulfide) impurity, not diamagnetic Meissner levitation. Cu2S has a structural phase transition at ~104C.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: multiple, videos",
+        "detected": "2026-04-11T17:41:36Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-07-26T14:00:00Z",
+        "entry_a_text": "Condensed matter physicists note methodological concerns: no AC susceptibility measurement, no Meissner effect demonstration, resistance measurements on polycrystalline samples are unreliable. Base rate for RT superconductor claims is effectively 0%.",
+        "entry_b_time": "2026-04-11T17:41:36+00:00",
+        "entry_b_text": "Multiple condensed matter theory groups note that the partial levitation videos are consistent with ferromagnetism from Cu2S (copper sulfide) impurity, not diamagnetic Meissner levitation. Cu2S has a structural phase transition at ~104C.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: condensed, matter, meissner, note",
+        "detected": "2026-04-11T17:41:36Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-07-31T16:00:00Z",
+        "entry_a_text": "Multiple Chinese labs report synthesis attempts. Most produce non-superconducting samples. One lab (unverified) claims resistivity drop but no zero resistance.",
+        "entry_b_time": "2026-04-11T17:41:36+00:00",
+        "entry_b_text": "University of Maryland team identifies Cu2S as a significant impurity phase in LK-99 synthesis. Cu2S undergoes a phase transition at 104C that produces a sharp resistivity drop - matching the original claim's 'superconducting transition'.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: drop, resistivity, superconducting, synthesis",
+        "detected": "2026-04-11T17:41:36Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-02T11:00:00Z",
+        "entry_a_text": "Southeast University (Nanjing) reports failed replication: synthesized LK-99 samples show no superconducting signatures. Resistivity is semiconducting, not metallic.",
+        "entry_b_time": "2026-04-11T17:41:36+00:00",
+        "entry_b_text": "University of Maryland team identifies Cu2S as a significant impurity phase in LK-99 synthesis. Cu2S undergoes a phase transition at 104C that produces a sharp resistivity drop - matching the original claim's 'superconducting transition'.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: resistivity, superconducting, university",
+        "detected": "2026-04-11T17:41:36Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-03T20:00:00Z",
+        "entry_a_text": "Multiple condensed matter theory groups note that the partial levitation videos are consistent with ferromagnetism from Cu2S (copper sulfide) impurity, not diamagnetic Meissner levitation. Cu2S has a structural phase transition at ~104C.",
+        "entry_b_time": "2026-04-11T17:41:36+00:00",
+        "entry_b_text": "University of Maryland team identifies Cu2S as a significant impurity phase in LK-99 synthesis. Cu2S undergoes a phase transition at 104C that produces a sharp resistivity drop - matching the original claim's 'superconducting transition'.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: impurity, phase, transition",
+        "detected": "2026-04-11T17:41:36Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-01T09:00:00Z",
+        "entry_a_text": "Sinead Griffin (Lawrence Berkeley National Lab) publishes DFT calculation showing flat bands near Fermi level in Cu-substituted lead apatite structure. Theoretical plausibility for electronic correlation effects, but flat bands alone do not guarantee superconductivity.",
+        "entry_b_time": "2026-04-11T17:41:36+00:00",
+        "entry_b_text": "IBS publishes results on high-quality single-crystal LK-99 (not polycrystalline). Single crystal shows NO superconductivity whatsoever - high resistivity semiconductor with no anomalous diamagnetism. This is the cleanest test possible.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: publishes, superconductivity",
+        "detected": "2026-04-11T17:41:36Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-03T14:00:00Z",
+        "entry_a_text": "IBS (Institute for Basic Science, Korea) reports synthesis of LK-99 but finds no zero resistance and no Meissner effect. Sample is a dark semiconductor.",
+        "entry_b_time": "2026-04-11T17:41:36+00:00",
+        "entry_b_text": "IBS publishes results on high-quality single-crystal LK-99 (not polycrystalline). Single crystal shows NO superconductivity whatsoever - high resistivity semiconductor with no anomalous diamagnetism. This is the cleanest test possible.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: ibs, semiconductor",
+        "detected": "2026-04-11T17:41:36Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-07-28T10:00:00Z",
+        "entry_a_text": "Huazhong University of Science and Technology (China) posts video showing partial levitation of a dark sample on a magnet. Sample rocks but does not fully levitate - consistent with diamagnetism, not Meissner effect.",
+        "entry_b_time": "2026-04-11T17:41:36+00:00",
+        "entry_b_text": "Replication scoreboard: 0 successful replications of zero resistance, 0 Meissner effect confirmations, 6+ failed replications from independent labs worldwide. No lab has reproduced the core SC claims.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: effect, meissner",
+        "detected": "2026-04-11T17:41:36Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-02T11:00:00Z",
+        "entry_a_text": "Southeast University (Nanjing) reports failed replication: synthesized LK-99 samples show no superconducting signatures. Resistivity is semiconducting, not metallic.",
+        "entry_b_time": "2026-04-11T17:41:36+00:00",
+        "entry_b_text": "Replication scoreboard: 0 successful replications of zero resistance, 0 Meissner effect confirmations, 6+ failed replications from independent labs worldwide. No lab has reproduced the core SC claims.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: failed, replication",
+        "detected": "2026-04-11T17:41:36Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-07-28T10:00:00Z",
+        "entry_a_text": "Huazhong University of Science and Technology (China) posts video showing partial levitation of a dark sample on a magnet. Sample rocks but does not fully levitate - consistent with diamagnetism, not Meissner effect.",
+        "entry_b_time": "2026-04-11T17:41:36+00:00",
+        "entry_b_text": "Comprehensive analysis published: ALL observed effects in LK-99 are explained by Cu2S impurity. Resistivity drop = Cu2S phase transition at 104C. Partial levitation = ferromagnetic Cu2S on permanent magnet. No superconductivity. Multiple independent groups converge on same explanation.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: levitation, magnet, partial",
+        "detected": "2026-04-11T17:41:36Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-01T09:00:00Z",
+        "entry_a_text": "Sinead Griffin (Lawrence Berkeley National Lab) publishes DFT calculation showing flat bands near Fermi level in Cu-substituted lead apatite structure. Theoretical plausibility for electronic correlation effects, but flat bands alone do not guarantee superconductivity.",
+        "entry_b_time": "2026-04-11T17:41:36+00:00",
+        "entry_b_text": "Comprehensive analysis published: ALL observed effects in LK-99 are explained by Cu2S impurity. Resistivity drop = Cu2S phase transition at 104C. Partial levitation = ferromagnetic Cu2S on permanent magnet. No superconductivity. Multiple independent groups converge on same explanation.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: effects, superconductivity",
+        "detected": "2026-04-11T17:41:36Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-03T20:00:00Z",
+        "entry_a_text": "Multiple condensed matter theory groups note that the partial levitation videos are consistent with ferromagnetism from Cu2S (copper sulfide) impurity, not diamagnetic Meissner levitation. Cu2S has a structural phase transition at ~104C.",
+        "entry_b_time": "2026-04-11T17:41:36+00:00",
+        "entry_b_text": "Comprehensive analysis published: ALL observed effects in LK-99 are explained by Cu2S impurity. Resistivity drop = Cu2S phase transition at 104C. Partial levitation = ferromagnetic Cu2S on permanent magnet. No superconductivity. Multiple independent groups converge on same explanation.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: groups, impurity, levitation, multiple, partial",
+        "detected": "2026-04-11T17:41:36Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-06T10:00:00Z",
+        "entry_a_text": "University of Maryland team identifies Cu2S as a significant impurity phase in LK-99 synthesis. Cu2S undergoes a phase transition at 104C that produces a sharp resistivity drop - matching the original claim's 'superconducting transition'.",
+        "entry_b_time": "2026-04-11T17:41:36+00:00",
+        "entry_b_text": "Comprehensive analysis published: ALL observed effects in LK-99 are explained by Cu2S impurity. Resistivity drop = Cu2S phase transition at 104C. Partial levitation = ferromagnetic Cu2S on permanent magnet. No superconductivity. Multiple independent groups converge on same explanation.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: drop, impurity, phase, resistivity, transition",
+        "detected": "2026-04-11T17:41:36Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-07T09:00:00Z",
+        "entry_a_text": "Prashant Jain (UIUC) et al. publish analysis showing the partial levitation is explained by ferromagnetic Cu2S impurities interacting with the permanent magnet. Not diamagnetic levitation.",
+        "entry_b_time": "2026-04-11T17:41:36+00:00",
+        "entry_b_text": "Comprehensive analysis published: ALL observed effects in LK-99 are explained by Cu2S impurity. Resistivity drop = Cu2S phase transition at 104C. Partial levitation = ferromagnetic Cu2S on permanent magnet. No superconductivity. Multiple independent groups converge on same explanation.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: analysis, explained, ferromagnetic, levitation, magnet",
+        "detected": "2026-04-11T17:41:36Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-08T15:00:00Z",
+        "entry_a_text": "IBS publishes results on high-quality single-crystal LK-99 (not polycrystalline). Single crystal shows NO superconductivity whatsoever - high resistivity semiconductor with no anomalous diamagnetism. This is the cleanest test possible.",
+        "entry_b_time": "2026-04-11T17:41:36+00:00",
+        "entry_b_text": "Comprehensive analysis published: ALL observed effects in LK-99 are explained by Cu2S impurity. Resistivity drop = Cu2S phase transition at 104C. Partial levitation = ferromagnetic Cu2S on permanent magnet. No superconductivity. Multiple independent groups converge on same explanation.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: resistivity, superconductivity",
+        "detected": "2026-04-11T17:41:36Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-06T10:00:00Z",
+        "entry_a_text": "University of Maryland team identifies Cu2S as a significant impurity phase in LK-99 synthesis. Cu2S undergoes a phase transition at 104C that produces a sharp resistivity drop - matching the original claim's 'superconducting transition'.",
+        "entry_b_time": "2026-04-11T17:41:36+00:00",
+        "entry_b_text": "Nature publishes summary: LK-99 is not a superconductor. Scientific consensus reached. Original observations fully explained by Cu2S copper sulfide impurity phase. The rapid open-science replication effort is praised but the claim is definitively debunked.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: claim, impurity, original, phase",
+        "detected": "2026-04-11T17:41:36Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-14T12:00:00Z",
+        "entry_a_text": "Comprehensive analysis published: ALL observed effects in LK-99 are explained by Cu2S impurity. Resistivity drop = Cu2S phase transition at 104C. Partial levitation = ferromagnetic Cu2S on permanent magnet. No superconductivity. Multiple independent groups converge on same explanation.",
+        "entry_b_time": "2026-04-11T17:41:36+00:00",
+        "entry_b_text": "Nature publishes summary: LK-99 is not a superconductor. Scientific consensus reached. Original observations fully explained by Cu2S copper sulfide impurity phase. The rapid open-science replication effort is praised but the claim is definitively debunked.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: explained, impurity, phase",
+        "detected": "2026-04-11T17:41:36Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-03T20:00:00Z",
+        "entry_a_text": "Multiple condensed matter theory groups note that the partial levitation videos are consistent with ferromagnetism from Cu2S (copper sulfide) impurity, not diamagnetic Meissner levitation. Cu2S has a structural phase transition at ~104C.",
+        "entry_b_time": "2026-04-11T17:41:48+00:00",
+        "entry_b_text": "Social media explosion on Twitter/X and Reddit. LK-99 trending worldwide. Viral hype but no independent verification yet. Multiple unvetted videos circulating.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: multiple, videos",
+        "detected": "2026-04-11T17:41:48Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-07-28T10:00:00Z",
+        "entry_a_text": "Huazhong University of Science and Technology (China) posts video showing partial levitation of a dark sample on a magnet. Sample rocks but does not fully levitate - consistent with diamagnetism, not Meissner effect.",
+        "entry_b_time": "2026-04-11T17:41:48+00:00",
+        "entry_b_text": "Condensed matter physicists note methodological concerns: no AC susceptibility measurement, no Meissner effect demonstration, resistance measurements on polycrystalline samples are unreliable. Base rate for RT superconductor claims is effectively 0%.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: effect, meissner",
+        "detected": "2026-04-11T17:41:48Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-03T20:00:00Z",
+        "entry_a_text": "Multiple condensed matter theory groups note that the partial levitation videos are consistent with ferromagnetism from Cu2S (copper sulfide) impurity, not diamagnetic Meissner levitation. Cu2S has a structural phase transition at ~104C.",
+        "entry_b_time": "2026-04-11T17:41:48+00:00",
+        "entry_b_text": "Condensed matter physicists note methodological concerns: no AC susceptibility measurement, no Meissner effect demonstration, resistance measurements on polycrystalline samples are unreliable. Base rate for RT superconductor claims is effectively 0%.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: condensed, matter, meissner, note",
+        "detected": "2026-04-11T17:41:48Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-07-26T14:00:00Z",
+        "entry_a_text": "Condensed matter physicists note methodological concerns: no AC susceptibility measurement, no Meissner effect demonstration, resistance measurements on polycrystalline samples are unreliable. Base rate for RT superconductor claims is effectively 0%.",
+        "entry_b_time": "2026-04-11T17:41:48+00:00",
+        "entry_b_text": "Huazhong University of Science and Technology (China) posts video showing partial levitation of a dark sample on a magnet. Sample rocks but does not fully levitate - consistent with diamagnetism, not Meissner effect.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: effect, meissner",
+        "detected": "2026-04-11T17:41:48Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-03T14:00:00Z",
+        "entry_a_text": "IBS (Institute for Basic Science, Korea) reports synthesis of LK-99 but finds no zero resistance and no Meissner effect. Sample is a dark semiconductor.",
+        "entry_b_time": "2026-04-11T17:41:48+00:00",
+        "entry_b_text": "Huazhong University of Science and Technology (China) posts video showing partial levitation of a dark sample on a magnet. Sample rocks but does not fully levitate - consistent with diamagnetism, not Meissner effect.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: dark, effect, meissner, sample, science",
+        "detected": "2026-04-11T17:41:48Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-08T16:00:00Z",
+        "entry_a_text": "Replication scoreboard: 0 successful replications of zero resistance, 0 Meissner effect confirmations, 6+ failed replications from independent labs worldwide. No lab has reproduced the core SC claims.",
+        "entry_b_time": "2026-04-11T17:41:48+00:00",
+        "entry_b_text": "Huazhong University of Science and Technology (China) posts video showing partial levitation of a dark sample on a magnet. Sample rocks but does not fully levitate - consistent with diamagnetism, not Meissner effect.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: effect, meissner",
+        "detected": "2026-04-11T17:41:48Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-14T12:00:00Z",
+        "entry_a_text": "Comprehensive analysis published: ALL observed effects in LK-99 are explained by Cu2S impurity. Resistivity drop = Cu2S phase transition at 104C. Partial levitation = ferromagnetic Cu2S on permanent magnet. No superconductivity. Multiple independent groups converge on same explanation.",
+        "entry_b_time": "2026-04-11T17:41:48+00:00",
+        "entry_b_text": "Huazhong University of Science and Technology (China) posts video showing partial levitation of a dark sample on a magnet. Sample rocks but does not fully levitate - consistent with diamagnetism, not Meissner effect.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: levitation, magnet, partial",
+        "detected": "2026-04-11T17:41:48Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-07-26T14:00:00Z",
+        "entry_a_text": "Condensed matter physicists note methodological concerns: no AC susceptibility measurement, no Meissner effect demonstration, resistance measurements on polycrystalline samples are unreliable. Base rate for RT superconductor claims is effectively 0%.",
+        "entry_b_time": "2026-04-11T17:41:48+00:00",
+        "entry_b_text": "Huazhong University of Science and Technology (China) posts video showing partial levitation of a dark sample on a magnet. Sample rocks but does not fully levitate - consistent with diamagnetism, not Meissner effect.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: effect, meissner",
+        "detected": "2026-04-11T17:41:48Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-02T11:00:00Z",
+        "entry_a_text": "Southeast University (Nanjing) reports failed replication: synthesized LK-99 samples show no superconducting signatures. Resistivity is semiconducting, not metallic.",
+        "entry_b_time": "2026-04-11T17:41:48+00:00",
+        "entry_b_text": "Multiple Chinese labs report synthesis attempts. Most produce non-superconducting samples. One lab (unverified) claims resistivity drop but no zero resistance.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: resistivity, samples, superconducting",
+        "detected": "2026-04-11T17:41:48Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-06T10:00:00Z",
+        "entry_a_text": "University of Maryland team identifies Cu2S as a significant impurity phase in LK-99 synthesis. Cu2S undergoes a phase transition at 104C that produces a sharp resistivity drop - matching the original claim's 'superconducting transition'.",
+        "entry_b_time": "2026-04-11T17:41:48+00:00",
+        "entry_b_text": "Multiple Chinese labs report synthesis attempts. Most produce non-superconducting samples. One lab (unverified) claims resistivity drop but no zero resistance.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: drop, resistivity, superconducting, synthesis",
+        "detected": "2026-04-11T17:41:48Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-08T15:00:00Z",
+        "entry_a_text": "IBS publishes results on high-quality single-crystal LK-99 (not polycrystalline). Single crystal shows NO superconductivity whatsoever - high resistivity semiconductor with no anomalous diamagnetism. This is the cleanest test possible.",
+        "entry_b_time": "2026-04-11T17:41:48+00:00",
+        "entry_b_text": "Sinead Griffin (Lawrence Berkeley National Lab) publishes DFT calculation showing flat bands near Fermi level in Cu-substituted lead apatite structure. Theoretical plausibility for electronic correlation effects, but flat bands alone do not guarantee superconductivity.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: publishes, superconductivity",
+        "detected": "2026-04-11T17:41:48Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-14T12:00:00Z",
+        "entry_a_text": "Comprehensive analysis published: ALL observed effects in LK-99 are explained by Cu2S impurity. Resistivity drop = Cu2S phase transition at 104C. Partial levitation = ferromagnetic Cu2S on permanent magnet. No superconductivity. Multiple independent groups converge on same explanation.",
+        "entry_b_time": "2026-04-11T17:41:48+00:00",
+        "entry_b_text": "Sinead Griffin (Lawrence Berkeley National Lab) publishes DFT calculation showing flat bands near Fermi level in Cu-substituted lead apatite structure. Theoretical plausibility for electronic correlation effects, but flat bands alone do not guarantee superconductivity.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: effects, superconductivity",
+        "detected": "2026-04-11T17:41:48Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-07-31T16:00:00Z",
+        "entry_a_text": "Multiple Chinese labs report synthesis attempts. Most produce non-superconducting samples. One lab (unverified) claims resistivity drop but no zero resistance.",
+        "entry_b_time": "2026-04-11T17:41:48+00:00",
+        "entry_b_text": "Southeast University (Nanjing) reports failed replication: synthesized LK-99 samples show no superconducting signatures. Resistivity is semiconducting, not metallic.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: resistivity, samples, superconducting",
+        "detected": "2026-04-11T17:41:48Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-06T10:00:00Z",
+        "entry_a_text": "University of Maryland team identifies Cu2S as a significant impurity phase in LK-99 synthesis. Cu2S undergoes a phase transition at 104C that produces a sharp resistivity drop - matching the original claim's 'superconducting transition'.",
+        "entry_b_time": "2026-04-11T17:41:48+00:00",
+        "entry_b_text": "Southeast University (Nanjing) reports failed replication: synthesized LK-99 samples show no superconducting signatures. Resistivity is semiconducting, not metallic.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: resistivity, superconducting, university",
+        "detected": "2026-04-11T17:41:48Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-08T16:00:00Z",
+        "entry_a_text": "Replication scoreboard: 0 successful replications of zero resistance, 0 Meissner effect confirmations, 6+ failed replications from independent labs worldwide. No lab has reproduced the core SC claims.",
+        "entry_b_time": "2026-04-11T17:41:48+00:00",
+        "entry_b_text": "Southeast University (Nanjing) reports failed replication: synthesized LK-99 samples show no superconducting signatures. Resistivity is semiconducting, not metallic.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: failed, replication",
+        "detected": "2026-04-11T17:41:48Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-07-31T16:00:00Z",
+        "entry_a_text": "Multiple Chinese labs report synthesis attempts. Most produce non-superconducting samples. One lab (unverified) claims resistivity drop but no zero resistance.",
+        "entry_b_time": "2026-04-11T17:41:48+00:00",
+        "entry_b_text": "Southeast University (Nanjing) reports failed replication: synthesized LK-99 samples show no superconducting signatures. Resistivity is semiconducting, not metallic.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: resistivity, samples, superconducting",
+        "detected": "2026-04-11T17:41:48Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-07-28T10:00:00Z",
+        "entry_a_text": "Huazhong University of Science and Technology (China) posts video showing partial levitation of a dark sample on a magnet. Sample rocks but does not fully levitate - consistent with diamagnetism, not Meissner effect.",
+        "entry_b_time": "2026-04-11T17:41:48+00:00",
+        "entry_b_text": "IBS (Institute for Basic Science, Korea) reports synthesis of LK-99 but finds no zero resistance and no Meissner effect. Sample is a dark semiconductor.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: dark, effect, meissner, sample, science",
+        "detected": "2026-04-11T17:41:48Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-08T15:00:00Z",
+        "entry_a_text": "IBS publishes results on high-quality single-crystal LK-99 (not polycrystalline). Single crystal shows NO superconductivity whatsoever - high resistivity semiconductor with no anomalous diamagnetism. This is the cleanest test possible.",
+        "entry_b_time": "2026-04-11T17:41:48+00:00",
+        "entry_b_text": "IBS (Institute for Basic Science, Korea) reports synthesis of LK-99 but finds no zero resistance and no Meissner effect. Sample is a dark semiconductor.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: ibs, semiconductor",
+        "detected": "2026-04-11T17:41:48Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-07-28T10:00:00Z",
+        "entry_a_text": "Huazhong University of Science and Technology (China) posts video showing partial levitation of a dark sample on a magnet. Sample rocks but does not fully levitate - consistent with diamagnetism, not Meissner effect.",
+        "entry_b_time": "2026-04-11T17:41:48+00:00",
+        "entry_b_text": "IBS (Institute for Basic Science, Korea) reports synthesis of LK-99 but finds no zero resistance and no Meissner effect. Sample is a dark semiconductor.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: dark, effect, meissner, sample, science",
+        "detected": "2026-04-11T17:41:48Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-07-25T08:00:00Z",
+        "entry_a_text": "Social media explosion on Twitter/X and Reddit. LK-99 trending worldwide. Viral hype but no independent verification yet. Multiple unvetted videos circulating.",
+        "entry_b_time": "2026-04-11T17:41:48+00:00",
+        "entry_b_text": "Multiple condensed matter theory groups note that the partial levitation videos are consistent with ferromagnetism from Cu2S (copper sulfide) impurity, not diamagnetic Meissner levitation. Cu2S has a structural phase transition at ~104C.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: multiple, videos",
+        "detected": "2026-04-11T17:41:48Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-07-26T14:00:00Z",
+        "entry_a_text": "Condensed matter physicists note methodological concerns: no AC susceptibility measurement, no Meissner effect demonstration, resistance measurements on polycrystalline samples are unreliable. Base rate for RT superconductor claims is effectively 0%.",
+        "entry_b_time": "2026-04-11T17:41:48+00:00",
+        "entry_b_text": "Multiple condensed matter theory groups note that the partial levitation videos are consistent with ferromagnetism from Cu2S (copper sulfide) impurity, not diamagnetic Meissner levitation. Cu2S has a structural phase transition at ~104C.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: condensed, matter, meissner, note",
+        "detected": "2026-04-11T17:41:48Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-06T10:00:00Z",
+        "entry_a_text": "University of Maryland team identifies Cu2S as a significant impurity phase in LK-99 synthesis. Cu2S undergoes a phase transition at 104C that produces a sharp resistivity drop - matching the original claim's 'superconducting transition'.",
+        "entry_b_time": "2026-04-11T17:41:48+00:00",
+        "entry_b_text": "Multiple condensed matter theory groups note that the partial levitation videos are consistent with ferromagnetism from Cu2S (copper sulfide) impurity, not diamagnetic Meissner levitation. Cu2S has a structural phase transition at ~104C.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: impurity, phase, transition",
+        "detected": "2026-04-11T17:41:48Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-14T12:00:00Z",
+        "entry_a_text": "Comprehensive analysis published: ALL observed effects in LK-99 are explained by Cu2S impurity. Resistivity drop = Cu2S phase transition at 104C. Partial levitation = ferromagnetic Cu2S on permanent magnet. No superconductivity. Multiple independent groups converge on same explanation.",
+        "entry_b_time": "2026-04-11T17:41:48+00:00",
+        "entry_b_text": "Multiple condensed matter theory groups note that the partial levitation videos are consistent with ferromagnetism from Cu2S (copper sulfide) impurity, not diamagnetic Meissner levitation. Cu2S has a structural phase transition at ~104C.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: groups, impurity, levitation, multiple, partial",
+        "detected": "2026-04-11T17:41:48Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-07-25T08:00:00Z",
+        "entry_a_text": "Social media explosion on Twitter/X and Reddit. LK-99 trending worldwide. Viral hype but no independent verification yet. Multiple unvetted videos circulating.",
+        "entry_b_time": "2026-04-11T17:41:48+00:00",
+        "entry_b_text": "Multiple condensed matter theory groups note that the partial levitation videos are consistent with ferromagnetism from Cu2S (copper sulfide) impurity, not diamagnetic Meissner levitation. Cu2S has a structural phase transition at ~104C.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: multiple, videos",
+        "detected": "2026-04-11T17:41:48Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-07-26T14:00:00Z",
+        "entry_a_text": "Condensed matter physicists note methodological concerns: no AC susceptibility measurement, no Meissner effect demonstration, resistance measurements on polycrystalline samples are unreliable. Base rate for RT superconductor claims is effectively 0%.",
+        "entry_b_time": "2026-04-11T17:41:48+00:00",
+        "entry_b_text": "Multiple condensed matter theory groups note that the partial levitation videos are consistent with ferromagnetism from Cu2S (copper sulfide) impurity, not diamagnetic Meissner levitation. Cu2S has a structural phase transition at ~104C.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: condensed, matter, meissner, note",
+        "detected": "2026-04-11T17:41:48Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-07-31T16:00:00Z",
+        "entry_a_text": "Multiple Chinese labs report synthesis attempts. Most produce non-superconducting samples. One lab (unverified) claims resistivity drop but no zero resistance.",
+        "entry_b_time": "2026-04-11T17:41:48+00:00",
+        "entry_b_text": "University of Maryland team identifies Cu2S as a significant impurity phase in LK-99 synthesis. Cu2S undergoes a phase transition at 104C that produces a sharp resistivity drop - matching the original claim's 'superconducting transition'.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: drop, resistivity, superconducting, synthesis",
+        "detected": "2026-04-11T17:41:48Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-02T11:00:00Z",
+        "entry_a_text": "Southeast University (Nanjing) reports failed replication: synthesized LK-99 samples show no superconducting signatures. Resistivity is semiconducting, not metallic.",
+        "entry_b_time": "2026-04-11T17:41:48+00:00",
+        "entry_b_text": "University of Maryland team identifies Cu2S as a significant impurity phase in LK-99 synthesis. Cu2S undergoes a phase transition at 104C that produces a sharp resistivity drop - matching the original claim's 'superconducting transition'.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: resistivity, superconducting, university",
+        "detected": "2026-04-11T17:41:48Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-03T20:00:00Z",
+        "entry_a_text": "Multiple condensed matter theory groups note that the partial levitation videos are consistent with ferromagnetism from Cu2S (copper sulfide) impurity, not diamagnetic Meissner levitation. Cu2S has a structural phase transition at ~104C.",
+        "entry_b_time": "2026-04-11T17:41:48+00:00",
+        "entry_b_text": "University of Maryland team identifies Cu2S as a significant impurity phase in LK-99 synthesis. Cu2S undergoes a phase transition at 104C that produces a sharp resistivity drop - matching the original claim's 'superconducting transition'.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: impurity, phase, transition",
+        "detected": "2026-04-11T17:41:48Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-14T12:00:00Z",
+        "entry_a_text": "Comprehensive analysis published: ALL observed effects in LK-99 are explained by Cu2S impurity. Resistivity drop = Cu2S phase transition at 104C. Partial levitation = ferromagnetic Cu2S on permanent magnet. No superconductivity. Multiple independent groups converge on same explanation.",
+        "entry_b_time": "2026-04-11T17:41:48+00:00",
+        "entry_b_text": "University of Maryland team identifies Cu2S as a significant impurity phase in LK-99 synthesis. Cu2S undergoes a phase transition at 104C that produces a sharp resistivity drop - matching the original claim's 'superconducting transition'.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: drop, impurity, phase, resistivity, transition",
+        "detected": "2026-04-11T17:41:48Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-16T10:00:00Z",
+        "entry_a_text": "Nature publishes summary: LK-99 is not a superconductor. Scientific consensus reached. Original observations fully explained by Cu2S copper sulfide impurity phase. The rapid open-science replication effort is praised but the claim is definitively debunked.",
+        "entry_b_time": "2026-04-11T17:41:48+00:00",
+        "entry_b_text": "University of Maryland team identifies Cu2S as a significant impurity phase in LK-99 synthesis. Cu2S undergoes a phase transition at 104C that produces a sharp resistivity drop - matching the original claim's 'superconducting transition'.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: claim, impurity, original, phase",
+        "detected": "2026-04-11T17:41:48Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-07-31T16:00:00Z",
+        "entry_a_text": "Multiple Chinese labs report synthesis attempts. Most produce non-superconducting samples. One lab (unverified) claims resistivity drop but no zero resistance.",
+        "entry_b_time": "2026-04-11T17:41:48+00:00",
+        "entry_b_text": "University of Maryland team identifies Cu2S as a significant impurity phase in LK-99 synthesis. Cu2S undergoes a phase transition at 104C that produces a sharp resistivity drop - matching the original claim's 'superconducting transition'.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: drop, resistivity, superconducting, synthesis",
+        "detected": "2026-04-11T17:41:48Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-02T11:00:00Z",
+        "entry_a_text": "Southeast University (Nanjing) reports failed replication: synthesized LK-99 samples show no superconducting signatures. Resistivity is semiconducting, not metallic.",
+        "entry_b_time": "2026-04-11T17:41:48+00:00",
+        "entry_b_text": "University of Maryland team identifies Cu2S as a significant impurity phase in LK-99 synthesis. Cu2S undergoes a phase transition at 104C that produces a sharp resistivity drop - matching the original claim's 'superconducting transition'.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: resistivity, superconducting, university",
+        "detected": "2026-04-11T17:41:48Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-03T20:00:00Z",
+        "entry_a_text": "Multiple condensed matter theory groups note that the partial levitation videos are consistent with ferromagnetism from Cu2S (copper sulfide) impurity, not diamagnetic Meissner levitation. Cu2S has a structural phase transition at ~104C.",
+        "entry_b_time": "2026-04-11T17:41:48+00:00",
+        "entry_b_text": "University of Maryland team identifies Cu2S as a significant impurity phase in LK-99 synthesis. Cu2S undergoes a phase transition at 104C that produces a sharp resistivity drop - matching the original claim's 'superconducting transition'.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: impurity, phase, transition",
+        "detected": "2026-04-11T17:41:48Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-14T12:00:00Z",
+        "entry_a_text": "Comprehensive analysis published: ALL observed effects in LK-99 are explained by Cu2S impurity. Resistivity drop = Cu2S phase transition at 104C. Partial levitation = ferromagnetic Cu2S on permanent magnet. No superconductivity. Multiple independent groups converge on same explanation.",
+        "entry_b_time": "2026-04-11T17:41:48+00:00",
+        "entry_b_text": "Prashant Jain (UIUC) et al. publish analysis showing the partial levitation is explained by ferromagnetic Cu2S impurities interacting with the permanent magnet. Not diamagnetic levitation.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: analysis, explained, ferromagnetic, levitation, magnet",
+        "detected": "2026-04-11T17:41:48Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-01T09:00:00Z",
+        "entry_a_text": "Sinead Griffin (Lawrence Berkeley National Lab) publishes DFT calculation showing flat bands near Fermi level in Cu-substituted lead apatite structure. Theoretical plausibility for electronic correlation effects, but flat bands alone do not guarantee superconductivity.",
+        "entry_b_time": "2026-04-11T17:41:48+00:00",
+        "entry_b_text": "IBS publishes results on high-quality single-crystal LK-99 (not polycrystalline). Single crystal shows NO superconductivity whatsoever - high resistivity semiconductor with no anomalous diamagnetism. This is the cleanest test possible.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: publishes, superconductivity",
+        "detected": "2026-04-11T17:41:48Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-03T14:00:00Z",
+        "entry_a_text": "IBS (Institute for Basic Science, Korea) reports synthesis of LK-99 but finds no zero resistance and no Meissner effect. Sample is a dark semiconductor.",
+        "entry_b_time": "2026-04-11T17:41:48+00:00",
+        "entry_b_text": "IBS publishes results on high-quality single-crystal LK-99 (not polycrystalline). Single crystal shows NO superconductivity whatsoever - high resistivity semiconductor with no anomalous diamagnetism. This is the cleanest test possible.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: ibs, semiconductor",
+        "detected": "2026-04-11T17:41:48Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-14T12:00:00Z",
+        "entry_a_text": "Comprehensive analysis published: ALL observed effects in LK-99 are explained by Cu2S impurity. Resistivity drop = Cu2S phase transition at 104C. Partial levitation = ferromagnetic Cu2S on permanent magnet. No superconductivity. Multiple independent groups converge on same explanation.",
+        "entry_b_time": "2026-04-11T17:41:48+00:00",
+        "entry_b_text": "IBS publishes results on high-quality single-crystal LK-99 (not polycrystalline). Single crystal shows NO superconductivity whatsoever - high resistivity semiconductor with no anomalous diamagnetism. This is the cleanest test possible.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: resistivity, superconductivity",
+        "detected": "2026-04-11T17:41:48Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-01T09:00:00Z",
+        "entry_a_text": "Sinead Griffin (Lawrence Berkeley National Lab) publishes DFT calculation showing flat bands near Fermi level in Cu-substituted lead apatite structure. Theoretical plausibility for electronic correlation effects, but flat bands alone do not guarantee superconductivity.",
+        "entry_b_time": "2026-04-11T17:41:48+00:00",
+        "entry_b_text": "IBS publishes results on high-quality single-crystal LK-99 (not polycrystalline). Single crystal shows NO superconductivity whatsoever - high resistivity semiconductor with no anomalous diamagnetism. This is the cleanest test possible.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: publishes, superconductivity",
+        "detected": "2026-04-11T17:41:48Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-03T14:00:00Z",
+        "entry_a_text": "IBS (Institute for Basic Science, Korea) reports synthesis of LK-99 but finds no zero resistance and no Meissner effect. Sample is a dark semiconductor.",
+        "entry_b_time": "2026-04-11T17:41:48+00:00",
+        "entry_b_text": "IBS publishes results on high-quality single-crystal LK-99 (not polycrystalline). Single crystal shows NO superconductivity whatsoever - high resistivity semiconductor with no anomalous diamagnetism. This is the cleanest test possible.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: ibs, semiconductor",
+        "detected": "2026-04-11T17:41:48Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-07-28T10:00:00Z",
+        "entry_a_text": "Huazhong University of Science and Technology (China) posts video showing partial levitation of a dark sample on a magnet. Sample rocks but does not fully levitate - consistent with diamagnetism, not Meissner effect.",
+        "entry_b_time": "2026-04-11T17:41:48+00:00",
+        "entry_b_text": "Replication scoreboard: 0 successful replications of zero resistance, 0 Meissner effect confirmations, 6+ failed replications from independent labs worldwide. No lab has reproduced the core SC claims.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: effect, meissner",
+        "detected": "2026-04-11T17:41:48Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-02T11:00:00Z",
+        "entry_a_text": "Southeast University (Nanjing) reports failed replication: synthesized LK-99 samples show no superconducting signatures. Resistivity is semiconducting, not metallic.",
+        "entry_b_time": "2026-04-11T17:41:48+00:00",
+        "entry_b_text": "Replication scoreboard: 0 successful replications of zero resistance, 0 Meissner effect confirmations, 6+ failed replications from independent labs worldwide. No lab has reproduced the core SC claims.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: failed, replication",
+        "detected": "2026-04-11T17:41:48Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-07-28T10:00:00Z",
+        "entry_a_text": "Huazhong University of Science and Technology (China) posts video showing partial levitation of a dark sample on a magnet. Sample rocks but does not fully levitate - consistent with diamagnetism, not Meissner effect.",
+        "entry_b_time": "2026-04-11T17:41:48+00:00",
+        "entry_b_text": "Replication scoreboard: 0 successful replications of zero resistance, 0 Meissner effect confirmations, 6+ failed replications from independent labs worldwide. No lab has reproduced the core SC claims.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: effect, meissner",
+        "detected": "2026-04-11T17:41:48Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-02T11:00:00Z",
+        "entry_a_text": "Southeast University (Nanjing) reports failed replication: synthesized LK-99 samples show no superconducting signatures. Resistivity is semiconducting, not metallic.",
+        "entry_b_time": "2026-04-11T17:41:48+00:00",
+        "entry_b_text": "Replication scoreboard: 0 successful replications of zero resistance, 0 Meissner effect confirmations, 6+ failed replications from independent labs worldwide. No lab has reproduced the core SC claims.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: failed, replication",
+        "detected": "2026-04-11T17:41:48Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-07-28T10:00:00Z",
+        "entry_a_text": "Huazhong University of Science and Technology (China) posts video showing partial levitation of a dark sample on a magnet. Sample rocks but does not fully levitate - consistent with diamagnetism, not Meissner effect.",
+        "entry_b_time": "2026-04-11T17:41:48+00:00",
+        "entry_b_text": "Comprehensive analysis published: ALL observed effects in LK-99 are explained by Cu2S impurity. Resistivity drop = Cu2S phase transition at 104C. Partial levitation = ferromagnetic Cu2S on permanent magnet. No superconductivity. Multiple independent groups converge on same explanation.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: levitation, magnet, partial",
+        "detected": "2026-04-11T17:41:48Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-01T09:00:00Z",
+        "entry_a_text": "Sinead Griffin (Lawrence Berkeley National Lab) publishes DFT calculation showing flat bands near Fermi level in Cu-substituted lead apatite structure. Theoretical plausibility for electronic correlation effects, but flat bands alone do not guarantee superconductivity.",
+        "entry_b_time": "2026-04-11T17:41:48+00:00",
+        "entry_b_text": "Comprehensive analysis published: ALL observed effects in LK-99 are explained by Cu2S impurity. Resistivity drop = Cu2S phase transition at 104C. Partial levitation = ferromagnetic Cu2S on permanent magnet. No superconductivity. Multiple independent groups converge on same explanation.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: effects, superconductivity",
+        "detected": "2026-04-11T17:41:48Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-03T20:00:00Z",
+        "entry_a_text": "Multiple condensed matter theory groups note that the partial levitation videos are consistent with ferromagnetism from Cu2S (copper sulfide) impurity, not diamagnetic Meissner levitation. Cu2S has a structural phase transition at ~104C.",
+        "entry_b_time": "2026-04-11T17:41:48+00:00",
+        "entry_b_text": "Comprehensive analysis published: ALL observed effects in LK-99 are explained by Cu2S impurity. Resistivity drop = Cu2S phase transition at 104C. Partial levitation = ferromagnetic Cu2S on permanent magnet. No superconductivity. Multiple independent groups converge on same explanation.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: groups, impurity, levitation, multiple, partial",
+        "detected": "2026-04-11T17:41:48Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-06T10:00:00Z",
+        "entry_a_text": "University of Maryland team identifies Cu2S as a significant impurity phase in LK-99 synthesis. Cu2S undergoes a phase transition at 104C that produces a sharp resistivity drop - matching the original claim's 'superconducting transition'.",
+        "entry_b_time": "2026-04-11T17:41:48+00:00",
+        "entry_b_text": "Comprehensive analysis published: ALL observed effects in LK-99 are explained by Cu2S impurity. Resistivity drop = Cu2S phase transition at 104C. Partial levitation = ferromagnetic Cu2S on permanent magnet. No superconductivity. Multiple independent groups converge on same explanation.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: drop, impurity, phase, resistivity, transition",
+        "detected": "2026-04-11T17:41:48Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-07T09:00:00Z",
+        "entry_a_text": "Prashant Jain (UIUC) et al. publish analysis showing the partial levitation is explained by ferromagnetic Cu2S impurities interacting with the permanent magnet. Not diamagnetic levitation.",
+        "entry_b_time": "2026-04-11T17:41:48+00:00",
+        "entry_b_text": "Comprehensive analysis published: ALL observed effects in LK-99 are explained by Cu2S impurity. Resistivity drop = Cu2S phase transition at 104C. Partial levitation = ferromagnetic Cu2S on permanent magnet. No superconductivity. Multiple independent groups converge on same explanation.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: analysis, explained, ferromagnetic, levitation, magnet",
+        "detected": "2026-04-11T17:41:48Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-08T15:00:00Z",
+        "entry_a_text": "IBS publishes results on high-quality single-crystal LK-99 (not polycrystalline). Single crystal shows NO superconductivity whatsoever - high resistivity semiconductor with no anomalous diamagnetism. This is the cleanest test possible.",
+        "entry_b_time": "2026-04-11T17:41:48+00:00",
+        "entry_b_text": "Comprehensive analysis published: ALL observed effects in LK-99 are explained by Cu2S impurity. Resistivity drop = Cu2S phase transition at 104C. Partial levitation = ferromagnetic Cu2S on permanent magnet. No superconductivity. Multiple independent groups converge on same explanation.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: resistivity, superconductivity",
+        "detected": "2026-04-11T17:41:48Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-16T10:00:00Z",
+        "entry_a_text": "Nature publishes summary: LK-99 is not a superconductor. Scientific consensus reached. Original observations fully explained by Cu2S copper sulfide impurity phase. The rapid open-science replication effort is praised but the claim is definitively debunked.",
+        "entry_b_time": "2026-04-11T17:41:48+00:00",
+        "entry_b_text": "Comprehensive analysis published: ALL observed effects in LK-99 are explained by Cu2S impurity. Resistivity drop = Cu2S phase transition at 104C. Partial levitation = ferromagnetic Cu2S on permanent magnet. No superconductivity. Multiple independent groups converge on same explanation.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: explained, impurity, phase",
+        "detected": "2026-04-11T17:41:48Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-07-28T10:00:00Z",
+        "entry_a_text": "Huazhong University of Science and Technology (China) posts video showing partial levitation of a dark sample on a magnet. Sample rocks but does not fully levitate - consistent with diamagnetism, not Meissner effect.",
+        "entry_b_time": "2026-04-11T17:41:48+00:00",
+        "entry_b_text": "Comprehensive analysis published: ALL observed effects in LK-99 are explained by Cu2S impurity. Resistivity drop = Cu2S phase transition at 104C. Partial levitation = ferromagnetic Cu2S on permanent magnet. No superconductivity. Multiple independent groups converge on same explanation.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: levitation, magnet, partial",
+        "detected": "2026-04-11T17:41:48Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-01T09:00:00Z",
+        "entry_a_text": "Sinead Griffin (Lawrence Berkeley National Lab) publishes DFT calculation showing flat bands near Fermi level in Cu-substituted lead apatite structure. Theoretical plausibility for electronic correlation effects, but flat bands alone do not guarantee superconductivity.",
+        "entry_b_time": "2026-04-11T17:41:48+00:00",
+        "entry_b_text": "Comprehensive analysis published: ALL observed effects in LK-99 are explained by Cu2S impurity. Resistivity drop = Cu2S phase transition at 104C. Partial levitation = ferromagnetic Cu2S on permanent magnet. No superconductivity. Multiple independent groups converge on same explanation.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: effects, superconductivity",
+        "detected": "2026-04-11T17:41:48Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-03T20:00:00Z",
+        "entry_a_text": "Multiple condensed matter theory groups note that the partial levitation videos are consistent with ferromagnetism from Cu2S (copper sulfide) impurity, not diamagnetic Meissner levitation. Cu2S has a structural phase transition at ~104C.",
+        "entry_b_time": "2026-04-11T17:41:48+00:00",
+        "entry_b_text": "Comprehensive analysis published: ALL observed effects in LK-99 are explained by Cu2S impurity. Resistivity drop = Cu2S phase transition at 104C. Partial levitation = ferromagnetic Cu2S on permanent magnet. No superconductivity. Multiple independent groups converge on same explanation.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: groups, impurity, levitation, multiple, partial",
+        "detected": "2026-04-11T17:41:48Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-06T10:00:00Z",
+        "entry_a_text": "University of Maryland team identifies Cu2S as a significant impurity phase in LK-99 synthesis. Cu2S undergoes a phase transition at 104C that produces a sharp resistivity drop - matching the original claim's 'superconducting transition'.",
+        "entry_b_time": "2026-04-11T17:41:48+00:00",
+        "entry_b_text": "Comprehensive analysis published: ALL observed effects in LK-99 are explained by Cu2S impurity. Resistivity drop = Cu2S phase transition at 104C. Partial levitation = ferromagnetic Cu2S on permanent magnet. No superconductivity. Multiple independent groups converge on same explanation.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: drop, impurity, phase, resistivity, transition",
+        "detected": "2026-04-11T17:41:48Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-07T09:00:00Z",
+        "entry_a_text": "Prashant Jain (UIUC) et al. publish analysis showing the partial levitation is explained by ferromagnetic Cu2S impurities interacting with the permanent magnet. Not diamagnetic levitation.",
+        "entry_b_time": "2026-04-11T17:41:48+00:00",
+        "entry_b_text": "Comprehensive analysis published: ALL observed effects in LK-99 are explained by Cu2S impurity. Resistivity drop = Cu2S phase transition at 104C. Partial levitation = ferromagnetic Cu2S on permanent magnet. No superconductivity. Multiple independent groups converge on same explanation.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: analysis, explained, ferromagnetic, levitation, magnet",
+        "detected": "2026-04-11T17:41:48Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-08T15:00:00Z",
+        "entry_a_text": "IBS publishes results on high-quality single-crystal LK-99 (not polycrystalline). Single crystal shows NO superconductivity whatsoever - high resistivity semiconductor with no anomalous diamagnetism. This is the cleanest test possible.",
+        "entry_b_time": "2026-04-11T17:41:48+00:00",
+        "entry_b_text": "Comprehensive analysis published: ALL observed effects in LK-99 are explained by Cu2S impurity. Resistivity drop = Cu2S phase transition at 104C. Partial levitation = ferromagnetic Cu2S on permanent magnet. No superconductivity. Multiple independent groups converge on same explanation.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: resistivity, superconductivity",
+        "detected": "2026-04-11T17:41:48Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-06T10:00:00Z",
+        "entry_a_text": "University of Maryland team identifies Cu2S as a significant impurity phase in LK-99 synthesis. Cu2S undergoes a phase transition at 104C that produces a sharp resistivity drop - matching the original claim's 'superconducting transition'.",
+        "entry_b_time": "2026-04-11T17:41:48+00:00",
+        "entry_b_text": "Nature publishes summary: LK-99 is not a superconductor. Scientific consensus reached. Original observations fully explained by Cu2S copper sulfide impurity phase. The rapid open-science replication effort is praised but the claim is definitively debunked.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: claim, impurity, original, phase",
+        "detected": "2026-04-11T17:41:48Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-14T12:00:00Z",
+        "entry_a_text": "Comprehensive analysis published: ALL observed effects in LK-99 are explained by Cu2S impurity. Resistivity drop = Cu2S phase transition at 104C. Partial levitation = ferromagnetic Cu2S on permanent magnet. No superconductivity. Multiple independent groups converge on same explanation.",
+        "entry_b_time": "2026-04-11T17:41:48+00:00",
+        "entry_b_text": "Nature publishes summary: LK-99 is not a superconductor. Scientific consensus reached. Original observations fully explained by Cu2S copper sulfide impurity phase. The rapid open-science replication effort is praised but the claim is definitively debunked.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: explained, impurity, phase",
+        "detected": "2026-04-11T17:41:48Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-06T10:00:00Z",
+        "entry_a_text": "University of Maryland team identifies Cu2S as a significant impurity phase in LK-99 synthesis. Cu2S undergoes a phase transition at 104C that produces a sharp resistivity drop - matching the original claim's 'superconducting transition'.",
+        "entry_b_time": "2026-04-11T17:41:48+00:00",
+        "entry_b_text": "Nature publishes summary: LK-99 is not a superconductor. Scientific consensus reached. Original observations fully explained by Cu2S copper sulfide impurity phase. The rapid open-science replication effort is praised but the claim is definitively debunked.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: claim, impurity, original, phase",
+        "detected": "2026-04-11T17:41:48Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-14T12:00:00Z",
+        "entry_a_text": "Comprehensive analysis published: ALL observed effects in LK-99 are explained by Cu2S impurity. Resistivity drop = Cu2S phase transition at 104C. Partial levitation = ferromagnetic Cu2S on permanent magnet. No superconductivity. Multiple independent groups converge on same explanation.",
+        "entry_b_time": "2026-04-11T17:41:48+00:00",
+        "entry_b_text": "Nature publishes summary: LK-99 is not a superconductor. Scientific consensus reached. Original observations fully explained by Cu2S copper sulfide impurity phase. The rapid open-science replication effort is praised but the claim is definitively debunked.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: explained, impurity, phase",
+        "detected": "2026-04-11T17:41:48Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-07-26T14:00:00Z",
+        "entry_a_text": "Condensed matter physicists note methodological concerns: no AC susceptibility measurement, no Meissner effect demonstration, resistance measurements on polycrystalline samples are unreliable. Base rate for RT superconductor claims is effectively 0%.",
+        "entry_b_time": "2026-04-11T17:42:13+00:00",
+        "entry_b_text": "Huazhong University of Science and Technology (China) posts video showing partial levitation of a dark sample on a magnet. Sample rocks but does not fully levitate - consistent with diamagnetism, not Meissner effect.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: effect, meissner",
+        "detected": "2026-04-11T17:42:13Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-07-31T16:00:00Z",
+        "entry_a_text": "Multiple Chinese labs report synthesis attempts. Most produce non-superconducting samples. One lab (unverified) claims resistivity drop but no zero resistance.",
+        "entry_b_time": "2026-04-11T17:42:13+00:00",
+        "entry_b_text": "Southeast University (Nanjing) reports failed replication: synthesized LK-99 samples show no superconducting signatures. Resistivity is semiconducting, not metallic.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: resistivity, samples, superconducting",
+        "detected": "2026-04-11T17:42:13Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-07-28T10:00:00Z",
+        "entry_a_text": "Huazhong University of Science and Technology (China) posts video showing partial levitation of a dark sample on a magnet. Sample rocks but does not fully levitate - consistent with diamagnetism, not Meissner effect.",
+        "entry_b_time": "2026-04-11T17:42:13+00:00",
+        "entry_b_text": "IBS (Institute for Basic Science, Korea) reports synthesis of LK-99 but finds no zero resistance and no Meissner effect. Sample is a dark semiconductor.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: dark, effect, meissner, sample, science",
+        "detected": "2026-04-11T17:42:13Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-07-25T08:00:00Z",
+        "entry_a_text": "Social media explosion on Twitter/X and Reddit. LK-99 trending worldwide. Viral hype but no independent verification yet. Multiple unvetted videos circulating.",
+        "entry_b_time": "2026-04-11T17:42:13+00:00",
+        "entry_b_text": "Multiple condensed matter theory groups note that the partial levitation videos are consistent with ferromagnetism from Cu2S (copper sulfide) impurity, not diamagnetic Meissner levitation. Cu2S has a structural phase transition at ~104C.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: multiple, videos",
+        "detected": "2026-04-11T17:42:13Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-07-26T14:00:00Z",
+        "entry_a_text": "Condensed matter physicists note methodological concerns: no AC susceptibility measurement, no Meissner effect demonstration, resistance measurements on polycrystalline samples are unreliable. Base rate for RT superconductor claims is effectively 0%.",
+        "entry_b_time": "2026-04-11T17:42:13+00:00",
+        "entry_b_text": "Multiple condensed matter theory groups note that the partial levitation videos are consistent with ferromagnetism from Cu2S (copper sulfide) impurity, not diamagnetic Meissner levitation. Cu2S has a structural phase transition at ~104C.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: condensed, matter, meissner, note",
+        "detected": "2026-04-11T17:42:13Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-07-31T16:00:00Z",
+        "entry_a_text": "Multiple Chinese labs report synthesis attempts. Most produce non-superconducting samples. One lab (unverified) claims resistivity drop but no zero resistance.",
+        "entry_b_time": "2026-04-11T17:42:13+00:00",
+        "entry_b_text": "University of Maryland team identifies Cu2S as a significant impurity phase in LK-99 synthesis. Cu2S undergoes a phase transition at 104C that produces a sharp resistivity drop - matching the original claim's 'superconducting transition'.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: drop, resistivity, superconducting, synthesis",
+        "detected": "2026-04-11T17:42:13Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-02T11:00:00Z",
+        "entry_a_text": "Southeast University (Nanjing) reports failed replication: synthesized LK-99 samples show no superconducting signatures. Resistivity is semiconducting, not metallic.",
+        "entry_b_time": "2026-04-11T17:42:13+00:00",
+        "entry_b_text": "University of Maryland team identifies Cu2S as a significant impurity phase in LK-99 synthesis. Cu2S undergoes a phase transition at 104C that produces a sharp resistivity drop - matching the original claim's 'superconducting transition'.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: resistivity, superconducting, university",
+        "detected": "2026-04-11T17:42:13Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-03T20:00:00Z",
+        "entry_a_text": "Multiple condensed matter theory groups note that the partial levitation videos are consistent with ferromagnetism from Cu2S (copper sulfide) impurity, not diamagnetic Meissner levitation. Cu2S has a structural phase transition at ~104C.",
+        "entry_b_time": "2026-04-11T17:42:13+00:00",
+        "entry_b_text": "University of Maryland team identifies Cu2S as a significant impurity phase in LK-99 synthesis. Cu2S undergoes a phase transition at 104C that produces a sharp resistivity drop - matching the original claim's 'superconducting transition'.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: impurity, phase, transition",
+        "detected": "2026-04-11T17:42:13Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-01T09:00:00Z",
+        "entry_a_text": "Sinead Griffin (Lawrence Berkeley National Lab) publishes DFT calculation showing flat bands near Fermi level in Cu-substituted lead apatite structure. Theoretical plausibility for electronic correlation effects, but flat bands alone do not guarantee superconductivity.",
+        "entry_b_time": "2026-04-11T17:42:13+00:00",
+        "entry_b_text": "IBS publishes results on high-quality single-crystal LK-99 (not polycrystalline). Single crystal shows NO superconductivity whatsoever - high resistivity semiconductor with no anomalous diamagnetism. This is the cleanest test possible.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: publishes, superconductivity",
+        "detected": "2026-04-11T17:42:13Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-03T14:00:00Z",
+        "entry_a_text": "IBS (Institute for Basic Science, Korea) reports synthesis of LK-99 but finds no zero resistance and no Meissner effect. Sample is a dark semiconductor.",
+        "entry_b_time": "2026-04-11T17:42:13+00:00",
+        "entry_b_text": "IBS publishes results on high-quality single-crystal LK-99 (not polycrystalline). Single crystal shows NO superconductivity whatsoever - high resistivity semiconductor with no anomalous diamagnetism. This is the cleanest test possible.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: ibs, semiconductor",
+        "detected": "2026-04-11T17:42:13Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-07-28T10:00:00Z",
+        "entry_a_text": "Huazhong University of Science and Technology (China) posts video showing partial levitation of a dark sample on a magnet. Sample rocks but does not fully levitate - consistent with diamagnetism, not Meissner effect.",
+        "entry_b_time": "2026-04-11T17:42:13+00:00",
+        "entry_b_text": "Replication scoreboard: 0 successful replications of zero resistance, 0 Meissner effect confirmations, 6+ failed replications from independent labs worldwide. No lab has reproduced the core SC claims.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: effect, meissner",
+        "detected": "2026-04-11T17:42:13Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-02T11:00:00Z",
+        "entry_a_text": "Southeast University (Nanjing) reports failed replication: synthesized LK-99 samples show no superconducting signatures. Resistivity is semiconducting, not metallic.",
+        "entry_b_time": "2026-04-11T17:42:13+00:00",
+        "entry_b_text": "Replication scoreboard: 0 successful replications of zero resistance, 0 Meissner effect confirmations, 6+ failed replications from independent labs worldwide. No lab has reproduced the core SC claims.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: failed, replication",
+        "detected": "2026-04-11T17:42:13Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-07-28T10:00:00Z",
+        "entry_a_text": "Huazhong University of Science and Technology (China) posts video showing partial levitation of a dark sample on a magnet. Sample rocks but does not fully levitate - consistent with diamagnetism, not Meissner effect.",
+        "entry_b_time": "2026-04-11T17:42:13+00:00",
+        "entry_b_text": "Comprehensive analysis published: ALL observed effects in LK-99 are explained by Cu2S impurity. Resistivity drop = Cu2S phase transition at 104C. Partial levitation = ferromagnetic Cu2S on permanent magnet. No superconductivity. Multiple independent groups converge on same explanation.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: levitation, magnet, partial",
+        "detected": "2026-04-11T17:42:13Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-01T09:00:00Z",
+        "entry_a_text": "Sinead Griffin (Lawrence Berkeley National Lab) publishes DFT calculation showing flat bands near Fermi level in Cu-substituted lead apatite structure. Theoretical plausibility for electronic correlation effects, but flat bands alone do not guarantee superconductivity.",
+        "entry_b_time": "2026-04-11T17:42:13+00:00",
+        "entry_b_text": "Comprehensive analysis published: ALL observed effects in LK-99 are explained by Cu2S impurity. Resistivity drop = Cu2S phase transition at 104C. Partial levitation = ferromagnetic Cu2S on permanent magnet. No superconductivity. Multiple independent groups converge on same explanation.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: effects, superconductivity",
+        "detected": "2026-04-11T17:42:13Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-03T20:00:00Z",
+        "entry_a_text": "Multiple condensed matter theory groups note that the partial levitation videos are consistent with ferromagnetism from Cu2S (copper sulfide) impurity, not diamagnetic Meissner levitation. Cu2S has a structural phase transition at ~104C.",
+        "entry_b_time": "2026-04-11T17:42:13+00:00",
+        "entry_b_text": "Comprehensive analysis published: ALL observed effects in LK-99 are explained by Cu2S impurity. Resistivity drop = Cu2S phase transition at 104C. Partial levitation = ferromagnetic Cu2S on permanent magnet. No superconductivity. Multiple independent groups converge on same explanation.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: groups, impurity, levitation, multiple, partial",
+        "detected": "2026-04-11T17:42:13Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-06T10:00:00Z",
+        "entry_a_text": "University of Maryland team identifies Cu2S as a significant impurity phase in LK-99 synthesis. Cu2S undergoes a phase transition at 104C that produces a sharp resistivity drop - matching the original claim's 'superconducting transition'.",
+        "entry_b_time": "2026-04-11T17:42:13+00:00",
+        "entry_b_text": "Comprehensive analysis published: ALL observed effects in LK-99 are explained by Cu2S impurity. Resistivity drop = Cu2S phase transition at 104C. Partial levitation = ferromagnetic Cu2S on permanent magnet. No superconductivity. Multiple independent groups converge on same explanation.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: drop, impurity, phase, resistivity, transition",
+        "detected": "2026-04-11T17:42:13Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-07T09:00:00Z",
+        "entry_a_text": "Prashant Jain (UIUC) et al. publish analysis showing the partial levitation is explained by ferromagnetic Cu2S impurities interacting with the permanent magnet. Not diamagnetic levitation.",
+        "entry_b_time": "2026-04-11T17:42:13+00:00",
+        "entry_b_text": "Comprehensive analysis published: ALL observed effects in LK-99 are explained by Cu2S impurity. Resistivity drop = Cu2S phase transition at 104C. Partial levitation = ferromagnetic Cu2S on permanent magnet. No superconductivity. Multiple independent groups converge on same explanation.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: analysis, explained, ferromagnetic, levitation, magnet",
+        "detected": "2026-04-11T17:42:13Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-08T15:00:00Z",
+        "entry_a_text": "IBS publishes results on high-quality single-crystal LK-99 (not polycrystalline). Single crystal shows NO superconductivity whatsoever - high resistivity semiconductor with no anomalous diamagnetism. This is the cleanest test possible.",
+        "entry_b_time": "2026-04-11T17:42:13+00:00",
+        "entry_b_text": "Comprehensive analysis published: ALL observed effects in LK-99 are explained by Cu2S impurity. Resistivity drop = Cu2S phase transition at 104C. Partial levitation = ferromagnetic Cu2S on permanent magnet. No superconductivity. Multiple independent groups converge on same explanation.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: resistivity, superconductivity",
+        "detected": "2026-04-11T17:42:13Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-06T10:00:00Z",
+        "entry_a_text": "University of Maryland team identifies Cu2S as a significant impurity phase in LK-99 synthesis. Cu2S undergoes a phase transition at 104C that produces a sharp resistivity drop - matching the original claim's 'superconducting transition'.",
+        "entry_b_time": "2026-04-11T17:42:13+00:00",
+        "entry_b_text": "Nature publishes summary: LK-99 is not a superconductor. Scientific consensus reached. Original observations fully explained by Cu2S copper sulfide impurity phase. The rapid open-science replication effort is praised but the claim is definitively debunked.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: claim, impurity, original, phase",
+        "detected": "2026-04-11T17:42:13Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-14T12:00:00Z",
+        "entry_a_text": "Comprehensive analysis published: ALL observed effects in LK-99 are explained by Cu2S impurity. Resistivity drop = Cu2S phase transition at 104C. Partial levitation = ferromagnetic Cu2S on permanent magnet. No superconductivity. Multiple independent groups converge on same explanation.",
+        "entry_b_time": "2026-04-11T17:42:13+00:00",
+        "entry_b_text": "Nature publishes summary: LK-99 is not a superconductor. Scientific consensus reached. Original observations fully explained by Cu2S copper sulfide impurity phase. The rapid open-science replication effort is praised but the claim is definitively debunked.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: explained, impurity, phase",
+        "detected": "2026-04-11T17:42:13Z"
+      }
+    ],
+    "resolved": []
+  },
+  "sourceCalibration": {
+    "ledger": [
+      {
+        "timestamp": "2026-04-11T17:47:00Z",
+        "evidence_index": 3,
+        "confirming_index": 7,
+        "resolution": "REFUTED",
+        "source": "Huazhong University",
+        "confirming_source": "IBS Korea",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Huazhong University of Science and Technology (China) posts video showing partial levitation of a dark sample on a magne",
+        "confirming_text_snippet": "IBS (Institute for Basic Science, Korea) reports synthesis of LK-99 but finds no zero resistance and no Meissner effect."
+      },
+      {
+        "timestamp": "2026-04-11T17:47:00Z",
+        "evidence_index": 7,
+        "confirming_index": 12,
+        "resolution": "REFUTED",
+        "source": "IBS Korea",
+        "confirming_source": "Aggregated lab results",
+        "trust_delta": -0.1,
+        "original_text_snippet": "IBS (Institute for Basic Science, Korea) reports synthesis of LK-99 but finds no zero resistance and no Meissner effect.",
+        "confirming_text_snippet": "Replication scoreboard: 0 successful replications of zero resistance, 0 Meissner effect confirmations, 6+ failed replica"
+      },
+      {
+        "timestamp": "2026-04-11T17:47:00Z",
+        "evidence_index": 8,
+        "confirming_index": 13,
+        "resolution": "REFUTED",
+        "source": "Multiple theory groups",
+        "confirming_source": "Multiple groups (consensus)",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Multiple condensed matter theory groups note that the partial levitation videos are consistent with ferromagnetism from ",
+        "confirming_text_snippet": "Comprehensive analysis published: ALL observed effects in LK-99 are explained by Cu2S impurity. Resistivity drop = Cu2S "
+      },
+      {
+        "timestamp": "2026-04-11T17:47:00Z",
+        "evidence_index": 10,
+        "confirming_index": 13,
+        "resolution": "REFUTED",
+        "source": "UIUC (Jain et al.)",
+        "confirming_source": "Multiple groups (consensus)",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Prashant Jain (UIUC) et al. publish analysis showing the partial levitation is explained by ferromagnetic Cu2S impuritie",
+        "confirming_text_snippet": "Comprehensive analysis published: ALL observed effects in LK-99 are explained by Cu2S impurity. Resistivity drop = Cu2S "
+      },
+      {
+        "timestamp": "2026-04-11T17:47:50Z",
+        "evidence_index": 0,
+        "resolution": "REFUTED",
+        "source": "arXiv (Lee & Kim)",
+        "tag": "SCIENTIFIC",
+        "reason": "Pushed toward H1 (lost)",
+        "winning_hypothesis": "H3",
+        "original_text_snippet": "Two arXiv preprints posted by Lee Sukbae, Kim Ji-Hoon et al. claiming LK-99 (Pb10-xCux(PO4)6O) is a room-temperature, am",
+        "scoring_method": "outcome"
+      },
+      {
+        "timestamp": "2026-04-11T17:47:50Z",
+        "evidence_index": 2,
+        "resolution": "CONFIRMED",
+        "source": "Physics community (multiple)",
+        "tag": "ANALYSIS",
+        "reason": "Pushed toward H3 (correct)",
+        "winning_hypothesis": "H3",
+        "original_text_snippet": "Condensed matter physicists note methodological concerns: no AC susceptibility measurement, no Meissner effect demonstra",
+        "scoring_method": "outcome"
+      },
+      {
+        "timestamp": "2026-04-11T17:47:50Z",
+        "evidence_index": 3,
+        "resolution": "REFUTED",
+        "source": "Huazhong University",
+        "tag": "EXPERIMENTAL",
+        "reason": "Pushed toward H2 (lost)",
+        "winning_hypothesis": "H3",
+        "original_text_snippet": "Huazhong University of Science and Technology (China) posts video showing partial levitation of a dark sample on a magne",
+        "scoring_method": "outcome"
+      },
+      {
+        "timestamp": "2026-04-11T17:47:50Z",
+        "evidence_index": 4,
+        "resolution": "REFUTED",
+        "source": "Chinese labs (multiple unverified)",
+        "tag": "EXPERIMENTAL",
+        "reason": "Pushed toward H2 (lost)",
+        "winning_hypothesis": "H3",
+        "original_text_snippet": "Multiple Chinese labs report synthesis attempts. Most produce non-superconducting samples. One lab (unverified) claims r",
+        "scoring_method": "outcome"
+      },
+      {
+        "timestamp": "2026-04-11T17:47:50Z",
+        "evidence_index": 5,
+        "resolution": "REFUTED",
+        "source": "LBNL (Sinead Griffin)",
+        "tag": "SCIENTIFIC",
+        "reason": "Pushed toward H1+H2 (lost)",
+        "winning_hypothesis": "H3",
+        "original_text_snippet": "Sinead Griffin (Lawrence Berkeley National Lab) publishes DFT calculation showing flat bands near Fermi level in Cu-subs",
+        "scoring_method": "outcome"
+      },
+      {
+        "timestamp": "2026-04-11T17:47:50Z",
+        "evidence_index": 6,
+        "resolution": "CONFIRMED",
+        "source": "Southeast University",
+        "tag": "EXPERIMENTAL",
+        "reason": "Pushed toward H3 (correct)",
+        "winning_hypothesis": "H3",
+        "original_text_snippet": "Southeast University (Nanjing) reports failed replication: synthesized LK-99 samples show no superconducting signatures.",
+        "scoring_method": "outcome"
+      },
+      {
+        "timestamp": "2026-04-11T17:47:50Z",
+        "evidence_index": 7,
+        "resolution": "CONFIRMED",
+        "source": "IBS Korea",
+        "tag": "EXPERIMENTAL",
+        "reason": "Pushed toward H3 (correct)",
+        "winning_hypothesis": "H3",
+        "original_text_snippet": "IBS (Institute for Basic Science, Korea) reports synthesis of LK-99 but finds no zero resistance and no Meissner effect.",
+        "scoring_method": "outcome"
+      },
+      {
+        "timestamp": "2026-04-11T17:47:50Z",
+        "evidence_index": 8,
+        "resolution": "CONFIRMED",
+        "source": "Multiple theory groups",
+        "tag": "SCIENTIFIC",
+        "reason": "Pushed toward H3 (correct)",
+        "winning_hypothesis": "H3",
+        "original_text_snippet": "Multiple condensed matter theory groups note that the partial levitation videos are consistent with ferromagnetism from ",
+        "scoring_method": "outcome"
+      },
+      {
+        "timestamp": "2026-04-11T17:47:50Z",
+        "evidence_index": 9,
+        "resolution": "CONFIRMED",
+        "source": "University of Maryland",
+        "tag": "EXPERIMENTAL",
+        "reason": "Pushed toward H3 (correct)",
+        "winning_hypothesis": "H3",
+        "original_text_snippet": "University of Maryland team identifies Cu2S as a significant impurity phase in LK-99 synthesis. Cu2S undergoes a phase t",
+        "scoring_method": "outcome"
+      },
+      {
+        "timestamp": "2026-04-11T17:47:50Z",
+        "evidence_index": 10,
+        "resolution": "CONFIRMED",
+        "source": "UIUC (Jain et al.)",
+        "tag": "SCIENTIFIC",
+        "reason": "Pushed toward H3 (correct)",
+        "winning_hypothesis": "H3",
+        "original_text_snippet": "Prashant Jain (UIUC) et al. publish analysis showing the partial levitation is explained by ferromagnetic Cu2S impuritie",
+        "scoring_method": "outcome"
+      },
+      {
+        "timestamp": "2026-04-11T17:47:50Z",
+        "evidence_index": 11,
+        "resolution": "CONFIRMED",
+        "source": "IBS Korea (single crystal)",
+        "tag": "EXPERIMENTAL",
+        "reason": "Pushed toward H3 (correct)",
+        "winning_hypothesis": "H3",
+        "original_text_snippet": "IBS publishes results on high-quality single-crystal LK-99 (not polycrystalline). Single crystal shows NO superconductiv",
+        "scoring_method": "outcome"
+      },
+      {
+        "timestamp": "2026-04-11T17:47:50Z",
+        "evidence_index": 12,
+        "resolution": "CONFIRMED",
+        "source": "Aggregated lab results",
+        "tag": "DATA",
+        "reason": "Pushed toward H3 (correct)",
+        "winning_hypothesis": "H3",
+        "original_text_snippet": "Replication scoreboard: 0 successful replications of zero resistance, 0 Meissner effect confirmations, 6+ failed replica",
+        "scoring_method": "outcome"
+      },
+      {
+        "timestamp": "2026-04-11T17:47:50Z",
+        "evidence_index": 13,
+        "resolution": "CONFIRMED",
+        "source": "Multiple groups (consensus)",
+        "tag": "SCIENTIFIC",
+        "reason": "Pushed toward H3 (correct)",
+        "winning_hypothesis": "H3",
+        "original_text_snippet": "Comprehensive analysis published: ALL observed effects in LK-99 are explained by Cu2S impurity. Resistivity drop = Cu2S ",
+        "scoring_method": "outcome"
+      },
+      {
+        "timestamp": "2026-04-11T17:47:50Z",
+        "evidence_index": 14,
+        "resolution": "CONFIRMED",
+        "source": "Nature (news feature)",
+        "tag": "SCIENTIFIC",
+        "reason": "Pushed toward H3 (correct)",
+        "winning_hypothesis": "H3",
+        "original_text_snippet": "Nature publishes summary: LK-99 is not a superconductor. Scientific consensus reached. Original observations fully expla",
+        "scoring_method": "outcome"
+      }
+    ],
+    "effectiveTrust": {
+      "Aggregated lab results": 0.5455,
+      "Chinese labs (multiple unverified)": 0.4118,
+      "Huazhong University": 0.3289,
+      "IBS Korea": 0.4565,
+      "IBS Korea (single crystal)": 0.5455,
+      "LBNL (Sinead Griffin)": 0.4118,
+      "Multiple groups (consensus)": 0.5455,
+      "Multiple theory groups": 0.4565,
+      "Nature (news feature)": 0.5455,
+      "Physics community (multiple)": 0.5455,
+      "Reddit": 0.5,
+      "Southeast University": 0.5455,
+      "Twitter": 0.5,
+      "UIUC (Jain et al.)": 0.4565,
+      "University of Maryland": 0.5455,
+      "arXiv (Lee & Kim)": 0.4118
+    },
+    "_last_scan_same_source_skipped": 0
+  },
+  "outcomeScoring": {
+    "winningHypothesis": "H3",
+    "losingHypotheses": [
+      "H1",
+      "H2",
+      "H4"
+    ],
+    "scoredAt": "2026-04-11T17:47:50Z",
+    "summary": {
+      "scored": 14,
+      "confirmed": 10,
+      "refuted": 4,
+      "skipped": 1
+    },
+    "log": [
+      {
+        "timestamp": "2026-04-11T17:47:50Z",
+        "evidence_index": 0,
+        "resolution": "REFUTED",
+        "source": "arXiv (Lee & Kim)",
+        "tag": "SCIENTIFIC",
+        "reason": "Pushed toward H1 (lost)",
+        "winning_hypothesis": "H3",
+        "original_text_snippet": "Two arXiv preprints posted by Lee Sukbae, Kim Ji-Hoon et al. claiming LK-99 (Pb10-xCux(PO4)6O) is a room-temperature, am",
+        "scoring_method": "outcome"
+      },
+      {
+        "timestamp": "2026-04-11T17:47:50Z",
+        "evidence_index": 2,
+        "resolution": "CONFIRMED",
+        "source": "Physics community (multiple)",
+        "tag": "ANALYSIS",
+        "reason": "Pushed toward H3 (correct)",
+        "winning_hypothesis": "H3",
+        "original_text_snippet": "Condensed matter physicists note methodological concerns: no AC susceptibility measurement, no Meissner effect demonstra",
+        "scoring_method": "outcome"
+      },
+      {
+        "timestamp": "2026-04-11T17:47:50Z",
+        "evidence_index": 3,
+        "resolution": "REFUTED",
+        "source": "Huazhong University",
+        "tag": "EXPERIMENTAL",
+        "reason": "Pushed toward H2 (lost)",
+        "winning_hypothesis": "H3",
+        "original_text_snippet": "Huazhong University of Science and Technology (China) posts video showing partial levitation of a dark sample on a magne",
+        "scoring_method": "outcome"
+      },
+      {
+        "timestamp": "2026-04-11T17:47:50Z",
+        "evidence_index": 4,
+        "resolution": "REFUTED",
+        "source": "Chinese labs (multiple unverified)",
+        "tag": "EXPERIMENTAL",
+        "reason": "Pushed toward H2 (lost)",
+        "winning_hypothesis": "H3",
+        "original_text_snippet": "Multiple Chinese labs report synthesis attempts. Most produce non-superconducting samples. One lab (unverified) claims r",
+        "scoring_method": "outcome"
+      },
+      {
+        "timestamp": "2026-04-11T17:47:50Z",
+        "evidence_index": 5,
+        "resolution": "REFUTED",
+        "source": "LBNL (Sinead Griffin)",
+        "tag": "SCIENTIFIC",
+        "reason": "Pushed toward H1+H2 (lost)",
+        "winning_hypothesis": "H3",
+        "original_text_snippet": "Sinead Griffin (Lawrence Berkeley National Lab) publishes DFT calculation showing flat bands near Fermi level in Cu-subs",
+        "scoring_method": "outcome"
+      },
+      {
+        "timestamp": "2026-04-11T17:47:50Z",
+        "evidence_index": 6,
+        "resolution": "CONFIRMED",
+        "source": "Southeast University",
+        "tag": "EXPERIMENTAL",
+        "reason": "Pushed toward H3 (correct)",
+        "winning_hypothesis": "H3",
+        "original_text_snippet": "Southeast University (Nanjing) reports failed replication: synthesized LK-99 samples show no superconducting signatures.",
+        "scoring_method": "outcome"
+      },
+      {
+        "timestamp": "2026-04-11T17:47:50Z",
+        "evidence_index": 7,
+        "resolution": "CONFIRMED",
+        "source": "IBS Korea",
+        "tag": "EXPERIMENTAL",
+        "reason": "Pushed toward H3 (correct)",
+        "winning_hypothesis": "H3",
+        "original_text_snippet": "IBS (Institute for Basic Science, Korea) reports synthesis of LK-99 but finds no zero resistance and no Meissner effect.",
+        "scoring_method": "outcome"
+      },
+      {
+        "timestamp": "2026-04-11T17:47:50Z",
+        "evidence_index": 8,
+        "resolution": "CONFIRMED",
+        "source": "Multiple theory groups",
+        "tag": "SCIENTIFIC",
+        "reason": "Pushed toward H3 (correct)",
+        "winning_hypothesis": "H3",
+        "original_text_snippet": "Multiple condensed matter theory groups note that the partial levitation videos are consistent with ferromagnetism from ",
+        "scoring_method": "outcome"
+      },
+      {
+        "timestamp": "2026-04-11T17:47:50Z",
+        "evidence_index": 9,
+        "resolution": "CONFIRMED",
+        "source": "University of Maryland",
+        "tag": "EXPERIMENTAL",
+        "reason": "Pushed toward H3 (correct)",
+        "winning_hypothesis": "H3",
+        "original_text_snippet": "University of Maryland team identifies Cu2S as a significant impurity phase in LK-99 synthesis. Cu2S undergoes a phase t",
+        "scoring_method": "outcome"
+      },
+      {
+        "timestamp": "2026-04-11T17:47:50Z",
+        "evidence_index": 10,
+        "resolution": "CONFIRMED",
+        "source": "UIUC (Jain et al.)",
+        "tag": "SCIENTIFIC",
+        "reason": "Pushed toward H3 (correct)",
+        "winning_hypothesis": "H3",
+        "original_text_snippet": "Prashant Jain (UIUC) et al. publish analysis showing the partial levitation is explained by ferromagnetic Cu2S impuritie",
+        "scoring_method": "outcome"
+      },
+      {
+        "timestamp": "2026-04-11T17:47:50Z",
+        "evidence_index": 11,
+        "resolution": "CONFIRMED",
+        "source": "IBS Korea (single crystal)",
+        "tag": "EXPERIMENTAL",
+        "reason": "Pushed toward H3 (correct)",
+        "winning_hypothesis": "H3",
+        "original_text_snippet": "IBS publishes results on high-quality single-crystal LK-99 (not polycrystalline). Single crystal shows NO superconductiv",
+        "scoring_method": "outcome"
+      },
+      {
+        "timestamp": "2026-04-11T17:47:50Z",
+        "evidence_index": 12,
+        "resolution": "CONFIRMED",
+        "source": "Aggregated lab results",
+        "tag": "DATA",
+        "reason": "Pushed toward H3 (correct)",
+        "winning_hypothesis": "H3",
+        "original_text_snippet": "Replication scoreboard: 0 successful replications of zero resistance, 0 Meissner effect confirmations, 6+ failed replica",
+        "scoring_method": "outcome"
+      },
+      {
+        "timestamp": "2026-04-11T17:47:50Z",
+        "evidence_index": 13,
+        "resolution": "CONFIRMED",
+        "source": "Multiple groups (consensus)",
+        "tag": "SCIENTIFIC",
+        "reason": "Pushed toward H3 (correct)",
+        "winning_hypothesis": "H3",
+        "original_text_snippet": "Comprehensive analysis published: ALL observed effects in LK-99 are explained by Cu2S impurity. Resistivity drop = Cu2S ",
+        "scoring_method": "outcome"
+      },
+      {
+        "timestamp": "2026-04-11T17:47:50Z",
+        "evidence_index": 14,
+        "resolution": "CONFIRMED",
+        "source": "Nature (news feature)",
+        "tag": "SCIENTIFIC",
+        "reason": "Pushed toward H3 (correct)",
+        "winning_hypothesis": "H3",
+        "original_text_snippet": "Nature publishes summary: LK-99 is not a superconductor. Scientific consensus reached. Original observations fully expla",
+        "scoring_method": "outcome"
+      }
+    ]
+  }
+}
