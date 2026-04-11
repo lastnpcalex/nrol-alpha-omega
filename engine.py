@@ -656,6 +656,61 @@ def bayesian_update(topic: dict, likelihoods: dict[str, float],
             "effectiveWeight": 0.5,
         })
 
+    # --- Cross-session likelihood drift detection ---
+    # Compare these likelihoods against the most recent bayesian_update
+    # in posteriorHistory that used the same evidence tag. If the same
+    # kind of evidence produces significantly different likelihoods across
+    # sessions, that's an inconsistency the operator should know about.
+    history = topic["model"].get("posteriorHistory", [])
+    if history:
+        # Find the evidence tag for this update (from the first cited entry)
+        current_tag = None
+        for ref in evidence_refs:
+            for e in topic.get("evidenceLog", []):
+                if e.get("time") == ref or e.get("text", "")[:50] == ref[:50]:
+                    current_tag = e.get("tag")
+                    break
+            if current_tag:
+                break
+
+        if current_tag:
+            # Search recent history for a bayesian_update with likelihoods
+            # on the same tag
+            for prev in reversed(history[-20:]):
+                prev_likelihoods = prev.get("likelihoods")
+                if not prev_likelihoods:
+                    continue
+                # Check if the previous entry's note references the same tag
+                prev_note = prev.get("note", "").upper()
+                if current_tag not in prev_note:
+                    continue
+
+                # Compute max likelihood divergence
+                max_divergence = 0.0
+                for hk in likelihoods:
+                    if hk in prev_likelihoods:
+                        max_divergence = max(
+                            max_divergence,
+                            abs(likelihoods[hk] - prev_likelihoods[hk]),
+                        )
+
+                if max_divergence > 0.20:
+                    _add_evidence_raw(topic, {
+                        "time": _now_iso(),
+                        "tag": "INTEL",
+                        "text": (f"LIKELIHOOD DRIFT: {current_tag} evidence produced "
+                                 f"likelihoods diverging by {max_divergence:.2f} from "
+                                 f"previous {current_tag} update (prior: "
+                                 f"{prev_likelihoods}, current: {dict(likelihoods)}). "
+                                 f"Check for cross-session inconsistency."),
+                        "provenance": "DERIVED",
+                        "posteriorImpact": "NONE",
+                        "ledger": "DECISION",
+                        "claimState": "PROPOSED",
+                        "effectiveWeight": 0.5,
+                    })
+                break  # only compare against most recent matching entry
+
     # Apply
     for k in computed:
         hypotheses[k]["posterior"] = computed[k]

@@ -30,7 +30,31 @@ This engine is honest about what it is and what it isn't.
 
 **What it is**: a Bayesian estimation engine where the update mechanics are principled and the governance layer enforces epistemic discipline. Posteriors are computed via Bayes' theorem from explicit likelihoods. Evidence weight feeds back into the update via a probabilistic mixture model — contested evidence is treated as a mixture of signal and noise, not discarded or blindly trusted. Source trust is Bayesian-updated per domain with surprisal-weighted likelihood ratios, so a source correctly predicting something surprising earns more trust than one confirming the obvious. Calibration is tracked via Brier scores and fed back into governance health.
 
-**What it isn't**: a generative model. The likelihoods in `bayesian_update()` are operator-supplied or derived from pre-committed indicator definitions via `suggest_likelihoods()`. There is no forward model that predicts what evidence you'd observe under each hypothesis — that would require a causal model of the domain (geopolitics, science, markets), which is an open research problem. The engine is Bayesian in its update mechanics, its source calibration, and its information-theoretic monitoring. The human judgment lives in the indicator design and the decision to fire them. Everything downstream of that judgment is mechanical.
+**What it isn't**: a parametric generative model with closed-form likelihood functions. You can't call `P(evidence | H3)` and get a number from a distribution. But the system does contain a **distributed qualitative generative model** — the topic state file encodes a structured causal story about how the world produces evidence under each hypothesis:
+
+- **Conditional probability tables** in sub-models: `P(H_i | scenario)` is specified explicitly (e.g. `khargConditionalHormuz: {H1: 0.0, H2: 0.05, H3: 0.35, H4: 0.6}`)
+- **Indicators as likelihood proxies**: each indicator's `posteriorEffect` encodes which observables are more probable under which hypotheses — a tier-1 indicator with "H3/H4 surge" is implicitly saying P(indicator fires | H3) >> P(indicator fires | H1)
+- **Actor decision models**: decision styles, biases, filters, and overrides model how key actors *generate* the evidence you observe. Trump's fixation-driven decision style predicts different observables than institutional rationality.
+- **Tag direction hints**: KINETIC → H3/H4, DIPLO → H1/H2 encode which evidence types are more probable under which hypotheses
+
+`suggest_likelihoods()` mechanizes part of this model — converting indicator effects and sub-model conditionals into explicit likelihood ratios via inverse Bayes. The actor models and tag hints are currently used by the LLM operator implicitly when supplying likelihoods; they're structured context, not yet code.
+
+The human judgment lives in the topic design: defining hypotheses, setting indicator thresholds, specifying actor models, writing conditional tables. Everything downstream — the likelihood derivation, the Bayesian update, the evidence weighting, the governance checks — is mechanical.
+
+#### The LLM-as-operator architecture
+
+The system is designed to be operated by a language model — not as a novelty, but because the hardest part of intelligence analysis (translating unstructured reports into structured likelihood judgments) is exactly what LLMs do well, and the hardest failure mode of LLMs (confident hallucination with no self-awareness) is exactly what the governor was built to catch.
+
+The architecture splits the problem:
+- **The LLM** handles perception: reading news, identifying what's new vs. recycled, assessing source quality, mapping observations to hypotheses. This is where human-like judgment lives.
+- **The engine** handles inference: Bayes' theorem, mixture model attenuation, entropy computation, Brier scoring. No judgment calls — pure math on whatever the operator feeds it.
+- **The governor** handles discipline: rhetoric detection, hallucination checklists, evidence freshness scoring, admissibility gates. It exists because LLMs will confidently update posteriors on vibes if you let them. The governor doesn't let them.
+
+TTLs are the critical mechanism here. Every evidence tag has a time-to-live — OSINT decays in 24 hours, commodity prices in 8 hours, diplomatic signals in 48 hours. When evidence ages past its TTL, governance health degrades. This isn't a suggestion; it's a forcing function that makes the operator go *search for new information* rather than recycling stale context. An LLM without TTL pressure will happily re-summarize last week's brief and call it an update. The TTL makes that behavior visible in the health score.
+
+The hallucination checklist (`governor.hallucination_check()`) runs before every posterior update: Are you citing evidence that actually exists in the log? Is the evidence recent enough? Are you double-counting same-chain entries? Did you actually search, or are you pattern-matching from training data? These are exactly the failure modes that emerge when an LLM operates a forecasting system without guardrails.
+
+This is not "AI-assisted analysis." It's a mechanical Bayesian system that uses an LLM as its sensory organ and a governor as its immune system.
 
 #### Fundamental constraint: conditional dependence between evidence
 

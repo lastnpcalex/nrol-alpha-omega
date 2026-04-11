@@ -27,13 +27,13 @@ from typing import Optional
 
 
 # ===========================================================================
-# 1. R_t EVIDENCE FRESHNESS SCORING
+# 1. R_t — SEARCH PRIORITY SCORE
 #
-#   Information-theoretic grounding:
-#
-#   R_t measures the EXPECTED POSTERIOR DRIFT since the last update. In a
-#   fast-moving domain, posteriors that haven't been refreshed are
-#   increasingly likely to be wrong. R_t quantifies this risk.
+#   R_t is an entropy-weighted attention-allocation heuristic. It tells the
+#   operator which hypotheses most urgently need fresh evidence. It is NOT
+#   a pure information-theoretic derivation — it uses Shannon entropy as a
+#   component but does not model the domain's actual volatility or the
+#   expected rate of posterior change.
 #
 #   For each hypothesis H_i:
 #     - entropy_contribution = -p_i * log2(p_i)  (how much info this H carries)
@@ -41,18 +41,17 @@ from typing import Optional
 #     - evidence_recency = weighted count of recent evidence (24h=3x, 72h=1x)
 #     - R_t(H_i) = entropy_contribution * time_decay / evidence_recency
 #
-#   This replaces the prior heuristic (prior_strength * delay / evidence)
-#   with an information-theoretic measure: hypotheses that carry more
-#   Shannon information AND haven't been refreshed score highest.
-#
-#   The key improvement: a low-probability tail hypothesis (5%) that
-#   hasn't been checked is now flagged as risky — it carries surprise
-#   value if true — whereas the old formula underweighted it.
+#   The entropy term ensures low-probability tail hypotheses get flagged
+#   when stale — a 5% hypothesis that hasn't been checked carries more
+#   surprise value if true than a 50% hypothesis. But the time_decay is
+#   a log-scaled proxy for domain volatility, not a model of it. A fast-
+#   moving conflict and a slow-moving geological process get the same
+#   staleness curve unless the operator tunes rtConfig thresholds.
 #
 #   Regime thresholds are configurable per-topic via topic["rtConfig"]
 #   and can be calibrated against Brier score history.
 #
-#   High R_t → this topic/hypothesis needs fresh evidence NOW
+#   High R_t → this hypothesis needs fresh evidence NOW (search priority)
 #   Low R_t  → well-evidenced and recently updated, can wait
 # ===========================================================================
 
@@ -67,12 +66,12 @@ _RT_DEFAULTS = {
 
 def compute_rt(topic: dict) -> dict:
     """
-    Compute R_t (evidence staleness risk) for each hypothesis.
+    Compute R_t (search priority score) for each hypothesis.
 
     Returns dict of {hypothesis_key: {rt, regime, priority_rank}} sorted by
     urgency. Higher R_t = more urgent need for fresh evidence.
 
-    Information-theoretic basis:
+    Entropy-weighted heuristic:
       R_t(H_i) = entropy_contribution(H_i) * time_decay / evidence_recency
 
     Regimes (configurable via topic["rtConfig"]):

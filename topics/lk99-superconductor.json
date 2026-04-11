@@ -6,7 +6,7 @@
     "question": "Is LK-99 (copper-substituted lead apatite) a room-temperature, ambient-pressure superconductor as claimed by Lee & Kim (2023)?",
     "resolution": "Resolved when: (a) 3+ independent labs replicate zero-resistance AND diamagnetic levitation in LK-99 samples, OR (b) 3+ independent labs fail to replicate AND a credible structural/electronic explanation for the original observations emerges.",
     "created": "2023-07-22T00:00:00Z",
-    "lastUpdated": "2026-04-11T17:47:50+00:00",
+    "lastUpdated": "2026-04-11T21:01:12+00:00",
     "status": "RESOLVED",
     "dayCount": 25,
     "startDate": "2023-07-22T00:00:00Z",
@@ -93,7 +93,11 @@
           "H3": 0.5,
           "H4": 0.2
         },
-        "note": "Initial priors - skeptical base rate"
+        "note": "Initial priors - skeptical base rate",
+        "H1": 0.1,
+        "H2": 0.2,
+        "H3": 0.5,
+        "H4": 0.2
       },
       {
         "date": "2023-07-28T10:00:00Z",
@@ -103,7 +107,11 @@
           "H3": 0.42,
           "H4": 0.18
         },
-        "note": "Partial levitation video + social media hype shifts H2 up slightly"
+        "note": "Partial levitation video + social media hype shifts H2 up slightly",
+        "H1": 0.12,
+        "H2": 0.28,
+        "H3": 0.42,
+        "H4": 0.18
       },
       {
         "date": "2023-08-01T09:00:00Z",
@@ -113,7 +121,11 @@
           "H3": 0.38,
           "H4": 0.17
         },
-        "note": "DFT flat bands provide some theoretical support"
+        "note": "DFT flat bands provide some theoretical support",
+        "H1": 0.15,
+        "H2": 0.3,
+        "H3": 0.38,
+        "H4": 0.17
       },
       {
         "date": "2023-08-03T20:00:00Z",
@@ -123,7 +135,11 @@
           "H3": 0.55,
           "H4": 0.17
         },
-        "note": "Multiple failed replications + Cu2S explanation emerging"
+        "note": "Multiple failed replications + Cu2S explanation emerging",
+        "H1": 0.08,
+        "H2": 0.2,
+        "H3": 0.55,
+        "H4": 0.17
       },
       {
         "date": "2023-08-08T15:00:00Z",
@@ -133,7 +149,11 @@
           "H3": 0.83,
           "H4": 0.1
         },
-        "note": "IBS single crystal definitively negative. Cu2S explains everything."
+        "note": "IBS single crystal definitively negative. Cu2S explains everything.",
+        "H1": 0.02,
+        "H2": 0.05,
+        "H3": 0.83,
+        "H4": 0.1
       },
       {
         "date": "2023-08-16T10:00:00Z",
@@ -143,7 +163,11 @@
           "H3": 0.9,
           "H4": 0.07
         },
-        "note": "RESOLVED: Scientific consensus - not a superconductor. Cu2S impurity."
+        "note": "RESOLVED: Scientific consensus - not a superconductor. Cu2S impurity.",
+        "H1": 0.01,
+        "H2": 0.02,
+        "H3": 0.9,
+        "H4": 0.07
       }
     ]
   },
@@ -588,14 +612,171 @@
       "H3": "ADMISSIBLE",
       "H4": "ADMISSIBLE"
     },
-    "lastComputed": "2026-04-11T17:47:50+00:00",
-    "calibrationHealth": "ACCEPTABLE",
+    "klFromPrior": {
+      "kl_divergence": 0.3864,
+      "interpretation": "MODERATE"
+    },
+    "lastComputed": "2026-04-11T21:01:12+00:00",
+    "calibrationHealth": "WELL_CALIBRATED",
     "unresolvedContradictions": 100
   },
   "predictionScoring": {
-    "snapshots": [],
-    "outcomes": [],
-    "brierScores": []
+    "snapshots": [
+      {
+        "timestamp": "2023-07-22T12:00:00ZT00:00:00+00:00",
+        "trigger": "backfill",
+        "posteriors": {
+          "H1": 0.1,
+          "H2": 0.2,
+          "H3": 0.5,
+          "H4": 0.2
+        },
+        "entropy": 1.761,
+        "note": "Initial priors - skeptical base rate"
+      },
+      {
+        "timestamp": "2023-07-28T10:00:00ZT00:00:00+00:00",
+        "trigger": "backfill",
+        "posteriors": {
+          "H1": 0.12,
+          "H2": 0.28,
+          "H3": 0.42,
+          "H4": 0.18
+        },
+        "entropy": 1.8522,
+        "note": "Partial levitation video + social media hype shifts H2 up slightly"
+      },
+      {
+        "timestamp": "2023-08-01T09:00:00ZT00:00:00+00:00",
+        "trigger": "backfill",
+        "posteriors": {
+          "H1": 0.15,
+          "H2": 0.3,
+          "H3": 0.38,
+          "H4": 0.17
+        },
+        "entropy": 1.8967,
+        "note": "DFT flat bands provide some theoretical support"
+      },
+      {
+        "timestamp": "2023-08-03T20:00:00ZT00:00:00+00:00",
+        "trigger": "backfill",
+        "posteriors": {
+          "H1": 0.08,
+          "H2": 0.2,
+          "H3": 0.55,
+          "H4": 0.17
+        },
+        "entropy": 1.6649,
+        "note": "Multiple failed replications + Cu2S explanation emerging"
+      },
+      {
+        "timestamp": "2023-08-08T15:00:00ZT00:00:00+00:00",
+        "trigger": "backfill",
+        "posteriors": {
+          "H1": 0.02,
+          "H2": 0.05,
+          "H3": 0.83,
+          "H4": 0.1
+        },
+        "entropy": 0.8843,
+        "note": "IBS single crystal definitively negative. Cu2S explains everything."
+      },
+      {
+        "timestamp": "2023-08-16T10:00:00ZT00:00:00+00:00",
+        "trigger": "backfill",
+        "posteriors": {
+          "H1": 0.01,
+          "H2": 0.02,
+          "H3": 0.9,
+          "H4": 0.07
+        },
+        "entropy": 0.5847,
+        "note": "RESOLVED: Scientific consensus - not a superconductor. Cu2S impurity."
+      }
+    ],
+    "outcomes": [
+      {
+        "timestamp": "2026-04-11T21:01:12+00:00",
+        "resolved": "H3",
+        "label": "Not SC — mundane explanation (impurities, measurement error, Cu2S)",
+        "note": "Resolved: not a superconductor. Cu2S impurity explains all observations."
+      }
+    ],
+    "brierScores": [
+      {
+        "timestamp": "2023-07-22T12:00:00ZT00:00:00+00:00",
+        "trigger": "backfill",
+        "brier_score": 0.085,
+        "per_hypothesis": {
+          "H1": 0.01,
+          "H2": 0.04,
+          "H3": 0.25,
+          "H4": 0.04
+        },
+        "outcome": "H3"
+      },
+      {
+        "timestamp": "2023-07-28T10:00:00ZT00:00:00+00:00",
+        "trigger": "backfill",
+        "brier_score": 0.1154,
+        "per_hypothesis": {
+          "H1": 0.0144,
+          "H2": 0.0784,
+          "H3": 0.3364,
+          "H4": 0.0324
+        },
+        "outcome": "H3"
+      },
+      {
+        "timestamp": "2023-08-01T09:00:00ZT00:00:00+00:00",
+        "trigger": "backfill",
+        "brier_score": 0.13145,
+        "per_hypothesis": {
+          "H1": 0.0225,
+          "H2": 0.09,
+          "H3": 0.3844,
+          "H4": 0.0289
+        },
+        "outcome": "H3"
+      },
+      {
+        "timestamp": "2023-08-03T20:00:00ZT00:00:00+00:00",
+        "trigger": "backfill",
+        "brier_score": 0.06945,
+        "per_hypothesis": {
+          "H1": 0.0064,
+          "H2": 0.04,
+          "H3": 0.2025,
+          "H4": 0.0289
+        },
+        "outcome": "H3"
+      },
+      {
+        "timestamp": "2023-08-08T15:00:00ZT00:00:00+00:00",
+        "trigger": "backfill",
+        "brier_score": 0.01045,
+        "per_hypothesis": {
+          "H1": 0.0004,
+          "H2": 0.0025,
+          "H3": 0.0289,
+          "H4": 0.01
+        },
+        "outcome": "H3"
+      },
+      {
+        "timestamp": "2023-08-16T10:00:00ZT00:00:00+00:00",
+        "trigger": "backfill",
+        "brier_score": 0.00385,
+        "per_hypothesis": {
+          "H1": 0.0001,
+          "H2": 0.0004,
+          "H3": 0.01,
+          "H4": 0.0049
+        },
+        "outcome": "H3"
+      }
+    ]
   },
   "contradictionTracker": {
     "unresolved": [
