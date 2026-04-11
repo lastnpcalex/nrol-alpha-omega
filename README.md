@@ -38,9 +38,9 @@ flowchart TD
         Enrich --> Contra --> SrcCal
     end
 
-    subgraph UPDATE ["update_posteriors()"]
+    subgraph UPDATE ["update_posteriors() / bayesian_update()"]
         direction TB
-        Gate["**Governor Pre-Commit Gate**\n14 failure modes checked\nEvidence supports shift direction\nNo circular reasoning or rhetoric-only\nNo unresolved HIGH contradictions\nShift proportional to evidence weight"]
+        Gate["**Governor Pre-Commit Gate**\n14 failure modes checked\nEvidence supports shift direction\nNo circular reasoning or rhetoric-only\nNo unresolved HIGH contradictions\nShift proportional to evidence weight\nbayesian_update: mechanical P(H|E) from likelihoods"]
         Block["CRITICAL failure\n**GovernanceError** (hard block)"]
         Warn["HIGH failure\nWarning + audit trail"]
         Force["Force override\navailable with audit log"]
@@ -51,7 +51,7 @@ flowchart TD
 
     subgraph SAVE ["save_topic()"]
         direction TB
-        Gov["Governance snapshot\nR_t freshness · Entropy"]
+        Gov["Governance snapshot\nR_t freshness · Entropy · KL from prior"]
         Expire["Expired hypothesis detection\nPartial Brier scoring"]
         Snap["Prediction calibration\nsnapshot"]
         Gov --> Expire --> Snap
@@ -128,8 +128,8 @@ A source confirmed 5 times in ECON and refuted 3 times in RHETORIC will have hig
 ## Architecture
 
 ```
-engine.py                  Topic I/O, add_evidence, update_posteriors, save_topic
-governor.py                Epistemic governor — 14 failure modes, R_t, entropy, claim lifecycle
+engine.py                  Topic I/O, add_evidence, update_posteriors, bayesian_update, save_topic
+governor.py                Epistemic governor — 14 failure modes, R_t, entropy, KL from prior, claim lifecycle
 server.py                  Multi-topic HTTP dashboard (port 8098)
 
 framework/
@@ -153,7 +153,11 @@ sources/                   Source database (cross-topic trust tracking)
 
 ### Key Invariant
 
-**Every mutation goes through the governor.** Never write directly to `topic["evidenceLog"]`, `topic["model"]["hypotheses"]`, or `topic["subModels"]`. Always use `add_evidence()`, `update_posteriors()`, `update_submodel()`, `hold_posteriors()`. The governor enriches, validates, and gates every change.
+**Every mutation goes through the governor.** Never write directly to `topic["evidenceLog"]`, `topic["model"]["hypotheses"]`, or `topic["subModels"]`. Always use `add_evidence()`, `update_posteriors()` / `bayesian_update()`, `update_submodel()`, `hold_posteriors()`. The governor enriches, validates, and gates every change.
+
+Two paths for posterior updates:
+- **`update_posteriors()`** — operator supplies final posteriors directly. The governor validates them against the hallucination checklist but the Bayesian math is implicit (in the operator's head).
+- **`bayesian_update()`** — operator supplies explicit likelihoods `P(E|H_i)` and the engine computes posteriors mechanically via Bayes' theorem. Same governor gate, but the reasoning is auditable: likelihoods are recorded in `posteriorHistory`.
 
 ## Quickstart
 
@@ -239,6 +243,44 @@ H4 ████                                            0.07
 - 6+ failed replications → bulk failure indicator fired, H3 surged
 - Cu2S phase transition identified → smoking gun, H3 locked in
 
+**Governance snapshot at resolution**:
+- **KL from prior**: 0.39 nats → `MODERATE`. The prior already favored H3 (0.50), so reaching H3=0.90 was a significant move but not a reversal. Honest classification: the evidence confirmed a direction the prior already leaned, rather than overturning it.
+- **R_t**: all hypotheses `SAFE` — evidence was fresh at time of resolution.
+- **Health**: `DEGRADED` (post-resolution, all 15 evidence entries have aged past TTL — expected for a closed topic).
+
+**How `bayesian_update()` would have worked** (retrospective):
+
+The Aug 3 update (6+ failed replications) could have been expressed as explicit likelihoods:
+
+```python
+# If H3 is true (mundane), how likely are 6 failed replications? Very.
+# If H1 is true (genuine SC), how likely are 6 failures? Very unlikely.
+bayesian_update(topic, likelihoods={
+    "H1": 0.05,   # P(6 failures | genuine SC) — almost impossible
+    "H2": 0.30,   # P(6 failures | partial SC) — possible if effect is subtle
+    "H3": 0.90,   # P(6 failures | not SC) — expected
+    "H4": 0.60,   # P(6 failures | fraud) — expected but not certain
+}, reason="6+ independent replication failures", evidence_refs=[...])
+```
+
+The engine computes posteriors mechanically via Bayes' theorem. If the operator also supplies their intuitive posteriors, the system logs the KL divergence between mechanical and intuitive results — making the judgment call auditable.
+
+**Information chains** (retrospective): Multiple outlets reported the Huazhong levitation video. Without `informationChain` tracking, each article could have been counted as independent corroboration. With it:
+
+```python
+add_evidence(topic, {
+    "tag": "EXPERIMENTAL", "source": "reuters",
+    "text": "Huazhong University video shows partial levitation of LK-99 sample",
+    "informationChain": "huazhong-levitation-video-2023-07",  # same primary source
+})
+add_evidence(topic, {
+    "tag": "EXPERIMENTAL", "source": "scmp",
+    "text": "Chinese university demonstrates LK-99 sample levitating",
+    "informationChain": "huazhong-levitation-video-2023-07",  # same video, same chain
+})
+# Governor treats these as ONE evidential unit, not independent corroboration
+```
+
 **Source trust after outcome scoring** (carried into future science topics):
 
 | Source | Domain Trust | Why |
@@ -312,7 +354,7 @@ The governor (`governor.py`) enforces analytical discipline through multiple mec
 
 | Mechanism | What It Does |
 |-----------|-------------|
-| **R_t = PD/E** | Evidence freshness scoring — SAFE / ELASTIC / DANGEROUS / RUNAWAY |
+| **R_t (info-theoretic)** | Evidence freshness scoring — entropy contribution × log-time decay / evidence recency → SAFE / ELASTIC / DANGEROUS / RUNAWAY |
 | **14 Failure Modes** | Pre-commit checklist (3 CRITICAL, 5 HIGH, 3 MEDIUM, 3 LOW) |
 | **Dual Ledger** | Facts (auto-decay) vs decisions (explicit supersession) |
 | **Claim Lifecycle** | PROPOSED → SUPPORTED → CONTESTED → INVALIDATED |
@@ -323,6 +365,8 @@ The governor (`governor.py`) enforces analytical discipline through multiple mec
 | **Hypothesis Expiry** | Auto-detects when dayCount exceeds hypothesis midpoint × 1.5 |
 | **Brier Score Tracking** | Snapshot posteriors at each update; score against outcomes |
 | **Entropy Monitoring** | Tracks posterior distribution spread for calibration health |
+| **KL from Prior** | Detects prior-dominated confidence — sharp posteriors that never moved from the initial prior |
+| **Information Chains** | Evidence entries sharing an `informationChain` ID are treated as one evidential unit, not independent corroboration |
 
 ### Hallucination Failure Modes (14 total)
 
@@ -343,11 +387,27 @@ The governor (`governor.py`) enforces analytical discipline through multiple mec
 | 13 | feed_key_mismatch | LOW | Data feed reference doesn't match topic |
 | 14 | duplicate_evidence | LOW | Semantic duplicate of existing entry |
 
+## Epistemic Limitations
+
+This engine is honest about what it is and what it isn't.
+
+**What it is**: a disciplined expert elicitation framework with Bayesian bookkeeping. The governor enforces that posteriors move only when evidence justifies it, tracks calibration via Brier scores, and flags common reasoning failures before they corrupt the model.
+
+**What it isn't**: a fully mechanistic Bayesian inference engine. `update_posteriors()` accepts operator-supplied posteriors; `bayesian_update()` accepts operator-supplied *likelihoods* and computes posteriors via Bayes' theorem. In both cases, the critical judgment call — "how likely is this evidence under each hypothesis?" — happens in a human or LLM's head, not in a generative model with explicit likelihood functions. The governor constrains that judgment; it doesn't replace it.
+
+### Known limitation: conditional dependence between evidence
+
+Intelligence sources are correlated in ways that are often opaque and dynamic. A Reuters correspondent in Dubai and an AP correspondent in Dubai might be independently reporting, or they might both be working off the same CENTCOM background briefing. The engine provides **information-chain tracking** (`informationChain` field on evidence entries) so operators can declare when entries trace to the same primary source — and the governor will not count same-chain entries as independent corroboration. But this requires the operator to *know* the dependency structure, which is often unknowable.
+
+A proper Bayesian treatment would model the full joint distribution over sources. This engine does not attempt that. Instead, it takes the pragmatic position: make dependencies *declarable* when known, discount same-chain evidence automatically, and accept that undeclared dependencies will occasionally inflate confidence. The calibration feedback loop (Brier scores over time) is the long-run corrective — if correlated evidence is systematically overcounted, calibration will degrade, and the operator will see it.
+
+This is an honest limitation, not a planned feature. If you have ideas for tractable approaches to source-correlation modeling in sparse-evidence domains, we'd like to hear them.
+
 ## Acknowledgments
 
 The epistemic governance layer builds on patterns from **[@unpingable](https://github.com/unpingable)**'s **[Agent Governor](https://github.com/unpingable/agent_governor)** framework:
 
-- The **R_t = PD/E control equation** for evidence freshness scoring
+- The **R_t control equation** concept for evidence freshness scoring (rewritten with information-theoretic grounding: entropy contribution × log-time decay)
 - The **dual-ledger design** (facts vs decisions) for separating observations from analytical choices
 - The **claim lifecycle** (PROPOSED → SUPPORTED → CONTESTED → INVALIDATED) for evidence state
 - **Admissibility gating** for hypothesis quality (setpoint clarity + observability)

@@ -26,6 +26,7 @@ from governor import (
     compute_entropy,
     compute_max_entropy,
     compute_uncertainty_ratio,
+    compute_kl_from_prior,
     audit_evidence_freshness,
 )
 
@@ -114,6 +115,10 @@ def save_topic(topic: dict) -> None:
         elif uncertainty < 0.1:
             issues.append("Near-zero uncertainty — check for overconfidence")
 
+        kl_result = compute_kl_from_prior(topic)
+        if kl_result["interpretation"] == "PRIOR_DOMINATED":
+            issues.append("Posterior may be prior-dominated (low KL from initial prior)")
+
         health = "HEALTHY" if len(issues) == 0 else "DEGRADED" if len(issues) <= 2 else "CRITICAL"
 
         topic["governance"] = {
@@ -134,6 +139,10 @@ def save_topic(topic: dict) -> None:
             },
             "hypothesisAdmissibility": {
                 k: v["grade"] for k, v in admissibility.items()
+            },
+            "klFromPrior": {
+                "kl_divergence": kl_result["kl_divergence"],
+                "interpretation": kl_result["interpretation"],
             },
             "lastComputed": _now_iso(),
         }
@@ -456,6 +465,166 @@ def update_posteriors(topic: dict, new_posteriors: dict[str, float],
     return topic
 
 
+def bayesian_update(topic: dict, likelihoods: dict[str, float],
+                    reason: str, evidence_refs: list[str],
+                    operator_posteriors: dict[str, float] = None) -> dict:
+    """
+    Mechanistic Bayesian posterior update from explicit likelihood ratios.
+
+    Unlike update_posteriors() (which accepts operator-supplied posteriors
+    directly), this function computes posteriors via Bayes' theorem:
+
+        P(H_i|E) = P(E|H_i) * P(H_i) / sum_j( P(E|H_j) * P(H_j) )
+
+    likelihoods: {H1: P(E|H1), H2: P(E|H2), ...} — the probability of
+        the observed evidence under each hypothesis. Values in (0, 1].
+    reason: why the update happened.
+    evidence_refs: list of evidence log timestamps supporting this update.
+        Required (not optional) — mechanistic updates must cite evidence.
+    operator_posteriors: optional. If supplied, the function computes KL
+        divergence between the mechanically derived posteriors and the
+        operator's intuition. Divergence > 0.05 nats logs a governance
+        note. The mechanical posteriors are always the ones applied.
+
+    Returns the mutated topic (same pattern as update_posteriors).
+    Raises GovernanceError if governor pre-commit checks fail.
+    """
+    import math as _math
+
+    hypotheses = topic["model"]["hypotheses"]
+
+    # Validate: all hypothesis keys must be present
+    for k in hypotheses:
+        if k not in likelihoods:
+            raise ValueError(
+                f"Missing likelihood for hypothesis {k}. "
+                "All hypotheses must have a likelihood value."
+            )
+
+    # Validate: likelihoods must be positive
+    for k, l in likelihoods.items():
+        if k not in hypotheses:
+            raise ValueError(f"Unknown hypothesis: {k}")
+        if l <= 0 or l > 1:
+            raise ValueError(
+                f"Likelihood for {k} is {l} — must be in (0, 1]"
+            )
+
+    # Compute unnormalized posteriors: prior * likelihood
+    unnormalized = {}
+    for k, h in hypotheses.items():
+        unnormalized[k] = h["posterior"] * likelihoods[k]
+
+    # Normalize
+    total = sum(unnormalized.values())
+    if total == 0:
+        raise ValueError("All unnormalized posteriors are zero — likelihoods "
+                         "are incompatible with current priors")
+
+    computed = {k: round(v / total, 4) for k, v in unnormalized.items()}
+
+    # If operator also supplied their intuition, compare
+    if operator_posteriors is not None:
+        op_total = sum(operator_posteriors.values())
+        if abs(op_total - 1.0) > 0.01:
+            raise ValueError(f"operator_posteriors sum to {op_total:.4f}")
+        op_norm = {k: v / op_total for k, v in operator_posteriors.items()}
+
+        # KL divergence: D_KL(computed || operator)
+        kl = 0.0
+        for k in computed:
+            p = computed[k]
+            q = op_norm.get(k, 0.0)
+            if p > 0 and q > 0:
+                kl += p * _math.log(p / q)
+            elif p > 0 and q == 0:
+                kl = float("inf")
+                break
+
+        if kl > 0.05:
+            _add_evidence_raw(topic, {
+                "time": _now_iso(),
+                "tag": "INTEL",
+                "text": (f"LIKELIHOOD AUDIT: operator intuition diverges from "
+                         f"mechanical Bayes (KL={kl:.3f} nats). "
+                         f"Mechanical: {computed}. Operator: {op_norm}. "
+                         f"Applying mechanical result."),
+                "provenance": "DERIVED",
+                "posteriorImpact": "NONE",
+                "ledger": "DECISION",
+                "claimState": "PROPOSED",
+                "effectiveWeight": 0.5,
+            })
+
+    # Governor hard gate — same checks as update_posteriors
+    proposal_check = check_update_proposal(
+        topic, computed, evidence_refs=evidence_refs, reason=reason
+    )
+
+    if not proposal_check["passed"]:
+        raise GovernanceError(
+            f"Bayesian update blocked by governance: "
+            f"{', '.join(proposal_check['failures'])}",
+            failures=proposal_check["failures"],
+            warnings=proposal_check["warnings"],
+        )
+
+    if proposal_check["warnings"]:
+        _add_evidence_raw(topic, {
+            "time": _now_iso(),
+            "tag": "INTEL",
+            "text": (f"GOVERNANCE WARNING on bayesian_update: "
+                     f"{', '.join(proposal_check['warnings'])}. "
+                     f"Reason: {reason}"),
+            "provenance": "DERIVED",
+            "posteriorImpact": "NONE",
+            "ledger": "DECISION",
+            "claimState": "PROPOSED",
+            "effectiveWeight": 0.5,
+        })
+
+    # Apply
+    for k in computed:
+        hypotheses[k]["posterior"] = computed[k]
+
+    # Recompute expected value
+    topic["model"]["expectedValue"] = round(
+        sum(h["midpoint"] * h["posterior"] for h in hypotheses.values()), 2
+    )
+
+    # Append to history — include likelihoods for auditability
+    history_entry = {"date": _now_iso()[:10]}
+    for k in hypotheses:
+        history_entry[k] = hypotheses[k]["posterior"]
+    history_entry["note"] = reason
+    history_entry["likelihoods"] = likelihoods
+
+    # Red team challenge
+    try:
+        from framework.red_team import generate_red_team
+        red_team = generate_red_team(topic, computed)
+        history_entry["redTeam"] = red_team
+        if red_team.get("devil_advocate_score", 0) > 0.6:
+            warnings.warn(
+                f"Red team score {red_team['devil_advocate_score']:.2f} — "
+                f"strong counter-case exists: {red_team.get('challenge', '')[:100]}",
+                stacklevel=2,
+            )
+    except ImportError:
+        pass
+
+    topic["model"].setdefault("posteriorHistory", []).append(history_entry)
+
+    # Prediction snapshot
+    try:
+        from framework.scoring import snapshot_posteriors
+        snapshot_posteriors(topic, trigger="bayesian_update")
+    except ImportError:
+        pass
+
+    return topic
+
+
 def hold_posteriors(topic: dict, reason: str = "No new indicators") -> dict:
     """Record that posteriors were reviewed but not changed."""
     add_evidence(topic, {
@@ -680,6 +849,11 @@ def add_evidence(topic: dict, entry: dict) -> dict:
         "source": entry.get("source"),
         "posteriorImpact": entry.get("posteriorImpact", "NONE"),
     }
+
+    # Information-chain tracking: entries sharing a chain ID trace to the
+    # same primary source and should not count as independent corroboration.
+    if entry.get("informationChain"):
+        full_entry["informationChain"] = entry["informationChain"]
 
     # Deduplication: don't add if identical text exists in last 10 entries
     recent = topic.get("evidenceLog", [])[-10:]

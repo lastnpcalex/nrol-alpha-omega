@@ -29,13 +29,41 @@ from typing import Optional
 # ===========================================================================
 # 1. R_t EVIDENCE FRESHNESS SCORING
 #
-#   Adapted from Governor's R_t = (P * D) / E
-#   Original: Risk = (Privilege × Delay) / Evidence
-#   Ours:     Staleness = (Prior_Strength × Hours_Since_Update) / Evidence_Count
+#   Information-theoretic grounding:
+#
+#   R_t measures the EXPECTED POSTERIOR DRIFT since the last update. In a
+#   fast-moving domain, posteriors that haven't been refreshed are
+#   increasingly likely to be wrong. R_t quantifies this risk.
+#
+#   For each hypothesis H_i:
+#     - entropy_contribution = -p_i * log2(p_i)  (how much info this H carries)
+#     - time_decay = log2(1 + delay_hours / 24)   (log-scaled staleness)
+#     - evidence_recency = weighted count of recent evidence (24h=3x, 72h=1x)
+#     - R_t(H_i) = entropy_contribution * time_decay / evidence_recency
+#
+#   This replaces the prior heuristic (prior_strength * delay / evidence)
+#   with an information-theoretic measure: hypotheses that carry more
+#   Shannon information AND haven't been refreshed score highest.
+#
+#   The key improvement: a low-probability tail hypothesis (5%) that
+#   hasn't been checked is now flagged as risky — it carries surprise
+#   value if true — whereas the old formula underweighted it.
+#
+#   Regime thresholds are configurable per-topic via topic["rtConfig"]
+#   and can be calibrated against Brier score history.
 #
 #   High R_t → this topic/hypothesis needs fresh evidence NOW
 #   Low R_t  → well-evidenced and recently updated, can wait
 # ===========================================================================
+
+# Default R_t regime thresholds. Topics can override via rtConfig.
+_RT_DEFAULTS = {
+    "safe": 0.1,
+    "elastic": 0.3,
+    "dangerous": 1.0,
+    # above dangerous = RUNAWAY
+}
+
 
 def compute_rt(topic: dict) -> dict:
     """
@@ -44,21 +72,34 @@ def compute_rt(topic: dict) -> dict:
     Returns dict of {hypothesis_key: {rt, regime, priority_rank}} sorted by
     urgency. Higher R_t = more urgent need for fresh evidence.
 
-    Regimes (from Governor):
-      SAFE:      R_t < 0.3  — well-evidenced, recently updated
-      ELASTIC:   0.3-1.0    — normal operating range
-      DANGEROUS: 1.0-3.0    — stale, needs attention
-      RUNAWAY:   > 3.0      — critically stale, prioritize immediately
+    Information-theoretic basis:
+      R_t(H_i) = entropy_contribution(H_i) * time_decay / evidence_recency
+
+    Regimes (configurable via topic["rtConfig"]):
+      SAFE:      below safe threshold  — well-evidenced, recently updated
+      ELASTIC:   safe..elastic         — normal operating range
+      DANGEROUS: elastic..dangerous    — stale, needs attention
+      RUNAWAY:   above dangerous       — critically stale, prioritize immediately
     """
     model = topic["model"]
     hypotheses = model["hypotheses"]
     evidence_log = topic.get("evidenceLog", [])
     last_updated = topic["meta"].get("lastUpdated", "")
 
-    # Hours since last update
-    delay_hours = _hours_since(last_updated) if last_updated else 168  # default 1 week
+    # Configurable thresholds
+    rt_config = topic.get("rtConfig", _RT_DEFAULTS)
+    t_safe = rt_config.get("safe", _RT_DEFAULTS["safe"])
+    t_elastic = rt_config.get("elastic", _RT_DEFAULTS["elastic"])
+    t_dangerous = rt_config.get("dangerous", _RT_DEFAULTS["dangerous"])
 
-    # Count evidence entries in last 24h, 72h, and total
+    # Hours since last update
+    delay_hours = _hours_since(last_updated) if last_updated else 168
+
+    # Logarithmic time scaling — prevents R_t from blowing up linearly
+    # for topics that are simply slow-moving
+    time_decay = math.log2(1.0 + delay_hours / 24.0)
+
+    # Count evidence entries in last 24h, 72h
     now = datetime.now(timezone.utc)
     evidence_24h = sum(1 for e in evidence_log
                        if _parse_time(e.get("time")) and
@@ -66,37 +107,43 @@ def compute_rt(topic: dict) -> dict:
     evidence_72h = sum(1 for e in evidence_log
                        if _parse_time(e.get("time")) and
                        (now - _parse_time(e["time"])).total_seconds() < 259200)
-    evidence_total = len(evidence_log)
+
+    # Evidence recency score (recent evidence counts more, +1 to avoid div-by-zero)
+    evidence_recency = evidence_24h * 3.0 + evidence_72h * 1.0 + 1.0
 
     results = {}
     for k, h in hypotheses.items():
-        # Prior strength = how concentrated is the posterior?
-        # A 50% posterior has more "weight" than a 5% one
-        prior_strength = h["posterior"]
+        p = h["posterior"]
 
-        # Evidence quality: recent evidence counts more
-        # E_t = (evidence_24h * 3 + evidence_72h * 1 + 1) to avoid div-by-zero
-        evidence_quality = evidence_24h * 3.0 + evidence_72h * 1.0 + 1.0
+        # Shannon information contribution: -p * log2(p)
+        # At p=0 this is 0 (no information). At p=0.5 this peaks.
+        # A 5% tail hypothesis carries more entropy per unit than a 90% one —
+        # this is the key fix vs the old formula.
+        if p > 0:
+            entropy_contribution = -p * math.log2(p)
+        else:
+            entropy_contribution = 0.0
 
-        # R_t = (P_t * D_t) / E_t
-        rt = (prior_strength * delay_hours) / evidence_quality
+        # R_t = entropy_contribution * time_decay / evidence_recency
+        rt = entropy_contribution * time_decay / evidence_recency
 
         # Determine regime
-        if rt < 0.3:
+        if rt < t_safe:
             regime = "SAFE"
-        elif rt < 1.0:
+        elif rt < t_elastic:
             regime = "ELASTIC"
-        elif rt < 3.0:
+        elif rt < t_dangerous:
             regime = "DANGEROUS"
         else:
             regime = "RUNAWAY"
 
         results[k] = {
-            "rt": round(rt, 3),
+            "rt": round(rt, 4),
             "regime": regime,
-            "prior_strength": round(prior_strength, 4),
+            "entropy_contribution": round(entropy_contribution, 4),
+            "time_decay": round(time_decay, 2),
+            "evidence_recency": round(evidence_recency, 1),
             "delay_hours": round(delay_hours, 1),
-            "evidence_quality": round(evidence_quality, 1),
         }
 
     # Add priority ranking (highest R_t = rank 1)
@@ -146,6 +193,34 @@ DECISION_TAGS = {"INTEL", "RHETORIC", "ANALYSIS", "EDITORIAL", "FORECAST"}
 
 # Evidence TTLs by tag (hours before evidence becomes STALE)
 # Universal tags + domain-specific tags. Topics can override via tagConfig.
+#
+# EPISTEMOLOGICAL NOTE ON TTLs
+#
+# TTLs do NOT model truth decay. A confirmed missile strike does not become
+# less true after 48 hours. What decays is *relevance to live estimation*:
+#
+#   - FORCE positions are perishable because units move. The truth "CVN-78
+#     was at 26.5°N on April 3" is permanent, but its relevance to "where
+#     is CVN-78 NOW?" drops rapidly.
+#   - MARKET prices are perishable because the number changes. Yesterday's
+#     Brent close is a historical fact, not a current price.
+#   - SCIENTIFIC findings are durable because replication takes months.
+#     The finding doesn't change; its relevance window is long.
+#
+# Mechanically, stale evidence triggers a GOVERNANCE WARNING (not a hard
+# block). The posterior update can still proceed. The effect is:
+#
+#   1. Governance health degrades from HEALTHY → DEGRADED → CRITICAL as
+#      the ratio of stale-to-fresh evidence grows.
+#   2. The operator sees which evidence categories are aging out.
+#   3. R_t scoring prioritizes hypotheses whose evidence base is oldest.
+#
+# This is an ATTENTION ALLOCATION heuristic — "your evidence base is aging,
+# consider refreshing these feeds" — not a claim that old evidence is false.
+# A Bayesian purist would model per-hypothesis relevance decay curves; TTLs
+# are the coarse-filter approximation that keeps the system tractable for
+# an operator running update cycles, not a probabilistic graphical model.
+#
 EVIDENCE_TTL = {
     # === Universal (any topic) ===
     "EVENT": 72,           # something happened — context shifts
@@ -303,9 +378,12 @@ def assess_claim_state(entry: dict, evidence_log: list) -> str:
         # Direct observations and user-provided facts start as SUPPORTED
         return "SUPPORTED"
 
-    # Check for corroboration: another entry with similar content from different source
+    # Check for corroboration: another entry with similar content from an
+    # independent source. Entries sharing an informationChain trace to the
+    # same primary source and cannot corroborate each other.
     entry_text_lower = entry.get("text", "").lower()
     entry_source = entry.get("source", "")
+    entry_chain = entry.get("informationChain")
 
     corroborated = False
     contradicted = False
@@ -315,9 +393,14 @@ def assess_claim_state(entry: dict, evidence_log: list) -> str:
             continue
         other_text = other.get("text", "").lower()
         other_source = other.get("source", "")
+        other_chain = other.get("informationChain")
 
         # Skip same source
         if entry_source and other_source == entry_source:
+            continue
+
+        # Skip same information chain — these are not independent
+        if entry_chain and other_chain and entry_chain == other_chain:
             continue
 
         # Simple similarity check: shared significant words
@@ -562,6 +645,91 @@ def compute_uncertainty_ratio(topic: dict) -> float:
     return round(compute_entropy(topic) / max_ent, 4)
 
 
+def compute_kl_from_prior(topic: dict) -> dict:
+    """
+    Compute KL divergence D_KL(current || initial_prior).
+
+    Distinguishes "confident because evidenced" (posterior moved far from
+    prior) from "confident because prior-dominated" (posterior is sharp
+    but hasn't moved).
+
+    Returns {
+        "kl_divergence": float,      # nats (natural log)
+        "interpretation": str,       # WELL_EVIDENCED | PRIOR_DOMINATED | MODERATE | INSUFFICIENT_HISTORY
+        "current_entropy": float,    # bits
+        "initial_prior": dict,       # {H1: p, H2: p, ...}
+        "current_posteriors": dict,  # {H1: p, H2: p, ...}
+    }
+    """
+    hypotheses = topic["model"]["hypotheses"]
+    history = topic["model"].get("posteriorHistory", [])
+
+    current = {k: h["posterior"] for k, h in hypotheses.items()}
+    entropy = compute_entropy(topic)
+    max_ent = compute_max_entropy(topic)
+
+    # Need at least one history entry to know the initial prior
+    if not history:
+        return {
+            "kl_divergence": 0.0,
+            "interpretation": "INSUFFICIENT_HISTORY",
+            "current_entropy": entropy,
+            "initial_prior": {},
+            "current_posteriors": current,
+        }
+
+    # Extract initial prior from first history entry.
+    # Handles both formats:
+    #   Flat:   {"date": "...", "H1": 0.3, "H2": 0.4, ...}
+    #   Nested: {"date": "...", "posteriors": {"H1": 0.3, "H2": 0.4, ...}}
+    initial = {}
+    first = history[0]
+    first_posteriors = first.get("posteriors", first)  # nested or flat
+    for k in hypotheses:
+        val = first_posteriors.get(k)
+        if val is not None and isinstance(val, (int, float)):
+            initial[k] = val
+        else:
+            # Fallback: uniform
+            initial[k] = 1.0 / len(hypotheses)
+
+    # D_KL(current || initial) = sum( current[i] * ln(current[i] / initial[i]) )
+    kl = 0.0
+    for k in hypotheses:
+        p = current.get(k, 0.0)
+        q = initial.get(k, 0.0)
+        if p > 0 and q > 0:
+            kl += p * math.log(p / q)
+        elif p > 0 and q == 0:
+            # Infinite divergence — posterior assigns mass where prior had none
+            kl = float("inf")
+            break
+
+    kl = round(kl, 4) if kl != float("inf") else float("inf")
+
+    # Interpretation: combine entropy level with KL distance
+    # Threshold 0.5: with 5 hypotheses, [0.60, 0.15, 0.10, 0.10, 0.05] has
+    # ratio ~0.76; [0.85, 0.05, 0.04, 0.03, 0.03] has ratio ~0.42. The
+    # cutoff targets posteriors that are meaningfully concentrated.
+    low_entropy = max_ent > 0 and (entropy / max_ent) < 0.5
+    if kl == float("inf"):
+        interpretation = "WELL_EVIDENCED"
+    elif low_entropy and kl > 0.5:
+        interpretation = "WELL_EVIDENCED"
+    elif low_entropy and kl < 0.1:
+        interpretation = "PRIOR_DOMINATED"
+    else:
+        interpretation = "MODERATE"
+
+    return {
+        "kl_divergence": kl,
+        "interpretation": interpretation,
+        "current_entropy": entropy,
+        "initial_prior": initial,
+        "current_posteriors": current,
+    }
+
+
 def prioritize_queries(topic: dict) -> list[dict]:
     """
     Rank search queries by estimated Value of Information.
@@ -781,6 +949,9 @@ def check_update_proposal(topic: dict, proposed_posteriors: dict[str, float],
     if has_evidence:
         unique_texts = set()
         dup_count = 0
+        # Also check information chains: refs sharing a chain are one unit
+        seen_chains = set()
+        chain_dup_count = 0
         for ref in evidence_refs:
             for e in evidence_log:
                 if e.get("time") == ref or e.get("text", "")[:50] == ref[:50]:
@@ -788,10 +959,22 @@ def check_update_proposal(topic: dict, proposed_posteriors: dict[str, float],
                     if text_key in unique_texts:
                         dup_count += 1
                     unique_texts.add(text_key)
-        if dup_count > 0:
+                    # Information chain check
+                    chain = e.get("informationChain")
+                    if chain:
+                        if chain in seen_chains:
+                            chain_dup_count += 1
+                        seen_chains.add(chain)
+        total_dups = dup_count + chain_dup_count
+        if total_dups > 0:
+            detail_parts = []
+            if dup_count > 0:
+                detail_parts.append(f"{dup_count} duplicate text(s)")
+            if chain_dup_count > 0:
+                detail_parts.append(f"{chain_dup_count} same-chain ref(s)")
             results["checks"]["repetition_as_validation"] = {
                 "passed": False,
-                "detail": f"{dup_count} duplicate evidence entries used as independent refs",
+                "detail": f"{' + '.join(detail_parts)} used as independent evidence",
             }
             results["warnings"].append("repetition_as_validation")
         else:
@@ -1071,6 +1254,7 @@ def governance_report(topic: dict) -> dict:
     entropy = compute_entropy(topic)
     max_entropy = compute_max_entropy(topic)
     uncertainty = compute_uncertainty_ratio(topic)
+    kl_prior = compute_kl_from_prior(topic)
     queries = prioritize_queries(topic)
 
     # Overall health assessment
@@ -1095,6 +1279,9 @@ def governance_report(topic: dict) -> dict:
     elif uncertainty < 0.1:
         issues.append("Near-zero uncertainty — check for overconfidence")
 
+    if kl_prior["interpretation"] == "PRIOR_DOMINATED":
+        issues.append("Posterior may be prior-dominated (low KL from initial prior)")
+
     health = "HEALTHY" if len(issues) == 0 else "DEGRADED" if len(issues) <= 2 else "CRITICAL"
 
     return {
@@ -1104,6 +1291,7 @@ def governance_report(topic: dict) -> dict:
         "entropy": entropy,
         "max_entropy": max_entropy,
         "uncertainty_ratio": uncertainty,
+        "kl_from_prior": kl_prior,
         "evidence_freshness": freshness,
         "hypothesis_admissibility": admissibility,
         "top_queries": queries[:5],
