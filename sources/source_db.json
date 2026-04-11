@@ -4472,7 +4472,7 @@
         }
       },
       "topicHistory": {
-        "lk99-superconductor": {
+        "calibration-lk99-superconductor": {
           "claims": 1,
           "confirmed": 0,
           "refuted": 1,
@@ -4499,7 +4499,7 @@
         }
       },
       "topicHistory": {
-        "lk99-superconductor": {
+        "calibration-lk99-superconductor": {
           "claims": 1,
           "confirmed": 1,
           "refuted": 0,
@@ -4526,7 +4526,7 @@
         }
       },
       "topicHistory": {
-        "lk99-superconductor": {
+        "calibration-lk99-superconductor": {
           "claims": 2,
           "confirmed": 0,
           "refuted": 2,
@@ -4553,7 +4553,7 @@
         }
       },
       "topicHistory": {
-        "lk99-superconductor": {
+        "calibration-lk99-superconductor": {
           "claims": 1,
           "confirmed": 0,
           "refuted": 1,
@@ -4580,7 +4580,7 @@
         }
       },
       "topicHistory": {
-        "lk99-superconductor": {
+        "calibration-lk99-superconductor": {
           "claims": 1,
           "confirmed": 0,
           "refuted": 1,
@@ -4607,7 +4607,7 @@
         }
       },
       "topicHistory": {
-        "lk99-superconductor": {
+        "calibration-lk99-superconductor": {
           "claims": 1,
           "confirmed": 1,
           "refuted": 0,
@@ -4634,7 +4634,7 @@
         }
       },
       "topicHistory": {
-        "lk99-superconductor": {
+        "calibration-lk99-superconductor": {
           "claims": 2,
           "confirmed": 1,
           "refuted": 1,
@@ -4661,7 +4661,7 @@
         }
       },
       "topicHistory": {
-        "lk99-superconductor": {
+        "calibration-lk99-superconductor": {
           "claims": 2,
           "confirmed": 1,
           "refuted": 1,
@@ -4688,7 +4688,7 @@
         }
       },
       "topicHistory": {
-        "lk99-superconductor": {
+        "calibration-lk99-superconductor": {
           "claims": 1,
           "confirmed": 1,
           "refuted": 0,
@@ -4715,7 +4715,7 @@
         }
       },
       "topicHistory": {
-        "lk99-superconductor": {
+        "calibration-lk99-superconductor": {
           "claims": 2,
           "confirmed": 1,
           "refuted": 1,
@@ -4742,7 +4742,7 @@
         }
       },
       "topicHistory": {
-        "lk99-superconductor": {
+        "calibration-lk99-superconductor": {
           "claims": 1,
           "confirmed": 1,
           "refuted": 0,
@@ -4769,7 +4769,7 @@
         }
       },
       "topicHistory": {
-        "lk99-superconductor": {
+        "calibration-lk99-superconductor": {
           "claims": 1,
           "confirmed": 1,
           "refuted": 0,
@@ -4796,7 +4796,7 @@
         }
       },
       "topicHistory": {
-        "lk99-superconductor": {
+        "calibration-lk99-superconductor": {
           "claims": 1,
           "confirmed": 1,
           "refuted": 0,
@@ -4823,7 +4823,7 @@
         }
       },
       "topicHistory": {
-        "lk99-superconductor": {
+        "calibration-lk99-superconductor": {
           "claims": 1,
           "confirmed": 1,
           "refuted": 0,
@@ -4843,7 +4843,7 @@
     "lastFullScan": "2026-04-11T17:47:00Z",
     "topicsScanned": [
       "hormuz-closure",
-      "lk99-superconductor"
+      "calibration-lk99-superconductor"
     ]
   }
 }

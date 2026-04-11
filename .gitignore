@@ -10,8 +10,6 @@ topics/*.json
 !topics/_template.json
 
 # Calibration topics are tracked — these are the empirical record
-!topics/lk99-superconductor.json
-!topics/750gev-diphoton.json
 !topics/calibration-*.json
 
 # Agent instructions (agent-specific, not part of the framework)

@@ -1,7 +1,7 @@
 {
   "_protocol": "Calibration backfill \u2014 resolved topic for Brier score validation",
   "meta": {
-    "slug": "750gev-diphoton",
+    "slug": "calibration-750gev-diphoton",
     "title": "750 GeV Diphoton Excess",
     "question": "Is the ~750 GeV diphoton excess observed by ATLAS and CMS at the LHC a new particle or a statistical fluctuation?",
     "resolution": "Resolved when full Run 2 data (2016) confirms or excludes the excess at 5-sigma significance. If excess disappears with more data, H2 wins.",

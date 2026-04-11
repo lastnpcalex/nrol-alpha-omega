@@ -22,13 +22,13 @@ Two complementary scoring mechanisms:
 
 Usage:
     # Backfill evidence with historical timestamps
-    python framework/backfill.py load --topic lk99-superconductor --file timeline.json
+    python framework/backfill.py load --topic calibration-lk99-superconductor --file timeline.json
 
     # Score sources against known outcome
-    python framework/backfill.py score --topic lk99-superconductor --winner H3
+    python framework/backfill.py score --topic calibration-lk99-superconductor --winner H3
 
     # Full pipeline: backfill + score + calibrate + ingest into source_db
-    python framework/backfill.py full --topic lk99-superconductor --winner H3 --file timeline.json
+    python framework/backfill.py full --topic calibration-lk99-superconductor --winner H3 --file timeline.json
 
 No external dependencies -- Python stdlib + engine/framework modules.
 """

@@ -1,7 +1,7 @@
 {
   "_protocol": "Historical reconstruction: LK-99 room-temperature superconductor claim, July-August 2023",
   "meta": {
-    "slug": "lk99-superconductor",
+    "slug": "calibration-lk99-superconductor",
     "title": "LK-99: Room-Temperature Superconductor or Not?",
     "question": "Is LK-99 (copper-substituted lead apatite) a room-temperature, ambient-pressure superconductor as claimed by Lee & Kim (2023)?",
     "resolution": "Resolved when: (a) 3+ independent labs replicate zero-resistance AND diamagnetic levitation in LK-99 samples, OR (b) 3+ independent labs fail to replicate AND a credible structural/electronic explanation for the original observations emerges.",

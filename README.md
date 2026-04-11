@@ -509,7 +509,7 @@ add_evidence(topic, {
 
 If Huazhong publishes an EXPERIMENTAL claim on the next science topic, the governor starts them at 0.10 domain trust instead of 0.50. They have to earn it back.
 
-To explore the LK-99 topic: `python engine.py show lk99-superconductor`
+To explore the LK-99 topic: `python engine.py show calibration-lk99-superconductor`
 
 ## Creating a New Topic
 
