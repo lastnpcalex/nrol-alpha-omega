@@ -68,7 +68,68 @@ A proper Bayesian treatment would model the full joint distribution over sources
 
 This is an honest limitation, not a planned feature. If you have ideas for tractable approaches to source-correlation modeling in sparse-evidence domains, we'd like to hear them.
 
-## How It Works
+## The Loop
+
+The system's update cycle maps to Boyd's OODA loop, but the key insight is *where judgment lives vs. where mechanism lives*. Human and LLM judgment are confined to perception (what happened?) and topic design (what matters?). Everything downstream — the Bayesian math, the governance checks, the calibration scoring — is mechanical. The governor exists to enforce that boundary.
+
+```mermaid
+flowchart LR
+    subgraph OBSERVE ["OBSERVE"]
+        direction TB
+        Search["Search feeds\n& sources"]
+        Identify["Identify what's\nnew vs. recycled"]
+    end
+
+    subgraph ORIENT ["ORIENT"]
+        direction TB
+        Design["Topic design gate\ncoverage · distinguishability\nprior justification"]
+        Enrich["Evidence enrichment\nclaim state · source trust\ncontradiction detection"]
+        Governor["Governor gate\n14 failure modes\nR_t · entropy · KL"]
+    end
+
+    subgraph DECIDE ["DECIDE"]
+        direction TB
+        Likelihoods["Set likelihoods\nP(E|H_i) for each\nhypothesis"]
+        Bayes["Bayesian update\nP(H|E) = P(E|H)P(H)\n/ sum P(E|H_j)P(H_j)"]
+        Suggest["suggest_likelihoods()\ninverse Bayes from\nfired indicators"]
+    end
+
+    subgraph ACT ["ACT"]
+        direction TB
+        Brief["Generate brief\nassessment · watchpoints\nindicator status"]
+        Calibrate["Brier score snapshot\ncalibration tracking"]
+        Save["save_topic()\ngovernance embed\ndesign gate embed"]
+    end
+
+    OBSERVE -->|"LLM · web tools"| ORIENT
+    ORIENT -->|"function · mechanical"| DECIDE
+    DECIDE -->|"function · Bayes theorem"| ACT
+    ACT -->|"LLM · next cycle"| OBSERVE
+
+    Search -->|"LLM + web"| Identify
+    Design -->|"function"| Enrich -->|"function"| Governor
+    Likelihoods -->|"LLM or function"| Bayes
+    Suggest -.->|"function · optional"| Likelihoods
+    Brief -->|"LLM"| Calibrate -->|"function"| Save
+
+    style OBSERVE fill:#1a1a2e,stroke:#4a9eff,color:#eee
+    style ORIENT fill:#1a1a2e,stroke:#e94560,color:#eee
+    style DECIDE fill:#1a1a2e,stroke:#f5a623,color:#eee
+    style ACT fill:#1a1a2e,stroke:#0f9b58,color:#eee
+```
+
+**Where judgment lives:**
+
+| Phase | Who | What they do |
+|-------|-----|-------------|
+| **Observe** | LLM + web tools | Search for news, read sources, determine what's new vs. recycled. This is perception — the hardest part to mechanize and where LLMs earn their keep. |
+| **Orient** | Function (mechanical) | Design gate, evidence enrichment, governor checks. Zero judgment — structural validation, claim-state assignment, contradiction detection, source trust lookup. |
+| **Decide** | LLM sets likelihoods *or* function derives them from indicators | The operator says "how likely is this evidence if H3 is true?" — that's the judgment call. Or `suggest_likelihoods()` derives it mechanically from pre-committed indicator definitions. Either way, Bayes' theorem does the math. |
+| **Act** | LLM writes brief, function scores | Brief synthesis is LLM work. Brier scoring, governance snapshots, design gate embedding are all mechanical. The brief is the deliverable; the scores are the accountability. |
+
+The governor's role is to make the boundary between judgment and mechanism *enforceable*. An LLM without the governor will confidently update posteriors on vibes. The governor forces it to show its work — cite evidence, pass the hallucination checklist, survive the pre-commit gate — or get blocked.
+
+## How It Works (Detailed Pipeline)
 
 ```mermaid
 flowchart TD
