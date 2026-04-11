@@ -176,6 +176,7 @@ def _run_diff(topic_name: str) -> dict:
     """Show diff from last brief."""
     import difflib
     from datetime import datetime, timezone
+    from update import load_topic
 
     topic = None
     try:

@@ -780,6 +780,9 @@ def generate_brief(topic: dict, mode: str = "routine",
     if topic.get("watchpoints"):
         lines.append("### KEY WATCHPOINTS NEXT 12-24H")
         for wp in topic["watchpoints"]:
+            # Skip malformed watchpoints (missing event key)
+            if 'event' not in wp:
+                continue
             lines.append(f"- **{wp['time']}** — {wp['event']}")
             if wp.get("watch"):
                 lines.append(f"  - {wp['watch']}")

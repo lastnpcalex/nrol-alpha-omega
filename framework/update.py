@@ -176,9 +176,20 @@ def _add_evidence_governor_gated(topic: dict, evidence: dict) -> bool:
         return False
 
 
-def _update_data_feeds(topic: dict, new_values: dict) -> dict:
+def _update_data_feeds(topic: dict, new_values: dict | str) -> dict:
     """Update data feeds with new values."""
     updated = {}
+
+    # Handle string JSON input
+    if isinstance(new_values, str):
+        if not new_values or new_values == "{}":
+            new_values = {}
+        else:
+            try:
+                new_values = json.loads(new_values)
+            except json.JSONDecodeError:
+                print(f"[WARN] Invalid feed JSON: {new_values}")
+                new_values = {}
 
     for feed_id, value in new_values.items():
         if feed_id in topic.get("dataFeeds", {}):
@@ -297,18 +308,18 @@ def _summarize_diff(diff_str: str) -> str:
 # ============================================================================
 
 def run_update(topic_name: str, mode: str = "routine",
-               new_posteriors: dict | None = None,
-               new_submodels: dict | None = None,
-               new_data_feeds: dict | None = None) -> dict:
+               new_posteriors: dict | str | None = None,
+               new_submodels: dict | str | None = None,
+               new_data_feeds: dict | str | None = None) -> dict:
     """
     Main update pipeline.
 
     Args:
         topic_name: Name of topic (e.g., "hormuz-closure")
         mode: "routine" or "crisis"
-        new_posteriors: New posterior values (optional)
-        new_submodels: New sub-model values (optional)
-        new_data_feeds: New feed values (optional)
+        new_posteriors: New posterior values (dict or JSON string, optional)
+        new_submodels: New sub-model values (dict or JSON string, optional)
+        new_data_feeds: New feed values (dict or JSON string, optional)
 
     Returns:
         Updated topic dict
@@ -316,6 +327,25 @@ def run_update(topic_name: str, mode: str = "routine",
     print(f"\n{'='*60}")
     print(f"UPDATE PIPELINE: {topic_name} [{mode}]")
     print(f"{'='*60}")
+
+    # Parse string inputs
+    if isinstance(new_posteriors, str):
+        try:
+            new_posteriors = json.loads(new_posteriors) if new_posteriors and new_posteriors != "{}" else None
+        except json.JSONDecodeError:
+            new_posteriors = None
+
+    if isinstance(new_submodels, str):
+        try:
+            new_submodels = json.loads(new_submodels) if new_submodels and new_submodels != "{}" else None
+        except json.JSONDecodeError:
+            new_submodels = None
+
+    if isinstance(new_data_feeds, str):
+        try:
+            new_data_feeds = json.loads(new_data_feeds) if new_data_feeds and new_data_feeds != "{}" else None
+        except json.JSONDecodeError:
+            new_data_feeds = None
 
     # 1. Load topic
     topic = load_topic(topic_name)
