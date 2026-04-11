@@ -206,8 +206,9 @@ def run_mechanical_checks(topic: dict) -> dict:
         warnings.append(
             f"INDISTINGUISHABLE: {pair['h1']} and {pair['h2']} share "
             f"{pair['shared']}/{pair['total']} indicators "
-            f"(overlap {pair['overlap']:.0%}) — consider merging or adding "
-            f"a discriminating indicator"
+            f"(overlap {pair['overlap']:.0%}) with {pair.get('discriminators', 0)} "
+            f"directional discriminators — consider merging or adding "
+            f"an indicator that moves them in opposite directions"
         )
 
     # --- Prior Justification ---
@@ -365,6 +366,22 @@ def _check_distinguishability(coverage: dict) -> dict:
 
             overlap = len(intersection) / len(union) if union else 0
 
+            # Direction-aware discrimination: an indicator that moves h1
+            # positive and h2 negative (or vice versa) is a discriminator
+            # even if it mentions both hypotheses.
+            pos_h1 = set(positive.get(h1, []))
+            neg_h1 = set(negative.get(h1, []))
+            pos_h2 = set(positive.get(h2, []))
+            neg_h2 = set(negative.get(h2, []))
+
+            # Indicators that move the pair in opposite directions
+            discriminators = (
+                (pos_h1 & neg_h2) |  # positive for h1, negative for h2
+                (neg_h1 & pos_h2) |  # negative for h1, positive for h2
+                (all_h1 - all_h2) |  # unique to h1
+                (all_h2 - all_h1)    # unique to h2
+            )
+
             entry = {
                 "h1": h1, "h2": h2,
                 "shared": len(intersection),
@@ -372,10 +389,12 @@ def _check_distinguishability(coverage: dict) -> dict:
                 "overlap": round(overlap, 2),
                 "unique_to_h1": list(all_h1 - all_h2),
                 "unique_to_h2": list(all_h2 - all_h1),
+                "discriminators": len(discriminators),
+                "discriminator_ids": sorted(discriminators)[:5],  # sample
             }
 
-            # >80% overlap with no unique discriminators = indistinguishable
-            if overlap > 0.8 and not (all_h1 - all_h2) and not (all_h2 - all_h1):
+            # Indistinguishable = high overlap AND no directional discriminators
+            if overlap > 0.8 and len(discriminators) == 0:
                 indistinguishable.append(entry)
             else:
                 distinguishable.append(entry)

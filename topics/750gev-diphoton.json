@@ -147,6 +147,14 @@
           "firedDate": null,
           "note": "ATLAS actually showed wider width at Moriond, making resonance interpretation harder.",
           "posteriorEffect": "H1 +10pp, H4 -5pp"
+        },
+        {
+          "id": "t2_detector_discrepancy",
+          "desc": "ATLAS and CMS report the excess at significantly different masses (>10 GeV apart) or one experiment sees it while the other does not at >2 sigma. Observable: comparison of fitted parameters in conference presentations or publications.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "Never fired — both experiments reported consistent mass. Had this fired, it would strongly suggest detector artifact or analysis error rather than real physics. A genuine particle would appear at the same mass in both detectors.",
+          "posteriorEffect": "H3 +15pp, H1 -8pp, H2 -5pp, H4 -2pp"
         }
       ],
       "tier3_suggestive": [
@@ -167,6 +175,14 @@
           "firedDate": "2016-06-01",
           "note": "Fired. No ZZ, Zh, WW, or fermionic channels showed anything at 750 GeV.",
           "posteriorEffect": "H1 -5pp per quarter without corroboration"
+        },
+        {
+          "id": "anti_h3_consistent_mass",
+          "desc": "Both ATLAS and CMS report the excess at consistent mass and width within statistical uncertainties. Observable: comparison of fitted mass peaks and width parameters in published results.",
+          "status": "FIRED",
+          "firedDate": "2015-12-15",
+          "note": "Fired at initial presentation. Both experiments saw excess at ~750 GeV. This argues AGAINST detector artifact (H3) — a detector-specific issue would not reproduce at the same mass in an independent detector with different hardware, calibration, and reconstruction code.",
+          "posteriorEffect": "H3 -5pp, H2 +3pp, H1 +2pp"
         }
       ]
     }

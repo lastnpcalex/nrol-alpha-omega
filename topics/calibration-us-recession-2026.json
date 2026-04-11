@@ -355,6 +355,36 @@
       ],
       "tier3_suggestive": [
         {
+          "id": "t2_unemployment_above55",
+          "desc": "BLS monthly unemployment rate rises above 5.5% in official U-3 rate. Observable: BLS Employment Situation report.",
+          "threshold_fired": "U-3 unemployment >= 5.5%",
+          "threshold_not_fired": "U-3 unemployment < 5.5%",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "This is the H3 resolution threshold — 5.5% is specified in H3's definition. Crossing 5.5% discriminates H3 from H2 (H2 expects 4.8-5.2% range). If unemployment rises but stays below 5.5%, that's H2 territory.",
+          "posteriorEffect": "If fired: H3 +12pp, H2 -8pp, H1 -3pp, H4 +1pp. Key discriminator between shallow (H2) and significant (H3) recession."
+        },
+        {
+          "id": "t2_gdp_quarter_worse_than_neg15",
+          "desc": "BEA advance GDP print for any quarter shows contraction worse than -1.5% annualized. Observable: BEA press release.",
+          "threshold_fired": "Any quarterly GDP < -1.5% annualized",
+          "threshold_not_fired": "All quarterly GDP >= -1.5% annualized (or positive)",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "H3 requires at least one quarter worse than -1.5%. H2 is explicitly defined as shallow (> -1.5% each quarter). This is the mechanical discriminator between H2 and H3.",
+          "posteriorEffect": "If fired: H3 +10pp, H4 +3pp, H2 -10pp, H1 -3pp. Hard discriminator: H2 is definitionally excluded if any quarter is worse than -1.5%."
+        },
+        {
+          "id": "t2_gdp_negative_but_mild",
+          "desc": "BEA advance GDP print shows negative growth but milder than -1.0% annualized (between -1.0% and 0%). Observable: BEA press release.",
+          "threshold_fired": "Quarterly GDP between -1.0% and 0% annualized",
+          "threshold_not_fired": "GDP positive or worse than -1.0%",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "A mildly negative quarter is H2 territory — technical recession but shallow. Distinguishes H2 from both H1 (positive GDP) and H3 (deep contraction). NBER may not even call this a recession.",
+          "posteriorEffect": "If fired: H2 +10pp, H1 -5pp, H3 -4pp, H4 -1pp. Favors H2 specifically — negative enough to rule out H1, mild enough to rule out H3."
+        },
+        {
           "id": "t3_conference_board_below80",
           "desc": "Conference Board Consumer Confidence Index falls below 80. Observable: Conference Board monthly release.",
           "threshold_fired": "Conference Board CCI < 80",
@@ -475,6 +505,16 @@
           "firedDate": null,
           "note": "Tariff rollback would remove the primary exogenous shock driving our recession premium above base rate. Immediate positive impulse for growth expectations.",
           "posteriorEffect": "If fired: H1 +7pp, H2 -3pp, H3 -3pp, H4 -1pp."
+        },
+        {
+          "id": "anti_h3_unemployment_stays_below_55",
+          "desc": "Unemployment rate stays below 5.5% through Q3 2026 despite negative GDP. Observable: BLS monthly Employment Situation reports through September 2026.",
+          "threshold_fired": "U-3 unemployment remains < 5.5% through Q3 2026 while GDP is negative",
+          "threshold_not_fired": "Unemployment >= 5.5% or GDP stays positive",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "If we get a recession but unemployment stays contained, that's H2 (shallow) not H3 (significant). The labor market is the discriminator between a technical recession and a painful one. H3 definitionally requires unemployment >5.5%.",
+          "posteriorEffect": "If fired: H2 +8pp, H3 -10pp, H4 -2pp, H1 +4pp. Directly discriminates H2 from H3 — recession but not severe."
         },
         {
           "id": "anti_h1_services_pmi_strong",

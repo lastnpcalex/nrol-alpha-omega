@@ -258,7 +258,7 @@ framework/
 ├── backfill.py            Historical backfill + outcome-based source scoring
 ├── compaction.py          Evidence log compaction (preserves key claims + weights)
 ├── calibrate.py           Base source trust scores, verification functions
-├── topic_design_gate.py   Pre-governor structural review + adversarial prompt for new topics
+├── topic_design_gate.py   Pre-governor design gate — coverage matrix, distinguishability, prior justification + adversarial prompt
 ├── runner.py              CLI orchestrator
 ├── lint.py                Evidence log linting (failure mode checks)
 └── test.py                Hypothesis test registry
@@ -272,10 +272,18 @@ sources/                   Source database (cross-topic trust tracking)
 
 **Every mutation goes through the governor.** Never write directly to `topic["evidenceLog"]`, `topic["model"]["hypotheses"]`, or `topic["subModels"]`. Always use `add_evidence()`, `update_posteriors()` / `bayesian_update()`, `update_submodel()`, `hold_posteriors()`. The governor enriches, validates, and gates every change.
 
-**Every topic goes through the design gate.** Before a topic enters the governor's jurisdiction, it must pass `topic_design_gate.py` — a two-stage structural review:
+**Every topic goes through the design gate.** Before a topic enters the governor's jurisdiction, it must pass `topic_design_gate.py` — a two-stage structural review that runs automatically on every `save_topic()` call:
 
-1. **Mechanical checks** (`run_mechanical_checks()`) — instant, no LLM. Catches missing fields, empty indicator tiers, hypotheses without anti-indicators, non-observable resolution criteria, degenerate hypothesis labels.
-2. **Adversarial review** (`generate_review_prompt()`) — produces a fixed prompt for an LLM subagent that acts as an adversarial examiner, not a collaborator. Eight checks: hypothesis completeness, distinguishability, resolution criteria, indicator falsifiability, indicator coverage, actor model realism, evidence feed feasibility, prior justification. The subagent must PASS or FAIL each check with specific objections. The operator addresses all FAILs before the topic enters the system.
+1. **Mechanical checks** (`run_mechanical_checks()`) — instant, no LLM, no judgment calls. Catches:
+   - Missing fields, empty indicator tiers, hypotheses without anti-indicators
+   - Non-observable resolution criteria, degenerate hypothesis labels
+   - **Coverage matrix**: builds a hypothesis × indicator map by parsing `posteriorEffect` strings with direction (positive/negative). Flags hypotheses with zero indicator coverage (permanently underdetermined) and coverage asymmetry (can only gain or only lose probability)
+   - **Distinguishability analysis**: detects hypothesis pairs that share all indicators *and* are moved in the same direction — meaning no evidence can discriminate between them. Direction-aware: two hypotheses affected by the same indicator in opposite directions (H1 +10pp, H2 -5pp) are distinguishable even though they share the indicator
+   - **Prior justification**: uniform priors warned as potential lazy defaults; non-uniform priors without a documented rationale in `posteriorHistory` are blocked
+   - Indicator observability (flags subjective language like "believe", "seem", "likely")
+2. **Adversarial review** (`generate_review_prompt()`) — produces a fixed prompt for an LLM subagent that acts as an adversarial examiner, not a collaborator. Eight checks covering edge cases the mechanical layer can't reach. The subagent must PASS or FAIL each check with specific objections.
+
+The gate is wired into `engine.py` — results are embedded in `topic["governance"]["designGate"]` on every save, including the coverage matrix and indistinguishable pairs. A blocked topic triggers a warning but doesn't prevent saving (the operator needs to fix and re-save).
 
 The governor gates every *update*. The design gate gates the *topic itself*. A bad topic design wastes months of tracking and corrupts the calibration corpus. The design gate catches structural flaws before that investment begins.
 
