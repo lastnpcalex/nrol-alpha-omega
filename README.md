@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="NROLAO.png" width="300" alt="NROL-αΩ mission patch — DELENDA EST CURRENT THING" />
+  <img src="logo.png" width="300" alt="NROL-αΩ mission patch — CURRENT THING DELENDA EST" />
   <br/>
   <sub>Simplified vector files available (AI/SVG). Patch art inspired by <a href="https://github.com/vgel">@vgel</a>.</sub>
 </p>
@@ -208,44 +208,14 @@ Tags classify evidence by domain. Each tag has a TTL (how fast it goes stale), a
 
 The system ships with **28 tags** across 6 categories. Pick the ones relevant to your topic:
 
-```mermaid
-mindmap
-  root((Evidence Tags))
-    Universal
-      EVENT
-      DATA
-      RHETORIC
-      INTEL
-      ANALYSIS
-      OSINT
-      POLICY
-    Conflict
-      KINETIC
-      FORCE
-      DIPLO
-      SIGINT
-    Economic
-      ECON
-      MARKET
-    Political
-      POLITICAL
-      POLL
-      LEGAL
-      REGULATORY
-      JUDICIAL
-      LEGISLATIVE
-    Science
-      SCIENTIFIC
-      EXPERIMENTAL
-      TECHNICAL
-    Social
-      CORPORATE
-      DEMOGRAPHIC
-      SOCIAL
-      ENVIRONMENTAL
-      EDITORIAL
-      FORECAST
-```
+| Category | Tags |
+|----------|------|
+| **Universal** | `EVENT` · `DATA` · `RHETORIC` · `INTEL` · `ANALYSIS` · `OSINT` · `POLICY` |
+| **Conflict** | `KINETIC` · `FORCE` · `DIPLO` · `SIGINT` |
+| **Economic** | `ECON` · `MARKET` |
+| **Political** | `POLITICAL` · `POLL` · `LEGAL` · `REGULATORY` · `JUDICIAL` · `LEGISLATIVE` |
+| **Science** | `SCIENTIFIC` · `EXPERIMENTAL` · `TECHNICAL` |
+| **Social** | `CORPORATE` · `DEMOGRAPHIC` · `SOCIAL` · `ENVIRONMENTAL` · `EDITORIAL` · `FORECAST` |
 
 ### Topic Type Presets
 
@@ -329,4 +299,4 @@ Agent Governor's core insight — "natural language is a proposal, not an author
 
 ## License
 
-Do what you want with it. *Delenda est Current Thing.*
+Do what you want with it. *Current Thing delenda est.*
