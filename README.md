@@ -268,61 +268,14 @@ Tags classify evidence by domain. Each tag has a TTL (how fast it goes stale), a
 
 The system ships with **28 tags** across 6 categories. Pick the ones relevant to your topic:
 
-```mermaid
-flowchart TD
-    Root((Evidence Tags))
-
-    Root --> Uni[Universal]
-    Root --> Con[Conflict]
-    Root --> Eco[Economic]
-    Root --> Pol[Political]
-    Root --> Sci[Science]
-    Root --> Soc[Social]
-
-    Uni --> EVENT & DATA & RHETORIC & INTEL & ANALYSIS & OSINT & POLICY
-    Con --> KINETIC & FORCE & DIPLO & SIGINT
-    Eco --> ECON & MARKET
-    Pol --> POLITICAL & POLL & LEGAL & REGULATORY & JUDICIAL & LEGISLATIVE
-    Sci --> SCIENTIFIC & EXPERIMENTAL & TECHNICAL
-    Soc --> CORPORATE & DEMOGRAPHIC & SOCIAL & ENVIRONMENTAL & EDITORIAL & FORECAST
-
-    style Root fill:#1a1a2e,stroke:#3b82f6,color:#e2e8f0
-    style Uni fill:#2563eb,stroke:#3b82f6,color:#fff
-    style Con fill:#dc2626,stroke:#ef4444,color:#fff
-    style Eco fill:#d97706,stroke:#f59e0b,color:#fff
-    style Pol fill:#9333ea,stroke:#a855f7,color:#fff
-    style Sci fill:#0891b2,stroke:#06b6d4,color:#fff
-    style Soc fill:#059669,stroke:#10b981,color:#fff
-
-    style EVENT fill:#1e3a5f,color:#e2e8f0
-    style DATA fill:#1e3a5f,color:#e2e8f0
-    style RHETORIC fill:#1e3a5f,color:#e2e8f0
-    style INTEL fill:#1e3a5f,color:#e2e8f0
-    style ANALYSIS fill:#1e3a5f,color:#e2e8f0
-    style OSINT fill:#1e3a5f,color:#e2e8f0
-    style POLICY fill:#1e3a5f,color:#e2e8f0
-    style KINETIC fill:#4a1a1a,color:#fca5a5
-    style FORCE fill:#4a1a1a,color:#fca5a5
-    style DIPLO fill:#4a1a1a,color:#fca5a5
-    style SIGINT fill:#4a1a1a,color:#fca5a5
-    style ECON fill:#4a3a1a,color:#fde68a
-    style MARKET fill:#4a3a1a,color:#fde68a
-    style POLITICAL fill:#3b1a5c,color:#d8b4fe
-    style POLL fill:#3b1a5c,color:#d8b4fe
-    style LEGAL fill:#3b1a5c,color:#d8b4fe
-    style REGULATORY fill:#3b1a5c,color:#d8b4fe
-    style JUDICIAL fill:#3b1a5c,color:#d8b4fe
-    style LEGISLATIVE fill:#3b1a5c,color:#d8b4fe
-    style SCIENTIFIC fill:#164e63,color:#a5f3fc
-    style EXPERIMENTAL fill:#164e63,color:#a5f3fc
-    style TECHNICAL fill:#164e63,color:#a5f3fc
-    style CORPORATE fill:#1a3a2e,color:#a7f3d0
-    style DEMOGRAPHIC fill:#1a3a2e,color:#a7f3d0
-    style SOCIAL fill:#1a3a2e,color:#a7f3d0
-    style ENVIRONMENTAL fill:#1a3a2e,color:#a7f3d0
-    style EDITORIAL fill:#1a3a2e,color:#a7f3d0
-    style FORECAST fill:#1a3a2e,color:#a7f3d0
-```
+| Category | Tags |
+|----------|------|
+| **Universal** | `EVENT` `DATA` `RHETORIC` `INTEL` `ANALYSIS` `OSINT` `POLICY` |
+| **Conflict** | `KINETIC` `FORCE` `DIPLO` `SIGINT` |
+| **Economic** | `ECON` `MARKET` |
+| **Political** | `POLITICAL` `POLL` `LEGAL` `REGULATORY` `JUDICIAL` `LEGISLATIVE` |
+| **Science** | `SCIENTIFIC` `EXPERIMENTAL` `TECHNICAL` |
+| **Social** | `CORPORATE` `DEMOGRAPHIC` `SOCIAL` `ENVIRONMENTAL` `EDITORIAL` `FORECAST` |
 
 ### Topic Type Presets
 
