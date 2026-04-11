@@ -197,7 +197,7 @@ if __name__ == "__main__":
         ])
 
     server = http.server.HTTPServer(("0.0.0.0", PORT), Handler)
-    print(f"NRL-ALPHA OMEGA — Epistemic Bayesian Estimator")
+    print(f"NROL-Alpha Omega -- Current Thing delenda est")
     print(f"  Topics:    {topic_count} active")
     print(f"  Local:     http://localhost:{PORT}")
     ts_ip = get_tailscale_ip()

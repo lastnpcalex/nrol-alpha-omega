@@ -4,9 +4,9 @@
   <sub>Simplified vector files available (AI/SVG). Patch art inspired by <a href="https://github.com/vgel">@vgel</a>.</sub>
 </p>
 
-# NRL-Alpha Omega
+# NROL-αΩ
 
-**Governor-gated Bayesian estimation engine for tracking Current Things.**
+**Necro Rationalist Operations Laboratory-αΩ** — Governor-gated Bayesian estimation engine for tracking Current Things.
 
 A framework for decomposing any predictive question into hypotheses, indicators, evidence, and actor models — then maintaining posteriors with epistemic discipline. Evidence-first, never vibes. The governor enforces that discipline automatically: rhetoric can't move posteriors, stale evidence gets flagged, sources earn trust through track record, and contradictions block updates until resolved.
 
@@ -208,14 +208,45 @@ Tags classify evidence by domain. Each tag has a TTL (how fast it goes stale), a
 
 The system ships with **28 tags** across 6 categories. Pick the ones relevant to your topic:
 
-| Category | Tags |
-|----------|------|
-| **Universal** | `EVENT` · `DATA` · `RHETORIC` · `INTEL` · `ANALYSIS` · `OSINT` · `POLICY` |
-| **Conflict** | `KINETIC` · `FORCE` · `DIPLO` · `SIGINT` |
-| **Economic** | `ECON` · `MARKET` |
-| **Political** | `POLITICAL` · `POLL` · `LEGAL` · `REGULATORY` · `JUDICIAL` · `LEGISLATIVE` |
-| **Science** | `SCIENTIFIC` · `EXPERIMENTAL` · `TECHNICAL` |
-| **Social** | `CORPORATE` · `DEMOGRAPHIC` · `SOCIAL` · `ENVIRONMENTAL` · `EDITORIAL` · `FORECAST` |
+```mermaid
+%%{init: {'theme': 'dark'}}%%
+mindmap
+  root((Evidence Tags))
+    Universal
+      EVENT
+      DATA
+      RHETORIC
+      INTEL
+      ANALYSIS
+      OSINT
+      POLICY
+    Conflict
+      KINETIC
+      FORCE
+      DIPLO
+      SIGINT
+    Economic
+      ECON
+      MARKET
+    Political
+      POLITICAL
+      POLL
+      LEGAL
+      REGULATORY
+      JUDICIAL
+      LEGISLATIVE
+    Science
+      SCIENTIFIC
+      EXPERIMENTAL
+      TECHNICAL
+    Social
+      CORPORATE
+      DEMOGRAPHIC
+      SOCIAL
+      ENVIRONMENTAL
+      EDITORIAL
+      FORECAST
+```
 
 ### Topic Type Presets
 
