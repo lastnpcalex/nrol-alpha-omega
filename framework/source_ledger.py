@@ -310,7 +310,10 @@ def _compute_domain_base_rates(topic: dict) -> dict:
     base_rates = {}
     for tag, counts in tag_counts.items():
         total = counts["confirmed"] + counts["refuted"]
-        if total > 0:
+        # Require >= 3 resolved claims before computing a base rate.
+        # With fewer, the estimate is too noisy and surprisal weighting
+        # would amplify noise rather than signal.
+        if total >= 3:
             base_rates[tag] = counts["confirmed"] / total
 
     return base_rates

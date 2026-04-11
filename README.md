@@ -32,11 +32,15 @@ This engine is honest about what it is and what it isn't.
 
 **What it isn't**: a generative model. The likelihoods in `bayesian_update()` are operator-supplied or derived from pre-committed indicator definitions via `suggest_likelihoods()`. There is no forward model that predicts what evidence you'd observe under each hypothesis — that would require a causal model of the domain (geopolitics, science, markets), which is an open research problem. The engine is Bayesian in its update mechanics, its source calibration, and its information-theoretic monitoring. The human judgment lives in the indicator design and the decision to fire them. Everything downstream of that judgment is mechanical.
 
-#### Known limitation: conditional dependence between evidence
+#### Fundamental constraint: conditional dependence between evidence
 
-Intelligence sources are correlated in ways that are often opaque and dynamic. A Reuters correspondent in Dubai and an AP correspondent in Dubai might be independently reporting, or they might both be working off the same CENTCOM background briefing. The engine provides **information-chain tracking** (`informationChain` field on evidence entries) so operators can declare when entries trace to the same primary source — and the governor will not count same-chain entries as independent corroboration. But this requires the operator to *know* the dependency structure, which is often unknowable.
+This is the system's single biggest theoretical weakness, and it's not fully solvable without a joint distribution over sources — which no one has for geopolitical intelligence.
 
-A proper Bayesian treatment would model the full joint distribution over sources. This engine does not attempt that. Instead, it takes the pragmatic position: make dependencies *declarable* when known, discount same-chain evidence automatically, and accept that undeclared dependencies will occasionally inflate confidence. The calibration feedback loop (Brier scores over time) is the long-run corrective — if correlated evidence is systematically overcounted, calibration will degrade, and the operator will see it.
+Intelligence sources are correlated in ways that are often opaque and dynamic. A Reuters correspondent in Dubai and an AP correspondent in Dubai might be independently reporting, or they might both be working off the same CENTCOM background briefing. Two "independent" confirmations that trace to the same satellite imagery are one data point, not two. When the system counts them as independent corroboration, it inflates confidence.
+
+The engine provides **information-chain tracking** (`informationChain` field on evidence entries) so operators can declare when entries trace to the same primary source — the governor will not count same-chain entries as independent corroboration. But this only handles *known* dependencies. Most source correlations are invisible: shared briefings, shared imagery access, shared wire service feeds, herd behavior among analysts.
+
+A proper Bayesian treatment would model the full joint distribution over sources. This engine does not attempt that. It takes the pragmatic position: make dependencies *declarable* when known, discount same-chain evidence automatically, and accept that undeclared dependencies will occasionally inflate confidence. The Brier score feedback loop is the long-run corrective — if correlated evidence is systematically overcounted, calibration will degrade and the operator will see it. But Brier scores aggregate over all sources simultaneously; they can't isolate *which* correlations are causing miscalibration. The operator still has to diagnose that.
 
 This is an honest limitation, not a planned feature. If you have ideas for tractable approaches to source-correlation modeling in sparse-evidence domains, we'd like to hear them.
 
@@ -131,7 +135,7 @@ For indicators referencing sub-model scenarios (e.g. "Kharg +10pp"), the functio
 The posterior distribution's Shannon entropy H = −Σ p_i log₂(p_i) drives several mechanisms:
 
 - **Uncertainty ratio** (H / H_max): 1.0 = uniform (maximum ignorance), 0.0 = all mass on one hypothesis. Governance flags both extremes — near-maximum means the model isn't discriminating, near-zero means check for overconfidence.
-- **R_t (evidence staleness risk)**: For each hypothesis, R_t = (entropy contribution × time decay) / evidence recency. Hypotheses that carry high Shannon information (especially low-probability tail hypotheses with high surprise value if true) and haven't been refreshed recently get high R_t scores. This drives the Value of Information system: queries that could resolve high-R_t hypotheses are prioritized.
+- **R_t (evidence staleness risk)**: An entropy-weighted operational heuristic, not a pure information-theoretic derivation. For each hypothesis, R_t = (entropy contribution × time decay) / evidence recency. The entropy term ensures low-probability tail hypotheses with high surprise value get flagged when stale — a 5% hypothesis that hasn't been checked carries more surprise value if true than a 50% hypothesis. But R_t doesn't model the domain's actual volatility; it uses log-scaled time decay as a proxy. A fast-moving conflict and a slow-moving geological process get the same staleness curve unless the operator tunes `rtConfig` thresholds. This is a practical attention-allocation heuristic that uses entropy as a component, not a statement about information-theoretic optimality.
 - **VoI query prioritization**: When entropy is high, the system prioritizes discriminating queries (which hypothesis is right?). When entropy is low, it prioritizes disconfirmation queries (is the leading hypothesis actually wrong?). Unfired high-tier indicators always rank highest.
 
 ### Brier Score Calibration
@@ -151,6 +155,8 @@ Base LRs (cross-topic): confirmed → LR 3:1, refuted → LR 1:3. Per-topic: con
 $$LR_{\text{eff}} = LR_{\text{base}}^{s}, \quad s = \text{clamp}\left(\frac{-\log_2(p_{\text{domain}})}{1\text{ bit}},\ 0.5,\ 2.0\right)$$
 
 where *p*_domain is the confirmation base rate for this domain tag. A source that correctly called something surprising (low base rate of confirmation in that domain) earns up to 2× the trust credit. A source that confirmed the obvious (high base rate) earns as little as 0.5×. This prevents "oil goes up during a war" from earning the same trust boost as "Iran releases hostages by Tuesday." The normalizer of 1 bit means a coin-flip base rate (p=0.5) produces weight 1.0 — the unsurprised default.
+
+Surprisal weighting requires a minimum of 3 resolved claims per domain before it activates. With fewer, the base rate estimate is too noisy and the weighting would amplify noise rather than signal — so the system falls back to unweighted LRs until enough data accumulates.
 
 Trust is stored and queried at four levels of specificity (first match wins): per-topic calibration → cross-topic domain trust → cross-topic overall trust → static base prior. The minimum trust across all cited sources is used (conservative).
 
