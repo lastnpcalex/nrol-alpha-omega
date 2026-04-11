@@ -24,6 +24,22 @@ This engine makes all of those structurally harder to do. Every mutation — add
 
 The goal isn't to be right. The goal is to *know how wrong you are* and get less wrong over time.
 
+### Epistemic Limitations
+
+This engine is honest about what it is and what it isn't.
+
+**What it is**: a disciplined expert elicitation framework with Bayesian bookkeeping. The governor enforces that posteriors move only when evidence justifies it, tracks calibration via Brier scores, and flags common reasoning failures before they corrupt the model.
+
+**What it isn't**: a fully mechanistic Bayesian inference engine. `update_posteriors()` accepts operator-supplied posteriors; `bayesian_update()` accepts operator-supplied *likelihoods* and computes posteriors via Bayes' theorem. In both cases, the critical judgment call — "how likely is this evidence under each hypothesis?" — happens in a human or LLM's head, not in a generative model with explicit likelihood functions. The governor constrains that judgment; it doesn't replace it.
+
+#### Known limitation: conditional dependence between evidence
+
+Intelligence sources are correlated in ways that are often opaque and dynamic. A Reuters correspondent in Dubai and an AP correspondent in Dubai might be independently reporting, or they might both be working off the same CENTCOM background briefing. The engine provides **information-chain tracking** (`informationChain` field on evidence entries) so operators can declare when entries trace to the same primary source — and the governor will not count same-chain entries as independent corroboration. But this requires the operator to *know* the dependency structure, which is often unknowable.
+
+A proper Bayesian treatment would model the full joint distribution over sources. This engine does not attempt that. Instead, it takes the pragmatic position: make dependencies *declarable* when known, discount same-chain evidence automatically, and accept that undeclared dependencies will occasionally inflate confidence. The calibration feedback loop (Brier scores over time) is the long-run corrective — if correlated evidence is systematically overcounted, calibration will degrade, and the operator will see it.
+
+This is an honest limitation, not a planned feature. If you have ideas for tractable approaches to source-correlation modeling in sparse-evidence domains, we'd like to hear them.
+
 ## How It Works
 
 ```mermaid
@@ -386,22 +402,6 @@ The governor (`governor.py`) enforces analytical discipline through multiple mec
 | 12 | temporal_confusion | LOW | Evidence timestamp inconsistent with claim |
 | 13 | feed_key_mismatch | LOW | Data feed reference doesn't match topic |
 | 14 | duplicate_evidence | LOW | Semantic duplicate of existing entry |
-
-## Epistemic Limitations
-
-This engine is honest about what it is and what it isn't.
-
-**What it is**: a disciplined expert elicitation framework with Bayesian bookkeeping. The governor enforces that posteriors move only when evidence justifies it, tracks calibration via Brier scores, and flags common reasoning failures before they corrupt the model.
-
-**What it isn't**: a fully mechanistic Bayesian inference engine. `update_posteriors()` accepts operator-supplied posteriors; `bayesian_update()` accepts operator-supplied *likelihoods* and computes posteriors via Bayes' theorem. In both cases, the critical judgment call — "how likely is this evidence under each hypothesis?" — happens in a human or LLM's head, not in a generative model with explicit likelihood functions. The governor constrains that judgment; it doesn't replace it.
-
-### Known limitation: conditional dependence between evidence
-
-Intelligence sources are correlated in ways that are often opaque and dynamic. A Reuters correspondent in Dubai and an AP correspondent in Dubai might be independently reporting, or they might both be working off the same CENTCOM background briefing. The engine provides **information-chain tracking** (`informationChain` field on evidence entries) so operators can declare when entries trace to the same primary source — and the governor will not count same-chain entries as independent corroboration. But this requires the operator to *know* the dependency structure, which is often unknowable.
-
-A proper Bayesian treatment would model the full joint distribution over sources. This engine does not attempt that. Instead, it takes the pragmatic position: make dependencies *declarable* when known, discount same-chain evidence automatically, and accept that undeclared dependencies will occasionally inflate confidence. The calibration feedback loop (Brier scores over time) is the long-run corrective — if correlated evidence is systematically overcounted, calibration will degrade, and the operator will see it.
-
-This is an honest limitation, not a planned feature. If you have ideas for tractable approaches to source-correlation modeling in sparse-evidence domains, we'd like to hear them.
 
 ## Acknowledgments
 
