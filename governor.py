@@ -348,10 +348,12 @@ def get_effective_weight(entry: dict, evidence_log: list,
 
     Weight = claimState_weight * source_trust_factor
 
-    source_trust_factor priority:
-      1. sourceCalibration.effectiveTrust (Bayesian-updated)
-      2. SOURCE_TRUST base dict (from calibrate.py)
-      3. 0.5 fallback for unknown sources
+    source_trust_factor priority (first match wins per source):
+      1. Per-topic sourceCalibration.effectiveTrust (this topic's Bayesian data)
+      2. Cross-topic source_db domain trust (same tag, all resolved topics)
+      3. Cross-topic source_db overall trust (all domains, all topics)
+      4. SOURCE_TRUST base dict (static priors from calibrate.py)
+      5. 0.5 fallback for completely unknown sources
 
     Result clamped to [0.05, 1.0].
     """
@@ -370,21 +372,55 @@ def get_effective_weight(entry: dict, evidence_log: list,
             # Framework not available — skip trust adjustment
             return claim_weight
 
-        # Get effective trust from calibration, or fall back to base
+        # Try loading cross-topic source database
+        source_db = None
+        try:
+            from framework.source_db import load_db
+            source_db = load_db()
+            # Only use if it has actual data
+            if not source_db.get("sources"):
+                source_db = None
+        except (ImportError, Exception):
+            pass
+
+        tag = entry.get("tag", "")
+
+        # Get effective trust from calibration, or fall back through the chain
         cal = topic.get("sourceCalibration", {})
         effective_trust = cal.get("effectiveTrust", {})
 
         trust_values = []
         for src in extract_sources(source_str):
+            t = None
+
+            # Priority 1: per-topic calibration
             t = effective_trust.get(src)
-            if t is not None:
-                trust_values.append(t)
-            else:
+
+            # Priority 2: cross-topic domain trust (same tag)
+            if t is None and source_db and tag:
+                src_profile = source_db.get("sources", {}).get(src)
+                if src_profile:
+                    domain = src_profile.get("domains", {}).get(tag)
+                    if domain and domain.get("domainTrust") is not None:
+                        t = domain["domainTrust"]
+
+            # Priority 3: cross-topic overall trust
+            if t is None and source_db:
+                src_profile = source_db.get("sources", {}).get(src)
+                if src_profile and src_profile.get("effectiveTrust") is not None:
+                    t = src_profile["effectiveTrust"]
+
+            # Priority 4: base trust from calibrate.py
+            if t is None:
                 base_t = SOURCE_TRUST.get(src)
                 if base_t is not None:
-                    trust_values.append(base_t)
-                else:
-                    trust_values.append(0.5)
+                    t = base_t
+
+            # Priority 5: unknown source fallback
+            if t is None:
+                t = 0.5
+
+            trust_values.append(t)
 
         if trust_values:
             # Use minimum trust among all sources (conservative)

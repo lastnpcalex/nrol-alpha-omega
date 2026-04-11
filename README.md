@@ -1,5 +1,7 @@
 <p align="center">
-  <img src="logo.png" width="300" alt="NROL-αΩ mission patch — DELENDA EST CURRENT THING" />
+  <img src="NROLAO.png" width="300" alt="NROL-αΩ mission patch — DELENDA EST CURRENT THING" />
+  <br/>
+  <sub>Simplified vector files available (AI/SVG). Patch art inspired by <a href="https://github.com/vgel">@vgel</a>.</sub>
 </p>
 
 # NRL-Alpha Omega
