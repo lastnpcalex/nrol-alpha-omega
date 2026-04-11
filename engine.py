@@ -465,6 +465,38 @@ def update_posteriors(topic: dict, new_posteriors: dict[str, float],
     return topic
 
 
+def _resolve_evidence_weight(topic: dict, evidence_refs: list[str]) -> tuple[float, list[dict]]:
+    """
+    Resolve evidence_refs to log entries and compute aggregate effectiveWeight.
+
+    Returns (aggregate_weight, resolved_entries_detail) where detail is for
+    audit logging. Falls back to 1.0 if no refs resolve.
+
+    Uses the same matching pattern as governor.check_update_proposal():
+    match by entry's `time` field or first 50 chars of `text`.
+    """
+    evidence_log = topic.get("evidenceLog", [])
+    weights = []
+    detail = []
+
+    for ref in evidence_refs:
+        for e in evidence_log:
+            if e.get("time") == ref or e.get("text", "")[:50] == ref[:50]:
+                w = e.get("effectiveWeight", 1.0)
+                weights.append(w)
+                detail.append({
+                    "ref": ref[:50],
+                    "effectiveWeight": w,
+                    "claimState": e.get("claimState"),
+                })
+                break  # first match per ref
+
+    if not weights:
+        return 1.0, detail
+
+    return round(sum(weights) / len(weights), 4), detail
+
+
 def bayesian_update(topic: dict, likelihoods: dict[str, float],
                     reason: str, evidence_refs: list[str],
                     operator_posteriors: dict[str, float] = None) -> dict:
@@ -510,10 +542,37 @@ def bayesian_update(topic: dict, likelihoods: dict[str, float],
                 f"Likelihood for {k} is {l} — must be in (0, 1]"
             )
 
-    # Compute unnormalized posteriors: prior * likelihood
+    # --- Effective weight attenuation ---
+    # Resolve evidence_refs to their effectiveWeights and attenuate likelihoods.
+    # Low-weight evidence (contested, low-trust) pulls likelihoods toward 1.0
+    # (the "no update" value). High-weight evidence passes through unmodified.
+    evidence_weight, weight_detail = _resolve_evidence_weight(topic, evidence_refs)
+
+    if evidence_weight < 1.0:
+        adjusted_likelihoods = {}
+        for k, raw_l in likelihoods.items():
+            adjusted_likelihoods[k] = round(1.0 + (raw_l - 1.0) * evidence_weight, 6)
+
+        if evidence_weight < 0.3:
+            _add_evidence_raw(topic, {
+                "time": _now_iso(),
+                "tag": "INTEL",
+                "text": (f"WEIGHT ATTENUATION: bayesian_update likelihoods attenuated "
+                         f"to {evidence_weight:.0%} strength — evidence refs have low "
+                         f"effectiveWeight ({weight_detail})"),
+                "provenance": "DERIVED",
+                "posteriorImpact": "NONE",
+                "ledger": "DECISION",
+                "claimState": "PROPOSED",
+                "effectiveWeight": 0.5,
+            })
+    else:
+        adjusted_likelihoods = dict(likelihoods)
+
+    # Compute unnormalized posteriors: prior * adjusted likelihood
     unnormalized = {}
     for k, h in hypotheses.items():
-        unnormalized[k] = h["posterior"] * likelihoods[k]
+        unnormalized[k] = h["posterior"] * adjusted_likelihoods[k]
 
     # Normalize
     total = sum(unnormalized.values())
@@ -598,6 +657,10 @@ def bayesian_update(topic: dict, likelihoods: dict[str, float],
         history_entry[k] = hypotheses[k]["posterior"]
     history_entry["note"] = reason
     history_entry["likelihoods"] = likelihoods
+    if evidence_weight < 1.0:
+        history_entry["adjustedLikelihoods"] = adjusted_likelihoods
+        history_entry["evidenceWeight"] = evidence_weight
+        history_entry["weightDetail"] = weight_detail
 
     # Red team challenge
     try:
@@ -748,6 +811,363 @@ def update_submodel(topic: dict, submodel_id: str,
 # ---------------------------------------------------------------------------
 # Indicators
 # ---------------------------------------------------------------------------
+
+import re as _re
+
+
+# Tier-based default magnitudes (pp) for qualitative posteriorEffect strings
+_TIER_MAGNITUDE = {
+    "tier1_critical":   {"strong": 22, "moderate": 15},
+    "tier2_strong":     {"strong": 12, "moderate": 8},
+    "tier3_suggestive": {"strong": 4,  "moderate": 3},
+    "anti_indicators":  {"strong": 10, "moderate": 8},
+}
+
+# Words that map to strong/moderate magnitude
+_STRONG_WORDS = {"surge", "collapse", "plunge", "spike", "soar", "crash"}
+_MODERATE_WORDS = {"up", "down", "rise", "fall", "increase", "decrease", "flat"}
+_NEGATIVE_WORDS = {"collapse", "plunge", "crash", "down", "fall", "decrease", "flat"}
+
+
+def _parse_posterior_effect(effect_str: str, tier_key: str,
+                            hypothesis_keys: list[str]) -> dict:
+    """
+    Parse a posteriorEffect string into structured per-hypothesis pp shifts.
+
+    Returns {
+        "shifts": {"H1": +10, "H3": -5, ...},  # pp shifts per hypothesis
+        "submodel_refs": ["kharg", ...],         # submodel scenario names found
+        "confidence": "HIGH" | "MEDIUM" | "LOW" | "UNPARSEABLE",
+        "warnings": [...],
+    }
+    """
+    shifts = {}
+    submodel_refs = []
+    warnings_list = []
+    confidence = "UNPARSEABLE"
+    h_pattern = "|".join(_re.escape(k) for k in hypothesis_keys)
+
+    # Pattern 1: explicit Hx +/-Npp or Hx +N-Mpp (possibly grouped H1/H2)
+    # Matches: "H1 +25pp", "H3/H4 +5-10pp", "H1 -10pp"
+    p1 = _re.compile(
+        rf'((?:{h_pattern})(?:/(?:{h_pattern}))*)\s*([+-])\s*(\d+)(?:-(\d+))?\s*pp',
+        _re.IGNORECASE,
+    )
+    for m in p1.finditer(effect_str):
+        h_group = _re.findall(rf'({h_pattern})', m.group(1), _re.IGNORECASE)
+        sign = 1 if m.group(2) == "+" else -1
+        lo = int(m.group(3))
+        hi = int(m.group(4)) if m.group(4) else lo
+        magnitude = (lo + hi) / 2.0
+        per_h = magnitude / len(h_group)
+        for h in h_group:
+            h_upper = h.upper()
+            shifts[h_upper] = shifts.get(h_upper, 0) + sign * per_h
+        confidence = "HIGH"
+
+    # Pattern 2: Hx/Hy with qualitative direction word (no pp number)
+    # Matches: "H3/H4 surge", "H1/H2 collapse", "H3/H4 up"
+    p2 = _re.compile(
+        rf'((?:{h_pattern})(?:/(?:{h_pattern}))*)\s+(surge|collapse|plunge|spike|soar|crash|up|down|rise|fall|increase|decrease|flat)',
+        _re.IGNORECASE,
+    )
+    for m in p2.finditer(effect_str):
+        h_group = _re.findall(rf'({h_pattern})', m.group(1), _re.IGNORECASE)
+        word = m.group(2).lower()
+        tier_mag = _TIER_MAGNITUDE.get(tier_key, _TIER_MAGNITUDE["tier2_strong"])
+        mag = tier_mag["strong"] if word in _STRONG_WORDS else tier_mag["moderate"]
+        sign = -1 if word in _NEGATIVE_WORDS else 1
+        per_h = mag / len(h_group)
+        for h in h_group:
+            h_upper = h.upper()
+            if h_upper not in shifts:  # don't overwrite explicit pp from pattern 1
+                shifts[h_upper] = shifts.get(h_upper, 0) + sign * per_h
+        if confidence == "UNPARSEABLE":
+            confidence = "MEDIUM"
+
+    # Pattern 3: submodel references with pp — "Kharg +10-15pp"
+    # Match any word that isn't an H-key followed by +/- Npp
+    p3 = _re.compile(
+        r'(\b[A-Z][a-z]+\b)\s*([+-])\s*(\d+)(?:-(\d+))?\s*pp',
+    )
+    for m in p3.finditer(effect_str):
+        name = m.group(1).lower()
+        # Skip if it's a hypothesis key
+        if name.upper() in [k.upper() for k in hypothesis_keys]:
+            continue
+        sign = 1 if m.group(2) == "+" else -1
+        lo = int(m.group(3))
+        hi = int(m.group(4)) if m.group(4) else lo
+        submodel_refs.append({
+            "name": name,
+            "shift_pp": sign * (lo + hi) / 2.0,
+        })
+        if confidence == "UNPARSEABLE":
+            confidence = "LOW"
+
+    # Pattern 4: submodel → percentage — "Kharg → 80%+"
+    p4 = _re.compile(r'(\b[A-Z][a-z]+\b)\s*(?:→|->)\s*(\d+)%')
+    for m in p4.finditer(effect_str):
+        name = m.group(1).lower()
+        if name.upper() in [k.upper() for k in hypothesis_keys]:
+            continue
+        submodel_refs.append({
+            "name": name,
+            "target_pct": int(m.group(2)),
+        })
+        if confidence == "UNPARSEABLE":
+            confidence = "LOW"
+
+    # Pattern 5: "Hx -Xpp" template placeholder (anti-indicators)
+    if _re.search(rf'({h_pattern})\s*-\s*Xpp', effect_str, _re.IGNORECASE):
+        h_match = _re.search(rf'({h_pattern})', effect_str, _re.IGNORECASE)
+        if h_match:
+            tier_mag = _TIER_MAGNITUDE.get(tier_key, _TIER_MAGNITUDE["anti_indicators"])
+            h_upper = h_match.group(1).upper()
+            shifts[h_upper] = shifts.get(h_upper, 0) - tier_mag["strong"]
+            confidence = "MEDIUM"
+            warnings_list.append(f"Template placeholder 'Xpp' replaced with tier default ({tier_mag['strong']}pp)")
+
+    # Catch unparseable
+    if confidence == "UNPARSEABLE" and not submodel_refs:
+        warnings_list.append(f"Could not parse posteriorEffect: '{effect_str}'")
+
+    return {
+        "shifts": shifts,
+        "submodel_refs": submodel_refs,
+        "confidence": confidence,
+        "warnings": warnings_list,
+    }
+
+
+def _resolve_submodel_shifts(topic: dict, submodel_refs: list[dict],
+                             hypothesis_keys: list[str]) -> dict:
+    """
+    Convert submodel references into hypothesis-level pp shifts using
+    the topic's subModel conditionals.
+
+    If a submodel scenario has a conditional mapping (e.g. khargConditionalHormuz),
+    use the difference between that conditional distribution and current priors
+    as the shift direction, scaled by the submodel pp magnitude.
+    """
+    hypotheses = topic["model"]["hypotheses"]
+    current = {k: h["posterior"] for k, h in hypotheses.items()}
+    shifts = {}
+
+    submodels = topic.get("subModels", {})
+
+    for ref in submodel_refs:
+        name = ref["name"]
+        # Find the submodel and scenario
+        for sm_id, sm in submodels.items():
+            scenarios = sm.get("scenarios", {})
+            if name not in scenarios:
+                continue
+
+            conditionals = sm.get("conditionals", {})
+            # Look for a conditional like "{name}ConditionalHormuz" or similar
+            cond_key = None
+            for ck in conditionals:
+                if name in ck.lower():
+                    cond_key = ck
+                    break
+
+            if not cond_key:
+                continue
+
+            cond = conditionals[cond_key]
+
+            if "target_pct" in ref:
+                # "Kharg → 80%" — scale the conditional's direction by how much
+                # this indicator moves the submodel
+                current_prob = scenarios[name]["prob"]
+                target_prob = ref["target_pct"] / 100.0
+                scale = max(0, target_prob - current_prob)
+            elif "shift_pp" in ref:
+                # "Kharg +10pp" — use the pp shift as a fraction of movement
+                scale = abs(ref["shift_pp"]) / 100.0
+                if ref["shift_pp"] < 0:
+                    scale = -scale
+            else:
+                continue
+
+            # The conditional tells us: if this scenario is more likely,
+            # which hypotheses benefit? Use the difference from current priors.
+            for hk in hypothesis_keys:
+                if hk in cond:
+                    direction = cond[hk] - current.get(hk, 0)
+                    shift_pp = direction * scale * 100
+                    shifts[hk] = shifts.get(hk, 0) + shift_pp
+
+    return shifts
+
+
+def _pp_shifts_to_likelihoods(priors: dict[str, float],
+                               shifts: dict[str, float]) -> dict[str, float]:
+    """
+    Convert per-hypothesis pp shifts into likelihood ratios via inverse Bayes.
+
+    Given current priors P(Hi) and desired shifts delta_i (in pp, e.g. +10 = +0.10):
+    1. Compute target posteriors: target[Hi] = prior[Hi] + delta_i/100
+    2. Clamp to [0.005, 0.995]
+    3. Renormalize targets to sum to 1.0
+    4. Derive likelihoods: L(Hi) = target[Hi] / prior[Hi]
+    5. Normalize likelihoods so max = 1.0 (keeps values in (0, 1])
+    """
+    # Build target posteriors
+    target = {}
+    for k, p in priors.items():
+        delta = shifts.get(k, 0.0) / 100.0
+        target[k] = max(0.005, min(0.995, p + delta))
+
+    # Renormalize
+    total = sum(target.values())
+    target = {k: v / total for k, v in target.items()}
+
+    # Derive raw likelihoods
+    raw = {}
+    for k in priors:
+        if priors[k] > 0:
+            raw[k] = target[k] / priors[k]
+        else:
+            raw[k] = 1.0  # can't update a zero prior
+
+    # Normalize to max = 1.0
+    max_l = max(raw.values()) if raw else 1.0
+    if max_l == 0:
+        max_l = 1.0
+    likelihoods = {k: round(v / max_l, 6) for k, v in raw.items()}
+
+    return likelihoods
+
+
+def suggest_likelihoods(topic: dict, fired_indicator_ids: list[str],
+                        *, override_effects: dict[str, dict] = None) -> dict:
+    """
+    Convert fired indicators into suggested likelihood ratios for bayesian_update().
+
+    Parses each indicator's posteriorEffect string, combines shifts, resolves
+    submodel references via conditionals, and computes inverse-Bayes likelihoods.
+
+    Parameters
+    ----------
+    topic : dict
+        Live topic state.
+    fired_indicator_ids : list[str]
+        Indicator IDs to derive likelihoods from.
+    override_effects : dict, optional
+        Manual overrides: {indicator_id: {"H1": +5, "H2": -3, ...}} in pp.
+        Overrides parsed effects entirely for that indicator.
+
+    Returns
+    -------
+    dict with keys:
+        suggested_likelihoods: {H1: float, ...} ready for bayesian_update()
+        target_posteriors: {H1: float, ...} what posteriors would result
+        current_priors: {H1: float, ...}
+        indicator_breakdown: list of per-indicator parse results
+        combined_shifts_pp: {H1: float, ...} net pp shift per hypothesis
+        unparseable: list of indicator IDs that couldn't be parsed
+        warnings: list of warning strings
+        ready: bool — True if all indicators parsed (or overridden)
+    """
+    override_effects = override_effects or {}
+    hypotheses = topic["model"]["hypotheses"]
+    h_keys = list(hypotheses.keys())
+    priors = {k: h["posterior"] for k, h in hypotheses.items()}
+
+    # Find indicators by ID
+    all_indicators = {}
+    for tier_key, indicators in topic["indicators"]["tiers"].items():
+        for ind in indicators:
+            all_indicators[ind["id"]] = (ind, tier_key)
+
+    indicator_breakdown = []
+    combined_shifts = {k: 0.0 for k in h_keys}
+    unparseable = []
+    all_warnings = []
+
+    for ind_id in fired_indicator_ids:
+        if ind_id not in all_indicators:
+            all_warnings.append(f"Indicator '{ind_id}' not found in topic")
+            continue
+
+        ind, tier_key = all_indicators[ind_id]
+
+        # Manual override?
+        if ind_id in override_effects:
+            parsed = {
+                "shifts": override_effects[ind_id],
+                "submodel_refs": [],
+                "confidence": "HIGH",
+                "warnings": ["Operator override"],
+            }
+        else:
+            parsed = _parse_posterior_effect(
+                ind.get("posteriorEffect", ""), tier_key, h_keys,
+            )
+
+        # Resolve submodel references into H-level shifts
+        if parsed["submodel_refs"]:
+            sm_shifts = _resolve_submodel_shifts(
+                topic, parsed["submodel_refs"], h_keys,
+            )
+            for k, v in sm_shifts.items():
+                parsed["shifts"][k] = parsed["shifts"].get(k, 0) + v
+            if sm_shifts:
+                parsed["warnings"].append(
+                    f"Submodel refs resolved via conditionals: {sm_shifts}"
+                )
+                if parsed["confidence"] == "LOW":
+                    parsed["confidence"] = "MEDIUM"
+
+        # Accumulate
+        for k, v in parsed["shifts"].items():
+            if k in combined_shifts:
+                combined_shifts[k] += v
+
+        if parsed["confidence"] == "UNPARSEABLE" and ind_id not in override_effects:
+            unparseable.append(ind_id)
+
+        indicator_breakdown.append({
+            "id": ind_id,
+            "tier": tier_key,
+            "posteriorEffect": ind.get("posteriorEffect", ""),
+            "parsed_shifts": parsed["shifts"],
+            "submodel_refs": parsed["submodel_refs"],
+            "confidence": parsed["confidence"],
+            "warnings": parsed["warnings"],
+        })
+        all_warnings.extend(parsed["warnings"])
+
+    # Cap combined shifts at 40pp per hypothesis
+    for k in combined_shifts:
+        if abs(combined_shifts[k]) > 40:
+            all_warnings.append(
+                f"Combined shift for {k} capped at {'+' if combined_shifts[k] > 0 else '-'}40pp "
+                f"(was {combined_shifts[k]:+.1f}pp)"
+            )
+            combined_shifts[k] = 40.0 if combined_shifts[k] > 0 else -40.0
+
+    # Convert to likelihoods
+    likelihoods = _pp_shifts_to_likelihoods(priors, combined_shifts)
+
+    # Compute what posteriors would result (forward Bayes)
+    unnorm = {k: priors[k] * likelihoods[k] for k in h_keys}
+    total = sum(unnorm.values())
+    target_posteriors = {k: round(v / total, 4) for k, v in unnorm.items()} if total > 0 else priors
+
+    return {
+        "suggested_likelihoods": likelihoods,
+        "target_posteriors": target_posteriors,
+        "current_priors": priors,
+        "indicator_breakdown": indicator_breakdown,
+        "combined_shifts_pp": {k: round(v, 2) for k, v in combined_shifts.items()},
+        "unparseable": unparseable,
+        "warnings": all_warnings,
+        "ready": len(unparseable) == 0,
+    }
+
 
 def fire_indicator(topic: dict, indicator_id: str,
                    note: str = None, tier: str = None) -> dict:
