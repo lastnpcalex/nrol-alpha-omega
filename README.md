@@ -30,7 +30,7 @@ This engine is honest about what it is and what it isn't.
 
 **What it is**: a disciplined expert elicitation framework with Bayesian bookkeeping. The governor enforces that posteriors move only when evidence justifies it, tracks calibration via Brier scores, and flags common reasoning failures before they corrupt the model.
 
-**What it isn't**: a fully mechanistic Bayesian inference engine. `update_posteriors()` accepts operator-supplied posteriors; `bayesian_update()` accepts operator-supplied *likelihoods* and computes posteriors via Bayes' theorem. In both cases, the critical judgment call — "how likely is this evidence under each hypothesis?" — happens in a human or LLM's head, not in a generative model with explicit likelihood functions. The governor constrains that judgment; it doesn't replace it.
+**What it isn't**: a fully mechanistic Bayesian inference engine with a generative model. `bayesian_update()` computes posteriors via Bayes' theorem from explicit likelihoods, and `suggest_likelihoods()` can derive those likelihoods from indicator definitions via inverse Bayes — but the indicator effects themselves are operator-defined. Evidence quality (claim state, source trust) feeds back into the update via `effectiveWeight` attenuation, so contested evidence automatically produces weaker updates. The remaining human judgment call is in the indicator design and the decision to fire them, not in the posterior arithmetic.
 
 #### Known limitation: conditional dependence between evidence
 
@@ -88,6 +88,68 @@ flowchart TD
     style Force fill:#444,stroke:#f5a623,color:#fff
 ```
 
+## Bayesian & Information-Theoretic Mechanics
+
+The engine implements several formal mechanisms from Bayesian inference and information theory. These aren't decorative — they're load-bearing parts of the update pipeline that control how evidence flows into posteriors.
+
+### Posterior Updates via Bayes' Theorem
+
+`bayesian_update()` computes posteriors mechanically:
+
+$$P(H_i|E) = \frac{P(E|H_i) \cdot P(H_i)}{\sum_j P(E|H_j) \cdot P(H_j)}$$
+
+The operator supplies likelihoods P(E|H_i) for each hypothesis — "how probable is this evidence if H_i is true?" — and the engine handles the rest. Both raw and adjusted likelihoods are recorded in `posteriorHistory` for full auditability.
+
+### Evidence Weight Attenuation
+
+Likelihoods are attenuated by the `effectiveWeight` of the cited evidence before entering the Bayes computation:
+
+$$L_{\text{adjusted}}(H_i) = 1 + (L_{\text{raw}}(H_i) - 1) \times w$$
+
+where *w* = mean effectiveWeight of cited evidence entries. At *w*=1.0 (fully corroborated, trusted source), likelihoods pass through unchanged. At *w*=0.2 (contested claim), the likelihood is pulled 80% of the way toward 1.0 (the no-update value). This means contested or low-trust evidence mechanically produces weaker posterior shifts — the system doesn't just flag bad evidence, it down-weights it in the math.
+
+`effectiveWeight` itself is the product of two factors:
+- **Claim state weight**: PROPOSED (0.5) → SUPPORTED (1.0) → CONTESTED (0.2) → INVALIDATED (0.0)
+- **Source trust**: Bayesian-updated per source per domain, starting from base priors and refined by claim resolution history
+
+### Inverse Bayes: Likelihoods from Indicators
+
+`suggest_likelihoods()` reverses the Bayes computation. Given indicator-defined posterior shifts (e.g. "H3 +15pp"), it derives the likelihoods that would produce those shifts:
+
+$$L(H_i) \propto \frac{P_{\text{target}}(H_i)}{P_{\text{current}}(H_i)}$$
+
+For indicators referencing sub-model scenarios (e.g. "Kharg +10pp"), the function resolves through the topic's conditional probability tables — `P(H_i | \text{scenario})` — to translate sub-model movements into hypothesis-level likelihood ratios.
+
+### KL Divergence — Two Applications
+
+**Prior-domination detection** (`compute_kl_from_prior`): Measures D_KL(current posterior ‖ initial prior). Low entropy + low KL = the model is confident but hasn't moved far from where it started — a sign that confidence is inherited from the prior rather than earned from evidence. The governance system flags this as `PRIOR_DOMINATED`.
+
+**Operator-vs-mechanical divergence** (inside `bayesian_update`): When the operator supplies both likelihoods and their intuitive posteriors, the engine computes D_KL(mechanical ‖ intuitive). Divergence > 0.05 nats triggers a governance note. The mechanical result always wins, but the divergence is logged — making the gap between "what the math says" and "what the operator expected" visible and auditable.
+
+### Shannon Entropy and R_t
+
+The posterior distribution's Shannon entropy H = −Σ p_i log₂(p_i) drives several mechanisms:
+
+- **Uncertainty ratio** (H / H_max): 1.0 = uniform (maximum ignorance), 0.0 = all mass on one hypothesis. Governance flags both extremes — near-maximum means the model isn't discriminating, near-zero means check for overconfidence.
+- **R_t (evidence staleness risk)**: For each hypothesis, R_t = (entropy contribution × time decay) / evidence recency. Hypotheses that carry high Shannon information (especially low-probability tail hypotheses with high surprise value if true) and haven't been refreshed recently get high R_t scores. This drives the Value of Information system: queries that could resolve high-R_t hypotheses are prioritized.
+- **VoI query prioritization**: When entropy is high, the system prioritizes discriminating queries (which hypothesis is right?). When entropy is low, it prioritizes disconfirmation queries (is the leading hypothesis actually wrong?). Unfired high-tier indicators always rank highest.
+
+### Brier Score Calibration
+
+Every posterior update triggers a prediction snapshot. When a topic resolves, `record_outcome()` scores all historical snapshots against ground truth using the Brier score:
+
+$$BS = \frac{1}{N} \sum_{i=1}^{N} (p_i - o_i)^2$$
+
+where *o_i* = 1 for the correct hypothesis, 0 otherwise. Brier scores feed back into governance health — `POORLY_CALIBRATED` (Brier > 0.4) degrades system health. Hypotheses that expire by time (day count exceeds 1.5× the midpoint) get partial Brier scoring without waiting for full topic resolution.
+
+### Bayesian Source Trust
+
+Source trust isn't a static lookup table. The source ledger tracks claim outcomes per source per domain tag (ECON, KINETIC, DIPLO, etc.) and updates trust via Bayesian likelihood ratios:
+- Confirmed claim → LR 3:1 (triple the odds the source is reliable in this domain)
+- Refuted claim → LR 1:3 (cut odds to one-third)
+
+Trust is stored and queried at four levels of specificity (first match wins): per-topic calibration → cross-topic domain trust → cross-topic overall trust → static base prior. The minimum trust across all cited sources is used (conservative).
+
 ## Source Trust: How It Updates
 
 Sources don't have a single trust score. Trust is tracked **per domain** — a source that's excellent at reporting economic data might be unreliable on diplomatic analysis.
@@ -144,7 +206,7 @@ A source confirmed 5 times in ECON and refuted 3 times in RHETORIC will have hig
 ## Architecture
 
 ```
-engine.py                  Topic I/O, add_evidence, update_posteriors, bayesian_update, save_topic
+engine.py                  Topic I/O, add_evidence, update_posteriors, bayesian_update, suggest_likelihoods, save_topic
 governor.py                Epistemic governor — 14 failure modes, R_t, entropy, KL from prior, claim lifecycle
 server.py                  Multi-topic HTTP dashboard (port 8098)
 
@@ -173,7 +235,8 @@ sources/                   Source database (cross-topic trust tracking)
 
 Two paths for posterior updates:
 - **`update_posteriors()`** — operator supplies final posteriors directly. The governor validates them against the hallucination checklist but the Bayesian math is implicit (in the operator's head).
-- **`bayesian_update()`** — operator supplies explicit likelihoods `P(E|H_i)` and the engine computes posteriors mechanically via Bayes' theorem. Same governor gate, but the reasoning is auditable: likelihoods are recorded in `posteriorHistory`.
+- **`bayesian_update()`** — operator supplies explicit likelihoods `P(E|H_i)` and the engine computes posteriors mechanically via Bayes' theorem. Same governor gate, but the reasoning is auditable: likelihoods are recorded in `posteriorHistory`. Likelihoods are attenuated by the `effectiveWeight` of cited evidence — contested or low-trust evidence produces weaker updates automatically.
+- **`suggest_likelihoods()`** — converts fired indicator `posteriorEffect` strings into likelihood ratios via inverse Bayes. Parses explicit pp shifts, qualitative directions (`H3/H4 surge`), and submodel references (resolved through conditional distributions). Returns a structured suggestion for operator review before passing to `bayesian_update()`.
 
 ## Quickstart
 
@@ -279,7 +342,24 @@ bayesian_update(topic, likelihoods={
 }, reason="6+ independent replication failures", evidence_refs=[...])
 ```
 
-The engine computes posteriors mechanically via Bayes' theorem. If the operator also supplies their intuitive posteriors, the system logs the KL divergence between mechanical and intuitive results — making the judgment call auditable.
+The engine computes posteriors mechanically via Bayes' theorem. If the cited evidence has low `effectiveWeight` (contested claims, low-trust sources), the likelihoods are attenuated toward 1.0 before the update — so weak evidence produces proportionally weaker posterior shifts. If the operator also supplies their intuitive posteriors, the system logs the KL divergence between mechanical and intuitive results — making the judgment call auditable.
+
+**`suggest_likelihoods()`** — instead of hand-crafting likelihoods, derive them from indicator definitions:
+
+```python
+# Fire an indicator, then get suggested likelihoods
+fire_indicator(topic, "t1_bulk_failure", note="6+ labs failed to replicate")
+suggestion = suggest_likelihoods(topic, ["t1_bulk_failure"])
+# suggestion["suggested_likelihoods"] = {"H1": 0.05, "H2": 0.30, "H3": 1.0, "H4": 0.60}
+# suggestion["target_posteriors"] = {"H1": 0.01, "H2": 0.03, "H3": 0.93, "H4": 0.03}
+# suggestion["ready"] = True
+
+# Review, optionally adjust, then apply
+bayesian_update(topic, suggestion["suggested_likelihoods"],
+                reason="6+ replication failures", evidence_refs=[...])
+```
+
+For indicators with unparseable effects (e.g. "Thesis confirmation"), `ready` returns `False` and the operator can supply overrides via `override_effects={"indicator_id": {"H1": +5, "H3": -3}}`.
 
 **Information chains** (retrospective): Multiple outlets reported the Huazhong levitation video. Without `informationChain` tracking, each article could have been counted as independent corroboration. With it:
 
