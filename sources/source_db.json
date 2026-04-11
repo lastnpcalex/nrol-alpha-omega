@@ -4458,13 +4458,392 @@
       "totalConfirmed": 0,
       "totalRefuted": 1,
       "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "arXiv (Lee & Kim)": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "SCIENTIFIC": {
+          "claims": 1,
+          "confirmed": 0,
+          "refuted": 1,
+          "hitRate": 0.0,
+          "domainTrust": 0.2481
+        }
+      },
+      "topicHistory": {
+        "lk99-superconductor": {
+          "claims": 1,
+          "confirmed": 0,
+          "refuted": 1,
+          "hitRate": 0.0,
+          "lastSeen": "2026-04-11T17:47:00Z"
+        }
+      },
+      "effectiveTrust": 0.2481,
+      "totalClaims": 1,
+      "totalConfirmed": 0,
+      "totalRefuted": 1,
+      "lastUpdated": "2026-04-11T17:47:00Z"
+    },
+    "Physics community (multiple)": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "ANALYSIS": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "lk99-superconductor": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T17:47:00Z"
+        }
+      },
+      "effectiveTrust": 0.75,
+      "totalClaims": 1,
+      "totalConfirmed": 1,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T17:47:00Z"
+    },
+    "Huazhong University": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EXPERIMENTAL": {
+          "claims": 2,
+          "confirmed": 0,
+          "refuted": 2,
+          "hitRate": 0.0,
+          "domainTrust": 0.0982
+        }
+      },
+      "topicHistory": {
+        "lk99-superconductor": {
+          "claims": 2,
+          "confirmed": 0,
+          "refuted": 2,
+          "hitRate": 0.0,
+          "lastSeen": "2026-04-11T17:47:00Z"
+        }
+      },
+      "effectiveTrust": 0.0982,
+      "totalClaims": 2,
+      "totalConfirmed": 0,
+      "totalRefuted": 2,
+      "lastUpdated": "2026-04-11T17:47:00Z"
+    },
+    "Chinese labs (multiple unverified)": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EXPERIMENTAL": {
+          "claims": 1,
+          "confirmed": 0,
+          "refuted": 1,
+          "hitRate": 0.0,
+          "domainTrust": 0.2481
+        }
+      },
+      "topicHistory": {
+        "lk99-superconductor": {
+          "claims": 1,
+          "confirmed": 0,
+          "refuted": 1,
+          "hitRate": 0.0,
+          "lastSeen": "2026-04-11T17:47:00Z"
+        }
+      },
+      "effectiveTrust": 0.2481,
+      "totalClaims": 1,
+      "totalConfirmed": 0,
+      "totalRefuted": 1,
+      "lastUpdated": "2026-04-11T17:47:00Z"
+    },
+    "LBNL (Sinead Griffin)": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "SCIENTIFIC": {
+          "claims": 1,
+          "confirmed": 0,
+          "refuted": 1,
+          "hitRate": 0.0,
+          "domainTrust": 0.2481
+        }
+      },
+      "topicHistory": {
+        "lk99-superconductor": {
+          "claims": 1,
+          "confirmed": 0,
+          "refuted": 1,
+          "hitRate": 0.0,
+          "lastSeen": "2026-04-11T17:47:00Z"
+        }
+      },
+      "effectiveTrust": 0.2481,
+      "totalClaims": 1,
+      "totalConfirmed": 0,
+      "totalRefuted": 1,
+      "lastUpdated": "2026-04-11T17:47:00Z"
+    },
+    "Southeast University": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EXPERIMENTAL": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "lk99-superconductor": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T17:47:00Z"
+        }
+      },
+      "effectiveTrust": 0.75,
+      "totalClaims": 1,
+      "totalConfirmed": 1,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T17:47:00Z"
+    },
+    "IBS Korea": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EXPERIMENTAL": {
+          "claims": 2,
+          "confirmed": 1,
+          "refuted": 1,
+          "hitRate": 0.5,
+          "domainTrust": 0.4975
+        }
+      },
+      "topicHistory": {
+        "lk99-superconductor": {
+          "claims": 2,
+          "confirmed": 1,
+          "refuted": 1,
+          "hitRate": 0.5,
+          "lastSeen": "2026-04-11T17:47:00Z"
+        }
+      },
+      "effectiveTrust": 0.4975,
+      "totalClaims": 2,
+      "totalConfirmed": 1,
+      "totalRefuted": 1,
+      "lastUpdated": "2026-04-11T17:47:00Z"
+    },
+    "Multiple theory groups": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "SCIENTIFIC": {
+          "claims": 2,
+          "confirmed": 1,
+          "refuted": 1,
+          "hitRate": 0.5,
+          "domainTrust": 0.4975
+        }
+      },
+      "topicHistory": {
+        "lk99-superconductor": {
+          "claims": 2,
+          "confirmed": 1,
+          "refuted": 1,
+          "hitRate": 0.5,
+          "lastSeen": "2026-04-11T17:47:00Z"
+        }
+      },
+      "effectiveTrust": 0.4975,
+      "totalClaims": 2,
+      "totalConfirmed": 1,
+      "totalRefuted": 1,
+      "lastUpdated": "2026-04-11T17:47:00Z"
+    },
+    "University of Maryland": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EXPERIMENTAL": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "lk99-superconductor": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T17:47:00Z"
+        }
+      },
+      "effectiveTrust": 0.75,
+      "totalClaims": 1,
+      "totalConfirmed": 1,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T17:47:00Z"
+    },
+    "UIUC (Jain et al.)": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "SCIENTIFIC": {
+          "claims": 2,
+          "confirmed": 1,
+          "refuted": 1,
+          "hitRate": 0.5,
+          "domainTrust": 0.4975
+        }
+      },
+      "topicHistory": {
+        "lk99-superconductor": {
+          "claims": 2,
+          "confirmed": 1,
+          "refuted": 1,
+          "hitRate": 0.5,
+          "lastSeen": "2026-04-11T17:47:00Z"
+        }
+      },
+      "effectiveTrust": 0.4975,
+      "totalClaims": 2,
+      "totalConfirmed": 1,
+      "totalRefuted": 1,
+      "lastUpdated": "2026-04-11T17:47:00Z"
+    },
+    "IBS Korea (single crystal)": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EXPERIMENTAL": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "lk99-superconductor": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T17:47:00Z"
+        }
+      },
+      "effectiveTrust": 0.75,
+      "totalClaims": 1,
+      "totalConfirmed": 1,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T17:47:00Z"
+    },
+    "Aggregated lab results": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "DATA": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "lk99-superconductor": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T17:47:00Z"
+        }
+      },
+      "effectiveTrust": 0.75,
+      "totalClaims": 1,
+      "totalConfirmed": 1,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T17:47:00Z"
+    },
+    "Multiple groups (consensus)": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "SCIENTIFIC": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "lk99-superconductor": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T17:47:00Z"
+        }
+      },
+      "effectiveTrust": 0.75,
+      "totalClaims": 1,
+      "totalConfirmed": 1,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T17:47:00Z"
+    },
+    "Nature (news feature)": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "SCIENTIFIC": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "lk99-superconductor": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T17:47:00Z"
+        }
+      },
+      "effectiveTrust": 0.75,
+      "totalClaims": 1,
+      "totalConfirmed": 1,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T17:47:00Z"
     }
   },
   "meta": {
     "version": 1,
-    "lastFullScan": "2026-04-11T16:59:37Z",
+    "lastFullScan": "2026-04-11T17:47:00Z",
     "topicsScanned": [
-      "hormuz-closure"
+      "hormuz-closure",
+      "lk99-superconductor"
     ]
   }
 }

@@ -673,7 +673,7 @@ def add_evidence(topic: dict, entry: dict) -> dict:
         raise ValueError("Evidence entry requires 'tag' and 'text'")
 
     full_entry = {
-        "time": _now_iso(),
+        "time": entry.get("time") or _now_iso(),
         "tag": entry["tag"],
         "text": entry["text"],
         "provenance": entry.get("provenance", "OBSERVED"),

@@ -137,6 +137,7 @@ framework/
 ├── scoring.py             Brier score calibration, hypothesis expiry, partial scoring
 ├── source_ledger.py       Claim resolution tracking, Bayesian source trust updates
 ├── source_db.py           Cross-topic, domain-aware source performance database
+├── backfill.py            Historical backfill + outcome-based source scoring
 ├── compaction.py          Evidence log compaction (preserves key claims + weights)
 ├── calibrate.py           Base source trust scores, verification functions
 ├── runner.py              CLI orchestrator
