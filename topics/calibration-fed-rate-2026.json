@@ -1,0 +1,631 @@
+{
+  "_protocol": "Calibration topic: Federal Reserve target rate at end of 2026. Prospective estimation from April 2026 baseline.",
+
+  "meta": {
+    "slug": "calibration-fed-rate-2026",
+    "title": "Fed Funds Rate by End 2026",
+    "question": "Where will the Federal Reserve target rate be on December 31, 2026?",
+    "resolution": "FOMC official target range as announced at or following the December 2026 FOMC meeting (scheduled Dec 9-10, 2026). Resolved against the FOMC statement on federalreserve.gov.",
+    "created": "2026-04-11T00:00:00Z",
+    "lastUpdated": "2026-04-11T00:00:00Z",
+    "status": "ACTIVE",
+    "dayCount": 0,
+    "startDate": "2026-04-11T00:00:00Z",
+    "classification": "ROUTINE",
+    "topicType": "economics",
+    "horizon": "~264 days (through Dec 31, 2026)",
+    "remainingFOMCMeetings": ["May 6-7", "Jun 17-18", "Jul 29-30", "Sep 16-17", "Oct 28-29", "Dec 9-10"]
+  },
+
+  "tagConfig": {
+    "_docs": "Tag configuration for monetary policy topic. HAWKISH tags favor H1/H4 (no cut or hike). DOVISH tags favor H2/H3 (cuts). DATA tags are neutral until values are known.",
+    "availableTags": ["EVENT", "DATA", "RHETORIC", "ANALYSIS", "FOMC", "HAWKISH", "DOVISH", "MARKET"],
+    "directionHints": {
+      "HAWKISH": { "H1": 1, "H4": 1, "H2": -1, "H3": -1 },
+      "DOVISH":  { "H2": 1, "H3": 1, "H1": -1, "H4": -1 },
+      "DATA":    {},
+      "EVENT":   {},
+      "RHETORIC": {},
+      "ANALYSIS": {},
+      "FOMC":    {},
+      "MARKET":  {}
+    },
+    "escalationTags": ["HAWKISH"],
+    "deescalationTags": ["DOVISH"]
+  },
+
+  "model": {
+    "hypotheses": {
+      "H1": {
+        "label": "No further cuts — stays 3.50-3.75%",
+        "midpoint": 3.625,
+        "unit": "percent",
+        "posterior": 0.22,
+        "description": "Fed holds all year. Tariff-driven inflation keeps CPI sticky above 3%, forcing Powell to maintain the pause indefinitely. Dot plot median signals one cut but FOMC ultimately does not deliver it. Consistent with stagflation-lite scenario where labor market softens but inflation prevents easing."
+      },
+      "H2": {
+        "label": "One cut — 3.25-3.50%",
+        "midpoint": 3.375,
+        "unit": "percent",
+        "posterior": 0.38,
+        "description": "Dot plot median outcome. Fed delivers one 25bp cut, likely in September or December. Inflation moderates gradually, unemployment ticks up to ~4.8-5.0%, but Fed moves cautiously. Most consistent with current guidance and SEP projections."
+      },
+      "H3": {
+        "label": "Two+ cuts — 3.00-3.25% or below",
+        "midpoint": 3.125,
+        "unit": "percent",
+        "posterior": 0.28,
+        "description": "Labor market deteriorates faster than expected (unemployment 5.2%+), tariff shock proves disinflationary via demand destruction, or financial conditions tighten sharply. Goldman and Bankrate both see 2-3 cuts as plausible. Requires either clear disinflation signal or meaningful growth scare."
+      },
+      "H4": {
+        "label": "Rate hike — inflation forces reversal",
+        "midpoint": 4.0,
+        "unit": "percent",
+        "posterior": 0.12,
+        "description": "Tariff pass-through re-accelerates CPI to 4%+, inflation expectations become unanchored, or a dollar crisis forces the Fed's hand. Hike of 25-50bp. Historically rare once an easing cycle begins, but tariff environment creates genuine tail risk. H4 is not negligible given current policy uncertainty."
+      }
+    },
+    "expectedValue": 3.43,
+    "expectedUnit": "percent (midpoint of expected target range)",
+    "expectedValueNote": "Probability-weighted midpoint: 0.22*3.625 + 0.38*3.375 + 0.28*3.125 + 0.12*4.0 = 3.43%",
+    "posteriorHistory": [
+      {
+        "date": "2026-04-11T00:00:00Z",
+        "posteriors": { "H1": 0.22, "H2": 0.38, "H3": 0.28, "H4": 0.12 },
+        "note": "Initial priors. Anchored on dot plot median (one cut), adjusted up for H3 given Goldman/Bankrate forecasts, assigned meaningful H4 tail for tariff inflation risk. Unemployment at 4.6% creates genuine two-way risk."
+      }
+    ]
+  },
+
+  "subModels": {
+    "inflation_regime": {
+      "label": "Inflation Regime",
+      "description": "Current CPI/PCE trajectory and whether it is consistent with further easing",
+      "value": "STICKY_ELEVATED",
+      "options": ["FALLING_TO_TARGET", "STICKY_ELEVATED", "RE-ACCELERATING", "UNANCHORED"],
+      "asOf": "2026-04-11",
+      "note": "Core PCE ~2.8% as of March 2026. Tariff pass-through adds upside risk. Not falling fast enough to unlock cuts confidently, not re-accelerating to hike territory yet.",
+      "posteriorEffect": {
+        "FALLING_TO_TARGET": "Boosts H2/H3 significantly. H3 +10-15pp if sustained.",
+        "STICKY_ELEVATED": "Current baseline. Supports H1/H2 split.",
+        "RE-ACCELERATING": "Boosts H1/H4. H4 +10pp if CPI breaks 4%.",
+        "UNANCHORED": "Near-certain H4. H4 +30pp, H3 collapses."
+      }
+    },
+    "labor_market": {
+      "label": "Labor Market Condition",
+      "description": "Unemployment trajectory and payroll growth",
+      "value": "SOFTENING_SLOWLY",
+      "options": ["TIGHT", "SOFTENING_SLOWLY", "DETERIORATING", "RECESSION_SIGNAL"],
+      "asOf": "2026-04-11",
+      "note": "Unemployment 4.6%. Payrolls positive but decelerating. Consistent with gradual normalization, not yet a recession signal. Tariff uncertainty suppressing business investment.",
+      "posteriorEffect": {
+        "TIGHT": "Removes H3. Supports H1.",
+        "SOFTENING_SLOWLY": "Baseline. Consistent with H1/H2 distribution.",
+        "DETERIORATING": "Boosts H3 +10-15pp. Unlocks multiple cuts.",
+        "RECESSION_SIGNAL": "Emergency cut scenario. H3 dominant, H4 collapses."
+      }
+    },
+    "market_pricing": {
+      "label": "Fed Funds Futures Implied Cuts",
+      "description": "Number of 25bp cuts priced in by Dec 2026 futures",
+      "value": 1.5,
+      "unit": "cuts",
+      "asOf": "2026-04-11",
+      "note": "Approximate — futures mid-point between one and two cuts as of early April. Represents market consensus, which has historically over-anticipated cuts in the 2024-2026 cycle.",
+      "posteriorEffect": "Futures pricing >2.5 cuts would boost H3 +10pp. Pricing <0.5 cuts would collapse H3 and boost H1."
+    },
+    "fomc_communication": {
+      "label": "FOMC Communication Posture",
+      "description": "Directional lean in most recent FOMC statement and press conference",
+      "value": "CAUTIOUSLY_NEUTRAL",
+      "options": ["DOVISH_PIVOT", "CAUTIOUSLY_DOVISH", "CAUTIOUSLY_NEUTRAL", "HAWKISH_TILT", "EXPLICIT_HIKE_SIGNAL"],
+      "asOf": "2026-04-11",
+      "note": "March FOMC held steady, Powell maintained 'wait and see' on tariffs. Neither signaling imminent cut nor hike. Dot plot still projects one cut median.",
+      "posteriorEffect": {
+        "DOVISH_PIVOT": "H2 +10pp, H3 +5pp.",
+        "CAUTIOUSLY_DOVISH": "H2 +5pp.",
+        "CAUTIOUSLY_NEUTRAL": "Baseline. No update.",
+        "HAWKISH_TILT": "H1 +10pp, H4 +5pp, H3 -10pp.",
+        "EXPLICIT_HIKE_SIGNAL": "H4 +25pp, H3 collapses."
+      }
+    }
+  },
+
+  "indicators": {
+    "_design_rules": [
+      "Each indicator must be OBSERVABLE — actions, not opinions",
+      "Each must have a clear fired/not-fired threshold",
+      "Every hypothesis needs at least one pro AND one anti indicator",
+      "Governor flags unfalsifiable hypotheses as DEGRADED"
+    ],
+    "tiers": {
+      "tier1_critical": [
+        {
+          "id": "t1_fomc_actual_cut",
+          "desc": "FOMC announces a 25bp rate cut at any meeting. Observable in FOMC statement on federalreserve.gov same day.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "First cut: H2 +20pp, H1 -20pp. Second cut within same year: H3 +20pp, H2 -15pp."
+        },
+        {
+          "id": "t1_fomc_actual_hike",
+          "desc": "FOMC announces a 25bp+ rate hike at any meeting. Observable in FOMC statement.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H4 +40pp. H2/H3 collapse to near-zero."
+        },
+        {
+          "id": "t1_cpi_reacceleration",
+          "desc": "Month-over-month core CPI prints +0.5% or higher for two consecutive months, or year-over-year core CPI crosses 4.0%. BLS release, verifiable.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H4 +15pp, H1 +10pp, H3 -20pp."
+        },
+        {
+          "id": "t1_unemployment_spike",
+          "desc": "BLS monthly unemployment rate reaches 5.5% or higher in any single report.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H3 +25pp. Emergency cut scenario becomes likely. H1/H4 both -10pp."
+        },
+        {
+          "id": "t1_dot_plot_shift_hawkish",
+          "desc": "June or September SEP dot plot median moves to zero cuts in 2026 (from current one-cut median). Observable in published SEP table.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 +20pp, H4 +5pp, H2 -15pp, H3 -10pp."
+        },
+        {
+          "id": "t1_dot_plot_shift_dovish",
+          "desc": "June or September SEP dot plot median moves to two or more cuts in 2026. Observable in published SEP table.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H3 +20pp, H2 +5pp, H1 -15pp, H4 -10pp."
+        }
+      ],
+      "tier2_strong": [
+        {
+          "id": "t2_pce_below_25",
+          "desc": "Core PCE falls to 2.5% or below on a 3-month annualized basis. BEA release, verifiable.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H2/H3 combined +10pp. Removes key obstacle to cuts."
+        },
+        {
+          "id": "t2_fed_funds_futures_price_2cuts",
+          "desc": "December 2026 Fed funds futures consistently price in 2+ cuts (>50bp) for 10+ consecutive trading days.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H3 +8pp, H2 -5pp. Market is a noisy but influential signal."
+        },
+        {
+          "id": "t2_payrolls_sub_50k",
+          "desc": "Non-farm payrolls print below +50,000 for two consecutive months. BLS release.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H3 +10pp, H1 -5pp. Labor weakening accelerates cut timeline."
+        },
+        {
+          "id": "t2_powell_explicit_cut_signal",
+          "desc": "Powell or FOMC majority explicitly signals imminent cut in press conference or congressional testimony — not just 'data dependent' but conditional language pointing to specific meeting.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H2 +10pp. Note: rhetoric only, must fire before T1 cut confirmation."
+        },
+        {
+          "id": "t2_tariff_inflation_pass_through",
+          "desc": "Fed Beige Book or regional Fed surveys show widespread, broad-based tariff price pass-through reported by 70%+ of districts. Observable in published Beige Book.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 +8pp, H4 +5pp. Signals inflation stickier than base case."
+        },
+        {
+          "id": "t2_yield_curve_inversion_deepens",
+          "desc": "2yr-10yr spread inverts beyond -50bp for 30+ consecutive days. Observable via Treasury data / FRED.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H3 +8pp. Recession signal historically precedes emergency cuts."
+        },
+        {
+          "id": "t2_gdp_contraction",
+          "desc": "BEA advance GDP estimate shows negative growth in any quarter of 2026 (Q1 or Q2 advance release).",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H3 +15pp. Recession forces hand on cuts regardless of inflation."
+        }
+      ],
+      "tier3_suggestive": [
+        {
+          "id": "t3_fomc_minutes_dovish",
+          "desc": "Published FOMC minutes show majority of participants discussed easing in the near term. Observable in minutes 3 weeks post-meeting.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H2 +3pp, H3 +2pp."
+        },
+        {
+          "id": "t3_unemployment_4pt8",
+          "desc": "Unemployment reaches 4.8% in any monthly BLS report.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H3 +4pp. Trending toward cut-triggering threshold."
+        },
+        {
+          "id": "t3_cpi_3consecutive_benign",
+          "desc": "Three consecutive monthly CPI reports show core m/m of 0.2% or below.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H2 +4pp, H3 +3pp. Disinflation narrative strengthens."
+        },
+        {
+          "id": "t3_fed_vice_chair_dovish_speech",
+          "desc": "Fed Vice Chair or multiple governors give speeches emphasizing downside labor risks (not inflation). Observable in published speech transcripts.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H2 +2pp. Socialization signal for cut."
+        },
+        {
+          "id": "t3_goldman_forecast_revision_upward",
+          "desc": "Goldman Sachs revises its 2026 Fed cut forecast upward to 3+ cuts in a published research note.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H3 +3pp. Wall Street forecasters move together; one leading revision often precedes consensus shift."
+        },
+        {
+          "id": "t3_tariff_rollback",
+          "desc": "White House announces material rollback or delay of tariffs affecting >20% of import volume. Observable in official trade policy announcements.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H3 +5pp, H4 -5pp. Removes key inflation upside risk."
+        },
+        {
+          "id": "t3_breakeven_inflation_above_3",
+          "desc": "5yr breakeven inflation rate (TIPS spread) rises above 3.0% on FRED for 20+ consecutive trading days.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H4 +4pp, H3 -4pp. Market pricing in persistent above-target inflation."
+        }
+      ],
+      "anti_indicators": [
+        {
+          "id": "anti_h1",
+          "desc": "Fed delivers any cut OR dot plot shifts to 2+ cuts for 2026 — directly falsifies no-cut scenario.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 -25pp minimum if t1_fomc_actual_cut fires."
+        },
+        {
+          "id": "anti_h2",
+          "desc": "Fed holds all year through December AND delivers zero cuts (H1 confirmed), OR delivers two or more cuts (H3 confirmed).",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H2 collapses to near-zero if either H1 or H3 is confirmed."
+        },
+        {
+          "id": "anti_h3",
+          "desc": "CPI re-accelerates above 4% YoY OR FOMC explicitly signals hike bias — removes room for two-cut scenario.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H3 -20pp if inflation regime flips to RE-ACCELERATING."
+        },
+        {
+          "id": "anti_h4",
+          "desc": "Core PCE falls sustainably below 2.5% OR unemployment exceeds 5.5% — removes inflation pressure that would force a hike.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H4 -15pp. Hike narrative becomes implausible."
+        }
+      ]
+    }
+  },
+
+  "actorModel": {
+    "description": "The Federal Open Market Committee (FOMC) is the sole decision-making body. 12 voting members: 7 Fed governors (permanent voters) + 5 rotating regional presidents. Chair Powell dominates public communication and sets agenda framing. Key tension in 2026: tariff-driven inflation vs. softening labor market creates genuine two-way risk, making FOMC unusually data-dependent.",
+    "actors": {
+      "powell": {
+        "name": "Jerome Powell (Chair)",
+        "role": "FOMC Chair. Controls public narrative, press conference framing, and meeting agenda. Swing vote in contentious decisions.",
+        "decisionStyle": "Institutionalist. Highly data-dependent. Consensus-builder. Reluctant to surprise markets. Prioritizes Fed credibility over speed.",
+        "biases": [
+          "Anchoring to dot plot: once median is published, needs strong justification to deviate",
+          "Asymmetric caution on inflation: scarred by 2021-2022 'transitory' episode, will err hawkish when uncertain",
+          "Labor market tolerance: comfortable with unemployment 4.5-5.0% range before treating it as emergency"
+        ],
+        "filters": [
+          "Congressional testimony requires consistent messaging — cannot pivot sharply between testimonies",
+          "Press conference commitments: language used in press conferences binds subsequent communication",
+          "Dual mandate: must balance both inflation and employment, cannot optimize for one alone"
+        ],
+        "overrides": [
+          "Financial stability shock (credit crunch, bank failures) — historical override for emergency cuts",
+          "Unemployment spike above 5.5% — would override inflation caution",
+          "Explicit White House pressure tends to produce the opposite of intended effect (Powell independence signaling)"
+        ]
+      },
+      "fomc_hawks": {
+        "name": "FOMC Hawks (Bowman, Waller, regional presidents)",
+        "role": "Voting members who lean toward maintaining restrictive policy. Constrain Powell's ability to cut without consensus.",
+        "decisionStyle": "Rules-based. Prefer systematic frameworks over discretionary judgment. Resistant to cutting before inflation clearly at 2%.",
+        "biases": [
+          "Overly weight current inflation prints vs. forward-looking signals",
+          "Skeptical of yield curve / financial conditions as leading indicators"
+        ],
+        "filters": [
+          "Dissents are rare — institutional norm to support Chair unless strongly opposed",
+          "Speech calendars create public commitment traps"
+        ],
+        "overrides": [
+          "Unemployment above 5.5% would bring hawks into cut consensus"
+        ]
+      },
+      "fomc_doves": {
+        "name": "FOMC Doves (Cook, Jefferson, regional presidents)",
+        "role": "Voting members who lean toward easing policy to support employment. Provide vote cushion for cuts when inflation cooperates.",
+        "decisionStyle": "Balance-of-risks oriented. Weight employment side of dual mandate more heavily than hawks.",
+        "biases": [
+          "May over-weight lagging unemployment data",
+          "Can be swayed by financial conditions tightening narrative"
+        ],
+        "filters": [
+          "Same institutional constraints as hawks"
+        ],
+        "overrides": []
+      },
+      "treasury": {
+        "name": "U.S. Treasury (Bessent)",
+        "role": "Does not set rates but influences the environment: debt issuance volume, dollar policy, fiscal stimulus signals. In 2026, tariff revenue policy creates inflation feedback.",
+        "decisionStyle": "Fiscal focus. In current administration: willing to accept short-term market volatility for structural goals.",
+        "biases": [
+          "Incentivized to maintain lower rates for debt service cost management",
+          "Tariff policy creates inflation that Fed must react to — indirect constraint on rate path"
+        ],
+        "filters": [
+          "No formal authority over FOMC",
+          "Jawboning by Treasury Secretary historically has limited effect on Fed decisions"
+        ],
+        "overrides": []
+      },
+      "markets": {
+        "name": "Fed Funds Futures Market",
+        "role": "Aggregates private sector expectations. Fed monitors this for communication calibration. Systematic over-pricing of cuts is a documented bias (2024-2026 cycle).",
+        "decisionStyle": "Bayesian aggregation of analyst views, fast-moving on new data.",
+        "biases": [
+          "Historically over-anticipates cuts in restrictive environments (2024 had 6-7 cuts priced in Jan, delivered only 1)",
+          "Subject to narrative momentum — can price in aggressive cuts on single data points"
+        ],
+        "filters": [],
+        "overrides": []
+      }
+    },
+    "methodology": [
+      "ACTIONS OVER RHETORIC — FOMC statement language is observable action. Powell speeches are rhetoric until confirmed by vote.",
+      "TAG EVERYTHING — Distinguish FOMC votes (EVENT), SEP/dot plot releases (DATA), and Fed speeches (RHETORIC).",
+      "DON'T FRONT-RUN — Market pricing of cuts has been wrong in this cycle. Set tripwires and let FOMC votes confirm.",
+      "SOCIALIZATION DETECTION — Watch for coordinated dovish/hawkish messaging across multiple Fed officials in the weeks before a meeting. This is the Fed pre-committing.",
+      "DOT PLOT ANCHORING — The dot plot median is a strong prior but not a commitment. Count participant distributions, not just medians."
+    ]
+  },
+
+  "evidenceLog": [
+    {
+      "id": "ev_001",
+      "time": "2026-03-19T00:00:00Z",
+      "text": "FOMC holds target rate steady at 3.50-3.75% at March 2026 meeting. Statement reiterates 'data dependent' approach. Powell press conference emphasizes tariff uncertainty on both inflation and growth outlooks.",
+      "source": "Federal Reserve FOMC Statement, March 19 2026",
+      "tags": ["EVENT", "FOMC"],
+      "claimState": "OBSERVED",
+      "weight": 1.0
+    },
+    {
+      "id": "ev_002",
+      "time": "2026-03-19T00:00:00Z",
+      "text": "March 2026 SEP dot plot: median projection remains one 25bp cut in 2026 (to 3.25-3.50%). Range of participant views spans zero to three cuts. No participant projects a hike.",
+      "source": "Federal Reserve Summary of Economic Projections, March 2026",
+      "tags": ["DATA", "FOMC"],
+      "claimState": "OBSERVED",
+      "weight": 1.0
+    },
+    {
+      "id": "ev_003",
+      "time": "2026-04-01T00:00:00Z",
+      "text": "March 2026 BLS employment report: unemployment 4.6%, non-farm payrolls +145,000. Labor market softening gradually but not deteriorating. Wages +3.8% YoY.",
+      "source": "BLS Employment Situation, April 2026 release",
+      "tags": ["DATA"],
+      "claimState": "OBSERVED",
+      "weight": 1.0
+    },
+    {
+      "id": "ev_004",
+      "time": "2026-04-10T00:00:00Z",
+      "text": "Goldman Sachs forecast (as of April 2026): projects two 25bp cuts in 2026, most likely in September and December, bringing rate to 3.00-3.25%. Cites tariff-driven demand weakness outweighing inflation concerns over second half.",
+      "source": "Goldman Sachs Global Investment Research, April 2026",
+      "tags": ["ANALYSIS"],
+      "claimState": "SUPPORTED",
+      "weight": 0.6,
+      "weightNote": "Wall Street forecast, not primary source. Informative for market prior but RHETORIC-adjacent."
+    },
+    {
+      "id": "ev_005",
+      "time": "2026-04-10T00:00:00Z",
+      "text": "Bankrate analyst consensus (April 2026): projects three 25bp cuts in 2026, bringing rate to 2.75-3.00%. Minority view in professional forecaster community.",
+      "source": "Bankrate Fed Rate Forecast, April 2026",
+      "tags": ["ANALYSIS"],
+      "claimState": "PROPOSED",
+      "weight": 0.4,
+      "weightNote": "Retail-facing forecast aggregator. Lower weight than primary Fed or primary research sources."
+    }
+  ],
+
+  "dataFeeds": {
+    "fed_funds_rate": {
+      "label": "Fed Funds Target Rate (upper bound)",
+      "value": 3.75,
+      "unit": "%",
+      "baseline": 3.75,
+      "asOf": "2026-04-11",
+      "source": "Federal Reserve",
+      "note": "Target range 3.50-3.75%. Tracking upper bound."
+    },
+    "core_cpi_yoy": {
+      "label": "Core CPI YoY",
+      "value": 3.1,
+      "unit": "%",
+      "baseline": 3.1,
+      "asOf": "2026-04-11",
+      "source": "BLS",
+      "note": "Approximate April 2026 estimate. Update monthly on BLS release."
+    },
+    "core_pce_yoy": {
+      "label": "Core PCE YoY",
+      "value": 2.8,
+      "unit": "%",
+      "baseline": 2.8,
+      "asOf": "2026-04-11",
+      "source": "BEA",
+      "note": "Fed's preferred inflation gauge. Target is 2.0%. Current 2.8% is above target but below crisis level."
+    },
+    "unemployment": {
+      "label": "Unemployment Rate",
+      "value": 4.6,
+      "unit": "%",
+      "baseline": 4.6,
+      "asOf": "2026-04-11",
+      "source": "BLS",
+      "note": "March 2026 reading. Creeping up from 4.1% in early 2025."
+    },
+    "fed_funds_futures_dec26": {
+      "label": "Dec 2026 Fed Funds Futures Implied Rate",
+      "value": 3.25,
+      "unit": "%",
+      "baseline": 3.25,
+      "asOf": "2026-04-11",
+      "source": "CME FedWatch",
+      "note": "Implies ~1.5 cuts priced by Dec 2026. Check CME FedWatch tool for updates."
+    },
+    "two_ten_spread": {
+      "label": "2yr-10yr Treasury Spread",
+      "value": 0.15,
+      "unit": "%",
+      "baseline": 0.15,
+      "asOf": "2026-04-11",
+      "source": "FRED / Treasury",
+      "note": "Slightly positive. Not inverted. Recession signal not currently active."
+    },
+    "breakeven_5yr": {
+      "label": "5yr Breakeven Inflation (TIPS spread)",
+      "value": 2.6,
+      "unit": "%",
+      "baseline": 2.6,
+      "asOf": "2026-04-11",
+      "source": "FRED",
+      "note": "Market-implied inflation expectations. Above 2.0% target but not alarming. Watch for move above 3.0%."
+    },
+    "nfp_last": {
+      "label": "Non-Farm Payrolls (most recent monthly)",
+      "value": 145,
+      "unit": "thousands",
+      "baseline": 145,
+      "asOf": "2026-04-11",
+      "source": "BLS",
+      "note": "March 2026 reading. Decent but decelerating from 2025 pace."
+    }
+  },
+
+  "watchpoints": [
+    {
+      "id": "wp_001",
+      "desc": "May FOMC meeting (May 6-7): Will statement language shift? Any dissents? Any hint of June cut possibility?",
+      "priority": "HIGH",
+      "deadline": "2026-05-07"
+    },
+    {
+      "id": "wp_002",
+      "desc": "April CPI release (mid-April): First post-tariff-implementation inflation read. Core CPI above 0.4% m/m would be significant hawkish signal.",
+      "priority": "HIGH",
+      "deadline": "2026-04-15"
+    },
+    {
+      "id": "wp_003",
+      "desc": "Q1 2026 GDP advance estimate (late April): Negative print would materially shift H3 upward.",
+      "priority": "HIGH",
+      "deadline": "2026-04-30"
+    },
+    {
+      "id": "wp_004",
+      "desc": "June FOMC + SEP (Jun 17-18): Next dot plot release. Will median shift? This is the highest-information meeting between now and year-end.",
+      "priority": "HIGH",
+      "deadline": "2026-06-18"
+    },
+    {
+      "id": "wp_005",
+      "desc": "Watch for coordinated Fed governor speeches (~2 weeks before each FOMC meeting) signaling meeting outcome.",
+      "priority": "MEDIUM",
+      "deadline": "ONGOING"
+    },
+    {
+      "id": "wp_006",
+      "desc": "CME FedWatch tool: if Dec 2026 futures price in 3+ cuts (implied rate <3.00%) for 10+ consecutive days, trigger t2 indicator review.",
+      "priority": "MEDIUM",
+      "deadline": "ONGOING"
+    },
+    {
+      "id": "wp_007",
+      "desc": "White House / Trump statements on Fed independence: aggressive rate-cut demands could trigger Powell credibility defense (hawkish response). Monitor Truth Social and official statements.",
+      "priority": "LOW",
+      "deadline": "ONGOING"
+    }
+  ],
+
+  "searchQueries": [
+    "Federal Reserve FOMC meeting {month} 2026 rate decision",
+    "Fed funds rate cut hike 2026 {month}",
+    "Powell press conference {month} 2026 transcript",
+    "FOMC statement {month} 2026 site:federalreserve.gov",
+    "core CPI April 2026 BLS inflation",
+    "core PCE March 2026 BEA personal consumption",
+    "Fed dot plot June 2026 SEP projections",
+    "CME FedWatch December 2026 implied rate",
+    "Goldman Sachs Fed rate forecast 2026 cuts",
+    "tariff inflation pass-through Federal Reserve Beige Book 2026",
+    "unemployment rate May 2026 BLS payrolls",
+    "Fed funds futures December 2026 pricing",
+    "Powell congressional testimony 2026",
+    "FOMC minutes {month} 2026 easing guidance",
+    "5yr TIPS breakeven inflation 2026 FRED",
+    "2yr 10yr Treasury yield spread inversion 2026",
+    "GDP Q1 2026 advance estimate BEA"
+  ],
+
+  "governance": null,
+
+  "predictionScoring": {
+    "_docs": "Calibration infrastructure. Snapshots are auto-created by engine on each posterior update. Record outcome when topic resolves (after Dec 2026 FOMC meeting), then compute_calibration_report() for Brier analysis.",
+    "snapshots": [],
+    "outcomes": [],
+    "brierScores": []
+  }
+}

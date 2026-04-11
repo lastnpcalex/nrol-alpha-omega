@@ -1,0 +1,804 @@
+{
+  "_protocol": "Calibration topic — prospective. Populated 2026-04-11. Resolves on BEA advance GDP release for Q3 2026 (est. Oct 2026).",
+
+  "meta": {
+    "slug": "calibration-us-recession-2026",
+    "title": "US Recession by Q4 2026",
+    "question": "Will the US economy enter a recession (2 consecutive quarters of negative real GDP growth) by Q4 2026?",
+    "resolution": "BEA official advance GDP prints for Q2 2026 (released ~July 2026) and Q3 2026 (released ~Oct 2026). Two consecutive quarters of negative real GDP growth = recession confirmed. NBER declaration is corroborating but NOT required for resolution — the quantitative criterion governs.",
+    "created": "2026-04-11T00:00:00Z",
+    "lastUpdated": "2026-04-11T00:00:00Z",
+    "status": "ACTIVE",
+    "dayCount": 0,
+    "startDate": "2026-04-11T00:00:00Z",
+    "classification": "ROUTINE",
+    "topicType": "economics",
+    "horizon": "~6 months (Q3 2026 GDP advance print, est. Oct 2026)",
+    "_notes": [
+      "Base rate: Post-WWII US recessions occur roughly every 6-8 years. We are ~3 years from COVID trough.",
+      "Polymarket consensus ~25% as of early April 2026.",
+      "Section 122 tariffs (10% universal + higher sector-specific) add demand uncertainty and supply-chain inflation simultaneously.",
+      "Fed at 3.50-3.75% has limited room to cut before reaching ZLB concern territory.",
+      "H1+H2 are 'recession yes' outcomes (H2 shallow, H3 deep). H4 is stagflation variant. H1 is no recession.",
+      "WARNING: H labeling is non-standard here. H1=NO recession. H2/H3/H4 are recession severity variants. Sum H2+H3+H4 = total recession probability."
+    ]
+  },
+
+  "tagConfig": {
+    "_docs": "ECON tag = hard data releases (GDP, PMI, unemployment). DATA = any numerical feed update. POLICY = Fed/Treasury/fiscal action. RHETORIC = statements without action. EVENT = market events, institutional actions. ANALYSIS = derived/model output.",
+    "availableTags": ["EVENT", "DATA", "RHETORIC", "INTEL", "ANALYSIS", "ECON", "POLICY", "LABOR", "TRADE"],
+    "directionHints": {
+      "ECON": {
+        "H1": 0,
+        "H2": 0,
+        "H3": 0,
+        "H4": 0,
+        "_note": "Neutral by default — direction depends on whether data is strong or weak. Let evidence text carry the signal."
+      },
+      "POLICY": {
+        "H1": 1,
+        "H2": -1,
+        "H3": -1,
+        "H4": 0,
+        "_note": "Stimulative policy (rate cuts, fiscal expansion) favors H1 over H2/H3. Stagflation (H4) is orthogonal to policy."
+      },
+      "LABOR": {
+        "H1": 0,
+        "H2": 0,
+        "H3": 0,
+        "H4": 0,
+        "_note": "Labor data is highly directional but depends on reading. Use indicator thresholds, not tag alone."
+      },
+      "TRADE": {
+        "H1": -1,
+        "H2": 1,
+        "H3": 1,
+        "H4": 1,
+        "_note": "Tariff escalation or trade disruption is net-negative. Favors recession outcomes over H1."
+      },
+      "RHETORIC": {
+        "H1": 0,
+        "H2": 0,
+        "H3": 0,
+        "H4": 0,
+        "_note": "Statements do not move posteriors. Flag as RHETORIC and hold."
+      }
+    },
+    "escalationTags": ["TRADE", "LABOR"],
+    "deescalationTags": ["POLICY"]
+  },
+
+  "model": {
+    "_prior_rationale": [
+      "Polymarket ~25% recession probability = useful anchor but subject to bias (prediction markets underweight tail risks in low-liquidity environments).",
+      "Historical base rate: ~15-20% chance of recession in any given 12-month window (post-WWII average). 6-month window is lower: ~8-12%.",
+      "Tariff shock adds ~5-8pp above base rate based on analogues (2018-19 tariff uncertainty, 1970s supply shocks).",
+      "PMI Manufacturing below 50 for several months is recessionary-adjacent but NOT recession — services PMI matters more for GDP.",
+      "Unemployment at 4.6% is elevated from cycle low but not yet at Sahm Rule trigger (typically ~0.5pp 3m-avg rise above prior 12m low).",
+      "GDP growth forecasts of 1.5-2.0% leave a thin margin. A 2pp downside shock from tariffs or consumer pullback would flip sign.",
+      "Split: ~55% no recession (H1), ~22% technical/shallow (H2), ~14% significant (H3), ~9% stagflation (H4).",
+      "This is a modest recession lean relative to Polymarket. Rationale: Polymarket ~25% bundles all recession types. Our H2+H3+H4 = ~45%, but ~20pp of that is in H2 which is shallow and hard to distinguish from 'stall speed' growth. Adjust downward for base-rate anchoring."
+    ],
+    "hypotheses": {
+      "H1": {
+        "label": "No recession — GDP stays positive both Q2 and Q3 2026",
+        "midpoint": null,
+        "unit": "probability",
+        "posterior": 0.55,
+        "description": "US avoids two consecutive negative GDP quarters. Growth may slow to near-zero (0.0-1.0% annualized) but does not go negative. Labor market softens but holds. Fed cuts 1-2 times as insurance. Tariff impact is absorbed via margin compression and partial pass-through. Resolves: Both Q2 and Q3 BEA advance prints are positive."
+      },
+      "H2": {
+        "label": "Technical recession — 2 negative quarters, shallow (> -1.5% annualized each)",
+        "midpoint": null,
+        "unit": "probability",
+        "posterior": 0.22,
+        "description": "GDP goes negative for 2 quarters but neither quarter exceeds -1.5% annualized contraction. Unemployment rises to 4.8-5.2%. Shallow enough that NBER may delay or decline to call. Consumer spending contracts modestly. Fed cuts aggressively (3+ cuts). Resolves: Q2 or Q3 GDP negative, neither quarter worse than -1.5% ann."
+      },
+      "H3": {
+        "label": "Significant recession — unemployment crosses 5.5%, GDP -1.5% or worse",
+        "midpoint": null,
+        "unit": "probability",
+        "posterior": 0.14,
+        "description": "Hard landing. GDP contracts -1.5% or worse in at least one quarter. Unemployment rises through 5.5% by Q4. Corporate layoffs accelerate. Fed pivots to emergency cuts. Credit spreads widen materially. Possible external shock amplifier (trade war escalation, financial contagion). Resolves: At least one GDP print worse than -1.5% ann AND unemployment >5.5%."
+      },
+      "H4": {
+        "label": "Stagflation — negative GDP growth with CPI above 4%",
+        "midpoint": null,
+        "unit": "probability",
+        "posterior": 0.09,
+        "description": "Worst case: tariff pass-through re-ignites inflation above 4% CPI while GDP contracts. Fed is caught between cutting to support growth and holding/hiking to contain inflation. Analogues: 1973-74, 1980. Requires tariff escalation beyond current 10% universal — sector-specific hikes (autos, energy) driving simultaneous supply contraction and price increases. Resolves: GDP negative for 2 quarters AND CPI year-over-year above 4%."
+      }
+    },
+    "expectedValue": null,
+    "expectedUnit": "probability_of_recession",
+    "posteriorHistory": [
+      {
+        "date": "2026-04-11T00:00:00Z",
+        "posteriors": { "H1": 0.55, "H2": 0.22, "H3": 0.14, "H4": 0.09 },
+        "note": "Initial priors. Weighted against Polymarket ~25% (all recession types). Our H2+H3+H4 = 45% reflects higher weight on downside given tariff uncertainty and thin GDP margin. Moderate confidence — wide uncertainty bands appropriate.",
+        "H1": 0.55,
+        "H2": 0.22,
+        "H3": 0.14,
+        "H4": 0.09
+      }
+    ]
+  },
+
+  "subModels": {
+    "labor_market": {
+      "label": "Labor Market Health",
+      "description": "Composite read on employment conditions. Key leading indicators: initial jobless claims trend, quits rate, hiring rate.",
+      "current": {
+        "unemployment_rate": 4.6,
+        "unemployment_unit": "percent",
+        "sahm_rule_indicator": "unknown — needs current 3m avg vs prior 12m low",
+        "initial_claims_4wk_avg": null,
+        "quits_rate": null,
+        "status": "SOFTENING",
+        "asOf": "2026-04-11T00:00:00Z"
+      },
+      "thresholds": {
+        "sahm_rule_trigger": "3m avg unemployment >= prior 12m low + 0.5pp → recession signal",
+        "unemployment_h3_threshold": 5.5,
+        "claims_concern_level": "4-week average above 260k is elevated; above 300k is recessionary"
+      },
+      "lastUpdated": "2026-04-11T00:00:00Z"
+    },
+    "manufacturing_pulse": {
+      "label": "Manufacturing & Industrial Activity",
+      "description": "ISM Manufacturing PMI as primary signal. Below 50 = contraction. Below 45 = significant contraction. New Orders sub-index is leading.",
+      "current": {
+        "ism_manufacturing_pmi": null,
+        "ism_new_orders": null,
+        "industrial_production_yoy": null,
+        "status": "CONTRACTING",
+        "context": "ISM Manufacturing below 50 for multiple months as of April 2026",
+        "asOf": "2026-04-11T00:00:00Z"
+      },
+      "thresholds": {
+        "contraction": "PMI < 50",
+        "significant_contraction": "PMI < 45",
+        "new_orders_leading_signal": "New Orders sub-index below 45 typically leads recession by 2-3 quarters"
+      },
+      "lastUpdated": "2026-04-11T00:00:00Z"
+    },
+    "consumer_health": {
+      "label": "Consumer Demand & Confidence",
+      "description": "Consumer spending is ~70% of US GDP. Confidence surveys are leading; retail sales and PCE are coincident.",
+      "current": {
+        "consumer_confidence_index": null,
+        "retail_sales_mom": null,
+        "personal_savings_rate": null,
+        "credit_card_delinquency_trend": "rising — needs current value",
+        "status": "DECLINING",
+        "context": "Consumer confidence declining for 3 consecutive quarters as of April 2026",
+        "asOf": "2026-04-11T00:00:00Z"
+      },
+      "thresholds": {
+        "confidence_recession_signal": "University of Michigan index below 60, or Conference Board below 80, sustained 2+ months",
+        "retail_sales_concern": "3-month rolling average negative in real terms"
+      },
+      "lastUpdated": "2026-04-11T00:00:00Z"
+    },
+    "monetary_conditions": {
+      "label": "Monetary Policy & Credit Conditions",
+      "description": "Fed funds rate, yield curve shape, credit spreads. Restrictive conditions precede recession with 12-18 month lag.",
+      "current": {
+        "fed_funds_target": "3.50-3.75%",
+        "fed_funds_midpoint": 3.625,
+        "ten_year_two_year_spread": null,
+        "ten_year_three_month_spread": null,
+        "hy_credit_spread_bps": null,
+        "yield_curve_status": "unknown — inversion history through 2024-2025 may already have front-loaded recession signal",
+        "status": "HOLDING",
+        "asOf": "2026-04-11T00:00:00Z"
+      },
+      "thresholds": {
+        "yield_curve_inversion_concern": "10y-2y below 0 sustained 6+ months → historically precedes recession by 12-24 months",
+        "credit_spread_warning": "HY spread above 500bps signals credit stress",
+        "fed_pivot_signal": "2+ emergency cuts between meetings = recession acknowledgment by Fed"
+      },
+      "lastUpdated": "2026-04-11T00:00:00Z"
+    },
+    "tariff_impact": {
+      "label": "Trade Policy & Tariff Shock Assessment",
+      "description": "Section 122 universal 10% tariff effective impact on GDP and inflation. Tracks escalation risk.",
+      "current": {
+        "universal_tariff_rate": 10.0,
+        "universal_tariff_unit": "percent",
+        "sector_specific_additional": "unknown — needs current schedule",
+        "estimated_gdp_drag": "-0.5 to -1.0pp annualized (range, model-dependent)",
+        "estimated_cpi_impulse": "+0.3 to +0.8pp (range, model-dependent)",
+        "escalation_risk": "MODERATE — retaliatory tariffs from EU/China could amplify",
+        "status": "ACTIVE",
+        "asOf": "2026-04-11T00:00:00Z"
+      },
+      "thresholds": {
+        "escalation_to_h3": "Universal tariff rises to 20%+ OR major trading partner imposes retaliatory tariffs on US services/agriculture",
+        "stagflation_risk_trigger": "Tariff-driven CPI above 3.5% while GDP slowing — puts Fed in impossible position"
+      },
+      "lastUpdated": "2026-04-11T00:00:00Z"
+    }
+  },
+
+  "indicators": {
+    "_design_rules": [
+      "Each indicator is OBSERVABLE — a reported data point or official action, not a sentiment reading.",
+      "Thresholds are set prospectively before first update. Do not change thresholds after firing.",
+      "Governor flags unfalsifiable hypotheses as DEGRADED.",
+      "H1 = no recession. H2 = shallow recession. H3 = significant recession. H4 = stagflation."
+    ],
+    "tiers": {
+      "tier1_critical": [
+        {
+          "id": "t1_gdp_negative_q2",
+          "desc": "BEA advance GDP print for Q2 2026 is negative (annualized real GDP < 0%). Observable: BEA press release, ~July 30 2026.",
+          "threshold_fired": "Q2 2026 advance GDP < 0%",
+          "threshold_not_fired": "Q2 2026 advance GDP >= 0%",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "First of two required quarters for technical recession definition. Alone, triggers H2/H3 watch but not resolution.",
+          "posteriorEffect": "If fired: H1 -20pp, H2 +10pp, H3 +7pp, H4 +3pp. If strongly positive (>1.5%): H1 +10pp, others proportional down."
+        },
+        {
+          "id": "t1_gdp_negative_q3",
+          "desc": "BEA advance GDP print for Q3 2026 is negative (annualized real GDP < 0%), following a negative Q2. Observable: BEA press release, ~Oct 30 2026.",
+          "threshold_fired": "Q3 2026 advance GDP < 0% AND Q2 was also negative",
+          "threshold_not_fired": "Q3 2026 advance GDP >= 0%, OR Q2 was positive",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "Confirmation of technical recession. Severity determines H2 vs H3 resolution. If both quarters worse than -1.5% ann, H3. If stagflation conditions co-present (CPI >4%), H4.",
+          "posteriorEffect": "If fired following negative Q2: H1 to near 0, H2/H3/H4 redistribute based on depth and CPI."
+        },
+        {
+          "id": "t1_sahm_rule_triggered",
+          "desc": "Sahm Rule indicator triggers: 3-month average unemployment rate rises 0.5pp or more above its prior 12-month low. Observable: BLS monthly unemployment release.",
+          "threshold_fired": "Sahm Rule indicator >= 0.50",
+          "threshold_not_fired": "Sahm Rule indicator < 0.50",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "Sahm Rule has triggered before or concurrent with every recession since 1970. Current unemployment 4.6% — need prior 12m low to calculate current indicator value. Approximate: if prior 12m low was 4.1%, current 3m avg of 4.6% would be right at threshold.",
+          "posteriorEffect": "If fired: H1 -15pp, H2 +8pp, H3 +5pp, H4 +2pp."
+        },
+        {
+          "id": "t1_fed_emergency_cut",
+          "desc": "Fed cuts rates outside of scheduled FOMC meeting (emergency inter-meeting cut). Observable: Fed press release.",
+          "threshold_fired": "Fed announces rate cut not at a scheduled FOMC meeting",
+          "threshold_not_fired": "All rate actions occur at scheduled FOMC meetings",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "Emergency cuts occurred March 2020 (COVID), Jan 2008, Sept 2007. Each preceded confirmed recession. Extremely high signal — Fed only acts inter-meeting when conditions deteriorate rapidly.",
+          "posteriorEffect": "If fired: H1 -25pp, H2 +10pp, H3 +10pp, H4 +5pp."
+        }
+      ],
+      "tier2_strong": [
+        {
+          "id": "t2_ism_manufacturing_below45",
+          "desc": "ISM Manufacturing PMI falls below 45.0 in any monthly reading. Observable: ISM press release, first business day of each month.",
+          "threshold_fired": "ISM Manufacturing PMI < 45.0",
+          "threshold_not_fired": "ISM Manufacturing PMI >= 45.0",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "PMI already below 50 (contraction). A break below 45 historically correlates with recession within 6 months. Below 42 is historically only seen during confirmed recessions.",
+          "posteriorEffect": "If fired: H1 -8pp, H2 +4pp, H3 +3pp, H4 +1pp."
+        },
+        {
+          "id": "t2_ism_services_below50",
+          "desc": "ISM Services PMI falls below 50.0 for two consecutive months. Observable: ISM press release.",
+          "threshold_fired": "ISM Services PMI < 50 for 2 consecutive months",
+          "threshold_not_fired": "ISM Services PMI >= 50 or only 1 month below",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "Services is 70%+ of US GDP. Manufacturing can contract without recession if services hold. Sustained services contraction below 50 is a strong recession leading indicator.",
+          "posteriorEffect": "If fired: H1 -10pp, H2 +5pp, H3 +3pp, H4 +2pp."
+        },
+        {
+          "id": "t2_unemployment_above5",
+          "desc": "BLS monthly unemployment rate rises above 5.0% in official U-3 rate. Observable: BLS Employment Situation report.",
+          "threshold_fired": "U-3 unemployment >= 5.0%",
+          "threshold_not_fired": "U-3 unemployment < 5.0%",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "Current at 4.6%. A crossing of 5.0% would represent significant deterioration and likely partial Sahm Rule trigger. Strong signal for H3.",
+          "posteriorEffect": "If fired: H1 -10pp, H2 +3pp, H3 +5pp, H4 +2pp."
+        },
+        {
+          "id": "t2_yield_curve_reinverts",
+          "desc": "10y-2y Treasury yield spread returns to negative (inversion) after having normalized, sustained for 4+ weeks. Observable: Fed H.15 release or Treasury Direct.",
+          "threshold_fired": "10y-2y spread < 0 for 4 consecutive weeks",
+          "threshold_not_fired": "10y-2y spread >= 0 or inversion < 4 weeks",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "Yield curve was inverted 2022-2024. Re-inversion after normalization would signal renewed credit stress or flight to safety. Less reliable as standalone indicator post-QE era.",
+          "posteriorEffect": "If fired: H1 -5pp, H2 +2pp, H3 +2pp, H4 +1pp."
+        },
+        {
+          "id": "t2_retail_sales_3m_negative",
+          "desc": "Real retail sales (inflation-adjusted) are negative on a 3-month rolling average basis. Observable: Census Bureau Advance Retail Sales + CPI adjustment.",
+          "threshold_fired": "3-month average real retail sales growth < 0",
+          "threshold_not_fired": "3-month average real retail sales growth >= 0",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "Retail sales proxy for consumer spending. Negative real trend = consumers pulling back. Three months filters noise.",
+          "posteriorEffect": "If fired: H1 -7pp, H2 +4pp, H3 +2pp, H4 +1pp."
+        },
+        {
+          "id": "t2_initial_claims_above300k",
+          "desc": "4-week moving average of initial jobless claims exceeds 300,000. Observable: DOL weekly claims release.",
+          "threshold_fired": "4-week average initial claims > 300,000",
+          "threshold_not_fired": "4-week average initial claims <= 300,000",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "Claims have been historically low (~220k range). A sustained rise to 300k+ indicates significant layoff acceleration. Fast-moving signal — leads GDP by 1-2 quarters.",
+          "posteriorEffect": "If fired: H1 -8pp, H2 +4pp, H3 +3pp, H4 +1pp."
+        },
+        {
+          "id": "t2_cpi_above4_during_slowdown",
+          "desc": "CPI year-over-year exceeds 4.0% while GDP growth is below 1.0% or negative. Observable: BLS CPI report + GDP print.",
+          "threshold_fired": "CPI YoY > 4.0% AND GDP growth < 1.0%",
+          "threshold_not_fired": "CPI YoY <= 4.0% OR GDP growth >= 1.0%",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "Stagflation precondition. Tariff pass-through is the primary risk channel here. Fed is trapped: cutting accelerates inflation, holding deepens recession.",
+          "posteriorEffect": "If fired: H4 +15pp, H2 -5pp, H3 -3pp, H1 -7pp."
+        },
+        {
+          "id": "t2_tariff_escalation_20pct",
+          "desc": "US raises universal tariff rate to 20%+ or announces major sector-specific tariffs (auto, energy, pharma) above 25%. Observable: Federal Register / USTR announcement.",
+          "threshold_fired": "Universal tariff >= 20% OR major sector tariff >= 25% on >$100B import category",
+          "threshold_not_fired": "Universal tariff remains at 10%, no major sector escalation",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "Current universal rate is 10%. Escalation would compound GDP drag and inflation simultaneously. Immediate recession risk amplifier.",
+          "posteriorEffect": "If fired: H1 -10pp, H2 +3pp, H3 +4pp, H4 +3pp."
+        }
+      ],
+      "tier3_suggestive": [
+        {
+          "id": "t3_conference_board_below80",
+          "desc": "Conference Board Consumer Confidence Index falls below 80. Observable: Conference Board monthly release.",
+          "threshold_fired": "Conference Board CCI < 80",
+          "threshold_not_fired": "Conference Board CCI >= 80",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "Confidence has been declining 3 quarters. Below 80 is historically associated with recession conditions. Sentiment indicator — leads spending by 1-2 months.",
+          "posteriorEffect": "If fired: H1 -3pp, H2 +1pp, H3 +1pp, H4 +1pp."
+        },
+        {
+          "id": "t3_umich_below60",
+          "desc": "University of Michigan Consumer Sentiment falls below 60. Observable: U of Michigan monthly preliminary release.",
+          "threshold_fired": "UMich Sentiment < 60",
+          "threshold_not_fired": "UMich Sentiment >= 60",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "Below 60 is historically recessionary territory. Fast-moving; can recover quickly. Corroborating signal, not standalone.",
+          "posteriorEffect": "If fired: H1 -2pp, H2 +1pp, H3 +0.5pp, H4 +0.5pp."
+        },
+        {
+          "id": "t3_ism_new_orders_below45",
+          "desc": "ISM Manufacturing New Orders sub-index falls below 45. Observable: ISM press release (sub-component).",
+          "threshold_fired": "ISM New Orders sub-index < 45",
+          "threshold_not_fired": "ISM New Orders sub-index >= 45",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "New Orders leads the headline PMI by 1-2 months. Below 45 signals demand destruction, not just inventory adjustment.",
+          "posteriorEffect": "If fired: H1 -3pp, H2 +1pp, H3 +1pp, H4 +1pp."
+        },
+        {
+          "id": "t3_sp500_correction_20pct",
+          "desc": "S&P 500 falls 20%+ from its most recent high (bear market territory). Observable: major financial data sources.",
+          "threshold_fired": "S&P 500 drawdown from 52-week high >= 20%",
+          "threshold_not_fired": "S&P 500 drawdown from 52-week high < 20%",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "Markets are imperfect recession predictors (Samuelson: 'predicted 9 of last 5 recessions'). But a genuine bear market reflects earnings expectations. Corroborating, not causal.",
+          "posteriorEffect": "If fired: H1 -4pp, H2 +2pp, H3 +1pp, H4 +1pp."
+        },
+        {
+          "id": "t3_hy_spread_above500",
+          "desc": "ICE BofA US High Yield Index option-adjusted spread exceeds 500 basis points. Observable: Fed FRED series (BAMLH0A0HYM2).",
+          "threshold_fired": "HY OAS > 500bps",
+          "threshold_not_fired": "HY OAS <= 500bps",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "HY spreads widened during COVID (>1000bps), GFC (>2000bps), 2015-16 oil shock (~800bps). Sustained above 500 implies credit market stress, tightening conditions for leveraged companies.",
+          "posteriorEffect": "If fired: H1 -3pp, H2 +1pp, H3 +1pp, H4 +1pp."
+        },
+        {
+          "id": "t3_gdp_nowcast_negative",
+          "desc": "Atlanta Fed GDPNow or NY Fed Nowcast falls below 0% for the current quarter. Observable: Atlanta Fed GDPNow (updated every few days).",
+          "threshold_fired": "GDPNow estimate for current quarter < 0%",
+          "threshold_not_fired": "GDPNow estimate >= 0%",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "Real-time signal. Nowcasts are volatile early in a quarter and converge as data arrives. A sustained sub-zero nowcast (3+ weeks) is more reliable than a brief dip.",
+          "posteriorEffect": "If fired and sustained: H1 -5pp, H2 +2pp, H3 +2pp, H4 +1pp."
+        },
+        {
+          "id": "t3_fed_cuts_2plus_in_year",
+          "desc": "Fed cuts rates 2 or more times in 2026. Observable: FOMC meeting statements.",
+          "threshold_fired": "2+ Fed rate cuts occur at FOMC meetings in calendar 2026",
+          "threshold_not_fired": "0 or 1 cuts in 2026",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "Multiple cuts signal Fed sees material downside. Insurance cuts (1 cut) are benign. Cycle of cuts (2+) reflects deteriorating conditions. Note: cuts alone do not prevent recession.",
+          "posteriorEffect": "If fired: H1 +2pp (Fed response effective), but could also accompany H2 +2pp (cuts too late). Net effect small and ambiguous — mostly informational."
+        },
+        {
+          "id": "t3_major_layoff_wave",
+          "desc": "Single-week initial claims spike above 350,000, or 3+ major employers (Fortune 500) announce layoffs of 10,000+ in same calendar month. Observable: DOL claims data, company press releases.",
+          "threshold_fired": "Weekly claims > 350k OR 3+ major employer mass layoffs in one month",
+          "threshold_not_fired": "Neither condition met",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "Layoff waves are visible in claims data but lag announcement. Fortune 500 announcements are leading — actual separations take months.",
+          "posteriorEffect": "If fired: H1 -4pp, H2 +2pp, H3 +1pp, H4 +1pp."
+        }
+      ],
+      "anti_indicators": [
+        {
+          "id": "anti_h2h3_strong_gdp_q1",
+          "desc": "Q1 2026 GDP advance print comes in above 2.0% annualized. Observable: BEA advance GDP release ~April 30 2026.",
+          "threshold_fired": "Q1 2026 GDP > 2.0% annualized",
+          "threshold_not_fired": "Q1 2026 GDP <= 2.0%",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "Strong Q1 gives economy a larger buffer before recession is possible by Q4. Recession by Q4 would require Q2 AND Q3 to both go negative — more runway needed.",
+          "posteriorEffect": "If fired: H1 +8pp, H2 -4pp, H3 -3pp, H4 -1pp."
+        },
+        {
+          "id": "anti_h3h4_unemployment_stable",
+          "desc": "Unemployment rate holds below 4.5% for 3 consecutive months despite slowdown. Observable: BLS monthly reports.",
+          "threshold_fired": "U-3 unemployment < 4.5% for 3 consecutive months",
+          "threshold_not_fired": "Unemployment rises above 4.5% or data insufficient",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "Labor market stability is the primary mechanism by which recessions stay shallow or are avoided. Consumers keep spending if they have jobs. Strong anti-H3/H4 signal.",
+          "posteriorEffect": "If fired: H3 -8pp, H4 -4pp, H1 +7pp, H2 -3pp... wait — normalizes to: H1 +8pp, H2 -3pp, H3 -4pp, H4 -1pp."
+        },
+        {
+          "id": "anti_h4_cpi_falling",
+          "desc": "CPI year-over-year falls below 2.5% for two consecutive months. Observable: BLS CPI report.",
+          "threshold_fired": "CPI YoY < 2.5% for 2 consecutive months",
+          "threshold_not_fired": "CPI YoY >= 2.5% or only 1 month below",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "Deflating inflation removes the stagflation risk (H4). If inflation is falling, tariff pass-through was weaker than feared or demand destruction is dominating supply shock.",
+          "posteriorEffect": "If fired: H4 -8pp, H1 +3pp, H2 +3pp, H3 +2pp."
+        },
+        {
+          "id": "anti_h2h3_tariff_rollback",
+          "desc": "US reduces or exempts significant portion of Section 122 tariffs. Observable: USTR notice, Federal Register, or White House announcement.",
+          "threshold_fired": "Universal tariff reduced below 7% OR major sector exemptions covering >$500B in imports",
+          "threshold_not_fired": "Tariffs remain at 10%+ universal",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "Tariff rollback would remove the primary exogenous shock driving our recession premium above base rate. Immediate positive impulse for growth expectations.",
+          "posteriorEffect": "If fired: H1 +7pp, H2 -3pp, H3 -3pp, H4 -1pp."
+        },
+        {
+          "id": "anti_h1_services_pmi_strong",
+          "desc": "ISM Services PMI stays above 52 for 3 consecutive months while manufacturing is contracting. Observable: ISM monthly report.",
+          "threshold_fired": "ISM Services PMI > 52 for 3 consecutive months",
+          "threshold_not_fired": "Services PMI falls below 52 or data insufficient",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "Services resilience is the most common reason manufacturing recessions do not become economy-wide recessions. 2015-16 and 2019 examples where manufacturing dipped but services held.",
+          "posteriorEffect": "If fired: H1 +5pp, H2 -3pp, H3 -1pp, H4 -1pp."
+        }
+      ]
+    }
+  },
+
+  "actorModel": {
+    "description": "Recession outcomes are driven by the interaction of monetary policy (Fed), fiscal/trade policy (Executive/Treasury), and private sector behavior (business investment + consumer spending). Unlike geopolitical topics, there is no single decision-maker — outcomes emerge from aggregate behavior within policy constraints.",
+    "actors": {
+      "fed_powell": {
+        "name": "Federal Reserve / Jerome Powell (Chair through Jan 2028)",
+        "role": "Primary monetary policy actor. Controls federal funds rate, forward guidance, balance sheet. Decisions affect cost of capital, mortgage rates, credit availability, dollar strength.",
+        "decisionStyle": "Data-dependent, institutionally cautious, committee-based (FOMC). Resistant to political pressure but sensitive to labor market deterioration (dual mandate). Prefers gradual moves over large shocks. Will act aggressively if financial stability threatened (see: 2008, 2020).",
+        "biases": [
+          "Recency bias toward last inflation episode — slow to cut if CPI sticky",
+          "Symmetric mandate rhetoric but historically more responsive to unemployment spikes than inflation undershoots",
+          "Adverse to 'stop-start' — dislikes cutting then hiking, creates credibility problem",
+          "Underweights tariff-driven inflation as 'transitory' supply shock — may ease even with rising CPI"
+        ],
+        "filters": [
+          "Dual mandate: price stability AND maximum employment. Cannot purely optimize for growth.",
+          "Committee process: 12 FOMC voters, requires majority. Dissents are possible but rarely determinative.",
+          "Communication lead time: typically telegraphs moves 1-2 meetings in advance"
+        ],
+        "overrides": [
+          "Financial system instability (bank failures, credit freeze) triggers emergency action outside normal cadence",
+          "Unemployment spiking rapidly (>0.5pp in one month) could accelerate easing",
+          "Political pressure from executive branch historically does NOT change policy but could affect forward guidance framing"
+        ],
+        "keyWatchpoints": [
+          "PCE inflation relative to 2% target at each meeting",
+          "Unemployment rate trend and claims data",
+          "Financial conditions index (FCI) tightening",
+          "Press conference language: 'watching carefully' < 'closely monitoring' < 'prepared to act' < emergency statement"
+        ]
+      },
+      "treasury_bessent": {
+        "name": "Treasury Department / Scott Bessent (Secretary)",
+        "role": "Fiscal policy framing, debt management, currency policy. Does not set tariffs (USTR does) but influences overall economic narrative and coordinates with White House on stimulus vs austerity framing.",
+        "decisionStyle": "Institutionally oriented former hedge fund manager. Market-aware, less prone to pure political signaling than some predecessors. Likely to argue for 'orderly' tariff implementation rather than shock-and-awe.",
+        "biases": [
+          "Dollar strength preference — strong dollar constrains export competitiveness but reduces import inflation",
+          "Deficit concern balanced against growth mandate",
+          "Creditor-class framing: prioritizes financial market stability over labor market"
+        ],
+        "filters": [
+          "Congressional budget process constrains fiscal response speed",
+          "DOGE-era spending constraints limit stimulus headroom"
+        ],
+        "overrides": [
+          "Severe market dislocation (2008-style credit freeze) would unlock emergency fiscal authority",
+          "Election-cycle proximity increases probability of stimulus proposals if polls deteriorate"
+        ],
+        "keyWatchpoints": [
+          "Treasury issuance announcements — refunding decisions signal fiscal path",
+          "Any statements on dollar policy or currency intervention",
+          "Coordination signals with USTR on tariff timeline"
+        ]
+      },
+      "ustr_greer": {
+        "name": "Office of US Trade Representative / Jamieson Greer",
+        "role": "Administers Section 122 tariffs. Key escalation/de-escalation decision maker for trade policy. Tariff path is the primary exogenous variable in our recession model.",
+        "decisionStyle": "Politically directed — USTR implements White House trade strategy rather than acting independently. Will reflect Trump administration priorities: domestic manufacturing revival, leverage in bilateral negotiations, political signaling to rust belt base.",
+        "biases": [
+          "Tariffs-as-leverage framing: treats tariff rates as negotiating chips, not permanent policy",
+          "Nationalist bias: default toward protection, burden of proof on free trade",
+          "Overestimates foreign elasticity — assumes trading partners absorb more of the burden than they actually do"
+        ],
+        "filters": [
+          "Legal constraints: Section 122 authority is time-limited and subject to congressional override",
+          "WTO dispute mechanism: formal complaints take years but create political friction",
+          "Supply chain lobbying: domestic industries dependent on imports (auto, retail, pharma) will pressure for exemptions"
+        ],
+        "overrides": [
+          "If recession attributed to tariffs in public discourse, White House may order quick rollback for political cover",
+          "Bilateral deal with China or EU would likely include tariff reduction component"
+        ],
+        "keyWatchpoints": [
+          "Any USTR press releases on tariff modifications",
+          "White House trade deal announcements",
+          "Retaliatory tariff announcements from EU, China, Canada, Mexico",
+          "Section 122 congressional review timeline"
+        ]
+      },
+      "congress": {
+        "name": "US Congress (118th/119th)",
+        "role": "Fiscal policy (spending, tax), potential tariff override authority, emergency economic legislation.",
+        "decisionStyle": "Slow, consensus-dependent, bicameral. Fiscal response to recession takes 6-12 months minimum from recognition to implementation. Tax cuts or stimulus packages require supermajority-equivalent alignment.",
+        "biases": [
+          "Electoral cycle: midterm 2026 proximity increases urgency of economic optics",
+          "Partisan gridlock on deficit spending makes large stimulus unlikely pre-recession",
+          "Tariff skepticism in both parties (different reasons), but institutional deference to executive on trade"
+        ],
+        "filters": [
+          "Reconciliation process limits what can pass on simple majority",
+          "Deficit ceiling constraints still operative",
+          "Senate filibuster on standalone economic legislation"
+        ],
+        "overrides": [
+          "Crisis legislation (CARES Act-style) passed quickly when recession already confirmed and unemployment rising fast",
+          "Lame-duck sessions sometimes enable otherwise-blocked legislation"
+        ],
+        "keyWatchpoints": [
+          "Any tariff override legislation introduced",
+          "Emergency economic package discussions",
+          "Midterm 2026 polling — affects willingness to countenance stimulus"
+        ]
+      },
+      "business_sector": {
+        "name": "Aggregate Business Sector (capex, hiring, investment)",
+        "role": "Private investment is the most volatile component of GDP (~15%). Hiring and capex decisions aggregate into the labor market and industrial output readings we track. No single decision-maker — treat as a probability distribution responding to signals.",
+        "decisionStyle": "Forward-looking, risk-averse under uncertainty. Capex freezes often precede recession by 1-2 quarters. Hiring is lagging — companies maintain headcount through mild slowdowns, then cut sharply when outlook deteriorates.",
+        "biases": [
+          "Policy uncertainty amplification: even without actual tariff damage, uncertainty freezes investment",
+          "Herding: once layoffs begin in one sector, cross-sector contagion accelerates",
+          "CEO confidence surveys often self-fulfilling — pessimism causes the slowdown it predicts"
+        ],
+        "filters": [
+          "Long-term contracts and supply chain commitments create inertia — can't adjust instantly",
+          "Labor market tightness means some sectors (tech, defense) are still hiring even as goods sector contracts"
+        ],
+        "overrides": [
+          "Credit market seize-up (banks stop lending) immediately constrains investment regardless of fundamentals",
+          "Tariff exemption rumors can temporarily unfreeze capex pending policy clarity"
+        ],
+        "keyWatchpoints": [
+          "Business investment (non-residential fixed investment in GDP accounts)",
+          "NFIB Small Business Uncertainty Index",
+          "CEO confidence surveys (Conference Board CEO Confidence)",
+          "Announced capex guidance from S&P 500 companies in earnings calls"
+        ]
+      }
+    },
+    "methodology": [
+      "ACTIONS OVER RHETORIC — Fed rate decisions, GDP prints, and tariff notices move posteriors. Powell speeches and Treasury statements do not unless they announce concrete actions.",
+      "TAG EVERYTHING — separate POLICY (actual action) from RHETORIC (statement) in evidence log.",
+      "DON'T FRONT-RUN — wait for BEA GDP print before resolving. Nowcasts and forecasts are DATA, not resolution events.",
+      "SOCIALIZATION DETECTION — Fed 'leak' to WSJ often precedes moves. Watch Nick Timiraos reporting as a pre-signal.",
+      "TARIFF TRACKING — Federal Register is the authoritative source. White House announcements are RHETORIC until FR publication.",
+      "LAG AWARENESS — monetary policy acts with 12-18 month lag. Current tight conditions may already be causing Q2-Q3 deterioration before tariffs add their shock."
+    ]
+  },
+
+  "dataFeeds": {
+    "gdp_growth": {
+      "label": "Real GDP Growth (annualized, BEA advance print)",
+      "value": null,
+      "unit": "percent annualized",
+      "baseline": 2.9,
+      "baseline_note": "2023 full-year GDP. Q4 2024 was ~2.3%.",
+      "current_forecast": "1.5-2.0% for Q1 2026 (consensus as of April 2026)",
+      "asOf": "2026-04-11T00:00:00Z",
+      "source": "BEA advance GDP release (quarterly)",
+      "nextRelease": "~2026-04-30 (Q1 2026 advance)"
+    },
+    "unemployment": {
+      "label": "US Unemployment Rate (U-3)",
+      "value": 4.6,
+      "unit": "percent",
+      "baseline": 3.4,
+      "baseline_note": "Cycle low ~early 2023",
+      "asOf": "2026-04-11T00:00:00Z",
+      "source": "BLS Employment Situation (monthly, first Friday)",
+      "nextRelease": "~2026-05-01 (April employment situation)"
+    },
+    "ism_manufacturing": {
+      "label": "ISM Manufacturing PMI",
+      "value": null,
+      "unit": "index (50=neutral)",
+      "baseline": 50.0,
+      "baseline_note": "Below 50 = contraction. Has been below 50 for multiple months as of April 2026.",
+      "asOf": "2026-04-11T00:00:00Z",
+      "source": "Institute for Supply Management (first business day of each month)",
+      "nextRelease": "~2026-05-01"
+    },
+    "ism_services": {
+      "label": "ISM Services PMI",
+      "value": null,
+      "unit": "index (50=neutral)",
+      "baseline": 50.0,
+      "baseline_note": "Services has held above 50 longer than manufacturing.",
+      "asOf": "2026-04-11T00:00:00Z",
+      "source": "Institute for Supply Management (3rd business day of each month)",
+      "nextRelease": "~2026-05-05"
+    },
+    "cpi_yoy": {
+      "label": "CPI Year-over-Year",
+      "value": null,
+      "unit": "percent",
+      "baseline": 2.4,
+      "baseline_note": "Approximate recent reading. Fed target is 2% PCE (not CPI, but correlated).",
+      "asOf": "2026-04-11T00:00:00Z",
+      "source": "BLS CPI (monthly, ~2 weeks after month close)",
+      "nextRelease": "~2026-05-13 (April CPI)"
+    },
+    "yield_curve_10y2y": {
+      "label": "10-Year minus 2-Year Treasury Yield Spread",
+      "value": null,
+      "unit": "basis points",
+      "baseline": 0,
+      "baseline_note": "Was deeply inverted 2022-2024. Positive spread = normal curve. Negative = inverted.",
+      "asOf": "2026-04-11T00:00:00Z",
+      "source": "Federal Reserve H.15 / FRED (DFII10, DFII2, or T10Y2Y)",
+      "nextRelease": "Daily"
+    },
+    "sahm_rule_indicator": {
+      "label": "Sahm Rule Real-Time Indicator",
+      "value": null,
+      "unit": "percentage points",
+      "baseline": 0.0,
+      "threshold": 0.5,
+      "baseline_note": "Triggered at 0.50pp. = 3m avg unemployment minus prior 12m low. FRED series: SAHMREALTIME.",
+      "asOf": "2026-04-11T00:00:00Z",
+      "source": "FRED SAHMREALTIME (updated monthly after BLS release)",
+      "nextRelease": "~2026-05-01 (after April employment data)"
+    },
+    "consumer_confidence": {
+      "label": "Conference Board Consumer Confidence Index",
+      "value": null,
+      "unit": "index",
+      "baseline": 100.0,
+      "baseline_note": "Has been declining for 3 consecutive quarters as of April 2026. Below 80 historically recessionary.",
+      "asOf": "2026-04-11T00:00:00Z",
+      "source": "Conference Board (last Tuesday of each month)",
+      "nextRelease": "~2026-04-29"
+    },
+    "polymarket_recession_prob": {
+      "label": "Polymarket Recession Probability (any definition, by Q4 2026)",
+      "value": 0.25,
+      "unit": "probability",
+      "baseline": 0.15,
+      "baseline_note": "Historical base rate ~15%. Current Polymarket consensus ~25% as of early April 2026.",
+      "asOf": "2026-04-11T00:00:00Z",
+      "source": "Polymarket prediction market (continuous)",
+      "nextRelease": "Continuous"
+    },
+    "initial_claims_4wk": {
+      "label": "Initial Jobless Claims (4-Week Moving Average)",
+      "value": null,
+      "unit": "thousands",
+      "baseline": 220,
+      "baseline_note": "Recent 4-week average. Threshold of concern: 260k. Recessionary: 300k+.",
+      "asOf": "2026-04-11T00:00:00Z",
+      "source": "DOL weekly claims (every Thursday for prior week)",
+      "nextRelease": "2026-04-17"
+    },
+    "gdpnow": {
+      "label": "Atlanta Fed GDPNow Current-Quarter Estimate",
+      "value": null,
+      "unit": "percent annualized",
+      "baseline": null,
+      "baseline_note": "Real-time nowcast. Volatile early in quarter, converges as data arrives. Q1 2026 estimate needed.",
+      "asOf": "2026-04-11T00:00:00Z",
+      "source": "Atlanta Fed GDPNow (https://www.atlantafed.org/cqer/research/gdpnow)",
+      "nextRelease": "Updated every few days"
+    }
+  },
+
+  "watchpoints": [
+    "Q1 2026 GDP advance print (~April 30): first hard data point on tariff impact. Critical for Bayesian update.",
+    "April employment situation (~May 1): will Sahm Rule indicator move? Unemployment above 4.7% is notable.",
+    "ISM Manufacturing April reading (~May 1): watch for break below 45 or New Orders deterioration.",
+    "ISM Services April reading (~May 5): services contraction below 50 would be significant indicator fire.",
+    "Fed FOMC meeting outcome and press conference language: any 'data dependent' language shift toward easing is a leading signal.",
+    "Any USTR/White House announcement on tariff modifications, exemptions, or new sector tariffs.",
+    "Retaliatory tariff announcements from EU, China, Canada, Mexico — escalation amplifies recession risk.",
+    "Conference Board Consumer Confidence (~April 29): watch for sub-80 print.",
+    "Initial claims trend: any sustained move above 260k-270k range warrants note.",
+    "GDPNow Q2 2026 tracker once Q2 begins (April 1): early read on whether tariff shock is materializing.",
+    "Corporate earnings guidance for Q2 2026: forward guidance cuts signal CEO-level demand pessimism."
+  ],
+
+  "searchQueries": [
+    "US GDP Q1 2026 advance estimate BEA",
+    "US recession 2026 probability forecast April",
+    "ISM manufacturing PMI April 2026",
+    "ISM services PMI April 2026",
+    "US unemployment rate April 2026 BLS",
+    "jobless claims week April 2026",
+    "Sahm rule indicator 2026 FRED",
+    "Section 122 tariffs GDP impact 2026",
+    "tariff escalation recession risk April 2026",
+    "Federal Reserve FOMC rate cut 2026 outlook",
+    "consumer confidence Conference Board April 2026",
+    "University of Michigan consumer sentiment April 2026",
+    "Atlanta Fed GDPNow Q1 2026",
+    "yield curve 10-year 2-year spread April 2026",
+    "US high yield credit spreads April 2026",
+    "retail sales March 2026 Census Bureau",
+    "US recession prediction market Polymarket April 2026",
+    "Wall Street GDP forecast 2026 recession",
+    "NBER recession indicators 2026",
+    "layoffs mass layoffs April 2026 WARN Act",
+    "Trump tariff rollback exemption April 2026",
+    "US trade deficit tariff retaliation April 2026",
+    "Powell Fed inflation unemployment April 2026 speech",
+    "Nick Timiraos Fed rate cut 2026"
+  ],
+
+  "evidenceLog": [],
+
+  "governance": null,
+
+  "predictionScoring": {
+    "_docs": "Calibration infrastructure. Snapshots auto-created by engine on each posterior update. Record outcome when BEA confirms or denies two consecutive negative quarters. Compute Brier score at resolution.",
+    "resolutionCriteria": {
+      "resolvedYes_H2": "Q2 and Q3 2026 both negative, neither worse than -1.5% ann, CPI < 4%",
+      "resolvedYes_H3": "At least one quarter worse than -1.5% ann AND unemployment > 5.5%",
+      "resolvedYes_H4": "Two negative quarters AND CPI YoY > 4% during contraction period",
+      "resolvedNo_H1": "Q2 OR Q3 2026 GDP positive (preventing two-quarter streak)",
+      "resolutionDate_earliest": "2026-10-29",
+      "resolutionDate_note": "Q3 2026 advance GDP expected ~Oct 29-30 2026. Q2 advance expected ~July 30 2026 (first negative print would fire t1_gdp_negative_q2)."
+    },
+    "snapshots": [],
+    "outcomes": [],
+    "brierScores": []
+  }
+}

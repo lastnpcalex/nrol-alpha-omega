@@ -102,5 +102,12 @@
     "specific search query {date}"
   ],
 
-  "governance": null
+  "governance": null,
+
+  "predictionScoring": {
+    "_docs": "Calibration infrastructure. Snapshots are auto-created by engine on each posterior update. Record outcome when topic resolves, then compute_calibration_report() for Brier analysis.",
+    "snapshots": [],
+    "outcomes": [],
+    "brierScores": []
+  }
 }

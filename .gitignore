@@ -5,9 +5,14 @@ briefs/
 dashboards/
 
 # Topic instance data (domain-specific, not the framework)
-# Only _template.json is tracked — active topics are local working data
+# Active operational topics are local working data
 topics/*.json
 !topics/_template.json
+
+# Calibration topics are tracked — these are the empirical record
+!topics/lk99-superconductor.json
+!topics/750gev-diphoton.json
+!topics/calibration-*.json
 
 # Agent instructions (agent-specific, not part of the framework)
 CLAUDE.md

@@ -1,0 +1,491 @@
+{
+  "_protocol": "Calibration topic — prospective. Tracks whether any post-2024 RTSC claim achieves dual independent replication within 12 months. Base rate near zero; field in high-skepticism posture post-LK-99.",
+
+  "meta": {
+    "slug": "calibration-rtsc-replication",
+    "title": "Next RTSC Claim Survives Replication",
+    "question": "Will any room-temperature superconductor claim published after 2024 be independently replicated by >=2 labs within 12 months of publication?",
+    "resolution": "Two independent labs (neither affiliated with the original authors) publish peer-reviewed or preprint results confirming both zero DC resistance and diamagnetic levitation (Meissner effect) at room temperature (>=15C) and ambient pressure (<= 1.1 atm) within 12 calendar months of the original claim's arXiv or journal deposit date.",
+    "created": "2026-04-11T00:00:00Z",
+    "lastUpdated": "2026-04-11T00:00:00Z",
+    "status": "ACTIVE",
+    "dayCount": 0,
+    "startDate": "2026-04-11T00:00:00Z",
+    "classification": "ROUTINE",
+    "topicType": "science",
+    "horizon": "Rolling 12-month window from any new credible claim. Topic remains open until a claim fires or window closes without one.",
+    "notes": "Window is claim-triggered. If no credible claim is made, H4 resolves as TRUE at end of monitoring period (defined as 24 months from topic creation, i.e. April 2028). Ranga Dias retractions (2023-2024) and LK-99 debunking (Aug 2023) set the current epistemic baseline. Post-LK-99 replication speed record: ~2 weeks to first failure. Field discipline improved markedly."
+  },
+
+  "tagConfig": {
+    "_docs": "Science topic. EXPERIMENTAL = lab measurement published (moves H1/H2 up or H3/H4 down). RETRACTION = published withdrawal of claim. METHODOLOGY = structural critique of experimental design. DATA = numerical feed update. RHETORIC = press release, news quote, social media hype — does not move posteriors alone.",
+    "availableTags": [
+      "EXPERIMENTAL",
+      "RETRACTION",
+      "METHODOLOGY",
+      "DATA",
+      "EVENT",
+      "RHETORIC",
+      "ANALYSIS",
+      "EDITORIAL",
+      "FUNDING"
+    ],
+    "directionHints": {
+      "EXPERIMENTAL": {
+        "H1": 1,
+        "H2": 1,
+        "H3": -1,
+        "H4": -1
+      },
+      "RETRACTION": {
+        "H1": -1,
+        "H2": -1,
+        "H3": 1,
+        "H4": 1
+      },
+      "METHODOLOGY": {
+        "H3": 1,
+        "H4": 1
+      },
+      "DATA": {},
+      "EVENT": {},
+      "RHETORIC": {},
+      "ANALYSIS": {},
+      "EDITORIAL": {},
+      "FUNDING": {}
+    },
+    "escalationTags": ["EXPERIMENTAL"],
+    "deescalationTags": ["RETRACTION", "METHODOLOGY"]
+  },
+
+  "model": {
+    "_prior_rationale": "H4 (no credible claim) is the base state as of April 2026. No credible RTSC claim has emerged post-LK-99 debunking. Historical base rate for genuine RTSC: effectively 0 in ~75 years of post-BCS condensed matter physics. H1 (full replication) requires both a new claim AND successful replication — a compound event. H3 (claim published, fails) is the canonical post-LK-99 trajectory if a claim does emerge. H2 (partial) reflects the LK-99 outcome itself — anomalous signal but not superconductivity.",
+    "hypotheses": {
+      "H1": {
+        "label": "Claim published and replicated (>=2 independent labs, <=12 months)",
+        "midpoint": 0,
+        "unit": "probability",
+        "posterior": 0.02,
+        "description": "A credible RTSC claim is published AND two independent non-affiliated labs replicate both zero-resistance AND Meissner-effect levitation at room temperature and ambient pressure within 12 months. Would be Nobel-tier. Compound event: P(claim) * P(genuine|claim) * P(replicated|genuine). Each factor is small."
+      },
+      "H2": {
+        "label": "Partial replication (1 lab only, or only some properties confirmed)",
+        "midpoint": 0,
+        "unit": "probability",
+        "posterior": 0.05,
+        "description": "A credible claim is published and one lab replicates some aspect (e.g. resistivity anomaly but no levitation, or levitation-like behavior without zero resistance). The LK-99 trajectory: striking partial signal, ultimately non-SC explanation. Higher than H1 because partial replication is easier to achieve and harder to immediately rule out."
+      },
+      "H3": {
+        "label": "Claim published, fails replication (<2 independent confirmations in 12 months)",
+        "midpoint": 0,
+        "unit": "probability",
+        "posterior": 0.18,
+        "description": "A credible claim appears — passes an initial plausibility bar (specific materials, characterization data, Tc claim) — but replication attempts fail or find mundane explanations. The post-LK-99 default trajectory for any new RTSC claim given current field skepticism and rapid debunking infrastructure."
+      },
+      "H4": {
+        "label": "No credible claim published within monitoring window",
+        "midpoint": 0,
+        "unit": "probability",
+        "posterior": 0.75,
+        "description": "No preprint or publication clears the credibility bar (defined as: specific synthesized material, at least two characterization measurements, authors with institutional affiliation) within the monitoring window. Current state as of April 2026. Field has gone ~32 months post-LK-99 without a credible successor claim. Dias retracted, lost Rochester position. Hype cycle in consolidation phase."
+      }
+    },
+    "expectedValue": 0.02,
+    "expectedUnit": "P(H1)",
+    "posteriorHistory": [
+      {
+        "date": "2026-04-11T00:00:00Z",
+        "posteriors": { "H1": 0.02, "H2": 0.05, "H3": 0.18, "H4": 0.75 },
+        "note": "Initial priors. Anchored to post-LK-99 base rate (~32 months no credible claim), Dias retractions, historical RTSC failure rate. H4 dominant."
+      }
+    ]
+  },
+
+  "subModels": {
+    "claimQuality": {
+      "_desc": "If a new claim appears, assess its prior credibility before ingesting as H3-relevant evidence. A low-quality claim barely moves H3 vs H4.",
+      "dimensions": {
+        "institutionalAffiliation": { "label": "Authors have verifiable institutional affiliation", "score": null, "note": "null = no active claim" },
+        "materialsCharacterization": { "label": "Structural characterization (XRD, TEM) published alongside claim", "score": null, "note": null },
+        "twoMeasurements": { "label": "Both zero-resistance AND diamagnetic signal reported", "score": null, "note": null },
+        "tcSpecificity": { "label": "Specific critical temperature reported (not just 'RT')", "score": null, "note": null },
+        "independentDeposit": { "label": "At least one co-author from different institution than PI", "score": null, "note": null }
+      },
+      "credibilityScore": null,
+      "lastUpdated": null
+    },
+    "replicationVelocity": {
+      "_desc": "If a claim fires, track how fast labs respond. Post-LK-99 baseline: first response ~3-5 days (simulation), first lab replication attempt ~10-14 days.",
+      "activeClaimSlug": null,
+      "daysFromClaim": null,
+      "labsAttempting": null,
+      "labsConfirming": null,
+      "labsRefuting": null,
+      "velocityAssessment": "NO_ACTIVE_CLAIM",
+      "lastUpdated": null
+    },
+    "fieldSentiment": {
+      "_desc": "Qualitative read on community prior. Affects how quickly debunking mobilizes.",
+      "communitySkepticism": "HIGH",
+      "debunkingInfrastructure": "STRONG",
+      "rationale": "Post-LK-99 field has established rapid-replication norms. arXiv moderation tightened for RTSC-adjacent claims. Major labs (MIT, Stanford, NIMS Japan, Max Planck) have standing protocols to quickly test new claims. Skepticism is high but not dismissive — community will respond fast.",
+      "lastUpdated": "2026-04-11T00:00:00Z"
+    }
+  },
+
+  "indicators": {
+    "_design_rules": [
+      "Each indicator must be OBSERVABLE — a published paper, a press release with specific data, a retraction notice",
+      "Social media hype alone does NOT fire any indicator",
+      "Replication requires non-affiliated independent lab — same group, different campus still counts as affiliated",
+      "Partial credit (H2) requires published data, not just a claim of confirmation"
+    ],
+    "tiers": {
+      "tier1_critical": [
+        {
+          "id": "t1_dual_replication",
+          "desc": "Two independent, non-affiliated labs publish (arXiv or peer-reviewed journal) both zero-resistance AND diamagnetic levitation in the same claimed material, within 12 months of the original claim.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 +40-50pp, H2 -10pp, H3 -20pp, H4 -20pp. Near-definitive H1 resolution.",
+          "requiresActiveClaim": true
+        },
+        {
+          "id": "t1_claim_credibility_threshold",
+          "desc": "A new RTSC claim clears the credibility bar: (a) institutional affiliation, (b) structural characterization published, (c) both zero-R and diamagnetic signal reported, (d) specific Tc stated. Triggers shift from H4 to active H1/H2/H3 contest.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H4 -30pp (redistributed to H2/H3). Does not alone move H1 significantly.",
+          "requiresActiveClaim": false
+        },
+        {
+          "id": "t1_mass_replication_failure",
+          "desc": "Three or more independent labs publish failure-to-replicate results for the same claimed material, AND original authors do not produce rebuttal with new data within 60 days.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H3 +30pp, H1 -15pp, H2 -10pp. Near-definitive H3 resolution if active claim exists.",
+          "requiresActiveClaim": true
+        }
+      ],
+      "tier2_strong": [
+        {
+          "id": "t2_single_independent_replication",
+          "desc": "One independent, non-affiliated lab publishes both zero-resistance AND diamagnetic signal in the claimed material.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H2 +15pp, H1 +8pp, H3 -10pp. Significant but not sufficient for H1.",
+          "requiresActiveClaim": true
+        },
+        {
+          "id": "t2_partial_property_confirmation",
+          "desc": "One or more labs confirm one property (resistivity anomaly OR diamagnetic behavior) but not both. E.g., LK-99 partial levitation without zero resistance.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H2 +10pp, H3 -5pp. Mirrors LK-99 partial signal trajectory.",
+          "requiresActiveClaim": true
+        },
+        {
+          "id": "t2_mundane_explanation_published",
+          "desc": "A peer-reviewed paper provides a specific mechanistic explanation (impurity phase, magnetic artifact, measurement error) that accounts for the original observations without invoking superconductivity.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H3 +15pp, H2 -8pp, H1 -5pp. Strong debunk signal.",
+          "requiresActiveClaim": true
+        },
+        {
+          "id": "t2_high_impact_journal_acceptance",
+          "desc": "Original claim published in Nature, Science, Physical Review Letters, or Nature Materials (not just arXiv). Indicates peer review cleared basic hurdles.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H3 +5pp, H2 +5pp (journal acceptance does NOT increase H1 on its own — post-Dias, journals have published later-retracted claims).",
+          "requiresActiveClaim": true
+        },
+        {
+          "id": "t2_retraction_before_replication",
+          "desc": "Original authors retract the claim before independent replication is achieved.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H3 +20pp, H1 -10pp, H2 -5pp.",
+          "requiresActiveClaim": true
+        }
+      ],
+      "tier3_suggestive": [
+        {
+          "id": "t3_arxiv_claim_posted",
+          "desc": "A new RTSC-adjacent arXiv preprint is posted claiming RT superconductivity but does NOT yet clear the full credibility bar (missing structural data, no Tc specified, or single-author with no affiliation).",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "Low credibility claims are frequent noise. Do not move posteriors more than 2-3pp on a single weak preprint.",
+          "posteriorEffect": "H4 -3pp, H3 +2pp (weak signal only).",
+          "requiresActiveClaim": false
+        },
+        {
+          "id": "t3_major_lab_begins_replication",
+          "desc": "A named, credible lab (MIT, Stanford, NIMS, Max Planck, ETH, Cambridge) publicly announces it is attempting to replicate a specific new RTSC claim.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H2 +3pp, H3 +2pp (indicates claim cleared internal plausibility check at major institution). Does not move H1.",
+          "requiresActiveClaim": true
+        },
+        {
+          "id": "t3_funding_agency_investment",
+          "desc": "DOE, NSF, DARPA, or equivalent issues a specific funding solicitation or grant for replication of a named post-2024 RTSC claim.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H2 +3pp, H3 +2pp. Funding signal, not experimental confirmation.",
+          "requiresActiveClaim": false
+        },
+        {
+          "id": "t3_negative_simulation",
+          "desc": "DFT or other ab initio simulation published showing the claimed material's band structure is inconsistent with superconductivity at claimed Tc.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H3 +3pp, H1 -2pp. Theory can lead experiment.",
+          "requiresActiveClaim": true
+        },
+        {
+          "id": "t3_citation_velocity_spike",
+          "desc": "arXiv citation velocity for a specific new claim exceeds 50 citations in first 7 days. Indicates community engagement — consistent with both genuine interest (H2/H3) and hype (H4 slightly down).",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H4 -3pp, H3 +2pp. Community engagement signal, not experimental.",
+          "requiresActiveClaim": true
+        }
+      ],
+      "anti_indicators": [
+        {
+          "id": "anti_h1_no_replication_6mo",
+          "desc": "Six months pass since a credible claim with no independent replication of both properties from any lab.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "Temporal decay: H1 probability should compress further after 6-month silence. LK-99 debunked within 4 weeks.",
+          "posteriorEffect": "H1 -10pp, H2 -5pp, H3 +10pp, H4 +5pp.",
+          "requiresActiveClaim": true
+        },
+        {
+          "id": "anti_h1_author_misconduct",
+          "desc": "Investigation opened or finding published by journal or institution regarding data integrity of the original claim's authors.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "Mirrors Dias (Rochester) trajectory. Misconduct finding is strong H1/H2 anti-indicator.",
+          "posteriorEffect": "H1 -15pp, H2 -8pp, H3 +15pp.",
+          "requiresActiveClaim": true
+        },
+        {
+          "id": "anti_h4_credible_claim_posted",
+          "desc": "A claim clears the credibility bar (t1_claim_credibility_threshold fires). H4 can no longer resolve as the outcome.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H4 set to 0 (topic restructures to H1/H2/H3 contest).",
+          "requiresActiveClaim": false
+        },
+        {
+          "id": "anti_h3_no_claim_24mo",
+          "desc": "24 months pass from topic creation (April 2028) with no credible RTSC claim published. H3 cannot resolve without an active claim.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "Temporal: if H4 persists to April 2028, topic resolves as H4. H3 requires a published claim.",
+          "posteriorEffect": "H3 set to 0, H4 +18pp (terminal H4 resolution signal).",
+          "requiresActiveClaim": false
+        }
+      ]
+    }
+  },
+
+  "actorModel": {
+    "description": "The outcome is determined by the collective behavior of condensed matter labs, preprint infrastructure, and the replication ecosystem — not a single decision-maker. Key actors operate on reputational and funding incentives.",
+    "actors": {
+      "claimant_labs": {
+        "name": "RTSC Claimant Labs",
+        "role": "Source of new claims. Incentivized by funding, prestige, and patent potential to publish rapidly.",
+        "decisionStyle": "Competitive, often under pressure to publish before rivals. Post-Dias, institutional review boards are more cautious but individual labs can still push premature claims.",
+        "biases": [
+          "Confirmation bias in own data",
+          "Pressure to claim RT conditions (maximizes media attention)",
+          "Sample selection: publish best sample, not representative sample"
+        ],
+        "filters": [
+          "Journal peer review (post-LK-99, Nature/Science tightened RTSC screening)",
+          "Institutional legal review if patent filing involved",
+          "arXiv moderation (now flags RTSC-adjacent claims for additional scrutiny)"
+        ],
+        "overrides": [
+          "National security / military funding can accelerate and shield claims from normal peer review",
+          "Pre-print culture bypasses journal gatekeeping entirely"
+        ]
+      },
+      "replication_labs": {
+        "name": "Independent Replication Labs",
+        "role": "Labs that attempt to reproduce claims. Speed and rigor determine H1 vs H3 outcome.",
+        "decisionStyle": "Rational/institutional. Move fast when claim is high-profile. Post-LK-99, major labs maintain synthesis capability for common materials and can respond within 1-2 weeks for simple compositions.",
+        "biases": [
+          "Publication bias toward positive results even in replication (partial signals may be published)",
+          "Anchoring on original claim's synthesis protocol",
+          "Reputational cost of premature positive replication (Dias case raised the bar)"
+        ],
+        "filters": [
+          "Funding and capacity constraints — only ~10-15 labs globally have full RTSC replication capability",
+          "Material availability (novel exotic materials may take months to synthesize independently)"
+        ],
+        "overrides": [
+          "High-profile claims trigger rapid mobilization regardless of cost",
+          "Counter-pressure from prior embarrassments (LK-99 hype) motivates skeptical fast-replication"
+        ]
+      },
+      "arxiv_journals": {
+        "name": "arXiv / Journals",
+        "role": "Publication infrastructure. Post-LK-99, arXiv added metadata flags for RTSC claims. Journals increased scrutiny.",
+        "decisionStyle": "Rule-based, gatekeeping. Nature Physics added explicit RTSC checklist post-2023.",
+        "biases": ["High-impact claims still create publication incentive even with increased scrutiny"],
+        "filters": ["Mandatory data availability", "Post-Dias: mandatory raw data and materials availability statements for RTSC claims"],
+        "overrides": ["Authors can post directly to arXiv without review — journal gatekeeping only applies to peer-reviewed version"]
+      },
+      "media_social": {
+        "name": "Science Media & Social Media",
+        "role": "Amplification layer. Does NOT move posteriors but does influence how quickly replication labs mobilize.",
+        "decisionStyle": "Sensation-driven. RT superconductivity is a reliably viral topic.",
+        "biases": ["Amplifies claims, under-amplifies debunks", "LK-99 hype cycle now cited as cautionary tale — some dampening effect"],
+        "filters": [],
+        "overrides": []
+      },
+      "funding_agencies": {
+        "name": "DOE / NSF / DARPA / ARPA-E",
+        "role": "Secondary influence. Rapid-replication funding programs can accelerate the H1/H3 determination.",
+        "decisionStyle": "Institutional, slow. DARPA can move fast if claim has defense relevance.",
+        "biases": ["Incentivized to fund any credible claim regardless of base rate — option value argument"],
+        "filters": ["Budget cycles", "Political sensitivity post-Dias (DOE funded Dias lab)"],
+        "overrides": ["DARPA discretionary programs can bypass normal review timelines"]
+      }
+    },
+    "methodology": [
+      "ACTIONS OVER RHETORIC — a press release about RTSC is noise; a published zero-resistance measurement is signal",
+      "TAG EVERYTHING — separate EXPERIMENTAL (lab data) from RHETORIC (media, investor statements)",
+      "PUBLICATION DATE MATTERS — use arXiv submission date as claim clock start, not media coverage date",
+      "AFFILIATION INDEPENDENCE — replication by collaborating institutions does not count; require genuine arms-length independence",
+      "COMPOUND EVENT DISCIPLINE — H1 requires both a credible claim AND successful replication; treat each as separate probability node",
+      "SOCIALIZATION DETECTION — watch for 'sources say a major lab is close' patterns; these are rhetorical, not EXPERIMENTAL"
+    ]
+  },
+
+  "evidenceLog": [
+    {
+      "id": "ev_001",
+      "time": "2023-08-12T00:00:00Z",
+      "text": "LK-99 debunked: multiple independent labs (Beijing, Stuttgart, Maryland, others) find Cu2S phase transition explains resistivity anomaly; no zero-resistance; Meissner effect attributed to ferromagnetism. Consensus: not a superconductor. [HISTORICAL BASELINE]",
+      "tags": ["RETRACTION", "EXPERIMENTAL"],
+      "source": "Multiple peer-reviewed publications, Nature Materials (2023)",
+      "claimState": "OBSERVED",
+      "posteriorEffect": "Establishes current baseline. H4 dominant entering 2026."
+    },
+    {
+      "id": "ev_002",
+      "time": "2024-02-20T00:00:00Z",
+      "text": "Ranga Dias (U Rochester) third RTSC paper retracted by Nature. Pattern: three high-profile claims, all retracted. Dias removed from Rochester faculty. Chilling effect on aggressive RTSC claims in high-impact journals. [HISTORICAL BASELINE]",
+      "tags": ["RETRACTION", "EVENT"],
+      "source": "Nature retraction notice; Rochester University statement",
+      "claimState": "OBSERVED",
+      "posteriorEffect": "Reinforces H4 prior. Reduces H3 probability (fewer credible-but-flawed claims expected near-term)."
+    },
+    {
+      "id": "ev_003",
+      "time": "2026-04-11T00:00:00Z",
+      "text": "Topic initialized. As of April 2026, no credible post-2024 RTSC claim identified in literature. ~32 months since LK-99 debunking. Field in high-skepticism, rapid-debunking posture. Initial priors set: H4=0.75, H3=0.18, H2=0.05, H1=0.02.",
+      "tags": ["ANALYSIS"],
+      "source": "Topic initialization",
+      "claimState": "OBSERVED",
+      "posteriorEffect": "Baseline set."
+    }
+  ],
+
+  "dataFeeds": {
+    "arxiv_rtsc_preprints_30d": {
+      "label": "arXiv RTSC-adjacent preprints (last 30 days)",
+      "value": 0,
+      "unit": "preprints",
+      "baseline": 2,
+      "asOf": "2026-04-11T00:00:00Z",
+      "note": "Credibility-screened count only. Baseline ~2/month post-LK-99 (noise floor of fringe claims). Spike above 5 within 7 days of any date warrants investigation."
+    },
+    "citation_velocity_top_claim": {
+      "label": "Citation velocity — top active RTSC claim (citations/week)",
+      "value": 0,
+      "unit": "citations/week",
+      "baseline": 0,
+      "asOf": "2026-04-11T00:00:00Z",
+      "note": "Null when no active claim. LK-99 peak: ~300 citations/week in first month. Any new claim exceeding 50/week within first 7 days suggests genuine community engagement."
+    },
+    "independent_replication_attempts": {
+      "label": "Independent replication attempts on top active claim",
+      "value": 0,
+      "unit": "labs",
+      "baseline": 0,
+      "asOf": "2026-04-11T00:00:00Z",
+      "note": "Count of distinct non-affiliated labs with announced or published replication attempt. Null when no active claim."
+    },
+    "independent_replication_confirmations": {
+      "label": "Independent replication confirmations (both properties)",
+      "value": 0,
+      "unit": "labs",
+      "baseline": 0,
+      "asOf": "2026-04-11T00:00:00Z",
+      "note": "H1 fires at >=2. Partial (one property only) feeds H2 count separately."
+    },
+    "days_since_lk99_debunking": {
+      "label": "Days since LK-99 debunking consensus (Aug 12 2023)",
+      "value": 973,
+      "unit": "days",
+      "baseline": 0,
+      "asOf": "2026-04-11T00:00:00Z",
+      "note": "Proxy for how long the field has operated without a credible successor claim. Longer elapsed time increases H4 weight."
+    }
+  },
+
+  "watchpoints": [
+    "arXiv cond-mat.supr-con section: any new RTSC claim with institutional affiliation and dual measurements",
+    "Nature, Science, PRL, Nature Materials: watch for RTSC submissions entering review or accepted",
+    "Retraction Watch: any new retractions flagged as RTSC-related",
+    "DOE/NSF/DARPA solicitations mentioning room-temperature superconductivity or ambient-pressure SC",
+    "University press releases: watch for institutional endorsement of a new RTSC claim (institutional backing was absent for many fringe claims)",
+    "Raman/XRD data accompanying any new claim: structural characterization is the minimum credibility bar post-LK-99",
+    "South Korea, China, India research groups: historically active in RTSC claims; monitor their condensed matter output",
+    "Hydrogen sulfide at high pressure (near-RT SC at very high pressure): if pressure drops toward ambient, watch closely"
+  ],
+
+  "searchQueries": [
+    "room temperature superconductor 2025 2026 new claim arxiv",
+    "\"room-temperature superconductivity\" OR \"ambient pressure superconductor\" site:arxiv.org 2025",
+    "RTSC replication failure 2025 2026",
+    "superconductor retraction 2025 2026",
+    "\"zero resistance\" \"room temperature\" superconductor preprint 2026",
+    "cond-mat.supr-con arXiv new claim ambient pressure 2026",
+    "Nature Physics superconductor 2026 room temperature",
+    "DOE NSF DARPA room temperature superconductor funding 2026",
+    "Ranga Dias Rochester superconductor update 2025 2026",
+    "LK-99 successor replication 2025",
+    "hydrogen clathrate superconductor ambient pressure 2026",
+    "Meissner effect room temperature 2026 lab confirmation"
+  ],
+
+  "governance": null,
+
+  "predictionScoring": {
+    "_docs": "Calibration infrastructure. Snapshots auto-created by engine on each posterior update. When topic resolves, record outcome in outcomes[] and run compute_calibration_report() for Brier analysis. This topic is part of the calibration set for the RTSC domain — used to assess model performance on science prediction tasks.",
+    "snapshots": [],
+    "outcomes": [],
+    "brierScores": [],
+    "calibrationNotes": "H4 at 0.75 should be tested against base rate of 'no credible RTSC claim in any 12-month window since 2010.' Post-LK-99: ~100% H4 in every 12-month window. H1 at 0.02 reflects ~2% residual for genuine breakthrough — deliberately non-zero to avoid Dutch Book on a question where we have genuine uncertainty about unknown physics."
+  }
+}

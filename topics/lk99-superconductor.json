@@ -54,21 +54,21 @@
   "model": {
     "hypotheses": {
       "H1": {
-        "label": "Genuine RTSC — LK-99 is a room-temp superconductor",
+        "label": "Genuine RTSC \u00e2\u20ac\u201d LK-99 is a room-temp superconductor",
         "midpoint": 4,
         "unit": "weeks",
         "posterior": 0.01,
         "description": "The Lee & Kim claim is correct. LK-99 exhibits zero resistance and Meissner effect at room temperature and ambient pressure. Would be Nobel-tier discovery."
       },
       "H2": {
-        "label": "Partial — real but not full SC (e.g., filamentary, diamagnetic, but not bulk SC)",
+        "label": "Partial \u00e2\u20ac\u201d real but not full SC (e.g., filamentary, diamagnetic, but not bulk SC)",
         "midpoint": 6,
         "unit": "weeks",
         "posterior": 0.02,
         "description": "Something genuinely novel is happening in the material (unusual diamagnetism, resistivity drop) but it falls short of true superconductivity. Could be a phase transition, Cu2S impurity effect, or structural anomaly."
       },
       "H3": {
-        "label": "Not SC — mundane explanation (impurities, measurement error, Cu2S)",
+        "label": "Not SC \u00e2\u20ac\u201d mundane explanation (impurities, measurement error, Cu2S)",
         "midpoint": 4,
         "unit": "weeks",
         "posterior": 0.9,
@@ -314,7 +314,7 @@
     "actors": {
       "originalAuthors": {
         "name": "Lee Sukbae & Kim Ji-Hoon (Q-Centre, Korea University)",
-        "role": "Original claimants — published two arXiv preprints with competing author lists",
+        "role": "Original claimants \u00e2\u20ac\u201d published two arXiv preprints with competing author lists",
         "decisionStyle": "Small lab, limited resources, long-running project (1999-2023), internal disputes visible in competing preprints",
         "biases": [
           "Sunk cost (20+ years on this material)",
@@ -330,7 +330,7 @@
       },
       "replicationLabs": {
         "name": "Independent replication labs worldwide",
-        "role": "The actual resolution mechanism — their results determine truth",
+        "role": "The actual resolution mechanism \u00e2\u20ac\u201d their results determine truth",
         "decisionStyle": "Institutional, methodical, but operating under social media time pressure",
         "biases": [
           "Publication bias (positive results more publishable)",
@@ -346,7 +346,7 @@
       },
       "socialMedia": {
         "name": "Twitter/X, Reddit, YouTube commentary ecosystem",
-        "role": "Amplification and narrative formation — not evidence producers but massive influence on attention and framing",
+        "role": "Amplification and narrative formation \u00e2\u20ac\u201d not evidence producers but massive influence on attention and framing",
         "decisionStyle": "Viral, hype-driven, rewards sensationalism",
         "biases": [
           "Novelty bias",
@@ -354,7 +354,7 @@
           "Confusing enthusiasm with evidence"
         ],
         "filters": [
-          "None — no editorial filter on social media"
+          "None \u00e2\u20ac\u201d no editorial filter on social media"
         ],
         "overrides": [
           "Expert voices can cut through but are often drowned out"
@@ -362,11 +362,11 @@
       }
     },
     "methodology": [
-      "REPLICATION OVER RHETORIC — only independent lab results move posteriors, not social media videos or takes",
-      "SAMPLE QUALITY MATTERS — failed replications from impure samples are weak evidence; clean single-crystal results are strong",
-      "SEPARATE THE PHENOMENA — partial levitation, resistivity drops, and diamagnetism are different things with different explanations",
-      "CONSIDER BASE RATES — room-temperature superconductor claims have a ~0% historical success rate",
-      "WATCH FOR CU2S — copper sulfide is a known contaminant with a phase transition at 104C that mimics SC signatures"
+      "REPLICATION OVER RHETORIC \u00e2\u20ac\u201d only independent lab results move posteriors, not social media videos or takes",
+      "SAMPLE QUALITY MATTERS \u00e2\u20ac\u201d failed replications from impure samples are weak evidence; clean single-crystal results are strong",
+      "SEPARATE THE PHENOMENA \u00e2\u20ac\u201d partial levitation, resistivity drops, and diamagnetism are different things with different explanations",
+      "CONSIDER BASE RATES \u00e2\u20ac\u201d room-temperature superconductor claims have a ~0% historical success rate",
+      "WATCH FOR CU2S \u00e2\u20ac\u201d copper sulfide is a known contaminant with a phase transition at 104C that mimics SC signatures"
     ]
   },
   "evidenceLog": [
@@ -697,10 +697,10 @@
     ],
     "outcomes": [
       {
-        "timestamp": "2026-04-11T21:01:12+00:00",
+        "timestamp": "2026-04-11T21:29:57+00:00",
         "resolved": "H3",
-        "label": "Not SC — mundane explanation (impurities, measurement error, Cu2S)",
-        "note": "Resolved: not a superconductor. Cu2S impurity explains all observations."
+        "label": "Not SC \u00e2\u20ac\u201d mundane explanation (impurities, measurement error, Cu2S)",
+        "note": "Cu2S impurity explanation confirmed by multiple independent labs. Resolved Aug 2023."
       }
     ],
     "brierScores": [
