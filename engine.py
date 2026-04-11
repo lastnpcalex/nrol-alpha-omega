@@ -77,7 +77,7 @@ def save_topic(topic: dict) -> None:
                 entry, evidence_log
             )
             entry["effectiveWeight"] = entry.get("effectiveWeight") or get_effective_weight(
-                entry, evidence_log
+                entry, evidence_log, topic=topic
             )
             enriched_count += 1
     if enriched_count:
@@ -137,9 +137,69 @@ def save_topic(topic: dict) -> None:
             },
             "lastComputed": _now_iso(),
         }
+
+        # --- Epistemic improvement: calibration health ---
+        try:
+            from framework.scoring import get_calibration_health
+            cal_health = get_calibration_health(topic)
+            topic["governance"]["calibrationHealth"] = cal_health
+            if cal_health == "POORLY_CALIBRATED":
+                issues.append("Prediction calibration is poor (Brier > 0.4)")
+                topic["governance"]["health"] = (
+                    "CRITICAL" if len(issues) > 2 else "DEGRADED"
+                )
+                topic["governance"]["issues"] = issues
+        except ImportError:
+            pass
+
+        # --- Epistemic improvement: contradiction count ---
+        try:
+            from framework.contradictions import get_unresolved_contradictions
+            unresolved = get_unresolved_contradictions(topic)
+            topic["governance"]["unresolvedContradictions"] = len(unresolved)
+            if len(unresolved) > 3:
+                issues.append(f"{len(unresolved)} unresolved contradictions")
+                topic["governance"]["issues"] = issues
+        except ImportError:
+            pass
+
+        # --- Epistemic improvement: expired hypothesis detection ---
+        try:
+            from framework.scoring import check_expired_hypotheses, record_partial_outcome
+            expired = check_expired_hypotheses(topic)
+            if expired:
+                ps = topic.get("predictionScoring", {})
+                for exp in expired:
+                    already = any(
+                        o.get("expired") == exp["hypothesis"]
+                        for o in ps.get("outcomes", [])
+                        if o.get("type") == "PARTIAL_EXPIRY"
+                    )
+                    if not already:
+                        record_partial_outcome(
+                            topic, exp["hypothesis"],
+                            note=f"Auto-expired at day {exp['current_day']}"
+                        )
+                topic["governance"]["expiredHypotheses"] = [
+                    {"key": e["hypothesis"], "label": e["label"],
+                     "expiredAtDay": e["expired_at_day"]}
+                    for e in expired
+                ]
+        except ImportError:
+            pass
+
     except Exception:
         # Governor computation must never prevent saving state
         pass
+
+    # --- Epistemic improvement: auto-compaction ---
+    try:
+        from framework.compaction import auto_compact
+        compact_result = auto_compact(topic, threshold=150)
+        if compact_result.get("compacted"):
+            topic.setdefault("governance", {})["lastCompaction"] = _now_iso()
+    except (ImportError, Exception):
+        pass  # Never block save
 
     path = TOPICS_DIR / f"{slug}.json"
     with open(path, "w", encoding="utf-8") as f:
@@ -369,7 +429,29 @@ def update_posteriors(topic: dict, new_posteriors: dict[str, float],
     for k in hypotheses:
         history_entry[k] = hypotheses[k]["posterior"]
     history_entry["note"] = reason
+
+    # --- Epistemic improvement: red team challenge ---
+    try:
+        from framework.red_team import generate_red_team
+        red_team = generate_red_team(topic, merged)
+        history_entry["redTeam"] = red_team
+        if red_team.get("devil_advocate_score", 0) > 0.6:
+            warnings.warn(
+                f"Red team score {red_team['devil_advocate_score']:.2f} — "
+                f"strong counter-case exists: {red_team.get('challenge', '')[:100]}",
+                stacklevel=2,
+            )
+    except ImportError:
+        pass  # Framework module not available
+
     topic["model"].setdefault("posteriorHistory", []).append(history_entry)
+
+    # --- Epistemic improvement: prediction snapshot ---
+    try:
+        from framework.scoring import snapshot_posteriors
+        snapshot_posteriors(topic, trigger="posterior_update")
+    except ImportError:
+        pass  # Framework module not available
 
     return topic
 
@@ -612,8 +694,19 @@ def add_evidence(topic: dict, entry: dict) -> dict:
         full_entry, evidence_log
     )
     full_entry["effectiveWeight"] = entry.get("effectiveWeight") or get_effective_weight(
-        full_entry, evidence_log
+        full_entry, evidence_log, topic=topic
     )
+
+    # --- Epistemic improvement: contradiction detection ---
+    try:
+        from framework.contradictions import detect_contradictions
+        contradictions = detect_contradictions(topic, full_entry)
+        if contradictions:
+            # Override claim state to CONTESTED if contradictions found
+            full_entry["claimState"] = "CONTESTED"
+            full_entry["effectiveWeight"] = min(full_entry["effectiveWeight"], 0.5)
+    except ImportError:
+        pass  # Framework module not available, skip
 
     topic.setdefault("evidenceLog", []).append(full_entry)
     return topic

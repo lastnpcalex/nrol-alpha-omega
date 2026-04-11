@@ -1,0 +1,4470 @@
+{
+  "sources": {
+    "Reuters": {
+      "baseTrust": 0.9,
+      "category": "wire",
+      "domains": {
+        "OSINT": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.9643
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.9643,
+      "totalClaims": 1,
+      "totalConfirmed": 1,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "AP": {
+      "baseTrust": 0.9,
+      "category": "wire",
+      "domains": {
+        "OSINT": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.9643
+        },
+        "EVENT": {
+          "claims": 5,
+          "confirmed": 5,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.99
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 6,
+          "confirmed": 6,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.99,
+      "totalClaims": 6,
+      "totalConfirmed": 6,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "IRGC statement": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "OSINT": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.75,
+      "totalClaims": 1,
+      "totalConfirmed": 1,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Multiple wire services": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EVENT": {
+          "claims": 1,
+          "confirmed": 0,
+          "refuted": 1,
+          "hitRate": 0.0,
+          "domainTrust": 0.2481
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 1,
+          "confirmed": 0,
+          "refuted": 1,
+          "hitRate": 0.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.2481,
+      "totalClaims": 1,
+      "totalConfirmed": 0,
+      "totalRefuted": 1,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Iranian state media": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "RHETORIC": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.75,
+      "totalClaims": 1,
+      "totalConfirmed": 1,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Truth Social": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "RHETORIC": {
+          "claims": 1,
+          "confirmed": 0,
+          "refuted": 1,
+          "hitRate": 0.0,
+          "domainTrust": 0.2481
+        },
+        "INTEL": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 2,
+          "confirmed": 1,
+          "refuted": 1,
+          "hitRate": 0.5,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.4975,
+      "totalClaims": 2,
+      "totalConfirmed": 1,
+      "totalRefuted": 1,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "pool reports": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "RHETORIC": {
+          "claims": 1,
+          "confirmed": 0,
+          "refuted": 1,
+          "hitRate": 0.0,
+          "domainTrust": 0.2481
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 1,
+          "confirmed": 0,
+          "refuted": 1,
+          "hitRate": 0.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.2481,
+      "totalClaims": 1,
+      "totalConfirmed": 0,
+      "totalRefuted": 1,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Market data": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "ECON": {
+          "claims": 2,
+          "confirmed": 2,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.9
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 2,
+          "confirmed": 2,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.9,
+      "totalClaims": 2,
+      "totalConfirmed": 2,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "AIS tracking": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EVENT": {
+          "claims": 2,
+          "confirmed": 1,
+          "refuted": 1,
+          "hitRate": 0.5,
+          "domainTrust": 0.4975
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 2,
+          "confirmed": 1,
+          "refuted": 1,
+          "hitRate": 0.5,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.4975,
+      "totalClaims": 2,
+      "totalConfirmed": 1,
+      "totalRefuted": 1,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "transit analysis": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EVENT": {
+          "claims": 2,
+          "confirmed": 1,
+          "refuted": 1,
+          "hitRate": 0.5,
+          "domainTrust": 0.4975
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 2,
+          "confirmed": 1,
+          "refuted": 1,
+          "hitRate": 0.5,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.4975,
+      "totalClaims": 2,
+      "totalConfirmed": 1,
+      "totalRefuted": 1,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "CBS News exclusive": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "DIPLO": {
+          "claims": 2,
+          "confirmed": 2,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.9
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 2,
+          "confirmed": 2,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.9,
+      "totalClaims": 2,
+      "totalConfirmed": 2,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Al Jazeera": {
+      "baseTrust": 0.6,
+      "category": "broadcast",
+      "domains": {
+        "DIPLO": {
+          "claims": 6,
+          "confirmed": 5,
+          "refuted": 1,
+          "hitRate": 0.8333,
+          "domainTrust": 0.99
+        },
+        "EVENT": {
+          "claims": 18,
+          "confirmed": 17,
+          "refuted": 1,
+          "hitRate": 0.9444,
+          "domainTrust": 0.99
+        },
+        "DATA": {
+          "claims": 5,
+          "confirmed": 3,
+          "refuted": 2,
+          "hitRate": 0.6,
+          "domainTrust": 0.8152
+        },
+        "RHETORIC": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.8182
+        },
+        "INTEL": {
+          "claims": 2,
+          "confirmed": 2,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.931
+        },
+        "SIGINT": {
+          "claims": 2,
+          "confirmed": 2,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.931
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 34,
+          "confirmed": 30,
+          "refuted": 4,
+          "hitRate": 0.8824,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.99,
+      "totalClaims": 34,
+      "totalConfirmed": 30,
+      "totalRefuted": 4,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "NPR": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "DIPLO": {
+          "claims": 5,
+          "confirmed": 4,
+          "refuted": 1,
+          "hitRate": 0.8,
+          "domainTrust": 0.9639
+        },
+        "DATA": {
+          "claims": 4,
+          "confirmed": 2,
+          "refuted": 2,
+          "hitRate": 0.5,
+          "domainTrust": 0.495
+        },
+        "EVENT": {
+          "claims": 5,
+          "confirmed": 4,
+          "refuted": 1,
+          "hitRate": 0.8,
+          "domainTrust": 0.9639
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 14,
+          "confirmed": 10,
+          "refuted": 4,
+          "hitRate": 0.7143,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.99,
+      "totalClaims": 14,
+      "totalConfirmed": 10,
+      "totalRefuted": 4,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "PBS": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EVENT": {
+          "claims": 3,
+          "confirmed": 3,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.9643
+        },
+        "DIPLO": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 4,
+          "confirmed": 4,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.9878,
+      "totalClaims": 4,
+      "totalConfirmed": 4,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Euronews": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EVENT": {
+          "claims": 11,
+          "confirmed": 10,
+          "refuted": 1,
+          "hitRate": 0.9091,
+          "domainTrust": 0.99
+        },
+        "RHETORIC": {
+          "claims": 2,
+          "confirmed": 0,
+          "refuted": 2,
+          "hitRate": 0.0,
+          "domainTrust": 0.0982
+        },
+        "DIPLO": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 14,
+          "confirmed": 11,
+          "refuted": 3,
+          "hitRate": 0.7857,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.99,
+      "totalClaims": 14,
+      "totalConfirmed": 11,
+      "totalRefuted": 3,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Military.com": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EVENT": {
+          "claims": 6,
+          "confirmed": 6,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.99
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 6,
+          "confirmed": 6,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.99,
+      "totalClaims": 6,
+      "totalConfirmed": 6,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Bloomberg": {
+      "baseTrust": 0.85,
+      "category": "broadsheet",
+      "domains": {
+        "DIPLO": {
+          "claims": 5,
+          "confirmed": 3,
+          "refuted": 2,
+          "hitRate": 0.6,
+          "domainTrust": 0.9434
+        },
+        "EVENT": {
+          "claims": 9,
+          "confirmed": 8,
+          "refuted": 1,
+          "hitRate": 0.8889,
+          "domainTrust": 0.99
+        },
+        "ECON": {
+          "claims": 5,
+          "confirmed": 5,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.99
+        },
+        "DATA": {
+          "claims": 4,
+          "confirmed": 4,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.99
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 23,
+          "confirmed": 20,
+          "refuted": 3,
+          "hitRate": 0.8696,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.99,
+      "totalClaims": 23,
+      "totalConfirmed": 20,
+      "totalRefuted": 3,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "FT": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "DIPLO": {
+          "claims": 4,
+          "confirmed": 2,
+          "refuted": 2,
+          "hitRate": 0.5,
+          "domainTrust": 0.495
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 4,
+          "confirmed": 2,
+          "refuted": 2,
+          "hitRate": 0.5,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.495,
+      "totalClaims": 4,
+      "totalConfirmed": 2,
+      "totalRefuted": 2,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Rappler": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "DIPLO": {
+          "claims": 4,
+          "confirmed": 2,
+          "refuted": 2,
+          "hitRate": 0.5,
+          "domainTrust": 0.495
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 4,
+          "confirmed": 2,
+          "refuted": 2,
+          "hitRate": 0.5,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.495,
+      "totalClaims": 4,
+      "totalConfirmed": 2,
+      "totalRefuted": 2,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Caixin": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "DIPLO": {
+          "claims": 4,
+          "confirmed": 2,
+          "refuted": 2,
+          "hitRate": 0.5,
+          "domainTrust": 0.495
+        },
+        "EVENT": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 5,
+          "confirmed": 3,
+          "refuted": 2,
+          "hitRate": 0.6,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.7462,
+      "totalClaims": 5,
+      "totalConfirmed": 3,
+      "totalRefuted": 2,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "CNN": {
+      "baseTrust": 0.75,
+      "category": "broadcast",
+      "domains": {
+        "EVENT": {
+          "claims": 12,
+          "confirmed": 11,
+          "refuted": 1,
+          "hitRate": 0.9167,
+          "domainTrust": 0.99
+        },
+        "DIPLO": {
+          "claims": 2,
+          "confirmed": 0,
+          "refuted": 2,
+          "hitRate": 0.0,
+          "domainTrust": 0.2463
+        },
+        "INTEL": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.9
+        },
+        "DATA": {
+          "claims": 3,
+          "confirmed": 3,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.9878
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 18,
+          "confirmed": 15,
+          "refuted": 3,
+          "hitRate": 0.8333,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.99,
+      "totalClaims": 18,
+      "totalConfirmed": 15,
+      "totalRefuted": 3,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "WaPo": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EVENT": {
+          "claims": 16,
+          "confirmed": 15,
+          "refuted": 1,
+          "hitRate": 0.9375,
+          "domainTrust": 0.99
+        },
+        "DATA": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 17,
+          "confirmed": 16,
+          "refuted": 1,
+          "hitRate": 0.9412,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.99,
+      "totalClaims": 17,
+      "totalConfirmed": 16,
+      "totalRefuted": 1,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Intercept": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EVENT": {
+          "claims": 5,
+          "confirmed": 5,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.99
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 5,
+          "confirmed": 5,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.99,
+      "totalClaims": 5,
+      "totalConfirmed": 5,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Stars and Stripes": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EVENT": {
+          "claims": 11,
+          "confirmed": 11,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.99
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 11,
+          "confirmed": 11,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.99,
+      "totalClaims": 11,
+      "totalConfirmed": 11,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "USNI Fleet Tracker Mar 23": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EVENT": {
+          "claims": 9,
+          "confirmed": 7,
+          "refuted": 2,
+          "hitRate": 0.7778,
+          "domainTrust": 0.99
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 9,
+          "confirmed": 7,
+          "refuted": 2,
+          "hitRate": 0.7778,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.99,
+      "totalClaims": 9,
+      "totalConfirmed": 7,
+      "totalRefuted": 2,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "CNBC": {
+      "baseTrust": 0.65,
+      "category": "broadcast",
+      "domains": {
+        "ECON": {
+          "claims": 31,
+          "confirmed": 30,
+          "refuted": 1,
+          "hitRate": 0.9677,
+          "domainTrust": 0.99
+        },
+        "DATA": {
+          "claims": 10,
+          "confirmed": 4,
+          "refuted": 6,
+          "hitRate": 0.4,
+          "domainTrust": 0.1627
+        },
+        "EVENT": {
+          "claims": 11,
+          "confirmed": 9,
+          "refuted": 2,
+          "hitRate": 0.8182,
+          "domainTrust": 0.99
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 52,
+          "confirmed": 43,
+          "refuted": 9,
+          "hitRate": 0.8269,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.99,
+      "totalClaims": 52,
+      "totalConfirmed": 43,
+      "totalRefuted": 9,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Fortune": {
+      "baseTrust": 0.7,
+      "category": "trade",
+      "domains": {
+        "ECON": {
+          "claims": 26,
+          "confirmed": 25,
+          "refuted": 1,
+          "hitRate": 0.9615,
+          "domainTrust": 0.99
+        },
+        "DATA": {
+          "claims": 4,
+          "confirmed": 4,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.99
+        },
+        "EVENT": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.875
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 31,
+          "confirmed": 30,
+          "refuted": 1,
+          "hitRate": 0.9677,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.99,
+      "totalClaims": 31,
+      "totalConfirmed": 30,
+      "totalRefuted": 1,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Yahoo Finance": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "ECON": {
+          "claims": 8,
+          "confirmed": 8,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.99
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 8,
+          "confirmed": 8,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.99,
+      "totalClaims": 8,
+      "totalConfirmed": 8,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Lloyd's List": {
+      "baseTrust": 0.5,
+      "category": "trade",
+      "domains": {
+        "DATA": {
+          "claims": 13,
+          "confirmed": 5,
+          "refuted": 8,
+          "hitRate": 0.3846,
+          "domainTrust": 0.033
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 13,
+          "confirmed": 5,
+          "refuted": 8,
+          "hitRate": 0.3846,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.033,
+      "totalClaims": 13,
+      "totalConfirmed": 5,
+      "totalRefuted": 8,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "S&P Global": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "DATA": {
+          "claims": 7,
+          "confirmed": 3,
+          "refuted": 4,
+          "hitRate": 0.4286,
+          "domainTrust": 0.2425
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 7,
+          "confirmed": 3,
+          "refuted": 4,
+          "hitRate": 0.4286,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.2425,
+      "totalClaims": 7,
+      "totalConfirmed": 3,
+      "totalRefuted": 4,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Wikipedia": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "DATA": {
+          "claims": 8,
+          "confirmed": 8,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.99
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 8,
+          "confirmed": 8,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.99,
+      "totalClaims": 8,
+      "totalConfirmed": 8,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Hengaw": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "DATA": {
+          "claims": 7,
+          "confirmed": 7,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.99
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 7,
+          "confirmed": 7,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.99,
+      "totalClaims": 7,
+      "totalConfirmed": 7,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Al Jazeera casualty tracker": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "DATA": {
+          "claims": 5,
+          "confirmed": 5,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.99
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 5,
+          "confirmed": 5,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.99,
+      "totalClaims": 5,
+      "totalConfirmed": 5,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Al Jazeera Day 25 tracker": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EVENT": {
+          "claims": 4,
+          "confirmed": 2,
+          "refuted": 2,
+          "hitRate": 0.5,
+          "domainTrust": 0.495
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 4,
+          "confirmed": 2,
+          "refuted": 2,
+          "hitRate": 0.5,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.495,
+      "totalClaims": 4,
+      "totalConfirmed": 2,
+      "totalRefuted": 2,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "NBC": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EVENT": {
+          "claims": 8,
+          "confirmed": 8,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.99
+        },
+        "DIPLO": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        },
+        "DATA": {
+          "claims": 3,
+          "confirmed": 2,
+          "refuted": 1,
+          "hitRate": 0.6667,
+          "domainTrust": 0.7481
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 12,
+          "confirmed": 11,
+          "refuted": 1,
+          "hitRate": 0.9167,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.99,
+      "totalClaims": 12,
+      "totalConfirmed": 11,
+      "totalRefuted": 1,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "CBS Day 25 coverage": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EVENT": {
+          "claims": 2,
+          "confirmed": 2,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.9
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 2,
+          "confirmed": 2,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.9,
+      "totalClaims": 2,
+      "totalConfirmed": 2,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Times of Israel": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "DIPLO": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        },
+        "RHETORIC": {
+          "claims": 2,
+          "confirmed": 0,
+          "refuted": 2,
+          "hitRate": 0.0,
+          "domainTrust": 0.0982
+        },
+        "DATA": {
+          "claims": 3,
+          "confirmed": 2,
+          "refuted": 1,
+          "hitRate": 0.6667,
+          "domainTrust": 0.7481
+        },
+        "EVENT": {
+          "claims": 6,
+          "confirmed": 5,
+          "refuted": 1,
+          "hitRate": 0.8333,
+          "domainTrust": 0.9877
+        },
+        "INTEL": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 13,
+          "confirmed": 9,
+          "refuted": 4,
+          "hitRate": 0.6923,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.99,
+      "totalClaims": 13,
+      "totalConfirmed": 9,
+      "totalRefuted": 4,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Argus Media": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "DATA": {
+          "claims": 3,
+          "confirmed": 1,
+          "refuted": 2,
+          "hitRate": 0.3333,
+          "domainTrust": 0.2463
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 3,
+          "confirmed": 1,
+          "refuted": 2,
+          "hitRate": 0.3333,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.2463,
+      "totalClaims": 3,
+      "totalConfirmed": 1,
+      "totalRefuted": 2,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "UANI": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "DATA": {
+          "claims": 3,
+          "confirmed": 1,
+          "refuted": 2,
+          "hitRate": 0.3333,
+          "domainTrust": 0.2463
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 3,
+          "confirmed": 1,
+          "refuted": 2,
+          "hitRate": 0.3333,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.2463,
+      "totalClaims": 3,
+      "totalConfirmed": 1,
+      "totalRefuted": 2,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "WSJ": {
+      "baseTrust": 0.7,
+      "category": "broadsheet",
+      "domains": {
+        "EVENT": {
+          "claims": 5,
+          "confirmed": 5,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.99
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 5,
+          "confirmed": 5,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.99,
+      "totalClaims": 5,
+      "totalConfirmed": 5,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Turkiye Today": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EVENT": {
+          "claims": 6,
+          "confirmed": 5,
+          "refuted": 1,
+          "hitRate": 0.8333,
+          "domainTrust": 0.9877
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 6,
+          "confirmed": 5,
+          "refuted": 1,
+          "hitRate": 0.8333,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.9877,
+      "totalClaims": 6,
+      "totalConfirmed": 5,
+      "totalRefuted": 1,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Investing.com": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "ECON": {
+          "claims": 15,
+          "confirmed": 15,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.99
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 15,
+          "confirmed": 15,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.99,
+      "totalClaims": 15,
+      "totalConfirmed": 15,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "AAA": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "ECON": {
+          "claims": 7,
+          "confirmed": 7,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.99
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 7,
+          "confirmed": 7,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.99,
+      "totalClaims": 7,
+      "totalConfirmed": 7,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Al Jazeera tracker": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "DATA": {
+          "claims": 5,
+          "confirmed": 5,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.99
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 5,
+          "confirmed": 5,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.99,
+      "totalClaims": 5,
+      "totalConfirmed": 5,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Iranian Red Crescent": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "DATA": {
+          "claims": 2,
+          "confirmed": 2,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.9
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 2,
+          "confirmed": 2,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.9,
+      "totalClaims": 2,
+      "totalConfirmed": 2,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "CBS": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EVENT": {
+          "claims": 4,
+          "confirmed": 4,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.9878
+        },
+        "RHETORIC": {
+          "claims": 2,
+          "confirmed": 0,
+          "refuted": 2,
+          "hitRate": 0.0,
+          "domainTrust": 0.0982
+        },
+        "DIPLO": {
+          "claims": 1,
+          "confirmed": 0,
+          "refuted": 1,
+          "hitRate": 0.0,
+          "domainTrust": 0.2481
+        },
+        "DATA": {
+          "claims": 2,
+          "confirmed": 1,
+          "refuted": 1,
+          "hitRate": 0.5,
+          "domainTrust": 0.4975
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 9,
+          "confirmed": 5,
+          "refuted": 4,
+          "hitRate": 0.5556,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.7424,
+      "totalClaims": 9,
+      "totalConfirmed": 5,
+      "totalRefuted": 4,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "BMTO": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EVENT": {
+          "claims": 3,
+          "confirmed": 2,
+          "refuted": 1,
+          "hitRate": 0.6667,
+          "domainTrust": 0.7481
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 3,
+          "confirmed": 2,
+          "refuted": 1,
+          "hitRate": 0.6667,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.7481,
+      "totalClaims": 3,
+      "totalConfirmed": 2,
+      "totalRefuted": 1,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Semafor": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "DATA": {
+          "claims": 3,
+          "confirmed": 1,
+          "refuted": 2,
+          "hitRate": 0.3333,
+          "domainTrust": 0.2463
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 3,
+          "confirmed": 1,
+          "refuted": 2,
+          "hitRate": 0.3333,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.2463,
+      "totalClaims": 3,
+      "totalConfirmed": 1,
+      "totalRefuted": 2,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Sputnik": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EVENT": {
+          "claims": 3,
+          "confirmed": 2,
+          "refuted": 1,
+          "hitRate": 0.6667,
+          "domainTrust": 0.7481
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 3,
+          "confirmed": 2,
+          "refuted": 1,
+          "hitRate": 0.6667,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.7481,
+      "totalClaims": 3,
+      "totalConfirmed": 2,
+      "totalRefuted": 1,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "GlobalSecurity": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EVENT": {
+          "claims": 3,
+          "confirmed": 2,
+          "refuted": 1,
+          "hitRate": 0.6667,
+          "domainTrust": 0.7481
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 3,
+          "confirmed": 2,
+          "refuted": 1,
+          "hitRate": 0.6667,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.7481,
+      "totalClaims": 3,
+      "totalConfirmed": 2,
+      "totalRefuted": 1,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "IranWire": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EVENT": {
+          "claims": 3,
+          "confirmed": 2,
+          "refuted": 1,
+          "hitRate": 0.6667,
+          "domainTrust": 0.7481
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 3,
+          "confirmed": 2,
+          "refuted": 1,
+          "hitRate": 0.6667,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.7481,
+      "totalClaims": 3,
+      "totalConfirmed": 2,
+      "totalRefuted": 1,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "World Nuclear News": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EVENT": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.75,
+      "totalClaims": 1,
+      "totalConfirmed": 1,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "CGTN": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EVENT": {
+          "claims": 2,
+          "confirmed": 2,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.9
+        },
+        "RHETORIC": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 3,
+          "confirmed": 3,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.9643,
+      "totalClaims": 3,
+      "totalConfirmed": 3,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "IAEA official X post": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EVENT": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.75,
+      "totalClaims": 1,
+      "totalConfirmed": 1,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Al Jazeera Day 26": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EVENT": {
+          "claims": 4,
+          "confirmed": 4,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.9878
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 4,
+          "confirmed": 4,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.9878,
+      "totalClaims": 4,
+      "totalConfirmed": 4,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Al Arabiya": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EVENT": {
+          "claims": 8,
+          "confirmed": 7,
+          "refuted": 1,
+          "hitRate": 0.875,
+          "domainTrust": 0.99
+        },
+        "DATA": {
+          "claims": 1,
+          "confirmed": 0,
+          "refuted": 1,
+          "hitRate": 0.0,
+          "domainTrust": 0.2481
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 9,
+          "confirmed": 7,
+          "refuted": 2,
+          "hitRate": 0.7778,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.99,
+      "totalClaims": 9,
+      "totalConfirmed": 7,
+      "totalRefuted": 2,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Gulf News": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EVENT": {
+          "claims": 4,
+          "confirmed": 4,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.9878
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 4,
+          "confirmed": 4,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.9878,
+      "totalClaims": 4,
+      "totalConfirmed": 4,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Al-Monitor": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "RHETORIC": {
+          "claims": 2,
+          "confirmed": 0,
+          "refuted": 2,
+          "hitRate": 0.0,
+          "domainTrust": 0.0982
+        },
+        "DIPLO": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 3,
+          "confirmed": 1,
+          "refuted": 2,
+          "hitRate": 0.3333,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.2463,
+      "totalClaims": 3,
+      "totalConfirmed": 1,
+      "totalRefuted": 2,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Sky News": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "RHETORIC": {
+          "claims": 2,
+          "confirmed": 0,
+          "refuted": 2,
+          "hitRate": 0.0,
+          "domainTrust": 0.0982
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 2,
+          "confirmed": 0,
+          "refuted": 2,
+          "hitRate": 0.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.0982,
+      "totalClaims": 2,
+      "totalConfirmed": 0,
+      "totalRefuted": 2,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Security Council Report": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "DIPLO": {
+          "claims": 2,
+          "confirmed": 2,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.9
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 2,
+          "confirmed": 2,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.9,
+      "totalClaims": 2,
+      "totalConfirmed": 2,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Washington Times": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "DIPLO": {
+          "claims": 3,
+          "confirmed": 3,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.9643
+        },
+        "DATA": {
+          "claims": 3,
+          "confirmed": 3,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.9643
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 6,
+          "confirmed": 6,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.99,
+      "totalClaims": 6,
+      "totalConfirmed": 6,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Arab News": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "DIPLO": {
+          "claims": 2,
+          "confirmed": 2,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.9
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 2,
+          "confirmed": 2,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.9,
+      "totalClaims": 2,
+      "totalConfirmed": 2,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "UN News": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "DIPLO": {
+          "claims": 2,
+          "confirmed": 2,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.9
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 2,
+          "confirmed": 2,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.9,
+      "totalClaims": 2,
+      "totalConfirmed": 2,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "White House briefing": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "DATA": {
+          "claims": 1,
+          "confirmed": 0,
+          "refuted": 1,
+          "hitRate": 0.0,
+          "domainTrust": 0.2481
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 1,
+          "confirmed": 0,
+          "refuted": 1,
+          "hitRate": 0.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.2481,
+      "totalClaims": 1,
+      "totalConfirmed": 0,
+      "totalRefuted": 1,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Newsweek": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EVENT": {
+          "claims": 2,
+          "confirmed": 2,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.9
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 2,
+          "confirmed": 2,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.9,
+      "totalClaims": 2,
+      "totalConfirmed": 2,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "The Week": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "INTEL": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.75,
+      "totalClaims": 1,
+      "totalConfirmed": 1,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "JPost": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "INTEL": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        },
+        "EVENT": {
+          "claims": 3,
+          "confirmed": 2,
+          "refuted": 1,
+          "hitRate": 0.6667,
+          "domainTrust": 0.7481
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 4,
+          "confirmed": 3,
+          "refuted": 1,
+          "hitRate": 0.75,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.8991,
+      "totalClaims": 4,
+      "totalConfirmed": 3,
+      "totalRefuted": 1,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Azernews": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "INTEL": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.75,
+      "totalClaims": 1,
+      "totalConfirmed": 1,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Axios": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EVENT": {
+          "claims": 8,
+          "confirmed": 7,
+          "refuted": 1,
+          "hitRate": 0.875,
+          "domainTrust": 0.99
+        },
+        "INTEL": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 9,
+          "confirmed": 8,
+          "refuted": 1,
+          "hitRate": 0.8889,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.99,
+      "totalClaims": 9,
+      "totalConfirmed": 8,
+      "totalRefuted": 1,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "India TV": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EVENT": {
+          "claims": 6,
+          "confirmed": 5,
+          "refuted": 1,
+          "hitRate": 0.8333,
+          "domainTrust": 0.9877
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 6,
+          "confirmed": 5,
+          "refuted": 1,
+          "hitRate": 0.8333,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.9877,
+      "totalClaims": 6,
+      "totalConfirmed": 5,
+      "totalRefuted": 1,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Pew Research": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "DATA": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.75,
+      "totalClaims": 1,
+      "totalConfirmed": 1,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Spectrum News": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EVENT": {
+          "claims": 3,
+          "confirmed": 2,
+          "refuted": 1,
+          "hitRate": 0.6667,
+          "domainTrust": 0.7481
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 3,
+          "confirmed": 2,
+          "refuted": 1,
+          "hitRate": 0.6667,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.7481,
+      "totalClaims": 3,
+      "totalConfirmed": 2,
+      "totalRefuted": 1,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "OilPrice": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EVENT": {
+          "claims": 3,
+          "confirmed": 2,
+          "refuted": 1,
+          "hitRate": 0.6667,
+          "domainTrust": 0.7481
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 3,
+          "confirmed": 2,
+          "refuted": 1,
+          "hitRate": 0.6667,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.7481,
+      "totalClaims": 3,
+      "totalConfirmed": 2,
+      "totalRefuted": 1,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Israel Hayom": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EVENT": {
+          "claims": 3,
+          "confirmed": 2,
+          "refuted": 1,
+          "hitRate": 0.6667,
+          "domainTrust": 0.7481
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 3,
+          "confirmed": 2,
+          "refuted": 1,
+          "hitRate": 0.6667,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.7481,
+      "totalClaims": 3,
+      "totalConfirmed": 2,
+      "totalRefuted": 1,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "XTB": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EVENT": {
+          "claims": 3,
+          "confirmed": 2,
+          "refuted": 1,
+          "hitRate": 0.6667,
+          "domainTrust": 0.7481
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 3,
+          "confirmed": 2,
+          "refuted": 1,
+          "hitRate": 0.6667,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.7481,
+      "totalClaims": 3,
+      "totalConfirmed": 2,
+      "totalRefuted": 1,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "OPB": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "DIPLO": {
+          "claims": 3,
+          "confirmed": 2,
+          "refuted": 1,
+          "hitRate": 0.6667,
+          "domainTrust": 0.7481
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 3,
+          "confirmed": 2,
+          "refuted": 1,
+          "hitRate": 0.6667,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.7481,
+      "totalClaims": 3,
+      "totalConfirmed": 2,
+      "totalRefuted": 1,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "FDD": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "DATA": {
+          "claims": 1,
+          "confirmed": 0,
+          "refuted": 1,
+          "hitRate": 0.0,
+          "domainTrust": 0.2481
+        },
+        "EVENT": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 2,
+          "confirmed": 1,
+          "refuted": 1,
+          "hitRate": 0.5,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.4975,
+      "totalClaims": 2,
+      "totalConfirmed": 1,
+      "totalRefuted": 1,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Eurasia Review": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "DATA": {
+          "claims": 1,
+          "confirmed": 0,
+          "refuted": 1,
+          "hitRate": 0.0,
+          "domainTrust": 0.2481
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 1,
+          "confirmed": 0,
+          "refuted": 1,
+          "hitRate": 0.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.2481,
+      "totalClaims": 1,
+      "totalConfirmed": 0,
+      "totalRefuted": 1,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "RTE": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "ECON": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.75,
+      "totalClaims": 1,
+      "totalConfirmed": 1,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "WTO": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "ECON": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.75,
+      "totalClaims": 1,
+      "totalConfirmed": 1,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Business Standard": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "DIPLO": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.75,
+      "totalClaims": 1,
+      "totalConfirmed": 1,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Channel Islands": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "DIPLO": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.75,
+      "totalClaims": 1,
+      "totalConfirmed": 1,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Organiser": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "DIPLO": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.75,
+      "totalClaims": 1,
+      "totalConfirmed": 1,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Kashmir Observer": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "DIPLO": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.75,
+      "totalClaims": 1,
+      "totalConfirmed": 1,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "ACLED": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "DATA": {
+          "claims": 2,
+          "confirmed": 2,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.9
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 2,
+          "confirmed": 2,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.9,
+      "totalClaims": 2,
+      "totalConfirmed": 2,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Critical Threats": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "DATA": {
+          "claims": 2,
+          "confirmed": 2,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.9
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 2,
+          "confirmed": 2,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.9,
+      "totalClaims": 2,
+      "totalConfirmed": 2,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Motley Fool": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "ECON": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.75,
+      "totalClaims": 1,
+      "totalConfirmed": 1,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "TheStreet": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "ECON": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.75,
+      "totalClaims": 1,
+      "totalConfirmed": 1,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Syntex America": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "ECON": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.75,
+      "totalClaims": 1,
+      "totalConfirmed": 1,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "CSIS": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EVENT": {
+          "claims": 6,
+          "confirmed": 5,
+          "refuted": 1,
+          "hitRate": 0.8333,
+          "domainTrust": 0.9877
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 6,
+          "confirmed": 5,
+          "refuted": 1,
+          "hitRate": 0.8333,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.9877,
+      "totalClaims": 6,
+      "totalConfirmed": 5,
+      "totalRefuted": 1,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "USNI": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EVENT": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        },
+        "INTEL": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 2,
+          "confirmed": 2,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.9,
+      "totalClaims": 2,
+      "totalConfirmed": 2,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Fox News": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EVENT": {
+          "claims": 2,
+          "confirmed": 2,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.9
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 2,
+          "confirmed": 2,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.9,
+      "totalClaims": 2,
+      "totalConfirmed": 2,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Voice of Emirates": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EVENT": {
+          "claims": 2,
+          "confirmed": 2,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.9
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 2,
+          "confirmed": 2,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.9,
+      "totalClaims": 2,
+      "totalConfirmed": 2,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "IDF official": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EVENT": {
+          "claims": 1,
+          "confirmed": 0,
+          "refuted": 1,
+          "hitRate": 0.0,
+          "domainTrust": 0.2481
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 1,
+          "confirmed": 0,
+          "refuted": 1,
+          "hitRate": 0.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.2481,
+      "totalClaims": 1,
+      "totalConfirmed": 0,
+      "totalRefuted": 1,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "ANI": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EVENT": {
+          "claims": 1,
+          "confirmed": 0,
+          "refuted": 1,
+          "hitRate": 0.0,
+          "domainTrust": 0.2481
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 1,
+          "confirmed": 0,
+          "refuted": 1,
+          "hitRate": 0.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.2481,
+      "totalClaims": 1,
+      "totalConfirmed": 0,
+      "totalRefuted": 1,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "JNS": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EVENT": {
+          "claims": 1,
+          "confirmed": 0,
+          "refuted": 1,
+          "hitRate": 0.0,
+          "domainTrust": 0.2481
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 1,
+          "confirmed": 0,
+          "refuted": 1,
+          "hitRate": 0.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.2481,
+      "totalClaims": 1,
+      "totalConfirmed": 0,
+      "totalRefuted": 1,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Tribune India": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EVENT": {
+          "claims": 1,
+          "confirmed": 0,
+          "refuted": 1,
+          "hitRate": 0.0,
+          "domainTrust": 0.2481
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 1,
+          "confirmed": 0,
+          "refuted": 1,
+          "hitRate": 0.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.2481,
+      "totalClaims": 1,
+      "totalConfirmed": 0,
+      "totalRefuted": 1,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "The National": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EVENT": {
+          "claims": 2,
+          "confirmed": 2,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.9
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 2,
+          "confirmed": 2,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.9,
+      "totalClaims": 2,
+      "totalConfirmed": 2,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Times of Israel liveblog Mar 27": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EVENT": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.75,
+      "totalClaims": 1,
+      "totalConfirmed": 1,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Boston Globe": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EVENT": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.75,
+      "totalClaims": 1,
+      "totalConfirmed": 1,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "247 Wall St": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "ECON": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.75,
+      "totalClaims": 1,
+      "totalConfirmed": 1,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Windward Maritime Intelligence": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "DATA": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.75,
+      "totalClaims": 1,
+      "totalConfirmed": 1,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Maritime Executive": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EVENT": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.75,
+      "totalClaims": 1,
+      "totalConfirmed": 1,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "TradeWinds": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EVENT": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.75,
+      "totalClaims": 1,
+      "totalConfirmed": 1,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Time": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EVENT": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.75,
+      "totalClaims": 1,
+      "totalConfirmed": 1,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Sahara Reporters": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EVENT": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.75,
+      "totalClaims": 1,
+      "totalConfirmed": 1,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Daily Mirror": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EVENT": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.75,
+      "totalClaims": 1,
+      "totalConfirmed": 1,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Middle East Monitor": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EVENT": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.75,
+      "totalClaims": 1,
+      "totalConfirmed": 1,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "ABC7": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EVENT": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.75,
+      "totalClaims": 1,
+      "totalConfirmed": 1,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Haaretz": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EVENT": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.75,
+      "totalClaims": 1,
+      "totalConfirmed": 1,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "CNN Day 29": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EVENT": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.75,
+      "totalClaims": 1,
+      "totalConfirmed": 1,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "NRC": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "DATA": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.75,
+      "totalClaims": 1,
+      "totalConfirmed": 1,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "GB News": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EVENT": {
+          "claims": 4,
+          "confirmed": 3,
+          "refuted": 1,
+          "hitRate": 0.75,
+          "domainTrust": 0.8991
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 4,
+          "confirmed": 3,
+          "refuted": 1,
+          "hitRate": 0.75,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.8991,
+      "totalClaims": 4,
+      "totalConfirmed": 3,
+      "totalRefuted": 1,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "The Hill": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EVENT": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.75,
+      "totalClaims": 1,
+      "totalConfirmed": 1,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Capital News Point": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EVENT": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.75,
+      "totalClaims": 1,
+      "totalConfirmed": 1,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "US News": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EVENT": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.75,
+      "totalClaims": 1,
+      "totalConfirmed": 1,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "France24": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EVENT": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        },
+        "RHETORIC": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        },
+        "INTEL": {
+          "claims": 2,
+          "confirmed": 1,
+          "refuted": 1,
+          "hitRate": 0.5,
+          "domainTrust": 0.4975
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 4,
+          "confirmed": 3,
+          "refuted": 1,
+          "hitRate": 0.75,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.8991,
+      "totalClaims": 4,
+      "totalConfirmed": 3,
+      "totalRefuted": 1,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Al Bawaba": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EVENT": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.75,
+      "totalClaims": 1,
+      "totalConfirmed": 1,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Anadolu Agency": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EVENT": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.75,
+      "totalClaims": 1,
+      "totalConfirmed": 1,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Daily Star": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "EVENT": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.75,
+      "totalClaims": 1,
+      "totalConfirmed": 1,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "TradingEconomics": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "ECON": {
+          "claims": 6,
+          "confirmed": 6,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.99
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 6,
+          "confirmed": 6,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.99,
+      "totalClaims": 6,
+      "totalConfirmed": 6,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Goodreturns": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "ECON": {
+          "claims": 4,
+          "confirmed": 4,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.9878
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 4,
+          "confirmed": 4,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.9878,
+      "totalClaims": 4,
+      "totalConfirmed": 4,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "WBUR": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "RHETORIC": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.75,
+      "totalClaims": 1,
+      "totalConfirmed": 1,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Daily Caller": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "RHETORIC": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.75,
+      "totalClaims": 1,
+      "totalConfirmed": 1,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "OilCrudePrice": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "ECON": {
+          "claims": 2,
+          "confirmed": 2,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.9
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 2,
+          "confirmed": 2,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.9,
+      "totalClaims": 2,
+      "totalConfirmed": 2,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Foreign Policy": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "INTEL": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.75,
+      "totalClaims": 1,
+      "totalConfirmed": 1,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "NYT": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "INTEL": {
+          "claims": 2,
+          "confirmed": 2,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.9
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 2,
+          "confirmed": 2,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.9,
+      "totalClaims": 2,
+      "totalConfirmed": 2,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Presstv": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "INTEL": {
+          "claims": 2,
+          "confirmed": 2,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.9
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 2,
+          "confirmed": 2,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.9,
+      "totalClaims": 2,
+      "totalConfirmed": 2,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "IRNA": {
+      "baseTrust": 0.4,
+      "category": "state_media",
+      "domains": {
+        "INTEL": {
+          "claims": 2,
+          "confirmed": 2,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.8571
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 2,
+          "confirmed": 2,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.8571,
+      "totalClaims": 2,
+      "totalConfirmed": 2,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "HSToday": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "OSINT": {
+          "claims": 4,
+          "confirmed": 4,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.9878
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 4,
+          "confirmed": 4,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.9878,
+      "totalClaims": 4,
+      "totalConfirmed": 4,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "MarineTraffic": {
+      "baseTrust": 0.5,
+      "category": "trade",
+      "domains": {
+        "OSINT": {
+          "claims": 4,
+          "confirmed": 4,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.9878
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 4,
+          "confirmed": 4,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.9878,
+      "totalClaims": 4,
+      "totalConfirmed": 4,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Forbes": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "ECON": {
+          "claims": 2,
+          "confirmed": 2,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.9
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 2,
+          "confirmed": 2,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.9,
+      "totalClaims": 2,
+      "totalConfirmed": 2,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Pintu": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "ECON": {
+          "claims": 2,
+          "confirmed": 2,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.9
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 2,
+          "confirmed": 2,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.9,
+      "totalClaims": 2,
+      "totalConfirmed": 2,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Defense Security Asia": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "SIGINT": {
+          "claims": 2,
+          "confirmed": 2,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.9
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 2,
+          "confirmed": 2,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.9,
+      "totalClaims": 2,
+      "totalConfirmed": 2,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Army Recognition": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "SIGINT": {
+          "claims": 2,
+          "confirmed": 2,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.9
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 2,
+          "confirmed": 2,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.9,
+      "totalClaims": 2,
+      "totalConfirmed": 2,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Eurasian Times": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "INTEL": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.75,
+      "totalClaims": 1,
+      "totalConfirmed": 1,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "CFR": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "INTEL": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.75,
+      "totalClaims": 1,
+      "totalConfirmed": 1,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "UPI": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "OSINT": {
+          "claims": 2,
+          "confirmed": 2,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.9
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 2,
+          "confirmed": 2,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.9,
+      "totalClaims": 2,
+      "totalConfirmed": 2,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Your News": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "OSINT": {
+          "claims": 2,
+          "confirmed": 2,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.9
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 2,
+          "confirmed": 2,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.9,
+      "totalClaims": 2,
+      "totalConfirmed": 2,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "AP News": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "INTEL": {
+          "claims": 2,
+          "confirmed": 2,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.9
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 2,
+          "confirmed": 2,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.9,
+      "totalClaims": 2,
+      "totalConfirmed": 2,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "ABC11": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "INTEL": {
+          "claims": 2,
+          "confirmed": 2,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.9
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 2,
+          "confirmed": 2,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.9,
+      "totalClaims": 2,
+      "totalConfirmed": 2,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "CENTCOM": {
+      "baseTrust": 0.95,
+      "category": "government",
+      "domains": {
+        "INTEL": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.9828
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.9828,
+      "totalClaims": 1,
+      "totalConfirmed": 1,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Defense News": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "INTEL": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.75,
+      "totalClaims": 1,
+      "totalConfirmed": 1,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Correction log": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "INTEL": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.75,
+      "totalClaims": 1,
+      "totalConfirmed": 1,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Nampa": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "OSINT": {
+          "claims": 3,
+          "confirmed": 3,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.9643
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 3,
+          "confirmed": 3,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.9643,
+      "totalClaims": 3,
+      "totalConfirmed": 3,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "IRGC X": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "OSINT": {
+          "claims": 3,
+          "confirmed": 3,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.9643
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 3,
+          "confirmed": 3,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.9643,
+      "totalClaims": 3,
+      "totalConfirmed": 3,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Malay Mail": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "OSINT": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.75,
+      "totalClaims": 1,
+      "totalConfirmed": 1,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Maritime tracking": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "OSINT": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.75,
+      "totalClaims": 1,
+      "totalConfirmed": 1,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "RFERL": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "DIPLO": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.75
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.75,
+      "totalClaims": 1,
+      "totalConfirmed": 1,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Nour News (IRGC-affiliated)": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "INTEL": {
+          "claims": 3,
+          "confirmed": 3,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.9643
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 3,
+          "confirmed": 3,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.9643,
+      "totalClaims": 3,
+      "totalConfirmed": 3,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Report.az": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "INTEL": {
+          "claims": 2,
+          "confirmed": 2,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.9
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 2,
+          "confirmed": 2,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.9,
+      "totalClaims": 2,
+      "totalConfirmed": 2,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Tasnim": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "INTEL": {
+          "claims": 2,
+          "confirmed": 2,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.9
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 2,
+          "confirmed": 2,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.9,
+      "totalClaims": 2,
+      "totalConfirmed": 2,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "BBC": {
+      "baseTrust": 0.75,
+      "category": "broadcast",
+      "domains": {
+        "INTEL": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "domainTrust": 0.9
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.9,
+      "totalClaims": 1,
+      "totalConfirmed": 1,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    },
+    "Meaww vs Iranian state media — no Pentagon confirmation": {
+      "baseTrust": 0.5,
+      "category": "unknown",
+      "domains": {
+        "INTEL": {
+          "claims": 1,
+          "confirmed": 0,
+          "refuted": 1,
+          "hitRate": 0.0,
+          "domainTrust": 0.2481
+        }
+      },
+      "topicHistory": {
+        "hormuz-closure": {
+          "claims": 1,
+          "confirmed": 0,
+          "refuted": 1,
+          "hitRate": 0.0,
+          "lastSeen": "2026-04-11T16:59:37Z"
+        }
+      },
+      "effectiveTrust": 0.2481,
+      "totalClaims": 1,
+      "totalConfirmed": 0,
+      "totalRefuted": 1,
+      "lastUpdated": "2026-04-11T16:59:37Z"
+    }
+  },
+  "meta": {
+    "version": 1,
+    "lastFullScan": "2026-04-11T16:59:37Z",
+    "topicsScanned": [
+      "hormuz-closure"
+    ]
+  }
+}

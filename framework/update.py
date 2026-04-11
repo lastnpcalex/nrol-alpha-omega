@@ -3,18 +3,30 @@
 NRL-Alpha Omega — Programmatic Update Framework
 ===================================================
 
-This module provides governor-gated update automation that:
-1. Reads ONLY the most recent brief (not all history)
-2. Gathers fresh intel via web search
-3. Adds evidence through governor gate
-4. Updates posteriors/sub-models if warranted
-5. Generates brief and commits via governor
-6. Tracks diff-based history (not full briefs)
+Two-phase update system:
+  Phase 1 (agent): Gather intel via WebSearch, structure as JSON
+  Phase 2 (script): Ingest evidence, update feeds/posteriors/sub-models,
+                     generate brief, record diff, save topic
+
+The agent cannot call web search from Python. So this script accepts
+structured intel as JSON input — the agent's job is to search and
+structure, this script's job is to validate and commit.
 
 Usage:
-    python update.py --topic hormuz-closure --mode routine
-    python update.py --topic hormuz-closure --mode crisis
-    python update.py --topic <topic> --update-posteriors <new_values>
+    # Full update with evidence + feeds + posteriors + sub-models
+    python framework/update.py --topic hormuz-closure \
+        --evidence '[{"tag":"ECON","text":"Brent at 95","provenance":"OBSERVED"}]' \
+        --feeds '{"brent":95.63,"wti":96.57}' \
+        --posteriors '{"H1":0.005,"H2":0.18,"H3":0.53,"H4":0.285}' \
+        --posterior-reason "Ceasefire not implemented..." \
+        --submodels '{"meuMission":{"kharg":0.55,"larak":0.22}}' \
+        --submodel-reason "Kharg not seized..."
+
+    # Audit only
+    python framework/update.py --topic hormuz-closure --audit
+
+    # Orient only (print current state, no mutations)
+    python framework/update.py --topic hormuz-closure --orient
 """
 
 import sys
@@ -24,24 +36,22 @@ from pathlib import Path
 from datetime import datetime, timezone
 from difflib import unified_diff
 
-# Add parent to path for imports
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from engine import load_topic, add_evidence, update_posteriors, update_submodel, update_feed, save_topic, generate_brief
-from governor import check_update_proposal, audit_evidence_freshness, assess_claim_state, classify_evidence
+from engine import (
+    load_topic, add_evidence, update_posteriors, update_submodel,
+    update_feed, save_topic, generate_brief, save_brief,
+    GovernanceError, _add_evidence_raw,
+)
+from governor import (
+    check_update_proposal, audit_evidence_freshness,
+    assess_claim_state, classify_evidence,
+)
 
 
-# ============================================================================
-# Configuration
-# ============================================================================
-
-TOPICS_DIR = Path(__file__).parent.parent / "topics"
 BRIEFS_DIR = Path(__file__).parent.parent / "briefs"
-DASHBOARDS_DIR = Path(__file__).parent.parent / "dashboards"
-HISTORY_FILE = Path(__file__).parent.parent / "HISTORY.md"
-FRAMEWORK_DIR = Path(__file__).parent
+CHANGELOG = Path(__file__).parent.parent / "CHANGELOG.md"
 
-# Source trust scores for cross-referencing
 SOURCE_TRUST = {
     "CENTCOM": 0.95, "Pentagon": 0.95, "DoD": 0.95,
     "Reuters": 0.90, "AP": 0.90, "AFP": 0.90,
@@ -55,454 +65,393 @@ SOURCE_TRUST = {
 }
 
 
-# ============================================================================
-# Core Update Functions
-# ============================================================================
-
-def _now_iso() -> str:
-    """Get current UTC timestamp in ISO format."""
+def _now_iso():
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%S+00:00")
 
 
-def _read_most_recent_brief(topic_name: str) -> str | None:
-    """Read the most recent brief for a topic (not all history!)."""
-    briefs_dir = BRIEFS_DIR / topic_name
-    if not briefs_dir.exists():
+def _most_recent_brief(topic_name: str) -> str | None:
+    """Read most recent brief content (token-efficient: only one file)."""
+    d = BRIEFS_DIR / topic_name
+    if not d.exists():
         return None
-
-    briefs = list(briefs_dir.glob("*.md"))
+    briefs = sorted(d.glob("2*.md"), key=lambda p: p.stem, reverse=True)
     if not briefs:
         return None
-
-    # Sort by filename (YYYY-MM-DD-HHMM format) and get most recent
-    briefs.sort(key=lambda p: p.stem, reverse=True)
-    recent = briefs[0]
-
-    print(f"[READ] Most recent brief: {recent.name}")
-    with open(recent) as f:
-        content = f.read()
-        # Truncate for display (don't load all into context)
-        preview = content[:500] + ("..." if len(content) > 500 else "")
-        print(f"[READ] Brief preview:\n{preview}")
-        return content
-
-
-def _gather_intel(topic: dict, search_queries: list[str]) -> list[dict]:
-    """
-    Gather fresh intel via web search.
-    Returns list of evidence entries ready to add (if warranted).
-    """
-    found_evidence = []
-    search_results = []
-
-    for query in search_queries:
-        # TODO: Integrate mcp__web-tools__web_search
-        # For now, simulate with placeholder
-        print(f"[SEARCH] Query: {query}")
-
-        # TODO: Replace with actual web search when MCP available
-        # result = mcp__web-tools__web_search(query=query)
-        # search_results.append(result)
-
-        # Placeholder: Log that search unavailable
-        search_results.append({
-            "query": query,
-            "result": "SEARCH_UNAVAILABLE (MCP web tools not loaded)",
-            "timestamp": _now_iso(),
-        })
-
-    # TODO: Parse search results and extract new events
-    # For now, return empty
-    print(f"[GATHER] Search results: {len(search_results)} queries attempted")
-    return found_evidence
-
-
-def _generate_search_queries(topic: dict) -> list[str]:
-    """Generate search queries based on topic state."""
-    meta = topic.get("meta", {})
-    last_updated = meta.get("lastUpdated", "")
-    day_count = meta.get("dayCount", 0)
-
-    # Date-specific queries
-    queries = [
-        f'{meta.get("slug", "hormuz")} after:{last_updated[:10]}',
-        f'{meta.get("slug", "hormuz")} breaking news',
-    ]
-
-    # Feed-specific queries
-    queries.extend([
-        f'Brent crude oil price {last_updated[:4]}-{last_updated[5:7]}',
-        f'CENTCOM {meta.get("slug", "hormuz")}',
-        f'{meta.get("slug", "hormuz")} shipping',
-    ])
-
-    return queries
-
-
-def _cross_reference_sources(evidence: dict) -> dict:
-    """Cross-reference evidence against source trust scores."""
-    text = evidence.get("text", "")
-
-    # TODO: Implement actual cross-referencing
-    # For now, just add source note
-    evidence["cross_referenced"] = False
-    evidence["notes"] = evidence.get("notes", "")
-
-    return evidence
-
-
-def _add_evidence_governor_gated(topic: dict, evidence: dict) -> bool:
-    """
-    Add evidence through governor gate.
-    Returns True if added, False if rejected.
-    """
     try:
-        # Classifier checks: rhetoric, hallucination, freshness
-        classified = classify_evidence(evidence)
-        effective_weight = get_effective_weight(topic, classified)
-
-        # Add via engine (already governor-gated in engine.py)
-        result = add_evidence(topic, {
-            "tag": evidence.get("tag", "INTEL"),
-            "text": evidence.get("text", ""),
-            "provenance": evidence.get("provenance", "OBSERVED"),
-            "source": evidence.get("source", ""),
-            "posteriorImpact": evidence.get("posteriorImpact", "MODERATE"),
-        })
-
-        return True
-    except Exception as e:
-        print(f"[GOVERNOR] Evidence rejected: {e}")
-        return False
+        return briefs[0].read_text(encoding="utf-8")
+    except UnicodeDecodeError:
+        return briefs[0].read_text(encoding="utf-8", errors="replace")
 
 
-def _update_data_feeds(topic: dict, new_values: dict | str) -> dict:
-    """Update data feeds with new values."""
-    updated = {}
-
-    # Handle string JSON input
-    if isinstance(new_values, str):
-        if not new_values or new_values == "{}":
-            new_values = {}
-        else:
-            try:
-                new_values = json.loads(new_values)
-            except json.JSONDecodeError:
-                print(f"[WARN] Invalid feed JSON: {new_values}")
-                new_values = {}
-
-    for feed_id, value in new_values.items():
-        if feed_id in topic.get("dataFeeds", {}):
-            topic = update_feed(topic, feed_id, value, as_of=_now_iso())
-            updated[feed_id] = value
-
-    return topic, updated
+def _record_diff(before: str | None, after: str, change_type: str):
+    """Append unified diff to CHANGELOG.md (not full brief content)."""
+    if not before:
+        return
+    diff_lines = list(unified_diff(
+        before.splitlines(), after.splitlines(),
+        fromfile="previous", tofile="current", lineterm="",
+    ))
+    if not diff_lines:
+        return
+    ts = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+    entry = f"\n---\n## {ts} [{change_type}]\n\n```diff\n"
+    entry += "\n".join(diff_lines[:80])  # cap diff length
+    if len(diff_lines) > 80:
+        entry += f"\n... ({len(diff_lines) - 80} more lines)\n"
+    entry += "\n```\n"
+    existing = CHANGELOG.read_text(encoding="utf-8", errors="replace") if CHANGELOG.exists() else "# NRL-Alpha Omega Change Log\n"
+    CHANGELOG.write_text(existing + entry, encoding="utf-8")
 
 
-def _update_posteriors_governor_gated(topic: dict, new_posteriors: dict) -> dict:
+# ============================================================================
+# Orient — read-only snapshot for the agent
+# ============================================================================
+
+def orient(topic_name: str) -> dict:
+    """Print current state as compact JSON. No mutations."""
+    t = load_topic(topic_name)
+    h = t["model"]["hypotheses"]
+    feeds = {k: {"value": v.get("value"), "asOf": v.get("asOf", "")[:10]}
+             for k, v in t.get("dataFeeds", {}).items()}
+    log = t.get("evidenceLog", [])
+    fresh = [e for e in log if e.get("time", "") and e["time"][:10] >= "2026-04-09"]
+    gov = t.get("governance", {})
+
+    state = {
+        "topic": topic_name,
+        "lastUpdated": t["meta"]["lastUpdated"],
+        "dayCount": t["meta"]["dayCount"],
+        "posteriors": {k: round(v["posterior"], 4) for k, v in h.items()},
+        "expectedWeeks": t["model"]["expectedValue"],
+        "feeds": feeds,
+        "evidence": {"total": len(log), "fresh": len(fresh)},
+        "governance": {
+            "health": gov.get("health"),
+            "rt": gov.get("rt", {}).get("rt"),
+            "entropy": round(gov.get("entropy", 0), 3),
+        },
+        "last5": [
+            {"time": e.get("time", "")[:16], "tag": e.get("tag"), "text": e.get("text", "")[:80]}
+            for e in log[-5:]
+        ],
+    }
+    return state
+
+
+# ============================================================================
+# Main update pipeline
+# ============================================================================
+
+def run_update(topic_name: str, *,
+               evidence: list[dict] | None = None,
+               feeds: dict | None = None,
+               posteriors: dict | None = None,
+               posterior_reason: str = "",
+               submodels: dict | None = None,
+               submodel_reason: str = "",
+               mode: str = "routine",
+               force: bool = False) -> dict:
     """
-    Update posteriors through governor gate.
-    Validates: sum=1, shift justification, evidence_refs.
-    """
-    # Validate proposal
-    validation = check_update_proposal(
-        topic,
-        proposed_posteriors=new_posteriors,
-    )
-
-    if not validation.get("passed", False):
-        print(f"[GOVERNOR] Posterior update rejected:")
-        for failure in validation.get("failures", []):
-            print(f"  - {failure}")
-        return topic
-
-    # Apply update
-    topic = update_posteriors(
-        topic,
-        new_posteriors,
-        reason=validation.get("reason", ""),
-        evidence_refs=validation.get("evidence_refs", []),
-    )
-
-    return topic
-
-
-def _update_submodel_governor_gated(topic: dict, submodel_name: str,
-                                     new_values: dict) -> dict:
-    """Update sub-model through governor gate."""
-    validation = check_update_proposal(
-        topic,
-        proposed_submodel_updates=new_values,
-    )
-
-    if validation.get("passed", False):
-        topic = update_submodel(
-            topic,
-            submodel_name,
-            new_values,
-            reason=validation.get("reason", ""),
-            evidence_refs=validation.get("evidence_refs", []),
-        )
-
-    return topic
-
-
-# ============================================================================
-# History Tracking (Diff-based, not full briefs)
-# ============================================================================
-
-def _record_change(diff: str, change_type: str) -> None:
-    """Append diff-based change record to history file."""
-    HISTORY_DIR = FRAMEWORK_DIR.parent
-    HISTORY_FILE = HISTORY_DIR / "CHANGELOG.md"
-
-    if not HISTORY_FILE.exists():
-        HISTORY_FILE.write_text("# NRL-Alpha Omega Change Log\n\n")
-
-    # Write change to history
-    timestamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
-    append_text = f"""
----
-## {timestamp} [{change_type}]
-
-{diff}
-"""
-    HISTORY_FILE.write_text(append_text + HISTORY_FILE.read_text())
-
-
-def _generate_diff_brief(before_content: str, after_content: str) -> str:
-    """Generate unified diff for brief comparison."""
-    diff = unified_diff(
-        before_content.splitlines(),
-        after_content.splitlines(),
-        fromfile=f"before-{_now_iso()[:16]}",
-        tofile=f"after-{_now_iso()[:16]}",
-        lineterm="",
-    )
-    return "\n".join(diff)
-
-
-def _summarize_diff(diff_str: str) -> str:
-    """Generate human-readable summary of diff."""
-    lines = diff_str.strip().split("\n")
-    additions = lines.count("+") - lines.count("+++")
-    deletions = lines.count("-") - lines.count("---")
-
-    if additions == 0 and deletions == 0:
-        return "No changes."
-
-    summary = f"Diff summary: +{additions} lines, -{deletions} lines"
-
-    # Extract key changes
-    for line in lines:
-        if line.startswith("+") and not line.startswith("+++"):
-            summary += f"\n  Added: {line.strip()[:80]}..."
-        elif line.startswith("-") and not line.startswith("---"):
-            summary += f"\n  Removed: {line.strip()[:80]}..."
-
-    return summary
-
-
-# ============================================================================
-# Main Update Pipeline
-# ============================================================================
-
-def run_update(topic_name: str, mode: str = "routine",
-               new_posteriors: dict | str | None = None,
-               new_submodels: dict | str | None = None,
-               new_data_feeds: dict | str | None = None) -> dict:
-    """
-    Main update pipeline.
+    Governor-gated update pipeline.
 
     Args:
-        topic_name: Name of topic (e.g., "hormuz-closure")
+        topic_name: topic slug
+        evidence: list of evidence dicts from agent's web search
+        feeds: {feed_id: value} for data feed updates
+        posteriors: {H1: p, H2: p, ...} new posteriors
+        posterior_reason: justification string
+        submodels: {submodel_name: {scenario: prob, ...}}
+        submodel_reason: justification string
         mode: "routine" or "crisis"
-        new_posteriors: New posterior values (dict or JSON string, optional)
-        new_submodels: New sub-model values (dict or JSON string, optional)
-        new_data_feeds: New feed values (dict or JSON string, optional)
 
     Returns:
-        Updated topic dict
+        result dict with state, governance, brief path
     """
     print(f"\n{'='*60}")
-    print(f"UPDATE PIPELINE: {topic_name} [{mode}]")
+    print(f"UPDATE: {topic_name} [{mode}]")
     print(f"{'='*60}")
 
-    # Parse string inputs
-    if isinstance(new_posteriors, str):
+    # 1. Load topic + read most recent brief (one file only)
+    t = load_topic(topic_name)
+    prev_brief = _most_recent_brief(topic_name)
+    print(f"[LOAD] {topic_name} | lastUpdated={t['meta']['lastUpdated']}")
+
+    results = {"added": 0, "rejected": 0, "feeds_updated": [], "errors": []}
+
+    # 2. Add evidence (governor-gated via engine.add_evidence)
+    if evidence:
+        for i, e in enumerate(evidence):
+            try:
+                add_evidence(t, e)
+                results["added"] += 1
+                print(f"[+] {i+1}. [{e.get('tag','')}] {e.get('text','')[:60]}...")
+            except Exception as ex:
+                results["rejected"] += 1
+                results["errors"].append(str(ex))
+                print(f"[X] {i+1}. REJECTED: {ex}")
+
+    # 3. Update data feeds
+    if feeds:
+        now = _now_iso()
+        for fid, val in feeds.items():
+            try:
+                update_feed(t, fid, val, as_of=now)
+                results["feeds_updated"].append(fid)
+                print(f"[FEED] {fid} = {val}")
+            except ValueError as ex:
+                results["errors"].append(str(ex))
+                print(f"[FEED ERROR] {fid}: {ex}")
+
+    # 3.5 Auto-calibrate source trust
+    try:
+        from source_ledger import auto_calibrate
+        cal = auto_calibrate(t)
+        if cal.get("resolutions_found", 0) > 0:
+            print(f"[CAL] Source calibration: {cal['resolutions_found']} resolutions, "
+                  f"{cal.get('trust_changes', 0)} trust adjustments")
+            results["calibration"] = cal
+    except (ImportError, Exception) as ex:
+        pass  # Non-blocking
+
+    # 3.6 Check contradictions before posterior update
+    try:
+        from contradictions import get_unresolved_contradictions
+        unresolved = get_unresolved_contradictions(t)
+        high_sev = [c for c in unresolved if c.get("severity") == "HIGH"]
+        if high_sev:
+            print(f"[WARN] {len(high_sev)} HIGH-severity unresolved contradictions:")
+            for c in high_sev[:3]:
+                print(f"  - {c.get('type', '?')}: {c.get('reason', '?')[:60]}")
+            results["contradictions_warning"] = len(high_sev)
+    except (ImportError, Exception):
+        pass
+
+    # 4. Update posteriors (governor hard-gates this via engine.update_posteriors)
+    if posteriors:
         try:
-            new_posteriors = json.loads(new_posteriors) if new_posteriors and new_posteriors != "{}" else None
-        except json.JSONDecodeError:
-            new_posteriors = None
+            update_posteriors(t, posteriors,
+                              reason=posterior_reason,
+                              evidence_refs=[_now_iso()])
+        except GovernanceError as e:
+            if force and "unresolved_contradiction" in getattr(e, "failures", []):
+                # Force override — create audit trail and apply manually
+                print(f"[FORCE] Governance block overridden: {e}")
+                _add_evidence_raw(t, {
+                    "time": _now_iso(),
+                    "tag": "INTEL",
+                    "text": (f"GOVERNANCE FORCE OVERRIDE: {e}. "
+                             f"Operator acknowledged unresolved contradictions."),
+                    "provenance": "USER_PROVIDED",
+                    "posteriorImpact": "NONE",
+                    "ledger": "DECISION",
+                    "claimState": "PROPOSED",
+                    "effectiveWeight": 0.5,
+                })
+                # Apply posteriors directly (bypass governor)
+                hypotheses = t["model"]["hypotheses"]
+                total = sum(posteriors.values())
+                for k in posteriors:
+                    hypotheses[k]["posterior"] = round(posteriors[k] / total, 4)
+                t["model"]["expectedValue"] = round(
+                    sum(h["midpoint"] * h["posterior"] for h in hypotheses.values()), 2
+                )
+                results["force_override"] = True
+            else:
+                raise  # Re-raise non-forceable failures
 
-    if isinstance(new_submodels, str):
+        ev = t["model"]["expectedValue"]
+        print(f"[POST] Updated | E[weeks]={ev}")
+
+        # Red team result is embedded in posteriorHistory by engine
         try:
-            new_submodels = json.loads(new_submodels) if new_submodels and new_submodels != "{}" else None
-        except json.JSONDecodeError:
-            new_submodels = None
+            history = t["model"].get("posteriorHistory", [])
+            if history and "redTeam" in history[-1]:
+                rt = history[-1]["redTeam"]
+                score = rt.get("devil_advocate_score", 0)
+                print(f"[RED TEAM] Devil's advocate score: {score:.2f}")
+                if score > 0.6:
+                    print(f"[RED TEAM] STRONG counter-case: {rt.get('challenge', '')[:80]}...")
+                results["red_team_score"] = score
+        except Exception:
+            pass
 
-    if isinstance(new_data_feeds, str):
-        try:
-            new_data_feeds = json.loads(new_data_feeds) if new_data_feeds and new_data_feeds != "{}" else None
-        except json.JSONDecodeError:
-            new_data_feeds = None
+    # 5. Update sub-models
+    if submodels:
+        for sm_name, scenarios in submodels.items():
+            update_submodel(t, sm_name, scenarios,
+                            reason=submodel_reason,
+                            evidence_refs=[_now_iso()])
+            print(f"[SUB] {sm_name} updated")
 
-    # 1. Load topic
-    topic = load_topic(topic_name)
-    print(f"[LOAD] Loaded topic: {topic_name}")
+    # 6. Save topic (triggers governance snapshot)
+    save_topic(t)
+    gov = t.get("governance", {})
+    print(f"[SAVE] Health={gov.get('health')} | Entropy={gov.get('entropy', 0):.3f}")
 
-    # 2. Read most recent brief (not all history!)
-    recent_brief = _read_most_recent_brief(topic_name)
+    # 7. Generate and save brief
+    try:
+        brief_text = generate_brief(t, mode=mode)
+        brief_path = save_brief(t, brief_text)
+        print(f"[BRIEF] {brief_path}")
+    except Exception as ex:
+        brief_text = None
+        brief_path = None
+        results["errors"].append(f"Brief generation failed: {ex}")
+        print(f"[BRIEF ERROR] {ex}")
 
-    # 3. Generate search queries
-    search_queries = _generate_search_queries(topic)
+    # 8. Record diff
+    if brief_text and prev_brief:
+        _record_diff(prev_brief, brief_text, mode.upper())
+        print(f"[DIFF] Recorded to CHANGELOG.md")
 
-    # 4. Gather intel (via search)
-    new_evidence = _gather_intel(topic, search_queries)
-
-    if not new_evidence and mode == "routine":
-        print("[NOTE] No new intel gathered via search.")
-        print("[NOTE] Updating data feeds and holding posteriors...")
-    else:
-        print(f"[NOTE] {len(new_evidence)} new evidence entries found.")
-
-    # 5. Add evidence (if found)
-    added_evidence = 0
-    for evidence in new_evidence:
-        if _add_evidence_governor_gated(topic, evidence):
-            added_evidence += 1
-            print(f"[ADD] Evidence added: {evidence.get('text', '')[:50]}...")
-
-    # 6. Update data feeds (if provided)
-    if new_data_feeds:
-        topic, updated = _update_data_feeds(topic, new_data_feeds)
-        for feed_id, value in updated.items():
-            print(f"[FEED] Updated {feed_id}: {value}")
-
-    # 7. Update posteriors (if provided and warranted)
-    if new_posteriors:
-        topic = _update_posteriors_governor_gated(topic, new_posteriors)
-        print(f"[POST] Posteriors updated: {new_posteriors}")
-
-    # 8. Update sub-models (if provided)
-    if new_submodels:
-        for submodel_name, values in new_submodels.items():
-            topic = _update_submodel_governor_gated(topic, submodel_name, values)
-        print(f"[SUB] Sub-models updated.")
-
-    # 9. Generate brief
-    brief = generate_brief(topic, mode=mode)
-    brief_path = BRIEFS_DIR / topic_name / f"{datetime.now(timezone.utc).strftime('%Y-%m-%d-%H%M')}.md"
-    with open(brief_path, "w") as f:
-        f.write(brief)
-    print(f"[BRIEF] Saved to: {brief_path}")
-
-    # 10. Record diff-based change
-    if recent_brief and brief:
-        diff = _generate_diff_brief(recent_brief, brief)
-        change_type = "ROUTINE" if mode == "routine" else "CRISIS"
-        _record_change(diff, change_type)
-
-    # 11. Save topic (triggers governor snapshot)
-    save_topic(topic)
-    print(f"[SAVE] Topic saved. Governance health: {topic.get('governance', {}).get('health', 'N/A')}")
-
-    return topic
+    # 9. Return summary
+    h = t["model"]["hypotheses"]
+    return {
+        "topic": topic_name,
+        "mode": mode,
+        "evidence": results,
+        "posteriors": {k: round(v["posterior"], 4) for k, v in h.items()},
+        "expectedWeeks": t["model"]["expectedValue"],
+        "governance": {
+            "health": gov.get("health"),
+            "entropy": round(gov.get("entropy", 0), 3),
+        },
+        "brief": brief_path,
+        "totalEvidence": len(t.get("evidenceLog", [])),
+    }
 
 
 def run_epistemic_audit(topic_name: str) -> dict:
-    """
-    Run epistemic audit on topic:
-    - Check evidence freshness
-    - Check hypothesis admissibility
-    - Check for unfalsifiable hypotheses
-    - Check uncertainty ratio
-    """
-    topic = load_topic(topic_name)
-    print(f"\nEPIDEMIC AUDIT: {topic_name}")
-    print(f"{'='*40}")
+    """Run epistemic audit — read-only governance check."""
+    t = load_topic(topic_name)
+    freshness = audit_evidence_freshness(t)
+    gov = t.get("governance", {})
+    h = t["model"]["hypotheses"]
 
-    # Audit freshness
-    freshness = audit_evidence_freshness(topic)
-    print(f"[FRESHNESS] Stale: {freshness.get('stale', 0)}, Fresh: {freshness.get('fresh', 0)}, Total: {freshness.get('total', 0)}")
-
-    # Return governance snapshot
-    return topic.get("governance", {})
+    return {
+        "topic": topic_name,
+        "health": gov.get("health"),
+        "rt": gov.get("rt"),
+        "entropy": round(gov.get("entropy", 0), 3),
+        "freshness": freshness,
+        "posteriors": {k: round(v["posterior"], 4) for k, v in h.items()},
+        "expectedWeeks": t["model"]["expectedValue"],
+        "issues": gov.get("issues", []),
+    }
 
 
 # ============================================================================
-# Test Functions
+# CLI
 # ============================================================================
-
-def test_hypothesis(topic_name: str, hypothesis: str, evidence: dict) -> bool:
-    """
-    Test a hypothesis with new evidence.
-    Returns True if hypothesis is supported/refuted.
-    """
-    topic = load_topic(topic_name)
-
-    print(f"\nTEST: {hypothesis}")
-    print(f"{'='*40}")
-
-    # Add evidence
-    if add_evidence(topic, evidence):
-        print("[ADD] Evidence added")
-    else:
-        print("[ADD] Evidence rejected by governor")
-
-    # Check hypothesis state
-    hypotheses = topic.get("model", {}).get("hypotheses", {})
-    print(f"Hypothesis state: {json.dumps(hypotheses, indent=2)}")
-
-    return True
-
-
-def update_resolution_criterion(topic_name: str,
-                                 traffic_threshold: int = 40,
-                                 freedom_of_navigation: bool = True,
-                                 toll_regime_resolved: bool = False) -> dict:
-    """
-    Update resolution criterion with new dimensions:
-    - traffic_threshold: 30% of pre-war
-    - freedom_of_navigation: Can vessels freely pass?
-    - toll_regime_resolved: Is toll temporary or permanent?
-    """
-    topic = load_topic(topic_name)
-
-    # TODO: Add resolution sub-tracks
-    # topic["resolutionTracks"] = {
-    #     "commerce": {"threshold": traffic_threshold, "status": "UNRESOLVED"},
-    #     "freedom_of_navigation": {"status": "FALSE" if not toll_regime_resolved else "TRUE"},
-    #     "sovereignty": {"status": "IRGC_CONTROL"},
-    # }
-
-    return topic
-
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="NRL-Alpha Omega update pipeline")
-    parser.add_argument("--topic", required=True, help="Topic name (e.g., hormuz-closure)")
+    parser = argparse.ArgumentParser(
+        description="NRL-Alpha Omega update pipeline",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
+    parser.add_argument("--topic", required=True)
     parser.add_argument("--mode", default="routine", choices=["routine", "crisis"])
-    parser.add_argument("--posteriors", type=json.loads, help="New posterior values")
-    parser.add_argument("--submodels", type=json.loads, help="New sub-model values")
-    parser.add_argument("--feeds", type=json.loads, help="New feed values")
-    parser.add_argument("--audit", action="store_true", help="Run epistemic audit")
+    parser.add_argument("--evidence", type=str, default=None,
+                        help="JSON array of evidence dicts")
+    parser.add_argument("--feeds", type=str, default=None,
+                        help="JSON object {feed_id: value}")
+    parser.add_argument("--posteriors", type=str, default=None,
+                        help="JSON object {H1: p, H2: p, ...}")
+    parser.add_argument("--posterior-reason", type=str, default="")
+    parser.add_argument("--submodels", type=str, default=None,
+                        help="JSON object {name: {scenario: prob}}")
+    parser.add_argument("--submodel-reason", type=str, default="")
+    parser.add_argument("--audit", action="store_true")
+    parser.add_argument("--orient", action="store_true")
+    parser.add_argument("--backfill-scores", action="store_true",
+                        help="Backfill prediction snapshots from posteriorHistory")
+    parser.add_argument("--scoring-report", action="store_true",
+                        help="Print calibration report")
+    parser.add_argument("--resolve-outcome", type=str, default=None,
+                        help="Record which hypothesis resolved (e.g., H3)")
+    parser.add_argument("--compact", action="store_true",
+                        help="Run evidence compaction")
+    parser.add_argument("--contradictions", action="store_true",
+                        help="Show unresolved contradictions")
+    parser.add_argument("--auto-calibrate", action="store_true",
+                        help="Run source trust auto-calibration")
+    parser.add_argument("--check-expired", action="store_true",
+                        help="Check for and score expired hypotheses")
+    parser.add_argument("--force", action="store_true",
+                        help="Acknowledge governance warnings and proceed (creates audit trail)")
 
     args = parser.parse_args()
 
-    if args.audit:
-        result = run_epistemic_audit(args.topic)
+    if args.orient:
+        print(json.dumps(orient(args.topic), indent=2))
+    elif args.audit:
+        print(json.dumps(run_epistemic_audit(args.topic), indent=2))
+    elif args.backfill_scores:
+        from scoring import backfill_snapshots_from_history, snapshot_posteriors
+        t = load_topic(args.topic)
+        count = backfill_snapshots_from_history(t)
+        save_topic(t)
+        print(json.dumps({"backfilled": count, "total_snapshots": len(t.get("predictionScoring", {}).get("snapshots", []))}, indent=2))
+    elif args.scoring_report:
+        from scoring import compute_calibration_report
+        t = load_topic(args.topic)
+        print(json.dumps(compute_calibration_report(t), indent=2))
+    elif args.resolve_outcome:
+        from scoring import record_outcome
+        t = load_topic(args.topic)
+        record_outcome(t, args.resolve_outcome, note="CLI resolution")
+        save_topic(t)
+        scores = t.get("predictionScoring", {}).get("brierScores", [])
+        print(json.dumps({"resolved": args.resolve_outcome, "scores_computed": len(scores)}, indent=2))
+    elif args.compact:
+        from compaction import auto_compact
+        t = load_topic(args.topic)
+        result = auto_compact(t)
+        if result.get("compacted"):
+            save_topic(t)
         print(json.dumps(result, indent=2))
+    elif args.contradictions:
+        from contradictions import get_unresolved_contradictions
+        t = load_topic(args.topic)
+        unresolved = get_unresolved_contradictions(t)
+        print(json.dumps({"unresolved": len(unresolved), "items": unresolved}, indent=2, default=str))
+    elif args.auto_calibrate:
+        from source_ledger import auto_calibrate
+        t = load_topic(args.topic)
+        result = auto_calibrate(t)
+        save_topic(t)
+        print(json.dumps(result, indent=2, default=str))
+    elif args.check_expired:
+        from scoring import check_expired_hypotheses, record_partial_outcome
+        t = load_topic(args.topic)
+        expired = check_expired_hypotheses(t)
+        for exp in expired:
+            ps = t.get("predictionScoring", {})
+            already = any(
+                o.get("expired") == exp["hypothesis"]
+                for o in ps.get("outcomes", [])
+                if o.get("type") == "PARTIAL_EXPIRY"
+            )
+            if not already:
+                record_partial_outcome(t, exp["hypothesis"],
+                                       note=f"CLI: expired at day {exp['current_day']}")
+        save_topic(t)
+        print(json.dumps({"expired": expired}, indent=2, default=str))
     else:
-        topic = run_update(
+        ev = json.loads(args.evidence) if args.evidence else None
+        fd = json.loads(args.feeds) if args.feeds else None
+        po = json.loads(args.posteriors) if args.posteriors else None
+        sm = json.loads(args.submodels) if args.submodels else None
+
+        result = run_update(
             args.topic,
+            evidence=ev,
+            feeds=fd,
+            posteriors=po,
+            posterior_reason=args.posterior_reason,
+            submodels=sm,
+            submodel_reason=args.submodel_reason,
             mode=args.mode,
-            new_posteriors=args.posteriors,
-            new_submodels=args.submodels,
-            new_data_feeds=args.feeds,
+            force=args.force,
         )
-        print(json.dumps({
-            "topic": args.topic,
-            "health": topic.get("governance", {}).get("health", "N/A"),
-            "evidence": len(topic.get("evidenceLog", [])),
-        }, indent=2))
+        print(json.dumps(result, indent=2))

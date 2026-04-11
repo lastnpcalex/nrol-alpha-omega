@@ -312,10 +312,57 @@ def assess_claim_state(entry: dict, evidence_log: list) -> str:
     return "PROPOSED"
 
 
-def get_effective_weight(entry: dict, evidence_log: list) -> float:
-    """Get the effective weight of an evidence entry for posterior updates."""
+def get_effective_weight(entry: dict, evidence_log: list,
+                         topic: dict = None) -> float:
+    """
+    Get the effective weight of an evidence entry for posterior updates.
+
+    Weight = claimState_weight * source_trust_factor
+
+    source_trust_factor priority:
+      1. sourceCalibration.effectiveTrust (Bayesian-updated)
+      2. SOURCE_TRUST base dict (from calibrate.py)
+      3. 0.5 fallback for unknown sources
+
+    Result clamped to [0.05, 1.0].
+    """
     state = entry.get("claimState") or assess_claim_state(entry, evidence_log)
-    return CLAIM_WEIGHTS.get(state, 0.5)
+    claim_weight = CLAIM_WEIGHTS.get(state, 0.5)
+
+    # Source trust factor — only applied when topic is available
+    source_trust_factor = 1.0
+    source_str = entry.get("source") or ""
+
+    if source_str and topic is not None:
+        try:
+            from framework.source_ledger import extract_sources
+            from framework.calibrate import SOURCE_TRUST
+        except ImportError:
+            # Framework not available — skip trust adjustment
+            return claim_weight
+
+        # Get effective trust from calibration, or fall back to base
+        cal = topic.get("sourceCalibration", {})
+        effective_trust = cal.get("effectiveTrust", {})
+
+        trust_values = []
+        for src in extract_sources(source_str):
+            t = effective_trust.get(src)
+            if t is not None:
+                trust_values.append(t)
+            else:
+                base_t = SOURCE_TRUST.get(src)
+                if base_t is not None:
+                    trust_values.append(base_t)
+                else:
+                    trust_values.append(0.5)
+
+        if trust_values:
+            # Use minimum trust among all sources (conservative)
+            source_trust_factor = min(trust_values)
+
+    weight = claim_weight * source_trust_factor
+    return max(0.05, min(1.0, round(weight, 4)))
 
 
 # ===========================================================================
@@ -598,6 +645,24 @@ FAILURE_MODES = [
                 "actions over rhetoric violated",
         "severity": "HIGH",
     },
+    {
+        "id": "unresolved_contradiction",
+        "name": "Unresolved Contradiction",
+        "desc": "Posterior shift while HIGH-severity contradictions remain unresolved",
+        "severity": "CRITICAL",
+    },
+    {
+        "id": "discredited_source",
+        "name": "Discredited Source",
+        "desc": "Posterior shift relies on evidence from a source with effective trust below 0.30",
+        "severity": "HIGH",
+    },
+    {
+        "id": "red_team_override",
+        "name": "Red Team Override",
+        "desc": "Devil's advocate score exceeds 0.7 — strong counterevidence exists",
+        "severity": "MEDIUM",
+    },
 ]
 
 
@@ -790,10 +855,91 @@ def check_update_proposal(topic: dict, proposed_posteriors: dict[str, float],
     else:
         results["checks"]["rhetoric_as_evidence"] = {"passed": True}
 
+    # 9. Unresolved Contradiction — HARD BLOCK when HIGH contradictions exist
+    try:
+        from framework.contradictions import get_unresolved_contradictions
+        unresolved = get_unresolved_contradictions(topic)
+        high_sev = [c for c in unresolved if c.get("severity") == "HIGH"]
+        if high_sev and max_shift > 0.02:
+            results["checks"]["unresolved_contradiction"] = {
+                "passed": False,
+                "detail": f"{len(high_sev)} HIGH-severity contradictions unresolved — "
+                          f"resolve before shifting posteriors",
+            }
+            results["failures"].append("unresolved_contradiction")
+            results["passed"] = False
+        else:
+            results["checks"]["unresolved_contradiction"] = {"passed": True}
+    except ImportError:
+        results["checks"]["unresolved_contradiction"] = {"passed": True, "detail": "Module not available"}
+
+    # 10. Discredited Source — warn if evidence relies on low-trust sources
+    if has_evidence and max_shift > 0.02:
+        try:
+            cal = topic.get("sourceCalibration", {})
+            effective_trust = cal.get("effectiveTrust", {})
+            discredited = []
+            for ref in evidence_refs:
+                for e in evidence_log:
+                    if e.get("time") == ref:
+                        src = e.get("source", "")
+                        if src:
+                            from framework.source_ledger import extract_sources
+                            for s in extract_sources(src):
+                                trust = effective_trust.get(s)
+                                if trust is not None and trust < 0.30:
+                                    discredited.append(f"{s} ({trust:.2f})")
+            if discredited:
+                results["checks"]["discredited_source"] = {
+                    "passed": False,
+                    "detail": f"Evidence relies on discredited source(s): {', '.join(discredited)}",
+                }
+                results["warnings"].append("discredited_source")
+            else:
+                results["checks"]["discredited_source"] = {"passed": True}
+        except ImportError:
+            results["checks"]["discredited_source"] = {"passed": True, "detail": "Module not available"}
+    else:
+        results["checks"]["discredited_source"] = {"passed": True}
+
+    # 11. Red Team Override — warn if devil's advocate score is very high
+    # This is checked AFTER posteriors are applied (in engine.update_posteriors),
+    # so here we check the most recent red team result from history
+    try:
+        history = topic["model"].get("posteriorHistory", [])
+        if history and "redTeam" in history[-1]:
+            rt_score = history[-1]["redTeam"].get("devil_advocate_score", 0)
+            if rt_score > 0.7:
+                results["checks"]["red_team_override"] = {
+                    "passed": False,
+                    "detail": f"Devil's advocate score {rt_score:.2f} — "
+                              f"strong counterevidence: "
+                              f"{history[-1]['redTeam'].get('challenge', '')[:100]}",
+                }
+                results["warnings"].append("red_team_override")
+            else:
+                results["checks"]["red_team_override"] = {"passed": True}
+        else:
+            results["checks"]["red_team_override"] = {"passed": True}
+    except (KeyError, IndexError):
+        results["checks"]["red_team_override"] = {"passed": True}
+
     # Fill remaining checks as passed (need runtime context to fully evaluate)
     for mode in FAILURE_MODES:
         if mode["id"] not in results["checks"]:
             results["checks"][mode["id"]] = {"passed": True, "detail": "Not evaluated (requires runtime context)"}
+
+    # Compile governance overrides for audit trail
+    overrides = []
+    for w in results["warnings"]:
+        mode = next((m for m in FAILURE_MODES if m["id"] == w), None)
+        if mode:
+            overrides.append({
+                "id": w,
+                "severity": mode["severity"],
+                "detail": results["checks"].get(w, {}).get("detail", ""),
+            })
+    results["governance_overrides"] = overrides
 
     return results
 
