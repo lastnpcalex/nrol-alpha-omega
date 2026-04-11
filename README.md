@@ -209,7 +209,7 @@ Tags classify evidence by domain. Each tag has a TTL (how fast it goes stale), a
 The system ships with **28 tags** across 6 categories. Pick the ones relevant to your topic:
 
 ```mermaid
-%%{init: {'theme': 'dark'}}%%
+%%{init: {'theme': 'dark', 'themeVariables': {'primaryColor': '#1e3a5f', 'primaryTextColor': '#e2e8f0', 'primaryBorderColor': '#3b82f6', 'secondaryColor': '#2d4a3e', 'tertiaryColor': '#4a3a2a', 'noteTextColor': '#e2e8f0', 'noteBkgColor': '#1e293b'}}}%%
 mindmap
   root((Evidence Tags))
     Universal
