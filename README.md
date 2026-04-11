@@ -24,102 +24,102 @@ The goal isn't to be right. The goal is to *know how wrong you are* and get less
 
 ## How It Works
 
-```
-                         ┌──────────────────────┐
-                         │   Web Search / Intel  │
-                         │   (manual or agent)   │
-                         └──────────┬───────────┘
-                                    │
-                                    ▼
-┌───────────────────────────────────────────────────────────┐
-│                      add_evidence()                       │
-│                                                           │
-│  1. Governor enrichment:                                  │
-│     - Classify: FACT or DECISION                          │
-│     - Assess claim state: PROPOSED → SUPPORTED            │
-│     - Compute effective weight (claim state × source      │
-│       trust from source database)                         │
-│     - Detect rhetoric, predictions, duplicates            │
-│                                                           │
-│  2. Contradiction check:                                  │
-│     - DIRECT contradictions (severity: HIGH)              │
-│     - FEED_MISMATCH against data feeds (severity: HIGH)   │
-│     - MAGNITUDE disagreements (severity: MEDIUM)          │
-│     - TEMPORAL conflicts (severity: LOW)                  │
-│                                                           │
-│  3. Source calibration:                                    │
-│     - Track claim by source × domain tag                  │
-│     - Bayesian update: confirmed claims raise trust,      │
-│       refuted claims lower it                             │
-│     - Domain matters more than source identity             │
-│       (ECON: 99% reliable vs RHETORIC: 0%)                │
-└───────────────────────────┬───────────────────────────────┘
-                            │
-                            ▼
-┌───────────────────────────────────────────────────────────┐
-│                   update_posteriors()                      │
-│                                                           │
-│  Governor pre-commit gate (14 failure modes):             │
-│     ✓ Evidence supports the direction of shift            │
-│     ✓ No circular reasoning                               │
-│     ✓ No rhetoric-only justification                      │
-│     ✓ No unresolved HIGH-severity contradictions          │
-│     ✓ Shift magnitude proportional to evidence weight     │
-│     ✓ Posteriors sum to 1.0                               │
-│     ✓ All hypotheses accounted for                        │
-│                                                           │
-│  CRITICAL failures → GovernanceError (hard block)         │
-│  HIGH failures → warning + audit trail                    │
-│  Force override available with full audit log             │
-└───────────────────────────┬───────────────────────────────┘
-                            │
-                            ▼
-┌───────────────────────────────────────────────────────────┐
-│                      save_topic()                         │
-│                                                           │
-│  1. Governance snapshot embedded in topic state            │
-│  2. R_t freshness scoring (SAFE / ELASTIC / DANGEROUS)    │
-│  3. Entropy computation                                   │
-│  4. Expired hypothesis detection (partial Brier scoring)  │
-│  5. Prediction calibration snapshot                       │
-│  6. Source calibration update                             │
-└───────────────────────────┬───────────────────────────────┘
-                            │
-                            ▼
-                    ┌───────────────┐
-                    │  Brief output │
-                    │  + Dashboard  │
-                    └───────────────┘
+```mermaid
+flowchart TD
+    Intel["Web Search / Intel\n(manual or agent)"]
+
+    subgraph ADD ["add_evidence()"]
+        direction TB
+        Enrich["**Governor Enrichment**\nClassify FACT or DECISION\nAssess claim state: PROPOSED / SUPPORTED\nCompute weight = claim state x source trust\nDetect rhetoric, predictions, duplicates"]
+        Contra["**Contradiction Check**\nDIRECT (HIGH) · FEED_MISMATCH (HIGH)\nMAGNITUDE (MEDIUM) · TEMPORAL (LOW)"]
+        SrcCal["**Source Calibration**\nTrack claim by source x domain tag\nBayesian update on confirmation/refutation\nDomain > source identity (ECON 99% vs RHETORIC 0%)"]
+        Enrich --> Contra --> SrcCal
+    end
+
+    subgraph UPDATE ["update_posteriors()"]
+        direction TB
+        Gate["**Governor Pre-Commit Gate**\n14 failure modes checked\nEvidence supports shift direction\nNo circular reasoning or rhetoric-only\nNo unresolved HIGH contradictions\nShift proportional to evidence weight"]
+        Block["CRITICAL failure\n**GovernanceError** (hard block)"]
+        Warn["HIGH failure\nWarning + audit trail"]
+        Force["Force override\navailable with audit log"]
+        Gate -->|"CRITICAL"| Block
+        Gate -->|"HIGH"| Warn
+        Gate -->|"blocked + --force"| Force
+    end
+
+    subgraph SAVE ["save_topic()"]
+        direction TB
+        Gov["Governance snapshot\nR_t freshness · Entropy"]
+        Expire["Expired hypothesis detection\nPartial Brier scoring"]
+        Snap["Prediction calibration\nsnapshot"]
+        Gov --> Expire --> Snap
+    end
+
+    Output["Brief Output + Dashboard"]
+
+    Intel --> ADD
+    ADD --> UPDATE
+    UPDATE -->|"passed"| SAVE
+    Force --> SAVE
+    SAVE --> Output
+
+    style ADD fill:#1a1a2e,stroke:#e94560,color:#eee
+    style UPDATE fill:#1a1a2e,stroke:#f5a623,color:#eee
+    style SAVE fill:#1a1a2e,stroke:#0f9b58,color:#eee
+    style Block fill:#8b0000,stroke:#e94560,color:#fff
+    style Force fill:#444,stroke:#f5a623,color:#fff
 ```
 
 ## Source Trust: How It Updates
 
 Sources don't have a single trust score. Trust is tracked **per domain** — a source that's excellent at reporting economic data might be unreliable on diplomatic analysis.
 
-```
-                    Source: "Al Jazeera"
-                    ┌────────────────────────────┐
-                    │  Base trust: 0.60           │
-                    │                             │
-                    │  Domain trust:              │
-                    │    DIPLO:  0.99  (5/6)      │
-                    │    EVENT:  0.94  (17/18)     │
-                    │    DATA:   0.82  (3/5)       │
-                    │    RHETORIC: 1.0  (1/1)      │
-                    │                             │
-                    │  Effective trust: 0.99       │
-                    └────────────────────────────┘
+```mermaid
+block-beta
+    columns 3
+
+    block:header:3
+        columns 3
+        space name["Al Jazeera — Base Trust: 0.60"] space
+    end
+
+    block:domains:3
+        columns 4
+        DIPLO["DIPLO\n0.99\n5/6 confirmed"]
+        EVENT["EVENT\n0.94\n17/18 confirmed"]
+        DATA["DATA\n0.82\n3/5 confirmed"]
+        RHETORIC["RHETORIC\n1.0\n1/1 confirmed"]
+    end
+
+    block:effective:3
+        columns 3
+        space eff["Effective Trust → 0.99"] space
+    end
+
+    style DIPLO fill:#0f9b58,color:#fff
+    style EVENT fill:#0f9b58,color:#fff
+    style DATA fill:#f5a623,color:#fff
+    style RHETORIC fill:#0f9b58,color:#fff
+    style eff fill:#1a1a2e,stroke:#0f9b58,color:#eee
 ```
 
 The update mechanism is Bayesian:
 
-1. **Claim enters evidence log** with a source and domain tag (ECON, KINETIC, DIPLO, etc.)
-2. **Source ledger scans** for confirmation/refutation pairs — a later entry from a *different* source that either supports or contradicts the claim
-3. **Confirmed claims** → likelihood ratio 3:1 (triple the odds the source is reliable in this domain)
-4. **Refuted claims** → likelihood ratio 1:3 (cut the odds to one-third)
-5. **Effective weight** of new evidence = `claim_state_weight × min(source_trust_values)`
+```mermaid
+flowchart LR
+    Claim["New claim enters\nevidence log"] --> Tag["Tagged with source\n+ domain (ECON, KINETIC, ...)"]
+    Tag --> Scan["Source ledger scans\nfor confirmation/refutation\nfrom *different* sources"]
+    Scan -->|"Confirmed"| Up["LR = 3:1\nTriple the odds\nthis source is reliable\nin this domain"]
+    Scan -->|"Refuted"| Down["LR = 1:3\nCut odds to 1/3"]
+    Up --> Weight
+    Down --> Weight
+    Weight["Effective weight =\nclaim_state x min(source_trust)"]
 
-A source that's been confirmed 5 times in ECON and refuted 3 times in RHETORIC will have high ECON trust and low RHETORIC trust. When that source makes a new ECON claim, it gets high weight. When it makes a RHETORIC claim, it gets low weight. The system learns this automatically from the evidence log.
+    style Up fill:#0f9b58,color:#fff
+    style Down fill:#8b0000,color:#fff
+```
+
+A source confirmed 5 times in ECON and refuted 3 times in RHETORIC will have high ECON trust and low RHETORIC trust. When that source makes a new ECON claim, it gets high weight. When it makes a RHETORIC claim, it gets low weight. The system learns this automatically from the evidence log.
 
 **Key finding from testing against live data**: domain predicts reliability far better than source identity (r=0.159 for source alone). ECON claims are 99.4% reliable across all sources; RHETORIC claims are 0% reliable.
 
