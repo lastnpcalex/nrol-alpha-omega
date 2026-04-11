@@ -163,7 +163,7 @@ def run_mechanical_checks(topic: dict) -> dict:
         )
 
     # Check indicator observability
-    for ind in all_indicators:
+    for ind in all_indicators + anti_indicators:
         desc = ind.get("desc", "").lower()
         if any(w in desc for w in ["believe", "think", "feel", "seem", "likely"]):
             warnings.append(
@@ -171,6 +171,63 @@ def run_mechanical_checks(topic: dict) -> dict:
                 f"observable — description uses subjective language: "
                 f"'{ind.get('desc', '')[:60]}...'"
             )
+
+    # --- Coverage Matrix (hypothesis × indicator) ---
+    # For each indicator, parse which hypotheses it references in posteriorEffect.
+    # Build a matrix: which hypotheses can be POSITIVELY updated and which can be
+    # NEGATIVELY updated by the indicator set? Gaps are structural flaws.
+    coverage = _build_coverage_matrix(hypotheses, all_indicators, anti_indicators)
+    info.append(f"COVERAGE_MATRIX: {json.dumps(coverage['matrix'])}")
+
+    for hk in h_keys:
+        pos = coverage["positive"].get(hk, [])
+        neg = coverage["negative"].get(hk, [])
+        if not pos and not neg:
+            blockers.append(
+                f"COVERAGE GAP: {hk} has no indicators for or against it — "
+                "this hypothesis is permanently underdetermined"
+            )
+        elif not pos:
+            warnings.append(
+                f"COVERAGE ASYMMETRY: {hk} has {len(neg)} negative indicator(s) "
+                f"but no positive ones — it can only lose probability, never gain"
+            )
+        elif not neg:
+            warnings.append(
+                f"COVERAGE ASYMMETRY: {hk} has {len(pos)} positive indicator(s) "
+                f"but no negative ones — it can only gain probability, never lose"
+            )
+
+    # --- Distinguishability (hypothesis pairs sharing all indicators) ---
+    # If two hypotheses are affected by EXACTLY the same set of indicators,
+    # no evidence can discriminate between them. This is mechanically detectable.
+    distinguishability = _check_distinguishability(coverage)
+    for pair in distinguishability["indistinguishable"]:
+        warnings.append(
+            f"INDISTINGUISHABLE: {pair['h1']} and {pair['h2']} share "
+            f"{pair['shared']}/{pair['total']} indicators "
+            f"(overlap {pair['overlap']:.0%}) — consider merging or adding "
+            f"a discriminating indicator"
+        )
+
+    # --- Prior Justification ---
+    posteriors = {hk: h.get("posterior", 0) for hk, h in hypotheses.items()}
+    is_uniform = all(abs(p - 1.0/len(posteriors)) < 0.01 for p in posteriors.values())
+    history = model.get("posteriorHistory", [])
+    has_prior_note = bool(history and history[0].get("note"))
+
+    if is_uniform and len(hypotheses) >= 3:
+        warnings.append(
+            f"UNIFORM PRIORS ({1.0/len(posteriors):.2f} each) — is this "
+            "honest ignorance or lazy defaulting? If you have domain knowledge, "
+            "use it. If genuinely ignorant, document why."
+        )
+    elif not is_uniform and not has_prior_note:
+        blockers.append(
+            f"NON-UNIFORM PRIORS without justification — posteriors are "
+            f"{posteriors} but posteriorHistory has no initial note explaining "
+            "the asymmetry. Add a posteriorHistory entry documenting why."
+        )
 
     # --- Actor Model ---
     actors = actor_model.get("actors", {})
@@ -201,6 +258,131 @@ def run_mechanical_checks(topic: dict) -> dict:
         "warnings": warnings,
         "info": info,
         "passed": len(blockers) == 0,
+        "coverage": coverage,
+        "distinguishability": distinguishability,
+    }
+
+
+def _build_coverage_matrix(hypotheses: dict, indicators: list,
+                           anti_indicators: list) -> dict:
+    """
+    Build a hypothesis × indicator coverage matrix.
+
+    For each indicator, parse posteriorEffect to determine which hypotheses
+    it affects and in which direction (positive = increases probability,
+    negative = decreases probability).
+
+    Returns dict with:
+        matrix: {H1: {pos: [ind_ids], neg: [ind_ids]}, ...}
+        positive: {H1: [ind_ids that can increase H1], ...}
+        negative: {H1: [ind_ids that can decrease H1], ...}
+        indicator_reach: {ind_id: [hypothesis_keys it affects]}
+    """
+    import re as _re
+
+    h_keys = list(hypotheses.keys())
+    matrix = {hk: {"pos": [], "neg": []} for hk in h_keys}
+    indicator_reach = {}
+
+    for ind in indicators + anti_indicators:
+        ind_id = ind.get("id", "?")
+        effect = ind.get("posteriorEffect", "")
+        reached = []
+
+        for hk in h_keys:
+            if hk in effect:
+                reached.append(hk)
+                # Determine direction from effect string
+                # Patterns: "H1 +15pp", "H3 surge", "H2 -5pp", "H1 collapse"
+                # Look for the hypothesis mention and its nearby context
+                pattern = _re.compile(
+                    rf'{hk}\s*([+-])?\s*(\d+)?\s*(?:pp|%)?|'
+                    rf'{hk}.*?(surge|increase|up|gain|rise|confirm)|'
+                    rf'{hk}.*?(collapse|decrease|down|drop|reduce|decline)',
+                    _re.IGNORECASE
+                )
+                match = pattern.search(effect)
+                if match:
+                    if match.group(1) == '+' or match.group(3):  # +Npp or surge/increase
+                        matrix[hk]["pos"].append(ind_id)
+                    elif match.group(1) == '-' or match.group(4):  # -Npp or collapse/decrease
+                        matrix[hk]["neg"].append(ind_id)
+                    else:
+                        # Ambiguous — count as both
+                        matrix[hk]["pos"].append(ind_id)
+                        matrix[hk]["neg"].append(ind_id)
+                else:
+                    # H mentioned but no clear direction — count as affecting
+                    matrix[hk]["pos"].append(ind_id)
+
+        indicator_reach[ind_id] = reached
+
+    positive = {hk: matrix[hk]["pos"] for hk in h_keys}
+    negative = {hk: matrix[hk]["neg"] for hk in h_keys}
+
+    return {
+        "matrix": {hk: {"pos": len(v["pos"]), "neg": len(v["neg"])}
+                   for hk, v in matrix.items()},
+        "positive": positive,
+        "negative": negative,
+        "indicator_reach": indicator_reach,
+    }
+
+
+def _check_distinguishability(coverage: dict) -> dict:
+    """
+    Check if any pair of hypotheses are indistinguishable — meaning
+    they are affected by exactly the same set of indicators.
+
+    Two hypotheses that share all indicators cannot be discriminated
+    by evidence. This is a structural flaw, not a judgment call.
+
+    Returns dict with:
+        indistinguishable: list of {h1, h2, shared, total, overlap}
+        distinguishable: list of {h1, h2, shared, total, overlap}
+    """
+    positive = coverage["positive"]
+    negative = coverage["negative"]
+    h_keys = list(positive.keys())
+
+    indistinguishable = []
+    distinguishable = []
+
+    for i, h1 in enumerate(h_keys):
+        for j, h2 in enumerate(h_keys):
+            if i >= j:
+                continue
+
+            # All indicators affecting either hypothesis
+            all_h1 = set(positive.get(h1, []) + negative.get(h1, []))
+            all_h2 = set(positive.get(h2, []) + negative.get(h2, []))
+            union = all_h1 | all_h2
+            intersection = all_h1 & all_h2
+
+            if not union:
+                # Neither hypothesis has any indicators — already caught
+                continue
+
+            overlap = len(intersection) / len(union) if union else 0
+
+            entry = {
+                "h1": h1, "h2": h2,
+                "shared": len(intersection),
+                "total": len(union),
+                "overlap": round(overlap, 2),
+                "unique_to_h1": list(all_h1 - all_h2),
+                "unique_to_h2": list(all_h2 - all_h1),
+            }
+
+            # >80% overlap with no unique discriminators = indistinguishable
+            if overlap > 0.8 and not (all_h1 - all_h2) and not (all_h2 - all_h1):
+                indistinguishable.append(entry)
+            else:
+                distinguishable.append(entry)
+
+    return {
+        "indistinguishable": indistinguishable,
+        "distinguishable": distinguishable,
     }
 
 

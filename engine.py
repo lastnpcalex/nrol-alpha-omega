@@ -201,6 +201,36 @@ def save_topic(topic: dict) -> None:
         # Governor computation must never prevent saving state
         pass
 
+    # --- Design gate check (runs on every save, embeds results) ---
+    try:
+        from framework.topic_design_gate import run_mechanical_checks
+        gate = run_mechanical_checks(topic)
+        topic.setdefault("governance", {})["designGate"] = {
+            "passed": gate["passed"],
+            "blockers": gate["blockers"],
+            "warnings": gate["warnings"],
+            "coverage": gate.get("coverage", {}).get("matrix", {}),
+            "indistinguishable": [
+                {"h1": p["h1"], "h2": p["h2"], "overlap": p["overlap"]}
+                for p in gate.get("distinguishability", {}).get("indistinguishable", [])
+            ],
+            "lastChecked": _now_iso(),
+        }
+        if not gate["passed"]:
+            topic["governance"].setdefault("issues", []).append(
+                f"DESIGN GATE BLOCKED: {len(gate['blockers'])} blocker(s)"
+            )
+            # Warn but don't prevent save — the operator needs to fix and re-save
+            warnings.warn(
+                f"Topic '{slug}' has {len(gate['blockers'])} design gate blocker(s): "
+                f"{'; '.join(gate['blockers'][:3])}",
+                stacklevel=2,
+            )
+    except ImportError:
+        pass  # Framework module not available
+    except Exception:
+        pass  # Gate check must never prevent saving state
+
     # --- Epistemic improvement: auto-compaction ---
     try:
         from framework.compaction import auto_compact
