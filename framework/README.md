@@ -1,188 +1,120 @@
 # NRL-Alpha Omega Framework
 
-A governor-gated, programmatic update system for the NRL-Alpha Omega geopolitical tracking engine.
+Governor-gated programmatic update system for the estimation engine.
 
-## Why This Framework
+## Modules
 
-The previous system required agents to read all briefs to "catch up," consuming many tokens. This framework:
+### Core Pipeline
+| Module | Purpose |
+|--------|---------|
+| `runner.py` | CLI orchestrator — dispatches update, lint, test, audit, diff, health |
+| `update.py` | Full update pipeline — load topic, gather intel, add evidence, shift posteriors, generate brief |
+| `lint.py` | Evidence log linting — checks for rhetoric-as-evidence, recycled intel, stale data, feed mismatches |
+| `test.py` | Hypothesis test registry — structured tests with governor-gated evidence injection |
 
-1. **Minimizes token overhead**: Uses diff-based history, not full brief reads
-2. **Automates governor-gated updates**: Scripts run the pipeline
-3. **Generalizes tools**: Works for any topic, not just Hormuz
-4. **Tests hypotheses systematically**: Built-in test registry
+### Epistemic Modules
+| Module | Purpose |
+|--------|---------|
+| `red_team.py` | Devil's advocate system — scores counterevidence, builds contrarian case, text heuristic inference for string posteriorImpact values |
+| `contradictions.py` | Contradiction detection — DIRECT, FEED_MISMATCH, MAGNITUDE, TEMPORAL types with severity tiers (HIGH/MEDIUM/LOW) |
+| `scoring.py` | Prediction calibration — Brier scores, posterior snapshots, hypothesis expiry detection, partial scoring |
+| `compaction.py` | Evidence log compaction — archives old entries while preserving key claims and their effective weights |
+| `source_ledger.py` | Claim resolution tracker — scans evidence for confirmation/refutation pairs, Bayesian trust updates per source |
+| `source_db.py` | Source database — cross-topic, domain-aware performance tracking. Stores per-source-per-domain hit rates and trust scores |
+| `calibrate.py` | Base trust scores and source registration — the starting priors that source_ledger and source_db update from |
 
-## Architecture
-
-```
-framework/
-├── runner.py          # Main orchestrator
-├── update.py          # Update pipeline
-├── lint.py            # Linting (failure mode checks)
-├── test.py            # Hypothesis testing
-├── run.sh             # Shell wrapper
-└── README.md          # This file
-```
-
-## Quick Start
-
-### Shell Script
+## Update Pipeline
 
 ```bash
-# Routine update
-./run.sh update --topic hormuz-closure --mode routine
-
-# Crisis update
-./run.sh update --topic hormuz-closure --mode crisis
-
-# Lint evidence log
-./run.sh lint --topic hormuz-closure
-
-# Run test case
-./run.sh test --topic hormuz-closure --test resolution_achieved
-
-# Epistemic audit
-./run.sh audit --topic hormuz-closure
-```
-
-### Python Direct
-
-```bash
-# Update
+# Routine update (daily)
 python framework/runner.py update --topic hormuz-closure --mode routine
 
-# Lint
-python framework/runner.py lint --topic hormuz-closure
+# Crisis update (high-tempo)
+python framework/runner.py update --topic hormuz-closure --mode crisis
 
-# Test
-python framework/runner.py test \
-    --topic hormuz-closure \
-    --test resolution_achieved \
-    --evidence '{"tag":"EVENT","text":"Resolution achieved","provenance":"OBSERVED"}'
+# With force override (bypasses governance blocks)
+python framework/update.py hormuz-closure --force
+
+# Check for expired hypotheses
+python framework/update.py hormuz-closure --check-expired
 ```
 
-## Commands
+The pipeline:
+1. Load topic state
+2. Read most recent brief (not all history — token-efficient)
+3. Gather fresh intel via web search (if available)
+4. Add evidence through governor gate (enrichment + validation)
+5. Update posteriors if warranted (or hold with rationale)
+6. Generate brief with all required sections
+7. Save topic (governance snapshot embedded)
 
-### `update` — Run Update Pipeline
+## Epistemic Modules: How They Connect
 
-Runs the full update pipeline:
-1. Loads topic
-2. Reads most recent brief (not all history!)
-3. Gathers fresh intel via web search
-4. Adds evidence (governor-gated)
-5. Updates posteriors/sub-models if warranted
-6. Generates brief
-7. Saves topic (governor snapshot)
-
-```bash
-./run.sh update --topic hormuz-closure --mode routine
+```
+Evidence enters                Source calibration
+add_evidence() ──────────────► source_ledger.py
+      │                              │
+      │  Contradiction check         │  Track claim outcomes
+      ├──► contradictions.py         ├──► source_db.py
+      │                              │         │
+      │  Weight calculation          │         │  Domain-aware trust
+      ├──► governor.get_effective_   │         │  (ECON: 0.96,
+      │    weight() uses source      │         │   RHETORIC: 0.10)
+      │    trust from calibration    │         │
+      │                              ▼         ▼
+      │                     Effective weight = claim_state × source_trust
+      │
+      ▼
+Posterior update ──────────► red_team.py (devil's advocate check)
+      │                              │
+      │                              │  Counterevidence scoring
+      │                              │  (scans compacted evidence too)
+      │                              │
+      ▼                              ▼
+save_topic() ──────────────► scoring.py
+      │                         │
+      │  Governance snapshot     │  Brier score snapshots
+      │  R_t, entropy            │  Hypothesis expiry detection
+      │  Health assessment       │  Partial scoring for expired H
+      │
+      ▼
+Topic JSON (single source of truth)
 ```
 
-### `lint` — Lint Evidence Log
-
-Checks for failure modes:
-- Rhetoric-as-evidence
-- Recycled intel
-- Empty search not logged
-- Feed key mismatches
-- Stale evidence
-- Anchoring bias
+## CLI Reference
 
 ```bash
-./run.sh lint --topic hormuz-closure --check-history
-```
+# Update pipeline
+./run.sh update --topic <slug> --mode routine|crisis
 
-### `test` — Run Test Case
+# Lint evidence log
+./run.sh lint --topic <slug> [--check-history]
 
-Runs a hypothesis test:
-1. Loads hypothesis state
-2. Lints test evidence
-3. Adds evidence via governor
-4. Updates posteriors if warranted
-5. Records test result
+# Run hypothesis test
+./run.sh test --topic <slug> --test <test_name>
 
-```bash
-./run.sh test --topic hormuz-closure --test resolution_achieved
-```
+# Epistemic audit
+./run.sh audit --topic <slug>
 
-Available tests:
-- `resolution_achieved`
-- `toll_regime_active`
-- `iceland_seized`
-- `ceasefire_active`
-- `freedom_of_navigation`
+# Brief diff
+./run.sh diff --topic <slug>
 
-### `audit` — Epistemic Audit
+# Health snapshot
+./run.sh health --topic <slug>
 
-Checks governance health:
-- Evidence freshness
-- Hypothesis admissibility
-- Unfalsifiable hypotheses
-- Uncertainty ratio
-- R_t regime
+# Scoring/calibration
+python framework/scoring.py <slug> --report
+python framework/scoring.py <slug> --backfill
+python framework/scoring.py <slug> --snapshot
+python framework/scoring.py <slug> --resolve H3
 
-```bash
-./run.sh audit --topic hormuz-closure
-```
-
-### `diff` — Show Brief Diff
-
-Shows diff from last brief (for troubleshooting):
-
-```bash
-./run.sh diff --topic hormuz-closure
-```
-
-### `health` — Health Status
-
-Shows governance health snapshot:
-
-```bash
-./run.sh health --topic hormuz-closure
+# Source database
+python framework/source_db.py ingest --topic <slug>
+python framework/source_db.py profile --source Reuters
+python framework/source_db.py domains --min-claims 3
+python framework/source_db.py export --tag ECON
 ```
 
 ## Token Efficiency
 
-### Before (Old System)
-```
-Agent reads: 200+ brief files
-Token overhead: ~50,000 tokens per update
-Agent must read ALL history to "catch up"
-```
-
-### After (New Framework)
-```
-Agent reads: Most recent brief only
-Token overhead: ~1,000 tokens per update
-Diff history available for troubleshooting
-```
-
-## Governor Integration
-
-All updates are governor-gated:
-- Evidence freshness checks
-- Rhetoric detection
-- Hallucination checklist
-- R_t regime checks
-- Entropy monitoring
-
-The governor enforces epistemic discipline automatically.
-
-## Epistemic Improvements
-
-This framework enables systematic epistemic improvement:
-
-1. **Source hierarchy**: Trust scores for different sources
-2. **Evidence categories**: Rhetoric vs fact vs prediction
-3. **Sub-model expansion**: Add missing variables
-4. **Resolution criterion evolution**: Toll regime vs freedom of navigation
-
-## Contributing
-
-1. Add new test cases to `test.py::TEST_CASES`
-2. Add new failure modes to `lint.py::FAILURE_MODES`
-3. Update search queries in `update.py::SEARCH_QUERIES`
-4. Add new sub-models to topic schema
-
-## License
-
-Internal use only.
+The framework reads only the most recent brief (not all history), uses diff-based tracking, and compacts old evidence while preserving key claims. Typical overhead: ~1,000 tokens per update vs ~50,000 with full-history reads.
