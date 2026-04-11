@@ -310,20 +310,6 @@ The governor (`governor.py`) enforces analytical discipline through multiple mec
 | 13 | feed_key_mismatch | LOW | Data feed reference doesn't match topic |
 | 14 | duplicate_evidence | LOW | Semantic duplicate of existing entry |
 
-## Current Topic: Strait of Hormuz Closure
-
-The active deployment tracks the duration of Iran's closure of the Strait of Hormuz following the February 2026 US/Israeli strikes on Iranian nuclear facilities.
-
-**Hypotheses**:
-- H1: <6 weeks (near-expired)
-- H2: 6 weeks to 4 months
-- H3: 4-12 months (current mode)
-- H4: >12 months
-
-**Sub-models**: MEU mission status, Trump ultimatum track, diplomatic talks track
-
-As of Day 40 (April 11, 2026): H3 remains the mode at 0.50, with H2 gaining ground (0.22) following historic Islamabad face-to-face talks between VP Vance and Iranian Parliament Speaker Qalibaf.
-
 ## Acknowledgments
 
 The epistemic governance layer builds on patterns from **[@unpingable](https://github.com/unpingable)**'s **[Agent Governor](https://github.com/unpingable/agent_governor)** framework:
