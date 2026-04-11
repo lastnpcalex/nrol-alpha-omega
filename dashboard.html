@@ -99,6 +99,24 @@
   .tag-RHETORIC { background: var(--purple); color: #fff; }
   .tag-INTEL { background: var(--accent); color: #fff; }
   .tag-POLL { background: #ec4899; color: #fff; }
+  .tag-SCIENTIFIC { background: #0ea5e9; color: #fff; }
+  .tag-EXPERIMENTAL { background: #14b8a6; color: #fff; }
+  .tag-TECHNICAL { background: #6366f1; color: #fff; }
+  .tag-ANALYSIS { background: #a78bfa; color: #fff; }
+  .tag-CORPORATE { background: #78716c; color: #fff; }
+  .tag-POLITICAL { background: #e11d48; color: #fff; }
+  .tag-LEGAL { background: #d97706; color: #fff; }
+  .tag-REGULATORY { background: #d97706; color: #fff; }
+  .tag-SOCIAL { background: #f472b6; color: #fff; }
+  .tag-EDITORIAL { background: var(--purple); color: #fff; }
+  .tag-FORECAST { background: var(--amber); color: #000; }
+  .tag-OSINT { background: var(--accent); color: #fff; }
+  .tag-MARKET { background: var(--amber); color: #000; }
+  .tag-ENVIRONMENTAL { background: #22c55e; color: #000; }
+  .tag-DEMOGRAPHIC { background: #94a3b8; color: #000; }
+  .tag-SIGINT { background: #dc2626; color: #fff; }
+  .tag-LEGISLATIVE { background: #d97706; color: #fff; }
+  .tag-JUDICIAL { background: #d97706; color: #fff; }
   .tag-MISC { background: var(--dim); color: #000; }
   .ev-time { color: var(--dim); font-size: 10px; }
   .ev-provenance { color: var(--dim); font-size: 9px; font-style: italic; }
@@ -495,8 +513,14 @@ function renderEvidenceLog() {
     return;
   }
   el.innerHTML = entries.map(e => {
-    const impactClass = e.posteriorImpact && e.posteriorImpact !== 'NONE'
-      ? `<span class="ev-impact ${e.posteriorImpact}">${e.posteriorImpact}</span>` : '';
+    let impactClass = '';
+    if (e.posteriorImpact && e.posteriorImpact !== 'NONE') {
+      const impactUpper = e.posteriorImpact.toUpperCase ? e.posteriorImpact.toUpperCase() : '';
+      const impactCls = ['MAJOR','MODERATE','MINOR'].includes(impactUpper) ? impactUpper : '';
+      const impactText = typeof e.posteriorImpact === 'string' && e.posteriorImpact.length > 20
+        ? e.posteriorImpact.substring(0, 30) + '...' : e.posteriorImpact;
+      impactClass = `<span class="ev-impact ${impactCls}" style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${impactText}</span>`;
+    }
     const prov = e.provenance ? `<span class="ev-provenance">[${e.provenance}]</span>` : '';
     return `
       <div class="evidence-entry">
@@ -558,12 +582,17 @@ function renderWatchpoints() {
     el.innerHTML = '<div style="color:var(--dim)">No watchpoints set</div>';
     return;
   }
-  el.innerHTML = wps.map(w => `
-    <div class="watchpoint">
-      <span class="wp-time">${w.time}</span> — <strong>${w.event}</strong>
-      ${w.watch ? `<div style="color:var(--dim);margin-left:16px;">${w.watch}</div>` : ''}
-    </div>
-  `).join('');
+  el.innerHTML = wps.map(w => {
+    if (typeof w === 'string') {
+      return `<div class="watchpoint">${w}</div>`;
+    }
+    return `
+      <div class="watchpoint">
+        ${w.time ? `<span class="wp-time">${w.time}</span> — ` : ''}<strong>${w.event || w}</strong>
+        ${w.watch ? `<div style="color:var(--dim);margin-left:16px;">${w.watch}</div>` : ''}
+      </div>
+    `;
+  }).join('');
 }
 
 function renderChart() {
@@ -617,18 +646,25 @@ function renderChart() {
   const hKeys = Object.keys(state.model.hypotheses);
   const palette = generatePalette(hKeys.length);
 
+  // Helper: extract hypothesis value from history entry (handles flat or nested format)
+  function getHistVal(entry, key) {
+    if (entry[key] != null) return entry[key];
+    if (entry.posteriors && entry.posteriors[key] != null) return entry.posteriors[key];
+    return 0;
+  }
+
   hKeys.forEach((k, idx) => {
     ctx.strokeStyle = palette[idx]; ctx.lineWidth = 2; ctx.beginPath();
     for (let i = 0; i < history.length; i++) {
       const x = pad.left + (i / (history.length - 1)) * cW;
-      const val = history[i][k] ?? 0;
+      const val = getHistVal(history[i], k);
       const y = pad.top + cH * (1 - val);
       if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
     }
     ctx.stroke();
 
     // Label at end
-    const lastVal = history[history.length - 1][k] ?? 0;
+    const lastVal = getHistVal(history[history.length - 1], k);
     const lastY = pad.top + cH * (1 - lastVal);
     ctx.fillStyle = palette[idx]; ctx.textAlign = 'left'; ctx.font = 'bold 10px monospace';
     ctx.fillText(k, W - pad.right + 2, lastY + 3);

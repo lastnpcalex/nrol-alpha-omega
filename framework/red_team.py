@@ -21,6 +21,7 @@ Usage:
     print(format_red_team_challenge(red))
 """
 
+import re
 import sys
 import math
 from pathlib import Path
@@ -231,10 +232,21 @@ def _get_posterior_impact(entry: dict, topic: dict | None = None) -> dict:
     if isinstance(impact, dict):
         return impact
 
-    # String fallback: infer from tag + text keywords
+    # String fallback
     if not isinstance(impact, str):
         return {}
 
+    # Try parsing explicit "H1 +5pp, H3 -3pp" format first
+    explicit_signals = {}
+    for match in re.finditer(r"(H\d+)\s*([+-])\s*(\d+)\s*pp", impact):
+        h = match.group(1)
+        sign = 1 if match.group(2) == "+" else -1
+        magnitude_pp = int(match.group(3)) / 100.0  # convert pp to decimal
+        explicit_signals[h] = sign * magnitude_pp
+    if explicit_signals:
+        return explicit_signals
+
+    # Fall back to MAJOR/MODERATE/MINOR/NONE + text keyword heuristic
     magnitude = IMPACT_MAGNITUDE.get(impact.upper(), 0.0)
     if magnitude == 0.0:
         return {}
