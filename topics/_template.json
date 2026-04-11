@@ -11,7 +11,16 @@
     "status": "ACTIVE",
     "dayCount": 0,
     "startDate": "",
-    "classification": "ROUTINE"
+    "classification": "ROUTINE",
+    "topicType": "conflict"
+  },
+
+  "tagConfig": {
+    "_docs": "Tag configuration for this topic. topicType presets: conflict, science, election, tech. Override directionHints for custom tag-to-hypothesis mappings.",
+    "availableTags": ["EVENT", "DATA", "RHETORIC", "INTEL", "ANALYSIS"],
+    "directionHints": {},
+    "escalationTags": [],
+    "deescalationTags": []
   },
 
   "model": {

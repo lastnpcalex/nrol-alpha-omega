@@ -192,10 +192,86 @@ python server.py
 ## Creating a New Topic
 
 1. Copy `topics/_template.json` to `topics/{your-slug}.json`
-2. Fill in: question, resolution criterion, hypotheses (with midpoints), indicators, actor model
-3. Wire up data feeds with baseline values
-4. Run `python engine.py show your-slug` to verify the governor accepts it
-5. Start adding evidence — the system handles enrichment, claim states, and calibration automatically
+2. Set `meta.topicType` to one of: `conflict`, `science`, `election`, `tech` (or leave empty for custom)
+3. Fill in: question, resolution criterion, hypotheses (with midpoints), indicators, actor model
+4. Wire up data feeds with baseline values
+5. Choose relevant tags from the tag registry (see below) and list them in `tagConfig.availableTags`
+6. Run `python engine.py show your-slug` to verify the governor accepts it
+7. Start adding evidence — the system handles enrichment, claim states, and calibration automatically
+
+## Evidence Tags
+
+Tags classify evidence by domain. Each tag has a TTL (how fast it goes stale), a fact/decision classification, and optional direction hints for the red team's heuristic inference.
+
+The system ships with **28 tags** across 6 categories. Pick the ones relevant to your topic:
+
+```mermaid
+mindmap
+  root((Evidence Tags))
+    Universal
+      EVENT
+      DATA
+      RHETORIC
+      INTEL
+      ANALYSIS
+      OSINT
+      POLICY
+    Conflict
+      KINETIC
+      FORCE
+      DIPLO
+      SIGINT
+    Economic
+      ECON
+      MARKET
+    Political
+      POLITICAL
+      POLL
+      LEGAL
+      REGULATORY
+      JUDICIAL
+      LEGISLATIVE
+    Science
+      SCIENTIFIC
+      EXPERIMENTAL
+      TECHNICAL
+    Social
+      CORPORATE
+      DEMOGRAPHIC
+      SOCIAL
+      ENVIRONMENTAL
+      EDITORIAL
+      FORECAST
+```
+
+### Topic Type Presets
+
+Setting `meta.topicType` in your topic JSON automatically configures which tags the red team uses for direction inference:
+
+| Topic Type | Example Use Cases | Key Tags | Direction Logic |
+|-----------|-------------------|----------|----------------|
+| `conflict` | Wars, crises, blockades | KINETIC, FORCE, DIPLO, ECON | Kinetic events argue for longer timelines; diplomacy argues shorter |
+| `science` | LK-99, replication studies | EXPERIMENTAL, SCIENTIFIC, TECHNICAL | Lab results and papers push toward confirmation |
+| `election` | Elections, referenda | POLL, POLITICAL, LEGAL | Neutral — direction from content, not tag |
+| `tech` | AI capabilities, product launches | TECHNICAL, SCIENTIFIC, REGULATORY | Technical demos argue "sooner"; regulation argues "slower" |
+
+### Custom Tag Configuration
+
+For topics that don't fit a preset, configure `tagConfig` in the topic JSON:
+
+```json
+{
+  "tagConfig": {
+    "availableTags": ["EVENT", "DATA", "SCIENTIFIC", "EXPERIMENTAL", "RHETORIC"],
+    "directionHints": {
+      "EXPERIMENTAL": {"H1": 1, "H2": 1, "H3": -1},
+      "SCIENTIFIC": {"H1": 1}
+    },
+    "escalationTags": ["EXPERIMENTAL"],
+    "deescalationTags": ["RHETORIC"]
+  }
+}
+```
 
 ## Epistemic Governance
 

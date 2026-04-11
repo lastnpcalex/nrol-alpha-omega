@@ -45,28 +45,135 @@ IMPACT_MAGNITUDE = {
     "NONE": 0.0,
 }
 
-# Tag → hypothesis direction hints (positive = argues for longer timeline)
-# These are domain-specific defaults; text keywords override them
-TAG_DIRECTION_HINTS = {
+# ---------------------------------------------------------------------------
+# Tag direction hints — topic-configurable with fallback defaults
+# ---------------------------------------------------------------------------
+# These map tags to per-hypothesis direction hints. Positive = argues for
+# "longer/more/worse" hypotheses, negative = "shorter/less/better".
+#
+# Topics can override via topic["tagConfig"]["directionHints"].
+# The defaults below are for conflict/geopolitical topics (the original
+# use case). For other topic types, use get_direction_hints(topic) which
+# checks the topic first, then falls back.
+
+# Conflict / Geopolitical default (Hormuz, wars, crises)
+_CONFLICT_DIRECTION_HINTS = {
     "KINETIC": {"H3": +1, "H4": +1, "H2": -1},
     "FORCE":   {"H3": +1, "H4": +1, "H2": -1},
     "DIPLO":   {"H2": +1, "H1": +1, "H3": -1},
     "ECON":    {"H3": +1, "H4": +1},
-    "EVENT":   {},  # neutral — direction from text only
-    "RHETORIC": {},  # ignored per methodology
+    "EVENT":   {},
+    "RHETORIC": {},
     "INTEL":   {},
+    "ANALYSIS": {},
     "DATA":    {},
     "OSINT":   {},
 }
 
-# Text keywords for inferring direction when posteriorImpact is a string
+# Science / Replication default (LK-99, cold fusion, etc.)
+_SCIENCE_DIRECTION_HINTS = {
+    "EXPERIMENTAL": {"H1": +1, "H2": +1},  # lab results push toward confirmation
+    "SCIENTIFIC":   {"H1": +1, "H2": +1},  # papers push toward confirmation
+    "TECHNICAL":    {"H1": +1},             # engineering details confirm feasibility
+    "EDITORIAL":    {},                      # ignore
+    "RHETORIC":     {},                      # ignore
+    "DATA":         {},                      # neutral — depends on content
+    "EVENT":        {},
+    "CORPORATE":    {},
+}
+
+# Election / Political default
+_ELECTION_DIRECTION_HINTS = {
+    "POLL":       {},    # neutral — direction from numbers
+    "POLITICAL":  {},    # neutral
+    "LEGAL":      {},    # neutral — court rulings can go either way
+    "JUDICIAL":   {},
+    "LEGISLATIVE": {},
+    "CORPORATE":  {},    # endorsements
+    "SOCIAL":     {},    # protests, movements
+    "RHETORIC":   {},    # ignore
+    "DATA":       {},
+    "EVENT":      {},
+}
+
+# AI / Technology default
+_TECH_DIRECTION_HINTS = {
+    "TECHNICAL":   {"H1": +1, "H2": +1},  # benchmarks/demos push toward "sooner"
+    "SCIENTIFIC":  {"H1": +1},             # papers confirm feasibility
+    "CORPORATE":   {},                      # neutral — depends on content
+    "REGULATORY":  {"H3": +1, "H4": +1},  # regulation slows things down
+    "MARKET":      {},                      # neutral
+    "RHETORIC":    {},
+    "DATA":        {},
+    "EVENT":       {},
+}
+
+# Presets by topic type
+DIRECTION_HINT_PRESETS = {
+    "conflict": _CONFLICT_DIRECTION_HINTS,
+    "science": _SCIENCE_DIRECTION_HINTS,
+    "election": _ELECTION_DIRECTION_HINTS,
+    "tech": _TECH_DIRECTION_HINTS,
+}
+
+# Fallback (used when no topic is available)
+TAG_DIRECTION_HINTS = _CONFLICT_DIRECTION_HINTS
+
+
+def get_direction_hints(topic: dict | None = None) -> dict:
+    """
+    Get tag direction hints, checking topic config first.
+
+    Priority:
+    1. topic["tagConfig"]["directionHints"] (explicit per-topic overrides)
+    2. DIRECTION_HINT_PRESETS[topic["meta"]["topicType"]] (preset for topic type)
+    3. TAG_DIRECTION_HINTS (conflict default)
+    """
+    if topic is None:
+        return TAG_DIRECTION_HINTS
+
+    # Check for explicit overrides
+    tc = topic.get("tagConfig", {})
+    if "directionHints" in tc:
+        return tc["directionHints"]
+
+    # Check for topic type preset
+    topic_type = topic.get("meta", {}).get("topicType", "")
+    if topic_type in DIRECTION_HINT_PRESETS:
+        return DIRECTION_HINT_PRESETS[topic_type]
+
+    return TAG_DIRECTION_HINTS
+
+
+# Escalation/de-escalation tag sets — also topic-configurable
+_DEFAULT_ESCALATION_TAGS = {"KINETIC", "FORCE", "ECON"}
+_DEFAULT_DEESCALATION_TAGS = {"DIPLO"}
+
+
+def get_escalation_tags(topic: dict | None = None) -> tuple:
+    """Return (escalation_tags, deescalation_tags) for a topic."""
+    if topic is not None:
+        tc = topic.get("tagConfig", {})
+        esc = tc.get("escalationTags")
+        deesc = tc.get("deescalationTags")
+        if esc is not None or deesc is not None:
+            return (set(esc or []), set(deesc or []))
+    return (_DEFAULT_ESCALATION_TAGS, _DEFAULT_DEESCALATION_TAGS)
+
+
+# Text keywords for inferring direction when posteriorImpact is a string.
+# Universal — these work across most topic types.
 DIRECTION_KEYWORDS = {
     "positive": ("ceasefire", "peace", "agreement", "withdrawal", "resumed",
                  "reopened", "de-escalat", "negoti", "diplomacy", "talks",
-                 "convoy", "escort", "deal"),
+                 "convoy", "escort", "deal", "confirmed", "replicated",
+                 "verified", "passed", "approved", "breakthrough", "success",
+                 "resolved", "settled", "won", "achieved", "demonstrated"),
     "negative": ("escalat", "attack", "strike", "destroy", "blockade",
                  "mine", "seized", "offensive", "expand", "toll", "closed",
-                 "closure", "fortif", "missile", "drone lost"),
+                 "closure", "fortif", "missile", "drone lost", "failed",
+                 "retracted", "debunked", "rejected", "denied", "collapsed",
+                 "fraud", "fabricat", "unreplicable", "defeated", "stalled"),
 }
 
 
@@ -109,13 +216,16 @@ def _recency_weight(ts: str) -> float:
 # Evidence analysis helpers
 # ---------------------------------------------------------------------------
 
-def _get_posterior_impact(entry: dict) -> dict:
+def _get_posterior_impact(entry: dict, topic: dict | None = None) -> dict:
     """
     Extract posteriorImpact as {hypothesis_key: float}.
 
     Handles both dict format (explicit) and string format
     (MAJOR/MODERATE/MINOR/NONE) via text heuristic inference.
     When using heuristics, direction is inferred from tag + text keywords.
+
+    If topic is provided, uses topic-specific direction hints and
+    escalation/de-escalation tag sets. Otherwise falls back to defaults.
     """
     impact = entry.get("posteriorImpact")
     if isinstance(impact, dict):
@@ -136,8 +246,9 @@ def _get_posterior_impact(entry: dict) -> dict:
     pos_score = sum(1 for kw in DIRECTION_KEYWORDS["positive"] if kw in text_lower)
     neg_score = sum(1 for kw in DIRECTION_KEYWORDS["negative"] if kw in text_lower)
 
-    # Get tag-based direction hints
-    hints = TAG_DIRECTION_HINTS.get(tag, {})
+    # Get tag-based direction hints (topic-aware)
+    hints_dict = get_direction_hints(topic)
+    hints = hints_dict.get(tag, {})
 
     if not hints and pos_score == 0 and neg_score == 0:
         return {}  # Cannot infer direction — no signal
@@ -151,9 +262,8 @@ def _get_posterior_impact(entry: dict) -> dict:
     else:
         text_direction = 0  # ambiguous — use tag hints only
 
-    # Tags that normally indicate escalation vs de-escalation
-    _ESCALATION_TAGS = {"KINETIC", "FORCE", "ECON"}
-    _DEESCALATION_TAGS = {"DIPLO"}
+    # Tags that normally indicate escalation vs de-escalation (topic-aware)
+    _ESCALATION_TAGS, _DEESCALATION_TAGS = get_escalation_tags(topic)
 
     result = {}
     if hints:
@@ -184,12 +294,13 @@ def _get_posterior_impact(entry: dict) -> dict:
     return result
 
 
-def _entry_argues_direction(entry: dict, hypothesis_key: str) -> float | None:
+def _entry_argues_direction(entry: dict, hypothesis_key: str,
+                            topic: dict | None = None) -> float | None:
     """
     Return the direction this entry argues for the given hypothesis.
     Positive = argues UP, negative = argues DOWN, None = no opinion.
     """
-    impact = _get_posterior_impact(entry)
+    impact = _get_posterior_impact(entry, topic=topic)
     return impact.get(hypothesis_key)
 
 
@@ -250,7 +361,7 @@ def score_counterevidence(topic: dict, hypothesis_key: str,
     counter = []
 
     for idx, entry in enumerate(evidence_log):
-        impact = _get_posterior_impact(entry)
+        impact = _get_posterior_impact(entry, topic=topic)
         entry_direction = impact.get(hypothesis_key)
         ew = _effective_weight(entry)
         recency = _recency_weight(entry.get("time", ""))

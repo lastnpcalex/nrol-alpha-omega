@@ -138,21 +138,50 @@ def compute_topic_rt(topic: dict) -> dict:
 #   Decisions are ACTIVE or SUPERSEDED.
 # ===========================================================================
 
-FACT_TAGS = {"EVENT", "KINETIC", "DATA", "ECON", "FORCE", "DIPLO", "POLL"}
-DECISION_TAGS = {"INTEL", "RHETORIC"}  # analysis / interpretation
+FACT_TAGS = {"EVENT", "KINETIC", "DATA", "ECON", "FORCE", "DIPLO", "POLL",
+             "SCIENTIFIC", "TECHNICAL", "LEGAL", "REGULATORY", "POLITICAL",
+             "SOCIAL", "ENVIRONMENTAL", "OSINT", "SIGINT", "MARKET",
+             "EXPERIMENTAL", "CORPORATE", "DEMOGRAPHIC", "JUDICIAL"}
+DECISION_TAGS = {"INTEL", "RHETORIC", "ANALYSIS", "EDITORIAL", "FORECAST"}
 
 # Evidence TTLs by tag (hours before evidence becomes STALE)
+# Universal tags + domain-specific tags. Topics can override via tagConfig.
 EVIDENCE_TTL = {
-    "EVENT": 72,      # events are facts but context shifts
-    "KINETIC": 48,    # kinetic events: fast-moving
-    "DATA": 168,      # market/statistical data: 1 week
-    "ECON": 168,      # economic data: 1 week
-    "FORCE": 24,      # force positions: very perishable
-    "DIPLO": 168,     # diplomatic: slower decay
-    "RHETORIC": 24,   # rhetoric: extremely perishable (talk is cheap)
-    "INTEL": 72,      # analysis: medium decay
-    "POLL": 168,      # polling data: 1 week
-    "POLICY": 720,    # policy decisions: 30 days
+    # === Universal (any topic) ===
+    "EVENT": 72,           # something happened — context shifts
+    "DATA": 168,           # quantitative measurement — 1 week
+    "RHETORIC": 24,        # someone said something — perishable
+    "INTEL": 72,           # non-public analysis — medium decay
+    "ANALYSIS": 72,        # expert assessment — medium decay
+    "EDITORIAL": 24,       # opinion — very perishable
+    "FORECAST": 72,        # prediction — medium decay
+    "POLICY": 720,         # policy/regulatory decision — 30 days
+    "OSINT": 72,           # open source intelligence
+    "SIGINT": 48,          # signals intelligence
+    # === Conflict / Geopolitical ===
+    "KINETIC": 48,         # military action — fast-moving
+    "FORCE": 24,           # force positions — very perishable
+    "DIPLO": 168,          # diplomatic — slower decay
+    # === Economic / Market ===
+    "ECON": 168,           # economic data — 1 week
+    "MARKET": 24,          # market prices — very perishable
+    # === Political / Governance ===
+    "POLITICAL": 168,      # political developments — 1 week
+    "POLL": 168,           # polling data — 1 week
+    "LEGAL": 720,          # legal rulings — 30 days
+    "REGULATORY": 720,     # regulatory actions — 30 days
+    "JUDICIAL": 720,       # court decisions — 30 days
+    "LEGISLATIVE": 720,    # bills, votes — 30 days
+    # === Science / Technology ===
+    "SCIENTIFIC": 720,     # papers, studies — slow decay
+    "EXPERIMENTAL": 168,   # lab results — 1 week (replication matters)
+    "TECHNICAL": 168,      # benchmarks, capabilities — 1 week
+    # === Corporate / Industry ===
+    "CORPORATE": 168,      # company announcements — 1 week
+    "DEMOGRAPHIC": 720,    # census, population — 30 days
+    # === Social / Environmental ===
+    "SOCIAL": 168,         # protests, opinion, cultural — 1 week
+    "ENVIRONMENTAL": 720,  # climate, resources — 30 days
 }
 
 
@@ -1065,7 +1094,7 @@ _PREDICTION_MARKERS = [
 ]
 
 # Tags that are inherently predictive/analytical rather than factual
-_PREDICTIVE_TAGS = {"RHETORIC", "INTEL"}
+_PREDICTIVE_TAGS = {"RHETORIC", "INTEL", "ANALYSIS", "EDITORIAL", "FORECAST"}
 
 
 def _is_prediction(text_lower: str, tag: str = "") -> bool:
