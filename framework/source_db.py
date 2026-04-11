@@ -183,23 +183,42 @@ def save_db(db: dict) -> Path:
 # ---------------------------------------------------------------------------
 
 def _bayesian_update(prior: float, hits: int, misses: int,
-                     lr_hit: float = 3.0, lr_miss: float = 0.33) -> float:
+                     lr_hit: float = 3.0, lr_miss: float = 0.33,
+                     domain_base_rate: float = None) -> float:
     """
-    Update trust via repeated Bayesian updates.
+    Update trust via repeated Bayesian updates with surprisal weighting.
 
-    For each hit:   posterior = (prior * lr_hit) / (prior * lr_hit + (1 - prior))
-    For each miss:  posterior = (prior * lr_miss) / (prior * lr_miss + (1 - prior))
+    For each hit:   posterior = (prior * lr_eff) / (prior * lr_eff + (1 - prior))
+    For each miss:  posterior = (prior * lr_eff) / (prior * lr_eff + (1 - prior))
 
     lr_hit=3.0 means a confirmed claim triples the odds.
     lr_miss=0.33 means a refuted claim cuts odds to 1/3.
+
+    domain_base_rate: if provided, LRs are exponentiated by a surprisal weight
+    derived from the domain's confirmation base rate. A surprising confirmation
+    (low base rate domain) earns more trust credit than an expected one.
+
+    surprisal_weight = -log2(base_rate) for hits, -log2(1 - base_rate) for misses
+    Clamped to [0.5, 2.0], normalized so that p=0.5 → weight 1.0.
     """
     p = max(0.01, min(0.99, prior))
 
+    # Compute surprisal weights if base rate is available
+    sw_hit = 1.0
+    sw_miss = 1.0
+    if domain_base_rate is not None:
+        br = max(0.01, min(0.99, domain_base_rate))
+        sw_hit = max(0.5, min(2.0, -math.log2(br)))
+        sw_miss = max(0.5, min(2.0, -math.log2(1.0 - br)))
+
+    eff_lr_hit = math.pow(lr_hit, sw_hit)
+    eff_lr_miss = math.pow(lr_miss, sw_miss)
+
     for _ in range(hits):
-        p = (p * lr_hit) / (p * lr_hit + (1.0 - p))
+        p = (p * eff_lr_hit) / (p * eff_lr_hit + (1.0 - p))
 
     for _ in range(misses):
-        p = (p * lr_miss) / (p * lr_miss + (1.0 - p))
+        p = (p * eff_lr_miss) / (p * eff_lr_miss + (1.0 - p))
 
     return round(max(0.01, min(0.99, p)), 4)
 
@@ -282,8 +301,12 @@ def ingest_from_topic(db: dict, topic: dict) -> dict:
                 d["refuted"] += 1
             total_resolved = d["confirmed"] + d["refuted"]
             d["hitRate"] = round(d["confirmed"] / total_resolved, 4) if total_resolved > 0 else 0.0
+            # Pass domain base rate for surprisal weighting
+            domain_total = d["confirmed"] + d["refuted"]
+            domain_br = d["confirmed"] / domain_total if domain_total >= 3 else None
             d["domainTrust"] = _bayesian_update(
-                s["baseTrust"], d["confirmed"], d["refuted"]
+                s["baseTrust"], d["confirmed"], d["refuted"],
+                domain_base_rate=domain_br,
             )
 
             # Update topic history

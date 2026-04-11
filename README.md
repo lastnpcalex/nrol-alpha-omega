@@ -28,9 +28,9 @@ The goal isn't to be right. The goal is to *know how wrong you are* and get less
 
 This engine is honest about what it is and what it isn't.
 
-**What it is**: a disciplined expert elicitation framework with Bayesian bookkeeping. The governor enforces that posteriors move only when evidence justifies it, tracks calibration via Brier scores, and flags common reasoning failures before they corrupt the model.
+**What it is**: a Bayesian estimation engine where the update mechanics are principled and the governance layer enforces epistemic discipline. Posteriors are computed via Bayes' theorem from explicit likelihoods. Evidence weight feeds back into the update via a probabilistic mixture model — contested evidence is treated as a mixture of signal and noise, not discarded or blindly trusted. Source trust is Bayesian-updated per domain with surprisal-weighted likelihood ratios, so a source correctly predicting something surprising earns more trust than one confirming the obvious. Calibration is tracked via Brier scores and fed back into governance health.
 
-**What it isn't**: a fully mechanistic Bayesian inference engine with a generative model. `bayesian_update()` computes posteriors via Bayes' theorem from explicit likelihoods, and `suggest_likelihoods()` can derive those likelihoods from indicator definitions via inverse Bayes — but the indicator effects themselves are operator-defined. Evidence quality (claim state, source trust) feeds back into the update via `effectiveWeight` attenuation, so contested evidence automatically produces weaker updates. The remaining human judgment call is in the indicator design and the decision to fire them, not in the posterior arithmetic.
+**What it isn't**: a generative model. The likelihoods in `bayesian_update()` are operator-supplied or derived from pre-committed indicator definitions via `suggest_likelihoods()`. There is no forward model that predicts what evidence you'd observe under each hypothesis — that would require a causal model of the domain (geopolitics, science, markets), which is an open research problem. The engine is Bayesian in its update mechanics, its source calibration, and its information-theoretic monitoring. The human judgment lives in the indicator design and the decision to fire them. Everything downstream of that judgment is mechanical.
 
 #### Known limitation: conditional dependence between evidence
 
@@ -100,17 +100,17 @@ $$P(H_i|E) = \frac{P(E|H_i) \cdot P(H_i)}{\sum_j P(E|H_j) \cdot P(H_j)}$$
 
 The operator supplies likelihoods P(E|H_i) for each hypothesis — "how probable is this evidence if H_i is true?" — and the engine handles the rest. Both raw and adjusted likelihoods are recorded in `posteriorHistory` for full auditability.
 
-### Evidence Weight Attenuation
+### Evidence Weight Attenuation (Mixture Model)
 
-Likelihoods are attenuated by the `effectiveWeight` of the cited evidence before entering the Bayes computation:
+Evidence quality feeds into the Bayes computation through a proper probabilistic mixture model. Each piece of cited evidence has an `effectiveWeight` *w* representing the probability that the evidence is genuine signal rather than noise:
 
-$$L_{\text{adjusted}}(H_i) = 1 + (L_{\text{raw}}(H_i) - 1) \times w$$
+$$P(E|H_i) = w \cdot P(E|H_i,\text{real}) + (1-w) \cdot P(E|\text{noise})$$
 
-where *w* = mean effectiveWeight of cited evidence entries. At *w*=1.0 (fully corroborated, trusted source), likelihoods pass through unchanged. At *w*=0.2 (contested claim), the likelihood is pulled 80% of the way toward 1.0 (the no-update value). This means contested or low-trust evidence mechanically produces weaker posterior shifts — the system doesn't just flag bad evidence, it down-weights it in the math.
+where P(E|noise) = mean of raw likelihoods across all hypotheses (uninformative — identical for all H, so the noise component produces zero posterior movement after normalization). At *w*=1.0, the full likelihood passes through. At *w*=0, all hypotheses receive the same likelihood and posteriors don't move. At intermediate weights, the update is attenuated proportionally. Unlike a linear interpolation toward a fixed neutral value, this formulation is coherent: it corresponds to a well-defined generative model ("the evidence is real with probability *w*, noise otherwise") and preserves the direction of all likelihood ratios at every weight level.
 
 `effectiveWeight` itself is the product of two factors:
 - **Claim state weight**: PROPOSED (0.5) → SUPPORTED (1.0) → CONTESTED (0.2) → INVALIDATED (0.0)
-- **Source trust**: Bayesian-updated per source per domain, starting from base priors and refined by claim resolution history
+- **Source trust**: Bayesian-updated per source per domain, starting from base priors and refined by claim resolution history with surprisal weighting
 
 ### Inverse Bayes: Likelihoods from Indicators
 
@@ -142,11 +142,15 @@ $$BS = \frac{1}{N} \sum_{i=1}^{N} (p_i - o_i)^2$$
 
 where *o_i* = 1 for the correct hypothesis, 0 otherwise. Brier scores feed back into governance health — `POORLY_CALIBRATED` (Brier > 0.4) degrades system health. Hypotheses that expire by time (day count exceeds 1.5× the midpoint) get partial Brier scoring without waiting for full topic resolution.
 
-### Bayesian Source Trust
+### Bayesian Source Trust with Surprisal Weighting
 
-Source trust isn't a static lookup table. The source ledger tracks claim outcomes per source per domain tag (ECON, KINETIC, DIPLO, etc.) and updates trust via Bayesian likelihood ratios:
-- Confirmed claim → LR 3:1 (triple the odds the source is reliable in this domain)
-- Refuted claim → LR 1:3 (cut odds to one-third)
+Source trust isn't a static lookup table. The source ledger tracks claim outcomes per source per domain tag (ECON, KINETIC, DIPLO, etc.) and updates trust via Bayesian likelihood ratios — weighted by how surprising the resolved claim was.
+
+Base LRs (cross-topic): confirmed → LR 3:1, refuted → LR 1:3. Per-topic: confirmed → LR 1.2, refuted → LR 0.7. These are then exponentiated by a surprisal weight:
+
+$$LR_{\text{eff}} = LR_{\text{base}}^{s}, \quad s = \text{clamp}\left(\frac{-\log_2(p_{\text{domain}})}{1\text{ bit}},\ 0.5,\ 2.0\right)$$
+
+where *p*_domain is the confirmation base rate for this domain tag. A source that correctly called something surprising (low base rate of confirmation in that domain) earns up to 2× the trust credit. A source that confirmed the obvious (high base rate) earns as little as 0.5×. This prevents "oil goes up during a war" from earning the same trust boost as "Iran releases hostages by Tuesday." The normalizer of 1 bit means a coin-flip base rate (p=0.5) produces weight 1.0 — the unsurprised default.
 
 Trust is stored and queried at four levels of specificity (first match wins): per-topic calibration → cross-topic domain trust → cross-topic overall trust → static base prior. The minimum trust across all cited sources is used (conservative).
 
@@ -183,23 +187,27 @@ block-beta
     style eff fill:#1a1a2e,stroke:#0f9b58,color:#eee
 ```
 
-The update mechanism is Bayesian:
+The update mechanism is Bayesian with surprisal weighting:
 
 ```mermaid
 flowchart LR
     Claim["New claim enters\nevidence log"] --> Tag["Tagged with source\n+ domain (ECON, KINETIC, ...)"]
     Tag --> Scan["Source ledger scans\nfor confirmation/refutation\nfrom *different* sources"]
-    Scan -->|"Confirmed"| Up["LR = 3:1\nTriple the odds\nthis source is reliable\nin this domain"]
-    Scan -->|"Refuted"| Down["LR = 1:3\nCut odds to 1/3"]
+    Scan -->|"Confirmed"| Surp["Surprisal weight\n-log₂(domain base rate)\nnormalized to 1 bit"]
+    Scan -->|"Refuted"| SurpR["Surprisal weight\n-log₂(1 - domain base rate)"]
+    Surp --> Up["LR = 3:1 ^ surprisal\nSurprising confirm → up to 9:1\nExpected confirm → down to √3:1"]
+    SurpR --> Down["LR = 1:3 ^ surprisal\nSurprising refutation → stronger penalty"]
     Up --> Weight
     Down --> Weight
-    Weight["Effective weight =\nclaim_state x min(source_trust)"]
+    Weight["Effective weight =\nclaim_state × min(source_trust)"]
 
     style Up fill:#0f9b58,color:#fff
     style Down fill:#8b0000,color:#fff
+    style Surp fill:#1a1a2e,stroke:#f5a623,color:#eee
+    style SurpR fill:#1a1a2e,stroke:#f5a623,color:#eee
 ```
 
-A source confirmed 5 times in ECON and refuted 3 times in RHETORIC will have high ECON trust and low RHETORIC trust. When that source makes a new ECON claim, it gets high weight. When it makes a RHETORIC claim, it gets low weight. The system learns this automatically from the evidence log.
+A source confirmed 5 times in ECON and refuted 3 times in RHETORIC will have high ECON trust and low RHETORIC trust. When that source makes a new ECON claim, it gets high weight. When it makes a RHETORIC claim, it gets low weight. The system learns this automatically from the evidence log. Crucially, the five ECON confirmations don't all count equally — if the domain base rate is 99% (ECON claims are almost always confirmed), each confirmation earns minimal trust credit. A single correct call in a domain where sources are usually wrong is worth more than five correct calls where everyone is right.
 
 **Key finding from testing against live data**: domain predicts reliability far better than source identity (r=0.159 for source alone). ECON claims are 99.4% reliable across all sources; RHETORIC claims are 0% reliable.
 
@@ -342,9 +350,9 @@ bayesian_update(topic, likelihoods={
 }, reason="6+ independent replication failures", evidence_refs=[...])
 ```
 
-The engine computes posteriors mechanically via Bayes' theorem. If the cited evidence has low `effectiveWeight` (contested claims, low-trust sources), the likelihoods are attenuated toward 1.0 before the update — so weak evidence produces proportionally weaker posterior shifts. If the operator also supplies their intuitive posteriors, the system logs the KL divergence between mechanical and intuitive results — making the judgment call auditable.
+The engine computes posteriors mechanically via Bayes' theorem. If the cited evidence has low `effectiveWeight` (contested claims, low-trust sources), the likelihoods are attenuated via the mixture model — the evidence is treated as a probability-weighted mix of genuine signal and uninformative noise, so weak evidence produces proportionally weaker posterior shifts without distorting likelihood direction. If the operator also supplies their intuitive posteriors, the system logs the KL divergence between mechanical and intuitive results — making the gap between math and intuition visible.
 
-**`suggest_likelihoods()`** — instead of hand-crafting likelihoods, derive them from indicator definitions:
+**`suggest_likelihoods()`** — instead of hand-crafting likelihoods, derive them from pre-committed indicator definitions. Indicators are defined at topic creation before the evidence arrives — they're a pre-registered analysis plan, not a post-hoc rationalization. When an indicator fires, the function mechanizes what the operator already committed to:
 
 ```python
 # Fire an indicator, then get suggested likelihoods

@@ -542,24 +542,38 @@ def bayesian_update(topic: dict, likelihoods: dict[str, float],
                 f"Likelihood for {k} is {l} — must be in (0, 1]"
             )
 
-    # --- Effective weight attenuation ---
-    # Resolve evidence_refs to their effectiveWeights and attenuate likelihoods.
-    # Low-weight evidence (contested, low-trust) pulls likelihoods toward 1.0
-    # (the "no update" value). High-weight evidence passes through unmodified.
+    # --- Mixture model attenuation ---
+    # Resolve evidence_refs to their effectiveWeights and attenuate likelihoods
+    # using a proper probabilistic mixture model:
+    #
+    #   P(E|H_i) = w * P(E|H_i, real) + (1-w) * P(E|noise)
+    #
+    # where P(E|noise) = mean of raw likelihoods (uninformative — same for all H,
+    # so it contributes zero posterior movement after normalization).
+    #
+    # This is coherent: it models "with probability w, the evidence is genuine;
+    # otherwise it's noise." Unlike linear interpolation toward 1.0, this
+    # preserves likelihood direction at all weight levels.
     evidence_weight, weight_detail = _resolve_evidence_weight(topic, evidence_refs)
 
     if evidence_weight < 1.0:
+        # P(E|noise) = mean likelihood (uniform across hypotheses → no update)
+        noise_likelihood = sum(likelihoods.values()) / len(likelihoods)
+
         adjusted_likelihoods = {}
         for k, raw_l in likelihoods.items():
-            adjusted_likelihoods[k] = round(1.0 + (raw_l - 1.0) * evidence_weight, 6)
+            adjusted_likelihoods[k] = round(
+                evidence_weight * raw_l + (1.0 - evidence_weight) * noise_likelihood,
+                6,
+            )
 
         if evidence_weight < 0.3:
             _add_evidence_raw(topic, {
                 "time": _now_iso(),
                 "tag": "INTEL",
                 "text": (f"WEIGHT ATTENUATION: bayesian_update likelihoods attenuated "
-                         f"to {evidence_weight:.0%} strength — evidence refs have low "
-                         f"effectiveWeight ({weight_detail})"),
+                         f"to {evidence_weight:.0%} strength via mixture model — "
+                         f"evidence refs have low effectiveWeight ({weight_detail})"),
                 "provenance": "DERIVED",
                 "posteriorImpact": "NONE",
                 "ledger": "DECISION",

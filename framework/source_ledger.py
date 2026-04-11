@@ -272,24 +272,113 @@ def resolve_claim(topic: dict, evidence_index: int, resolution: str,
 # 3) compute_effective_trust
 # ---------------------------------------------------------------------------
 
+def _compute_domain_base_rates(topic: dict) -> dict:
+    """
+    Compute confirmation base rates per domain tag from the calibration ledger.
+
+    Returns {tag: base_rate} where base_rate = confirmed / (confirmed + refuted).
+    Tags with no resolved claims are omitted.
+    """
+    import math as _math
+
+    cal = topic.get("sourceCalibration", {})
+    evidence_log = topic.get("evidenceLog", [])
+    tag_counts = {}  # {tag: {"confirmed": N, "refuted": N}}
+
+    for record in cal.get("ledger", []):
+        if record.get("flagged") == "SAME_SOURCE":
+            continue
+        resolution = record.get("resolution", "")
+        if resolution not in ("CONFIRMED", "REFUTED"):
+            continue
+
+        # Get the tag from the evidence entry
+        tag = ""
+        ev_idx = record.get("evidence_index")
+        if ev_idx is not None and 0 <= ev_idx < len(evidence_log):
+            tag = evidence_log[ev_idx].get("tag", "")
+        if not tag:
+            tag = "UNKNOWN"
+
+        if tag not in tag_counts:
+            tag_counts[tag] = {"confirmed": 0, "refuted": 0}
+        if resolution == "CONFIRMED":
+            tag_counts[tag]["confirmed"] += 1
+        else:
+            tag_counts[tag]["refuted"] += 1
+
+    base_rates = {}
+    for tag, counts in tag_counts.items():
+        total = counts["confirmed"] + counts["refuted"]
+        if total > 0:
+            base_rates[tag] = counts["confirmed"] / total
+
+    return base_rates
+
+
+def _surprisal_weight(base_rate: float, resolution: str) -> float:
+    """
+    Compute a surprisal-based weight for a claim resolution.
+
+    A confirmed claim that's surprising (low base rate of confirmation in this
+    domain) should give MORE trust credit. A confirmed claim that's expected
+    (high base rate) should give LESS.
+
+    Returns a multiplier in [0.5, 2.0] applied to the base LR exponent.
+
+    For confirmations: weight = -log2(base_rate) / -log2(0.5)
+        base_rate=0.99 → weight ≈ 0.014 / 1.0 ≈ 0.01 (clamped to 0.5)
+        base_rate=0.50 → weight = 1.0
+        base_rate=0.10 → weight ≈ 3.32 (clamped to 2.0)
+
+    For refutations: weight = -log2(1 - base_rate) / -log2(0.5)
+        (a refutation is surprising when the base rate of confirmation is HIGH)
+    """
+    import math as _math
+
+    if resolution == "CONFIRMED":
+        # Surprisal of this confirmation given the domain base rate
+        p = max(0.01, min(0.99, base_rate))
+        surprisal = -_math.log2(p)
+    elif resolution == "REFUTED":
+        # Surprisal of this refutation (= confirmation was expected)
+        p = max(0.01, min(0.99, 1.0 - base_rate))
+        surprisal = -_math.log2(p)
+    else:
+        return 1.0
+
+    # Normalize: surprisal of a coin flip (p=0.5) = 1 bit → weight 1.0
+    weight = surprisal / 1.0  # 1 bit baseline
+
+    return max(0.5, min(2.0, weight))
+
+
 def compute_effective_trust(topic: dict, source_name: str) -> float:
     """
-    Compute Bayesian-updated trust for a source.
+    Compute Bayesian-updated trust for a source with surprisal-weighted LRs.
 
     prior = base_trust (from SOURCE_TRUST)
     For each resolution involving this source:
-        if CONFIRMED:  likelihood_ratio *= 1.2
-        if REFUTED:    likelihood_ratio *= 0.7
-        if PARTIAL:    likelihood_ratio *= 0.9
+        if CONFIRMED:  lr *= base_lr_hit ^ surprisal_weight
+        if REFUTED:    lr *= base_lr_miss ^ surprisal_weight
+        if PARTIAL:    lr *= 0.9
+
+    surprisal_weight: a correctly predicted surprising claim (low domain base
+    rate) gives MORE trust credit than a correctly predicted expected claim.
+    This prevents "oil goes up in a war" from earning the same trust boost
+    as "Iran will release hostages by Tuesday."
+
     posterior = prior * LR / (prior * LR + (1 - prior))
     Clamped to [0.05, 0.99].
     """
     topic = _ensure_calibration(topic)
+    evidence_log = topic.get("evidenceLog", [])
 
     prior = _get_source_trust(source_name)
     lr = 1.0  # cumulative likelihood ratio
 
-    lr_map = {"CONFIRMED": 1.2, "REFUTED": 0.7, "PARTIAL": 0.9}
+    base_lr = {"CONFIRMED": 1.2, "REFUTED": 0.7, "PARTIAL": 0.9}
+    domain_rates = _compute_domain_base_rates(topic)
 
     for record in topic["sourceCalibration"]["ledger"]:
         # Skip flagged same-source entries
@@ -299,8 +388,27 @@ def compute_effective_trust(topic: dict, source_name: str) -> float:
         record_sources = extract_sources(record.get("source", ""))
         if source_name in record_sources or source_name == record.get("source", ""):
             resolution = record.get("resolution", "")
-            if resolution in lr_map:
-                lr *= lr_map[resolution]
+            if resolution not in base_lr:
+                continue
+
+            if resolution == "PARTIAL":
+                lr *= base_lr["PARTIAL"]
+                continue
+
+            # Get the domain tag for surprisal weighting
+            tag = ""
+            ev_idx = record.get("evidence_index")
+            if ev_idx is not None and 0 <= ev_idx < len(evidence_log):
+                tag = evidence_log[ev_idx].get("tag", "")
+
+            if tag and tag in domain_rates:
+                sw = _surprisal_weight(domain_rates[tag], resolution)
+            else:
+                sw = 1.0  # no base rate data → neutral weight
+
+            # Apply: LR = base_lr ^ surprisal_weight
+            import math as _math
+            lr *= _math.pow(base_lr[resolution], sw)
 
     posterior = (prior * lr) / (prior * lr + (1.0 - prior))
     return max(0.05, min(0.99, round(posterior, 4)))
