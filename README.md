@@ -87,9 +87,13 @@ When the upstream topic's posteriors drift beyond the assumed values, the downst
 
 ### Loom Integration
 
-The system is designed to be operated through [A Shadow Loom](https://github.com/lastnpcalex/a-shadow-loom) — a tree-branching conversation interface where every chat is a directed graph, not a linear thread. The mirror dashboard embeds in the loom as a persistent panel. When you see a drift alert or a triage result that needs investigation, you branch into a conversation with Claude Code that has the full NROL engine loaded.
+The system is designed to be operated through [A Shadow Loom](https://github.com/lastnpcalex/a-shadow-loom) — a tree-branching conversation interface where every chat is a directed graph, not a linear thread. The mirror dashboard embeds in the loom as a persistent canvas panel. When you see a drift alert or a triage result that needs investigation, you branch into a conversation with Claude Code that has the full NROL engine loaded.
 
-The tree structure maps to analytical branching: explore "what if we fire this indicator" on one branch and "what if we hold" on another. Each branch preserves the reasoning. The topic's posteriorHistory is linear, but the loom captures the *deliberation* that produced it — the part no other system preserves.
+The `loom/` directory contains a standalone canvas deployment — copy it into your Claude Code project's `canvas/` folder. The canvas renders the dashboard and mirror views in-browser, and uses the Canvas SDK (`Loom.send()`) to send triage results, URLs, and social media posts directly to Claude for full pipeline processing. No `server.py` required.
+
+The pipeline is governor-enforced end-to-end: paste a URL → Claude fetches content → triages against active topics → looks up source trust via the 5-tier calibration chain → logs evidence → updates posteriors → calibrates source trust → writes an activity log entry. The canvas auto-refreshes. See [`LOOM.md`](LOOM.md) for architecture details, setup instructions, and the trigger template system.
+
+The tree structure maps to analytical branching: explore “what if we fire this indicator” on one branch and “what if we hold” on another. Each branch preserves the reasoning. The topic's posteriorHistory is linear, but the loom captures the *deliberation* that produced it — the part no other system preserves.
 
 The mirror is the read surface (what does the system know). The loom is the write surface (what should we do about it).
 
@@ -513,6 +517,20 @@ The longitudinal surface — how your beliefs have actually evolved across all t
 - **Dependency graph**: upstream/downstream edges with stale edge highlighting and drift magnitude
 
 Auto-refreshes every 60 seconds.
+
+### Loom Canvas (`loom/`)
+
+Standalone version of both dashboards that runs inside [A Shadow Loom](https://github.com/lastnpcalex/a-shadow-loom)'s canvas iframe. No server required. Reads topic state from local JSON files and uses the Canvas SDK to send triage results directly to Claude for processing.
+
+Additional features over the server dashboards:
+
+- **URL pipeline**: paste a URL into the triage input, it's sent to Claude who fetches, triages, logs evidence, and updates posteriors automatically
+- **Social media routing**: Twitter/X, Bluesky, Reddit, YouTube links are detected and routed through a platform-aware trigger with appropriate source trust handling
+- **Evidence drop zone**: drag files or screenshots onto the mirror page for processing
+- **Activity feed**: real-time audit trail of all pipeline actions (evidence logged, posteriors shifted, sources calibrated)
+- **Governor-enforced triggers**: prompt templates in `loom/triggers/` that enforce the 5-tier trust chain, rhetoric-vs-evidence lint, and claim lifecycle weights
+
+Setup: `cp -r loom/* canvas/` then copy topic files and `sources/source_db.json` into the canvas. See [`LOOM.md`](LOOM.md).
 
 ### API Endpoints
 

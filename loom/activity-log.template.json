@@ -1,0 +1,19 @@
+{
+  "_schema": "NROL-AO Activity Log — written by Claude, rendered by canvas",
+  "_setup": "Copy this file to activity-log.json before first use: cp activity-log.template.json activity-log.json",
+  "_fields": {
+    "id": "Unique entry ID (timestamp-based)",
+    "timestamp": "ISO 8601",
+    "type": "TRIAGE | EVIDENCE_LOGGED | SOURCE_CALIBRATED | POSTERIOR_UPDATE | INDICATOR_FIRED",
+    "headline": "Original headline or link text",
+    "source": "Source name if identified",
+    "sourceTrust": "{ trust, origin, domain, domainTrust } — from framework trust chain, never LLM-estimated",
+    "triageResult": "{ top_action, matches[] }",
+    "evidenceEntry": "{ tag, text, provenance, claimState, effectiveWeight }",
+    "posteriorDelta": "{ topic, before: {H1..}, after: {H1..} }",
+    "calibrationDelta": "{ source, before, after, resolution }",
+    "topicSlugs": "Array of affected topic slugs",
+    "notes": "Free-text analyst notes"
+  },
+  "entries": []
+}

@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NROL-αΩ MIRROR</title>
+<style>
+  :root {
+    --bg: #0a0e17; --surface: #111827; --surface2: #1e293b;
+    --border: #334155; --text: #e2e8f0; --dim: #94a3b8; --accent: #3b82f6;
+    --red: #ef4444; --amber: #f59e0b; --green: #22c55e; --cyan: #06b6d4;
+    --purple: #8b5cf6;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'JetBrains Mono', 'Cascadia Code', 'Fira Code', monospace; font-size: 13px; line-height: 1.5; }
+
+  .header { background: linear-gradient(135deg, #1a1a2e, #16213e); border-bottom: 2px solid var(--purple); padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+  .header-left { display: flex; align-items: center; gap: 14px; }
+  .header-left .logo { width: 48px; height: 48px; border-radius: 50%; border: 1px solid var(--purple); object-fit: cover; }
+  .header-left h1 { font-size: 16px; letter-spacing: 2px; color: var(--purple); }
+  .header-left .subtitle { font-size: 11px; color: var(--dim); letter-spacing: 1px; margin-top: 2px; }
+  .nav-links { display: flex; gap: 12px; }
+  .nav-links a { color: var(--dim); text-decoration: none; font-size: 11px; letter-spacing: 1px; padding: 4px 12px; border: 1px solid var(--border); border-radius: 4px; }
+  .nav-links a:hover, .nav-links a.active { color: var(--text); border-color: var(--purple); }
+
+  .container { max-width: 1400px; margin: 0 auto; padding: 16px 24px; }
+
+  /* Triage Panel */
+  .triage-panel { background: var(--surface); border: 2px solid var(--purple); border-radius: 6px; padding: 16px; margin-bottom: 16px; }
+  .triage-panel h2 { font-size: 11px; letter-spacing: 2px; color: var(--purple); margin-bottom: 12px; text-transform: uppercase; }
+  .triage-input { display: flex; gap: 8px; margin-bottom: 12px; }
+  .triage-input input { flex: 1; background: var(--surface2); border: 1px solid var(--border); color: var(--text); padding: 8px 12px; border-radius: 4px; font-family: inherit; font-size: 13px; }
+  .triage-input input:focus { outline: none; border-color: var(--purple); }
+  .triage-input input::placeholder { color: #475569; }
+  .triage-btn { background: var(--purple); border: none; color: #fff; padding: 8px 20px; border-radius: 4px; cursor: pointer; font-family: inherit; font-size: 12px; font-weight: bold; letter-spacing: 1px; }
+  .triage-btn:hover { opacity: 0.9; }
+  .triage-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+  .triage-result { display: none; }
+  .triage-summary { font-size: 14px; font-weight: bold; padding: 8px 0; }
+  .triage-match { background: var(--surface2); border-radius: 4px; padding: 10px; margin-top: 8px; border-left: 3px solid var(--border); }
+  .triage-match.UPDATE_CYCLE { border-left-color: var(--red); }
+  .triage-match.LOG_EVIDENCE { border-left-color: var(--amber); }
+  .triage-match.MONITOR { border-left-color: var(--cyan); }
+  .triage-match.REVIEW { border-left-color: var(--purple); }
+  .triage-action { display: inline-block; padding: 1px 8px; border-radius: 3px; font-size: 10px; font-weight: bold; letter-spacing: 1px; }
+  .triage-action.UPDATE_CYCLE { background: var(--red); color: #fff; }
+  .triage-action.LOG_EVIDENCE { background: var(--amber); color: #000; }
+  .triage-action.MONITOR { background: var(--cyan); color: #000; }
+  .triage-action.REVIEW { background: var(--purple); color: #fff; }
+  .triage-action.IGNORE { background: var(--dim); color: #000; }
+  .triage-effects { font-size: 11px; color: var(--amber); margin-top: 4px; }
+  .triage-deps { font-size: 11px; color: var(--cyan); margin-top: 4px; }
+
+  /* Overview Grid */
+  .overview-grid { display: grid; grid-template-columns: 1fr; gap: 8px; margin-bottom: 16px; }
+  .topic-row { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 12px 16px; display: grid; grid-template-columns: 200px 1fr 100px 100px 80px; align-items: center; gap: 12px; cursor: pointer; transition: border-color 0.2s; }
+  .topic-row:hover { border-color: var(--accent); }
+  .topic-row .name { font-weight: bold; font-size: 12px; }
+  .topic-row .question { font-size: 10px; color: var(--dim); margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .topic-row .mini-bar { display: flex; height: 20px; border-radius: 3px; overflow: hidden; }
+  .topic-row .mini-bar div { display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: bold; color: #000; min-width: 0; }
+  .health-badge { display: inline-block; padding: 2px 8px; border-radius: 3px; font-size: 10px; font-weight: bold; letter-spacing: 1px; }
+  .health-badge.HEALTHY { background: var(--green); color: #000; }
+  .health-badge.DEGRADED { background: var(--amber); color: #000; }
+  .health-badge.CRITICAL { background: var(--red); color: #fff; }
+  .rt-badge { display: inline-block; padding: 2px 8px; border-radius: 3px; font-size: 10px; font-weight: bold; }
+  .rt-badge.SAFE { background: rgba(34,197,94,0.15); color: var(--green); }
+  .rt-badge.ELASTIC { background: rgba(6,182,212,0.15); color: var(--cyan); }
+  .rt-badge.DANGEROUS { background: rgba(245,158,11,0.15); color: var(--amber); }
+  .rt-badge.RUNAWAY { background: rgba(239,68,68,0.15); color: var(--red); }
+  .stale-dep { font-size: 10px; color: var(--amber); }
+
+  /* Panels */
+  .panel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .panel { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 16px; }
+  .panel h2 { font-size: 11px; letter-spacing: 2px; color: var(--accent); margin-bottom: 12px; text-transform: uppercase; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+  .panel.full-width { grid-column: 1 / -1; }
+
+  /* Trajectory Charts */
+  .trajectory-topic { margin-bottom: 16px; }
+  .trajectory-topic h3 { font-size: 12px; color: var(--cyan); margin-bottom: 4px; }
+  .trajectory-chart { position: relative; height: 150px; }
+  .trajectory-chart canvas { width: 100% !important; height: 100% !important; }
+
+  /* Dependency Graph */
+  .dep-edge { font-size: 11px; padding: 6px 0; border-bottom: 1px solid rgba(51,65,85,0.3); }
+  .dep-edge:last-child { border: none; }
+  .dep-stale { color: var(--amber); }
+  .dep-ok { color: var(--dim); }
+
+  /* Drift Alerts */
+  .drift-alert { background: rgba(245,158,11,0.08); border: 1px solid var(--amber); border-radius: 4px; padding: 10px; margin-bottom: 8px; }
+  .drift-alert .title { color: var(--amber); font-weight: bold; font-size: 12px; }
+  .drift-alert .detail { font-size: 11px; color: var(--dim); margin-top: 4px; }
+
+  /* Calibration */
+  .cal-pending { text-align: center; padding: 24px; color: var(--dim); }
+
+  /* Activity Feed */
+  .activity-feed { max-height: 500px; overflow-y: auto; }
+  .activity-entry { background: var(--surface2); border-radius: 4px; padding: 10px; margin-bottom: 8px; border-left: 3px solid var(--border); }
+  .activity-entry.TRIAGE { border-left-color: var(--purple); }
+  .activity-entry.EVIDENCE_LOGGED { border-left-color: var(--amber); }
+  .activity-entry.SOURCE_CALIBRATED { border-left-color: var(--cyan); }
+  .activity-entry.POSTERIOR_UPDATE { border-left-color: var(--green); }
+  .activity-entry.INDICATOR_FIRED { border-left-color: var(--red); }
+  .activity-type { display: inline-block; padding: 1px 8px; border-radius: 3px; font-size: 10px; font-weight: bold; letter-spacing: 1px; }
+  .activity-type.TRIAGE { background: var(--purple); color: #fff; }
+  .activity-type.EVIDENCE_LOGGED { background: var(--amber); color: #000; }
+  .activity-type.SOURCE_CALIBRATED { background: var(--cyan); color: #000; }
+  .activity-type.POSTERIOR_UPDATE { background: var(--green); color: #000; }
+  .activity-type.INDICATOR_FIRED { background: var(--red); color: #fff; }
+  .activity-time { color: var(--dim); font-size: 10px; margin-left: 8px; }
+  .activity-headline { font-size: 12px; margin-top: 4px; }
+  .activity-source { font-size: 11px; color: var(--cyan); margin-top: 2px; }
+  .activity-topics { font-size: 10px; color: var(--dim); margin-top: 4px; }
+  .activity-delta { font-size: 11px; margin-top: 4px; padding: 4px 8px; background: rgba(255,255,255,0.03); border-radius: 3px; }
+  .activity-notes { font-size: 11px; color: var(--dim); font-style: italic; margin-top: 4px; }
+  .trust-bar { display: inline-block; height: 8px; border-radius: 2px; margin-left: 4px; vertical-align: middle; }
+  .trust-label { font-size: 10px; }
+
+  /* Drop Zone */
+  .drop-zone { border: 2px dashed rgba(139,92,246,0.3); border-radius: 6px; padding: 20px; text-align: center; color: var(--dim); font-size: 12px; margin-bottom: 16px; transition: 0.2s; cursor: pointer; }
+  .drop-zone.loom-dragover { border-color: var(--purple); background: rgba(139,92,246,0.05); color: var(--purple); }
+  .drop-zone-label { font-size: 10px; letter-spacing: 1px; color: var(--purple); margin-bottom: 4px; }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .panel-grid { grid-template-columns: 1fr; }
+    .topic-row { grid-template-columns: 1fr; }
+  }
+</style>
+<script src="/static/canvas-sdk.js"></script>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <img src="NROLAO.svg" alt="NROL-αΩ" class="logo">
+    <div>
+    <h1>NROL-αΩ MIRROR</h1>
+    <div class="subtitle">EPISTEMIC OPERATING SYSTEM</div>
+    </div>
+  </div>
+  <div class="nav-links">
+    <a href="index.html">TOPIC VIEW</a>
+    <a href="mirror.html" class="active">MIRROR</a>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- TRIAGE -->
+  <div class="triage-panel">
+    <h2>NEWS TRIAGE</h2>
+    <div class="triage-input">
+      <input type="text" id="triageHeadline" placeholder="Paste a headline or news item..." onkeydown="if(event.key==='Enter')runTriage()">
+      <input type="text" id="triageSource" placeholder="Source (optional)" style="max-width:160px;" onkeydown="if(event.key==='Enter')runTriage()">
+      <button class="triage-btn" id="triageBtn" onclick="runTriage()">TRIAGE</button>
+    </div>
+    <div class="triage-result" id="triageResult"></div>
+  </div>
+
+  <!-- DROP ZONE -->
+  <div id="dropZone" class="drop-zone">
+    <div class="drop-zone-label">EVIDENCE DROP</div>
+    Drop files, screenshots, or documents here — Claude will triage, assess source, and log evidence
+  </div>
+
+  <!-- CROSS-TOPIC OVERVIEW -->
+  <div style="margin-bottom:8px;">
+    <h2 style="font-size:11px;letter-spacing:2px;color:var(--accent);">ACTIVE TOPICS</h2>
+  </div>
+  <div class="overview-grid" id="overviewGrid">
+    <div style="color:var(--dim);padding:16px;">Loading...</div>
+  </div>
+
+  <!-- DRIFT ALERTS -->
+  <div id="driftAlerts"></div>
+
+  <div class="panel-grid">
+    <!-- TRAJECTORIES -->
+    <div class="panel full-width">
+      <h2>Posterior Trajectories</h2>
+      <div id="trajectories">
+        <div style="color:var(--dim);padding:16px;">Loading...</div>
+      </div>
+    </div>
+
+    <!-- DEPENDENCY GRAPH -->
+    <div class="panel">
+      <h2>Dependency Graph</h2>
+      <div id="depGraph">
+        <div style="color:var(--dim);padding:8px;">Loading...</div>
+      </div>
+    </div>
+
+    <!-- CALIBRATION -->
+    <div class="panel">
+      <h2>Calibration Status</h2>
+      <div id="calibration">
+        <div class="cal-pending">Awaiting resolved topics for Brier scoring</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACTIVITY FEED -->
+  <div class="panel-grid">
+    <div class="panel full-width">
+      <h2>Activity Feed <span style="font-size:9px;color:var(--dim);letter-spacing:0;text-transform:none;font-weight:normal;">— pipeline updates from Claude</span></h2>
+      <div id="activityFeed" class="activity-feed">
+        <div style="color:var(--dim);padding:16px;text-align:center;font-size:12px;">
+          No activity yet. Paste a headline above or send a link in chat to start the pipeline.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+let overviewData = null;
+let trajData = null;
+let depData = null;
+
+// --- Standalone topic index ---
+const TOPIC_SLUGS = [
+  "calibration-750gev-diphoton",
+  "calibration-fed-rate-2026",
+  "calibration-houthi-posture",
+  "calibration-lk99-superconductor",
+  "calibration-midterms-2026",
+  "calibration-rtsc-replication",
+  "calibration-scs-kinetic",
+  "calibration-section122-tariffs",
+  "calibration-ukraine-ceasefire",
+  "calibration-us-recession-2026",
+];
+
+async function loadAllTopics() {
+  const topics = [];
+  for (const slug of TOPIC_SLUGS) {
+    try {
+      const res = await fetch(`topics/${slug}.json?` + Date.now());
+      const d = await res.json();
+      topics.push(d);
+    } catch(e) { console.warn('Failed to load', slug, e); }
+  }
+  return topics;
+}
+
+// --- DATA LOADING ---
+async function loadAll() {
+  const topics = await loadAllTopics();
+
+  // Build overview from topic files
+  overviewData = { topics: topics.map(d => {
+    const m = d.meta;
+    const posteriors = {};
+    for (const [k, v] of Object.entries(d.model.hypotheses)) posteriors[k] = v.posterior;
+    return {
+      slug: m.slug, title: m.title, question: m.question || '',
+      classification: m.classification || 'ROUTINE', status: m.status,
+      lastUpdated: m.lastUpdated, posteriors,
+      health: 'HEALTHY', rt: {}, staleDependencies: 0, downstreamAlerts: []
+    };
+  })};
+  renderOverview();
+  renderDriftAlerts();
+
+  // Build trajectories from posteriorHistory
+  const trajectories = {};
+  for (const d of topics) {
+    const history = d.model.posteriorHistory || [];
+    if (history.length < 2) continue;
+    const hLabels = {};
+    for (const [k, v] of Object.entries(d.model.hypotheses)) hLabels[k] = v.label;
+    trajectories[d.meta.slug] = { title: d.meta.title, history, hypothesis_labels: hLabels };
+  }
+  trajData = { trajectories };
+  renderTrajectories();
+
+  // Build dependencies
+  const edges = []; const stale_edges = [];
+  for (const d of topics) {
+    const deps = d.dependencies?.upstream || [];
+    for (const dep of deps) {
+      edges.push({ from: dep.slug, to: d.meta.slug, assumptions: dep.assumptions || {} });
+    }
+  }
+  depData = { edges, stale_edges };
+  renderDepGraph();
+}
+
+// --- TRIAGE (client-side port of framework/triage.py) ---
+let _allTopics = [];
+
+const TRIAGE_STOPWORDS = new Set([
+  "must","will","that","this","with","from","have","been","were","their",
+  "about","would","could","should","into","more","than","also","other",
+  "some","each","which","when","where","what","action","signal",
+  "observable","verified","indicator","near","certain","strong","clear"
+]);
+const KEYWORD_GENERIC = new Set([
+  "what","will","when","does","this","that","with","from","have","been",
+  "their","about","would","could","specific","measurable","rate","price",
+  "current","value","units","baseline","status","active","routine",
+  "before","after","since","until","during","between","latest","today"
+]);
+
+function extractWords(text, minLen=4) {
+  return new Set((text.toLowerCase().match(/\b\w{4,}\b/g) || []).filter(w => true));
+}
+function extractWords3(text) {
+  return new Set((text.toLowerCase().match(/\b\w{3,}\b/g) || []));
+}
+function setIntersection(a, b) { return new Set([...a].filter(x => b.has(x))); }
+function setDifference(a, b) { return new Set([...a].filter(x => !b.has(x))); }
+
+function matchIndicators(headlineLower, headlineWords, topic) {
+  const matches = [];
+  const tiers = topic.indicators?.tiers || {};
+  for (const [tierKey, indicators] of Object.entries(tiers)) {
+    for (const ind of indicators) {
+      const desc = (ind.desc || "").toLowerCase();
+      let descWords = extractWords(desc);
+      descWords = setDifference(descWords, TRIAGE_STOPWORDS);
+      if (descWords.size === 0) continue;
+
+      const overlap = setIntersection(headlineWords, descWords);
+      const score = overlap.size / descWords.size;
+      const phraseMatch = checkPhraseMatch(headlineLower, desc);
+
+      if (score >= 0.35 || phraseMatch) {
+        matches.push({
+          id: ind.id || "", tier: tierKey, desc: ind.desc || "",
+          posterior_effect: ind.posteriorEffect || "",
+          current_status: ind.status || "NOT_FIRED",
+          match_score: Math.round(score * 1000) / 1000,
+          matched_words: [...overlap].sort(), phrase_match: phraseMatch,
+        });
+      }
+    }
+  }
+  matches.sort((a, b) => b.match_score - a.match_score);
+  return matches;
+}
+
+function checkPhraseMatch(headline, description) {
+  const words = description.split(/\s+/);
+  for (let i = 0; i < words.length - 1; i++) {
+    const a = words[i], b = words[i + 1];
+    if (a.length > 3 && b.length > 3) {
+      const bigram = (a + " " + b).replace(/[^\w\s]/g, "");
+      if (bigram && headline.includes(bigram)) return true;
+    }
+  }
+  return false;
+}
+
+function matchWatchpoints(headlineLower, headlineWords, topic) {
+  const matches = [];
+  for (const wp of (topic.watchpoints || [])) {
+    const event = (typeof wp === "string" ? wp : wp.event || "").toLowerCase();
+    const watch = (typeof wp === "string" ? "" : wp.watch || "").toLowerCase();
+    const combined = event + " " + watch;
+    const eventWords = extractWords(combined);
+    const overlap = setIntersection(headlineWords, eventWords);
+    if (overlap.size >= 2) {
+      matches.push({
+        event: typeof wp === "string" ? wp : wp.event || "",
+        watch: typeof wp === "string" ? "" : wp.watch || "",
+        matched_words: [...overlap].sort(),
+      });
+    }
+  }
+  return matches;
+}
+
+function matchKeywords(headlineLower, headlineWords, topic) {
+  const sources = [];
+  const meta = topic.meta || {};
+  sources.push(meta.title || "", meta.question || "");
+  for (const h of Object.values(topic.model?.hypotheses || {})) sources.push(h.label || "");
+  for (const a of Object.values(topic.actorModel?.actors || {})) sources.push(a.name || "");
+  for (const sq of (topic.searchQueries || [])) sources.push(sq);
+  for (const f of Object.values(topic.dataFeeds || {})) sources.push(f.label || "");
+
+  const allKw = new Set();
+  for (const src of sources) {
+    const words = setDifference(extractWords(src), KEYWORD_GENERIC);
+    for (const w of words) allKw.add(w);
+  }
+  return [...setIntersection(headlineWords, allKw)].sort();
+}
+
+function triageTopic(headline, source, topic) {
+  const slug = topic.meta?.slug || "";
+  const title = topic.meta?.title || slug;
+  const headlineLower = headline.toLowerCase();
+  const headlineWords = extractWords(headlineLower);
+
+  const indicatorMatches = matchIndicators(headlineLower, headlineWords, topic);
+  const watchpointMatches = matchWatchpoints(headlineLower, headlineWords, topic);
+  const keywordMatches = matchKeywords(headlineLower, headlineWords, topic);
+
+  let relevance;
+  if (indicatorMatches.length) relevance = "INDICATOR_MATCH";
+  else if (watchpointMatches.length || keywordMatches.length >= 3) relevance = "TOPIC_RELEVANT";
+  else if (keywordMatches.length >= 2) relevance = "TOPIC_RELEVANT";
+  else relevance = "IRRELEVANT";
+
+  if (relevance === "IRRELEVANT")
+    return { slug, title, relevance: "IRRELEVANT", action: "IGNORE",
+             indicator_matches: [], watchpoint_matches: [], keyword_matches: [] };
+
+  let action;
+  if (indicatorMatches.length) {
+    const hasTier1 = indicatorMatches.some(m => m.tier === "tier1_critical");
+    const hasTier2 = indicatorMatches.some(m => m.tier === "tier2_strong");
+    action = (hasTier1 || hasTier2) ? "UPDATE_CYCLE" : "LOG_EVIDENCE";
+  } else if (watchpointMatches.length) {
+    action = "MONITOR";
+  } else {
+    action = "REVIEW";
+  }
+
+  const pre_committed = indicatorMatches.map(m => ({
+    indicator_id: m.id, tier: m.tier, posterior_effect: m.posterior_effect,
+    status: m.current_status,
+  }));
+
+  // Explanation
+  const parts = [];
+  if (relevance === "INDICATOR_MATCH") {
+    const ind = indicatorMatches[0];
+    parts.push(`Matches indicator ${ind.id} (${ind.tier.replace(/_/g, ' ')})`);
+    if (ind.current_status === "FIRED") parts.push("(already fired)");
+    else if (ind.current_status === "PARTIAL") parts.push("(partially confirmed)");
+    else parts.push(`Pre-committed effect: ${ind.posterior_effect}`);
+  } else {
+    if (watchpointMatches.length) parts.push(`Matches watchpoint: ${watchpointMatches[0].event}`);
+    if (keywordMatches.length) parts.push(`Domain keywords: ${keywordMatches.slice(0, 5).join(', ')}`);
+    parts.push("No pre-registered indicator match — review for new indicator or evidence");
+  }
+  const explanation = parts.join(". ") + ".";
+
+  return {
+    slug, title, relevance, action,
+    indicator_matches: indicatorMatches,
+    watchpoint_matches: watchpointMatches,
+    keyword_matches: keywordMatches,
+    rt_status: {}, source_trust: null,
+    pre_committed_effects: pre_committed,
+    dependency_implications: [],
+    explanation,
+  };
+}
+
+function isUrl(str) {
+  return /^https?:\/\//i.test(str) || /^www\./i.test(str);
+}
+
+function detectPlatform(url) {
+  const u = url.toLowerCase();
+  if (/\b(x\.com|twitter\.com|nitter\.)/.test(u)) return 'twitter';
+  if (/\bbsky\.app\b/.test(u)) return 'bluesky';
+  if (/\b(reddit\.com|old\.reddit\.com)\b/.test(u)) return 'reddit';
+  if (/\b(youtube\.com|youtu\.be)\b/.test(u)) return 'youtube';
+  if (/\bthreads\.net\b/.test(u)) return 'threads';
+  if (/\bmastodon\.|\/\@\w+$/.test(u)) return 'mastodon';
+  if (/\bt\.me\//.test(u)) return 'telegram';
+  return null; // not social media
+}
+
+async function runTriage() {
+  const headline = document.getElementById('triageHeadline').value.trim();
+  const source = document.getElementById('triageSource').value.trim() || null;
+  if (!headline) return;
+
+  const btn = document.getElementById('triageBtn');
+  btn.disabled = true;
+
+  // --- URL DETECTED: route to appropriate trigger ---
+  if (isUrl(headline)) {
+    const platform = detectPlatform(headline);
+    const isSocial = platform !== null;
+    const triggerName = isSocial ? 'social-post' : 'pipeline';
+    const label = isSocial ? platform.toUpperCase() + ' POST' : 'URL';
+
+    btn.textContent = 'SENDING...';
+    try {
+      const vars = isSocial
+        ? { headline, source: source || 'auto-detect from post', platform }
+        : {
+            headline,
+            source: source || 'auto-detect from URL',
+            triageJson: JSON.stringify({
+              top_action: 'URL_FETCH',
+              url: headline,
+              note: 'URL detected — client-side triage skipped. Claude should fetch content, extract headline/source, then run full triage + pipeline.',
+              matches: [],
+            }, null, 2),
+          };
+      const prompt = await Loom.loadTrigger(triggerName, vars);
+      Loom.send(prompt);
+      btn.textContent = 'SENT';
+      btn.style.background = 'var(--green)';
+      btn.style.color = '#000';
+      // Show status
+      const el = document.getElementById('triageResult');
+      el.style.display = 'block';
+      const steps = isSocial
+        ? `Claude is fetching ${platform} post → extracting claim → assessing source trust → triaging → logging evidence → updating posteriors`
+        : 'Claude is fetching content → extracting headline → triaging → assessing source → logging evidence → updating posteriors';
+      el.innerHTML = `<div style="padding:10px;background:rgba(139,92,246,0.08);border:1px solid var(--purple);border-radius:4px;">
+        <div style="color:var(--purple);font-size:11px;font-weight:bold;letter-spacing:1px;">${label} SENT TO PIPELINE</div>
+        <div style="font-size:12px;margin-top:4px;"><code>${escapeHtml(headline)}</code></div>
+        ${isSocial ? `<div style="font-size:11px;color:var(--cyan);margin-top:4px;">Platform: ${platform} — using social media assessment protocol</div>` : ''}
+        <div style="font-size:11px;color:var(--dim);margin-top:4px;">${steps}</div>
+        <div style="font-size:11px;color:var(--dim);margin-top:2px;">Watch the Activity Feed below for results.</div>
+      </div>`;
+    } catch(e) {
+      console.error('URL pipeline failed:', e);
+      btn.textContent = 'FAILED';
+      btn.style.background = 'var(--red)';
+    }
+    setTimeout(() => { btn.disabled = false; btn.textContent = 'TRIAGE'; btn.style.background = ''; btn.style.color = ''; }, 3000);
+    return;
+  }
+
+  // --- HEADLINE: run client-side triage first ---
+  btn.textContent = 'TRIAGING...';
+
+  try {
+    // Load topics if not cached
+    if (!_allTopics.length) _allTopics = await loadAllTopics();
+
+    const activeTopics = _allTopics.filter(t => t.meta?.status === "ACTIVE");
+    const matches = [];
+    for (const topic of activeTopics) {
+      const result = triageTopic(headline, source, topic);
+      if (result.relevance !== "IRRELEVANT") matches.push(result);
+    }
+
+    const actionPriority = { UPDATE_CYCLE: 0, LOG_EVIDENCE: 1, MONITOR: 2, REVIEW: 3 };
+    matches.sort((a, b) => (actionPriority[a.action] ?? 99) - (actionPriority[b.action] ?? 99));
+
+    const top_action = matches.length ? matches[0].action : "IGNORE";
+    let summary;
+    if (!matches.length) summary = `No active topics matched: "${headline.slice(0, 60)}..."`;
+    else if (matches.length === 1) summary = `${matches[0].action}: "${headline.slice(0, 50)}..." → ${matches[0].slug} (${matches[0].relevance.replace(/_/g, ' ').toLowerCase()})`;
+    else summary = `${matches[0].action}: "${headline.slice(0, 50)}..." → ${matches.length} topics (${matches.slice(0, 3).map(m => m.slug).join(', ')})`;
+
+    // Look up source trust if source provided
+    let sourceTrustInfo = null;
+    if (source) {
+      // Check source_db first, then base priors
+      const dbSrc = sourceDB?.sources?.[source];
+      if (dbSrc) {
+        sourceTrustInfo = { trust: dbSrc.effectiveTrust, origin: 'source_db', domains: dbSrc.domains };
+      } else if (sourceTrust && sourceTrust[source] != null) {
+        sourceTrustInfo = { trust: sourceTrust[source], origin: 'base_prior' };
+      } else {
+        sourceTrustInfo = { trust: 0.50, origin: 'unknown_source' };
+      }
+    }
+
+    renderTriageResult({ headline, source, matches, top_action, summary, sourceTrustInfo });
+  } catch(e) {
+    console.error('Triage failed:', e);
+    document.getElementById('triageResult').innerHTML =
+      `<div style="color:var(--red);padding:8px;">Triage failed: ${e.message}</div>`;
+    document.getElementById('triageResult').style.display = 'block';
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'TRIAGE';
+  }
+}
+
+function renderTriageResult(result) {
+  const el = document.getElementById('triageResult');
+  el.style.display = 'block';
+
+  if (!result.matches || result.matches.length === 0) {
+    el.innerHTML = `
+      <div class="triage-summary" style="color:var(--dim);">
+        <span class="triage-action IGNORE">IGNORE</span>
+        No active topics matched this headline.
+      </div>`;
+    return;
+  }
+
+  let html = `<div class="triage-summary">
+    <span class="triage-action ${result.top_action}">${result.top_action}</span>
+    ${result.summary}
+  </div>`;
+
+  // Source trust display
+  if (result.source && result.sourceTrustInfo) {
+    const st = result.sourceTrustInfo;
+    const pct = (st.trust * 100).toFixed(0);
+    const col = st.trust >= 0.85 ? 'var(--green)' : st.trust >= 0.65 ? 'var(--cyan)' : st.trust >= 0.50 ? 'var(--amber)' : 'var(--red)';
+    html += `<div style="margin:6px 0;padding:6px 10px;background:var(--surface2);border-radius:4px;font-size:11px;">
+      Source: <strong>${escapeHtml(result.source)}</strong>
+      <span style="color:${col};margin-left:8px;">${pct}% trust</span>
+      <span style="display:inline-block;height:8px;width:${pct * 0.6}px;background:${col};border-radius:2px;vertical-align:middle;margin-left:4px;"></span>
+      <span style="color:var(--dim);font-size:9px;margin-left:6px;">[${st.origin}]</span>`;
+    if (st.domains) {
+      const domainParts = Object.entries(st.domains).map(([d, v]) =>
+        `${d}: ${(v.domainTrust * 100).toFixed(0)}% (${v.confirmed}/${v.claims})`
+      ).join(', ');
+      html += `<div style="font-size:10px;color:var(--dim);margin-top:2px;">Domains: ${domainParts}</div>`;
+    }
+    html += `</div>`;
+  }
+
+  for (const m of result.matches) {
+    html += `<div class="triage-match ${m.action}">
+      <div>
+        <span class="triage-action ${m.action}">${m.action}</span>
+        <strong>${m.slug}</strong>
+        <span style="color:var(--dim);font-size:11px;">${m.relevance.replace(/_/g,' ')}</span>
+      </div>
+      <div style="font-size:12px;color:var(--dim);margin-top:4px;">${m.explanation}</div>`;
+
+    if (m.pre_committed_effects && m.pre_committed_effects.length) {
+      html += '<div class="triage-effects">';
+      for (const eff of m.pre_committed_effects) {
+        const statusNote = eff.status === 'FIRED' ? ' (already fired)' :
+                           eff.status === 'PARTIAL' ? ' (partial)' : '';
+        html += `<div>Pre-committed: ${eff.indicator_id} — ${eff.posterior_effect}${statusNote}</div>`;
+      }
+      html += '</div>';
+    }
+
+    if (m.dependency_implications && m.dependency_implications.length) {
+      html += '<div class="triage-deps">';
+      for (const dep of m.dependency_implications) {
+        html += `<div>${dep.note}</div>`;
+      }
+      html += '</div>';
+    }
+
+    // R_t context
+    if (m.rt_status && m.rt_status.regime && m.rt_status.regime !== 'SAFE') {
+      html += `<div style="font-size:10px;color:var(--${m.rt_status.regime === 'RUNAWAY' ? 'red' : 'amber'});margin-top:4px;">
+        R_t: ${m.rt_status.regime} (${m.rt_status.rt?.toFixed(3) || '?'})
+      </div>`;
+    }
+
+    html += '</div>';
+  }
+
+  // Pipeline trigger — send to Claude via Loom SDK
+  if (result.matches.length > 0) {
+    const action = result.top_action;
+    const pipelineVerb = action === 'UPDATE_CYCLE' ? 'Run full update cycle'
+      : action === 'LOG_EVIDENCE' ? 'Log evidence & calibrate'
+      : action === 'MONITOR' ? 'Assess & monitor'
+      : 'Review for relevance';
+    const btnId = 'pipelineBtn_' + Date.now();
+    html += `<div style="margin-top:10px;padding:10px;background:rgba(139,92,246,0.08);border:1px solid var(--purple);border-radius:4px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <div style="color:var(--purple);font-size:11px;font-weight:bold;letter-spacing:1px;">PIPELINE READY</div>
+          <div style="font-size:11px;color:var(--dim);margin-top:2px;">fetch → assess source → log evidence → update posteriors → calibrate → activity log</div>
+        </div>
+        <button id="${btnId}" class="triage-btn" style="background:var(--purple);white-space:nowrap;"
+          onclick="runPipeline('${btnId}')">${pipelineVerb}</button>
+      </div>
+    </div>`;
+    // Stash the result for the pipeline call
+    window._lastTriageResult = result;
+  }
+
+  el.innerHTML = html;
+}
+
+// --- OVERVIEW ---
+function renderOverview() {
+  const el = document.getElementById('overviewGrid');
+  if (!overviewData || !overviewData.topics.length) {
+    el.innerHTML = '<div style="color:var(--dim);padding:16px;">No active topics.</div>';
+    return;
+  }
+
+  const palette = ['#22c55e','#06b6d4','#f59e0b','#ef4444','#8b5cf6','#ec4899','#14b8a6','#f97316'];
+
+  el.innerHTML = overviewData.topics.map(t => {
+    const hKeys = Object.keys(t.posteriors);
+    const barHtml = hKeys.map((k, i) => {
+      const pct = (t.posteriors[k] * 100).toFixed(0);
+      return `<div style="width:${pct}%;background:${palette[i % palette.length]}">${pct > 6 ? pct + '%' : ''}</div>`;
+    }).join('');
+
+    const rt = t.rt || {};
+    const staleDeps = t.staleDependencies || 0;
+    const health = t.health || '?';
+    const updated = t.lastUpdated ? t.lastUpdated.slice(0, 10) : '?';
+
+    return `
+      <div class="topic-row" onclick="window.location.href='index.html#${t.slug}'">
+        <div>
+          <div class="name">${t.title}</div>
+          <div class="question">${updated}</div>
+        </div>
+        <div class="mini-bar">${barHtml}</div>
+        <div><span class="health-badge ${health}">${health}</span></div>
+        <div><span class="rt-badge ${rt.regime || ''}">${rt.regime || '?'}</span></div>
+        <div>${staleDeps > 0 ? `<span class="stale-dep">${staleDeps} stale</span>` : '<span style="color:var(--dim);font-size:10px;">OK</span>'}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+// --- DRIFT ALERTS ---
+function renderDriftAlerts() {
+  const el = document.getElementById('driftAlerts');
+  if (!overviewData) { el.innerHTML = ''; return; }
+
+  const alerts = [];
+  for (const t of overviewData.topics) {
+    // Stale dependencies
+    if (t.staleDependencies > 0) {
+      alerts.push({
+        type: 'STALE_DEPENDENCY',
+        slug: t.slug,
+        title: t.title,
+        detail: `${t.staleDependencies} upstream assumption(s) have drifted beyond tolerance`,
+      });
+    }
+    // R_t warnings
+    const rt = t.rt || {};
+    if (rt.regime === 'DANGEROUS' || rt.regime === 'RUNAWAY') {
+      alerts.push({
+        type: 'EVIDENCE_STALE',
+        slug: t.slug,
+        title: t.title,
+        detail: `R_t is ${rt.regime} (${rt.rt?.toFixed(3) || '?'}) — evidence base is aging`,
+      });
+    }
+    // Downstream alerts
+    if (t.downstreamAlerts && t.downstreamAlerts.length) {
+      for (const da of t.downstreamAlerts) {
+        alerts.push({
+          type: 'DOWNSTREAM',
+          slug: t.slug,
+          title: t.title,
+          detail: `${da.downstream_slug} has ${da.stale_assumptions.length} stale assumption(s) from ${t.slug}`,
+        });
+      }
+    }
+  }
+
+  if (alerts.length === 0) {
+    el.innerHTML = '';
+    return;
+  }
+
+  el.innerHTML = '<div style="margin-bottom:16px;">' +
+    alerts.map(a => `
+      <div class="drift-alert">
+        <div class="title">${a.type.replace(/_/g,' ')}: ${a.title}</div>
+        <div class="detail">${a.detail}</div>
+      </div>
+    `).join('') + '</div>';
+}
+
+// --- TRAJECTORIES ---
+function renderTrajectories() {
+  const el = document.getElementById('trajectories');
+  if (!trajData || !trajData.trajectories || Object.keys(trajData.trajectories).length === 0) {
+    el.innerHTML = '<div style="color:var(--dim);">No trajectory data yet.</div>';
+    return;
+  }
+
+  el.innerHTML = '';
+  const palette = ['#22c55e','#06b6d4','#f59e0b','#ef4444','#8b5cf6','#ec4899','#14b8a6','#f97316'];
+
+  for (const [slug, data] of Object.entries(trajData.trajectories)) {
+    const history = data.history || [];
+    if (history.length < 2) continue;
+
+    const container = document.createElement('div');
+    container.className = 'trajectory-topic';
+
+    const title = document.createElement('h3');
+    title.textContent = data.title || slug;
+    container.appendChild(title);
+
+    // Legend
+    const hKeys = Object.keys(data.hypothesis_labels || {});
+    const legend = document.createElement('div');
+    legend.style.cssText = 'display:flex;gap:12px;margin-bottom:4px;font-size:10px;';
+    hKeys.forEach((k, i) => {
+      const label = data.hypothesis_labels[k] || k;
+      legend.innerHTML += `<span style="color:${palette[i % palette.length]};">${k}: ${label}</span>`;
+    });
+    container.appendChild(legend);
+
+    const chartDiv = document.createElement('div');
+    chartDiv.className = 'trajectory-chart';
+    const canvas = document.createElement('canvas');
+    chartDiv.appendChild(canvas);
+    container.appendChild(chartDiv);
+    el.appendChild(container);
+
+    // Draw after DOM insertion
+    requestAnimationFrame(() => drawTrajectory(canvas, history, hKeys, palette));
+  }
+}
+
+function drawTrajectory(canvas, history, hKeys, palette) {
+  const rect = canvas.parentElement.getBoundingClientRect();
+  if (rect.width === 0) return;
+  canvas.width = rect.width * 2;
+  canvas.height = rect.height * 2;
+  const ctx = canvas.getContext('2d');
+  ctx.scale(2, 2);
+  const W = rect.width, H = rect.height;
+  const pad = {top: 8, right: 35, bottom: 24, left: 35};
+  const cW = W - pad.left - pad.right, cH = H - pad.top - pad.bottom;
+
+  ctx.clearRect(0, 0, W, H);
+
+  // Axes
+  ctx.strokeStyle = '#334155'; ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(pad.left, pad.top);
+  ctx.lineTo(pad.left, H - pad.bottom);
+  ctx.lineTo(W - pad.right, H - pad.bottom);
+  ctx.stroke();
+
+  // Y labels
+  ctx.fillStyle = '#94a3b8'; ctx.font = '9px monospace'; ctx.textAlign = 'right';
+  for (let i = 0; i <= 4; i++) {
+    const y = pad.top + (cH * (4 - i) / 4);
+    ctx.fillText((i * 25) + '%', pad.left - 4, y + 3);
+    ctx.strokeStyle = 'rgba(51,65,85,0.3)';
+    ctx.beginPath(); ctx.moveTo(pad.left, y); ctx.lineTo(W - pad.right, y); ctx.stroke();
+  }
+
+  // X labels
+  ctx.textAlign = 'center';
+  const step = Math.max(1, Math.floor(history.length / 6));
+  for (let i = 0; i < history.length; i += step) {
+    const x = pad.left + (i / Math.max(1, history.length - 1)) * cW;
+    const label = history[i].date ? history[i].date.slice(5) : '';
+    ctx.fillText(label, x, H - pad.bottom + 12);
+  }
+
+  // Lines
+  function getVal(entry, key) {
+    if (entry[key] != null) return entry[key];
+    if (entry.posteriors && entry.posteriors[key] != null) return entry.posteriors[key];
+    return 0;
+  }
+
+  hKeys.forEach((k, idx) => {
+    ctx.strokeStyle = palette[idx % palette.length]; ctx.lineWidth = 1.5; ctx.beginPath();
+    for (let i = 0; i < history.length; i++) {
+      const x = pad.left + (i / Math.max(1, history.length - 1)) * cW;
+      const val = getVal(history[i], k);
+      const y = pad.top + cH * (1 - val);
+      if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+
+    // End label
+    const lastVal = getVal(history[history.length - 1], k);
+    const lastY = pad.top + cH * (1 - lastVal);
+    ctx.fillStyle = palette[idx % palette.length]; ctx.textAlign = 'left'; ctx.font = 'bold 9px monospace';
+    ctx.fillText(`${k} ${(lastVal*100).toFixed(0)}%`, W - pad.right + 2, lastY + 3);
+    ctx.fillStyle = '#94a3b8'; ctx.font = '9px monospace';
+  });
+}
+
+// --- DEPENDENCY GRAPH ---
+function renderDepGraph() {
+  const el = document.getElementById('depGraph');
+  if (!depData || !depData.edges || depData.edges.length === 0) {
+    el.innerHTML = '<div style="color:var(--dim);font-size:12px;">No cross-topic dependencies declared yet.<br><br><span style="font-size:11px;">Add to a topic JSON:<br><code>"dependencies": {"upstream": [{"slug": "other-topic", "assumptions": {"H1": 0.20}, "tolerance": 0.08}]}</code></span></div>';
+    return;
+  }
+
+  let html = '';
+  for (const edge of depData.edges) {
+    const isStale = depData.stale_edges.some(s => s.from === edge.from && s.to === edge.to);
+    const cls = isStale ? 'dep-stale' : 'dep-ok';
+    const staleEdge = depData.stale_edges.find(s => s.from === edge.from && s.to === edge.to);
+
+    html += `<div class="dep-edge ${cls}">
+      <strong>${edge.from}</strong> → <strong>${edge.to}</strong>`;
+
+    if (staleEdge) {
+      for (const [h, d] of Object.entries(staleEdge.drift)) {
+        html += `<div style="margin-left:16px;font-size:10px;">
+          ${h}: assumed ${(d.assumed*100).toFixed(0)}%, actual ${(d.actual*100).toFixed(0)}%, drift ${(d.drift*100).toFixed(1)}pp
+        </div>`;
+      }
+    } else {
+      const assumptions = Object.entries(edge.assumptions).map(([h, v]) => `${h}=${(v*100).toFixed(0)}%`).join(', ');
+      html += `<span style="font-size:10px;color:var(--dim);margin-left:8px;">${assumptions}</span>`;
+    }
+
+    html += '</div>';
+  }
+
+  el.innerHTML = html;
+}
+
+// --- ACTIVITY FEED ---
+let activityData = null;
+let sourceDB = null;
+let sourceTrust = null;
+
+async function loadActivityFeed() {
+  try {
+    const [logRes, dbRes, trustRes] = await Promise.all([
+      fetch('activity-log.json?' + Date.now()),
+      fetch('source_db.json?' + Date.now()).catch(() => null),
+      fetch('source-trust.json?' + Date.now()).catch(() => null),
+    ]);
+    activityData = await logRes.json();
+    if (dbRes && dbRes.ok) sourceDB = await dbRes.json();
+    if (trustRes && trustRes.ok) sourceTrust = await trustRes.json();
+    renderActivityFeed();
+  } catch(e) { console.warn('Activity feed load failed:', e); }
+}
+
+function trustColor(trust) {
+  if (trust >= 0.85) return 'var(--green)';
+  if (trust >= 0.65) return 'var(--cyan)';
+  if (trust >= 0.50) return 'var(--amber)';
+  return 'var(--red)';
+}
+
+function renderActivityFeed() {
+  const el = document.getElementById('activityFeed');
+  const entries = activityData?.entries || [];
+  if (!entries.length) {
+    el.innerHTML = `<div style="color:var(--dim);padding:16px;text-align:center;font-size:12px;">
+      No activity yet. Paste a headline above or send a link in chat to start the pipeline.
+    </div>`;
+    return;
+  }
+
+  // Render newest first
+  const sorted = [...entries].reverse();
+  let html = '';
+
+  for (const e of sorted) {
+    const time = e.timestamp ? new Date(e.timestamp).toLocaleString() : '?';
+    const type = e.type || 'TRIAGE';
+
+    html += `<div class="activity-entry ${type}">`;
+    html += `<span class="activity-type ${type}">${type.replace(/_/g, ' ')}</span>`;
+    html += `<span class="activity-time">${time}</span>`;
+
+    // Headline
+    if (e.headline) {
+      html += `<div class="activity-headline">${escapeHtml(e.headline)}</div>`;
+    }
+
+    // Source + trust
+    if (e.source) {
+      const st = e.sourceTrust;
+      html += `<div class="activity-source">`;
+      html += `Source: <strong>${escapeHtml(e.source)}</strong>`;
+      if (st && st.trust != null) {
+        const pct = (st.trust * 100).toFixed(0);
+        const col = trustColor(st.trust);
+        html += ` <span class="trust-label" style="color:${col};">${pct}% trust</span>`;
+        html += `<span class="trust-bar" style="width:${pct * 0.6}px;background:${col};"></span>`;
+        if (st.domain) html += ` <span style="font-size:9px;color:var(--dim);">(${st.domain}: ${((st.domainTrust || st.trust) * 100).toFixed(0)}%)</span>`;
+        if (st.origin) html += ` <span style="font-size:9px;color:var(--dim);">[${st.origin}]</span>`;
+      }
+      html += `</div>`;
+    }
+
+    // Triage result
+    if (e.triageResult && e.triageResult.matches) {
+      for (const m of e.triageResult.matches.slice(0, 3)) {
+        html += `<div style="font-size:11px;margin-top:2px;">`;
+        html += `<span class="triage-action ${m.action}">${m.action}</span> `;
+        html += `<strong>${m.slug}</strong> `;
+        html += `<span style="color:var(--dim);">${m.relevance?.replace(/_/g, ' ').toLowerCase() || ''}</span>`;
+        if (m.explanation) html += `<div style="font-size:10px;color:var(--dim);margin-left:16px;">${escapeHtml(m.explanation)}</div>`;
+        html += `</div>`;
+      }
+    }
+
+    // Evidence entry
+    if (e.evidenceEntry) {
+      const ev = e.evidenceEntry;
+      html += `<div class="activity-delta">`;
+      if (ev.tag) html += `<span class="tag tag-${ev.tag}" style="font-size:9px;padding:1px 6px;border-radius:2px;margin-right:4px;">${ev.tag}</span>`;
+      if (ev.claimState) html += `<span style="font-size:10px;color:var(--dim);">${ev.claimState}</span> `;
+      if (ev.effectiveWeight != null) html += `<span style="font-size:10px;color:var(--dim);">w=${ev.effectiveWeight.toFixed(2)}</span>`;
+      if (ev.text) html += `<div style="font-size:11px;margin-top:2px;">${escapeHtml(ev.text.slice(0, 200))}</div>`;
+      html += `</div>`;
+    }
+
+    // Posterior delta
+    if (e.posteriorDelta) {
+      const pd = e.posteriorDelta;
+      html += `<div class="activity-delta">`;
+      html += `<span style="font-size:10px;color:var(--accent);">${pd.topic || ''} posterior shift:</span>`;
+      if (pd.before && pd.after) {
+        html += `<div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:2px;">`;
+        for (const h of Object.keys(pd.after)) {
+          const b = ((pd.before[h] || 0) * 100).toFixed(0);
+          const a = ((pd.after[h] || 0) * 100).toFixed(0);
+          const delta = a - b;
+          const arrow = delta > 0 ? '↑' : delta < 0 ? '↓' : '→';
+          const col = delta > 0 ? 'var(--green)' : delta < 0 ? 'var(--red)' : 'var(--dim)';
+          html += `<span style="font-size:11px;">${h}: ${b}%<span style="color:${col};"> ${arrow}${Math.abs(delta)}pp</span> ${a}%</span>`;
+        }
+        html += `</div>`;
+      }
+      html += `</div>`;
+    }
+
+    // Calibration delta
+    if (e.calibrationDelta) {
+      const cd = e.calibrationDelta;
+      html += `<div class="activity-delta">`;
+      html += `<span style="font-size:10px;color:var(--cyan);">Source calibration: ${escapeHtml(cd.source || '')}</span>`;
+      if (cd.before != null && cd.after != null) {
+        const delta = ((cd.after - cd.before) * 100).toFixed(1);
+        const col = cd.after > cd.before ? 'var(--green)' : 'var(--red)';
+        html += ` <span style="color:${col};font-size:11px;">${(cd.before*100).toFixed(0)}% → ${(cd.after*100).toFixed(0)}% (${delta > 0 ? '+' : ''}${delta}pp)</span>`;
+      }
+      if (cd.resolution) html += ` <span style="font-size:10px;color:var(--dim);">[${cd.resolution}]</span>`;
+      html += `</div>`;
+    }
+
+    // Topics affected
+    if (e.topicSlugs && e.topicSlugs.length) {
+      html += `<div class="activity-topics">Topics: ${e.topicSlugs.join(', ')}</div>`;
+    }
+
+    // Notes
+    if (e.notes) {
+      html += `<div class="activity-notes">${escapeHtml(e.notes)}</div>`;
+    }
+
+    html += `</div>`;
+  }
+
+  el.innerHTML = html;
+}
+
+function escapeHtml(s) {
+  if (!s) return '';
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// --- LOOM PIPELINE ---
+async function runPipeline(btnId) {
+  const btn = document.getElementById(btnId);
+  if (btn) { btn.disabled = true; btn.textContent = 'SENDING...'; }
+
+  const result = window._lastTriageResult;
+  if (!result) return;
+
+  try {
+    const prompt = await Loom.loadTrigger('pipeline', {
+      headline: result.headline || '',
+      source: result.source || 'unknown',
+      triageJson: JSON.stringify({
+        top_action: result.top_action,
+        matches: (result.matches || []).map(m => ({
+          slug: m.slug, title: m.title, action: m.action,
+          relevance: m.relevance, explanation: m.explanation,
+          indicator_matches: (m.indicator_matches || []).slice(0, 3),
+          watchpoint_matches: m.watchpoint_matches || [],
+          keyword_matches: (m.keyword_matches || []).slice(0, 8),
+        })),
+        sourceTrustInfo: result.sourceTrustInfo || null,
+      }, null, 2),
+    });
+    Loom.send(prompt);
+    if (btn) { btn.textContent = 'SENT'; btn.style.background = 'var(--green)'; btn.style.color = '#000'; }
+  } catch(e) {
+    console.error('Pipeline send failed:', e);
+    if (btn) { btn.textContent = 'FAILED'; btn.style.background = 'var(--red)'; }
+  }
+}
+
+// --- INIT ---
+loadAll();
+loadActivityFeed();
+setInterval(loadAll, 60000);
+setInterval(loadActivityFeed, 15000);
+
+// Wire up drop zone
+try {
+  const dz = document.getElementById('dropZone');
+  Loom.dropZone(dz, {
+    trigger: 'evidence-drop',
+    onDrop: (files) => {
+      dz.innerHTML = `<div class="drop-zone-label">PROCESSING</div>Uploading ${files.length} file(s)...`;
+    }
+  });
+} catch(e) { console.warn('Loom SDK not available for drop zone:', e); }
+</script>
+
+<div style="text-align:center; padding:16px 24px; color:var(--dim); font-size:10px; border-top:1px solid var(--border); margin-top:16px;">
+  NROL-αΩ MIRROR — Epistemic Operating System
+  &nbsp;|&nbsp; <em>Current Thing delenda est</em>
+</div>
+</body>
+</html>

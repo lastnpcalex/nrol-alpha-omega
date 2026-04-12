@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NROL-αΩ</title>
+<style>
+  :root {
+    --bg: #0a0e17; --surface: #111827; --surface2: #1e293b;
+    --border: #334155; --text: #e2e8f0; --dim: #94a3b8; --accent: #3b82f6;
+    --red: #ef4444; --amber: #f59e0b; --green: #22c55e; --cyan: #06b6d4;
+    --purple: #8b5cf6;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'JetBrains Mono', 'Cascadia Code', 'Fira Code', monospace; font-size: 13px; line-height: 1.5; }
+
+  /* Header */
+  .header { background: linear-gradient(135deg, #1a1a2e, #16213e); border-bottom: 2px solid var(--accent); padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+  .header-left { display: flex; align-items: center; gap: 14px; }
+  .header-left .logo { width: 48px; height: 48px; border-radius: 50%; border: 1px solid var(--accent); object-fit: cover; }
+  .header-left h1 { font-size: 16px; letter-spacing: 2px; color: var(--accent); }
+  .header-left .subtitle { font-size: 11px; color: var(--dim); letter-spacing: 1px; margin-top: 2px; }
+  .header-right { display: flex; align-items: center; gap: 12px; }
+  .topic-select { background: var(--surface2); border: 1px solid var(--border); color: var(--text); padding: 6px 12px; border-radius: 4px; font-family: inherit; font-size: 12px; cursor: pointer; }
+  .topic-select:hover { border-color: var(--accent); }
+
+  /* Topic Header */
+  .topic-header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 12px 24px; }
+  .topic-title { font-size: 18px; letter-spacing: 2px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .topic-question { color: var(--dim); font-size: 12px; margin-top: 4px; font-style: italic; }
+  .topic-meta { color: var(--dim); font-size: 11px; margin-top: 4px; display: flex; gap: 16px; flex-wrap: wrap; }
+  .classification { display: inline-block; padding: 2px 10px; border-radius: 3px; font-weight: bold; font-size: 11px; letter-spacing: 1px; }
+  .classification.ROUTINE { background: var(--green); color: #000; }
+  .classification.ELEVATED { background: var(--amber); color: #000; }
+  .classification.ALERT { background: var(--red); color: #fff; animation: pulse 1s infinite; }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.6; } }
+  .status-badge { display: inline-block; padding: 1px 8px; border-radius: 3px; font-size: 10px; letter-spacing: 1px; }
+  .status-badge.ACTIVE { background: var(--green); color: #000; }
+  .status-badge.RESOLVED { background: var(--dim); color: #000; }
+  .status-badge.SUSPENDED { background: var(--amber); color: #000; }
+
+  /* Grid */
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 16px 24px; max-width: 1400px; margin: 0 auto; }
+  .panel { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 16px; }
+  .panel h2 { font-size: 11px; letter-spacing: 2px; color: var(--accent); margin-bottom: 12px; text-transform: uppercase; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+  .full-width { grid-column: 1 / -1; }
+
+  /* Posteriors */
+  .posterior-bar { display: flex; height: 32px; border-radius: 4px; overflow: hidden; margin-bottom: 8px; }
+  .posterior-bar div { display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: bold; color: #000; transition: width 0.5s; min-width: 0; }
+  .posterior-labels { display: flex; gap: 12px; font-size: 11px; color: var(--dim); margin-bottom: 4px; flex-wrap: wrap; }
+  .posterior-labels span { display: flex; align-items: center; gap: 4px; }
+  .posterior-labels .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+  .expected { font-size: 16px; color: var(--amber); margin-top: 8px; font-weight: bold; }
+
+  /* Chart */
+  .chart-container { position: relative; height: 200px; margin-top: 12px; }
+  canvas { width: 100% !important; height: 100% !important; }
+
+  /* Sub-models */
+  .scenario-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid var(--border); }
+  .scenario-row:last-child { border: none; }
+  .scenario-label { color: var(--dim); }
+  .scenario-prob { font-weight: bold; font-size: 16px; }
+  .scenario-prob.high { color: var(--red); }
+  .submodel-section { margin-bottom: 16px; }
+  .submodel-section h3 { font-size: 11px; color: var(--cyan); letter-spacing: 1px; margin-bottom: 8px; }
+
+  /* Indicators */
+  .indicator { display: flex; align-items: flex-start; gap: 8px; padding: 5px 0; border-bottom: 1px solid rgba(51,65,85,0.5); font-size: 12px; }
+  .indicator:last-child { border: none; }
+  .ind-status { width: 10px; height: 10px; border-radius: 50%; margin-top: 4px; flex-shrink: 0; }
+  .ind-status.NOT_FIRED { background: var(--dim); }
+  .ind-status.FIRED { background: var(--red); box-shadow: 0 0 6px var(--red); }
+  .ind-status.PARTIAL { background: var(--amber); box-shadow: 0 0 6px var(--amber); }
+  .ind-tier { font-size: 10px; color: var(--accent); letter-spacing: 1px; margin-top: 8px; font-weight: bold; }
+  .ind-note { color: var(--amber); font-size: 11px; margin-left: 18px; }
+  .ind-effect { color: var(--dim); font-size: 10px; margin-left: 18px; font-style: italic; }
+
+  /* Data Feeds */
+  .feed-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
+  .feed-item { text-align: center; background: var(--surface2); border-radius: 4px; padding: 10px; }
+  .feed-item .label { font-size: 10px; color: var(--dim); letter-spacing: 1px; }
+  .feed-item .value { font-size: 18px; font-weight: bold; margin-top: 4px; }
+  .feed-item .change { font-size: 11px; margin-top: 2px; }
+  .up { color: var(--red); } .down { color: var(--green); }
+
+  /* Evidence Log */
+  .evidence-entry { padding: 6px 0; border-bottom: 1px solid rgba(51,65,85,0.5); font-size: 12px; }
+  .evidence-entry:last-child { border: none; }
+  .ev-tag { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: 10px; font-weight: bold; margin-right: 6px; }
+  .tag-EVENT { background: var(--red); color: #fff; }
+  .tag-KINETIC { background: var(--red); color: #fff; }
+  .tag-DATA { background: var(--cyan); color: #000; }
+  .tag-FORCE { background: var(--cyan); color: #000; }
+  .tag-ECON { background: var(--amber); color: #000; }
+  .tag-POLICY { background: var(--green); color: #000; }
+  .tag-DIPLO { background: var(--green); color: #000; }
+  .tag-RHETORIC { background: var(--purple); color: #fff; }
+  .tag-INTEL { background: var(--accent); color: #fff; }
+  .tag-POLL { background: #ec4899; color: #fff; }
+  .tag-SCIENTIFIC { background: #0ea5e9; color: #fff; }
+  .tag-EXPERIMENTAL { background: #14b8a6; color: #fff; }
+  .tag-TECHNICAL { background: #6366f1; color: #fff; }
+  .tag-ANALYSIS { background: #a78bfa; color: #fff; }
+  .tag-CORPORATE { background: #78716c; color: #fff; }
+  .tag-POLITICAL { background: #e11d48; color: #fff; }
+  .tag-LEGAL { background: #d97706; color: #fff; }
+  .tag-REGULATORY { background: #d97706; color: #fff; }
+  .tag-SOCIAL { background: #f472b6; color: #fff; }
+  .tag-EDITORIAL { background: var(--purple); color: #fff; }
+  .tag-FORECAST { background: var(--amber); color: #000; }
+  .tag-OSINT { background: var(--accent); color: #fff; }
+  .tag-MARKET { background: var(--amber); color: #000; }
+  .tag-ENVIRONMENTAL { background: #22c55e; color: #000; }
+  .tag-DEMOGRAPHIC { background: #94a3b8; color: #000; }
+  .tag-SIGINT { background: #dc2626; color: #fff; }
+  .tag-LEGISLATIVE { background: #d97706; color: #fff; }
+  .tag-JUDICIAL { background: #d97706; color: #fff; }
+  .tag-MISC { background: var(--dim); color: #000; }
+  .ev-time { color: var(--dim); font-size: 10px; }
+  .ev-provenance { color: var(--dim); font-size: 9px; font-style: italic; }
+  .ev-impact { display: inline-block; margin-left: 4px; font-size: 9px; padding: 0 4px; border-radius: 2px; }
+  .ev-impact.MAJOR { background: var(--red); color: #fff; }
+  .ev-impact.MODERATE { background: var(--amber); color: #000; }
+  .ev-impact.MINOR { background: var(--surface2); color: var(--dim); }
+
+  /* Actor Model */
+  .actor-card { background: var(--surface2); border-radius: 4px; padding: 10px; margin-bottom: 8px; }
+  .actor-card h3 { font-size: 12px; color: var(--cyan); margin-bottom: 6px; }
+  .actor-detail { font-size: 11px; color: var(--dim); padding: 2px 0; }
+  .actor-detail .val { color: var(--text); }
+  .actor-bias { display: inline-block; background: rgba(239,68,68,0.15); color: var(--red); padding: 1px 6px; border-radius: 3px; font-size: 10px; margin: 2px 2px 2px 0; }
+  .methodology-rule { font-size: 11px; color: var(--dim); padding: 3px 0; border-bottom: 1px solid rgba(51,65,85,0.3); }
+
+  /* Watchpoints */
+  .watchpoint { padding: 6px 0; border-bottom: 1px solid rgba(51,65,85,0.5); font-size: 12px; }
+  .watchpoint:last-child { border: none; }
+  .wp-time { color: var(--cyan); font-size: 11px; }
+
+  /* Governance */
+  .gov-health { font-size: 14px; font-weight: bold; margin-bottom: 12px; }
+  .gov-health.HEALTHY { color: var(--green); }
+  .gov-health.DEGRADED { color: var(--amber); }
+  .gov-health.CRITICAL { color: var(--red); }
+  .gov-metric { display: flex; justify-content: space-between; padding: 4px 0; font-size: 12px; border-bottom: 1px solid rgba(51,65,85,0.3); }
+  .gov-metric:last-child { border: none; }
+  .gov-metric .val { font-weight: bold; }
+  .regime-badge { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: 10px; font-weight: bold; }
+  .regime-badge.SAFE { background: var(--green); color: #000; }
+  .regime-badge.ELASTIC { background: var(--cyan); color: #000; }
+  .regime-badge.DANGEROUS { background: var(--amber); color: #000; }
+  .regime-badge.RUNAWAY { background: var(--red); color: #fff; animation: pulse 1s infinite; }
+  .entropy-bar { height: 8px; background: var(--surface2); border-radius: 4px; overflow: hidden; margin: 4px 0; }
+  .entropy-fill { height: 100%; border-radius: 4px; transition: width 0.5s; }
+  .gov-issue { font-size: 11px; color: var(--amber); padding: 3px 0; }
+  .voi-entry { font-size: 11px; padding: 3px 0; border-bottom: 1px solid rgba(51,65,85,0.2); }
+  .voi-score { display: inline-block; width: 30px; color: var(--cyan); font-weight: bold; }
+
+  /* Collapsible */
+  .collapsible-header { cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+  .collapsible-header::after { content: '\u25BC'; font-size: 10px; color: var(--dim); transition: transform 0.2s; }
+  .collapsible-header.collapsed::after { transform: rotate(-90deg); }
+  .collapsible-body { overflow: hidden; transition: max-height 0.3s; }
+  .collapsible-body.collapsed { max-height: 0 !important; }
+
+  /* Controls */
+  .btn { background: var(--surface2); border: 1px solid var(--border); color: var(--dim); padding: 4px 12px; border-radius: 4px; cursor: pointer; font-family: inherit; font-size: 11px; }
+  .btn:hover { border-color: var(--accent); color: var(--text); }
+
+  /* Empty state */
+  .empty-state { text-align: center; padding: 60px 24px; color: var(--dim); }
+  .empty-state h2 { color: var(--accent); font-size: 18px; margin-bottom: 12px; }
+
+  /* Activity Ticker */
+  .activity-ticker { max-height: 300px; overflow-y: auto; }
+  .atick { background: var(--surface2); border-radius: 4px; padding: 8px 10px; margin-bottom: 6px; border-left: 3px solid var(--border); font-size: 11px; }
+  .atick.TRIAGE { border-left-color: var(--purple); }
+  .atick.EVIDENCE_LOGGED { border-left-color: var(--amber); }
+  .atick.SOURCE_CALIBRATED { border-left-color: var(--cyan); }
+  .atick.POSTERIOR_UPDATE { border-left-color: var(--green); }
+  .atick.INDICATOR_FIRED { border-left-color: var(--red); }
+  .atick-type { display: inline-block; padding: 1px 6px; border-radius: 2px; font-size: 9px; font-weight: bold; letter-spacing: 1px; }
+  .atick-type.TRIAGE { background: var(--purple); color: #fff; }
+  .atick-type.EVIDENCE_LOGGED { background: var(--amber); color: #000; }
+  .atick-type.SOURCE_CALIBRATED { background: var(--cyan); color: #000; }
+  .atick-type.POSTERIOR_UPDATE { background: var(--green); color: #000; }
+  .atick-type.INDICATOR_FIRED { background: var(--red); color: #fff; }
+
+  /* Responsive */
+  @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } .feed-grid { grid-template-columns: repeat(2, 1fr); } }
+</style>
+<script src="/static/canvas-sdk.js"></script>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <img src="NROLAO.svg" alt="NROL-αΩ" class="logo">
+    <div>
+    <h1>NROL-αΩ</h1>
+    <div class="subtitle">NECRO RATIONALIST OPERATIONS LABORATORY</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <select class="topic-select" id="topicSelect" onchange="switchTopic(this.value)">
+      <option value="">Select topic...</option>
+    </select>
+    <a href="mirror.html" class="btn" style="text-decoration:none;letter-spacing:1px;">MIRROR</a>
+    <button class="btn" onclick="loadTopics()">REFRESH</button>
+  </div>
+</div>
+
+<div id="topicHeader" class="topic-header" style="display:none;"></div>
+
+<div id="emptyState" class="empty-state">
+  <h2>NO TOPIC SELECTED</h2>
+  <p>Select a topic from the dropdown above, or create a new topic in topics/</p>
+</div>
+
+<div id="mainGrid" class="grid" style="display:none;">
+  <!-- Posteriors -->
+  <div class="panel">
+    <h2>Posterior Distribution</h2>
+    <div class="posterior-bar" id="posteriorBar"></div>
+    <div class="posterior-labels" id="posteriorLabels"></div>
+    <div class="expected" id="expectedValue"></div>
+    <div class="chart-container"><canvas id="historyChart"></canvas></div>
+  </div>
+
+  <!-- Sub-Models -->
+  <div class="panel" id="subModelsPanel">
+    <h2>Sub-Models / Scenarios</h2>
+    <div id="subModels"></div>
+  </div>
+
+  <!-- Governance / Epistemic Health -->
+  <div class="panel" id="govPanel">
+    <h2>Epistemic Governor</h2>
+    <div id="governance"></div>
+  </div>
+
+  <!-- VoI Queries -->
+  <div class="panel" id="voiPanel">
+    <h2>Value of Information — Priority Queries</h2>
+    <div id="voiQueries"></div>
+  </div>
+
+  <!-- Indicators -->
+  <div class="panel full-width">
+    <h2>Indicator Status</h2>
+    <div id="indicators"></div>
+  </div>
+
+  <!-- Data Feeds -->
+  <div class="panel" id="feedsPanel">
+    <h2>Data Feeds</h2>
+    <div class="feed-grid" id="dataFeeds"></div>
+  </div>
+
+  <!-- Evidence Log -->
+  <div class="panel" id="evidencePanel">
+    <h2 class="collapsible-header" onclick="toggleCollapse(this)">Evidence Log (Latest 20)</h2>
+    <div class="collapsible-body" id="evidenceLog"></div>
+  </div>
+
+  <!-- Actor Model -->
+  <div class="panel full-width" id="actorPanel">
+    <h2 class="collapsible-header collapsed" onclick="toggleCollapse(this)">Actor Model & Methodology</h2>
+    <div class="collapsible-body collapsed" id="actorModel"></div>
+  </div>
+
+  <!-- Watchpoints -->
+  <div class="panel full-width">
+    <h2>Key Watchpoints</h2>
+    <div id="watchpoints"></div>
+  </div>
+
+  <!-- Activity Ticker -->
+  <div class="panel full-width">
+    <h2>Recent Activity <a href="mirror.html" style="font-size:9px;color:var(--dim);text-decoration:none;letter-spacing:0;text-transform:none;font-weight:normal;float:right;">full feed →</a></h2>
+    <div id="activityTicker" class="activity-ticker">
+      <div style="color:var(--dim);padding:8px;font-size:11px;">No pipeline activity yet.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+let state = null;
+let govData = null;
+let currentSlug = null;
+
+// --- Standalone topic index (no server required) ---
+const TOPIC_INDEX = [
+  {slug:"calibration-750gev-diphoton",title:"750 GeV Diphoton Excess",classification:"ROUTINE",status:"RESOLVED"},
+  {slug:"calibration-fed-rate-2026",title:"Fed Funds Rate by End 2026",classification:"ROUTINE",status:"ACTIVE"},
+  {slug:"calibration-houthi-posture",title:"Houthi Red Sea Posture by Mid-2026",classification:"ROUTINE",status:"ACTIVE"},
+  {slug:"calibration-lk99-superconductor",title:"LK-99: Room-Temperature Superconductor or Not?",classification:"ROUTINE",status:"RESOLVED"},
+  {slug:"calibration-midterms-2026",title:"US Midterms 2026 — House Control",classification:"ROUTINE",status:"ACTIVE"},
+  {slug:"calibration-rtsc-replication",title:"Next RTSC Claim Survives Replication",classification:"ROUTINE",status:"ACTIVE"},
+  {slug:"calibration-scs-kinetic",title:"South China Sea Kinetic Incident by End 2026",classification:"ROUTINE",status:"ACTIVE"},
+  {slug:"calibration-section122-tariffs",title:"Section 122 Tariffs at 150-Day Expiry (July 2026)",classification:"ROUTINE",status:"ACTIVE"},
+  {slug:"calibration-ukraine-ceasefire",title:"Ukraine Formal Ceasefire by End 2026",classification:"ROUTINE",status:"ACTIVE"},
+  {slug:"calibration-us-recession-2026",title:"US Recession by Q4 2026",classification:"ROUTINE",status:"ACTIVE"},
+];
+
+// --- Topic loading ---
+async function loadTopics() {
+  try {
+    const topics = TOPIC_INDEX;
+    const sel = document.getElementById('topicSelect');
+    const current = sel.value;
+    sel.innerHTML = '<option value="">Select topic...</option>';
+    for (const t of topics) {
+      const opt = document.createElement('option');
+      opt.value = t.slug;
+      opt.textContent = `${t.classification === 'ALERT' ? '!' : t.classification === 'ELEVATED' ? '*' : ' '} ${t.title}`;
+      if (t.slug === current) opt.selected = true;
+      sel.appendChild(opt);
+    }
+    // Auto-select if only one topic or restore previous
+    if (topics.length === 1 && !current) {
+      sel.value = topics[0].slug;
+      switchTopic(topics[0].slug);
+    } else if (current) {
+      switchTopic(current);
+    }
+  } catch(e) {
+    console.error('Failed to load topics:', e);
+  }
+}
+
+async function switchTopic(slug) {
+  if (!slug) {
+    state = null;
+    currentSlug = null;
+    document.getElementById('emptyState').style.display = '';
+    document.getElementById('mainGrid').style.display = 'none';
+    document.getElementById('topicHeader').style.display = 'none';
+    return;
+  }
+  currentSlug = slug;
+  try {
+    const res = await fetch(`topics/${slug}.json?` + Date.now());
+    state = await res.json();
+    document.getElementById('emptyState').style.display = 'none';
+    document.getElementById('mainGrid').style.display = '';
+    document.getElementById('topicHeader').style.display = '';
+    render();
+    // Load governance data
+    try {
+      // Governance data not available in standalone mode
+      govData = null;
+    } catch(e) { console.warn('Governance endpoint not available:', e); }
+  } catch(e) {
+    console.error('Failed to load topic:', e);
+  }
+}
+
+// --- Render ---
+function render() {
+  if (!state) return;
+  renderTopicHeader();
+  renderPosteriors();
+  renderSubModels();
+  renderIndicators();
+  renderDataFeeds();
+  renderEvidenceLog();
+  renderActorModel();
+  renderWatchpoints();
+  renderChart();
+}
+
+function renderTopicHeader() {
+  const m = state.meta;
+  const el = document.getElementById('topicHeader');
+  el.innerHTML = `
+    <div class="topic-title">
+      <span>${m.title}</span>
+      <span class="classification ${m.classification}">${m.classification}</span>
+      <span class="status-badge ${m.status}">${m.status}</span>
+    </div>
+    <div class="topic-question">${m.question}</div>
+    <div class="topic-meta">
+      <span>Day ${m.dayCount || '?'}</span>
+      <span>Resolution: ${m.resolution}</span>
+      <span>Updated: ${m.lastUpdated}</span>
+    </div>
+  `;
+}
+
+function renderPosteriors() {
+  const h = state.model.hypotheses;
+  const bar = document.getElementById('posteriorBar');
+  const labels = document.getElementById('posteriorLabels');
+  bar.innerHTML = '';
+  labels.innerHTML = '';
+
+  const hKeys = Object.keys(h);
+  const palette = generatePalette(hKeys.length);
+
+  hKeys.forEach((k, i) => {
+    const pct = (h[k].posterior * 100).toFixed(0);
+    const color = palette[i];
+    bar.innerHTML += `<div style="width:${pct}%;background:${color}">${pct > 4 ? pct + '%' : ''}</div>`;
+    labels.innerHTML += `<span><span class="dot" style="background:${color}"></span>${k}: ${h[k].label} (${pct}%)</span>`;
+  });
+
+  const ev = state.model.expectedValue;
+  const eu = state.model.expectedUnit || '';
+  document.getElementById('expectedValue').textContent = `E[${eu}] = ${ev}`;
+}
+
+function renderSubModels() {
+  const el = document.getElementById('subModels');
+  const panel = document.getElementById('subModelsPanel');
+  const subs = state.subModels;
+
+  if (!subs || Object.keys(subs).length === 0) {
+    panel.style.display = 'none';
+    return;
+  }
+  panel.style.display = '';
+  el.innerHTML = '';
+
+  for (const [smKey, sm] of Object.entries(subs)) {
+    let html = `<div class="submodel-section"><h3>${smKey}</h3>`;
+    if (sm.scenarios) {
+      for (const [sk, sv] of Object.entries(sm.scenarios)) {
+        const pct = (sv.prob * 100).toFixed(0);
+        const high = sv.prob >= 0.4 ? ' high' : '';
+        html += `<div class="scenario-row"><span class="scenario-label">${sv.label || sk}</span><span class="scenario-prob${high}">${pct}%</span></div>`;
+      }
+    }
+    if (sm.deadline) {
+      const dl = new Date(sm.deadline);
+      const now = new Date();
+      const diff = dl - now;
+      let cdText = 'EXPIRED';
+      if (diff > 0) {
+        const hrs = Math.floor(diff / 3600000);
+        const mins = Math.floor((diff % 3600000) / 60000);
+        cdText = `${hrs}h ${mins}m remaining`;
+      }
+      html += `<div style="margin-top:8px;padding:8px;background:rgba(239,68,68,0.1);border:1px solid var(--red);border-radius:4px;">
+        <div style="color:var(--red);font-weight:bold;font-size:11px;">DEADLINE: ${sm.deadline}</div>
+        <div style="color:var(--red);font-size:20px;font-weight:bold;margin:4px 0;">${cdText}</div>
+        ${sm.status ? `<div style="color:var(--dim);font-size:11px;">Status: ${sm.status}</div>` : ''}
+      </div>`;
+    }
+    // Conditionals (e.g. khargConditionalHormuz)
+    if (sm.conditionals) {
+      for (const [ck, cv] of Object.entries(sm.conditionals)) {
+        html += `<div style="margin-top:8px;padding:8px;background:var(--surface2);border-radius:4px;">
+          <div style="color:var(--cyan);font-size:10px;letter-spacing:1px;margin-bottom:4px;">CONDITIONAL: ${ck}</div>`;
+        const condKeys = Object.keys(cv).filter(k => k.startsWith('H'));
+        if (condKeys.length) {
+          html += '<div style="display:flex;gap:8px;flex-wrap:wrap;">';
+          for (const hk of condKeys) {
+            html += `<span style="font-size:11px;color:var(--dim);">${hk}=${(cv[hk]*100).toFixed(0)}%</span>`;
+          }
+          html += '</div>';
+        }
+        if (cv.expectedDurationWeeks) {
+          html += `<div style="color:var(--amber);font-size:12px;margin-top:4px;">E[duration] = ${cv.expectedDurationWeeks} weeks</div>`;
+        }
+        html += '</div>';
+      }
+    }
+    // Timeline data (e.g. khargTimeline)
+    if (sm.assaultWindow || sm.boxerETA || sm.overlapWindow) {
+      html += `<div style="margin-top:8px;padding:8px;background:rgba(239,68,68,0.05);border:1px solid var(--border);border-radius:4px;">
+        <div style="color:var(--red);font-size:10px;letter-spacing:1px;margin-bottom:4px;">OPERATIONAL TIMELINE</div>`;
+      if (sm.assaultWindow) html += `<div style="font-size:11px;margin:2px 0;"><span style="color:var(--dim);">Assault window:</span> <span style="color:var(--red);font-weight:bold;">${sm.assaultWindow}</span></div>`;
+      if (sm.boxerETA) html += `<div style="font-size:11px;margin:2px 0;"><span style="color:var(--dim);">Boxer ARG ETA:</span> ${sm.boxerETA}</div>`;
+      if (sm.overlapWindow) html += `<div style="font-size:11px;margin:2px 0;"><span style="color:var(--dim);">Overlap window:</span> ${sm.overlapWindow}</div>`;
+      html += '</div>';
+    }
+    // Note field
+    if (sm.note) {
+      html += `<div style="margin-top:8px;padding:8px;background:var(--surface2);border-left:3px solid var(--accent);border-radius:0 4px 4px 0;font-size:11px;color:var(--dim);line-height:1.5;">${sm.note}</div>`;
+    }
+    html += '</div>';
+    el.innerHTML += html;
+  }
+}
+
+function renderIndicators() {
+  const el = document.getElementById('indicators');
+  el.innerHTML = '';
+  const tierLabels = {
+    tier1_critical: 'TIER 1 — CRITICAL',
+    tier2_strong: 'TIER 2 — STRONG SIGNAL',
+    tier3_suggestive: 'TIER 3 — SUGGESTIVE',
+    anti_indicators: 'ANTI-INDICATORS'
+  };
+
+  for (const [tierKey, indicators] of Object.entries(state.indicators.tiers)) {
+    const label = tierLabels[tierKey] || tierKey.toUpperCase().replace(/_/g, ' ');
+    el.innerHTML += `<div class="ind-tier">${label}</div>`;
+    for (const ind of indicators) {
+      let html = `<div class="indicator"><span class="ind-status ${ind.status}"></span><span>${ind.desc}</span></div>`;
+      if (ind.note) html += `<div class="ind-note">${ind.note}</div>`;
+      if (ind.posteriorEffect) html += `<div class="ind-effect">Effect: ${ind.posteriorEffect}</div>`;
+      el.innerHTML += html;
+    }
+  }
+}
+
+function renderDataFeeds() {
+  const feeds = state.dataFeeds;
+  const panel = document.getElementById('feedsPanel');
+  const el = document.getElementById('dataFeeds');
+
+  if (!feeds || Object.keys(feeds).length === 0) {
+    panel.style.display = 'none';
+    return;
+  }
+  panel.style.display = '';
+  el.innerHTML = '';
+
+  for (const [fid, feed] of Object.entries(feeds)) {
+    let changeHtml = '';
+    if (feed.baseline && feed.value != null) {
+      try {
+        if (feed.baseline !== 0) {
+          const pct = ((feed.value - feed.baseline) / feed.baseline * 100).toFixed(1);
+          const dir = pct > 0 ? '+' : '';
+          const cls = pct > 0 ? 'up' : pct < 0 ? 'down' : '';
+          changeHtml = `<div class="change ${cls}">${dir}${pct}% vs baseline</div>`;
+        }
+      } catch(e) {}
+    }
+    el.innerHTML += `
+      <div class="feed-item">
+        <div class="label">${feed.label}</div>
+        <div class="value">${feed.value}${feed.unit ? ' ' + feed.unit : ''}</div>
+        ${changeHtml}
+      </div>
+    `;
+  }
+}
+
+function renderEvidenceLog() {
+  const el = document.getElementById('evidenceLog');
+  const entries = [...(state.evidenceLog || [])].reverse().slice(0, 20);
+  if (entries.length === 0) {
+    el.innerHTML = '<div style="color:var(--dim);padding:8px;">No evidence logged yet.</div>';
+    return;
+  }
+  el.innerHTML = entries.map(e => {
+    let impactClass = '';
+    if (e.posteriorImpact && e.posteriorImpact !== 'NONE') {
+      const impactUpper = e.posteriorImpact.toUpperCase ? e.posteriorImpact.toUpperCase() : '';
+      const impactCls = ['MAJOR','MODERATE','MINOR'].includes(impactUpper) ? impactUpper : '';
+      const impactText = typeof e.posteriorImpact === 'string' && e.posteriorImpact.length > 20
+        ? e.posteriorImpact.substring(0, 30) + '...' : e.posteriorImpact;
+      impactClass = `<span class="ev-impact ${impactCls}" style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${impactText}</span>`;
+    }
+    const prov = e.provenance ? `<span class="ev-provenance">[${e.provenance}]</span>` : '';
+    return `
+      <div class="evidence-entry">
+        <span class="ev-tag tag-${e.tag}">${e.tag}</span>
+        ${impactClass}
+        <span class="ev-time">${e.time}</span> ${prov}
+        <div style="margin-top:2px;">${e.text}</div>
+        ${e.source ? `<div style="color:var(--dim);font-size:10px;">Source: ${e.source}</div>` : ''}
+      </div>
+    `;
+  }).join('');
+}
+
+function renderActorModel() {
+  const el = document.getElementById('actorModel');
+  const panel = document.getElementById('actorPanel');
+  const am = state.actorModel;
+
+  if (!am || (!am.actors && !am.methodology)) {
+    panel.style.display = 'none';
+    return;
+  }
+  panel.style.display = '';
+  let html = '';
+
+  if (am.description) {
+    html += `<div style="color:var(--dim);font-size:12px;margin-bottom:12px;font-style:italic;">${am.description}</div>`;
+  }
+
+  if (am.actors) {
+    for (const [aid, actor] of Object.entries(am.actors)) {
+      html += `<div class="actor-card"><h3>${actor.name} — ${actor.role}</h3>`;
+      if (actor.decisionStyle) html += `<div class="actor-detail"><span class="val">${actor.decisionStyle}</span></div>`;
+      if (actor.biases && actor.biases.length) {
+        html += '<div style="margin-top:4px;">' + actor.biases.map(b => `<span class="actor-bias">${b}</span>`).join('') + '</div>';
+      }
+      if (actor.overrides && actor.overrides.length) {
+        html += '<div class="actor-detail" style="margin-top:4px;color:var(--amber);">Overrides: ' + actor.overrides.join('; ') + '</div>';
+      }
+      html += '</div>';
+    }
+  }
+
+  if (am.methodology && am.methodology.length) {
+    html += '<div style="margin-top:12px;">';
+    for (const rule of am.methodology) {
+      html += `<div class="methodology-rule">${rule}</div>`;
+    }
+    html += '</div>';
+  }
+
+  el.innerHTML = html;
+}
+
+function renderWatchpoints() {
+  const el = document.getElementById('watchpoints');
+  const wps = state.watchpoints;
+  if (!wps || wps.length === 0) {
+    el.innerHTML = '<div style="color:var(--dim)">No watchpoints set</div>';
+    return;
+  }
+  el.innerHTML = wps.map(w => {
+    if (typeof w === 'string') {
+      return `<div class="watchpoint">${w}</div>`;
+    }
+    return `
+      <div class="watchpoint">
+        ${w.time ? `<span class="wp-time">${w.time}</span> — ` : ''}<strong>${w.event || w}</strong>
+        ${w.watch ? `<div style="color:var(--dim);margin-left:16px;">${w.watch}</div>` : ''}
+      </div>
+    `;
+  }).join('');
+}
+
+function renderChart() {
+  const canvas = document.getElementById('historyChart');
+  const ctx = canvas.getContext('2d');
+  const history = state.model.posteriorHistory;
+  if (!history || history.length < 2) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    return;
+  }
+
+  const rect = canvas.parentElement.getBoundingClientRect();
+  canvas.width = rect.width * 2;
+  canvas.height = rect.height * 2;
+  ctx.scale(2, 2);
+  const W = rect.width, H = rect.height;
+  const pad = { top: 10, right: 30, bottom: 30, left: 35 };
+  const cW = W - pad.left - pad.right, cH = H - pad.top - pad.bottom;
+
+  ctx.clearRect(0, 0, W, H);
+
+  // Axes
+  ctx.strokeStyle = '#334155'; ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(pad.left, pad.top);
+  ctx.lineTo(pad.left, H - pad.bottom);
+  ctx.lineTo(W - pad.right, H - pad.bottom);
+  ctx.stroke();
+
+  // Y labels
+  ctx.fillStyle = '#94a3b8'; ctx.font = '10px monospace'; ctx.textAlign = 'right';
+  for (let i = 0; i <= 4; i++) {
+    const y = pad.top + (cH * (4 - i) / 4);
+    ctx.fillText((i * 25) + '%', pad.left - 4, y + 3);
+    if (i > 0) {
+      ctx.strokeStyle = 'rgba(51,65,85,0.5)';
+      ctx.beginPath(); ctx.moveTo(pad.left, y); ctx.lineTo(W - pad.right, y); ctx.stroke();
+    }
+  }
+
+  // X labels
+  ctx.textAlign = 'center';
+  const step = Math.max(1, Math.floor(history.length / 6));
+  for (let i = 0; i < history.length; i += step) {
+    const x = pad.left + (i / (history.length - 1)) * cW;
+    const label = history[i].date ? history[i].date.slice(5) : i.toString();
+    ctx.fillText(label, x, H - pad.bottom + 14);
+  }
+
+  // Lines for each hypothesis
+  const hKeys = Object.keys(state.model.hypotheses);
+  const palette = generatePalette(hKeys.length);
+
+  // Helper: extract hypothesis value from history entry (handles flat or nested format)
+  function getHistVal(entry, key) {
+    if (entry[key] != null) return entry[key];
+    if (entry.posteriors && entry.posteriors[key] != null) return entry.posteriors[key];
+    return 0;
+  }
+
+  hKeys.forEach((k, idx) => {
+    ctx.strokeStyle = palette[idx]; ctx.lineWidth = 2; ctx.beginPath();
+    for (let i = 0; i < history.length; i++) {
+      const x = pad.left + (i / (history.length - 1)) * cW;
+      const val = getHistVal(history[i], k);
+      const y = pad.top + cH * (1 - val);
+      if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+
+    // Label at end
+    const lastVal = getHistVal(history[history.length - 1], k);
+    const lastY = pad.top + cH * (1 - lastVal);
+    ctx.fillStyle = palette[idx]; ctx.textAlign = 'left'; ctx.font = 'bold 10px monospace';
+    ctx.fillText(k, W - pad.right + 2, lastY + 3);
+    ctx.fillStyle = '#94a3b8'; ctx.font = '10px monospace';
+  });
+}
+
+function renderGovernance() {
+  const el = document.getElementById('governance');
+  const panel = document.getElementById('govPanel');
+  if (!govData) { panel.style.display = 'none'; return; }
+  panel.style.display = '';
+
+  const rt = govData.rt || {};
+  const uncPct = Math.round((govData.uncertainty_ratio || 0) * 100);
+  const entropyColor = uncPct > 80 ? 'var(--amber)' : uncPct < 30 ? 'var(--green)' : 'var(--cyan)';
+
+  let html = `<div class="gov-health ${govData.health}">${govData.health}</div>`;
+
+  // R_t
+  html += `<div class="gov-metric"><span>R_t (staleness risk)</span><span class="val">${rt.rt?.toFixed(3) || '?'} <span class="regime-badge ${rt.regime || ''}">${rt.regime || '?'}</span></span></div>`;
+
+  // Entropy
+  html += `<div class="gov-metric"><span>Uncertainty</span><span class="val">${uncPct}%</span></div>`;
+  html += `<div class="entropy-bar"><div class="entropy-fill" style="width:${uncPct}%;background:${entropyColor}"></div></div>`;
+  html += `<div class="gov-metric"><span>Shannon entropy</span><span class="val" style="color:var(--dim)">${govData.entropy?.toFixed(3) || '?'} / ${govData.max_entropy?.toFixed(3) || '?'} bits</span></div>`;
+
+  // Evidence freshness
+  const fresh = govData.evidence_freshness || {};
+  html += `<div class="gov-metric"><span>Evidence</span><span class="val"><span style="color:var(--green)">${fresh.fresh || 0} fresh</span> / <span style="color:${fresh.stale > 0 ? 'var(--amber)' : 'var(--dim)'}">${fresh.stale || 0} stale</span> / ${fresh.total || 0} total</span></div>`;
+
+  // Hypothesis admissibility
+  const adm = govData.hypothesis_admissibility || {};
+  if (Object.keys(adm).length) {
+    html += '<div style="margin-top:8px;font-size:10px;color:var(--accent);letter-spacing:1px;">HYPOTHESIS ADMISSIBILITY</div>';
+    for (const [k, v] of Object.entries(adm)) {
+      const gradeColor = v.grade === 'ADMISSIBLE' ? 'var(--green)' : v.grade === 'MARGINAL' ? 'var(--amber)' : 'var(--red)';
+      html += `<div class="gov-metric"><span>${k}</span><span class="val" style="color:${gradeColor}">${v.grade} <span style="color:var(--dim);font-size:10px;">${v.passed}/${v.total}</span></span></div>`;
+    }
+  }
+
+  // Issues
+  if (govData.issues && govData.issues.length) {
+    html += '<div style="margin-top:8px;font-size:10px;color:var(--amber);letter-spacing:1px;">ISSUES</div>';
+    for (const issue of govData.issues) {
+      html += `<div class="gov-issue">! ${issue}</div>`;
+    }
+  }
+
+  el.innerHTML = html;
+}
+
+function renderVoI() {
+  const el = document.getElementById('voiQueries');
+  const panel = document.getElementById('voiPanel');
+  if (!govData || !govData.top_queries || !govData.top_queries.length) {
+    panel.style.display = 'none';
+    return;
+  }
+  panel.style.display = '';
+
+  el.innerHTML = govData.top_queries.map(q => `
+    <div class="voi-entry">
+      <span class="voi-score">${q.voi_score.toFixed(1)}</span>
+      ${q.query.substring(0, 70)}
+      <div style="color:var(--dim);font-size:10px;margin-left:30px;">${q.reason}</div>
+    </div>
+  `).join('');
+}
+
+// --- Utilities ---
+function generatePalette(n) {
+  const base = ['#22c55e', '#06b6d4', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899', '#14b8a6', '#f97316'];
+  if (n <= base.length) return base.slice(0, n);
+  // Generate more if needed
+  const out = [...base];
+  for (let i = base.length; i < n; i++) {
+    const hue = (i * 137.5) % 360;
+    out.push(`hsl(${hue}, 70%, 55%)`);
+  }
+  return out;
+}
+
+function toggleCollapse(headerEl) {
+  const body = headerEl.nextElementSibling;
+  headerEl.classList.toggle('collapsed');
+  body.classList.toggle('collapsed');
+}
+
+// --- Activity Ticker ---
+async function loadActivityTicker() {
+  try {
+    const res = await fetch('activity-log.json?' + Date.now());
+    const data = await res.json();
+    const entries = data.entries || [];
+    const el = document.getElementById('activityTicker');
+    if (!entries.length) {
+      el.innerHTML = '<div style="color:var(--dim);padding:8px;font-size:11px;">No pipeline activity yet.</div>';
+      return;
+    }
+    const recent = [...entries].reverse().slice(0, 5);
+    el.innerHTML = recent.map(e => {
+      const time = e.timestamp ? new Date(e.timestamp).toLocaleString([], {month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}) : '';
+      const type = e.type || 'TRIAGE';
+      let detail = e.headline ? e.headline.slice(0, 80) : '';
+      if (e.source) detail += ` <span style="color:var(--cyan);">[${e.source}]</span>`;
+      if (e.posteriorDelta && e.posteriorDelta.topic) {
+        const pd = e.posteriorDelta;
+        const shifts = Object.keys(pd.after || {}).map(h => {
+          const d = ((pd.after[h] || 0) - (pd.before?.[h] || 0)) * 100;
+          return d !== 0 ? `${h}:${d > 0 ? '+' : ''}${d.toFixed(0)}pp` : null;
+        }).filter(Boolean).join(' ');
+        if (shifts) detail += ` <span style="color:var(--green);font-size:10px;">${shifts}</span>`;
+      }
+      const slugs = (e.topicSlugs || []).join(', ');
+      return `<div class="atick ${type}">
+        <span class="atick-type ${type}">${type.replace(/_/g,' ')}</span>
+        <span style="color:var(--dim);font-size:10px;margin-left:6px;">${time}</span>
+        <div style="margin-top:2px;">${detail}</div>
+        ${slugs ? `<div style="font-size:9px;color:var(--dim);margin-top:2px;">${slugs}</div>` : ''}
+      </div>`;
+    }).join('');
+  } catch(e) { /* activity log not available yet */ }
+}
+
+// --- Init ---
+loadTopics();
+loadActivityTicker();
+// Auto-refresh every 60s
+setInterval(() => { if (currentSlug) switchTopic(currentSlug); }, 60000);
+// Update deadlines every second
+setInterval(() => { if (state && state.subModels) renderSubModels(); }, 1000);
+// Refresh activity ticker every 15s
+setInterval(loadActivityTicker, 15000);
+
+// URL hash routing
+if (window.location.hash) {
+  const slug = window.location.hash.slice(1);
+  setTimeout(() => {
+    document.getElementById('topicSelect').value = slug;
+    switchTopic(slug);
+  }, 500);
+}
+</script>
+
+<div style="text-align:center; padding:16px 24px; color:var(--dim); font-size:10px; border-top:1px solid var(--border); margin-top:16px;">
+  NROL-αΩ — Epistemic governance patterns from <a href="https://github.com/unpingable/agent_governor" style="color:var(--accent);" target="_blank">@unpingable/agent_governor</a>
+  &nbsp;|&nbsp; <em>Current Thing delenda est</em>
+</div>
+</body>
+</html>

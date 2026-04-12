@@ -1,0 +1,13 @@
+{
+  "_note": "Base prior trust scores from framework/calibrate.py SOURCE_TRUST dict",
+  "CENTCOM": 0.95, "Pentagon": 0.95, "DoD": 0.95,
+  "Reuters": 0.90, "AP": 0.90, "AFP": 0.90,
+  "WashingtonPost": 0.85, "NewYorkTimes": 0.85,
+  "Bloomberg": 0.85, "WallStreetJournal": 0.85,
+  "CNN": 0.75, "BBC": 0.75, "Fox": 0.70,
+  "Fortune": 0.70, "WSJ": 0.70,
+  "DailyMail": 0.50, "CNBC": 0.65,
+  "Al Jazeera": 0.60, "TASS": 0.50,
+  "Mehr News": 0.50, "IRNA": 0.40, "ISNA": 0.40,
+  "IranianEmbassy": 0.30
+}

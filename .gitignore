@@ -19,9 +19,32 @@ CLAUDE.md
 # Calibration data (runtime calibration history, not part of framework)
 calibration/
 
-# Framework working files (not part of broader project)
-# These should be tracked as part of NRL-Alpha Omega core
-# See framework/README.md for framework usage
+# --- Loom mirror runtime data ---
+# Activity log is per-session working data, not framework state.
+# The repo ships an empty skeleton; user entries stay local.
+loom/activity-log.json
+!loom/activity-log.template.json
+
+# Source DB in loom/ is a working copy of sources/source_db.json.
+# Don't duplicate — users copy it in at setup time.
+loom/source_db.json
+
+# Canvas directory is the user's local Loom workspace, never committed.
+canvas/
+
+# --- General dev / prototype artifacts ---
+*.tmp
+*.bak
+*.swp
+*~
+.DS_Store
+Thumbs.db
+*.log
+node_modules/
+.env
+.env.*
+
+# Stray files from prior development
 7e004f2d922e49a79c994d9e061e9a0a.png
 add_evidence.py
 bc12c685cc194151ad6f16eeaac69c15.md
