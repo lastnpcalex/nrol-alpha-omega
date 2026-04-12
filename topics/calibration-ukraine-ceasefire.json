@@ -7,7 +7,7 @@
     "question": "Will Russia and Ukraine reach a formal ceasefire agreement by December 31, 2026?",
     "resolution": "A document signed by authorized representatives of both Russia and Ukraine constituting a mutual commitment to halt offensive operations across a defined line of contact \u2014 not a unilateral declaration, not a temporary humanitarian truce (Easter-style), and not a third-party mediated pause without bilateral signature. Frozen-conflict line stabilization without a signed document does NOT resolve H1.",
     "created": "2026-04-11T00:00:00Z",
-    "lastUpdated": "2026-04-11T00:00:00Z",
+    "lastUpdated": "2026-04-12T00:00:00Z",
     "status": "ACTIVE",
     "dayCount": 0,
     "startDate": "2026-04-11T00:00:00Z",
@@ -563,6 +563,50 @@
       "claimState": "OBSERVED",
       "trustWeight": 0.75,
       "note": "Tagged RHETORIC because it is a stated position, not an action."
+    },
+    {
+      "id": "ev_005",
+      "time": "2026-04-12T00:00:00Z",
+      "text": "Easter ceasefire violations: Ukraine reports 2,299 violations (28 assault actions, 479 shellings, 747 attack drone strikes, 1,045 FPV drone strikes). Russia reports 1,971 violations (258 artillery/tank firings, 1,329 FPV drone strikes, 375 munition drops). Both sides accuse each other. However, Ukraine confirms NO long-range Shahed drones, guided aerial bombs, or missile strikes during truce — a significant de-escalation from nightly barrages.",
+      "tags": ["EVENT", "DATA"],
+      "source": "Ukrainian General Staff (Facebook), Russian MoD (MAX app), via Al Jazeera/AP/Guardian, April 12 2026",
+      "claimState": "OBSERVED",
+      "trustWeight": 1.0,
+      "posteriorImpact": "H3 confirmed: truce is partial and violated, consistent with 'limited truces only' hypothesis. Absence of strategic weapons (Shaheds, missiles) during truce is notable — suggests both sides can modulate escalation level. Does NOT support H2 (sustained ceasefire) or H1 (comprehensive deal).",
+      "note": "Al Jazeera base trust 0.60. AP 0.99. Violation counts from official military statements on both sides — cross-referenced. Pattern identical to 2025 Easter truce."
+    },
+    {
+      "id": "ev_006",
+      "time": "2026-04-12T00:00:00Z",
+      "text": "Kremlin spokesman Peskov: Russia will NOT extend Easter truce unless Zelenskyy 'accepts well-known solutions.' States Russian forces still need 17-18% more of Donetsk region. 'Until Zelenskyy musters the courage... the special military operation will continue after the truce expires.'",
+      "tags": ["RHETORIC", "DIPLOMATIC"],
+      "source": "Kremlin (Peskov) via Russian news agencies, reported by Al Jazeera, April 12 2026",
+      "claimState": "OBSERVED",
+      "trustWeight": 0.6,
+      "posteriorImpact": "Fires anti-indicator anti_h1_russia_maximalism: Russia reaffirms full oblast demands. H1 -signal. Confirms H3 as modal: episodic truces with no path to agreement. Peskov statement is RHETORIC but from authoritative Kremlin source — it IS the negotiating position.",
+      "note": "Tagged RHETORIC per framework (stated position, not action). But Kremlin spokesperson statements carry operational weight — this is not punditry."
+    },
+    {
+      "id": "ev_007",
+      "time": "2026-04-12T00:00:00Z",
+      "text": "Zelenskyy calls for longer ceasefire in evening address, insists 'the ball is in Moscow's court.' Ukraine proposed freezing conflict along current front lines — Russia rejected this.",
+      "tags": ["RHETORIC", "DIPLOMATIC"],
+      "source": "Zelenskyy evening address, reported by Al Jazeera/Guardian, April 12 2026",
+      "claimState": "OBSERVED",
+      "trustWeight": 0.7,
+      "posteriorImpact": "Mild H2/H1 signal: Ukraine signaling willingness to freeze. But Russia's rejection is the binding constraint. Zelenskyy's proposal matches indicator t2_ukraine_territory_concession partially — accepting current lines IS a concession from pre-war borders.",
+      "note": "Zelenskyy's willingness to freeze on current lines is a significant shift from 2022-2024 position but has been Russia-rejected."
+    },
+    {
+      "id": "ev_008",
+      "time": "2026-04-12T00:00:00Z",
+      "text": "US attention confirmed shifted to Iran war. Al Jazeera: 'The process has stalled further since the outbreak of the war in the Middle East, with Washington's attention having shifted towards Iran.' No US envoy activity on Ukraine track reported in April.",
+      "tags": ["ANALYSIS", "DIPLOMATIC"],
+      "source": "Al Jazeera contextual reporting, April 12 2026",
+      "claimState": "OBSERVED",
+      "trustWeight": 0.6,
+      "posteriorImpact": "H3/H4 lean: US disengagement removes the primary external pressure for deal. Without active US mediation, structural path to H1 is blocked. Increases H3 (episodic truces) and H4 (escalation via Russian offensive advantage if Ukraine aid wavers).",
+      "note": "Al Jazeera base trust 0.60. This is contextual assessment but triangulates with absence of reported US diplomatic activity."
     }
   ],
 

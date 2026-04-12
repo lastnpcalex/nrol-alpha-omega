@@ -6,9 +6,9 @@
     "question": "Where will the Federal Reserve target rate be on December 31, 2026?",
     "resolution": "FOMC official target range as announced at or following the December 2026 FOMC meeting (scheduled Dec 9-10, 2026). Resolved against the FOMC statement on federalreserve.gov.",
     "created": "2026-04-11T00:00:00Z",
-    "lastUpdated": "2026-04-11T00:00:00Z",
+    "lastUpdated": "2026-04-12T00:00:00Z",
     "status": "ACTIVE",
-    "dayCount": 0,
+    "dayCount": 1,
     "startDate": "2026-04-11T00:00:00Z",
     "classification": "ROUTINE",
     "topicType": "economics",
@@ -533,6 +533,39 @@
       "claimState": "PROPOSED",
       "weight": 0.4,
       "weightNote": "Retail-facing forecast aggregator. Lower weight than primary Fed or primary research sources."
+    },
+    {
+      "id": "ev_006",
+      "time": "2026-04-08T00:00:00Z",
+      "text": "FOMC minutes from March 17-18 meeting released. Fed officials 'still saw rate cuts as a possibility' but stressed need to look through Iran war energy shock. Minutes show tension between inflation persistence and growth concerns. Rate hike probability rose to 14% before Iran ceasefire.",
+      "tags": ["EVENT", "FOMC"],
+      "source": "Federal Reserve FOMC Minutes, released April 8 2026",
+      "claimState": "OBSERVED",
+      "weight": 1.0,
+      "posteriorImpact": "Confirms H2 as modal: cuts still on table but highly conditional. H4 (hike) probability briefly spiked during Iran conflict but has since retreated. No posterior movement — consistent with existing priors.",
+      "note": "Primary source (Federal Reserve). US News, Kraken blog both confirm same reading."
+    },
+    {
+      "id": "ev_007",
+      "time": "2026-04-10T00:00:00Z",
+      "text": "March 2026 CPI: headline +0.9% m/m (3.3% YoY) driven by energy +10.9% (Iran war gasoline +21.2%). Core CPI +0.2% m/m (2.6% YoY) — both 0.1pp BELOW consensus. Services ex-energy +0.2% m/m (3.0% YoY). Shelter +0.3% m/m (3.0% YoY, lowest since Aug 2021). Food unchanged. Real earnings -0.6% m/m.",
+      "tags": ["DATA"],
+      "source": "BLS CPI release via CNBC, April 10 2026",
+      "claimState": "OBSERVED",
+      "weight": 1.0,
+      "posteriorImpact": "Mixed signal with H2/H3 lean. Headline inflation alarming (3.3%) but Fed will look through energy. Core below forecast is dovish signal — supports rate cut thesis. Goldman: 'Fed has room to be patient.' Key: shelter at 3.0% is lowest in 5 years — structural disinflation in stickiest component.",
+      "note": "BLS primary data. Core CPI below forecast is the critical signal. Tariff visible in apparel (+1%), airlines (+2.7%) but small magnitude."
+    },
+    {
+      "id": "ev_008",
+      "time": "2026-04-10T00:00:00Z",
+      "text": "Goldman Sachs Asset Management (Wilson-Elizondo): 'We believe the Fed will look through the energy-driven noise so long as these factors hold. The Fed has room to be patient, and every reason to do so. Today's number buys the Fed time, but the real test lies ahead.'",
+      "tags": ["ANALYSIS"],
+      "source": "Goldman Sachs Asset Management via CNBC, April 10 2026",
+      "claimState": "PROPOSED",
+      "weight": 0.5,
+      "posteriorImpact": "NONE — ANALYSIS tag. Informative for market consensus but does not move posteriors. Confirms 'patient' framing consistent with H1 (no cut) or slow H2.",
+      "note": "Goldman is a market participant, not a Fed source. Tagged ANALYSIS per framework rules."
     }
   ],
   "dataFeeds": {
@@ -547,12 +580,12 @@
     },
     "core_cpi_yoy": {
       "label": "Core CPI YoY",
-      "value": 3.1,
+      "value": 2.6,
       "unit": "%",
       "baseline": 3.1,
-      "asOf": "2026-04-11",
-      "source": "BLS",
-      "note": "Approximate April 2026 estimate. Update monthly on BLS release."
+      "asOf": "2026-04-12",
+      "source": "BLS March 2026 CPI release (April 10)",
+      "note": "Core CPI 2.6% YoY, 0.2% m/m — both below forecast by 0.1pp. Headline CPI 3.3% YoY driven by energy +10.9%. Updated from BLS primary data."
     },
     "core_pce_yoy": {
       "label": "Core PCE YoY",

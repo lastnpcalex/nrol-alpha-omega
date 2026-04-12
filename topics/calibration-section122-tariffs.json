@@ -7,9 +7,9 @@
     "question": "What happens to the Trump administration's Section 122 10% universal tariff when it reaches its 150-day statutory limit in late July 2026?",
     "resolution": "Observable: White House action or documented inaction by July 23, 2026 (150 days from Feb 24 effective date). Resolution criteria: (a) tariff expires with no successor = H1; (b) new proclamation issues at ~10% using different authority = H2; (c) new proclamation/action at higher rate or expanded scope = H3; (d) bilateral deal(s) announced covering >=30% of affected import value with reduced rates = H4. Partial-deal-plus-continuation counts as H4 if rollback is material.",
     "created": "2026-04-11T00:00:00Z",
-    "lastUpdated": "2026-04-11T00:00:00Z",
+    "lastUpdated": "2026-04-12T00:00:00Z",
     "status": "ACTIVE",
-    "dayCount": 46,
+    "dayCount": 47,
     "startDate": "2026-02-24T00:00:00Z",
     "classification": "ROUTINE",
     "topicType": "economics",
@@ -420,7 +420,118 @@
     ]
   },
 
-  "evidenceLog": [],
+  "evidenceLog": [
+    {
+      "id": "ev_001",
+      "time": "2026-02-20T00:00:00Z",
+      "text": "SCOTUS strikes IEEPA-based tariffs (Learning Resources v. Trump). Same day, Trump issues Section 122 proclamation: 10% universal import surcharge effective Feb 24. 150-day clock starts.",
+      "tags": ["EVENT", "LEGAL"],
+      "source": "Supreme Court ruling + White House Proclamation, Feb 20 2026",
+      "claimState": "OBSERVED",
+      "weight": 1.0,
+      "posteriorImpact": "Founding event. Establishes the H1-H4 framing.",
+      "note": "Section 122 had never been used to impose tariffs before. Novel legal territory."
+    },
+    {
+      "id": "ev_002",
+      "time": "2026-02-21T00:00:00Z",
+      "text": "Trump announces via social media intent to raise Section 122 rate to 15% (statutory maximum). No formal proclamation issued.",
+      "tags": ["RHETORIC"],
+      "source": "Trump social media post, Feb 21 2026",
+      "claimState": "PROPOSED",
+      "weight": 0.25,
+      "posteriorImpact": "Mild H3 signal but RHETORIC only — no Federal Register action. Do not move posteriors on announcement alone.",
+      "note": "Tagged RHETORIC per framework rules. Social media intent ≠ formal action."
+    },
+    {
+      "id": "ev_003",
+      "time": "2026-03-04T00:00:00Z",
+      "text": "Treasury Secretary Bessent confirms intent to raise to 15% on CNBC. Also references ongoing Section 301 investigations and Section 232 studies as successor frameworks during 150-day window.",
+      "tags": ["RHETORIC", "INTEL"],
+      "source": "CNBC interview, Bessent, March 4 2026",
+      "claimState": "PROPOSED",
+      "weight": 0.35,
+      "posteriorImpact": "Strengthens H2/H3 pipeline — successor authority actively being built. Still no formal action.",
+      "note": "Bessent statement is highest-ranking official confirmation of escalation intent AND successor framework preparation. CNBC base trust 0.65."
+    },
+    {
+      "id": "ev_004",
+      "time": "2026-03-05T00:00:00Z",
+      "text": "24 state attorneys general (led by Oregon, Arizona, California, New York, Vermont) file suit at US Court of International Trade challenging Section 122 surcharge. Case No. 1:26-cv-01472. States argue balance-of-payments requirement not met.",
+      "tags": ["EVENT", "LEGAL"],
+      "source": "CIT filing, Oregon et al. v. Trump, March 5 2026",
+      "claimState": "OBSERVED",
+      "weight": 1.0,
+      "posteriorImpact": "H1 +signal: legal pathway to injunction now exists. t2_court_challenge_filed indicator partially relevant.",
+      "note": "24 states is the broadest state coalition against Section 122. Matches indicator t2_court_challenge_filed."
+    },
+    {
+      "id": "ev_005",
+      "time": "2026-03-09T00:00:00Z",
+      "text": "Liberty Justice Center files second suit (Burlap and Barrel v. Trump, Case No. 1:26-cv-01606) on behalf of spice importer and toy company. Assigned to same 3-judge CIT panel (Barnett, Kelly, Stanceu).",
+      "tags": ["EVENT", "LEGAL"],
+      "source": "CIT filing, Burlap and Barrel v. Trump, March 9 2026",
+      "claimState": "OBSERVED",
+      "weight": 1.0,
+      "posteriorImpact": "Reinforces H1 legal pathway. Two parallel challenges increase judicial engagement.",
+      "note": "Both cases consolidated before same panel for April 10 oral arguments."
+    },
+    {
+      "id": "ev_006",
+      "time": "2026-03-30T00:00:00Z",
+      "text": "As of March 30, rate remains 10%. No formal proclamation raising to 15% has been issued despite repeated announcements. 15% rhetoric has not translated to Federal Register action.",
+      "tags": ["DATA"],
+      "source": "Fleischer CHB trade advisory, March 30 2026",
+      "claimState": "OBSERVED",
+      "weight": 0.8,
+      "posteriorImpact": "Mildly reduces H3 probability — if escalation were imminent, proclamation would have issued. But 15% still possible before July.",
+      "note": "Gap between rhetoric and action is itself informative. 36 days of announced intent with no formal action."
+    },
+    {
+      "id": "ev_007",
+      "time": "2026-04-06T00:00:00Z",
+      "text": "Reuters reports Trump-Xi summit planned for mid-May in Beijing. Trade war framing: China responded with reciprocal investigations. Prior Busan meeting produced truce (tariff trim + fentanyl + soybean purchases). May summit is highest-level bilateral trade engagement since Section 122.",
+      "tags": ["EVENT", "DIPLOMATIC"],
+      "source": "Reuters, April 6 2026",
+      "claimState": "OBSERVED",
+      "weight": 1.0,
+      "posteriorImpact": "NONE. H4-directional but no indicator fired: t1_bilateral_deal_announced requires formal deal covering >=30% volume. A scheduled summit is not a deal. Posteriors HOLD — summit is precondition for deal, not deal itself. Monitor May outcome.",
+      "note": "Reuters effectiveTrust 0.9643 from source_db. Summit delayed from original date due to Iran war."
+    },
+    {
+      "id": "ev_008",
+      "time": "2026-04-10T00:00:00Z",
+      "text": "CIT oral arguments held April 10-11. Three-judge panel (Barnett, Kelly, Stanceu) sharply questioned both sides for 3+ hours. Key issue: whether 'balance-of-payments deficits' in 1974 statute covers trade deficits. Awkward for government: DOJ argued last year Section 122 had 'no obvious application' to trade deficits. Awkward for challengers: CIT itself wrote Section 122 was available when striking IEEPA tariffs.",
+      "tags": ["EVENT", "LEGAL"],
+      "source": "AP (Paul Wiseman), Chicago Tribune, April 11 2026",
+      "claimState": "OBSERVED",
+      "weight": 1.0,
+      "posteriorImpact": "Indicator t2_court_challenge_filed now ACTIVE (arguments heard). Trade lawyer (King & Spalding) predicts court will defer to president given temporary nature. If so, H1 legal pathway weakens.",
+      "note": "AP effectiveTrust 0.99. Expert assessment: 'stunned if challengers prevail' — but expert opinion is ANALYSIS, not outcome."
+    },
+    {
+      "id": "ev_009",
+      "time": "2026-04-10T00:00:00Z",
+      "text": "March 2026 CPI: headline +0.9% m/m, 3.3% annual (highest since April 2024). Energy +10.9% (Iran war driven). But core CPI +0.2% m/m, 2.6% annual — both below forecast. Tariff impact visible in apparel (+1%) and airline fares (+2.7%).",
+      "tags": ["DATA"],
+      "source": "BLS CPI release via CNBC, April 10 2026",
+      "claimState": "OBSERVED",
+      "weight": 1.0,
+      "posteriorImpact": "Matches indicator t3_cpi_spike_tariff_attributed partially — goods categories show tariff pass-through but headline is energy-dominated. Core below forecast reduces political pressure to remove tariffs on inflation grounds.",
+      "note": "CNBC base trust 0.65 but reporting BLS primary data. Effective trust for DATA tag: BLS primary source."
+    },
+    {
+      "id": "ev_010",
+      "time": "2026-04-02T00:00:00Z",
+      "text": "One-year anniversary of 'Liberation Day' tariffs. NPR/CNBC assessments: tariffs have not produced promised economic boom. Tax Foundation estimates average household cost $700/year. Trade deficit not meaningfully altered.",
+      "tags": ["ANALYSIS", "DATA"],
+      "source": "NPR, CNBC, Tax Foundation, April 2-3 2026",
+      "claimState": "OBSERVED",
+      "weight": 0.7,
+      "posteriorImpact": "Background context. Political pressure from economic impact could favor H4 (deal) over H3 (escalation). But Trump has historically doubled down despite adverse data.",
+      "note": "Multiple-source convergence on economic assessment. Tagged ANALYSIS because it involves interpretation of aggregate data."
+    }
+  ],
 
   "dataFeeds": {
     "tariff_rate": {
