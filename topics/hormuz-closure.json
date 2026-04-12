@@ -2492,31 +2492,50 @@
     "Iran ceasefire Hormuz April 2026"
   ],
   "governance": {
-    "health": "HEALTHY",
+    "health": "DEGRADED",
     "issues": [
-      "15-day update gap (Mar 28 to Apr 12) — batch update covers rapid ceasefire-collapse cycle. Multiple indicators fired simultaneously. R_t computed across full window, not per-event.",
-      "H1 at 0.01 — approaching INADMISSIBLE threshold. Consider whether <6 weeks is still a meaningful hypothesis at Day 41."
+      "Majority stale evidence: 109 stale vs 17 fresh. Structural for long-running topic with 126 entries spanning Feb-Apr 2026."
     ],
     "rt": {
-      "rt": 0.06,
+      "rt": 0.021,
       "regime": "SAFE",
       "worst_hypothesis": "H4"
     },
-    "entropy": 0.9874,
-    "maxEntropy": 1.3863,
-    "uncertaintyRatio": 0.7123,
+    "entropy": 1.425,
+    "maxEntropy": 2.0,
+    "uncertaintyRatio": 0.712,
     "evidenceFreshness": {
-      "fresh": 16,
-      "stale": 108,
-      "total": 124
+      "total": 126,
+      "fresh": 17,
+      "stale": 109
     },
     "hypothesisAdmissibility": {
-      "H1": "ADMISSIBLE",
-      "H2": "ADMISSIBLE",
-      "H3": "ADMISSIBLE",
-      "H4": "ADMISSIBLE"
+      "H1": {
+        "grade": "ADMISSIBLE",
+        "passed": 4,
+        "total": 5
+      },
+      "H2": {
+        "grade": "ADMISSIBLE",
+        "passed": 4,
+        "total": 5
+      },
+      "H3": {
+        "grade": "ADMISSIBLE",
+        "passed": 5,
+        "total": 5
+      },
+      "H4": {
+        "grade": "ADMISSIBLE",
+        "passed": 5,
+        "total": 5
+      }
     },
-    "lastComputed": "2026-04-12T20:22:00+00:00"
+    "klFromPrior": {
+      "klDivergence": 0.824,
+      "interpretation": "WELL_EVIDENCED"
+    },
+    "lastComputed": "2026-04-12T22:00:00Z"
   },
   "dependencies": {
     "_docs": "Cross-topic dependency declarations. Upstream topics whose posteriors this topic assumptions depend on.",

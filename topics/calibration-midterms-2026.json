@@ -684,7 +684,52 @@
     "site:cookpolitical.com House 2026",
     "site:sabatoscrystalball.com House 2026 ratings"
   ],
-  "governance": null,
+  "governance": {
+    "health": "DEGRADED",
+    "issues": [
+      "KL from prior: PRIOR_DOMINATED (0.027 nats). Only 1 indicator fired (t2_dem_special_overperformance_plus5). Posteriors still close to initial priors. Expected at this stage."
+    ],
+    "rt": {
+      "rt": 0.033,
+      "regime": "SAFE",
+      "worst_hypothesis": "H2"
+    },
+    "entropy": 1.691,
+    "maxEntropy": 2.0,
+    "uncertaintyRatio": 0.846,
+    "evidenceFreshness": {
+      "total": 8,
+      "fresh": 8,
+      "stale": 0
+    },
+    "hypothesisAdmissibility": {
+      "H1": {
+        "grade": "ADMISSIBLE",
+        "passed": 5,
+        "total": 5
+      },
+      "H2": {
+        "grade": "ADMISSIBLE",
+        "passed": 5,
+        "total": 5
+      },
+      "H3": {
+        "grade": "ADMISSIBLE",
+        "passed": 5,
+        "total": 5
+      },
+      "H4": {
+        "grade": "ADMISSIBLE",
+        "passed": 5,
+        "total": 5
+      }
+    },
+    "klFromPrior": {
+      "klDivergence": 0.027,
+      "interpretation": "PRIOR_DOMINATED"
+    },
+    "lastComputed": "2026-04-12T22:00:00Z"
+  },
   "dependencies": {
     "_docs": "Cross-topic dependency declarations. Upstream topics whose posteriors this topic's assumptions depend on.",
     "upstream": [
