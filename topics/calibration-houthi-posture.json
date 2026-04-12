@@ -668,6 +668,11 @@
 
   "governance": null,
 
+  "dependencies": {
+    "_docs": "Cross-topic dependency declarations. Upstream topics whose posteriors this topic's assumptions depend on.",
+    "upstream": []
+  },
+
   "predictionScoring": {
     "_docs": "Calibration infrastructure. Topic resolves July 1 2026. Record observed posture state against H1-H4 definitions in meta.resolution. Compute Brier score against each snapshot.",
     "snapshots": [],

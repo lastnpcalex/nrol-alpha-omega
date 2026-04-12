@@ -6,9 +6,9 @@
     "question": "Will the US economy enter a recession (2 consecutive quarters of negative real GDP growth) by Q4 2026?",
     "resolution": "BEA official advance GDP prints for Q2 2026 (released ~July 2026) and Q3 2026 (released ~Oct 2026). Two consecutive quarters of negative real GDP growth = recession confirmed. NBER declaration is corroborating but NOT required for resolution — the quantitative criterion governs.",
     "created": "2026-04-11T00:00:00Z",
-    "lastUpdated": "2026-04-11T00:00:00Z",
+    "lastUpdated": "2026-04-12T00:00:00Z",
     "status": "ACTIVE",
-    "dayCount": 0,
+    "dayCount": 1,
     "startDate": "2026-04-11T00:00:00Z",
     "classification": "ROUTINE",
     "topicType": "economics",
@@ -833,7 +833,107 @@
     "Powell Fed inflation unemployment April 2026 speech",
     "Nick Timiraos Fed rate cut 2026"
   ],
-  "evidenceLog": [],
+  "evidenceLog": [
+    {
+      "id": "ev_001",
+      "time": "2026-04-01T00:00:00Z",
+      "text": "St. Louis Fed President Musalem (AEI speech): Baseline 2026 scenario has real GDP growing close to potential, unemployment holding around current level, core inflation gradually easing toward 2% later in year. But risks tilt unfavorable — toward weaker labor market AND greater inflation persistence simultaneously. Atlanta Fed GDPNow projects Q1 2026 growth at 2.0%. Consumer spending soft in Jan-Feb (winter storms), but tax refunds +$1,000/household and wealth effects support spending.",
+      "tags": ["ECON", "POLICY"],
+      "source": "Federal Reserve Bank of St. Louis (Musalem remarks at AEI), April 1 2026",
+      "claimState": "OBSERVED",
+      "weight": 1.0,
+      "posteriorImpact": "NONE. Confirms existing priors: GDP positive but thin margin, risks two-sided. Musalem explicitly describes 1970s stagflation analogy but stops short of predicting it. GDPNow 2.0% is firmly in H1 territory for Q1.",
+      "note": "Primary source (FOMC participant). Key signal: 'risks tilt in unfavorable directions' on BOTH mandates. This is the dual-risk framing consistent with H4 tail but baseline is H1."
+    },
+    {
+      "id": "ev_002",
+      "time": "2026-04-01T00:00:00Z",
+      "text": "Musalem: Tariffs explain about half of excess 12-month inflation above 2% (St. Louis Fed staff estimates). Effect of 2025 tariffs should fade over next couple quarters, BUT geopolitical developments (Iran war) cloud forecast — now sees more risk of persistent above-target inflation throughout 2026.",
+      "tags": ["ECON", "TRADE"],
+      "source": "Federal Reserve Bank of St. Louis (Musalem remarks at AEI), April 1 2026",
+      "claimState": "OBSERVED",
+      "weight": 1.0,
+      "posteriorImpact": "NONE. Tariff inflation quantified at ~50% of excess — this is the most specific Fed attribution to date. Iran war extends inflation persistence risk, which is H4-directional. But Musalem says tariff effect 'should fade' — that's H1-directional. Offsetting signals, no net posterior movement.",
+      "note": "Same speech as ev_001. Split into separate entry because tariff attribution and Iran inflation risk are distinct claims."
+    },
+    {
+      "id": "ev_003",
+      "time": "2026-04-01T00:00:00Z",
+      "text": "Musalem on labor market: 'low hire, low fire' state. Payroll growth narrowly concentrated in few sectors, at low end of breakeven rate needed to prevent unemployment from rising. Firms reporting greater reluctance to hire amid geopolitical uncertainty (S&P Global Flash PMI, March 24). 'An increase in layoffs could lead to a rapid increase in the unemployment rate.'",
+      "tags": ["LABOR", "ECON"],
+      "source": "Federal Reserve Bank of St. Louis (Musalem remarks at AEI), April 1 2026",
+      "claimState": "OBSERVED",
+      "weight": 1.0,
+      "posteriorImpact": "NONE. H2/H3-directional: labor market at breakeven is one shock away from deterioration. But Musalem explicitly says unemployment remains 'close to the natural rate.' Not yet at indicator threshold (t1_unemployment_spike_5_5 requires 5.5%). Monitoring.",
+      "note": "FOMC participant explicitly flagging nonlinear labor risk. 'Rapid increase' language is unusual for Fed speeches — suggests higher-than-typical concern."
+    },
+    {
+      "id": "ev_004",
+      "time": "2026-04-01T00:00:00Z",
+      "text": "Musalem on monetary policy: Supported holding at 3.50-3.75%. Real policy rate in 'lower portion of neutral range.' Could support easing if labor market weakens (provided inflation expectations stable). Could support HIKING if inflation or expectations move persistently higher. Current setting 'will likely remain appropriate for some time.'",
+      "tags": ["POLICY"],
+      "source": "Federal Reserve Bank of St. Louis (Musalem remarks at AEI), April 1 2026",
+      "claimState": "OBSERVED",
+      "weight": 1.0,
+      "posteriorImpact": "NONE. Confirms Fed in wait-and-see mode. Explicit hike scenario mention is notable — increases H4 tail plausibility slightly but this is a conditional statement, not a signal of intent. No indicator fired.",
+      "note": "Hike mention matters: first FOMC participant to publicly articulate rate hike scenario in a prepared speech since the easing cycle began."
+    },
+    {
+      "id": "ev_005",
+      "time": "2026-03-24T00:00:00Z",
+      "text": "S&P Global US Manufacturing PMI: 52.3 in March (up from 51.6 in February). Third consecutive month in expansion territory. But firms reporting largest increase in selling prices since August 2022 — energy cost pass-through to customers.",
+      "tags": ["ECON", "DATA"],
+      "source": "S&P Global Flash PMI, March 24 2026; Trading Economics",
+      "claimState": "OBSERVED",
+      "weight": 1.0,
+      "posteriorImpact": "NONE. Mixed signal: manufacturing expanding (H1 lean) but price pass-through at multi-year highs (H4 lean). PMI >50 is not recessionary. But pricing pressure in manufacturing is a leading indicator of CPI goods inflation. Net: offsetting.",
+      "note": "ISM PMI roundup confirms expansion for third month. Manufacturing expansion contradicts recession base case but price pressure is consistent with stagflation tail."
+    },
+    {
+      "id": "ev_006",
+      "time": "2026-04-10T00:00:00Z",
+      "text": "March 2026 CPI: headline +0.9% m/m, 3.3% annual (highest since April 2024). Energy +10.9% (Iran war). Core CPI +0.2% m/m, 2.6% annual — below forecast. Real earnings -0.6% m/m. Tariff visible in apparel (+1%), airlines (+2.7%). Food unchanged.",
+      "tags": ["DATA", "ECON"],
+      "source": "BLS CPI release via CNBC, April 10 2026",
+      "claimState": "OBSERVED",
+      "weight": 1.0,
+      "posteriorImpact": "NONE. Cross-referenced with Fed Rate topic ev_007. Headline 3.3% is elevated but energy-driven (Iran), not demand-driven. Core 2.6% below forecast is H1-directional (disinflation in stickiest components). Real earnings -0.6% is H2-directional (consumer purchasing power erosion). Net: ambiguous, no posterior movement.",
+      "note": "Key for recession assessment: headline vs core divergence. If energy-driven inflation fades (Iran ceasefire), headline reverts. If core continues declining, Fed has room to cut (H1). If real earnings decline persists, consumer spending weakens (H2)."
+    },
+    {
+      "id": "ev_007",
+      "time": "2026-04-06T00:00:00Z",
+      "text": "Goldman Sachs raised US recession probability to 30% under current conditions (up from prior estimate). Cited tariff uncertainty and Iran war oil shock as primary drivers.",
+      "tags": ["ANALYSIS"],
+      "source": "Goldman Sachs via The Crypto Fire / financial media, April 2026",
+      "claimState": "PROPOSED",
+      "weight": 0.5,
+      "posteriorImpact": "NONE. ANALYSIS tag — Goldman forecast is informative but does not move posteriors. 30% is close to Polymarket ~25% anchor. Goldman is a market participant, not a primary data source. Noted for tracking consensus shift.",
+      "note": "Goldman recession probability is widely followed but has mixed track record. Tagged ANALYSIS per framework. Weight 0.5 reflects PROPOSED claim from non-primary source."
+    },
+    {
+      "id": "ev_008",
+      "time": "2026-03-04T00:00:00Z",
+      "text": "UCLA Anderson Forecast (Spring 2026): Signals 'meaningful shift in economic momentum since late 2025.' December 2025 forecast anticipated economy 'muddling through' amid tariff shocks and labor market stagnation. Spring revision suggests reacceleration driven by fiscal stimulus and AI investment.",
+      "tags": ["ANALYSIS"],
+      "source": "UCLA Anderson Forecast, March 4 2026",
+      "claimState": "PROPOSED",
+      "weight": 0.5,
+      "posteriorImpact": "NONE. ANALYSIS tag. H1-directional: academic forecast sees reacceleration, not contraction. But pre-dates Iran war (Feb 28 onset) — may be stale. Weight 0.5 for ANALYSIS + temporal gap.",
+      "note": "UCLA Anderson is respected macro forecaster but this was issued 4 days after Iran war began — unclear if incorporated. Flagged as potentially stale."
+    },
+    {
+      "id": "ev_009",
+      "time": "2026-04-01T00:00:00Z",
+      "text": "Tax Foundation analysis: 2026 Trump tariffs amount to average tax increase of $700 per US household. Trade deficit not meaningfully altered. NPR/CNBC one-year assessment: tariffs have not produced promised economic boom.",
+      "tags": ["DATA", "TRADE"],
+      "source": "Tax Foundation, NPR, CNBC, April 1-3 2026",
+      "claimState": "OBSERVED",
+      "weight": 0.8,
+      "posteriorImpact": "NONE. Cross-referenced with Section 122 topic ev_010. $700/household is quantified consumer burden — H2-directional (demand drag). But not yet translating to GDP contraction per GDPNow (2.0% Q1). Trade deficit unchanged undermines the policy rationale but is not recessionary per se.",
+      "note": "Multiple-source convergence. Tax Foundation is nonpartisan policy research. Weight 0.8 (DATA from credible non-primary source)."
+    }
+  ],
   "governance": null,
   "predictionScoring": {
     "_docs": "Calibration infrastructure. Snapshots auto-created by engine on each posterior update. Record outcome when BEA confirms or denies two consecutive negative quarters. Compute Brier score at resolution.",
@@ -860,6 +960,17 @@
           "H4": 0.12
         },
         "tolerance": 0.08
+      },
+      {
+        "slug": "calibration-section122-tariffs",
+        "assumptions": {
+          "H1": 0.07,
+          "H2": 0.18,
+          "H3": 0.33,
+          "H4": 0.42
+        },
+        "tolerance": 0.10,
+        "reason": "Tariff escalation (H3) directly increases recession probability via demand destruction and inflation. Deal (H4) with material rollback reduces tariff drag on consumer spending. Tariff policy is the primary demand-side shock vector."
       },
       {
         "slug": "hormuz-closure",

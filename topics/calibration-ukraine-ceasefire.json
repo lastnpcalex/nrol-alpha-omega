@@ -614,6 +614,18 @@
 
   "governance": null,
 
+  "dependencies": {
+    "_docs": "Cross-topic dependency declarations. Upstream topics whose posteriors this topic's assumptions depend on.",
+    "upstream": [
+      {
+        "slug": "calibration-houthi-posture",
+        "reason": "Houthi escalation ties to broader Iran war trajectory which diverts US attention from Ukraine mediation. US diplomatic bandwidth is zero-sum — Iran engagement crowds out Ukraine peace process.",
+        "assumptions": { "H1": 0.15, "H2": 0.45, "H3": 0.30, "H4": 0.10 },
+        "tolerance": 0.10
+      }
+    ]
+  },
+
   "predictionScoring": {
     "_docs": "Calibration infrastructure. Snapshots are auto-created by engine on each posterior update. Record outcome when topic resolves Dec 31 2026, then compute_calibration_report() for Brier analysis. Resolution: H1 fires if formal signed ceasefire by Dec 31 2026.",
     "snapshots": [

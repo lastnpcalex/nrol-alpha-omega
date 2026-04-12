@@ -683,6 +683,18 @@
 
   "governance": null,
 
+  "dependencies": {
+    "_docs": "Cross-topic dependency declarations. Upstream topics whose posteriors this topic's assumptions depend on.",
+    "upstream": [
+      {
+        "slug": "calibration-us-recession-2026",
+        "reason": "Recession increases political pressure for tariff rollback (H4 deal) or forces Congress to let Section 122 expire (H1). Recession probability shift affects H1/H4 balance.",
+        "assumptions": { "H1": 0.55, "H2": 0.22, "H3": 0.14, "H4": 0.09 },
+        "tolerance": 0.10
+      }
+    ]
+  },
+
   "predictionScoring": {
     "_docs": "Calibration infrastructure. Snapshots auto-created by engine on each posterior update. Record outcome when topic resolves, then compute_calibration_report() for Brier analysis.",
     "snapshots": [],

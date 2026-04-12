@@ -7,9 +7,9 @@
     "question": "Which party will control the US House of Representatives after the November 2026 midterm elections?",
     "resolution": "AP/Decision Desk calls House majority on or after Election Night, November 3, 2026. Controlling party must hold 218+ seats. Final seat counts certified by mid-December 2026.",
     "created": "2026-04-11T00:00:00Z",
-    "lastUpdated": "2026-04-11T00:00:00Z",
+    "lastUpdated": "2026-04-12T00:00:00Z",
     "status": "ACTIVE",
-    "dayCount": 0,
+    "dayCount": 1,
     "startDate": "2026-04-11T00:00:00Z",
     "classification": "ROUTINE",
     "topicType": "election",
@@ -58,38 +58,43 @@
         "label": "Democrats flip House (218+ seats)",
         "midpoint": 225,
         "unit": "seats",
-        "posterior": 0.42,
+        "posterior": 0.49,
         "description": "Democrats net enough gains to exceed 218 seats. Requires approximately a net shift of ~3 seats from current GOP margin. Historical base rate + current approval environment make this the modal outcome. A generic ballot advantage of +5pp or more, sustained through October, is the key threshold."
       },
       "H2": {
         "label": "Democrats gain seats but fall short of majority",
         "midpoint": 210,
         "unit": "seats",
-        "posterior": 0.28,
+        "posterior": 0.31,
         "description": "Democrats make meaningful gains (5-15 seats) but GOP retains majority below 218D seats. Consistent with a generic ballot lead of +2 to +4pp being partially absorbed by geographic/districting inefficiency. More likely if war rally effect persists into fall or Dem candidate recruitment underperforms."
       },
       "H3": {
         "label": "Republicans hold — status quo (+/- 5 seats from current margin)",
         "midpoint": 221,
         "unit": "seats",
-        "posterior": 0.18,
+        "posterior": 0.11,
         "description": "Election outcome roughly matches current seat distribution. Would represent a historic deviation from midterm pattern — only the 2002 cycle (post-9/11) and 1998 cycle (Clinton impeachment backlash) saw the president's party hold or gain. Requires sustained war rally effect, generic ballot narrowing to near-parity, or major Democratic collapse (scandal, candidate quality, GOTV failure)."
       },
       "H4": {
         "label": "Republicans gain seats",
         "midpoint": 228,
         "unit": "seats",
-        "posterior": 0.12,
+        "posterior": 0.09,
         "description": "GOP nets additional seats over current ~220. Historically very rare for the president's party at this approval level. Would require a reversal of every current trend: generic ballot, approval, economic sentiment. Possible only under a major geopolitical/economic shock that completely reframes the election as a wartime mandate vote. Tail risk only."
       }
     },
-    "expectedValue": 214,
+    "expectedValue": 217,
     "expectedUnit": "Democratic seats (post-election)",
     "posteriorHistory": [
       {
         "date": "2026-04-11T00:00:00Z",
         "posteriors": { "H1": 0.42, "H2": 0.28, "H3": 0.18, "H4": 0.12 },
         "note": "Initial priors. Justified by historical base rate (89% opp gains midterm), Trump approval ~41%/31% economy, generic ballot Dems +6-8pp. Moderated by active war rally effect and unusual generic ballot/presidential approval divergence."
+      },
+      {
+        "date": "2026-04-12T00:00:00Z",
+        "posteriors": { "H1": 0.49, "H2": 0.31, "H3": 0.11, "H4": 0.09 },
+        "note": "Indicator t2_dem_special_overperformance_plus5 FIRED: GA-14 runoff Dem overperformance +25pp vs 2024 baseline (threshold was +5pp). Applied prescribed posteriorEffect: H1 +7pp, H2 +3pp, H3 -7pp, H4 -3pp. Sum = 1.00. Also supported by WI Supreme Court +20 margin and 30-0 state legislative seat flip pattern, but those are corroborating context, not separate indicator fires."
       }
     ]
   },
@@ -210,9 +215,9 @@
         {
           "id": "t2_dem_special_overperformance_plus5",
           "desc": "Democrat outperforms 2024 presidential baseline by +5pp or more in any special or off-cycle election (including state-level) held before October 2026. Observable: certified results plus 2024 Biden baseline in same geography.",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": null,
+          "status": "FIRED",
+          "firedDate": "2026-04-07T00:00:00Z",
+          "note": "GA-14 special runoff: Harris (D) overperformed 2024 Biden baseline by +25pp (44.1% vs ~19% Biden 2024 in district). Threshold was +5pp. Fired on certified AP/NBC results.",
           "posteriorEffect": "H1 +7pp, H2 +3pp, H3 -7pp, H4 -3pp."
         },
         {
@@ -432,16 +437,83 @@
     ]
   },
 
-  "evidenceLog": [],
+  "evidenceLog": [
+    {
+      "id": "ev_001",
+      "time": "2026-04-07T00:00:00Z",
+      "text": "Georgia 14th District special election runoff: Republican Clay Fuller defeats Democrat Shawn Harris 55.9%-44.1% (11.8-point margin). Trump carried district by 37 points in 2024. Harris overperformed 2024 Democratic presidential baseline by +25 points — largest Democratic overperformance in a House special election since Trump took office.",
+      "tags": ["EVENT", "DATA"],
+      "source": "NBC News Decision Desk / AP, April 7 2026",
+      "claimState": "OBSERVED",
+      "weight": 1.0,
+      "posteriorImpact": "MODERATE — POSTERIORS MOVED. Indicator t2_dem_special_overperformance_plus5 FIRED: overperformance +25pp vs threshold +5pp. Applied: H1 0.42→0.49, H2 0.28→0.31, H3 0.18→0.11, H4 0.12→0.09. District is R+37 (not swing), but indicator definition includes 'any special or off-cycle election including state-level' — threshold is met on overperformance margin, not district competitiveness.",
+      "note": "AP effectiveTrust 0.99. This is the strongest special election signal to date. Half of top-10 Dem overperformances have come since 2024 election. District non-competitiveness attenuates direct seat-flip relevance but the MARGIN of overperformance is the signal, not the win/loss."
+    },
+    {
+      "id": "ev_002",
+      "time": "2026-04-07T00:00:00Z",
+      "text": "Wisconsin Supreme Court race: Democratic-aligned Chris Taylor defeats Republican-aligned Maria Lazar by ~20 points. Largest margin in competitive WI Supreme Court race since 2000. Taylor flipped historically Republican counties including Jefferson (Trump +16 in 2024) and Ozaukee (Trump +10). Moves court from 4-3 to 5-2 liberal majority.",
+      "tags": ["EVENT", "DATA"],
+      "source": "CNN analysis / AP results, April 7 2026",
+      "claimState": "OBSERVED",
+      "weight": 1.0,
+      "posteriorImpact": "MODERATE. Not a direct House indicator but Wisconsin is THE bellwether swing state (decided by <1pp in last 3 presidential elections). 20-point margin in a swing state judicial race is structurally significant — demonstrates extraordinary Dem enthusiasm advantage in a midterm-preview environment.",
+      "note": "CNN base trust 0.75 but reporting certified election results (primary data). County-level flips in suburban/exurban areas are directly relevant to House swing district demographics."
+    },
+    {
+      "id": "ev_003",
+      "time": "2026-04-07T00:00:00Z",
+      "text": "CNN analysis: Since Trump returned to White House, Democrats have flipped 30 state legislative seats to Republicans' zero. Half of top-10 special election overperformances have occurred since 2024 election. National Republicans spent money in GA-14 (unusual for safe seat) and still saw 25-point Dem overperformance.",
+      "tags": ["DATA", "ANALYSIS"],
+      "source": "CNN / Bloomberg Government, April 7 2026",
+      "claimState": "OBSERVED",
+      "weight": 0.85,
+      "posteriorImpact": "NONE — this is ANALYSIS synthesizing multiple data points. The individual data points (ev_001, ev_002) carry the weight. The 30-0 seat flip stat is notable but is aggregate context, not a new indicator firing.",
+      "note": "30-0 state legislative seat flips is a remarkable stat but each individual flip was a low-visibility race. Aggregate pattern is more informative than any single race. Tagged ANALYSIS because it requires interpretation."
+    },
+    {
+      "id": "ev_004",
+      "time": "2026-04-12T00:00:00Z",
+      "text": "RealClearPolitics generic congressional ballot average: Democrats +5.4 (47.4% D vs 42.0% R). Morning Consult weekly tracker: Democrats lead 45%-42% among registered voters — 6-point net swing from Republican advantage at start of Trump's second term.",
+      "tags": ["POLL"],
+      "source": "RealClearPolling / Morning Consult tracker, April 12 2026",
+      "claimState": "OBSERVED",
+      "weight": 1.0,
+      "posteriorImpact": "NONE — matches existing prior assumption (generic ballot Dems +6-8pp). RCP +5.4 is at the lower end of the range assumed in prior justification. This is CONFIRMING data, not new information. Indicator t1_generic_ballot_sustained_plus5 requires +5pp sustained for 30+ consecutive days entering October — April reading is too early to fire.",
+      "note": "RCP and Morning Consult are primary polling aggregators. +5.4 is significant — historical models associate sustained +5pp with House flip. But April is 7 months from election. Monitor monthly."
+    },
+    {
+      "id": "ev_005",
+      "time": "2026-04-10T00:00:00Z",
+      "text": "March 2026 CPI: headline 3.3% annual (Iran war energy driven), core 2.6% annual. Real earnings -0.6% m/m. Tariff impact visible in goods categories. Consumer purchasing power erosion is the economic signal most relevant to midterm voting behavior.",
+      "tags": ["DATA"],
+      "source": "BLS CPI release, April 10 2026",
+      "claimState": "OBSERVED",
+      "weight": 0.8,
+      "posteriorImpact": "NONE. Cross-referenced with recession and tariff topics. CPI data is a structural input to voter sentiment, not a direct midterm indicator. Indicator t3_tariff_economic_hit_visible partially matches (tariff attribution in news coverage) but effect is small and dominated by energy. Real earnings decline is a leading indicator of economic disapproval.",
+      "note": "BLS primary data. Weight 0.8 because midterm relevance is indirect — CPI affects approval which affects generic ballot which affects outcome. Chain of inference, not direct observation."
+    },
+    {
+      "id": "ev_006",
+      "time": "2026-04-11T00:00:00Z",
+      "text": "Manhattan DA investigating Eric Swalwell sexual assault allegation; multiple Democrats calling for gubernatorial withdrawal. Single-candidate CA governor scandal.",
+      "tags": ["EVENT"],
+      "source": "CNN, April 11 2026",
+      "claimState": "PROPOSED",
+      "weight": 0.495,
+      "posteriorImpact": "NONE. Single-candidate gubernatorial scandal, not party-wide. No direct House seat impact unless Swalwell resigns from Congress. Anti-indicator anti_h4_no_dem_scandal_or_collapse NOT fired — this is not a party-wide event. Posteriors unchanged.",
+      "note": "CNN effectiveTrust 0.99, EVENT domain 0.99. Correctly triaged as PROPOSED (single source, investigation stage). This was the first live pipeline test entry."
+    }
+  ],
 
   "dataFeeds": {
     "generic_ballot_dem_advantage": {
       "label": "Generic Congressional Ballot — Dem Advantage (pp)",
-      "value": 6.5,
+      "value": 5.4,
       "unit": "percentage points",
       "baseline": 1.5,
-      "note": "Baseline is 2024 national House popular vote margin. Current value approx. April 2026 per stated context. Update from RCP average monthly.",
-      "asOf": "2026-04-11"
+      "note": "RCP average April 12 2026: Dems 47.4%, GOP 42.0%. Updated from RealClearPolling. Prior value was 6.5 (stated context estimate). Morning Consult weekly: Dems +3 (45-42 RV).",
+      "asOf": "2026-04-12"
     },
     "trump_approval_overall": {
       "label": "Trump Approval — Overall (%)",
@@ -501,11 +573,11 @@
     },
     "special_election_overperformance": {
       "label": "Average Dem Special Election Overperformance vs. 2024 Baseline",
-      "value": null,
+      "value": 25.0,
       "unit": "percentage points",
       "baseline": 0.0,
-      "note": "Calculate as mean Dem overperformance across all 2026 special elections vs. 2024 presidential result in same geography. Populate as specials occur.",
-      "asOf": null
+      "note": "GA-14 runoff (April 7 2026): Harris (D) overperformed 2024 Biden baseline by +25pp. Only one 2026 House special so far — single data point. Prior FL-01 (2025) was +23pp. NBC News Decision Desk.",
+      "asOf": "2026-04-12"
     }
   },
 
@@ -542,6 +614,24 @@
   ],
 
   "governance": null,
+
+  "dependencies": {
+    "_docs": "Cross-topic dependency declarations. Upstream topics whose posteriors this topic's assumptions depend on.",
+    "upstream": [
+      {
+        "slug": "calibration-us-recession-2026",
+        "reason": "Economic conditions are the #1 structural predictor of midterm outcomes. If recession materializes (H2+H3+H4), Dem flip probability (H1) increases substantially. Trump economy approval (currently 31%) would collapse further in recession.",
+        "assumptions": { "H1": 0.55, "H2": 0.22, "H3": 0.14, "H4": 0.09 },
+        "tolerance": 0.10
+      },
+      {
+        "slug": "calibration-section122-tariffs",
+        "reason": "Tariff policy directly affects consumer prices and economic sentiment. Escalation (H3) or deal (H4) outcomes change the economic environment that drives midterm voting. Visible tariff costs ($700/household) are already a factor in economic disapproval.",
+        "assumptions": { "H1": 0.07, "H2": 0.18, "H3": 0.33, "H4": 0.42 },
+        "tolerance": 0.10
+      }
+    ]
+  },
 
   "predictionScoring": {
     "_docs": "Snapshots auto-created by engine on each posterior update. Outcome recorded after AP calls House majority (est. November 3-4, 2026). Compute Brier scores at resolution.",
