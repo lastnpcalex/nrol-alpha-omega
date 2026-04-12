@@ -1,13 +1,12 @@
 {
   "_protocol": "Calibration topic — prospective election forecast. Populated 2026-04-11. Update on each new generic ballot release, special election result, or major political development.",
-
   "meta": {
     "slug": "calibration-midterms-2026",
     "title": "US Midterms 2026 — House Control",
     "question": "Which party will control the US House of Representatives after the November 2026 midterm elections?",
     "resolution": "AP/Decision Desk calls House majority on or after Election Night, November 3, 2026. Controlling party must hold 218+ seats. Final seat counts certified by mid-December 2026.",
     "created": "2026-04-11T00:00:00Z",
-    "lastUpdated": "2026-04-12T00:00:00Z",
+    "lastUpdated": "2026-04-12T21:30:00+00:00",
     "status": "ACTIVE",
     "dayCount": 1,
     "startDate": "2026-04-11T00:00:00Z",
@@ -15,10 +14,17 @@
     "topicType": "election",
     "horizon": "~207 days (Election Day: Nov 3, 2026)"
   },
-
   "tagConfig": {
     "_docs": "directionHints: positive = evidence favors this H, negative = evidence cuts against. POLL data is weak signal. EVENT (special election result, candidate filing) is strong.",
-    "availableTags": ["EVENT", "DATA", "POLL", "RHETORIC", "INTEL", "ANALYSIS", "FUNDRAISING"],
+    "availableTags": [
+      "EVENT",
+      "DATA",
+      "POLL",
+      "RHETORIC",
+      "INTEL",
+      "ANALYSIS",
+      "FUNDRAISING"
+    ],
     "directionHints": {
       "EVENT": {
         "H1": 1,
@@ -38,10 +44,11 @@
       "ANALYSIS": {},
       "FUNDRAISING": {}
     },
-    "escalationTags": ["EVENT"],
+    "escalationTags": [
+      "EVENT"
+    ],
     "deescalationTags": []
   },
-
   "model": {
     "_priorJustification": [
       "BASE RATE: Since 1946, the president's party loses House seats in 17 of 19 midterm cycles (~89%). Average loss ~25 seats. GOP currently holds ~220 seats, needing to lose only ~3 net to lose majority.",
@@ -88,17 +95,26 @@
     "posteriorHistory": [
       {
         "date": "2026-04-11T00:00:00Z",
-        "posteriors": { "H1": 0.42, "H2": 0.28, "H3": 0.18, "H4": 0.12 },
+        "posteriors": {
+          "H1": 0.42,
+          "H2": 0.28,
+          "H3": 0.18,
+          "H4": 0.12
+        },
         "note": "Initial priors. Justified by historical base rate (89% opp gains midterm), Trump approval ~41%/31% economy, generic ballot Dems +6-8pp. Moderated by active war rally effect and unusual generic ballot/presidential approval divergence."
       },
       {
         "date": "2026-04-12T00:00:00Z",
-        "posteriors": { "H1": 0.49, "H2": 0.31, "H3": 0.11, "H4": 0.09 },
+        "posteriors": {
+          "H1": 0.49,
+          "H2": 0.31,
+          "H3": 0.11,
+          "H4": 0.09
+        },
         "note": "Indicator t2_dem_special_overperformance_plus5 FIRED: GA-14 runoff Dem overperformance +25pp vs 2024 baseline (threshold was +5pp). Applied prescribed posteriorEffect: H1 +7pp, H2 +3pp, H3 -7pp, H4 -3pp. Sum = 1.00. Also supported by WI Supreme Court +20 margin and 30-0 state legislative seat flip pattern, but those are corroborating context, not separate indicator fires."
       }
     ]
   },
-
   "subModels": {
     "genericBallotTracker": {
       "label": "Generic Congressional Ballot — Democratic Advantage",
@@ -137,7 +153,6 @@
       "history": []
     }
   },
-
   "indicators": {
     "_design_rules": [
       "Each indicator must be OBSERVABLE — polling averages, filed FEC reports, certified election results. Not pundit commentary.",
@@ -339,7 +354,6 @@
       ]
     }
   },
-
   "actorModel": {
     "description": "Election outcomes are driven by structural environment (approval, economy, war) and by specific actor decisions that shift recruitment, enthusiasm, and turnout. Five primary actors.",
     "actors": {
@@ -436,13 +450,15 @@
       "ECONOMIC PAIN TIMELINE — tariff impacts have a lag. Watch Q3 GDP and August/September CPI. If inflation spikes hit before October, H3/H4 probabilities collapse further."
     ]
   },
-
   "evidenceLog": [
     {
       "id": "ev_001",
       "time": "2026-04-07T00:00:00Z",
       "text": "Georgia 14th District special election runoff: Republican Clay Fuller defeats Democrat Shawn Harris 55.9%-44.1% (11.8-point margin). Trump carried district by 37 points in 2024. Harris overperformed 2024 Democratic presidential baseline by +25 points — largest Democratic overperformance in a House special election since Trump took office.",
-      "tags": ["EVENT", "DATA"],
+      "tags": [
+        "EVENT",
+        "DATA"
+      ],
       "source": "NBC News Decision Desk / AP, April 7 2026",
       "claimState": "OBSERVED",
       "weight": 1.0,
@@ -453,7 +469,10 @@
       "id": "ev_002",
       "time": "2026-04-07T00:00:00Z",
       "text": "Wisconsin Supreme Court race: Democratic-aligned Chris Taylor defeats Republican-aligned Maria Lazar by ~20 points. Largest margin in competitive WI Supreme Court race since 2000. Taylor flipped historically Republican counties including Jefferson (Trump +16 in 2024) and Ozaukee (Trump +10). Moves court from 4-3 to 5-2 liberal majority.",
-      "tags": ["EVENT", "DATA"],
+      "tags": [
+        "EVENT",
+        "DATA"
+      ],
       "source": "CNN analysis / AP results, April 7 2026",
       "claimState": "OBSERVED",
       "weight": 1.0,
@@ -464,7 +483,10 @@
       "id": "ev_003",
       "time": "2026-04-07T00:00:00Z",
       "text": "CNN analysis: Since Trump returned to White House, Democrats have flipped 30 state legislative seats to Republicans' zero. Half of top-10 special election overperformances have occurred since 2024 election. National Republicans spent money in GA-14 (unusual for safe seat) and still saw 25-point Dem overperformance.",
-      "tags": ["DATA", "ANALYSIS"],
+      "tags": [
+        "DATA",
+        "ANALYSIS"
+      ],
       "source": "CNN / Bloomberg Government, April 7 2026",
       "claimState": "OBSERVED",
       "weight": 0.85,
@@ -475,7 +497,9 @@
       "id": "ev_004",
       "time": "2026-04-12T00:00:00Z",
       "text": "RealClearPolitics generic congressional ballot average: Democrats +5.4 (47.4% D vs 42.0% R). Morning Consult weekly tracker: Democrats lead 45%-42% among registered voters — 6-point net swing from Republican advantage at start of Trump's second term.",
-      "tags": ["POLL"],
+      "tags": [
+        "POLL"
+      ],
       "source": "RealClearPolling / Morning Consult tracker, April 12 2026",
       "claimState": "OBSERVED",
       "weight": 1.0,
@@ -486,7 +510,9 @@
       "id": "ev_005",
       "time": "2026-04-10T00:00:00Z",
       "text": "March 2026 CPI: headline 3.3% annual (Iran war energy driven), core 2.6% annual. Real earnings -0.6% m/m. Tariff impact visible in goods categories. Consumer purchasing power erosion is the economic signal most relevant to midterm voting behavior.",
-      "tags": ["DATA"],
+      "tags": [
+        "DATA"
+      ],
       "source": "BLS CPI release, April 10 2026",
       "claimState": "OBSERVED",
       "weight": 0.8,
@@ -497,15 +523,43 @@
       "id": "ev_006",
       "time": "2026-04-11T00:00:00Z",
       "text": "Manhattan DA investigating Eric Swalwell sexual assault allegation; multiple Democrats calling for gubernatorial withdrawal. Single-candidate CA governor scandal.",
-      "tags": ["EVENT"],
+      "tags": [
+        "EVENT"
+      ],
       "source": "CNN, April 11 2026",
       "claimState": "PROPOSED",
       "weight": 0.495,
       "posteriorImpact": "NONE. Single-candidate gubernatorial scandal, not party-wide. No direct House seat impact unless Swalwell resigns from Congress. Anti-indicator anti_h4_no_dem_scandal_or_collapse NOT fired — this is not a party-wide event. Posteriors unchanged.",
       "note": "CNN effectiveTrust 0.99, EVENT domain 0.99. Correctly triaged as PROPOSED (single source, investigation stage). This was the first live pipeline test entry."
+    },
+    {
+      "id": "ev_007",
+      "time": "2026-04-12T20:00:00Z",
+      "text": "Generic ballot streak tracker initialized. RCP average Dems +5.4pp (April 12). Ballotpedia shows +6 as of April 2. RealClearPolling Facebook shows 45.3-42.6 (D+2.7, date unclear). Sabato Crystal Ball model gives Dems strong chance to retake House based on generic ballot fundamentals. Streak counter set to 0 pending confirmation of 30 consecutive days at +5pp threshold.",
+      "tags": [
+        "DATA",
+        "POLL"
+      ],
+      "source": "RealClearPolling / Ballotpedia / Sabato Crystal Ball",
+      "claimState": "SUPPORTED",
+      "weight": 0.85,
+      "posteriorImpact": "NONE. t1_generic_ballot_sustained_plus5 requires 30+ consecutive days at Dems +5pp. Streak tracking begins but threshold not yet met. Current readings are above +5pp but consecutive-day confirmation requires daily monitoring.",
+      "note": "Source trust: RealClearPolling 0.70, Ballotpedia index is aggregation of multiple pollsters. The +5.4pp RCP reading and +6pp Ballotpedia reading are consistent with threshold being met currently, but the 30-day duration requirement is the gating factor."
+    },
+    {
+      "id": "ev_008",
+      "time": "2026-04-12T20:30:00Z",
+      "text": "FEC Q1 2026 quarterly filings due April 15. DCCC and NRCC cash-on-hand data will populate dccc_coh and nrcc_coh data feeds. In Q1 2025, DCCC raised $36.9M vs NRCC $36.7M (near parity). Indicator t2_dccc_fundraising_advantage fires if DCCC outraises NRCC by $15M+ in any quarter.",
+      "tags": [
+        "DATA"
+      ],
+      "source": "FEC / Ballotpedia / Campaigns & Elections",
+      "claimState": "PROPOSED",
+      "weight": 0.7,
+      "posteriorImpact": "NONE. Filing not yet released. Q1 2025 baseline shows near-parity (~$200K DCCC lead). If Q1 2026 shows significant DCCC advantage, t2_dccc_fundraising_advantage should be evaluated.",
+      "note": "Source trust: FEC filings are official government data (0.95). Filing deadline is April 15, 2026. Check FEC.gov/data/committee/C00000935/ (DCCC) and C00075820 (NRCC) after that date."
     }
   ],
-
   "dataFeeds": {
     "generic_ballot_dem_advantage": {
       "label": "Generic Congressional Ballot — Dem Advantage (pp)",
@@ -557,11 +611,11 @@
     },
     "days_to_election": {
       "label": "Days to Election Day (Nov 3, 2026)",
-      "value": 206,
+      "value": 205,
       "unit": "days",
       "baseline": 206,
       "note": "Countdown from 2026-04-11. Update each cycle.",
-      "asOf": "2026-04-11"
+      "asOf": "2026-04-12"
     },
     "cook_tossup_lean_dem_seats": {
       "label": "Cook Political Report — Toss Up + Lean Dem Seats (currently GOP-held)",
@@ -578,9 +632,28 @@
       "baseline": 0.0,
       "note": "GA-14 runoff (April 7 2026): Harris (D) overperformed 2024 Biden baseline by +25pp. Only one 2026 House special so far — single data point. Prior FL-01 (2025) was +23pp. NBC News Decision Desk.",
       "asOf": "2026-04-12"
+    },
+    "generic_ballot_streak": {
+      "label": "Generic Ballot Dems +5pp Streak (consecutive days)",
+      "value": 0,
+      "unit": "days",
+      "baseline": 0,
+      "note": "Tracks consecutive days where RCP generic ballot average shows Dems +5pp or better. Indicator t1_generic_ballot_sustained_plus5 fires at 30 days. Current RCP average: Dems +5.4pp as of April 12. Streak tracking begins now. Ballotpedia shows +6 as of April 2; RCP Facebook post shows 45.3-42.6 (D+2.7). Need to reconcile sources. Using RCP website as canonical. Prior readings: ~+6.5 (pre-April), +5.4 (April 12). Streak starts when sustained +5pp is confirmed across multiple consecutive readings.",
+      "asOf": "2026-04-12",
+      "history": [
+        {
+          "date": "2026-04-02",
+          "value": 6.0,
+          "source": "Ballotpedia polling index"
+        },
+        {
+          "date": "2026-04-12",
+          "value": 5.4,
+          "source": "RealClearPolling"
+        }
+      ]
     }
   },
-
   "watchpoints": [
     "FEC Q1 2026 quarterly fundraising reports due ~April 15. Populate dccc_coh and nrcc_coh immediately.",
     "Any special House election called for a vacant seat — this is a tier-1 or tier-2 event.",
@@ -593,7 +666,6 @@
     "September 2026 is the last major update window before the election. All tier-1 and tier-2 indicators should resolve by then.",
     "Watch for Dem generic ballot divergence explanation: does the gap between Trump individual approval and generic ballot close (normalizes to historical pattern) or persist (structural GOP floor)?"
   ],
-
   "searchQueries": [
     "generic congressional ballot 2026 polling average {YYYY-MM}",
     "Trump approval rating poll {YYYY-MM}",
@@ -612,27 +684,34 @@
     "site:cookpolitical.com House 2026",
     "site:sabatoscrystalball.com House 2026 ratings"
   ],
-
   "governance": null,
-
   "dependencies": {
     "_docs": "Cross-topic dependency declarations. Upstream topics whose posteriors this topic's assumptions depend on.",
     "upstream": [
       {
         "slug": "calibration-us-recession-2026",
         "reason": "Economic conditions are the #1 structural predictor of midterm outcomes. If recession materializes (H2+H3+H4), Dem flip probability (H1) increases substantially. Trump economy approval (currently 31%) would collapse further in recession.",
-        "assumptions": { "H1": 0.55, "H2": 0.22, "H3": 0.14, "H4": 0.09 },
-        "tolerance": 0.10
+        "assumptions": {
+          "H1": 0.55,
+          "H2": 0.22,
+          "H3": 0.14,
+          "H4": 0.09
+        },
+        "tolerance": 0.1
       },
       {
         "slug": "calibration-section122-tariffs",
         "reason": "Tariff policy directly affects consumer prices and economic sentiment. Escalation (H3) or deal (H4) outcomes change the economic environment that drives midterm voting. Visible tariff costs ($700/household) are already a factor in economic disapproval.",
-        "assumptions": { "H1": 0.07, "H2": 0.18, "H3": 0.33, "H4": 0.42 },
-        "tolerance": 0.10
+        "assumptions": {
+          "H1": 0.07,
+          "H2": 0.18,
+          "H3": 0.33,
+          "H4": 0.42
+        },
+        "tolerance": 0.1
       }
     ]
   },
-
   "predictionScoring": {
     "_docs": "Snapshots auto-created by engine on each posterior update. Outcome recorded after AP calls House majority (est. November 3-4, 2026). Compute Brier scores at resolution.",
     "snapshots": [],
