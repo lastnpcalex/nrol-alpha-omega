@@ -102,6 +102,11 @@
     "specific search query {date}"
   ],
 
+  "dependencies": {
+    "_docs": "Cross-topic dependency declarations. Upstream topics whose posteriors this topic's assumptions depend on. Checked mechanically on save — stale assumptions surface as governance issues.",
+    "upstream": []
+  },
+
   "governance": null,
 
   "predictionScoring": {

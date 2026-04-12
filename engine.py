@@ -147,6 +147,36 @@ def save_topic(topic: dict) -> None:
             "lastComputed": _now_iso(),
         }
 
+        # --- Epistemic improvement: cross-topic dependency staleness ---
+        try:
+            from framework.dependencies import check_stale_dependencies, propagate_alert
+            stale_deps = check_stale_dependencies(topic)
+            stale_list = [s for s in stale_deps if s.get("stale")]
+            topic["governance"]["staleDependencies"] = len(stale_list)
+            if stale_list:
+                for sd in stale_list:
+                    issues.append(
+                        f"Stale dependency: {sd['upstream_slug']}.{sd['hypothesis']} "
+                        f"assumed={sd['assumed']}, actual={sd['actual']}, "
+                        f"drift={sd['drift']:.2%}"
+                    )
+                topic["governance"]["staleDependencyDetails"] = stale_list
+
+            # Check if THIS topic's shift affects downstream topics
+            downstream_alerts = propagate_alert(topic)
+            if downstream_alerts:
+                topic["governance"]["downstreamAlerts"] = downstream_alerts
+                for alert in downstream_alerts:
+                    issues.append(
+                        f"Downstream alert: {alert['downstream_slug']} has "
+                        f"{len(alert['stale_assumptions'])} stale assumption(s) "
+                        f"from this topic"
+                    )
+        except ImportError:
+            pass
+        except Exception:
+            pass  # Dependency checks must never prevent saving
+
         # --- Epistemic improvement: calibration health ---
         try:
             from framework.scoring import get_calibration_health
@@ -1806,6 +1836,105 @@ if (typeof SNAPSHOT_MODE !== 'undefined' && SNAPSHOT_MODE) {
     return str(out_path)
 
 
+def triage_headline(headline: str, source: str = None) -> dict:
+    """
+    Triage a news headline against all active topics.
+
+    Top-level engine function wrapping framework.triage. Returns
+    indicator matches, pre-committed posterior effects, source trust,
+    R_t status, dependency implications, and recommended action.
+    """
+    from framework.triage import triage
+    return triage(headline, source=source)
+
+
+def get_overview() -> dict:
+    """
+    Cross-topic overview for the mirror dashboard.
+
+    Returns all active topics with posteriors, governance health,
+    R_t, stale dependencies, and dependency graph.
+    """
+    topics_data = []
+    for t_info in list_topics():
+        slug = t_info["slug"]
+        try:
+            topic = load_topic(slug)
+        except (FileNotFoundError, ValueError):
+            continue
+
+        gov = topic.get("governance") or {}
+        hypotheses = topic.get("model", {}).get("hypotheses", {})
+        posteriors = {k: h["posterior"] for k, h in hypotheses.items()}
+
+        topics_data.append({
+            "slug": slug,
+            "title": t_info["title"],
+            "status": t_info["status"],
+            "classification": t_info.get("classification", "ROUTINE"),
+            "lastUpdated": t_info.get("lastUpdated", ""),
+            "posteriors": posteriors,
+            "expectedValue": topic.get("model", {}).get("expectedValue"),
+            "expectedUnit": topic.get("model", {}).get("expectedUnit"),
+            "health": gov.get("health"),
+            "rt": gov.get("rt", {}),
+            "staleDependencies": gov.get("staleDependencies", 0),
+            "downstreamAlerts": gov.get("downstreamAlerts", []),
+            "evidenceFreshness": gov.get("evidenceFreshness", {}),
+        })
+
+    # Build dependency graph
+    dep_graph = None
+    try:
+        from framework.dependencies import build_dependency_graph
+        dep_graph = build_dependency_graph()
+    except (ImportError, Exception):
+        pass
+
+    return {
+        "topics": topics_data,
+        "dependency_graph": dep_graph,
+        "timestamp": _now_iso(),
+    }
+
+
+def get_trajectories(slug: str = None) -> dict:
+    """
+    Get posterior trajectories for the mirror dashboard.
+
+    Returns posteriorHistory for one or all topics, formatted for
+    time-series charting.
+    """
+    trajectories = {}
+
+    if slug:
+        slugs = [slug]
+    else:
+        slugs = [t["slug"] for t in list_topics()
+                 if t["status"] == "ACTIVE"]
+
+    for s in slugs:
+        try:
+            topic = load_topic(s)
+        except (FileNotFoundError, ValueError):
+            continue
+
+        history = topic.get("model", {}).get("posteriorHistory", [])
+        hypotheses = topic.get("model", {}).get("hypotheses", {})
+        h_labels = {k: h.get("label", k) for k, h in hypotheses.items()}
+
+        trajectories[s] = {
+            "title": topic.get("meta", {}).get("title", s),
+            "hypothesis_labels": h_labels,
+            "history": history,
+        }
+
+    return {
+        "trajectories": trajectories,
+        "timestamp": _now_iso(),
+    }
+
+
 def list_dashboards(slug: str = None) -> list[dict]:
     """List generated dashboard snapshots, optionally filtered by topic slug."""
     results = []
@@ -1930,6 +2059,47 @@ if __name__ == "__main__":
             print("  No dashboards generated yet.")
         for d in dashes:
             print(f"  {d['slug']:20s} {d['filename']}")
+
+    elif cmd == "triage":
+        if len(sys.argv) < 3:
+            print("Usage: python engine.py triage \"headline text\" [source]")
+            sys.exit(1)
+        headline = sys.argv[2]
+        source = sys.argv[3] if len(sys.argv) > 3 else None
+        result = triage_headline(headline, source)
+        print(f"\n  TRIAGE: {result['summary']}")
+        for m in result["matches"]:
+            print(f"\n  [{m['action']}] {m['slug']} ({m['relevance']})")
+            print(f"    {m['explanation']}")
+            if m.get("pre_committed_effects"):
+                for eff in m["pre_committed_effects"]:
+                    print(f"    → {eff['indicator_id']}: {eff['posterior_effect']}")
+            if m.get("dependency_implications"):
+                for dep in m["dependency_implications"]:
+                    print(f"    ↓ {dep['note']}")
+        if not result["matches"]:
+            print("  No active topics matched.")
+        print()
+
+    elif cmd == "overview":
+        ov = get_overview()
+        print(f"\n  OVERVIEW — {len(ov['topics'])} topics")
+        print(f"  {'─' * 50}")
+        for t in ov["topics"]:
+            rt = t.get("rt", {})
+            health = t.get("health", "?")
+            stale = t.get("staleDependencies", 0)
+            posteriors = " | ".join(f"{k}={v:.0%}" for k, v in t["posteriors"].items())
+            stale_note = f" ⚠ {stale} stale deps" if stale else ""
+            print(f"  [{health:8s}] {t['slug']:25s} {posteriors}{stale_note}")
+        if ov.get("dependency_graph", {}).get("stale_edges"):
+            print(f"\n  STALE DEPENDENCIES:")
+            for edge in ov["dependency_graph"]["stale_edges"]:
+                for h, d in edge["drift"].items():
+                    print(f"    {edge['from']}.{h} → {edge['to']}: "
+                          f"assumed={d['assumed']}, actual={d['actual']}, "
+                          f"drift={d['drift']:.2%}")
+        print()
 
     else:
         print(f"Unknown command: {cmd}")

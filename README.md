@@ -6,23 +6,92 @@
 
 # NROL-αΩ
 
-**Necro Rationalist Operations Laboratory-αΩ** — Governor-gated Bayesian estimation engine for tracking Current Things.
+**Necro Rationalist Operations Laboratory-αΩ** — A personal epistemic operating system.
 
-A framework for decomposing any predictive question into hypotheses, indicators, evidence, and actor models — then maintaining posteriors with epistemic discipline. Evidence-first, never vibes. The governor enforces that discipline automatically: rhetoric can't move posteriors, stale evidence gets flagged, sources earn trust through track record, and contradictions block updates until resolved.
+Governor-gated Bayesian estimation engine that scaffolds the human-LLM pair so neither can degrade the other's reasoning. The human brings judgment. The LLM brings perception, tool use, and knowledge retrieval. The governor prevents both from updating on vibes, recycling stale evidence, or mistaking repetition for confirmation.
+
+Not a forecasting tool. A framework for navigating uncertainty across every domain that matters to your life — geopolitics, economics, AI, climate, finance — with tracked beliefs, auditable reasoning, and calibration feedback that tells you where you're actually wrong.
 
 ## Why This Exists
 
-Forecasting hard questions — "how long will the Strait of Hormuz stay closed?" — is easy to do badly. Common failure modes:
+You want to understand what's happening in the world without becoming a full-time forecaster. You want to drop a headline into a system and know whether it matters, how much, and to what. You want a record of how your beliefs actually evolved, not how you remember them evolving. And you want the LLM helping you to be structurally prevented from doing what LLMs do worst: confidently agreeing with whatever you already believe.
+
+The system solves a specific problem: **an LLM without guardrails will sycophantically mirror your priors, and a human without structure will drift without noticing.** The governor breaks both failure modes by making every update pass through mechanical checks — cite your evidence, pass the hallucination checklist, survive the pre-commit gate, or get blocked. The LLM doesn't get to update on vibes. Neither do you.
+
+Common failure modes this makes structurally harder:
 
 1. **Anchoring**: you pick a number and then find evidence to support it
 2. **Source laundering**: a rumor gets repeated across outlets and starts looking like consensus
 3. **Rhetoric-as-evidence**: a politician's threat gets treated like an observed event
 4. **Stale priors**: yesterday's assessment gets copy-pasted as today's with no new information
 5. **Confirmation bias**: counterevidence gets lower weight because it's inconvenient
+6. **Sycophantic convergence**: the LLM agrees with you, you feel validated, both walk away more confident and no more accurate
 
-This engine makes all of those structurally harder to do. Every mutation — adding evidence, shifting posteriors, updating sub-models — passes through governance checks. The system tracks its own calibration (Brier scores), detects contradictions in the evidence log, and maintains domain-specific trust ratings for sources based on their empirical track record.
+Every mutation — adding evidence, shifting posteriors, updating sub-models — passes through governance checks. The system tracks its own calibration (Brier scores), detects contradictions in the evidence log, and maintains domain-specific trust ratings for sources based on their empirical track record.
 
 The goal isn't to be right. The goal is to *know how wrong you are* and get less wrong over time.
+
+## How You Use It
+
+### Daily (2 minutes): Triage
+
+Drop a headline into the triage function. The system checks it against pre-registered indicators, watchpoints, and domain keywords across all active topics and tells you:
+
+- **INDICATOR_MATCH → UPDATE_CYCLE**: This fires a pre-registered indicator. You already committed to what this means for your posteriors at topic design time. Run the update.
+- **TOPIC_RELEVANT → MONITOR/REVIEW**: This touches a topic but doesn't match a specific indicator. Log it as evidence if substantive. If the same kind of event keeps showing up with no indicator match, you need a new indicator — the system's gap is now visible.
+- **IRRELEVANT → IGNORE**: Doesn't touch any active topic. Move on.
+
+The triage layer draws on SOC alert triage architecture from cybersecurity — matching incoming signals against pre-registered indicators of compromise. Nobody has applied this pattern to personal epistemic use before. It includes a third output mode (TOPIC_RELEVANT) that addresses the flexibility critique from [Millidge (2024)](https://www.beren.io/2024-05-05-Does-Scaffolding-Help-Humans/): the system doesn't only see what it pre-registered. It also flags novel events that touch a topic's domain without matching a specific indicator.
+
+```python
+from engine import triage_headline
+r = triage_headline("CENTCOM announces new phase of operations in Persian Gulf", "CENTCOM")
+# → INDICATOR_MATCH on hormuz-closure, fires 'new_phase' (tier1_critical)
+# → Pre-committed effect: H3/H4 +15-25pp
+# → Source trust: 95% (high)
+# → Action: UPDATE_CYCLE
+```
+
+### Weekly (30 minutes): Update cycle
+
+Pick the topic with the worst R_t (evidence staleness score). Run a full governed update — intel search, evidence ingestion, indicator check, posterior update or hold, brief generation. The governor enforces the full OODA loop: search for genuinely new information, validate before ingesting, cite evidence for every shift, and pass the 14-point hallucination checklist before posteriors move.
+
+### Ongoing: The Mirror
+
+The mirror dashboard (`/mirror`) is the longitudinal surface — how your beliefs have actually evolved, not how you remember them evolving:
+
+- **Cross-topic overview**: all topics at a glance with posterior bars, governance health, R_t regime, last updated
+- **Drift alerts**: stale evidence, stale cross-topic dependencies, R_t in DANGEROUS/RUNAWAY
+- **Posterior trajectories**: time-series charts of how each hypothesis has moved over weeks and months
+- **Dependency graph**: which topics feed into which, with stale edges highlighted
+
+This is the product nobody else has. Metaculus tracks point estimates. Prediction markets track prices. This system tracks the full trajectory with governance metadata, evidence provenance, source trust histories, and calibration feedback attached.
+
+### Cross-Topic Dependencies
+
+Topics are not independent. "Will there be a recession?" and "Where will the Fed rate be?" are correlated through shared evidence and shared causal structure. The dependency system lets you declare these relationships:
+
+```json
+{
+  "dependencies": {
+    "upstream": [{
+      "slug": "calibration-us-recession-2026",
+      "assumptions": {"H1": 0.55, "H3": 0.15},
+      "tolerance": 0.08
+    }]
+  }
+}
+```
+
+When the upstream topic's posteriors drift beyond the assumed values, the downstream topic's governance health degrades and the mirror shows a stale dependency alert. The operator reviews whether the assumption still holds. This is alert-based, not auto-propagation — the math for Bayesian forecast reconciliation exists ([Athanasopoulos et al., 2024](https://robjhyndman.com/papers/hf_review.pdf)), but the operator decides whether to act.
+
+### Loom Integration
+
+The system is designed to be operated through [A Shadow Loom](https://github.com/lastnpcalex/a-shadow-loom) — a tree-branching conversation interface where every chat is a directed graph, not a linear thread. The mirror dashboard embeds in the loom as a persistent panel. When you see a drift alert or a triage result that needs investigation, you branch into a conversation with Claude Code that has the full NROL engine loaded.
+
+The tree structure maps to analytical branching: explore "what if we fire this indicator" on one branch and "what if we hold" on another. Each branch preserves the reasoning. The topic's posteriorHistory is linear, but the loom captures the *deliberation* that produced it — the part no other system preserves.
+
+The mirror is the read surface (what does the system know). The loom is the write surface (what should we do about it).
 
 ### Epistemic Limitations
 
@@ -310,6 +379,8 @@ governor.py                Epistemic governor — 14 failure modes, R_t, entropy
 server.py                  Multi-topic HTTP dashboard (port 8098)
 
 framework/
+├── triage.py              SOC-style news triage — match headlines against indicators, watchpoints, keywords
+├── dependencies.py        Cross-topic dependency graph — staleness detection, propagation alerts
 ├── update.py              Programmatic update pipeline (routine/crisis modes)
 ├── red_team.py            Devil's advocate — counterevidence scoring, contrarian analysis
 ├── contradictions.py      Multi-type contradiction detection with severity tiers
@@ -324,6 +395,7 @@ framework/
 ├── lint.py                Evidence log linting (failure mode checks)
 └── test.py                Hypothesis test registry
 
+mirror.html                Longitudinal dashboard — trajectories, drift alerts, dependency graph, triage input
 topics/                    One JSON state file per active topic (gitignored; calibration-*.json tracked)
 briefs/                    Generated intelligence briefs per topic (gitignored)
 sources/                   Source database (cross-topic trust tracking)
@@ -392,13 +464,32 @@ python framework/scoring.py hormuz-closure --report
 # Ingest source data into the cross-topic database
 python framework/source_db.py ingest --topic hormuz-closure
 
+# Triage a headline
+python -c "
+from engine import triage_headline
+import json
+r = triage_headline('CENTCOM announces new phase of operations in Persian Gulf', 'CENTCOM')
+print(json.dumps(r, indent=2))
+"
+
+# Check cross-topic dependencies
+python -c "
+from framework.dependencies import build_dependency_graph
+import json
+print(json.dumps(build_dependency_graph(), indent=2))
+"
+
 # Launch the dashboard
 python server.py
 ```
 
-## Dashboard
+## Dashboards
 
-`python server.py` launches a real-time dashboard on port 8098 (binds `0.0.0.0` — accessible over Tailscale or LAN). The dashboard auto-detects all topics in `topics/` and renders:
+`python server.py` launches the server on port 8098 (binds `0.0.0.0` — accessible over Tailscale or LAN).
+
+### Topic Dashboard (`/`)
+
+The per-topic dashboard auto-detects all topics in `topics/` and renders:
 
 - Posterior distribution bar + historical chart
 - Sub-models with scenarios, deadlines, and conditional probabilities
@@ -410,6 +501,31 @@ python server.py
 - Value of Information priority queries
 
 Select topics from the dropdown. Auto-refreshes every 60 seconds.
+
+### Mirror Dashboard (`/mirror`)
+
+The longitudinal surface — how your beliefs have actually evolved across all topics:
+
+- **Triage input**: drop a headline + source, get instant routing across all active topics
+- **Cross-topic overview**: all topics at a glance with posterior bars, health badges, R_t regime, staleness
+- **Drift alerts**: stale dependencies, DANGEROUS/RUNAWAY R_t, downstream propagation warnings
+- **Posterior trajectories**: time-series charts per topic showing how each hypothesis moved
+- **Dependency graph**: upstream/downstream edges with stale edge highlighting and drift magnitude
+
+Auto-refreshes every 60 seconds.
+
+### API Endpoints
+
+| Method | Path | Returns |
+|--------|------|---------|
+| GET | `/topics` | List of all topics (slug, title, status, classification) |
+| GET | `/topics/{slug}/state.json` | Full topic state |
+| GET | `/topics/{slug}/governance.json` | Live governance report |
+| GET | `/overview` | Cross-topic overview (posteriors, health, R_t, staleness) |
+| GET | `/trajectories` | Posterior history for all topics |
+| GET | `/trajectories/{slug}` | Posterior history for one topic |
+| GET | `/dependencies` | Full dependency graph (nodes, edges, stale edges) |
+| POST | `/triage` | Triage a headline: `{"headline": "...", "source": "..."}` |
 
 ## Requirements
 

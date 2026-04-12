@@ -1,6 +1,5 @@
 {
   "_protocol": "Calibration topic — prospective. Populated 2026-04-11. Resolves on BEA advance GDP release for Q3 2026 (est. Oct 2026).",
-
   "meta": {
     "slug": "calibration-us-recession-2026",
     "title": "US Recession by Q4 2026",
@@ -23,10 +22,19 @@
       "WARNING: H labeling is non-standard here. H1=NO recession. H2/H3/H4 are recession severity variants. Sum H2+H3+H4 = total recession probability."
     ]
   },
-
   "tagConfig": {
     "_docs": "ECON tag = hard data releases (GDP, PMI, unemployment). DATA = any numerical feed update. POLICY = Fed/Treasury/fiscal action. RHETORIC = statements without action. EVENT = market events, institutional actions. ANALYSIS = derived/model output.",
-    "availableTags": ["EVENT", "DATA", "RHETORIC", "INTEL", "ANALYSIS", "ECON", "POLICY", "LABOR", "TRADE"],
+    "availableTags": [
+      "EVENT",
+      "DATA",
+      "RHETORIC",
+      "INTEL",
+      "ANALYSIS",
+      "ECON",
+      "POLICY",
+      "LABOR",
+      "TRADE"
+    ],
     "directionHints": {
       "ECON": {
         "H1": 0,
@@ -64,10 +72,14 @@
         "_note": "Statements do not move posteriors. Flag as RHETORIC and hold."
       }
     },
-    "escalationTags": ["TRADE", "LABOR"],
-    "deescalationTags": ["POLICY"]
+    "escalationTags": [
+      "TRADE",
+      "LABOR"
+    ],
+    "deescalationTags": [
+      "POLICY"
+    ]
   },
-
   "model": {
     "_prior_rationale": [
       "Polymarket ~25% recession probability = useful anchor but subject to bias (prediction markets underweight tail risks in low-liquidity environments).",
@@ -114,7 +126,12 @@
     "posteriorHistory": [
       {
         "date": "2026-04-11T00:00:00Z",
-        "posteriors": { "H1": 0.55, "H2": 0.22, "H3": 0.14, "H4": 0.09 },
+        "posteriors": {
+          "H1": 0.55,
+          "H2": 0.22,
+          "H3": 0.14,
+          "H4": 0.09
+        },
         "note": "Initial priors. Weighted against Polymarket ~25% (all recession types). Our H2+H3+H4 = 45% reflects higher weight on downside given tariff uncertainty and thin GDP margin. Moderate confidence — wide uncertainty bands appropriate.",
         "H1": 0.55,
         "H2": 0.22,
@@ -123,7 +140,6 @@
       }
     ]
   },
-
   "subModels": {
     "labor_market": {
       "label": "Labor Market Health",
@@ -220,7 +236,6 @@
       "lastUpdated": "2026-04-11T00:00:00Z"
     }
   },
-
   "indicators": {
     "_design_rules": [
       "Each indicator is OBSERVABLE — a reported data point or official action, not a sentiment reading.",
@@ -529,7 +544,6 @@
       ]
     }
   },
-
   "actorModel": {
     "description": "Recession outcomes are driven by the interaction of monetary policy (Fed), fiscal/trade policy (Executive/Treasury), and private sector behavior (business investment + consumer spending). Unlike geopolitical topics, there is no single decision-maker — outcomes emerge from aggregate behavior within policy constraints.",
     "actors": {
@@ -666,7 +680,6 @@
       "LAG AWARENESS — monetary policy acts with 12-18 month lag. Current tight conditions may already be causing Q2-Q3 deterioration before tariffs add their shock."
     ]
   },
-
   "dataFeeds": {
     "gdp_growth": {
       "label": "Real GDP Growth (annualized, BEA advance print)",
@@ -781,7 +794,6 @@
       "nextRelease": "Updated every few days"
     }
   },
-
   "watchpoints": [
     "Q1 2026 GDP advance print (~April 30): first hard data point on tariff impact. Critical for Bayesian update.",
     "April employment situation (~May 1): will Sahm Rule indicator move? Unemployment above 4.7% is notable.",
@@ -795,7 +807,6 @@
     "GDPNow Q2 2026 tracker once Q2 begins (April 1): early read on whether tariff shock is materializing.",
     "Corporate earnings guidance for Q2 2026: forward guidance cuts signal CEO-level demand pessimism."
   ],
-
   "searchQueries": [
     "US GDP Q1 2026 advance estimate BEA",
     "US recession 2026 probability forecast April",
@@ -822,11 +833,8 @@
     "Powell Fed inflation unemployment April 2026 speech",
     "Nick Timiraos Fed rate cut 2026"
   ],
-
   "evidenceLog": [],
-
   "governance": null,
-
   "predictionScoring": {
     "_docs": "Calibration infrastructure. Snapshots auto-created by engine on each posterior update. Record outcome when BEA confirms or denies two consecutive negative quarters. Compute Brier score at resolution.",
     "resolutionCriteria": {
@@ -840,5 +848,29 @@
     "snapshots": [],
     "outcomes": [],
     "brierScores": []
+  },
+  "dependencies": {
+    "upstream": [
+      {
+        "slug": "calibration-fed-rate-2026",
+        "assumptions": {
+          "H1": 0.22,
+          "H2": 0.38,
+          "H3": 0.28,
+          "H4": 0.12
+        },
+        "tolerance": 0.08
+      },
+      {
+        "slug": "hormuz-closure",
+        "assumptions": {
+          "H1": 0.005,
+          "H2": 0.22,
+          "H3": 0.5,
+          "H4": 0.275
+        },
+        "tolerance": 0.1
+      }
+    ]
   }
 }

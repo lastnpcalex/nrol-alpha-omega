@@ -25,6 +25,45 @@ class Handler(http.server.SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, directory=str(DIR), **kwargs)
 
+    def do_POST(self):
+        path = self.path.split("?")[0]
+
+        if path == "/triage":
+            return self._handle_triage()
+
+        self.send_error(404)
+
+    def _handle_triage(self):
+        content_length = int(self.headers.get("Content-Length", 0))
+        body = self.rfile.read(content_length)
+        try:
+            data = json.loads(body)
+        except json.JSONDecodeError:
+            self.send_error(400, "Invalid JSON")
+            return
+
+        headline = data.get("headline", "")
+        source = data.get("source")
+
+        if not headline:
+            self.send_error(400, "headline required")
+            return
+
+        try:
+            from engine import triage_headline
+            result = triage_headline(headline, source)
+            self._send_json(result)
+        except Exception as e:
+            self.send_error(500, str(e))
+
+    def _send_json(self, data):
+        body = json.dumps(data, ensure_ascii=False).encode("utf-8")
+        self.send_response(200)
+        self.send_header("Content-Type", "application/json")
+        self.send_header("Content-Length", str(len(body)))
+        self.end_headers()
+        self.wfile.write(body)
+
     def do_GET(self):
         path = self.path.split("?")[0]  # strip query string
 
@@ -32,6 +71,26 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         if path == "/" or path == "/index.html":
             self.path = "/dashboard.html"
             return super().do_GET()
+
+        # Mirror dashboard
+        if path == "/mirror" or path == "/mirror.html":
+            self.path = "/mirror.html"
+            return super().do_GET()
+
+        # Overview (cross-topic)
+        if path == "/overview":
+            return self._serve_overview()
+
+        # Trajectories
+        if path == "/trajectories" or path.startswith("/trajectories/"):
+            slug = None
+            if path.startswith("/trajectories/"):
+                slug = path.split("/")[2] if len(path.split("/")) > 2 else None
+            return self._serve_trajectories(slug)
+
+        # Dependencies
+        if path == "/dependencies":
+            return self._serve_dependencies()
 
         # Topic list
         if path == "/topics":
@@ -150,6 +209,30 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         self.send_header("Content-Type", "application/json")
         self.end_headers()
         self.wfile.write(json.dumps(dashboards, ensure_ascii=False).encode("utf-8"))
+
+    def _serve_overview(self):
+        try:
+            from engine import get_overview
+            result = get_overview()
+            self._send_json(result)
+        except Exception as e:
+            self.send_error(500, str(e))
+
+    def _serve_trajectories(self, slug=None):
+        try:
+            from engine import get_trajectories
+            result = get_trajectories(slug)
+            self._send_json(result)
+        except Exception as e:
+            self.send_error(500, str(e))
+
+    def _serve_dependencies(self):
+        try:
+            from framework.dependencies import build_dependency_graph
+            result = build_dependency_graph()
+            self._send_json(result)
+        except Exception as e:
+            self.send_error(500, str(e))
 
     def _serve_briefs_list(self, slug):
         brief_dir = BRIEFS_DIR / slug

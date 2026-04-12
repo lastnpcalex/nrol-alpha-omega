@@ -1,6 +1,5 @@
 {
   "_protocol": "Calibration topic: Federal Reserve target rate at end of 2026. Prospective estimation from April 2026 baseline.",
-
   "meta": {
     "slug": "calibration-fed-rate-2026",
     "title": "Fed Funds Rate by End 2026",
@@ -14,26 +13,54 @@
     "classification": "ROUTINE",
     "topicType": "economics",
     "horizon": "~264 days (through Dec 31, 2026)",
-    "remainingFOMCMeetings": ["May 6-7", "Jun 17-18", "Jul 29-30", "Sep 16-17", "Oct 28-29", "Dec 9-10"]
+    "remainingFOMCMeetings": [
+      "May 6-7",
+      "Jun 17-18",
+      "Jul 29-30",
+      "Sep 16-17",
+      "Oct 28-29",
+      "Dec 9-10"
+    ]
   },
-
   "tagConfig": {
     "_docs": "Tag configuration for monetary policy topic. HAWKISH tags favor H1/H4 (no cut or hike). DOVISH tags favor H2/H3 (cuts). DATA tags are neutral until values are known.",
-    "availableTags": ["EVENT", "DATA", "RHETORIC", "ANALYSIS", "FOMC", "HAWKISH", "DOVISH", "MARKET"],
+    "availableTags": [
+      "EVENT",
+      "DATA",
+      "RHETORIC",
+      "ANALYSIS",
+      "FOMC",
+      "HAWKISH",
+      "DOVISH",
+      "MARKET"
+    ],
     "directionHints": {
-      "HAWKISH": { "H1": 1, "H4": 1, "H2": -1, "H3": -1 },
-      "DOVISH":  { "H2": 1, "H3": 1, "H1": -1, "H4": -1 },
-      "DATA":    {},
-      "EVENT":   {},
+      "HAWKISH": {
+        "H1": 1,
+        "H4": 1,
+        "H2": -1,
+        "H3": -1
+      },
+      "DOVISH": {
+        "H2": 1,
+        "H3": 1,
+        "H1": -1,
+        "H4": -1
+      },
+      "DATA": {},
+      "EVENT": {},
       "RHETORIC": {},
       "ANALYSIS": {},
-      "FOMC":    {},
-      "MARKET":  {}
+      "FOMC": {},
+      "MARKET": {}
     },
-    "escalationTags": ["HAWKISH"],
-    "deescalationTags": ["DOVISH"]
+    "escalationTags": [
+      "HAWKISH"
+    ],
+    "deescalationTags": [
+      "DOVISH"
+    ]
   },
-
   "model": {
     "hypotheses": {
       "H1": {
@@ -71,18 +98,27 @@
     "posteriorHistory": [
       {
         "date": "2026-04-11T00:00:00Z",
-        "posteriors": { "H1": 0.22, "H2": 0.38, "H3": 0.28, "H4": 0.12 },
+        "posteriors": {
+          "H1": 0.22,
+          "H2": 0.38,
+          "H3": 0.28,
+          "H4": 0.12
+        },
         "note": "Initial priors. Anchored on dot plot median (one cut), adjusted up for H3 given Goldman/Bankrate forecasts, assigned meaningful H4 tail for tariff inflation risk. Unemployment at 4.6% creates genuine two-way risk."
       }
     ]
   },
-
   "subModels": {
     "inflation_regime": {
       "label": "Inflation Regime",
       "description": "Current CPI/PCE trajectory and whether it is consistent with further easing",
       "value": "STICKY_ELEVATED",
-      "options": ["FALLING_TO_TARGET", "STICKY_ELEVATED", "RE-ACCELERATING", "UNANCHORED"],
+      "options": [
+        "FALLING_TO_TARGET",
+        "STICKY_ELEVATED",
+        "RE-ACCELERATING",
+        "UNANCHORED"
+      ],
       "asOf": "2026-04-11",
       "note": "Core PCE ~2.8% as of March 2026. Tariff pass-through adds upside risk. Not falling fast enough to unlock cuts confidently, not re-accelerating to hike territory yet.",
       "posteriorEffect": {
@@ -96,7 +132,12 @@
       "label": "Labor Market Condition",
       "description": "Unemployment trajectory and payroll growth",
       "value": "SOFTENING_SLOWLY",
-      "options": ["TIGHT", "SOFTENING_SLOWLY", "DETERIORATING", "RECESSION_SIGNAL"],
+      "options": [
+        "TIGHT",
+        "SOFTENING_SLOWLY",
+        "DETERIORATING",
+        "RECESSION_SIGNAL"
+      ],
       "asOf": "2026-04-11",
       "note": "Unemployment 4.6%. Payrolls positive but decelerating. Consistent with gradual normalization, not yet a recession signal. Tariff uncertainty suppressing business investment.",
       "posteriorEffect": {
@@ -119,7 +160,13 @@
       "label": "FOMC Communication Posture",
       "description": "Directional lean in most recent FOMC statement and press conference",
       "value": "CAUTIOUSLY_NEUTRAL",
-      "options": ["DOVISH_PIVOT", "CAUTIOUSLY_DOVISH", "CAUTIOUSLY_NEUTRAL", "HAWKISH_TILT", "EXPLICIT_HIKE_SIGNAL"],
+      "options": [
+        "DOVISH_PIVOT",
+        "CAUTIOUSLY_DOVISH",
+        "CAUTIOUSLY_NEUTRAL",
+        "HAWKISH_TILT",
+        "EXPLICIT_HIKE_SIGNAL"
+      ],
       "asOf": "2026-04-11",
       "note": "March FOMC held steady, Powell maintained 'wait and see' on tariffs. Neither signaling imminent cut nor hike. Dot plot still projects one cut median.",
       "posteriorEffect": {
@@ -131,7 +178,6 @@
       }
     }
   },
-
   "indicators": {
     "_design_rules": [
       "Each indicator must be OBSERVABLE — actions, not opinions",
@@ -342,7 +388,6 @@
       ]
     }
   },
-
   "actorModel": {
     "description": "The Federal Open Market Committee (FOMC) is the sole decision-making body. 12 voting members: 7 Fed governors (permanent voters) + 5 rotating regional presidents. Chair Powell dominates public communication and sets agenda framing. Key tension in 2026: tariff-driven inflation vs. softening labor market creates genuine two-way risk, making FOMC unusually data-dependent.",
     "actors": {
@@ -429,14 +474,16 @@
       "DOT PLOT ANCHORING — The dot plot median is a strong prior but not a commitment. Count participant distributions, not just medians."
     ]
   },
-
   "evidenceLog": [
     {
       "id": "ev_001",
       "time": "2026-03-19T00:00:00Z",
       "text": "FOMC holds target rate steady at 3.50-3.75% at March 2026 meeting. Statement reiterates 'data dependent' approach. Powell press conference emphasizes tariff uncertainty on both inflation and growth outlooks.",
       "source": "Federal Reserve FOMC Statement, March 19 2026",
-      "tags": ["EVENT", "FOMC"],
+      "tags": [
+        "EVENT",
+        "FOMC"
+      ],
       "claimState": "OBSERVED",
       "weight": 1.0
     },
@@ -445,7 +492,10 @@
       "time": "2026-03-19T00:00:00Z",
       "text": "March 2026 SEP dot plot: median projection remains one 25bp cut in 2026 (to 3.25-3.50%). Range of participant views spans zero to three cuts. No participant projects a hike.",
       "source": "Federal Reserve Summary of Economic Projections, March 2026",
-      "tags": ["DATA", "FOMC"],
+      "tags": [
+        "DATA",
+        "FOMC"
+      ],
       "claimState": "OBSERVED",
       "weight": 1.0
     },
@@ -454,7 +504,9 @@
       "time": "2026-04-01T00:00:00Z",
       "text": "March 2026 BLS employment report: unemployment 4.6%, non-farm payrolls +145,000. Labor market softening gradually but not deteriorating. Wages +3.8% YoY.",
       "source": "BLS Employment Situation, April 2026 release",
-      "tags": ["DATA"],
+      "tags": [
+        "DATA"
+      ],
       "claimState": "OBSERVED",
       "weight": 1.0
     },
@@ -463,7 +515,9 @@
       "time": "2026-04-10T00:00:00Z",
       "text": "Goldman Sachs forecast (as of April 2026): projects two 25bp cuts in 2026, most likely in September and December, bringing rate to 3.00-3.25%. Cites tariff-driven demand weakness outweighing inflation concerns over second half.",
       "source": "Goldman Sachs Global Investment Research, April 2026",
-      "tags": ["ANALYSIS"],
+      "tags": [
+        "ANALYSIS"
+      ],
       "claimState": "SUPPORTED",
       "weight": 0.6,
       "weightNote": "Wall Street forecast, not primary source. Informative for market prior but RHETORIC-adjacent."
@@ -473,13 +527,14 @@
       "time": "2026-04-10T00:00:00Z",
       "text": "Bankrate analyst consensus (April 2026): projects three 25bp cuts in 2026, bringing rate to 2.75-3.00%. Minority view in professional forecaster community.",
       "source": "Bankrate Fed Rate Forecast, April 2026",
-      "tags": ["ANALYSIS"],
+      "tags": [
+        "ANALYSIS"
+      ],
       "claimState": "PROPOSED",
       "weight": 0.4,
       "weightNote": "Retail-facing forecast aggregator. Lower weight than primary Fed or primary research sources."
     }
   ],
-
   "dataFeeds": {
     "fed_funds_rate": {
       "label": "Fed Funds Target Rate (upper bound)",
@@ -554,7 +609,6 @@
       "note": "March 2026 reading. Decent but decelerating from 2025 pace."
     }
   },
-
   "watchpoints": [
     {
       "id": "wp_001",
@@ -599,7 +653,6 @@
       "deadline": "ONGOING"
     }
   ],
-
   "searchQueries": [
     "Federal Reserve FOMC meeting {month} 2026 rate decision",
     "Fed funds rate cut hike 2026 {month}",
@@ -619,13 +672,25 @@
     "2yr 10yr Treasury yield spread inversion 2026",
     "GDP Q1 2026 advance estimate BEA"
   ],
-
   "governance": null,
-
   "predictionScoring": {
     "_docs": "Calibration infrastructure. Snapshots are auto-created by engine on each posterior update. Record outcome when topic resolves (after Dec 2026 FOMC meeting), then compute_calibration_report() for Brier analysis.",
     "snapshots": [],
     "outcomes": [],
     "brierScores": []
+  },
+  "dependencies": {
+    "upstream": [
+      {
+        "slug": "calibration-us-recession-2026",
+        "assumptions": {
+          "H1": 0.55,
+          "H2": 0.22,
+          "H3": 0.14,
+          "H4": 0.09
+        },
+        "tolerance": 0.08
+      }
+    ]
   }
 }
