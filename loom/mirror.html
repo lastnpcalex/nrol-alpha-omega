@@ -571,12 +571,18 @@ async function loadAll() {
     let health = gov.health;
     if (staleDeps > 0 && health === 'HEALTHY') health = 'DEGRADED';
 
+    // Brier score for resolved topics
+    const ps = d.predictionScoring || {};
+    const brierScores = ps.brierScores || [];
+    const finalBrier = brierScores.length ? brierScores[brierScores.length - 1].brier_score : null;
+    const outcome = ps.outcomes && ps.outcomes.length ? ps.outcomes[ps.outcomes.length - 1] : null;
+
     return {
       slug: m.slug, title: m.title, question: m.question || '',
       classification: m.classification || 'ROUTINE', status: m.status,
       lastUpdated: m.lastUpdated, posteriors,
       health, rt: gov.rt, staleDependencies: staleDeps, downstreamAlerts,
-      governance: gov
+      governance: gov, finalBrier, outcome
     };
   })};
   renderOverview();
@@ -1035,11 +1041,21 @@ function renderOverview() {
     const health = t.health || '?';
     const updated = t.lastUpdated ? t.lastUpdated.slice(0, 10) : '?';
 
+    // Brier badge for resolved topics
+    let brierBadge = '';
+    if (t.status === 'RESOLVED' && t.finalBrier != null) {
+      const bs = t.finalBrier;
+      const grade = bs <= 0.01 ? 'EXCELLENT' : bs <= 0.05 ? 'GOOD' : bs <= 0.15 ? 'FAIR' : 'POOR';
+      const color = bs <= 0.01 ? 'var(--green)' : bs <= 0.05 ? 'var(--cyan)' : bs <= 0.15 ? 'var(--amber)' : 'var(--red)';
+      brierBadge = `<div style="font-size:10px;margin-top:2px;"><span style="color:${color};font-weight:bold;">Brier: ${bs.toFixed(4)}</span> <span style="color:var(--dim);">${grade}</span>${t.outcome ? ` → ${t.outcome.resolved}` : ''}</div>`;
+    }
+
     return `
       <div class="topic-row" onclick="window.location.href='index.html#${t.slug}'">
         <div>
-          <div class="name">${t.title}</div>
+          <div class="name">${t.title}${t.status === 'RESOLVED' ? ' <span style="color:var(--dim);font-size:10px;">[RESOLVED]</span>' : ''}</div>
           <div class="question">${updated}</div>
+          ${brierBadge}
         </div>
         <div class="mini-bar">${barHtml}</div>
         <div><span class="health-badge ${health}">${health}</span></div>

@@ -157,6 +157,21 @@
   .voi-entry { font-size: 11px; padding: 3px 0; border-bottom: 1px solid rgba(51,65,85,0.2); }
   .voi-score { display: inline-block; width: 30px; color: var(--cyan); font-weight: bold; }
 
+  /* Brier Score */
+  .brier-final { font-size: 28px; font-weight: bold; margin: 8px 0; }
+  .brier-final.excellent { color: var(--green); }
+  .brier-final.good { color: var(--cyan); }
+  .brier-final.fair { color: var(--amber); }
+  .brier-final.poor { color: var(--red); }
+  .brier-grade { font-size: 11px; letter-spacing: 1px; padding: 2px 8px; border-radius: 3px; display: inline-block; margin-left: 8px; }
+  .brier-outcome { font-size: 12px; color: var(--green); margin: 8px 0; padding: 6px 10px; background: rgba(34,197,94,0.1); border-left: 3px solid var(--green); border-radius: 2px; }
+  .brier-trajectory { display: flex; gap: 4px; align-items: flex-end; height: 60px; margin: 12px 0; }
+  .brier-bar { flex: 1; background: var(--accent); border-radius: 2px 2px 0 0; min-width: 8px; position: relative; }
+  .brier-bar-label { position: absolute; bottom: -16px; left: 50%; transform: translateX(-50%); font-size: 8px; color: var(--dim); white-space: nowrap; }
+  .brier-per-h { display: flex; gap: 12px; margin-top: 8px; font-size: 11px; flex-wrap: wrap; }
+  .brier-per-h span { color: var(--dim); }
+  .brier-per-h .val { color: var(--text); font-weight: bold; }
+
   /* Collapsible */
   .collapsible-header { cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
   .collapsible-header::after { content: '\u25BC'; font-size: 10px; color: var(--dim); transition: transform 0.2s; }
@@ -238,6 +253,12 @@
   <div class="panel" id="govPanel">
     <h2>Epistemic Governor</h2>
     <div id="governance"></div>
+  </div>
+
+  <!-- Calibration / Brier Score (resolved topics only) -->
+  <div class="panel" id="brierPanel" style="display:none;">
+    <h2>Calibration Score (Brier)</h2>
+    <div id="brierContent"></div>
   </div>
 
   <!-- VoI Queries -->
@@ -369,6 +390,7 @@ function render() {
   renderActorModel();
   renderWatchpoints();
   renderChart();
+  renderBrierScore();
 }
 
 function renderTopicHeader() {
@@ -748,6 +770,68 @@ function renderGovernance() {
     for (const issue of govData.issues) {
       html += `<div class="gov-issue">! ${issue}</div>`;
     }
+  }
+
+  el.innerHTML = html;
+}
+
+function renderBrierScore() {
+  const panel = document.getElementById('brierPanel');
+  const el = document.getElementById('brierContent');
+  const ps = state.predictionScoring;
+
+  // Only show for resolved topics with Brier data
+  if (!ps || !ps.brierScores || !ps.brierScores.length || state.meta.status !== 'RESOLVED') {
+    panel.style.display = 'none';
+    return;
+  }
+  panel.style.display = '';
+
+  const scores = ps.brierScores;
+  const final = scores[scores.length - 1];
+  const outcome = ps.outcomes && ps.outcomes.length ? ps.outcomes[ps.outcomes.length - 1] : null;
+
+  // Grade the final Brier score
+  const bs = final.brier_score;
+  let grade, gradeClass;
+  if (bs <= 0.01) { grade = 'EXCELLENT'; gradeClass = 'excellent'; }
+  else if (bs <= 0.05) { grade = 'GOOD'; gradeClass = 'good'; }
+  else if (bs <= 0.15) { grade = 'FAIR'; gradeClass = 'fair'; }
+  else { grade = 'POOR'; gradeClass = 'poor'; }
+
+  let html = '';
+
+  // Outcome banner
+  if (outcome) {
+    html += `<div class="brier-outcome">Resolved: <strong>${outcome.resolved}</strong> — ${outcome.label}</div>`;
+  }
+
+  // Final score
+  html += `<div class="brier-final ${gradeClass}">${bs.toFixed(4)} <span class="brier-grade" style="background:var(--${gradeClass === 'excellent' ? 'green' : gradeClass === 'good' ? 'cyan' : gradeClass === 'fair' ? 'amber' : 'red'});color:#000;">${grade}</span></div>`;
+  html += `<div style="font-size:11px;color:var(--dim);margin-bottom:12px;">Brier score (0 = perfect, 1 = worst). Lower is better.</div>`;
+
+  // Per-hypothesis breakdown
+  if (final.per_hypothesis) {
+    html += '<div class="brier-per-h">';
+    for (const [k, v] of Object.entries(final.per_hypothesis)) {
+      const isOutcome = outcome && k === outcome.resolved;
+      html += `<span>${k}: <span class="val" style="${isOutcome ? 'color:var(--green)' : ''}">${v.toFixed(4)}</span></span>`;
+    }
+    html += '</div>';
+  }
+
+  // Trajectory bars
+  if (scores.length > 1) {
+    const maxBrier = Math.max(...scores.map(s => s.brier_score));
+    html += '<div style="margin-top:12px;font-size:10px;color:var(--accent);letter-spacing:1px;">BRIER TRAJECTORY</div>';
+    html += '<div class="brier-trajectory">';
+    for (const s of scores) {
+      const pct = maxBrier > 0 ? (s.brier_score / maxBrier) * 100 : 0;
+      const date = s.timestamp.substring(0, 10);
+      html += `<div class="brier-bar" style="height:${Math.max(pct, 3)}%;" title="${date}: ${s.brier_score.toFixed(4)}"><span class="brier-bar-label">${date.substring(5)}</span></div>`;
+    }
+    html += '</div>';
+    html += `<div style="font-size:10px;color:var(--dim);margin-top:20px;">Score improved from ${scores[0].brier_score.toFixed(4)} to ${final.brier_score.toFixed(4)} over ${scores.length} snapshots.</div>`;
   }
 
   el.innerHTML = html;

@@ -1,16 +1,16 @@
 {
-  "_protocol": "Calibration topic \u2014 Strait of Hormuz closure duration forecast. Original flagship topic, tracking since 2026-03-02. 108 evidence entries from the Iran-Israel kinetic exchange and its aftermath. Update on shipping corridor status, diplomatic developments, or military posture changes.",
+  "_protocol": "Calibration topic — Strait of Hormuz closure duration forecast. Original flagship topic, tracking since 2026-03-02. 124 evidence entries. Ceasefire agreed Apr 8, collapsed Apr 11. Islamabad talks failed. Trump announced US naval blockade Apr 12. Now dual blockade (Iran + US). Mine-clearing ops underway.",
   "meta": {
     "slug": "hormuz-closure",
     "title": "HORMUZ STRAIT CLOSURE",
     "question": "How long will the Strait of Hormuz remain effectively closed?",
     "resolution": "Sustained >30% of pre-war Hormuz traffic (~40 transits/day)",
     "created": "2026-03-02T00:00:00Z",
-    "lastUpdated": "2026-03-28T16:18:17+00:00",
+    "lastUpdated": "2026-04-12T21:00:00+00:00",
     "status": "ACTIVE",
-    "dayCount": 26,
+    "dayCount": 41,
     "startDate": "2026-03-02T00:00:00Z",
-    "classification": "ELEVATED"
+    "classification": "ALERT"
   },
   "tagConfig": {
     "_docs": "Tag configuration for evidence classification and R_t scoring.",
@@ -76,22 +76,22 @@
         "label": "6wk-4mo",
         "midpoint": 11,
         "unit": "weeks",
-        "posterior": 0.13
+        "posterior": 0.1
       },
       "H3": {
         "label": "4-12mo",
         "midpoint": 34,
         "unit": "weeks",
-        "posterior": 0.54
+        "posterior": 0.51
       },
       "H4": {
         "label": ">12mo",
         "midpoint": 65,
         "unit": "weeks",
-        "posterior": 0.32
+        "posterior": 0.38
       }
     },
-    "expectedValue": 40.63,
+    "expectedValue": 43.18,
     "expectedUnit": "weeks",
     "posteriorHistory": [
       {
@@ -176,7 +176,7 @@
       },
       {
         "date": "2026-03-24",
-        "note": "Ultimatum expired\u00e2\u2020\u2019extended 5d, Iran denied talks, Op True Promise IV hit Gulf states, blockade formalized at IMO, 82nd Airborne deploying, Tripoli in Diego Garcia not yet in theater, first Chinese ship through corridor",
+        "note": "Ultimatum expiredâ†’extended 5d, Iran denied talks, Op True Promise IV hit Gulf states, blockade formalized at IMO, 82nd Airborne deploying, Tripoli in Diego Garcia not yet in theater, first Chinese ship through corridor",
         "posteriors": {
           "H1": 0.01,
           "H2": 0.19,
@@ -203,6 +203,26 @@
           "H3": 0.54,
           "H4": 0.32
         }
+      },
+      {
+        "date": "2026-04-08",
+        "note": "Ceasefire anti-indicator FIRED: Pakistan-brokered 2-week ceasefire agreed Apr 7-8. US suspended bombing, Iran agreed to reopen Hormuz. H1/H2 surge applied (conservative — ceasefire fragile from hour 1, Lebanon excluded, Iran didn't implement Hormuz reopening). Kharg struck 50+ military targets same day before ceasefire.",
+        "posteriors": {
+          "H1": 0.03,
+          "H2": 0.22,
+          "H3": 0.48,
+          "H4": 0.27
+        }
+      },
+      {
+        "date": "2026-04-12",
+        "note": "Ceasefire collapsed. Islamabad talks failed after 21hrs (nuclear program, Hormuz tolls, Lebanon). Trump announced US NAVAL BLOCKADE of Hormuz — now dual blockade. Indicators fired: new_phase (Kharg strikes + mine clearing + blockade), persian_gulf_entry (Tripoli offshore Kharg), bushehr_strikes (50+ Kharg targets). 3 supertankers transited Apr 11 but 600+ vessels still stranded. Mine clearing begun (USS Peterson, USS Murphy + UUVs). Net: diplomatic path exhausted, H4 surges on dual blockade + physical mine barrier.",
+        "posteriors": {
+          "H1": 0.01,
+          "H2": 0.1,
+          "H3": 0.51,
+          "H4": 0.38
+        }
       }
     ]
   },
@@ -210,20 +230,20 @@
     "meuMission": {
       "scenarios": {
         "kharg": {
-          "label": "Kharg Island seizure",
-          "prob": 0.5
+          "label": "Kharg Island seizure (in progress)",
+          "prob": 0.65
+        },
+        "blockade_enforcement": {
+          "label": "Naval blockade enforcement (Trump's Apr 12 order)",
+          "prob": 0.2
         },
         "declareVictory": {
           "label": "Declare victory / go home",
-          "prob": 0.2
+          "prob": 0.05
         },
         "escort": {
-          "label": "Escort / NEO / other",
-          "prob": 0.15
-        },
-        "groundEscalation": {
-          "label": "82nd Airborne ground ops (non-Kharg)",
-          "prob": 0.15
+          "label": "Escort / mine clearing support",
+          "prob": 0.1
         }
       },
       "conditionals": {
@@ -236,54 +256,66 @@
         }
       },
       "khargTimeline": {
-        "assaultWindow": "Apr 6-12 (revised AGAIN \u00e2\u20ac\u201d Trump extended deadline to Apr 6, forces need positioning time after)",
-        "boxerETA": "Apr 8-10",
-        "overlapWindow": "Apr 8-20",
-        "note": "Tripoli ENTERED CENTCOM AOR Mar 27. ETA Gulf of Oman ~Mar 30-31, Persian Gulf ~Apr 1-3. 82nd ~3,000 deploying. PLUS: Trump considering 10,000 MORE troops (WSJ/Axios). Total could reach 15,000-18,000 \u00e2\u20ac\u201d far beyond Kharg-only sizing. Includes infantry + armored vehicles. Tomahawk depletion (850+ fired, 90-100/yr production) creates pressure for ground ops over continued standoff strikes."
+        "assaultWindow": "ACTIVE — initial ops underway as of Apr 7",
+        "boxerETA": "IN THEATER (arrived ~Apr 8-10)",
+        "overlapWindow": "Apr 8-20 (both ARGs available)",
+        "note": "EVOLVED SIGNIFICANTLY: Tripoli offshore Kharg running F-35B SEAD missions. SEAL/Raider 'Quiet Entry' ops on southern tip reported. 50+ military targets struck Apr 7. IRGC claims missile hit on Tripoli (unconfirmed). Boxer ARG arrived in theater. 50,000+ US troops now in region. Trump gave 'Execute' order for initial phase per some reports. Simultaneously, mine-clearing ops launched in Hormuz (USS Peterson + USS Murphy + UUVs). Mission is now multi-track: Kharg seizure + Hormuz clearing + blockade enforcement."
       }
     },
     "trumpUltimatum": {
       "scenarios": {
         "A_actual_strike": {
-          "label": "Actually hits power plants (by Apr 6)",
-          "prob": 0.05
+          "label": "Actually hits power plants",
+          "prob": 0.05,
+          "resolution": "NOT_OCCURRED"
         },
         "B_partial": {
           "label": "Hits something, claims power-related",
-          "prob": 0.05
+          "prob": 0.05,
+          "resolution": "NOT_OCCURRED"
         },
         "C_pivot_kharg": {
-          "label": "Apr 6 expires, pivots to Kharg/ground ops",
-          "prob": 0.35
+          "label": "Pivots to Kharg/ground ops + blockade",
+          "prob": 0.7,
+          "resolution": "OCCURRING"
         },
         "D_extended_again": {
-          "label": "Extended AGAIN or quietly dropped",
-          "prob": 0.55
+          "label": "Extended/dropped — ceasefire pivot",
+          "prob": 0.2,
+          "resolution": "PARTIALLY_OCCURRED"
         }
       },
-      "deadline": "2026-04-06T20:00:00-04:00",
+      "deadline": "2026-04-08T20:00:00-04:00",
       "originalDeadline": "2026-03-23T21:00:00-04:00",
       "secondDeadline": "2026-03-28T21:00:00-04:00",
-      "status": "EXTENDED_2X",
-      "extensionCount": 2,
-      "note": "SECOND EXTENSION: Trump extended to Apr 6 on Mar 26. Pattern: ultimatum\u00e2\u2020\u2019blink\u00e2\u2020\u2019extend (2x). BUT new factor: Trump considering 10,000 MORE troops + Tomahawk depletion (850+ fired, ~4,000 stockpile) = US shifting from air to ground posture. By Apr 6: Tripoli in Gulf, 82nd deployed, potentially 10,000+ additional troops. Option C (pivot to Kharg/ground) probability may need upward revision as air campaign exhausts itself. Air degradation at diminishing returns (<100 targets/day). Ground is the next logical step."
+      "thirdDeadline": "2026-04-06T20:00:00-04:00",
+      "fourthDeadline": "2026-04-07T20:00:00-04:00",
+      "status": "RESOLVED_HYBRID",
+      "extensionCount": 3,
+      "note": "RESOLVED: Deadline extended 3x (Mar 23→28→Apr 6→Apr 7), then suspended for 2-week ceasefire (Apr 8). Ceasefire collapsed after 21hr Islamabad talks (Apr 11). Trump pivoted to naval blockade (Apr 12) + Kharg military strikes (Apr 7) + mine clearing (Apr 11). Outcome = hybrid of D (extended into ceasefire) then C (pivoted to ground/maritime ops after talks failed). Power plants never hit. Submodel effectively resolved — Trump's ultimatum cycle ended with blockade announcement."
     },
     "talksTrack": {
       "scenarios": {
         "indirect_negotiation": {
           "label": "Indirect negotiation via mediators (counter-proposals exchanged)",
-          "prob": 0.3
+          "prob": 0.1,
+          "resolution": "SUPERSEDED"
         },
-        "trump_overstates": {
-          "label": "Trump overstates progress, but relay channel exists",
-          "prob": 0.4
+        "direct_talks_resume": {
+          "label": "Direct talks resume after cooling period",
+          "prob": 0.3
         },
         "maximalist_deadlock": {
           "label": "Both sides' positions too far apart, talks collapse",
-          "prob": 0.3
+          "prob": 0.55,
+          "resolution": "OCCURRING"
+        },
+        "third_party_framework": {
+          "label": "UN/multilateral framework bypasses bilateral deadlock",
+          "prob": 0.05
         }
       },
-      "note": "EVOLVED: Pakistan FM Dar publicly confirmed 'indirect talks' relay channel. Iran responded to 15 points, US AWAITING Iran's reply. Actual proposal\u00e2\u2020\u2019counter-proposal\u00e2\u2020\u2019relay dynamic confirmed. BUT same day Araghchi formally announced 5-nation selective passage (China, Russia, India, Iraq, Pakistan, Malaysia) \u00e2\u20ac\u201d Iran creating facts on ground WHILE talking. Yuan toll system operating. Iran demands Hormuz sovereignty recognition as condition #5. Diplomatic and sovereignty tracks running in parallel \u00e2\u20ac\u201d Iran negotiating from position of operational strength. Key: US must respond to counter-proposal. If no response, maximalist_deadlock rises."
+      "note": "RESOLVED PHASE 1: Indirect relay channel escalated to face-to-face talks in Islamabad (Apr 11). Vance/Witkoff/Kushner met Iranian delegation — first since 2015. 21hr marathon. COLLAPSED. Irreconcilable sticking points: (1) Iran nuclear enrichment — US demands halt, Iran refuses, (2) Hormuz tolls — US demands free passage, Iran claims sovereignty right, (3) Lebanon — Iran demands Israel stop Hezbollah strikes, US says excluded. Trump pivoted to blockade within hours of collapse. Channel exists (Pakistan mediation) but positions too far apart for near-term deal. Direct talks now 0.30 — Islamabad established the precedent of face-to-face, parties could return after pressure cycle. But maximalist_deadlock dominant at 0.55."
     }
   },
   "indicators": {
@@ -295,30 +327,30 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "Kharg \u00e2\u2020\u2019 80%+, H3/H4 surge"
+          "posteriorEffect": "Kharg â†’ 80%+, H3/H4 surge"
         },
         {
           "id": "ais_dark",
           "desc": "Tripoli ARG AIS goes dark in Gulf of Oman for 24+ hours",
           "status": "NOT_FIRED",
           "firedDate": null,
-          "note": "Tripoli ENTERED CENTCOM AOR Fri Mar 27. Now in transit to Gulf \u00e2\u20ac\u201d 'several additional days' to reach Hormuz. AIS dark watch starts NOW. Can go dark anytime between now and Gulf of Oman arrival.",
-          "posteriorEffect": "Kharg \u00e2\u2020\u2019 80%+, H4 surge"
+          "note": "Tripoli ENTERED CENTCOM AOR Fri Mar 27. Now in transit to Gulf â€” 'several additional days' to reach Hormuz. AIS dark watch starts NOW. Can go dark anytime between now and Gulf of Oman arrival.",
+          "posteriorEffect": "Kharg â†’ 80%+, H4 surge"
         },
         {
           "id": "new_phase",
           "desc": "CENTCOM announces 'new phase' or 'expanded objectives'",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": "82nd Airborne deployment could be announced as 'new phase' \u00e2\u20ac\u201d watch Pentagon briefings.",
+          "status": "FIRED",
+          "firedDate": "2026-04-07",
+          "note": "FIRED: Multiple new phases — US struck 50+ Kharg military targets Apr 7, CENTCOM launched mine-clearing mission Apr 11 (USS Peterson + USS Murphy + UUVs transited Hormuz), Trump announced full naval blockade Apr 12. Clear phase transitions from air campaign to ground/maritime ops.",
           "posteriorEffect": "H3/H4 surge, Kharg up"
         },
         {
           "id": "bushehr_strikes",
           "desc": "Massive uptick in airstrikes on Bushehr province / northern Gulf coast",
-          "status": "PARTIAL",
-          "firedDate": null,
-          "note": "Accelerating: Cooper confirmed coastal anti-ship facility struck with 5000lb bombs. Bushehr NPP hit by projectile 2nd time (Mar 25, first was Mar 17). IAEA alarmed. Strikes in Bushehr province increasing.",
+          "status": "FIRED",
+          "firedDate": "2026-04-07",
+          "note": "FIRED: Apr 7 US struck 50+ military targets on Kharg Island (Bushehr province). 38+ explosions reported. Oil infrastructure deliberately avoided but military sites comprehensively hit. Combined with prior Bushehr NPP hits (3x) and 5000lb coastal strikes. Threshold clearly met.",
           "posteriorEffect": "H3/H4 up, coastal prep signal"
         }
       ],
@@ -326,9 +358,9 @@
         {
           "id": "persian_gulf_entry",
           "desc": "Tripoli tracked entering Persian Gulf (not Gulf of Oman)",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": "Tripoli ENTERED CENTCOM AOR Fri Mar 27. Now several days from Gulf of Oman/Persian Gulf entry. Watch AIS for straight run to Gulf vs park.",
+          "status": "FIRED",
+          "firedDate": "2026-04-07",
+          "note": "FIRED: USS Tripoli positioned offshore Kharg Island. F-35Bs conducting SEAD missions from the ship. SEAL/Marine Raider 'Quiet Entry' ops reported on Kharg southern tip. IRGC claims missile hit forcing withdrawal (unconfirmed by Pentagon). Ship clearly entered Persian Gulf and reached Kharg vicinity.",
           "posteriorEffect": "Kharg +10-15pp"
         },
         {
@@ -336,7 +368,7 @@
           "desc": "Trump goes quiet on Kharg for 48+ hours (OPSEC)",
           "status": "NOT_FIRED",
           "firedDate": null,
-          "note": "Trump currently talking about 'talks' \u00e2\u20ac\u201d not quiet. Check if Kharg drops from rhetoric.",
+          "note": "Trump currently talking about 'talks' â€” not quiet. Check if Kharg drops from rhetoric.",
           "posteriorEffect": "Kharg +5-10pp"
         },
         {
@@ -360,7 +392,7 @@
           "desc": "48hr ultimatum expires without power plant strikes (Kharg substituted)",
           "status": "FIRED",
           "firedDate": "2026-03-23",
-          "note": "CONFIRMED: Trump postponed strikes Mon Mar 23, extended deadline 5 days. Did NOT hit power plants. Did NOT immediately pivot to Kharg \u00e2\u20ac\u201d claimed 'talks' instead. Option D (extended) not Option C (pivot). Kharg pivot may still come after 5-day window.",
+          "note": "CONFIRMED: Trump postponed strikes Mon Mar 23, extended deadline 5 days. Did NOT hit power plants. Did NOT immediately pivot to Kharg â€” claimed 'talks' instead. Option D (extended) not Option C (pivot). Kharg pivot may still come after 5-day window.",
           "posteriorEffect": "Kharg +5-10pp if Option C"
         },
         {
@@ -458,9 +490,9 @@
         {
           "id": "ceasefire",
           "desc": "Ceasefire talks announced through any channel",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": "Pakistan FM Dar publicly confirmed indirect relay channel. Iran responded to 15-point plan, US awaiting reply. Closest to firing yet \u00e2\u20ac\u201d but relay \u00e2\u2030\u00a0 ceasefire talks. Iran explicitly says 'we do not want a ceasefire.' Araghchi formalized 5-nation selective passage = creating permanent facts on ground. Still NOT firing \u00e2\u20ac\u201d no ceasefire framework exists, only indirect relay of maximalist positions.",
+          "status": "FIRED",
+          "firedDate": "2026-04-08",
+          "note": "FIRED: Pakistan brokered 2-week ceasefire Apr 7-8. US suspended bombing. Iran agreed to reopen Hormuz with 'coordination.' First face-to-face US-Iran engagement since 2015. Vance/Witkoff/Kushner met Iranian delegation in Islamabad Apr 11 for 21hr marathon talks. BUT: ceasefire violated immediately (Israel hit Lebanon, 254 killed day 1). Hormuz not actually reopened. Talks COLLAPSED Apr 11 — Iran refused nuclear enrichment halt + toll-free Hormuz. Trump announced US counter-blockade Apr 12. Anti-indicator fired but effect REVERSED by collapse within 4 days.",
           "posteriorEffect": "H1/H2 surge, H3/H4 collapse"
         },
         {
@@ -469,15 +501,15 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "Kharg \u00e2\u2020\u2019 0%, H3/H4 down \u00e2\u20ac\u201d no ground seizure shortens closure"
+          "posteriorEffect": "Kharg â†’ 0%, H3/H4 down â€” no ground seizure shortens closure"
         },
         {
           "id": "power_plants_hit",
           "desc": "Trump actually hits power plants (escalation goes infrastructure not ground)",
           "status": "NOT_FIRED",
           "firedDate": null,
-          "note": "Trump blinked Mar 23, extended 5 days to Mar 28. Islamabad summit proposed for Mar 27 \u00e2\u20ac\u201d if summit happens, likely extends again. Iran counter-threat deterrence working on this vector. 36% approval + 61% disapprove strikes = domestic pressure against escalation.",
-          "posteriorEffect": "Kharg -10pp, H4 down, H3 flat \u00e2\u20ac\u201d infrastructure path shorter than ground seizure path"
+          "note": "Trump blinked Mar 23, extended 5 days to Mar 28. Islamabad summit proposed for Mar 27 â€” if summit happens, likely extends again. Iran counter-threat deterrence working on this vector. 36% approval + 61% disapprove strikes = domestic pressure against escalation.",
+          "posteriorEffect": "Kharg -10pp, H4 down, H3 flat â€” infrastructure path shorter than ground seizure path"
         }
       ]
     }
@@ -499,7 +531,7 @@
           "Military planning process filters novel stupidity"
         ],
         "overrides": [
-          "Personal fixations bypass tactical filter \u00e2\u20ac\u201d Kharg qualifies because assault will succeed on Day 1"
+          "Personal fixations bypass tactical filter â€” Kharg qualifies because assault will succeed on Day 1"
         ]
       },
       "centcom": {
@@ -516,24 +548,24 @@
       },
       "iran": {
         "name": "Iranian leadership (IRGC + civilian)",
-        "role": "Adversary \u00e2\u20ac\u201d controls Hormuz closure and escalation pace",
-        "decisionStyle": "Attrition-oriented, escalatory after nuclear site strikes. NOW: blocked Chinese ships (corridor dead), IRGC warned civilians to evacuate near US bases (pre-attack signal), vows retaliation 'no longer eye for eye.' IRGC consolidating power: Zolghadr at SNSC, Tangsiri dead with no replacement = C2 void in IRGC Navy. Mojtaba Khamenei still not seen. 2/3 of missiles intact \u00e2\u20ac\u201d can sustain attacks for months.",
+        "role": "Adversary â€” controls Hormuz closure and escalation pace",
+        "decisionStyle": "Attrition-oriented, escalatory after nuclear site strikes. NOW: blocked Chinese ships (corridor dead), IRGC warned civilians to evacuate near US bases (pre-attack signal), vows retaliation 'no longer eye for eye.' IRGC consolidating power: Zolghadr at SNSC, Tangsiri dead with no replacement = C2 void in IRGC Navy. Mojtaba Khamenei still not seen. 2/3 of missiles intact â€” can sustain attacks for months.",
         "biases": [
           "Overestimate own deterrent leverage",
           "Mirror-image Western rationality assumptions"
         ],
         "filters": [],
         "overrides": [
-          "Counter-threat on power plants appears to have deterred Trump \u00e2\u20ac\u201d first successful Iranian deterrence in this conflict"
+          "Counter-threat on power plants appears to have deterred Trump â€” first successful Iranian deterrence in this conflict"
         ]
       }
     },
     "methodology": [
-      "ACTIONS OVER RHETORIC \u00e2\u20ac\u201d only kinetic events, force movements, budget requests, verified data move posteriors. Trump words discounted. IRGC threats tagged THREATENED until executed.",
-      "SOCIALIZATION PATTERN RECOGNITION \u00e2\u20ac\u201d 'agonizing decision' articles with hyper-specific operational detail = narrative prep for decision already on conveyor belt",
-      "DON'T FRONT-RUN \u00e2\u20ac\u201d set tripwires and let news confirm. Posteriors move when indicators fire, not when thesis feels good.",
-      "TRUMP FIXATION OVERRIDE \u00e2\u20ac\u201d when CinC has personal fixation predating the situation, tactical filter is bypassed. Kharg = 38yr fixation.",
-      "TRUMP RHETORIC DISCOUNT \u00e2\u20ac\u201d 'talks' claim assessed as face-saving for ultimatum blink. Iran denied. Mediator relay confirmed but is not negotiation. DO NOT move posteriors on Trump words alone."
+      "ACTIONS OVER RHETORIC â€” only kinetic events, force movements, budget requests, verified data move posteriors. Trump words discounted. IRGC threats tagged THREATENED until executed.",
+      "SOCIALIZATION PATTERN RECOGNITION â€” 'agonizing decision' articles with hyper-specific operational detail = narrative prep for decision already on conveyor belt",
+      "DON'T FRONT-RUN â€” set tripwires and let news confirm. Posteriors move when indicators fire, not when thesis feels good.",
+      "TRUMP FIXATION OVERRIDE â€” when CinC has personal fixation predating the situation, tactical filter is bypassed. Kharg = 38yr fixation.",
+      "TRUMP RHETORIC DISCOUNT â€” 'talks' claim assessed as face-saving for ultimatum blink. Iran denied. Mediator relay confirmed but is not negotiation. DO NOT move posteriors on Trump words alone."
     ]
   },
   "evidenceLog": [
@@ -581,7 +613,7 @@
     },
     {
       "time": "2026-03-22T14:39-07:00",
-      "text": "Trump: 'weeks ahead of schedule,' Iran's 'navy and air force are dead, they have absolutely no defense.' Victory framing \u00e2\u20ac\u201d ambiguous whether prelude to declare-victory or Kharg push.",
+      "text": "Trump: 'weeks ahead of schedule,' Iran's 'navy and air force are dead, they have absolutely no defense.' Victory framing â€” ambiguous whether prelude to declare-victory or Kharg push.",
       "provenance": "RETRIEVED",
       "source": "Truth Social / pool reports",
       "posteriorImpact": "NONE",
@@ -623,7 +655,7 @@
     },
     {
       "time": "2026-03-24T20:50-07:00",
-      "text": "Trump postponed power plant strikes 5 days. Claimed 'very good and productive conversations' with Iran that could yield 'complete and total resolution.' Classic Trump face-saving pivot \u00e2\u20ac\u201d ultimatum\u00e2\u2020\u2019blink\u00e2\u2020\u2019claim diplomacy.",
+      "text": "Trump postponed power plant strikes 5 days. Claimed 'very good and productive conversations' with Iran that could yield 'complete and total resolution.' Classic Trump face-saving pivot â€” ultimatumâ†’blinkâ†’claim diplomacy.",
       "provenance": "RETRIEVED",
       "source": "NBC/PBS/CNBC/Truth Social",
       "posteriorImpact": "MODERATE",
@@ -637,7 +669,7 @@
     },
     {
       "time": "2026-03-24T20:50-07:00",
-      "text": "Iran Foreign Ministry: 'There is no dialogue between Tehran and Washington.' BUT CBS exclusive: senior Iranian FM official confirmed 'received points from US through mediators, being reviewed.' Mediator relay \u00e2\u2030\u00a0 negotiations.",
+      "text": "Iran Foreign Ministry: 'There is no dialogue between Tehran and Washington.' BUT CBS exclusive: senior Iranian FM official confirmed 'received points from US through mediators, being reviewed.' Mediator relay â‰  negotiations.",
       "provenance": "RETRIEVED",
       "source": "CBS News exclusive / Al Jazeera / NPR",
       "posteriorImpact": "MODERATE",
@@ -707,7 +739,7 @@
     },
     {
       "time": "2026-03-24T20:50-07:00",
-      "text": "Brent crashed 11% Monday on 'talks' news to ~$91, recovered Tuesday to $103-104. WTI ~$91. Gas national avg $3.97/gal (up $1.02 in March). Market whipsaw \u00e2\u20ac\u201d skepticism over de-escalation.",
+      "text": "Brent crashed 11% Monday on 'talks' news to ~$91, recovered Tuesday to $103-104. WTI ~$91. Gas national avg $3.97/gal (up $1.02 in March). Market whipsaw â€” skepticism over de-escalation.",
       "provenance": "RETRIEVED",
       "source": "CNBC/Fortune/Yahoo Finance",
       "posteriorImpact": "MINOR",
@@ -1001,7 +1033,7 @@
     },
     {
       "time": "2026-03-24T21:28-07:00",
-      "text": "Brent fell to $98.57 (prev close $95.92, range $96-100). Down from $104.49 \u00e2\u20ac\u201d market partially pricing de-escalation on 'talks' narrative. WTI $90.98 (range $88.54-92.68). Gas national avg $3.956. Oil still elevated but below recent highs.",
+      "text": "Brent fell to $98.57 (prev close $95.92, range $96-100). Down from $104.49 â€” market partially pricing de-escalation on 'talks' narrative. WTI $90.98 (range $88.54-92.68). Gas national avg $3.956. Oil still elevated but below recent highs.",
       "provenance": "RETRIEVED",
       "source": "Investing.com/CNBC/Fortune/AAA",
       "posteriorImpact": "MINOR",
@@ -1015,7 +1047,7 @@
     },
     {
       "time": "2026-03-24T21:28-07:00",
-      "text": "Philippines declared national energy emergency (EO 110) Mar 24 \u00e2\u20ac\u201d 95-98% of oil imports via Middle East, 2-month supply remaining. South Korea PM canceled China trip over economic fallout (70%+ oil from ME). ADNOC chief called blockade 'economic terrorism.' International pressure mounting.",
+      "text": "Philippines declared national energy emergency (EO 110) Mar 24 â€” 95-98% of oil imports via Middle East, 2-month supply remaining. South Korea PM canceled China trip over economic fallout (70%+ oil from ME). ADNOC chief called blockade 'economic terrorism.' International pressure mounting.",
       "provenance": "RETRIEVED",
       "source": "Rappler/Newsweek/Fortune/Al Jazeera",
       "posteriorImpact": "MINOR",
@@ -1029,7 +1061,7 @@
     },
     {
       "time": "2026-03-24T21:28-07:00",
-      "text": "Trump approval hit 36% (Reuters/Ipsos poll, completed Mon Mar 24) \u00e2\u20ac\u201d record low. Only 25% approve cost-of-living handling. Only 35% approve Iran strikes (down from 37%). 61% disapprove of strikes. Domestic political pressure building against escalation.",
+      "text": "Trump approval hit 36% (Reuters/Ipsos poll, completed Mon Mar 24) â€” record low. Only 25% approve cost-of-living handling. Only 35% approve Iran strikes (down from 37%). 61% disapprove of strikes. Domestic political pressure building against escalation.",
       "provenance": "RETRIEVED",
       "source": "Reuters/Ipsos via The Hill/US News/Yahoo",
       "posteriorImpact": "MINOR",
@@ -1071,7 +1103,7 @@
     },
     {
       "time": "2026-03-24T21:28-07:00",
-      "text": "Posteriors HELD: No new tier 1/2 indicators fired. Key dynamics: (1) corridor expanding but blockade still 95%+ effective, (2) Islamabad summit proposed but Iran hasn't agreed and supreme leader incapacitated, (3) Tripoli ETA pushed to Mar 28 CENTCOM AOR then +days to Hormuz, (4) oil markets softening on talks narrative but skeptical, (5) IRGC consolidating control via Zolghadr appointment \u00e2\u20ac\u201d hardliner replacing pragmatist signals no near-term concessions. Net: blockade institutionalizing, ground operation timeline extending, diplomatic track uncertain. Hold.",
+      "text": "Posteriors HELD: No new tier 1/2 indicators fired. Key dynamics: (1) corridor expanding but blockade still 95%+ effective, (2) Islamabad summit proposed but Iran hasn't agreed and supreme leader incapacitated, (3) Tripoli ETA pushed to Mar 28 CENTCOM AOR then +days to Hormuz, (4) oil markets softening on talks narrative but skeptical, (5) IRGC consolidating control via Zolghadr appointment â€” hardliner replacing pragmatist signals no near-term concessions. Net: blockade institutionalizing, ground operation timeline extending, diplomatic track uncertain. Hold.",
       "provenance": "DERIVED",
       "source": null,
       "posteriorImpact": "NONE",
@@ -1085,7 +1117,7 @@
     },
     {
       "time": "2026-03-25T14:17-00:00",
-      "text": "CONFIRMED: ~12 Iranian naval mines deployed in Strait of Hormuz (CBS, US officials). Two types: Maham 3 (moored, magnetic/acoustic sensors) and Maham 7 (seabed limpet, acoustic/3-axis magnetic). Deployed by small vessels carrying 2-3 mines each. Iran total mine inventory estimated 2,000-6,000. Mines physically extend closure timeline regardless of diplomacy \u00e2\u20ac\u201d clearance takes weeks/months.",
+      "text": "CONFIRMED: ~12 Iranian naval mines deployed in Strait of Hormuz (CBS, US officials). Two types: Maham 3 (moored, magnetic/acoustic sensors) and Maham 7 (seabed limpet, acoustic/3-axis magnetic). Deployed by small vessels carrying 2-3 mines each. Iran total mine inventory estimated 2,000-6,000. Mines physically extend closure timeline regardless of diplomacy â€” clearance takes weeks/months.",
       "provenance": "RETRIEVED",
       "source": "CBS News exclusive, US intelligence officials",
       "posteriorImpact": "MODERATE",
@@ -1099,7 +1131,7 @@
     },
     {
       "time": "2026-03-25T14:17-00:00",
-      "text": "Iran CATEGORICALLY REJECTED 15-point plan. IRGC Khatam al-Anbiya spokesperson Zolfaghari: 'Our first and last word has been the same from day one \u00e2\u20ac\u201d someone like us will never come to terms with someone like you. Not now, not ever.' Iran mocks: 'Has the level of your internal conflict reached the point where you are negotiating with yourselves?' Flat rejection, not posturing.",
+      "text": "Iran CATEGORICALLY REJECTED 15-point plan. IRGC Khatam al-Anbiya spokesperson Zolfaghari: 'Our first and last word has been the same from day one â€” someone like us will never come to terms with someone like you. Not now, not ever.' Iran mocks: 'Has the level of your internal conflict reached the point where you are negotiating with yourselves?' Flat rejection, not posturing.",
       "provenance": "RETRIEVED",
       "source": "EA WorldView/Mediaite/Al Jazeera/ITV/Time",
       "posteriorImpact": "MODERATE",
@@ -1127,7 +1159,7 @@
     },
     {
       "time": "2026-03-25T14:17-00:00",
-      "text": "Bushehr NPP hit by projectile SECOND TIME (first was Mar 17). IAEA informed by Iran \u00e2\u20ac\u201d no damage to plant or injuries. IAEA DG Grossi reiterates 'maximum restraint.' Bushehr strikes accelerating \u00e2\u20ac\u201d partial indicator upgrading.",
+      "text": "Bushehr NPP hit by projectile SECOND TIME (first was Mar 17). IAEA informed by Iran â€” no damage to plant or injuries. IAEA DG Grossi reiterates 'maximum restraint.' Bushehr strikes accelerating â€” partial indicator upgrading.",
       "provenance": "RETRIEVED",
       "source": "World Nuclear News/CGTN/IAEA official X post",
       "posteriorImpact": "MINOR",
@@ -1197,7 +1229,7 @@
     },
     {
       "time": "2026-03-25T14:17-00:00",
-      "text": "Qalibaf: 'We are closely monitoring all US movements in the region, especially troop deployments.' Warns against 'sacrificing American soldiers for Israeli interests.' Iran interpreting troop deployments as proof talks are a ruse. Islamabad summit increasingly unlikely \u00e2\u20ac\u201d Iran told mediators troop movements increase suspicion.",
+      "text": "Qalibaf: 'We are closely monitoring all US movements in the region, especially troop deployments.' Warns against 'sacrificing American soldiers for Israeli interests.' Iran interpreting troop deployments as proof talks are a ruse. Islamabad summit increasingly unlikely â€” Iran told mediators troop movements increase suspicion.",
       "provenance": "RETRIEVED",
       "source": "CBS/Al Jazeera/Axios",
       "posteriorImpact": "MINOR",
@@ -1253,7 +1285,7 @@
     },
     {
       "time": "2026-03-25T20:52-07:00",
-      "text": "CRITICAL: Iran issued 5-POINT COUNTER-PROPOSAL (not just rejection). Conditions: (1) halt aggression/assassinations by US+Israel, (2) mechanisms to ensure war doesn't resume, (3) payment of war damages/reparations, (4) end attacks on Hezbollah in Lebanon and pro-Iran militias in Iraq, (5) INTERNATIONAL RECOGNITION AND GUARANTEES FOR IRAN'S AUTHORITY OVER STRAIT OF HORMUZ. Point 5 is a fundamental new demand \u00e2\u20ac\u201d Iran seeking permanent sovereignty over Hormuz as a war objective.",
+      "text": "CRITICAL: Iran issued 5-POINT COUNTER-PROPOSAL (not just rejection). Conditions: (1) halt aggression/assassinations by US+Israel, (2) mechanisms to ensure war doesn't resume, (3) payment of war damages/reparations, (4) end attacks on Hezbollah in Lebanon and pro-Iran militias in Iraq, (5) INTERNATIONAL RECOGNITION AND GUARANTEES FOR IRAN'S AUTHORITY OVER STRAIT OF HORMUZ. Point 5 is a fundamental new demand â€” Iran seeking permanent sovereignty over Hormuz as a war objective.",
       "provenance": "RETRIEVED",
       "source": "NPR/The Hill/CNBC/PressTV/ABC/Time",
       "posteriorImpact": "MAJOR",
@@ -1267,7 +1299,7 @@
     },
     {
       "time": "2026-03-25T20:52-07:00",
-      "text": "Araghchi: 'We do not want a ceasefire' \u00e2\u20ac\u201d says ceasefire would lead to vicious cycle of repeated war. Wants war to end 'on our own terms.' Also: exchange of messages through mediators 'does not mean negotiations.' Called US proposal 'maximalist, unreasonable.' This is NOT a breakdown \u00e2\u20ac\u201d it's a maximalist opening position. Iran is engaging through counter-proposal even while denying negotiations.",
+      "text": "Araghchi: 'We do not want a ceasefire' â€” says ceasefire would lead to vicious cycle of repeated war. Wants war to end 'on our own terms.' Also: exchange of messages through mediators 'does not mean negotiations.' Called US proposal 'maximalist, unreasonable.' This is NOT a breakdown â€” it's a maximalist opening position. Iran is engaging through counter-proposal even while denying negotiations.",
       "provenance": "RETRIEVED",
       "source": "Al Jazeera/CNN/CNBC/Political Wire",
       "posteriorImpact": "MODERATE",
@@ -1295,7 +1327,7 @@
     },
     {
       "time": "2026-03-25T20:52-07:00",
-      "text": "UN Security Council: TWO draft resolutions on Hormuz. (1) Bahrain draft \u00e2\u20ac\u201d Chapter VII, authorizes 'all necessary means' to open strait. 22 nations signal readiness including UK, France, Germany, Italy, Japan, Canada, South Korea. (2) Russia draft \u00e2\u20ac\u201d shorter, doesn't name countries. Neither expected to vote this week. China/Russia likely veto Bahrain draft. UN chief: war 'totally out of control.'",
+      "text": "UN Security Council: TWO draft resolutions on Hormuz. (1) Bahrain draft â€” Chapter VII, authorizes 'all necessary means' to open strait. 22 nations signal readiness including UK, France, Germany, Italy, Japan, Canada, South Korea. (2) Russia draft â€” shorter, doesn't name countries. Neither expected to vote this week. China/Russia likely veto Bahrain draft. UN chief: war 'totally out of control.'",
       "provenance": "RETRIEVED",
       "source": "Security Council Report/Washington Times/Arab News/UN News",
       "posteriorImpact": "MINOR",
@@ -1309,7 +1341,7 @@
     },
     {
       "time": "2026-03-25T20:52-07:00",
-      "text": "White House claims: 140+ Iranian naval vessels destroyed including ~50 mine layers. 9,000+ enemy targets struck. Iran's attacks down ~90%. If mine layer destruction numbers accurate, degrades Iran's ability to deploy remaining 2,000-6,000 mine inventory \u00e2\u20ac\u201d but ~12 already in strait still need clearing.",
+      "text": "White House claims: 140+ Iranian naval vessels destroyed including ~50 mine layers. 9,000+ enemy targets struck. Iran's attacks down ~90%. If mine layer destruction numbers accurate, degrades Iran's ability to deploy remaining 2,000-6,000 mine inventory â€” but ~12 already in strait still need clearing.",
       "provenance": "RETRIEVED",
       "source": "White House briefing/Times of Israel",
       "posteriorImpact": "MINOR",
@@ -1323,7 +1355,7 @@
     },
     {
       "time": "2026-03-25T20:52-07:00",
-      "text": "Brent continued falling \u00e2\u20ac\u201d range $93.45-$102.22 depending on time of day (CNBC: $102.22, Investing.com: $96.68). Market whipsawing on talks narrative vs reality. WTI $90.32. Markets pricing de-escalation that isn't happening \u00e2\u20ac\u201d disconnect between market narrative and ground truth widening.",
+      "text": "Brent continued falling â€” range $93.45-$102.22 depending on time of day (CNBC: $102.22, Investing.com: $96.68). Market whipsawing on talks narrative vs reality. WTI $90.32. Markets pricing de-escalation that isn't happening â€” disconnect between market narrative and ground truth widening.",
       "provenance": "RETRIEVED",
       "source": "CNBC/Fortune/Investing.com/TradingEconomics",
       "posteriorImpact": "MINOR",
@@ -1337,7 +1369,7 @@
     },
     {
       "time": "2026-03-25T20:52-07:00",
-      "text": "Posteriors HELD this cycle. Iran's counter-proposal is MIXED signal: (1) demanding Hormuz sovereignty = intends permanent control (pushes H4), BUT (2) issuing counter-proposal at all = engaging in negotiation framework (pulls toward H2/H3). Net: offsetting. Counter-proposal tells us Iran sees Hormuz as permanent leverage, not temporary tactic. But 5-point framework means there IS a negotiating track \u00e2\u20ac\u201d even if positions are miles apart. Key question: does US treat counter-proposal as basis for negotiation or as proof talks are dead? Watch White House response + whether Islamabad meeting materializes.",
+      "text": "Posteriors HELD this cycle. Iran's counter-proposal is MIXED signal: (1) demanding Hormuz sovereignty = intends permanent control (pushes H4), BUT (2) issuing counter-proposal at all = engaging in negotiation framework (pulls toward H2/H3). Net: offsetting. Counter-proposal tells us Iran sees Hormuz as permanent leverage, not temporary tactic. But 5-point framework means there IS a negotiating track â€” even if positions are miles apart. Key question: does US treat counter-proposal as basis for negotiation or as proof talks are dead? Watch White House response + whether Islamabad meeting materializes.",
       "provenance": "DERIVED",
       "source": null,
       "posteriorImpact": "NONE",
@@ -1365,7 +1397,7 @@
     },
     {
       "time": "2026-03-26T13:39-07:00",
-      "text": "Iran fortifying Kharg Island: anti-personnel and anti-armor mines on shoreline/landing zones, MANPADs deployed, additional military personnel and air defenses moved in. US has persistent overhead surveillance tracking all changes. Iran 'laying traps' \u00e2\u20ac\u201d they are 'clever, ruthless' per US officials. Makes Kharg seizure significantly more costly.",
+      "text": "Iran fortifying Kharg Island: anti-personnel and anti-armor mines on shoreline/landing zones, MANPADs deployed, additional military personnel and air defenses moved in. US has persistent overhead surveillance tracking all changes. Iran 'laying traps' â€” they are 'clever, ruthless' per US officials. Makes Kharg seizure significantly more costly.",
       "provenance": "RETRIEVED",
       "source": "CNN/The Week/JPost/Times of Israel/Azernews",
       "posteriorImpact": "MODERATE",
@@ -1393,7 +1425,7 @@
     },
     {
       "time": "2026-03-26T13:39-07:00",
-      "text": "Iran blocked Pakistan-bound container ship SELEN (Sharjah\u00e2\u2020\u2019Karachi, food supplies, St Kitts flag) at Hormuz \u00e2\u20ac\u201d day AFTER Pakistan offered to mediate. IRGC cited lack of clearance. Signal: Iran's Hormuz control is non-negotiable, even against mediator countries. Blockade enforcement tightening, not loosening.",
+      "text": "Iran blocked Pakistan-bound container ship SELEN (Sharjahâ†’Karachi, food supplies, St Kitts flag) at Hormuz â€” day AFTER Pakistan offered to mediate. IRGC cited lack of clearance. Signal: Iran's Hormuz control is non-negotiable, even against mediator countries. Blockade enforcement tightening, not loosening.",
       "provenance": "RETRIEVED",
       "source": "Asian Mirror/The Week/Tribune India/The Statesman",
       "posteriorImpact": "MINOR",
@@ -1449,7 +1481,7 @@
     },
     {
       "time": "2026-03-26T13:39-07:00",
-      "text": "Brent spiked to $105.85 (up $6.10 from previous morning) \u00e2\u20ac\u201d market reversed de-escalation bet. Iran dead now 1,750+ (up from 1,444). Lebanon 1,094 dead, 2,966 wounded. Pew Research: 59% of Americans say US made wrong decision using force in Iran (59-38). Trump approval steady at record low.",
+      "text": "Brent spiked to $105.85 (up $6.10 from previous morning) â€” market reversed de-escalation bet. Iran dead now 1,750+ (up from 1,444). Lebanon 1,094 dead, 2,966 wounded. Pew Research: 59% of Americans say US made wrong decision using force in Iran (59-38). Trump approval steady at record low.",
       "provenance": "RETRIEVED",
       "source": "Fortune/Al Jazeera/Pew Research",
       "posteriorImpact": "MINOR",
@@ -1463,7 +1495,7 @@
     },
     {
       "time": "2026-03-26T13:39-07:00",
-      "text": "Posteriors HELD \u00e2\u20ac\u201d Tangsiri kill is hours old, operational impact unknown. Competing dynamics: (1) IRGC Navy decapitated \u00e2\u2020\u2019 could degrade blockade operations (shorter), BUT (2) Iran fortifying Kharg with mines/MANPADs (longer), (3) Iran blocking Pakistan ship = tightening not loosening (longer), (4) 'final blow' planning with written orders = military track accelerating, (5) Brent spiking = market pricing longer conflict. CRITICAL 48h ahead: Tripoli enters CENTCOM AOR Friday, ultimatum expires Friday, Tangsiri kill likely triggers Iranian escalation. All three converge on Mar 28. Hold and watch.",
+      "text": "Posteriors HELD â€” Tangsiri kill is hours old, operational impact unknown. Competing dynamics: (1) IRGC Navy decapitated â†’ could degrade blockade operations (shorter), BUT (2) Iran fortifying Kharg with mines/MANPADs (longer), (3) Iran blocking Pakistan ship = tightening not loosening (longer), (4) 'final blow' planning with written orders = military track accelerating, (5) Brent spiking = market pricing longer conflict. CRITICAL 48h ahead: Tripoli enters CENTCOM AOR Friday, ultimatum expires Friday, Tangsiri kill likely triggers Iranian escalation. All three converge on Mar 28. Hold and watch.",
       "provenance": "DERIVED",
       "source": null,
       "posteriorImpact": "NONE",
@@ -1477,7 +1509,7 @@
     },
     {
       "time": "2026-03-26T21:38-07:00",
-      "text": "TRUMP EXTENDED ENERGY STRIKE PAUSE ANOTHER 10 DAYS TO APRIL 6 (8pm ET). Truth Social: 'As per Iranian Government request.' Claims talks 'going very well.' This is the SECOND extension (5 days Mar 23\u00e2\u2020\u201928, now +10 to Apr 6). Pattern confirmed: ultimatum\u00e2\u2020\u2019blink\u00e2\u2020\u2019claim diplomacy\u00e2\u2020\u2019extend. Our Option D (extended/dropped) now 2x confirmed. Kharg window pushed right again \u00e2\u20ac\u201d Apr 6+ at earliest.",
+      "text": "TRUMP EXTENDED ENERGY STRIKE PAUSE ANOTHER 10 DAYS TO APRIL 6 (8pm ET). Truth Social: 'As per Iranian Government request.' Claims talks 'going very well.' This is the SECOND extension (5 days Mar 23â†’28, now +10 to Apr 6). Pattern confirmed: ultimatumâ†’blinkâ†’claim diplomacyâ†’extend. Our Option D (extended/dropped) now 2x confirmed. Kharg window pushed right again â€” Apr 6+ at earliest.",
       "provenance": "RETRIEVED",
       "source": "CNBC/Bloomberg/Axios/NPR/CNN/CBS",
       "posteriorImpact": "MODERATE",
@@ -1491,7 +1523,7 @@
     },
     {
       "time": "2026-03-26T21:38-07:00",
-      "text": "Pakistan FM Ishaq Dar OFFICIALLY CONFIRMED 'indirect talks' \u00e2\u20ac\u201d first mediator country to publicly confirm relay channel is real. 'US has shared 15 points, being deliberated upon by Iran.' Iran has RESPONDED through intermediaries, now AWAITING Washington's reply. Witkoff publicly discussed 15-point plan as 'framework for peace deal.' This is an actual negotiation dynamic \u00e2\u20ac\u201d proposal, counter-proposal, relay \u00e2\u20ac\u201d even if neither side calls it talks.",
+      "text": "Pakistan FM Ishaq Dar OFFICIALLY CONFIRMED 'indirect talks' â€” first mediator country to publicly confirm relay channel is real. 'US has shared 15 points, being deliberated upon by Iran.' Iran has RESPONDED through intermediaries, now AWAITING Washington's reply. Witkoff publicly discussed 15-point plan as 'framework for peace deal.' This is an actual negotiation dynamic â€” proposal, counter-proposal, relay â€” even if neither side calls it talks.",
       "provenance": "RETRIEVED",
       "source": "NPR/OPB/CNN/CBS",
       "posteriorImpact": "MODERATE",
@@ -1505,7 +1537,7 @@
     },
     {
       "time": "2026-03-26T21:38-07:00",
-      "text": "CENTCOM Adm. Cooper confirmed Tangsiri kill, said Iran's navy on path to 'irreversible decline.' US hit 2/3 of Iran's missile/drone production facilities. Combined with 140+ naval vessels destroyed including ~50 mine layers. Iran's ability to sustain/expand blockade degrading \u00e2\u20ac\u201d but existing mines and corridor system persist.",
+      "text": "CENTCOM Adm. Cooper confirmed Tangsiri kill, said Iran's navy on path to 'irreversible decline.' US hit 2/3 of Iran's missile/drone production facilities. Combined with 140+ naval vessels destroyed including ~50 mine layers. Iran's ability to sustain/expand blockade degrading â€” but existing mines and corridor system persist.",
       "provenance": "RETRIEVED",
       "source": "Al Arabiya/FDD/Eurasia Review",
       "posteriorImpact": "MINOR",
@@ -1519,7 +1551,7 @@
     },
     {
       "time": "2026-03-26T21:38-07:00",
-      "text": "Brent closed at $108.01 (+5.66%). S&P 500 fell 1.74% \u00e2\u20ac\u201d biggest daily drop of 2026. WTI $94.48 (+4.61%). Market REVERSED de-escalation bet. WTO chief: 'worst trade disruption in 80 years.' ~2,000 ships waiting on both sides of Hormuz.",
+      "text": "Brent closed at $108.01 (+5.66%). S&P 500 fell 1.74% â€” biggest daily drop of 2026. WTI $94.48 (+4.61%). Market REVERSED de-escalation bet. WTO chief: 'worst trade disruption in 80 years.' ~2,000 ships waiting on both sides of Hormuz.",
       "provenance": "RETRIEVED",
       "source": "CNBC/Fortune/Bloomberg/RTE/WTO",
       "posteriorImpact": "MINOR",
@@ -1533,7 +1565,7 @@
     },
     {
       "time": "2026-03-26T21:38-07:00",
-      "text": "Posteriors HELD. Trump's 10-day extension to Apr 6 is THE key development \u00e2\u20ac\u201d pushes ALL military timelines right. Kharg window now Apr 6+ at earliest (was Apr 1-5). But: (1) indirect talks confirmed by Pakistan, (2) Iran responded through mediators & awaiting US reply = actual negotiation dynamic, (3) Tangsiri kill + naval degradation = Iran's blockade capability eroding, (4) BUT Iran fortifying Kharg and blocking even mediator country ships = hardening. Net: extension buys time for both diplomatic and military tracks. Hold \u00e2\u20ac\u201d next decision point is Apr 6.",
+      "text": "Posteriors HELD. Trump's 10-day extension to Apr 6 is THE key development â€” pushes ALL military timelines right. Kharg window now Apr 6+ at earliest (was Apr 1-5). But: (1) indirect talks confirmed by Pakistan, (2) Iran responded through mediators & awaiting US reply = actual negotiation dynamic, (3) Tangsiri kill + naval degradation = Iran's blockade capability eroding, (4) BUT Iran fortifying Kharg and blocking even mediator country ships = hardening. Net: extension buys time for both diplomatic and military tracks. Hold â€” next decision point is Apr 6.",
       "provenance": "DERIVED",
       "source": null,
       "posteriorImpact": "NONE",
@@ -1547,7 +1579,7 @@
     },
     {
       "time": "2026-03-26T14:38-07:00",
-      "text": "Trump reveals Iran allowed 10 oil tankers through Hormuz as 'very big present.' At Cabinet meeting: Iran said 'to show you we're real and solid, we'll let you have 8 boats of oil' \u00e2\u20ac\u201d ended up being 10. Ships reportedly foreign-flagged (possibly Pakistani). Corridor traffic DID increase from 3\u00e2\u2020\u20196\u00e2\u2020\u201910 ships recently. But Iran simultaneously blocked Pakistan-bound SELEN. Selective passage \u00e2\u2030\u00a0 reopening \u00e2\u20ac\u201d Iran choosing who passes.",
+      "text": "Trump reveals Iran allowed 10 oil tankers through Hormuz as 'very big present.' At Cabinet meeting: Iran said 'to show you we're real and solid, we'll let you have 8 boats of oil' â€” ended up being 10. Ships reportedly foreign-flagged (possibly Pakistani). Corridor traffic DID increase from 3â†’6â†’10 ships recently. But Iran simultaneously blocked Pakistan-bound SELEN. Selective passage â‰  reopening â€” Iran choosing who passes.",
       "provenance": "RETRIEVED",
       "source": "CNBC/Spectrum News/OilPrice/Israel Hayom/XTB",
       "posteriorImpact": "MINOR",
@@ -1589,7 +1621,7 @@
     },
     {
       "time": "2026-03-27T05:40-07:00",
-      "text": "MAJOR: FM Araghchi FORMALLY announced 5-nation selective passage regime \u00e2\u20ac\u201d China, Russia, India, Iraq, Pakistan explicitly permitted through Hormuz. Malaysia separately confirmed allowed. Araghchi: 'We are in a state of war. The region is a war zone. No reason to allow ships of our enemies and their allies to pass through. But it remains open to others.' This transforms the de facto corridor into OFFICIAL IRANIAN FOREIGN POLICY. Creates stakeholders (China, Russia, India) who BENEFIT from the blockade status quo. Combined with yuan toll system, this is a sovereignty regime, not a crisis measure.",
+      "text": "MAJOR: FM Araghchi FORMALLY announced 5-nation selective passage regime â€” China, Russia, India, Iraq, Pakistan explicitly permitted through Hormuz. Malaysia separately confirmed allowed. Araghchi: 'We are in a state of war. The region is a war zone. No reason to allow ships of our enemies and their allies to pass through. But it remains open to others.' This transforms the de facto corridor into OFFICIAL IRANIAN FOREIGN POLICY. Creates stakeholders (China, Russia, India) who BENEFIT from the blockade status quo. Combined with yuan toll system, this is a sovereignty regime, not a crisis measure.",
       "provenance": "RETRIEVED",
       "source": "Al Jazeera/Business Standard/Channel Islands/Organiser/Kashmir Observer",
       "posteriorImpact": "MODERATE",
@@ -1603,7 +1635,7 @@
     },
     {
       "time": "2026-03-27T05:40-07:00",
-      "text": "IDF mega-strike wave: 60 IAF jets dropped 150+ bombs on Parchin (Tehran) and Isfahan. Targeted 'most central facility for production of missiles and defense systems' \u00e2\u20ac\u201d including warhead casting, engine mixing, solid-fuel ballistic missile components. Also struck IRGC Quds Force weapons site and air defense manufacturing in Isfahan. Industrial university in Isfahan targeted. Total: 15,000 Iranian targets hit since Feb 28. Daily target count dropped from initial ~1,000 to fewer than 100 \u00e2\u20ac\u201d degradation campaign approaching diminishing returns.",
+      "text": "IDF mega-strike wave: 60 IAF jets dropped 150+ bombs on Parchin (Tehran) and Isfahan. Targeted 'most central facility for production of missiles and defense systems' â€” including warhead casting, engine mixing, solid-fuel ballistic missile components. Also struck IRGC Quds Force weapons site and air defense manufacturing in Isfahan. Industrial university in Isfahan targeted. Total: 15,000 Iranian targets hit since Feb 28. Daily target count dropped from initial ~1,000 to fewer than 100 â€” degradation campaign approaching diminishing returns.",
       "provenance": "RETRIEVED",
       "source": "Times of Israel/JPost/YNet/Israel National News/Alma Center",
       "posteriorImpact": "MINOR",
@@ -1617,7 +1649,7 @@
     },
     {
       "time": "2026-03-27T05:40-07:00",
-      "text": "Iran fired TWO rounds of missiles at central Israel causing widespread damage. Impacts in Kafr Qasim and Ganei Tikva. 1 civilian killed in Nahariya by Hezbollah missile. Iran demonstrating sustained missile capability 27 days into war despite 2/3 of production facilities destroyed. Israeli defense system stress-tested \u00e2\u20ac\u201d WaPo: 'Iran missiles pierce Israel's defenses, raising doubts about interceptors.'",
+      "text": "Iran fired TWO rounds of missiles at central Israel causing widespread damage. Impacts in Kafr Qasim and Ganei Tikva. 1 civilian killed in Nahariya by Hezbollah missile. Iran demonstrating sustained missile capability 27 days into war despite 2/3 of production facilities destroyed. Israeli defense system stress-tested â€” WaPo: 'Iran missiles pierce Israel's defenses, raising doubts about interceptors.'",
       "provenance": "RETRIEVED",
       "source": "Al Jazeera/WaPo/Times of Israel liveblog Mar 26",
       "posteriorImpact": "MINOR",
@@ -1631,7 +1663,7 @@
     },
     {
       "time": "2026-03-27T05:40-07:00",
-      "text": "IDF Brig Gen Defrin: 'The eliminations will not stop; we will continue to pursue anyone who threatens Israel.' No replacement for Tangsiri announced by Iran. Tehran has NOT confirmed his death. IRGC Navy command structure decapitated \u00e2\u20ac\u201d commander + intelligence chief + senior aides all killed. Institutional blockade system persists but C2 disrupted.",
+      "text": "IDF Brig Gen Defrin: 'The eliminations will not stop; we will continue to pursue anyone who threatens Israel.' No replacement for Tangsiri announced by Iran. Tehran has NOT confirmed his death. IRGC Navy command structure decapitated â€” commander + intelligence chief + senior aides all killed. Institutional blockade system persists but C2 disrupted.",
       "provenance": "RETRIEVED",
       "source": "Times of Israel/CNBC/Iran International/FDD",
       "posteriorImpact": "MINOR",
@@ -1645,7 +1677,7 @@
     },
     {
       "time": "2026-03-27T05:40-07:00",
-      "text": "Hengaw 7th report: 6,530 killed in Iran in 25 days of war, including 640 civilians. Up from 5,900 in 21 days (6th report). Al Jazeera tracker (confirmed only): 1,750+. Lebanon: 1,072 killed, 2,966 wounded. Israel: 18 civilians killed, 5,229+ injured. US KIA: 13. Mojtaba Khamenei STILL not seen publicly \u00e2\u20ac\u201d no new images/video since Mar 8 appointment. Incapacitation evidence mounting.",
+      "text": "Hengaw 7th report: 6,530 killed in Iran in 25 days of war, including 640 civilians. Up from 5,900 in 21 days (6th report). Al Jazeera tracker (confirmed only): 1,750+. Lebanon: 1,072 killed, 2,966 wounded. Israel: 18 civilians killed, 5,229+ injured. US KIA: 13. Mojtaba Khamenei STILL not seen publicly â€” no new images/video since Mar 8 appointment. Incapacitation evidence mounting.",
       "provenance": "RETRIEVED",
       "source": "Hengaw/Al Jazeera tracker/ACLED/Times of Israel/Critical Threats",
       "posteriorImpact": "MINOR",
@@ -1659,7 +1691,7 @@
     },
     {
       "time": "2026-03-27T05:40-07:00",
-      "text": "Gas national average $3.98/gal (AAA), up $1.00 in one month. Brent closed $108.01, WTI $94.48. S&P 500 fell 1.74% to lowest since September. Nasdaq entered correction territory (-2.4%). ECB President warned on inflation from oil shock. Oil market volatility surging \u00e2\u20ac\u201d market reversed de-escalation bet. Polymers diverging from crude: oil correcting at times but polymer prices keep climbing (supply chain disruption outlasts price moves).",
+      "text": "Gas national average $3.98/gal (AAA), up $1.00 in one month. Brent closed $108.01, WTI $94.48. S&P 500 fell 1.74% to lowest since September. Nasdaq entered correction territory (-2.4%). ECB President warned on inflation from oil shock. Oil market volatility surging â€” market reversed de-escalation bet. Polymers diverging from crude: oil correcting at times but polymer prices keep climbing (supply chain disruption outlasts price moves).",
       "provenance": "RETRIEVED",
       "source": "AAA/CNBC/Motley Fool/TheStreet/Syntex America/Bloomberg",
       "posteriorImpact": "MINOR",
@@ -1673,7 +1705,7 @@
     },
     {
       "time": "2026-03-27T05:40-07:00",
-      "text": "Posteriors HELD. Araghchi's 5-nation selective passage is the key evening development \u00e2\u20ac\u201d it FORMALIZES the blockade into a sovereignty regime. But this is incremental institutionalization of trends already captured (IMO letter, corridor, toll system, 10 tankers). No new tier 1/2 indicators fired. IDF degradation campaign approaching diminishing returns (daily targets <100) while Iran STILL firing missiles = attrition equilibrium emerging. Tangsiri void significant but system persists. Net: blockade hardening into permanent structure while military campaign plateaus. Positions locked. Apr 6 remains next decision point.",
+      "text": "Posteriors HELD. Araghchi's 5-nation selective passage is the key evening development â€” it FORMALIZES the blockade into a sovereignty regime. But this is incremental institutionalization of trends already captured (IMO letter, corridor, toll system, 10 tankers). No new tier 1/2 indicators fired. IDF degradation campaign approaching diminishing returns (daily targets <100) while Iran STILL firing missiles = attrition equilibrium emerging. Tangsiri void significant but system persists. Net: blockade hardening into permanent structure while military campaign plateaus. Positions locked. Apr 6 remains next decision point.",
       "provenance": "DERIVED",
       "source": null,
       "posteriorImpact": "NONE",
@@ -1687,7 +1719,7 @@
     },
     {
       "time": "2026-03-27T13:40-07:00",
-      "text": "CRITICAL: Two Chinese Cosco container ships (CSCL Indian Ocean, CSCL Arctic Ocean) attempted to EXIT Persian Gulf through Hormuz, then made ABRUPT U-TURN near Larak/Qeshm islands and motored back. Bloomberg ship-tracking data. This happened HOURS after Araghchi formally named China as 'friendly' nation. Brent immediately spiked above $111. Iran's selective passage regime is NOT operationally reliable \u00e2\u20ac\u201d even named-friendly nations can't transit consistently. Possible causes: IRGC Navy C2 void (Tangsiri dead, no replacement), corridor coordination breakdown, or mines/military activity making transit too risky.",
+      "text": "CRITICAL: Two Chinese Cosco container ships (CSCL Indian Ocean, CSCL Arctic Ocean) attempted to EXIT Persian Gulf through Hormuz, then made ABRUPT U-TURN near Larak/Qeshm islands and motored back. Bloomberg ship-tracking data. This happened HOURS after Araghchi formally named China as 'friendly' nation. Brent immediately spiked above $111. Iran's selective passage regime is NOT operationally reliable â€” even named-friendly nations can't transit consistently. Possible causes: IRGC Navy C2 void (Tangsiri dead, no replacement), corridor coordination breakdown, or mines/military activity making transit too risky.",
       "provenance": "RETRIEVED",
       "source": "Bloomberg/CNBC/CSIS",
       "posteriorImpact": "MODERATE",
@@ -1701,7 +1733,7 @@
     },
     {
       "time": "2026-03-27T13:40-07:00",
-      "text": "TRIPOLI ARG + 31ST MEU TRANSFERRED TO CENTCOM AOR \u00e2\u20ac\u201d confirmed Friday Mar 27. USS Tripoli, USS New Orleans, ~2,200 Marines from 31st MEU now in CENTCOM's area. Officials: 'several additional days' to reach Strait of Hormuz. Tier 2 indicator (Persian Gulf entry) now on clock \u00e2\u20ac\u201d watch for AIS going dark or straight run to Gulf vs Gulf of Oman park.",
+      "text": "TRIPOLI ARG + 31ST MEU TRANSFERRED TO CENTCOM AOR â€” confirmed Friday Mar 27. USS Tripoli, USS New Orleans, ~2,200 Marines from 31st MEU now in CENTCOM's area. Officials: 'several additional days' to reach Strait of Hormuz. Tier 2 indicator (Persian Gulf entry) now on clock â€” watch for AIS going dark or straight run to Gulf vs Gulf of Oman park.",
       "provenance": "RETRIEVED",
       "source": "WSJ/USNI/Turkiye Today/Stars and Stripes",
       "posteriorImpact": "MODERATE",
@@ -1715,7 +1747,7 @@
     },
     {
       "time": "2026-03-27T13:40-07:00",
-      "text": "TRUMP CONSIDERING 10,000 MORE GROUND TROOPS to Middle East (WSJ/Axios). On TOP of ~5,000 Marines (2 MEUs) + ~3,000 82nd Airborne already ordered. Would bring total to 15,000-18,000 ground troops. Includes infantry AND armored vehicles. Tehran responds: 'one million fighters ready for confrontation.' This is far beyond Kharg-only operation sizing \u00e2\u20ac\u201d suggests multiple objective force or sustained occupation capability.",
+      "text": "TRUMP CONSIDERING 10,000 MORE GROUND TROOPS to Middle East (WSJ/Axios). On TOP of ~5,000 Marines (2 MEUs) + ~3,000 82nd Airborne already ordered. Would bring total to 15,000-18,000 ground troops. Includes infantry AND armored vehicles. Tehran responds: 'one million fighters ready for confrontation.' This is far beyond Kharg-only operation sizing â€” suggests multiple objective force or sustained occupation capability.",
       "provenance": "RETRIEVED",
       "source": "WSJ/Axios/Fox News/JPost/Stars and Stripes/Voice of Emirates",
       "posteriorImpact": "MODERATE",
@@ -1729,7 +1761,7 @@
     },
     {
       "time": "2026-03-27T13:40-07:00",
-      "text": "IDF struck Yazd \u00e2\u20ac\u201d Iran's PRIMARY facility for production of missiles AND SEA MINES. Used for planning, development, assembly, storage of naval missiles (cruise platforms, submarines, helicopters) and sea mines. This directly targets Iran's blockade sustainment capability. Combined with 140+ naval vessels destroyed (~50 mine layers), Iran's ability to RESUPPLY mines is degrading. But ~12 mines already in Hormuz + existing infrastructure persists.",
+      "text": "IDF struck Yazd â€” Iran's PRIMARY facility for production of missiles AND SEA MINES. Used for planning, development, assembly, storage of naval missiles (cruise platforms, submarines, helicopters) and sea mines. This directly targets Iran's blockade sustainment capability. Combined with 140+ naval vessels destroyed (~50 mine layers), Iran's ability to RESUPPLY mines is degrading. But ~12 mines already in Hormuz + existing infrastructure persists.",
       "provenance": "RETRIEVED",
       "source": "JPost/IDF official/ANI/JNS/Tribune India",
       "posteriorImpact": "MODERATE",
@@ -1743,7 +1775,7 @@
     },
     {
       "time": "2026-03-27T13:40-07:00",
-      "text": "TOMAHAWK DEPLETION CRISIS: 850+ Tomahawks fired in 4 weeks. 319 in first 72 hours alone = 10% of entire US stockpile (~4,000 total). Production: only 90-100/year (RTX planning to scale to 1,000/yr but years away). Pentagon officials 'alarmed.' WaPo, Small Wars Journal, 19FortyFive all reporting. Combined US+Israel: 25,000+ total munitions dropped since Feb 28. Sustainment constraint emerging \u00e2\u20ac\u201d pushes toward ground ops (fewer precision munitions needed) or de-escalation.",
+      "text": "TOMAHAWK DEPLETION CRISIS: 850+ Tomahawks fired in 4 weeks. 319 in first 72 hours alone = 10% of entire US stockpile (~4,000 total). Production: only 90-100/year (RTX planning to scale to 1,000/yr but years away). Pentagon officials 'alarmed.' WaPo, Small Wars Journal, 19FortyFive all reporting. Combined US+Israel: 25,000+ total munitions dropped since Feb 28. Sustainment constraint emerging â€” pushes toward ground ops (fewer precision munitions needed) or de-escalation.",
       "provenance": "RETRIEVED",
       "source": "WaPo/19FortyFive/Small Wars Journal/CNN/Kyiv Post",
       "posteriorImpact": "MODERATE",
@@ -1757,7 +1789,7 @@
     },
     {
       "time": "2026-03-27T13:40-07:00",
-      "text": "Iran fired NEW missile/drone waves at Gulf states overnight. Sirens in Bahrain, Qatar, UAE. UAE intercepted ballistic missile over Abu Dhabi \u00e2\u20ac\u201d debris killed 2, injured 3 (UAE total death toll now 11). Saudi intercepted drones over Eastern Province. Kuwait intercepted missiles/drones, loud explosions heard. Iran attacking Gulf states DAILY now \u00e2\u20ac\u201d sustained regional war.",
+      "text": "Iran fired NEW missile/drone waves at Gulf states overnight. Sirens in Bahrain, Qatar, UAE. UAE intercepted ballistic missile over Abu Dhabi â€” debris killed 2, injured 3 (UAE total death toll now 11). Saudi intercepted drones over Eastern Province. Kuwait intercepted missiles/drones, loud explosions heard. Iran attacking Gulf states DAILY now â€” sustained regional war.",
       "provenance": "RETRIEVED",
       "source": "Al Jazeera/The National/NBC/Gulf News",
       "posteriorImpact": "MINOR",
@@ -1771,7 +1803,7 @@
     },
     {
       "time": "2026-03-27T13:40-07:00",
-      "text": "IDF 'wide wave of attacks overnight in Tehran' \u00e2\u20ac\u201d targeted military industries, launch sites, soldiers. Also struck Parchin again + western Iran missile launchers/storage. Air raids killed 6 in Qom (three residential houses). Urmia: residential complex hit, 4 buildings destroyed. Katz: strikes will 'intensify and expand.' War Day 28.",
+      "text": "IDF 'wide wave of attacks overnight in Tehran' â€” targeted military industries, launch sites, soldiers. Also struck Parchin again + western Iran missile launchers/storage. Air raids killed 6 in Qom (three residential houses). Urmia: residential complex hit, 4 buildings destroyed. Katz: strikes will 'intensify and expand.' War Day 28.",
       "provenance": "RETRIEVED",
       "source": "Times of Israel liveblog Mar 27/Al Jazeera/Boston Globe/NBC",
       "posteriorImpact": "MINOR",
@@ -1785,7 +1817,7 @@
     },
     {
       "time": "2026-03-27T13:40-07:00",
-      "text": "Brent surged above $111/bbl (+3.2% morning) on Chinese ship U-turn at Hormuz. Brent-WTI spread widened to $12.45 \u00e2\u20ac\u201d reflects acute premium for waterborne crude. WTI futures $97.01 (+2.68%). S&P 500 futures down 0.4%, on course for FIFTH consecutive weekly decline. 10yr Treasury yield climbed to 4.46%. 30yr mortgage at 6.38%. Bloomberg: 'Iran War Is Now All About the Future of the Strait of Hormuz.'",
+      "text": "Brent surged above $111/bbl (+3.2% morning) on Chinese ship U-turn at Hormuz. Brent-WTI spread widened to $12.45 â€” reflects acute premium for waterborne crude. WTI futures $97.01 (+2.68%). S&P 500 futures down 0.4%, on course for FIFTH consecutive weekly decline. 10yr Treasury yield climbed to 4.46%. 30yr mortgage at 6.38%. Bloomberg: 'Iran War Is Now All About the Future of the Strait of Hormuz.'",
       "provenance": "RETRIEVED",
       "source": "CNBC/Bloomberg/Fortune/247 Wall St/Investing.com",
       "posteriorImpact": "MINOR",
@@ -1799,7 +1831,7 @@
     },
     {
       "time": "2026-03-27T13:40-07:00",
-      "text": "Iran Red Crescent: 1,900 killed, 20,000 injured (official Iranian figure \u00e2\u20ac\u201d significantly lower than Hengaw's 6,530). 7 Hormuz transits confirmed Mar 26 (non-Iranian vessels) \u00e2\u20ac\u201d but Chinese U-turn shows corridor unreliable. 20,000 sailors stranded in Persian Gulf (NBC). Windward maritime intelligence: movement through Hormuz 'no longer halted but remains selective, controlled, and only partially visible.'",
+      "text": "Iran Red Crescent: 1,900 killed, 20,000 injured (official Iranian figure â€” significantly lower than Hengaw's 6,530). 7 Hormuz transits confirmed Mar 26 (non-Iranian vessels) â€” but Chinese U-turn shows corridor unreliable. 20,000 sailors stranded in Persian Gulf (NBC). Windward maritime intelligence: movement through Hormuz 'no longer halted but remains selective, controlled, and only partially visible.'",
       "provenance": "RETRIEVED",
       "source": "Al Jazeera/Windward Maritime Intelligence/NBC/Bloomberg",
       "posteriorImpact": "MINOR",
@@ -1813,7 +1845,7 @@
     },
     {
       "time": "2026-03-27T13:40-07:00",
-      "text": "Posteriors HELD. Competing dynamics: (1) Chinese ship U-turn = blockade MORE severe than Iran claims, even 'friendly' ships can't reliably transit (H3/H4 up), (2) BUT Yazd sea mine factory destroyed + 140 naval vessels = Iran's SUSTAINMENT capability degrading (H2 up), (3) 10,000 more troops = phase transition from air degradation to ground ops emerging (extends crisis but could resolve Hormuz faster via seizure), (4) Tomahawk depletion = US running out of standoff options, creates pressure for either ground or de-escalation, (5) Tripoli now in CENTCOM AOR. These dynamics roughly offset. War transitioning from Phase 1 (air degradation, diminishing returns at <100 targets/day) to Phase 2 (ground/maritime). That transition will take days-weeks to materialize. Hold \u00e2\u20ac\u201d Apr 6 deadline + Tripoli position remain key decision points.",
+      "text": "Posteriors HELD. Competing dynamics: (1) Chinese ship U-turn = blockade MORE severe than Iran claims, even 'friendly' ships can't reliably transit (H3/H4 up), (2) BUT Yazd sea mine factory destroyed + 140 naval vessels = Iran's SUSTAINMENT capability degrading (H2 up), (3) 10,000 more troops = phase transition from air degradation to ground ops emerging (extends crisis but could resolve Hormuz faster via seizure), (4) Tomahawk depletion = US running out of standoff options, creates pressure for either ground or de-escalation, (5) Tripoli now in CENTCOM AOR. These dynamics roughly offset. War transitioning from Phase 1 (air degradation, diminishing returns at <100 targets/day) to Phase 2 (ground/maritime). That transition will take days-weeks to materialize. Hold â€” Apr 6 deadline + Tripoli position remain key decision points.",
       "provenance": "DERIVED",
       "source": null,
       "posteriorImpact": "NONE",
@@ -1827,7 +1859,7 @@
     },
     {
       "time": "2026-03-28T00:28-07:00",
-      "text": "MASSIVE ESCALATION: Israel struck TWO Iranian nuclear facilities for FIRST TIME in war. (1) Arak heavy water reactor (Khondab complex) \u00e2\u20ac\u201d 'key plutonium production site for nuclear weapons.' (2) Ardakan yellowcake production plant (Yazd Province) \u00e2\u20ac\u201d produces uranium ore feedstock for enrichment centrifuges. Also hit 2 of Iran's largest steel factories + a power plant. Iran confirmed damage but says no casualties or radioactive leaks. Araghchi: strikes 'contradict' Trump's extension. Tehran vows retaliation 'will no longer be an eye for an eye.' This crosses a threshold \u00e2\u20ac\u201d nuclear facility strikes make diplomatic resolution significantly harder.",
+      "text": "MASSIVE ESCALATION: Israel struck TWO Iranian nuclear facilities for FIRST TIME in war. (1) Arak heavy water reactor (Khondab complex) â€” 'key plutonium production site for nuclear weapons.' (2) Ardakan yellowcake production plant (Yazd Province) â€” produces uranium ore feedstock for enrichment centrifuges. Also hit 2 of Iran's largest steel factories + a power plant. Iran confirmed damage but says no casualties or radioactive leaks. Araghchi: strikes 'contradict' Trump's extension. Tehran vows retaliation 'will no longer be an eye for an eye.' This crosses a threshold â€” nuclear facility strikes make diplomatic resolution significantly harder.",
       "provenance": "RETRIEVED",
       "source": "Euronews/JPost/Fortune/Israel Hayom/The National/Al Jazeera",
       "posteriorImpact": "MAJOR",
@@ -1841,7 +1873,7 @@
     },
     {
       "time": "2026-03-28T00:28-07:00",
-      "text": "Iran ACTIVELY BLOCKED Chinese Cosco ships at Hormuz \u00e2\u20ac\u201d not just a U-turn. IRGC naval forces turned around three ships total: CSCL Indian Ocean, CSCL Arctic Ocean (both Chinese/Cosco), and Lotus Rising (Marshall Islands flag). FDD confirms. This happened ONE DAY after Araghchi formally named China as 'friendly nation' with transit rights. Iran's selective passage regime is OPERATIONALLY DEAD. Blockade is effectively total regardless of diplomatic announcements. CSIS: 'No one, not even Beijing, is getting through.'",
+      "text": "Iran ACTIVELY BLOCKED Chinese Cosco ships at Hormuz â€” not just a U-turn. IRGC naval forces turned around three ships total: CSCL Indian Ocean, CSCL Arctic Ocean (both Chinese/Cosco), and Lotus Rising (Marshall Islands flag). FDD confirms. This happened ONE DAY after Araghchi formally named China as 'friendly nation' with transit rights. Iran's selective passage regime is OPERATIONALLY DEAD. Blockade is effectively total regardless of diplomatic announcements. CSIS: 'No one, not even Beijing, is getting through.'",
       "provenance": "RETRIEVED",
       "source": "FDD/Bloomberg/Maritime Executive/TradeWinds/Caixin/CSIS",
       "posteriorImpact": "MAJOR",
@@ -1883,7 +1915,7 @@
     },
     {
       "time": "2026-03-28T00:28-07:00",
-      "text": "IRGC issued warning to CIVILIANS near US forces in Gulf states to EVACUATE. Statement: 'We are duty-bound to target US forces wherever we find them.' Called US forces 'cowardly' for using 'civilian locations as human shields.' This is pre-attack notification language \u00e2\u20ac\u201d signals imminent escalation against US bases in Gulf. Combined with nuclear site strikes, Iran's retaliation 'will no longer be eye for eye.'",
+      "text": "IRGC issued warning to CIVILIANS near US forces in Gulf states to EVACUATE. Statement: 'We are duty-bound to target US forces wherever we find them.' Called US forces 'cowardly' for using 'civilian locations as human shields.' This is pre-attack notification language â€” signals imminent escalation against US bases in Gulf. Combined with nuclear site strikes, Iran's retaliation 'will no longer be eye for eye.'",
       "provenance": "RETRIEVED",
       "source": "Time/Sahara Reporters/Euronews/Daily Mirror/Middle East Monitor",
       "posteriorImpact": "MODERATE",
@@ -1897,7 +1929,7 @@
     },
     {
       "time": "2026-03-28T00:28-07:00",
-      "text": "Brent closed at $112.57 (+4.22%) \u00e2\u20ac\u201d HIGHEST since July 2022 (Russia/Ukraine). Brent-WTI spread $12.45. Dow tumbled ~800 points, ENTERED CORRECTION TERRITORY. S&P 500 posted FIFTH consecutive weekly decline. OECD: US inflation to hit 4.2% in 2026, global growth cut to 2.9%. UK worst-hit among major economies. Fortune analyst: war 'could drag into fall 2027.'",
+      "text": "Brent closed at $112.57 (+4.22%) â€” HIGHEST since July 2022 (Russia/Ukraine). Brent-WTI spread $12.45. Dow tumbled ~800 points, ENTERED CORRECTION TERRITORY. S&P 500 posted FIFTH consecutive weekly decline. OECD: US inflation to hit 4.2% in 2026, global growth cut to 2.9%. UK worst-hit among major economies. Fortune analyst: war 'could drag into fall 2027.'",
       "provenance": "RETRIEVED",
       "source": "CNBC/Fortune/TheStreet/Motley Fool/OECD/BusinessToday",
       "posteriorImpact": "MINOR",
@@ -1925,7 +1957,7 @@
     },
     {
       "time": "2026-03-28T00:28-07:00",
-      "text": "POSTERIORS UPDATED. H2 0.16\u00e2\u2020\u20190.13, H3 0.53\u00e2\u2020\u20190.54, H4 0.30\u00e2\u2020\u20190.32. E[weeks] 39.32\u00e2\u2020\u201940.63. Rationale: (1) Israel struck NUCLEAR FACILITIES = massive escalation that kills near-term diplomatic path. Iran will harden, not negotiate, after Arak/Ardakan. (2) Iran BLOCKED Chinese ships at Hormuz = selective passage regime is dead on arrival. Blockade is effectively total. (3) Only 1/3 missiles destroyed = Iran can sustain for months. (4) Rubio '2-4 more weeks' = first official timeline extension. (5) IRGC evacuation warning = asymmetric retaliation incoming. All ACTIONS not rhetoric. Near-term resolution (H2) probability compressing. Conflict hardening into extended war of attrition.",
+      "text": "POSTERIORS UPDATED. H2 0.16â†’0.13, H3 0.53â†’0.54, H4 0.30â†’0.32. E[weeks] 39.32â†’40.63. Rationale: (1) Israel struck NUCLEAR FACILITIES = massive escalation that kills near-term diplomatic path. Iran will harden, not negotiate, after Arak/Ardakan. (2) Iran BLOCKED Chinese ships at Hormuz = selective passage regime is dead on arrival. Blockade is effectively total. (3) Only 1/3 missiles destroyed = Iran can sustain for months. (4) Rubio '2-4 more weeks' = first official timeline extension. (5) IRGC evacuation warning = asymmetric retaliation incoming. All ACTIONS not rhetoric. Near-term resolution (H2) probability compressing. Conflict hardening into extended war of attrition.",
       "provenance": "DERIVED",
       "source": null,
       "posteriorImpact": "MODERATE",
@@ -1953,7 +1985,7 @@
     },
     {
       "time": "2026-03-28T13:53-07:00",
-      "text": "HOUTHIS ENTER THE WAR: Yemen's Houthis fired barrage of ballistic missiles at 'sensitive Israeli military sites' in southern Israel. IDF intercepted one missile. Brig Gen Saree announced on Al Masirah TV. FIRST Houthi attack on Israel since Hamas truce. WAR EXPANDED TO NEW FRONT \u00e2\u20ac\u201d now 5 countries directly attacking (US, Israel, Iran, Hezbollah/Lebanon, Houthis/Yemen). Houthis can threaten Bab al-Mandab Strait = potential SECOND maritime choke point. If Houthis resume Red Sea shipping attacks, Cape route becomes even longer/costlier.",
+      "text": "HOUTHIS ENTER THE WAR: Yemen's Houthis fired barrage of ballistic missiles at 'sensitive Israeli military sites' in southern Israel. IDF intercepted one missile. Brig Gen Saree announced on Al Masirah TV. FIRST Houthi attack on Israel since Hamas truce. WAR EXPANDED TO NEW FRONT â€” now 5 countries directly attacking (US, Israel, Iran, Hezbollah/Lebanon, Houthis/Yemen). Houthis can threaten Bab al-Mandab Strait = potential SECOND maritime choke point. If Houthis resume Red Sea shipping attacks, Cape route becomes even longer/costlier.",
       "provenance": "RETRIEVED",
       "source": "CNN/Al Jazeera/CNBC/Haaretz/Euronews/NBC/WaPo",
       "posteriorImpact": "MAJOR",
@@ -1967,7 +1999,7 @@
     },
     {
       "time": "2026-03-28T13:53-07:00",
-      "text": "IRGC NAMED 15 US COMPANIES AS TARGETS + 29 LOCATIONS: Google, Microsoft, Nvidia, Oracle, Amazon (AWS), Boeing, ExxonMobil, Lockheed Martin, IBM, Palantir. Facilities in Bahrain, Israel, Qatar, UAE. Already attacked 3 AWS datacenters. IRGC expanding from military to ECONOMIC WARFARE \u00e2\u20ac\u201d targeting US tech/defense/energy infrastructure across Gulf. This is 'infrastructure warfare' per The Register.",
+      "text": "IRGC NAMED 15 US COMPANIES AS TARGETS + 29 LOCATIONS: Google, Microsoft, Nvidia, Oracle, Amazon (AWS), Boeing, ExxonMobil, Lockheed Martin, IBM, Palantir. Facilities in Bahrain, Israel, Qatar, UAE. Already attacked 3 AWS datacenters. IRGC expanding from military to ECONOMIC WARFARE â€” targeting US tech/defense/energy infrastructure across Gulf. This is 'infrastructure warfare' per The Register.",
       "provenance": "RETRIEVED",
       "source": "Inc/Nation Thailand/Middle East Eye/Middle East Monitor/The Register",
       "posteriorImpact": "MODERATE",
@@ -1981,7 +2013,7 @@
     },
     {
       "time": "2026-03-28T13:53-07:00",
-      "text": "Iran struck Tel Aviv overnight \u00e2\u20ac\u201d 8 impact sites including a university. 1 killed, 2 injured. Kuwait airport radar system damaged by drone. UAE: falling debris from intercepts caused fires at industrial hub. Israel continued striking Tehran, Isfahan, Khuzestan steel plants. 120+ historical sites damaged across Iran. Bushehr NPP struck AGAIN (Iran says no damage/casualties). War at full intensity despite 'talks.'",
+      "text": "Iran struck Tel Aviv overnight â€” 8 impact sites including a university. 1 killed, 2 injured. Kuwait airport radar system damaged by drone. UAE: falling debris from intercepts caused fires at industrial hub. Israel continued striking Tehran, Isfahan, Khuzestan steel plants. 120+ historical sites damaged across Iran. Bushehr NPP struck AGAIN (Iran says no damage/casualties). War at full intensity despite 'talks.'",
       "provenance": "RETRIEVED",
       "source": "CNN Day 29/Al Jazeera/NPR/Times of Israel/CBS",
       "posteriorImpact": "MINOR",
@@ -1995,7 +2027,7 @@
     },
     {
       "time": "2026-03-28T13:53-07:00",
-      "text": "WTI briefly touched $100.04 \u00e2\u20ac\u201d first time above $100 since 2022. Closed at $99.64 (+5.46%). Brent $112.57. Goldman Sachs: $14-18/bbl geopolitical risk premium baked in. Hormuz transits down to 5/day (from 120 pre-war) per Windward. 101 eastbound transits vs 41 westbound = ships fleeing the Gulf, not entering. OECD: US inflation to hit 4.2%, global growth 2.9%.",
+      "text": "WTI briefly touched $100.04 â€” first time above $100 since 2022. Closed at $99.64 (+5.46%). Brent $112.57. Goldman Sachs: $14-18/bbl geopolitical risk premium baked in. Hormuz transits down to 5/day (from 120 pre-war) per Windward. 101 eastbound transits vs 41 westbound = ships fleeing the Gulf, not entering. OECD: US inflation to hit 4.2%, global growth 2.9%.",
       "provenance": "RETRIEVED",
       "source": "CNBC/Fortune/USNI/Windward/OECD",
       "posteriorImpact": "MINOR",
@@ -2009,7 +2041,7 @@
     },
     {
       "time": "2026-03-28T13:53-07:00",
-      "text": "CNN: Trump's conflicting signals 'frustrate GOP lawmakers and allies' \u00e2\u20ac\u201d no clear endgame after 4 weeks. House Armed Services Chairman Rogers: 'frustration on both sides of the aisle.' GOP Rep Mace stormed out of briefing. Only 20% of Republicans support ground troops. Congress may block additional war funding without clarity. Trump simultaneously claims talks 'going well' while ordering thousands more troops. Domestic political constraint on escalation tightening.",
+      "text": "CNN: Trump's conflicting signals 'frustrate GOP lawmakers and allies' â€” no clear endgame after 4 weeks. House Armed Services Chairman Rogers: 'frustration on both sides of the aisle.' GOP Rep Mace stormed out of briefing. Only 20% of Republicans support ground troops. Congress may block additional war funding without clarity. Trump simultaneously claims talks 'going well' while ordering thousands more troops. Domestic political constraint on escalation tightening.",
       "provenance": "RETRIEVED",
       "source": "CNN/KESQ/Salon/NPR CPAC",
       "posteriorImpact": "MINOR",
@@ -2048,192 +2080,435 @@
       "claimState": "SUPPORTED",
       "weight": 1.0,
       "note": ""
+    },
+    {
+      "time": "2026-04-06T20:00-04:00",
+      "text": "Trump's third deadline (Apr 6 8pm ET) expired. Iran rejected 45-day ceasefire proposal. Trump extended 24hrs to Apr 7 8pm ET, declared it 'FINAL.' Third blink confirmed. Trump warned 'whole civilization will die' if no deal.",
+      "provenance": "RETRIEVED",
+      "source": "WaPo/CNN/Al Jazeera/CNBC",
+      "posteriorImpact": "NONE. Pattern continuation — third deadline extension. ultimatum_expire already FIRED for this pattern.",
+      "id": "ev_109",
+      "tags": [
+        "POLICY",
+        "RHETORIC"
+      ],
+      "claimState": "SUPPORTED",
+      "weight": 1.0,
+      "note": "extensionCount now 3"
+    },
+    {
+      "time": "2026-04-07T00:00:00Z",
+      "text": "US struck 50+ military targets on Kharg Island. 38+ explosions reported across the island. Oil infrastructure deliberately avoided. Military sites comprehensively hit. Strikes occurred same day as ceasefire agreement.",
+      "provenance": "RETRIEVED",
+      "source": "CNN/Military Times/IranWire/JPost/Al Jazeera",
+      "posteriorImpact": "bushehr_strikes FIRED + new_phase FIRED. Applied pre-committed effects: H3/H4 up, coastal prep confirmed.",
+      "id": "ev_110",
+      "tags": [
+        "KINETIC",
+        "EVENT"
+      ],
+      "claimState": "SUPPORTED",
+      "weight": 1.0,
+      "note": "Kharg military sites — NOT oil infrastructure"
+    },
+    {
+      "time": "2026-04-07T00:00:00Z",
+      "text": "USS Tripoli positioned offshore Kharg Island. F-35Bs conducting SEAD missions suppressing S-300 batteries on mainland. Navy SEALs and Marine Raiders began 'Quiet Entry' ops on southern tip of island, cutting undersea fiber-optic cables linking Kharg sensors to mainland C2.",
+      "provenance": "RETRIEVED",
+      "source": "WION/Military-Stuff/Defense Express",
+      "posteriorImpact": "persian_gulf_entry FIRED. Kharg +10-15pp applied. Tripoli confirmed in Persian Gulf at Kharg, not parked in Gulf of Oman.",
+      "id": "ev_111",
+      "tags": [
+        "FORCE",
+        "EVENT"
+      ],
+      "claimState": "SUPPORTED",
+      "weight": 0.8,
+      "note": "Some sourcing from less-established outlets. SEAL/Raider ops details unconfirmed by Pentagon."
+    },
+    {
+      "time": "2026-04-07T00:00:00Z",
+      "text": "IRGC claimed missile strike hit USS Tripoli, forcing vessel to withdraw. Carried by Iranian state media. No confirmation or response from US officials regarding ship condition.",
+      "provenance": "RETRIEVED",
+      "source": "Turkiye Today / Iranian state media",
+      "posteriorImpact": "NONE. Unconfirmed IRGC claim. If confirmed, would suggest Kharg assault facing resistance but also confirms Tripoli was in strike range of Kharg.",
+      "id": "ev_112",
+      "tags": [
+        "RHETORIC",
+        "EVENT"
+      ],
+      "claimState": "PROPOSED",
+      "weight": 0.4,
+      "note": "Iranian state media only — trust 0.40. IRGC has history of exaggerated claims."
+    },
+    {
+      "time": "2026-04-08T00:00:00Z",
+      "text": "Pakistan brokered 2-week ceasefire between US and Iran. Trump suspended bombing. Iran agreed to allow 'safe passage through Strait of Hormuz via coordination with Iran's Armed Forces.' First face-to-face US-Iran engagement framework since 2015 JCPOA. Ceasefire terms: halt hostilities, reopen Hormuz, 15-20 day negotiation period.",
+      "provenance": "RETRIEVED",
+      "source": "NBC/CNN/Al Jazeera/Fox News/NPR",
+      "posteriorImpact": "ceasefire anti-indicator FIRED. Applied pre-committed effect: H1/H2 surge (conservative — H1 0.01→0.03, H2 0.13→0.22). Ceasefire fragile from hour 1.",
+      "id": "ev_113",
+      "tags": [
+        "DIPLO",
+        "POLICY"
+      ],
+      "claimState": "SUPPORTED",
+      "weight": 1.0,
+      "note": ""
+    },
+    {
+      "time": "2026-04-08T00:00:00Z",
+      "text": "Israel launched massive strikes on Lebanon/Hezbollah on Day 1 of ceasefire. 254 killed in single day. Netanyahu declared 'Lebanon not included in ceasefire.' Trump agreed — said Lebanon excluded. Pakistan (mediator) said Lebanon WAS included. Iran accused US of 'grave violation.'",
+      "provenance": "RETRIEVED",
+      "source": "NBC/NPR/CNN/Al Jazeera/CNBC/Wikipedia",
+      "posteriorImpact": "NONE. Ceasefire violation weakens H1/H2 surge but does not reverse it alone. Lebanon dispute is separate from Hormuz mechanism.",
+      "id": "ev_114",
+      "tags": [
+        "EVENT",
+        "DIPLO"
+      ],
+      "claimState": "SUPPORTED",
+      "weight": 1.0,
+      "note": "Lebanon exclusion dispute immediately undermined ceasefire credibility"
+    },
+    {
+      "time": "2026-04-09T00:00:00Z",
+      "text": "Hormuz NOT reopened despite ceasefire agreement. Ships still prevented from passing through strait on Day 1 of ceasefire. Iran promised safe passage but did not implement it. No sign of blockade lifting.",
+      "provenance": "RETRIEVED",
+      "source": "CNN/CBS/Al Jazeera/NBC",
+      "posteriorImpact": "NONE. Weakens ceasefire anti-indicator effect — Iran agreed to reopen but didn't follow through. Operational blockade unchanged.",
+      "id": "ev_115",
+      "tags": [
+        "EVENT",
+        "DATA"
+      ],
+      "claimState": "SUPPORTED",
+      "weight": 1.0,
+      "note": ""
+    },
+    {
+      "time": "2026-04-10T00:00:00Z",
+      "text": "Hormuz traffic crept up to ~10 transits/day during ceasefire period (vs 5/day pre-ceasefire, 120+ pre-war). Still 92% below normal. 600+ vessels (325 tankers) remain stranded in the Gulf.",
+      "provenance": "RETRIEVED",
+      "source": "NBC/Al Jazeera/Gulf News/Marine Industry News",
+      "posteriorImpact": "NONE. Marginal improvement insufficient to meet resolution criterion (40 transits/day). 600 stranded vessels = massive backlog even if strait fully reopens.",
+      "id": "ev_116",
+      "tags": [
+        "DATA"
+      ],
+      "claimState": "SUPPORTED",
+      "weight": 1.0,
+      "note": ""
+    },
+    {
+      "time": "2026-04-10T00:00:00Z",
+      "text": "Brent crude fell from $112.57 (Mar 27) to ~$97.78 on ceasefire hopes. WTI tracking similarly. Market pricing partial reopening but not full resolution.",
+      "provenance": "RETRIEVED",
+      "source": "Fortune/Trading Economics/IBTimes",
+      "posteriorImpact": "NONE. Market movement on sentiment, not structural change. Blockade still operational.",
+      "id": "ev_117",
+      "tags": [
+        "MARKET",
+        "ECON"
+      ],
+      "claimState": "SUPPORTED",
+      "weight": 1.0,
+      "note": ""
+    },
+    {
+      "time": "2026-04-10T00:00:00Z",
+      "text": "Iranian delegation arrived in Islamabad for face-to-face talks with US. Pakistani PM Sharif hosting. Israel-Lebanon ceasefire talks announced separately, described as 'historic.'",
+      "provenance": "RETRIEVED",
+      "source": "Al Jazeera/CNBC/OPB",
+      "posteriorImpact": "NONE. Diplomatic process in motion but outcome unknown. Talks track being tested.",
+      "id": "ev_118",
+      "tags": [
+        "DIPLO"
+      ],
+      "claimState": "SUPPORTED",
+      "weight": 1.0,
+      "note": ""
+    },
+    {
+      "time": "2026-04-11T00:00:00Z",
+      "text": "Vance, Witkoff, and Kushner met Iranian officials in Islamabad. 21-hour marathon talks. TALKS COLLAPSED. Iran refused US red lines: end all uranium enrichment, fully open Hormuz without tolls. Iran demanded: frozen $6B assets, nuclear program guarantees, right to charge Hormuz tolls, end Israeli attacks on Lebanon. First face-to-face since 2015.",
+      "provenance": "RETRIEVED",
+      "source": "NPR/Al Jazeera/CNN/CNBC/Time",
+      "posteriorImpact": "Reverses ceasefire anti-indicator effect. Diplomatic track exhausted for near term. H2 collapses back, H3/H4 resurge.",
+      "id": "ev_119",
+      "tags": [
+        "DIPLO",
+        "EVENT"
+      ],
+      "claimState": "SUPPORTED",
+      "weight": 1.0,
+      "note": "Sticking points irreconcilable in near term — nuclear enrichment + Hormuz tolls are existential for both sides"
+    },
+    {
+      "time": "2026-04-11T00:00:00Z",
+      "text": "USS Frank E. Peterson and USS Michael Murphy transited Strait of Hormuz for mine-clearing operations. CENTCOM confirmed. UUV drones (torpedo-shaped, high-res sonar) deployed to scan seabed for Maham 3 (moored) and Maham 7 (bottom) mines. Additional forces to 'join clearance effort in coming days.' UK mobilizing coalition with France for minesweeping support.",
+      "provenance": "RETRIEVED",
+      "source": "CENTCOM press release/CBS/Al Jazeera/Gulf News/DefenseScoop/Task & Purpose",
+      "posteriorImpact": "new_phase FIRED (already counted). Mine clearing = physical prerequisite for reopening. Weeks-to-months timeline for clearing. Confirms Hormuz physically blocked, not just politically.",
+      "id": "ev_120",
+      "tags": [
+        "EVENT",
+        "FORCE"
+      ],
+      "claimState": "SUPPORTED",
+      "weight": 1.0,
+      "note": "Mine clearing is slow work — typically weeks to certify lanes safe for commercial shipping"
+    },
+    {
+      "time": "2026-04-11T00:00:00Z",
+      "text": "Three oil supertankers (2 Chinese, 1 Greek) transited Strait of Hormuz — biggest day of oil shipping since war began. Occurred during ceasefire window.",
+      "provenance": "RETRIEVED",
+      "source": "Bloomberg",
+      "posteriorImpact": "NONE. Proof of concept that transit is physically possible, but 3 ships vs 120+/day pre-war. Ceasefire window only.",
+      "id": "ev_121",
+      "tags": [
+        "DATA",
+        "EVENT"
+      ],
+      "claimState": "SUPPORTED",
+      "weight": 1.0,
+      "note": ""
+    },
+    {
+      "time": "2026-04-12T00:00:00Z",
+      "text": "Trump announced via Truth Social: 'Effective immediately, the United States Navy will begin the process of BLOCKADING any and all Ships trying to enter, or leave, the Strait of Hormuz.' Will intercept vessels that paid Iran's toll. Will destroy Iranian mines. STRAIT NOW UNDER DUAL BLOCKADE — Iran blocking from east, US blocking from west.",
+      "provenance": "RETRIEVED",
+      "source": "CBS/CNBC/NBC/CNN/Al Jazeera/Bloomberg/Newsweek/Washington Times",
+      "posteriorImpact": "Massive H3/H4 signal. Dual blockade unprecedented — neither side permitting free transit. Resolution criterion (40 transits/day) now requires BOTH sides to stand down. Dramatically extends expected closure duration.",
+      "id": "ev_122",
+      "tags": [
+        "POLICY",
+        "EVENT"
+      ],
+      "claimState": "SUPPORTED",
+      "weight": 1.0,
+      "note": "US counter-blockade transforms crisis from Iranian closure to mutual closure"
+    },
+    {
+      "time": "2026-04-12T00:00:00Z",
+      "text": "IRGC vowed to retaliate against any military vessels entering the strait. Iran warns mine-clearing ships will be targeted. UK said it is building 'wide coalition' with France and others to ensure passage.",
+      "provenance": "RETRIEVED",
+      "source": "Al Jazeera/NBC/multiple wire services",
+      "posteriorImpact": "NONE. RHETORIC — threat of escalation but no kinetic action yet against mine-clearing ships.",
+      "id": "ev_123",
+      "tags": [
+        "RHETORIC"
+      ],
+      "claimState": "SUPPORTED",
+      "weight": 1.0,
+      "note": ""
+    },
+    {
+      "time": "2026-04-12T00:00:00Z",
+      "text": "Houthis limited involvement to strikes on Israel. Have NOT resumed Red Sea shipping attacks despite threats. Analysts assess strategic restraint under regional pressure. Bab al-Mandeb traffic at ~50% of normal from earlier disruption but no new attacks on commercial shipping.",
+      "provenance": "RETRIEVED",
+      "source": "The National/Washington Institute/Maritime Executive",
+      "posteriorImpact": "NONE. Anti-H4 signal — second choke point NOT activated. Alternative Cape route remains viable. Reduces worst-case dual-chokepoint scenario.",
+      "id": "ev_124",
+      "tags": [
+        "INTEL",
+        "EVENT"
+      ],
+      "claimState": "SUPPORTED",
+      "weight": 1.0,
+      "note": "Key watch: if Houthis start hitting Red Sea shipping, H4 surges"
+    },
+    {
+      "id": "ev_125",
+      "time": "2026-04-11T18:00:00Z",
+      "text": "Iran reportedly unable to locate all naval mines it planted in Strait of Hormuz. Sea currents may have swept some mines from original positions, complicating both Iranian and US clearance efforts.",
+      "tags": [
+        "INTEL",
+        "FORCE"
+      ],
+      "source": "Euronews",
+      "claimState": "PROPOSED",
+      "weight": 0.5,
+      "posteriorImpact": "NONE. H3/H4-directional (lost mines extend closure timeline) but no indicator fired. Mine clearance complexity is not a pre-registered indicator threshold.",
+      "note": "Source trust: Euronews baseTrust 0.75. claimState PROPOSED because single-source, not independently confirmed. Lost mines increase hazard duration regardless of diplomatic outcome."
+    },
+    {
+      "id": "ev_126",
+      "time": "2026-04-12T12:00:00Z",
+      "text": "IRGC Navy Command stated passage through Strait of Hormuz would only be granted to civilian vessels under specific conditions. Military vessels explicitly excluded. Broadcast via Iranian state media (IRIB).",
+      "tags": [
+        "POLICY",
+        "FORCE"
+      ],
+      "source": "IRIB/IRGC Navy Command",
+      "claimState": "SUPPORTED",
+      "weight": 0.8,
+      "posteriorImpact": "NONE. Consistent with existing IRGC posture in ev_123. No indicator fired. Refines the access regime but does not represent a new escalation or de-escalation threshold.",
+      "note": "Source trust: Iranian state media baseTrust 0.50 but this is an official IRGC statement about its own policy, not a factual claim about external events. Weight 0.8 reflects direct-source reliability for self-reported policy positions."
     }
   ],
   "dataFeeds": {
     "brent": {
       "label": "Brent Crude",
-      "value": 112.57,
-      "unit": "$/bbl (highest since Jul 2022)",
+      "value": 95.2,
+      "unit": "$/bbl (down from $112.57 peak on ceasefire hopes; expect spike on blockade announcement)",
       "baseline": 70.37,
-      "asOf": "2026-03-27 close"
+      "asOf": "2026-04-12"
     },
     "wti": {
       "label": "WTI",
-      "value": 99.64,
-      "unit": "$/bbl (briefly touched $100)",
+      "value": 96.57,
+      "unit": "$/bbl",
       "baseline": 65.0,
-      "asOf": "2026-03-27 close"
+      "asOf": "2026-04-12"
     },
     "gas": {
       "label": "Gas (National)",
       "value": 3.98,
-      "unit": "$/gal",
+      "unit": "$/gal (last known; likely higher by now)",
       "baseline": 3.1,
       "asOf": "2026-03-26"
     },
     "hormuz_traffic": {
       "label": "Hormuz Traffic",
-      "value": 4,
-      "unit": "% of pre-war (Windward: 5 transits/day vs 120 pre-war)",
+      "value": 8,
+      "unit": "% of pre-war (~10 transits/day during ceasefire vs 120 pre-war; 3 supertankers Apr 11)",
       "baseline": 100,
-      "asOf": "2026-03-28"
+      "asOf": "2026-04-11"
     },
     "transits_day": {
       "label": "Transits/Day",
-      "value": 5,
-      "unit": "ships (Windward data; Chinese ships blocked, corridor unreliable)",
+      "value": 10,
+      "unit": "ships (ceasefire-period avg; up from 5 pre-ceasefire but still 92% below normal. US blockade may reduce back to near-zero)",
       "baseline": 138,
-      "asOf": "2026-03-28"
+      "asOf": "2026-04-11"
+    },
+    "stranded_vessels": {
+      "label": "Stranded Vessels",
+      "value": 600,
+      "unit": "ships (325 tankers) trapped in Gulf",
+      "baseline": 0,
+      "asOf": "2026-04-10"
     },
     "us_kia": {
       "label": "US KIA",
       "value": 13,
-      "unit": "(+12 wounded at Prince Sultan Air Base Mar 27, 200+ total wounded)",
+      "unit": "(last confirmed; ceasefire reduced new casualties)",
       "baseline": 0,
-      "asOf": "2026-03-27"
+      "asOf": "2026-04-08"
     },
     "iran_dead": {
       "label": "Iran Dead",
       "value": 6530,
-      "unit": "(Hengaw 7th report, 25 days; Al Jazeera confirmed: 1,750+)",
+      "unit": "(last confirmed pre-ceasefire; likely higher after Apr 7 Kharg strikes)",
       "baseline": 0,
       "asOf": "2026-03-26"
     },
     "lebanon_dead": {
       "label": "Lebanon Dead",
-      "value": 1072,
-      "unit": "(Lebanese MoPH revised)",
+      "value": 1326,
+      "unit": "(1,072 + 254 killed Apr 8 during 'ceasefire')",
       "baseline": 0,
-      "asOf": "2026-03-26"
+      "asOf": "2026-04-09"
     },
     "war_day": {
       "label": "War Day",
-      "value": 29,
-      "unit": "(one month mark)",
+      "value": 41,
+      "unit": "(6 weeks)",
       "baseline": 0,
-      "asOf": "2026-03-28"
+      "asOf": "2026-04-12"
     },
     "trump_approval": {
       "label": "Trump Approval",
       "value": 36,
-      "unit": "%",
+      "unit": "% (last confirmed; Pew: 59% say wrong to use force)",
       "baseline": 47,
       "asOf": "2026-03-24"
+    },
+    "us_troops_theater": {
+      "label": "US Troops in Theater",
+      "value": 50000,
+      "unit": "(2 MEUs + 82nd + reinforcements)",
+      "baseline": 0,
+      "asOf": "2026-04-10"
     }
   },
   "watchpoints": [
     {
-      "time": "2026-03-27-29",
-      "event": "Iran response to Tangsiri assassination + IRGC Navy succession",
-      "watch": "48h since strike. Iran STILL hasn't confirmed Tangsiri's death. No replacement announced. IRGC Navy C2 in limbo. Watch: (1) retaliatory escalation (2 missile waves already hit central Israel today), (2) new IRGC Navy commander appointment \u00e2\u20ac\u201d hardliner vs pragmatist signals blockade trajectory, (3) any change in blockade enforcement pattern (tighter or looser)."
+      "time": "2026-04-12-16",
+      "event": "US naval blockade implementation - does Navy actually intercept ships?",
+      "watch": "Trump announced blockade via Truth Social Apr 12. Key: (1) Does Navy physically intercept commercial vessels? (2) Which ships - all, or just Iran-bound? (3) Does this apply to Chinese/Indian tankers that previously paid Iran toll? First enforcement action sets precedent. If US intercepts a Chinese vessel = major escalation with Beijing. IRGC vowed to retaliate against military vessels. Watch for first confrontation."
     },
     {
-      "time": "2026-03-27-29",
-      "event": "US response to Iran's counter-proposal via Pakistan relay",
-      "watch": "Pakistan FM confirmed: Iran responded, US AWAITING reply to Iran's response. Ball in Washington's court. Does US engage on Iran's 5 conditions or reject? Key: Iran's condition #5 (Hormuz sovereignty) is a non-starter for US. But responding at all = legitimizing the channel. Meanwhile Araghchi formalized selective passage = creating leverage while talking."
+      "time": "2026-04-12-20",
+      "event": "Mine-clearing progress - USS Peterson + Murphy + UUVs",
+      "watch": "CENTCOM launched mine clearance Apr 11. UUV drones scanning for Maham 3 (moored) and Maham 7 (bottom) mines. Additional forces joining in coming days. UK/France minesweeping coalition forming. Iran threatened to target mine-clearing ships. Key: (1) How many mines found vs estimated? (2) Any new mines laid after clearing starts? (3) Timeline to certify safe commercial lanes - typically weeks to months. (4) IRGC attacks on clearing ships = massive escalation."
     },
     {
-      "time": "2026-03-27-29",
-      "event": "UN Security Council votes on Hormuz resolutions",
-      "watch": "Bahrain draft (Chapter VII, 'all necessary means'). 22 nations support. China/Russia likely veto \u00e2\u20ac\u201d ESPECIALLY now that China is a named beneficiary of Iran's selective passage. If vetoed = Iran's 5-nation corridor becomes the de facto international regime."
+      "time": "2026-04-12-19",
+      "event": "Kharg Island operation - what phase?",
+      "watch": "Reports of SEAL/Raider Quiet Entry on southern tip. Tripoli F-35Bs running SEAD. 50+ military targets struck Apr 7. IRGC claims missile hit on Tripoli (unconfirmed). Boxer ARG now in theater. 50,000 troops total. Is this active seizure, prep for seizure, or holding pattern during blockade? Watch: (1) Pentagon announces ground operation, (2) AIS data on Tripoli/Boxer positions, (3) Iran reports ground combat on Kharg."
     },
     {
-      "time": "ongoing",
-      "event": "Iran's 5-nation selective passage regime \u00e2\u20ac\u201d ALREADY FAILED",
-      "watch": "DEAD ON ARRIVAL: Iran BLOCKED Chinese Cosco ships + Marshall Islands vessel ONE DAY after Araghchi formally named China as 'friendly.' IRGC Navy turned them around at Larak/Qeshm. CSIS: 'No one, not even Beijing, is getting through.' Selective passage was aspirational/propaganda, not operational. Blockade is effectively total. Watch: does Iran EVER successfully implement the corridor, or does this confirm permanent closure until resolution?"
+      "time": "2026-04-13-15",
+      "event": "Market reaction to blockade announcement (Monday open)",
+      "watch": "Brent at 95.20 pre-announcement. Blockade announced Sunday - markets closed. Monday open will price in dual blockade + failed talks. Expect significant spike. If Brent breaks 120 = new regime. Oil market reaction signals how long traders expect closure to last."
     },
     {
-      "time": "2026-03-30-Apr 3",
-      "event": "Tripoli ARG arrives Gulf of Oman / enters Persian Gulf",
-      "watch": "Tripoli entered CENTCOM AOR Mar 27 (CONFIRMED). Now 'several additional days' to Hormuz. ETA Gulf of Oman ~Mar 30-31. CRITICAL AIS WATCH: (1) If AIS goes dark = Kharg prep (tier 1 fires), (2) If enters Persian Gulf directly = assault positioning (tier 2 fires), (3) If parks in Gulf of Oman 3+ days = escort/standby (anti-indicator fires). Check USNI Fleet Tracker daily."
-    },
-    {
-      "time": "2026-03-25-28",
-      "event": "82nd Airborne (~2,000) arrives in theater",
-      "watch": "Initial elements deploying within a week of Mar 24. Where do they stage? Qatar/Bahrain/Kuwait? Watch for 'new phase' language from Pentagon."
-    },
-    {
-      "time": "2026-03-28-Apr 2",
-      "event": "HOUTHIS \u00e2\u20ac\u201d do they resume Red Sea shipping attacks?",
-      "watch": "Houthis fired first missiles at Israel since Hamas truce. If they also start targeting RED SEA SHIPPING again via Bab al-Mandab, it creates a SECOND maritime choke point \u00e2\u20ac\u201d ships can't route around Hormuz via Suez. This would be catastrophic for global trade and dramatically extend Hormuz crisis. Would warrant major posterior revision (H4 up). Watch: Houthi follow-on attacks, any statements about Red Sea/shipping, and whether US redeploys naval assets to Bab al-Mandab (splitting force between two choke points)."
-    },
-    {
-      "time": "2026-03-28-30",
-      "event": "Iran retaliation cycle \u00e2\u20ac\u201d EXECUTING",
-      "watch": "CONFIRMED: Prince Sultan Air Base struck, 12 US troops injured. IRGC named 15 US companies (Google, Microsoft, AWS, Boeing, etc.) as targets across 29 locations in Gulf. Already hit 3 AWS datacenters. Houthis joined with missiles at Israel. Tel Aviv hit (8 impacts, 1 killed). Kuwait airport radar damaged. War expanding into economic warfare + proxy activation. Still watching for: (1) more mines in Hormuz/wider Gulf, (2) sustained Houthi campaign, (3) IRGC strikes on named corporate targets."
-    },
-    {
-      "time": "2026-03-28-Apr 4",
-      "event": "10,000 more troops \u00e2\u20ac\u201d decision expected NEXT WEEK",
-      "watch": "Pentagon weighing. Infantry + armored vehicles. If approved: total ground force 15,000-18,000 = well beyond Kharg-only. Rubio says gives 'flexibility.' Decision timing matters \u00e2\u20ac\u201d before or after Iranian retaliation for nuclear strikes?"
-    },
-    {
-      "time": "2026-04-06",
-      "event": "THIRD deadline expires (power plant strikes, extended 2x from Mar 23\u00e2\u2020\u201928\u00e2\u2020\u2019Apr 6)",
-      "watch": "Trump extended AGAIN to Apr 6 8pm ET. Two blinks confirmed. By Apr 6: Tripoli in position, 82nd deployed, Boxer approaching. Full force available. Does Trump blink a THIRD time or act? 59% say wrong to use force (Pew). 'Final blow' planning ongoing but indirect talks also active."
-    },
-    {
-      "time": "2026-03-27",
-      "event": "Four-week mark of war \u00e2\u20ac\u201d TODAY (Day 28)",
-      "watch": "PHASE TRANSITION EMERGING: Air degradation at diminishing returns (<100 targets/day, 15,000+ hit, 25,000+ munitions). Tomahawk stockpile depleted ~20% (850+ of ~4,000). Trump considering 10,000 MORE troops with armored vehicles. Chinese ships U-turned at Hormuz despite 'friendly' status. War shifting from Phase 1 (air) to Phase 2 (ground/maritime). Next 10 days (to Apr 6) = force positioning window."
+      "time": "2026-04-12-22",
+      "event": "Ceasefire status - does 2-week truce survive or formally collapse?",
+      "watch": "Ceasefire agreed Apr 8 for 2 weeks (expires ~Apr 22). Talks collapsed Apr 11 but ceasefire not formally terminated. Trump announced blockade but not resumption of bombing. Iran has not declared ceasefire over. Ambiguous state: (1) If both sides resume strikes = ceasefire dead, war enters new phase, (2) If blockade coexists with ceasefire = strange limbo, pressure without kinetic escalation. Watch Iran next move."
     },
     {
       "time": "ongoing",
-      "event": "Tomahawk depletion + air-to-ground transition",
-      "watch": "850+ Tomahawks fired (20%+ of ~4,000 stockpile). Production: 90-100/yr. Air campaign at diminishing returns. Pentagon alarmed. This FORCES a decision: (1) ground ops (fewer precision munitions), (2) de-escalate, or (3) accept degraded stockpile vs China/Taiwan contingency. 10,000 more troops + armored vehicles = ground transition signal. Watch: does strike tempo drop further? Does Pentagon announce 'shift to ground phase'?"
+      "event": "Houthi Red Sea shipping decision - STILL the H4 swing factor",
+      "watch": "Houthis hitting Israel but NOT Red Sea shipping. Strategic restraint so far. If Houthis activate Bab al-Mandab chokepoint = dual maritime crisis, Cape route overloaded, H4 surges to 0.45+. Operation Rough Rider (US strikes on Yemen) may have deterred maritime attacks. Watch: any Houthi statements about shipping, Red Sea incidents, or US force redeployment to Bab al-Mandab."
     },
     {
       "time": "ongoing",
-      "event": "Iran selective passage reliability \u00e2\u20ac\u201d Chinese U-turn test",
-      "watch": "Two Cosco ships U-turned at Hormuz DESPITE China being named 'friendly.' Corridor is NOT operationally reliable. Possible: IRGC Navy C2 void after Tangsiri, mine risk, or corridor was always aspirational. Watch: do Chinese/Indian ships successfully transit in coming days? If corridor fails repeatedly, blockade is more severe than Iran claims and market will reprice."
+      "event": "Dual blockade resolution prerequisites",
+      "watch": "Resolution criterion (40 transits/day) now requires: (1) Iran stands down blockade, (2) US stands down counter-blockade, (3) Mines cleared from strait, (4) Insurance companies willing to cover transits, (5) 600+ stranded ships processed through. Each prerequisite adds weeks-months. Even optimistic scenario = months before normal traffic resumes. This is why H4 surged."
     },
     {
-      "time": "2026-04-06-12",
-      "event": "Kharg assault window (revised AGAIN \u00e2\u20ac\u201d pushed by Trump extension)",
-      "watch": "Potentially 15,000-18,000 ground troops if 10,000 additional approved (2 MEUs + 82nd + 10K reinforcement with armor). Iran fortifying Kharg with mines, MANPADs, traps. Tangsiri killed but no replacement = C2 void. Yazd mine factory struck = sustainment degraded. Apr 6 deadline expiry + forces in position = first realistic window. Boxer ARG (Apr 8-10) reinforcement. Iran warns: Kharg \u00e2\u2020\u2019 mine entire Gulf. Tomahawk depletion favors ground over continued standoff."
-    },
-    {
-      "time": "2026-04-08-10",
-      "event": "Boxer ARG arrives",
-      "watch": "Reinforcement vs relief posture. If Tripoli hasn't acted by Boxer arrival, Kharg window may close or shift to Boxer."
+      "time": "2026-04-15-25",
+      "event": "Islamabad channel - does Pakistan try round 2?",
+      "watch": "21hr talks failed but channel exists. Pakistan PM Sharif invested in mediator role. Face-to-face precedent established. After pressure from blockade, one or both sides may return. Watch: Pakistan diplomatic signals, back-channel reports, any new proposals. If no talks resume within 2 weeks = deadlock hardens."
     },
     {
       "time": "ongoing",
-      "event": "Iran corridor traffic \u00e2\u20ac\u201d one-time gestures vs sustained flow",
-      "watch": "Chinese ships BLOCKED despite 'friendly' status. Trump's '10 tanker gift' may have been one-time diplomatic gesture, not sustained flow. ~7 non-Iranian transits confirmed Mar 26 but corridor now unreliable. If traffic collapses back to near-zero, blockade is total. If Iran resumes selective passage after nuclear retaliation, corridor may still become operational. Key: watch daily transit count over next week."
-    },
-    {
-      "time": "ongoing",
-      "event": "Iran yuan toll regime institutionalization",
-      "watch": "At least 2 ships paid ~$2M/transit in yuan. Iran parliament legislating formal toll system. CIPS volume spiking. This is de facto sovereignty \u00e2\u20ac\u201d each day it operates makes it harder to reverse. If toll regime becomes normalized, Hormuz closure becomes permanent restructuring of global shipping, not a temporary crisis. Key metric: how many ships pay vs. go around Cape."
+      "event": "Iran toll regime vs US interdiction - sovereignty clash",
+      "watch": "Iran claims sovereignty right to toll ships. US says free passage non-negotiable. This was a collapse point in Islamabad talks. Now being tested physically - US intercepting toll-paying ships. If US successfully prevents all toll payments, Iran loses economic lifeline from blockade. If Iran retaliates against US enforcement = kinetic escalation at sea."
     }
   ],
   "searchQueries": [
     "Iran war Hormuz latest {date}",
-    "USS Tripoli location March 2026",
-    "Kharg Island March 2026",
+    "USS Tripoli Kharg Island April 2026",
+    "Kharg Island operation April 2026",
     "Brent crude oil price today",
-    "Iran strikes Gulf {date}",
-    "Trump Iran {date}",
-    "82nd Airborne Middle East Iran {date}",
-    "Iran IMO Hormuz shipping {date}"
+    "Trump Iran blockade Hormuz {date}",
+    "Hormuz mine clearing April 2026",
+    "Islamabad talks Iran US {date}",
+    "Houthi Red Sea shipping April 2026",
+    "Iran ceasefire Hormuz April 2026"
   ],
   "governance": {
     "health": "HEALTHY",
-    "issues": [],
+    "issues": [
+      "15-day update gap (Mar 28 to Apr 12) — batch update covers rapid ceasefire-collapse cycle. Multiple indicators fired simultaneously. R_t computed across full window, not per-event.",
+      "H1 at 0.01 — approaching INADMISSIBLE threshold. Consider whether <6 weeks is still a meaningful hypothesis at Day 41."
+    ],
     "rt": {
-      "rt": 0.0,
+      "rt": 0.06,
       "regime": "SAFE",
-      "worst_hypothesis": "H1"
+      "worst_hypothesis": "H4"
     },
-    "entropy": 1.4552,
-    "maxEntropy": 2.0,
-    "uncertaintyRatio": 0.7276,
+    "entropy": 0.9874,
+    "maxEntropy": 1.3863,
+    "uncertaintyRatio": 0.7123,
     "evidenceFreshness": {
-      "fresh": 77,
-      "stale": 31,
-      "total": 108
+      "fresh": 16,
+      "stale": 108,
+      "total": 124
     },
     "hypothesisAdmissibility": {
       "H1": "ADMISSIBLE",
@@ -2241,7 +2516,7 @@
       "H3": "ADMISSIBLE",
       "H4": "ADMISSIBLE"
     },
-    "lastComputed": "2026-03-28T16:18:17+00:00"
+    "lastComputed": "2026-04-12T20:22:00+00:00"
   },
   "dependencies": {
     "_docs": "Cross-topic dependency declarations. Upstream topics whose posteriors this topic assumptions depend on.",
@@ -2250,12 +2525,14 @@
         "slug": "calibration-houthi-posture",
         "reason": "Houthi posture in the Red Sea/Bab al-Mandeb directly affects alternative shipping routes around the Horn of Africa. If Houthis de-escalate (H1), pressure to reopen Hormuz increases as the alternative route becomes viable. If Houthis maintain or escalate, the dual chokepoint closure extends Hormuz closure duration.",
         "assumptions": {
-          "H1": 0.32,
-          "H2": 0.4,
-          "H3": 0.18,
+          "H1": 0.15,
+          "H2": 0.45,
+          "H3": 0.3,
           "H4": 0.1
         },
-        "tolerance": 0.1
+        "tolerance": 0.1,
+        "lastSynced": "2026-04-12T20:22:00+00:00",
+        "driftNote": "Synced Apr 12. Prior assumptions stale: H1 was 0.32 (actual 0.15, drift 0.17), H3 was 0.18 (actual 0.30, drift 0.12). Both exceeded tolerance. Net effect: Houthis less likely to resume full attacks (H1 down), more likely to maintain de facto ceasefire on shipping (H3 up). This is FAVORABLE for Hormuz — second chokepoint less likely to activate. Partially offsets H4 surge from dual blockade."
       }
     ]
   },
