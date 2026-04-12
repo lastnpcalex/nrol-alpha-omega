@@ -248,40 +248,293 @@ async function loadAllTopics() {
   return topics;
 }
 
-// --- DATA LOADING ---
+// ============================================================================
+// GOVERNOR PORT — faithful JS port of governor.py R_t, freshness, and health
+// ============================================================================
+
+// R_t regime thresholds (governor.py:59-64). Topics can override via rtConfig.
+const _RT_DEFAULTS = { safe: 0.1, elastic: 0.3, dangerous: 1.0 };
+
+// Evidence TTLs by tag in hours (governor.py:223-258)
+const EVIDENCE_TTL = {
+  EVENT: 72, DATA: 168, RHETORIC: 24, INTEL: 72, ANALYSIS: 72,
+  EDITORIAL: 24, FORECAST: 72, POLICY: 720, OSINT: 72, SIGINT: 48,
+  KINETIC: 48, FORCE: 24, DIPLO: 168,
+  ECON: 168, MARKET: 24,
+  POLITICAL: 168, POLL: 168, LEGAL: 720, REGULATORY: 720, JUDICIAL: 720, LEGISLATIVE: 720,
+  SCIENTIFIC: 720, EXPERIMENTAL: 168, TECHNICAL: 168,
+  CORPORATE: 168, DEMOGRAPHIC: 720,
+  SOCIAL: 168, ENVIRONMENTAL: 720,
+};
+
+// Fact vs Decision classification (governor.py:187-191)
+const FACT_TAGS = new Set([
+  "EVENT","KINETIC","DATA","ECON","FORCE","DIPLO","POLL",
+  "SCIENTIFIC","TECHNICAL","LEGAL","REGULATORY","POLITICAL",
+  "SOCIAL","ENVIRONMENTAL","OSINT","SIGINT","MARKET",
+  "EXPERIMENTAL","CORPORATE","DEMOGRAPHIC","JUDICIAL"
+]);
+
+function _parseTime(isoStr) {
+  if (!isoStr) return null;
+  try { const d = new Date(isoStr); return isNaN(d) ? null : d; }
+  catch { return null; }
+}
+
+function _hoursSince(isoStr) {
+  const dt = _parseTime(isoStr);
+  if (!dt) return 168.0; // default 1 week (governor.py:1356)
+  return (Date.now() - dt.getTime()) / 3600000;
+}
+
+/**
+ * compute_rt — JS port of governor.py:67-153
+ * R_t(H_i) = entropy_contribution * time_decay / evidence_recency
+ */
+function computeRt(topic) {
+  const hypotheses = topic.model.hypotheses;
+  const evidenceLog = topic.evidenceLog || [];
+  const lastUpdated = topic.meta?.lastUpdated || '';
+
+  const rtConfig = topic.rtConfig || _RT_DEFAULTS;
+  const tSafe = rtConfig.safe ?? _RT_DEFAULTS.safe;
+  const tElastic = rtConfig.elastic ?? _RT_DEFAULTS.elastic;
+  const tDangerous = rtConfig.dangerous ?? _RT_DEFAULTS.dangerous;
+
+  const delayHours = _hoursSince(lastUpdated);
+  const timeDecay = Math.log2(1.0 + delayHours / 24.0);
+
+  const now = Date.now();
+  let ev24h = 0, ev72h = 0;
+  for (const e of evidenceLog) {
+    const t = _parseTime(e.time);
+    if (!t) continue;
+    const ageSec = (now - t.getTime()) / 1000;
+    if (ageSec < 86400) ev24h++;
+    if (ageSec < 259200) ev72h++;
+  }
+  const evidenceRecency = ev24h * 3.0 + ev72h * 1.0 + 1.0;
+
+  const results = {};
+  for (const [k, h] of Object.entries(hypotheses)) {
+    const p = h.posterior;
+    const entropyContribution = p > 0 ? -p * Math.log2(p) : 0.0;
+    const rt = entropyContribution * timeDecay / evidenceRecency;
+
+    let regime;
+    if (rt < tSafe) regime = 'SAFE';
+    else if (rt < tElastic) regime = 'ELASTIC';
+    else if (rt < tDangerous) regime = 'DANGEROUS';
+    else regime = 'RUNAWAY';
+
+    results[k] = { rt: +rt.toFixed(4), regime, entropyContribution: +entropyContribution.toFixed(4),
+                    timeDecay: +timeDecay.toFixed(2), evidenceRecency: +evidenceRecency.toFixed(1),
+                    delayHours: +delayHours.toFixed(1) };
+  }
+
+  // Priority ranking (highest R_t = rank 1)
+  const ranked = Object.entries(results).sort((a, b) => b[1].rt - a[1].rt);
+  ranked.forEach(([k], i) => { results[k].priorityRank = i + 1; });
+  return results;
+}
+
+/**
+ * compute_topic_rt — JS port of governor.py:156-172
+ * Aggregate: max hypothesis R_t
+ */
+function computeTopicRt(topic) {
+  const hRt = computeRt(topic);
+  const entries = Object.entries(hRt);
+  if (entries.length === 0) return { rt: 0, regime: 'SAFE' };
+  const [worstKey, worstVal] = entries.reduce((a, b) => b[1].rt > a[1].rt ? b : a);
+  return { rt: worstVal.rt, regime: worstVal.regime, worstHypothesis: worstKey, perHypothesis: hRt };
+}
+
+/**
+ * audit_evidence_freshness — JS port of governor.py:270-320
+ * Per-tag TTL-based freshness audit
+ */
+function auditEvidenceFreshness(topic) {
+  const now = Date.now();
+  const evidence = topic.evidenceLog || [];
+  const report = { total: evidence.length, fresh: 0, stale: 0, unknownTime: 0, staleEntries: [], byTag: {} };
+
+  for (let i = 0; i < evidence.length; i++) {
+    const entry = evidence[i];
+    // Use first tag from tags array, or fall back to tag field
+    const tag = (entry.tags && entry.tags[0]) || entry.tag || 'MISC';
+    const ttlHours = EVIDENCE_TTL[tag] ?? 72;
+
+    const entryTime = _parseTime(entry.time);
+    if (!entryTime) { report.unknownTime++; continue; }
+
+    const ageHours = (now - entryTime.getTime()) / 3600000;
+    if (ageHours > ttlHours) {
+      report.stale++;
+      report.staleEntries.push({ index: i, tag, ageHours: +ageHours.toFixed(1), ttlHours,
+        text: (entry.text || '').slice(0, 80), ledger: FACT_TAGS.has(tag) ? 'FACT' : 'DECISION' });
+    } else {
+      report.fresh++;
+    }
+
+    if (!report.byTag[tag]) report.byTag[tag] = { fresh: 0, stale: 0 };
+    report.byTag[tag][ageHours > ttlHours ? 'stale' : 'fresh']++;
+  }
+  return report;
+}
+
+/**
+ * compute_entropy / compute_max_entropy / compute_uncertainty_ratio
+ * JS port of governor.py:619-644
+ */
+function computeEntropy(topic) {
+  let entropy = 0;
+  for (const h of Object.values(topic.model.hypotheses)) {
+    const p = h.posterior;
+    if (p > 0) entropy -= p * Math.log2(p);
+  }
+  return +entropy.toFixed(4);
+}
+function computeMaxEntropy(topic) {
+  const n = Object.keys(topic.model.hypotheses).length;
+  return n > 0 ? +Math.log2(n).toFixed(4) : 0;
+}
+function computeUncertaintyRatio(topic) {
+  const maxEnt = computeMaxEntropy(topic);
+  return maxEnt === 0 ? 0 : +(computeEntropy(topic) / maxEnt).toFixed(4);
+}
+
+/**
+ * compute_kl_from_prior — JS port of governor.py:647-729
+ */
+function computeKlFromPrior(topic) {
+  const hypotheses = topic.model.hypotheses;
+  const history = topic.model.posteriorHistory || [];
+  const current = {};
+  for (const [k, h] of Object.entries(hypotheses)) current[k] = h.posterior;
+  const entropy = computeEntropy(topic);
+  const maxEnt = computeMaxEntropy(topic);
+
+  if (!history.length) return { klDivergence: 0, interpretation: 'INSUFFICIENT_HISTORY', currentEntropy: entropy };
+
+  const first = history[0];
+  const firstPosteriors = first.posteriors || first;
+  const initial = {};
+  for (const k of Object.keys(hypotheses)) {
+    const val = firstPosteriors[k];
+    initial[k] = (typeof val === 'number') ? val : 1.0 / Object.keys(hypotheses).length;
+  }
+
+  let kl = 0;
+  for (const k of Object.keys(hypotheses)) {
+    const p = current[k] || 0, q = initial[k] || 0;
+    if (p > 0 && q > 0) kl += p * Math.log(p / q);
+    else if (p > 0 && q === 0) { kl = Infinity; break; }
+  }
+  kl = kl === Infinity ? Infinity : +kl.toFixed(4);
+
+  const lowEntropy = maxEnt > 0 && (entropy / maxEnt) < 0.5;
+  let interpretation;
+  if (kl === Infinity) interpretation = 'WELL_EVIDENCED';
+  else if (lowEntropy && kl > 0.5) interpretation = 'WELL_EVIDENCED';
+  else if (lowEntropy && kl < 0.1) interpretation = 'PRIOR_DOMINATED';
+  else interpretation = 'MODERATE';
+
+  return { klDivergence: kl, interpretation, currentEntropy: entropy, initialPrior: initial, currentPosteriors: current };
+}
+
+/**
+ * validate_hypotheses — simplified JS port of governor.py:529-603
+ * Returns per-hypothesis admissibility grades
+ */
+function validateHypotheses(topic) {
+  const hypotheses = topic.model.hypotheses;
+  const resolution = topic.meta?.resolution || '';
+  const tiers = topic.indicators?.tiers || {};
+  const allIndicators = [].concat(...Object.values(tiers));
+  const antiIndicators = tiers.anti_indicators || [];
+  const report = {};
+
+  for (const [k, h] of Object.entries(hypotheses)) {
+    const checks = {
+      hasLabel: !!h.label, hasMidpoint: h.midpoint != null && h.midpoint !== 0,
+      hasUnit: !!h.unit, resolutionDefined: !!resolution,
+      hasSupportingIndicators: false, hasContraryIndicators: false,
+      distinguishable: true, priorNonzero: (h.posterior || 0) > 0, priorNotCertain: (h.posterior || 0) < 0.99,
+    };
+    const labelLower = (h.label || '').toLowerCase();
+    for (const ind of allIndicators) {
+      const effect = (ind.posteriorEffect || '').toLowerCase();
+      if (effect.includes(k.toLowerCase()) || effect.includes(labelLower)) { checks.hasSupportingIndicators = true; break; }
+    }
+    for (const ind of antiIndicators) {
+      const effect = (ind.posteriorEffect || '').toLowerCase();
+      if (effect.includes(k.toLowerCase()) || effect.includes(labelLower)) { checks.hasContraryIndicators = true; break; }
+    }
+    const passed = Object.values(checks).filter(Boolean).length;
+    const grade = passed >= 7 ? 'ADMISSIBLE' : passed >= 5 ? 'MARGINAL' : 'INADMISSIBLE';
+    report[k] = { checks, passed, total: Object.keys(checks).length, grade,
+      falsifiability: checks.hasContraryIndicators ? 'YES' : 'NO' };
+  }
+  return report;
+}
+
+/**
+ * governance_report — JS port of governor.py:1244-1298
+ * Full epistemic health: HEALTHY / DEGRADED / CRITICAL
+ */
+function governanceReport(topic) {
+  const rt = computeTopicRt(topic);
+  const freshness = auditEvidenceFreshness(topic);
+  const admissibility = validateHypotheses(topic);
+  const entropy = computeEntropy(topic);
+  const maxEntropy = computeMaxEntropy(topic);
+  const uncertainty = computeUncertaintyRatio(topic);
+  const klPrior = computeKlFromPrior(topic);
+
+  const issues = [];
+  if (rt.regime === 'DANGEROUS' || rt.regime === 'RUNAWAY')
+    issues.push(`R_t in ${rt.regime} regime (${rt.rt.toFixed(2)}) — needs fresh evidence`);
+  if (freshness.stale > freshness.fresh)
+    issues.push(`Majority of evidence is stale (${freshness.stale}/${freshness.total})`);
+
+  const inadmissible = Object.entries(admissibility).filter(([,v]) => v.grade === 'INADMISSIBLE').map(([k]) => k);
+  if (inadmissible.length) issues.push(`Inadmissible hypotheses: ${inadmissible.join(', ')}`);
+  const unfalsifiable = Object.entries(admissibility).filter(([,v]) => v.falsifiability === 'NO').map(([k]) => k);
+  if (unfalsifiable.length) issues.push(`Unfalsifiable hypotheses: ${unfalsifiable.join(', ')}`);
+
+  if (uncertainty > 0.9) issues.push('Near-maximum uncertainty — model is not discriminating');
+  else if (uncertainty < 0.1) issues.push('Near-zero uncertainty — check for overconfidence');
+
+  if (klPrior.interpretation === 'PRIOR_DOMINATED')
+    issues.push('Posterior may be prior-dominated (low KL from initial prior)');
+
+  const health = issues.length === 0 ? 'HEALTHY' : issues.length <= 2 ? 'DEGRADED' : 'CRITICAL';
+
+  return { health, issues, rt, entropy, maxEntropy, uncertaintyRatio: uncertainty,
+           klFromPrior: klPrior, evidenceFreshness: freshness, hypothesisAdmissibility: admissibility };
+}
+
+// ============================================================================
+// DATA LOADING
+// ============================================================================
 async function loadAll() {
   const topics = await loadAllTopics();
 
-  // Build lookup for stale dependency computation
+  // Build lookup for cross-topic dependency checks
   const topicMap = {};
   for (const d of topics) topicMap[d.meta.slug] = d;
 
-  // Build overview from topic files with computed health
+  // Build overview using real governor computations
   overviewData = { topics: topics.map(d => {
     const m = d.meta;
     const posteriors = {};
     for (const [k, v] of Object.entries(d.model.hypotheses)) posteriors[k] = v.posterior;
 
-    // Compute R_t: evidence staleness ratio
-    const evLog = d.evidence_log || [];
-    const now = Date.now();
-    const STALE_DAYS = 14; // evidence older than 14 days without newer entry
-    let rt = {};
-    if (evLog.length > 0) {
-      const newest = Math.max(...evLog.map(e => new Date(e.date || e.timestamp || 0).getTime()));
-      const ageDays = (now - newest) / (1000 * 60 * 60 * 24);
-      if (ageDays > STALE_DAYS * 3) {
-        rt = { regime: 'RUNAWAY', rt: ageDays / STALE_DAYS, ageDays: Math.round(ageDays) };
-      } else if (ageDays > STALE_DAYS * 2) {
-        rt = { regime: 'DANGEROUS', rt: ageDays / STALE_DAYS, ageDays: Math.round(ageDays) };
-      } else if (ageDays > STALE_DAYS) {
-        rt = { regime: 'ELEVATED', rt: ageDays / STALE_DAYS, ageDays: Math.round(ageDays) };
-      } else {
-        rt = { regime: 'HEALTHY', rt: ageDays / STALE_DAYS, ageDays: Math.round(ageDays) };
-      }
-    }
+    // Real governor report (R_t, freshness, admissibility, entropy, KL, health)
+    const gov = governanceReport(d);
 
-    // Compute stale dependency count
+    // Stale dependency count
     let staleDeps = 0;
     const downstreamAlerts = [];
     const deps = d.dependencies?.upstream || [];
@@ -292,14 +545,12 @@ async function loadAll() {
       const staleAssumptions = [];
       for (const [h, assumed] of Object.entries(dep.assumptions)) {
         const actual = upstream.model.hypotheses[h]?.posterior;
-        if (actual != null && Math.abs(actual - assumed) > tolerance) {
-          staleAssumptions.push(h);
-        }
+        if (actual != null && Math.abs(actual - assumed) > tolerance) staleAssumptions.push(h);
       }
       if (staleAssumptions.length > 0) staleDeps++;
     }
 
-    // Check if this topic is a stale upstream for others (downstream alerts)
+    // Downstream alerts: check if this topic's posteriors drifted from what others assumed
     for (const other of topics) {
       if (other.meta.slug === m.slug) continue;
       const otherDeps = other.dependencies?.upstream || [];
@@ -308,26 +559,23 @@ async function loadAll() {
         const tolerance = od.tolerance || 0.10;
         const staleAssumptions = [];
         for (const [h, assumed] of Object.entries(od.assumptions)) {
-          if (posteriors[h] != null && Math.abs(posteriors[h] - assumed) > tolerance) {
-            staleAssumptions.push(h);
-          }
+          if (posteriors[h] != null && Math.abs(posteriors[h] - assumed) > tolerance) staleAssumptions.push(h);
         }
-        if (staleAssumptions.length > 0) {
+        if (staleAssumptions.length > 0)
           downstreamAlerts.push({ downstream_slug: other.meta.slug, stale_assumptions: staleAssumptions });
-        }
       }
     }
 
-    // Overall health: worst of R_t regime and dependency staleness
-    let health = rt.regime || 'HEALTHY';
-    if (staleDeps > 0 && (health === 'HEALTHY' || health === 'ELEVATED')) health = 'ELEVATED';
-    if (staleDeps >= 2) health = 'DANGEROUS';
+    // Escalate health if stale dependencies exist
+    let health = gov.health;
+    if (staleDeps > 0 && health === 'HEALTHY') health = 'DEGRADED';
 
     return {
       slug: m.slug, title: m.title, question: m.question || '',
       classification: m.classification || 'ROUTINE', status: m.status,
       lastUpdated: m.lastUpdated, posteriors,
-      health, rt, staleDependencies: staleDeps, downstreamAlerts
+      health, rt: gov.rt, staleDependencies: staleDeps, downstreamAlerts,
+      governance: gov
     };
   })};
   renderOverview();
