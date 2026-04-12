@@ -1,7 +1,7 @@
 {
   "_protocol": "Calibration topic \u2014 Strait of Hormuz closure duration forecast. Original flagship topic, tracking since 2026-03-02. 108 evidence entries from the Iran-Israel kinetic exchange and its aftermath. Update on shipping corridor status, diplomatic developments, or military posture changes.",
   "meta": {
-    "slug": "calibration-hormuz-closure",
+    "slug": "hormuz-closure",
     "title": "HORMUZ STRAIT CLOSURE",
     "question": "How long will the Strait of Hormuz remain effectively closed?",
     "resolution": "Sustained >30% of pre-war Hormuz traffic (~40 transits/day)",
