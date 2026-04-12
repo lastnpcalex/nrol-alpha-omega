@@ -252,16 +252,82 @@ async function loadAllTopics() {
 async function loadAll() {
   const topics = await loadAllTopics();
 
-  // Build overview from topic files
+  // Build lookup for stale dependency computation
+  const topicMap = {};
+  for (const d of topics) topicMap[d.meta.slug] = d;
+
+  // Build overview from topic files with computed health
   overviewData = { topics: topics.map(d => {
     const m = d.meta;
     const posteriors = {};
     for (const [k, v] of Object.entries(d.model.hypotheses)) posteriors[k] = v.posterior;
+
+    // Compute R_t: evidence staleness ratio
+    const evLog = d.evidence_log || [];
+    const now = Date.now();
+    const STALE_DAYS = 14; // evidence older than 14 days without newer entry
+    let rt = {};
+    if (evLog.length > 0) {
+      const newest = Math.max(...evLog.map(e => new Date(e.date || e.timestamp || 0).getTime()));
+      const ageDays = (now - newest) / (1000 * 60 * 60 * 24);
+      if (ageDays > STALE_DAYS * 3) {
+        rt = { regime: 'RUNAWAY', rt: ageDays / STALE_DAYS, ageDays: Math.round(ageDays) };
+      } else if (ageDays > STALE_DAYS * 2) {
+        rt = { regime: 'DANGEROUS', rt: ageDays / STALE_DAYS, ageDays: Math.round(ageDays) };
+      } else if (ageDays > STALE_DAYS) {
+        rt = { regime: 'ELEVATED', rt: ageDays / STALE_DAYS, ageDays: Math.round(ageDays) };
+      } else {
+        rt = { regime: 'HEALTHY', rt: ageDays / STALE_DAYS, ageDays: Math.round(ageDays) };
+      }
+    }
+
+    // Compute stale dependency count
+    let staleDeps = 0;
+    const downstreamAlerts = [];
+    const deps = d.dependencies?.upstream || [];
+    for (const dep of deps) {
+      const upstream = topicMap[dep.slug];
+      if (!upstream || !dep.assumptions) continue;
+      const tolerance = dep.tolerance || 0.10;
+      const staleAssumptions = [];
+      for (const [h, assumed] of Object.entries(dep.assumptions)) {
+        const actual = upstream.model.hypotheses[h]?.posterior;
+        if (actual != null && Math.abs(actual - assumed) > tolerance) {
+          staleAssumptions.push(h);
+        }
+      }
+      if (staleAssumptions.length > 0) staleDeps++;
+    }
+
+    // Check if this topic is a stale upstream for others (downstream alerts)
+    for (const other of topics) {
+      if (other.meta.slug === m.slug) continue;
+      const otherDeps = other.dependencies?.upstream || [];
+      for (const od of otherDeps) {
+        if (od.slug !== m.slug || !od.assumptions) continue;
+        const tolerance = od.tolerance || 0.10;
+        const staleAssumptions = [];
+        for (const [h, assumed] of Object.entries(od.assumptions)) {
+          if (posteriors[h] != null && Math.abs(posteriors[h] - assumed) > tolerance) {
+            staleAssumptions.push(h);
+          }
+        }
+        if (staleAssumptions.length > 0) {
+          downstreamAlerts.push({ downstream_slug: other.meta.slug, stale_assumptions: staleAssumptions });
+        }
+      }
+    }
+
+    // Overall health: worst of R_t regime and dependency staleness
+    let health = rt.regime || 'HEALTHY';
+    if (staleDeps > 0 && (health === 'HEALTHY' || health === 'ELEVATED')) health = 'ELEVATED';
+    if (staleDeps >= 2) health = 'DANGEROUS';
+
     return {
       slug: m.slug, title: m.title, question: m.question || '',
       classification: m.classification || 'ROUTINE', status: m.status,
       lastUpdated: m.lastUpdated, posteriors,
-      health: 'HEALTHY', rt: {}, staleDependencies: 0, downstreamAlerts: []
+      health, rt, staleDependencies: staleDeps, downstreamAlerts
     };
   })};
   renderOverview();
@@ -279,12 +345,34 @@ async function loadAll() {
   trajData = { trajectories };
   renderTrajectories();
 
-  // Build dependencies
+  // Build dependencies with stale edge detection
   const edges = []; const stale_edges = [];
   for (const d of topics) {
     const deps = d.dependencies?.upstream || [];
     for (const dep of deps) {
-      edges.push({ from: dep.slug, to: d.meta.slug, assumptions: dep.assumptions || {} });
+      const edge = { from: dep.slug, to: d.meta.slug, assumptions: dep.assumptions || {} };
+      edges.push(edge);
+
+      // Compute staleness: compare assumed posteriors to actual upstream posteriors
+      const upstream = topicMap[dep.slug];
+      if (upstream && dep.assumptions) {
+        const tolerance = dep.tolerance || 0.10;
+        const drift = {};
+        let isStale = false;
+        for (const [h, assumed] of Object.entries(dep.assumptions)) {
+          const actual = upstream.model.hypotheses[h]?.posterior;
+          if (actual != null) {
+            const delta = Math.abs(actual - assumed);
+            if (delta > tolerance) {
+              isStale = true;
+              drift[h] = { assumed, actual, drift: delta };
+            }
+          }
+        }
+        if (isStale) {
+          stale_edges.push({ from: dep.slug, to: d.meta.slug, drift, tolerance });
+        }
+      }
     }
   }
   depData = { edges, stale_edges };
