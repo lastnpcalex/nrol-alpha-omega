@@ -4432,7 +4432,7 @@
       "totalRefuted": 0,
       "lastUpdated": "2026-04-11T16:59:37Z"
     },
-    "Meaww vs Iranian state media — no Pentagon confirmation": {
+    "Meaww vs Iranian state media \u00e2\u20ac\u201d no Pentagon confirmation": {
       "baseTrust": 0.5,
       "category": "unknown",
       "domains": {
@@ -4836,6 +4836,83 @@
       "totalConfirmed": 1,
       "totalRefuted": 0,
       "lastUpdated": "2026-04-11T17:47:00Z"
+    },
+    "Goldman Sachs": {
+      "baseTrust": 0.8,
+      "category": "financial-research",
+      "domains": {},
+      "topicHistory": {},
+      "effectiveTrust": 0.8,
+      "totalClaims": 0,
+      "totalConfirmed": 0,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-12T00:00:00Z"
+    },
+    "UCLA Anderson": {
+      "baseTrust": 0.75,
+      "category": "academic-forecast",
+      "domains": {},
+      "topicHistory": {},
+      "effectiveTrust": 0.75,
+      "totalClaims": 0,
+      "totalConfirmed": 0,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-12T00:00:00Z"
+    },
+    "Ship and Bunker": {
+      "baseTrust": 0.7,
+      "category": "trade-publication",
+      "domains": {},
+      "topicHistory": {},
+      "effectiveTrust": 0.7,
+      "totalClaims": 0,
+      "totalConfirmed": 0,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-12T00:00:00Z"
+    },
+    "Tax Foundation": {
+      "baseTrust": 0.8,
+      "category": "think-tank",
+      "domains": {},
+      "topicHistory": {},
+      "effectiveTrust": 0.8,
+      "totalClaims": 0,
+      "totalConfirmed": 0,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-12T00:00:00Z"
+    },
+    "Morning Consult": {
+      "baseTrust": 0.75,
+      "category": "polling",
+      "domains": {},
+      "topicHistory": {},
+      "effectiveTrust": 0.75,
+      "totalClaims": 0,
+      "totalConfirmed": 0,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-12T00:00:00Z"
+    },
+    "RealClearPolling": {
+      "baseTrust": 0.7,
+      "category": "polling-aggregator",
+      "domains": {},
+      "topicHistory": {},
+      "effectiveTrust": 0.7,
+      "totalClaims": 0,
+      "totalConfirmed": 0,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-12T00:00:00Z"
+    },
+    "Huax": {
+      "baseTrust": 0.5,
+      "category": "analytics",
+      "domains": {},
+      "topicHistory": {},
+      "effectiveTrust": 0.5,
+      "totalClaims": 0,
+      "totalConfirmed": 0,
+      "totalRefuted": 0,
+      "lastUpdated": "2026-04-12T00:00:00Z"
     }
   },
   "meta": {

@@ -381,6 +381,9 @@ A source confirmed 5 times in ECON and refuted 3 times in RHETORIC will have hig
 engine.py                  Topic I/O, add_evidence, update_posteriors, bayesian_update, suggest_likelihoods, save_topic
 governor.py                Epistemic governor — 14 failure modes, R_t, entropy, KL from prior, claim lifecycle
 server.py                  Multi-topic HTTP dashboard (port 8098)
+AGENTS.md                  Standing orders for any AI assistant (Claude, Gemini, Cursor, etc.)
+GEMINI.md                  gemini-cli integration — @file.md imports for all skills
+LOOM.md                    Loom canvas architecture documentation
 
 framework/
 ├── triage.py              SOC-style news triage — match headlines against indicators, watchpoints, keywords
@@ -399,11 +402,40 @@ framework/
 ├── lint.py                Evidence log linting (failure mode checks)
 └── test.py                Hypothesis test registry
 
+skills/                    AI assistant skill prompts (read by AGENTS.md, GEMINI.md, Claude Code commands)
+├── triage.md              Process new information — match, assess source, route action
+├── update-cycle.md        Fire indicator + update posteriors with full governor gate
+├── evidence.md            Add evidence with provenance, lint, and claim lifecycle
+├── governance.md          Epistemic health audit — R_t, freshness, admissibility, entropy
+├── topic-design.md        Create/modify topics with design gate checklist
+├── dependencies.md        Wire and check cross-topic links, stale edge detection
+├── source-trust.md        5-tier source trust chain, register and calibrate sources
+├── red-team.md            Devil's advocate challenges, contrarian scoring
+└── calibration.md         Record outcomes, Brier scoring, backfill pipeline
+
+loom/                      Standalone canvas dashboards (runs inside A Shadow Loom iframe)
+├── index.html             Per-topic dashboard — posteriors, indicators, evidence, governor health
+├── mirror.html            Cross-topic mirror — triage engine, governor port, dependency graph, activity feed
+└── triggers/              Pipeline prompt templates (enforce 5-tier trust, rhetoric lint)
+    ├── pipeline.md        Standard headline/URL triage trigger
+    ├── social-post.md     Platform-aware social media trigger
+    └── evidence-drop.md   File/screenshot drop processing trigger
+
 mirror.html                Longitudinal dashboard — trajectories, drift alerts, dependency graph, triage input
 topics/                    One JSON state file per active topic (gitignored; calibration-*.json tracked)
 briefs/                    Generated intelligence briefs per topic (gitignored)
 sources/                   Source database (cross-topic trust tracking)
 ```
+
+### AI Assistant Integration
+
+The framework is designed to be operated by any AI assistant, not just one. Three layers of enforcement:
+
+1. **`AGENTS.md`** — shared standing orders. Any agent operating the framework reads this file and follows 5 mandatory behaviors: triage before acting, governor checks on every update, full evidence provenance, dependency propagation, and source trust chain.
+2. **`skills/`** — 9 skill prompts that map to the Python framework's actual function calls. Each skill file contains the constraints, field schemas, and lint rules for one workflow.
+3. **Slash commands** (`.claude/commands/`) — project-scoped one-keystroke commands (`/triage`, `/update`, `/evidence`, `/governance`, `/lint`, `/dependencies`) that enforce the skill system mechanically in Claude Code.
+
+For **gemini-cli**, `GEMINI.md` uses `@file.md` imports to load all skills into context automatically.
 
 ### Key Invariant
 
