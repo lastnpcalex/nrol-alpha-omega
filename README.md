@@ -411,14 +411,17 @@ skills/                    AI assistant skill prompts (read by AGENTS.md, GEMINI
 ├── dependencies.md        Wire and check cross-topic links, stale edge detection
 ├── source-trust.md        5-tier source trust chain, register and calibrate sources
 ├── red-team.md            Devil's advocate challenges, contrarian scoring
-└── calibration.md         Record outcomes, Brier scoring, backfill pipeline
+├── calibration.md         Record outcomes, Brier scoring, backfill pipeline
+└── resolve.md             Prediction sweep — resolve expired predictions, calibrate sources
 
 loom/                      Standalone canvas dashboards (runs inside A Shadow Loom iframe)
 ├── index.html             Per-topic dashboard — posteriors, indicators, evidence, governor health
-├── mirror.html            Cross-topic mirror — triage engine, governor port, dependency graph, activity feed
-└── triggers/              Pipeline prompt templates (enforce 5-tier trust, rhetoric lint)
-    ├── pipeline.md        Standard headline/URL triage trigger
-    ├── social-post.md     Platform-aware social media trigger
+├── mirror.html            Cross-topic mirror — triage engine, governor port, trust panel, activity feed
+├── source-trust.json      Source trust display config for canvas
+├── topics/                Topic JSONs + manifest for canvas reads
+└── triggers/              Pipeline prompt templates (enforce 5-tier trust, rhetoric lint, mandatory branching)
+    ├── pipeline.md        Standard headline/URL triage trigger (9-step, cold storage for IGNORE)
+    ├── social-post.md     Platform-aware social media trigger (3-filter prediction gate)
     └── evidence-drop.md   File/screenshot drop processing trigger
 
 mirror.html                Longitudinal dashboard — trajectories, drift alerts, dependency graph, triage input
@@ -432,8 +435,8 @@ sources/                   Source database (cross-topic trust tracking)
 The framework is designed to be operated by any AI assistant, not just one. Three layers of enforcement:
 
 1. **`AGENTS.md`** — shared standing orders. Any agent operating the framework reads this file and follows 5 mandatory behaviors: triage before acting, governor checks on every update, full evidence provenance, dependency propagation, and source trust chain.
-2. **`skills/`** — 9 skill prompts that map to the Python framework's actual function calls. Each skill file contains the constraints, field schemas, and lint rules for one workflow.
-3. **Slash commands** (`.claude/commands/`) — project-scoped one-keystroke commands (`/triage`, `/update`, `/evidence`, `/governance`, `/lint`, `/dependencies`) that enforce the skill system mechanically in Claude Code.
+2. **`skills/`** — 10 skill prompts that map to the Python framework's actual function calls. Each skill file contains the constraints, field schemas, and lint rules for one workflow.
+3. **Slash commands** (`.claude/commands/`) — project-scoped one-keystroke commands (`/triage`, `/update`, `/evidence`, `/governance`, `/lint`, `/dependencies`, `/resolve`) that enforce the skill system mechanically in Claude Code.
 
 For **gemini-cli**, `GEMINI.md` uses `@file.md` imports to load all skills into context automatically.
 
@@ -542,8 +545,9 @@ Select topics from the dropdown. Auto-refreshes every 60 seconds.
 
 The longitudinal surface — how your beliefs have actually evolved across all topics:
 
-- **Triage input**: drop a headline + source, get instant routing across all active topics
-- **Cross-topic overview**: all topics at a glance with posterior bars, health badges, R_t regime, staleness
+- **Triage input**: drop a headline + source, get instant routing across all active topics (client-side indicator/watchpoint/keyword matching)
+- **Cross-topic overview**: all topics at a glance with posterior bars, health badges, R_t regime, staleness — searchable and sortable
+- **Source trust leaderboard**: all registered sources ranked by domain trust with visual meters and claim records
 - **Drift alerts**: stale dependencies, DANGEROUS/RUNAWAY R_t, downstream propagation warnings
 - **Posterior trajectories**: time-series charts per topic showing how each hypothesis moved
 - **Dependency graph**: upstream/downstream edges with stale edge highlighting and drift magnitude
@@ -557,10 +561,15 @@ Standalone version of both dashboards that runs inside [A Shadow Loom](https://g
 Additional features over the server dashboards:
 
 - **URL pipeline**: paste a URL into the triage input, it's sent to Claude who fetches, triages, logs evidence, and updates posteriors automatically
-- **Social media routing**: Twitter/X, Bluesky, Reddit, YouTube links are detected and routed through a platform-aware trigger with appropriate source trust handling
+- **Social media routing**: Twitter/X, Bluesky, Reddit, YouTube links are detected and routed through a platform-aware trigger with appropriate source trust handling and a 3-filter prediction gate (specific, testable, time-bounded)
 - **Evidence drop zone**: drag files or screenshots onto the mirror page for processing
-- **Activity feed**: real-time audit trail of all pipeline actions (evidence logged, posteriors shifted, sources calibrated)
-- **Governor-enforced triggers**: prompt templates in `loom/triggers/` that enforce the 5-tier trust chain, rhetoric-vs-evidence lint, and claim lifecycle weights
+- **Source trust leaderboard**: searchable, sortable panel showing all registered sources with per-domain Bayesian trust scores, meter bars, and record counts
+- **Topic search and sort**: filter topics by name, sort by Health/R_t/A-Z/Updated
+- **Prediction tracking**: evidence entries with PREDICTION tags carry structured claims with resolution criteria and deadlines; the `/resolve` skill sweeps expired predictions and fires source calibration with minimum-sample guards
+- **Cold storage**: IGNORE'd pipeline evidence is written to `evidence-cold.json` with full provenance (claims, domains, actors, regions, keywords) for retroactive matching when new topics are created
+- **Activity feed**: real-time audit trail of all pipeline actions (evidence logged, posteriors shifted, sources calibrated, predictions resolved)
+- **Mandatory pipeline branching**: all triggers create a git branch before modifying files — no exceptions, regardless of invocation context
+- **Governor-enforced triggers**: prompt templates in `loom/triggers/` that enforce the 5-tier trust chain, rhetoric-vs-evidence lint, claim lifecycle weights, and branch isolation
 
 Setup: `cp -r loom/* canvas/` then copy topic files and `sources/source_db.json` into the canvas. See [`LOOM.md`](LOOM.md).
 
