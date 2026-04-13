@@ -13,6 +13,19 @@ NROL-AO TRIAGE PIPELINE — process this headline through the full framework.
 
 Run the full NROL-AO evidence pipeline. The Governor enforces epistemic discipline at every step — follow the framework, not your intuition.
 
+### 0. Branch Isolation — MANDATORY
+
+**Every pipeline run gets its own branch. No exceptions.**
+
+```bash
+git checkout -b pipeline/YYYY-MM-DD-headline-slug
+```
+
+- Branch naming: `pipeline/{date}-{2-4 word slug}` (e.g., `pipeline/2026-04-12-swalwell-ca-gov`)
+- All file modifications (evidence, posteriors, activity log, source DB) happen on this branch
+- Do NOT merge to main — report the branch name at the end so the user can review and merge
+- This applies whether the trigger came from the Loom canvas, was pasted manually, or was typed directly
+
 ### 1. Fetch Content
 
 If the headline is a URL (starts with `http://` or `https://`), use WebFetch to retrieve the full content. If the triage JSON shows `top_action: "URL_FETCH"`, this step is mandatory.
@@ -60,7 +73,7 @@ For each matched topic, append to `canvas/topics/{slug}.json` evidenceLog:
   - Rhetoric → NONE (always)
 
 **Lint checks before logging** (from the Governor's failure mode detection):
-- `rhetoric_as_evidence`: If the text is rhetoric ("X will do Y", "X threatens Y"), tag as RHETORIC and set posteriorImpact to NONE. Rhetoric does not move posteriors.
+- `rhetoric_as_evidence`: If the text is rhetoric ("X will do Y", "X threatens Y"), tag as RHETORIC and set posteriorImpact to NONE. Rhetoric does not move posteriors. BUT: if the rhetoric is a specific, testable, time-bounded prediction (all 3 required), tag as PREDICTION instead — see `skills/evidence.md` for the prediction schema. Predictions don't move posteriors but calibrate source trust when resolved.
 - `recycled_intel`: Check if this claim already appears in the evidence log. Deduplicate against last 10 entries.
 - `anchoring_bias`: If you find yourself writing "HOLD — unchanged" for posteriors, you must provide a shift rationale. No-change is a decision that needs justification.
 - `phantom_precision`: Do not report posteriors to more than 2 decimal places. Round to appropriate significance.
@@ -116,3 +129,33 @@ Use the most significant `type` — if posteriors moved, use POSTERIOR_UPDATE ev
 ### 8. Report
 
 Briefly: what you fetched, what matched, what you logged, what moved (if anything), and why. If nothing moved, that's fine — most evidence is MINOR or NONE. The system is working when it correctly ignores noise.
+
+If running on a pipeline branch (Step 0), end with:
+
+```
+Branch: pipeline/YYYY-MM-DD-slug
+Ready for review. Merge to main with: git checkout main && git merge pipeline/YYYY-MM-DD-slug
+```
+
+### 9. Cold Storage (IGNORE only)
+
+If triage returned IGNORE (no topic match), the extracted claims still have future value. Append to `canvas/evidence-cold.json`:
+
+```json
+{
+  "id": "cold_NNN",
+  "timestamp": "ISO now",
+  "headline": "the headline or URL",
+  "source": "source name",
+  "sourceTrust": { "trust": 0.XX, "origin": "tier", "domain": "tag", "domainTrust": 0.XX },
+  "claims": ["extracted factual claim 1", "claim 2", "..."],
+  "domains": ["EVENT", "DIPLO", "..."],
+  "actors": ["actor names mentioned"],
+  "regions": ["geographic regions"],
+  "keywords": ["searchable", "keyword", "set"],
+  "activityLogRef": "matching activity-log entry ID",
+  "note": "one-line summary of why IGNORE'd and potential future relevance"
+}
+```
+
+This preserves structured evidence for retroactive matching when new topics are created. The `topic-design` skill scans cold storage during topic creation.

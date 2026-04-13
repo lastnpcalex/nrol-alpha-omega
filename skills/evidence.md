@@ -86,7 +86,8 @@ contradictions = detect_contradictions(topic, new_entry)
 | INTEL | 72 | Non-public analysis |
 | ANALYSIS | 72 | Expert assessment |
 | EDITORIAL | 24 | Opinion piece |
-| FORECAST | 72 | Prediction |
+| FORECAST | 72 | Prediction (from institutional source) |
+| PREDICTION | 168 | Testable prediction logged for source calibration |
 | POLICY | 720 | Policy/regulatory decision |
 | KINETIC | 48 | Military action |
 | FORCE | 24 | Force positions |
@@ -121,6 +122,62 @@ Every evidence entry must pass these checks:
 
 5. **stale_evidence** — Is this old information being treated as current?
    Check the timestamp against the tag's TTL.
+
+## Predictions (testable rhetoric)
+
+Some evidence is a **prediction** — a specific, testable, time-bounded claim made by
+a source. Predictions don't move posteriors at logging time (posteriorImpact = NONE),
+but they DO calibrate source trust when resolved.
+
+### Prediction filter — all 3 must be true to tag as PREDICTION
+
+1. **Specific**: a concrete claim, not hedged ("will" not "might", "could", "likely")
+2. **Testable**: there exists an observable outcome that confirms or refutes it
+3. **Time-bounded**: explicit or inferrable deadline ("within 48 hours", "by April 20",
+   "this week"). Open-ended predictions ("eventually") are RHETORIC.
+
+If any filter fails → tag as RHETORIC, no prediction tracking, no calibration.
+
+### Prediction schema (extra fields on evidence entry)
+
+```json
+{
+  "id": "ev_NNN",
+  "time": "ISO8601",
+  "text": "Factual extraction of the prediction",
+  "tags": ["PREDICTION"],
+  "source": "@handle or source name",
+  "claimState": "PROPOSED",
+  "weight": 0.0,
+  "posteriorImpact": "NONE. Prediction logged for source calibration only.",
+  "prediction": {
+    "claim": "The specific testable statement",
+    "resolvesBy": "ISO8601 — deadline for checking",
+    "resolutionCriteria": "What counts as confirmed vs refuted",
+    "resolution": null,
+    "resolvedDate": null,
+    "resolvedBy": null,
+    "resolvedEvidence": null
+  },
+  "note": "optional"
+}
+```
+
+### Resolution values
+
+- `CONFIRMED` — the predicted thing happened within the window. Source gets a hit.
+- `REFUTED` — the window passed and the predicted thing did not happen, or the
+  opposite happened. Source gets a miss.
+- `INCONCLUSIVE` — cannot determine either way (e.g., prediction was about
+  something unobservable). No calibration event — entry ignored.
+
+### Resolution rules
+
+- Resolution MUST come from an independent source (not the predictor themselves)
+- `resolvedBy`: the source that provided the resolution evidence
+- `resolvedEvidence`: the ev_NNN ID of the confirming/refuting evidence entry
+- Resolution triggers source calibration in source_db.json (see `/resolve` skill)
+- Minimum 5 resolved predictions before trust moves more than +/-0.10 from 0.50
 
 ## Claim lifecycle
 

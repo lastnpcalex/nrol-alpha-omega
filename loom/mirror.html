@@ -104,12 +104,14 @@
   .activity-entry.SOURCE_CALIBRATED { border-left-color: var(--cyan); }
   .activity-entry.POSTERIOR_UPDATE { border-left-color: var(--green); }
   .activity-entry.INDICATOR_FIRED { border-left-color: var(--red); }
+  .activity-entry.PREDICTION_RESOLVED { border-left-color: var(--purple); }
   .activity-type { display: inline-block; padding: 1px 8px; border-radius: 3px; font-size: 10px; font-weight: bold; letter-spacing: 1px; }
   .activity-type.TRIAGE { background: var(--purple); color: #fff; }
   .activity-type.EVIDENCE_LOGGED { background: var(--amber); color: #000; }
   .activity-type.SOURCE_CALIBRATED { background: var(--cyan); color: #000; }
   .activity-type.POSTERIOR_UPDATE { background: var(--green); color: #000; }
   .activity-type.INDICATOR_FIRED { background: var(--red); color: #fff; }
+  .activity-type.PREDICTION_RESOLVED { background: var(--purple); color: #fff; }
   .activity-time { color: var(--dim); font-size: 10px; margin-left: 8px; }
   .activity-headline { font-size: 12px; margin-top: 4px; }
   .activity-source { font-size: 11px; color: var(--cyan); margin-top: 2px; }
@@ -118,6 +120,32 @@
   .activity-notes { font-size: 11px; color: var(--dim); font-style: italic; margin-top: 4px; }
   .trust-bar { display: inline-block; height: 8px; border-radius: 2px; margin-left: 4px; vertical-align: middle; }
   .trust-label { font-size: 10px; }
+
+  /* Source Trust Panel */
+  .trust-panel { max-height: 400px; overflow-y: auto; }
+  .trust-source { display: grid; grid-template-columns: 160px 60px 1fr 80px; align-items: center; gap: 8px; padding: 6px 0; border-bottom: 1px solid rgba(51,65,85,0.3); font-size: 12px; }
+  .trust-source:last-child { border: none; }
+  .trust-source .name { font-weight: bold; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .trust-source .score { font-weight: bold; font-size: 14px; }
+  .trust-source .score.high { color: var(--green); }
+  .trust-source .score.mid { color: var(--amber); }
+  .trust-source .score.low { color: var(--red); }
+  .trust-source .score.unknown { color: var(--dim); }
+  .trust-meter { height: 8px; border-radius: 4px; background: var(--surface2); overflow: hidden; }
+  .trust-meter-fill { height: 100%; border-radius: 4px; }
+  .trust-record { font-size: 10px; color: var(--dim); text-align: right; }
+  .trust-filter { display: flex; gap: 8px; margin-bottom: 10px; }
+  .trust-filter input { flex: 1; background: var(--surface2); border: 1px solid var(--border); color: var(--text); padding: 6px 10px; border-radius: 4px; font-family: inherit; font-size: 12px; }
+  .trust-filter input:focus { outline: none; border-color: var(--accent); }
+  .trust-filter select { background: var(--surface2); border: 1px solid var(--border); color: var(--text); padding: 6px 8px; border-radius: 4px; font-family: inherit; font-size: 11px; }
+  .pred-badge { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: 9px; font-weight: bold; letter-spacing: 1px; margin-left: 4px; }
+  .pred-badge.has-preds { background: rgba(139,92,246,0.15); color: var(--purple); }
+
+  /* Topic Search */
+  .topic-search { margin-bottom: 8px; }
+  .topic-search input { width: 100%; background: var(--surface2); border: 1px solid var(--border); color: var(--text); padding: 6px 12px; border-radius: 4px; font-family: inherit; font-size: 12px; }
+  .topic-search input:focus { outline: none; border-color: var(--accent); }
+  .topic-search input::placeholder { color: #475569; }
 
   /* Drop Zone */
   .drop-zone { border: 2px dashed rgba(139,92,246,0.3); border-radius: 6px; padding: 20px; text-align: center; color: var(--dim); font-size: 12px; margin-bottom: 16px; transition: 0.2s; cursor: pointer; }
@@ -168,8 +196,19 @@
   </div>
 
   <!-- CROSS-TOPIC OVERVIEW -->
-  <div style="margin-bottom:8px;">
+  <div style="margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
     <h2 style="font-size:11px;letter-spacing:2px;color:var(--accent);">ACTIVE TOPICS</h2>
+    <div style="display:flex;gap:8px;align-items:center;">
+      <select id="topicSort" style="background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:4px 8px;border-radius:4px;font-family:inherit;font-size:10px;" onchange="renderOverview()">
+        <option value="health">Sort: Health</option>
+        <option value="rt">Sort: R_t</option>
+        <option value="alpha">Sort: A-Z</option>
+        <option value="updated">Sort: Last Updated</option>
+      </select>
+    </div>
+  </div>
+  <div class="topic-search">
+    <input type="text" id="topicSearchInput" placeholder="Search topics by name, question, or slug..." oninput="filterTopics()">
   </div>
   <div class="overview-grid" id="overviewGrid">
     <div style="color:var(--dim);padding:16px;">Loading...</div>
@@ -204,6 +243,34 @@
     </div>
   </div>
 
+  <!-- SOURCE TRUST LEADERBOARD -->
+  <div class="panel-grid">
+    <div class="panel full-width">
+      <h2>Source Trust Leaderboard <span style="font-size:9px;color:var(--dim);letter-spacing:0;text-transform:none;font-weight:normal;">— calibrated from resolved claims + predictions</span></h2>
+      <div class="trust-filter">
+        <input type="text" id="trustSearch" placeholder="Search sources..." oninput="renderTrustPanel()">
+        <select id="trustSort" onchange="renderTrustPanel()">
+          <option value="trust_desc">Trust (high-low)</option>
+          <option value="trust_asc">Trust (low-high)</option>
+          <option value="claims_desc">Claims (most)</option>
+          <option value="alpha">A-Z</option>
+        </select>
+        <select id="trustCategory" onchange="renderTrustPanel()">
+          <option value="all">All categories</option>
+          <option value="social_media">Social media</option>
+          <option value="wire">Wire services</option>
+          <option value="broadcast">Broadcast</option>
+          <option value="government">Government</option>
+          <option value="academic">Academic</option>
+          <option value="think_tank">Think tanks</option>
+        </select>
+      </div>
+      <div class="trust-panel" id="trustPanel">
+        <div style="color:var(--dim);padding:16px;text-align:center;font-size:12px;">Loading source trust data...</div>
+      </div>
+    </div>
+  </div>
+
   <!-- ACTIVITY FEED -->
   <div class="panel-grid">
     <div class="panel full-width">
@@ -222,8 +289,8 @@ let overviewData = null;
 let trajData = null;
 let depData = null;
 
-// --- Standalone topic index ---
-const TOPIC_SLUGS = [
+// --- Topic index: loaded from manifest (auto-generated by engine.save_topic) ---
+const TOPIC_SLUGS_FALLBACK = [
   "calibration-750gev-diphoton",
   "calibration-fed-rate-2026",
   "hormuz-closure",
@@ -235,11 +302,26 @@ const TOPIC_SLUGS = [
   "calibration-section122-tariffs",
   "calibration-ukraine-ceasefire",
   "calibration-us-recession-2026",
+  "lake-mead-elevation-2027",
+  "colorado-shortage-tier-2028",
 ];
 
+async function fetchTopicSlugs() {
+  try {
+    const res = await fetch('topics/manifest.json?' + Date.now());
+    if (!res.ok) throw new Error('manifest fetch failed');
+    const manifest = await res.json();
+    return (manifest.topics || []).map(t => t.slug);
+  } catch (e) {
+    console.warn('Manifest not found, using fallback slug list:', e.message);
+    return TOPIC_SLUGS_FALLBACK;
+  }
+}
+
 async function loadAllTopics() {
+  const slugs = await fetchTopicSlugs();
   const topics = [];
-  for (const slug of TOPIC_SLUGS) {
+  for (const slug of slugs) {
     try {
       const res = await fetch(`topics/${slug}.json?` + Date.now());
       const d = await res.json();
@@ -845,7 +927,9 @@ async function runTriage() {
             }, null, 2),
           };
       const prompt = await Loom.loadTrigger(triggerName, vars);
-      Loom.send(prompt);
+      // Fork from pipeline intake branch so each run is its own branch
+      const sendOpts = _pipelineParentId ? { parentId: _pipelineParentId } : {};
+      Loom.send(prompt, sendOpts);
       btn.textContent = 'SENT';
       btn.style.background = 'var(--green)';
       btn.style.color = '#000';
@@ -1027,9 +1111,21 @@ function renderOverview() {
     return;
   }
 
+  const sortBy = document.getElementById('topicSort')?.value || 'health';
+  const healthOrder = { CRITICAL: 0, DEGRADED: 1, HEALTHY: 2 };
+  const rtOrder = { RUNAWAY: 0, DANGEROUS: 1, ELASTIC: 2, SAFE: 3 };
+
+  const sorted = [...overviewData.topics].sort((a, b) => {
+    if (sortBy === 'health') return (healthOrder[a.health] ?? 3) - (healthOrder[b.health] ?? 3);
+    if (sortBy === 'rt') return (rtOrder[(a.rt||{}).regime] ?? 4) - (rtOrder[(b.rt||{}).regime] ?? 4);
+    if (sortBy === 'alpha') return (a.title || '').localeCompare(b.title || '');
+    if (sortBy === 'updated') return (b.lastUpdated || '').localeCompare(a.lastUpdated || '');
+    return 0;
+  });
+
   const palette = ['#22c55e','#06b6d4','#f59e0b','#ef4444','#8b5cf6','#ec4899','#14b8a6','#f97316'];
 
-  el.innerHTML = overviewData.topics.map(t => {
+  el.innerHTML = sorted.map(t => {
     const hKeys = Object.keys(t.posteriors);
     const barHtml = hKeys.map((k, i) => {
       const pct = (t.posteriors[k] * 100).toFixed(0);
@@ -1278,6 +1374,7 @@ async function loadActivityFeed() {
     if (dbRes && dbRes.ok) sourceDB = await dbRes.json();
     if (trustRes && trustRes.ok) sourceTrust = await trustRes.json();
     renderActivityFeed();
+    renderTrustPanel();
   } catch(e) { console.warn('Activity feed load failed:', e); }
 }
 
@@ -1409,6 +1506,71 @@ function escapeHtml(s) {
   return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
+// --- SOURCE TRUST PANEL ---
+function renderTrustPanel() {
+  const el = document.getElementById('trustPanel');
+  if (!sourceDB || !sourceDB.sources) {
+    el.innerHTML = '<div style="color:var(--dim);padding:16px;text-align:center;">No source data loaded.</div>';
+    return;
+  }
+
+  const search = (document.getElementById('trustSearch')?.value || '').toLowerCase();
+  const sort = document.getElementById('trustSort')?.value || 'trust_desc';
+  const category = document.getElementById('trustCategory')?.value || 'all';
+
+  let sources = Object.entries(sourceDB.sources).map(([name, s]) => ({
+    name,
+    trust: s.effectiveTrust || s.baseTrust || 0.50,
+    baseTrust: s.baseTrust || 0.50,
+    category: s.category || 'unknown',
+    claims: s.totalClaims || 0,
+    confirmed: s.totalConfirmed || 0,
+    refuted: s.totalRefuted || 0,
+    domains: s.domains || {},
+    predDomain: (s.domains || {}).PREDICTION || null,
+  }));
+
+  // Filter
+  if (search) sources = sources.filter(s => s.name.toLowerCase().includes(search));
+  if (category !== 'all') sources = sources.filter(s => s.category === category);
+
+  // Sort
+  if (sort === 'trust_desc') sources.sort((a, b) => b.trust - a.trust);
+  else if (sort === 'trust_asc') sources.sort((a, b) => a.trust - b.trust);
+  else if (sort === 'claims_desc') sources.sort((a, b) => b.claims - a.claims);
+  else if (sort === 'alpha') sources.sort((a, b) => a.name.localeCompare(b.name));
+
+  if (!sources.length) {
+    el.innerHTML = '<div style="color:var(--dim);padding:16px;text-align:center;">No sources match filter.</div>';
+    return;
+  }
+
+  el.innerHTML = sources.slice(0, 50).map(s => {
+    const pct = (s.trust * 100).toFixed(0);
+    const scoreClass = s.trust >= 0.80 ? 'high' : s.trust >= 0.50 ? 'mid' : s.trust < 0.50 ? 'low' : 'unknown';
+    const barColor = s.trust >= 0.80 ? 'var(--green)' : s.trust >= 0.50 ? 'var(--amber)' : 'var(--red)';
+    const record = s.claims > 0 ? `${s.confirmed}/${s.claims}` : '--';
+    const predBadge = s.predDomain ? `<span class="pred-badge has-preds">${s.predDomain.confirmed || 0}/${s.predDomain.claims || 0} preds</span>` : '';
+
+    return `<div class="trust-source">
+      <div class="name" title="${s.name} (${s.category})">${s.name}${predBadge}</div>
+      <div class="score ${scoreClass}">${pct}%</div>
+      <div class="trust-meter"><div class="trust-meter-fill" style="width:${pct}%;background:${barColor};"></div></div>
+      <div class="trust-record">${record} claims</div>
+    </div>`;
+  }).join('');
+}
+
+// --- TOPIC FILTER ---
+function filterTopics() {
+  const search = (document.getElementById('topicSearchInput')?.value || '').toLowerCase();
+  const rows = document.querySelectorAll('.topic-row');
+  rows.forEach(row => {
+    const text = row.textContent.toLowerCase();
+    row.style.display = text.includes(search) ? '' : 'none';
+  });
+}
+
 // --- LOOM PIPELINE ---
 async function runPipeline(btnId) {
   const btn = document.getElementById(btnId);
@@ -1433,13 +1595,31 @@ async function runPipeline(btnId) {
         sourceTrustInfo: result.sourceTrustInfo || null,
       }, null, 2),
     });
-    Loom.send(prompt);
+    // Fork from pipeline intake branch
+    const sendOpts = _pipelineParentId ? { parentId: _pipelineParentId } : {};
+    Loom.send(prompt, sendOpts);
     if (btn) { btn.textContent = 'SENT'; btn.style.background = 'var(--green)'; btn.style.color = '#000'; }
   } catch(e) {
     console.error('Pipeline send failed:', e);
     if (btn) { btn.textContent = 'FAILED'; btn.style.background = 'var(--red)'; }
   }
 }
+
+// --- PIPELINE BRANCH PARENT ---
+// Set this to the Loom integer ID of the pipeline intake branch's first assistant response.
+// All pipeline Loom.send() calls will fork from this message.
+// To discover IDs: check browser console — every message-sent event logs its ID.
+let _pipelineParentId = 5020; // Pipeline intake branch parent
+
+// Debug: log every message ID so we can discover the right parent
+try {
+  Loom.on('message-sent', (data) => {
+    console.log('[NROL-AO] Message created — id:', data.id, 'data:', JSON.stringify(data));
+  });
+  Loom.getConvId().then(r => {
+    console.log('[NROL-AO] Conv ID:', r.convId);
+  }).catch(() => {});
+} catch(e) {}
 
 // --- INIT ---
 loadAll();

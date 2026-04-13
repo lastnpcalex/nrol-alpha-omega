@@ -96,6 +96,30 @@ result = run_design_gate(topic)
 - [ ] Baseline values recorded
 - [ ] Thresholds defined for indicator triggers
 
+## Phase 6: Cold storage scan
+
+Before finalizing a new topic, scan `canvas/evidence-cold.json` for pre-existing
+evidence that matches the new topic's domain, keywords, actors, or regions.
+
+```
+For each cold storage entry:
+  1. Compare entry keywords/actors/regions against new topic's question, hypotheses,
+     and indicator descriptions
+  2. If overlap is significant (≥3 keyword matches or actor match + domain match):
+     - Log the cold storage claims as evidence in the new topic's evidenceLog
+     - Set posteriorImpact based on indicator matching (same rules as live pipeline)
+     - Add note: "Retroactive from cold_NNN"
+     - Do NOT remove from cold storage — it may match future topics too
+  3. Report which cold entries were pulled in and why
+```
+
+Cold storage entries carry their original source trust scores. Do not re-assess
+source trust — use the values recorded at triage time.
+
+**Limitation**: Cold storage only contains evidence that was triaged through the
+pipeline. It is NOT an exhaustive prior evidence scan. Always conduct independent
+research when creating a new topic — cold storage supplements, not substitutes.
+
 ## Topic JSON structure
 
 See SPEC.md for the full schema. Key sections:

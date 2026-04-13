@@ -5,6 +5,16 @@ NROL-AO EVIDENCE DROP — a file was dropped on the Mirror dashboard.
 
 ## Instructions
 
+### 0. Branch Isolation — MANDATORY
+
+**Every evidence drop gets its own branch. No exceptions.**
+
+```bash
+git checkout -b pipeline/YYYY-MM-DD-evidence-drop
+```
+
+All modifications happen on this branch. Do NOT merge — report the branch name at the end.
+
 Process this dropped file as potential evidence for the NROL-AO system:
 
 1. **Read the file** — determine what it contains (article, screenshot, data, document).

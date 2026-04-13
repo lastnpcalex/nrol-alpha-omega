@@ -1,0 +1,449 @@
+{
+  "meta": {
+    "slug": "colorado-shortage-tier-2028",
+    "title": "Colorado River Lower Basin Shortage Tier for 2028",
+    "question": "What Lower Colorado River shortage tier will the Bureau of Reclamation declare for calendar year 2028 operations?",
+    "resolution": "Official BOR Annual Operating Plan shortage tier determination for CY2028, as declared in the August 2027 24-month study. If BOR issues a revised determination before January 1, 2028, the latest revision governs. Revisions published on or after January 1, 2028 do not affect resolution. If the DCP tier framework is formally superseded before the August 2027 determination: resolution maps to whichever hypothesis best matches the actual mandatory allocation reduction imposed, measured as total Lower Basin curtailment volume (AF/yr). Tier 1 equivalent: <600K AF cut. Tier 2 equivalent: 600K-900K AF cut. Tier 3+ equivalent: >900K AF cut. If curtailment structure is novel and cannot be expressed as a single AF volume, H4 resolves. If the August 2027 AOP is explicitly marked provisional pending new guidelines, resolution uses the AOP as declared — provisional status does not prevent resolution.",
+    "created": "2026-04-13T18:38:33+00:00",
+    "lastUpdated": "2026-04-13T19:48:34+00:00",
+    "status": "ACTIVE",
+    "dayCount": 0,
+    "startDate": "2026-04-13",
+    "classification": "ROUTINE",
+    "topicType": "policy"
+  },
+  "tagConfig": {
+    "_docs": "Tag configuration for this topic. topicType presets: conflict, science, election, tech. Override directionHints for custom tag-to-hypothesis mappings.",
+    "availableTags": [
+      "EVENT",
+      "DATA",
+      "RHETORIC",
+      "ANALYSIS",
+      "POLICY",
+      "DIPLO",
+      "FORECAST"
+    ],
+    "directionHints": {
+      "POLICY": "Shortage declarations, allocation changes, new guidelines",
+      "DIPLO": "Interstate compact negotiations, Mexico treaty discussions — DIRECTION NEUTRAL: negotiations can escalate (failure -> H3/H4) or de-escalate (agreement -> H1). Assess direction per-entry.",
+      "FORECAST": "BOR projections driving tier determination"
+    },
+    "escalationTags": [
+      "POLICY",
+      "DATA"
+    ],
+    "deescalationTags": []
+  },
+  "model": {
+    "hypotheses": {
+      "H1": {
+        "label": "Tier 1 or no shortage: current restriction level maintained, reduced, or lifted entirely (Mead stays above 1,050 ft in Aug 2027 projection)",
+        "midpoint": 1,
+        "unit": "tier",
+        "posterior": 0.3
+      },
+      "H2": {
+        "label": "Tier 2 declared: mandatory deeper cuts to AZ, NV, MX",
+        "midpoint": 2,
+        "unit": "tier",
+        "posterior": 0.45
+      },
+      "H3": {
+        "label": "Tier 3+ or emergency measures beyond existing DCP framework",
+        "midpoint": 3,
+        "unit": "tier",
+        "posterior": 0.15
+      },
+      "H4": {
+        "label": "Unprecedented outcome: restriction level imposed that cannot be mapped to existing Tier 1/2/3 scale (new framework with novel structure, emergency federal override, or court-ordered reallocation)",
+        "midpoint": 4,
+        "unit": "tier",
+        "posterior": 0.1
+      }
+    },
+    "expectedValue": 2.05,
+    "expectedUnit": "tier",
+    "posteriorHistory": [
+      {
+        "date": "2026-04-13",
+        "note": "Initial priors. Currently in Tier 1 shortage (since 2022). Lake Mead ~1,061 ft, Tier 2 triggers at 1,050 ft. BOR projects possible 1,032 ft by Nov 2027 — well into Tier 2 range. H2 (0.45): most probable escalation given BOR projection. H1 (0.30): requires elevation holding above 1,050 — possible with good snowpack but against current trend. H3 (0.15): requires extreme decline below 1,025 or emergency federal measures — plausible via tribal court orders or extreme drought. H4 (0.10): post-2026 guidelines renegotiation is active but slow — Interior has signaled intent but no formal proposal yet; low probability of completion before August 2027 determination. Timeline uncertainty is high.",
+        "H1": 0.3,
+        "H2": 0.45,
+        "H3": 0.15,
+        "H4": 0.1
+      }
+    ]
+  },
+  "subModels": {},
+  "indicators": {
+    "tiers": {
+      "tier1_critical": [
+        {
+          "id": "t1_bor_declares_tier2",
+          "desc": "BOR officially declares Tier 2 shortage in August 2027 Annual Operating Plan.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H2 +30pp, H1 -20pp, H3 -5pp, H4 -5pp"
+        },
+        {
+          "id": "t1_bor_declares_tier3",
+          "desc": "BOR officially declares Tier 3 or higher shortage in August 2027 AOP.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H3 +30pp, H1 -15pp, H2 -10pp, H4 -5pp"
+        },
+        {
+          "id": "t1_new_framework_adopted",
+          "desc": "Federal or interstate agreement formally replaces current DCP tier system before August 2027 determination.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H4 +30pp, H1 -10pp, H2 -10pp, H3 -10pp"
+        }
+      ],
+      "tier2_strong": [
+        {
+          "id": "t2_aug_projection_below_1050",
+          "desc": "BOR August 2027 24-month study projects Mead below 1,050 ft for Jan 1, 2028 — mechanical Tier 2 trigger.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H2 +12pp, H1 -8pp, H3 +2pp, H4 -6pp"
+        },
+        {
+          "id": "t2_aug_projection_below_1025",
+          "desc": "BOR August 2027 24-month study projects Mead below 1,025 ft for Jan 1, 2028 — mechanical Tier 3 trigger.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H3 +12pp, H2 -4pp, H1 -6pp, H4 -2pp"
+        },
+        {
+          "id": "t2_interior_convenes_negotiation",
+          "desc": "Dept of Interior formally convenes post-2026 guidelines negotiation with all 7 Basin states.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H4 +10pp, H1 -3pp, H2 -3pp, H3 -4pp"
+        },
+        {
+          "id": "t2_elevation_upstream_shift",
+          "desc": "Dependency: upstream topic lake-mead-elevation-2027 posterior for H3+H4 exceeds 0.70.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H2 +8pp, H3 +4pp, H1 -10pp, H4 -2pp"
+        },
+        {
+          "id": "t2_mead_above_1065_at_midyear",
+          "desc": "USBR daily reading shows Lake Mead above 1,065 ft on or after July 1, 2027 (elevation holding or recovering heading into August determination).",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 +8pp, H2 +2pp, H3 -7pp, H4 -3pp"
+        },
+        {
+          "id": "t2_formal_framework_proposal",
+          "desc": "Dept of Interior or any Basin state publishes a formal written proposal for post-2026 guidelines that would replace the DCP tier system (not just opening negotiations — an actual draft framework with proposed allocation rules).",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H4 +8pp, H1 -2pp, H2 -3pp, H3 -3pp"
+        }
+      ],
+      "tier3_suggestive": [
+        {
+          "id": "t3_state_requests_emergency",
+          "desc": "Any Basin state formally requests emergency federal intervention outside existing DCP framework.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H3 +3pp, H4 +2pp, H1 -3pp, H2 -2pp"
+        },
+        {
+          "id": "t3_congress_legislation",
+          "desc": "Legislation addressing Colorado River crisis introduced in Congress.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H4 +3pp, H3 +1pp, H1 -2pp, H2 -2pp"
+        },
+        {
+          "id": "t3_voluntary_cuts_exceed_dcp",
+          "desc": "Basin states agree to voluntary cuts exceeding what current DCP tier requires.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 +3pp, H2 -1pp, H3 -1pp, H4 -1pp"
+        },
+        {
+          "id": "t3_mead_rises_vs_projection",
+          "desc": "Lake Mead elevation at time of August 2027 study is higher than BOR projected 6 months prior.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 +4pp, H2 -2pp, H3 -1pp, H4 -1pp"
+        },
+        {
+          "id": "t3_bor_interim_reduction",
+          "desc": "BOR issues an interim determination reducing the shortage tier or releasing conserved water from a conservation pool (as occurred May 2023).",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 +3pp, H2 -1pp, H3 -1pp, H4 -1pp"
+        }
+      ],
+      "anti_indicators": [
+        {
+          "id": "anti_h1",
+          "desc": "BOR mid-year 2027 projection already shows Mead below 1,050 ft for Jan 2028.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 -10pp, H2 +7pp, H3 +3pp"
+        },
+        {
+          "id": "anti_h2",
+          "desc": "BOR declares Tier 3 directly, bypassing or escalating past Tier 2.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H2 -10pp, H3 +10pp"
+        },
+        {
+          "id": "anti_h3",
+          "desc": "Elevation recovers above 1,060 ft by Aug 2027; BOR projects Tier 1 continuation.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H3 -8pp, H1 +5pp, H2 +3pp"
+        },
+        {
+          "id": "anti_h4",
+          "desc": "All 7 Basin states publicly reaffirm current DCP framework through 2028 without renegotiation.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H4 -8pp, H1 +3pp, H2 +5pp"
+        }
+      ]
+    }
+  },
+  "actorModel": {
+    "description": "Policy/institutional actors who declare and implement shortage tiers, plus federal actors who could replace the framework entirely.",
+    "actors": {
+      "bor": {
+        "name": "Bureau of Reclamation",
+        "role": "Declares shortage tiers based on 24-month study; publishes Annual Operating Plan",
+        "decisionStyle": "Technocratic — tier determination is mechanical based on projected elevation",
+        "biases": [
+          "Follows established model projections",
+          "Conservative: prefers existing framework over novel interventions"
+        ],
+        "filters": [
+          "Bound by DCP and interim guidelines",
+          "August determination timeline is fixed"
+        ],
+        "overrides": [
+          "Secretary of Interior can invoke emergency authority"
+        ]
+      },
+      "interior": {
+        "name": "Department of Interior / Secretary",
+        "role": "Political authority over BOR; can invoke extraordinary measures or fast-track new guidelines",
+        "decisionStyle": "Political + institutional — balances state politics with federal mandate",
+        "biases": [
+          "Administration priorities influence urgency",
+          "Election cycles affect willingness to impose unpopular cuts"
+        ],
+        "filters": [
+          "Must maintain legal defensibility under Law of the River",
+          "Stakeholder consultation requirements"
+        ],
+        "overrides": [
+          "National emergency declaration could bypass normal process"
+        ]
+      },
+      "basin_states": {
+        "name": "Seven Basin States (CO, WY, UT, NM, AZ, NV, CA)",
+        "role": "Compact parties who negotiate allocation and conservation; must consent to new guidelines. Within Arizona specifically, junior rights holders (agricultural users served by CAP) are marginal actors — their fallowing/water banking decisions affect whether the state requests softer or harder shortage declarations. AZ water banking and informal water markets can move paper allocations in ways that affect BOR calculations.",
+        "decisionStyle": "Competitive/cooperative hybrid — each state protects own allocation while recognizing shared crisis",
+        "biases": [
+          "Upper Basin: protect compact deliveries",
+          "Lower Basin: resist deeper cuts",
+          "CA (senior rights): defend priority system"
+        ],
+        "filters": [
+          "Interstate compact obligations",
+          "State water law and politics"
+        ],
+        "overrides": [
+          "Federal intervention overrides state consensus requirement"
+        ]
+      },
+      "congress": {
+        "name": "US Congress",
+        "role": "Can authorize new Colorado River legislation, fund infrastructure, or mandate framework changes",
+        "decisionStyle": "Legislative, slow, reactive — unlikely to act unless crisis is undeniable",
+        "biases": [
+          "Western state delegations have outsized influence on water policy"
+        ],
+        "filters": [
+          "Requires bipartisan support for major water legislation",
+          "Budget constraints"
+        ],
+        "overrides": [
+          "Severe crisis + media attention can accelerate legislative action"
+        ]
+      },
+      "mexico": {
+        "name": "Mexico (CONAGUA)",
+        "role": "1944 Treaty rights to 1.5 MAF/yr; proportional cuts under Minute 323",
+        "decisionStyle": "Treaty-bound, diplomatic",
+        "biases": [
+          "Limited leverage but international dimension adds complexity"
+        ],
+        "filters": [
+          "Treaty obligations are senior to DCP",
+          "Diplomatic channel separate from domestic politics"
+        ],
+        "overrides": [
+          "Severe crisis could prompt treaty renegotiation"
+        ]
+      },
+      "tribal_nations": {
+        "name": "Tribal Nations (Navajo Nation, Colorado River Indian Tribes, others)",
+        "role": "Hold senior unresolved water rights claims (Navajo alone: 600K+ AF/yr). Federal court rulings on tribal water rights can force BOR to alter shortage calculations outside the DCP framework. Supreme Court's 2023 Arizona v. Navajo Nation left federal trust duty claims open.",
+        "decisionStyle": "Legal/judicial — pursue rights through federal courts",
+        "biases": [
+          "Long-term rights maximization over short-term political compromise"
+        ],
+        "filters": [
+          "Federal trust doctrine",
+          "Winters doctrine seniority",
+          "Ongoing litigation timelines"
+        ],
+        "overrides": [
+          "Federal court order could force reallocation outside DCP"
+        ]
+      }
+    },
+    "methodology": [
+      "ACTIONS OVER RHETORIC — only official BOR declarations and signed agreements move posteriors",
+      "ELEVATION DRIVES TIER — the tier is mechanically determined by projected elevation at trigger dates",
+      "WATCH THE AUGUST STUDY — the August 24-month study is the single most important data point each year",
+      "FRAMEWORK NEGOTIATIONS ARE SLOW — discount rhetoric about new guidelines until formal proposals emerge"
+    ]
+  },
+  "evidenceLog": [],
+  "dataFeeds": {
+    "current_shortage_tier": {
+      "label": "Current Declared Shortage Tier",
+      "value": 1,
+      "unit": "tier",
+      "baseline": 1,
+      "asOf": "2026-01-01"
+    },
+    "mead_elevation_at_projection": {
+      "label": "Lake Mead Elevation (at time of latest BOR projection)",
+      "value": 1061,
+      "unit": "ft",
+      "baseline": 1061,
+      "asOf": "2026-04-10"
+    },
+    "bor_projected_jan2028_elevation": {
+      "label": "BOR Projected Lake Mead Elevation for Jan 1, 2028",
+      "value": null,
+      "unit": "ft",
+      "baseline": null,
+      "asOf": ""
+    }
+  },
+  "watchpoints": [],
+  "searchQueries": [
+    "Bureau of Reclamation shortage tier Colorado River {date}",
+    "BOR Annual Operating Plan 2028 {date}",
+    "Colorado River post-2026 guidelines negotiation {date}",
+    "Interior Department Colorado River emergency {date}",
+    "Colorado River Basin states agreement {date}"
+  ],
+  "dependencies": {
+    "_docs": "Cross-topic dependency declarations. Upstream topics whose posteriors this topic's assumptions depend on. Checked mechanically on save — stale assumptions surface as governance issues.",
+    "upstream": [
+      {
+        "slug": "lake-mead-elevation-2027",
+        "assumption": "Lake Mead elevation determines shortage tier mechanically. If elevation topic H3+H4 posterior exceeds 0.70, Tier 2+ becomes near-certain.",
+        "tolerance": 0.15,
+        "lastChecked": "2026-04-13"
+      }
+    ]
+  },
+  "governance": {
+    "health": "HEALTHY",
+    "issues": [],
+    "rt": {
+      "rt": 0.0,
+      "regime": "SAFE",
+      "worst_hypothesis": "H1"
+    },
+    "entropy": 1.7822,
+    "maxEntropy": 2.0,
+    "uncertaintyRatio": 0.8911,
+    "evidenceFreshness": {
+      "fresh": 0,
+      "stale": 0,
+      "total": 0
+    },
+    "hypothesisAdmissibility": {
+      "H1": "ADMISSIBLE",
+      "H2": "ADMISSIBLE",
+      "H3": "ADMISSIBLE",
+      "H4": "ADMISSIBLE"
+    },
+    "klFromPrior": {
+      "kl_divergence": 0.0,
+      "interpretation": "MODERATE"
+    },
+    "lastComputed": "2026-04-13T19:48:34+00:00",
+    "staleDependencies": 0,
+    "calibrationHealth": "ACCEPTABLE",
+    "unresolvedContradictions": 0,
+    "designGate": {
+      "passed": true,
+      "blockers": [],
+      "warnings": [],
+      "coverage": {
+        "H1": {
+          "pos": 6,
+          "neg": 11
+        },
+        "H2": {
+          "pos": 7,
+          "neg": 11
+        },
+        "H3": {
+          "pos": 8,
+          "neg": 9
+        },
+        "H4": {
+          "pos": 5,
+          "neg": 10
+        }
+      },
+      "indistinguishable": [],
+      "lastChecked": "2026-04-13T19:48:34+00:00"
+    }
+  },
+  "predictionScoring": {
+    "_docs": "Calibration infrastructure. Snapshots are auto-created by engine on each posterior update. Record outcome when topic resolves, then compute_calibration_report() for Brier analysis.",
+    "snapshots": [],
+    "outcomes": [],
+    "brierScores": []
+  },
+  "contradictionTracker": {
+    "unresolved": [],
+    "resolved": []
+  }
+}

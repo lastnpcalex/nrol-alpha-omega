@@ -572,6 +572,24 @@
       "weight": 0.99,
       "posteriorImpact": "NONE. Single-candidate scandal in CA gubernatorial race. Not a party-wide event. anti_h4_no_dem_scandal_or_collapse requires party-wide scandal or national candidate quality collapse — this is localized. No House seat vacancy yet (Swalwell has not resigned from Congress). Watchpoint triggered: monitor for resignation → special election. If resignation occurs, assess whether safe-D district special has any bearing on House control calculus.",
       "note": "Source trust: CNN EVENT domain 0.99 (tier 2, cross-topic domain). claimState SUPPORTED — withdrawal confirmed by Swalwell's own X post, corroborated by CNN, multiple quoted officials. effectiveWeight = 0.99 (SUPPORTED 1.0 x trust 0.99). Related to prior ev_005 (Manhattan DA investigation of Swalwell) but distinct event — investigation led to withdrawal."
+    },
+    {
+      "id": "ev_010",
+      "time": "2026-04-13T17:07:00Z",
+      "ingested": "2026-04-13T22:25:54Z",
+      "text": "Social media commentator predicts Democrats favored to take Senate, projecting 55 seats including anti-Republican independents. Thread discusses specific competitive races (ME, NC, AK, IA, TX, OH, MT) and economic headwinds (fertilizer shortages, food prices, oil disruption) as factors.",
+      "tags": [
+        "RHETORIC"
+      ],
+      "source": "@mikhailgorbaechev.bsky.social",
+      "platform": "bluesky",
+      "url": "https://bsky.app/profile/mikhailgorbaechev.bsky.social/post/3mjfe3jkrlk2p",
+      "sourceTrust": 0.5,
+      "sourceTrustNote": "New source not in source_db. Assigned 0.50 unknown prior. RECOMMEND: register as social_media_commentator with base trust via calibrate.py register.",
+      "claimState": "PROPOSED",
+      "ledger": "OPINION",
+      "posteriorImpact": "NONE. Rhetoric/prediction from social media commentator. No indicator fired. Opinion about Senate seat counts is not an observable event, polling data, or filed candidacy.",
+      "effectiveWeight": 0.0
     }
   ],
   "dataFeeds": {

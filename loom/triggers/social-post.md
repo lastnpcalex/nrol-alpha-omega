@@ -13,6 +13,18 @@ NROL-AO SOCIAL MEDIA PIPELINE — process a social media post through the framew
 
 This is a social media post. Social posts require the same epistemic discipline as any other evidence — the framework handles trust, not you.
 
+### 0. Branch Isolation — MANDATORY
+
+**Every pipeline run gets its own branch. No exceptions.**
+
+```bash
+git checkout -b pipeline/YYYY-MM-DD-headline-slug
+```
+
+- Branch naming: `pipeline/{date}-{2-4 word slug}` (e.g., `pipeline/2026-04-12-iran-rhetoric`)
+- All file modifications happen on this branch
+- Do NOT merge to main — report the branch name at the end so the user can review and merge
+
 ### 1. Fetch the Post Content
 
 Route by platform:
@@ -39,15 +51,21 @@ The Governor's `get_effective_weight()` defines a 5-tier trust lookup chain. You
 
 If you want to register a new source with a category-based prior (e.g., a government account at 0.90), note that in the activity log as a recommendation — do not unilaterally assign it. Write: `"notes": "New source @handle not in source_db. Assigned 0.50 unknown prior. RECOMMEND: register as [category] with base trust [X] via calibrate.py register."` The user decides.
 
-### 3. Extract the Claim — Separate Fact from Rhetoric
+### 3. Extract the Claim — Separate Fact from Rhetoric from Prediction
 
 The Governor's lint module flags `rhetoric_as_evidence` as a HIGH severity failure mode. Apply this rigorously:
 
 - **Factual claim** (something happened, a number changed, an action was taken): tag as the appropriate domain tag (EVENT, DATA, MILITARY, etc.)
-- **Rhetoric** (opinion, prediction, threat, posturing, "X will do Y"): tag as RHETORIC. `posteriorImpact: NONE`. Rhetoric does not move posteriors. Log it for the record but the Governor suppresses its weight.
-- **Mixed**: Extract the factual component only. The rhetoric wrapping is noise.
+- **Prediction** (specific, testable, time-bounded claim about the future): tag as PREDICTION. All 3 filters must pass:
+  1. **Specific**: "will" not "might/could/likely" — a concrete claim
+  2. **Testable**: an observable outcome exists that confirms or refutes it
+  3. **Time-bounded**: explicit or inferrable deadline ("within 48 hours", "by Friday", "this week")
+  If all 3 pass, log with extra `prediction` fields (see `skills/evidence.md`). posteriorImpact = NONE. The prediction gets resolved later via `/resolve` and calibrates the source's trust score.
+  If any filter fails → it's RHETORIC, not PREDICTION.
+- **Rhetoric** (opinion, hedged speculation, posturing, "X might do Y"): tag as RHETORIC. `posteriorImpact: NONE`. Rhetoric does not move posteriors and does not calibrate sources. Log it for the record.
+- **Mixed**: Extract the factual component. If there's also a testable prediction, log both as separate entries (one EVENT/DATA, one PREDICTION).
 
-Social media is disproportionately rhetoric. Most posts will be tagged RHETORIC with posteriorImpact NONE. This is correct behavior, not a failure.
+Social media is disproportionately rhetoric. Most posts will be tagged RHETORIC with posteriorImpact NONE. This is correct behavior, not a failure. A smaller fraction will be PREDICTION — these don't move posteriors either, but they build the source's track record over time.
 
 ### 4. Log Evidence
 
@@ -80,3 +98,7 @@ If `claimState` is PROPOSED (single source, unverified): cap the posterior shift
 ### 7. Report
 
 State what you found, what you logged, and what (if anything) moved. If the post was rhetoric, say so. Do not apologize for logging rhetoric at zero weight — that IS the system working.
+
+### 8. Cold Storage (IGNORE only)
+
+If triage returned IGNORE (no topic match), append structured claims to `canvas/evidence-cold.json` for retroactive matching when new topics are created. See `pipeline.md` Step 9 for the schema.
