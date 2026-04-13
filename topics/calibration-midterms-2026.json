@@ -6,7 +6,7 @@
     "question": "Which party will control the US House of Representatives after the November 2026 midterm elections?",
     "resolution": "AP/Decision Desk calls House majority on or after Election Night, November 3, 2026. Controlling party must hold 218+ seats. Final seat counts certified by mid-December 2026.",
     "created": "2026-04-11T00:00:00Z",
-    "lastUpdated": "2026-04-12T21:30:00+00:00",
+    "lastUpdated": "2026-04-13T01:25:34+00:00",
     "status": "ACTIVE",
     "dayCount": 1,
     "startDate": "2026-04-11T00:00:00Z",
@@ -558,6 +558,20 @@
       "weight": 0.7,
       "posteriorImpact": "NONE. Filing not yet released. Q1 2025 baseline shows near-parity (~$200K DCCC lead). If Q1 2026 shows significant DCCC advantage, t2_dccc_fundraising_advantage should be evaluated.",
       "note": "Source trust: FEC filings are official government data (0.95). Filing deadline is April 15, 2026. Check FEC.gov/data/committee/C00000935/ (DCCC) and C00075820 (NRCC) after that date."
+    },
+    {
+      "id": "ev_009",
+      "time": "2026-04-12T19:00:00Z",
+      "text": "Rep. Eric Swalwell suspended California gubernatorial campaign after CNN/SF Chronicle sexual misconduct reports. 4 women accused him. Key endorsers (Rep. Gomez, Sens. Gallego, Schiff) pulled support. Multiple Dems (Reps. Vindman, Jayapal) called for him to resign from Congress. Jeffries declined to say whether Swalwell should resign House seat. If Swalwell resigns, CA special election would be triggered in safe-D district.",
+      "tags": [
+        "EVENT",
+        "POLITICAL"
+      ],
+      "source": "CNN",
+      "claimState": "SUPPORTED",
+      "weight": 0.99,
+      "posteriorImpact": "NONE. Single-candidate scandal in CA gubernatorial race. Not a party-wide event. anti_h4_no_dem_scandal_or_collapse requires party-wide scandal or national candidate quality collapse — this is localized. No House seat vacancy yet (Swalwell has not resigned from Congress). Watchpoint triggered: monitor for resignation → special election. If resignation occurs, assess whether safe-D district special has any bearing on House control calculus.",
+      "note": "Source trust: CNN EVENT domain 0.99 (tier 2, cross-topic domain). claimState SUPPORTED — withdrawal confirmed by Swalwell's own X post, corroborated by CNN, multiple quoted officials. effectiveWeight = 0.99 (SUPPORTED 1.0 x trust 0.99). Related to prior ev_005 (Manhattan DA investigation of Swalwell) but distinct event — investigation led to withdrawal."
     }
   ],
   "dataFeeds": {

@@ -657,10 +657,10 @@
       "category": "broadcast",
       "domains": {
         "EVENT": {
-          "claims": 12,
-          "confirmed": 11,
+          "claims": 13,
+          "confirmed": 12,
           "refuted": 1,
-          "hitRate": 0.9167,
+          "hitRate": 0.9230769230769231,
           "domainTrust": 0.99
         },
         "DIPLO": {
@@ -692,13 +692,20 @@
           "refuted": 3,
           "hitRate": 0.8333,
           "lastSeen": "2026-04-11T16:59:37Z"
+        },
+        "calibration-midterms-2026": {
+          "claims": 1,
+          "confirmed": 1,
+          "refuted": 0,
+          "hitRate": 1.0,
+          "lastSeen": "2026-04-13T01:26:09Z"
         }
       },
       "effectiveTrust": 0.99,
-      "totalClaims": 18,
-      "totalConfirmed": 15,
+      "totalClaims": 19,
+      "totalConfirmed": 16,
       "totalRefuted": 3,
-      "lastUpdated": "2026-04-11T16:59:37Z"
+      "lastUpdated": "2026-04-13T01:26:09Z"
     },
     "WaPo": {
       "baseTrust": 0.5,
