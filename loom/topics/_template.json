@@ -1,0 +1,118 @@
+{
+  "_protocol": "See PROTOCOL.md for full scaffolding instructions",
+
+  "meta": {
+    "slug": "CHANGE-ME",
+    "title": "Topic Title",
+    "question": "What specific, measurable thing are we estimating?",
+    "resolution": "Observable criterion that resolves the question (must be verifiable by third party)",
+    "created": "",
+    "lastUpdated": "",
+    "status": "ACTIVE",
+    "dayCount": 0,
+    "startDate": "",
+    "classification": "ROUTINE",
+    "topicType": "conflict"
+  },
+
+  "tagConfig": {
+    "_docs": "Tag configuration for this topic. topicType presets: conflict, science, election, tech. Override directionHints for custom tag-to-hypothesis mappings.",
+    "availableTags": ["EVENT", "DATA", "RHETORIC", "INTEL", "ANALYSIS"],
+    "directionHints": {},
+    "escalationTags": [],
+    "deescalationTags": []
+  },
+
+  "model": {
+    "hypotheses": {
+      "H1": { "label": "Outcome A (shortest/lowest)", "midpoint": 0, "unit": "weeks", "posterior": 0.25 },
+      "H2": { "label": "Outcome B", "midpoint": 0, "unit": "weeks", "posterior": 0.25 },
+      "H3": { "label": "Outcome C", "midpoint": 0, "unit": "weeks", "posterior": 0.25 },
+      "H4": { "label": "Outcome D (longest/highest)", "midpoint": 0, "unit": "weeks", "posterior": 0.25 }
+    },
+    "expectedValue": 0,
+    "expectedUnit": "weeks",
+    "posteriorHistory": []
+  },
+
+  "subModels": {},
+
+  "indicators": {
+    "_design_rules": [
+      "Each indicator must be OBSERVABLE — actions, not opinions",
+      "Each must have a clear fired/not-fired threshold",
+      "Every hypothesis needs at least one pro AND one anti indicator",
+      "Governor flags unfalsifiable hypotheses as DEGRADED"
+    ],
+    "tiers": {
+      "tier1_critical": [
+        { "id": "t1_example", "desc": "Near-certain signal of [outcome]. MUST be observable action, not rhetoric.", "status": "NOT_FIRED", "firedDate": null, "note": null, "posteriorEffect": "Major shift: [which H] +15-30pp" }
+      ],
+      "tier2_strong": [
+        { "id": "t2_example", "desc": "Strong signal. Observable, verifiable.", "status": "NOT_FIRED", "firedDate": null, "note": null, "posteriorEffect": "Moderate shift: [which H] +5-15pp" }
+      ],
+      "tier3_suggestive": [
+        { "id": "t3_example", "desc": "Suggestive signal or thesis confirmation.", "status": "NOT_FIRED", "firedDate": null, "note": null, "posteriorEffect": "Minor shift: [which H] +1-5pp" }
+      ],
+      "anti_indicators": [
+        { "id": "anti_h1", "desc": "Evidence that would REDUCE H1 probability", "status": "NOT_FIRED", "firedDate": null, "note": null, "posteriorEffect": "H1 -Xpp" },
+        { "id": "anti_h2", "desc": "Evidence that would REDUCE H2 probability", "status": "NOT_FIRED", "firedDate": null, "note": null, "posteriorEffect": "H2 -Xpp" },
+        { "id": "anti_h3", "desc": "Evidence that would REDUCE H3 probability", "status": "NOT_FIRED", "firedDate": null, "note": null, "posteriorEffect": "H3 -Xpp" },
+        { "id": "anti_h4", "desc": "Evidence that would REDUCE H4 probability", "status": "NOT_FIRED", "firedDate": null, "note": null, "posteriorEffect": "H4 -Xpp" }
+      ]
+    }
+  },
+
+  "actorModel": {
+    "description": "Decision-theoretic framework: who makes the decisions that drive this outcome?",
+    "actors": {
+      "actor1": {
+        "name": "Key Decision Maker",
+        "role": "Primary actor whose decisions drive the outcome",
+        "decisionStyle": "How they decide (rational/impulsive/institutional/etc.)",
+        "biases": ["Known bias 1"],
+        "filters": ["Institutional constraint on behavior"],
+        "overrides": ["Condition where filters get bypassed"]
+      }
+    },
+    "methodology": [
+      "ACTIONS OVER RHETORIC — only verified events move posteriors",
+      "TAG EVERYTHING — separate rhetoric from action in evidence log",
+      "DON'T FRONT-RUN — set tripwires and let news confirm",
+      "SOCIALIZATION DETECTION — recognize narrative prep patterns"
+    ]
+  },
+
+  "evidenceLog": [],
+
+  "dataFeeds": {
+    "primary_metric": {
+      "label": "Primary Metric",
+      "value": 0,
+      "unit": "units",
+      "baseline": 0,
+      "asOf": ""
+    }
+  },
+
+  "watchpoints": [],
+
+  "searchQueries": [
+    "topic keyword latest {date}",
+    "specific search query {date}"
+  ],
+
+  "dependencies": {
+    "_docs": "Cross-topic dependency declarations. Upstream topics whose posteriors this topic's assumptions depend on. Checked mechanically on save — stale assumptions surface as governance issues.",
+    "upstream": []
+  },
+
+  "governance": null,
+
+  "predictionScoring": {
+    "_docs": "Calibration infrastructure. Snapshots are auto-created by engine on each posterior update. Record outcome when topic resolves, then compute_calibration_report() for Brier analysis.",
+    "snapshots": [],
+    "outcomes": [],
+    "brierScores": []
+  }
+}

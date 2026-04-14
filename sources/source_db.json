@@ -323,10 +323,10 @@
           "domainTrust": 0.99
         },
         "EVENT": {
-          "claims": 18,
-          "confirmed": 17,
+          "claims": 19,
+          "confirmed": 18,
           "refuted": 1,
-          "hitRate": 0.9444,
+          "hitRate": 0.9474,
           "domainTrust": 0.99
         },
         "DATA": {
@@ -360,18 +360,18 @@
       },
       "topicHistory": {
         "hormuz-closure": {
-          "claims": 34,
-          "confirmed": 30,
+          "claims": 35,
+          "confirmed": 31,
           "refuted": 4,
-          "hitRate": 0.8824,
-          "lastSeen": "2026-04-11T16:59:37Z"
+          "hitRate": 0.8857,
+          "lastSeen": "2026-04-13T14:30:00Z"
         }
       },
       "effectiveTrust": 0.99,
-      "totalClaims": 34,
-      "totalConfirmed": 30,
+      "totalClaims": 35,
+      "totalConfirmed": 31,
       "totalRefuted": 4,
-      "lastUpdated": "2026-04-11T16:59:37Z"
+      "lastUpdated": "2026-04-13T14:30:00Z"
     },
     "NPR": {
       "baseTrust": 0.5,
@@ -5294,6 +5294,22 @@
       "totalConfirmed": 0,
       "totalRefuted": 0,
       "lastUpdated": "2026-04-12T00:00:00Z"
+    },
+    "mikhailgorbaechev.bsky.social": {
+      "displayName": "Mikhail Gorbaechev",
+      "platform": "bluesky",
+      "category": "social_media",
+      "baseTrust": 0.5,
+      "effectiveTrust": 0.5,
+      "note": "Political commentary account. 5150 followers. Bluesky handle parody/reference name. No calibration data.",
+      "domains": {},
+      "topicHistory": {
+        "calibration-midterms-2026": {
+          "claims": 1,
+          "lastSeen": "2026-04-13T17:07:00Z"
+        }
+      },
+      "registeredAt": "2026-04-13T22:26:06Z"
     }
   },
   "meta": {

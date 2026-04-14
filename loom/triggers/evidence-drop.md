@@ -5,29 +5,19 @@ NROL-AO EVIDENCE DROP — a file was dropped on the Mirror dashboard.
 
 ## Instructions
 
-### 0. Branch Isolation — MANDATORY
-
-**Every evidence drop gets its own branch. No exceptions.**
-
-```bash
-git checkout -b pipeline/YYYY-MM-DD-evidence-drop
-```
-
-All modifications happen on this branch. Do NOT merge — report the branch name at the end.
-
 Process this dropped file as potential evidence for the NROL-AO system:
 
 1. **Read the file** — determine what it contains (article, screenshot, data, document).
 
 2. **Extract headline and source** — identify the key claim or news item, and the originating source.
 
-3. **Triage** — match against all active topics in `canvas/topics/`. Check indicators, watchpoints, and domain keywords.
+3. **Triage** — match against all active topics in `topics/`. Check indicators, watchpoints, and domain keywords.
 
 4. **If relevant**, run the full pipeline:
-   - Look up source trust in `canvas/source_db.json` and `canvas/source-trust.json`
-   - Log evidence to the matched topic JSON in `canvas/topics/{slug}.json`
+   - Look up source trust in `source_db.json` and `source-trust.json`
+   - Log evidence to the matched topic JSON in `topics/{slug}.json`
    - Update posteriors if warranted (MODERATE or MAJOR impact)
    - Update source calibration if this confirms/refutes existing evidence
-   - Append to `canvas/activity-log.json`
+   - Append to `activity-log.json`
 
 5. **Report** what you found and what you updated.

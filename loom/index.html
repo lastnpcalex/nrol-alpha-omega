@@ -12,49 +12,106 @@
     --purple: #8b5cf6;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { background: var(--bg); color: var(--text); font-family: 'JetBrains Mono', 'Cascadia Code', 'Fira Code', monospace; font-size: 13px; line-height: 1.5; }
+  body { background: var(--bg); color: var(--text); font-family: 'JetBrains Mono', 'Cascadia Code', 'Fira Code', monospace; font-size: 13px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
 
   /* Header */
-  .header { background: linear-gradient(135deg, #1a1a2e, #16213e); border-bottom: 2px solid var(--accent); padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
-  .header-left { display: flex; align-items: center; gap: 14px; }
-  .header-left .logo { width: 48px; height: 48px; border-radius: 50%; border: 1px solid var(--accent); object-fit: cover; }
-  .header-left h1 { font-size: 16px; letter-spacing: 2px; color: var(--accent); }
-  .header-left .subtitle { font-size: 11px; color: var(--dim); letter-spacing: 1px; margin-top: 2px; }
-  .header-right { display: flex; align-items: center; gap: 12px; }
-  .topic-select { background: var(--surface2); border: 1px solid var(--border); color: var(--text); padding: 6px 12px; border-radius: 4px; font-family: inherit; font-size: 12px; cursor: pointer; }
-  .topic-select:hover { border-color: var(--accent); }
+  .header { background: linear-gradient(135deg, #1a1a2e, #16213e); border-bottom: 2px solid var(--accent); padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; position: sticky; top: 0; z-index: 100; }
+  .header-left { display: flex; align-items: center; gap: 10px; }
+  .header-left .logo { width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--accent); object-fit: cover; }
+  .header-left h1 { font-size: 15px; letter-spacing: 2px; color: var(--accent); }
+  .header-left .subtitle { font-size: 10px; color: var(--dim); letter-spacing: 1px; margin-top: 1px; }
+  .header-right { display: flex; align-items: center; gap: 8px; }
+  .btn { background: var(--surface2); border: 1px solid var(--border); color: var(--dim); padding: 6px 12px; border-radius: 4px; cursor: pointer; font-family: inherit; font-size: 11px; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; }
+  .btn:hover { border-color: var(--accent); color: var(--text); }
+  .back-btn { display: none; }
 
-  /* Topic Header */
-  .topic-header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 12px 24px; }
-  .topic-title { font-size: 18px; letter-spacing: 2px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  /* ===== DASHBOARD VIEW ===== */
+  .dashboard-toolbar { padding: 12px 16px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .dashboard-toolbar select, .dashboard-toolbar input {
+    background: var(--surface2); border: 1px solid var(--border); color: var(--text);
+    padding: 8px 12px; border-radius: 4px; font-family: inherit; font-size: 12px;
+    min-height: 40px;
+  }
+  .dashboard-toolbar select:focus, .dashboard-toolbar input:focus { outline: none; border-color: var(--accent); }
+  .dashboard-toolbar input { flex: 1; min-width: 140px; }
+  .dashboard-toolbar input::placeholder { color: #475569; }
+  .dashboard-stats { display: flex; gap: 12px; padding: 0 16px 8px; flex-wrap: wrap; font-size: 11px; color: var(--dim); }
+  .dashboard-stats .stat { display: flex; align-items: center; gap: 4px; }
+  .dashboard-stats .stat-val { color: var(--text); font-weight: bold; }
+
+  /* Topic Card Grid */
+  .topic-grid { display: grid; grid-template-columns: 1fr; gap: 10px; padding: 0 16px 16px; }
+  @media (min-width: 600px) { .topic-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; } }
+  @media (min-width: 1000px) { .topic-grid { grid-template-columns: repeat(3, 1fr); gap: 14px; } }
+  @media (min-width: 1400px) { .topic-grid { grid-template-columns: repeat(4, 1fr); } }
+
+  /* Topic Card */
+  .topic-card { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 14px; cursor: pointer; transition: border-color 0.2s, box-shadow 0.2s; display: flex; flex-direction: column; gap: 8px; min-height: 44px; }
+  .topic-card:hover { border-color: var(--accent); box-shadow: 0 2px 12px rgba(59,130,246,0.08); }
+  .topic-card:active { transform: scale(0.995); }
+  .topic-card.alert-border { border-left: 3px solid var(--red); }
+  .topic-card.elevated-border { border-left: 3px solid var(--amber); }
+  .topic-card.resolved-border { border-left: 3px solid var(--dim); opacity: 0.7; }
+  .card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 6px; }
+  .card-title { font-size: 12px; font-weight: bold; letter-spacing: 0.5px; line-height: 1.3; }
+  .card-badges { display: flex; gap: 4px; flex-shrink: 0; flex-wrap: wrap; }
+  .badge { display: inline-block; padding: 2px 6px; border-radius: 3px; font-size: 9px; font-weight: bold; letter-spacing: 0.5px; white-space: nowrap; }
+  .badge.ALERT { background: var(--red); color: #fff; animation: pulse 1.5s infinite; }
+  .badge.ELEVATED { background: var(--amber); color: #000; }
+  .badge.ROUTINE { background: rgba(59,130,246,0.15); color: var(--accent); }
+  .badge.ACTIVE { background: rgba(34,197,94,0.15); color: var(--green); }
+  .badge.RESOLVED { background: var(--dim); color: #000; }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.6; } }
+
+  .card-question { font-size: 11px; color: var(--dim); font-style: italic; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.4; }
+
+  /* Card posterior bar */
+  .card-bar { display: flex; height: 22px; border-radius: 3px; overflow: hidden; }
+  .card-bar div { display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: bold; color: #000; min-width: 0; transition: width 0.4s; }
+  .card-labels { display: flex; gap: 6px; flex-wrap: wrap; font-size: 10px; color: var(--dim); }
+  .card-labels span { display: flex; align-items: center; gap: 3px; }
+  .card-labels .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+  .card-expected { font-size: 12px; color: var(--amber); font-weight: bold; }
+
+  .card-footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 4px; margin-top: auto; }
+  .card-updated { font-size: 10px; color: var(--dim); }
+  .health-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+  .health-dot.HEALTHY { background: var(--green); }
+  .health-dot.DEGRADED { background: var(--amber); }
+  .health-dot.CRITICAL { background: var(--red); box-shadow: 0 0 6px var(--red); }
+  .rt-mini { font-size: 9px; padding: 1px 5px; border-radius: 3px; font-weight: bold; }
+  .rt-mini.SAFE { background: rgba(34,197,94,0.12); color: var(--green); }
+  .rt-mini.ELASTIC { background: rgba(6,182,212,0.12); color: var(--cyan); }
+  .rt-mini.DANGEROUS { background: rgba(245,158,11,0.15); color: var(--amber); }
+  .rt-mini.RUNAWAY { background: rgba(239,68,68,0.15); color: var(--red); }
+
+  /* ===== DETAIL VIEW ===== */
+  .topic-header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 12px 16px; }
+  .topic-title { font-size: 16px; letter-spacing: 1px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
   .topic-question { color: var(--dim); font-size: 12px; margin-top: 4px; font-style: italic; }
-  .topic-meta { color: var(--dim); font-size: 11px; margin-top: 4px; display: flex; gap: 16px; flex-wrap: wrap; }
-  .classification { display: inline-block; padding: 2px 10px; border-radius: 3px; font-weight: bold; font-size: 11px; letter-spacing: 1px; }
+  .topic-meta { color: var(--dim); font-size: 11px; margin-top: 4px; display: flex; gap: 12px; flex-wrap: wrap; }
+  .classification { display: inline-block; padding: 2px 8px; border-radius: 3px; font-weight: bold; font-size: 10px; letter-spacing: 1px; }
   .classification.ROUTINE { background: var(--green); color: #000; }
   .classification.ELEVATED { background: var(--amber); color: #000; }
-  .classification.ALERT { background: var(--red); color: #fff; animation: pulse 1s infinite; }
-  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.6; } }
-  .status-badge { display: inline-block; padding: 1px 8px; border-radius: 3px; font-size: 10px; letter-spacing: 1px; }
+  .classification.ALERT { background: var(--red); color: #fff; animation: pulse 1.5s infinite; }
+  .status-badge { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: 10px; letter-spacing: 1px; }
   .status-badge.ACTIVE { background: var(--green); color: #000; }
   .status-badge.RESOLVED { background: var(--dim); color: #000; }
-  .status-badge.SUSPENDED { background: var(--amber); color: #000; }
 
-  /* Grid */
-  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 16px 24px; max-width: 1400px; margin: 0 auto; }
-  .panel { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 16px; }
-  .panel h2 { font-size: 11px; letter-spacing: 2px; color: var(--accent); margin-bottom: 12px; text-transform: uppercase; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+  .grid { display: grid; grid-template-columns: 1fr; gap: 12px; padding: 12px 16px; max-width: 1400px; margin: 0 auto; }
+  @media (min-width: 800px) { .grid { grid-template-columns: 1fr 1fr; gap: 16px; } }
+  .panel { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 14px; }
+  .panel h2 { font-size: 11px; letter-spacing: 2px; color: var(--accent); margin-bottom: 10px; text-transform: uppercase; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
   .full-width { grid-column: 1 / -1; }
 
   /* Posteriors */
   .posterior-bar { display: flex; height: 32px; border-radius: 4px; overflow: hidden; margin-bottom: 8px; }
   .posterior-bar div { display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: bold; color: #000; transition: width 0.5s; min-width: 0; }
-  .posterior-labels { display: flex; gap: 12px; font-size: 11px; color: var(--dim); margin-bottom: 4px; flex-wrap: wrap; }
+  .posterior-labels { display: flex; gap: 10px; font-size: 11px; color: var(--dim); flex-wrap: wrap; }
   .posterior-labels span { display: flex; align-items: center; gap: 4px; }
   .posterior-labels .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
   .expected { font-size: 16px; color: var(--amber); margin-top: 8px; font-weight: bold; }
-
-  /* Chart */
-  .chart-container { position: relative; height: 200px; margin-top: 12px; }
+  .chart-container { position: relative; height: 180px; margin-top: 12px; }
   canvas { width: 100% !important; height: 100% !important; }
 
   /* Sub-models */
@@ -78,17 +135,18 @@
   .ind-effect { color: var(--dim); font-size: 10px; margin-left: 18px; font-style: italic; }
 
   /* Data Feeds */
-  .feed-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
-  .feed-item { text-align: center; background: var(--surface2); border-radius: 4px; padding: 10px; }
+  .feed-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  @media (min-width: 600px) { .feed-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); } }
+  .feed-item { text-align: center; background: var(--surface2); border-radius: 4px; padding: 8px; }
   .feed-item .label { font-size: 10px; color: var(--dim); letter-spacing: 1px; }
-  .feed-item .value { font-size: 18px; font-weight: bold; margin-top: 4px; }
+  .feed-item .value { font-size: 16px; font-weight: bold; margin-top: 4px; }
   .feed-item .change { font-size: 11px; margin-top: 2px; }
   .up { color: var(--red); } .down { color: var(--green); }
 
   /* Evidence Log */
   .evidence-entry { padding: 6px 0; border-bottom: 1px solid rgba(51,65,85,0.5); font-size: 12px; }
   .evidence-entry:last-child { border: none; }
-  .ev-tag { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: 10px; font-weight: bold; margin-right: 6px; }
+  .ev-tag { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: 10px; font-weight: bold; margin-right: 4px; }
   .tag-EVENT { background: var(--red); color: #fff; }
   .tag-KINETIC { background: var(--red); color: #fff; }
   .tag-DATA { background: var(--cyan); color: #000; }
@@ -96,40 +154,28 @@
   .tag-ECON { background: var(--amber); color: #000; }
   .tag-POLICY { background: var(--green); color: #000; }
   .tag-DIPLO { background: var(--green); color: #000; }
+  .tag-DIPLOMATIC { background: var(--green); color: #000; }
   .tag-RHETORIC { background: var(--purple); color: #fff; }
   .tag-INTEL { background: var(--accent); color: #fff; }
   .tag-POLL { background: #ec4899; color: #fff; }
   .tag-SCIENTIFIC { background: #0ea5e9; color: #fff; }
-  .tag-EXPERIMENTAL { background: #14b8a6; color: #fff; }
-  .tag-TECHNICAL { background: #6366f1; color: #fff; }
   .tag-ANALYSIS { background: #a78bfa; color: #fff; }
-  .tag-CORPORATE { background: #78716c; color: #fff; }
   .tag-POLITICAL { background: #e11d48; color: #fff; }
   .tag-LEGAL { background: #d97706; color: #fff; }
   .tag-REGULATORY { background: #d97706; color: #fff; }
-  .tag-SOCIAL { background: #f472b6; color: #fff; }
-  .tag-EDITORIAL { background: var(--purple); color: #fff; }
   .tag-FORECAST { background: var(--amber); color: #000; }
-  .tag-OSINT { background: var(--accent); color: #fff; }
   .tag-MARKET { background: var(--amber); color: #000; }
-  .tag-ENVIRONMENTAL { background: #22c55e; color: #000; }
-  .tag-DEMOGRAPHIC { background: #94a3b8; color: #000; }
-  .tag-SIGINT { background: #dc2626; color: #fff; }
-  .tag-LEGISLATIVE { background: #d97706; color: #fff; }
-  .tag-JUDICIAL { background: #d97706; color: #fff; }
+  .tag-MILITARY { background: var(--red); color: #fff; }
+  .tag-HUMANITARIAN { background: var(--green); color: #000; }
   .tag-MISC { background: var(--dim); color: #000; }
   .ev-time { color: var(--dim); font-size: 10px; }
   .ev-provenance { color: var(--dim); font-size: 9px; font-style: italic; }
   .ev-impact { display: inline-block; margin-left: 4px; font-size: 9px; padding: 0 4px; border-radius: 2px; }
-  .ev-impact.MAJOR { background: var(--red); color: #fff; }
-  .ev-impact.MODERATE { background: var(--amber); color: #000; }
-  .ev-impact.MINOR { background: var(--surface2); color: var(--dim); }
 
   /* Actor Model */
   .actor-card { background: var(--surface2); border-radius: 4px; padding: 10px; margin-bottom: 8px; }
   .actor-card h3 { font-size: 12px; color: var(--cyan); margin-bottom: 6px; }
   .actor-detail { font-size: 11px; color: var(--dim); padding: 2px 0; }
-  .actor-detail .val { color: var(--text); }
   .actor-bias { display: inline-block; background: rgba(239,68,68,0.15); color: var(--red); padding: 1px 6px; border-radius: 3px; font-size: 10px; margin: 2px 2px 2px 0; }
   .methodology-rule { font-size: 11px; color: var(--dim); padding: 3px 0; border-bottom: 1px solid rgba(51,65,85,0.3); }
 
@@ -143,14 +189,14 @@
   .gov-health.HEALTHY { color: var(--green); }
   .gov-health.DEGRADED { color: var(--amber); }
   .gov-health.CRITICAL { color: var(--red); }
-  .gov-metric { display: flex; justify-content: space-between; padding: 4px 0; font-size: 12px; border-bottom: 1px solid rgba(51,65,85,0.3); }
+  .gov-metric { display: flex; justify-content: space-between; padding: 4px 0; font-size: 12px; border-bottom: 1px solid rgba(51,65,85,0.3); flex-wrap: wrap; gap: 4px; }
   .gov-metric:last-child { border: none; }
   .gov-metric .val { font-weight: bold; }
   .regime-badge { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: 10px; font-weight: bold; }
   .regime-badge.SAFE { background: var(--green); color: #000; }
   .regime-badge.ELASTIC { background: var(--cyan); color: #000; }
   .regime-badge.DANGEROUS { background: var(--amber); color: #000; }
-  .regime-badge.RUNAWAY { background: var(--red); color: #fff; animation: pulse 1s infinite; }
+  .regime-badge.RUNAWAY { background: var(--red); color: #fff; animation: pulse 1.5s infinite; }
   .entropy-bar { height: 8px; background: var(--surface2); border-radius: 4px; overflow: hidden; margin: 4px 0; }
   .entropy-fill { height: 100%; border-radius: 4px; transition: width 0.5s; }
   .gov-issue { font-size: 11px; color: var(--amber); padding: 3px 0; }
@@ -174,145 +220,137 @@
 
   /* Collapsible */
   .collapsible-header { cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-  .collapsible-header::after { content: '\u25BC'; font-size: 10px; color: var(--dim); transition: transform 0.2s; }
+  .collapsible-header::after { content: '\25BC'; font-size: 10px; color: var(--dim); transition: transform 0.2s; }
   .collapsible-header.collapsed::after { transform: rotate(-90deg); }
   .collapsible-body { overflow: hidden; transition: max-height 0.3s; }
   .collapsible-body.collapsed { max-height: 0 !important; }
-
-  /* Controls */
-  .btn { background: var(--surface2); border: 1px solid var(--border); color: var(--dim); padding: 4px 12px; border-radius: 4px; cursor: pointer; font-family: inherit; font-size: 11px; }
-  .btn:hover { border-color: var(--accent); color: var(--text); }
-
-  /* Empty state */
-  .empty-state { text-align: center; padding: 60px 24px; color: var(--dim); }
-  .empty-state h2 { color: var(--accent); font-size: 18px; margin-bottom: 12px; }
 
   /* Activity Ticker */
   .activity-ticker { max-height: 300px; overflow-y: auto; }
   .atick { background: var(--surface2); border-radius: 4px; padding: 8px 10px; margin-bottom: 6px; border-left: 3px solid var(--border); font-size: 11px; }
   .atick.TRIAGE { border-left-color: var(--purple); }
+  .atick.TRIAGE_PIPELINE { border-left-color: var(--purple); }
   .atick.EVIDENCE_LOGGED { border-left-color: var(--amber); }
-  .atick.SOURCE_CALIBRATED { border-left-color: var(--cyan); }
   .atick.POSTERIOR_UPDATE { border-left-color: var(--green); }
   .atick.INDICATOR_FIRED { border-left-color: var(--red); }
-  .atick-type { display: inline-block; padding: 1px 6px; border-radius: 2px; font-size: 9px; font-weight: bold; letter-spacing: 1px; }
-  .atick-type.TRIAGE { background: var(--purple); color: #fff; }
-  .atick-type.EVIDENCE_LOGGED { background: var(--amber); color: #000; }
-  .atick-type.SOURCE_CALIBRATED { background: var(--cyan); color: #000; }
-  .atick-type.POSTERIOR_UPDATE { background: var(--green); color: #000; }
-  .atick-type.INDICATOR_FIRED { background: var(--red); color: #fff; }
+  .atick.SOCIAL_MEDIA_PIPELINE { border-left-color: var(--cyan); }
 
-  /* Responsive */
-  @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } .feed-grid { grid-template-columns: repeat(2, 1fr); } }
+  /* Footer */
+  .footer { text-align: center; padding: 16px; color: var(--dim); font-size: 10px; border-top: 1px solid var(--border); margin-top: 16px; }
+  .footer a { color: var(--accent); }
 </style>
 <script src="/static/canvas-sdk.js"></script>
 </head>
 <body>
 
+<!-- HEADER -->
 <div class="header">
   <div class="header-left">
     <img src="NROLAO.svg" alt="NROL-αΩ" class="logo">
     <div>
-    <h1>NROL-αΩ</h1>
-    <div class="subtitle">NECRO RATIONALIST OPERATIONS LABORATORY</div>
+      <h1>NROL-αΩ</h1>
+      <div class="subtitle">EPISTEMIC OPERATING SYSTEM</div>
     </div>
   </div>
   <div class="header-right">
-    <select class="topic-select" id="topicSelect" onchange="switchTopic(this.value)">
-      <option value="">Select topic...</option>
+    <button class="btn back-btn" id="backBtn" onclick="showDashboard()">← DASHBOARD</button>
+    <a href="mirror.html" class="btn" style="letter-spacing:1px;">MIRROR</a>
+    <button class="btn" onclick="refresh()">↻</button>
+  </div>
+</div>
+
+<!-- ===== DASHBOARD VIEW ===== -->
+<div id="dashboardView">
+  <div class="dashboard-toolbar">
+    <select id="sortSelect" onchange="renderDashboard()">
+      <option value="updated">Recently Updated</option>
+      <option value="alpha">A — Z</option>
+      <option value="health">Health</option>
+      <option value="classification">Classification</option>
+      <option value="entropy">Uncertainty</option>
     </select>
-    <a href="mirror.html" class="btn" style="text-decoration:none;letter-spacing:1px;">MIRROR</a>
-    <button class="btn" onclick="loadTopics()">REFRESH</button>
+    <select id="statusFilter" onchange="renderDashboard()">
+      <option value="active">Active Only</option>
+      <option value="all">All Topics</option>
+      <option value="resolved">Resolved Only</option>
+    </select>
+    <input type="text" id="searchInput" placeholder="Search topics..." oninput="renderDashboard()">
+  </div>
+  <div class="dashboard-stats" id="dashboardStats"></div>
+  <div class="topic-grid" id="topicGrid">
+    <div style="color:var(--dim);padding:24px;text-align:center;">Loading topics...</div>
   </div>
 </div>
 
-<div id="topicHeader" class="topic-header" style="display:none;"></div>
-
-<div id="emptyState" class="empty-state">
-  <h2>NO TOPIC SELECTED</h2>
-  <p>Select a topic from the dropdown above, or create a new topic in topics/</p>
-</div>
-
-<div id="mainGrid" class="grid" style="display:none;">
-  <!-- Posteriors -->
-  <div class="panel">
-    <h2>Posterior Distribution</h2>
-    <div class="posterior-bar" id="posteriorBar"></div>
-    <div class="posterior-labels" id="posteriorLabels"></div>
-    <div class="expected" id="expectedValue"></div>
-    <div class="chart-container"><canvas id="historyChart"></canvas></div>
-  </div>
-
-  <!-- Sub-Models -->
-  <div class="panel" id="subModelsPanel">
-    <h2>Sub-Models / Scenarios</h2>
-    <div id="subModels"></div>
-  </div>
-
-  <!-- Governance / Epistemic Health -->
-  <div class="panel" id="govPanel">
-    <h2>Epistemic Governor</h2>
-    <div id="governance"></div>
-  </div>
-
-  <!-- Calibration / Brier Score (resolved topics only) -->
-  <div class="panel" id="brierPanel" style="display:none;">
-    <h2>Calibration Score (Brier)</h2>
-    <div id="brierContent"></div>
-  </div>
-
-  <!-- VoI Queries -->
-  <div class="panel" id="voiPanel">
-    <h2>Value of Information — Priority Queries</h2>
-    <div id="voiQueries"></div>
-  </div>
-
-  <!-- Indicators -->
-  <div class="panel full-width">
-    <h2>Indicator Status</h2>
-    <div id="indicators"></div>
-  </div>
-
-  <!-- Data Feeds -->
-  <div class="panel" id="feedsPanel">
-    <h2>Data Feeds</h2>
-    <div class="feed-grid" id="dataFeeds"></div>
-  </div>
-
-  <!-- Evidence Log -->
-  <div class="panel" id="evidencePanel">
-    <h2 class="collapsible-header" onclick="toggleCollapse(this)">Evidence Log (Latest 20)</h2>
-    <div class="collapsible-body" id="evidenceLog"></div>
-  </div>
-
-  <!-- Actor Model -->
-  <div class="panel full-width" id="actorPanel">
-    <h2 class="collapsible-header collapsed" onclick="toggleCollapse(this)">Actor Model & Methodology</h2>
-    <div class="collapsible-body collapsed" id="actorModel"></div>
-  </div>
-
-  <!-- Watchpoints -->
-  <div class="panel full-width">
-    <h2>Key Watchpoints</h2>
-    <div id="watchpoints"></div>
-  </div>
-
-  <!-- Activity Ticker -->
-  <div class="panel full-width">
-    <h2>Recent Activity <a href="mirror.html" style="font-size:9px;color:var(--dim);text-decoration:none;letter-spacing:0;text-transform:none;font-weight:normal;float:right;">full feed →</a></h2>
-    <div id="activityTicker" class="activity-ticker">
-      <div style="color:var(--dim);padding:8px;font-size:11px;">No pipeline activity yet.</div>
+<!-- ===== DETAIL VIEW ===== -->
+<div id="detailView" style="display:none;">
+  <div id="topicHeader" class="topic-header"></div>
+  <div id="mainGrid" class="grid">
+    <div class="panel">
+      <h2>Posterior Distribution</h2>
+      <div class="posterior-bar" id="posteriorBar"></div>
+      <div class="posterior-labels" id="posteriorLabels"></div>
+      <div class="expected" id="expectedValue"></div>
+      <div class="chart-container"><canvas id="historyChart"></canvas></div>
+    </div>
+    <div class="panel" id="subModelsPanel">
+      <h2>Sub-Models / Scenarios</h2>
+      <div id="subModels"></div>
+    </div>
+    <div class="panel" id="govPanel">
+      <h2>Epistemic Governor</h2>
+      <div id="governance"></div>
+    </div>
+    <div class="panel" id="brierPanel" style="display:none;">
+      <h2>Calibration Score (Brier)</h2>
+      <div id="brierContent"></div>
+    </div>
+    <div class="panel" id="voiPanel" style="display:none;">
+      <h2>Value of Information</h2>
+      <div id="voiQueries"></div>
+    </div>
+    <div class="panel full-width">
+      <h2>Indicator Status</h2>
+      <div id="indicators"></div>
+    </div>
+    <div class="panel" id="feedsPanel">
+      <h2>Data Feeds</h2>
+      <div class="feed-grid" id="dataFeeds"></div>
+    </div>
+    <div class="panel" id="evidencePanel">
+      <h2 class="collapsible-header" onclick="toggleCollapse(this)">Evidence Log (Latest 20)</h2>
+      <div class="collapsible-body" id="evidenceLog"></div>
+    </div>
+    <div class="panel full-width" id="actorPanel">
+      <h2 class="collapsible-header collapsed" onclick="toggleCollapse(this)">Actor Model & Methodology</h2>
+      <div class="collapsible-body collapsed" id="actorModel"></div>
+    </div>
+    <div class="panel full-width">
+      <h2>Key Watchpoints</h2>
+      <div id="watchpoints"></div>
+    </div>
+    <div class="panel full-width">
+      <h2>Recent Activity <a href="mirror.html" style="font-size:9px;color:var(--dim);text-decoration:none;letter-spacing:0;text-transform:none;font-weight:normal;float:right;">full feed →</a></h2>
+      <div id="activityTicker" class="activity-ticker">
+        <div style="color:var(--dim);padding:8px;font-size:11px;">No pipeline activity yet.</div>
+      </div>
     </div>
   </div>
 </div>
 
-<script>
-let state = null;
-let govData = null;
-let currentSlug = null;
+<div class="footer">
+  NROL-αΩ — Epistemic governance from <a href="https://github.com/unpingable/agent_governor" target="_blank">@unpingable/agent_governor</a>
+  &nbsp;|&nbsp; <em>Current Thing delenda est</em>
+</div>
 
-// --- Topic index: loaded from manifest (auto-generated by engine.save_topic) ---
-// Fallback to inline list if manifest fetch fails (e.g., file:// protocol)
+<script>
+// ========== STATE ==========
+let allTopics = {};       // slug -> topic JSON
+let allGovReports = {};   // slug -> governor report
+let state = null;         // current detail topic
+let currentView = 'dashboard';
+
+// ========== TOPIC INDEX ==========
 const TOPIC_INDEX_FALLBACK = [
   {slug:"calibration-750gev-diphoton",title:"750 GeV Diphoton Excess",classification:"ROUTINE",status:"RESOLVED"},
   {slug:"calibration-fed-rate-2026",title:"Fed Funds Rate by End 2026",classification:"ROUTINE",status:"ACTIVE"},
@@ -321,85 +359,296 @@ const TOPIC_INDEX_FALLBACK = [
   {slug:"calibration-midterms-2026",title:"US Midterms 2026 — House Control",classification:"ROUTINE",status:"ACTIVE"},
   {slug:"calibration-rtsc-replication",title:"Next RTSC Claim Survives Replication",classification:"ROUTINE",status:"ACTIVE"},
   {slug:"calibration-scs-kinetic",title:"South China Sea Kinetic Incident by End 2026",classification:"ROUTINE",status:"ACTIVE"},
-  {slug:"calibration-section122-tariffs",title:"Section 122 Tariffs at 150-Day Expiry (July 2026)",classification:"ROUTINE",status:"ACTIVE"},
+  {slug:"calibration-section122-tariffs",title:"Section 122 Tariffs at 150-Day Expiry",classification:"ROUTINE",status:"ACTIVE"},
   {slug:"calibration-ukraine-ceasefire",title:"Ukraine Formal Ceasefire by End 2026",classification:"ROUTINE",status:"ACTIVE"},
   {slug:"calibration-us-recession-2026",title:"US Recession by Q4 2026",classification:"ROUTINE",status:"ACTIVE"},
-  {slug:"hormuz-closure",title:"Strait of Hormuz Closure Duration",classification:"ROUTINE",status:"ACTIVE"},
+  {slug:"hormuz-closure",title:"Strait of Hormuz Closure Duration",classification:"ALERT",status:"ACTIVE"},
   {slug:"lake-mead-elevation-2027",title:"Lake Mead Elevation End-of-2027",classification:"ROUTINE",status:"ACTIVE"},
   {slug:"colorado-shortage-tier-2028",title:"Colorado River Shortage Tier for 2028",classification:"ROUTINE",status:"ACTIVE"},
 ];
 
-async function fetchTopicIndex() {
+// ========== GOVERNOR PORT (from mirror.html) ==========
+const EVIDENCE_TTL = {
+  EVENT:72, DATA:168, RHETORIC:24, INTEL:72, ANALYSIS:72, EDITORIAL:24,
+  FORECAST:72, POLICY:720, OSINT:72, SIGINT:48, KINETIC:48, FORCE:24,
+  DIPLO:168, ECON:168, MARKET:24, POLITICAL:168, POLL:168, LEGAL:720,
+  REGULATORY:720, JUDICIAL:720, LEGISLATIVE:720, SCIENTIFIC:720,
+  EXPERIMENTAL:168, TECHNICAL:168, CORPORATE:168, DEMOGRAPHIC:720,
+  SOCIAL:168, ENVIRONMENTAL:720, DIPLOMATIC:168, HUMANITARIAN:168,
+  MILITARY:48, CEASEFIRE:168, MARITIME:168, ATTACK:48,
+};
+const FACT_TAGS = new Set(["EVENT","KINETIC","DATA","ECON","FORCE","DIPLO","POLL","SCIENTIFIC","TECHNICAL","LEGAL","REGULATORY","POLITICAL","SOCIAL","ENVIRONMENTAL","OSINT","SIGINT","MARKET","EXPERIMENTAL","CORPORATE","DEMOGRAPHIC","JUDICIAL","MILITARY","DIPLOMATIC","HUMANITARIAN","MARITIME","ATTACK","CEASEFIRE"]);
+const _RT_DEFAULTS = { safe: 0.1, elastic: 0.3, dangerous: 1.0 };
+
+function _parseTime(s) { if (!s) return null; try { const d = new Date(s); return isNaN(d) ? null : d; } catch { return null; } }
+function _hoursSince(s) { const d = _parseTime(s); return d ? (Date.now() - d.getTime()) / 3600000 : 168; }
+
+function computeRt(topic) {
+  const hyps = topic.model.hypotheses, el = topic.evidenceLog || [];
+  const cfg = topic.rtConfig || _RT_DEFAULTS;
+  const decay = Math.log2(1 + _hoursSince(topic.meta?.lastUpdated) / 24);
+  const now = Date.now();
+  let ev24 = 0, ev72 = 0;
+  for (const e of el) { const t = _parseTime(e.time); if (!t) continue; const a = (now - t.getTime()) / 1000; if (a < 86400) ev24++; if (a < 259200) ev72++; }
+  const recency = ev24 * 3 + ev72 + 1;
+  const res = {};
+  for (const [k, h] of Object.entries(hyps)) {
+    const p = h.posterior, ec = p > 0 ? -p * Math.log2(p) : 0, rt = ec * decay / recency;
+    res[k] = { rt: +rt.toFixed(4), regime: rt < (cfg.safe||0.1) ? 'SAFE' : rt < (cfg.elastic||0.3) ? 'ELASTIC' : rt < (cfg.dangerous||1) ? 'DANGEROUS' : 'RUNAWAY' };
+  }
+  return res;
+}
+function computeTopicRt(topic) {
+  const hRt = computeRt(topic);
+  const entries = Object.entries(hRt);
+  if (!entries.length) return { rt: 0, regime: 'SAFE' };
+  const worst = entries.reduce((a, b) => b[1].rt > a[1].rt ? b : a);
+  return { rt: worst[1].rt, regime: worst[1].regime, perHypothesis: hRt };
+}
+function computeEntropy(topic) {
+  let e = 0; for (const h of Object.values(topic.model.hypotheses)) { const p = h.posterior; if (p > 0) e -= p * Math.log2(p); }
+  return +e.toFixed(4);
+}
+function computeMaxEntropy(topic) { return +Math.log2(Object.keys(topic.model.hypotheses).length).toFixed(4); }
+function computeUncertaintyRatio(topic) { const m = computeMaxEntropy(topic); return m ? +(computeEntropy(topic)/m).toFixed(4) : 0; }
+
+function auditFreshness(topic) {
+  const now = Date.now(), ev = topic.evidenceLog || [];
+  let fresh = 0, stale = 0;
+  for (const e of ev) {
+    const t = _parseTime(e.time); if (!t) { stale++; continue; }
+    const tag = (e.tags && e.tags[0]) || e.tag || 'EVENT';
+    const ttl = EVIDENCE_TTL[tag] || 72;
+    ((now - t.getTime()) / 3600000 <= ttl) ? fresh++ : stale++;
+  }
+  return { fresh, stale, total: ev.length };
+}
+
+function governanceReport(topic) {
+  const rt = computeTopicRt(topic);
+  const freshness = auditFreshness(topic);
+  const entropy = computeEntropy(topic);
+  const maxEntropy = computeMaxEntropy(topic);
+  const ur = computeUncertaintyRatio(topic);
+  const issues = [];
+  if (rt.regime === 'DANGEROUS' || rt.regime === 'RUNAWAY') issues.push(`R_t ${rt.regime}`);
+  if (freshness.stale > freshness.fresh && freshness.total > 0) issues.push('Majority evidence stale');
+  if (ur > 0.95) issues.push('Near-maximum uncertainty');
+  const health = issues.length === 0 ? 'HEALTHY' : issues.length <= 2 ? 'DEGRADED' : 'CRITICAL';
+  return { health, issues, rt, entropy, maxEntropy, uncertaintyRatio: ur, evidenceFreshness: freshness };
+}
+
+// ========== DATA LOADING ==========
+async function fetchTopicSlugs() {
   try {
     const res = await fetch('topics/manifest.json?' + Date.now());
-    if (!res.ok) throw new Error('manifest fetch failed');
-    const manifest = await res.json();
-    return manifest.topics || TOPIC_INDEX_FALLBACK;
-  } catch (e) {
-    console.warn('Manifest not found, using fallback topic index:', e.message);
-    return TOPIC_INDEX_FALLBACK;
-  }
+    if (!res.ok) throw new Error();
+    const m = await res.json();
+    return (m.topics || []).map(t => t.slug);
+  } catch { return TOPIC_INDEX_FALLBACK.map(t => t.slug); }
 }
 
-// --- Topic loading ---
-async function loadTopics() {
-  try {
-    const topics = await fetchTopicIndex();
-    const sel = document.getElementById('topicSelect');
-    const current = sel.value;
-    sel.innerHTML = '<option value="">Select topic...</option>';
-    for (const t of topics) {
-      const opt = document.createElement('option');
-      opt.value = t.slug;
-      opt.textContent = `${t.classification === 'ALERT' ? '!' : t.classification === 'ELEVATED' ? '*' : ' '} ${t.title}`;
-      if (t.slug === current) opt.selected = true;
-      sel.appendChild(opt);
+async function loadAllTopicData() {
+  const slugs = await fetchTopicSlugs();
+  const results = await Promise.allSettled(
+    slugs.map(s => fetch(`topics/${s}.json?` + Date.now()).then(r => r.json()).then(d => ({ slug: s, data: d })))
+  );
+  allTopics = {};
+  allGovReports = {};
+  for (const r of results) {
+    if (r.status === 'fulfilled') {
+      const { slug, data } = r.value;
+      allTopics[slug] = data;
+      try { allGovReports[slug] = governanceReport(data); } catch(e) { console.warn('Gov failed for', slug, e); }
     }
-    // Auto-select if only one topic or restore previous
-    if (topics.length === 1 && !current) {
-      sel.value = topics[0].slug;
-      switchTopic(topics[0].slug);
-    } else if (current) {
-      switchTopic(current);
-    }
-  } catch(e) {
-    console.error('Failed to load topics:', e);
   }
+  renderDashboard();
 }
 
-async function switchTopic(slug) {
-  if (!slug) {
-    state = null;
-    currentSlug = null;
-    document.getElementById('emptyState').style.display = '';
-    document.getElementById('mainGrid').style.display = 'none';
-    document.getElementById('topicHeader').style.display = 'none';
+// ========== UTILITIES ==========
+function generatePalette(n) {
+  const base = ['#22c55e','#06b6d4','#f59e0b','#ef4444','#8b5cf6','#ec4899','#14b8a6','#f97316'];
+  if (n <= base.length) return base.slice(0, n);
+  const out = [...base];
+  for (let i = base.length; i < n; i++) out.push(`hsl(${(i*137.5)%360},70%,55%)`);
+  return out;
+}
+function toggleCollapse(el) { const b = el.nextElementSibling; el.classList.toggle('collapsed'); b.classList.toggle('collapsed'); }
+function relativeTime(iso) {
+  const d = _parseTime(iso); if (!d) return '';
+  const h = (Date.now() - d.getTime()) / 3600000;
+  if (h < 1) return Math.round(h * 60) + 'm ago';
+  if (h < 24) return Math.round(h) + 'h ago';
+  if (h < 168) return Math.round(h / 24) + 'd ago';
+  return d.toISOString().substring(0, 10);
+}
+
+// ========== DASHBOARD ==========
+function renderDashboard() {
+  const sort = document.getElementById('sortSelect').value;
+  const statusFilter = document.getElementById('statusFilter').value;
+  const search = document.getElementById('searchInput').value.toLowerCase();
+  const grid = document.getElementById('topicGrid');
+
+  let topics = Object.entries(allTopics).map(([slug, d]) => {
+    const gov = allGovReports[slug] || {};
+    return { slug, data: d, gov };
+  });
+
+  // Filter by status
+  if (statusFilter === 'active') topics = topics.filter(t => t.data.meta.status === 'ACTIVE');
+  else if (statusFilter === 'resolved') topics = topics.filter(t => t.data.meta.status === 'RESOLVED');
+
+  // Filter by search
+  if (search) {
+    topics = topics.filter(t => {
+      const m = t.data.meta;
+      return (m.title||'').toLowerCase().includes(search) ||
+             (m.question||'').toLowerCase().includes(search) ||
+             (m.slug||'').toLowerCase().includes(search);
+    });
+  }
+
+  // Sort
+  const healthOrder = { CRITICAL: 0, DEGRADED: 1, HEALTHY: 2 };
+  const classOrder = { ALERT: 0, ELEVATED: 1, ROUTINE: 2 };
+  switch (sort) {
+    case 'updated':
+      topics.sort((a, b) => (b.data.meta.lastUpdated || '').localeCompare(a.data.meta.lastUpdated || ''));
+      break;
+    case 'alpha':
+      topics.sort((a, b) => (a.data.meta.title || '').localeCompare(b.data.meta.title || ''));
+      break;
+    case 'health':
+      topics.sort((a, b) => (healthOrder[a.gov.health] ?? 2) - (healthOrder[b.gov.health] ?? 2));
+      break;
+    case 'classification':
+      topics.sort((a, b) => (classOrder[a.data.meta.classification] ?? 2) - (classOrder[b.data.meta.classification] ?? 2));
+      break;
+    case 'entropy':
+      topics.sort((a, b) => (b.gov.uncertaintyRatio ?? 0) - (a.gov.uncertaintyRatio ?? 0));
+      break;
+  }
+
+  // Stats
+  const active = Object.values(allTopics).filter(d => d.meta.status === 'ACTIVE').length;
+  const resolved = Object.values(allTopics).filter(d => d.meta.status === 'RESOLVED').length;
+  const alerts = Object.values(allTopics).filter(d => d.meta.classification === 'ALERT').length;
+  document.getElementById('dashboardStats').innerHTML =
+    `<div class="stat"><span class="stat-val">${active}</span> active</div>` +
+    `<div class="stat"><span class="stat-val">${resolved}</span> resolved</div>` +
+    (alerts ? `<div class="stat"><span class="stat-val" style="color:var(--red)">${alerts}</span> alert</div>` : '') +
+    `<div class="stat"><span class="stat-val">${topics.length}</span> shown</div>`;
+
+  // Render cards
+  if (!topics.length) {
+    grid.innerHTML = '<div style="color:var(--dim);padding:24px;text-align:center;">No topics match filters.</div>';
     return;
   }
-  currentSlug = slug;
-  try {
-    const res = await fetch(`topics/${slug}.json?` + Date.now());
-    state = await res.json();
-    document.getElementById('emptyState').style.display = 'none';
-    document.getElementById('mainGrid').style.display = '';
-    document.getElementById('topicHeader').style.display = '';
-    render();
-    // Load governance data
-    try {
-      // Governance data not available in standalone mode
-      govData = null;
-    } catch(e) { console.warn('Governance endpoint not available:', e); }
-  } catch(e) {
-    console.error('Failed to load topic:', e);
-  }
+
+  grid.innerHTML = topics.map(t => renderTopicCard(t)).join('');
 }
 
-// --- Render ---
+function renderTopicCard({ slug, data, gov }) {
+  const m = data.meta;
+  const hyps = data.model.hypotheses;
+  const hKeys = Object.keys(hyps);
+  const palette = generatePalette(hKeys.length);
+
+  // Border class
+  let borderClass = '';
+  if (m.status === 'RESOLVED') borderClass = 'resolved-border';
+  else if (m.classification === 'ALERT') borderClass = 'alert-border';
+  else if (m.classification === 'ELEVATED') borderClass = 'elevated-border';
+
+  // Posterior bar
+  const barHtml = hKeys.map((k, i) => {
+    const pct = (hyps[k].posterior * 100).toFixed(0);
+    return `<div style="width:${pct}%;background:${palette[i]}">${pct > 6 ? pct+'%' : ''}</div>`;
+  }).join('');
+
+  // Labels
+  const labelsHtml = hKeys.map((k, i) => {
+    const pct = (hyps[k].posterior * 100).toFixed(0);
+    const lbl = (hyps[k].label || k).length > 20 ? (hyps[k].label || k).substring(0, 18) + '..' : (hyps[k].label || k);
+    return `<span><span class="dot" style="background:${palette[i]}"></span>${k}: ${pct}%</span>`;
+  }).join('');
+
+  // Expected value
+  const ev = data.model.expectedValue;
+  const eu = data.model.expectedUnit || '';
+  const evHtml = (ev != null) ? `<div class="card-expected">E[${eu}] = ${ev}</div>` : '';
+
+  // Governance badges
+  const health = gov.health || 'HEALTHY';
+  const rt = gov.rt || {};
+  const regime = rt.regime || 'SAFE';
+
+  return `
+    <div class="topic-card ${borderClass}" onclick="showDetail('${slug}')">
+      <div class="card-header">
+        <div class="card-title">${m.title}</div>
+        <div class="card-badges">
+          <span class="badge ${m.classification}">${m.classification}</span>
+          <span class="badge ${m.status}">${m.status}</span>
+        </div>
+      </div>
+      <div class="card-question">${m.question || ''}</div>
+      <div class="card-bar">${barHtml}</div>
+      <div class="card-labels">${labelsHtml}</div>
+      ${evHtml}
+      <div class="card-footer">
+        <div style="display:flex;align-items:center;gap:6px;">
+          <span class="health-dot ${health}" title="${health}"></span>
+          <span class="rt-mini ${regime}">${regime}</span>
+        </div>
+        <div class="card-updated">${relativeTime(m.lastUpdated)}</div>
+      </div>
+    </div>
+  `;
+}
+
+// ========== VIEW SWITCHING ==========
+function showDashboard() {
+  currentView = 'dashboard';
+  document.getElementById('dashboardView').style.display = '';
+  document.getElementById('detailView').style.display = 'none';
+  document.getElementById('backBtn').style.display = 'none';
+  history.pushState(null, '', window.location.pathname);
+  renderDashboard();
+}
+
+function showDetail(slug) {
+  if (!allTopics[slug]) return;
+  currentView = slug;
+  state = allTopics[slug];
+  document.getElementById('dashboardView').style.display = 'none';
+  document.getElementById('detailView').style.display = '';
+  document.getElementById('backBtn').style.display = '';
+  history.pushState(null, '', '#' + slug);
+  render();
+  loadActivityTicker();
+  window.scrollTo(0, 0);
+}
+
+window.addEventListener('popstate', () => {
+  const hash = window.location.hash.slice(1);
+  if (hash && allTopics[hash]) showDetail(hash);
+  else showDashboard();
+});
+
+function refresh() {
+  if (currentView === 'dashboard') loadAllTopicData();
+  else if (allTopics[currentView]) { loadAllTopicData().then(() => { if (allTopics[currentView]) { state = allTopics[currentView]; render(); } }); }
+}
+
+// ========== DETAIL VIEW RENDERERS ==========
 function render() {
   if (!state) return;
   renderTopicHeader();
   renderPosteriors();
   renderSubModels();
+  renderGovernanceDetail();
   renderIndicators();
   renderDataFeeds();
   renderEvidenceLog();
@@ -411,8 +660,7 @@ function render() {
 
 function renderTopicHeader() {
   const m = state.meta;
-  const el = document.getElementById('topicHeader');
-  el.innerHTML = `
+  document.getElementById('topicHeader').innerHTML = `
     <div class="topic-title">
       <span>${m.title}</span>
       <span class="classification ${m.classification}">${m.classification}</span>
@@ -431,111 +679,95 @@ function renderPosteriors() {
   const h = state.model.hypotheses;
   const bar = document.getElementById('posteriorBar');
   const labels = document.getElementById('posteriorLabels');
-  bar.innerHTML = '';
-  labels.innerHTML = '';
-
+  bar.innerHTML = ''; labels.innerHTML = '';
   const hKeys = Object.keys(h);
   const palette = generatePalette(hKeys.length);
-
   hKeys.forEach((k, i) => {
     const pct = (h[k].posterior * 100).toFixed(0);
-    const color = palette[i];
-    bar.innerHTML += `<div style="width:${pct}%;background:${color}">${pct > 4 ? pct + '%' : ''}</div>`;
-    labels.innerHTML += `<span><span class="dot" style="background:${color}"></span>${k}: ${h[k].label} (${pct}%)</span>`;
+    bar.innerHTML += `<div style="width:${pct}%;background:${palette[i]}">${pct > 4 ? pct+'%' : ''}</div>`;
+    labels.innerHTML += `<span><span class="dot" style="background:${palette[i]}"></span>${k}: ${h[k].label} (${pct}%)</span>`;
   });
-
   const ev = state.model.expectedValue;
   const eu = state.model.expectedUnit || '';
-  document.getElementById('expectedValue').textContent = `E[${eu}] = ${ev}`;
+  document.getElementById('expectedValue').textContent = ev != null ? `E[${eu}] = ${ev}` : '';
 }
 
 function renderSubModels() {
   const el = document.getElementById('subModels');
   const panel = document.getElementById('subModelsPanel');
   const subs = state.subModels;
-
-  if (!subs || Object.keys(subs).length === 0) {
-    panel.style.display = 'none';
-    return;
-  }
+  if (!subs || Object.keys(subs).length === 0) { panel.style.display = 'none'; return; }
   panel.style.display = '';
   el.innerHTML = '';
-
   for (const [smKey, sm] of Object.entries(subs)) {
     let html = `<div class="submodel-section"><h3>${smKey}</h3>`;
     if (sm.scenarios) {
       for (const [sk, sv] of Object.entries(sm.scenarios)) {
         const pct = (sv.prob * 100).toFixed(0);
-        const high = sv.prob >= 0.4 ? ' high' : '';
-        html += `<div class="scenario-row"><span class="scenario-label">${sv.label || sk}</span><span class="scenario-prob${high}">${pct}%</span></div>`;
+        html += `<div class="scenario-row"><span class="scenario-label">${sv.label || sk}</span><span class="scenario-prob${sv.prob >= 0.4 ? ' high' : ''}">${pct}%</span></div>`;
       }
     }
     if (sm.deadline) {
-      const dl = new Date(sm.deadline);
-      const now = new Date();
-      const diff = dl - now;
-      let cdText = 'EXPIRED';
-      if (diff > 0) {
-        const hrs = Math.floor(diff / 3600000);
-        const mins = Math.floor((diff % 3600000) / 60000);
-        cdText = `${hrs}h ${mins}m remaining`;
-      }
+      const diff = new Date(sm.deadline) - new Date();
+      let cd = 'EXPIRED';
+      if (diff > 0) { cd = Math.floor(diff/3600000)+'h '+Math.floor((diff%3600000)/60000)+'m remaining'; }
       html += `<div style="margin-top:8px;padding:8px;background:rgba(239,68,68,0.1);border:1px solid var(--red);border-radius:4px;">
         <div style="color:var(--red);font-weight:bold;font-size:11px;">DEADLINE: ${sm.deadline}</div>
-        <div style="color:var(--red);font-size:20px;font-weight:bold;margin:4px 0;">${cdText}</div>
+        <div style="color:var(--red);font-size:20px;font-weight:bold;margin:4px 0;">${cd}</div>
         ${sm.status ? `<div style="color:var(--dim);font-size:11px;">Status: ${sm.status}</div>` : ''}
       </div>`;
     }
-    // Conditionals (e.g. khargConditionalHormuz)
     if (sm.conditionals) {
       for (const [ck, cv] of Object.entries(sm.conditionals)) {
-        html += `<div style="margin-top:8px;padding:8px;background:var(--surface2);border-radius:4px;">
-          <div style="color:var(--cyan);font-size:10px;letter-spacing:1px;margin-bottom:4px;">CONDITIONAL: ${ck}</div>`;
-        const condKeys = Object.keys(cv).filter(k => k.startsWith('H'));
-        if (condKeys.length) {
-          html += '<div style="display:flex;gap:8px;flex-wrap:wrap;">';
-          for (const hk of condKeys) {
-            html += `<span style="font-size:11px;color:var(--dim);">${hk}=${(cv[hk]*100).toFixed(0)}%</span>`;
-          }
-          html += '</div>';
-        }
-        if (cv.expectedDurationWeeks) {
-          html += `<div style="color:var(--amber);font-size:12px;margin-top:4px;">E[duration] = ${cv.expectedDurationWeeks} weeks</div>`;
-        }
+        html += `<div style="margin-top:8px;padding:8px;background:var(--surface2);border-radius:4px;"><div style="color:var(--cyan);font-size:10px;letter-spacing:1px;margin-bottom:4px;">CONDITIONAL: ${ck}</div>`;
+        const cKeys = Object.keys(cv).filter(k => k.startsWith('H'));
+        if (cKeys.length) { html += '<div style="display:flex;gap:8px;flex-wrap:wrap;">'; for (const hk of cKeys) html += `<span style="font-size:11px;color:var(--dim);">${hk}=${(cv[hk]*100).toFixed(0)}%</span>`; html += '</div>'; }
+        if (cv.expectedDurationWeeks) html += `<div style="color:var(--amber);font-size:12px;margin-top:4px;">E[duration] = ${cv.expectedDurationWeeks} weeks</div>`;
         html += '</div>';
       }
     }
-    // Timeline data (e.g. khargTimeline)
     if (sm.assaultWindow || sm.boxerETA || sm.overlapWindow) {
-      html += `<div style="margin-top:8px;padding:8px;background:rgba(239,68,68,0.05);border:1px solid var(--border);border-radius:4px;">
-        <div style="color:var(--red);font-size:10px;letter-spacing:1px;margin-bottom:4px;">OPERATIONAL TIMELINE</div>`;
+      html += `<div style="margin-top:8px;padding:8px;background:rgba(239,68,68,0.05);border:1px solid var(--border);border-radius:4px;"><div style="color:var(--red);font-size:10px;letter-spacing:1px;margin-bottom:4px;">OPERATIONAL TIMELINE</div>`;
       if (sm.assaultWindow) html += `<div style="font-size:11px;margin:2px 0;"><span style="color:var(--dim);">Assault window:</span> <span style="color:var(--red);font-weight:bold;">${sm.assaultWindow}</span></div>`;
       if (sm.boxerETA) html += `<div style="font-size:11px;margin:2px 0;"><span style="color:var(--dim);">Boxer ARG ETA:</span> ${sm.boxerETA}</div>`;
       if (sm.overlapWindow) html += `<div style="font-size:11px;margin:2px 0;"><span style="color:var(--dim);">Overlap window:</span> ${sm.overlapWindow}</div>`;
       html += '</div>';
     }
-    // Note field
-    if (sm.note) {
-      html += `<div style="margin-top:8px;padding:8px;background:var(--surface2);border-left:3px solid var(--accent);border-radius:0 4px 4px 0;font-size:11px;color:var(--dim);line-height:1.5;">${sm.note}</div>`;
-    }
+    if (sm.note) html += `<div style="margin-top:8px;padding:8px;background:var(--surface2);border-left:3px solid var(--accent);border-radius:0 4px 4px 0;font-size:11px;color:var(--dim);line-height:1.5;">${sm.note}</div>`;
     html += '</div>';
     el.innerHTML += html;
   }
 }
 
+function renderGovernanceDetail() {
+  const el = document.getElementById('governance');
+  const panel = document.getElementById('govPanel');
+  panel.style.display = '';
+  const gov = allGovReports[state.meta.slug] || governanceReport(state);
+  const uncPct = Math.round((gov.uncertaintyRatio || 0) * 100);
+  const eColor = uncPct > 80 ? 'var(--amber)' : uncPct < 30 ? 'var(--green)' : 'var(--cyan)';
+  const rt = gov.rt || {};
+
+  let html = `<div class="gov-health ${gov.health}">${gov.health}</div>`;
+  html += `<div class="gov-metric"><span>R_t (staleness)</span><span class="val">${rt.rt?.toFixed(3)||'?'} <span class="regime-badge ${rt.regime||''}">${rt.regime||'?'}</span></span></div>`;
+  html += `<div class="gov-metric"><span>Uncertainty</span><span class="val">${uncPct}%</span></div>`;
+  html += `<div class="entropy-bar"><div class="entropy-fill" style="width:${uncPct}%;background:${eColor}"></div></div>`;
+  html += `<div class="gov-metric"><span>Entropy</span><span class="val" style="color:var(--dim)">${gov.entropy?.toFixed(3)||'?'} / ${gov.maxEntropy?.toFixed(3)||'?'} bits</span></div>`;
+  const f = gov.evidenceFreshness || {};
+  html += `<div class="gov-metric"><span>Evidence</span><span class="val"><span style="color:var(--green)">${f.fresh||0} fresh</span> / <span style="color:${f.stale>0?'var(--amber)':'var(--dim)'}">${f.stale||0} stale</span> / ${f.total||0}</span></div>`;
+  if (gov.issues && gov.issues.length) {
+    html += '<div style="margin-top:8px;font-size:10px;color:var(--amber);letter-spacing:1px;">ISSUES</div>';
+    for (const iss of gov.issues) html += `<div class="gov-issue">! ${iss}</div>`;
+  }
+  el.innerHTML = html;
+}
+
 function renderIndicators() {
   const el = document.getElementById('indicators');
   el.innerHTML = '';
-  const tierLabels = {
-    tier1_critical: 'TIER 1 — CRITICAL',
-    tier2_strong: 'TIER 2 — STRONG SIGNAL',
-    tier3_suggestive: 'TIER 3 — SUGGESTIVE',
-    anti_indicators: 'ANTI-INDICATORS'
-  };
-
+  const tierLabels = { tier1_critical:'TIER 1 — CRITICAL', tier2_strong:'TIER 2 — STRONG SIGNAL', tier3_suggestive:'TIER 3 — SUGGESTIVE', anti_indicators:'ANTI-INDICATORS' };
   for (const [tierKey, indicators] of Object.entries(state.indicators.tiers)) {
-    const label = tierLabels[tierKey] || tierKey.toUpperCase().replace(/_/g, ' ');
-    el.innerHTML += `<div class="ind-tier">${label}</div>`;
+    el.innerHTML += `<div class="ind-tier">${tierLabels[tierKey] || tierKey.toUpperCase().replace(/_/g,' ')}</div>`;
     for (const ind of indicators) {
       let html = `<div class="indicator"><span class="ind-status ${ind.status}"></span><span>${ind.desc}</span></div>`;
       if (ind.note) html += `<div class="ind-note">${ind.note}</div>`;
@@ -549,62 +781,36 @@ function renderDataFeeds() {
   const feeds = state.dataFeeds;
   const panel = document.getElementById('feedsPanel');
   const el = document.getElementById('dataFeeds');
-
-  if (!feeds || Object.keys(feeds).length === 0) {
-    panel.style.display = 'none';
-    return;
-  }
+  if (!feeds || Object.keys(feeds).length === 0) { panel.style.display = 'none'; return; }
   panel.style.display = '';
   el.innerHTML = '';
-
   for (const [fid, feed] of Object.entries(feeds)) {
     let changeHtml = '';
-    if (feed.baseline && feed.value != null) {
-      try {
-        if (feed.baseline !== 0) {
-          const pct = ((feed.value - feed.baseline) / feed.baseline * 100).toFixed(1);
-          const dir = pct > 0 ? '+' : '';
-          const cls = pct > 0 ? 'up' : pct < 0 ? 'down' : '';
-          changeHtml = `<div class="change ${cls}">${dir}${pct}% vs baseline</div>`;
-        }
-      } catch(e) {}
+    if (feed.baseline && feed.value != null && feed.baseline !== 0) {
+      const pct = ((feed.value - feed.baseline) / feed.baseline * 100).toFixed(1);
+      changeHtml = `<div class="change ${pct > 0 ? 'up' : pct < 0 ? 'down' : ''}">${pct > 0?'+':''}${pct}% vs baseline</div>`;
     }
-    el.innerHTML += `
-      <div class="feed-item">
-        <div class="label">${feed.label}</div>
-        <div class="value">${feed.value}${feed.unit ? ' ' + feed.unit : ''}</div>
-        ${changeHtml}
-      </div>
-    `;
+    el.innerHTML += `<div class="feed-item"><div class="label">${feed.label}</div><div class="value">${feed.value}${feed.unit?' '+feed.unit:''}</div>${changeHtml}</div>`;
   }
 }
 
 function renderEvidenceLog() {
   const el = document.getElementById('evidenceLog');
   const entries = [...(state.evidenceLog || [])].reverse().slice(0, 20);
-  if (entries.length === 0) {
-    el.innerHTML = '<div style="color:var(--dim);padding:8px;">No evidence logged yet.</div>';
-    return;
-  }
+  if (!entries.length) { el.innerHTML = '<div style="color:var(--dim);padding:8px;">No evidence logged yet.</div>'; return; }
   el.innerHTML = entries.map(e => {
-    let impactClass = '';
-    if (e.posteriorImpact && e.posteriorImpact !== 'NONE') {
-      const impactUpper = e.posteriorImpact.toUpperCase ? e.posteriorImpact.toUpperCase() : '';
-      const impactCls = ['MAJOR','MODERATE','MINOR'].includes(impactUpper) ? impactUpper : '';
-      const impactText = typeof e.posteriorImpact === 'string' && e.posteriorImpact.length > 20
-        ? e.posteriorImpact.substring(0, 30) + '...' : e.posteriorImpact;
-      impactClass = `<span class="ev-impact ${impactCls}" style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${impactText}</span>`;
+    const tags = (e.tags || [e.tag]).filter(Boolean);
+    const tagHtml = tags.map(t => `<span class="ev-tag tag-${t}">${t}</span>`).join('');
+    let impactHtml = '';
+    if (e.posteriorImpact && !e.posteriorImpact.startsWith('NONE')) {
+      impactHtml = `<span class="ev-impact" style="background:var(--amber);color:#000;">${(typeof e.posteriorImpact==='string'?e.posteriorImpact:'').substring(0,40)}...</span>`;
     }
-    const prov = e.provenance ? `<span class="ev-provenance">[${e.provenance}]</span>` : '';
-    return `
-      <div class="evidence-entry">
-        <span class="ev-tag tag-${e.tag}">${e.tag}</span>
-        ${impactClass}
-        <span class="ev-time">${e.time}</span> ${prov}
-        <div style="margin-top:2px;">${e.text}</div>
-        ${e.source ? `<div style="color:var(--dim);font-size:10px;">Source: ${e.source}</div>` : ''}
-      </div>
-    `;
+    return `<div class="evidence-entry">
+      ${tagHtml}${impactHtml}
+      <span class="ev-time">${e.time}</span>
+      <div style="margin-top:2px;">${e.text}</div>
+      ${e.source?`<div style="color:var(--dim);font-size:10px;">Source: ${e.source}</div>`:''}
+    </div>`;
   }).join('');
 }
 
@@ -612,343 +818,162 @@ function renderActorModel() {
   const el = document.getElementById('actorModel');
   const panel = document.getElementById('actorPanel');
   const am = state.actorModel;
-
-  if (!am || (!am.actors && !am.methodology)) {
-    panel.style.display = 'none';
-    return;
-  }
+  if (!am || (!am.actors && !am.methodology)) { panel.style.display = 'none'; return; }
   panel.style.display = '';
   let html = '';
-
-  if (am.description) {
-    html += `<div style="color:var(--dim);font-size:12px;margin-bottom:12px;font-style:italic;">${am.description}</div>`;
-  }
-
+  if (am.description) html += `<div style="color:var(--dim);font-size:12px;margin-bottom:12px;font-style:italic;">${am.description}</div>`;
   if (am.actors) {
     for (const [aid, actor] of Object.entries(am.actors)) {
       html += `<div class="actor-card"><h3>${actor.name} — ${actor.role}</h3>`;
-      if (actor.decisionStyle) html += `<div class="actor-detail"><span class="val">${actor.decisionStyle}</span></div>`;
-      if (actor.biases && actor.biases.length) {
-        html += '<div style="margin-top:4px;">' + actor.biases.map(b => `<span class="actor-bias">${b}</span>`).join('') + '</div>';
-      }
-      if (actor.overrides && actor.overrides.length) {
-        html += '<div class="actor-detail" style="margin-top:4px;color:var(--amber);">Overrides: ' + actor.overrides.join('; ') + '</div>';
-      }
+      if (actor.decisionStyle) html += `<div class="actor-detail"><span>${actor.decisionStyle}</span></div>`;
+      if (actor.biases && actor.biases.length) html += '<div style="margin-top:4px;">' + actor.biases.map(b => `<span class="actor-bias">${b}</span>`).join('') + '</div>';
       html += '</div>';
     }
   }
-
-  if (am.methodology && am.methodology.length) {
-    html += '<div style="margin-top:12px;">';
-    for (const rule of am.methodology) {
-      html += `<div class="methodology-rule">${rule}</div>`;
-    }
-    html += '</div>';
-  }
-
+  if (am.methodology && am.methodology.length) { html += '<div style="margin-top:12px;">'; for (const r of am.methodology) html += `<div class="methodology-rule">${r}</div>`; html += '</div>'; }
   el.innerHTML = html;
 }
 
 function renderWatchpoints() {
   const el = document.getElementById('watchpoints');
   const wps = state.watchpoints;
-  if (!wps || wps.length === 0) {
-    el.innerHTML = '<div style="color:var(--dim)">No watchpoints set</div>';
-    return;
-  }
-  el.innerHTML = wps.map(w => {
-    if (typeof w === 'string') {
-      return `<div class="watchpoint">${w}</div>`;
-    }
-    return `
-      <div class="watchpoint">
-        ${w.time ? `<span class="wp-time">${w.time}</span> — ` : ''}<strong>${w.event || w}</strong>
-        ${w.watch ? `<div style="color:var(--dim);margin-left:16px;">${w.watch}</div>` : ''}
-      </div>
-    `;
-  }).join('');
+  if (!wps || !wps.length) { el.innerHTML = '<div style="color:var(--dim)">No watchpoints set</div>'; return; }
+  el.innerHTML = wps.map(w => typeof w === 'string' ? `<div class="watchpoint">${w}</div>` :
+    `<div class="watchpoint">${w.time?`<span class="wp-time">${w.time}</span> — `:''}<strong>${w.event||w}</strong>${w.watch?`<div style="color:var(--dim);margin-left:16px;">${w.watch}</div>`:''}</div>`
+  ).join('');
 }
 
 function renderChart() {
   const canvas = document.getElementById('historyChart');
   const ctx = canvas.getContext('2d');
   const history = state.model.posteriorHistory;
-  if (!history || history.length < 2) {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    return;
-  }
-
+  if (!history || history.length < 2) { ctx.clearRect(0, 0, canvas.width, canvas.height); return; }
   const rect = canvas.parentElement.getBoundingClientRect();
-  canvas.width = rect.width * 2;
-  canvas.height = rect.height * 2;
+  canvas.width = rect.width * 2; canvas.height = rect.height * 2;
   ctx.scale(2, 2);
   const W = rect.width, H = rect.height;
   const pad = { top: 10, right: 30, bottom: 30, left: 35 };
   const cW = W - pad.left - pad.right, cH = H - pad.top - pad.bottom;
-
   ctx.clearRect(0, 0, W, H);
-
-  // Axes
   ctx.strokeStyle = '#334155'; ctx.lineWidth = 1;
-  ctx.beginPath();
-  ctx.moveTo(pad.left, pad.top);
-  ctx.lineTo(pad.left, H - pad.bottom);
-  ctx.lineTo(W - pad.right, H - pad.bottom);
-  ctx.stroke();
-
-  // Y labels
+  ctx.beginPath(); ctx.moveTo(pad.left, pad.top); ctx.lineTo(pad.left, H - pad.bottom); ctx.lineTo(W - pad.right, H - pad.bottom); ctx.stroke();
   ctx.fillStyle = '#94a3b8'; ctx.font = '10px monospace'; ctx.textAlign = 'right';
   for (let i = 0; i <= 4; i++) {
-    const y = pad.top + (cH * (4 - i) / 4);
-    ctx.fillText((i * 25) + '%', pad.left - 4, y + 3);
-    if (i > 0) {
-      ctx.strokeStyle = 'rgba(51,65,85,0.5)';
-      ctx.beginPath(); ctx.moveTo(pad.left, y); ctx.lineTo(W - pad.right, y); ctx.stroke();
-    }
+    const y = pad.top + (cH * (4-i)/4);
+    ctx.fillText((i*25)+'%', pad.left-4, y+3);
+    if (i > 0) { ctx.strokeStyle='rgba(51,65,85,0.5)'; ctx.beginPath(); ctx.moveTo(pad.left,y); ctx.lineTo(W-pad.right,y); ctx.stroke(); }
   }
-
-  // X labels
   ctx.textAlign = 'center';
   const step = Math.max(1, Math.floor(history.length / 6));
   for (let i = 0; i < history.length; i += step) {
-    const x = pad.left + (i / (history.length - 1)) * cW;
-    const label = history[i].date ? history[i].date.slice(5) : i.toString();
-    ctx.fillText(label, x, H - pad.bottom + 14);
+    const x = pad.left + (i/(history.length-1))*cW;
+    ctx.fillText((history[i].date||'').slice(5), x, H-pad.bottom+14);
   }
-
-  // Lines for each hypothesis
   const hKeys = Object.keys(state.model.hypotheses);
   const palette = generatePalette(hKeys.length);
-
-  // Helper: extract hypothesis value from history entry (handles flat or nested format)
-  function getHistVal(entry, key) {
-    if (entry[key] != null) return entry[key];
-    if (entry.posteriors && entry.posteriors[key] != null) return entry.posteriors[key];
-    return 0;
-  }
-
+  function getHistVal(entry, key) { if (entry[key]!=null) return entry[key]; if (entry.posteriors&&entry.posteriors[key]!=null) return entry.posteriors[key]; return 0; }
   hKeys.forEach((k, idx) => {
     ctx.strokeStyle = palette[idx]; ctx.lineWidth = 2; ctx.beginPath();
     for (let i = 0; i < history.length; i++) {
-      const x = pad.left + (i / (history.length - 1)) * cW;
-      const val = getHistVal(history[i], k);
-      const y = pad.top + cH * (1 - val);
-      if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      const x = pad.left+(i/(history.length-1))*cW, y = pad.top+cH*(1-getHistVal(history[i],k));
+      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
     }
     ctx.stroke();
-
-    // Label at end
-    const lastVal = getHistVal(history[history.length - 1], k);
-    const lastY = pad.top + cH * (1 - lastVal);
+    const lastY = pad.top+cH*(1-getHistVal(history[history.length-1],k));
     ctx.fillStyle = palette[idx]; ctx.textAlign = 'left'; ctx.font = 'bold 10px monospace';
-    ctx.fillText(k, W - pad.right + 2, lastY + 3);
+    ctx.fillText(k, W-pad.right+2, lastY+3);
     ctx.fillStyle = '#94a3b8'; ctx.font = '10px monospace';
   });
-}
-
-function renderGovernance() {
-  const el = document.getElementById('governance');
-  const panel = document.getElementById('govPanel');
-  if (!govData) { panel.style.display = 'none'; return; }
-  panel.style.display = '';
-
-  const rt = govData.rt || {};
-  const uncPct = Math.round((govData.uncertainty_ratio || 0) * 100);
-  const entropyColor = uncPct > 80 ? 'var(--amber)' : uncPct < 30 ? 'var(--green)' : 'var(--cyan)';
-
-  let html = `<div class="gov-health ${govData.health}">${govData.health}</div>`;
-
-  // R_t
-  html += `<div class="gov-metric"><span>R_t (staleness risk)</span><span class="val">${rt.rt?.toFixed(3) || '?'} <span class="regime-badge ${rt.regime || ''}">${rt.regime || '?'}</span></span></div>`;
-
-  // Entropy
-  html += `<div class="gov-metric"><span>Uncertainty</span><span class="val">${uncPct}%</span></div>`;
-  html += `<div class="entropy-bar"><div class="entropy-fill" style="width:${uncPct}%;background:${entropyColor}"></div></div>`;
-  html += `<div class="gov-metric"><span>Shannon entropy</span><span class="val" style="color:var(--dim)">${govData.entropy?.toFixed(3) || '?'} / ${govData.max_entropy?.toFixed(3) || '?'} bits</span></div>`;
-
-  // Evidence freshness
-  const fresh = govData.evidence_freshness || {};
-  html += `<div class="gov-metric"><span>Evidence</span><span class="val"><span style="color:var(--green)">${fresh.fresh || 0} fresh</span> / <span style="color:${fresh.stale > 0 ? 'var(--amber)' : 'var(--dim)'}">${fresh.stale || 0} stale</span> / ${fresh.total || 0} total</span></div>`;
-
-  // Hypothesis admissibility
-  const adm = govData.hypothesis_admissibility || {};
-  if (Object.keys(adm).length) {
-    html += '<div style="margin-top:8px;font-size:10px;color:var(--accent);letter-spacing:1px;">HYPOTHESIS ADMISSIBILITY</div>';
-    for (const [k, v] of Object.entries(adm)) {
-      const gradeColor = v.grade === 'ADMISSIBLE' ? 'var(--green)' : v.grade === 'MARGINAL' ? 'var(--amber)' : 'var(--red)';
-      html += `<div class="gov-metric"><span>${k}</span><span class="val" style="color:${gradeColor}">${v.grade} <span style="color:var(--dim);font-size:10px;">${v.passed}/${v.total}</span></span></div>`;
-    }
-  }
-
-  // Issues
-  if (govData.issues && govData.issues.length) {
-    html += '<div style="margin-top:8px;font-size:10px;color:var(--amber);letter-spacing:1px;">ISSUES</div>';
-    for (const issue of govData.issues) {
-      html += `<div class="gov-issue">! ${issue}</div>`;
-    }
-  }
-
-  el.innerHTML = html;
 }
 
 function renderBrierScore() {
   const panel = document.getElementById('brierPanel');
   const el = document.getElementById('brierContent');
   const ps = state.predictionScoring;
-
-  // Only show for resolved topics with Brier data
-  if (!ps || !ps.brierScores || !ps.brierScores.length || state.meta.status !== 'RESOLVED') {
-    panel.style.display = 'none';
-    return;
-  }
+  if (!ps || !ps.brierScores || !ps.brierScores.length || state.meta.status !== 'RESOLVED') { panel.style.display = 'none'; return; }
   panel.style.display = '';
-
   const scores = ps.brierScores;
-  const final = scores[scores.length - 1];
-  const outcome = ps.outcomes && ps.outcomes.length ? ps.outcomes[ps.outcomes.length - 1] : null;
-
-  // Grade the final Brier score
+  const final = scores[scores.length-1];
+  const outcome = ps.outcomes && ps.outcomes.length ? ps.outcomes[ps.outcomes.length-1] : null;
   const bs = final.brier_score;
-  let grade, gradeClass;
-  if (bs <= 0.01) { grade = 'EXCELLENT'; gradeClass = 'excellent'; }
-  else if (bs <= 0.05) { grade = 'GOOD'; gradeClass = 'good'; }
-  else if (bs <= 0.15) { grade = 'FAIR'; gradeClass = 'fair'; }
-  else { grade = 'POOR'; gradeClass = 'poor'; }
-
+  let grade, gc;
+  if (bs <= 0.01) { grade='EXCELLENT'; gc='excellent'; } else if (bs <= 0.05) { grade='GOOD'; gc='good'; } else if (bs <= 0.15) { grade='FAIR'; gc='fair'; } else { grade='POOR'; gc='poor'; }
   let html = '';
-
-  // Outcome banner
-  if (outcome) {
-    html += `<div class="brier-outcome">Resolved: <strong>${outcome.resolved}</strong> — ${outcome.label}</div>`;
-  }
-
-  // Final score
-  html += `<div class="brier-final ${gradeClass}">${bs.toFixed(4)} <span class="brier-grade" style="background:var(--${gradeClass === 'excellent' ? 'green' : gradeClass === 'good' ? 'cyan' : gradeClass === 'fair' ? 'amber' : 'red'});color:#000;">${grade}</span></div>`;
-  html += `<div style="font-size:11px;color:var(--dim);margin-bottom:12px;">Brier score (0 = perfect, 1 = worst). Lower is better.</div>`;
-
-  // Per-hypothesis breakdown
+  if (outcome) html += `<div class="brier-outcome">Resolved: <strong>${outcome.resolved}</strong> — ${outcome.label}</div>`;
+  html += `<div class="brier-final ${gc}">${bs.toFixed(4)} <span class="brier-grade" style="background:var(--${gc==='excellent'?'green':gc==='good'?'cyan':gc==='fair'?'amber':'red'});color:#000;">${grade}</span></div>`;
+  html += `<div style="font-size:11px;color:var(--dim);margin-bottom:12px;">Brier score (0=perfect, 1=worst)</div>`;
   if (final.per_hypothesis) {
     html += '<div class="brier-per-h">';
     for (const [k, v] of Object.entries(final.per_hypothesis)) {
-      const isOutcome = outcome && k === outcome.resolved;
-      html += `<span>${k}: <span class="val" style="${isOutcome ? 'color:var(--green)' : ''}">${v.toFixed(4)}</span></span>`;
+      const isOut = outcome && k === outcome.resolved;
+      html += `<span>${k}: <span class="val" style="${isOut?'color:var(--green)':''}">${v.toFixed(4)}</span></span>`;
     }
     html += '</div>';
   }
-
-  // Trajectory bars
   if (scores.length > 1) {
-    const maxBrier = Math.max(...scores.map(s => s.brier_score));
-    html += '<div style="margin-top:12px;font-size:10px;color:var(--accent);letter-spacing:1px;">BRIER TRAJECTORY</div>';
-    html += '<div class="brier-trajectory">';
-    for (const s of scores) {
-      const pct = maxBrier > 0 ? (s.brier_score / maxBrier) * 100 : 0;
-      const date = s.timestamp.substring(0, 10);
-      html += `<div class="brier-bar" style="height:${Math.max(pct, 3)}%;" title="${date}: ${s.brier_score.toFixed(4)}"><span class="brier-bar-label">${date.substring(5)}</span></div>`;
-    }
+    const mx = Math.max(...scores.map(s => s.brier_score));
+    html += '<div style="margin-top:12px;font-size:10px;color:var(--accent);letter-spacing:1px;">BRIER TRAJECTORY</div><div class="brier-trajectory">';
+    for (const s of scores) { const p = mx > 0 ? (s.brier_score/mx)*100 : 0; html += `<div class="brier-bar" style="height:${Math.max(p,3)}%;" title="${s.timestamp.substring(0,10)}: ${s.brier_score.toFixed(4)}"><span class="brier-bar-label">${s.timestamp.substring(5,10)}</span></div>`; }
     html += '</div>';
-    html += `<div style="font-size:10px;color:var(--dim);margin-top:20px;">Score improved from ${scores[0].brier_score.toFixed(4)} to ${final.brier_score.toFixed(4)} over ${scores.length} snapshots.</div>`;
   }
-
   el.innerHTML = html;
 }
 
-function renderVoI() {
-  const el = document.getElementById('voiQueries');
-  const panel = document.getElementById('voiPanel');
-  if (!govData || !govData.top_queries || !govData.top_queries.length) {
-    panel.style.display = 'none';
-    return;
-  }
-  panel.style.display = '';
-
-  el.innerHTML = govData.top_queries.map(q => `
-    <div class="voi-entry">
-      <span class="voi-score">${q.voi_score.toFixed(1)}</span>
-      ${q.query.substring(0, 70)}
-      <div style="color:var(--dim);font-size:10px;margin-left:30px;">${q.reason}</div>
-    </div>
-  `).join('');
-}
-
-// --- Utilities ---
-function generatePalette(n) {
-  const base = ['#22c55e', '#06b6d4', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899', '#14b8a6', '#f97316'];
-  if (n <= base.length) return base.slice(0, n);
-  // Generate more if needed
-  const out = [...base];
-  for (let i = base.length; i < n; i++) {
-    const hue = (i * 137.5) % 360;
-    out.push(`hsl(${hue}, 70%, 55%)`);
-  }
-  return out;
-}
-
-function toggleCollapse(headerEl) {
-  const body = headerEl.nextElementSibling;
-  headerEl.classList.toggle('collapsed');
-  body.classList.toggle('collapsed');
-}
-
-// --- Activity Ticker ---
+// ========== ACTIVITY TICKER ==========
 async function loadActivityTicker() {
   try {
     const res = await fetch('activity-log.json?' + Date.now());
     const data = await res.json();
     const entries = data.entries || [];
     const el = document.getElementById('activityTicker');
-    if (!entries.length) {
-      el.innerHTML = '<div style="color:var(--dim);padding:8px;font-size:11px;">No pipeline activity yet.</div>';
-      return;
-    }
-    const recent = [...entries].reverse().slice(0, 5);
+    if (!entries.length) { el.innerHTML = '<div style="color:var(--dim);padding:8px;font-size:11px;">No pipeline activity yet.</div>'; return; }
+    const recent = [...entries].reverse().slice(0, 8);
     el.innerHTML = recent.map(e => {
       const time = e.timestamp ? new Date(e.timestamp).toLocaleString([], {month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}) : '';
-      const type = e.type || 'TRIAGE';
-      let detail = e.headline ? e.headline.slice(0, 80) : '';
+      const type = e.type || e.action || 'TRIAGE';
+      let detail = (e.headline || e.summary || '').slice(0, 100);
       if (e.source) detail += ` <span style="color:var(--cyan);">[${e.source}]</span>`;
-      if (e.posteriorDelta && e.posteriorDelta.topic) {
-        const pd = e.posteriorDelta;
-        const shifts = Object.keys(pd.after || {}).map(h => {
-          const d = ((pd.after[h] || 0) - (pd.before?.[h] || 0)) * 100;
-          return d !== 0 ? `${h}:${d > 0 ? '+' : ''}${d.toFixed(0)}pp` : null;
-        }).filter(Boolean).join(' ');
-        if (shifts) detail += ` <span style="color:var(--green);font-size:10px;">${shifts}</span>`;
+      if (e.posteriorDelta || e.posteriorChange) {
+        const pd = e.posteriorDelta || e.posteriorChange;
+        if (pd.after && pd.before) {
+          const shifts = Object.keys(pd.after).map(h => {
+            const d = ((pd.after[h]||0) - (pd.before?.[h]||0)) * 100;
+            return d !== 0 ? `${h}:${d>0?'+':''}${d.toFixed(0)}pp` : null;
+          }).filter(Boolean).join(' ');
+          if (shifts) detail += ` <span style="color:var(--green);font-size:10px;">${shifts}</span>`;
+        }
       }
-      const slugs = (e.topicSlugs || []).join(', ');
+      const topic = e.topicSlugs ? e.topicSlugs.join(', ') : e.topic || '';
       return `<div class="atick ${type}">
-        <span class="atick-type ${type}">${type.replace(/_/g,' ')}</span>
+        <span style="font-size:9px;font-weight:bold;letter-spacing:1px;padding:1px 6px;border-radius:2px;background:var(--surface2);color:var(--dim);">${type.replace(/_/g,' ')}</span>
         <span style="color:var(--dim);font-size:10px;margin-left:6px;">${time}</span>
         <div style="margin-top:2px;">${detail}</div>
-        ${slugs ? `<div style="font-size:9px;color:var(--dim);margin-top:2px;">${slugs}</div>` : ''}
+        ${topic ? `<div style="font-size:9px;color:var(--dim);margin-top:2px;">${topic}</div>` : ''}
       </div>`;
     }).join('');
-  } catch(e) { /* activity log not available yet */ }
+  } catch(e) { /* not available */ }
 }
 
-// --- Init ---
-loadTopics();
-loadActivityTicker();
-// Auto-refresh every 60s
-setInterval(() => { if (currentSlug) switchTopic(currentSlug); }, 60000);
-// Update deadlines every second
-setInterval(() => { if (state && state.subModels) renderSubModels(); }, 1000);
-// Refresh activity ticker every 15s
+// ========== INIT ==========
+async function init() {
+  await loadAllTopicData();
+  // Check URL hash for deep link
+  const hash = window.location.hash.slice(1);
+  if (hash && allTopics[hash]) {
+    showDetail(hash);
+  }
+  loadActivityTicker();
+}
+init();
+// Auto-refresh
+setInterval(() => {
+  if (currentView === 'dashboard') loadAllTopicData();
+  else if (allTopics[currentView]) {
+    loadAllTopicData().then(() => { if (allTopics[currentView]) { state = allTopics[currentView]; render(); } });
+  }
+}, 60000);
+setInterval(() => { if (state && state.subModels && currentView !== 'dashboard') renderSubModels(); }, 1000);
 setInterval(loadActivityTicker, 15000);
-
-// URL hash routing
-if (window.location.hash) {
-  const slug = window.location.hash.slice(1);
-  setTimeout(() => {
-    document.getElementById('topicSelect').value = slug;
-    switchTopic(slug);
-  }, 500);
-}
 </script>
-
-<div style="text-align:center; padding:16px 24px; color:var(--dim); font-size:10px; border-top:1px solid var(--border); margin-top:16px;">
-  NROL-αΩ — Epistemic governance patterns from <a href="https://github.com/unpingable/agent_governor" style="color:var(--accent);" target="_blank">@unpingable/agent_governor</a>
-  &nbsp;|&nbsp; <em>Current Thing delenda est</em>
-</div>
 </body>
 </html>

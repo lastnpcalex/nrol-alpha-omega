@@ -1,0 +1,641 @@
+{
+  "_protocol": "Calibration topic \u2014 prospective. Populated 2026-04-11. Priors justified below in actorModel and indicator notes.",
+
+  "meta": {
+    "slug": "calibration-ukraine-ceasefire",
+    "title": "Ukraine Formal Ceasefire by End 2026",
+    "question": "Will Russia and Ukraine reach a formal ceasefire agreement by December 31, 2026?",
+    "resolution": "A document signed by authorized representatives of both Russia and Ukraine constituting a mutual commitment to halt offensive operations across a defined line of contact \u2014 not a unilateral declaration, not a temporary humanitarian truce (Easter-style), and not a third-party mediated pause without bilateral signature. Frozen-conflict line stabilization without a signed document does NOT resolve H1.",
+    "created": "2026-04-11T00:00:00Z",
+    "lastUpdated": "2026-04-12T00:00:00Z",
+    "status": "ACTIVE",
+    "dayCount": 0,
+    "startDate": "2026-04-11T00:00:00Z",
+    "classification": "ROUTINE",
+    "topicType": "conflict",
+    "horizon": "~37 weeks (deadline: 2026-12-31)",
+    "resolutionDeadline": "2026-12-31T23:59:59Z",
+    "priorJustification": "Base rate: post-WWII hot wars involving a nuclear state and a non-nuclear peer rarely produce formal bilateral agreements within 12 months of talks commencing \u2014 roughly 15-20% historical rate for 'something signed.' April 2026 context depresses H1 (comprehensive deal) further: Russia is demanding Donbas + Zaporizhzhia + Kherson in full, Kyiv refuses to cede occupied territory, Washington is Iran-war-distracted, and the 32-hour Easter truce failed to catalyze broader talks. H3 (limited truces only) is the modal outcome given the Easter precedent. H4 (escalation) is non-trivial because UK/France military hub pledges are a Russian red line and a Russian summer offensive is historically cyclical.",
+    "notes": "Resolution question is about formal agreement only. A de facto frozen line (H2) does NOT count as H1 resolution even if fighting stops."
+  },
+
+  "tagConfig": {
+    "_docs": "directionHints: positive = evidence favors that H, negative = evidence disfavors. Ceasefire-relevant tags layered onto base set.",
+    "availableTags": ["EVENT", "DATA", "RHETORIC", "INTEL", "ANALYSIS", "DIPLOMATIC", "MILITARY", "HUMANITARIAN"],
+    "directionHints": {
+      "DIPLOMATIC": {
+        "H1": 1,
+        "H2": 1,
+        "H3": 0,
+        "H4": -1
+      },
+      "MILITARY": {
+        "H1": -1,
+        "H2": 0,
+        "H3": -1,
+        "H4": 1
+      },
+      "HUMANITARIAN": {
+        "H1": 0,
+        "H2": 0,
+        "H3": 1,
+        "H4": -1
+      },
+      "EVENT": {},
+      "DATA": {},
+      "RHETORIC": {},
+      "INTEL": {},
+      "ANALYSIS": {}
+    },
+    "escalationTags": ["MILITARY"],
+    "deescalationTags": ["DIPLOMATIC", "HUMANITARIAN"]
+  },
+
+  "model": {
+    "hypotheses": {
+      "H1": {
+        "label": "Comprehensive peace deal \u2014 formal signed ceasefire with territorial settlement",
+        "midpoint": 20,
+        "unit": "weeks",
+        "posterior": 0.07,
+        "description": "Both parties sign a document halting offensive operations and specifying a line of contact or broader territorial arrangement. Requires either Russian acceptance of current-control lines or Ukrainian acceptance of Russian territorial gains. Neither condition is met as of April 2026. Historical comp: Minsk II took ~6 months of talks after Debaltseve and still failed. Assigned 7% \u2014 non-zero because US pressure combined with Iran-war distraction could force Kyiv's hand, but Russia's maximalist demands make mutual signature highly unlikely by Dec 31."
+      },
+      "H2": {
+        "label": "Frozen conflict \u2014 fighting stops de facto, no formal agreement",
+        "midpoint": 28,
+        "unit": "weeks",
+        "posterior": 0.22,
+        "description": "Both sides exhaust offensive momentum and fighting drops below threshold of major operations, but no document is signed. Historical comp: Korea (armistice, distinct from peace treaty), Cyprus 1974, Nagorno-Karabakh pre-2020. Assigned 22% \u2014 plausible if US disengagement from European security accelerates and both sides face attrition exhaustion, but Russia still has offensive incentive and Kyiv won't accept a line that legitimizes Russian gains."
+      },
+      "H3": {
+        "label": "Limited truces only \u2014 episodic ceasefires, no lasting agreement",
+        "midpoint": 0,
+        "unit": "weeks",
+        "posterior": 0.47,
+        "description": "The Easter 32-hour pattern continues: holiday or crisis-driven pauses negotiated under US/Turkish/Vatican pressure, none converting to a durable arrangement. This is the modal outcome given the April 2026 baseline. Assigned 47% \u2014 highest prior because it matches current trajectory (Easter ceasefire), the structural impasse (territory), and the distracted mediator environment (Washington). Resolves as H3 if by Dec 31 there has been no sustained halt exceeding ~30 days."
+      },
+      "H4": {
+        "label": "Escalation \u2014 new major Russian offensive or external actor military entry",
+        "midpoint": 0,
+        "unit": "weeks",
+        "posterior": 0.24,
+        "description": "Russia launches a summer/autumn offensive capturing new significant population centers (Kharkiv, Sumy, Odesa approaches), or a NATO-member country formally deploys combat troops to Ukraine triggering Russian escalation response. Assigned 24% \u2014 elevated because: (1) Russia historically uses summer operational windows, (2) UK/France military hub pledges are a declared Russian red line, (3) Washington's Iran distraction reduces deterrence credibility, (4) Russian economy showing strain but Putin faces no domestic accountability constraint."
+      }
+    },
+    "expectedValue": 0.07,
+    "expectedUnit": "P(formal ceasefire signed by Dec 31 2026)",
+    "posteriorHistory": [
+      {
+        "date": "2026-04-11T00:00:00Z",
+        "posteriors": { "H1": 0.07, "H2": 0.22, "H3": 0.47, "H4": 0.24 },
+        "note": "Initial priors \u2014 set prospectively April 11 2026. Easter ceasefire just agreed (April 10, 32 hours). Broader talks stalled. Russia demanding full Donbas. Washington Iran-distracted."
+      }
+    ]
+  },
+
+  "subModels": {
+    "negotiationTrack": {
+      "label": "Active Negotiation Track",
+      "value": "Informal/mediated (Abu Dhabi, Geneva, Paris tracks \u2014 all stalled as of Apr 2026)",
+      "description": "Which diplomatic channel is active? Options: None / Informal back-channel / Mediated (third party) / Formal bilateral / Formal multilateral. Escalation path toward H1 requires progression to Formal bilateral.",
+      "history": []
+    },
+    "territorialImpasse": {
+      "label": "Territorial Demand Gap",
+      "value": "Maximal (Russia: full Donbas+Zaporizhzhia+Kherson; Ukraine: withdrawal to 1991 borders or current-control only)",
+      "description": "Qualitative assessment of distance between declared positions. Scale: Maximal / High / Moderate / Bridgeable / Resolved. Any movement toward Bridgeable is a tier-2 indicator event.",
+      "history": []
+    },
+    "usEngagement": {
+      "label": "US Mediation Engagement Level",
+      "value": "Distracted (Iran war occupies Washington bandwidth)",
+      "description": "How actively is Washington pressing for a Ukraine settlement? Scale: Disengaged / Distracted / Background / Active / Driving. US engagement is historically the strongest predictor of ceasefire timeline compression.",
+      "history": []
+    },
+    "ukraineAidLevel": {
+      "label": "Western Military Aid Continuity",
+      "value": "Continuing (UK/France military hubs pledged; US baseline continues)",
+      "description": "Is Western military aid to Ukraine maintained, reduced, or cut? A sudden aid cut dramatically shifts H2/H3 upward. Unit: qualitative (Maintained / Reduced / Suspended / Cut).",
+      "history": []
+    },
+    "frontlineStability": {
+      "label": "Frontline Movement (30-day rolling)",
+      "value": "Low movement (Easter truce; minor Russian advances Zaporizhzhia sector)",
+      "description": "Qualitative: Static / Low movement (<5km) / Significant advance (5-20km) / Breakthrough (>20km or major city). Major Russian advance shifts H4. Major Ukrainian counter shifts H3/H4.",
+      "history": []
+    }
+  },
+
+  "indicators": {
+    "_design_rules": [
+      "Each indicator must be OBSERVABLE \u2014 actions, not opinions",
+      "Each must have a clear fired/not-fired threshold",
+      "Every hypothesis needs at least one pro AND one anti indicator",
+      "Governor flags unfalsifiable hypotheses as DEGRADED"
+    ],
+    "tiers": {
+      "tier1_critical": [
+        {
+          "id": "t1_bilateral_signing",
+          "desc": "Russia and Ukraine both send authorized signatories to a designated venue and sign a ceasefire or armistice document.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 +60pp (resolves H1 if met); H3 -30pp; H4 -20pp"
+        },
+        {
+          "id": "t1_russia_major_offensive",
+          "desc": "Russia launches a confirmed large-scale offensive (>20km advance or capture of city >50k pop) after April 11 2026.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H4 +25pp; H1 -15pp; H2 -10pp"
+        },
+        {
+          "id": "t1_nato_ground_entry",
+          "desc": "A NATO member state officially deploys uniformed combat troops to Ukrainian territory (not trainers, not hubs \u2014 actual combat units).",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H4 +30pp; H1 -20pp; H2 -15pp"
+        },
+        {
+          "id": "t1_aid_suspension",
+          "desc": "US Congress passes or President signs legislation suspending military aid to Ukraine, OR UK/France formally withdraws military hub commitment.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H2 +20pp; H3 +10pp; H1 -5pp; H4 -5pp"
+        }
+      ],
+      "tier2_strong": [
+        {
+          "id": "t2_sustained_ceasefire_30d",
+          "desc": "Fighting drops below 10 artillery incidents/day along the entire front for 30 consecutive days (OSINT-confirmed).",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H2 +15pp; H1 +5pp; H3 -10pp; H4 -10pp"
+        },
+        {
+          "id": "t2_formal_talks_announced",
+          "desc": "Russia and Ukraine both publicly confirm participation in formal bilateral ceasefire talks (not mediated-only) with a named venue and date.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 +15pp; H2 +5pp; H3 -10pp; H4 -10pp"
+        },
+        {
+          "id": "t2_russia_position_shift",
+          "desc": "Russia publicly drops demand for full Donbas/Zaporizhzhia/Kherson and accepts a line-of-contact-based settlement in official statement (not backchannel).",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 +20pp; H2 +5pp; H4 -15pp"
+        },
+        {
+          "id": "t2_ukraine_territory_concession",
+          "desc": "Zelenskyy publicly accepts a ceasefire on current control lines without insisting on return of occupied territories as precondition.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 +15pp; H2 +10pp; H3 -15pp; H4 -10pp"
+        },
+        {
+          "id": "t2_trump_ukraine_push",
+          "desc": "Trump publicly states Ukraine settlement is a top foreign policy priority and names an envoy with direct Kyiv/Moscow access (not just rhetoric).",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 +10pp; H2 +5pp; H3 -10pp; H4 -5pp"
+        },
+        {
+          "id": "t2_russia_kharkiv_push",
+          "desc": "Russian forces advance within 20km of Kharkiv city center or launch confirmed multi-division assault on Sumy oblast.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H4 +15pp; H1 -10pp; H2 -5pp"
+        }
+      ],
+      "tier3_suggestive": [
+        {
+          "id": "t3_easter_truce_extended",
+          "desc": "The April 10 Easter ceasefire is extended beyond 32 hours by mutual agreement (even if not signed).",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "Monitor: ceasefire was 32h, expired ~April 12. Any extension is signal.",
+          "posteriorEffect": "H2 +5pp; H3 +3pp; H4 -5pp"
+        },
+        {
+          "id": "t3_prisoner_exchange_large",
+          "desc": "A large prisoner exchange (>200 each side) occurs, indicating back-channel coordination above tactical level.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 +3pp; H2 +3pp; H3 +2pp; H4 -8pp"
+        },
+        {
+          "id": "t3_macron_erdogan_joint",
+          "desc": "Macron and Erdogan issue a joint statement proposing a specific ceasefire framework with both Kyiv and Moscow acknowledgment.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 +4pp; H2 +2pp; H4 -6pp"
+        },
+        {
+          "id": "t3_ukraine_mobilization_strain",
+          "desc": "Credible OSINT or official report indicates Ukraine unable to fill mobilization quotas by >30% for two consecutive months.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H2 +5pp; H3 +3pp; H4 +2pp; H1 -5pp"
+        },
+        {
+          "id": "t3_russia_economic_strain",
+          "desc": "CBR emergency rate hike above 22% OR Russia formally requests IMF/BRICS emergency credit, signaling war cost pressure.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 +3pp; H2 +4pp; H4 -5pp"
+        },
+        {
+          "id": "t3_ceasefire_advocacy_zelenskyy",
+          "desc": "Zelenskyy explicitly says Ukraine would accept a temporary ceasefire without precondition of Russian withdrawal (in official address, not off-the-record).",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 +5pp; H2 +3pp; H3 +2pp; H4 -8pp"
+        }
+      ],
+      "anti_indicators": [
+        {
+          "id": "anti_h1_russia_maximalism",
+          "desc": "Russia reaffirms demand for full Donbas/Zaporizhzhia/Kherson/Mykolaiv oblasts in official MFA or Kremlin statement within 60 days.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "This is the background baseline \u2014 fire only if a NEW, emphatic restatement after talks progress.",
+          "posteriorEffect": "H1 -10pp"
+        },
+        {
+          "id": "anti_h1_talks_collapse",
+          "desc": "Any formal or mediated talks (Abu Dhabi, Geneva, Paris) collapse publicly with both sides issuing blame statements.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 -15pp; H3 +5pp; H4 +5pp"
+        },
+        {
+          "id": "anti_h2_new_offensive",
+          "desc": "Russia launches a new offensive that advances significantly (10km+) before any ceasefire talks begin, eliminating frozen-line stability.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H2 -10pp; H4 +10pp"
+        },
+        {
+          "id": "anti_h3_sustained_halt",
+          "desc": "Fighting halts for >14 consecutive days across the entire front (H3 requires episodic truces, not sustained halt).",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H3 -10pp; H2 +8pp; H1 +2pp"
+        },
+        {
+          "id": "anti_h4_russia_defensive",
+          "desc": "Russia publicly announces a shift to 'defensive posture' and halts cross-border shelling for >7 days (verified by OSCE or OSINT).",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H4 -15pp; H2 +8pp; H3 +5pp"
+        }
+      ]
+    }
+  },
+
+  "actorModel": {
+    "description": "Five actors whose decisions are necessary and sufficient to drive outcomes. H1 requires Putin + Zelenskyy both accepting a deal. H4 requires only Putin (or a NATO actor) to escalate. This asymmetry explains why H4 has similar probability to H1 despite being the 'extreme' outcome.",
+    "actors": {
+      "putin": {
+        "name": "Vladimir Putin",
+        "role": "Russian decision authority. Veto over any ceasefire. Can unilaterally trigger H4 escalation.",
+        "decisionStyle": "Strategic-rational with high risk tolerance; escalate-to-negotiate; values regime survival > territorial maximalism > economic costs. Responsive to domestic elite sentiment only when losses are undeniable.",
+        "biases": [
+          "Anchors to 2022 maximalist goals even when circumstances change",
+          "Interprets Western hesitation as weakness warranting further pressure",
+          "Discounts economic pain signals until CBR reserve drawdown becomes critical",
+          "Reads US distraction (Iran war) as structural not temporary"
+        ],
+        "filters": [
+          "Cannot be seen to lose domestically \u2014 any ceasefire must be frameable as Russian victory",
+          "Siloviki and Milblog pressure against territorial concessions",
+          "Ceasefire must not foreclose future claims on remaining Ukrainian oblasts"
+        ],
+        "overrides": [
+          "If CBR reserves fall below $150B and elite defection signals emerge, economic pressure could override maximalism",
+          "If NATO ground troops enter Ukraine, escalation calculus shifts \u2014 could paradoxically accelerate talks to lock in gains before NATO commitment solidifies"
+        ],
+        "currentAssessment": "Cool on talks. Demanded full Donbas oblasts. No domestic pressure to compromise. Benefits from Washington's Iran distraction by running clock. Most likely decision in next 6 months: launch summer offensive to improve negotiating position rather than accept current lines."
+      },
+      "zelenskyy": {
+        "name": "Volodymyr Zelenskyy",
+        "role": "Ukrainian decision authority. Must accept terms Kyiv can ratify domestically. Cannot sign away 1991 territory without political cost.",
+        "decisionStyle": "Crisis-driven, responsive to battlefield reality and Western support signals. More flexible than domestic rhetoric suggests \u2014 has floated territorial compromise in private channels (Welt interview 2025). Survival calculus includes personal legal exposure if seen to concede.",
+        "biases": [
+          "Overweights Western rhetorical commitments vs. revealed preference",
+          "Anchors to 1991 borders as legal baseline even when militarily untenable",
+          "Pressured by military commanders who believe more territory recoverable"
+        ],
+        "filters": [
+          "Ukrainian constitutional ban on ceding territory (requires referendum)",
+          "Domestic political cost of any ceasefire on current lines without NATO membership guarantee",
+          "Must be seen as not betraying soldiers killed in occupied territory"
+        ],
+        "overrides": [
+          "Dramatic aid cut by US could force acceptance of current-line ceasefire",
+          "NATO membership offer (even conditional/future) could unlock territorial compromise",
+          "Military collapse on any major front would override political constraints"
+        ],
+        "currentAssessment": "Pushing ceasefire proposals but insisting on security guarantees. Politically unable to accept current Russian-controlled lines without something substantial in return (NATO track, territory swap, security guarantee). Mobilization strain is real. Most likely: continues lobbying Washington while avoiding formal talks that could lock in losses."
+      },
+      "trump": {
+        "name": "Donald Trump (US President)",
+        "role": "Critical enabler or spoiler. US is the only actor that can coerce both parties simultaneously \u2014 Kyiv via aid, Moscow via sanctions/oil price.",
+        "decisionStyle": "Transactional, deal-focused, impatient with process. Frames Ukraine as a Biden legacy problem. Responsive to domestic political framing ('ending wars') and personal relationship with Putin.",
+        "biases": [
+          "Views Zelenskyy as ungrateful; more sympathetic to Putin's framing",
+          "Iran war consuming political bandwidth \u2014 Ukraine is a secondary distraction",
+          "Wants a 'deal' more than a durable settlement \u2014 susceptible to Potemkin agreements"
+        ],
+        "filters": [
+          "Congressional Republicans split on Ukraine aid \u2014 cannot easily resume large packages",
+          "Iran war political capital consumed elsewhere",
+          "NATO allies (UK/France) providing cover that reduces US pressure to act"
+        ],
+        "overrides": [
+          "If Iran war ends quickly (before summer), Ukraine re-enters as top diplomatic priority",
+          "If Trump decides he wants a signature foreign policy 'win' before 2026 midterms, Ukraine pressure accelerates",
+          "A major Russian offensive making him look weak could force re-engagement"
+        ],
+        "currentAssessment": "Distracted. Not driving Ukraine talks. Envoy Witkoff contacts have stalled. Iran war makes Ukraine a second-tier issue. Probability of decisive US intervention in Ukraine talks before Q3 2026: ~25%. If re-engaged, could compress timeline significantly."
+      },
+      "macron": {
+        "name": "Emmanuel Macron",
+        "role": "EU/European security actor. UK/France military hub pledge is the most significant European action since 2022. Can complicate Russian calculations.",
+        "decisionStyle": "Institutional-strategic, focused on European autonomy narrative. Willing to move ahead of consensus. Uses ambiguity as a tool ('strategic ambiguity' on troop deployment).",
+        "biases": [
+          "Overestimates French diplomatic leverage with Moscow",
+          "Domestic political pressure (2027 election backdrop) incentivizes visible action",
+          "UK-France coordination is new and untested \u2014 may fracture under Russian pressure"
+        ],
+        "filters": [
+          "EU consensus required for major sanctions steps",
+          "German coalition limits collective EU military action",
+          "French military capacity constraints on actual deployment"
+        ],
+        "overrides": [
+          "Russian strike on a French national in Ukraine would force military response",
+          "US disengagement would push Macron to fill vacuum, accelerating hub deployment"
+        ],
+        "currentAssessment": "Hub pledges are the most credible European escalation signal in years. Russian response will determine whether they accelerate talks or trigger H4. Net effect on ceasefire probability: ambiguous \u2014 could deter Russian offensive (H4 down) or harden Russian position against talks (H1 down)."
+      },
+      "erdogan": {
+        "name": "Recep Tayyip Erdogan",
+        "role": "Key mediator. Turkey controls Bosphorus (Montreux) and has credibility with both sides. Hosted 2022 Istanbul talks. Grain deal architect.",
+        "decisionStyle": "Pragmatic-transactional. Values Turkey's unique position between NATO and Russia. Will not push so hard as to lose either relationship. Moves when there is a deal to be brokered \u2014 not a driver, a facilitator.",
+        "biases": [
+          "Overweights his personal relationship with Putin as a moderating force",
+          "Economic relationship with Russia (gas, tourism) creates conflict of interest in tough pressure",
+          "Mediator role requires impartiality, limiting his ability to coerce"
+        ],
+        "filters": [
+          "NATO membership constraints on overt Russia support",
+          "Domestic economic dependence on Russian energy"
+        ],
+        "overrides": [
+          "If both parties request Turkey as venue and guarantor, Erdogan becomes critical",
+          "A new Istanbul-format meeting would be a major H1 signal"
+        ],
+        "currentAssessment": "Available but not driving. Most important role: if formal talks reconvene, Turkey is likely venue and guarantor. A confirmed Istanbul II meeting would be a tier-1 event."
+      }
+    },
+    "methodology": [
+      "ACTIONS OVER RHETORIC \u2014 only verified events move posteriors",
+      "TAG EVERYTHING \u2014 separate rhetoric from action in evidence log",
+      "DON'T FRONT-RUN \u2014 set tripwires and let news confirm",
+      "SOCIALIZATION DETECTION \u2014 recognize narrative prep patterns",
+      "ACTOR FILTERING \u2014 apply each actor's filters before inferring intent from statement",
+      "ASYMMETRY NOTE \u2014 H4 requires only one actor to escalate; H1 requires all five actors to align. This structural asymmetry is priced into priors."
+    ]
+  },
+
+  "dataFeeds": {
+    "negotiation_track": {
+      "label": "Active Negotiation Track",
+      "value": "Stalled",
+      "unit": "qualitative (None/Stalled/Informal/Mediated/Formal)",
+      "baseline": "Stalled",
+      "asOf": "2026-04-11T00:00:00Z"
+    },
+    "ceasefire_duration_longest": {
+      "label": "Longest Unbroken Ceasefire (days)",
+      "value": 1.33,
+      "unit": "days",
+      "baseline": 0,
+      "asOf": "2026-04-11T00:00:00Z",
+      "note": "32-hour Easter truce = 1.33 days. Update whenever a longer continuous halt is observed."
+    },
+    "frontline_change_30d": {
+      "label": "Net Frontline Change (30-day, km)",
+      "value": -2,
+      "unit": "km (positive = Russian advance)",
+      "baseline": 0,
+      "asOf": "2026-04-11T00:00:00Z",
+      "note": "Approximate. Use ISW or Brady Afric OSINT as source."
+    },
+    "ukraine_aid_usd_bn": {
+      "label": "Western Military Aid Committed YTD 2026 ($B)",
+      "value": 0,
+      "unit": "USD billions",
+      "baseline": 0,
+      "asOf": "2026-04-11T00:00:00Z",
+      "note": "Track total committed (not disbursed) across US + UK + EU + France."
+    },
+    "territorial_control_pct": {
+      "label": "Russian-Controlled Ukrainian Territory (%)",
+      "value": 18,
+      "unit": "% of Ukrainian sovereign territory (1991 borders)",
+      "baseline": 18,
+      "asOf": "2026-04-11T00:00:00Z",
+      "note": "Approximate. Crimea + occupied Donbas + current front advances. Update monthly."
+    },
+    "talks_venue_confirmed": {
+      "label": "Formal Talks Venue Confirmed",
+      "value": "None",
+      "unit": "qualitative (None / City, Country)",
+      "baseline": "None",
+      "asOf": "2026-04-11T00:00:00Z"
+    },
+    "war_day": {
+      "label": "War Day (from Feb 24 2022)",
+      "value": 1507,
+      "unit": "days",
+      "baseline": 1,
+      "asOf": "2026-04-11T00:00:00Z",
+      "note": "Feb 24 2022 = Day 1. April 11 2026 = Day 1507."
+    },
+    "russia_cbr_rate": {
+      "label": "Russia CBR Key Rate (%)",
+      "value": 21,
+      "unit": "percent",
+      "baseline": 21,
+      "asOf": "2026-04-11T00:00:00Z",
+      "note": "Proxy for Russian war cost pressure. Emergency hike above 22% = tier-3 indicator."
+    }
+  },
+
+  "watchpoints": [
+    "Whether the April 10 Easter ceasefire holds beyond 32 hours or collapses immediately \u2014 sets tone for Q2 talks",
+    "Russia summer offensive window (May-July): historically when major advances occur. A significant advance before June would shift H4 up sharply.",
+    "UK/France military hub implementation timeline: are these symbolic or operational? Russian response will be a leading indicator.",
+    "Trump re-engagement on Ukraine: any named envoy with executive authority, not Witkoff-level backchannel",
+    "Zelenskyy's domestic position: if Rada support drops below 50%, his negotiating flexibility paradoxically decreases",
+    "Istanbul II: any credible report of Turkey hosting bilateral (not mediated) ceasefire talks is a tier-1 precursor event",
+    "CBR rate and Russian reserve drawdown: economic exhaustion is the most likely forcing function for Russian flexibility",
+    "US Congressional action on Ukraine aid: a mid-year supplemental or cut decision is a major prior-moving event"
+  ],
+
+  "searchQueries": [
+    "Ukraine Russia ceasefire talks {month} {year}",
+    "Zelenskyy ceasefire proposal {month} {year}",
+    "Putin ceasefire Ukraine {month} {year}",
+    "Ukraine peace talks venue Istanbul Geneva {year}",
+    "Russia Ukraine frontline ISW {month} {year}",
+    "UK France Ukraine military hub deployment {year}",
+    "Trump Ukraine war envoy Witkoff {month} {year}",
+    "Erdogan Ukraine Russia mediation {month} {year}",
+    "Ukraine aid package US Congress {month} {year}",
+    "Russia CBR interest rate {month} {year}",
+    "Ukraine mobilization shortage {year}",
+    "Russia summer offensive Ukraine {year}",
+    "ISW Ukraine control map {month} {year}",
+    "site:understandingwar.org Ukraine {month} {year}",
+    "site:kyivindependent.com ceasefire {year}"
+  ],
+
+  "evidenceLog": [
+    {
+      "id": "init_001",
+      "time": "2026-04-10T00:00:00Z",
+      "text": "32-hour Easter ceasefire agreed between Russia and Ukraine, brokered under pressure from Washington and Vatican. Took effect April 10. No indication of extension. Both sides reported violations during the truce window.",
+      "tags": ["EVENT", "DIPLOMATIC"],
+      "source": "Multiple wire reports (AP, Reuters) April 10 2026",
+      "claimState": "OBSERVED",
+      "trustWeight": 1.0,
+      "note": "This is a confirmed event. Logged as founding context entry."
+    },
+    {
+      "id": "init_002",
+      "time": "2026-04-11T00:00:00Z",
+      "text": "Abu Dhabi, Geneva, and Paris diplomatic tracks all stalled as of April 2026. No formal bilateral meeting scheduled. Russia has not accepted any current-control ceasefire line.",
+      "tags": ["ANALYSIS", "DIPLOMATIC"],
+      "source": "Contextual assessment at topic creation",
+      "claimState": "OBSERVED",
+      "trustWeight": 0.8,
+      "note": "Assessed from open-source reporting. No single confirmatory source."
+    },
+    {
+      "id": "init_003",
+      "time": "2026-04-11T00:00:00Z",
+      "text": "UK and France pledge 'military hubs' in Ukraine. Not combat deployment but logistical/training infrastructure with military personnel. Russia designates this a red line.",
+      "tags": ["EVENT", "MILITARY", "DIPLOMATIC"],
+      "source": "Contextual at topic creation",
+      "claimState": "OBSERVED",
+      "trustWeight": 0.85,
+      "note": "Russia's stated red line is verified; actual hub construction timeline is uncertain."
+    },
+    {
+      "id": "init_004",
+      "time": "2026-04-11T00:00:00Z",
+      "text": "Russia maintaining demand for full Donbas, Zaporizhzhia, and Kherson oblasts as precondition. No positional movement detected since 2025 talks collapsed.",
+      "tags": ["RHETORIC", "DIPLOMATIC"],
+      "source": "Contextual at topic creation",
+      "claimState": "OBSERVED",
+      "trustWeight": 0.75,
+      "note": "Tagged RHETORIC because it is a stated position, not an action."
+    },
+    {
+      "id": "ev_005",
+      "time": "2026-04-12T00:00:00Z",
+      "text": "Easter ceasefire violations: Ukraine reports 2,299 violations (28 assault actions, 479 shellings, 747 attack drone strikes, 1,045 FPV drone strikes). Russia reports 1,971 violations (258 artillery/tank firings, 1,329 FPV drone strikes, 375 munition drops). Both sides accuse each other. However, Ukraine confirms NO long-range Shahed drones, guided aerial bombs, or missile strikes during truce — a significant de-escalation from nightly barrages.",
+      "tags": ["EVENT", "DATA"],
+      "source": "Ukrainian General Staff (Facebook), Russian MoD (MAX app), via Al Jazeera/AP/Guardian, April 12 2026",
+      "claimState": "OBSERVED",
+      "trustWeight": 1.0,
+      "posteriorImpact": "H3 confirmed: truce is partial and violated, consistent with 'limited truces only' hypothesis. Absence of strategic weapons (Shaheds, missiles) during truce is notable — suggests both sides can modulate escalation level. Does NOT support H2 (sustained ceasefire) or H1 (comprehensive deal).",
+      "note": "Al Jazeera base trust 0.60. AP 0.99. Violation counts from official military statements on both sides — cross-referenced. Pattern identical to 2025 Easter truce."
+    },
+    {
+      "id": "ev_006",
+      "time": "2026-04-12T00:00:00Z",
+      "text": "Kremlin spokesman Peskov: Russia will NOT extend Easter truce unless Zelenskyy 'accepts well-known solutions.' States Russian forces still need 17-18% more of Donetsk region. 'Until Zelenskyy musters the courage... the special military operation will continue after the truce expires.'",
+      "tags": ["RHETORIC", "DIPLOMATIC"],
+      "source": "Kremlin (Peskov) via Russian news agencies, reported by Al Jazeera, April 12 2026",
+      "claimState": "OBSERVED",
+      "trustWeight": 0.6,
+      "posteriorImpact": "Fires anti-indicator anti_h1_russia_maximalism: Russia reaffirms full oblast demands. H1 -signal. Confirms H3 as modal: episodic truces with no path to agreement. Peskov statement is RHETORIC but from authoritative Kremlin source — it IS the negotiating position.",
+      "note": "Tagged RHETORIC per framework (stated position, not action). But Kremlin spokesperson statements carry operational weight — this is not punditry."
+    },
+    {
+      "id": "ev_007",
+      "time": "2026-04-12T00:00:00Z",
+      "text": "Zelenskyy calls for longer ceasefire in evening address, insists 'the ball is in Moscow's court.' Ukraine proposed freezing conflict along current front lines — Russia rejected this.",
+      "tags": ["RHETORIC", "DIPLOMATIC"],
+      "source": "Zelenskyy evening address, reported by Al Jazeera/Guardian, April 12 2026",
+      "claimState": "OBSERVED",
+      "trustWeight": 0.7,
+      "posteriorImpact": "Mild H2/H1 signal: Ukraine signaling willingness to freeze. But Russia's rejection is the binding constraint. Zelenskyy's proposal matches indicator t2_ukraine_territory_concession partially — accepting current lines IS a concession from pre-war borders.",
+      "note": "Zelenskyy's willingness to freeze on current lines is a significant shift from 2022-2024 position but has been Russia-rejected."
+    },
+    {
+      "id": "ev_008",
+      "time": "2026-04-12T00:00:00Z",
+      "text": "US attention confirmed shifted to Iran war. Al Jazeera: 'The process has stalled further since the outbreak of the war in the Middle East, with Washington's attention having shifted towards Iran.' No US envoy activity on Ukraine track reported in April.",
+      "tags": ["ANALYSIS", "DIPLOMATIC"],
+      "source": "Al Jazeera contextual reporting, April 12 2026",
+      "claimState": "OBSERVED",
+      "trustWeight": 0.6,
+      "posteriorImpact": "H3/H4 lean: US disengagement removes the primary external pressure for deal. Without active US mediation, structural path to H1 is blocked. Increases H3 (episodic truces) and H4 (escalation via Russian offensive advantage if Ukraine aid wavers).",
+      "note": "Al Jazeera base trust 0.60. This is contextual assessment but triangulates with absence of reported US diplomatic activity."
+    }
+  ],
+
+  "watchpointAlerts": [],
+
+  "governance": null,
+
+  "dependencies": {
+    "_docs": "Cross-topic dependency declarations. Upstream topics whose posteriors this topic's assumptions depend on.",
+    "upstream": [
+      {
+        "slug": "calibration-houthi-posture",
+        "reason": "Houthi escalation ties to broader Iran war trajectory which diverts US attention from Ukraine mediation. US diplomatic bandwidth is zero-sum — Iran engagement crowds out Ukraine peace process.",
+        "assumptions": { "H1": 0.15, "H2": 0.45, "H3": 0.30, "H4": 0.10 },
+        "tolerance": 0.10
+      }
+    ]
+  },
+
+  "predictionScoring": {
+    "_docs": "Calibration infrastructure. Snapshots are auto-created by engine on each posterior update. Record outcome when topic resolves Dec 31 2026, then compute_calibration_report() for Brier analysis. Resolution: H1 fires if formal signed ceasefire by Dec 31 2026.",
+    "snapshots": [
+      {
+        "date": "2026-04-11T00:00:00Z",
+        "posteriors": { "H1": 0.07, "H2": 0.22, "H3": 0.47, "H4": 0.24 },
+        "note": "Founding snapshot"
+      }
+    ],
+    "outcomes": [],
+    "brierScores": []
+  }
+}

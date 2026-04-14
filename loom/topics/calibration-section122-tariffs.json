@@ -1,0 +1,704 @@
+{
+  "_protocol": "Calibration topic \u2014 fully populated. Section 122 10% universal tariff expiry, late July 2026.",
+
+  "meta": {
+    "slug": "calibration-section122-tariffs",
+    "title": "Section 122 Tariffs at 150-Day Expiry (July 2026)",
+    "question": "What happens to the Trump administration's Section 122 10% universal tariff when it reaches its 150-day statutory limit in late July 2026?",
+    "resolution": "Observable: White House action or documented inaction by July 23, 2026 (150 days from Feb 24 effective date). Resolution criteria: (a) tariff expires with no successor = H1; (b) new proclamation issues at ~10% using different authority = H2; (c) new proclamation/action at higher rate or expanded scope = H3; (d) bilateral deal(s) announced covering >=30% of affected import value with reduced rates = H4. Partial-deal-plus-continuation counts as H4 if rollback is material.",
+    "created": "2026-04-11T00:00:00Z",
+    "lastUpdated": "2026-04-12T00:00:00Z",
+    "status": "ACTIVE",
+    "dayCount": 47,
+    "startDate": "2026-02-24T00:00:00Z",
+    "classification": "ROUTINE",
+    "topicType": "economics",
+    "horizon": "~3.5 months (July 23, 2026)",
+    "_notes": {
+      "statutory_cap": "Section 122 of the Trade Act of 1974 (19 U.S.C. 2132) authorizes up to 15% tariff surcharges for balance-of-payments purposes, but caps them at 150 days unless Congress extends. The 150-day clock runs from Feb 24 2026, expiring approximately July 23 2026.",
+      "ieepa_context": "SCOTUS struck IEEPA-based tariffs in Feb 2026. Administration pivoted to Section 122 as the available statutory authority. Section 301 investigations into EU/Mexico/China launched simultaneously suggest intent to build alternative legal basis.",
+      "prior_basis": "Priors reflect: (1) base rate of Trump-era trade escalation over negotiation; (2) active Section 301 investigations as pipeline for escalation; (3) bilateral negotiation framing (H4) as stated goal but 3.5-month runway is tight for complex deals; (4) near-zero probability of clean expiry given political costs.",
+      "uncertainty": "Key uncertainty is whether Section 301 investigations can produce actionable tariff authority before the Section 122 clock runs out, and whether any bilateral deal reaches material scope. Congress extending Section 122 is possible but historically rare."
+    }
+  },
+
+  "tagConfig": {
+    "availableTags": ["EVENT", "DATA", "RHETORIC", "INTEL", "ANALYSIS", "LEGAL", "DIPLOMATIC"],
+    "directionHints": {
+      "EVENT": {},
+      "DATA": {},
+      "RHETORIC": {},
+      "INTEL": {},
+      "ANALYSIS": {},
+      "LEGAL": {
+        "H1": 1,
+        "H2": -1,
+        "H3": -1,
+        "H4": -1,
+        "_note": "Legal challenges or court rulings limiting authority push toward H1"
+      },
+      "DIPLOMATIC": {
+        "H4": 1,
+        "H3": -1,
+        "_note": "Diplomatic signals (deal progress, partner concessions) push toward H4"
+      }
+    },
+    "escalationTags": ["EVENT", "LEGAL"],
+    "deescalationTags": ["DIPLOMATIC"]
+  },
+
+  "model": {
+    "hypotheses": {
+      "H1": {
+        "label": "Expires as scheduled \u2014 no replacement, no extension",
+        "midpoint": 0,
+        "unit": "weeks",
+        "posterior": 0.07,
+        "description": "The tariff lapses on ~July 23, 2026 with no successor action. Administration makes no new proclamation, Congress does not authorize extension, Section 301 investigations have not yet produced usable tariff authority. Politically very costly \u2014 would be framed as capitulation. Requires either a court order forcing expiry or a deliberate policy reversal. Base rate for clean expiry given current posture: low.",
+        "_prior_note": "7% reflects near-impossibility of deliberate no-action given political signaling. Only fires if legal constraint (court order) or unexpected political reversal."
+      },
+      "H2": {
+        "label": "Maintained at same ~10% rate via new authority",
+        "midpoint": 0,
+        "unit": "weeks",
+        "posterior": 0.18,
+        "description": "Administration issues a new proclamation at roughly the same 10% rate using a different statutory basis \u2014 most likely Section 301 authority once investigations conclude, or a Section 232 national security finding, or a new IEEPA invocation with a different legal framing. Rate stays flat, scope roughly unchanged. This is the 'hold the line' outcome: no escalation, no deal, but tariffs continue.",
+        "_prior_note": "18% reflects plausibility as a fallback if deals stall and escalation seems risky, but narrower than H3/H4 because straight-rate maintenance is strategically inert and doesn't match the administration's pattern of using expiry moments for leverage."
+      },
+      "H3": {
+        "label": "Expanded \u2014 higher rate and/or broader product scope",
+        "midpoint": 0,
+        "unit": "weeks",
+        "posterior": 0.33,
+        "description": "At or before expiry, administration announces escalation: higher tariff rate (above 10%), expanded country coverage, expanded product scope, or a new Section 301 tariff regime (historically 25%+ on targeted categories) that replaces the universal surcharge with a more aggressive targeted structure. New Section 301 investigations into EU, Mexico, and China are the most direct pipeline. A 25% targeted tariff on EU autos or Chinese tech goods would qualify as H3 even if the universal 10% lapses.",
+        "_prior_note": "33% reflects the administration's track record of using tariff deadlines as escalation moments rather than resolution moments, plus active Section 301 pipeline. H3 is the modal outcome if bilateral deals fail to materialize."
+      },
+      "H4": {
+        "label": "Partial rollback \u2014 bilateral deal(s) reduce tariffs on >=30% of affected import value",
+        "midpoint": 0,
+        "unit": "weeks",
+        "posterior": 0.42,
+        "description": "One or more bilateral trade agreements or framework deals (EU, Mexico, Japan, UK, Canada, or others) are announced before or at the July 23 deadline, resulting in materially reduced tariff rates on a significant share of the ~$1.2T import base. Does not require a comprehensive agreement \u2014 sector deals (e.g., EU autos, Mexican agricultural goods) that cover >=30% of affected volume qualify. May be accompanied by continuation of tariffs on non-deal partners. This is the stated preferred outcome of the administration and trading partners.",
+        "_prior_note": "42% reflects: (1) bilateral deal framing as stated policy goal; (2) three active negotiating tracks (EU, Mexico/Canada, China-adjacent); (3) both sides have economic incentives before US midterm season; BUT (4) discount heavily because 3.5 months is tight for complex deals, and partial-deal announcements often get classified as 'framework' without tariff relief. Set as modal outcome but note high uncertainty."
+      }
+    },
+    "expectedValue": 0,
+    "expectedUnit": "probability_weighted_outcome",
+    "posteriorHistory": [
+      {
+        "date": "2026-04-11T00:00:00Z",
+        "posteriors": { "H1": 0.07, "H2": 0.18, "H3": 0.33, "H4": 0.42 },
+        "note": "Initial priors. Based on: IEEPA struck Feb 2026, Section 122 effective Feb 24, Section 301 investigations active, bilateral deal framing stated as goal.",
+        "H1": 0.07,
+        "H2": 0.18,
+        "H3": 0.33,
+        "H4": 0.42
+      }
+    ]
+  },
+
+  "subModels": {
+    "section301Pipeline": {
+      "label": "Section 301 Investigation Progress",
+      "value": "Investigations launched Apr 2026 into EU, Mexico, China. Typically 6-12 months to completion; unlikely to produce tariff authority before July 23.",
+      "description": "Section 301 investigations require notice, comment period, and USTR determination before tariffs can issue. Tracks whether any investigation is fast-tracked or whether findings precede the July 23 deadline. A completed 301 determination before July 23 would enable H3 escalation with new legal footing.",
+      "history": []
+    },
+    "bilateralNegotiations": {
+      "label": "Bilateral Deal Progress",
+      "value": "EU: framework talks reported, no tariff relief offered yet. Mexico: USMCA review ongoing. China: no direct talks. UK: advanced.",
+      "description": "Tracks progress of bilateral negotiations. Key threshold for H4: formal announcement of tariff reduction on >=30% of affected import value. A 'framework agreement' without tariff relief does not qualify. Monitors: EU-US trade talks, USMCA/Mexico negotiations, UK-US deal, Japan-US.",
+      "history": []
+    },
+    "legalChallenges": {
+      "label": "Legal/Judicial Constraints on Section 122 Authority",
+      "value": "No known active challenges to Section 122 authority as of April 2026. SCOTUS IEEPA ruling limited executive tariff authority but did not address Section 122.",
+      "description": "Tracks whether courts have limited or enjoined Section 122 authority. A court ruling striking Section 122 would force H1 or require Congressional action. Also tracks Congressional legislation (extension or repeal).",
+      "history": []
+    },
+    "importVolumeImpact": {
+      "label": "Import Volume Response",
+      "value": "Frontloading reported in Q1 2026; underlying demand suppression beginning. No official import volume data post-Feb 24.",
+      "description": "Tracks how importers are responding to the tariff. Sustained frontloading suggests trading partners expect continuation (H2/H3). Sharp import collapse suggests economic pressure building toward deal (H4) or expiry (H1). Measured via Census Bureau monthly trade data.",
+      "history": []
+    }
+  },
+
+  "indicators": {
+    "_design_rules": [
+      "Each indicator is OBSERVABLE \u2014 an action, data point, or published document, not an opinion or prediction",
+      "Each has a clear fired/not-fired threshold",
+      "Anti-indicators explicitly reduce specific hypothesis probabilities",
+      "Governor flags indicators as FIRED only when threshold is clearly met"
+    ],
+    "tiers": {
+      "tier1_critical": [
+        {
+          "id": "t1_bilateral_deal_announced",
+          "desc": "Formal bilateral trade agreement announced covering >=30% of affected $1.2T import volume, with explicit tariff rate reductions. Must include USTR press release and partner government confirmation. 'Framework' or 'talks ongoing' do not qualify.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H4 +25pp, H1 -5pp, H2 -10pp, H3 -10pp"
+        },
+        {
+          "id": "t1_escalation_proclamation",
+          "desc": "Presidential proclamation or USTR notice issued announcing tariff rate above 10% or expanded product/country scope BEFORE or AT the July 23 deadline. Must be a formal Federal Register action, not a statement of intent.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H3 +30pp, H4 -15pp, H1 -10pp, H2 -5pp"
+        },
+        {
+          "id": "t1_expiry_no_action",
+          "desc": "July 23, 2026 passes with no White House proclamation, no Congressional extension, no new tariff authority issued. Observable via Federal Register absence and White House press releases.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 +60pp (near-resolution trigger)"
+        },
+        {
+          "id": "t1_section301_tariff_issued",
+          "desc": "USTR issues formal Section 301 tariff determination before July 23 that replaces or extends the universal surcharge with targeted product tariffs. Must be a signed Federal Register notice with effective date.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H3 +20pp if rate >10%; H2 +15pp if rate ~10%; H4 -10pp (suggests deal less likely)"
+        },
+        {
+          "id": "t1_congress_extension",
+          "desc": "Congress passes legislation authorizing extension of Section 122 tariff authority beyond 150 days, signed by President. Observable: bill passage and presidential signature.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "Historically rare. Congress has not used this authority since the 1970s. Would likely be attached to a larger trade bill.",
+          "posteriorEffect": "H2 +25pp, H3 +10pp, H1 -15pp, H4 -20pp"
+        }
+      ],
+      "tier2_strong": [
+        {
+          "id": "t2_eu_tariff_talks_advanced",
+          "desc": "EU-US trade talks reach ministerial level with explicit agenda item for tariff relief before July 23. Must be documented via EU Commission or USTR official statement, not media speculation.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H4 +10pp, H3 -5pp"
+        },
+        {
+          "id": "t2_ustr_rfr_deal_framework",
+          "desc": "USTR releases Request for Comments or formal notice of intent to negotiate bilateral tariff reduction with a specific partner (EU, Japan, UK, Mexico). Procedural step required before deal.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H4 +8pp, H1 -3pp"
+        },
+        {
+          "id": "t2_section301_fast_track",
+          "desc": "USTR announces accelerated Section 301 timeline (completion before July 2026) for any of the active investigations into EU, Mexico, or China. Must cite expedited schedule in official notice.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H3 +12pp, H4 -5pp"
+        },
+        {
+          "id": "t2_trump_public_deal_framing",
+          "desc": "Trump or senior official (USTR, Treasury Secretary) makes on-record statement framing July deadline as 'deal or escalation' choice, explicitly naming a target country and timeline. Distinguishable from routine rhetoric by specificity: named country, named date, named rate.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "Rhetoric only \u2014 tag as RHETORIC, not EVENT. Does not fire indicator but shifts priors modestly.",
+          "posteriorEffect": "H3 +5pp or H4 +5pp depending on framing; H1 -3pp in either case"
+        },
+        {
+          "id": "t2_import_volumes_collapse",
+          "desc": "Monthly Census Bureau trade data shows imports from tariffed partners down >=15% from pre-tariff baseline for two consecutive months. Observable: monthly trade release from Census.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H4 +7pp (economic pressure toward deal), H3 -4pp (escalation less likely if damage severe)"
+        },
+        {
+          "id": "t2_court_challenge_filed",
+          "desc": "Industry group or foreign government files legal challenge to Section 122 authority in federal court, with preliminary injunction sought. Observable: court filing docket.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "SCOTUS IEEPA precedent makes a challenge plausible. A successful PI would force H1.",
+          "posteriorEffect": "H1 +8pp, H2 -3pp, H3 -3pp"
+        },
+        {
+          "id": "t2_china_retaliatory_tariffs",
+          "desc": "China announces retaliatory tariff measures specifically in response to Section 122 (not pre-existing actions). Observable: MOFCOM announcement.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H3 +8pp (escalatory cycle), H4 -6pp (China-track deal less likely)"
+        }
+      ],
+      "tier3_suggestive": [
+        {
+          "id": "t3_trump_approval_tariff_boost",
+          "desc": "Trump job approval rises >=3pp in a national poll during a week featuring tariff-related news, suggesting political upside to the tariff stance. Observable: FiveThirtyEight or RealClearPolitics tracker.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "Approval correlation with tariff policy is weak but worth tracking as a political incentive signal.",
+          "posteriorEffect": "H3 +3pp (political reward for toughness)"
+        },
+        {
+          "id": "t3_wto_complaint_filed",
+          "desc": "Trading partner files formal WTO dispute settlement request against Section 122 tariffs. Observable: WTO dispute panel registry.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "WTO complaints move slowly and historically have not deterred US tariff policy, but filing signals credible partner intent.",
+          "posteriorEffect": "H4 +3pp (partner pressure), H3 -2pp"
+        },
+        {
+          "id": "t3_cpi_spike_tariff_attributed",
+          "desc": "BLS CPI report shows >=0.3pp monthly increase in goods categories dominated by tariffed imports (apparel, electronics, consumer goods). Observable: BLS monthly release.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H4 +4pp (inflation pressure toward deal), H3 -3pp"
+        },
+        {
+          "id": "t3_nab_nfib_recession_signal",
+          "desc": "NFIB Small Business Optimism Index falls below 90 two consecutive months, citing tariff costs as primary concern. Observable: NFIB monthly release.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H4 +3pp, H1 +2pp (domestic pressure to end tariffs)"
+        },
+        {
+          "id": "t3_eu_retaliatory_list_published",
+          "desc": "EU publishes formal list of US products for retaliatory tariffs, with implementation contingent on Section 122 continuation. Observable: EU Official Journal or Commission announcement.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H4 +4pp (deal-forcing mechanism), H3 -3pp"
+        },
+        {
+          "id": "t3_ustr_confirmed",
+          "desc": "Senate confirms new USTR (if vacancy) or USTR publicly commits to bilateral deal timeline naming a specific partner. Observable: Senate vote or USTR press conference.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H4 +3pp if deal-framed, H3 +3pp if escalation-framed"
+        }
+      ],
+      "anti_indicators": [
+        {
+          "id": "anti_h1",
+          "desc": "Trump or senior official makes unambiguous public statement that tariffs WILL continue past July 23 in some form (renewal, escalation, or deal). Observable: White House press release or on-record quote.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "Any positive statement about post-July tariff policy reduces H1 probability. H1 requires near-total absence of successor action.",
+          "posteriorEffect": "H1 -15pp"
+        },
+        {
+          "id": "anti_h2",
+          "desc": "Formal bilateral deal announced OR new tariff proclamation at rate substantially different from 10%. H2 requires rate continuity; any material rate change (up or down) removes H2.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H2 -20pp if rate changes materially"
+        },
+        {
+          "id": "anti_h3",
+          "desc": "Bilateral deal covering >=30% of affected import volume announced, AND no new escalation proclamation issued. Successful deal-making forecloses the escalation track.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H3 -20pp if material deal closes"
+        },
+        {
+          "id": "anti_h4",
+          "desc": "New tariff proclamation at higher rate (>12%) issued, explicitly on products covered by active Section 301 investigations, WITHOUT parallel deal announcement. Escalation proclamation without deal component forecloses H4.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H4 -25pp"
+        }
+      ]
+    }
+  },
+
+  "actorModel": {
+    "description": "Decision-theoretic framework: who makes the decisions that drive the Section 122 expiry outcome?",
+    "actors": {
+      "trump": {
+        "name": "Donald Trump (President)",
+        "role": "Primary decision authority. Tariff policy is managed personally; USTR and Treasury operate as implementers, not independent actors.",
+        "decisionStyle": "Deal-framing: announces pressure, then claims victory. Prefers visible wins over substantive ones. Uses deadlines as leverage rather than hard constraints. Has reversed tariff positions rapidly when presented with market downturns or coalition pressure.",
+        "biases": [
+          "Loss aversion on perceived capitulation \u2014 will not let July 23 look like a defeat",
+          "Market-as-approval-signal: sustained S&P decline accelerates deal-seeking (H4)",
+          "Personal grievance framing: EU and China treated differently from 'friends' (UK, Japan)",
+          "Transactionalism over rules-based order: bilateral deals preferred over multilateral frameworks"
+        ],
+        "filters": [
+          "Section 122 statutory cap is a hard legal constraint \u2014 cannot be extended by proclamation alone",
+          "Post-IEEPA SCOTUS ruling limits executive tariff authority generally; any new Section 301 action must be procedurally defensible",
+          "Treasury/Commerce provide economic cover narratives; if they signal recession risk, that filters toward H4"
+        ],
+        "overrides": [
+          "Geopolitical crisis (e.g., China-Taiwan, Iran-Hormuz) could override trade calculation entirely",
+          "Stock market crash >=15% from April 2026 levels would accelerate H4 regardless of other indicators",
+          "Personal business interest or foreign policy quid pro quo could produce surprise bilateral deal"
+        ]
+      },
+      "ustr": {
+        "name": "USTR (US Trade Representative)",
+        "role": "Executes trade policy, runs Section 301 investigations, negotiates bilateral deals. Has institutional interest in procedural legitimacy.",
+        "decisionStyle": "Institutional, process-oriented. Moves on Section 301 via formal notice-and-comment; cannot fast-track below statutory minimums without legal exposure.",
+        "biases": [
+          "Prefers tariff continuation to expiry \u2014 expiry means loss of leverage in ongoing negotiations",
+          "Bilateral deal preference aligns with institutional mandate"
+        ],
+        "filters": [
+          "Section 301 timelines are procedurally fixed at minimum 12 months for full investigation; any sub-July completion requires waiver or pre-existing work product",
+          "Federal Register publication deadlines: final action requires 30+ days notice minimum"
+        ],
+        "overrides": [
+          "Presidential direction to fast-track can accelerate some procedural steps",
+          "Emergency national security finding could bypass some procedural requirements"
+        ]
+      },
+      "congress": {
+        "name": "US Congress (Senate Finance + House Ways and Means)",
+        "role": "Can extend Section 122 authority beyond 150 days via legislation. Can also constrain tariff authority via appropriations riders.",
+        "decisionStyle": "Institutionally slow. Extension requires bipartisan support in Senate. Republican majority broadly supports tariff goals but may resist blank-check extension. Democrats have mixed views (labor protectionism vs. consumer cost concerns).",
+        "biases": [
+          "Midterm-year sensitivity (2026): members in swing districts will be alert to consumer price impact",
+          "Farm-state Republicans sensitive to retaliatory agricultural tariffs (EU, China, Mexico)"
+        ],
+        "filters": [
+          "Statutory extension requires floor time and votes \u2014 unlikely unless tied to must-pass legislation",
+          "Any extension bill is subject to amendment process that could add conditions"
+        ],
+        "overrides": [
+          "A must-pass vehicle (NDAA, continuing resolution) could carry a tariff extension rider"
+        ]
+      },
+      "eu": {
+        "name": "European Union (Commission, DG Trade)",
+        "role": "Largest single affected trading partner by volume. Active in bilateral negotiations. Has retaliation authority and is preparing contingency lists.",
+        "decisionStyle": "Consensual, slow-moving internally. Commission can negotiate but requires member state approval for binding agreements. France and Germany have divergent interests (agriculture vs. autos).",
+        "biases": [
+          "Prefers rules-based resolution but willing to make bilateral concessions to protect auto sector",
+          "French agricultural sensitivities constrain concession space",
+          "German auto industry has strong lobby for bilateral deal"
+        ],
+        "filters": [
+          "EU cannot do a binding deal in 3.5 months without extraordinary political will \u2014 a framework or 'standstill' agreement is more realistic",
+          "EU retaliatory measures require QMV approval and have political costs"
+        ],
+        "overrides": [
+          "Threat of 25% US auto tariffs (Section 232 or 301) is the most powerful EU deal-forcing mechanism"
+        ]
+      },
+      "china": {
+        "name": "People's Republic of China (MOFCOM, State Council)",
+        "role": "Largest source of US tariff revenue under prior Section 301 regime. Active Section 301 investigation. Has retaliation toolkit.",
+        "decisionStyle": "Strategic patience. China is unlikely to make major concessions under 3.5-month pressure. May offer tactical concessions on specific goods to manage escalation without appearing to capitulate.",
+        "biases": [
+          "Face-saving: any deal must be frameable domestically as mutual rather than coerced",
+          "Long-term decoupling strategy means China is building alternative markets regardless"
+        ],
+        "filters": [
+          "MOFCOM requires approval from State Council for major tariff concessions",
+          "Ongoing tech decoupling limits scope of possible deal"
+        ],
+        "overrides": [
+          "US-China deal is lowest-probability bilateral track in this timeframe \u2014 weight China-track heavily toward H3 if deals are expected"
+        ]
+      }
+    },
+    "methodology": [
+      "ACTIONS OVER RHETORIC \u2014 proclamations, Federal Register notices, and signed agreements move posteriors; press conferences and statements do not",
+      "TAG EVERYTHING \u2014 Trump statements = RHETORIC until followed by Federal Register action; tag separately",
+      "DON'T FRONT-RUN \u2014 set tripwires on specific documents (FR notices, USTR filings) and let publication confirm",
+      "DEAL ANATOMY \u2014 a 'deal' must specify: (a) named partner, (b) tariff rate reduction, (c) implementation date, (d) both parties confirm. 'Framework' and 'talks ongoing' are not deals.",
+      "PROCEDURAL CALENDAR \u2014 Section 301 cannot complete in <12 months without extraordinary action; track USTR procedural calendar explicitly",
+      "SOCIALIZATION DETECTION \u2014 if USTR starts signaling 'targeted' vs. 'universal' tariff framing, that's narrative prep for H3 transition"
+    ]
+  },
+
+  "evidenceLog": [
+    {
+      "id": "ev_001",
+      "time": "2026-02-20T00:00:00Z",
+      "text": "SCOTUS strikes IEEPA-based tariffs (Learning Resources v. Trump). Same day, Trump issues Section 122 proclamation: 10% universal import surcharge effective Feb 24. 150-day clock starts.",
+      "tags": ["EVENT", "LEGAL"],
+      "source": "Supreme Court ruling + White House Proclamation, Feb 20 2026",
+      "claimState": "OBSERVED",
+      "weight": 1.0,
+      "posteriorImpact": "Founding event. Establishes the H1-H4 framing.",
+      "note": "Section 122 had never been used to impose tariffs before. Novel legal territory."
+    },
+    {
+      "id": "ev_002",
+      "time": "2026-02-21T00:00:00Z",
+      "text": "Trump announces via social media intent to raise Section 122 rate to 15% (statutory maximum). No formal proclamation issued.",
+      "tags": ["RHETORIC"],
+      "source": "Trump social media post, Feb 21 2026",
+      "claimState": "PROPOSED",
+      "weight": 0.25,
+      "posteriorImpact": "Mild H3 signal but RHETORIC only — no Federal Register action. Do not move posteriors on announcement alone.",
+      "note": "Tagged RHETORIC per framework rules. Social media intent ≠ formal action."
+    },
+    {
+      "id": "ev_003",
+      "time": "2026-03-04T00:00:00Z",
+      "text": "Treasury Secretary Bessent confirms intent to raise to 15% on CNBC. Also references ongoing Section 301 investigations and Section 232 studies as successor frameworks during 150-day window.",
+      "tags": ["RHETORIC", "INTEL"],
+      "source": "CNBC interview, Bessent, March 4 2026",
+      "claimState": "PROPOSED",
+      "weight": 0.35,
+      "posteriorImpact": "Strengthens H2/H3 pipeline — successor authority actively being built. Still no formal action.",
+      "note": "Bessent statement is highest-ranking official confirmation of escalation intent AND successor framework preparation. CNBC base trust 0.65."
+    },
+    {
+      "id": "ev_004",
+      "time": "2026-03-05T00:00:00Z",
+      "text": "24 state attorneys general (led by Oregon, Arizona, California, New York, Vermont) file suit at US Court of International Trade challenging Section 122 surcharge. Case No. 1:26-cv-01472. States argue balance-of-payments requirement not met.",
+      "tags": ["EVENT", "LEGAL"],
+      "source": "CIT filing, Oregon et al. v. Trump, March 5 2026",
+      "claimState": "OBSERVED",
+      "weight": 1.0,
+      "posteriorImpact": "H1 +signal: legal pathway to injunction now exists. t2_court_challenge_filed indicator partially relevant.",
+      "note": "24 states is the broadest state coalition against Section 122. Matches indicator t2_court_challenge_filed."
+    },
+    {
+      "id": "ev_005",
+      "time": "2026-03-09T00:00:00Z",
+      "text": "Liberty Justice Center files second suit (Burlap and Barrel v. Trump, Case No. 1:26-cv-01606) on behalf of spice importer and toy company. Assigned to same 3-judge CIT panel (Barnett, Kelly, Stanceu).",
+      "tags": ["EVENT", "LEGAL"],
+      "source": "CIT filing, Burlap and Barrel v. Trump, March 9 2026",
+      "claimState": "OBSERVED",
+      "weight": 1.0,
+      "posteriorImpact": "Reinforces H1 legal pathway. Two parallel challenges increase judicial engagement.",
+      "note": "Both cases consolidated before same panel for April 10 oral arguments."
+    },
+    {
+      "id": "ev_006",
+      "time": "2026-03-30T00:00:00Z",
+      "text": "As of March 30, rate remains 10%. No formal proclamation raising to 15% has been issued despite repeated announcements. 15% rhetoric has not translated to Federal Register action.",
+      "tags": ["DATA"],
+      "source": "Fleischer CHB trade advisory, March 30 2026",
+      "claimState": "OBSERVED",
+      "weight": 0.8,
+      "posteriorImpact": "Mildly reduces H3 probability — if escalation were imminent, proclamation would have issued. But 15% still possible before July.",
+      "note": "Gap between rhetoric and action is itself informative. 36 days of announced intent with no formal action."
+    },
+    {
+      "id": "ev_007",
+      "time": "2026-04-06T00:00:00Z",
+      "text": "Reuters reports Trump-Xi summit planned for mid-May in Beijing. Trade war framing: China responded with reciprocal investigations. Prior Busan meeting produced truce (tariff trim + fentanyl + soybean purchases). May summit is highest-level bilateral trade engagement since Section 122.",
+      "tags": ["EVENT", "DIPLOMATIC"],
+      "source": "Reuters, April 6 2026",
+      "claimState": "OBSERVED",
+      "weight": 1.0,
+      "posteriorImpact": "NONE. H4-directional but no indicator fired: t1_bilateral_deal_announced requires formal deal covering >=30% volume. A scheduled summit is not a deal. Posteriors HOLD — summit is precondition for deal, not deal itself. Monitor May outcome.",
+      "note": "Reuters effectiveTrust 0.9643 from source_db. Summit delayed from original date due to Iran war."
+    },
+    {
+      "id": "ev_008",
+      "time": "2026-04-10T00:00:00Z",
+      "text": "CIT oral arguments held April 10-11. Three-judge panel (Barnett, Kelly, Stanceu) sharply questioned both sides for 3+ hours. Key issue: whether 'balance-of-payments deficits' in 1974 statute covers trade deficits. Awkward for government: DOJ argued last year Section 122 had 'no obvious application' to trade deficits. Awkward for challengers: CIT itself wrote Section 122 was available when striking IEEPA tariffs.",
+      "tags": ["EVENT", "LEGAL"],
+      "source": "AP (Paul Wiseman), Chicago Tribune, April 11 2026",
+      "claimState": "OBSERVED",
+      "weight": 1.0,
+      "posteriorImpact": "Indicator t2_court_challenge_filed now ACTIVE (arguments heard). Trade lawyer (King & Spalding) predicts court will defer to president given temporary nature. If so, H1 legal pathway weakens.",
+      "note": "AP effectiveTrust 0.99. Expert assessment: 'stunned if challengers prevail' — but expert opinion is ANALYSIS, not outcome."
+    },
+    {
+      "id": "ev_009",
+      "time": "2026-04-10T00:00:00Z",
+      "text": "March 2026 CPI: headline +0.9% m/m, 3.3% annual (highest since April 2024). Energy +10.9% (Iran war driven). But core CPI +0.2% m/m, 2.6% annual — both below forecast. Tariff impact visible in apparel (+1%) and airline fares (+2.7%).",
+      "tags": ["DATA"],
+      "source": "BLS CPI release via CNBC, April 10 2026",
+      "claimState": "OBSERVED",
+      "weight": 1.0,
+      "posteriorImpact": "Matches indicator t3_cpi_spike_tariff_attributed partially — goods categories show tariff pass-through but headline is energy-dominated. Core below forecast reduces political pressure to remove tariffs on inflation grounds.",
+      "note": "CNBC base trust 0.65 but reporting BLS primary data. Effective trust for DATA tag: BLS primary source."
+    },
+    {
+      "id": "ev_010",
+      "time": "2026-04-02T00:00:00Z",
+      "text": "One-year anniversary of 'Liberation Day' tariffs. NPR/CNBC assessments: tariffs have not produced promised economic boom. Tax Foundation estimates average household cost $700/year. Trade deficit not meaningfully altered.",
+      "tags": ["ANALYSIS", "DATA"],
+      "source": "NPR, CNBC, Tax Foundation, April 2-3 2026",
+      "claimState": "OBSERVED",
+      "weight": 0.7,
+      "posteriorImpact": "Background context. Political pressure from economic impact could favor H4 (deal) over H3 (escalation). But Trump has historically doubled down despite adverse data.",
+      "note": "Multiple-source convergence on economic assessment. Tagged ANALYSIS because it involves interpretation of aggregate data."
+    }
+  ],
+
+  "dataFeeds": {
+    "tariff_rate": {
+      "label": "Current Section 122 Tariff Rate (%)",
+      "value": 10,
+      "unit": "percent",
+      "baseline": 0,
+      "asOf": "2026-02-24T00:00:00Z",
+      "_note": "Tracks rate of active tariff. Will change if H2/H3 occur. Resets to 0 if H1 occurs."
+    },
+    "days_remaining": {
+      "label": "Days Until Section 122 Expiry",
+      "value": 103,
+      "unit": "days",
+      "baseline": 150,
+      "asOf": "2026-04-11T00:00:00Z",
+      "_note": "Counts down from 150-day clock starting Feb 24. At zero, statutory authority lapses unless extended."
+    },
+    "import_volume_index": {
+      "label": "Tariffed Import Volume Index (100 = pre-tariff baseline)",
+      "value": null,
+      "unit": "index",
+      "baseline": 100,
+      "asOf": null,
+      "_note": "Monthly Census Bureau trade data. Proxy for economic pressure. Sharp decline = deal pressure or demand destruction."
+    },
+    "us_eu_trade_talks": {
+      "label": "EU-US Trade Talks Status",
+      "value": "Technical-level talks ongoing, no tariff relief offered",
+      "unit": "categorical",
+      "baseline": "No talks",
+      "asOf": "2026-04-11T00:00:00Z",
+      "_note": "Categories: No talks / Technical talks / Ministerial talks / Framework agreement / Binding deal"
+    },
+    "section301_status": {
+      "label": "Section 301 Investigation Status (EU/Mexico/China)",
+      "value": "Investigations launched April 2026; comment period pending",
+      "unit": "categorical",
+      "baseline": "No investigations",
+      "asOf": "2026-04-11T00:00:00Z",
+      "_note": "Tracks whether any 301 investigation is on track to complete before July 23. Standard timeline: 12 months from launch."
+    },
+    "brent_crude": {
+      "label": "Brent Crude ($/bbl)",
+      "value": null,
+      "unit": "USD/bbl",
+      "baseline": null,
+      "asOf": null,
+      "_note": "Indirect signal: oil price reflects macro conditions that affect trade deal urgency."
+    },
+    "sp500_level": {
+      "label": "S&P 500 Level",
+      "value": null,
+      "unit": "index_points",
+      "baseline": null,
+      "asOf": null,
+      "_note": "Trump uses S&P as approval proxy. Sustained decline >=15% from peak accelerates H4 (deal-seeking)."
+    },
+    "cpi_goods": {
+      "label": "CPI Goods Month-over-Month Change (%)",
+      "value": null,
+      "unit": "percent_change",
+      "baseline": null,
+      "asOf": null,
+      "_note": "BLS monthly release. Tariff pass-through signal. Sustained >=0.3pp monthly increase adds deal pressure."
+    },
+    "trump_approval": {
+      "label": "Trump Job Approval (%)",
+      "value": null,
+      "unit": "percent",
+      "baseline": null,
+      "asOf": null,
+      "_note": "RCP or 538 tracker. Declining approval during tariff period signals political cost."
+    }
+  },
+
+  "watchpoints": [
+    {
+      "id": "wp1",
+      "desc": "Federal Register: any USTR or White House tariff action published before July 23",
+      "monitorFrequency": "weekly",
+      "url": "https://www.federalregister.gov/agencies/office-of-the-united-states-trade-representative",
+      "note": "Primary resolution signal. Any FR notice is a tier-1 event."
+    },
+    {
+      "id": "wp2",
+      "desc": "USTR press releases on Section 301 investigation timelines",
+      "monitorFrequency": "weekly",
+      "url": "https://ustr.gov/about-us/policy-offices/press-office/press-releases",
+      "note": "Acceleration of 301 timeline = H3 signal."
+    },
+    {
+      "id": "wp3",
+      "desc": "EU-US trade talks official communiques (EU Commission trade section)",
+      "monitorFrequency": "biweekly",
+      "url": "https://ec.europa.eu/trade/policy/countries-and-regions/countries/united-states/",
+      "note": "Ministerial-level meeting announcement = t2_eu_tariff_talks_advanced fires."
+    },
+    {
+      "id": "wp4",
+      "desc": "Census Bureau monthly trade data (goods imports by partner)",
+      "monitorFrequency": "monthly",
+      "url": "https://www.census.gov/foreign-trade/statistics/highlights/toppartners.html",
+      "note": "Import volume collapse = t2_import_volumes_collapse fires."
+    },
+    {
+      "id": "wp5",
+      "desc": "WTO dispute settlement registry for US Section 122 cases",
+      "monitorFrequency": "monthly",
+      "url": "https://www.wto.org/english/tratop_e/dispu_e/dispu_e.htm",
+      "note": "WTO complaint = t3_wto_complaint_filed fires."
+    },
+    {
+      "id": "wp6",
+      "desc": "Court PACER / federal district court filings for Section 122 legal challenges",
+      "monitorFrequency": "monthly",
+      "url": "https://pacer.uscourts.gov/",
+      "note": "PI filing = t2_court_challenge_filed fires. Monitor Court of International Trade specifically."
+    },
+    {
+      "id": "wp7",
+      "desc": "Congressional floor schedule (Senate Finance, House Ways and Means) for tariff extension legislation",
+      "monitorFrequency": "biweekly",
+      "url": "https://www.finance.senate.gov/",
+      "note": "Any markup or floor vote on tariff extension = t1_congress_extension pipeline."
+    }
+  ],
+
+  "searchQueries": [
+    "Section 122 tariff expiry July 2026",
+    "Trump tariff 150 day expiration 2026",
+    "USTR Section 301 investigation EU Mexico China 2026",
+    "\"Section 122\" tariff renewal extension 2026",
+    "US EU trade deal tariff reduction 2026",
+    "site:federalregister.gov Section 122 tariff 2026",
+    "site:ustr.gov Section 301 investigation 2026",
+    "Trump tariff bilateral deal July 2026",
+    "Section 122 trade act 1974 expiry renew",
+    "US trade deficit April 2026 census bureau",
+    "USTR press release tariff 2026 site:ustr.gov",
+    "EU US tariff negotiations ministerial 2026",
+    "CPI goods tariff pass-through BLS 2026",
+    "S&P 500 tariff market reaction 2026",
+    "Court of International Trade Section 122 challenge 2026",
+    "WTO dispute Section 122 universal tariff 2026",
+    "Congress Section 122 extension legislation 2026",
+    "Trump approval tariff poll 2026"
+  ],
+
+  "governance": null,
+
+  "dependencies": {
+    "_docs": "Cross-topic dependency declarations. Upstream topics whose posteriors this topic's assumptions depend on.",
+    "upstream": [
+      {
+        "slug": "calibration-us-recession-2026",
+        "reason": "Recession increases political pressure for tariff rollback (H4 deal) or forces Congress to let Section 122 expire (H1). Recession probability shift affects H1/H4 balance.",
+        "assumptions": { "H1": 0.55, "H2": 0.22, "H3": 0.14, "H4": 0.09 },
+        "tolerance": 0.10
+      }
+    ]
+  },
+
+  "predictionScoring": {
+    "_docs": "Calibration infrastructure. Snapshots auto-created by engine on each posterior update. Record outcome when topic resolves, then compute_calibration_report() for Brier analysis.",
+    "snapshots": [],
+    "outcomes": [],
+    "brierScores": []
+  }
+}

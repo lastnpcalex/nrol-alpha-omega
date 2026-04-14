@@ -1,0 +1,484 @@
+{
+  "_protocol": "Calibration backfill \u2014 resolved topic for Brier score validation",
+  "meta": {
+    "slug": "calibration-750gev-diphoton",
+    "title": "750 GeV Diphoton Excess",
+    "question": "Is the ~750 GeV diphoton excess observed by ATLAS and CMS at the LHC a new particle or a statistical fluctuation?",
+    "resolution": "Resolved when full Run 2 data (2016) confirms or excludes the excess at 5-sigma significance. If excess disappears with more data, H2 wins.",
+    "created": "2015-12-15T00:00:00Z",
+    "lastUpdated": "2026-04-11T22:00:00+00:00",
+    "status": "RESOLVED",
+    "dayCount": 240,
+    "startDate": "2015-12-15T00:00:00Z",
+    "classification": "ROUTINE",
+    "topicType": "science"
+  },
+  "tagConfig": {
+    "availableTags": [
+      "SCIENTIFIC",
+      "DATA",
+      "THEORETICAL",
+      "ANALYSIS",
+      "INSTITUTIONAL"
+    ],
+    "directionHints": {
+      "DATA": "depends on direction \u2014 excess grows or shrinks",
+      "THEORETICAL": "mostly H1/H3 \u2014 theory papers either explain or debunk"
+    },
+    "escalationTags": [
+      "DATA"
+    ],
+    "deescalationTags": []
+  },
+  "model": {
+    "hypotheses": {
+      "H1": {
+        "label": "New particle \u2014 genuine resonance at ~750 GeV",
+        "midpoint": 36,
+        "unit": "weeks",
+        "posterior": 0.01
+      },
+      "H2": {
+        "label": "Statistical fluctuation \u2014 disappears with more data",
+        "midpoint": 36,
+        "unit": "weeks",
+        "posterior": 0.9
+      },
+      "H3": {
+        "label": "Detector artifact or analysis error",
+        "midpoint": 24,
+        "unit": "weeks",
+        "posterior": 0.05
+      },
+      "H4": {
+        "label": "BSM physics but not a simple resonance (e.g., continuum, interference)",
+        "midpoint": 48,
+        "unit": "weeks",
+        "posterior": 0.04
+      }
+    },
+    "expectedValue": 36,
+    "expectedUnit": "weeks to resolution",
+    "posteriorHistory": [
+      {
+        "date": "2015-12-15",
+        "H1": 0.15,
+        "H2": 0.55,
+        "H3": 0.1,
+        "H4": 0.2,
+        "note": "Initial priors after ATLAS/CMS December presentations. ~3.6 sigma local (ATLAS), ~2.6 sigma local (CMS). Skeptical \u2014 look-elsewhere effect not fully accounted for, and 2-sigma excesses appear and vanish regularly."
+      },
+      {
+        "date": "2016-01-15",
+        "H1": 0.18,
+        "H2": 0.5,
+        "H3": 0.1,
+        "H4": 0.22,
+        "note": "Theory paper flood (~500 papers in one month). Mild H1 uptick from the fact that both experiments see it, but theory proliferation is noise, not evidence."
+      },
+      {
+        "date": "2016-03-15",
+        "H1": 0.12,
+        "H2": 0.6,
+        "H3": 0.1,
+        "H4": 0.18,
+        "note": "Moriond 2016 \u2014 ATLAS updates with slightly wider resonance, CMS less significant. Combined look-elsewhere brings global significance down. Starting to lean more toward fluctuation."
+      },
+      {
+        "date": "2016-06-01",
+        "H1": 0.08,
+        "H2": 0.7,
+        "H3": 0.08,
+        "H4": 0.14,
+        "note": "Pre-ICHEP. Run 2 data accumulating. No independent corroboration from other channels. The absence of corroborating signals (ZZ, Zh, etc.) is itself evidence against H1. Updating toward H2."
+      },
+      {
+        "date": "2016-08-05",
+        "H1": 0.02,
+        "H2": 0.88,
+        "H3": 0.06,
+        "H4": 0.04,
+        "note": "ICHEP 2016 \u2014 excess gone. Both ATLAS and CMS show the bump has vanished with 2016 data. Classic look-elsewhere effect. H2 confirmed."
+      },
+      {
+        "date": "2016-08-10",
+        "H1": 0.01,
+        "H2": 0.93,
+        "H3": 0.04,
+        "H4": 0.02,
+        "note": "RESOLVED. Post-ICHEP consensus: statistical fluctuation. The 750 GeV excess is dead. Final posteriors reflect near-certainty on H2 with small residual for detector/analysis issues (H3) since no formal retraction was needed."
+      }
+    ]
+  },
+  "subModels": {},
+  "indicators": {
+    "tiers": {
+      "tier1_critical": [
+        {
+          "id": "t1_5sigma_confirmation",
+          "desc": "Either ATLAS or CMS reports >=5 sigma local significance for diphoton excess at ~750 GeV with full 2016 dataset",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "Never fired. Excess vanished.",
+          "posteriorEffect": "H1 surge to >0.80, H2 collapses"
+        },
+        {
+          "id": "t1_excess_disappears",
+          "desc": "Full 2016 data shows the excess is <2 sigma local in BOTH experiments",
+          "status": "FIRED",
+          "firedDate": "2016-08-05",
+          "note": "Fired at ICHEP 2016. Both experiments showed the bump gone.",
+          "posteriorEffect": "H2 surge to >0.85, H1/H4 collapse"
+        }
+      ],
+      "tier2_strong": [
+        {
+          "id": "t2_corroborating_channel",
+          "desc": "Excess seen in a second decay channel (ZZ, Zh, WW) at ~750 GeV",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "Never fired. Absence of corroboration was itself informative.",
+          "posteriorEffect": "H1 +15pp"
+        },
+        {
+          "id": "t2_width_narrows",
+          "desc": "Updated analysis shows narrow width consistent with single resonance",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "ATLAS actually showed wider width at Moriond, making resonance interpretation harder.",
+          "posteriorEffect": "H1 +10pp, H4 -5pp"
+        },
+        {
+          "id": "t2_detector_discrepancy",
+          "desc": "ATLAS and CMS report the excess at significantly different masses (>10 GeV apart) or one experiment sees it while the other does not at >2 sigma. Observable: comparison of fitted parameters in conference presentations or publications.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "Never fired — both experiments reported consistent mass. Had this fired, it would strongly suggest detector artifact or analysis error rather than real physics. A genuine particle would appear at the same mass in both detectors.",
+          "posteriorEffect": "H3 +15pp, H1 -8pp, H2 -5pp, H4 -2pp"
+        }
+      ],
+      "tier3_suggestive": [
+        {
+          "id": "t3_theory_convergence",
+          "desc": "Theoretical community converges on a single compelling BSM explanation",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "500+ papers proposed 500+ different models. No convergence \u2014 noise, not signal.",
+          "posteriorEffect": "H1 +5pp"
+        }
+      ],
+      "anti_indicators": [
+        {
+          "id": "anti_h1_no_corroboration",
+          "desc": "No corroborating excess in any other channel after 6+ months",
+          "status": "FIRED",
+          "firedDate": "2016-06-01",
+          "note": "Fired. No ZZ, Zh, WW, or fermionic channels showed anything at 750 GeV.",
+          "posteriorEffect": "H1 -5pp per quarter without corroboration"
+        },
+        {
+          "id": "anti_h3_consistent_mass",
+          "desc": "Both ATLAS and CMS report the excess at consistent mass and width within statistical uncertainties. Observable: comparison of fitted mass peaks and width parameters in published results.",
+          "status": "FIRED",
+          "firedDate": "2015-12-15",
+          "note": "Fired at initial presentation. Both experiments saw excess at ~750 GeV. This argues AGAINST detector artifact (H3) — a detector-specific issue would not reproduce at the same mass in an independent detector with different hardware, calibration, and reconstruction code.",
+          "posteriorEffect": "H3 -5pp, H2 +3pp, H1 +2pp"
+        }
+      ]
+    }
+  },
+  "actorModel": {
+    "description": "Physics experiment dynamics \u2014 no geopolitical actors, but institutional incentives matter",
+    "actors": {
+      "atlas": {
+        "name": "ATLAS Collaboration",
+        "role": "One of two general-purpose LHC detectors",
+        "decisionStyle": "institutional-consensus",
+        "biases": [
+          "Publication bias \u2014 incentive to present interesting results",
+          "Internal review process tempers overclaims"
+        ],
+        "filters": [
+          "Collaboration-wide review before public results"
+        ],
+        "overrides": [
+          "Conference pressure can lead to preliminary results before full review"
+        ]
+      },
+      "cms": {
+        "name": "CMS Collaboration",
+        "role": "Second general-purpose LHC detector \u2014 independent cross-check",
+        "decisionStyle": "institutional-consensus",
+        "biases": [
+          "Same publication incentives as ATLAS",
+          "Competitive pressure to confirm/deny ATLAS results quickly"
+        ],
+        "filters": [
+          "Independent analysis pipeline from ATLAS"
+        ],
+        "overrides": []
+      },
+      "theory_community": {
+        "name": "Theoretical Physics Community",
+        "role": "Generates explanations, not evidence. Theory papers are RHETORIC, not DATA.",
+        "decisionStyle": "bandwagon-prone",
+        "biases": [
+          "Strong incentive to publish quickly on hot topics",
+          "Confirmation bias \u2014 easier to get a model published if it explains the excess"
+        ],
+        "filters": [
+          "Peer review (slow, post-hoc)"
+        ],
+        "overrides": [
+          "Social media hype can drive theory production faster than data warrants"
+        ]
+      }
+    },
+    "methodology": [
+      "DATA OVER THEORY \u2014 500 theory papers are not 500 data points",
+      "LOOK-ELSEWHERE EFFECT \u2014 local significance is not global significance",
+      "INDEPENDENT REPLICATION \u2014 CMS seeing it too matters, but only if analysis pipelines are truly independent",
+      "ABSENCE OF EVIDENCE IS EVIDENCE \u2014 no corroborating channels after 6 months is informative"
+    ]
+  },
+  "evidenceLog": [
+    {
+      "time": "2015-12-15T10:00:00Z",
+      "tag": "DATA",
+      "text": "ATLAS reports ~3.6 sigma local excess in diphoton channel at ~750 GeV using 3.2 fb-1 of 13 TeV data. CMS reports ~2.6 sigma local at similar mass. Both presented at CERN end-of-year seminar.",
+      "provenance": "OBSERVED",
+      "posteriorImpact": "MODERATE",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.8
+    },
+    {
+      "time": "2016-01-20T12:00:00Z",
+      "tag": "THEORETICAL",
+      "text": "Over 500 theoretical papers posted to arXiv proposing explanations for the 750 GeV excess. Models range from heavy Higgs to sgoldstinos to composite states. No convergence on a single explanation.",
+      "provenance": "OBSERVED",
+      "posteriorImpact": "LOW",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.3,
+      "note": "Theory proliferation is noise. 500 models explaining one bump means the bump is underdetermined, not confirmed."
+    },
+    {
+      "time": "2016-03-18T14:00:00Z",
+      "tag": "DATA",
+      "text": "Moriond 2016 update: ATLAS shows wider resonance width (~45 GeV) than December. CMS significance slightly reduced with refined analysis. Global significance for combination remains below 3 sigma.",
+      "provenance": "OBSERVED",
+      "posteriorImpact": "MODERATE",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.7
+    },
+    {
+      "time": "2016-06-01T10:00:00Z",
+      "tag": "DATA",
+      "text": "No corroborating excess found in ZZ, Zh, WW, or fermionic channels at ~750 GeV after 6 months of searches. If this were a real heavy scalar, some branching ratio to other channels would be expected.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "MODERATE",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 1.0,
+      "note": "Absence of corroboration is evidence against H1. A real particle should show up somewhere else."
+    },
+    {
+      "time": "2016-08-05T09:00:00Z",
+      "tag": "DATA",
+      "text": "ICHEP 2016: both ATLAS and CMS present full 2016 dataset. The 750 GeV diphoton excess has vanished completely. ATLAS sees no significant excess with 15.4 fb-1. CMS confirms with 12.9 fb-1. The bump was a statistical fluctuation.",
+      "provenance": "OBSERVED",
+      "posteriorImpact": "EXTREME",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 1.0,
+      "note": "Definitive resolution. t1_excess_disappears fired."
+    }
+  ],
+  "dataFeeds": {
+    "atlas_local_sigma": {
+      "label": "ATLAS Local Significance (sigma)",
+      "value": 0,
+      "unit": "sigma",
+      "baseline": 3.6,
+      "asOf": "2016-08-05"
+    },
+    "cms_local_sigma": {
+      "label": "CMS Local Significance (sigma)",
+      "value": 0,
+      "unit": "sigma",
+      "baseline": 2.6,
+      "asOf": "2016-08-05"
+    },
+    "theory_papers": {
+      "label": "Theory Papers on arXiv",
+      "value": 600,
+      "unit": "papers",
+      "baseline": 0,
+      "asOf": "2016-08-05"
+    }
+  },
+  "watchpoints": [
+    "RESOLVED \u2014 no active watchpoints"
+  ],
+  "searchQueries": [
+    "750 GeV diphoton excess LHC",
+    "ATLAS CMS diphoton resonance",
+    "ICHEP 2016 diphoton results"
+  ],
+  "governance": null,
+  "predictionScoring": {
+    "snapshots": [
+      {
+        "timestamp": "2015-12-15T00:00:00+00:00",
+        "trigger": "backfill",
+        "posteriors": {
+          "H1": 0.15,
+          "H2": 0.55,
+          "H3": 0.1,
+          "H4": 0.2
+        },
+        "entropy": 1.6815,
+        "note": "Initial priors after ATLAS/CMS December presentations. ~3.6 sigma local (ATLAS),"
+      },
+      {
+        "timestamp": "2016-01-15T00:00:00+00:00",
+        "trigger": "backfill",
+        "posteriors": {
+          "H1": 0.18,
+          "H2": 0.5,
+          "H3": 0.1,
+          "H4": 0.22
+        },
+        "entropy": 1.7581,
+        "note": "Theory paper flood (~500 papers in one month). Mild H1 uptick from the fact that"
+      },
+      {
+        "timestamp": "2016-03-15T00:00:00+00:00",
+        "trigger": "backfill",
+        "posteriors": {
+          "H1": 0.12,
+          "H2": 0.6,
+          "H3": 0.1,
+          "H4": 0.18
+        },
+        "entropy": 1.5867,
+        "note": "Moriond 2016 \u2014 ATLAS updates with slightly wider resonance, CMS less significant"
+      },
+      {
+        "timestamp": "2016-06-01T00:00:00+00:00",
+        "trigger": "backfill",
+        "posteriors": {
+          "H1": 0.08,
+          "H2": 0.7,
+          "H3": 0.08,
+          "H4": 0.14
+        },
+        "entropy": 1.3403,
+        "note": "Pre-ICHEP. Run 2 data accumulating. No independent corroboration from other chan"
+      },
+      {
+        "timestamp": "2016-08-05T00:00:00+00:00",
+        "trigger": "backfill",
+        "posteriors": {
+          "H1": 0.02,
+          "H2": 0.88,
+          "H3": 0.06,
+          "H4": 0.04
+        },
+        "entropy": 0.7045,
+        "note": "ICHEP 2016 \u2014 excess gone. Both ATLAS and CMS show the bump has vanished with 201"
+      },
+      {
+        "timestamp": "2016-08-10T00:00:00+00:00",
+        "trigger": "backfill",
+        "posteriors": {
+          "H1": 0.01,
+          "H2": 0.93,
+          "H3": 0.04,
+          "H4": 0.02
+        },
+        "entropy": 0.4624,
+        "note": "RESOLVED. Post-ICHEP consensus: statistical fluctuation. The 750 GeV excess is d"
+      }
+    ],
+    "outcomes": [
+      {
+        "timestamp": "2026-04-11T21:31:41+00:00",
+        "resolved": "H2",
+        "label": "Statistical fluctuation \u2014 disappears with more data",
+        "note": "ICHEP 2016: excess vanished with full Run 2 data. Statistical fluctuation confirmed."
+      }
+    ],
+    "brierScores": [
+      {
+        "timestamp": "2015-12-15T00:00:00+00:00",
+        "trigger": "backfill",
+        "brier_score": 0.06875,
+        "per_hypothesis": {
+          "H1": 0.0225,
+          "H2": 0.2025,
+          "H3": 0.01,
+          "H4": 0.04
+        },
+        "outcome": "H2"
+      },
+      {
+        "timestamp": "2016-01-15T00:00:00+00:00",
+        "trigger": "backfill",
+        "brier_score": 0.0852,
+        "per_hypothesis": {
+          "H1": 0.0324,
+          "H2": 0.25,
+          "H3": 0.01,
+          "H4": 0.0484
+        },
+        "outcome": "H2"
+      },
+      {
+        "timestamp": "2016-03-15T00:00:00+00:00",
+        "trigger": "backfill",
+        "brier_score": 0.0542,
+        "per_hypothesis": {
+          "H1": 0.0144,
+          "H2": 0.16,
+          "H3": 0.01,
+          "H4": 0.0324
+        },
+        "outcome": "H2"
+      },
+      {
+        "timestamp": "2016-06-01T00:00:00+00:00",
+        "trigger": "backfill",
+        "brier_score": 0.0306,
+        "per_hypothesis": {
+          "H1": 0.0064,
+          "H2": 0.09,
+          "H3": 0.0064,
+          "H4": 0.0196
+        },
+        "outcome": "H2"
+      },
+      {
+        "timestamp": "2016-08-05T00:00:00+00:00",
+        "trigger": "backfill",
+        "brier_score": 0.005,
+        "per_hypothesis": {
+          "H1": 0.0004,
+          "H2": 0.0144,
+          "H3": 0.0036,
+          "H4": 0.0016
+        },
+        "outcome": "H2"
+      },
+      {
+        "timestamp": "2016-08-10T00:00:00+00:00",
+        "trigger": "backfill",
+        "brier_score": 0.00175,
+        "per_hypothesis": {
+          "H1": 0.0001,
+          "H2": 0.0049,
+          "H3": 0.0016,
+          "H4": 0.0004
+        },
+        "outcome": "H2"
+      }
+    ]
+  }
+}

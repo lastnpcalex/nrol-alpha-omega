@@ -13,18 +13,6 @@ NROL-AO SOCIAL MEDIA PIPELINE — process a social media post through the framew
 
 This is a social media post. Social posts require the same epistemic discipline as any other evidence — the framework handles trust, not you.
 
-### 0. Branch Isolation — MANDATORY
-
-**Every pipeline run gets its own branch. No exceptions.**
-
-```bash
-git checkout -b pipeline/YYYY-MM-DD-headline-slug
-```
-
-- Branch naming: `pipeline/{date}-{2-4 word slug}` (e.g., `pipeline/2026-04-12-iran-rhetoric`)
-- All file modifications happen on this branch
-- Do NOT merge to main — report the branch name at the end so the user can review and merge
-
 ### 1. Fetch the Post Content
 
 Route by platform:
@@ -42,9 +30,9 @@ Extract: the post text, the author handle/name, the timestamp, and any linked so
 The Governor's `get_effective_weight()` defines a 5-tier trust lookup chain. You MUST follow it:
 
 1. **Per-topic calibration**: Check `topic["sourceCalibration"]["effectiveTrust"]` for this source handle.
-2. **Cross-topic domain trust**: Check `canvas/source_db.json` → `sources[handle].domains[tag].domainTrust`.
-3. **Cross-topic overall trust**: Check `canvas/source_db.json` → `sources[handle].effectiveTrust`.
-4. **Base priors**: Check `canvas/source-trust.json` for the source name.
+2. **Cross-topic domain trust**: Check `source_db.json` → `sources[handle].domains[tag].domainTrust`.
+3. **Cross-topic overall trust**: Check `source_db.json` → `sources[handle].effectiveTrust`.
+4. **Base priors**: Check `source-trust.json` for the source name.
 5. **Unknown fallback**: If the source is not in ANY of the above, assign **0.50** (maximum ignorance prior). Do not adjust this based on vibes, follower count, verification status, or your assessment of the account. 0.50 means "we have no data." The Bayesian machinery will update it from resolved claims.
 
 **PROHIBITED**: Assigning trust scores like "~0.75 because they seem credible" or "0.35 because anonymous accounts are unreliable." These are the LLM performing rationality. If the source isn't in the database, it's 0.50. Period. The calibration system will learn the real number from evidence.
@@ -69,7 +57,7 @@ Social media is disproportionately rhetoric. Most posts will be tagged RHETORIC 
 
 ### 4. Log Evidence
 
-Append to `canvas/topics/{slug}.json` evidenceLog with:
+Append to `topics/{slug}.json` evidenceLog with:
 - `tag`: from topic's `tagConfig.availableTags`
 - `text`: factual summary (not the post verbatim — strip rhetoric, normalize)
 - `provenance`: source handle + platform (e.g., `@user on X`)
@@ -91,9 +79,9 @@ If `claimState` is PROPOSED (single source, unverified): cap the posterior shift
 
 ### 6. Update Source DB and Activity Log
 
-- If the source handle is new: add to `canvas/source_db.json` with `baseTrust: 0.50`, `category: "social_media"`, empty domains, empty topicHistory.
+- If the source handle is new: add to `source_db.json` with `baseTrust: 0.50`, `category: "social_media"`, empty domains, empty topicHistory.
 - If this confirms/refutes existing evidence: update the ledger.
-- Append to `canvas/activity-log.json` with full audit trail.
+- Append to `activity-log.json` with full audit trail.
 
 ### 7. Report
 
@@ -101,4 +89,4 @@ State what you found, what you logged, and what (if anything) moved. If the post
 
 ### 8. Cold Storage (IGNORE only)
 
-If triage returned IGNORE (no topic match), append structured claims to `canvas/evidence-cold.json` for retroactive matching when new topics are created. See `pipeline.md` Step 9 for the schema.
+If triage returned IGNORE (no topic match), append structured claims to `evidence-cold.json` for retroactive matching when new topics are created. See `pipeline.md` Step 9 for the schema.

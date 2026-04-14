@@ -1,0 +1,682 @@
+{
+  "_protocol": "Calibration topic — Houthi Red Sea posture by mid-2026. Populated 2026-04-11.",
+
+  "meta": {
+    "slug": "calibration-houthi-posture",
+    "title": "Houthi Red Sea Posture by Mid-2026",
+    "question": "What will Houthi military posture toward Red Sea commercial shipping look like by July 2026?",
+    "resolution": "Assessed July 1, 2026 via: (1) 30-day rolling attack count against commercial vessels (attack frequency), (2) MARAD advisory status (Threat Level 1-4), (3) shipping insurance war-risk premium (% of vessel value), (4) weekly transit volume through Bab al-Mandeb as % of Jan 2024 baseline. H1 fires if ≥5 attacks/month AND >50% of Jan-2024 baseline transits re-routed. H2 fires if attacks selective (Israeli/US-linked targets only, ≤2 neutral-flag attacks/month). H3 fires if <1 commercial attack/month AND MARAD downgrades advisory. H4 fires if effective closure (≤20% of baseline transits, US NAVCENT NOTAM issued).",
+    "created": "2026-04-11T00:00:00Z",
+    "lastUpdated": "2026-04-12T00:00:00Z",
+    "status": "ACTIVE",
+    "dayCount": 1,
+    "startDate": "2026-04-11T00:00:00Z",
+    "classification": "ROUTINE",
+    "topicType": "conflict",
+    "horizon": "~12 weeks (resolution: 2026-07-01)"
+  },
+
+  "tagConfig": {
+    "_docs": "ESCALATION tags push toward H1/H4. DEESCALATION tags push toward H3. SELECTIVE tags confirm H2. RHETORIC tags are attenuated by governor.",
+    "availableTags": ["EVENT", "DATA", "RHETORIC", "INTEL", "ANALYSIS", "ATTACK", "CEASEFIRE", "DIPLOMATIC", "MARITIME", "MILITARY"],
+    "directionHints": {
+      "ATTACK": {
+        "H1": 1,
+        "H2": 1,
+        "H3": -1,
+        "H4": 1
+      },
+      "CEASEFIRE": {
+        "H1": -1,
+        "H2": 0,
+        "H3": 1,
+        "H4": -1
+      },
+      "DIPLOMATIC": {
+        "H1": -1,
+        "H2": 0,
+        "H3": 1,
+        "H4": -1
+      },
+      "MARITIME": {},
+      "MILITARY": {
+        "H1": 1,
+        "H4": 1
+      },
+      "EVENT": {},
+      "DATA": {},
+      "RHETORIC": {},
+      "INTEL": {},
+      "ANALYSIS": {}
+    },
+    "escalationTags": ["ATTACK", "MILITARY"],
+    "deescalationTags": ["CEASEFIRE", "DIPLOMATIC"]
+  },
+
+  "model": {
+    "hypotheses": {
+      "H1": {
+        "label": "Attacks resume at pre-ceasefire intensity (indiscriminate, ≥5/month)",
+        "midpoint": 0,
+        "unit": "probability_at_July2026",
+        "posterior": 0.15,
+        "description": "Houthis return to the late-2023/early-2024 campaign tempo: missile and drone strikes against any commercial vessel in or transiting the Red Sea, irrespective of flag or cargo. Threshold: ≥5 verified attacks against non-Israeli, non-US commercial shipping in a 30-day window, or public Houthi declaration ending political-screening policy. Precondition: Iran war escalates further OR Gaza conflict fully re-ignites OR Houthis perceive the ceasefire deal as a humiliation worth reversing for domestic mobilization."
+      },
+      "H2": {
+        "label": "Selective targeting — political screening persists (current posture)",
+        "midpoint": 0,
+        "unit": "probability_at_July2026",
+        "posterior": 0.45,
+        "description": "Houthis maintain the post-May 2026 posture: attacks limited to vessels with Israeli, US, or UK links (ownership, flag, cargo destination). Neutral-flag, non-sanctioned shipping passes largely unmolested. Threshold: ≤2 neutral-flag commercial attacks/month AND ≥1 confirmed attack against Israeli/US-linked vessel. This is the current observed posture as of April 2026. Ceasefire with US (May 6) prevents American-shipping attacks but Houthis retain discretion on other targets. Most likely because it satisfies domestic mobilization narrative (solidarity with Palestine/Iran) while avoiding full US re-engagement."
+      },
+      "H3": {
+        "label": "De facto ceasefire holds — no commercial attacks",
+        "midpoint": 0,
+        "unit": "probability_at_July2026",
+        "posterior": 0.30,
+        "description": "Houthis observe a broad commercial shipping ceasefire through July 2026, either through Iranian pressure following a larger regional settlement, US deterrence from Operation Rough Rider, or a formal extension of the May 6 deal to cover all commercial traffic. Threshold: <1 verified attack on any commercial vessel in the 30-day window before July 1, AND MARAD does not maintain a Threat Level ≥2 advisory for the Red Sea. Possible if the Iran-Israel/US war settles into frozen conflict and Houthis see no political upside to continued attacks."
+      },
+      "H4": {
+        "label": "Escalation beyond Red Sea — Bab al-Mandeb effective closure",
+        "midpoint": 0,
+        "unit": "probability_at_July2026",
+        "posterior": 0.10,
+        "description": "Houthis escalate to a de facto closure of Bab al-Mandeb, using anti-ship missiles, mines, or coordinated drone swarms to push weekly transits below 20% of Jan 2024 baseline. Threshold: US NAVCENT issues NOTAM effectively closing the strait, OR Lloyd's/JWC declares Bab al-Mandeb a war-exclusion zone, OR ≥15 attacks/month for 2 consecutive months. Requires significant Iranian resupply (weapons), Houthi willingness to absorb sustained US/Saudi airstrikes, and a political logic (e.g., Iran directing maximum economic pressure). Very high cost given Operation Rough Rider precedent."
+      }
+    },
+    "expectedValue": 0,
+    "expectedUnit": "probability_at_July2026",
+    "posteriorHistory": [
+      {
+        "date": "2026-04-11T00:00:00Z",
+        "posteriors": { "H1": 0.15, "H2": 0.45, "H3": 0.30, "H4": 0.10 },
+        "note": "Initial priors. H2 anchored by current observed selective-targeting posture post-May 6 ceasefire. H3 non-trivial given US deterrence. H1 depressed because Houthis have incentive to maintain political-screening distinction. H4 low due to cost of Operation Rough Rider re-engagement."
+      }
+    ]
+  },
+
+  "subModels": {
+    "attack_tempo": {
+      "label": "Attack Frequency (30-day rolling)",
+      "value": 2,
+      "unit": "attacks/month",
+      "description": "Verified anti-ship attacks in the Red Sea/Gulf of Aden, any vessel type. Includes missile, drone, boat swarm. Excludes Israeli airstrikes on Houthi positions.",
+      "baseline_prewar": 12,
+      "baseline_note": "Peak tempo Jan-Feb 2024, ~12-15 attacks/month, mostly commercial vessels",
+      "asOf": "2026-04-11T00:00:00Z",
+      "source": "UKMTO, MARAD, Naval News aggregation"
+    },
+    "transit_volume": {
+      "label": "Bab al-Mandeb Weekly Transits (% of Jan 2024 baseline)",
+      "value": 35,
+      "unit": "% of baseline",
+      "description": "Weekly commercial vessel transits through Bab al-Mandeb as a share of the Jan 2024 pre-campaign baseline. AIS-derived. Major carriers (MSC, Maersk, Hapag-Lloyd) still routing via Cape.",
+      "baseline_100pct_note": "~50-55 vessels/day in Jan 2024 before campaign began",
+      "asOf": "2026-04-11T00:00:00Z",
+      "source": "MarineTraffic AIS, Kpler, Lloyd's List Intelligence"
+    },
+    "war_risk_premium": {
+      "label": "War Risk Insurance Premium (% of vessel value/voyage)",
+      "value": 0.7,
+      "unit": "% of hull value per voyage",
+      "description": "JWC/Lloyd's additional war risk premium for a single transit through the Red Sea (Suez to Bab al-Mandeb). Peaked ~1.5% in early 2024. A premium >1% signals commercial shipping community pricing in high attack probability.",
+      "baseline_normal": 0.05,
+      "baseline_note": "Pre-campaign normal was ~0.05% or below",
+      "asOf": "2026-04-11T00:00:00Z",
+      "source": "Lloyd's Market Association, JWC advisories"
+    },
+    "marad_advisory": {
+      "label": "MARAD Red Sea Advisory Level",
+      "value": 3,
+      "unit": "threat level (1=low, 4=critical)",
+      "description": "US MARAD advisory threat level for the Red Sea/Bab al-Mandeb corridor. Level 3 = High threat, exercise extreme caution, avoid if possible. Level 4 = Critical, do not transit. Current level reflects continued elevated risk even under political-screening posture.",
+      "asOf": "2026-04-11T00:00:00Z",
+      "source": "MARAD maritime.dot.gov advisories"
+    },
+    "rough_rider_sortie_rate": {
+      "label": "Operation Rough Rider Strike Tempo (sorties/week)",
+      "value": 8,
+      "unit": "estimated sorties/week",
+      "description": "Estimated US airstrike sorties against Houthi military infrastructure in Yemen under Operation Rough Rider (commenced March 15, 2026). A sustained high tempo signals continued US deterrence pressure. Drop to near-zero would indicate ceasefire is holding OR US has shifted resources.",
+      "asOf": "2026-04-11T00:00:00Z",
+      "source": "CENTCOM statements, OSINT (Airwaves, Gerjon)"
+    },
+    "iran_resupply_estimate": {
+      "label": "Iranian Arms Resupply Confidence",
+      "value": "LOW",
+      "unit": "qualitative (LOW/MEDIUM/HIGH)",
+      "description": "Confidence level that Iran is actively resupplying Houthis with anti-ship munitions (ballistic missiles, Shahed drones, naval mines). Iran is currently fighting a war with US/Israel and diverting production internally. LOW confidence in active resupply does not mean zero — stockpiles may be pre-positioned.",
+      "asOf": "2026-04-11T00:00:00Z",
+      "source": "USNI, DIA assessments, Israeli intelligence reporting"
+    }
+  },
+
+  "indicators": {
+    "_design_rules": [
+      "Each indicator must be OBSERVABLE — actions, not opinions",
+      "Each must have a clear fired/not-fired threshold",
+      "Every hypothesis needs at least one pro AND one anti indicator",
+      "Governor flags unfalsifiable hypotheses as DEGRADED"
+    ],
+    "tiers": {
+      "tier1_critical": [
+        {
+          "id": "t1_neutral_flag_wave",
+          "desc": "Three or more verified attacks on neutral-flag commercial vessels (non-Israeli, non-US, non-UK linked) within a single 30-day window. Threshold: UKMTO incident reports + independent AIS corroboration for ≥3 distinct vessels.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "Would confirm H1 — indiscriminate posture. Single incident may be targeting error; pattern of 3+ confirms policy shift.",
+          "posteriorEffect": "H1 +25pp, H2 -20pp, H3 -8pp, H4 +3pp"
+        },
+        {
+          "id": "t1_bab_closure_notam",
+          "desc": "US NAVCENT or IMO issues effective closure NOTAM/circular for Bab al-Mandeb, OR Lloyd's JWC declares the strait a war exclusion zone. Must be an official published advisory, not informal guidance.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "Definitive H4 indicator. Has not occurred even at peak 2024 attack tempo — would require major escalation.",
+          "posteriorEffect": "H4 +40pp, H1 +10pp, H2 -25pp, H3 -25pp"
+        },
+        {
+          "id": "t1_ceasefire_formal_extension",
+          "desc": "Houthi leadership (Abdulmalik al-Houthi or senior Ansar Allah official) publicly announces cessation of all commercial shipping attacks, AND MARAD downgrades Red Sea advisory to Level 1 or 2 within 30 days.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "Would strongly confirm H3. Requires both Houthi announcement AND MARAD verification — announcement alone is RHETORIC.",
+          "posteriorEffect": "H3 +35pp, H2 -15pp, H1 -15pp, H4 -5pp"
+        },
+        {
+          "id": "t1_iranian_directive_ceasefire",
+          "desc": "Credible intelligence (2+ independent sources, not Houthi rhetoric) that Iran's IRGC-Quds Force has directed Houthis to stand down all anti-ship operations as part of a regional settlement.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "Iran controls Houthi weapons resupply and provides strategic direction. An Iranian directive is the highest-confidence H3 signal.",
+          "posteriorEffect": "H3 +30pp, H1 -15pp, H2 -10pp, H4 -5pp"
+        }
+      ],
+      "tier2_strong": [
+        {
+          "id": "t2_attack_tempo_sustained",
+          "desc": "30-day rolling attack count reaches ≥5 verified incidents (any vessel type) and holds above 5 for two consecutive months. Attacks must be confirmed by UKMTO, not just Houthi claims.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "Sustained tempo required — single spike could be targeting error or one-off. Two-month persistence confirms operational policy.",
+          "posteriorEffect": "H1 +15pp, H4 +5pp, H3 -15pp, H2 -5pp"
+        },
+        {
+          "id": "t2_war_risk_premium_spike",
+          "desc": "JWC/Lloyd's Red Sea war risk premium exceeds 1.2% of hull value per voyage for 3+ consecutive weeks.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "Insurance market is a leading indicator — underwriters price in attack probability before ships are hit. Premium >1.2% indicates market believes attacks are likely, not just possible.",
+          "posteriorEffect": "H1 +10pp, H4 +5pp, H3 -10pp, H2 -5pp"
+        },
+        {
+          "id": "t2_transit_volume_collapse",
+          "desc": "Weekly AIS-tracked transits through Bab al-Mandeb fall below 25% of Jan 2024 baseline and remain below 25% for 3+ weeks.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "Volume collapse independent of attack count — if shipping companies preemptively re-route, it signals they expect H1 or H4 regardless of current attack rate.",
+          "posteriorEffect": "H4 +15pp, H1 +10pp, H3 -15pp, H2 -10pp"
+        },
+        {
+          "id": "t2_selective_confirmed_pattern",
+          "desc": "UKMTO confirms 2+ attacks in a 30-day window that are verifiably against Israeli/US/UK-linked vessels with zero confirmed neutral-flag incidents in the same window, AND Houthi communications explicitly reference political criteria.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "Confirms H2 operational pattern is active and policy-driven, not random. Requires both action evidence and stated criteria.",
+          "posteriorEffect": "H2 +15pp, H3 -5pp, H1 -10pp, H4 -5pp"
+        },
+        {
+          "id": "t2_rough_rider_halt",
+          "desc": "CENTCOM publicly confirms suspension or halt of Operation Rough Rider airstrikes against Yemen, citing ceasefire compliance.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "Rough Rider continuation is the primary US lever constraining Houthi escalation. A halt removes that constraint and is H1/H2 permissive.",
+          "posteriorEffect": "H1 +8pp, H2 +5pp, H3 +5pp, H4 +3pp (ambiguous — could enable escalation OR reflect a deal)"
+        },
+        {
+          "id": "t2_major_carrier_return",
+          "desc": "Any of MSC, Maersk, Hapag-Lloyd, or CMA CGM publicly announces resumption of regular Red Sea routing (not a one-off test transit).",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "Major carriers have their own intelligence and legal exposure. A return signals their risk models see a durable H3 or low-H2 environment.",
+          "posteriorEffect": "H3 +12pp, H2 +5pp, H1 -10pp, H4 -7pp"
+        }
+      ],
+      "tier3_suggestive": [
+        {
+          "id": "t3_houthi_rhetoric_escalatory",
+          "desc": "Houthi official (Yahya Sarea or equivalent) issues specific threat to expand attacks to all commercial shipping, explicitly abandoning political-screening language. Must be a named official statement, not social media noise.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "RHETORIC — attenuated by governor. Houthis have a history of not matching rhetoric to action (and vice versa). Weight at ~25% of OBSERVED equivalent.",
+          "posteriorEffect": "H1 +3pp, H2 -3pp (rhetoric only — governor attenuates)"
+        },
+        {
+          "id": "t3_iran_war_intensification",
+          "desc": "Iran-US/Israel war significantly intensifies (new front opened, Iranian nuclear facility struck, or Iranian ballistic missile strike on US asset), changing Houthi strategic calculus.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "Iran escalation increases Houthi motivation to escalate in solidarity but does not guarantee it — depends on Iranian direction and Houthi capacity.",
+          "posteriorEffect": "H1 +5pp, H4 +3pp, H3 -5pp, H2 -3pp"
+        },
+        {
+          "id": "t3_houthi_drone_stockpile_signal",
+          "desc": "OSINT or US intelligence assessment reports Houthi anti-ship drone/missile stockpiles have been significantly replenished after Rough Rider attrition.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "Capacity indicator — resupply is a necessary but not sufficient condition for H1/H4. Depressed stockpiles constrain escalation options.",
+          "posteriorEffect": "H1 +4pp, H4 +4pp, H3 -3pp, H2 -2pp"
+        },
+        {
+          "id": "t3_marad_downgrade",
+          "desc": "MARAD downgrades Red Sea advisory from Level 3 to Level 2 (citing reduced threat frequency).",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "MARAD advisories lag actual attack rate but provide a useful institutional consensus signal. Downgrade without major carrier return is insufficient for H3 confirmation.",
+          "posteriorEffect": "H3 +5pp, H2 +3pp, H1 -4pp, H4 -4pp"
+        },
+        {
+          "id": "t3_oman_mediation_active",
+          "desc": "Oman confirms active mediation between Houthis and a US/Saudi interlocutor aimed at a formal Red Sea shipping agreement (beyond the May 6 US-only deal).",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "Oman is the only viable back-channel. Active Omani mediation is a leading indicator of H3 — but agreements can collapse. Treat as suggestive, not confirmatory.",
+          "posteriorEffect": "H3 +5pp, H2 +3pp, H1 -4pp, H4 -3pp"
+        },
+        {
+          "id": "t3_saudi_payment_signal",
+          "desc": "Reporting (2+ sources) that Saudi Arabia has resumed or increased financial payments to Houthi-controlled entities in Yemen as part of a broader Yemen de-escalation deal.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "Saudi money flow has historically correlated with Houthi operational restraint. Would support H3 trajectory but is not dispositive.",
+          "posteriorEffect": "H3 +4pp, H2 +2pp, H1 -3pp, H4 -3pp"
+        }
+      ],
+      "anti_indicators": [
+        {
+          "id": "anti_h1_screening_confirmed",
+          "desc": "For two consecutive months, all UKMTO-confirmed attacks are against vessels with verified Israeli/US/UK links, with zero neutral-flag confirmed incidents and no Houthi statements abandoning political criteria.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "Sustained screening discipline for 60+ days makes H1 (indiscriminate) implausible as a July 2026 state.",
+          "posteriorEffect": "H1 -20pp"
+        },
+        {
+          "id": "anti_h2_zero_attacks_60d",
+          "desc": "Zero verified anti-ship attacks of any kind for 60+ consecutive days, confirmed by UKMTO silence and AIS data showing no evasive routing by vessels that would be H2 targets.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "If even Israeli-linked vessels transit unmolested for 60 days, selective targeting is no longer the operative posture — H3 has replaced it.",
+          "posteriorEffect": "H2 -25pp, H3 +20pp"
+        },
+        {
+          "id": "anti_h3_any_attack_after_60d_peace",
+          "desc": "Any verified anti-ship attack occurs after a 60+ day quiet period that had appeared to confirm H3.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "Ceasefires with Houthis have historically been fragile. An attack after a sustained quiet period resets the assessment toward H2.",
+          "posteriorEffect": "H3 -20pp, H2 +15pp"
+        },
+        {
+          "id": "anti_h4_rough_rider_sustained",
+          "desc": "Operation Rough Rider continues at ≥5 sorties/week through June 2026, and Houthi missile/drone infrastructure assessments indicate significant degradation (>40% reduction in estimated stockpile).",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "H4 (full closure) requires offensive capacity. Sustained Rough Rider attrition makes full-closure attempt operationally implausible without major resupply.",
+          "posteriorEffect": "H4 -15pp"
+        },
+        {
+          "id": "anti_h4_iran_capacity_constrained",
+          "desc": "Two or more credible intelligence reports indicate Iranian ballistic missile/drone production is entirely consumed by the Iran war effort, with no surplus for Houthi resupply.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": "H4 requires Iranian resupply. If Iran is fully capacity-constrained, Houthis cannot sustain a closure campaign against US/Saudi air power.",
+          "posteriorEffect": "H4 -12pp, H1 -5pp"
+        }
+      ]
+    }
+  },
+
+  "actorModel": {
+    "description": "Five key actors whose interactions determine Houthi posture. Houthis are not fully autonomous — Iranian patron relationship and US deterrence are the two binding constraints. Saudi Arabia matters as a potential off-ramp provider. Shipping companies operationalize the outcome through routing decisions.",
+    "actors": {
+      "houthis": {
+        "name": "Ansar Allah (Houthis)",
+        "role": "Primary actor. Controls attack decisions, targeting criteria, and ceasefire compliance.",
+        "decisionStyle": "Ideologically driven but tactically opportunistic. Abd al-Malik al-Houthi sets strategic direction; operational commanders have significant discretion on targeting. Not fully rational-actor — domestic mobilization narrative (resistance axis) sometimes overrides strategic cost-benefit.",
+        "biases": [
+          "Solidarity framing: attacks framed as defending Gaza/Palestine provide domestic legitimacy — hard to abandon without narrative substitute",
+          "Underestimation of US/Saudi resolve: repeatedly surprised by Operation Rough Rider escalation; tends to test limits",
+          "Survivorship bias: has survived multiple prior military campaigns; may over-discount future damage",
+          "Iran dependency blindspot: Houthi leadership publicly downplays Iranian direction even when operationally dependent"
+        ],
+        "filters": [
+          "Iranian weapons resupply is a hard operational constraint — cannot sustain high-tempo campaign without IRGC pipeline",
+          "Saudi border pressure: if KSA resumes ground pressure in Marib/Hodeidah, Houthis must divert resources",
+          "US Rough Rider deterrence: continued airstrikes degrade launch capacity and impose decision costs"
+        ],
+        "overrides": [
+          "Israeli escalation: any Israeli strike on Yemeni territory would likely trigger immediate Houthi retaliation regardless of ceasefire",
+          "Gaza re-ignition: full collapse of Gaza ceasefire with mass civilian casualties would create strong domestic pressure to re-enter conflict",
+          "Iranian direct order: if IRGC Quds Force directly orders escalation as part of broader war strategy, Houthis will comply"
+        ]
+      },
+      "iran_irgc": {
+        "name": "Iran / IRGC-Quds Force",
+        "role": "Patron and strategic director. Controls weapons resupply pipeline and provides strategic guidance. Not micromanaging Houthi operations but sets parameters.",
+        "decisionStyle": "Institutionally rational with Supreme Leader veto. Currently in a degraded state — fighting a war with US/Israel, absorbing airstrikes, managing domestic pressure. Strategic bandwidth for Houthi management is compressed. IRGC-QF acts through relationships, not real-time command.",
+        "biases": [
+          "Maximum pressure doctrine: when not resource-constrained, default is to keep all fronts active to fragment US/Israeli attention",
+          "Escalation ladder management: Iran calibrates proxy escalation to stay below US red lines — has been miscalibrating more in 2025-26",
+          "Deniability preference: prefers Houthi autonomy narrative to maintain plausible deniability with third parties"
+        ],
+        "filters": [
+          "Current war with US/Israel creates strong incentive to avoid triggering further US escalation in Yemen",
+          "Weapons stockpile competition: Iranian missile/drone production may be prioritized for Iran's own defense over Houthi resupply",
+          "Diplomatic off-ramp pressure: Oman and others may be offering Iran incentives to restrain Houthis as part of broader settlement"
+        ],
+        "overrides": [
+          "If Iran is losing the war significantly (regime-threatening), may order Houthis to escalate as distraction/attrition strategy",
+          "If Iran reaches a ceasefire that includes Yemen, will direct Houthi stand-down"
+        ]
+      },
+      "us_centcom": {
+        "name": "US CENTCOM / DoD",
+        "role": "Deterrence enforcer via Operation Rough Rider. Negotiated the May 6 ceasefire covering US shipping.",
+        "decisionStyle": "Institutional-bureaucratic with political override (Trump White House). CENTCOM prefers clear rules of engagement and defined success criteria. White House prefers transactional deals (May 6 model). Tension: CENTCOM wants to degrade Houthi capacity; White House wants to declare victory and reduce exposure.",
+        "biases": [
+          "Deal-seeking: Trump administration demonstrated willingness to accept partial deals (US-only ceasefire) that leave allies exposed",
+          "Metrics focus: defining success by US shipping safety rather than broader Red Sea stability",
+          "Saudi deference: unlikely to commit ground forces; prefers air campaign and Saudi proxy pressure"
+        ],
+        "filters": [
+          "Congressional pressure on costs/casualties constrains sustained Rough Rider operations",
+          "Carrier availability: if Truman CSG rotates out without replacement, sortie rate drops",
+          "Israeli coordination: US will not act against Houthi interests if it directly undermines Israeli operations"
+        ],
+        "overrides": [
+          "Any Houthi attack on a US naval vessel would trigger immediate and significant escalation",
+          "Any attack on a US-flagged commercial vessel post-May 6 ceasefire would immediately void the deal"
+        ]
+      },
+      "saudi_arabia": {
+        "name": "Saudi Arabia / MBS",
+        "role": "Regional power with direct Yemen stake. Can offer Houthis financial incentives and political legitimacy in exchange for Red Sea restraint. Also has military capacity (air power) to pressure Houthi.",
+        "decisionStyle": "MBS is decisive and transactional. Has been pursuing a Yemen exit since 2022 and has strong incentive to stabilize. Will deal with Houthis if the price is right — has done so before.",
+        "biases": [
+          "Cost-minimization: nine years of Yemen war has been enormously costly; strong preference for any deal over continued conflict",
+          "Normalization priority: Saudi-Israel normalization track competes with Yemen de-escalation for US bandwidth",
+          "Face-saving requirement: cannot be seen domestically as capitulating to Houthis — needs to frame any deal as Houthi compliance"
+        ],
+        "filters": [
+          "Cannot act independently of US on Yemen — dependent on US logistics, intelligence, and political cover",
+          "Oil price sensitivity: Red Sea disruption raises Brent, which benefits Saudi revenue but hurts regional stability narrative"
+        ],
+        "overrides": [
+          "If Houthis attack Saudi oil infrastructure (Aramco pipelines, Ras Tanura), Saudi will re-enter conflict regardless of diplomatic track"
+        ]
+      },
+      "shipping_companies": {
+        "name": "Global Shipping Companies (MSC, Maersk, Hapag-Lloyd, CMA CGM, COSCO)",
+        "role": "Operationalize the outcome — their routing decisions determine transit volume and thus whether H3/H4 are observationally distinguishable from H2.",
+        "decisionStyle": "Risk-actuarial. Route decisions driven by insurance costs, crew safety requirements (ITF guidance), and competitive dynamics (first-mover advantage in returning to Red Sea vs. cost savings of Cape route).",
+        "biases": [
+          "Herd behavior: carriers tend to return en masse once one major player re-routes back — and avoid the route en masse when attacks start",
+          "Underreaction to political screening: companies may not trust that Houthi targeting criteria are stable enough to rely on",
+          "Cape route lock-in: after 18+ months of rerouting, some carriers have adjusted contracts, port calls, and crewing to Cape route — switching costs are now real"
+        ],
+        "filters": [
+          "JWC/Lloyd's war risk premium: if premium exceeds roughly 0.5-0.8% per voyage, most carriers find Cape route economical",
+          "ITF crew safety guidance: seafarer unions will block transits if ITF issues Red Sea travel advisory",
+          "Charterer pressure: cargo owners may demand Cape routing in contracts regardless of carrier preference"
+        ],
+        "overrides": [
+          "If a major carrier loses a vessel to attack after returning to Red Sea, entire industry reverses immediately"
+        ]
+      }
+    },
+    "methodology": [
+      "ACTIONS OVER RHETORIC — only verified UKMTO/AIS-confirmed attacks move posteriors. Houthi statements are tagged RHETORIC and attenuated.",
+      "TAG EVERYTHING — separate EVENT (confirmed attack), DATA (insurance rate, transit count), RHETORIC (Houthi/Iranian statements), INTEL (intelligence-derived), ANALYSIS (OSINT inference).",
+      "DON'T FRONT-RUN — set tripwires on indicators, let news confirm before updating posteriors.",
+      "SOCIALIZATION DETECTION — Houthis often announce shifts before acting. Watch for new framing language ('all shipping' vs 'Zionist shipping') as leading indicator.",
+      "IRAN FILTER — any Houthi shift in posture should be interrogated for Iranian direction. Houthi-autonomous escalation is less stable than Iranian-directed escalation.",
+      "INSURANCE LEADS ATTACKS — war risk premium movements precede attack volume changes. Monitor JWC advisories as early warning."
+    ]
+  },
+
+  "evidenceLog": [
+    {
+      "id": "ev_001",
+      "time": "2025-10-10T00:00:00Z",
+      "text": "Houthis halt attacks on international shipping and Israel following Gaza peace plan implementation. Commercial attacks paused after ~100 incidents since November 2023.",
+      "tags": ["EVENT"],
+      "source": "Wikipedia/multiple wire services, October 2025",
+      "claimState": "OBSERVED",
+      "weight": 1.0,
+      "posteriorImpact": "Strong H3 signal: de facto ceasefire established. Baseline for current posture assessment.",
+      "note": "Founding context. Attack pause was conditional on Gaza peace — not unconditional cessation."
+    },
+    {
+      "id": "ev_002",
+      "time": "2026-01-15T00:00:00Z",
+      "text": "Maersk Line resumes Red Sea transit with successive successful trans-Suez crossings. First major carrier to return since crisis began.",
+      "tags": ["EVENT", "DATA"],
+      "source": "Wikipedia/shipping industry reports, January 2026",
+      "claimState": "OBSERVED",
+      "weight": 1.0,
+      "posteriorImpact": "H3 +signal: major carrier return matches indicator t2_major_carrier_return. Demonstrates commercial confidence in ceasefire durability.",
+      "note": "Maersk returning is a high-conviction market signal — carriers risk vessels worth hundreds of millions."
+    },
+    {
+      "id": "ev_003",
+      "time": "2026-02-28T00:00:00Z",
+      "text": "US-Israel launch strikes on Iran. Iran war begins. Houthis do NOT immediately resume Red Sea attacks — surprising given prior behavior and regional ally mobilization.",
+      "tags": ["EVENT", "INTEL"],
+      "source": "The National, March 17 2026 analysis",
+      "claimState": "OBSERVED",
+      "weight": 1.0,
+      "posteriorImpact": "Ambiguous signal. Non-attack is notable given prior Houthi pattern of joining Iranian-aligned conflicts. Could indicate degraded capability (Rough Rider), Iranian restraint order, or strategic patience.",
+      "note": "Three weeks of silence post-Iran-war-start is anomalous. The National base trust: 0.50 (unknown in source_db)."
+    },
+    {
+      "id": "ev_004",
+      "time": "2026-03-28T00:00:00Z",
+      "text": "Houthis enter Iran war: fire ballistic missiles and drones at Israel. First offensive action since October 2025 pause. Targets are Israeli, NOT commercial shipping.",
+      "tags": ["EVENT"],
+      "source": "The National / multiple wire services, March 28 2026",
+      "claimState": "OBSERVED",
+      "weight": 1.0,
+      "posteriorImpact": "H2 +signal: Houthis re-activate but with selective targeting (Israel only, not commercial). Consistent with H2 (political screening). Does NOT match H1 (indiscriminate) or H3 (continued ceasefire).",
+      "note": "Critical distinction: attacking Israel ≠ attacking commercial shipping. Separate threat vectors."
+    },
+    {
+      "id": "ev_005",
+      "time": "2026-04-08T00:00:00Z",
+      "text": "US-Iran ceasefire agreed April 8. Houthis operating 'Bab al-Mandeb tollbooth' — screening ships via AIS for US/Israel ties, allowing others to pass. Ships transmitting declarations of no US/Israel affiliation. Pattern mirrors Iran's 'Tehran tollbooth' in Strait of Hormuz.",
+      "tags": ["EVENT", "INTEL"],
+      "source": "The National (Arsenio Longo/Huax analytics), April 8 2026",
+      "claimState": "OBSERVED",
+      "weight": 0.85,
+      "posteriorImpact": "NONE pending confirmation. H2-directional: selective screening matches t2_selective_confirmed_pattern definition. However, single specialist source (Huax, not in source_db — trust 0.50), claimState PROPOSED. Indicator requires sustained 60+ day pattern confirmation. Posteriors HOLD until wire service corroboration or second independent source.",
+      "note": "Huax is maritime analytics firm — specialist source but not in source_db. Weight 0.85 reflects domain expertise with limited calibration history."
+    },
+    {
+      "id": "ev_006",
+      "time": "2026-04-08T00:00:00Z",
+      "text": "Lloyd's Market Association: 'Time will tell whether it is a pause or a peace... highly unlikely that trade into the Gulf will simply resume. The region remains at heightened risk with none of the underlying tension resolved.'",
+      "tags": ["ANALYSIS"],
+      "source": "Lloyd's Market Association (Neil Roberts), via The National, April 8 2026",
+      "claimState": "PROPOSED",
+      "weight": 0.5,
+      "posteriorImpact": "NONE — this is ANALYSIS/RHETORIC from insurance industry. Informative for market sentiment but not evidence of Houthi posture change.",
+      "note": "Tagged ANALYSIS. Lloyd's is authoritative on risk pricing but this is assessment, not observed action."
+    },
+    {
+      "id": "ev_007",
+      "time": "2026-04-08T00:00:00Z",
+      "text": "Ali Akbar Velayati (former Iranian FM): 'The unified command of the resistance front views Bab al-Mandeb as it does Hormuz. If the White House dares to repeat its foolish mistakes, the flow of global energy and trade can be disrupted with a single move.'",
+      "tags": ["RHETORIC"],
+      "source": "Velayati social media post, reported by The National",
+      "claimState": "PROPOSED",
+      "weight": 0.25,
+      "posteriorImpact": "NONE — pure RHETORIC. Threat posturing from retired Iranian official. Does not constitute operational intelligence.",
+      "note": "Velayati is influential but no longer in formal command. Statement is deterrence signaling, not operational directive."
+    },
+    {
+      "id": "ev_008",
+      "time": "2026-04-08T00:00:00Z",
+      "text": "Iran pulls navy from Red Sea per ship tracking reports. Reduces direct Iranian naval presence near Houthi operating area.",
+      "tags": ["EVENT", "INTEL"],
+      "source": "Ship and Bunker (industry publication), April 2026",
+      "claimState": "PROPOSED",
+      "weight": 0.6,
+      "posteriorImpact": "Ambiguous. Could signal: (a) Iran reducing escalation risk (H3 lean), (b) Iran ceding Bab al-Mandeb to Houthis as proxy (H2 lean), (c) ceasefire compliance. Single-source — needs confirmation.",
+      "note": "Ship and Bunker not in source_db. Specialist maritime publication. claimState PROPOSED pending wire service confirmation."
+    }
+  ],
+
+  "dataFeeds": {
+    "attack_freq_30d": {
+      "label": "Anti-Ship Attacks (30-day rolling count)",
+      "value": 2,
+      "unit": "verified incidents/month",
+      "baseline": 12,
+      "baseline_note": "Peak campaign rate Jan-Feb 2024",
+      "asOf": "2026-04-11T00:00:00Z",
+      "source": "UKMTO, MARAD, Naval News"
+    },
+    "transit_volume_pct": {
+      "label": "Bab al-Mandeb Weekly Transits (% of Jan 2024 baseline)",
+      "value": 35,
+      "unit": "% of baseline",
+      "baseline": 100,
+      "asOf": "2026-04-11T00:00:00Z",
+      "source": "MarineTraffic AIS, Kpler"
+    },
+    "war_risk_premium": {
+      "label": "Red Sea War Risk Premium (% hull value/voyage)",
+      "value": 0.7,
+      "unit": "% of vessel hull value per voyage",
+      "baseline": 0.05,
+      "baseline_note": "Pre-campaign normal",
+      "asOf": "2026-04-11T00:00:00Z",
+      "source": "Lloyd's Market Association, JWC"
+    },
+    "marad_level": {
+      "label": "MARAD Red Sea Advisory Level",
+      "value": 3,
+      "unit": "threat level 1-4",
+      "baseline": 1,
+      "asOf": "2026-04-11T00:00:00Z",
+      "source": "maritime.dot.gov"
+    },
+    "rough_rider_sorties": {
+      "label": "Operation Rough Rider Sorties/Week (estimated)",
+      "value": 8,
+      "unit": "estimated sorties/week",
+      "baseline": 0,
+      "asOf": "2026-04-11T00:00:00Z",
+      "source": "CENTCOM press releases, OSINT"
+    },
+    "brent_crude": {
+      "label": "Brent Crude ($/bbl)",
+      "value": 98,
+      "unit": "USD/barrel",
+      "baseline": 78,
+      "baseline_note": "Pre-Iran war level (~Jan 2026)",
+      "asOf": "2026-04-11T00:00:00Z",
+      "source": "ICE futures"
+    },
+    "suez_transits_weekly": {
+      "label": "Suez Canal Weekly Transits (absolute)",
+      "value": 38,
+      "unit": "vessels/week",
+      "baseline": 104,
+      "baseline_note": "Pre-campaign weekly average 2023",
+      "asOf": "2026-04-11T00:00:00Z",
+      "source": "Suez Canal Authority, Kpler"
+    }
+  },
+
+  "watchpoints": [
+    {
+      "id": "wp1",
+      "desc": "Iran-US war trajectory — any ceasefire or major escalation directly shifts Houthi strategic calculus. Watch for Omani mediation signals and IAEA/UN involvement.",
+      "urgency": "HIGH",
+      "tripwire": "Any Iran-US ceasefire announcement OR Iranian strike on US carrier/base"
+    },
+    {
+      "id": "wp2",
+      "desc": "Gaza ceasefire status — full re-ignition of Gaza conflict is the most likely trigger for Houthi posture shift from H2/H3 toward H1.",
+      "urgency": "HIGH",
+      "tripwire": "IDF announces major Gaza operation OR Hamas declares ceasefire void"
+    },
+    {
+      "id": "wp3",
+      "desc": "Operation Rough Rider continuity — carrier rotation (Truman CSG relief), Congressional authorization pressure, or ceasefire extension could reduce sortie rate. Lower sorties = permissive environment for H1/H4.",
+      "urgency": "MEDIUM",
+      "tripwire": "CENTCOM announces reduction in Rough Rider operations OR no carrier present in Red Sea for >14 days"
+    },
+    {
+      "id": "wp4",
+      "desc": "First major carrier return to Red Sea routing — if Maersk, MSC, or Hapag-Lloyd announces regular resumption, it signals the industry has internally assessed H3 probability as dominant. This is a predictive market signal.",
+      "urgency": "MEDIUM",
+      "tripwire": "Maersk, MSC, CMA CGM, or Hapag-Lloyd issues formal return-to-Red-Sea advisory to customers"
+    },
+    {
+      "id": "wp5",
+      "desc": "Saudi-Houthi back-channel — any Omani, Qatari, or UN-mediated talks between Saudi Arabia and Houthi that go beyond the existing 2022 Stockholm framework. A deal here would be the most reliable H3 path.",
+      "urgency": "MEDIUM",
+      "tripwire": "Reuters/AP confirms direct Saudi-Houthi talks at senior level (minister or above)"
+    },
+    {
+      "id": "wp6",
+      "desc": "Houthi targeting language shift — watch official Houthi military spokesman (Yahya Sarea) statements for change in targeting framing. Shift from 'Zionist/American shipping' to 'all shipping supporting the enemy' is a reliable pre-attack socialization signal.",
+      "urgency": "MEDIUM",
+      "tripwire": "Yahya Sarea statement explicitly broadening targeting criteria beyond Israeli/US-linked vessels"
+    },
+    {
+      "id": "wp7",
+      "desc": "Iranian munitions resupply to Houthis — watch for USNI/DIA reporting on Iranian dhow shipments, IRGC-QF logistics activity at Hudaydah or Al-Salif port. Stockpile replenishment is a necessary precondition for H4.",
+      "urgency": "LOW",
+      "tripwire": "US/Israeli naval interdiction of Iranian arms shipment to Yemen OR intelligence reporting on stockpile replenishment"
+    }
+  ],
+
+  "searchQueries": [
+    "Houthi Red Sea attack commercial shipping April 2026",
+    "Houthi anti-ship missile drone April 2026",
+    "UKMTO Red Sea incident advisory April 2026",
+    "Bab al-Mandeb transit volume April 2026",
+    "Red Sea shipping insurance Lloyd's JWC war risk 2026",
+    "Operation Rough Rider Yemen airstrikes April 2026",
+    "CENTCOM Yemen statement April 2026",
+    "Houthi ceasefire commercial shipping 2026",
+    "Yahya Sarea statement shipping threat April 2026",
+    "MarineTraffic Bab al-Mandeb transits April 2026",
+    "Maersk MSC Red Sea routing decision 2026",
+    "MARAD Red Sea maritime advisory April 2026",
+    "Iran Houthi weapons resupply 2026",
+    "Oman mediation Houthi shipping deal 2026",
+    "Saudi Arabia Houthi Yemen ceasefire April 2026",
+    "site:defense.gov Yemen Houthi 2026",
+    "site:ukmto.org Red Sea advisory 2026",
+    "site:maritime.dot.gov Red Sea advisory"
+  ],
+
+  "governance": null,
+
+  "dependencies": {
+    "_docs": "Cross-topic dependency declarations. Upstream topics whose posteriors this topic's assumptions depend on.",
+    "upstream": []
+  },
+
+  "predictionScoring": {
+    "_docs": "Calibration infrastructure. Topic resolves July 1 2026. Record observed posture state against H1-H4 definitions in meta.resolution. Compute Brier score against each snapshot.",
+    "snapshots": [],
+    "outcomes": [],
+    "brierScores": []
+  }
+}
