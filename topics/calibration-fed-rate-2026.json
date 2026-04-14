@@ -6,7 +6,7 @@
     "question": "Where will the Federal Reserve target rate be on December 31, 2026?",
     "resolution": "FOMC official target range as announced at or following the December 2026 FOMC meeting (scheduled Dec 9-10, 2026). Resolved against the FOMC statement on federalreserve.gov.",
     "created": "2026-04-11T00:00:00Z",
-    "lastUpdated": "2026-04-12T00:00:00Z",
+    "lastUpdated": "2026-04-14T03:03:00Z",
     "status": "ACTIVE",
     "dayCount": 1,
     "startDate": "2026-04-11T00:00:00Z",
@@ -538,7 +538,10 @@
       "id": "ev_006",
       "time": "2026-04-08T00:00:00Z",
       "text": "FOMC minutes from March 17-18 meeting released. Fed officials 'still saw rate cuts as a possibility' but stressed need to look through Iran war energy shock. Minutes show tension between inflation persistence and growth concerns. Rate hike probability rose to 14% before Iran ceasefire.",
-      "tags": ["EVENT", "FOMC"],
+      "tags": [
+        "EVENT",
+        "FOMC"
+      ],
       "source": "Federal Reserve FOMC Minutes, released April 8 2026",
       "claimState": "OBSERVED",
       "weight": 1.0,
@@ -549,7 +552,9 @@
       "id": "ev_007",
       "time": "2026-04-10T00:00:00Z",
       "text": "March 2026 CPI: headline +0.9% m/m (3.3% YoY) driven by energy +10.9% (Iran war gasoline +21.2%). Core CPI +0.2% m/m (2.6% YoY) — both 0.1pp BELOW consensus. Services ex-energy +0.2% m/m (3.0% YoY). Shelter +0.3% m/m (3.0% YoY, lowest since Aug 2021). Food unchanged. Real earnings -0.6% m/m.",
-      "tags": ["DATA"],
+      "tags": [
+        "DATA"
+      ],
       "source": "BLS CPI release via CNBC, April 10 2026",
       "claimState": "OBSERVED",
       "weight": 1.0,
@@ -560,12 +565,28 @@
       "id": "ev_008",
       "time": "2026-04-10T00:00:00Z",
       "text": "Goldman Sachs Asset Management (Wilson-Elizondo): 'We believe the Fed will look through the energy-driven noise so long as these factors hold. The Fed has room to be patient, and every reason to do so. Today's number buys the Fed time, but the real test lies ahead.'",
-      "tags": ["ANALYSIS"],
+      "tags": [
+        "ANALYSIS"
+      ],
       "source": "Goldman Sachs Asset Management via CNBC, April 10 2026",
       "claimState": "PROPOSED",
       "weight": 0.5,
       "posteriorImpact": "NONE — ANALYSIS tag. Informative for market consensus but does not move posteriors. Confirms 'patient' framing consistent with H1 (no cut) or slow H2.",
       "note": "Goldman is a market participant, not a Fed source. Tagged ANALYSIS per framework rules."
+    },
+    {
+      "id": "ev_009",
+      "time": "2026-04-08T18:00:00Z",
+      "text": "FOMC March meeting minutes released April 8 show more Federal Reserve officials now see possible rate hikes in 2026, driven by Iran-war oil shock and tariff-driven inflation persistence. Fed held at 3.50-3.75% for 2nd consecutive meeting. Median dot plot still signals 1 cut but distribution widening.",
+      "tags": [
+        "POLICY",
+        "DATA"
+      ],
+      "source": "Federal Reserve Board / US News / Axios",
+      "claimState": "SUPPORTED",
+      "weight": 1.0,
+      "posteriorImpact": "NONE. H4-directional (hike scenario). t3_fomc_minutes_dovish requires dovish language - these minutes were hawkish, opposite direction. t1_dot_plot_shift_hawkish requires SEP dot plot to shift to zero cuts - median still shows 1 cut. No indicator fired.",
+      "note": "Multiple officials discussing hikes is a notable shift. Next FOMC May 6-7 with new SEP."
     }
   ],
   "dataFeeds": {
@@ -705,7 +726,19 @@
     "2yr 10yr Treasury yield spread inversion 2026",
     "GDP Q1 2026 advance estimate BEA"
   ],
-  "governance": null,
+  "governance": {
+    "health": "HEALTHY",
+    "issues": [],
+    "entropy": 1.892,
+    "maxEntropy": 2.0,
+    "uncertaintyRatio": 0.946,
+    "evidenceFreshness": {
+      "fresh": 2,
+      "stale": 7,
+      "window": "last_10"
+    },
+    "lastComputed": "2026-04-14T03:03:00Z"
+  },
   "predictionScoring": {
     "_docs": "Calibration infrastructure. Snapshots are auto-created by engine on each posterior update. Record outcome when topic resolves (after Dec 2026 FOMC meeting), then compute_calibration_report() for Brier analysis.",
     "snapshots": [],

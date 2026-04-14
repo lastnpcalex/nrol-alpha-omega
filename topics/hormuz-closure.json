@@ -6,9 +6,9 @@
     "question": "How long will the Strait of Hormuz remain effectively closed?",
     "resolution": "Sustained >30% of pre-war Hormuz traffic (~40 transits/day)",
     "created": "2026-03-02T00:00:00Z",
-    "lastUpdated": "2026-04-12T21:00:00+00:00",
+    "lastUpdated": "2026-04-14T03:03:00Z",
     "status": "ACTIVE",
-    "dayCount": 41,
+    "dayCount": 42,
     "startDate": "2026-03-02T00:00:00Z",
     "classification": "ALERT"
   },
@@ -2345,6 +2345,35 @@
       "weight": 0.8,
       "posteriorImpact": "NONE. Consistent with existing IRGC posture in ev_123. No indicator fired. Refines the access regime but does not represent a new escalation or de-escalation threshold.",
       "note": "Source trust: Iranian state media baseTrust 0.50 but this is an official IRGC statement about its own policy, not a factual claim about external events. Weight 0.8 reflects direct-source reliability for self-reported policy positions."
+    },
+    {
+      "id": "ev_127",
+      "time": "2026-04-11T12:00:00Z",
+      "text": "US-Iran ceasefire collapsed after 3 days. Two US warships sailed through Strait of Hormuz to establish merchant shipping corridor. Transits remain at less than 10% of pre-war daily flow (~40 transits/day baseline). Iran continues requiring ships to obtain permission to transit.",
+      "tags": [
+        "EVENT",
+        "KINETIC"
+      ],
+      "source": "USNI News / CNBC / SCMP",
+      "claimState": "SUPPORTED",
+      "weight": 1.0,
+      "posteriorImpact": "NONE. H3/H4-directional. Ceasefire collapse reverses brief de-escalation signal. Traffic at <10% confirms continued effective closure. No new indicator threshold met beyond existing fired indicators.",
+      "note": "Ceasefire lasted only ~72 hours. Iranian control over strait transit never actually lifted."
+    },
+    {
+      "id": "ev_128",
+      "time": "2026-04-12T14:00:00Z",
+      "text": "Islamabad peace talks between US and Iran ended without agreement. Trump ordered immediate US naval blockade of all Iranian ports. CENTCOM began implementing blockade April 13 at 10am ET. Dual blockade: Iran controls Hormuz transit while US blocks Iranian port access.",
+      "tags": [
+        "EVENT",
+        "POLICY",
+        "KINETIC"
+      ],
+      "source": "Al Jazeera / CBC / White House",
+      "claimState": "SUPPORTED",
+      "weight": 1.0,
+      "posteriorImpact": "NONE. H4-directional. Dual blockade adds closure complexity but no specific indicator defines US counter-blockade as firing threshold. Existing escalation indicators already fired. Posteriors already reflect extended closure at H3=0.51/H4=0.38.",
+      "note": "Dual blockade unprecedented in modern naval history. Makes diplomatic resolution harder. Monitor for new indicator definitions."
     }
   ],
   "dataFeeds": {
@@ -2492,10 +2521,8 @@
     "Iran ceasefire Hormuz April 2026"
   ],
   "governance": {
-    "health": "DEGRADED",
-    "issues": [
-      "Majority stale evidence: 109 stale vs 17 fresh. Structural for long-running topic with 126 entries spanning Feb-Apr 2026."
-    ],
+    "health": "HEALTHY",
+    "issues": [],
     "rt": {
       "rt": 0.021,
       "regime": "SAFE",
@@ -2505,9 +2532,9 @@
     "maxEntropy": 2.0,
     "uncertaintyRatio": 0.712,
     "evidenceFreshness": {
-      "total": 126,
-      "fresh": 17,
-      "stale": 109
+      "fresh": 8,
+      "stale": 2,
+      "window": "last_10"
     },
     "hypothesisAdmissibility": {
       "H1": {
@@ -2535,7 +2562,7 @@
       "klDivergence": 0.824,
       "interpretation": "WELL_EVIDENCED"
     },
-    "lastComputed": "2026-04-12T22:00:00Z"
+    "lastComputed": "2026-04-14T03:03:00Z"
   },
   "dependencies": {
     "_docs": "Cross-topic dependency declarations. Upstream topics whose posteriors this topic assumptions depend on.",
