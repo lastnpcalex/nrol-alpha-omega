@@ -40,6 +40,7 @@ canvas/
 .DS_Store
 Thumbs.db
 *.log
+*.ps1
 node_modules/
 .env
 .env.*
