@@ -528,18 +528,31 @@ python server.py
 
 ### Topic Dashboard (`/`)
 
-The per-topic dashboard auto-detects all topics in `topics/` and renders:
+The landing page is a card grid showing all tracked topics at a glance. Each card displays:
 
-- Posterior distribution bar + historical chart
+- Posterior distribution bar with color-coded hypothesis segments
+- Classification badge (ROUTINE / ELEVATED / ALERT with pulsing animation)
+- Governance health dot + R_t regime badge (computed client-side via governor port)
+- Relative timestamp ("3h ago", "2d ago")
+
+**Sort options** (default: most recently updated): Recently Updated, A-Z, Health, Classification, Uncertainty. Filter by status (Active / All / Resolved) and free-text search.
+
+**Mobile-first responsive layout**: 1 column on phones, 2 on tablets, 3-4 on desktop. Sticky header, 44px+ touch targets.
+
+Click any card to drill into the **topic detail view**, which renders:
+
+- Posterior distribution bar + historical trajectory chart (canvas)
 - Sub-models with scenarios, deadlines, and conditional probabilities
-- Indicator status across all tiers (with fired/pending states)
+- Epistemic governor health (R_t regime, entropy, freshness, admissibility, issues)
+- Indicator status across all tiers (with fired/pending states and pre-committed effects)
 - Data feeds with baseline deltas
-- Evidence log (latest 20, color-coded by tag)
+- Evidence log (latest 20, color-coded by tag with full provenance)
 - Actor model and methodology rules
-- Epistemic governor health (R_t regime, entropy, admissibility, issues)
-- Value of Information priority queries
+- Calibration score (Brier) for resolved topics with trajectory bars
+- Key watchpoints
+- Activity ticker (recent pipeline events)
 
-Select topics from the dropdown. Auto-refreshes every 60 seconds.
+Back button returns to the dashboard. Deep links via URL hash (`#hormuz-closure`). Auto-refreshes every 60 seconds.
 
 ### Mirror Dashboard (`/mirror`)
 
@@ -568,7 +581,7 @@ Additional features over the server dashboards:
 - **Prediction tracking**: evidence entries with PREDICTION tags carry structured claims with resolution criteria and deadlines; the `/resolve` skill sweeps expired predictions and fires source calibration with minimum-sample guards
 - **Cold storage**: IGNORE'd pipeline evidence is written to `evidence-cold.json` with full provenance (claims, domains, actors, regions, keywords) for retroactive matching when new topics are created
 - **Activity feed**: real-time audit trail of all pipeline actions (evidence logged, posteriors shifted, sources calibrated, predictions resolved)
-- **Mandatory pipeline branching**: all triggers create a git branch before modifying files — no exceptions, regardless of invocation context
+- **Mandatory loom branching**: all triggers create a loom branch before modifying files — no exceptions, regardless of invocation context
 - **Governor-enforced triggers**: prompt templates in `loom/triggers/` that enforce the 5-tier trust chain, rhetoric-vs-evidence lint, claim lifecycle weights, and branch isolation
 
 Setup: `cp -r loom/* canvas/` then copy topic files and `sources/source_db.json` into the canvas. See [`LOOM.md`](LOOM.md).
