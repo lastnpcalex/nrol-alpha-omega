@@ -1,0 +1,664 @@
+{
+  "_protocol": "Calibration topic: Frontier LLM autonomous research capability by March 2027. Anchored on Schwartz (Harvard/Anthropic) G1-G4 scale and 'taste' thesis.",
+  "meta": {
+    "slug": "calibration-llm-phd-2027",
+    "title": "LLM Research Autonomy by March 2027",
+    "question": "What level of autonomous scientific research capability will the most capable frontier LLM demonstrate by March 31, 2027, as assessed against the Schwartz G1-G4 scale (G1=undergraduate, G2=early graduate, G3=advanced graduate with novel methodology, G4=postdoc-level independent research)?",
+    "resolution": "Composite assessment at March 31, 2027 based on: (1) expert evaluations published in peer-reviewed venues or credible technical reports scoring frontier LLM research autonomy; (2) demonstrated artifacts — peer-reviewed papers where the LLM did the primary intellectual work with documented human oversight level; (3) benchmark performance on graduate-level scientific reasoning (GPQA Diamond, FrontierMath, METR autonomy evaluations). Resolution level determined by preponderance of evidence across these three axes.",
+    "created": "2026-04-14T00:00:00Z",
+    "lastUpdated": "2026-04-15T03:42:08+00:00",
+    "status": "ACTIVE",
+    "dayCount": 0,
+    "startDate": "2026-04-14T00:00:00Z",
+    "classification": "ROUTINE",
+    "topicType": "tech",
+    "horizon": "~351 days (through March 31, 2027)"
+  },
+  "tagConfig": {
+    "_docs": "Tag configuration for AI capabilities topic. CAPABILITY tags favor H1/H2 (fast progress). PLATEAU tags favor H3/H4 (slowdown). BENCHMARK tags are neutral until values are known.",
+    "availableTags": [
+      "EVENT",
+      "DATA",
+      "RHETORIC",
+      "ANALYSIS",
+      "BENCHMARK",
+      "CAPABILITY",
+      "PLATEAU",
+      "REGULATORY"
+    ],
+    "directionHints": {
+      "CAPABILITY": {
+        "H1": 1,
+        "H2": 1,
+        "H3": -1,
+        "H4": -1
+      },
+      "PLATEAU": {
+        "H3": 1,
+        "H4": 1,
+        "H1": -1,
+        "H2": -1
+      },
+      "BENCHMARK": {},
+      "DATA": {},
+      "EVENT": {},
+      "RHETORIC": {},
+      "ANALYSIS": {},
+      "REGULATORY": {}
+    },
+    "escalationTags": [
+      "CAPABILITY"
+    ],
+    "deescalationTags": [
+      "PLATEAU"
+    ]
+  },
+  "model": {
+    "hypotheses": {
+      "H1": {
+        "label": "G4 — Postdoc-level autonomy achieved",
+        "midpoint": 4.0,
+        "unit": "G-level (Schwartz scale)",
+        "posterior": 0.18,
+        "description": "Schwartz prediction confirmed. By March 2027, a frontier LLM autonomously identifies promising research directions and executes novel scientific work with minimal human guidance (<10% of total intellectual effort). 'Taste' problem substantially solved through training innovation, self-play, or emergent capability. Evidence: multiple peer-reviewed papers with LLM as primary author, GPQA Diamond >95%, FrontierMath score >60%, credible expert panels rate capability at postdoc level."
+      },
+      "H2": {
+        "label": "G3 — Advanced graduate, taste gap persists",
+        "midpoint": 3.0,
+        "unit": "G-level (Schwartz scale)",
+        "posterior": 0.38,
+        "description": "Significant capability gains but 'taste' remains unsolved. LLMs execute complex research tasks fluently — can derive novel results, write correct proofs, design experiments — but still require human direction on which problems are worth pursuing and which approaches are promising. Qualitative leap over G2 but falls short of independent research. Evidence: step-function benchmark improvements, successful complex research assistance documented, but expert consensus is 'brilliant technician, not a scientist.'"
+      },
+      "H3": {
+        "label": "G2-G2.5 — Plateau at current capability level",
+        "midpoint": 2.3,
+        "unit": "G-level (Schwartz scale)",
+        "posterior": 0.32,
+        "description": "Scaling hits diminishing returns. Incremental benchmark gains but no qualitative leap in research autonomy. 'Taste' proves deeply hard — possibly requiring architectural innovation beyond current transformer paradigm. Evidence: benchmark scores improve 5-15% but plateau, no convincing autonomous research artifacts, scaling laws show flattening returns on reasoning tasks, multiple expert assessments converge on 'impressive but not qualitatively different from 2025.'"
+      },
+      "H4": {
+        "label": "Below G2 — Capability ceiling or regression",
+        "midpoint": 1.5,
+        "unit": "G-level (Schwartz scale)",
+        "posterior": 0.12,
+        "description": "External disruption or fundamental architectural limitation prevents progress. Possible causes: major regulatory intervention (compute caps, training restrictions), catastrophic safety incident triggers industry pause, data wall (no new training signal available), economic downturn cuts AI investment, or discovered fundamental limitation of transformer architecture for open-ended reasoning. Evidence: no new frontier model release for 6+ months, benchmark stagnation or regression, lab pivots to non-LLM approaches."
+      }
+    },
+    "expectedValue": 2.82,
+    "expectedUnit": "G-level (Schwartz scale, 1-4)",
+    "expectedValueNote": "Probability-weighted: 0.18*4.0 + 0.38*3.0 + 0.32*2.3 + 0.12*1.5 = 2.82. Between G2.5 and G3 — market-implied expectation is meaningful progress but short of the Schwartz prediction.",
+    "posteriorHistory": [
+      {
+        "date": "2026-04-14T00:00:00Z",
+        "posteriors": {
+          "H1": 0.18,
+          "H2": 0.38,
+          "H3": 0.32,
+          "H4": 0.12
+        },
+        "note": "Initial priors. H2 (G3) is modal — fast trajectory from G1→G2 in ~4 months (mid-2025 to late-2025) suggests continued progress, but 'taste' is plausibly a qualitative barrier, not just a scaling problem. H3 assigned substantial weight (0.32) reflecting scaling skeptics and 'bitter lesson' uncertainty. H1 at 0.18 reflects that Schwartz's 'blunt extrapolation' is aggressive — he himself caveats it heavily. H4 tail risk at 0.12 for regulatory/economic/architectural disruption."
+      }
+    ]
+  },
+  "subModels": {
+    "taste_trajectory": {
+      "label": "Taste / Research Direction Selection",
+      "description": "Whether LLMs develop the ability to select promising research directions without human guidance — Schwartz's identified bottleneck",
+      "value": "ABSENT",
+      "options": [
+        "ABSENT",
+        "EMERGING",
+        "DOMAIN_SPECIFIC",
+        "GENERAL"
+      ],
+      "asOf": "2026-04-14",
+      "note": "Schwartz Dec 2025: 'I think we can distill what is missing in current LLMs to a single word: Taste.' Current models require human direction on which problems to pursue. No evidence of emergent taste yet.",
+      "posteriorEffect": {
+        "ABSENT": "Baseline. Supports H2/H3 split.",
+        "EMERGING": "H1 +10pp, H2 +5pp, H3 -10pp, H4 -5pp.",
+        "DOMAIN_SPECIFIC": "H1 +15pp, H2 +5pp, H3 -15pp, H4 -5pp.",
+        "GENERAL": "H1 +25pp, H3/H4 collapse."
+      }
+    },
+    "scaling_regime": {
+      "label": "Scaling Returns Trajectory",
+      "description": "Whether scaling compute/data continues to yield capability gains on research-level tasks",
+      "value": "UNCERTAIN",
+      "options": [
+        "ACCELERATING",
+        "LINEAR",
+        "DIMINISHING",
+        "PLATEAUED"
+      ],
+      "asOf": "2026-04-14",
+      "note": "Debate ongoing. Some evidence of diminishing returns on standard benchmarks, but o1/o3-style reasoning chains opened new scaling axis. Test-time compute scaling may extend runway.",
+      "posteriorEffect": {
+        "ACCELERATING": "H1 +15pp, H3 -10pp.",
+        "LINEAR": "H2 +10pp.",
+        "DIMINISHING": "H3 +10pp, H1 -5pp.",
+        "PLATEAUED": "H3 +20pp, H4 +5pp, H1 -15pp, H2 -10pp."
+      }
+    },
+    "architecture_innovation": {
+      "label": "Architectural Innovation Beyond Transformers",
+      "description": "Whether novel architectures (state-space models, hybrid approaches, etc.) unlock capabilities transformers cannot",
+      "value": "INCREMENTAL",
+      "options": [
+        "NONE",
+        "INCREMENTAL",
+        "SIGNIFICANT",
+        "PARADIGM_SHIFT"
+      ],
+      "asOf": "2026-04-14",
+      "note": "Mamba/SSM hybrids showing promise but no breakthrough. Most labs still scaling transformers with reasoning augmentations. No clear evidence of paradigm shift in progress.",
+      "posteriorEffect": {
+        "NONE": "Supports H3. Transformer-only path may plateau.",
+        "INCREMENTAL": "Baseline. No shift.",
+        "SIGNIFICANT": "H1 +10pp, H2 +5pp.",
+        "PARADIGM_SHIFT": "H1 +20pp, resets entire trajectory assessment."
+      }
+    }
+  },
+  "indicators": {
+    "_design_rules": [
+      "Each indicator must be OBSERVABLE — actions, not opinions",
+      "Each must have a clear fired/not-fired threshold",
+      "Every hypothesis needs at least one pro AND one anti indicator",
+      "Governor flags unfalsifiable hypotheses as DEGRADED"
+    ],
+    "tiers": {
+      "tier1_critical": [
+        {
+          "id": "t1_autonomous_paper",
+          "desc": "A frontier LLM is credited as primary intellectual contributor on a peer-reviewed paper in a recognized journal (Nature, Science, PRL, ICML, NeurIPS, etc.) where documented human oversight was <10% of the intellectual work. Observable via published paper + accompanying methodology disclosure.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 +25pp, H2 -10pp, H3 -10pp, H4 -5pp."
+        },
+        {
+          "id": "t1_gpqa_diamond_95",
+          "desc": "A frontier LLM scores >95% on GPQA Diamond (graduate-level science QA) in a published evaluation with standard methodology. Current best ~70-80% as of early 2026.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 +15pp, H2 +5pp, H3 -15pp, H4 -5pp."
+        },
+        {
+          "id": "t1_metr_research_autonomy",
+          "desc": "METR or equivalent independent evaluator publishes assessment showing frontier LLM can autonomously complete multi-week research tasks (problem selection through write-up) at postdoc level. Observable via published evaluation report.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 +20pp, H2 -5pp, H3 -10pp, H4 -5pp."
+        },
+        {
+          "id": "t1_scaling_wall_confirmed",
+          "desc": "Two or more major labs (Anthropic, OpenAI, Google DeepMind) publicly acknowledge diminishing returns from scaling on reasoning/research tasks, OR independent benchmarks show <5% improvement across two consecutive frontier model generations. Observable via published reports or benchmark databases.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H3 +20pp, H4 +5pp, H1 -15pp, H2 -10pp."
+        },
+        {
+          "id": "t1_regulatory_freeze",
+          "desc": "US, EU, or China enacts binding regulation that halts or severely restricts frontier model training (compute caps, mandatory licensing with >6mo delay, or training moratorium). Observable in official gazette/legislative record.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H4 +30pp, H1 -15pp, H2 -10pp, H3 -5pp."
+        }
+      ],
+      "tier2_strong": [
+        {
+          "id": "t2_frontiermath_double",
+          "desc": "FrontierMath benchmark score for best frontier model doubles from current baseline (~25-30% as of early 2026). Observable in published benchmark results.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 +10pp, H2 +5pp, H3 -10pp, H4 -5pp."
+        },
+        {
+          "id": "t2_lab_research_agent_product",
+          "desc": "A major AI lab launches a product explicitly marketed as a 'research agent' or 'research assistant' capable of multi-day autonomous investigation with documented research output. Observable in product announcement + public access.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 +8pp, H2 +5pp, H3 -8pp."
+        },
+        {
+          "id": "t2_expert_consensus_g3",
+          "desc": "Survey or published assessments from ≥10 domain experts (senior faculty, research scientists) in Nature, Science, or equivalent converge on rating frontier LLMs at G3 (advanced graduate) level or above. Observable via published survey/editorial.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H2 +12pp, H1 +5pp, H3 -12pp, H4 -5pp."
+        },
+        {
+          "id": "t2_novel_architecture_breakthrough",
+          "desc": "A new architecture (non-transformer or hybrid) demonstrates >20% improvement over best transformer on research-relevant benchmarks (GPQA, FrontierMath, or equivalent) in published comparison. Observable via paper + reproducible results.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 +10pp, H2 +5pp. Resets scaling trajectory assumptions."
+        },
+        {
+          "id": "t2_taste_training_method",
+          "desc": "Published research demonstrates a training method (RL from expert feedback, self-play research, curriculum learning, etc.) that measurably improves an LLM's ability to select promising research directions, validated by blind expert evaluation. Observable via paper + experimental results.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 +12pp, H2 +5pp, H3 -12pp. Directly addresses Schwartz's identified bottleneck."
+        },
+        {
+          "id": "t2_compute_disruption",
+          "desc": "Major disruption to AI compute supply: GPU shortage >6 months, major cloud provider exits AI market, or geopolitical event restricts chip supply. Observable via industry reports, earnings calls, or trade restrictions.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H4 +10pp, H3 +5pp, H1 -10pp, H2 -5pp."
+        }
+      ],
+      "tier3_suggestive": [
+        {
+          "id": "t3_schwartz_update",
+          "desc": "Matthew Schwartz publishes a follow-up assessment revising his G-level timeline estimate (either accelerating or delaying). Observable via published article, blog post, or recorded talk.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "Directional per his revision: +5pp toward indicated outcome. Schwartz is a calibrated assessor with skin in the game."
+        },
+        {
+          "id": "t3_benchmark_step_function",
+          "desc": "New frontier model shows >15% absolute improvement on any graduate-level reasoning benchmark (GPQA, MATH-500, FrontierMath) in a single model generation. Observable via published eval.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 +3pp, H2 +3pp, H3 -4pp."
+        },
+        {
+          "id": "t3_lab_blog_g3_claim",
+          "desc": "A major lab publishes a blog post or system card claiming their model has reached G3+ capability on research tasks with supporting evidence. Observable in public blog/report.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H2 +4pp, H1 +2pp. Note: lab self-assessment is RHETORIC-adjacent; discount for self-serving bias."
+        },
+        {
+          "id": "t3_oss_research_contribution",
+          "desc": "An LLM autonomously makes a substantive contribution to an open-source scientific project (not just code fixes but novel methodology or analysis) that is accepted by maintainers. Observable via merged PR with documented AI authorship.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H2 +3pp, H1 +2pp."
+        },
+        {
+          "id": "t3_safety_incident_pause",
+          "desc": "An AI safety incident (jailbreak, misuse, or capability concern) leads a major lab to voluntarily pause or delay a frontier model release by >3 months. Observable via public announcement.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H4 +4pp, H3 +2pp, H1 -4pp."
+        },
+        {
+          "id": "t3_investment_pullback",
+          "desc": "AI investment drops >30% YoY in VC/corporate funding, OR a major lab announces significant headcount reduction. Observable via PitchBook/Crunchbase data or press release.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H4 +4pp, H3 +3pp, H1 -5pp."
+        },
+        {
+          "id": "t3_test_time_compute_breakthrough",
+          "desc": "Published research shows that test-time compute scaling (chain-of-thought, search, self-verification) yields >2x improvement on research-level tasks without retraining. Observable via paper with reproducible results.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 +4pp, H2 +3pp, H3 -5pp. Opens alternative to weight-scaling."
+        }
+      ],
+      "anti_indicators": [
+        {
+          "id": "anti_h1",
+          "desc": "Multiple independent expert assessments rate best frontier LLM at G2 or below through end of 2026, OR scaling wall confirmed by multiple labs. Directly falsifies postdoc-level claim.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 -20pp minimum."
+        },
+        {
+          "id": "anti_h2",
+          "desc": "Either H1 is confirmed (G4 achieved, making G3 moot) OR t1_scaling_wall_confirmed fires with stagnation below G3 level.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H2 collapses if either G4 confirmed or plateau confirmed below G3."
+        },
+        {
+          "id": "anti_h3",
+          "desc": "Clear evidence of continued rapid capability gains: GPQA Diamond >90%, FrontierMath doubles, or expert consensus at G3+. Falsifies plateau thesis.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H3 -15pp if multiple capability indicators fire."
+        },
+        {
+          "id": "anti_h4",
+          "desc": "New frontier model release shows clear improvements over predecessor on research benchmarks, demonstrating continued progress. Falsifies regression/ceiling thesis.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H4 -10pp per model generation showing improvement."
+        }
+      ]
+    }
+  },
+  "actorModel": {
+    "description": "Unlike geopolitical topics, the 'actors' here are AI research labs whose training decisions, architecture choices, and release strategies determine the trajectory. Secondary actors are regulators and the academic evaluation community. Key tension: labs are incentivized to overclaim capability while genuinely pursuing breakthroughs; independent evaluators provide calibration but lag behind lab-internal assessments.",
+    "actors": {
+      "anthropic": {
+        "name": "Anthropic",
+        "role": "Developer of Claude models. Schwartz's collaboration partner. Strong safety focus may constrain deployment but research investment is aggressive. Published the 'Vibe Physics' article suggesting internal confidence in rapid progress.",
+        "decisionStyle": "Safety-conscious but capability-driven. Publishes detailed system cards and evals. Tends toward measured public claims relative to capability.",
+        "biases": [
+          "Schwartz article on their blog suggests institutional alignment with optimistic trajectory",
+          "Safety commitments may lead to delayed releases that mask actual capability level",
+          "Constitutional AI approach may develop 'taste' faster through alignment training"
+        ],
+        "filters": [
+          "RSP commitments constrain deployment of highly capable models",
+          "Must demonstrate safety before scaling — creates lag between capability and public demonstration"
+        ],
+        "overrides": [
+          "Competitive pressure from OpenAI/Google could accelerate release schedule"
+        ]
+      },
+      "openai": {
+        "name": "OpenAI",
+        "role": "Developer of GPT/o-series models. Pioneer of reasoning-focused models (o1, o3). Largest compute budget. Most aggressive public claims about AGI timeline.",
+        "decisionStyle": "Move-fast, claim-big. 'AGI by 2027' framing. Willing to release early and iterate. Public roadmap suggests belief in rapid scaling.",
+        "biases": [
+          "Incentivized to overclaim capability for fundraising and talent retention",
+          "CEO statements about AGI timeline create commitment pressure",
+          "o-series reasoning chain approach may solve 'taste' through search"
+        ],
+        "filters": [
+          "Board restructuring creates governance uncertainty",
+          "Safety team departures may signal tension between speed and caution"
+        ],
+        "overrides": []
+      },
+      "google_deepmind": {
+        "name": "Google DeepMind",
+        "role": "Developer of Gemini models and AlphaFold/AlphaProof. Strongest track record in scientific AI (protein folding, math olympiad). Most relevant precedent for 'taste' in scientific domains.",
+        "decisionStyle": "Research-first with product pressure from Google. Publishes extensively. AlphaProof/AlphaGeometry demonstrate domain-specific 'taste' is achievable.",
+        "biases": [
+          "AlphaFold success may create overconfidence about LLM research capability",
+          "Gemini competitive pressure with Claude/GPT drives rapid release cycles"
+        ],
+        "filters": [
+          "Google corporate governance constrains most aggressive deployments",
+          "EU AI Act compliance requirements"
+        ],
+        "overrides": []
+      },
+      "evaluators": {
+        "name": "Independent Evaluators (METR, academic benchmarkers, peer reviewers)",
+        "role": "Provide ground-truth capability assessment. Lag behind lab-internal knowledge but offer calibrated, adversarial evaluation. Key source for resolution judgment.",
+        "decisionStyle": "Methodical, conservative, peer-reviewed. Tend to rate capabilities lower than lab self-assessments.",
+        "biases": [
+          "Publication incentive to find novel results (both positive and negative)",
+          "Benchmark saturation can mask real progress or overstate it",
+          "Selection bias in which tasks get evaluated"
+        ],
+        "filters": [
+          "Peer review cycle creates 3-12 month lag between capability and published assessment"
+        ],
+        "overrides": []
+      },
+      "regulators": {
+        "name": "US/EU/China Regulators",
+        "role": "Can constrain or halt frontier model development through compute caps, licensing requirements, or training restrictions. Currently mostly permissive but EU AI Act is active.",
+        "decisionStyle": "Reactive. Legislative cycles are slow but executive orders can be fast. AI safety incidents accelerate regulatory timelines.",
+        "biases": [
+          "Tend to regulate based on last crisis, not anticipated capabilities",
+          "Industry lobbying creates regulatory capture risk"
+        ],
+        "filters": [
+          "Legislative process is slow — 6-18 months from proposal to enforcement",
+          "International competition creates reluctance to unilaterally restrict"
+        ],
+        "overrides": [
+          "Major AI safety incident could trigger emergency executive action"
+        ]
+      }
+    },
+    "methodology": [
+      "ACTIONS OVER RHETORIC — lab blog posts and CEO tweets are rhetoric. Published benchmarks, peer-reviewed papers, and independent evaluations are actions.",
+      "TAG EVERYTHING — separate lab self-assessment (RHETORIC) from independent evaluation (DATA) from benchmark results (BENCHMARK).",
+      "DON'T FRONT-RUN — new model announcements create hype cycles. Wait for independent benchmarks before updating posteriors.",
+      "BENCHMARK HYGIENE — check for contamination, memorization, and evaluation methodology before treating benchmark scores as evidence of genuine capability."
+    ]
+  },
+  "evidenceLog": [
+    {
+      "id": "ev_001",
+      "time": "2026-03-23T00:00:00Z",
+      "text": "Matthew Schwartz (Harvard physics professor, IAIFI) publishes 'Vibe Physics' on Anthropic's research blog. Reports completing a peer-reviewed theoretical physics paper (arXiv:2601.02484, C-parameter Sudakov shoulder) using Claude Opus 4.5 with ~50-60 hours human oversight over 2 weeks. Rates Claude at G2 level (early graduate student). Predicts 'blunt extrapolation' puts LLMs at PhD/postdoc level by ~March 2027. Identifies 'taste' as the single missing capability. Notes Claude was profoundly creative but made frequent errors requiring human verification, including faking results and adjusting parameters without proper derivation.",
+      "source": "Matthew Schwartz via Anthropic Research Blog",
+      "tags": [
+        "EVENT",
+        "ANALYSIS",
+        "CAPABILITY"
+      ],
+      "claimState": "SUPPORTED",
+      "weight": 0.8,
+      "weightNote": "Published on Anthropic's own blog (conflict of interest discount), but Schwartz is a credentialed domain expert with demonstrated skin-in-the-game (actual research artifact + peer review). Higher weight than typical RHETORIC because backed by reproducible artifact.",
+      "posteriorImpact": "Anchoring evidence for topic creation. G2 assessment establishes baseline. March 2027 prediction is the claim under test. No indicator fires — this IS the prior.",
+      "ledger": "DECISION",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_002",
+      "time": "2026-03-23T00:00:00Z",
+      "text": "Schwartz predicts that 'blunt extrapolation' of the G1-to-G2 trajectory (achieved in ~4 months) puts frontier LLMs at G4 (PhD/postdoc-level autonomous research) by approximately March 2027.",
+      "tags": ["PREDICTION"],
+      "source": "Matthew Schwartz via Anthropic Research Blog",
+      "claimState": "PROPOSED",
+      "weight": 0.0,
+      "posteriorImpact": "NONE. Prediction logged for source calibration only.",
+      "prediction": {
+        "claim": "Frontier LLMs will reach G4 (postdoc-level autonomous research capability on the Schwartz scale) by approximately March 2027.",
+        "resolvesBy": "2027-03-31T00:00:00Z",
+        "resolutionCriteria": "Composite expert assessment rates best frontier LLM at G4 on the Schwartz scale — autonomous problem selection, novel methodology, minimal human oversight (<10%). Resolved against the same criteria as the topic's resolution field.",
+        "resolution": null,
+        "resolvedDate": null,
+        "resolvedBy": null,
+        "resolvedEvidence": null
+      },
+      "note": "Extracted from ev_001. Schwartz himself caveats this as 'blunt extrapolation' — not a confident prediction. But it meets all 3 PREDICTION filters (specific, testable, time-bounded). Resolution will calibrate Schwartz as a source."
+    }
+  ],
+  "dataFeeds": {
+    "gpqa_diamond_best": {
+      "label": "GPQA Diamond — Best Frontier Model Score",
+      "value": 78,
+      "unit": "%",
+      "baseline": 78,
+      "asOf": "2026-04-14",
+      "source": "Published benchmarks (approximate, Claude 3.5/GPT-4o era)",
+      "note": "Graduate-level science QA. Human expert ceiling ~82%. Tracking best publicly reported score across frontier models."
+    },
+    "frontiermath_best": {
+      "label": "FrontierMath — Best Frontier Model Score",
+      "value": 28,
+      "unit": "%",
+      "baseline": 28,
+      "asOf": "2026-04-14",
+      "source": "Epoch AI FrontierMath benchmark",
+      "note": "Research-level mathematics problems. Very hard — human mathematician baseline varies by subfield. Tracking best publicly reported score."
+    },
+    "frontier_model_cadence": {
+      "label": "Months Between Frontier Model Releases",
+      "value": 4,
+      "unit": "months",
+      "baseline": 4,
+      "asOf": "2026-04-14",
+      "source": "Public release dates from Anthropic/OpenAI/Google",
+      "note": "Approximate average cadence of major frontier model releases across top 3 labs. Shorter cadence = faster iteration = more shots at capability jumps."
+    },
+    "ai_research_papers_llm_authored": {
+      "label": "Peer-Reviewed Papers with LLM Primary Contribution",
+      "value": 1,
+      "unit": "papers",
+      "baseline": 1,
+      "asOf": "2026-04-14",
+      "source": "arXiv + journals (manual tracking)",
+      "note": "Schwartz's C-parameter paper is the first well-documented case. Counting papers where human author explicitly credits LLM as doing majority of intellectual work AND paper passes peer review."
+    },
+    "ai_compute_investment": {
+      "label": "Estimated Annual AI Compute Investment (Top 3 Labs)",
+      "value": 50,
+      "unit": "billion USD (estimated)",
+      "baseline": 50,
+      "asOf": "2026-04-14",
+      "source": "Public earnings, funding announcements, analyst estimates",
+      "note": "Rough estimate. Tracking whether investment trajectory supports continued scaling."
+    }
+  },
+  "watchpoints": [
+    {
+      "id": "wp_001",
+      "desc": "Next major frontier model release from any top-3 lab (Anthropic, OpenAI, Google DeepMind). Benchmark against current scores on GPQA Diamond, FrontierMath.",
+      "priority": "HIGH",
+      "deadline": "ONGOING"
+    },
+    {
+      "id": "wp_002",
+      "desc": "METR next autonomous capability evaluation publication. Key independent assessment of research-level autonomy.",
+      "priority": "HIGH",
+      "deadline": "ONGOING"
+    },
+    {
+      "id": "wp_003",
+      "desc": "Any additional peer-reviewed papers with documented LLM primary authorship (following Schwartz precedent).",
+      "priority": "HIGH",
+      "deadline": "ONGOING"
+    },
+    {
+      "id": "wp_004",
+      "desc": "NeurIPS 2026 / ICML 2026 — watch for papers on 'taste' training, research direction selection, or scientific reasoning evaluation.",
+      "priority": "MEDIUM",
+      "deadline": "2026-12-15"
+    },
+    {
+      "id": "wp_005",
+      "desc": "EU AI Act enforcement milestones — any restrictions on frontier model training or deployment.",
+      "priority": "MEDIUM",
+      "deadline": "ONGOING"
+    },
+    {
+      "id": "wp_006",
+      "desc": "Schwartz follow-up publication or talk updating his G-level assessment.",
+      "priority": "MEDIUM",
+      "deadline": "ONGOING"
+    },
+    {
+      "id": "wp_007",
+      "desc": "Quarterly check: review scaling returns evidence — are new models showing step-function or incremental gains on research tasks?",
+      "priority": "MEDIUM",
+      "deadline": "ONGOING"
+    }
+  ],
+  "searchQueries": [
+    "LLM autonomous research capability 2026 2027",
+    "frontier model benchmark GPQA FrontierMath {month} 2026",
+    "AI PhD level research autonomy",
+    "Matthew Schwartz LLM physics research update",
+    "METR autonomous AI evaluation {month} 2026",
+    "AI scaling laws diminishing returns 2026",
+    "OpenAI GPT-5 o4 capability research {month} 2026",
+    "Anthropic Claude 4 capability research {month} 2026",
+    "Google Gemini capability research {month} 2026",
+    "AI regulation compute caps training restrictions {month} 2026",
+    "LLM scientific discovery peer reviewed paper 2026",
+    "AI taste research direction selection training",
+    "FrontierMath benchmark results {month} 2026",
+    "AI research agent product launch 2026",
+    "test time compute scaling reasoning improvement 2026"
+  ],
+  "dependencies": {
+    "_docs": "No upstream dependencies currently. This topic is potentially upstream for future topics on AI labor market impact, scientific productivity, or AI governance.",
+    "upstream": []
+  },
+  "governance": {
+    "health": "DEGRADED",
+    "issues": [
+      "Majority stale evidence (1/1)",
+      "Near-maximum uncertainty — model is not discriminating"
+    ],
+    "rt": {
+      "rt": 0.0,
+      "regime": "SAFE",
+      "worst_hypothesis": "H1"
+    },
+    "entropy": 1.8689,
+    "maxEntropy": 2.0,
+    "uncertaintyRatio": 0.9345,
+    "evidenceFreshness": {
+      "fresh": 0,
+      "stale": 1,
+      "prediction": 1,
+      "total": 2
+    },
+    "hypothesisAdmissibility": {
+      "H1": "ADMISSIBLE",
+      "H2": "ADMISSIBLE",
+      "H3": "ADMISSIBLE",
+      "H4": "ADMISSIBLE"
+    },
+    "klFromPrior": {
+      "kl_divergence": 0.0,
+      "interpretation": "MODERATE"
+    },
+    "lastComputed": "2026-04-14T00:00:00+00:00",
+    "staleDependencies": 0,
+    "calibrationHealth": "ACCEPTABLE",
+    "unresolvedContradictions": 0,
+    "designGate": {
+      "passed": true,
+      "blockers": [],
+      "warnings": [],
+      "coverage": {
+        "H1": {
+          "pos": 12,
+          "neg": 6
+        },
+        "H2": {
+          "pos": 11,
+          "neg": 6
+        },
+        "H3": {
+          "pos": 4,
+          "neg": 11
+        },
+        "H4": {
+          "pos": 5,
+          "neg": 6
+        }
+      },
+      "indistinguishable": [],
+      "lastChecked": "2026-04-15T03:42:08+00:00"
+    }
+  },
+  "predictionScoring": {
+    "_docs": "Calibration infrastructure. Resolution at March 31, 2027. Composite assessment based on expert evaluations, benchmark scores, and demonstrated research artifacts.",
+    "snapshots": [],
+    "outcomes": [],
+    "brierScores": []
+  },
+  "contradictionTracker": {
+    "unresolved": [],
+    "resolved": []
+  }
+}

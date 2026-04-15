@@ -6,9 +6,9 @@
     "question": "How long will the Strait of Hormuz remain effectively closed?",
     "resolution": "Sustained >30% of pre-war Hormuz traffic (~40 transits/day)",
     "created": "2026-03-02T00:00:00Z",
-    "lastUpdated": "2026-04-14T03:03:00Z",
+    "lastUpdated": "2026-04-14T03:20:00Z",
     "status": "ACTIVE",
-    "dayCount": 42,
+    "dayCount": 43,
     "startDate": "2026-03-02T00:00:00Z",
     "classification": "ALERT"
   },
@@ -2374,6 +2374,61 @@
       "weight": 1.0,
       "posteriorImpact": "NONE. H4-directional. Dual blockade adds closure complexity but no specific indicator defines US counter-blockade as firing threshold. Existing escalation indicators already fired. Posteriors already reflect extended closure at H3=0.51/H4=0.38.",
       "note": "Dual blockade unprecedented in modern naval history. Makes diplomatic resolution harder. Monitor for new indicator definitions."
+    },
+    {
+      "id": "ev_129",
+      "time": "2026-04-14T16:00:00Z",
+      "text": "CENTCOM reports first 24 hours of US naval blockade: 6 merchant ships turned around and returned to Iranian ports after encountering blockade. No ships made it past. 10,000+ US service members and 12 Navy ships enforcing blockade 'against vessels of all nations' coming in or out of Iranian ports. US clarified blockade targets Iranian port traffic only — not full strait closure. Ships transiting without entering/exiting Iranian ports told it is safe to pass. US sent destroyers through Hormuz to demonstrate safe corridor.",
+      "tags": [
+        "DATA",
+        "EVENT"
+      ],
+      "source": "CNN (citing CENTCOM press release)",
+      "claimState": "SUPPORTED",
+      "weight": 0.99,
+      "posteriorImpact": "NONE. Confirms existing blockade posture from ev_122/ev_128. No new indicator fired. US clarification that strait itself is not fully blocked is marginally H2-directional (less severe than full dual closure) but offset by continued Iranian mine presence + Iranian transit controls. Operational data consistent with H3/H4 distribution.",
+      "note": "CNN EVENT domainTrust 0.99. CENTCOM primary source. Key nuance: US blockade is Iranian-port-specific, not full strait closure. Iran's mine barrier + transit permission regime still the binding constraint on reopening."
+    },
+    {
+      "id": "ev_130",
+      "time": "2026-04-14T16:00:00Z",
+      "text": "No agreement on second round of US-Iran talks. US officials exploring dates/locations before ceasefire expires April 21. Trump suggests Pakistan round 2 ('something could be happening in next 2 days'), dismisses Geneva. Iran state media (IRNA): no decision on another round. Both sides proposed uranium enrichment suspension but disagree on timespan. US demands dismantling of enrichment facilities + unconditional Hormuz reopening. Separately, France/UK announced Friday video conference to build coalition for defensive freedom-of-navigation mission. Macron urged Hormuz reopening 'without controls or tolls.' 18 European + Australian foreign ministers issued joint statement calling for Lebanon ceasefire and regional de-escalation. Israel-Lebanon highest-level direct talks in 40+ years began in DC; Lebanon seeks ceasefire as precondition.",
+      "tags": [
+        "DIPLO"
+      ],
+      "source": "CNN (citing IRNA, Macron/X, UK gov statement, multiple officials)",
+      "claimState": "PROPOSED",
+      "weight": 0.37,
+      "posteriorImpact": "NONE. Diplomatic track weak but not dead — ceasefire expiry April 21 creates pressure. No talks-related indicator fires. FON coalition is announcement-only, no operational capability yet. Israel-Lebanon talks relevant because Iran demanded Lebanon ceasefire inclusion as precondition. Consistent with talksTrack maximalist_deadlock (0.55).",
+      "note": "CNN DIPLO domainTrust 0.2463 (historically poor on diplomatic predictions). PROPOSED claimState for talks speculation. FON coalition formation is new diplomatic thread — monitor for operational commitment. effectiveWeight attenuated by CNN DIPLO track record."
+    },
+    {
+      "id": "ev_131",
+      "time": "2026-04-14T16:00:00Z",
+      "text": "IMF chief economist says any Hormuz tolls likely passed to consumers. At least one vessel paid $2M toll to transit (Lloyd's List). Capital Economics: toll burden 'shared between producers and consumers' but 'overall impact on global prices and demand would probably be limited.' US gas prices $4.12/gallon (AAA, Apr 14), down 5 cents from $4.17 peak post-ceasefire. Oil futures slightly lower in early Tuesday trading. Experts don't expect gas below $4 for 1-2 weeks, could be months before sub-$3 (pre-war level).",
+      "tags": [
+        "ECON"
+      ],
+      "source": "CNN (citing IMF, Lloyd's List, Capital Economics, AAA)",
+      "claimState": "SUPPORTED",
+      "weight": 0.75,
+      "posteriorImpact": "NONE. ECON data on toll pricing and gas trajectory. No indicator threshold met. Gas price decline is marginal and may reverse with blockade. Toll system being priced by markets as semi-permanent — H3/H4-directional (tolls assume prolonged Iranian control). Capital Economics 'limited impact' assessment applies to tolls specifically, not the broader closure.",
+      "note": "CNN effectiveTrust 0.7462 (ECON domain not calibrated, using cross-topic overall). Multiple primary sources cited (IMF, Lloyd's List, AAA). Gas data updates stale dataFeed."
+    },
+    {
+      "id": "ev_129",
+      "time": "2026-04-13T14:00:00Z",
+      "text": "CENTCOM confirmed blockade scope: targets all vessels entering/exiting Iranian ports on Arabian Gulf and Gulf of Oman, but will NOT impede freedom of navigation for vessels transiting Hormuz to non-Iranian ports. WSJ reports Trump weighing limited strikes against Iran after Islamabad talks failed. IRGC warned of new military capabilities and new forms of warfare if conflict continues. NPR: Trump vowed to sink Iranian ships approaching blockade.",
+      "tags": [
+        "EVENT",
+        "POLICY",
+        "KINETIC"
+      ],
+      "source": "CNN / NPR / WSJ / Xinhua / FDD",
+      "claimState": "SUPPORTED",
+      "weight": 1.0,
+      "posteriorImpact": "NONE. H3/H4-directional. CENTCOM non-Iranian transit clarification is slightly H2-positive (shorter closure if non-Iranian traffic resumes). However limited strikes consideration and IRGC escalation threats push H4. Net: no indicator threshold met, existing posteriors remain appropriate.",
+      "note": "Day 43 of closure. Key nuance: blockade targets Iranian ports specifically, not all Hormuz transit. This could allow partial traffic restoration for non-Iranian routes. Monitor non-Iranian transit volumes."
     }
   ],
   "dataFeeds": {
@@ -2393,10 +2448,10 @@
     },
     "gas": {
       "label": "Gas (National)",
-      "value": 3.98,
-      "unit": "$/gal (last known; likely higher by now)",
+      "value": 4.12,
+      "unit": "$/gal (down from $4.17 peak post-ceasefire; AAA reading)",
       "baseline": 3.1,
-      "asOf": "2026-03-26"
+      "asOf": "2026-04-14"
     },
     "hormuz_traffic": {
       "label": "Hormuz Traffic",

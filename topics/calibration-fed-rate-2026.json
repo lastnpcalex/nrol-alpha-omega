@@ -587,6 +587,17 @@
       "weight": 1.0,
       "posteriorImpact": "NONE. H4-directional (hike scenario). t3_fomc_minutes_dovish requires dovish language - these minutes were hawkish, opposite direction. t1_dot_plot_shift_hawkish requires SEP dot plot to shift to zero cuts - median still shows 1 cut. No indicator fired.",
       "note": "Multiple officials discussing hikes is a notable shift. Next FOMC May 6-7 with new SEP."
+    },
+    {
+      "id": "ev_010",
+      "time": "2026-04-14T16:00:00Z",
+      "text": "Treasury Secretary Bessent told Semafor the Fed should 'wait and see' before lowering rates amid Iran war. 'Do I think rates should be lowered? Eventually. I think now that we have to wait and see.' Said Fed is 'doing the right thing by sitting and watching.' On 4%+ growth target for 2026: 'Obviously, we're going to have some make-up to do.' Comments come as Trump continues pushing for rate cuts.",
+      "tags": ["RHETORIC", "HAWKISH"],
+      "source": "CNN (citing Semafor interview with Bessent)",
+      "claimState": "SUPPORTED",
+      "weight": 0.0,
+      "posteriorImpact": "NONE. RHETORIC tag — Bessent is Treasury Secretary, not FOMC. Statement aligns with existing Fed posture (hold). No indicator fires. H1-directional (supports no-cut thesis) but RHETORIC from non-Fed official does not move posteriors per governor rules. Notable: Bessent now publicly at odds with Trump's rate-cut demands.",
+      "note": "CNN effectiveTrust 0.7462. Direct quote from Bessent via Semafor. RHETORIC weight = 0.0 per governor. Bessent's 'make-up to do' on growth acknowledges war damage — informative for recession topic cross-reference."
     }
   ],
   "dataFeeds": {

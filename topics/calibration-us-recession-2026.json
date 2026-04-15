@@ -932,6 +932,17 @@
       "weight": 0.8,
       "posteriorImpact": "NONE. Cross-referenced with Section 122 topic ev_010. $700/household is quantified consumer burden — H2-directional (demand drag). But not yet translating to GDP contraction per GDPNow (2.0% Q1). Trade deficit unchanged undermines the policy rationale but is not recessionary per se.",
       "note": "Multiple-source convergence. Tax Foundation is nonpartisan policy research. Weight 0.8 (DATA from credible non-primary source)."
+    },
+    {
+      "id": "ev_010",
+      "time": "2026-04-14T16:00:00Z",
+      "text": "IMF World Economic Outlook April 2026: global growth forecast cut to 3.1% in 2026 (down 0.2pp from January). Assumes Iran war 'relatively short-lived.' Global inflation raised to 4.4%. Severe scenario (oil/gas prices +100-200% sustained into 2027): global growth only 2.0% — IMF calls this 'a close call for a global recession' (defined as <2%, happened only 4 times since 1980). Notes downward revision partly offset by reduced US tariff rates vs last year. Pre-war, global economy was performing better than expected.",
+      "tags": ["ANALYSIS", "ECON"],
+      "source": "CNN (citing IMF World Economic Outlook, April 2026)",
+      "claimState": "SUPPORTED",
+      "weight": 0.37,
+      "posteriorImpact": "NONE. ANALYSIS tag — institutional forecast. 0.2pp global growth cut is modest and assumes short war. US-specific impact not broken out (global ≠ US GDP). Severe scenario (2% global) is conditional on oil spike — not base case. No US recession indicator fires. IMF's 'better than expected pre-war' note is marginally H1-directional. Net: informative for monitoring, no posterior movement.",
+      "note": "CNN effectiveTrust 0.7462. IMF is authoritative institutional source but ANALYSIS tag per governor rules. Weight attenuated: 0.7462 × 0.5 (ANALYSIS) = 0.37. Cross-reference: IMF severe scenario aligns with H4 (stagflation) if oil spike materializes domestically."
     }
   ],
   "governance": null,

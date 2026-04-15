@@ -28,8 +28,8 @@
   /* Triage Panel */
   .triage-panel { background: var(--surface); border: 2px solid var(--purple); border-radius: 6px; padding: 16px; margin-bottom: 16px; }
   .triage-panel h2 { font-size: 11px; letter-spacing: 2px; color: var(--purple); margin-bottom: 12px; text-transform: uppercase; }
-  .triage-input { display: flex; gap: 8px; margin-bottom: 12px; }
-  .triage-input input { flex: 1; background: var(--surface2); border: 1px solid var(--border); color: var(--text); padding: 8px 12px; border-radius: 4px; font-family: inherit; font-size: 13px; }
+  .triage-input { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+  .triage-input input { flex: 1; min-width: 0; background: var(--surface2); border: 1px solid var(--border); color: var(--text); padding: 8px 12px; border-radius: 4px; font-family: inherit; font-size: 13px; overflow: hidden; text-overflow: ellipsis; }
   .triage-input input:focus { outline: none; border-color: var(--purple); }
   .triage-input input::placeholder { color: #475569; }
   .triage-btn { background: var(--purple); border: none; color: #fff; padding: 8px 20px; border-radius: 4px; cursor: pointer; font-family: inherit; font-size: 12px; font-weight: bold; letter-spacing: 1px; }
@@ -182,8 +182,8 @@
   <div class="triage-panel">
     <h2>NEWS TRIAGE</h2>
     <div class="triage-input">
-      <input type="text" id="triageHeadline" placeholder="Paste a headline or news item..." onkeydown="if(event.key==='Enter')runTriage()">
-      <input type="text" id="triageSource" placeholder="Source (optional)" style="max-width:160px;" onkeydown="if(event.key==='Enter')runTriage()">
+      <input type="text" id="triageHeadline" placeholder="Paste a headline or URL..." style="flex-basis:100%;" onkeydown="if(event.key==='Enter')runTriage()">
+      <input type="text" id="triageSource" placeholder="Source (optional)" style="max-width:160px; flex-basis:140px;" onkeydown="if(event.key==='Enter')runTriage()">
       <button class="triage-btn" id="triageBtn" onclick="runTriage()">TRIAGE</button>
     </div>
     <div class="triage-result" id="triageResult"></div>
