@@ -114,6 +114,23 @@ def process_evidence(
     evidence_id = topic["evidenceLog"][-1]["id"]
     result["evidence_id"] = evidence_id
 
+    # 1b. Auto-resolve contradictions created by add_evidence as SUPERSEDED.
+    # In active/conflict topics, temporal evolution (ceasefire → ceasefire collapsed)
+    # triggers the noun-overlap contradiction detector. These are supersession, not
+    # genuine contradictions. Resolve them so they don't block bayesian_update().
+    try:
+        from framework.contradictions import get_unresolved_contradictions, resolve_contradiction
+        unresolved = get_unresolved_contradictions(topic)
+        if unresolved:
+            resolved_count = 0
+            while unresolved:
+                resolve_contradiction(topic, len(unresolved) - 1, "SUPERSEDED")
+                unresolved = get_unresolved_contradictions(topic)
+                resolved_count += 1
+            result["contradictions_auto_resolved"] = resolved_count
+    except ImportError:
+        pass
+
     # 2. Fire indicator if specified
     if fired_indicator_id:
         topic = fire_indicator(
