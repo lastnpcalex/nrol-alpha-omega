@@ -1605,25 +1605,57 @@ async function runPipeline(btnId) {
   }
 }
 
-// --- PIPELINE BRANCH PARENT ---
-// Set this to the Loom integer ID of the pipeline intake branch's first assistant response.
-// All pipeline Loom.send() calls will fork from this message.
-// To discover IDs: check browser console — every message-sent event logs its ID.
-let _pipelineParentId = 5024; // NROL-AO dedicated pipeline intake (clean context, no Loom ancestry)
+// --- PIPELINE INTAKE (auto-initializing) ---
+const PIPELINE_INTAKE_KEY = 'nrol_pipeline_parent_id';
+const PIPELINE_INTAKE_CONTENT = `NROL-AO PIPELINE INTAKE — This branch handles all scan and triage events from the canvas.
 
-// Debug: log every message ID so we can discover the right parent
+## Context
+- Project: NROL-AO Bayesian Estimation Framework
+- Read CLAUDE.md for standing orders. Read temp-repo/AGENTS.md for framework rules.
+- Use framework.pipeline functions (process_evidence, process_headline, log_activity).
+- DO NOT manually edit topic JSON files.
+
+## Your role
+You are the pipeline operator. When a headline, URL, or /news-scan arrives:
+1. Use \`from framework.pipeline import process_headline, process_evidence, log_activity\`
+2. Supply likelihoods for Bayesian updates
+3. The pipeline handles enrichment, Bayes, source trust, governance, and save automatically`;
+
+let _pipelineParentId = null;
+
+async function initPipelineIntake() {
+  const stored = localStorage.getItem(PIPELINE_INTAKE_KEY);
+  if (stored) {
+    _pipelineParentId = parseInt(stored, 10);
+    console.log(`[NROL] Pipeline intake loaded: ${_pipelineParentId}`);
+    return;
+  }
+  if (typeof Loom === 'undefined') return;
+  try {
+    const { convId } = await Loom.getConvId();
+    const resp = await fetch(`/api/conversations/${convId}/messages`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ role: 'user', content: PIPELINE_INTAKE_CONTENT, parent_id: null })
+    });
+    if (!resp.ok) throw new Error(`API error: ${resp.status}`);
+    const msg = await resp.json();
+    _pipelineParentId = msg.id;
+    localStorage.setItem(PIPELINE_INTAKE_KEY, String(msg.id));
+    console.log(`[NROL] Pipeline intake created: message ${msg.id}`);
+  } catch (e) {
+    console.error('[NROL] Failed to create pipeline intake:', e);
+  }
+}
+
 try {
-  Loom.on('message-sent', (data) => {
-    console.log('[NROL-AO] Message created — id:', data.id, 'data:', JSON.stringify(data));
-  });
-  Loom.getConvId().then(r => {
-    console.log('[NROL-AO] Conv ID:', r.convId);
-  }).catch(() => {});
+  Loom.on('message-sent', (data) => { console.log('[NROL] Message created — id:', data.id); });
 } catch(e) {}
 
 // --- INIT ---
 loadAll();
 loadActivityFeed();
+initPipelineIntake();
 setInterval(loadAll, 60000);
 setInterval(loadActivityFeed, 15000);
 
