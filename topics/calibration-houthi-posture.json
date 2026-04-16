@@ -1,13 +1,12 @@
 {
   "_protocol": "Calibration topic — Houthi Red Sea posture by mid-2026. Populated 2026-04-11.",
-
   "meta": {
     "slug": "calibration-houthi-posture",
     "title": "Houthi Red Sea Posture by Mid-2026",
     "question": "What will Houthi military posture toward Red Sea commercial shipping look like by July 2026?",
     "resolution": "Assessed July 1, 2026 via: (1) 30-day rolling attack count against commercial vessels (attack frequency), (2) MARAD advisory status (Threat Level 1-4), (3) shipping insurance war-risk premium (% of vessel value), (4) weekly transit volume through Bab al-Mandeb as % of Jan 2024 baseline. H1 fires if ≥5 attacks/month AND >50% of Jan-2024 baseline transits re-routed. H2 fires if attacks selective (Israeli/US-linked targets only, ≤2 neutral-flag attacks/month). H3 fires if <1 commercial attack/month AND MARAD downgrades advisory. H4 fires if effective closure (≤20% of baseline transits, US NAVCENT NOTAM issued).",
     "created": "2026-04-11T00:00:00Z",
-    "lastUpdated": "2026-04-12T00:00:00Z",
+    "lastUpdated": "2026-04-15T08:15:00-07:00",
     "status": "ACTIVE",
     "dayCount": 1,
     "startDate": "2026-04-11T00:00:00Z",
@@ -15,10 +14,20 @@
     "topicType": "conflict",
     "horizon": "~12 weeks (resolution: 2026-07-01)"
   },
-
   "tagConfig": {
     "_docs": "ESCALATION tags push toward H1/H4. DEESCALATION tags push toward H3. SELECTIVE tags confirm H2. RHETORIC tags are attenuated by governor.",
-    "availableTags": ["EVENT", "DATA", "RHETORIC", "INTEL", "ANALYSIS", "ATTACK", "CEASEFIRE", "DIPLOMATIC", "MARITIME", "MILITARY"],
+    "availableTags": [
+      "EVENT",
+      "DATA",
+      "RHETORIC",
+      "INTEL",
+      "ANALYSIS",
+      "ATTACK",
+      "CEASEFIRE",
+      "DIPLOMATIC",
+      "MARITIME",
+      "MILITARY"
+    ],
     "directionHints": {
       "ATTACK": {
         "H1": 1,
@@ -49,10 +58,15 @@
       "INTEL": {},
       "ANALYSIS": {}
     },
-    "escalationTags": ["ATTACK", "MILITARY"],
-    "deescalationTags": ["CEASEFIRE", "DIPLOMATIC"]
+    "escalationTags": [
+      "ATTACK",
+      "MILITARY"
+    ],
+    "deescalationTags": [
+      "CEASEFIRE",
+      "DIPLOMATIC"
+    ]
   },
-
   "model": {
     "hypotheses": {
       "H1": {
@@ -73,14 +87,14 @@
         "label": "De facto ceasefire holds — no commercial attacks",
         "midpoint": 0,
         "unit": "probability_at_July2026",
-        "posterior": 0.30,
+        "posterior": 0.3,
         "description": "Houthis observe a broad commercial shipping ceasefire through July 2026, either through Iranian pressure following a larger regional settlement, US deterrence from Operation Rough Rider, or a formal extension of the May 6 deal to cover all commercial traffic. Threshold: <1 verified attack on any commercial vessel in the 30-day window before July 1, AND MARAD does not maintain a Threat Level ≥2 advisory for the Red Sea. Possible if the Iran-Israel/US war settles into frozen conflict and Houthis see no political upside to continued attacks."
       },
       "H4": {
         "label": "Escalation beyond Red Sea — Bab al-Mandeb effective closure",
         "midpoint": 0,
         "unit": "probability_at_July2026",
-        "posterior": 0.10,
+        "posterior": 0.1,
         "description": "Houthis escalate to a de facto closure of Bab al-Mandeb, using anti-ship missiles, mines, or coordinated drone swarms to push weekly transits below 20% of Jan 2024 baseline. Threshold: US NAVCENT issues NOTAM effectively closing the strait, OR Lloyd's/JWC declares Bab al-Mandeb a war-exclusion zone, OR ≥15 attacks/month for 2 consecutive months. Requires significant Iranian resupply (weapons), Houthi willingness to absorb sustained US/Saudi airstrikes, and a political logic (e.g., Iran directing maximum economic pressure). Very high cost given Operation Rough Rider precedent."
       }
     },
@@ -89,12 +103,16 @@
     "posteriorHistory": [
       {
         "date": "2026-04-11T00:00:00Z",
-        "posteriors": { "H1": 0.15, "H2": 0.45, "H3": 0.30, "H4": 0.10 },
+        "posteriors": {
+          "H1": 0.15,
+          "H2": 0.45,
+          "H3": 0.3,
+          "H4": 0.1
+        },
         "note": "Initial priors. H2 anchored by current observed selective-targeting posture post-May 6 ceasefire. H3 non-trivial given US deterrence. H1 depressed because Houthis have incentive to maintain political-screening distinction. H4 low due to cost of Operation Rough Rider re-engagement."
       }
     ]
   },
-
   "subModels": {
     "attack_tempo": {
       "label": "Attack Frequency (30-day rolling)",
@@ -150,7 +168,6 @@
       "source": "USNI, DIA assessments, Israeli intelligence reporting"
     }
   },
-
   "indicators": {
     "_design_rules": [
       "Each indicator must be OBSERVABLE — actions, not opinions",
@@ -337,7 +354,6 @@
       ]
     }
   },
-
   "actorModel": {
     "description": "Five key actors whose interactions determine Houthi posture. Houthis are not fully autonomous — Iranian patron relationship and US deterrence are the two binding constraints. Saudi Arabia matters as a potential off-ramp provider. Shipping companies operationalize the outcome through routing decisions.",
     "actors": {
@@ -445,13 +461,14 @@
       "INSURANCE LEADS ATTACKS — war risk premium movements precede attack volume changes. Monitor JWC advisories as early warning."
     ]
   },
-
   "evidenceLog": [
     {
       "id": "ev_001",
       "time": "2025-10-10T00:00:00Z",
       "text": "Houthis halt attacks on international shipping and Israel following Gaza peace plan implementation. Commercial attacks paused after ~100 incidents since November 2023.",
-      "tags": ["EVENT"],
+      "tags": [
+        "EVENT"
+      ],
       "source": "Wikipedia/multiple wire services, October 2025",
       "claimState": "OBSERVED",
       "weight": 1.0,
@@ -462,7 +479,10 @@
       "id": "ev_002",
       "time": "2026-01-15T00:00:00Z",
       "text": "Maersk Line resumes Red Sea transit with successive successful trans-Suez crossings. First major carrier to return since crisis began.",
-      "tags": ["EVENT", "DATA"],
+      "tags": [
+        "EVENT",
+        "DATA"
+      ],
       "source": "Wikipedia/shipping industry reports, January 2026",
       "claimState": "OBSERVED",
       "weight": 1.0,
@@ -473,7 +493,10 @@
       "id": "ev_003",
       "time": "2026-02-28T00:00:00Z",
       "text": "US-Israel launch strikes on Iran. Iran war begins. Houthis do NOT immediately resume Red Sea attacks — surprising given prior behavior and regional ally mobilization.",
-      "tags": ["EVENT", "INTEL"],
+      "tags": [
+        "EVENT",
+        "INTEL"
+      ],
       "source": "The National, March 17 2026 analysis",
       "claimState": "OBSERVED",
       "weight": 1.0,
@@ -484,7 +507,9 @@
       "id": "ev_004",
       "time": "2026-03-28T00:00:00Z",
       "text": "Houthis enter Iran war: fire ballistic missiles and drones at Israel. First offensive action since October 2025 pause. Targets are Israeli, NOT commercial shipping.",
-      "tags": ["EVENT"],
+      "tags": [
+        "EVENT"
+      ],
       "source": "The National / multiple wire services, March 28 2026",
       "claimState": "OBSERVED",
       "weight": 1.0,
@@ -495,7 +520,10 @@
       "id": "ev_005",
       "time": "2026-04-08T00:00:00Z",
       "text": "US-Iran ceasefire agreed April 8. Houthis operating 'Bab al-Mandeb tollbooth' — screening ships via AIS for US/Israel ties, allowing others to pass. Ships transmitting declarations of no US/Israel affiliation. Pattern mirrors Iran's 'Tehran tollbooth' in Strait of Hormuz.",
-      "tags": ["EVENT", "INTEL"],
+      "tags": [
+        "EVENT",
+        "INTEL"
+      ],
       "source": "The National (Arsenio Longo/Huax analytics), April 8 2026",
       "claimState": "OBSERVED",
       "weight": 0.85,
@@ -506,7 +534,9 @@
       "id": "ev_006",
       "time": "2026-04-08T00:00:00Z",
       "text": "Lloyd's Market Association: 'Time will tell whether it is a pause or a peace... highly unlikely that trade into the Gulf will simply resume. The region remains at heightened risk with none of the underlying tension resolved.'",
-      "tags": ["ANALYSIS"],
+      "tags": [
+        "ANALYSIS"
+      ],
       "source": "Lloyd's Market Association (Neil Roberts), via The National, April 8 2026",
       "claimState": "PROPOSED",
       "weight": 0.5,
@@ -517,7 +547,9 @@
       "id": "ev_007",
       "time": "2026-04-08T00:00:00Z",
       "text": "Ali Akbar Velayati (former Iranian FM): 'The unified command of the resistance front views Bab al-Mandeb as it does Hormuz. If the White House dares to repeat its foolish mistakes, the flow of global energy and trade can be disrupted with a single move.'",
-      "tags": ["RHETORIC"],
+      "tags": [
+        "RHETORIC"
+      ],
       "source": "Velayati social media post, reported by The National",
       "claimState": "PROPOSED",
       "weight": 0.25,
@@ -528,15 +560,31 @@
       "id": "ev_008",
       "time": "2026-04-08T00:00:00Z",
       "text": "Iran pulls navy from Red Sea per ship tracking reports. Reduces direct Iranian naval presence near Houthi operating area.",
-      "tags": ["EVENT", "INTEL"],
+      "tags": [
+        "EVENT",
+        "INTEL"
+      ],
       "source": "Ship and Bunker (industry publication), April 2026",
       "claimState": "PROPOSED",
       "weight": 0.6,
       "posteriorImpact": "Ambiguous. Could signal: (a) Iran reducing escalation risk (H3 lean), (b) Iran ceding Bab al-Mandeb to Houthis as proxy (H2 lean), (c) ceasefire compliance. Single-source — needs confirmation.",
       "note": "Ship and Bunker not in source_db. Specialist maritime publication. claimState PROPOSED pending wire service confirmation."
+    },
+    {
+      "id": "ev_009",
+      "time": "2026-04-15T12:00:00Z",
+      "text": "Iran army warned it will block trade through the Red Sea, Gulf of Oman, and Sea of Oman if the US naval blockade on Iranian ports continues. This is an explicit threat to expand the Hormuz closure to Red Sea shipping lanes — directly relevant to Houthi operational calculus. US blockade entered day 2 with trade into/out of Iran \"completely halted.\" Iran-US ceasefire expires April 21.",
+      "tags": [
+        "EVENT",
+        "MILITARY"
+      ],
+      "source": "Al Jazeera (Iran army statement)",
+      "claimState": "SUPPORTED",
+      "weight": 1.0,
+      "posteriorImpact": "NONE. H1/H4-directional (Iran Red Sea action would reactivate indiscriminate attacks or push toward Bab al-Mandeb closure). t3_iran_war_intensification requires new front opened, nuclear facility struck, or ballistic missile strike on US asset — a Red Sea threat is rhetoric, not action. Observable threshold not met. If Iran executes the threat, this indicator fires.",
+      "note": "Cross-reference hormuz-closure ev_133. Iran Red Sea threat would change Houthi strategic calculus by providing Iranian cover/coordination for expanded attacks. Watch for Houthi response or IRGC-QF directive."
     }
   ],
-
   "dataFeeds": {
     "attack_freq_30d": {
       "label": "Anti-Ship Attacks (30-day rolling count)",
@@ -599,7 +647,6 @@
       "source": "Suez Canal Authority, Kpler"
     }
   },
-
   "watchpoints": [
     {
       "id": "wp1",
@@ -644,7 +691,6 @@
       "tripwire": "US/Israeli naval interdiction of Iranian arms shipment to Yemen OR intelligence reporting on stockpile replenishment"
     }
   ],
-
   "searchQueries": [
     "Houthi Red Sea attack commercial shipping April 2026",
     "Houthi anti-ship missile drone April 2026",
@@ -665,14 +711,18 @@
     "site:ukmto.org Red Sea advisory 2026",
     "site:maritime.dot.gov Red Sea advisory"
   ],
-
   "governance": null,
-
   "dependencies": {
     "_docs": "Cross-topic dependency declarations. Upstream topics whose posteriors this topic's assumptions depend on.",
-    "upstream": []
+    "upstream": [
+      {
+        "slug": "hormuz-closure",
+        "assumption": "Iran-US war trajectory directly shapes Houthi strategic calculus. If Hormuz conflict expands to Red Sea (Iran executes threat), Houthi posture shifts toward H1 (indiscriminate) or H4 (closure). If ceasefire holds and Hormuz reopens, pressure on Houthis to de-escalate (H3).",
+        "tolerance": 0.15,
+        "lastChecked": "2026-04-15"
+      }
+    ]
   },
-
   "predictionScoring": {
     "_docs": "Calibration infrastructure. Topic resolves July 1 2026. Record observed posture state against H1-H4 definitions in meta.resolution. Compute Brier score against each snapshot.",
     "snapshots": [],
