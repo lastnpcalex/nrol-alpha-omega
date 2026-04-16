@@ -252,128 +252,11 @@ flowchart TD
 
 ## Bayesian & Information-Theoretic Mechanics
 
-The engine implements several formal mechanisms from Bayesian inference and information theory. These aren't decorative — they're load-bearing parts of the update pipeline that control how evidence flows into posteriors.
+The engine uses principled Bayesian inference throughout: posterior updates via Bayes' theorem with explicit likelihoods, evidence weight attenuation through a probabilistic mixture model (contested or low-trust evidence produces proportionally weaker updates), inverse Bayes for deriving likelihoods from pre-committed indicator effects, KL divergence for prior-domination detection and operator-vs-mechanical divergence tracking, Shannon entropy driving R_t staleness scoring and VoI query prioritization, and Brier score calibration with partial scoring for expired hypotheses.
 
-### Posterior Updates via Bayes' Theorem
+Source trust is Bayesian-updated per source per domain with surprisal-weighted likelihood ratios — a source correctly predicting something surprising earns more trust than one confirming the obvious. Trust is queried through a 5-tier chain: per-topic calibration, cross-topic domain, cross-topic overall, static base prior, 0.50 fallback.
 
-`bayesian_update()` computes posteriors mechanically:
-
-$$P(H_i|E) = \frac{P(E|H_i) \cdot P(H_i)}{\sum_j P(E|H_j) \cdot P(H_j)}$$
-
-The operator supplies likelihoods P(E|H_i) for each hypothesis — "how probable is this evidence if H_i is true?" — and the engine handles the rest. Both raw and adjusted likelihoods are recorded in `posteriorHistory` for full auditability.
-
-### Evidence Weight Attenuation (Mixture Model)
-
-Evidence quality feeds into the Bayes computation through a proper probabilistic mixture model. Each piece of cited evidence has an `effectiveWeight` *w* representing the probability that the evidence is genuine signal rather than noise:
-
-$$P(E|H_i) = w \cdot P(E|H_i,\text{real}) + (1-w) \cdot P(E|\text{noise})$$
-
-where P(E|noise) = mean of raw likelihoods across all hypotheses (uninformative — identical for all H, so the noise component produces zero posterior movement after normalization). At *w*=1.0, the full likelihood passes through. At *w*=0, all hypotheses receive the same likelihood and posteriors don't move. At intermediate weights, the update is attenuated proportionally. Unlike a linear interpolation toward a fixed neutral value, this formulation is coherent: it corresponds to a well-defined generative model ("the evidence is real with probability *w*, noise otherwise") and preserves the direction of all likelihood ratios at every weight level.
-
-`effectiveWeight` itself is the product of two factors:
-- **Claim state weight**: PROPOSED (0.5) → SUPPORTED (1.0) → CONTESTED (0.2) → INVALIDATED (0.0)
-- **Source trust**: Bayesian-updated per source per domain, starting from base priors and refined by claim resolution history with surprisal weighting
-
-### Inverse Bayes: Likelihoods from Indicators
-
-`suggest_likelihoods()` reverses the Bayes computation. Given indicator-defined posterior shifts (e.g. "H3 +15pp"), it derives the likelihoods that would produce those shifts:
-
-$$L(H_i) \propto \frac{P_{\text{target}}(H_i)}{P_{\text{current}}(H_i)}$$
-
-For indicators referencing sub-model scenarios (e.g. "Kharg +10pp"), the function resolves through the topic's conditional probability tables — `P(H_i | \text{scenario})` — to translate sub-model movements into hypothesis-level likelihood ratios.
-
-### KL Divergence — Two Applications
-
-**Prior-domination detection** (`compute_kl_from_prior`): Measures D_KL(current posterior ‖ initial prior). Low entropy + low KL = the model is confident but hasn't moved far from where it started — a sign that confidence is inherited from the prior rather than earned from evidence. The governance system flags this as `PRIOR_DOMINATED`.
-
-**Operator-vs-mechanical divergence** (inside `bayesian_update`): When the operator supplies both likelihoods and their intuitive posteriors, the engine computes D_KL(mechanical ‖ intuitive). Divergence > 0.05 nats triggers a governance note. The mechanical result always wins, but the divergence is logged — making the gap between "what the math says" and "what the operator expected" visible and auditable.
-
-### Shannon Entropy and R_t
-
-The posterior distribution's Shannon entropy H = −Σ p_i log₂(p_i) drives several mechanisms:
-
-- **Uncertainty ratio** (H / H_max): 1.0 = uniform (maximum ignorance), 0.0 = all mass on one hypothesis. Governance flags both extremes — near-maximum means the model isn't discriminating, near-zero means check for overconfidence.
-- **R_t (evidence staleness risk)**: An entropy-weighted operational heuristic, not a pure information-theoretic derivation. For each hypothesis, R_t = (entropy contribution × time decay) / evidence recency. The entropy term ensures low-probability tail hypotheses with high surprise value get flagged when stale — a 5% hypothesis that hasn't been checked carries more surprise value if true than a 50% hypothesis. But R_t doesn't model the domain's actual volatility; it uses log-scaled time decay as a proxy. A fast-moving conflict and a slow-moving geological process get the same staleness curve unless the operator tunes `rtConfig` thresholds. This is a practical attention-allocation heuristic that uses entropy as a component, not a statement about information-theoretic optimality.
-- **VoI query prioritization**: When entropy is high, the system prioritizes discriminating queries (which hypothesis is right?). When entropy is low, it prioritizes disconfirmation queries (is the leading hypothesis actually wrong?). Unfired high-tier indicators always rank highest.
-
-### Brier Score Calibration
-
-Every posterior update triggers a prediction snapshot. When a topic resolves, `record_outcome()` scores all historical snapshots against ground truth using the Brier score:
-
-$$BS = \frac{1}{N} \sum_{i=1}^{N} (p_i - o_i)^2$$
-
-where *o_i* = 1 for the correct hypothesis, 0 otherwise. Brier scores feed back into governance health — `POORLY_CALIBRATED` (Brier > 0.4) degrades system health. Hypotheses that expire by time (day count exceeds 1.5× the midpoint) get partial Brier scoring without waiting for full topic resolution.
-
-### Bayesian Source Trust with Surprisal Weighting
-
-Source trust isn't a static lookup table. The source ledger tracks claim outcomes per source per domain tag (ECON, KINETIC, DIPLO, etc.) and updates trust via Bayesian likelihood ratios — weighted by how surprising the resolved claim was.
-
-Base LRs (cross-topic): confirmed → LR 3:1, refuted → LR 1:3. Per-topic: confirmed → LR 1.2, refuted → LR 0.7. These are then exponentiated by a surprisal weight:
-
-$$LR_{\text{eff}} = LR_{\text{base}}^{s}, \quad s = \text{clamp}\left(\frac{-\log_2(p_{\text{domain}})}{1\text{ bit}},\ 0.5,\ 2.0\right)$$
-
-where *p*_domain is the confirmation base rate for this domain tag. A source that correctly called something surprising (low base rate of confirmation in that domain) earns up to 2× the trust credit. A source that confirmed the obvious (high base rate) earns as little as 0.5×. This prevents "oil goes up during a war" from earning the same trust boost as "Iran releases hostages by Tuesday." The normalizer of 1 bit means a coin-flip base rate (p=0.5) produces weight 1.0 — the unsurprised default.
-
-Surprisal weighting requires a minimum of 3 resolved claims per domain before it activates. With fewer, the base rate estimate is too noisy and the weighting would amplify noise rather than signal — so the system falls back to unweighted LRs until enough data accumulates.
-
-Trust is stored and queried at four levels of specificity (first match wins): per-topic calibration → cross-topic domain trust → cross-topic overall trust → static base prior. The minimum trust across all cited sources is used (conservative).
-
-## Source Trust: How It Updates
-
-Sources don't have a single trust score. Trust is tracked **per domain** — a source that's excellent at reporting economic data might be unreliable on diplomatic analysis.
-
-```mermaid
-block-beta
-    columns 3
-
-    block:header:3
-        columns 3
-        space name["Al Jazeera — Base Trust: 0.60"] space
-    end
-
-    block:domains:3
-        columns 4
-        DIPLO["DIPLO\n0.99\n5/6 confirmed"]
-        EVENT["EVENT\n0.94\n17/18 confirmed"]
-        DATA["DATA\n0.82\n3/5 confirmed"]
-        RHETORIC["RHETORIC\n1.0\n1/1 confirmed"]
-    end
-
-    block:effective:3
-        columns 3
-        space eff["Effective Trust → 0.99"] space
-    end
-
-    style DIPLO fill:#0f9b58,color:#fff
-    style EVENT fill:#0f9b58,color:#fff
-    style DATA fill:#f5a623,color:#fff
-    style RHETORIC fill:#0f9b58,color:#fff
-    style eff fill:#1a1a2e,stroke:#0f9b58,color:#eee
-```
-
-The update mechanism is Bayesian with surprisal weighting:
-
-```mermaid
-flowchart LR
-    Claim["New claim enters\nevidence log"] --> Tag["Tagged with source\n+ domain (ECON, KINETIC, ...)"]
-    Tag --> Scan["Source ledger scans\nfor confirmation/refutation\nfrom *different* sources"]
-    Scan -->|"Confirmed"| Surp["Surprisal weight\n-log₂(domain base rate)\nnormalized to 1 bit"]
-    Scan -->|"Refuted"| SurpR["Surprisal weight\n-log₂(1 - domain base rate)"]
-    Surp --> Up["LR = 3:1 ^ surprisal\nSurprising confirm → up to 9:1\nExpected confirm → down to √3:1"]
-    SurpR --> Down["LR = 1:3 ^ surprisal\nSurprising refutation → stronger penalty"]
-    Up --> Weight
-    Down --> Weight
-    Weight["Effective weight =\nclaim_state × min(source_trust)"]
-
-    style Up fill:#0f9b58,color:#fff
-    style Down fill:#8b0000,color:#fff
-    style Surp fill:#1a1a2e,stroke:#f5a623,color:#eee
-    style SurpR fill:#1a1a2e,stroke:#f5a623,color:#eee
-```
-
-A source confirmed 5 times in ECON and refuted 3 times in RHETORIC will have high ECON trust and low RHETORIC trust. When that source makes a new ECON claim, it gets high weight. When it makes a RHETORIC claim, it gets low weight. The system learns this automatically from the evidence log. Crucially, the five ECON confirmations don't all count equally — if the domain base rate is 99% (ECON claims are almost always confirmed), each confirmation earns minimal trust credit. A single correct call in a domain where sources are usually wrong is worth more than five correct calls where everyone is right.
-
-**Key finding from testing against live data**: domain predicts reliability far better than source identity (r=0.159 for source alone). ECON claims are 99.4% reliable across all sources; RHETORIC claims are 0% reliable.
+For the full mathematical treatment including formulas, mixture model derivation, and source trust update diagrams, see **[MATH.md](MATH.md)**.
 
 ## Architecture
 
@@ -470,7 +353,60 @@ Two paths for posterior updates:
 - **`bayesian_update()`** — operator supplies explicit likelihoods `P(E|H_i)` and the engine computes posteriors mechanically via Bayes' theorem. Same governor gate, but the reasoning is auditable: likelihoods are recorded in `posteriorHistory`. Likelihoods are attenuated by the `effectiveWeight` of cited evidence — contested or low-trust evidence produces weaker updates automatically.
 - **`suggest_likelihoods()`** — converts fired indicator `posteriorEffect` strings into likelihood ratios via inverse Bayes. Parses explicit pp shifts, qualitative directions (`H3/H4 surge`), and submodel references (resolved through conditional distributions). Returns a structured suggestion for operator review before passing to `bayesian_update()`.
 
+## Setup
+
+### Requirements
+
+Python 3.10+. Zero external dependencies — stdlib only. No pip install, no venv, no requirements.txt.
+
+### Installation
+
+```bash
+git clone https://github.com/lastnpcalex/nrol-alpha-omega.git
+cd nrol-alpha-omega
+```
+
+### Loom Integration
+
+The system is designed to be operated through [A Shadow Loom](https://github.com/lastnpcalex/a-shadow-loom) — a tree-branching conversation interface where the mirror dashboard embeds as a persistent canvas panel.
+
+1. Create a conversation with `project_dir` pointed at this repo
+2. Enable canvas in the conversation settings
+3. Copy loom files into the canvas directory: `cp -r loom/* canvas/`
+4. Copy topic files and source database: `cp topics/*.json canvas/topics/ && cp sources/source_db.json canvas/`
+5. Pipeline intake auto-initializes on first canvas load — no server required
+6. Use the **SCAN ALL** / **SCAN TOPIC** buttons in the mirror dashboard to run multi-topic news sweeps
+
+The pipeline is governor-enforced end-to-end: paste a URL into the canvas triage input, Claude fetches content, triages against active topics, looks up source trust, logs evidence, updates posteriors, calibrates source trust, and writes an activity log entry. See [`LOOM.md`](LOOM.md) for architecture details and the trigger template system.
+
+### Standalone (No Loom)
+
+The framework works without Loom. Use the Python API directly or Claude Code slash commands (`/triage`, `/update`, `/evidence`, `/governance`, `/lint`, `/dependencies`, `/resolve`).
+
 ## Quickstart
+
+The primary interface is the pipeline — triage headlines and process evidence programmatically:
+
+```python
+from engine import triage_headline, load_topic, add_evidence, save_topic
+from framework.update import process_headline, process_evidence
+import json
+
+# Pipeline: triage a headline across all topics
+r = triage_headline("CENTCOM announces new phase of operations in Persian Gulf", "CENTCOM")
+print(json.dumps(r, indent=2))
+
+# Pipeline: full headline processing (triage + evidence + update + save)
+result = process_headline("Iran tests ballistic missile near Strait of Hormuz", source="Reuters")
+
+# Pipeline: process pre-structured evidence into a topic
+result = process_evidence("hormuz-closure", {
+    "tag": "KINETIC", "source": "CENTCOM",
+    "text": "US Navy intercepts drone near carrier group in Gulf of Oman"
+})
+```
+
+CLI tools for inspection and management:
 
 ```bash
 # List topics
@@ -598,10 +534,6 @@ Setup: `cp -r loom/* canvas/` then copy topic files and `sources/source_db.json`
 | GET | `/trajectories/{slug}` | Posterior history for one topic |
 | GET | `/dependencies` | Full dependency graph (nodes, edges, stale edges) |
 | POST | `/triage` | Triage a headline: `{"headline": "...", "source": "..."}` |
-
-## Requirements
-
-Python 3.10+. Zero external dependencies — stdlib only. No pip install, no venv, no requirements.txt.
 
 ## Example: LK-99 Superconductor (Resolved)
 
@@ -794,102 +726,11 @@ The governor (`governor.py`) enforces analytical discipline through multiple mec
 
 ## Calibration Roadmap
 
-### The problem
+The engine's Bayesian mechanics are implemented and tested. What's missing is empirical validation that the operator is well-calibrated — that the likelihoods fed into `bayesian_update()` produce posteriors that track reality. Brier scoring infrastructure exists and the LK-99 backfill validates mechanics (average Brier 0.069), but real calibration requires prospective predictions scored honestly against outcomes.
 
-The engine's Bayesian mechanics are implemented and tested. What's missing is *empirical validation that the operator is well-calibrated* — that the likelihoods fed into `bayesian_update()` produce posteriors that track reality. Without this, the system is a well-oiled machine pointed at an unknown angle.
+Ten calibration topics have been designed spanning geopolitics, economics, domestic politics, conflict/trade, and physics, with horizons from 3 months to rolling windows. The goal is N >= 10 resolved prospective topics to derive empirical claim-state weight functions, replacing the current hand-set values (SUPPORTED=1.0, PROPOSED=0.5, CONTESTED=0.2, INVALIDATED=0.0).
 
-Brier scoring infrastructure exists (`snapshot_posteriors`, `record_outcome`, `compute_brier`). The LK-99 topic has been backfilled with 6 prediction snapshots and scores (average Brier 0.069, WELL_CALIBRATED). But backfilled topics validate mechanics, not judgment — you can't un-know the answer. Real calibration requires **prospective predictions**: commit to posteriors *before* resolution, then score honestly when the answer arrives.
-
-### What's needed
-
-1. **Prospective predictions only.** Snapshots must be timestamped before resolution. No retroactive scoring.
-2. **Non-cherry-picked topics.** If you only forecast things you're confident about, Brier scores flatter you and teach nothing. Selection criteria, not vibes.
-3. **Pre-committed resolution criteria.** Each topic defines what "resolved" means and by when. Open-ended topics that never close are unfalsifiable.
-4. **Minimum corpus.** N ≥ 10 resolved prospective topics before deriving empirical weight functions. N ≥ 20 before automating them.
-5. **Domain diversity.** Calibration on physics alone doesn't validate geopolitical judgment. The corpus needs to span domains.
-
-### Goal: learn claim-state weights from data
-
-Right now, claim-state weights are hand-set: SUPPORTED = 1.0, PROPOSED = 0.5, CONTESTED = 0.2, INVALIDATED = 0.0. The long-term goal is to derive these empirically — what weight on PROPOSED evidence actually produces the best-calibrated posteriors? This requires enough resolved topics with enough prediction snapshots to fit a curve. We're not there yet, and pretending otherwise would be the kind of false precision the governor exists to catch.
-
-### Proposed calibration topics
-
-Ten topics designed using the framework's own criteria: multiple plausible hypotheses (not just yes/no), observable indicators and data feeds, genuine prior uncertainty, and a time horizon that actually resolves. Each topic below sketches the hypothesis space and the evidence feeds that would drive updates — the operator sets up the full topic file prospectively and commits to regular updates before resolution.
-
-**Topic 1: 750 GeV diphoton excess** (particle physics — backfill only)
-- *Hypotheses*: H1: new particle, H2: statistical fluctuation, H3: detector artifact, H4: BSM physics but not a resonance
-- *Resolution*: ICHEP 2016 data release. **Already resolved** (H2 won). Backfill like LK-99 — tests mechanics, not prospective judgment.
-- *Why include*: operator had documented early skepticism, updated before consensus. Second historical anchor alongside LK-99.
-
-**Topic 2: Iran war — Strait of Hormuz status by August 2026** (geopolitics/trade)
-- *Hypotheses*: H1: full unconditional reopen (<3 months), H2: conditional reopen (Iran retains inspection/fee regime), H3: remains effectively closed through August, H4: escalation closes Bab al-Mandeb too
-- *Indicators*: daily transit counts, Brent/WTI spread, ceasefire compliance reports, Islamabad negotiation outcomes, Houthi posture shifts
-- *Current state*: ceasefire agreed Apr 8 but Hormuz still at standstill as of Apr 10. Iran insists on transit permission regime. Genuinely uncertain — the ceasefire could collapse or calcify.
-- *Horizon*: ~4 months. *Difficulty*: hard.
-
-**Topic 3: US recession by Q4 2026** (economics)
-- *Hypotheses*: H1: no recession (GDP stays positive), H2: technical recession (2 negative quarters, shallow), H3: significant recession (unemployment >5.5%), H4: stagflation (negative growth + inflation >4%)
-- *Indicators*: ISM PMI (below 50 already), consumer confidence (declining 3 quarters), unemployment (4.6% and rising), GDP prints, yield curve, Sahm Rule trigger
-- *Current state*: Polymarket prices ~25% recession probability. Mixed signals — labor weakening but growth forecasts still positive (1.5-2.0%). Tariff uncertainty adds volatility.
-- *Horizon*: ~6 months (Q3/Q4 GDP prints). *Difficulty*: medium — the indicators disagree, which is exactly when Bayesian updating earns its keep.
-
-**Topic 4: Ukraine — formal ceasefire by end 2026** (geopolitics)
-- *Hypotheses*: H1: comprehensive peace deal (territorial settlement), H2: frozen conflict (de facto ceasefire, no agreement), H3: limited truces only (Easter-style, no lasting agreement), H4: escalation (new offensive or external actor entry)
-- *Indicators*: negotiation track (Abu Dhabi/Geneva/Paris), territorial control changes, Western arms deliveries, Russian domestic pressure, energy leverage shifts
-- *Current state*: 32-hour Easter ceasefire agreed Apr 10, but broader talks stalled. Territory impasse unresolved. Washington distracted by Iran. Genuine multi-hypothesis uncertainty.
-- *Horizon*: ~8 months. *Difficulty*: hard.
-
-**Topic 5: South China Sea — kinetic incident with casualties by end 2026** (geopolitics)
-- *Hypotheses*: H1: continued gray zone only (no casualties), H2: incident with injuries but no deaths, H3: lethal incident (deaths), H4: MDT Article IV invocation
-- *Indicators*: ADIZ incursions, warship near-misses (one on Mar 30), joint exercise frequency (500+ US-PH exercises planned), diplomatic track, China defense budget trajectory
-- *Current state*: near-miss between BRP Benguet and PLA frigate Jingzhou. Escalation pattern clear, but both sides have so far avoided casualties. Classic "slow burn, high consequence" — exactly the kind of tail risk the system's entropy weighting is designed to flag.
-- *Horizon*: ~8 months. *Difficulty*: hard — low base rate but rising indicators.
-
-**Topic 6: Section 122 tariffs at 150-day expiry (late July 2026)** (economics/policy)
-- *Hypotheses*: H1: expire as scheduled, H2: renewed at same 10% rate, H3: expanded (higher rate or broader scope), H4: replaced by bilateral deals (partial rollback)
-- *Indicators*: White House statements, Section 301 investigation outcomes, trade deficit data, business lobbying activity, Congressional action, WTO rulings
-- *Current state*: 10% tariff on ~$1.2T of imports, effective Feb 24. SCOTUS struck down IEEPA tariffs; Section 122 has a statutory 150-day limit. New Section 301 probes launched into EU, Mexico, China. Political incentives unclear — expiry vs. renewal both have constituencies.
-- *Horizon*: ~3.5 months (late July 2026). *Difficulty*: medium — policy prediction with observable leading indicators.
-
-**Topic 7: Fed funds rate by end 2026** (economics)
-- *Hypotheses*: H1: no further cuts (stays 3.50-3.75%), H2: one cut (to 3.25-3.50%), H3: two+ cuts (to 3.00-3.25% or below), H4: rate hike (inflation forces reversal)
-- *Indicators*: CPI/PCE prints, unemployment rate, Fed dot plot, FOMC minutes language, market-implied probabilities, tariff impact on prices
-- *Current state*: Fed held steady in March. Median dot plot projects one cut in 2026. Goldman forecasts two. Bankrate forecasts three. The tariff-inflation tension creates genuine ambiguity — cut for growth or hold for inflation?
-- *Horizon*: ~8 months. *Difficulty*: medium — data-driven, falsifiable, multiple expert forecasts to calibrate against.
-
-**Topic 8: US midterms 2026 — House control** (domestic politics)
-- *Hypotheses*: H1: Democrats flip House (>218 seats), H2: Democrats gain seats but fall short, H3: Republicans hold (status quo ±5 seats), H4: Republicans gain seats
-- *Indicators*: generic ballot polling, Trump approval (currently ~41%, economic approval 31%), special election results, redistricting outcomes, candidate recruitment, fundraising
-- *Current state*: historical base rate strongly favors opposition gains in midterms. Trump approval declining (net -19%). But GOP getting midterm polling boost despite Trump's numbers — unusual divergence worth tracking.
-- *Horizon*: ~7 months (Nov 2026). *Difficulty*: medium — strong historical prior but current cycle has unusual dynamics.
-
-**Topic 9: Houthi Red Sea posture by mid-2026** (conflict/trade)
-- *Hypotheses*: H1: attacks resume at pre-ceasefire intensity, H2: selective targeting (political screening, not indiscriminate), H3: de facto ceasefire holds (no commercial attacks), H4: Houthis escalate beyond Red Sea (Bab al-Mandeb full closure)
-- *Indicators*: MARAD advisories, shipping insurance rates, Houthi statements, Iran war ceasefire status, Operation Rough Rider outcomes, maritime tracking data
-- *Current state*: Houthis paused commercial attacks after Gaza ceasefire (Oct 2025), resumed Israel strikes in March 2026. Currently screening ships by political identity rather than attacking indiscriminately. Holding Red Sea leverage in reserve. Directly coupled to Hormuz topic — not independent, and that correlation itself is worth tracking.
-- *Horizon*: ~3 months. *Difficulty*: medium — dependent on Iran war trajectory.
-
-**Topic 10: Next RTSC claim survives independent replication** (physics)
-- *Hypotheses*: H1: claim published and replicated within 12 months (≥2 independent labs), H2: claim published, partial replication (1 lab, or only some properties), H3: claim published, fails replication, H4: no credible claim published in window
-- *Indicators*: arXiv preprints, journal publications, replication attempts, materials characterization data, theory predictions
-- *Current state*: post-LK-99, the field has higher replication standards and faster debunking cycles. Base rate for H1 is near zero historically. But the operator's prior (skeptical, updated early on LK-99) is testable — does that calibration transfer to the next claim?
-- *Horizon*: rolling (12-month window from any new claim). *Difficulty*: hard — rare events with high noise.
-
-**Selection rationale:**
-- **Domains**: geopolitics (2, 4, 5), economics (3, 6, 7), domestic politics (8), conflict/trade (9), physics (1, 10). Weighted toward geopolitics/economics because that's where the operator has active judgment to test.
-- **Timescales**: 3 months (6, 9) to rolling (10). Clustering at 6-8 months ensures bulk resolution by early 2027.
-- **Difficulty**: deliberate mix. Topics 6 and 7 are data-driven (observable indicators, expert forecasts to benchmark against). Topics 4 and 5 are genuinely hard (multi-actor, low-frequency events). Topic 10 is a known-hard problem that tests whether skeptical priors transfer across domains.
-- **Correlation structure**: topics 2 and 9 are coupled (Hormuz and Houthi posture move together). Topics 3, 6, and 7 are correlated through macroeconomic channels. This is deliberate — the system needs to handle correlated topics honestly, and the calibration corpus should test that.
-- **Topic 1 is the exception**: already resolved, backfill only. Included as a second historical anchor alongside LK-99.
-
-### Timeline
-
-- **Phase 1 — now (April 2026):** Backfill topic 1 (750 GeV). Set up topics 2, 6, and 9 prospectively — these have the shortest horizons (3-4 months) and the most observable indicators. Begin regular update cycles. Topic 2 (Hormuz) already has an active topic file; the others need new ones.
-- **Phase 2 — May/June 2026:** Set up remaining topics (3, 4, 5, 7, 8, 10). First prospective resolutions expected: topic 6 (Section 122 expiry, late July) and topic 9 (Houthi posture, mid-2026).
-- **Phase 3 — late 2026 / early 2027:** Bulk of resolutions arrive (midterms in November, Fed rate by December, Hormuz/recession/Ukraine by year-end). Compute aggregate Brier scores across domains. If N ≥ 10 resolved: derive preliminary empirical weight functions. If N < 10: identify which topics stalled and why.
-- **Phase 4 — 2027+:** If calibration holds across domains, automate claim-state weight derivation. If it doesn't, diagnose *where* operator judgment diverges from outcomes — is it likelihood-setting, indicator design, or evidence selection? The Brier decomposition (reliability + resolution + uncertainty) tells you which component is failing. Feed that back into the topic design process, not just the weight functions.
-
-The system will tell you honestly whether you're calibrated. The only thing it can't do is make you set up the topics in the first place. That's on you.
+For the full calibration plan including all 10 proposed topics, selection rationale, and phased timeline, see **[CALIBRATION.md](CALIBRATION.md)**.
 
 ## Acknowledgments
 
