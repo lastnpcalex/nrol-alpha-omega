@@ -6,7 +6,7 @@
     "question": "What level of autonomous scientific research capability will the most capable frontier LLM demonstrate by March 31, 2027, as assessed against the Schwartz G1-G4 scale (G1=undergraduate, G2=early graduate, G3=advanced graduate with novel methodology, G4=postdoc-level independent research)?",
     "resolution": "Composite assessment at March 31, 2027 based on: (1) expert evaluations published in peer-reviewed venues or credible technical reports scoring frontier LLM research autonomy; (2) demonstrated artifacts — peer-reviewed papers where the LLM did the primary intellectual work with documented human oversight level; (3) benchmark performance on graduate-level scientific reasoning (GPQA Diamond, FrontierMath, METR autonomy evaluations). Resolution level determined by preponderance of evidence across these three axes.",
     "created": "2026-04-14T00:00:00Z",
-    "lastUpdated": "2026-04-15T03:42:08+00:00",
+    "lastUpdated": "2026-04-16T03:44:07+00:00",
     "status": "ACTIVE",
     "dayCount": 0,
     "startDate": "2026-04-14T00:00:00Z",
@@ -59,32 +59,32 @@
         "label": "G4 — Postdoc-level autonomy achieved",
         "midpoint": 4.0,
         "unit": "G-level (Schwartz scale)",
-        "posterior": 0.18,
+        "posterior": 0.1557,
         "description": "Schwartz prediction confirmed. By March 2027, a frontier LLM autonomously identifies promising research directions and executes novel scientific work with minimal human guidance (<10% of total intellectual effort). 'Taste' problem substantially solved through training innovation, self-play, or emergent capability. Evidence: multiple peer-reviewed papers with LLM as primary author, GPQA Diamond >95%, FrontierMath score >60%, credible expert panels rate capability at postdoc level."
       },
       "H2": {
         "label": "G3 — Advanced graduate, taste gap persists",
         "midpoint": 3.0,
         "unit": "G-level (Schwartz scale)",
-        "posterior": 0.38,
+        "posterior": 0.526,
         "description": "Significant capability gains but 'taste' remains unsolved. LLMs execute complex research tasks fluently — can derive novel results, write correct proofs, design experiments — but still require human direction on which problems are worth pursuing and which approaches are promising. Qualitative leap over G2 but falls short of independent research. Evidence: step-function benchmark improvements, successful complex research assistance documented, but expert consensus is 'brilliant technician, not a scientist.'"
       },
       "H3": {
         "label": "G2-G2.5 — Plateau at current capability level",
         "midpoint": 2.3,
         "unit": "G-level (Schwartz scale)",
-        "posterior": 0.32,
+        "posterior": 0.2768,
         "description": "Scaling hits diminishing returns. Incremental benchmark gains but no qualitative leap in research autonomy. 'Taste' proves deeply hard — possibly requiring architectural innovation beyond current transformer paradigm. Evidence: benchmark scores improve 5-15% but plateau, no convincing autonomous research artifacts, scaling laws show flattening returns on reasoning tasks, multiple expert assessments converge on 'impressive but not qualitatively different from 2025.'"
       },
       "H4": {
         "label": "Below G2 — Capability ceiling or regression",
         "midpoint": 1.5,
         "unit": "G-level (Schwartz scale)",
-        "posterior": 0.12,
+        "posterior": 0.0415,
         "description": "External disruption or fundamental architectural limitation prevents progress. Possible causes: major regulatory intervention (compute caps, training restrictions), catastrophic safety incident triggers industry pause, data wall (no new training signal available), economic downturn cuts AI investment, or discovered fundamental limitation of transformer architecture for open-ended reasoning. Evidence: no new frontier model release for 6+ months, benchmark stagnation or regression, lab pivots to non-LLM approaches."
       }
     },
-    "expectedValue": 2.82,
+    "expectedValue": 2.9,
     "expectedUnit": "G-level (Schwartz scale, 1-4)",
     "expectedValueNote": "Probability-weighted: 0.18*4.0 + 0.38*3.0 + 0.32*2.3 + 0.12*1.5 = 2.82. Between G2.5 and G3 — market-implied expectation is meaningful progress but short of the Schwartz prediction.",
     "posteriorHistory": [
@@ -97,6 +97,28 @@
           "H4": 0.12
         },
         "note": "Initial priors. H2 (G3) is modal — fast trajectory from G1→G2 in ~4 months (mid-2025 to late-2025) suggests continued progress, but 'taste' is plausibly a qualitative barrier, not just a scaling problem. H3 assigned substantial weight (0.32) reflecting scaling skeptics and 'bitter lesson' uncertainty. H1 at 0.18 reflects that Schwartz's 'blunt extrapolation' is aggressive — he himself caveats it heavily. H4 tail risk at 0.12 for regulatory/economic/architectural disruption."
+      },
+      {
+        "date": "2026-04-16",
+        "H1": 0.1557,
+        "H2": 0.526,
+        "H3": 0.2768,
+        "H4": 0.0415,
+        "note": "Evidence ev_003: METR research shows AI task duration doubling every seven months, from one-hour ",
+        "likelihoods": {
+          "H1": 0.25,
+          "H2": 0.4,
+          "H3": 0.25,
+          "H4": 0.1
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        }
       }
     ]
   },
@@ -462,7 +484,9 @@
       "id": "ev_002",
       "time": "2026-03-23T00:00:00Z",
       "text": "Schwartz predicts that 'blunt extrapolation' of the G1-to-G2 trajectory (achieved in ~4 months) puts frontier LLMs at G4 (PhD/postdoc-level autonomous research) by approximately March 2027.",
-      "tags": ["PREDICTION"],
+      "tags": [
+        "PREDICTION"
+      ],
       "source": "Matthew Schwartz via Anthropic Research Blog",
       "claimState": "PROPOSED",
       "weight": 0.0,
@@ -476,7 +500,35 @@
         "resolvedBy": null,
         "resolvedEvidence": null
       },
-      "note": "Extracted from ev_001. Schwartz himself caveats this as 'blunt extrapolation' — not a confident prediction. But it meets all 3 PREDICTION filters (specific, testable, time-bounded). Resolution will calibrate Schwartz as a source."
+      "note": "Extracted from ev_001. Schwartz himself caveats this as 'blunt extrapolation' — not a confident prediction. But it meets all 3 PREDICTION filters (specific, testable, time-bounded). Resolution will calibrate Schwartz as a source.",
+      "ledger": "DECISION",
+      "effectiveWeight": 0.25
+    },
+    {
+      "id": "ev_003",
+      "time": "2026-04-16T03:44:07+00:00",
+      "tag": "EVENT",
+      "tags": [
+        "EVENT"
+      ],
+      "text": "METR research shows AI task duration doubling every seven months, from one-hour tasks in early 2025 to eight-hour autonomous workstreams by late 2026. DeepResearch Bench: top models score 48-49 out of 100 on PhD-level research tasks across 22 fields.",
+      "provenance": "OBSERVED",
+      "source": "METR / DeepResearch Bench",
+      "posteriorImpact": "NONE",
+      "note": "Matches indicator t3_test_time_compute_breakthrough (tier3 suggestive). Pre-committed effect: H1 +4pp, H2 +3pp, H3 -5pp. Opens alternative to weight-scaling.. Source trust: 50% (moderate).",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-16T03:44:07+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: stale_evidence, quorum_failure. Reason: Evidence ev_003: METR research shows AI task duration doubling every seven months, from one-hour ",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
     }
   ],
   "dataFeeds": {
@@ -592,24 +644,20 @@
     "upstream": []
   },
   "governance": {
-    "health": "DEGRADED",
-    "issues": [
-      "Majority stale evidence (1/1)",
-      "Near-maximum uncertainty — model is not discriminating"
-    ],
+    "health": "HEALTHY",
+    "issues": [],
     "rt": {
       "rt": 0.0,
       "regime": "SAFE",
       "worst_hypothesis": "H1"
     },
-    "entropy": 1.8689,
+    "entropy": 1.6087,
     "maxEntropy": 2.0,
-    "uncertaintyRatio": 0.9345,
+    "uncertaintyRatio": 0.8044,
     "evidenceFreshness": {
-      "fresh": 0,
-      "stale": 1,
-      "prediction": 1,
-      "total": 2
+      "fresh": 2,
+      "stale": 2,
+      "total": 4
     },
     "hypothesisAdmissibility": {
       "H1": "ADMISSIBLE",
@@ -618,10 +666,10 @@
       "H4": "ADMISSIBLE"
     },
     "klFromPrior": {
-      "kl_divergence": 0.0,
+      "kl_divergence": 0.0642,
       "interpretation": "MODERATE"
     },
-    "lastComputed": "2026-04-14T00:00:00+00:00",
+    "lastComputed": "2026-04-16T03:44:07+00:00",
     "staleDependencies": 0,
     "calibrationHealth": "ACCEPTABLE",
     "unresolvedContradictions": 0,
@@ -648,17 +696,62 @@
         }
       },
       "indistinguishable": [],
-      "lastChecked": "2026-04-15T03:42:08+00:00"
+      "lastChecked": "2026-04-16T03:44:07+00:00"
     }
   },
   "predictionScoring": {
     "_docs": "Calibration infrastructure. Resolution at March 31, 2027. Composite assessment based on expert evaluations, benchmark scores, and demonstrated research artifacts.",
-    "snapshots": [],
+    "snapshots": [
+      {
+        "timestamp": "2026-04-16T03:44:07+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.1557,
+          "H2": 0.526,
+          "H3": 0.2768,
+          "H4": 0.0415
+        },
+        "entropy": 1.6087
+      },
+      {
+        "timestamp": "2026-04-16T03:44:07+00:00",
+        "trigger": "pipeline:ev_003",
+        "posteriors": {
+          "H1": 0.1557,
+          "H2": 0.526,
+          "H3": 0.2768,
+          "H4": 0.0415
+        },
+        "entropy": 1.6087
+      }
+    ],
     "outcomes": [],
     "brierScores": []
   },
   "contradictionTracker": {
     "unresolved": [],
-    "resolved": []
+    "resolved": [
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-03-23T00:00:00Z",
+        "entry_a_text": "Schwartz predicts that 'blunt extrapolation' of the G1-to-G2 trajectory (achieved in ~4 months) puts frontier LLMs at G4 (PhD/postdoc-level autonomous research) by approximately March 2027.",
+        "entry_b_time": "2026-04-16T03:44:07+00:00",
+        "entry_b_text": "METR research shows AI task duration doubling every seven months, from one-hour tasks in early 2025 to eight-hour autonomous workstreams by late 2026. DeepResearch Bench: top models score 48-49 out of 100 on PhD-level research tasks across 22 fields.",
+        "reason": "Numeric divergence 99.8% on metric (context: in): new=2025.0, existing=4.0, threshold=10%",
+        "detected": "2026-04-16T03:44:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-16T03:44:07Z"
+      }
+    ]
+  },
+  "sourceCalibration": {
+    "ledger": [],
+    "effectiveTrust": {
+      "DeepResearch Bench": 0.5,
+      "METR": 0.5,
+      "Matthew Schwartz": 0.5
+    },
+    "_last_scan_same_source_skipped": 1
   }
 }

@@ -6,7 +6,7 @@
     "question": "Will a kinetic military incident with casualties occur between PRC forces and any claimant state in the South China Sea by December 31, 2026?",
     "resolution": "Confirmed shots fired at military/coast guard vessel, ramming causing documented injury or death, boarding of military vessel resulting in injury/death, or water cannon causing documented serious injury. Must be reported by at least two independent primary sources (wire service, government statement, or verified video evidence). Commercial vessel incidents alone do not resolve.",
     "created": "2026-04-11T00:00:00Z",
-    "lastUpdated": "2026-04-14T03:03:00Z",
+    "lastUpdated": "2026-04-16T03:42:35+00:00",
     "status": "ACTIVE",
     "dayCount": 0,
     "startDate": "2026-04-11T00:00:00Z",
@@ -63,32 +63,32 @@
         "label": "Gray zone only — no casualties through Dec 31, 2026",
         "midpoint": 0,
         "unit": "probability",
-        "posterior": 0.55,
+        "posterior": 0.943,
         "description": "PRC continues harassment operations (water cannon, laser, close intercept, blocking maneuvers) but no confirmed casualties. Philippines continues resupply missions under pressure. Pattern persists without crossing kinetic threshold. Dominant historical outcome; reinforced by PH-China talks resuming and ADIZ incursions declining."
       },
       "H2": {
         "label": "Kinetic incident with injuries but no deaths",
         "midpoint": 0,
         "unit": "probability",
-        "posterior": 0.25,
+        "posterior": 0.0501,
         "description": "At least one Philippine (or other claimant) sailor/guardsman sustains documented injury from PRC action (water cannon trauma, ramming injuries, physical altercation during boarding attempt). No fatalities. Most plausible escalation path given current trajectory: water cannon incidents have already come close, and proximity incidents like BRP Benguet / Jingzhou (March 30) raise collision risk."
       },
       "H3": {
         "label": "Lethal incident — at least one fatality",
         "midpoint": 0,
         "unit": "probability",
-        "posterior": 0.13,
+        "posterior": 0.006,
         "description": "A kinetic interaction results in at least one confirmed fatality on either side. Could result from: deliberate live fire, severe ramming, helicopter downing, or a water cannon incident causing drowning. PRC has historically avoided lethal outcomes due to MDT tripwire awareness, but escalation dynamics and miscalculation risk are non-trivial over an 8-month horizon."
       },
       "H4": {
         "label": "MDT Article IV invocation by Philippines",
         "midpoint": 0,
         "unit": "probability",
-        "posterior": 0.07,
+        "posterior": 0.0009,
         "description": "Philippines formally invokes the 1951 Mutual Defense Treaty Article IV following a PRC attack on Philippine armed forces or public vessels. Requires: (1) lethal or severe kinetic incident, (2) Marcos administration political will to invoke, (3) US willingness to respond. Historical base rate: never invoked since treaty signed. Conditional on H3 occurring, probability of invocation estimated at ~50%, implying ~0.065 unconditional."
       }
     },
-    "expectedValue": 0,
+    "expectedValue": 0.0,
     "expectedUnit": "probability_of_kinetic_incident",
     "posteriorHistory": [
       {
@@ -104,6 +104,50 @@
         "H2": 0.25,
         "H3": 0.13,
         "H4": 0.07
+      },
+      {
+        "date": "2026-04-16",
+        "H1": 0.8687,
+        "H2": 0.1015,
+        "H3": 0.0235,
+        "H4": 0.0063,
+        "note": "Evidence ev_001: Philippines says China fired flares directly at its coast guard aircraft over th",
+        "likelihoods": {
+          "H1": 0.7,
+          "H2": 0.18,
+          "H3": 0.08,
+          "H4": 0.04
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        }
+      },
+      {
+        "date": "2026-04-16",
+        "H1": 0.943,
+        "H2": 0.0501,
+        "H3": 0.006,
+        "H4": 0.0009,
+        "note": "Evidence ev_002: China installed a 352-meter floating barrier at the entrance to Scarborough Shoa",
+        "likelihoods": {
+          "H1": 0.55,
+          "H2": 0.25,
+          "H3": 0.13,
+          "H4": 0.07
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        }
       }
     ]
   },
@@ -433,7 +477,9 @@
       "claimState": "SUPPORTED",
       "indicatorFired": "t2_warship_proximity_under_100m",
       "effectWeight": 0.6,
-      "note": "First warship-to-warship near-miss at this level of proximity in recent cycle. Elevates H2/H3 relative to pure PCG-only scenario."
+      "note": "First warship-to-warship near-miss at this level of proximity in recent cycle. Elevates H2/H3 relative to pure PCG-only scenario.",
+      "ledger": "DECISION",
+      "effectiveWeight": 0.5
     },
     {
       "id": "e002",
@@ -446,7 +492,9 @@
       "claimState": "SUPPORTED",
       "indicatorFired": null,
       "effectWeight": 0.0,
-      "note": "RHETORIC tag. Standard PRC framing. Does not move posteriors. Log for pattern tracking."
+      "note": "RHETORIC tag. Standard PRC framing. Does not move posteriors. Log for pattern tracking.",
+      "ledger": "DECISION",
+      "effectiveWeight": 0.5
     },
     {
       "id": "e003",
@@ -459,7 +507,9 @@
       "claimState": "SUPPORTED",
       "indicatorFired": null,
       "effectWeight": 0.3,
-      "note": "Moderate de-escalatory signal. Supports H1. Does not fire a specific indicator but informs diplomatic track sub-model."
+      "note": "Moderate de-escalatory signal. Supports H1. Does not fire a specific indicator but informs diplomatic track sub-model.",
+      "ledger": "DECISION",
+      "effectiveWeight": 0.5
     },
     {
       "id": "e004",
@@ -472,7 +522,9 @@
       "claimState": "SUPPORTED",
       "indicatorFired": null,
       "effectWeight": 0.2,
-      "note": "Supports H1 direction. Does not yet reach t3_adiz_sustained_below_150 threshold. Monitor for 3-month sustain."
+      "note": "Supports H1 direction. Does not yet reach t3_adiz_sustained_below_150 threshold. Monitor for 3-month sustain.",
+      "ledger": "DECISION",
+      "effectiveWeight": 0.5
     },
     {
       "id": "e005",
@@ -486,7 +538,9 @@
       "claimState": "SUPPORTED",
       "indicatorFired": null,
       "effectWeight": 0.25,
-      "note": "US commitment signal at HIGH. Deters PRC escalation to lethal threshold. Feeds us_commitment_signal sub-model."
+      "note": "US commitment signal at HIGH. Deters PRC escalation to lethal threshold. Feeds us_commitment_signal sub-model.",
+      "ledger": "DECISION",
+      "effectiveWeight": 0.5
     },
     {
       "id": "e006",
@@ -500,7 +554,61 @@
       "claimState": "SUPPORTED",
       "weight": 1.0,
       "posteriorImpact": "NONE. H1-directional (gray zone intensification without casualties). No indicator fired. Cyanide is novel gray-zone tactic but does not meet any tier 1/2 threshold (no live fire, no casualties, no boarding attempt).",
-      "note": "Novel escalation vector: environmental/chemical sabotage at Second Thomas Shoal. Watch for PH response - could accelerate t2_ph_china_talks_collapse."
+      "note": "Novel escalation vector: environmental/chemical sabotage at Second Thomas Shoal. Watch for PH response - could accelerate t2_ph_china_talks_collapse.",
+      "ledger": "DECISION",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_001",
+      "time": "2026-04-16T03:42:13+00:00",
+      "tag": "EVENT",
+      "tags": [
+        "EVENT"
+      ],
+      "text": "Philippines says China fired flares directly at its coast guard aircraft over the Spratly Islands in the disputed South China Sea, calling it a clear and deliberate act of bullying",
+      "provenance": "OBSERVED",
+      "source": "Bloomberg",
+      "posteriorImpact": "NONE",
+      "note": "Matches indicator t1_ramming_contact (tier1 critical). Pre-committed effect: H1 -25pp, H2 +15pp, H3 +10pp. Near-certain precursor to H3.. R_t is DANGEROUS — this topic is evidence-starved, even tangential intel has value. Source trust: 85% (high).",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-16T03:42:13+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, stale_evidence, quorum_failure. Reason: Evidence ev_001: Philippines says China fired flares directly at its coast guard aircraft over th",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_002",
+      "time": "2026-04-16T03:42:35+00:00",
+      "tag": "EVENT",
+      "tags": [
+        "EVENT"
+      ],
+      "text": "China installed a 352-meter floating barrier at the entrance to Scarborough Shoal, blocking Philippine access with coast guard ships and fishing boats",
+      "provenance": "OBSERVED",
+      "source": "Manila Times",
+      "posteriorImpact": "NONE",
+      "note": "Matches indicator t1_ramming_contact (tier1 critical). Pre-committed effect: H1 -25pp, H2 +15pp, H3 +10pp. Near-certain precursor to H3.. Source trust: 50% (moderate).",
+      "ledger": "FACT",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-16T03:42:35+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: stale_evidence. Reason: Evidence ev_002: China installed a 352-meter floating barrier at the entrance to Scarborough Shoa",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
     }
   ],
   "dataFeeds": {
@@ -592,22 +700,147 @@
     "Vietnam Malaysia South China Sea China incident {YYYY-MM}"
   ],
   "governance": {
-    "health": "HEALTHY",
-    "issues": [],
-    "entropy": 1.626,
-    "maxEntropy": 2.0,
-    "uncertaintyRatio": 0.813,
-    "evidenceFreshness": {
-      "fresh": 1,
-      "stale": 5,
-      "window": "last_10"
+    "health": "DEGRADED",
+    "issues": [
+      "Majority stale evidence (5/10)"
+    ],
+    "rt": {
+      "rt": 0.0,
+      "regime": "SAFE",
+      "worst_hypothesis": "H1"
     },
-    "lastComputed": "2026-04-14T03:03:00Z"
+    "entropy": 0.3496,
+    "maxEntropy": 2.0,
+    "uncertaintyRatio": 0.1748,
+    "evidenceFreshness": {
+      "fresh": 4,
+      "stale": 5,
+      "total": 10
+    },
+    "hypothesisAdmissibility": {
+      "H1": "ADMISSIBLE",
+      "H2": "ADMISSIBLE",
+      "H3": "ADMISSIBLE",
+      "H4": "ADMISSIBLE"
+    },
+    "klFromPrior": {
+      "kl_divergence": 0.4055,
+      "interpretation": "MODERATE"
+    },
+    "lastComputed": "2026-04-16T03:42:35+00:00",
+    "staleDependencies": 0,
+    "calibrationHealth": "ACCEPTABLE",
+    "unresolvedContradictions": 0,
+    "designGate": {
+      "passed": true,
+      "blockers": [],
+      "warnings": [],
+      "coverage": {
+        "H1": {
+          "pos": 5,
+          "neg": 11
+        },
+        "H2": {
+          "pos": 10,
+          "neg": 4
+        },
+        "H3": {
+          "pos": 12,
+          "neg": 4
+        },
+        "H4": {
+          "pos": 6,
+          "neg": 4
+        }
+      },
+      "indistinguishable": [],
+      "lastChecked": "2026-04-16T03:42:35+00:00"
+    }
   },
   "predictionScoring": {
     "_docs": "Calibration infrastructure. Topic resolves 2026-12-31 or upon qualifying kinetic incident. Record outcome in outcomes[], compute Brier scores against posteriorHistory snapshots.",
-    "snapshots": [],
+    "snapshots": [
+      {
+        "timestamp": "2026-04-16T03:42:13+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.8687,
+          "H2": 0.1015,
+          "H3": 0.0235,
+          "H4": 0.0063
+        },
+        "entropy": 0.6846
+      },
+      {
+        "timestamp": "2026-04-16T03:42:13+00:00",
+        "trigger": "pipeline:ev_001",
+        "posteriors": {
+          "H1": 0.8687,
+          "H2": 0.1015,
+          "H3": 0.0235,
+          "H4": 0.0063
+        },
+        "entropy": 0.6846
+      },
+      {
+        "timestamp": "2026-04-16T03:42:35+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.943,
+          "H2": 0.0501,
+          "H3": 0.006,
+          "H4": 0.0009
+        },
+        "entropy": 0.3496
+      },
+      {
+        "timestamp": "2026-04-16T03:42:35+00:00",
+        "trigger": "pipeline:ev_002",
+        "posteriors": {
+          "H1": 0.943,
+          "H2": 0.0501,
+          "H3": 0.006,
+          "H4": 0.0009
+        },
+        "entropy": 0.3496
+      }
+    ],
     "outcomes": [],
     "brierScores": []
+  },
+  "contradictionTracker": {
+    "unresolved": [],
+    "resolved": [
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-03-30T00:00:00Z",
+        "entry_a_text": "BRP Benguet near-miss with PLA Navy frigate Jingzhou in South China Sea. AFP characterized as dangerous close approach. No injuries reported.",
+        "entry_b_time": "2026-04-16T03:42:13+00:00",
+        "entry_b_text": "Philippines says China fired flares directly at its coast guard aircraft over the Spratly Islands in the disputed South China Sea, calling it a clear and deliberate act of bullying",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: china, sea, south",
+        "detected": "2026-04-16T03:42:13Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-16T03:42:13Z"
+      }
+    ]
+  },
+  "sourceCalibration": {
+    "ledger": [],
+    "effectiveTrust": {
+      "AFP joint statements": 0.5,
+      "AFP official statement": 0.5,
+      "Bloomberg": 0.85,
+      "DFA statements": 0.5,
+      "INDOPACOM": 0.5,
+      "Modern Diplomacy": 0.5,
+      "PRC Ministry of National Defense statement": 0.5,
+      "Taiwan MND reports": 0.5,
+      "Wire reports": 0.5,
+      "open source tracking": 0.5,
+      "wire reports": 0.5,
+      "Manila Times": 0.5
+    },
+    "_last_scan_same_source_skipped": 1
   }
 }

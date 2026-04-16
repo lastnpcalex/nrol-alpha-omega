@@ -1609,7 +1609,7 @@ async function runPipeline(btnId) {
 // Set this to the Loom integer ID of the pipeline intake branch's first assistant response.
 // All pipeline Loom.send() calls will fork from this message.
 // To discover IDs: check browser console — every message-sent event logs its ID.
-let _pipelineParentId = 5020; // Pipeline intake branch parent
+let _pipelineParentId = 5024; // NROL-AO dedicated pipeline intake (clean context, no Loom ancestry)
 
 // Debug: log every message ID so we can discover the right parent
 try {
