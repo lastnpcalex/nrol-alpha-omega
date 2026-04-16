@@ -6,7 +6,7 @@
     "question": "How long will the Strait of Hormuz remain effectively closed?",
     "resolution": "Sustained >30% of pre-war Hormuz traffic (~40 transits/day)",
     "created": "2026-03-02T00:00:00Z",
-    "lastUpdated": "2026-04-16T02:31:36+00:00",
+    "lastUpdated": "2026-04-16T02:37:10+00:00",
     "status": "ACTIVE",
     "dayCount": 45,
     "startDate": "2026-03-02T00:00:00Z",
@@ -2922,6 +2922,40 @@
       "ledger": "DECISION",
       "claimState": "PROPOSED",
       "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_142",
+      "time": "2026-04-15T12:37:00Z",
+      "tag": "DIPLO",
+      "tags": [
+        "DIPLO",
+        "POLICY"
+      ],
+      "text": "AP reports Iran and US gave 'in principle' approval to extend ceasefire beyond Apr 22 expiry, via Pakistan mediation (finance minister Aurangzeb). However, US official told Reuters Washington has 'not formally agreed' to extension. Three sticking points remain: nuclear program, Hormuz control, war damages. Iran demands blockade lifted as precondition. Trump: 'I view it as very close to over.' Ceasefire technically holding with no confirmed violations but structurally precarious with blockade ongoing.",
+      "provenance": "OBSERVED",
+      "source": "AP (Magdy/Metz/Ahmed) / Reuters / Fortune / Middle East Monitor",
+      "posteriorImpact": "NONE. H2-directional: extension creates diplomatic window favoring 6wk-4mo resolution. But 'in principle' is not formal agreement, and three core sticking points (nuclear, Hormuz, damages) are the same ones that collapsed Islamabad talks. No indicator fired.",
+      "note": "Day 46. Ceasefire expires Apr 22 (6 days). Gap between in-principle and formal is significant. US may use ambiguity as leverage while blockade tightens. Cross-ref ev_139. talksTrack: supports direct_talks_resume (0.30).",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.25
+    },
+    {
+      "id": "ev_143",
+      "time": "2026-04-15T14:00:00Z",
+      "tag": "ECON",
+      "tags": [
+        "ECON",
+        "POLICY"
+      ],
+      "text": "Treasury waiver authorizing certain Iranian crude purchases expires this weekend and will NOT be renewed. Tightens economic blockade beyond naval interdiction. 230 loaded oil tankers remain trapped in Gulf. ECB and IMF issuing stagflation warnings tied to supply disruptions. North Sea oil at record highs.",
+      "provenance": "OBSERVED",
+      "source": "European Business Magazine",
+      "posteriorImpact": "NONE. H3/H4-directional: waiver expiry removes last legal channel for Iranian oil exports, deepening economic isolation. Adds resolution prerequisite (sanctions policy reversal). No indicator fired.",
+      "note": "Day 46. Source trust 0.50 (unknown in source_db). Waiver expiry verifiable via Treasury.gov. 230 loaded tankers refines stranded_vessels datafeed.",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.25
     }
   ],
   "dataFeeds": {
@@ -3071,8 +3105,9 @@
   "governance": {
     "health": "DEGRADED",
     "issues": [
-      "Majority stale evidence (128/145)",
-      "Downstream alert: calibration-us-recession-2026 has 2 stale assumption(s) from this topic"
+      "Majority stale evidence (128/147)",
+      "Downstream alert: calibration-us-recession-2026 has 1 stale assumption(s) from this topic",
+      "56 unresolved contradictions"
     ],
     "rt": {
       "rt": 0.0,
@@ -3083,9 +3118,9 @@
     "maxEntropy": 2.0,
     "uncertaintyRatio": 0.6745,
     "evidenceFreshness": {
-      "fresh": 17,
+      "fresh": 19,
       "stale": 128,
-      "total": 145
+      "total": 147
     },
     "hypothesisAdmissibility": {
       "H1": "ADMISSIBLE",
@@ -3097,7 +3132,7 @@
       "kl_divergence": 0.776,
       "interpretation": "MODERATE"
     },
-    "lastComputed": "2026-04-16T02:31:36+00:00",
+    "lastComputed": "2026-04-16T02:37:10+00:00",
     "staleDependencies": 0,
     "downstreamAlerts": [
       {
@@ -3105,22 +3140,16 @@
         "downstream_title": "US Recession by Q4 2026",
         "stale_assumptions": [
           {
-            "hypothesis": "H2",
-            "assumed": 0.22,
-            "actual": 0.1,
-            "drift": 0.12
-          },
-          {
-            "hypothesis": "H4",
-            "assumed": 0.275,
-            "actual": 0.38,
-            "drift": 0.105
+            "hypothesis": "H3",
+            "assumed": 0.5,
+            "actual": 0.6051,
+            "drift": 0.1051
           }
         ]
       }
     ],
     "calibrationHealth": "ACCEPTABLE",
-    "unresolvedContradictions": 0,
+    "unresolvedContradictions": 56,
     "expiredHypotheses": [
       {
         "key": "H1",
@@ -3153,7 +3182,7 @@
         }
       },
       "indistinguishable": [],
-      "lastChecked": "2026-04-16T02:31:36+00:00"
+      "lastChecked": "2026-04-16T02:37:10+00:00"
     }
   },
   "dependencies": {
@@ -3213,7 +3242,568 @@
     "partialBrierScores": []
   },
   "contradictionTracker": {
-    "unresolved": [],
+    "unresolved": [
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-03-28T00:28-07:00",
+        "entry_a_text": "US INTELLIGENCE: Only 1/3 of Iran's missile arsenal CONFIRMED destroyed after a month of war. Another 1/3 damaged or buried underground. Remaining 1/3 intact and operational. Iran can sustain missile attacks for MONTHS. Contradicts White House 'ahead of schedule' narrative. Combined with Tomahawk depletion (850+ fired, ~20% of stockpile), both sides face long-term sustainment challenges but neither is close to exhaustion.",
+        "entry_b_time": "2026-04-15T12:37:00Z",
+        "entry_b_text": "AP reports Iran and US gave 'in principle' approval to extend ceasefire beyond Apr 22 expiry, via Pakistan mediation (finance minister Aurangzeb). However, US official told Reuters Washington has 'not formally agreed' to extension. Three sticking points remain: nuclear program, Hormuz control, war damages. Iran demands blockade lifted as precondition. Trump: 'I view it as very close to over.' Ceasefire technically holding with no confirmed violations but structurally precarious with blockade ongoing.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: close, confirmed, iran, war",
+        "detected": "2026-04-16T02:36:56Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-03-28T00:28-07:00",
+        "entry_a_text": "IRGC issued warning to CIVILIANS near US forces in Gulf states to EVACUATE. Statement: 'We are duty-bound to target US forces wherever we find them.' Called US forces 'cowardly' for using 'civilian locations as human shields.' This is pre-attack notification language â€” signals imminent escalation against US bases in Gulf. Combined with nuclear site strikes, Iran's retaliation 'will no longer be eye for eye.'",
+        "entry_b_time": "2026-04-15T12:37:00Z",
+        "entry_b_text": "AP reports Iran and US gave 'in principle' approval to extend ceasefire beyond Apr 22 expiry, via Pakistan mediation (finance minister Aurangzeb). However, US official told Reuters Washington has 'not formally agreed' to extension. Three sticking points remain: nuclear program, Hormuz control, war damages. Iran demands blockade lifted as precondition. Trump: 'I view it as very close to over.' Ceasefire technically holding with no confirmed violations but structurally precarious with blockade ongoing.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: iran, nuclear",
+        "detected": "2026-04-16T02:36:56Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-03-28T00:28-07:00",
+        "entry_a_text": "Brent closed at $112.57 (+4.22%) â€” HIGHEST since July 2022 (Russia/Ukraine). Brent-WTI spread $12.45. Dow tumbled ~800 points, ENTERED CORRECTION TERRITORY. S&P 500 posted FIFTH consecutive weekly decline. OECD: US inflation to hit 4.2% in 2026, global growth cut to 2.9%. UK worst-hit among major economies. Fortune analyst: war 'could drag into fall 2027.'",
+        "entry_b_time": "2026-04-15T12:37:00Z",
+        "entry_b_text": "AP reports Iran and US gave 'in principle' approval to extend ceasefire beyond Apr 22 expiry, via Pakistan mediation (finance minister Aurangzeb). However, US official told Reuters Washington has 'not formally agreed' to extension. Three sticking points remain: nuclear program, Hormuz control, war damages. Iran demands blockade lifted as precondition. Trump: 'I view it as very close to over.' Ceasefire technically holding with no confirmed violations but structurally precarious with blockade ongoing.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: points, war",
+        "detected": "2026-04-16T02:36:56Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-03-28T00:28-07:00",
+        "entry_a_text": "10,000 troop decision expected NEXT WEEK (per defense official). Not yet approved. Rubio: deployments give Trump 'flexibility if conditions change.' Infantry + armored vehicles = ground operation capability, not just deterrence posture. Meanwhile: Tripoli in CENTCOM AOR, 82nd deploying, Boxer approaching. Force convergence continuing regardless of diplomatic track.",
+        "entry_b_time": "2026-04-15T12:37:00Z",
+        "entry_b_text": "AP reports Iran and US gave 'in principle' approval to extend ceasefire beyond Apr 22 expiry, via Pakistan mediation (finance minister Aurangzeb). However, US official told Reuters Washington has 'not formally agreed' to extension. Three sticking points remain: nuclear program, Hormuz control, war damages. Iran demands blockade lifted as precondition. Trump: 'I view it as very close to over.' Ceasefire technically holding with no confirmed violations but structurally precarious with blockade ongoing.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: official, trump",
+        "detected": "2026-04-16T02:36:56Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-03-28T00:28-07:00",
+        "entry_a_text": "POSTERIORS UPDATED. H2 0.16â†’0.13, H3 0.53â†’0.54, H4 0.30â†’0.32. E[weeks] 39.32â†’40.63. Rationale: (1) Israel struck NUCLEAR FACILITIES = massive escalation that kills near-term diplomatic path. Iran will harden, not negotiate, after Arak/Ardakan. (2) Iran BLOCKED Chinese ships at Hormuz = selective passage regime is dead on arrival. Blockade is effectively total. (3) Only 1/3 missiles destroyed = Iran can sustain for months. (4) Rubio '2-4 more weeks' = first official timeline extension. (5) IRGC evacuation warning = asymmetric retaliation incoming. All ACTIONS not rhetoric. Near-term resolution (H2) probability compressing. Conflict hardening into extended war of attrition.",
+        "entry_b_time": "2026-04-15T12:37:00Z",
+        "entry_b_text": "AP reports Iran and US gave 'in principle' approval to extend ceasefire beyond Apr 22 expiry, via Pakistan mediation (finance minister Aurangzeb). However, US official told Reuters Washington has 'not formally agreed' to extension. Three sticking points remain: nuclear program, Hormuz control, war damages. Iran demands blockade lifted as precondition. Trump: 'I view it as very close to over.' Ceasefire technically holding with no confirmed violations but structurally precarious with blockade ongoing.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: blockade, extension, hormuz, iran, nuclear",
+        "detected": "2026-04-16T02:36:56Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-03-28T01:32-07:00",
+        "entry_a_text": "IRGC EXECUTED EVACUATION WARNING: Iran struck Prince Sultan Air Base in Saudi Arabia. 12 US service members injured (shrapnel wounds, not life-threatening). Refueler tanker aircraft damaged. This came HOURS after IRGC warned civilians to evacuate areas near US forces. Retaliatory cycle for nuclear site strikes (Arak/Ardakan) playing out. First confirmed US casualties from Iranian strike since Kuwait airport attack. War expanding into direct Iran-vs-US-bases axis.",
+        "entry_b_time": "2026-04-15T12:37:00Z",
+        "entry_b_text": "AP reports Iran and US gave 'in principle' approval to extend ceasefire beyond Apr 22 expiry, via Pakistan mediation (finance minister Aurangzeb). However, US official told Reuters Washington has 'not formally agreed' to extension. Three sticking points remain: nuclear program, Hormuz control, war damages. Iran demands blockade lifted as precondition. Trump: 'I view it as very close to over.' Ceasefire technically holding with no confirmed violations but structurally precarious with blockade ongoing.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: confirmed, iran, nuclear, war",
+        "detected": "2026-04-16T02:36:56Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-03-28T13:53-07:00",
+        "entry_a_text": "HOUTHIS ENTER THE WAR: Yemen's Houthis fired barrage of ballistic missiles at 'sensitive Israeli military sites' in southern Israel. IDF intercepted one missile. Brig Gen Saree announced on Al Masirah TV. FIRST Houthi attack on Israel since Hamas truce. WAR EXPANDED TO NEW FRONT â€” now 5 countries directly attacking (US, Israel, Iran, Hezbollah/Lebanon, Houthis/Yemen). Houthis can threaten Bab al-Mandab Strait = potential SECOND maritime choke point. If Houthis resume Red Sea shipping attacks, Cape route becomes even longer/costlier.",
+        "entry_b_time": "2026-04-15T12:37:00Z",
+        "entry_b_text": "AP reports Iran and US gave 'in principle' approval to extend ceasefire beyond Apr 22 expiry, via Pakistan mediation (finance minister Aurangzeb). However, US official told Reuters Washington has 'not formally agreed' to extension. Three sticking points remain: nuclear program, Hormuz control, war damages. Iran demands blockade lifted as precondition. Trump: 'I view it as very close to over.' Ceasefire technically holding with no confirmed violations but structurally precarious with blockade ongoing.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: iran, war",
+        "detected": "2026-04-16T02:36:56Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-03-28T13:53-07:00",
+        "entry_a_text": "Iran struck Tel Aviv overnight â€” 8 impact sites including a university. 1 killed, 2 injured. Kuwait airport radar system damaged by drone. UAE: falling debris from intercepts caused fires at industrial hub. Israel continued striking Tehran, Isfahan, Khuzestan steel plants. 120+ historical sites damaged across Iran. Bushehr NPP struck AGAIN (Iran says no damage/casualties). War at full intensity despite 'talks.'",
+        "entry_b_time": "2026-04-15T12:37:00Z",
+        "entry_b_text": "AP reports Iran and US gave 'in principle' approval to extend ceasefire beyond Apr 22 expiry, via Pakistan mediation (finance minister Aurangzeb). However, US official told Reuters Washington has 'not formally agreed' to extension. Three sticking points remain: nuclear program, Hormuz control, war damages. Iran demands blockade lifted as precondition. Trump: 'I view it as very close to over.' Ceasefire technically holding with no confirmed violations but structurally precarious with blockade ongoing.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: iran, war",
+        "detected": "2026-04-16T02:36:56Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-03-28T13:53-07:00",
+        "entry_a_text": "WTI briefly touched $100.04 â€” first time above $100 since 2022. Closed at $99.64 (+5.46%). Brent $112.57. Goldman Sachs: $14-18/bbl geopolitical risk premium baked in. Hormuz transits down to 5/day (from 120 pre-war) per Windward. 101 eastbound transits vs 41 westbound = ships fleeing the Gulf, not entering. OECD: US inflation to hit 4.2%, global growth 2.9%.",
+        "entry_b_time": "2026-04-15T12:37:00Z",
+        "entry_b_text": "AP reports Iran and US gave 'in principle' approval to extend ceasefire beyond Apr 22 expiry, via Pakistan mediation (finance minister Aurangzeb). However, US official told Reuters Washington has 'not formally agreed' to extension. Three sticking points remain: nuclear program, Hormuz control, war damages. Iran demands blockade lifted as precondition. Trump: 'I view it as very close to over.' Ceasefire technically holding with no confirmed violations but structurally precarious with blockade ongoing.",
+        "reason": "Antonym pair detected: new has 'blockade', existing has 'transit'",
+        "detected": "2026-04-16T02:36:56Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-03-28T13:53-07:00",
+        "entry_a_text": "CNN: Trump's conflicting signals 'frustrate GOP lawmakers and allies' â€” no clear endgame after 4 weeks. House Armed Services Chairman Rogers: 'frustration on both sides of the aisle.' GOP Rep Mace stormed out of briefing. Only 20% of Republicans support ground troops. Congress may block additional war funding without clarity. Trump simultaneously claims talks 'going well' while ordering thousands more troops. Domestic political constraint on escalation tightening.",
+        "entry_b_time": "2026-04-15T12:37:00Z",
+        "entry_b_text": "AP reports Iran and US gave 'in principle' approval to extend ceasefire beyond Apr 22 expiry, via Pakistan mediation (finance minister Aurangzeb). However, US official told Reuters Washington has 'not formally agreed' to extension. Three sticking points remain: nuclear program, Hormuz control, war damages. Iran demands blockade lifted as precondition. Trump: 'I view it as very close to over.' Ceasefire technically holding with no confirmed violations but structurally precarious with blockade ongoing.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: trump, war",
+        "detected": "2026-04-16T02:36:56Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-03-28T13:53-07:00",
+        "entry_a_text": "Posteriors HELD this cycle. Houthi entry is the headline but ONE salvo doesn't confirm sustained campaign. Key question: do Houthis resume RED SEA SHIPPING attacks? If yes, Bab al-Mandab becomes second choke point = catastrophic for global trade and extends Hormuz resolution timeline (ships can't even route around). IRGC economic warfare (15 US companies targeted) + Prince Sultan strike = war broadening into new domains. But yesterday's move already captured the nuclear escalation + Chinese ship blockage dynamics. Wait for: (1) Houthi follow-on attacks, (2) Bab al-Mandab shipping threat, (3) 10,000 troop decision next week, (4) Tripoli position update.",
+        "entry_b_time": "2026-04-15T12:37:00Z",
+        "entry_b_text": "AP reports Iran and US gave 'in principle' approval to extend ceasefire beyond Apr 22 expiry, via Pakistan mediation (finance minister Aurangzeb). However, US official told Reuters Washington has 'not formally agreed' to extension. Three sticking points remain: nuclear program, Hormuz control, war damages. Iran demands blockade lifted as precondition. Trump: 'I view it as very close to over.' Ceasefire technically holding with no confirmed violations but structurally precarious with blockade ongoing.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: hormuz, nuclear, war",
+        "detected": "2026-04-16T02:36:56Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-06T20:00-04:00",
+        "entry_a_text": "Trump's third deadline (Apr 6 8pm ET) expired. Iran rejected 45-day ceasefire proposal. Trump extended 24hrs to Apr 7 8pm ET, declared it 'FINAL.' Third blink confirmed. Trump warned 'whole civilization will die' if no deal.",
+        "entry_b_time": "2026-04-15T12:37:00Z",
+        "entry_b_text": "AP reports Iran and US gave 'in principle' approval to extend ceasefire beyond Apr 22 expiry, via Pakistan mediation (finance minister Aurangzeb). However, US official told Reuters Washington has 'not formally agreed' to extension. Three sticking points remain: nuclear program, Hormuz control, war damages. Iran demands blockade lifted as precondition. Trump: 'I view it as very close to over.' Ceasefire technically holding with no confirmed violations but structurally precarious with blockade ongoing.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: apr, ceasefire, confirmed, iran, trump",
+        "detected": "2026-04-16T02:36:56Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-08T00:00:00Z",
+        "entry_a_text": "Pakistan brokered 2-week ceasefire between US and Iran. Trump suspended bombing. Iran agreed to allow 'safe passage through Strait of Hormuz via coordination with Iran's Armed Forces.' First face-to-face US-Iran engagement framework since 2015 JCPOA. Ceasefire terms: halt hostilities, reopen Hormuz, 15-20 day negotiation period.",
+        "entry_b_time": "2026-04-15T12:37:00Z",
+        "entry_b_text": "AP reports Iran and US gave 'in principle' approval to extend ceasefire beyond Apr 22 expiry, via Pakistan mediation (finance minister Aurangzeb). However, US official told Reuters Washington has 'not formally agreed' to extension. Three sticking points remain: nuclear program, Hormuz control, war damages. Iran demands blockade lifted as precondition. Trump: 'I view it as very close to over.' Ceasefire technically holding with no confirmed violations but structurally precarious with blockade ongoing.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: agreed, ceasefire, hormuz, iran, pakistan",
+        "detected": "2026-04-16T02:36:56Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-08T00:00:00Z",
+        "entry_a_text": "Israel launched massive strikes on Lebanon/Hezbollah on Day 1 of ceasefire. 254 killed in single day. Netanyahu declared 'Lebanon not included in ceasefire.' Trump agreed — said Lebanon excluded. Pakistan (mediator) said Lebanon WAS included. Iran accused US of 'grave violation.'",
+        "entry_b_time": "2026-04-15T12:37:00Z",
+        "entry_b_text": "AP reports Iran and US gave 'in principle' approval to extend ceasefire beyond Apr 22 expiry, via Pakistan mediation (finance minister Aurangzeb). However, US official told Reuters Washington has 'not formally agreed' to extension. Three sticking points remain: nuclear program, Hormuz control, war damages. Iran demands blockade lifted as precondition. Trump: 'I view it as very close to over.' Ceasefire technically holding with no confirmed violations but structurally precarious with blockade ongoing.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: agreed, ceasefire, iran, pakistan, trump",
+        "detected": "2026-04-16T02:36:56Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-10T00:00:00Z",
+        "entry_a_text": "Hormuz traffic crept up to ~10 transits/day during ceasefire period (vs 5/day pre-ceasefire, 120+ pre-war). Still 92% below normal. 600+ vessels (325 tankers) remain stranded in the Gulf.",
+        "entry_b_time": "2026-04-15T12:37:00Z",
+        "entry_b_text": "AP reports Iran and US gave 'in principle' approval to extend ceasefire beyond Apr 22 expiry, via Pakistan mediation (finance minister Aurangzeb). However, US official told Reuters Washington has 'not formally agreed' to extension. Three sticking points remain: nuclear program, Hormuz control, war damages. Iran demands blockade lifted as precondition. Trump: 'I view it as very close to over.' Ceasefire technically holding with no confirmed violations but structurally precarious with blockade ongoing.",
+        "reason": "Antonym pair detected: new has 'blockade', existing has 'transit'",
+        "detected": "2026-04-16T02:36:56Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-10T00:00:00Z",
+        "entry_a_text": "Brent crude fell from $112.57 (Mar 27) to ~$97.78 on ceasefire hopes. WTI tracking similarly. Market pricing partial reopening but not full resolution.",
+        "entry_b_time": "2026-04-15T12:37:00Z",
+        "entry_b_text": "AP reports Iran and US gave 'in principle' approval to extend ceasefire beyond Apr 22 expiry, via Pakistan mediation (finance minister Aurangzeb). However, US official told Reuters Washington has 'not formally agreed' to extension. Three sticking points remain: nuclear program, Hormuz control, war damages. Iran demands blockade lifted as precondition. Trump: 'I view it as very close to over.' Ceasefire technically holding with no confirmed violations but structurally precarious with blockade ongoing.",
+        "reason": "Numeric divergence 77.5% on metric (context: ceasefire): new=22.0, existing=97.78, threshold=10%",
+        "detected": "2026-04-16T02:36:56Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-11T00:00:00Z",
+        "entry_a_text": "Vance, Witkoff, and Kushner met Iranian officials in Islamabad. 21-hour marathon talks. TALKS COLLAPSED. Iran refused US red lines: end all uranium enrichment, fully open Hormuz without tolls. Iran demanded: frozen $6B assets, nuclear program guarantees, right to charge Hormuz tolls, end Israeli attacks on Lebanon. First face-to-face since 2015.",
+        "entry_b_time": "2026-04-15T12:37:00Z",
+        "entry_b_text": "AP reports Iran and US gave 'in principle' approval to extend ceasefire beyond Apr 22 expiry, via Pakistan mediation (finance minister Aurangzeb). However, US official told Reuters Washington has 'not formally agreed' to extension. Three sticking points remain: nuclear program, Hormuz control, war damages. Iran demands blockade lifted as precondition. Trump: 'I view it as very close to over.' Ceasefire technically holding with no confirmed violations but structurally precarious with blockade ongoing.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: hormuz, iran, nuclear, program",
+        "detected": "2026-04-16T02:36:56Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-11T00:00:00Z",
+        "entry_a_text": "USS Frank E. Peterson and USS Michael Murphy transited Strait of Hormuz for mine-clearing operations. CENTCOM confirmed. UUV drones (torpedo-shaped, high-res sonar) deployed to scan seabed for Maham 3 (moored) and Maham 7 (bottom) mines. Additional forces to 'join clearance effort in coming days.' UK mobilizing coalition with France for minesweeping support.",
+        "entry_b_time": "2026-04-15T12:37:00Z",
+        "entry_b_text": "AP reports Iran and US gave 'in principle' approval to extend ceasefire beyond Apr 22 expiry, via Pakistan mediation (finance minister Aurangzeb). However, US official told Reuters Washington has 'not formally agreed' to extension. Three sticking points remain: nuclear program, Hormuz control, war damages. Iran demands blockade lifted as precondition. Trump: 'I view it as very close to over.' Ceasefire technically holding with no confirmed violations but structurally precarious with blockade ongoing.",
+        "reason": "Antonym pair detected: new has 'blockade', existing has 'transit'",
+        "detected": "2026-04-16T02:36:56Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-11T00:00:00Z",
+        "entry_a_text": "Three oil supertankers (2 Chinese, 1 Greek) transited Strait of Hormuz — biggest day of oil shipping since war began. Occurred during ceasefire window.",
+        "entry_b_time": "2026-04-15T12:37:00Z",
+        "entry_b_text": "AP reports Iran and US gave 'in principle' approval to extend ceasefire beyond Apr 22 expiry, via Pakistan mediation (finance minister Aurangzeb). However, US official told Reuters Washington has 'not formally agreed' to extension. Three sticking points remain: nuclear program, Hormuz control, war damages. Iran demands blockade lifted as precondition. Trump: 'I view it as very close to over.' Ceasefire technically holding with no confirmed violations but structurally precarious with blockade ongoing.",
+        "reason": "Antonym pair detected: new has 'blockade', existing has 'transit'",
+        "detected": "2026-04-16T02:36:56Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-12T00:00:00Z",
+        "entry_a_text": "Trump announced via Truth Social: 'Effective immediately, the United States Navy will begin the process of BLOCKADING any and all Ships trying to enter, or leave, the Strait of Hormuz.' Will intercept vessels that paid Iran's toll. Will destroy Iranian mines. STRAIT NOW UNDER DUAL BLOCKADE — Iran blocking from east, US blocking from west.",
+        "entry_b_time": "2026-04-15T12:37:00Z",
+        "entry_b_text": "AP reports Iran and US gave 'in principle' approval to extend ceasefire beyond Apr 22 expiry, via Pakistan mediation (finance minister Aurangzeb). However, US official told Reuters Washington has 'not formally agreed' to extension. Three sticking points remain: nuclear program, Hormuz control, war damages. Iran demands blockade lifted as precondition. Trump: 'I view it as very close to over.' Ceasefire technically holding with no confirmed violations but structurally precarious with blockade ongoing.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: blockade, hormuz, iran, trump",
+        "detected": "2026-04-16T02:36:56Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-11T18:00:00Z",
+        "entry_a_text": "Iran reportedly unable to locate all naval mines it planted in Strait of Hormuz. Sea currents may have swept some mines from original positions, complicating both Iranian and US clearance efforts.",
+        "entry_b_time": "2026-04-15T12:37:00Z",
+        "entry_b_text": "AP reports Iran and US gave 'in principle' approval to extend ceasefire beyond Apr 22 expiry, via Pakistan mediation (finance minister Aurangzeb). However, US official told Reuters Washington has 'not formally agreed' to extension. Three sticking points remain: nuclear program, Hormuz control, war damages. Iran demands blockade lifted as precondition. Trump: 'I view it as very close to over.' Ceasefire technically holding with no confirmed violations but structurally precarious with blockade ongoing.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: hormuz, iran",
+        "detected": "2026-04-16T02:36:56Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-11T12:00:00Z",
+        "entry_a_text": "US-Iran ceasefire collapsed after 3 days. Two US warships sailed through Strait of Hormuz to establish merchant shipping corridor. Transits remain at less than 10% of pre-war daily flow (~40 transits/day baseline). Iran continues requiring ships to obtain permission to transit.",
+        "entry_b_time": "2026-04-15T12:37:00Z",
+        "entry_b_text": "AP reports Iran and US gave 'in principle' approval to extend ceasefire beyond Apr 22 expiry, via Pakistan mediation (finance minister Aurangzeb). However, US official told Reuters Washington has 'not formally agreed' to extension. Three sticking points remain: nuclear program, Hormuz control, war damages. Iran demands blockade lifted as precondition. Trump: 'I view it as very close to over.' Ceasefire technically holding with no confirmed violations but structurally precarious with blockade ongoing.",
+        "reason": "Antonym pair detected: new has 'blockade', existing has 'transit'",
+        "detected": "2026-04-16T02:36:56Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-12T14:00:00Z",
+        "entry_a_text": "Islamabad peace talks between US and Iran ended without agreement. Trump ordered immediate US naval blockade of all Iranian ports. CENTCOM began implementing blockade April 13 at 10am ET. Dual blockade: Iran controls Hormuz transit while US blocks Iranian port access.",
+        "entry_b_time": "2026-04-15T12:37:00Z",
+        "entry_b_text": "AP reports Iran and US gave 'in principle' approval to extend ceasefire beyond Apr 22 expiry, via Pakistan mediation (finance minister Aurangzeb). However, US official told Reuters Washington has 'not formally agreed' to extension. Three sticking points remain: nuclear program, Hormuz control, war damages. Iran demands blockade lifted as precondition. Trump: 'I view it as very close to over.' Ceasefire technically holding with no confirmed violations but structurally precarious with blockade ongoing.",
+        "reason": "Antonym pair detected: new has 'blockade', existing has 'transit'",
+        "detected": "2026-04-16T02:36:56Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-14T16:00:00Z",
+        "entry_a_text": "CENTCOM reports first 24 hours of US naval blockade: 6 merchant ships turned around and returned to Iranian ports after encountering blockade. No ships made it past. 10,000+ US service members and 12 Navy ships enforcing blockade 'against vessels of all nations' coming in or out of Iranian ports. US clarified blockade targets Iranian port traffic only — not full strait closure. Ships transiting without entering/exiting Iranian ports told it is safe to pass. US sent destroyers through Hormuz to demonstrate safe corridor.",
+        "entry_b_time": "2026-04-15T12:37:00Z",
+        "entry_b_text": "AP reports Iran and US gave 'in principle' approval to extend ceasefire beyond Apr 22 expiry, via Pakistan mediation (finance minister Aurangzeb). However, US official told Reuters Washington has 'not formally agreed' to extension. Three sticking points remain: nuclear program, Hormuz control, war damages. Iran demands blockade lifted as precondition. Trump: 'I view it as very close to over.' Ceasefire technically holding with no confirmed violations but structurally precarious with blockade ongoing.",
+        "reason": "Antonym pair detected: new has 'blockade', existing has 'transit'",
+        "detected": "2026-04-16T02:36:56Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-14T16:00:00Z",
+        "entry_a_text": "No agreement on second round of US-Iran talks. US officials exploring dates/locations before ceasefire expires April 21. Trump suggests Pakistan round 2 ('something could be happening in next 2 days'), dismisses Geneva. Iran state media (IRNA): no decision on another round. Both sides proposed uranium enrichment suspension but disagree on timespan. US demands dismantling of enrichment facilities + unconditional Hormuz reopening. Separately, France/UK announced Friday video conference to build coalition for defensive freedom-of-navigation mission. Macron urged Hormuz reopening 'without controls or tolls.' 18 European + Australian foreign ministers issued joint statement calling for Lebanon ceasefire and regional de-escalation. Israel-Lebanon highest-level direct talks in 40+ years began in DC; Lebanon seeks ceasefire as precondition.",
+        "entry_b_time": "2026-04-15T12:37:00Z",
+        "entry_b_text": "AP reports Iran and US gave 'in principle' approval to extend ceasefire beyond Apr 22 expiry, via Pakistan mediation (finance minister Aurangzeb). However, US official told Reuters Washington has 'not formally agreed' to extension. Three sticking points remain: nuclear program, Hormuz control, war damages. Iran demands blockade lifted as precondition. Trump: 'I view it as very close to over.' Ceasefire technically holding with no confirmed violations but structurally precarious with blockade ongoing.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: ceasefire, demands, hormuz, iran, pakistan",
+        "detected": "2026-04-16T02:36:56Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-14T16:00:00Z",
+        "entry_a_text": "IMF chief economist says any Hormuz tolls likely passed to consumers. At least one vessel paid $2M toll to transit (Lloyd's List). Capital Economics: toll burden 'shared between producers and consumers' but 'overall impact on global prices and demand would probably be limited.' US gas prices $4.12/gallon (AAA, Apr 14), down 5 cents from $4.17 peak post-ceasefire. Oil futures slightly lower in early Tuesday trading. Experts don't expect gas below $4 for 1-2 weeks, could be months before sub-$3 (pre-war level).",
+        "entry_b_time": "2026-04-15T12:37:00Z",
+        "entry_b_text": "AP reports Iran and US gave 'in principle' approval to extend ceasefire beyond Apr 22 expiry, via Pakistan mediation (finance minister Aurangzeb). However, US official told Reuters Washington has 'not formally agreed' to extension. Three sticking points remain: nuclear program, Hormuz control, war damages. Iran demands blockade lifted as precondition. Trump: 'I view it as very close to over.' Ceasefire technically holding with no confirmed violations but structurally precarious with blockade ongoing.",
+        "reason": "Antonym pair detected: new has 'blockade', existing has 'transit'",
+        "detected": "2026-04-16T02:36:56Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-14T22:00:00Z",
+        "entry_a_text": "Pentagon confirmed zero ships made it past US blockade in first 24 hours of enforcement. Six merchant ships followed orders to turn around. Blockade is operational and 100% effective at stopping Iranian port traffic. China called the blockade a \"dangerous and irresponsible act\" that will further inflame tensions. Iran accused the US of \"piracy\" and stated ports are \"either for everyone or for no one.\" Separately, CNN reports satellite imagery shows Iran using ceasefire period to clear debris from entrances to underground missile bases.",
+        "entry_b_time": "2026-04-15T12:37:00Z",
+        "entry_b_text": "AP reports Iran and US gave 'in principle' approval to extend ceasefire beyond Apr 22 expiry, via Pakistan mediation (finance minister Aurangzeb). However, US official told Reuters Washington has 'not formally agreed' to extension. Three sticking points remain: nuclear program, Hormuz control, war damages. Iran demands blockade lifted as precondition. Trump: 'I view it as very close to over.' Ceasefire technically holding with no confirmed violations but structurally precarious with blockade ongoing.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: blockade, ceasefire, confirmed, iran",
+        "detected": "2026-04-16T02:36:56Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-15T12:00:00Z",
+        "entry_a_text": "Iran army warned it will block trade through the Red Sea, Gulf of Oman, and Sea of Oman if the US naval blockade on Iranian ports continues — an explicit threat to expand closure beyond Hormuz. Separately, Trump stated the war is \"very close to over\" and said Islamabad round 2 is \"more likely.\" US military confirmed it has \"completely halted economic trade going into and out of Iran by sea\" on day 2 of blockade. 15 US ships deployed including aircraft carrier and 11 destroyers.",
+        "entry_b_time": "2026-04-15T12:37:00Z",
+        "entry_b_text": "AP reports Iran and US gave 'in principle' approval to extend ceasefire beyond Apr 22 expiry, via Pakistan mediation (finance minister Aurangzeb). However, US official told Reuters Washington has 'not formally agreed' to extension. Three sticking points remain: nuclear program, Hormuz control, war damages. Iran demands blockade lifted as precondition. Trump: 'I view it as very close to over.' Ceasefire technically holding with no confirmed violations but structurally precarious with blockade ongoing.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: beyond, blockade, close, confirmed, hormuz",
+        "detected": "2026-04-16T02:36:56Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-15T22:00:00Z",
+        "entry_a_text": "CENTCOM confirmed US blockade of Iranian ports 'fully implemented' as of Tuesday night. In first 36 hours: 10+ merchant vessels turned back, 20+ non-Iranian ships transited safely. US destroyer interdicted two oil tankers leaving Iran's Chabahar port (Gulf of Oman — extends blockade beyond Hormuz to non-Gulf ports). Force posture: 10,000+ service members, 12+ ships, 100+ fighter/surveillance aircraft. CENTCOM broadcast radio warning: vessels attempting to breach blockade 'will be boarded for interdiction and seizure.' However, tracking data shows at least 3 Iran-linked vessels (Christianna, Elpis, others) crossed strait after blockade began — blockade not 100% effective.",
+        "entry_b_time": "2026-04-15T12:37:00Z",
+        "entry_b_text": "AP reports Iran and US gave 'in principle' approval to extend ceasefire beyond Apr 22 expiry, via Pakistan mediation (finance minister Aurangzeb). However, US official told Reuters Washington has 'not formally agreed' to extension. Three sticking points remain: nuclear program, Hormuz control, war damages. Iran demands blockade lifted as precondition. Trump: 'I view it as very close to over.' Ceasefire technically holding with no confirmed violations but structurally precarious with blockade ongoing.",
+        "reason": "Antonym pair detected: new has 'blockade', existing has 'transit'",
+        "detected": "2026-04-16T02:36:56Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-15T20:00:00Z",
+        "entry_a_text": "Bloomberg reports US and Iran have 'in principle agreement' to pursue further diplomacy after inconclusive Islamabad round 1. Pakistan PM Sharif traveling to Saudi Arabia, Qatar, Turkey this week to arrange second round. Ceasefire extension being considered before April 21 expiry. Trump told Fox: 'I think it's close to over, yeah.' Trump told NY Post: talks could happen 'over the next two days.' Mediators pushing for compromise on Hormuz and nuclear program before truce expires.",
+        "entry_b_time": "2026-04-15T12:37:00Z",
+        "entry_b_text": "AP reports Iran and US gave 'in principle' approval to extend ceasefire beyond Apr 22 expiry, via Pakistan mediation (finance minister Aurangzeb). However, US official told Reuters Washington has 'not formally agreed' to extension. Three sticking points remain: nuclear program, Hormuz control, war damages. Iran demands blockade lifted as precondition. Trump: 'I view it as very close to over.' Ceasefire technically holding with no confirmed violations but structurally precarious with blockade ongoing.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: ceasefire, close, expiry, extension, hormuz",
+        "detected": "2026-04-16T02:36:56Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-15T18:00:00Z",
+        "entry_a_text": "US official told Axios: Washington sees 'no need at present' to launch military invasion of Kharg Island. Blockade strategy substituting for ground seizure — official stated 'the ability to strangle the island is available without direct military escalation.' Evaluation includes increased naval presence, enhanced surveillance, coordinated allied pressure, and economic restrictions as alternatives to amphibious assault.",
+        "entry_b_time": "2026-04-15T12:37:00Z",
+        "entry_b_text": "AP reports Iran and US gave 'in principle' approval to extend ceasefire beyond Apr 22 expiry, via Pakistan mediation (finance minister Aurangzeb). However, US official told Reuters Washington has 'not formally agreed' to extension. Three sticking points remain: nuclear program, Hormuz control, war damages. Iran demands blockade lifted as precondition. Trump: 'I view it as very close to over.' Ceasefire technically holding with no confirmed violations but structurally precarious with blockade ongoing.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: blockade, official, told, washington",
+        "detected": "2026-04-16T02:36:56Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-15T21:00:00Z",
+        "entry_a_text": "Israel and Lebanon held first direct talks since 1993 in Washington with Secretary Rubio participating. Joint statement: agreed to 'launch direct negotiations.' Simultaneously: first Israeli soldier killed in combat since ceasefire (Bint Jbeil), IDF fully surrounded Bint Jbeil, Hezbollah targeted 13 northern Israeli towns with rockets during talks. Talks and fighting occurring in parallel.",
+        "entry_b_time": "2026-04-15T12:37:00Z",
+        "entry_b_text": "AP reports Iran and US gave 'in principle' approval to extend ceasefire beyond Apr 22 expiry, via Pakistan mediation (finance minister Aurangzeb). However, US official told Reuters Washington has 'not formally agreed' to extension. Three sticking points remain: nuclear program, Hormuz control, war damages. Iran demands blockade lifted as precondition. Trump: 'I view it as very close to over.' Ceasefire technically holding with no confirmed violations but structurally precarious with blockade ongoing.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: agreed, ceasefire, washington",
+        "detected": "2026-04-16T02:36:56Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-15T16:00:00Z",
+        "entry_a_text": "IMF sharply cut 2026 MENA growth forecast to 1.1% (from prior estimate). Iran economy predicted to slide 6.1%. Iraq and Qatar also particularly hard-hit. EIA raised 2026 Brent crude projection to $96/bbl. Brent trading $94.66-96.80 on Apr 15, volatile but range-bound around $95. 103 empty oil tankers heading to US ports to load crude. US gas $4.12/gal (AAA Apr 14), down 5 cents from $4.17 peak.",
+        "entry_b_time": "2026-04-15T12:37:00Z",
+        "entry_b_text": "AP reports Iran and US gave 'in principle' approval to extend ceasefire beyond Apr 22 expiry, via Pakistan mediation (finance minister Aurangzeb). However, US official told Reuters Washington has 'not formally agreed' to extension. Three sticking points remain: nuclear program, Hormuz control, war damages. Iran demands blockade lifted as precondition. Trump: 'I view it as very close to over.' Ceasefire technically holding with no confirmed violations but structurally precarious with blockade ongoing.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: apr, iran",
+        "detected": "2026-04-16T02:36:56Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-15T16:00:00Z",
+        "entry_a_text": "AP reports US and Iran have \"in principle agreement\" to extend the two-week ceasefire (expiring April 21) to allow more diplomacy. However a senior US official told CNBC the US \"has not formally agreed\" to an extension. Pakistani army chief is in Tehran pushing to restart talks. White House says it feels \"good about prospects of a deal\" and Pakistan is likely location for round 2. Trump: war is \"very close to over,\" \"we have beaten them militarily, totally.\"",
+        "entry_b_time": "2026-04-15T12:37:00Z",
+        "entry_b_text": "AP reports Iran and US gave 'in principle' approval to extend ceasefire beyond Apr 22 expiry, via Pakistan mediation (finance minister Aurangzeb). However, US official told Reuters Washington has 'not formally agreed' to extension. Three sticking points remain: nuclear program, Hormuz control, war damages. Iran demands blockade lifted as precondition. Trump: 'I view it as very close to over.' Ceasefire technically holding with no confirmed violations but structurally precarious with blockade ongoing.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: agreed, ceasefire, close, extend, extension",
+        "detected": "2026-04-16T02:36:56Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-15T16:00:00Z",
+        "entry_a_text": "France and UK announced online meeting April 17 to assemble a \"defensive multilateral mission\" for keeping the Strait of Hormuz open. Macron urged reopening \"without controls or tolls.\" Starmer and Trump discussed both diplomatic coalition and military options on April 9 call. 18 European + Australian foreign ministers issued joint statement calling for regional de-escalation.",
+        "entry_b_time": "2026-04-15T12:37:00Z",
+        "entry_b_text": "AP reports Iran and US gave 'in principle' approval to extend ceasefire beyond Apr 22 expiry, via Pakistan mediation (finance minister Aurangzeb). However, US official told Reuters Washington has 'not formally agreed' to extension. Three sticking points remain: nuclear program, Hormuz control, war damages. Iran demands blockade lifted as precondition. Trump: 'I view it as very close to over.' Ceasefire technically holding with no confirmed violations but structurally precarious with blockade ongoing.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: hormuz, trump",
+        "detected": "2026-04-16T02:36:56Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-15T16:00:00Z",
+        "entry_a_text": "3,000+ vessels backed up in the Gulf area including 800+ oil tankers (Reuters). Maritime officials say it will take months to restore normal traffic even after the strait opens. Iran previously granted selective transit to China, Russia, India, Iraq, Pakistan, Malaysia, and Thailand on March 26 — a sovereignty-based access regime that bypasses the US blockade for friendly states. Enrichment sticking point: US demands 20-year halt, Iran proposes 5 years.",
+        "entry_b_time": "2026-04-15T12:37:00Z",
+        "entry_b_text": "AP reports Iran and US gave 'in principle' approval to extend ceasefire beyond Apr 22 expiry, via Pakistan mediation (finance minister Aurangzeb). However, US official told Reuters Washington has 'not formally agreed' to extension. Three sticking points remain: nuclear program, Hormuz control, war damages. Iran demands blockade lifted as precondition. Trump: 'I view it as very close to over.' Ceasefire technically holding with no confirmed violations but structurally precarious with blockade ongoing.",
+        "reason": "Antonym pair detected: new has 'blockade', existing has 'transit'",
+        "detected": "2026-04-16T02:36:56Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-15T20:00:00Z",
+        "entry_a_text": "CENTCOM declared US naval blockade of Iranian ports 'fully implemented' within 36 hours of Trump's order. 10,000+ US personnel involved. 6 merchant ships turned around in first 24 hours. Interdictions in Gulf of Oman, not Hormuz proper. However, 19 vessels still transited Hormuz on Apr 15 (5 inbound, 14 outbound, various flags) and sanctioned ships crossed toward Iran despite CENTCOM's 'completely halted' claim. Blockade covers Iranian ports in Persian Gulf and Gulf of Oman.",
+        "entry_b_time": "2026-04-15T12:37:00Z",
+        "entry_b_text": "AP reports Iran and US gave 'in principle' approval to extend ceasefire beyond Apr 22 expiry, via Pakistan mediation (finance minister Aurangzeb). However, US official told Reuters Washington has 'not formally agreed' to extension. Three sticking points remain: nuclear program, Hormuz control, war damages. Iran demands blockade lifted as precondition. Trump: 'I view it as very close to over.' Ceasefire technically holding with no confirmed violations but structurally precarious with blockade ongoing.",
+        "reason": "Antonym pair detected: new has 'blockade', existing has 'transit'",
+        "detected": "2026-04-16T02:36:56Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-15T22:00:00Z",
+        "entry_a_text": "Mohsen Rezaei (Khamenei military adviser, ex-IRGC CinC) threatened to sink US ships in Hormuz: 'These ships will be sunk by our first missiles.' Separately, Iran armed forces warned they would block shipping in Persian Gulf, Sea of Oman, AND Red Sea if US blockade continues. Red Sea threat is new — first explicit Iranian (not Houthi) threat to Bab al-Mandab chokepoint.",
+        "entry_b_time": "2026-04-15T12:37:00Z",
+        "entry_b_text": "AP reports Iran and US gave 'in principle' approval to extend ceasefire beyond Apr 22 expiry, via Pakistan mediation (finance minister Aurangzeb). However, US official told Reuters Washington has 'not formally agreed' to extension. Three sticking points remain: nuclear program, Hormuz control, war damages. Iran demands blockade lifted as precondition. Trump: 'I view it as very close to over.' Ceasefire technically holding with no confirmed violations but structurally precarious with blockade ongoing.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: blockade, hormuz, iran",
+        "detected": "2026-04-16T02:36:56Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-03-28T13:53-07:00",
+        "entry_a_text": "IRGC NAMED 15 US COMPANIES AS TARGETS + 29 LOCATIONS: Google, Microsoft, Nvidia, Oracle, Amazon (AWS), Boeing, ExxonMobil, Lockheed Martin, IBM, Palantir. Facilities in Bahrain, Israel, Qatar, UAE. Already attacked 3 AWS datacenters. IRGC expanding from military to ECONOMIC WARFARE â€” targeting US tech/defense/energy infrastructure across Gulf. This is 'infrastructure warfare' per The Register.",
+        "entry_b_time": "2026-04-15T14:00:00Z",
+        "entry_b_text": "Treasury waiver authorizing certain Iranian crude purchases expires this weekend and will NOT be renewed. Tightens economic blockade beyond naval interdiction. 230 loaded oil tankers remain trapped in Gulf. ECB and IMF issuing stagflation warnings tied to supply disruptions. North Sea oil at record highs.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: economic, gulf",
+        "detected": "2026-04-16T02:36:56Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-03-28T13:53-07:00",
+        "entry_a_text": "ONE MONTH MARK: WaPo: ~1,500 Iranian civilians killed (most comprehensive estimate). NRC: 1M+ displaced in Iran. 81,000+ civilian structures damaged (61,000 homes, 19,000 commercial, 275 medical centers, ~500 schools). US: 13 KIA, 200+ wounded across 7 countries, 12 injured at Prince Sultan Air Base Mar 27. Israel: 19 civilians killed, 5,229+ injured. Lebanon: 1,072+ killed. Gulf states: 25+ killed (UAE total 11+).",
+        "entry_b_time": "2026-04-15T14:00:00Z",
+        "entry_b_text": "Treasury waiver authorizing certain Iranian crude purchases expires this weekend and will NOT be renewed. Tightens economic blockade beyond naval interdiction. 230 loaded oil tankers remain trapped in Gulf. ECB and IMF issuing stagflation warnings tied to supply disruptions. North Sea oil at record highs.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: gulf, iranian",
+        "detected": "2026-04-16T02:36:56Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-03-28T13:53-07:00",
+        "entry_a_text": "Posteriors HELD this cycle. Houthi entry is the headline but ONE salvo doesn't confirm sustained campaign. Key question: do Houthis resume RED SEA SHIPPING attacks? If yes, Bab al-Mandab becomes second choke point = catastrophic for global trade and extends Hormuz resolution timeline (ships can't even route around). IRGC economic warfare (15 US companies targeted) + Prince Sultan strike = war broadening into new domains. But yesterday's move already captured the nuclear escalation + Chinese ship blockage dynamics. Wait for: (1) Houthi follow-on attacks, (2) Bab al-Mandab shipping threat, (3) 10,000 troop decision next week, (4) Tripoli position update.",
+        "entry_b_time": "2026-04-15T14:00:00Z",
+        "entry_b_text": "Treasury waiver authorizing certain Iranian crude purchases expires this weekend and will NOT be renewed. Tightens economic blockade beyond naval interdiction. 230 loaded oil tankers remain trapped in Gulf. ECB and IMF issuing stagflation warnings tied to supply disruptions. North Sea oil at record highs.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: economic, sea",
+        "detected": "2026-04-16T02:36:56Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-10T00:00:00Z",
+        "entry_a_text": "Hormuz traffic crept up to ~10 transits/day during ceasefire period (vs 5/day pre-ceasefire, 120+ pre-war). Still 92% below normal. 600+ vessels (325 tankers) remain stranded in the Gulf.",
+        "entry_b_time": "2026-04-15T14:00:00Z",
+        "entry_b_text": "Treasury waiver authorizing certain Iranian crude purchases expires this weekend and will NOT be renewed. Tightens economic blockade beyond naval interdiction. 230 loaded oil tankers remain trapped in Gulf. ECB and IMF issuing stagflation warnings tied to supply disruptions. North Sea oil at record highs.",
+        "reason": "Antonym pair detected: new has 'blockade', existing has 'transit'",
+        "detected": "2026-04-16T02:36:56Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-11T00:00:00Z",
+        "entry_a_text": "Three oil supertankers (2 Chinese, 1 Greek) transited Strait of Hormuz — biggest day of oil shipping since war began. Occurred during ceasefire window.",
+        "entry_b_time": "2026-04-15T14:00:00Z",
+        "entry_b_text": "Treasury waiver authorizing certain Iranian crude purchases expires this weekend and will NOT be renewed. Tightens economic blockade beyond naval interdiction. 230 loaded oil tankers remain trapped in Gulf. ECB and IMF issuing stagflation warnings tied to supply disruptions. North Sea oil at record highs.",
+        "reason": "Numeric divergence 99.1% on metric (context: oil): new=230.0, existing=2.0, threshold=20%",
+        "detected": "2026-04-16T02:36:56Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-12T00:00:00Z",
+        "entry_a_text": "Trump announced via Truth Social: 'Effective immediately, the United States Navy will begin the process of BLOCKADING any and all Ships trying to enter, or leave, the Strait of Hormuz.' Will intercept vessels that paid Iran's toll. Will destroy Iranian mines. STRAIT NOW UNDER DUAL BLOCKADE — Iran blocking from east, US blocking from west.",
+        "entry_b_time": "2026-04-15T14:00:00Z",
+        "entry_b_text": "Treasury waiver authorizing certain Iranian crude purchases expires this weekend and will NOT be renewed. Tightens economic blockade beyond naval interdiction. 230 loaded oil tankers remain trapped in Gulf. ECB and IMF issuing stagflation warnings tied to supply disruptions. North Sea oil at record highs.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: blockade, iranian",
+        "detected": "2026-04-16T02:36:56Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-11T18:00:00Z",
+        "entry_a_text": "Iran reportedly unable to locate all naval mines it planted in Strait of Hormuz. Sea currents may have swept some mines from original positions, complicating both Iranian and US clearance efforts.",
+        "entry_b_time": "2026-04-15T14:00:00Z",
+        "entry_b_text": "Treasury waiver authorizing certain Iranian crude purchases expires this weekend and will NOT be renewed. Tightens economic blockade beyond naval interdiction. 230 loaded oil tankers remain trapped in Gulf. ECB and IMF issuing stagflation warnings tied to supply disruptions. North Sea oil at record highs.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: iranian, naval, sea",
+        "detected": "2026-04-16T02:36:56Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-12T14:00:00Z",
+        "entry_a_text": "Islamabad peace talks between US and Iran ended without agreement. Trump ordered immediate US naval blockade of all Iranian ports. CENTCOM began implementing blockade April 13 at 10am ET. Dual blockade: Iran controls Hormuz transit while US blocks Iranian port access.",
+        "entry_b_time": "2026-04-15T14:00:00Z",
+        "entry_b_text": "Treasury waiver authorizing certain Iranian crude purchases expires this weekend and will NOT be renewed. Tightens economic blockade beyond naval interdiction. 230 loaded oil tankers remain trapped in Gulf. ECB and IMF issuing stagflation warnings tied to supply disruptions. North Sea oil at record highs.",
+        "reason": "Antonym pair detected: new has 'blockade', existing has 'transit'",
+        "detected": "2026-04-16T02:36:56Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-14T16:00:00Z",
+        "entry_a_text": "CENTCOM reports first 24 hours of US naval blockade: 6 merchant ships turned around and returned to Iranian ports after encountering blockade. No ships made it past. 10,000+ US service members and 12 Navy ships enforcing blockade 'against vessels of all nations' coming in or out of Iranian ports. US clarified blockade targets Iranian port traffic only — not full strait closure. Ships transiting without entering/exiting Iranian ports told it is safe to pass. US sent destroyers through Hormuz to demonstrate safe corridor.",
+        "entry_b_time": "2026-04-15T14:00:00Z",
+        "entry_b_text": "Treasury waiver authorizing certain Iranian crude purchases expires this weekend and will NOT be renewed. Tightens economic blockade beyond naval interdiction. 230 loaded oil tankers remain trapped in Gulf. ECB and IMF issuing stagflation warnings tied to supply disruptions. North Sea oil at record highs.",
+        "reason": "Antonym pair detected: new has 'blockade', existing has 'transit'",
+        "detected": "2026-04-16T02:36:56Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-14T16:00:00Z",
+        "entry_a_text": "IMF chief economist says any Hormuz tolls likely passed to consumers. At least one vessel paid $2M toll to transit (Lloyd's List). Capital Economics: toll burden 'shared between producers and consumers' but 'overall impact on global prices and demand would probably be limited.' US gas prices $4.12/gallon (AAA, Apr 14), down 5 cents from $4.17 peak post-ceasefire. Oil futures slightly lower in early Tuesday trading. Experts don't expect gas below $4 for 1-2 weeks, could be months before sub-$3 (pre-war level).",
+        "entry_b_time": "2026-04-15T14:00:00Z",
+        "entry_b_text": "Treasury waiver authorizing certain Iranian crude purchases expires this weekend and will NOT be renewed. Tightens economic blockade beyond naval interdiction. 230 loaded oil tankers remain trapped in Gulf. ECB and IMF issuing stagflation warnings tied to supply disruptions. North Sea oil at record highs.",
+        "reason": "Antonym pair detected: new has 'blockade', existing has 'transit'",
+        "detected": "2026-04-16T02:36:56Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-14T22:00:00Z",
+        "entry_a_text": "Pentagon confirmed zero ships made it past US blockade in first 24 hours of enforcement. Six merchant ships followed orders to turn around. Blockade is operational and 100% effective at stopping Iranian port traffic. China called the blockade a \"dangerous and irresponsible act\" that will further inflame tensions. Iran accused the US of \"piracy\" and stated ports are \"either for everyone or for no one.\" Separately, CNN reports satellite imagery shows Iran using ceasefire period to clear debris from entrances to underground missile bases.",
+        "entry_b_time": "2026-04-15T14:00:00Z",
+        "entry_b_text": "Treasury waiver authorizing certain Iranian crude purchases expires this weekend and will NOT be renewed. Tightens economic blockade beyond naval interdiction. 230 loaded oil tankers remain trapped in Gulf. ECB and IMF issuing stagflation warnings tied to supply disruptions. North Sea oil at record highs.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: blockade, iranian",
+        "detected": "2026-04-16T02:36:56Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-15T12:00:00Z",
+        "entry_a_text": "Iran army warned it will block trade through the Red Sea, Gulf of Oman, and Sea of Oman if the US naval blockade on Iranian ports continues — an explicit threat to expand closure beyond Hormuz. Separately, Trump stated the war is \"very close to over\" and said Islamabad round 2 is \"more likely.\" US military confirmed it has \"completely halted economic trade going into and out of Iran by sea\" on day 2 of blockade. 15 US ships deployed including aircraft carrier and 11 destroyers.",
+        "entry_b_time": "2026-04-15T14:00:00Z",
+        "entry_b_text": "Treasury waiver authorizing certain Iranian crude purchases expires this weekend and will NOT be renewed. Tightens economic blockade beyond naval interdiction. 230 loaded oil tankers remain trapped in Gulf. ECB and IMF issuing stagflation warnings tied to supply disruptions. North Sea oil at record highs.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: beyond, blockade, economic, gulf, iranian",
+        "detected": "2026-04-16T02:36:56Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-15T22:00:00Z",
+        "entry_a_text": "CENTCOM confirmed US blockade of Iranian ports 'fully implemented' as of Tuesday night. In first 36 hours: 10+ merchant vessels turned back, 20+ non-Iranian ships transited safely. US destroyer interdicted two oil tankers leaving Iran's Chabahar port (Gulf of Oman — extends blockade beyond Hormuz to non-Gulf ports). Force posture: 10,000+ service members, 12+ ships, 100+ fighter/surveillance aircraft. CENTCOM broadcast radio warning: vessels attempting to breach blockade 'will be boarded for interdiction and seizure.' However, tracking data shows at least 3 Iran-linked vessels (Christianna, Elpis, others) crossed strait after blockade began — blockade not 100% effective.",
+        "entry_b_time": "2026-04-15T14:00:00Z",
+        "entry_b_text": "Treasury waiver authorizing certain Iranian crude purchases expires this weekend and will NOT be renewed. Tightens economic blockade beyond naval interdiction. 230 loaded oil tankers remain trapped in Gulf. ECB and IMF issuing stagflation warnings tied to supply disruptions. North Sea oil at record highs.",
+        "reason": "Antonym pair detected: new has 'blockade', existing has 'transit'",
+        "detected": "2026-04-16T02:36:56Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-15T18:00:00Z",
+        "entry_a_text": "US official told Axios: Washington sees 'no need at present' to launch military invasion of Kharg Island. Blockade strategy substituting for ground seizure — official stated 'the ability to strangle the island is available without direct military escalation.' Evaluation includes increased naval presence, enhanced surveillance, coordinated allied pressure, and economic restrictions as alternatives to amphibious assault.",
+        "entry_b_time": "2026-04-15T14:00:00Z",
+        "entry_b_text": "Treasury waiver authorizing certain Iranian crude purchases expires this weekend and will NOT be renewed. Tightens economic blockade beyond naval interdiction. 230 loaded oil tankers remain trapped in Gulf. ECB and IMF issuing stagflation warnings tied to supply disruptions. North Sea oil at record highs.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: blockade, economic, naval",
+        "detected": "2026-04-16T02:36:56Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-15T16:00:00Z",
+        "entry_a_text": "IMF sharply cut 2026 MENA growth forecast to 1.1% (from prior estimate). Iran economy predicted to slide 6.1%. Iraq and Qatar also particularly hard-hit. EIA raised 2026 Brent crude projection to $96/bbl. Brent trading $94.66-96.80 on Apr 15, volatile but range-bound around $95. 103 empty oil tankers heading to US ports to load crude. US gas $4.12/gal (AAA Apr 14), down 5 cents from $4.17 peak.",
+        "entry_b_time": "2026-04-15T14:00:00Z",
+        "entry_b_text": "Treasury waiver authorizing certain Iranian crude purchases expires this weekend and will NOT be renewed. Tightens economic blockade beyond naval interdiction. 230 loaded oil tankers remain trapped in Gulf. ECB and IMF issuing stagflation warnings tied to supply disruptions. North Sea oil at record highs.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: crude, imf, oil, tankers",
+        "detected": "2026-04-16T02:36:56Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-15T16:00:00Z",
+        "entry_a_text": "3,000+ vessels backed up in the Gulf area including 800+ oil tankers (Reuters). Maritime officials say it will take months to restore normal traffic even after the strait opens. Iran previously granted selective transit to China, Russia, India, Iraq, Pakistan, Malaysia, and Thailand on March 26 — a sovereignty-based access regime that bypasses the US blockade for friendly states. Enrichment sticking point: US demands 20-year halt, Iran proposes 5 years.",
+        "entry_b_time": "2026-04-15T14:00:00Z",
+        "entry_b_text": "Treasury waiver authorizing certain Iranian crude purchases expires this weekend and will NOT be renewed. Tightens economic blockade beyond naval interdiction. 230 loaded oil tankers remain trapped in Gulf. ECB and IMF issuing stagflation warnings tied to supply disruptions. North Sea oil at record highs.",
+        "reason": "Antonym pair detected: new has 'blockade', existing has 'transit'",
+        "detected": "2026-04-16T02:36:56Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-15T20:00:00Z",
+        "entry_a_text": "CENTCOM declared US naval blockade of Iranian ports 'fully implemented' within 36 hours of Trump's order. 10,000+ US personnel involved. 6 merchant ships turned around in first 24 hours. Interdictions in Gulf of Oman, not Hormuz proper. However, 19 vessels still transited Hormuz on Apr 15 (5 inbound, 14 outbound, various flags) and sanctioned ships crossed toward Iran despite CENTCOM's 'completely halted' claim. Blockade covers Iranian ports in Persian Gulf and Gulf of Oman.",
+        "entry_b_time": "2026-04-15T14:00:00Z",
+        "entry_b_text": "Treasury waiver authorizing certain Iranian crude purchases expires this weekend and will NOT be renewed. Tightens economic blockade beyond naval interdiction. 230 loaded oil tankers remain trapped in Gulf. ECB and IMF issuing stagflation warnings tied to supply disruptions. North Sea oil at record highs.",
+        "reason": "Antonym pair detected: new has 'blockade', existing has 'transit'",
+        "detected": "2026-04-16T02:36:56Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-15T12:37:00Z",
+        "entry_a_text": "AP reports Iran and US gave 'in principle' approval to extend ceasefire beyond Apr 22 expiry, via Pakistan mediation (finance minister Aurangzeb). However, US official told Reuters Washington has 'not formally agreed' to extension. Three sticking points remain: nuclear program, Hormuz control, war damages. Iran demands blockade lifted as precondition. Trump: 'I view it as very close to over.' Ceasefire technically holding with no confirmed violations but structurally precarious with blockade ongoing.",
+        "entry_b_time": "2026-04-15T14:00:00Z",
+        "entry_b_text": "Treasury waiver authorizing certain Iranian crude purchases expires this weekend and will NOT be renewed. Tightens economic blockade beyond naval interdiction. 230 loaded oil tankers remain trapped in Gulf. ECB and IMF issuing stagflation warnings tied to supply disruptions. North Sea oil at record highs.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: beyond, blockade, remain",
+        "detected": "2026-04-16T02:36:56Z"
+      }
+    ],
     "resolved": [
       {
         "type": "DIRECT",

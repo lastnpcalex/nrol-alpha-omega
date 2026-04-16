@@ -1,7 +1,6 @@
 # Skill: Update Cycle
 
-Fire an indicator, update posteriors, and run full governance validation.
-This is the core posterior-moving operation.
+Fire an indicator and update posteriors through the Bayesian pipeline.
 
 ## When to use
 
@@ -9,126 +8,76 @@ This is the core posterior-moving operation.
 - A pre-registered indicator's threshold has been met
 - You need to apply a Bayesian update with likelihood ratios
 
+## Pipeline call
+
+DO NOT manually edit JSON files. Use the pipeline.
+
+```python
+from framework.pipeline import process_evidence, log_activity
+
+# Fire an indicator — likelihoods derived automatically from pre-committed effect
+result = process_evidence(
+    slug="topic-slug",
+    entry={
+        "text": "Observable criteria met: [what was observed]",
+        "source": "Source Name",
+        "tag": "EVENT",
+        "tags": ["EVENT"],
+    },
+    fired_indicator_id="t2_indicator_slug",
+    reason="Indicator t2_indicator_slug FIRED: [description]."
+)
+
+log_activity(result, platform="update-cycle")
+
+# Check results
+print(f"Posteriors before: {result['posteriors_before']}")
+print(f"Posteriors after:  {result['posteriors_after']}")
+print(f"Governance: {result['governance']['health']}")
+```
+
+### Bayesian update without an indicator
+
+If no pre-registered indicator fires but the evidence is informative,
+supply likelihoods directly:
+
+```python
+result = process_evidence(
+    slug="topic-slug",
+    entry={
+        "text": "Factual description of what happened.",
+        "source": "Source Name",
+        "tag": "DIPLO",
+        "tags": ["DIPLO", "POLICY"],
+    },
+    likelihoods={"H1": 0.15, "H2": 0.45, "H3": 0.30, "H4": 0.10},
+    reason="[Why this evidence is informative and directional assessment]"
+)
+```
+
 ## Prerequisites
 
 - The indicator's observable criteria must be **verified**, not just plausible
-- The indicator must be in NOT_FIRED status (check first)
+- The indicator must be in NOT_FIRED status (the pipeline checks this)
 - You must know which indicator ID to fire
 
-## Python calls
+## What the pipeline does automatically
 
-### Option A: Fire a pre-registered indicator (preferred)
-
-```python
-from engine import load_topic, fire_indicator, save_topic
-from governor import governance_report, check_update_proposal
-
-topic = load_topic("calibration-topic-slug")
-
-# Fire the indicator — this records firedDate and firedNote
-topic = fire_indicator(
-    topic,
-    indicator_id="t2_indicator_slug",
-    note="Observable criteria met: [describe what was observed]",
-    firedDate="2026-04-12T00:00:00Z"
-)
-
-# The indicator's pre-committed posteriorEffect tells you what to apply.
-# Read it from topic["indicators"]["tiers"]["tier2_strong"] (or whichever tier).
-# Then update posteriors:
-from engine import update_posteriors
-topic = update_posteriors(
-    topic,
-    new_posteriors={"H1": 0.49, "H2": 0.31, "H3": 0.11, "H4": 0.09},
-    reason="Indicator t2_indicator_slug FIRED: [description]. Applied pre-committed effects.",
-    evidence_refs=["ev_001"]  # evidence entries that support this
-)
-
-# Run governance checks BEFORE saving
-report = governance_report(topic)
-print(f"Health: {report['health']}, Issues: {report['issues']}")
-
-# If health is not CRITICAL, save
-save_topic(topic)
-```
-
-### Option B: Bayesian update with likelihood ratios
-
-```python
-from engine import load_topic, bayesian_update, save_topic
-from governor import check_update_proposal
-
-topic = load_topic("calibration-topic-slug")
-
-# check_update_proposal runs the 10 failure mode checks BEFORE applying
-pre_check = check_update_proposal(
-    topic,
-    proposed_posteriors={"H1": 0.49, "H2": 0.31, "H3": 0.11, "H4": 0.09},
-    reason="[justification]",
-    evidence_refs=["ev_001"]
-)
-if not pre_check["passed"]:
-    print(f"BLOCKED: {pre_check['failures']}")
-    # Do not proceed — fix the issues first
-
-# If pre-check passes, apply
-topic = bayesian_update(
-    topic,
-    likelihoods={"H1": 1.2, "H2": 1.1, "H3": 0.7, "H4": 0.8},
-    reason="[justification]"
-)
-save_topic(topic)
-```
-
-### Option C: Hold (no change)
-
-```python
-from engine import load_topic, hold_posteriors, save_topic
-
-topic = load_topic("calibration-topic-slug")
-topic = hold_posteriors(topic, reason="No new indicators fired. Evidence logged but below threshold.")
-save_topic(topic)
-```
-
-## Full update cycle workflow (framework/update.py)
-
-```python
-from framework.update import run_update
-
-# This runs the complete pipeline:
-# 1. Orient (load topic, compute R_t, identify priorities)
-# 2. Lint evidence log
-# 3. Check for contradictions
-# 4. Apply posteriors (fire indicators or hold)
-# 5. Run governance report
-# 6. Check dependencies
-# 7. Generate brief
-result = run_update("calibration-topic-slug",
-    fired_indicators=["t2_indicator_slug"],
-    new_evidence=[{...}],
-    reason="Update cycle triggered by triage INDICATOR_MATCH"
-)
-```
+1. `add_evidence()` — enrichment, dedup, contradiction detection
+2. `fire_indicator()` — marks indicator as FIRED with date and note
+3. `suggest_likelihoods()` — derives likelihoods from pre-committed posteriorEffect
+4. `bayesian_update()` — mechanical Bayes: P(H|E) = P(E|H)P(H) / sum
+5. `snapshot_posteriors()` — records for Brier scoring
+6. `auto_calibrate()` — resolves claims, updates source trust
+7. `governance_report()` — full epistemic health check
+8. `save_topic()` — embeds governance snapshot
+9. `propagate_alert()` — checks downstream dependencies
 
 ## Constraints
 
-1. **Posteriors must sum to 1.00** — the engine validates this and will reject
-   updates that don't sum correctly.
-2. **Pre-committed effects only** — when firing an indicator, apply the
-   posteriorEffect declared in the indicator definition. Do not invent new
-   shift magnitudes.
-3. **Evidence coupling** — every posterior update must reference at least one
-   evidence entry. Updates without evidence refs are rejected.
-4. **Governor pre-check** — `check_update_proposal()` runs 10 failure mode
-   checks. If it fails, the update is blocked. Fix the issue, don't bypass.
-5. **posteriorHistory** — every update appends to `model.posteriorHistory`
-   with date, new posteriors, and a note explaining the change.
-6. **Classification auto-update** — `compute_classification()` runs after
-   indicator fires to update ROUTINE/ELEVATED/ALERT status.
-
-## After updating
-
-- Check dependencies: `framework.dependencies.propagate_alert(topic)` to
-  see if downstream topics now have stale assumptions.
-- Update expectedValue if the model has midpoints.
-- Update the mirror dashboard by syncing the topic JSON.
+1. **Posteriors computed by Bayes** — the engine computes them, you don't.
+2. **Pre-committed effects only** — for indicator fires, the posteriorEffect
+   in the indicator definition determines the likelihoods. Do not override.
+3. **Evidence coupling** — every update references evidence. The pipeline enforces this.
+4. **Governor pre-check** — `check_update_proposal()` runs 14 failure modes.
+   If it fails, the update is blocked. Fix the issue, don't bypass.

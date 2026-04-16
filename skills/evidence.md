@@ -1,80 +1,63 @@
 # Skill: Evidence Management
 
-Add evidence to a topic's evidence log with proper provenance, lint it through
-the 5 failure modes, and check for contradictions.
+Add evidence to a topic's evidence log through the Bayesian pipeline.
+Evidence is enriched, checked for contradictions, and used to update
+posteriors through Bayes' theorem — all mechanically.
 
 ## When to use
 
 - Triage returned LOG_EVIDENCE action
 - You have new factual information relevant to a topic
-- You need to document a development even if it doesn't fire an indicator
+- You need to document a development
 
-## Python calls
+## Pipeline call
 
-### Add evidence
-
-```python
-from engine import load_topic, add_evidence, save_topic
-
-topic = load_topic("calibration-topic-slug")
-
-entry = {
-    "id": "ev_007",                          # sequential within topic
-    "time": "2026-04-12T14:30:00Z",          # when the event occurred (not when logged)
-    "text": "Factual description of what happened. No analysis or speculation.",
-    "tags": ["EVENT", "DIPLO"],              # from EVIDENCE_TTL tag list
-    "source": "Reuters via AP wire",
-    "claimState": "SUPPORTED",               # PROPOSED | SUPPORTED | CONTESTED | INVALIDATED
-    "weight": 1.0,                           # effective after source trust scaling
-    "posteriorImpact": "NONE. H2-directional but no indicator fired. t2_relevant_indicator requires [threshold]. This event is [below/above] that threshold.",
-    "note": "Additional context if needed"
-}
-
-topic = add_evidence(topic, entry)
-save_topic(topic)
-```
-
-### Lint the evidence log
+DO NOT manually edit JSON files. Use the pipeline.
 
 ```python
-from framework.lint import run_lint
+from framework.pipeline import process_evidence, log_activity
 
-result = run_lint("calibration-topic-slug")
-# Returns pass/fail for each check:
-# - posterior_sum: do posteriors sum to 1.0?
-# - evidence_refs: do all evidence entries have required fields?
-# - resolution_criterion: is it defined and measurable?
-# - submodel_consistency: do submodels align with main model?
+result = process_evidence(
+    slug="topic-slug",
+    entry={
+        "text": "Factual description of what happened. No analysis or speculation.",
+        "source": "Reuters",
+        "tag": "EVENT",
+        "tags": ["EVENT", "DIPLO"],
+        "time": "2026-04-15T12:00:00Z",  # when it happened, not when you're logging
+        "note": "Optional context",
+    },
+    likelihoods={"H1": 0.15, "H2": 0.45, "H3": 0.30, "H4": 0.10},
+    reason="Why this evidence is informative."
+)
+
+log_activity(result, platform="evidence")
 ```
 
-### Check for contradictions
+## What the pipeline does automatically
 
-```python
-from framework.contradictions import detect_contradictions
+- **Auto-assigns evidence ID** (sequential ev_NNN)
+- **Governor enrichment**: ledger classification, claimState, effectiveWeight
+- **Deduplication**: skips if identical text exists in last 10 entries
+- **Contradiction detection**: checks against recent evidence, contests if found
+- **Source trust lookup**: resolves through 5-tier chain
+- **Bayesian update**: computes P(H|E) from your likelihoods, attenuated by source trust
+- **Brier snapshot**: records posteriors for calibration scoring
+- **Source calibration**: resolves claims, updates source trust
+- **Governance report**: full epistemic health check
+- **Save with snapshot**: embeds governance into the topic JSON
+- **Dependency check**: flags stale downstream assumptions
 
-topic = load_topic("calibration-topic-slug")
-contradictions = detect_contradictions(topic, new_entry)
-# Returns list of contradictions found:
-# - negation: new text contradicts existing text
-# - numeric: new numbers conflict with existing data
-# - feed_mismatch: new data conflicts with dataFeeds values
-```
+## Likelihood guidance
 
-## Evidence entry schema
+You MUST supply likelihoods to get a Bayesian update. Ask: "How likely
+is this evidence if H_i is true?"
 
-```json
-{
-  "id": "ev_NNN",
-  "time": "ISO8601",
-  "text": "Factual claim. Observable. No rhetoric.",
-  "tags": ["TAG1", "TAG2"],
-  "source": "Source name",
-  "claimState": "PROPOSED | SUPPORTED | CONTESTED | INVALIDATED",
-  "weight": 1.0,
-  "posteriorImpact": "NONE | description of posterior movement with justification",
-  "note": "optional"
-}
-```
+- P(E|H) close to 1.0 = this evidence is exactly what you'd expect under H
+- P(E|H) close to 0.0 = this evidence would be very surprising under H
+- All likelihoods must be in (0, 1]. They do NOT need to sum to 1.
+- If you cannot assess likelihoods, pass `likelihoods=None` — evidence is
+  logged but posteriors do not move. This is the "MONITOR" path.
 
 ## Valid tags (from governor.py EVIDENCE_TTL)
 
@@ -99,86 +82,6 @@ contradictions = detect_contradictions(topic, new_entry)
 | LEGAL/JUDICIAL/REGULATORY | 720 | Legal/court/regulatory |
 | SCIENTIFIC | 720 | Papers, studies |
 
-## 5 lint failure modes
-
-Every evidence entry must pass these checks:
-
-1. **rhetoric_as_evidence** — Is this someone's opinion disguised as a fact?
-   If the source said "X thinks Y will happen", that's RHETORIC, not EVENT.
-   Weight should be reduced.
-
-2. **recycled_intel** — Is this the same information from a previous entry,
-   just from a different source? Check existing evidence log for duplicates.
-   Multiple sources reporting the same AP wire story = 1 evidence entry, not 3.
-
-3. **anchoring_bias** — Does the posteriorImpact claim a shift that isn't
-   justified? If no indicator fired, posteriorImpact should be NONE or
-   "NONE pending confirmation." Don't write "Strong H2 signal" when there's
-   no mechanism for that signal to move posteriors.
-
-4. **phantom_precision** — Is the entry claiming more precision than the
-   source provides? "Exactly 73.2% probability" from a qualitative assessment
-   is phantom precision.
-
-5. **stale_evidence** — Is this old information being treated as current?
-   Check the timestamp against the tag's TTL.
-
-## Predictions (testable rhetoric)
-
-Some evidence is a **prediction** — a specific, testable, time-bounded claim made by
-a source. Predictions don't move posteriors at logging time (posteriorImpact = NONE),
-but they DO calibrate source trust when resolved.
-
-### Prediction filter — all 3 must be true to tag as PREDICTION
-
-1. **Specific**: a concrete claim, not hedged ("will" not "might", "could", "likely")
-2. **Testable**: there exists an observable outcome that confirms or refutes it
-3. **Time-bounded**: explicit or inferrable deadline ("within 48 hours", "by April 20",
-   "this week"). Open-ended predictions ("eventually") are RHETORIC.
-
-If any filter fails → tag as RHETORIC, no prediction tracking, no calibration.
-
-### Prediction schema (extra fields on evidence entry)
-
-```json
-{
-  "id": "ev_NNN",
-  "time": "ISO8601",
-  "text": "Factual extraction of the prediction",
-  "tags": ["PREDICTION"],
-  "source": "@handle or source name",
-  "claimState": "PROPOSED",
-  "weight": 0.0,
-  "posteriorImpact": "NONE. Prediction logged for source calibration only.",
-  "prediction": {
-    "claim": "The specific testable statement",
-    "resolvesBy": "ISO8601 — deadline for checking",
-    "resolutionCriteria": "What counts as confirmed vs refuted",
-    "resolution": null,
-    "resolvedDate": null,
-    "resolvedBy": null,
-    "resolvedEvidence": null
-  },
-  "note": "optional"
-}
-```
-
-### Resolution values
-
-- `CONFIRMED` — the predicted thing happened within the window. Source gets a hit.
-- `REFUTED` — the window passed and the predicted thing did not happen, or the
-  opposite happened. Source gets a miss.
-- `INCONCLUSIVE` — cannot determine either way (e.g., prediction was about
-  something unobservable). No calibration event — entry ignored.
-
-### Resolution rules
-
-- Resolution MUST come from an independent source (not the predictor themselves)
-- `resolvedBy`: the source that provided the resolution evidence
-- `resolvedEvidence`: the ev_NNN ID of the confirming/refuting evidence entry
-- Resolution triggers source calibration in source_db.json (see `/resolve` skill)
-- Minimum 5 resolved predictions before trust moves more than +/-0.10 from 0.50
-
 ## Claim lifecycle
 
 ```
@@ -189,9 +92,41 @@ INVALIDATED → Definitively disproven. Weight: 0.0
 ```
 
 Effective weight = claimState weight * source_trust score.
+The pipeline computes this automatically via `add_evidence()`.
 
-## posteriorImpact rules
+## Predictions (testable rhetoric)
 
-- If NO indicator fires: `"NONE. [Directional assessment]-directional but no indicator fired. [indicator_id] requires [threshold]. This [falls short/does not meet] that threshold."`
-- If an indicator FIRES: `"[indicator_id] FIRED. Applied pre-committed effect: [H1 +Xpp, H2 -Ypp, ...]. New posteriors: [values]. Sum = 1.00."`
-- Never write vague impact like "Strong signal for H2" or "Moderate impact" — either quantify via a fired indicator or state NONE.
+Some evidence is a **prediction** — a specific, testable, time-bounded claim.
+Predictions don't move posteriors at logging time but calibrate source trust
+when resolved.
+
+### Prediction filter — all 3 must be true to tag as PREDICTION
+
+1. **Specific**: a concrete claim, not hedged ("will" not "might")
+2. **Testable**: there exists an observable outcome that confirms or refutes it
+3. **Time-bounded**: explicit deadline ("by April 20", "within 48 hours")
+
+If any filter fails → tag as RHETORIC, no prediction tracking.
+
+### Prediction schema (extra fields on evidence entry)
+
+```json
+{
+  "tags": ["PREDICTION"],
+  "prediction": {
+    "claim": "The specific testable statement",
+    "resolvesBy": "ISO8601 deadline",
+    "resolutionCriteria": "What counts as confirmed vs refuted",
+    "resolution": null,
+    "resolvedDate": null
+  }
+}
+```
+
+## 5 lint failure modes (checked automatically by the governor)
+
+1. **rhetoric_as_evidence** — opinion disguised as fact
+2. **recycled_intel** — duplicate of existing evidence
+3. **anchoring_bias** — shift claimed without mechanism
+4. **phantom_precision** — more precision than source provides
+5. **stale_evidence** — old information treated as current
