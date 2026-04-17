@@ -113,6 +113,7 @@ def process_evidence(
     topic = add_evidence(topic, entry)
     evidence_id = topic["evidenceLog"][-1]["id"]
     result["evidence_id"] = evidence_id
+    result["evidence_text"] = entry.get("text", "")
     result["url"] = entry.get("url")
 
     # 1b. Auto-resolve contradictions created by add_evidence as SUPERSEDED.
@@ -305,8 +306,7 @@ def log_activity(result: dict, platform: str = "pipeline"):
         "timestamp": datetime.now(timezone.utc).isoformat(),
         "action": "POSTERIOR_UPDATE" if result.get("posteriors_after") else "EVIDENCE_LOGGED",
         "topic": result.get("slug", ""),
-        "summary": f"Evidence {result.get('evidence_id', '?')} logged. "
-                   f"Posteriors: {result.get('posteriors_before', {})} → {result.get('posteriors_after', {})}",
+        "summary": result.get("evidence_text", "") or f"Evidence {result.get('evidence_id', '?')} logged.",
         "evidenceId": result.get("evidence_id", ""),
         "source": platform,
         "platform": platform,
