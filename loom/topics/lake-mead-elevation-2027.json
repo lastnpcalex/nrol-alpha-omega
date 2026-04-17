@@ -5,7 +5,7 @@
     "question": "What will Lake Mead water surface elevation (feet above sea level) be on December 31, 2027?",
     "resolution": "USBR official daily reservoir elevation reading for Lake Mead for December 31, 2027, as published on the Bureau of Reclamation Lower Colorado Region daily reservoir data portal. Fallback (in order): December 30 reading if Dec 31 is missing; SNWA published Lake Mead intake elevation for the same date; Western Area Power Administration Hoover Dam daily operations report. Reading is the end-of-day elevation in feet above sea level.",
     "created": "2026-04-13T18:38:33+00:00",
-    "lastUpdated": "2026-04-16T03:43:52+00:00",
+    "lastUpdated": "2026-04-17T15:23:00+00:00",
     "status": "ACTIVE",
     "dayCount": 0,
     "startDate": "2026-04-13",
@@ -42,28 +42,28 @@
         "label": "Recovery: above 1,075 ft (exits Tier 1 shortage zone)",
         "midpoint": 1085,
         "unit": "ft",
-        "posterior": 0.0037
+        "posterior": 0.0001
       },
       "H2": {
         "label": "Stable decline: 1,050-1,075 ft (remains in Tier 1 range)",
         "midpoint": 1062,
         "unit": "ft",
-        "posterior": 0.1337
+        "posterior": 0.043
       },
       "H3": {
         "label": "Record-breaking decline: 1,025-1,050 ft (Tier 2 range)",
         "midpoint": 1038,
         "unit": "ft",
-        "posterior": 0.664
+        "posterior": 0.8546
       },
       "H4": {
         "label": "Severe decline: below 1,025 ft (Tier 3 threshold)",
         "midpoint": 1015,
         "unit": "ft",
-        "posterior": 0.1986
+        "posterior": 0.1022
       }
     },
-    "expectedValue": 1036.81,
+    "expectedValue": 1036.58,
     "expectedUnit": "ft",
     "posteriorHistory": [
       {
@@ -97,6 +97,28 @@
           "H2": 0.15,
           "H3": 0.45,
           "H4": 0.38
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        }
+      },
+      {
+        "date": "2026-04-17",
+        "H1": 0.0001,
+        "H2": 0.043,
+        "H3": 0.8546,
+        "H4": 0.1022,
+        "note": "Very low snowpack and one-third normal inflow projection strongly favor continued decline into Tier 2 range (H3). Small Jan buffer unlikely to persist through summer drawdown. H4 risk elevated by drought severity.",
+        "likelihoods": {
+          "H1": 0.01,
+          "H2": 0.15,
+          "H3": 0.6,
+          "H4": 0.24
         },
         "redTeam": {
           "contrarian_direction": {},
@@ -395,7 +417,8 @@
       "note": "Seed evidence. Source: The Independent (0.50 initial trust), citing FOX 5 Vegas local reporting and Nevada Current.",
       "ledger": "FACT",
       "claimState": "SUPPORTED",
-      "effectiveWeight": 0.5
+      "effectiveWeight": 0.5,
+      "url": "https://www.foxnews.com"
     },
     {
       "id": "ev_002",
@@ -410,7 +433,8 @@
       "posteriorImpact": "t3_monthly_drop_6ft FIRED. Applied pre-committed effect: H3 +3pp, H4 +2pp, H1 -2pp, H2 -3pp. New posteriors: H1=0.06, H2=0.29, H3=0.48, H4=0.17. Sum=1.00.",
       "note": "1,032ft projection for Nov 2027 is approaching t1_below_record (1,040.94 ft) and t2_bor_projects_below_1040 territory. Monitor May 24-month study.",
       "ledger": "DECISION",
-      "effectiveWeight": 0.4118
+      "effectiveWeight": 0.4118,
+      "url": "https://www.foxnews.com"
     },
     {
       "id": "ev_003",
@@ -432,6 +456,33 @@
       "time": "2026-04-16T03:43:52+00:00",
       "tag": "INTEL",
       "text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Evidence ev_003: Colorado Basin April 1 snowpack at historically record low levels, roughly five ",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_004",
+      "time": "2026-04-17T15:23:00+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "HYDRO"
+      ],
+      "text": "Lake Mead at ~34% capacity. Upper Basin snowpack near lowest levels during 2000-present drought. Apr-Jul inflow to Powell projected at one-third of normal. Mead was 1,062 ft in Jan 2026 (6.5 ft above projections). Post-2026 operating agreements under negotiation.",
+      "provenance": "OBSERVED",
+      "source": "USBR / 8 News Now",
+      "posteriorImpact": "NONE",
+      "url": "https://www.usbr.gov/newsroom/news-release/5211",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-17T15:23:00+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Very low snowpack and one-third normal inflow projection strongly favor continued decline into Tier 2 range (H3). Small Jan buffer unlikely to persist through summer drawdown. H4 risk elevated by drought severity.",
       "provenance": "DERIVED",
       "posteriorImpact": "NONE",
       "ledger": "DECISION",
@@ -489,13 +540,13 @@
       "regime": "SAFE",
       "worst_hypothesis": "H1"
     },
-    "entropy": 1.2734,
+    "entropy": 0.7265,
     "maxEntropy": 2.0,
-    "uncertaintyRatio": 0.6367,
+    "uncertaintyRatio": 0.3633,
     "evidenceFreshness": {
-      "fresh": 3,
+      "fresh": 5,
       "stale": 1,
-      "total": 4
+      "total": 6
     },
     "hypothesisAdmissibility": {
       "H1": "ADMISSIBLE",
@@ -504,10 +555,10 @@
       "H4": "ADMISSIBLE"
     },
     "klFromPrior": {
-      "kl_divergence": 0.186,
+      "kl_divergence": 0.4219,
       "interpretation": "MODERATE"
     },
-    "lastComputed": "2026-04-16T03:43:52+00:00",
+    "lastComputed": "2026-04-17T15:23:00+00:00",
     "staleDependencies": 0,
     "calibrationHealth": "ACCEPTABLE",
     "unresolvedContradictions": 0,
@@ -534,7 +585,7 @@
         }
       },
       "indistinguishable": [],
-      "lastChecked": "2026-04-16T03:43:52+00:00"
+      "lastChecked": "2026-04-17T15:23:00+00:00"
     }
   },
   "predictionScoring": {
@@ -561,6 +612,28 @@
           "H4": 0.1986
         },
         "entropy": 1.2734
+      },
+      {
+        "timestamp": "2026-04-17T15:23:00+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0001,
+          "H2": 0.043,
+          "H3": 0.8546,
+          "H4": 0.1022
+        },
+        "entropy": 0.7265
+      },
+      {
+        "timestamp": "2026-04-17T15:23:00+00:00",
+        "trigger": "pipeline:ev_004",
+        "posteriors": {
+          "H1": 0.0001,
+          "H2": 0.043,
+          "H3": 0.8546,
+          "H4": 0.1022
+        },
+        "entropy": 0.7265
       }
     ],
     "outcomes": [],
@@ -592,6 +665,54 @@
         "detected": "2026-04-16T03:43:52Z",
         "resolution": "SUPERSEDED",
         "resolvedAt": "2026-04-16T03:43:52Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-16T03:43:52+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Evidence ev_003: Colorado Basin April 1 snowpack at historically record low levels, roughly five ",
+        "entry_b_time": "2026-04-17T15:23:00+00:00",
+        "entry_b_text": "Lake Mead at ~34% capacity. Upper Basin snowpack near lowest levels during 2000-present drought. Apr-Jul inflow to Powell projected at one-third of normal. Mead was 1,062 ft in Jan 2026 (6.5 ft above projections). Post-2026 operating agreements under negotiation.",
+        "reason": "Numeric divergence 97.1% on metric (context: at, basin): new=34.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-17T15:23:00Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T15:23:00Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-16T03:43:52+00:00",
+        "entry_a_text": "Colorado Basin April 1 snowpack at historically record low levels, roughly five times lower than previous record. Federal Bureau of Reclamation projects Lake Mead will reach new record-low water levels by November 2027, potentially dropping to approximately 1032 feet.",
+        "entry_b_time": "2026-04-17T15:23:00+00:00",
+        "entry_b_text": "Lake Mead at ~34% capacity. Upper Basin snowpack near lowest levels during 2000-present drought. Apr-Jul inflow to Powell projected at one-third of normal. Mead was 1,062 ft in Jan 2026 (6.5 ft above projections). Post-2026 operating agreements under negotiation.",
+        "reason": "Numeric divergence 97.1% on metric (context: at, basin): new=34.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-17T15:23:00Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T15:23:00Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-10T00:00:00Z",
+        "entry_a_text": "Lake Mead water surface elevation at 1,064.16 ft as of April 6 (USBR weekly update). Lake has dropped more than 6 feet since March 1, now just 20 feet above the all-time record low of 1,040.94 ft from July 2022. Federal projections show Lake Mead could reach new record low of ~1,032 ft by November 2027.",
+        "entry_b_time": "2026-04-17T15:23:00+00:00",
+        "entry_b_text": "Lake Mead at ~34% capacity. Upper Basin snowpack near lowest levels during 2000-present drought. Apr-Jul inflow to Powell projected at one-third of normal. Mead was 1,062 ft in Jan 2026 (6.5 ft above projections). Post-2026 operating agreements under negotiation.",
+        "reason": "Numeric divergence 97.1% on metric (context: at): new=34.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-17T15:23:00Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T15:23:00Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-12T00:00:00Z",
+        "entry_a_text": "Lake Mead dropped approximately 6 ft since March 1, 2026, now sitting 20 ft above the all-time low. Currently at approximately 35% capacity. SNWA outreach manager Bronson Mack stated the lake could drop another 16 ft by 2027. Federal projections released in March 2026 indicate Lake Mead could reach record-low water levels (~1,032 ft) by November 2027. Previous record low was approximately 1,040.94 ft, set in 2022. Very low snowpack cited as primary driver. Rising water temperatures reported as affecting water treatment operations. NPS issued harmful algal bloom advisory for Government Wash on March 13.",
+        "entry_b_time": "2026-04-17T15:23:00+00:00",
+        "entry_b_text": "Lake Mead at ~34% capacity. Upper Basin snowpack near lowest levels during 2000-present drought. Apr-Jul inflow to Powell projected at one-third of normal. Mead was 1,062 ft in Jan 2026 (6.5 ft above projections). Post-2026 operating agreements under negotiation.",
+        "reason": "Numeric divergence 82.4% on metric (context: mead): new=34.0, existing=6.0, threshold=10%",
+        "detected": "2026-04-17T15:23:00Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T15:23:00Z"
       }
     ]
   },
@@ -629,15 +750,27 @@
         "trust_delta": -0.1,
         "original_text_snippet": "Lake Mead water surface elevation at 1,064.16 ft as of April 6 (USBR weekly update). Lake has dropped more than 6 feet s",
         "confirming_text_snippet": "Colorado Basin April 1 snowpack at historically record low levels, roughly five times lower than previous record. Federa"
+      },
+      {
+        "timestamp": "2026-04-17T15:23:00Z",
+        "evidence_index": 0,
+        "confirming_index": 4,
+        "resolution": "REFUTED",
+        "source": "The Independent (citing FOX 5 Vegas, Nevada Current, NPS)",
+        "confirming_source": "USBR / 8 News Now",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Lake Mead dropped approximately 6 ft since March 1, 2026, now sitting 20 ft above the all-time low. Currently at approxi",
+        "confirming_text_snippet": "Lake Mead at ~34% capacity. Upper Basin snowpack near lowest levels during 2000-present drought. Apr-Jul inflow to Powel"
       }
     ],
     "effectiveTrust": {
       "Coyote Gulch": 0.5,
       "Fox5 Vegas": 0.4118,
-      "The Independent (": 0.4565,
+      "The Independent (": 0.468,
       "USBR": 0.5,
-      "USBR Lower Colorado Weekly Hydrologic Update": 0.4118
+      "USBR Lower Colorado Weekly Hydrologic Update": 0.4118,
+      "8 News Now": 0.5
     },
-    "_last_scan_same_source_skipped": 0
+    "_last_scan_same_source_skipped": 1
   }
 }

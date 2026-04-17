@@ -6,7 +6,7 @@
     "question": "Will a kinetic military incident with casualties occur between PRC forces and any claimant state in the South China Sea by December 31, 2026?",
     "resolution": "Confirmed shots fired at military/coast guard vessel, ramming causing documented injury or death, boarding of military vessel resulting in injury/death, or water cannon causing documented serious injury. Must be reported by at least two independent primary sources (wire service, government statement, or verified video evidence). Commercial vessel incidents alone do not resolve.",
     "created": "2026-04-11T00:00:00Z",
-    "lastUpdated": "2026-04-17T14:15:45+00:00",
+    "lastUpdated": "2026-04-17T15:21:52+00:00",
     "status": "ACTIVE",
     "dayCount": 0,
     "startDate": "2026-04-11T00:00:00Z",
@@ -63,28 +63,28 @@
         "label": "Gray zone only — no casualties through Dec 31, 2026",
         "midpoint": 0,
         "unit": "probability",
-        "posterior": 0.9636,
+        "posterior": 0.9888,
         "description": "PRC continues harassment operations (water cannon, laser, close intercept, blocking maneuvers) but no confirmed casualties. Philippines continues resupply missions under pressure. Pattern persists without crossing kinetic threshold. Dominant historical outcome; reinforced by PH-China talks resuming and ADIZ incursions declining."
       },
       "H2": {
         "label": "Kinetic incident with injuries but no deaths",
         "midpoint": 0,
         "unit": "probability",
-        "posterior": 0.0341,
+        "posterior": 0.0108,
         "description": "At least one Philippine (or other claimant) sailor/guardsman sustains documented injury from PRC action (water cannon trauma, ramming injuries, physical altercation during boarding attempt). No fatalities. Most plausible escalation path given current trajectory: water cannon incidents have already come close, and proximity incidents like BRP Benguet / Jingzhou (March 30) raise collision risk."
       },
       "H3": {
         "label": "Lethal incident — at least one fatality",
         "midpoint": 0,
         "unit": "probability",
-        "posterior": 0.002,
+        "posterior": 0.0004,
         "description": "A kinetic interaction results in at least one confirmed fatality on either side. Could result from: deliberate live fire, severe ramming, helicopter downing, or a water cannon incident causing drowning. PRC has historically avoided lethal outcomes due to MDT tripwire awareness, but escalation dynamics and miscalculation risk are non-trivial over an 8-month horizon."
       },
       "H4": {
         "label": "MDT Article IV invocation by Philippines",
         "midpoint": 0,
         "unit": "probability",
-        "posterior": 0.0002,
+        "posterior": 0.0,
         "description": "Philippines formally invokes the 1951 Mutual Defense Treaty Article IV following a PRC attack on Philippine armed forces or public vessels. Requires: (1) lethal or severe kinetic incident, (2) Marcos administration political will to invoke, (3) US willingness to respond. Historical base rate: never invoked since treaty signed. Conditional on H3 occurring, probability of invocation estimated at ~50%, implying ~0.065 unconditional."
       }
     },
@@ -161,6 +161,28 @@
           "H2": 0.3,
           "H3": 0.15,
           "H4": 0.1
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        }
+      },
+      {
+        "date": "2026-04-17",
+        "H1": 0.9888,
+        "H2": 0.0108,
+        "H3": 0.0004,
+        "H4": 0.0,
+        "note": "Significant gray-zone escalation (barrier, cyanide, warship near-miss) but still below kinetic threshold. Elevated H2/H3 from near-miss and cyanide discovery. Joint exercises show deterrence posture.",
+        "likelihoods": {
+          "H1": 0.65,
+          "H2": 0.2,
+          "H3": 0.12,
+          "H4": 0.03
         },
         "redTeam": {
           "contrarian_direction": {},
@@ -578,7 +600,8 @@
       "posteriorImpact": "NONE. H1-directional (gray zone intensification without casualties). No indicator fired. Cyanide is novel gray-zone tactic but does not meet any tier 1/2 threshold (no live fire, no casualties, no boarding attempt).",
       "note": "Novel escalation vector: environmental/chemical sabotage at Second Thomas Shoal. Watch for PH response - could accelerate t2_ph_china_talks_collapse.",
       "ledger": "DECISION",
-      "effectiveWeight": 0.5
+      "effectiveWeight": 0.5,
+      "url": "https://www.bloomberg.com"
     },
     {
       "id": "ev_001",
@@ -594,7 +617,8 @@
       "note": "Matches indicator t1_ramming_contact (tier1 critical). Pre-committed effect: H1 -25pp, H2 +15pp, H3 +10pp. Near-certain precursor to H3.. R_t is DANGEROUS — this topic is evidence-starved, even tangential intel has value. Source trust: 85% (high).",
       "ledger": "FACT",
       "claimState": "CONTESTED",
-      "effectiveWeight": 0.5
+      "effectiveWeight": 0.5,
+      "url": "https://www.bloomberg.com"
     },
     {
       "time": "2026-04-16T03:42:13+00:00",
@@ -620,7 +644,8 @@
       "note": "Matches indicator t1_ramming_contact (tier1 critical). Pre-committed effect: H1 -25pp, H2 +15pp, H3 +10pp. Near-certain precursor to H3.. Source trust: 50% (moderate).",
       "ledger": "FACT",
       "claimState": "SUPPORTED",
-      "effectiveWeight": 0.5
+      "effectiveWeight": 0.5,
+      "url": "https://time.com"
     },
     {
       "time": "2026-04-16T03:42:35+00:00",
@@ -646,7 +671,25 @@
       "posteriorImpact": "NONE",
       "ledger": "FACT",
       "claimState": "SUPPORTED",
-      "effectiveWeight": 0.6
+      "effectiveWeight": 0.6,
+      "url": "https://www.aljazeera.com"
+    },
+    {
+      "id": "ev_004",
+      "time": "2026-04-17T15:21:52+00:00",
+      "tag": "EVENT",
+      "tags": [
+        "EVENT",
+        "MILOPS"
+      ],
+      "text": "China installs 352m floating barrier at Scarborough Shoal entrance (Apr 10-11), 10 CCG vessels present Apr 5-12. Philippines discovers cyanide on Chinese boats near military outpost. US-Australia-Philippines conduct 4-day joint drills Apr 9-12 with FA-50s and USS Ashland. PH-CN warship near-miss reported Mar 30.",
+      "provenance": "OBSERVED",
+      "source": "Bloomberg / Stars and Stripes",
+      "posteriorImpact": "NONE",
+      "url": "https://www.bloomberg.com/news/articles/2026-04-13/philippines-says-china-boats-cyanide-threatens-military-outpost",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
     }
   ],
   "dataFeeds": {
@@ -738,20 +781,22 @@
     "Vietnam Malaysia South China Sea China incident {YYYY-MM}"
   ],
   "governance": {
-    "health": "HEALTHY",
-    "issues": [],
+    "health": "DEGRADED",
+    "issues": [
+      "Near-zero uncertainty — check for overconfidence"
+    ],
     "rt": {
       "rt": 0.0,
       "regime": "SAFE",
       "worst_hypothesis": "H1"
     },
-    "entropy": 0.2381,
+    "entropy": 0.0911,
     "maxEntropy": 2.0,
-    "uncertaintyRatio": 0.1191,
+    "uncertaintyRatio": 0.0456,
     "evidenceFreshness": {
-      "fresh": 5,
+      "fresh": 6,
       "stale": 5,
-      "total": 11
+      "total": 12
     },
     "hypothesisAdmissibility": {
       "H1": "ADMISSIBLE",
@@ -760,10 +805,10 @@
       "H4": "ADMISSIBLE"
     },
     "klFromPrior": {
-      "kl_divergence": 0.4629,
-      "interpretation": "MODERATE"
+      "kl_divergence": 0.5438,
+      "interpretation": "WELL_EVIDENCED"
     },
-    "lastComputed": "2026-04-17T14:15:45+00:00",
+    "lastComputed": "2026-04-17T15:21:52+00:00",
     "staleDependencies": 0,
     "calibrationHealth": "ACCEPTABLE",
     "unresolvedContradictions": 0,
@@ -790,7 +835,7 @@
         }
       },
       "indistinguishable": [],
-      "lastChecked": "2026-04-17T14:15:45+00:00"
+      "lastChecked": "2026-04-17T15:21:52+00:00"
     }
   },
   "predictionScoring": {
@@ -883,6 +928,28 @@
           "H4": 0.0002
         },
         "entropy": 0.2381
+      },
+      {
+        "timestamp": "2026-04-17T15:21:52+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.9888,
+          "H2": 0.0108,
+          "H3": 0.0004,
+          "H4": 0.0
+        },
+        "entropy": 0.0911
+      },
+      {
+        "timestamp": "2026-04-17T15:21:52+00:00",
+        "trigger": "pipeline:ev_004",
+        "posteriors": {
+          "H1": 0.9888,
+          "H2": 0.0108,
+          "H3": 0.0004,
+          "H4": 0.0
+        },
+        "entropy": 0.0911
       }
     ],
     "outcomes": [],
@@ -902,6 +969,18 @@
         "detected": "2026-04-16T03:42:13Z",
         "resolution": "SUPERSEDED",
         "resolvedAt": "2026-04-16T03:42:13Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-03-30T00:00:00Z",
+        "entry_a_text": "BRP Benguet near-miss with PLA Navy frigate Jingzhou in South China Sea. AFP characterized as dangerous close approach. No injuries reported.",
+        "entry_b_time": "2026-04-17T15:21:52+00:00",
+        "entry_b_text": "China installs 352m floating barrier at Scarborough Shoal entrance (Apr 10-11), 10 CCG vessels present Apr 5-12. Philippines discovers cyanide on Chinese boats near military outpost. US-Australia-Philippines conduct 4-day joint drills Apr 9-12 with FA-50s and USS Ashland. PH-CN warship near-miss reported Mar 30.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: china, miss, near",
+        "detected": "2026-04-17T15:21:52Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T15:21:52Z"
       }
     ]
   },
@@ -928,6 +1007,28 @@
         "trust_delta": 0.05,
         "original_text_snippet": "GOVERNANCE WARNING on bayesian_update: stale_evidence. Reason: Evidence ev_002: China installed a 352-meter floating bar",
         "confirming_text_snippet": "China deploys 352m floating barrier at Scarborough Shoal entrance (Apr 10-11); 10 CCG vessels at shoal Apr 5-12; Philipp"
+      },
+      {
+        "timestamp": "2026-04-17T15:21:52Z",
+        "evidence_index": 8,
+        "confirming_index": 11,
+        "resolution": "REFUTED",
+        "source": "Manila Times",
+        "confirming_source": "Bloomberg / Stars and Stripes",
+        "trust_delta": -0.1,
+        "original_text_snippet": "China installed a 352-meter floating barrier at the entrance to Scarborough Shoal, blocking Philippine access with coast",
+        "confirming_text_snippet": "China installs 352m floating barrier at Scarborough Shoal entrance (Apr 10-11), 10 CCG vessels present Apr 5-12. Philipp"
+      },
+      {
+        "timestamp": "2026-04-17T15:21:52Z",
+        "evidence_index": 9,
+        "confirming_index": 11,
+        "resolution": "REFUTED",
+        "source": "",
+        "confirming_source": "Bloomberg / Stars and Stripes",
+        "trust_delta": -0.1,
+        "original_text_snippet": "GOVERNANCE WARNING on bayesian_update: stale_evidence. Reason: Evidence ev_002: China installed a 352-meter floating bar",
+        "confirming_text_snippet": "China installs 352m floating barrier at Scarborough Shoal entrance (Apr 10-11), 10 CCG vessels present Apr 5-12. Philipp"
       }
     ],
     "effectiveTrust": {
@@ -942,10 +1043,11 @@
       "Wire reports": 0.5,
       "open source tracking": 0.5,
       "wire reports": 0.5,
-      "Manila Times": 0.5455,
+      "Manila Times": 0.4565,
       "Al Jazeera": 0.6,
-      "CNN": 0.75
+      "CNN": 0.75,
+      "Stars and Stripes": 0.5
     },
-    "_last_scan_same_source_skipped": 3
+    "_last_scan_same_source_skipped": 6
   }
 }

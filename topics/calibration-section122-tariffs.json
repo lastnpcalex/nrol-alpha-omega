@@ -6,7 +6,7 @@
     "question": "What happens to the Trump administration's Section 122 10% universal tariff when it reaches its 150-day statutory limit in late July 2026?",
     "resolution": "Observable: White House action or documented inaction by July 23, 2026 (150 days from Feb 24 effective date). Resolution criteria: (a) tariff expires with no successor = H1; (b) new proclamation issues at ~10% using different authority = H2; (c) new proclamation/action at higher rate or expanded scope = H3; (d) bilateral deal(s) announced covering >=30% of affected import value with reduced rates = H4. Partial-deal-plus-continuation counts as H4 if rollback is material.",
     "created": "2026-04-11T00:00:00Z",
-    "lastUpdated": "2026-04-17T14:18:28+00:00",
+    "lastUpdated": "2026-04-17T15:21:52+00:00",
     "status": "ACTIVE",
     "dayCount": 47,
     "startDate": "2026-02-24T00:00:00Z",
@@ -63,7 +63,7 @@
         "label": "Expires as scheduled — no replacement, no extension",
         "midpoint": 0,
         "unit": "weeks",
-        "posterior": 0.0011,
+        "posterior": 0.0,
         "description": "The tariff lapses on ~July 23, 2026 with no successor action. Administration makes no new proclamation, Congress does not authorize extension, Section 301 investigations have not yet produced usable tariff authority. Politically very costly — would be framed as capitulation. Requires either a court order forcing expiry or a deliberate policy reversal. Base rate for clean expiry given current posture: low.",
         "_prior_note": "7% reflects near-impossibility of deliberate no-action given political signaling. Only fires if legal constraint (court order) or unexpected political reversal."
       },
@@ -71,7 +71,7 @@
         "label": "Maintained at same ~10% rate via new authority",
         "midpoint": 0,
         "unit": "weeks",
-        "posterior": 0.0209,
+        "posterior": 0.0069,
         "description": "Administration issues a new proclamation at roughly the same 10% rate using a different statutory basis — most likely Section 301 authority once investigations conclude, or a Section 232 national security finding, or a new IEEPA invocation with a different legal framing. Rate stays flat, scope roughly unchanged. This is the 'hold the line' outcome: no escalation, no deal, but tariffs continue.",
         "_prior_note": "18% reflects plausibility as a fallback if deals stall and escalation seems risky, but narrower than H3/H4 because straight-rate maintenance is strategically inert and doesn't match the administration's pattern of using expiry moments for leverage."
       },
@@ -79,7 +79,7 @@
         "label": "Expanded — higher rate and/or broader product scope",
         "midpoint": 0,
         "unit": "weeks",
-        "posterior": 0.133,
+        "posterior": 0.1022,
         "description": "At or before expiry, administration announces escalation: higher tariff rate (above 10%), expanded country coverage, expanded product scope, or a new Section 301 tariff regime (historically 25%+ on targeted categories) that replaces the universal surcharge with a more aggressive targeted structure. New Section 301 investigations into EU, Mexico, and China are the most direct pipeline. A 25% targeted tariff on EU autos or Chinese tech goods would qualify as H3 even if the universal 10% lapses.",
         "_prior_note": "33% reflects the administration's track record of using tariff deadlines as escalation moments rather than resolution moments, plus active Section 301 pipeline. H3 is the modal outcome if bilateral deals fail to materialize."
       },
@@ -87,7 +87,7 @@
         "label": "Partial rollback — bilateral deal(s) reduce tariffs on >=30% of affected import value",
         "midpoint": 0,
         "unit": "weeks",
-        "posterior": 0.845,
+        "posterior": 0.8908,
         "description": "One or more bilateral trade agreements or framework deals (EU, Mexico, Japan, UK, Canada, or others) are announced before or at the July 23 deadline, resulting in materially reduced tariff rates on a significant share of the ~$1.2T import base. Does not require a comprehensive agreement — sector deals (e.g., EU autos, Mexican agricultural goods) that cover >=30% of affected volume qualify. May be accompanied by continuation of tariffs on non-deal partners. This is the stated preferred outcome of the administration and trading partners.",
         "_prior_note": "42% reflects: (1) bilateral deal framing as stated policy goal; (2) three active negotiating tracks (EU, Mexico/Canada, China-adjacent); (3) both sides have economic incentives before US midterm season; BUT (4) discount heavily because 3.5 months is tight for complex deals, and partial-deal announcements often get classified as 'framework' without tariff relief. Set as modal outcome but note high uncertainty."
       }
@@ -143,6 +143,28 @@
           "H2": 0.15,
           "H3": 0.25,
           "H4": 0.52
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        }
+      },
+      {
+        "date": "2026-04-17",
+        "H1": 0.0,
+        "H2": 0.0069,
+        "H3": 0.1022,
+        "H4": 0.8908,
+        "note": "Court challenge could force restructuring favoring H4 partial rollback. 232 modifications and announced 15% increase show escalation intent (H3). Congressional extension unlikely given judicial scrutiny. Expiry without replacement (H1) still near-zero.",
+        "likelihoods": {
+          "H1": 0.02,
+          "H2": 0.15,
+          "H3": 0.35,
+          "H4": 0.48
         },
         "redTeam": {
           "contrarian_direction": {},
@@ -690,6 +712,24 @@
       "ledger": "DECISION",
       "claimState": "PROPOSED",
       "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_013",
+      "time": "2026-04-17T15:21:52+00:00",
+      "tag": "EVENT",
+      "tags": [
+        "EVENT",
+        "LEGAL",
+        "TRADE"
+      ],
+      "text": "Section 122 tariffs face court challenge: CIT heard oral argument Apr 10 in Oregon v. Trump and Burlap & Barrel v. Trump. Trump modified Section 232 tariff regime for steel/aluminum/copper effective Apr 6. 15% rate increase announced but not yet implemented. 150-day expiry on Jul 24, 2026 unless Congress extends.",
+      "provenance": "OBSERVED",
+      "source": "Reason / National Law Review",
+      "posteriorImpact": "NONE",
+      "url": "https://reason.com/2026/04/10/in-new-tariff-cases-trump-asserts-unreviewable-power-to-invent-a-balance-of-payments-deficit/",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
     }
   ],
   "dataFeeds": {
@@ -840,23 +880,23 @@
   "governance": {
     "health": "DEGRADED",
     "issues": [
-      "Majority stale evidence (10/14)",
+      "Majority stale evidence (10/15)",
       "Stale dependency: calibration-us-recession-2026.H2 assumed=0.22, actual=0.3806, drift=16.06%",
-      "Downstream alert: calibration-midterms-2026 has 2 stale assumption(s) from this topic",
-      "Downstream alert: calibration-us-recession-2026 has 2 stale assumption(s) from this topic"
+      "Downstream alert: calibration-midterms-2026 has 3 stale assumption(s) from this topic",
+      "Downstream alert: calibration-us-recession-2026 has 3 stale assumption(s) from this topic"
     ],
     "rt": {
       "rt": 0.0,
       "regime": "SAFE",
       "worst_hypothesis": "H1"
     },
-    "entropy": 0.7199,
+    "entropy": 0.5344,
     "maxEntropy": 2.0,
-    "uncertaintyRatio": 0.3599,
+    "uncertaintyRatio": 0.2672,
     "evidenceFreshness": {
-      "fresh": 4,
+      "fresh": 5,
       "stale": 10,
-      "total": 14
+      "total": 15
     },
     "hypothesisAdmissibility": {
       "H1": "ADMISSIBLE",
@@ -865,10 +905,10 @@
       "H4": "ADMISSIBLE"
     },
     "klFromPrior": {
-      "kl_divergence": 0.4203,
-      "interpretation": "MODERATE"
+      "kl_divergence": 0.5275,
+      "interpretation": "WELL_EVIDENCED"
     },
-    "lastComputed": "2026-04-17T14:18:28+00:00",
+    "lastComputed": "2026-04-17T15:21:52+00:00",
     "staleDependencies": 1,
     "staleDependencyDetails": [
       {
@@ -889,14 +929,20 @@
           {
             "hypothesis": "H2",
             "assumed": 0.18,
-            "actual": 0.0603,
-            "drift": 0.1197
+            "actual": 0.0209,
+            "drift": 0.1591
+          },
+          {
+            "hypothesis": "H3",
+            "assumed": 0.33,
+            "actual": 0.133,
+            "drift": 0.197
           },
           {
             "hypothesis": "H4",
             "assumed": 0.42,
-            "actual": 0.7035,
-            "drift": 0.2835
+            "actual": 0.845,
+            "drift": 0.425
           }
         ]
       },
@@ -907,14 +953,20 @@
           {
             "hypothesis": "H2",
             "assumed": 0.18,
-            "actual": 0.0603,
-            "drift": 0.1197
+            "actual": 0.0209,
+            "drift": 0.1591
+          },
+          {
+            "hypothesis": "H3",
+            "assumed": 0.33,
+            "actual": 0.133,
+            "drift": 0.197
           },
           {
             "hypothesis": "H4",
             "assumed": 0.42,
-            "actual": 0.7035,
-            "drift": 0.2835
+            "actual": 0.845,
+            "drift": 0.425
           }
         ]
       }
@@ -922,11 +974,6 @@
     "calibrationHealth": "ACCEPTABLE",
     "unresolvedContradictions": 0,
     "expiredHypotheses": [
-      {
-        "key": "H1",
-        "label": "Expires as scheduled — no replacement, no extension",
-        "expiredAtDay": 0
-      },
       {
         "key": "H2",
         "label": "Maintained at same ~10% rate via new authority",
@@ -966,7 +1013,7 @@
         }
       },
       "indistinguishable": [],
-      "lastChecked": "2026-04-17T14:18:28+00:00"
+      "lastChecked": "2026-04-17T15:21:52+00:00"
     }
   },
   "dependencies": {
@@ -1053,6 +1100,28 @@
           "H4": 0.845
         },
         "entropy": 0.7199
+      },
+      {
+        "timestamp": "2026-04-17T15:21:52+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0,
+          "H2": 0.0069,
+          "H3": 0.1022,
+          "H4": 0.8908
+        },
+        "entropy": 0.5344
+      },
+      {
+        "timestamp": "2026-04-17T15:21:52+00:00",
+        "trigger": "pipeline:ev_013",
+        "posteriors": {
+          "H1": 0.0,
+          "H2": 0.0069,
+          "H3": 0.1022,
+          "H4": 0.8908
+        },
+        "entropy": 0.5344
       }
     ],
     "outcomes": [
@@ -1351,6 +1420,150 @@
         "detected": "2026-04-17T14:01:37Z",
         "resolution": "SUPERSEDED",
         "resolvedAt": "2026-04-17T14:01:37Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T14:18:28+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: stale_evidence, quorum_failure. Reason: Evidence ev_012: 18 bilateral trade frameworks reported as of Apr 16; Section 122 rate remains 10",
+        "entry_b_time": "2026-04-17T15:21:52+00:00",
+        "entry_b_text": "Section 122 tariffs face court challenge: CIT heard oral argument Apr 10 in Oregon v. Trump and Burlap & Barrel v. Trump. Trump modified Section 232 tariff regime for steel/aluminum/copper effective Apr 6. 15% rate increase announced but not yet implemented. 150-day expiry on Jul 24, 2026 unless Congress extends.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: apr, rate, section",
+        "detected": "2026-04-17T15:21:52Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T15:21:52Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T14:01:37+00:00",
+        "entry_a_text": "18 bilateral trade frameworks reported as of Apr 16; Section 122 rate remains 10% (15% announced but no formal order); two active lawsuits at CIT (oral args Apr 10-11); July 24 expiry firm at 150 days",
+        "entry_b_time": "2026-04-17T15:21:52+00:00",
+        "entry_b_text": "Section 122 tariffs face court challenge: CIT heard oral argument Apr 10 in Oregon v. Trump and Burlap & Barrel v. Trump. Trump modified Section 232 tariff regime for steel/aluminum/copper effective Apr 6. 15% rate increase announced but not yet implemented. 150-day expiry on Jul 24, 2026 unless Congress extends.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: announced, apr, cit, expiry, oral",
+        "detected": "2026-04-17T15:21:52Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T15:21:52Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-16T03:43:52+00:00",
+        "entry_a_text": "White House reports 18 bilateral framework trade agreements completed covering more than half of global GDP as result of Section 122 tariffs. CIT three-judge panel heard oral arguments April 10-11 on 23-state legal challenge.",
+        "entry_b_time": "2026-04-17T15:21:52+00:00",
+        "entry_b_text": "Section 122 tariffs face court challenge: CIT heard oral argument Apr 10 in Oregon v. Trump and Burlap & Barrel v. Trump. Trump modified Section 232 tariff regime for steel/aluminum/copper effective Apr 6. 15% rate increase announced but not yet implemented. 150-day expiry on Jul 24, 2026 unless Congress extends.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: challenge, cit, heard, oral, section",
+        "detected": "2026-04-17T15:21:52Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T15:21:52Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-10T00:00:00Z",
+        "entry_a_text": "March 2026 CPI: headline +0.9% m/m, 3.3% annual (highest since April 2024). Energy +10.9% (Iran war driven). But core CPI +0.2% m/m, 2.6% annual — both below forecast. Tariff impact visible in apparel (+1%) and airline fares (+2.7%).",
+        "entry_b_time": "2026-04-17T15:21:52+00:00",
+        "entry_b_text": "Section 122 tariffs face court challenge: CIT heard oral argument Apr 10 in Oregon v. Trump and Burlap & Barrel v. Trump. Trump modified Section 232 tariff regime for steel/aluminum/copper effective Apr 6. 15% rate increase announced but not yet implemented. 150-day expiry on Jul 24, 2026 unless Congress extends.",
+        "reason": "Numeric divergence 90.0% on metric (context: in): new=10.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-17T15:21:52Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T15:21:52Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-10T00:00:00Z",
+        "entry_a_text": "CIT oral arguments held April 10-11. Three-judge panel (Barnett, Kelly, Stanceu) sharply questioned both sides for 3+ hours. Key issue: whether 'balance-of-payments deficits' in 1974 statute covers trade deficits. Awkward for government: DOJ argued last year Section 122 had 'no obvious application' to trade deficits. Awkward for challengers: CIT itself wrote Section 122 was available when striking IEEPA tariffs.",
+        "entry_b_time": "2026-04-17T15:21:52+00:00",
+        "entry_b_text": "Section 122 tariffs face court challenge: CIT heard oral argument Apr 10 in Oregon v. Trump and Burlap & Barrel v. Trump. Trump modified Section 232 tariff regime for steel/aluminum/copper effective Apr 6. 15% rate increase announced but not yet implemented. 150-day expiry on Jul 24, 2026 unless Congress extends.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: cit, oral, section, tariffs",
+        "detected": "2026-04-17T15:21:52Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T15:21:52Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-06T00:00:00Z",
+        "entry_a_text": "Reuters reports Trump-Xi summit planned for mid-May in Beijing. Trade war framing: China responded with reciprocal investigations. Prior Busan meeting produced truce (tariff trim + fentanyl + soybean purchases). May summit is highest-level bilateral trade engagement since Section 122.",
+        "entry_b_time": "2026-04-17T15:21:52+00:00",
+        "entry_b_text": "Section 122 tariffs face court challenge: CIT heard oral argument Apr 10 in Oregon v. Trump and Burlap & Barrel v. Trump. Trump modified Section 232 tariff regime for steel/aluminum/copper effective Apr 6. 15% rate increase announced but not yet implemented. 150-day expiry on Jul 24, 2026 unless Congress extends.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: section, tariff, trump",
+        "detected": "2026-04-17T15:21:52Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T15:21:52Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-03-30T00:00:00Z",
+        "entry_a_text": "As of March 30, rate remains 10%. No formal proclamation raising to 15% has been issued despite repeated announcements. 15% rhetoric has not translated to Federal Register action.",
+        "entry_b_time": "2026-04-17T15:21:52+00:00",
+        "entry_b_text": "Section 122 tariffs face court challenge: CIT heard oral argument Apr 10 in Oregon v. Trump and Burlap & Barrel v. Trump. Trump modified Section 232 tariff regime for steel/aluminum/copper effective Apr 6. 15% rate increase announced but not yet implemented. 150-day expiry on Jul 24, 2026 unless Congress extends.",
+        "reason": "Numeric divergence 80.0% on metric (context: rate): new=6.0, existing=30.0, threshold=10%",
+        "detected": "2026-04-17T15:21:52Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T15:21:52Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-03-09T00:00:00Z",
+        "entry_a_text": "Liberty Justice Center files second suit (Burlap and Barrel v. Trump, Case No. 1:26-cv-01606) on behalf of spice importer and toy company. Assigned to same 3-judge CIT panel (Barnett, Kelly, Stanceu).",
+        "entry_b_time": "2026-04-17T15:21:52+00:00",
+        "entry_b_text": "Section 122 tariffs face court challenge: CIT heard oral argument Apr 10 in Oregon v. Trump and Burlap & Barrel v. Trump. Trump modified Section 232 tariff regime for steel/aluminum/copper effective Apr 6. 15% rate increase announced but not yet implemented. 150-day expiry on Jul 24, 2026 unless Congress extends.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: barrel, burlap, cit, trump",
+        "detected": "2026-04-17T15:21:52Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T15:21:52Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-03-05T00:00:00Z",
+        "entry_a_text": "24 state attorneys general (led by Oregon, Arizona, California, New York, Vermont) file suit at US Court of International Trade challenging Section 122 surcharge. Case No. 1:26-cv-01472. States argue balance-of-payments requirement not met.",
+        "entry_b_time": "2026-04-17T15:21:52+00:00",
+        "entry_b_text": "Section 122 tariffs face court challenge: CIT heard oral argument Apr 10 in Oregon v. Trump and Burlap & Barrel v. Trump. Trump modified Section 232 tariff regime for steel/aluminum/copper effective Apr 6. 15% rate increase announced but not yet implemented. 150-day expiry on Jul 24, 2026 unless Congress extends.",
+        "reason": "Numeric divergence 47.4% on metric (context: section): new=232.0, existing=122.0, threshold=10%",
+        "detected": "2026-04-17T15:21:52Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T15:21:52Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-03-04T00:00:00Z",
+        "entry_a_text": "Treasury Secretary Bessent confirms intent to raise to 15% on CNBC. Also references ongoing Section 301 investigations and Section 232 studies as successor frameworks during 150-day window.",
+        "entry_b_time": "2026-04-17T15:21:52+00:00",
+        "entry_b_text": "Section 122 tariffs face court challenge: CIT heard oral argument Apr 10 in Oregon v. Trump and Burlap & Barrel v. Trump. Trump modified Section 232 tariff regime for steel/aluminum/copper effective Apr 6. 15% rate increase announced but not yet implemented. 150-day expiry on Jul 24, 2026 unless Congress extends.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: day, section",
+        "detected": "2026-04-17T15:21:52Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T15:21:52Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-02-21T00:00:00Z",
+        "entry_a_text": "Trump announces via social media intent to raise Section 122 rate to 15% (statutory maximum). No formal proclamation issued.",
+        "entry_b_time": "2026-04-17T15:21:52+00:00",
+        "entry_b_text": "Section 122 tariffs face court challenge: CIT heard oral argument Apr 10 in Oregon v. Trump and Burlap & Barrel v. Trump. Trump modified Section 232 tariff regime for steel/aluminum/copper effective Apr 6. 15% rate increase announced but not yet implemented. 150-day expiry on Jul 24, 2026 unless Congress extends.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: rate, section, trump",
+        "detected": "2026-04-17T15:21:52Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T15:21:52Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-02-20T00:00:00Z",
+        "entry_a_text": "SCOTUS strikes IEEPA-based tariffs (Learning Resources v. Trump). Same day, Trump issues Section 122 proclamation: 10% universal import surcharge effective Feb 24. 150-day clock starts.",
+        "entry_b_time": "2026-04-17T15:21:52+00:00",
+        "entry_b_text": "Section 122 tariffs face court challenge: CIT heard oral argument Apr 10 in Oregon v. Trump and Burlap & Barrel v. Trump. Trump modified Section 232 tariff regime for steel/aluminum/copper effective Apr 6. 15% rate increase announced but not yet implemented. 150-day expiry on Jul 24, 2026 unless Congress extends.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: day, effective, section, tariffs, trump",
+        "detected": "2026-04-17T15:21:52Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T15:21:52Z"
       }
     ]
   },
@@ -1383,7 +1596,9 @@
       "White House": 0.5,
       "White House Proclamation, Feb 20 2026": 0.5,
       "Fleischer Group": 0.5,
-      "Global Trade Alert": 0.5
+      "Global Trade Alert": 0.5,
+      "National Law Review": 0.5,
+      "Reason": 0.5
     },
     "_last_scan_same_source_skipped": 0
   }

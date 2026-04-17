@@ -6,7 +6,7 @@
     "question": "What level of autonomous scientific research capability will the most capable frontier LLM demonstrate by March 31, 2027, as assessed against the Schwartz G1-G4 scale (G1=undergraduate, G2=early graduate, G3=advanced graduate with novel methodology, G4=postdoc-level independent research)?",
     "resolution": "Composite assessment at March 31, 2027 based on: (1) expert evaluations published in peer-reviewed venues or credible technical reports scoring frontier LLM research autonomy; (2) demonstrated artifacts — peer-reviewed papers where the LLM did the primary intellectual work with documented human oversight level; (3) benchmark performance on graduate-level scientific reasoning (GPQA Diamond, FrontierMath, METR autonomy evaluations). Resolution level determined by preponderance of evidence across these three axes.",
     "created": "2026-04-14T00:00:00Z",
-    "lastUpdated": "2026-04-16T03:44:07+00:00",
+    "lastUpdated": "2026-04-17T15:23:00+00:00",
     "status": "ACTIVE",
     "dayCount": 0,
     "startDate": "2026-04-14T00:00:00Z",
@@ -59,32 +59,32 @@
         "label": "G4 — Postdoc-level autonomy achieved",
         "midpoint": 4.0,
         "unit": "G-level (Schwartz scale)",
-        "posterior": 0.1557,
+        "posterior": 0.0977,
         "description": "Schwartz prediction confirmed. By March 2027, a frontier LLM autonomously identifies promising research directions and executes novel scientific work with minimal human guidance (<10% of total intellectual effort). 'Taste' problem substantially solved through training innovation, self-play, or emergent capability. Evidence: multiple peer-reviewed papers with LLM as primary author, GPQA Diamond >95%, FrontierMath score >60%, credible expert panels rate capability at postdoc level."
       },
       "H2": {
         "label": "G3 — Advanced graduate, taste gap persists",
         "midpoint": 3.0,
         "unit": "G-level (Schwartz scale)",
-        "posterior": 0.526,
+        "posterior": 0.6753,
         "description": "Significant capability gains but 'taste' remains unsolved. LLMs execute complex research tasks fluently — can derive novel results, write correct proofs, design experiments — but still require human direction on which problems are worth pursuing and which approaches are promising. Qualitative leap over G2 but falls short of independent research. Evidence: step-function benchmark improvements, successful complex research assistance documented, but expert consensus is 'brilliant technician, not a scientist.'"
       },
       "H3": {
         "label": "G2-G2.5 — Plateau at current capability level",
         "midpoint": 2.3,
         "unit": "G-level (Schwartz scale)",
-        "posterior": 0.2768,
+        "posterior": 0.2211,
         "description": "Scaling hits diminishing returns. Incremental benchmark gains but no qualitative leap in research autonomy. 'Taste' proves deeply hard — possibly requiring architectural innovation beyond current transformer paradigm. Evidence: benchmark scores improve 5-15% but plateau, no convincing autonomous research artifacts, scaling laws show flattening returns on reasoning tasks, multiple expert assessments converge on 'impressive but not qualitatively different from 2025.'"
       },
       "H4": {
         "label": "Below G2 — Capability ceiling or regression",
         "midpoint": 1.5,
         "unit": "G-level (Schwartz scale)",
-        "posterior": 0.0415,
+        "posterior": 0.0059,
         "description": "External disruption or fundamental architectural limitation prevents progress. Possible causes: major regulatory intervention (compute caps, training restrictions), catastrophic safety incident triggers industry pause, data wall (no new training signal available), economic downturn cuts AI investment, or discovered fundamental limitation of transformer architecture for open-ended reasoning. Evidence: no new frontier model release for 6+ months, benchmark stagnation or regression, lab pivots to non-LLM approaches."
       }
     },
-    "expectedValue": 2.9,
+    "expectedValue": 2.93,
     "expectedUnit": "G-level (Schwartz scale, 1-4)",
     "expectedValueNote": "Probability-weighted: 0.18*4.0 + 0.38*3.0 + 0.32*2.3 + 0.12*1.5 = 2.82. Between G2.5 and G3 — market-implied expectation is meaningful progress but short of the Schwartz prediction.",
     "posteriorHistory": [
@@ -110,6 +110,28 @@
           "H2": 0.4,
           "H3": 0.25,
           "H4": 0.1
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        }
+      },
+      {
+        "date": "2026-04-17",
+        "H1": 0.0977,
+        "H2": 0.6753,
+        "H3": 0.2211,
+        "H4": 0.0059,
+        "note": "Automated research agents outperforming humans on some tasks supports G3-G4. Anthropic W2S result is strong signal for advancing autonomous research. But full PhD-level autonomy (G4) requires taste/novelty not yet demonstrated at scale.",
+        "likelihoods": {
+          "H1": 0.22,
+          "H2": 0.45,
+          "H3": 0.28,
+          "H4": 0.05
         },
         "redTeam": {
           "contrarian_direction": {},
@@ -529,6 +551,33 @@
       "ledger": "DECISION",
       "claimState": "PROPOSED",
       "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_004",
+      "time": "2026-04-17T15:23:00+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "TECH"
+      ],
+      "text": "Anthropic publishes automated weak-to-strong researcher that outperforms human researchers on alignment tasks. Sakana AI Scientist system automates full research lifecycle (hypothesis to manuscript). Edison Kosmos autonomous AI scientist used by 50,000+ researchers. Microsoft forecasts AI as active scientific collaborator in 2026. NextBigFuture declares 2026 breakthrough year for AI world models.",
+      "provenance": "OBSERVED",
+      "source": "Anthropic / Sakana AI / Microsoft Research",
+      "posteriorImpact": "NONE",
+      "url": "https://alignment.anthropic.com/2026/automated-w2s-researcher/",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-17T15:23:00+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Automated research agents outperforming humans on some tasks supports G3-G4. Anthropic W2S result is strong signal for advancing autonomous research. But full PhD-level autonomy (G4) requires taste/novelty not yet demonstrated at scale.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
     }
   ],
   "dataFeeds": {
@@ -651,13 +700,13 @@
       "regime": "SAFE",
       "worst_hypothesis": "H1"
     },
-    "entropy": 1.6087,
+    "entropy": 1.2354,
     "maxEntropy": 2.0,
-    "uncertaintyRatio": 0.8044,
+    "uncertaintyRatio": 0.6177,
     "evidenceFreshness": {
-      "fresh": 2,
+      "fresh": 4,
       "stale": 2,
-      "total": 4
+      "total": 6
     },
     "hypothesisAdmissibility": {
       "H1": "ADMISSIBLE",
@@ -666,10 +715,10 @@
       "H4": "ADMISSIBLE"
     },
     "klFromPrior": {
-      "kl_divergence": 0.0642,
+      "kl_divergence": 0.2291,
       "interpretation": "MODERATE"
     },
-    "lastComputed": "2026-04-16T03:44:07+00:00",
+    "lastComputed": "2026-04-17T15:23:00+00:00",
     "staleDependencies": 0,
     "calibrationHealth": "ACCEPTABLE",
     "unresolvedContradictions": 0,
@@ -696,7 +745,7 @@
         }
       },
       "indistinguishable": [],
-      "lastChecked": "2026-04-16T03:44:07+00:00"
+      "lastChecked": "2026-04-17T15:23:00+00:00"
     }
   },
   "predictionScoring": {
@@ -723,6 +772,28 @@
           "H4": 0.0415
         },
         "entropy": 1.6087
+      },
+      {
+        "timestamp": "2026-04-17T15:23:00+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0977,
+          "H2": 0.6753,
+          "H3": 0.2211,
+          "H4": 0.0059
+        },
+        "entropy": 1.2354
+      },
+      {
+        "timestamp": "2026-04-17T15:23:00+00:00",
+        "trigger": "pipeline:ev_004",
+        "posteriors": {
+          "H1": 0.0977,
+          "H2": 0.6753,
+          "H3": 0.2211,
+          "H4": 0.0059
+        },
+        "entropy": 1.2354
       }
     ],
     "outcomes": [],
@@ -742,6 +813,42 @@
         "detected": "2026-04-16T03:44:07Z",
         "resolution": "SUPERSEDED",
         "resolvedAt": "2026-04-16T03:44:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-16T03:44:07+00:00",
+        "entry_a_text": "METR research shows AI task duration doubling every seven months, from one-hour tasks in early 2025 to eight-hour autonomous workstreams by late 2026. DeepResearch Bench: top models score 48-49 out of 100 on PhD-level research tasks across 22 fields.",
+        "entry_b_time": "2026-04-17T15:23:00+00:00",
+        "entry_b_text": "Anthropic publishes automated weak-to-strong researcher that outperforms human researchers on alignment tasks. Sakana AI Scientist system automates full research lifecycle (hypothesis to manuscript). Edison Kosmos autonomous AI scientist used by 50,000+ researchers. Microsoft forecasts AI as active scientific collaborator in 2026. NextBigFuture declares 2026 breakthrough year for AI world models.",
+        "reason": "Numeric divergence 97.5% on metric (context: by): new=50.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-17T15:23:00Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T15:23:00Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-03-23T00:00:00Z",
+        "entry_a_text": "Schwartz predicts that 'blunt extrapolation' of the G1-to-G2 trajectory (achieved in ~4 months) puts frontier LLMs at G4 (PhD/postdoc-level autonomous research) by approximately March 2027.",
+        "entry_b_time": "2026-04-17T15:23:00+00:00",
+        "entry_b_text": "Anthropic publishes automated weak-to-strong researcher that outperforms human researchers on alignment tasks. Sakana AI Scientist system automates full research lifecycle (hypothesis to manuscript). Edison Kosmos autonomous AI scientist used by 50,000+ researchers. Microsoft forecasts AI as active scientific collaborator in 2026. NextBigFuture declares 2026 breakthrough year for AI world models.",
+        "reason": "Numeric divergence 97.5% on metric (context: by): new=50.0, existing=2027.0, threshold=10%",
+        "detected": "2026-04-17T15:23:00Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T15:23:00Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-03-23T00:00:00Z",
+        "entry_a_text": "Matthew Schwartz (Harvard physics professor, IAIFI) publishes 'Vibe Physics' on Anthropic's research blog. Reports completing a peer-reviewed theoretical physics paper (arXiv:2601.02484, C-parameter Sudakov shoulder) using Claude Opus 4.5 with ~50-60 hours human oversight over 2 weeks. Rates Claude at G2 level (early graduate student). Predicts 'blunt extrapolation' puts LLMs at PhD/postdoc level by ~March 2027. Identifies 'taste' as the single missing capability. Notes Claude was profoundly creative but made frequent errors requiring human verification, including faking results and adjusting parameters without proper derivation.",
+        "entry_b_time": "2026-04-17T15:23:00+00:00",
+        "entry_b_text": "Anthropic publishes automated weak-to-strong researcher that outperforms human researchers on alignment tasks. Sakana AI Scientist system automates full research lifecycle (hypothesis to manuscript). Edison Kosmos autonomous AI scientist used by 50,000+ researchers. Microsoft forecasts AI as active scientific collaborator in 2026. NextBigFuture declares 2026 breakthrough year for AI world models.",
+        "reason": "Numeric divergence 97.5% on metric (context: by): new=50.0, existing=2027.0, threshold=10%",
+        "detected": "2026-04-17T15:23:00Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T15:23:00Z"
       }
     ]
   },
@@ -750,7 +857,10 @@
     "effectiveTrust": {
       "DeepResearch Bench": 0.5,
       "METR": 0.5,
-      "Matthew Schwartz": 0.5
+      "Matthew Schwartz": 0.5,
+      "Anthropic": 0.5,
+      "Microsoft Research": 0.5,
+      "Sakana AI": 0.5
     },
     "_last_scan_same_source_skipped": 1
   }

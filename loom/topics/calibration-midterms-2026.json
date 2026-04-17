@@ -6,7 +6,7 @@
     "question": "Which party will control the US House of Representatives after the November 2026 midterm elections?",
     "resolution": "AP/Decision Desk calls House majority on or after Election Night, November 3, 2026. Controlling party must hold 218+ seats. Final seat counts certified by mid-December 2026.",
     "created": "2026-04-11T00:00:00Z",
-    "lastUpdated": "2026-04-16T03:42:51+00:00",
+    "lastUpdated": "2026-04-17T15:22:22+00:00",
     "status": "ACTIVE",
     "dayCount": 1,
     "startDate": "2026-04-11T00:00:00Z",
@@ -65,32 +65,32 @@
         "label": "Democrats flip House (218+ seats)",
         "midpoint": 225,
         "unit": "seats",
-        "posterior": 0.7597,
+        "posterior": 0.932,
         "description": "Democrats net enough gains to exceed 218 seats. Requires approximately a net shift of ~3 seats from current GOP margin. Historical base rate + current approval environment make this the modal outcome. A generic ballot advantage of +5pp or more, sustained through October, is the key threshold."
       },
       "H2": {
         "label": "Democrats gain seats but fall short of majority",
         "midpoint": 210,
         "unit": "seats",
-        "posterior": 0.2003,
+        "posterior": 0.0632,
         "description": "Democrats make meaningful gains (5-15 seats) but GOP retains majority below 218D seats. Consistent with a generic ballot lead of +2 to +4pp being partially absorbed by geographic/districting inefficiency. More likely if war rally effect persists into fall or Dem candidate recruitment underperforms."
       },
       "H3": {
         "label": "Republicans hold — status quo (+/- 5 seats from current margin)",
         "midpoint": 221,
         "unit": "seats",
-        "posterior": 0.0284,
+        "posterior": 0.004,
         "description": "Election outcome roughly matches current seat distribution. Would represent a historic deviation from midterm pattern — only the 2002 cycle (post-9/11) and 1998 cycle (Clinton impeachment backlash) saw the president's party hold or gain. Requires sustained war rally effect, generic ballot narrowing to near-parity, or major Democratic collapse (scandal, candidate quality, GOTV failure)."
       },
       "H4": {
         "label": "Republicans gain seats",
         "midpoint": 228,
         "unit": "seats",
-        "posterior": 0.0116,
+        "posterior": 0.0008,
         "description": "GOP nets additional seats over current ~220. Historically very rare for the president's party at this approval level. Would require a reversal of every current trend: generic ballot, approval, economic sentiment. Possible only under a major geopolitical/economic shock that completely reframes the election as a wartime mandate vote. Tail risk only."
       }
     },
-    "expectedValue": 221.92,
+    "expectedValue": 224.04,
     "expectedUnit": "Democratic seats (post-election)",
     "posteriorHistory": [
       {
@@ -125,6 +125,28 @@
           "H2": 0.25,
           "H3": 0.1,
           "H4": 0.05
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        }
+      },
+      {
+        "date": "2026-04-17",
+        "H1": 0.932,
+        "H2": 0.0632,
+        "H3": 0.004,
+        "H4": 0.0008,
+        "note": "Cook rating shifts toward Democrats, fundraising advantage, and 69% model probability reinforce H1 (Dem flip). Still 7 months out so uncertainty remains.",
+        "likelihoods": {
+          "H1": 0.7,
+          "H2": 0.18,
+          "H3": 0.08,
+          "H4": 0.04
         },
         "redTeam": {
           "contrarian_direction": {},
@@ -487,7 +509,8 @@
       "posteriorImpact": "MODERATE — POSTERIORS MOVED. Indicator t2_dem_special_overperformance_plus5 FIRED: overperformance +25pp vs threshold +5pp. Applied: H1 0.42→0.49, H2 0.28→0.31, H3 0.18→0.11, H4 0.12→0.09. District is R+37 (not swing), but indicator definition includes 'any special or off-cycle election including state-level' — threshold is met on overperformance margin, not district competitiveness.",
       "note": "AP effectiveTrust 0.99. This is the strongest special election signal to date. Half of top-10 Dem overperformances have come since 2024 election. District non-competitiveness attenuates direct seat-flip relevance but the MARGIN of overperformance is the signal, not the win/loss.",
       "ledger": "DECISION",
-      "effectiveWeight": 0.25
+      "effectiveWeight": 0.25,
+      "url": "https://apnews.com"
     },
     {
       "id": "ev_002",
@@ -503,7 +526,8 @@
       "posteriorImpact": "MODERATE. Not a direct House indicator but Wisconsin is THE bellwether swing state (decided by <1pp in last 3 presidential elections). 20-point margin in a swing state judicial race is structurally significant — demonstrates extraordinary Dem enthusiasm advantage in a midterm-preview environment.",
       "note": "CNN base trust 0.75 but reporting certified election results (primary data). County-level flips in suburban/exurban areas are directly relevant to House swing district demographics.",
       "ledger": "DECISION",
-      "effectiveWeight": 0.25
+      "effectiveWeight": 0.25,
+      "url": "https://www.cnn.com"
     },
     {
       "id": "ev_003",
@@ -519,7 +543,8 @@
       "posteriorImpact": "NONE — this is ANALYSIS synthesizing multiple data points. The individual data points (ev_001, ev_002) carry the weight. The 30-0 seat flip stat is notable but is aggregate context, not a new indicator firing.",
       "note": "30-0 state legislative seat flips is a remarkable stat but each individual flip was a low-visibility race. Aggregate pattern is more informative than any single race. Tagged ANALYSIS because it requires interpretation.",
       "ledger": "DECISION",
-      "effectiveWeight": 0.25
+      "effectiveWeight": 0.25,
+      "url": "https://www.cnn.com"
     },
     {
       "id": "ev_004",
@@ -534,7 +559,8 @@
       "posteriorImpact": "NONE — matches existing prior assumption (generic ballot Dems +6-8pp). RCP +5.4 is at the lower end of the range assumed in prior justification. This is CONFIRMING data, not new information. Indicator t1_generic_ballot_sustained_plus5 requires +5pp sustained for 30+ consecutive days entering October — April reading is too early to fire.",
       "note": "RCP and Morning Consult are primary polling aggregators. +5.4 is significant — historical models associate sustained +5pp with House flip. But April is 7 months from election. Monitor monthly.",
       "ledger": "DECISION",
-      "effectiveWeight": 0.25
+      "effectiveWeight": 0.25,
+      "url": "https://apnews.com"
     },
     {
       "id": "ev_005",
@@ -549,7 +575,8 @@
       "posteriorImpact": "NONE. Cross-referenced with recession and tariff topics. CPI data is a structural input to voter sentiment, not a direct midterm indicator. Indicator t3_tariff_economic_hit_visible partially matches (tariff attribution in news coverage) but effect is small and dominated by energy. Real earnings decline is a leading indicator of economic disapproval.",
       "note": "BLS primary data. Weight 0.8 because midterm relevance is indirect — CPI affects approval which affects generic ballot which affects outcome. Chain of inference, not direct observation.",
       "ledger": "DECISION",
-      "effectiveWeight": 0.25
+      "effectiveWeight": 0.25,
+      "url": "https://apnews.com"
     },
     {
       "id": "ev_006",
@@ -564,7 +591,8 @@
       "posteriorImpact": "NONE. Single-candidate gubernatorial scandal, not party-wide. No direct House seat impact unless Swalwell resigns from Congress. Anti-indicator anti_h4_no_dem_scandal_or_collapse NOT fired — this is not a party-wide event. Posteriors unchanged.",
       "note": "CNN effectiveTrust 0.99, EVENT domain 0.99. Correctly triaged as PROPOSED (single source, investigation stage). This was the first live pipeline test entry.",
       "ledger": "DECISION",
-      "effectiveWeight": 0.2727
+      "effectiveWeight": 0.2727,
+      "url": "https://www.cnn.com"
     },
     {
       "id": "ev_007",
@@ -611,7 +639,8 @@
       "posteriorImpact": "NONE. Single-candidate scandal in CA gubernatorial race. Not a party-wide event. anti_h4_no_dem_scandal_or_collapse requires party-wide scandal or national candidate quality collapse — this is localized. No House seat vacancy yet (Swalwell has not resigned from Congress). Watchpoint triggered: monitor for resignation → special election. If resignation occurs, assess whether safe-D district special has any bearing on House control calculus.",
       "note": "Source trust: CNN EVENT domain 0.99 (tier 2, cross-topic domain). claimState SUPPORTED — withdrawal confirmed by Swalwell's own X post, corroborated by CNN, multiple quoted officials. effectiveWeight = 0.99 (SUPPORTED 1.0 x trust 0.99). Related to prior ev_005 (Manhattan DA investigation of Swalwell) but distinct event — investigation led to withdrawal.",
       "ledger": "DECISION",
-      "effectiveWeight": 0.75
+      "effectiveWeight": 0.75,
+      "url": "https://www.cnn.com"
     },
     {
       "id": "ev_010",
@@ -645,12 +674,40 @@
       "note": "Matches indicator t2_generic_ballot_dems_plus3_sustained (tier2 strong). Pre-committed effect: H1 +6pp, H3 -4pp, H4 -2pp.. Source trust: 50% (moderate).",
       "ledger": "FACT",
       "claimState": "CONTESTED",
-      "effectiveWeight": 0.5
+      "effectiveWeight": 0.5,
+      "url": "https://www.washingtonpost.com"
     },
     {
       "time": "2026-04-16T03:42:51+00:00",
       "tag": "INTEL",
       "text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, stale_evidence, quorum_failure. Reason: Evidence ev_011: Generic congressional ballot shows Democrats leading by 5.4 points sustained thr",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_012",
+      "time": "2026-04-17T15:22:22+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "POLLING"
+      ],
+      "text": "Democrats odds of winning House ~69%. Need net gain of 3 seats. Individual-donor fundraising advantage for Democrats. Cook Political shifting multiple seats toward Democrats: OH-01 Toss-up to Lean D, PA-08 Lean R to Toss-up. 42 battleground districts tracked (22 D, 20 R).",
+      "provenance": "OBSERVED",
+      "source": "Cook Political / 270toWin",
+      "posteriorImpact": "NONE",
+      "url": "https://www.cookpolitical.com/ratings/house-race-ratings",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-17T15:22:22+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, stale_evidence, quorum_failure. Reason: Cook rating shifts toward Democrats, fundraising advantage, and 69% model probability reinforce H1 (Dem flip). Still 7 months out so uncertainty remains.",
       "provenance": "DERIVED",
       "posteriorImpact": "NONE",
       "ledger": "DECISION",
@@ -785,20 +842,24 @@
   "governance": {
     "health": "DEGRADED",
     "issues": [
-      "Majority stale evidence (9/12)"
+      "Majority stale evidence (10/14)",
+      "Stale dependency: calibration-us-recession-2026.H2 assumed=0.22, actual=0.4365, drift=21.65%",
+      "Stale dependency: calibration-section122-tariffs.H2 assumed=0.18, actual=0.0069, drift=17.31%",
+      "Stale dependency: calibration-section122-tariffs.H3 assumed=0.33, actual=0.1022, drift=22.78%",
+      "Stale dependency: calibration-section122-tariffs.H4 assumed=0.42, actual=0.8908, drift=47.08%"
     ],
     "rt": {
       "rt": 0.0,
       "regime": "SAFE",
       "worst_hypothesis": "H1"
     },
-    "entropy": 0.9864,
+    "entropy": 0.3866,
     "maxEntropy": 2.0,
-    "uncertaintyRatio": 0.4932,
+    "uncertaintyRatio": 0.1933,
     "evidenceFreshness": {
-      "fresh": 3,
-      "stale": 9,
-      "total": 12
+      "fresh": 4,
+      "stale": 10,
+      "total": 14
     },
     "hypothesisAdmissibility": {
       "H1": "ADMISSIBLE",
@@ -807,11 +868,49 @@
       "H4": "ADMISSIBLE"
     },
     "klFromPrior": {
-      "kl_divergence": 0.3036,
-      "interpretation": "MODERATE"
+      "kl_divergence": 0.6296,
+      "interpretation": "WELL_EVIDENCED"
     },
-    "lastComputed": "2026-04-16T03:42:51+00:00",
-    "staleDependencies": 0,
+    "lastComputed": "2026-04-17T15:22:22+00:00",
+    "staleDependencies": 4,
+    "staleDependencyDetails": [
+      {
+        "upstream_slug": "calibration-us-recession-2026",
+        "hypothesis": "H2",
+        "assumed": 0.22,
+        "actual": 0.4365,
+        "drift": 0.2165,
+        "tolerance": 0.1,
+        "stale": true
+      },
+      {
+        "upstream_slug": "calibration-section122-tariffs",
+        "hypothesis": "H2",
+        "assumed": 0.18,
+        "actual": 0.0069,
+        "drift": 0.1731,
+        "tolerance": 0.1,
+        "stale": true
+      },
+      {
+        "upstream_slug": "calibration-section122-tariffs",
+        "hypothesis": "H3",
+        "assumed": 0.33,
+        "actual": 0.1022,
+        "drift": 0.2278,
+        "tolerance": 0.1,
+        "stale": true
+      },
+      {
+        "upstream_slug": "calibration-section122-tariffs",
+        "hypothesis": "H4",
+        "assumed": 0.42,
+        "actual": 0.8908,
+        "drift": 0.4708,
+        "tolerance": 0.1,
+        "stale": true
+      }
+    ],
     "calibrationHealth": "ACCEPTABLE",
     "unresolvedContradictions": 0,
     "designGate": {
@@ -841,7 +940,7 @@
         }
       },
       "indistinguishable": [],
-      "lastChecked": "2026-04-16T03:42:51+00:00"
+      "lastChecked": "2026-04-17T15:22:22+00:00"
     }
   },
   "dependencies": {
@@ -895,6 +994,28 @@
           "H4": 0.0116
         },
         "entropy": 0.9864
+      },
+      {
+        "timestamp": "2026-04-17T15:22:22+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.932,
+          "H2": 0.0632,
+          "H3": 0.004,
+          "H4": 0.0008
+        },
+        "entropy": 0.3866
+      },
+      {
+        "timestamp": "2026-04-17T15:22:22+00:00",
+        "trigger": "pipeline:ev_012",
+        "posteriors": {
+          "H1": 0.932,
+          "H2": 0.0632,
+          "H3": 0.004,
+          "H4": 0.0008
+        },
+        "entropy": 0.3866
       }
     ],
     "outcomes": [],
@@ -962,6 +1083,66 @@
         "detected": "2026-04-16T03:42:51Z",
         "resolution": "SUPERSEDED",
         "resolvedAt": "2026-04-16T03:42:51Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-16T03:42:51+00:00",
+        "entry_a_text": "Generic congressional ballot shows Democrats leading by 5.4 points sustained through April. Democrats odds of winning the House have increased to roughly 69 percent. Lingering Iran war adds to GOP problems in midterm elections.",
+        "entry_b_time": "2026-04-17T15:22:22+00:00",
+        "entry_b_text": "Democrats odds of winning House ~69%. Need net gain of 3 seats. Individual-donor fundraising advantage for Democrats. Cook Political shifting multiple seats toward Democrats: OH-01 Toss-up to Lean D, PA-08 Lean R to Toss-up. 42 battleground districts tracked (22 D, 20 R).",
+        "reason": "Numeric divergence 39.1% on metric (context: to): new=42.0, existing=69.0, threshold=10%",
+        "detected": "2026-04-17T15:22:22Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T15:22:22Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-12T20:00:00Z",
+        "entry_a_text": "Generic ballot streak tracker initialized. RCP average Dems +5.4pp (April 12). Ballotpedia shows +6 as of April 2. RealClearPolling Facebook shows 45.3-42.6 (D+2.7, date unclear). Sabato Crystal Ball model gives Dems strong chance to retake House based on generic ballot fundamentals. Streak counter set to 0 pending confirmation of 30 consecutive days at +5pp threshold.",
+        "entry_b_time": "2026-04-17T15:22:22+00:00",
+        "entry_b_text": "Democrats odds of winning House ~69%. Need net gain of 3 seats. Individual-donor fundraising advantage for Democrats. Cook Political shifting multiple seats toward Democrats: OH-01 Toss-up to Lean D, PA-08 Lean R to Toss-up. 42 battleground districts tracked (22 D, 20 R).",
+        "reason": "Numeric divergence 82.6% on metric (context: .): new=69.0, existing=12.0, threshold=10%",
+        "detected": "2026-04-17T15:22:22Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T15:22:22Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-12T00:00:00Z",
+        "entry_a_text": "RealClearPolitics generic congressional ballot average: Democrats +5.4 (47.4% D vs 42.0% R). Morning Consult weekly tracker: Democrats lead 45%-42% among registered voters — 6-point net swing from Republican advantage at start of Trump's second term.",
+        "entry_b_time": "2026-04-17T15:22:22+00:00",
+        "entry_b_text": "Democrats odds of winning House ~69%. Need net gain of 3 seats. Individual-donor fundraising advantage for Democrats. Cook Political shifting multiple seats toward Democrats: OH-01 Toss-up to Lean D, PA-08 Lean R to Toss-up. 42 battleground districts tracked (22 D, 20 R).",
+        "reason": "Numeric divergence 39.1% on metric (context: .): new=69.0, existing=42.0, threshold=10%",
+        "detected": "2026-04-17T15:22:22Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T15:22:22Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-07T00:00:00Z",
+        "entry_a_text": "Wisconsin Supreme Court race: Democratic-aligned Chris Taylor defeats Republican-aligned Maria Lazar by ~20 points. Largest margin in competitive WI Supreme Court race since 2000. Taylor flipped historically Republican counties including Jefferson (Trump +16 in 2024) and Ozaukee (Trump +10). Moves court from 4-3 to 5-2 liberal majority.",
+        "entry_b_time": "2026-04-17T15:22:22+00:00",
+        "entry_b_text": "Democrats odds of winning House ~69%. Need net gain of 3 seats. Individual-donor fundraising advantage for Democrats. Cook Political shifting multiple seats toward Democrats: OH-01 Toss-up to Lean D, PA-08 Lean R to Toss-up. 42 battleground districts tracked (22 D, 20 R).",
+        "reason": "Numeric divergence 85.5% on metric (context: .): new=69.0, existing=10.0, threshold=10%",
+        "detected": "2026-04-17T15:22:22Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T15:22:22Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-07T00:00:00Z",
+        "entry_a_text": "Georgia 14th District special election runoff: Republican Clay Fuller defeats Democrat Shawn Harris 55.9%-44.1% (11.8-point margin). Trump carried district by 37 points in 2024. Harris overperformed 2024 Democratic presidential baseline by +25 points — largest Democratic overperformance in a House special election since Trump took office.",
+        "entry_b_time": "2026-04-17T15:22:22+00:00",
+        "entry_b_text": "Democrats odds of winning House ~69%. Need net gain of 3 seats. Individual-donor fundraising advantage for Democrats. Cook Political shifting multiple seats toward Democrats: OH-01 Toss-up to Lean D, PA-08 Lean R to Toss-up. 42 battleground districts tracked (22 D, 20 R).",
+        "reason": "Numeric divergence 163.9% on metric (context: .): new=69.0, existing=-44.1, threshold=10%",
+        "detected": "2026-04-17T15:22:22Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T15:22:22Z"
       }
     ]
   },
@@ -996,7 +1177,9 @@
       "RealClearPolling": 0.5,
       "Sabato Crystal Ball": 0.5,
       "Silver Bulletin": 0.5,
-      "Washington Post": 0.5
+      "Washington Post": 0.5,
+      "270toWin": 0.5,
+      "Cook Political": 0.5
     },
     "_last_scan_same_source_skipped": 3
   }

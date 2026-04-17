@@ -6,7 +6,7 @@
     "question": "Where will the Federal Reserve target rate be on December 31, 2026?",
     "resolution": "FOMC official target range as announced at or following the December 2026 FOMC meeting (scheduled Dec 9-10, 2026). Resolved against the FOMC statement on federalreserve.gov.",
     "created": "2026-04-11T00:00:00Z",
-    "lastUpdated": "2026-04-17T14:01:37+00:00",
+    "lastUpdated": "2026-04-17T15:22:22+00:00",
     "status": "ACTIVE",
     "dayCount": 1,
     "startDate": "2026-04-11T00:00:00Z",
@@ -67,32 +67,32 @@
         "label": "No further cuts — stays 3.50-3.75%",
         "midpoint": 3.625,
         "unit": "percent",
-        "posterior": 0.3156,
+        "posterior": 0.4061,
         "description": "Fed holds all year. Tariff-driven inflation keeps CPI sticky above 3%, forcing Powell to maintain the pause indefinitely. Dot plot median signals one cut but FOMC ultimately does not deliver it. Consistent with stagflation-lite scenario where labor market softens but inflation prevents easing."
       },
       "H2": {
         "label": "One cut — 3.25-3.50%",
         "midpoint": 3.375,
         "unit": "percent",
-        "posterior": 0.3893,
+        "posterior": 0.4614,
         "description": "Dot plot median outcome. Fed delivers one 25bp cut, likely in September or December. Inflation moderates gradually, unemployment ticks up to ~4.8-5.0%, but Fed moves cautiously. Most consistent with current guidance and SEP projections."
       },
       "H3": {
         "label": "Two+ cuts — 3.00-3.25% or below",
         "midpoint": 3.125,
         "unit": "percent",
-        "posterior": 0.1721,
+        "posterior": 0.0699,
         "description": "Labor market deteriorates faster than expected (unemployment 5.2%+), tariff shock proves disinflationary via demand destruction, or financial conditions tighten sharply. Goldman and Bankrate both see 2-3 cuts as plausible. Requires either clear disinflation signal or meaningful growth scare."
       },
       "H4": {
         "label": "Rate hike — inflation forces reversal",
         "midpoint": 4.0,
         "unit": "percent",
-        "posterior": 0.123,
+        "posterior": 0.0625,
         "description": "Tariff pass-through re-accelerates CPI to 4%+, inflation expectations become unanchored, or a dollar crisis forces the Fed's hand. Hike of 25-50bp. Historically rare once an easing cycle begins, but tariff environment creates genuine tail risk. H4 is not negligible given current policy uncertainty."
       }
     },
-    "expectedValue": 3.49,
+    "expectedValue": 3.5,
     "expectedUnit": "percent (midpoint of expected target range)",
     "expectedValueNote": "Probability-weighted midpoint: 0.22*3.625 + 0.38*3.375 + 0.28*3.125 + 0.12*4.0 = 3.43%",
     "posteriorHistory": [
@@ -118,6 +118,28 @@
           "H2": 0.25,
           "H3": 0.15,
           "H4": 0.25
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        }
+      },
+      {
+        "date": "2026-04-17",
+        "H1": 0.4061,
+        "H2": 0.4614,
+        "H3": 0.0699,
+        "H4": 0.0625,
+        "note": "Futures pricing single cut or none. Inflation from tariffs and oil shock constrains easing. SEP median still says one cut but market skeptical. H4 hike risk rising from commodity-driven inflation.",
+        "likelihoods": {
+          "H1": 0.38,
+          "H2": 0.35,
+          "H3": 0.12,
+          "H4": 0.15
         },
         "redTeam": {
           "contrarian_direction": {},
@@ -676,6 +698,33 @@
       "ledger": "DECISION",
       "claimState": "PROPOSED",
       "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_012",
+      "time": "2026-04-17T15:22:22+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "ECON"
+      ],
+      "text": "Fed held rates at 3.50-3.75% in March. Next FOMC decision Apr 29. March SEP median projects one cut in 2026. Futures pricing: no easing until Sep/Oct at earliest, single cut this year. Rising inflation from tariffs and oil shock (Hormuz) constraining rate path.",
+      "provenance": "OBSERVED",
+      "source": "CNBC / Yahoo Finance",
+      "posteriorImpact": "NONE",
+      "url": "https://www.cnbc.com/2026/03/18/fed-interest-rate-decision-march-2026.html",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-17T15:22:22+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: stale_evidence, quorum_failure. Reason: Futures pricing single cut or none. Inflation from tariffs and oil shock constrains easing. SEP median still says one cut but market skeptical. H4 hike risk rising from commodity-driven inflation.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
     }
   ],
   "dataFeeds": {
@@ -818,22 +867,24 @@
   "governance": {
     "health": "DEGRADED",
     "issues": [
-      "Majority stale evidence (9/12)",
-      "Near-maximum uncertainty — model is not discriminating",
-      "Stale dependency: calibration-us-recession-2026.H2 assumed=0.22, actual=0.3806, drift=16.06%"
+      "Majority stale evidence (9/14)",
+      "Stale dependency: calibration-us-recession-2026.H2 assumed=0.22, actual=0.4365, drift=21.65%",
+      "Stale dependency: calibration-us-recession-2026.H3 assumed=0.14, actual=0.0491, drift=9.09%",
+      "Stale dependency: calibration-us-recession-2026.H4 assumed=0.09, actual=0.0029, drift=8.71%",
+      "Downstream alert: calibration-us-recession-2026 has 2 stale assumption(s) from this topic"
     ],
     "rt": {
       "rt": 0.0,
       "regime": "SAFE",
       "worst_hypothesis": "H1"
     },
-    "entropy": 1.8637,
+    "entropy": 1.5612,
     "maxEntropy": 2.0,
-    "uncertaintyRatio": 0.9318,
+    "uncertaintyRatio": 0.7806,
     "evidenceFreshness": {
-      "fresh": 3,
+      "fresh": 5,
       "stale": 9,
-      "total": 12
+      "total": 14
     },
     "hypothesisAdmissibility": {
       "H1": "ADMISSIBLE",
@@ -842,20 +893,58 @@
       "H4": "ADMISSIBLE"
     },
     "klFromPrior": {
-      "kl_divergence": 0.0426,
+      "kl_divergence": 0.2007,
       "interpretation": "MODERATE"
     },
-    "lastComputed": "2026-04-17T14:01:37+00:00",
-    "staleDependencies": 1,
+    "lastComputed": "2026-04-17T15:22:22+00:00",
+    "staleDependencies": 3,
     "staleDependencyDetails": [
       {
         "upstream_slug": "calibration-us-recession-2026",
         "hypothesis": "H2",
         "assumed": 0.22,
-        "actual": 0.3806,
-        "drift": 0.1606,
+        "actual": 0.4365,
+        "drift": 0.2165,
         "tolerance": 0.08,
         "stale": true
+      },
+      {
+        "upstream_slug": "calibration-us-recession-2026",
+        "hypothesis": "H3",
+        "assumed": 0.14,
+        "actual": 0.0491,
+        "drift": 0.0909,
+        "tolerance": 0.08,
+        "stale": true
+      },
+      {
+        "upstream_slug": "calibration-us-recession-2026",
+        "hypothesis": "H4",
+        "assumed": 0.09,
+        "actual": 0.0029,
+        "drift": 0.0871,
+        "tolerance": 0.08,
+        "stale": true
+      }
+    ],
+    "downstreamAlerts": [
+      {
+        "downstream_slug": "calibration-us-recession-2026",
+        "downstream_title": "US Recession by Q4 2026",
+        "stale_assumptions": [
+          {
+            "hypothesis": "H1",
+            "assumed": 0.22,
+            "actual": 0.3156,
+            "drift": 0.0956
+          },
+          {
+            "hypothesis": "H3",
+            "assumed": 0.28,
+            "actual": 0.1721,
+            "drift": 0.1079
+          }
+        ]
       }
     ],
     "calibrationHealth": "ACCEPTABLE",
@@ -883,7 +972,7 @@
         }
       },
       "indistinguishable": [],
-      "lastChecked": "2026-04-17T14:01:37+00:00"
+      "lastChecked": "2026-04-17T15:22:22+00:00"
     }
   },
   "predictionScoring": {
@@ -910,6 +999,28 @@
           "H4": 0.123
         },
         "entropy": 1.8637
+      },
+      {
+        "timestamp": "2026-04-17T15:22:22+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.4061,
+          "H2": 0.4614,
+          "H3": 0.0699,
+          "H4": 0.0625
+        },
+        "entropy": 1.5612
+      },
+      {
+        "timestamp": "2026-04-17T15:22:22+00:00",
+        "trigger": "pipeline:ev_012",
+        "posteriors": {
+          "H1": 0.4061,
+          "H2": 0.4614,
+          "H3": 0.0699,
+          "H4": 0.0625
+        },
+        "entropy": 1.5612
       }
     ],
     "outcomes": [],
@@ -979,6 +1090,138 @@
         "detected": "2026-04-17T14:01:37Z",
         "resolution": "SUPERSEDED",
         "resolvedAt": "2026-04-17T14:01:37Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T14:01:37+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: stale_evidence, quorum_failure. Reason: Evidence ev_011: FOMC April 8 minutes show more officials see possible rate hikes in 2026; rate h",
+        "entry_b_time": "2026-04-17T15:22:22+00:00",
+        "entry_b_text": "Fed held rates at 3.50-3.75% in March. Next FOMC decision Apr 29. March SEP median projects one cut in 2026. Futures pricing: no easing until Sep/Oct at earliest, single cut this year. Rising inflation from tariffs and oil shock (Hormuz) constraining rate path.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: fomc, rate",
+        "detected": "2026-04-17T15:22:22Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T15:22:22Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T14:01:37+00:00",
+        "entry_a_text": "FOMC April 8 minutes show more officials see possible rate hikes in 2026; rate held at 3.50-3.75% in March; SEP median forecast still 1 cut; next decision Apr 29; Fed expects to hold until December",
+        "entry_b_time": "2026-04-17T15:22:22+00:00",
+        "entry_b_text": "Fed held rates at 3.50-3.75% in March. Next FOMC decision Apr 29. March SEP median projects one cut in 2026. Futures pricing: no easing until Sep/Oct at earliest, single cut this year. Rising inflation from tariffs and oil shock (Hormuz) constraining rate path.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: apr, cut, decision, fed, fomc",
+        "detected": "2026-04-17T15:22:22Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T15:22:22Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-14T16:00:00Z",
+        "entry_a_text": "Treasury Secretary Bessent told Semafor the Fed should 'wait and see' before lowering rates amid Iran war. 'Do I think rates should be lowered? Eventually. I think now that we have to wait and see.' Said Fed is 'doing the right thing by sitting and watching.' On 4%+ growth target for 2026: 'Obviously, we're going to have some make-up to do.' Comments come as Trump continues pushing for rate cuts.",
+        "entry_b_time": "2026-04-17T15:22:22+00:00",
+        "entry_b_text": "Fed held rates at 3.50-3.75% in March. Next FOMC decision Apr 29. March SEP median projects one cut in 2026. Futures pricing: no easing until Sep/Oct at earliest, single cut this year. Rising inflation from tariffs and oil shock (Hormuz) constraining rate path.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: fed, rate, rates",
+        "detected": "2026-04-17T15:22:22Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T15:22:22Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-08T18:00:00Z",
+        "entry_a_text": "FOMC March meeting minutes released April 8 show more Federal Reserve officials now see possible rate hikes in 2026, driven by Iran-war oil shock and tariff-driven inflation persistence. Fed held at 3.50-3.75% for 2nd consecutive meeting. Median dot plot still signals 1 cut but distribution widening.",
+        "entry_b_time": "2026-04-17T15:22:22+00:00",
+        "entry_b_text": "Fed held rates at 3.50-3.75% in March. Next FOMC decision Apr 29. March SEP median projects one cut in 2026. Futures pricing: no easing until Sep/Oct at earliest, single cut this year. Rising inflation from tariffs and oil shock (Hormuz) constraining rate path.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: cut, fed, fomc, held, inflation",
+        "detected": "2026-04-17T15:22:22Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T15:22:22Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-10T00:00:00Z",
+        "entry_a_text": "March 2026 CPI: headline +0.9% m/m (3.3% YoY) driven by energy +10.9% (Iran war gasoline +21.2%). Core CPI +0.2% m/m (2.6% YoY) — both 0.1pp BELOW consensus. Services ex-energy +0.2% m/m (3.0% YoY). Shelter +0.3% m/m (3.0% YoY, lowest since Aug 2021). Food unchanged. Real earnings -0.6% m/m.",
+        "entry_b_time": "2026-04-17T15:22:22+00:00",
+        "entry_b_text": "Fed held rates at 3.50-3.75% in March. Next FOMC decision Apr 29. March SEP median projects one cut in 2026. Futures pricing: no easing until Sep/Oct at earliest, single cut this year. Rising inflation from tariffs and oil shock (Hormuz) constraining rate path.",
+        "reason": "Numeric divergence 98.6% on metric (context: march): new=29.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-17T15:22:22Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T15:22:22Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-08T00:00:00Z",
+        "entry_a_text": "FOMC minutes from March 17-18 meeting released. Fed officials 'still saw rate cuts as a possibility' but stressed need to look through Iran war energy shock. Minutes show tension between inflation persistence and growth concerns. Rate hike probability rose to 14% before Iran ceasefire.",
+        "entry_b_time": "2026-04-17T15:22:22+00:00",
+        "entry_b_text": "Fed held rates at 3.50-3.75% in March. Next FOMC decision Apr 29. March SEP median projects one cut in 2026. Futures pricing: no easing until Sep/Oct at earliest, single cut this year. Rising inflation from tariffs and oil shock (Hormuz) constraining rate path.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: fed, fomc, inflation, march, rate",
+        "detected": "2026-04-17T15:22:22Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T15:22:22Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-10T00:00:00Z",
+        "entry_a_text": "Bankrate analyst consensus (April 2026): projects three 25bp cuts in 2026, bringing rate to 2.75-3.00%. Minority view in professional forecaster community.",
+        "entry_b_time": "2026-04-17T15:22:22+00:00",
+        "entry_b_text": "Fed held rates at 3.50-3.75% in March. Next FOMC decision Apr 29. March SEP median projects one cut in 2026. Futures pricing: no easing until Sep/Oct at earliest, single cut this year. Rising inflation from tariffs and oil shock (Hormuz) constraining rate path.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: projects, rate",
+        "detected": "2026-04-17T15:22:22Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T15:22:22Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-10T00:00:00Z",
+        "entry_a_text": "Goldman Sachs forecast (as of April 2026): projects two 25bp cuts in 2026, most likely in September and December, bringing rate to 3.00-3.25%. Cites tariff-driven demand weakness outweighing inflation concerns over second half.",
+        "entry_b_time": "2026-04-17T15:22:22+00:00",
+        "entry_b_text": "Fed held rates at 3.50-3.75% in March. Next FOMC decision Apr 29. March SEP median projects one cut in 2026. Futures pricing: no easing until Sep/Oct at earliest, single cut this year. Rising inflation from tariffs and oil shock (Hormuz) constraining rate path.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: inflation, projects, rate",
+        "detected": "2026-04-17T15:22:22Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T15:22:22Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-01T00:00:00Z",
+        "entry_a_text": "March 2026 BLS employment report: unemployment 4.6%, non-farm payrolls +145,000. Labor market softening gradually but not deteriorating. Wages +3.8% YoY.",
+        "entry_b_time": "2026-04-17T15:22:22+00:00",
+        "entry_b_text": "Fed held rates at 3.50-3.75% in March. Next FOMC decision Apr 29. March SEP median projects one cut in 2026. Futures pricing: no easing until Sep/Oct at earliest, single cut this year. Rising inflation from tariffs and oil shock (Hormuz) constraining rate path.",
+        "reason": "Numeric divergence 98.6% on metric (context: march): new=29.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-17T15:22:22Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T15:22:22Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-03-19T00:00:00Z",
+        "entry_a_text": "March 2026 SEP dot plot: median projection remains one 25bp cut in 2026 (to 3.25-3.50%). Range of participant views spans zero to three cuts. No participant projects a hike.",
+        "entry_b_time": "2026-04-17T15:22:22+00:00",
+        "entry_b_text": "Fed held rates at 3.50-3.75% in March. Next FOMC decision Apr 29. March SEP median projects one cut in 2026. Futures pricing: no easing until Sep/Oct at earliest, single cut this year. Rising inflation from tariffs and oil shock (Hormuz) constraining rate path.",
+        "reason": "Numeric divergence 98.6% on metric (context: march, sep): new=29.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-17T15:22:22Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T15:22:22Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-03-19T00:00:00Z",
+        "entry_a_text": "FOMC holds target rate steady at 3.50-3.75% at March 2026 meeting. Statement reiterates 'data dependent' approach. Powell press conference emphasizes tariff uncertainty on both inflation and growth outlooks.",
+        "entry_b_time": "2026-04-17T15:22:22+00:00",
+        "entry_b_text": "Fed held rates at 3.50-3.75% in March. Next FOMC decision Apr 29. March SEP median projects one cut in 2026. Futures pricing: no easing until Sep/Oct at earliest, single cut this year. Rising inflation from tariffs and oil shock (Hormuz) constraining rate path.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: fomc, inflation, march, rate",
+        "detected": "2026-04-17T15:22:22Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T15:22:22Z"
       }
     ]
   },
@@ -1005,22 +1248,46 @@
         "trust_delta": -0.1,
         "original_text_snippet": "FOMC minutes from March 17-18 meeting released. Fed officials 'still saw rate cuts as a possibility' but stressed need t",
         "confirming_text_snippet": "FOMC April 8 minutes show more officials see possible rate hikes in 2026; rate held at 3.50-3.75% in March; SEP median f"
+      },
+      {
+        "timestamp": "2026-04-17T15:22:22Z",
+        "evidence_index": 8,
+        "confirming_index": 12,
+        "resolution": "REFUTED",
+        "source": "Federal Reserve Board / US News / Axios",
+        "confirming_source": "CNBC / Yahoo Finance",
+        "trust_delta": -0.1,
+        "original_text_snippet": "FOMC March meeting minutes released April 8 show more Federal Reserve officials now see possible rate hikes in 2026, dri",
+        "confirming_text_snippet": "Fed held rates at 3.50-3.75% in March. Next FOMC decision Apr 29. March SEP median projects one cut in 2026. Futures pri"
+      },
+      {
+        "timestamp": "2026-04-17T15:22:22Z",
+        "evidence_index": 10,
+        "confirming_index": 12,
+        "resolution": "REFUTED",
+        "source": "US News/Federal Reserve",
+        "confirming_source": "CNBC / Yahoo Finance",
+        "trust_delta": -0.1,
+        "original_text_snippet": "FOMC April 8 minutes show more officials see possible rate hikes in 2026; rate held at 3.50-3.75% in March; SEP median f",
+        "confirming_text_snippet": "Fed held rates at 3.50-3.75% in March. Next FOMC decision Apr 29. March SEP median projects one cut in 2026. Futures pri"
       }
     ],
     "effectiveTrust": {
-      "Axios": 0.5,
+      "Axios": 0.4118,
       "BLS CPI release": 0.5,
       "BLS Employment Situation, April 2026 release": 0.5,
       "Bankrate Fed Rate Forecast, April 2026": 0.5,
       "CNN (": 0.5,
-      "Federal Reserve": 0.5,
-      "Federal Reserve Board": 0.5,
+      "Federal Reserve": 0.4118,
+      "Federal Reserve Board": 0.4118,
       "Federal Reserve FOMC Minutes, released April 8 2026": 0.4565,
       "Federal Reserve FOMC Statement, March 19 2026": 0.5,
       "Federal Reserve Summary of Economic Projections, March 2026": 0.5,
       "Goldman Sachs Asset Management": 0.5,
       "Goldman Sachs Global Investment Research, April 2026": 0.5,
-      "US News": 0.5
+      "US News": 0.3289,
+      "CNBC": 0.65,
+      "Yahoo Finance": 0.5
     },
     "_last_scan_same_source_skipped": 1
   }
