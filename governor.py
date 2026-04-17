@@ -1276,7 +1276,14 @@ def governance_report(topic: dict) -> dict:
     if uncertainty > 0.9:
         issues.append("Near-maximum uncertainty — model is not discriminating")
     elif uncertainty < 0.1:
-        issues.append("Near-zero uncertainty — check for overconfidence")
+        issues.append("CRITICAL: Near-zero uncertainty on ACTIVE topic — epistemic overconfidence. Time horizons and unresolved indicators contradict certainty.")
+    # Check for point-mass posteriors (any H at 0.0 or 1.0 on active topic)
+    topic_status = topic.get("meta", {}).get("status", "ACTIVE")
+    if topic_status != "RESOLVED":
+        _hyps = topic.get("model", {}).get("hypotheses", {})
+        point_mass = [k for k, h in _hyps.items() if h.get("posterior", 0) in (0.0, 1.0)]
+        if point_mass:
+            issues.append(f"CRITICAL: Point-mass posteriors on ACTIVE topic ({', '.join(point_mass)}). Certainty requires RESOLVED status.")
 
     if kl_prior["interpretation"] == "PRIOR_DOMINATED":
         issues.append("Posterior may be prior-dominated (low KL from initial prior)")

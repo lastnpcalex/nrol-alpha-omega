@@ -493,6 +493,19 @@ def update_posteriors(topic: dict, new_posteriors: dict[str, float],
     for k in merged:
         merged[k] = round(merged[k] / total, 4)
 
+    # Epistemic floor/ceiling for ACTIVE topics
+    topic_status = topic.get("meta", {}).get("status", "ACTIVE")
+    if topic_status != "RESOLVED":
+        _EPISTEMIC_FLOOR = 0.005
+        _EPISTEMIC_CEILING = 0.98
+        needs_clamp = any(v < _EPISTEMIC_FLOOR or v > _EPISTEMIC_CEILING
+                          for v in merged.values())
+        if needs_clamp:
+            clamped = {k: max(_EPISTEMIC_FLOOR, min(_EPISTEMIC_CEILING, v))
+                       for k, v in merged.items()}
+            clamp_total = sum(clamped.values())
+            merged = {k: round(v / clamp_total, 4) for k, v in clamped.items()}
+
     # === GOVERNOR HARD GATE: Hallucination Checklist ===
     proposal_check = check_update_proposal(
         topic, merged, evidence_refs=evidence_refs, reason=reason
@@ -700,6 +713,35 @@ def bayesian_update(topic: dict, likelihoods: dict[str, float],
                          "are incompatible with current priors")
 
     computed = {k: round(v / total, 4) for k, v in unnormalized.items()}
+
+    # Epistemic floor/ceiling for ACTIVE topics
+    # A posterior of 0.0 or 1.0 on an active topic claims certainty that the
+    # resolution hasn't yet confirmed. Time uncertainty (midpoints, horizons)
+    # contradicts point-mass posteriors — if H3 says "4-12 months" and we're at
+    # month 1.5, claiming 100% on H3 ignores the time range we defined.
+    topic_status = topic.get("meta", {}).get("status", "ACTIVE")
+    if topic_status != "RESOLVED":
+        _EPISTEMIC_FLOOR = 0.005  # 0.5% minimum per hypothesis
+        _EPISTEMIC_CEILING = 0.98  # 98% maximum per hypothesis
+        needs_clamp = any(v < _EPISTEMIC_FLOOR or v > _EPISTEMIC_CEILING
+                          for v in computed.values())
+        if needs_clamp:
+            clamped = {k: max(_EPISTEMIC_FLOOR, min(_EPISTEMIC_CEILING, v))
+                       for k, v in computed.items()}
+            clamp_total = sum(clamped.values())
+            computed = {k: round(v / clamp_total, 4) for k, v in clamped.items()}
+            _add_evidence_raw(topic, {
+                "time": _now_iso(),
+                "tag": "INTEL",
+                "text": (f"EPISTEMIC CLAMP: posteriors clamped to [{_EPISTEMIC_FLOOR}, "
+                         f"{_EPISTEMIC_CEILING}] range — topic is ACTIVE, certainty requires "
+                         f"resolution. Pre-clamp values triggered floor/ceiling."),
+                "provenance": "DERIVED",
+                "posteriorImpact": "NONE",
+                "ledger": "DECISION",
+                "claimState": "PROPOSED",
+                "effectiveWeight": 0.5,
+            })
 
     # If operator also supplied their intuition, compare
     if operator_posteriors is not None:
