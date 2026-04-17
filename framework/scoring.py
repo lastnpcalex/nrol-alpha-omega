@@ -447,11 +447,9 @@ def backfill_snapshots_from_history(topic: dict) -> int:
         if date_str[:10] in existing_dates:
             continue
 
-        # Build posteriors dict from history entry
-        posteriors = {}
-        for hk in h_keys:
-            if hk in entry:
-                posteriors[hk] = entry[hk]
+        # Build posteriors dict from history entry (handles both flat and nested formats)
+        from engine import extract_posteriors
+        posteriors = extract_posteriors(entry, h_keys)
 
         if not posteriors:
             continue

@@ -551,13 +551,28 @@ def update_posteriors(topic: dict, new_posteriors: dict[str, float],
         sum(h["midpoint"] * h["posterior"] for h in hypotheses.values()), 2
     )
 
-    # Append to history
-    history_entry = {"date": _now_iso()[:10]}
-    for k in hypotheses:
-        history_entry[k] = hypotheses[k]["posterior"]
-    history_entry["note"] = reason
+    # Append to enriched history
+    old_posteriors = {k: h["posterior"] for k, h in hypotheses.items()}
+    # (old_posteriors captured BEFORE we apply merged — but merged is already applied above)
+    # Reconstruct priors from the previous history entry
+    hist = topic["model"].get("posteriorHistory", [])
+    priors = extract_posteriors(hist[-1], list(hypotheses.keys())) if hist else {}
 
-    # --- Epistemic improvement: red team challenge ---
+    history_entry = {
+        "date": _now_iso()[:10],
+        "posteriors": dict(merged),
+        "priors": priors,
+        "updateMethod": "operator_override",
+        "evidenceRefs": evidence_refs or [],
+        "note": reason,
+    }
+
+    # Turning point detection
+    tp = detect_turning_point(topic, priors, merged)
+    if tp:
+        history_entry["turningPoint"] = tp
+
+    # Red team challenge
     try:
         from framework.red_team import generate_red_team
         red_team = generate_red_team(topic, merged)
@@ -569,7 +584,7 @@ def update_posteriors(topic: dict, new_posteriors: dict[str, float],
                 stacklevel=2,
             )
     except ImportError:
-        pass  # Framework module not available
+        pass
 
     topic["model"].setdefault("posteriorHistory", []).append(history_entry)
 
@@ -867,16 +882,28 @@ def bayesian_update(topic: dict, likelihoods: dict[str, float],
         sum(h["midpoint"] * h["posterior"] for h in hypotheses.values()), 2
     )
 
-    # Append to history — include likelihoods for auditability
-    history_entry = {"date": _now_iso()[:10]}
-    for k in hypotheses:
-        history_entry[k] = hypotheses[k]["posterior"]
-    history_entry["note"] = reason
-    history_entry["likelihoods"] = likelihoods
+    # Append to enriched history
+    hist = topic["model"].get("posteriorHistory", [])
+    priors = extract_posteriors(hist[-1], list(hypotheses.keys())) if hist else {}
+
+    history_entry = {
+        "date": _now_iso()[:10],
+        "posteriors": dict(computed),
+        "priors": priors,
+        "updateMethod": "bayesian_update",
+        "evidenceRefs": evidence_refs or [],
+        "likelihoods": likelihoods,
+        "note": reason,
+    }
     if evidence_weight < 1.0:
         history_entry["adjustedLikelihoods"] = adjusted_likelihoods
         history_entry["evidenceWeight"] = evidence_weight
         history_entry["weightDetail"] = weight_detail
+
+    # Turning point detection
+    tp = detect_turning_point(topic, priors, computed, fired_indicators=evidence_refs)
+    if tp:
+        history_entry["turningPoint"] = tp
 
     # Red team challenge
     try:
@@ -1793,6 +1820,148 @@ def update_day_count(topic: dict) -> dict:
 # Helpers
 # ---------------------------------------------------------------------------
 
+def extract_posteriors(entry: dict, hypothesis_keys: list[str] = None) -> dict:
+    """
+    Extract posterior values from a posteriorHistory entry, handling both formats:
+      Flat:   {"date": "...", "H1": 0.3, "H2": 0.4, "note": "..."}
+      Nested: {"date": "...", "posteriors": {"H1": 0.3, "H2": 0.4}, "note": "..."}
+
+    Returns {H1: float, H2: float, ...} or empty dict if nothing found.
+    """
+    # Try nested format first
+    nested = entry.get("posteriors")
+    if isinstance(nested, dict):
+        if hypothesis_keys:
+            return {k: nested.get(k, 0.0) for k in hypothesis_keys if k in nested}
+        return {k: v for k, v in nested.items() if isinstance(v, (int, float))}
+
+    # Flat format — extract keys that look like hypothesis IDs
+    _META_KEYS = {"date", "note", "likelihoods", "adjustedLikelihoods", "evidenceWeight",
+                  "weightDetail", "redTeam", "updateMethod", "evidenceRefs",
+                  "firedIndicators", "turningPoint", "priors", "posteriors"}
+    if hypothesis_keys:
+        return {k: entry[k] for k in hypothesis_keys if k in entry and isinstance(entry[k], (int, float))}
+    return {k: v for k, v in entry.items() if k not in _META_KEYS and isinstance(v, (int, float))}
+
+
+def detect_turning_point(
+    topic: dict,
+    old_posteriors: dict,
+    new_posteriors: dict,
+    fired_indicators: list[str] = None,
+) -> dict | None:
+    """
+    Detect if this update constitutes a structural turning point.
+
+    Returns a turningPoint dict or None.
+    Types: LEADING_CHANGED, THRESHOLD_CROSSED, BRANCH_DEATH, TIER1_FIRED, MAJOR_SHIFT
+    """
+    if not old_posteriors or not new_posteriors:
+        return None
+
+    old_leading = max(old_posteriors, key=old_posteriors.get) if old_posteriors else None
+    new_leading = max(new_posteriors, key=new_posteriors.get) if new_posteriors else None
+
+    # LEADING_CHANGED
+    if old_leading and new_leading and old_leading != new_leading:
+        return {
+            "type": "LEADING_CHANGED",
+            "from": old_leading,
+            "to": new_leading,
+            "fromProb": round(old_posteriors.get(old_leading, 0), 4),
+            "toProb": round(new_posteriors.get(new_leading, 0), 4),
+        }
+
+    # TIER1_FIRED
+    if fired_indicators:
+        tiers = topic.get("indicators", {}).get("tiers", {})
+        t1_ids = {ind["id"] for ind in tiers.get("tier1_critical", []) if isinstance(ind, dict)}
+        t1_fired = [fid for fid in fired_indicators if fid in t1_ids]
+        if t1_fired:
+            return {"type": "TIER1_FIRED", "indicators": t1_fired}
+
+    # BRANCH_DEATH — any hypothesis fell below epistemic floor
+    _FLOOR = 0.005
+    for k in new_posteriors:
+        if old_posteriors.get(k, 1) > _FLOOR and new_posteriors[k] <= _FLOOR:
+            return {"type": "BRANCH_DEATH", "hypothesis": k, "lastPosterior": round(new_posteriors[k], 4)}
+
+    # THRESHOLD_CROSSED — any hypothesis crossed 0.50
+    for k in new_posteriors:
+        old_v = old_posteriors.get(k, 0)
+        new_v = new_posteriors[k]
+        if (old_v < 0.50 and new_v >= 0.50) or (old_v >= 0.50 and new_v < 0.50):
+            return {"type": "THRESHOLD_CROSSED", "hypothesis": k, "from": round(old_v, 4), "to": round(new_v, 4)}
+
+    # MAJOR_SHIFT — max shift > 15pp
+    max_shift = max(abs(new_posteriors.get(k, 0) - old_posteriors.get(k, 0)) for k in new_posteriors)
+    if max_shift > 0.15:
+        return {"type": "MAJOR_SHIFT", "maxShift": round(max_shift, 4)}
+
+    return None
+
+
+def get_state_at(target_date: str, topic_loader=None) -> dict:
+    """
+    Reconstruct all topic posteriors at a given timestamp.
+
+    Uses step function interpolation — posteriors hold until the next update.
+    No linear interpolation, ever. Beliefs change discretely with evidence.
+
+    Args:
+        target_date: ISO8601 date or datetime string
+        topic_loader: optional function(slug) -> dict
+
+    Returns: {slug: {H1: float, H2: float, ...}} for all topics that
+             existed at that date. Topics created after target_date are
+             omitted.
+    """
+    if topic_loader is None:
+        topic_loader = lambda s: load_topic(s)
+
+    target = target_date[:10]  # YYYY-MM-DD
+    result = {}
+
+    if not TOPICS_DIR.exists():
+        return result
+
+    for path in TOPICS_DIR.glob("*.json"):
+        if path.stem.startswith("_"):
+            continue
+        try:
+            t = json.loads(path.read_text(encoding="utf-8"))
+        except (json.JSONDecodeError, OSError):
+            continue
+
+        slug = t.get("meta", {}).get("slug", path.stem)
+        h_keys = list(t.get("model", {}).get("hypotheses", {}).keys())
+        history = t.get("model", {}).get("posteriorHistory", [])
+
+        if not history:
+            continue
+
+        # Check if topic existed at target date
+        first_date = history[0].get("date", "")[:10]
+        if first_date > target:
+            continue  # topic didn't exist yet
+
+        # Binary search for last entry on or before target date
+        best = None
+        for entry in history:
+            entry_date = entry.get("date", "")[:10]
+            if entry_date <= target:
+                best = entry
+            else:
+                break  # history is chronological
+
+        if best:
+            posteriors = extract_posteriors(best, h_keys)
+            if posteriors:
+                result[slug] = posteriors
+
+    return result
+
+
 def _now_iso() -> str:
     return datetime.now(timezone.utc).isoformat(timespec="seconds")
 
@@ -2113,6 +2282,167 @@ def what_happens_next(topic: dict, topic_loader=None) -> dict:
         "change_triggers": change_triggers,
         "downstream_implications": downstream_implications,
     }
+
+
+def compute_model_flags(topic: dict) -> list[str]:
+    """
+    Compute epistemic honesty flags for a topic.
+
+    Returns array of warning strings — not a score. Each flag represents
+    a structural limitation of the model, not a quality judgment.
+    """
+    flags = []
+    hypotheses = topic.get("model", {}).get("hypotheses", {})
+    h_keys = list(hypotheses.keys())
+
+    # NO_CATCHALL — no "other/unprecedented" hypothesis
+    labels = [h.get("label", "").lower() for h in hypotheses.values()]
+    catchall_terms = ["other", "unprecedented", "novel", "none of the above", "catch-all", "unknown"]
+    has_catchall = any(any(t in label for t in catchall_terms) for label in labels)
+    if not has_catchall:
+        flags.append("NO_CATCHALL")
+
+    # NARROW_FRAMING — fewer than 3 hypotheses
+    if len(h_keys) < 3:
+        flags.append("NARROW_FRAMING")
+
+    # HIGH_UNFIRED_INDICATORS — >3 tier-1/2 indicators unfired
+    tiers = topic.get("indicators", {}).get("tiers", {})
+    unfired_high = 0
+    for tn in ("tier1_critical", "tier2_strong"):
+        for ind in tiers.get(tn, []):
+            if isinstance(ind, dict) and ind.get("status") == "NOT_FIRED":
+                unfired_high += 1
+    if unfired_high > 3:
+        flags.append("HIGH_UNFIRED_INDICATORS")
+
+    # SPARSE_GRAPH — no upstream or downstream edges
+    deps = topic.get("dependencies", {})
+    upstream = deps.get("upstream", [])
+    # Check if anything depends on this topic
+    slug = topic.get("meta", {}).get("slug", "")
+    has_downstream = False
+    if TOPICS_DIR.exists():
+        for path in TOPICS_DIR.glob("*.json"):
+            if path.stem.startswith("_") or path.stem == slug:
+                continue
+            try:
+                t = json.loads(path.read_text(encoding="utf-8"))
+                for d in t.get("dependencies", {}).get("upstream", []):
+                    if d.get("slug") == slug:
+                        has_downstream = True
+                        break
+            except (json.JSONDecodeError, OSError):
+                continue
+            if has_downstream:
+                break
+    if not upstream and not has_downstream:
+        flags.append("SPARSE_GRAPH")
+
+    return flags
+
+
+def build_operator_model(topic_loader=None) -> dict:
+    """
+    Build the full operator model for the model.html visualization.
+
+    Extends build_dependency_graph with what_happens_next per node,
+    modelFlags, turning points, and a cross-topic timeline.
+    """
+    from framework.dependencies import build_dependency_graph
+
+    if topic_loader is None:
+        topic_loader = lambda s: load_topic(s)
+
+    graph = build_dependency_graph(topic_loader)
+
+    # Enrich nodes
+    timeline_events = []
+    for node in graph["nodes"]:
+        slug = node["slug"]
+        try:
+            t = topic_loader(slug)
+        except Exception:
+            continue
+
+        # what_happens_next
+        try:
+            whn = what_happens_next(t, topic_loader)
+            node["whatHappensNext"] = whn
+            node["confidence"] = whn["confidence"]
+            node["leading"] = whn["leading"]
+        except Exception:
+            node["confidence"] = "UNKNOWN"
+            node["leading"] = None
+
+        # modelFlags
+        node["modelFlags"] = compute_model_flags(t)
+
+        # Turning points from posteriorHistory
+        h_keys = list(t.get("model", {}).get("hypotheses", {}).keys())
+        history = t.get("model", {}).get("posteriorHistory", [])
+        turning_points = []
+        for i, entry in enumerate(history):
+            tp = entry.get("turningPoint")
+            if tp:
+                turning_points.append({
+                    "date": entry.get("date", ""),
+                    "slug": slug,
+                    "title": node.get("title", slug),
+                    **tp,
+                })
+        node["turningPoints"] = turning_points
+        timeline_events.extend(turning_points)
+
+        # Posteriors for pie chart
+        node["posteriors"] = {k: t["model"]["hypotheses"][k]["posterior"]
+                             for k in h_keys}
+
+        # Last updated
+        node["lastUpdated"] = t.get("meta", {}).get("lastUpdated", "")
+
+    # Sort timeline
+    timeline_events.sort(key=lambda e: e.get("date", ""))
+
+    # Compute depth for each node (longest path from a root)
+    depths = {}
+    edge_map = {}  # to -> [from]
+    for e in graph["edges"]:
+        edge_map.setdefault(e["to"], []).append(e["from"])
+
+    def get_depth(slug, visited=None):
+        if visited is None:
+            visited = set()
+        if slug in depths:
+            return depths[slug]
+        if slug in visited:
+            return 0  # cycle
+        visited.add(slug)
+        parents = edge_map.get(slug, [])
+        if not parents:
+            depths[slug] = 0
+            return 0
+        d = 1 + max(get_depth(p, visited) for p in parents)
+        depths[slug] = d
+        return d
+
+    for node in graph["nodes"]:
+        get_depth(node["slug"])
+        node["depth"] = depths.get(node["slug"], 0)
+
+    # System-level flags
+    total_possible_edges = len(graph["nodes"]) * (len(graph["nodes"]) - 1) / 2
+    edge_density = len(graph["edges"]) / total_possible_edges if total_possible_edges > 0 else 0
+    system_flags = []
+    if edge_density < 0.15:
+        system_flags.append("SPARSE_OPERATOR_MODEL")
+
+    graph["timeline"] = timeline_events
+    graph["depths"] = depths
+    graph["systemFlags"] = system_flags
+    graph["edgeDensity"] = round(edge_density, 3)
+
+    return graph
 
 
 def get_overview() -> dict:

@@ -681,15 +681,10 @@ def compute_kl_from_prior(topic: dict) -> dict:
     # Handles both formats:
     #   Flat:   {"date": "...", "H1": 0.3, "H2": 0.4, ...}
     #   Nested: {"date": "...", "posteriors": {"H1": 0.3, "H2": 0.4, ...}}
-    initial = {}
-    first = history[0]
-    first_posteriors = first.get("posteriors", first)  # nested or flat
+    from engine import extract_posteriors
+    initial = extract_posteriors(history[0], list(hypotheses.keys()))
     for k in hypotheses:
-        val = first_posteriors.get(k)
-        if val is not None and isinstance(val, (int, float)):
-            initial[k] = val
-        else:
-            # Fallback: uniform
+        if k not in initial:
             initial[k] = 1.0 / len(hypotheses)
 
     # D_KL(current || initial) = sum( current[i] * ln(current[i] / initial[i]) )
@@ -1215,8 +1210,11 @@ def build_constraint_chain(topic: dict, hypothesis_key: str) -> list[dict]:
     for i in range(1, len(history)):
         prev = history[i - 1]
         curr = history[i]
-        prev_val = prev.get(hypothesis_key, 0)
-        curr_val = curr.get(hypothesis_key, 0)
+        from engine import extract_posteriors as _ep
+        prev_p = _ep(prev, [hypothesis_key])
+        curr_p = _ep(curr, [hypothesis_key])
+        prev_val = prev_p.get(hypothesis_key, 0)
+        curr_val = curr_p.get(hypothesis_key, 0)
         delta = curr_val - prev_val
 
         if abs(delta) < 0.001:
