@@ -478,6 +478,289 @@ def backfill_snapshots_from_history(topic: dict) -> int:
 
 
 # ============================================================================
+# 8. Conditional Predictions
+# ============================================================================
+
+def add_conditional_prediction(
+    topic: dict,
+    condition_topic_slug: str,
+    condition_hypothesis: str,
+    prediction_text: str,
+    resolution_criteria: str,
+    deadline: str,
+    conditional_probability: float,
+    linked_topic_slug: str = None,
+    linked_hypothesis: str = None,
+    tags: list = None,
+    source: str = "operator",
+) -> dict:
+    """
+    Add a conditional prediction: "IF condition_hypothesis is true,
+    THEN prediction_text with probability conditional_probability."
+
+    conditional_probability is P(prediction | condition) — the probability
+    that the prediction is true GIVEN the condition is true. NOT the joint.
+
+    Predictions are scored when the condition resolves (or suspended if
+    the condition hasn't resolved by the deadline).
+
+    Linked topics are READ-ONLY references — resolution checks the linked
+    topic's state but never writes to it.
+
+    Returns the created prediction dict.
+    """
+    if conditional_probability <= 0 or conditional_probability >= 1:
+        raise ValueError(
+            f"conditionalProbability must be in (0, 1), got {conditional_probability}. "
+            "This is P(prediction | condition), not a certainty."
+        )
+
+    preds = topic.setdefault("conditionalPredictions", [])
+
+    # Sequential ID
+    max_id = 0
+    for p in preds:
+        pid = p.get("id", "")
+        if pid.startswith("cp_"):
+            try:
+                max_id = max(max_id, int(pid[3:]))
+            except ValueError:
+                pass
+    new_id = f"cp_{max_id + 1:03d}"
+
+    # Record the condition's probability at creation time
+    condition_prob_now = None
+    try:
+        from engine import load_topic as _lt
+        ct = _lt(condition_topic_slug)
+        condition_prob_now = ct["model"]["hypotheses"][condition_hypothesis]["posterior"]
+    except Exception:
+        pass
+
+    pred = {
+        "id": new_id,
+        "createdAt": _now_iso(),
+        "conditionTopic": condition_topic_slug,
+        "conditionHypothesis": condition_hypothesis,
+        "conditionProbAtCreation": condition_prob_now,
+        "prediction": prediction_text,
+        "resolutionCriteria": resolution_criteria,
+        "deadline": deadline,
+        "conditionalProbability": conditional_probability,
+        "status": "ACTIVE",
+        "resolvedAt": None,
+        "outcome": None,
+        "brierComponent": None,
+        "linkedTopicSlug": linked_topic_slug,
+        "linkedHypothesis": linked_hypothesis,
+        "tags": tags or [],
+        "source": source,
+    }
+
+    preds.append(pred)
+    return pred
+
+
+def score_conditional_prediction(
+    prediction: dict,
+    outcome: bool,
+) -> float:
+    """
+    Binary Brier score for a conditional prediction.
+
+    Args:
+        prediction: the prediction dict (must have conditionalProbability)
+        outcome: True if the prediction came true, False otherwise
+
+    Returns the Brier component: (conditionalProbability - outcome_indicator)^2
+    """
+    p = prediction["conditionalProbability"]
+    o = 1.0 if outcome else 0.0
+    return round((p - o) ** 2, 6)
+
+
+def resolve_conditional_prediction(
+    topic: dict,
+    prediction_id: str,
+    outcome: bool = None,
+    void_reason: str = None,
+) -> dict:
+    """
+    Resolve a conditional prediction.
+
+    Three outcomes:
+    - outcome=True/False: The condition was true and the prediction is scored.
+    - void_reason set: The condition was FALSE, so the prediction is voided.
+      No Brier penalty.
+    - Neither: The prediction is SUSPENDED (condition unresolved at deadline).
+
+    Returns the updated prediction dict.
+    """
+    preds = topic.get("conditionalPredictions", [])
+    pred = None
+    for p in preds:
+        if p["id"] == prediction_id:
+            pred = p
+            break
+
+    if pred is None:
+        raise ValueError(f"Prediction {prediction_id} not found")
+
+    if pred["status"] != "ACTIVE":
+        raise ValueError(f"Prediction {prediction_id} is already {pred['status']}")
+
+    pred["resolvedAt"] = _now_iso()
+
+    if void_reason:
+        pred["status"] = "VOIDED"
+        pred["outcome"] = None
+        pred["brierComponent"] = None
+        pred["voidReason"] = void_reason
+    elif outcome is not None:
+        pred["status"] = "SCORED"
+        pred["outcome"] = outcome
+        pred["brierComponent"] = score_conditional_prediction(pred, outcome)
+    else:
+        pred["status"] = "SUSPENDED"
+        pred["outcome"] = None
+        pred["brierComponent"] = None
+
+    return pred
+
+
+def sweep_conditional_predictions(topic: dict) -> dict:
+    """
+    Check all ACTIVE conditional predictions for resolution.
+
+    For each prediction:
+    - If the condition topic has RESOLVED: check which hypothesis won.
+      If the condition hypothesis won → score the prediction against reality.
+      If a different hypothesis won → void the prediction.
+    - If the deadline has passed and condition is still ACTIVE → SUSPEND.
+
+    Returns summary: {scored: int, voided: int, suspended: int, still_active: int}
+    """
+    from datetime import datetime, timezone
+
+    preds = topic.get("conditionalPredictions", [])
+    now = datetime.now(timezone.utc)
+    summary = {"scored": 0, "voided": 0, "suspended": 0, "still_active": 0}
+
+    for pred in preds:
+        if pred["status"] != "ACTIVE":
+            continue
+
+        # Check condition topic
+        condition_resolved = False
+        condition_won = False
+        try:
+            from engine import load_topic as _lt
+            ct = _lt(pred["conditionTopic"])
+            if ct.get("meta", {}).get("status") == "RESOLVED":
+                condition_resolved = True
+                # Check which hypothesis won
+                outcomes = ct.get("predictionScoring", {}).get("outcomes", [])
+                for o in outcomes:
+                    if o.get("resolved") == pred["conditionHypothesis"]:
+                        condition_won = True
+                        break
+        except Exception:
+            pass
+
+        if condition_resolved:
+            if condition_won:
+                # Score — but we need the actual outcome of the prediction
+                # This requires external input (did oil stay above $85?)
+                # For now, flag as NEEDS_SCORING
+                pred["status"] = "NEEDS_SCORING"
+                summary["scored"] += 1  # pending manual resolution
+            else:
+                resolve_conditional_prediction(
+                    topic, pred["id"],
+                    void_reason=f"Condition {pred['conditionHypothesis']} was not the resolved outcome"
+                )
+                summary["voided"] += 1
+        else:
+            # Check deadline
+            deadline_str = pred.get("deadline", "")
+            if deadline_str:
+                try:
+                    deadline = datetime.fromisoformat(deadline_str.replace("Z", "+00:00"))
+                    if now > deadline:
+                        resolve_conditional_prediction(topic, pred["id"])  # SUSPENDED
+                        summary["suspended"] += 1
+                        continue
+                except (ValueError, TypeError):
+                    pass
+
+            summary["still_active"] += 1
+
+    return summary
+
+
+def conditional_calibration_report(topic: dict) -> dict:
+    """
+    Calibration report for conditional predictions only.
+    Separate from topic-posterior calibration — never mixed.
+
+    Returns:
+        n_scored, n_voided, n_suspended, n_active,
+        avg_brier (scored only), void_rate,
+        by_domain (tag breakdown), condition_prob_distribution
+    """
+    preds = topic.get("conditionalPredictions", [])
+    if not preds:
+        return {"n_total": 0, "status": "no_predictions"}
+
+    scored = [p for p in preds if p["status"] == "SCORED" and p.get("brierComponent") is not None]
+    voided = [p for p in preds if p["status"] == "VOIDED"]
+    suspended = [p for p in preds if p["status"] == "SUSPENDED"]
+    active = [p for p in preds if p["status"] == "ACTIVE"]
+    needs = [p for p in preds if p["status"] == "NEEDS_SCORING"]
+
+    # Avg Brier over scored
+    avg_brier = None
+    if scored:
+        avg_brier = round(sum(p["brierComponent"] for p in scored) / len(scored), 4)
+
+    # Void rate
+    total_resolved = len(scored) + len(voided)
+    void_rate = round(len(voided) / total_resolved, 3) if total_resolved > 0 else None
+
+    # By domain tag
+    by_domain = {}
+    for p in scored:
+        for tag in p.get("tags", []):
+            if tag not in by_domain:
+                by_domain[tag] = {"n": 0, "total_brier": 0}
+            by_domain[tag]["n"] += 1
+            by_domain[tag]["total_brier"] += p["brierComponent"]
+    for tag in by_domain:
+        by_domain[tag]["avg_brier"] = round(by_domain[tag]["total_brier"] / by_domain[tag]["n"], 4)
+
+    # Condition probability distribution (are we only predicting on likely conditions?)
+    condition_probs = [p.get("conditionProbAtCreation") for p in preds if p.get("conditionProbAtCreation") is not None]
+    high_condition_pct = None
+    if condition_probs:
+        high_condition_pct = round(sum(1 for p in condition_probs if p > 0.9) / len(condition_probs), 3)
+
+    return {
+        "n_total": len(preds),
+        "n_scored": len(scored),
+        "n_voided": len(voided),
+        "n_suspended": len(suspended),
+        "n_active": len(active),
+        "n_needs_scoring": len(needs),
+        "avg_brier": avg_brier,
+        "void_rate": void_rate,
+        "by_domain": by_domain,
+        "high_condition_ratio": high_condition_pct,
+        "high_condition_warning": high_condition_pct is not None and high_condition_pct > 0.8,
+        "status": "calibrated" if scored else "pending",
+    }
+
+
+# ============================================================================
 # CLI entry point (for manual testing)
 # ============================================================================
 

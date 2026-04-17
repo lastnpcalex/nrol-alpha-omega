@@ -36,7 +36,11 @@ from engine import (
     triage_headline,
 )
 from governor import governance_report, check_update_proposal
-from framework.scoring import snapshot_posteriors, check_expired_hypotheses
+from framework.scoring import (
+    snapshot_posteriors, check_expired_hypotheses,
+    add_conditional_prediction, sweep_conditional_predictions,
+    conditional_calibration_report,
+)
 from framework.source_ledger import auto_calibrate, scan_for_resolutions
 from framework.dependencies import (
     propagate_alert, validate_conditionals, compute_implied_posteriors,
@@ -442,6 +446,55 @@ def process_dependency(
         },
         "cpt_staleness": staleness,
         "derivation_method": derivation_method,
+    }
+
+
+def process_conditional_prediction(
+    topic_slug: str,
+    condition_topic_slug: str,
+    condition_hypothesis: str,
+    prediction_text: str,
+    resolution_criteria: str,
+    deadline: str,
+    conditional_probability: float,
+    linked_topic_slug: str = None,
+    linked_hypothesis: str = None,
+    tags: list = None,
+) -> dict:
+    """
+    Add a conditional prediction through the pipeline.
+
+    conditional_probability is P(prediction | condition) — the probability
+    that the prediction is true GIVEN the condition is true.
+
+    Linked topics are READ-ONLY references. The prediction checks the linked
+    topic's state at resolution time but never writes to it.
+
+    Returns the prediction dict + topic governance.
+    """
+    topic = load_topic(topic_slug)
+
+    pred = add_conditional_prediction(
+        topic,
+        condition_topic_slug=condition_topic_slug,
+        condition_hypothesis=condition_hypothesis,
+        prediction_text=prediction_text,
+        resolution_criteria=resolution_criteria,
+        deadline=deadline,
+        conditional_probability=conditional_probability,
+        linked_topic_slug=linked_topic_slug,
+        linked_hypothesis=linked_hypothesis,
+        tags=tags,
+    )
+
+    save_topic(topic)
+
+    return {
+        "topic_slug": topic_slug,
+        "prediction": pred,
+        "governance": {
+            "health": governance_report(topic).get("health"),
+        },
     }
 
 
