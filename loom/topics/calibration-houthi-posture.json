@@ -6,7 +6,7 @@
     "question": "What will Houthi military posture toward Red Sea commercial shipping look like by July 2026?",
     "resolution": "Assessed July 1, 2026 via: (1) 30-day rolling attack count against commercial vessels (attack frequency), (2) MARAD advisory status (Threat Level 1-4), (3) shipping insurance war-risk premium (% of vessel value), (4) weekly transit volume through Bab al-Mandeb as % of Jan 2024 baseline. H1 fires if ≥5 attacks/month AND >50% of Jan-2024 baseline transits re-routed. H2 fires if attacks selective (Israeli/US-linked targets only, ≤2 neutral-flag attacks/month). H3 fires if <1 commercial attack/month AND MARAD downgrades advisory. H4 fires if effective closure (≤20% of baseline transits, US NAVCENT NOTAM issued).",
     "created": "2026-04-11T00:00:00Z",
-    "lastUpdated": "2026-04-17T18:32:24+00:00",
+    "lastUpdated": "2026-04-17T18:49:21+00:00",
     "status": "ACTIVE",
     "dayCount": 1,
     "startDate": "2026-04-11T00:00:00Z",
@@ -861,7 +861,7 @@
       "kl_divergence": 0.1519,
       "interpretation": "MODERATE"
     },
-    "lastComputed": "2026-04-17T18:32:24+00:00",
+    "lastComputed": "2026-04-17T18:49:21+00:00",
     "staleDependencies": 0,
     "downstreamAlerts": [
       {
@@ -928,7 +928,7 @@
         }
       },
       "indistinguishable": [],
-      "lastChecked": "2026-04-17T18:32:25+00:00"
+      "lastChecked": "2026-04-17T18:49:21+00:00"
     }
   },
   "dependencies": {

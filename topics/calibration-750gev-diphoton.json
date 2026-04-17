@@ -1,12 +1,12 @@
 {
-  "_protocol": "Calibration backfill \u2014 resolved topic for Brier score validation",
+  "_protocol": "Calibration backfill — resolved topic for Brier score validation",
   "meta": {
     "slug": "calibration-750gev-diphoton",
     "title": "750 GeV Diphoton Excess",
     "question": "Is the ~750 GeV diphoton excess observed by ATLAS and CMS at the LHC a new particle or a statistical fluctuation?",
     "resolution": "Resolved when full Run 2 data (2016) confirms or excludes the excess at 5-sigma significance. If excess disappears with more data, H2 wins.",
     "created": "2015-12-15T00:00:00Z",
-    "lastUpdated": "2026-04-11T22:00:00+00:00",
+    "lastUpdated": "2026-04-17T18:49:20+00:00",
     "status": "RESOLVED",
     "dayCount": 240,
     "startDate": "2015-12-15T00:00:00Z",
@@ -22,8 +22,8 @@
       "INSTITUTIONAL"
     ],
     "directionHints": {
-      "DATA": "depends on direction \u2014 excess grows or shrinks",
-      "THEORETICAL": "mostly H1/H3 \u2014 theory papers either explain or debunk"
+      "DATA": "depends on direction — excess grows or shrinks",
+      "THEORETICAL": "mostly H1/H3 — theory papers either explain or debunk"
     },
     "escalationTags": [
       "DATA"
@@ -33,13 +33,13 @@
   "model": {
     "hypotheses": {
       "H1": {
-        "label": "New particle \u2014 genuine resonance at ~750 GeV",
+        "label": "New particle — genuine resonance at ~750 GeV",
         "midpoint": 36,
         "unit": "weeks",
         "posterior": 0.01
       },
       "H2": {
-        "label": "Statistical fluctuation \u2014 disappears with more data",
+        "label": "Statistical fluctuation — disappears with more data",
         "midpoint": 36,
         "unit": "weeks",
         "posterior": 0.9
@@ -66,7 +66,7 @@
         "H2": 0.55,
         "H3": 0.1,
         "H4": 0.2,
-        "note": "Initial priors after ATLAS/CMS December presentations. ~3.6 sigma local (ATLAS), ~2.6 sigma local (CMS). Skeptical \u2014 look-elsewhere effect not fully accounted for, and 2-sigma excesses appear and vanish regularly."
+        "note": "Initial priors after ATLAS/CMS December presentations. ~3.6 sigma local (ATLAS), ~2.6 sigma local (CMS). Skeptical — look-elsewhere effect not fully accounted for, and 2-sigma excesses appear and vanish regularly."
       },
       {
         "date": "2016-01-15",
@@ -82,7 +82,7 @@
         "H2": 0.6,
         "H3": 0.1,
         "H4": 0.18,
-        "note": "Moriond 2016 \u2014 ATLAS updates with slightly wider resonance, CMS less significant. Combined look-elsewhere brings global significance down. Starting to lean more toward fluctuation."
+        "note": "Moriond 2016 — ATLAS updates with slightly wider resonance, CMS less significant. Combined look-elsewhere brings global significance down. Starting to lean more toward fluctuation."
       },
       {
         "date": "2016-06-01",
@@ -98,7 +98,7 @@
         "H2": 0.88,
         "H3": 0.06,
         "H4": 0.04,
-        "note": "ICHEP 2016 \u2014 excess gone. Both ATLAS and CMS show the bump has vanished with 2016 data. Classic look-elsewhere effect. H2 confirmed."
+        "note": "ICHEP 2016 — excess gone. Both ATLAS and CMS show the bump has vanished with 2016 data. Classic look-elsewhere effect. H2 confirmed."
       },
       {
         "date": "2016-08-10",
@@ -163,7 +163,7 @@
           "desc": "Theoretical community converges on a single compelling BSM explanation",
           "status": "NOT_FIRED",
           "firedDate": null,
-          "note": "500+ papers proposed 500+ different models. No convergence \u2014 noise, not signal.",
+          "note": "500+ papers proposed 500+ different models. No convergence — noise, not signal.",
           "posteriorEffect": "H1 +5pp"
         }
       ],
@@ -188,14 +188,14 @@
     }
   },
   "actorModel": {
-    "description": "Physics experiment dynamics \u2014 no geopolitical actors, but institutional incentives matter",
+    "description": "Physics experiment dynamics — no geopolitical actors, but institutional incentives matter",
     "actors": {
       "atlas": {
         "name": "ATLAS Collaboration",
         "role": "One of two general-purpose LHC detectors",
         "decisionStyle": "institutional-consensus",
         "biases": [
-          "Publication bias \u2014 incentive to present interesting results",
+          "Publication bias — incentive to present interesting results",
           "Internal review process tempers overclaims"
         ],
         "filters": [
@@ -207,7 +207,7 @@
       },
       "cms": {
         "name": "CMS Collaboration",
-        "role": "Second general-purpose LHC detector \u2014 independent cross-check",
+        "role": "Second general-purpose LHC detector — independent cross-check",
         "decisionStyle": "institutional-consensus",
         "biases": [
           "Same publication incentives as ATLAS",
@@ -224,7 +224,7 @@
         "decisionStyle": "bandwagon-prone",
         "biases": [
           "Strong incentive to publish quickly on hot topics",
-          "Confirmation bias \u2014 easier to get a model published if it explains the excess"
+          "Confirmation bias — easier to get a model published if it explains the excess"
         ],
         "filters": [
           "Peer review (slow, post-hoc)"
@@ -235,10 +235,10 @@
       }
     },
     "methodology": [
-      "DATA OVER THEORY \u2014 500 theory papers are not 500 data points",
-      "LOOK-ELSEWHERE EFFECT \u2014 local significance is not global significance",
-      "INDEPENDENT REPLICATION \u2014 CMS seeing it too matters, but only if analysis pipelines are truly independent",
-      "ABSENCE OF EVIDENCE IS EVIDENCE \u2014 no corroborating channels after 6 months is informative"
+      "DATA OVER THEORY — 500 theory papers are not 500 data points",
+      "LOOK-ELSEWHERE EFFECT — local significance is not global significance",
+      "INDEPENDENT REPLICATION — CMS seeing it too matters, but only if analysis pipelines are truly independent",
+      "ABSENCE OF EVIDENCE IS EVIDENCE — no corroborating channels after 6 months is informative"
     ]
   },
   "evidenceLog": [
@@ -249,7 +249,8 @@
       "provenance": "OBSERVED",
       "posteriorImpact": "MODERATE",
       "claimState": "PROPOSED",
-      "effectiveWeight": 0.8
+      "effectiveWeight": 0.8,
+      "ledger": "FACT"
     },
     {
       "time": "2016-01-20T12:00:00Z",
@@ -259,7 +260,8 @@
       "posteriorImpact": "LOW",
       "claimState": "PROPOSED",
       "effectiveWeight": 0.3,
-      "note": "Theory proliferation is noise. 500 models explaining one bump means the bump is underdetermined, not confirmed."
+      "note": "Theory proliferation is noise. 500 models explaining one bump means the bump is underdetermined, not confirmed.",
+      "ledger": "DECISION"
     },
     {
       "time": "2016-03-18T14:00:00Z",
@@ -268,7 +270,8 @@
       "provenance": "OBSERVED",
       "posteriorImpact": "MODERATE",
       "claimState": "CONTESTED",
-      "effectiveWeight": 0.7
+      "effectiveWeight": 0.7,
+      "ledger": "FACT"
     },
     {
       "time": "2016-06-01T10:00:00Z",
@@ -278,7 +281,8 @@
       "posteriorImpact": "MODERATE",
       "claimState": "SUPPORTED",
       "effectiveWeight": 1.0,
-      "note": "Absence of corroboration is evidence against H1. A real particle should show up somewhere else."
+      "note": "Absence of corroboration is evidence against H1. A real particle should show up somewhere else.",
+      "ledger": "FACT"
     },
     {
       "time": "2016-08-05T09:00:00Z",
@@ -288,7 +292,8 @@
       "posteriorImpact": "EXTREME",
       "claimState": "SUPPORTED",
       "effectiveWeight": 1.0,
-      "note": "Definitive resolution. t1_excess_disappears fired."
+      "note": "Definitive resolution. t1_excess_disappears fired.",
+      "ledger": "FACT"
     }
   ],
   "dataFeeds": {
@@ -315,14 +320,74 @@
     }
   },
   "watchpoints": [
-    "RESOLVED \u2014 no active watchpoints"
+    "RESOLVED — no active watchpoints"
   ],
   "searchQueries": [
     "750 GeV diphoton excess LHC",
     "ATLAS CMS diphoton resonance",
     "ICHEP 2016 diphoton results"
   ],
-  "governance": null,
+  "governance": {
+    "health": "DEGRADED",
+    "issues": [
+      "Majority stale evidence (5/5)",
+      "Unfalsifiable hypotheses: H4"
+    ],
+    "rt": {
+      "rt": 0.0,
+      "regime": "SAFE",
+      "worst_hypothesis": "H1"
+    },
+    "entropy": 0.6051,
+    "maxEntropy": 2.0,
+    "uncertaintyRatio": 0.3025,
+    "evidenceFreshness": {
+      "fresh": 0,
+      "stale": 5,
+      "total": 5
+    },
+    "hypothesisAdmissibility": {
+      "H1": "ADMISSIBLE",
+      "H2": "ADMISSIBLE",
+      "H3": "ADMISSIBLE",
+      "H4": "ADMISSIBLE"
+    },
+    "klFromPrior": {
+      "kl_divergence": 0.3171,
+      "interpretation": "MODERATE"
+    },
+    "lastComputed": "2026-04-17T18:49:20+00:00",
+    "staleDependencies": 0,
+    "calibrationHealth": "WELL_CALIBRATED",
+    "unresolvedContradictions": 0,
+    "designGate": {
+      "passed": true,
+      "blockers": [],
+      "warnings": [
+        "Hypotheses {'H4'} have no anti-indicator — what evidence would make these LESS likely?"
+      ],
+      "coverage": {
+        "H1": {
+          "pos": 6,
+          "neg": 4
+        },
+        "H2": {
+          "pos": 3,
+          "neg": 3
+        },
+        "H3": {
+          "pos": 1,
+          "neg": 1
+        },
+        "H4": {
+          "pos": 1,
+          "neg": 3
+        }
+      },
+      "indistinguishable": [],
+      "lastChecked": "2026-04-17T18:49:20+00:00"
+    }
+  },
   "predictionScoring": {
     "snapshots": [
       {
@@ -359,7 +424,7 @@
           "H4": 0.18
         },
         "entropy": 1.5867,
-        "note": "Moriond 2016 \u2014 ATLAS updates with slightly wider resonance, CMS less significant"
+        "note": "Moriond 2016 — ATLAS updates with slightly wider resonance, CMS less significant"
       },
       {
         "timestamp": "2016-06-01T00:00:00+00:00",
@@ -383,7 +448,7 @@
           "H4": 0.04
         },
         "entropy": 0.7045,
-        "note": "ICHEP 2016 \u2014 excess gone. Both ATLAS and CMS show the bump has vanished with 201"
+        "note": "ICHEP 2016 — excess gone. Both ATLAS and CMS show the bump has vanished with 201"
       },
       {
         "timestamp": "2016-08-10T00:00:00+00:00",
@@ -402,7 +467,7 @@
       {
         "timestamp": "2026-04-11T21:31:41+00:00",
         "resolved": "H2",
-        "label": "Statistical fluctuation \u2014 disappears with more data",
+        "label": "Statistical fluctuation — disappears with more data",
         "note": "ICHEP 2016: excess vanished with full Run 2 data. Statistical fluctuation confirmed."
       }
     ],
@@ -480,5 +545,9 @@
         "outcome": "H2"
       }
     ]
+  },
+  "contradictionTracker": {
+    "unresolved": [],
+    "resolved": []
   }
 }

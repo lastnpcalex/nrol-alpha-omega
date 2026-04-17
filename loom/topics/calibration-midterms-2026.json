@@ -6,7 +6,7 @@
     "question": "Which party will control the US House of Representatives after the November 2026 midterm elections?",
     "resolution": "AP/Decision Desk calls House majority on or after Election Night, November 3, 2026. Controlling party must hold 218+ seats. Final seat counts certified by mid-December 2026.",
     "created": "2026-04-11T00:00:00Z",
-    "lastUpdated": "2026-04-17T15:22:22+00:00",
+    "lastUpdated": "2026-04-17T18:49:21+00:00",
     "status": "ACTIVE",
     "dayCount": 1,
     "startDate": "2026-04-11T00:00:00Z",
@@ -65,28 +65,28 @@
         "label": "Democrats flip House (218+ seats)",
         "midpoint": 225,
         "unit": "seats",
-        "posterior": 0.932,
+        "posterior": 0.9272,
         "description": "Democrats net enough gains to exceed 218 seats. Requires approximately a net shift of ~3 seats from current GOP margin. Historical base rate + current approval environment make this the modal outcome. A generic ballot advantage of +5pp or more, sustained through October, is the key threshold."
       },
       "H2": {
         "label": "Democrats gain seats but fall short of majority",
         "midpoint": 210,
         "unit": "seats",
-        "posterior": 0.0632,
+        "posterior": 0.0629,
         "description": "Democrats make meaningful gains (5-15 seats) but GOP retains majority below 218D seats. Consistent with a generic ballot lead of +2 to +4pp being partially absorbed by geographic/districting inefficiency. More likely if war rally effect persists into fall or Dem candidate recruitment underperforms."
       },
       "H3": {
         "label": "Republicans hold — status quo (+/- 5 seats from current margin)",
         "midpoint": 221,
         "unit": "seats",
-        "posterior": 0.004,
+        "posterior": 0.005,
         "description": "Election outcome roughly matches current seat distribution. Would represent a historic deviation from midterm pattern — only the 2002 cycle (post-9/11) and 1998 cycle (Clinton impeachment backlash) saw the president's party hold or gain. Requires sustained war rally effect, generic ballot narrowing to near-parity, or major Democratic collapse (scandal, candidate quality, GOTV failure)."
       },
       "H4": {
         "label": "Republicans gain seats",
         "midpoint": 228,
         "unit": "seats",
-        "posterior": 0.0008,
+        "posterior": 0.005,
         "description": "GOP nets additional seats over current ~220. Historically very rare for the president's party at this approval level. Would require a reversal of every current trend: generic ballot, approval, economic sentiment. Possible only under a major geopolitical/economic shock that completely reframes the election as a wartime mandate vote. Tail risk only."
       }
     },
@@ -853,9 +853,9 @@
       "regime": "SAFE",
       "worst_hypothesis": "H1"
     },
-    "entropy": 0.3866,
+    "entropy": 0.4286,
     "maxEntropy": 2.0,
-    "uncertaintyRatio": 0.1933,
+    "uncertaintyRatio": 0.2143,
     "evidenceFreshness": {
       "fresh": 4,
       "stale": 10,
@@ -868,10 +868,10 @@
       "H4": "ADMISSIBLE"
     },
     "klFromPrior": {
-      "kl_divergence": 0.6296,
+      "kl_divergence": 0.6065,
       "interpretation": "WELL_EVIDENCED"
     },
-    "lastComputed": "2026-04-17T15:22:22+00:00",
+    "lastComputed": "2026-04-17T18:49:21+00:00",
     "staleDependencies": 4,
     "staleDependencyDetails": [
       {
@@ -940,7 +940,7 @@
         }
       },
       "indistinguishable": [],
-      "lastChecked": "2026-04-17T15:22:22+00:00"
+      "lastChecked": "2026-04-17T18:49:21+00:00"
     }
   },
   "dependencies": {

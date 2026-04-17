@@ -5,7 +5,7 @@
     "question": "What Lower Colorado River shortage tier will the Bureau of Reclamation declare for calendar year 2028 operations?",
     "resolution": "Official BOR Annual Operating Plan shortage tier determination for CY2028, as declared in the August 2027 24-month study. If BOR issues a revised determination before January 1, 2028, the latest revision governs. Revisions published on or after January 1, 2028 do not affect resolution. If the DCP tier framework is formally superseded before the August 2027 determination: resolution maps to whichever hypothesis best matches the actual mandatory allocation reduction imposed, measured as total Lower Basin curtailment volume (AF/yr). Tier 1 equivalent: <600K AF cut. Tier 2 equivalent: 600K-900K AF cut. Tier 3+ equivalent: >900K AF cut. If curtailment structure is novel and cannot be expressed as a single AF volume, H4 resolves. If the August 2027 AOP is explicitly marked provisional pending new guidelines, resolution uses the AOP as declared — provisional status does not prevent resolution.",
     "created": "2026-04-13T18:38:33+00:00",
-    "lastUpdated": "2026-04-17T18:32:47+00:00",
+    "lastUpdated": "2026-04-17T18:49:21+00:00",
     "status": "ACTIVE",
     "dayCount": 0,
     "startDate": "2026-04-13",
@@ -497,7 +497,7 @@
       "kl_divergence": 0.151,
       "interpretation": "MODERATE"
     },
-    "lastComputed": "2026-04-17T18:32:47+00:00",
+    "lastComputed": "2026-04-17T18:49:21+00:00",
     "staleDependencies": 0,
     "calibrationHealth": "ACCEPTABLE",
     "unresolvedContradictions": 0,
@@ -524,7 +524,7 @@
         }
       },
       "indistinguishable": [],
-      "lastChecked": "2026-04-17T18:32:47+00:00"
+      "lastChecked": "2026-04-17T18:49:21+00:00"
     }
   },
   "predictionScoring": {

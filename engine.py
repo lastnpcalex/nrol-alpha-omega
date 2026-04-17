@@ -1958,6 +1958,163 @@ def triage_headline(headline: str, source: str = None) -> dict:
     return triage(headline, source=source)
 
 
+def what_happens_next(topic: dict, topic_loader=None) -> dict:
+    """
+    Compute a structured "what happens next" outlook for a topic.
+
+    Synthesizes:
+    - Leading hypothesis and confidence level
+    - Time horizon and urgency
+    - Downstream implications via CPTs
+    - Key unfired indicators (what would change the picture)
+    - Uncertainty assessment
+
+    Returns a dict suitable for canvas rendering. Pure computation —
+    no LLM interpretation, no side effects.
+    """
+    import math as _math
+    if topic_loader is None:
+        topic_loader = lambda s: load_topic(s)
+
+    meta = topic.get("meta", {})
+    hypotheses = topic.get("model", {}).get("hypotheses", {})
+    h_keys = sorted(hypotheses.keys())
+    posteriors = {k: hypotheses[k]["posterior"] for k in h_keys}
+    status = meta.get("status", "ACTIVE")
+
+    # --- Leading hypothesis ---
+    leading_key = max(posteriors, key=posteriors.get)
+    leading_prob = posteriors[leading_key]
+    leading_label = hypotheses[leading_key].get("label", leading_key)
+
+    # --- Confidence assessment ---
+    entropy = -sum(p * _math.log2(p) if p > 0 else 0 for p in posteriors.values())
+    max_entropy = _math.log2(len(posteriors)) if len(posteriors) > 1 else 1
+    uncertainty_ratio = entropy / max_entropy if max_entropy > 0 else 0
+
+    if uncertainty_ratio > 0.85:
+        confidence = "TOO_UNCERTAIN"
+        confidence_text = "The model hasn't discriminated between hypotheses. Multiple outcomes remain plausible."
+    elif uncertainty_ratio > 0.65:
+        confidence = "LEANING"
+        confidence_text = f"Leaning toward {leading_key} ({leading_label}) at {leading_prob:.0%}, but alternatives remain live."
+    elif uncertainty_ratio > 0.35:
+        confidence = "PROBABLE"
+        confidence_text = f"{leading_key} ({leading_label}) is the probable outcome at {leading_prob:.0%}."
+    else:
+        confidence = "STRONG"
+        confidence_text = f"Strong convergence on {leading_key} ({leading_label}) at {leading_prob:.0%}."
+
+    # --- Time horizon ---
+    horizon = meta.get("horizon", "")
+    day_count = meta.get("dayCount", 0)
+    midpoint = hypotheses[leading_key].get("midpoint")
+    midpoint_unit = hypotheses[leading_key].get("unit", "")
+    time_note = None
+    if midpoint and midpoint_unit:
+        if "week" in midpoint_unit:
+            elapsed_weeks = day_count / 7
+            remaining = midpoint - elapsed_weeks
+            if remaining > 0:
+                time_note = f"Leading hypothesis midpoint: {midpoint} weeks. ~{remaining:.0f} weeks remain."
+            else:
+                time_note = f"Leading hypothesis midpoint ({midpoint} weeks) has passed — day {day_count} ({day_count/7:.0f} weeks elapsed)."
+        elif "ft" in midpoint_unit or "percent" in midpoint_unit:
+            time_note = f"Midpoint: {midpoint} {midpoint_unit}."
+
+    # --- Unfired indicators (what would change things) ---
+    change_triggers = []
+    tiers = topic.get("indicators", {}).get("tiers", {})
+    tier_priority = {"tier1_critical": 1, "tier2_strong": 2, "tier3_suggestive": 3, "anti_indicators": 4}
+    for tier_name in sorted(tiers.keys(), key=lambda t: tier_priority.get(t, 5)):
+        for ind in tiers.get(tier_name, []):
+            if not isinstance(ind, dict):
+                continue
+            if ind.get("status") == "NOT_FIRED":
+                change_triggers.append({
+                    "id": ind["id"],
+                    "tier": tier_name,
+                    "desc": ind.get("desc", "")[:120],
+                    "effect": ind.get("posteriorEffect", ""),
+                })
+            if len(change_triggers) >= 5:
+                break
+        if len(change_triggers) >= 5:
+            break
+
+    # --- Downstream implications via CPTs ---
+    downstream_implications = []
+    deps_downstream = []
+    # Find topics that depend on this one
+    if TOPICS_DIR.exists():
+        slug = meta.get("slug", "")
+        for path in TOPICS_DIR.glob("*.json"):
+            if path.stem.startswith("_"):
+                continue
+            try:
+                dt = json.loads(path.read_text(encoding="utf-8"))
+                for dep in dt.get("dependencies", {}).get("upstream", []):
+                    if dep.get("slug") == slug and dep.get("conditionals"):
+                        # Compute what leading hypothesis implies
+                        row = dep["conditionals"].get(leading_key, {})
+                        dt_hyps = dt.get("model", {}).get("hypotheses", {})
+                        implied = {}
+                        for dk in dt_hyps:
+                            v = row.get(dk)
+                            if isinstance(v, (int, float)):
+                                implied[dk] = v
+                        if implied:
+                            implied_leading = max(implied, key=implied.get)
+                            downstream_implications.append({
+                                "slug": dt["meta"].get("slug", path.stem),
+                                "title": dt["meta"].get("title", path.stem),
+                                "implied": implied,
+                                "implied_leading": implied_leading,
+                                "implied_leading_label": dt_hyps[implied_leading].get("label", implied_leading),
+                                "implied_leading_prob": implied[implied_leading],
+                                "narrative": row.get("narrative", ""),
+                            })
+            except (json.JSONDecodeError, OSError, KeyError):
+                continue
+
+    # --- Hypothesis landscape (all hypotheses with status) ---
+    landscape = []
+    for k in h_keys:
+        h = hypotheses[k]
+        p = posteriors[k]
+        status_label = "LEADING" if k == leading_key else "LIVE" if p > 0.05 else "TAIL" if p > 0.005 else "NEAR_ZERO"
+        landscape.append({
+            "key": k,
+            "label": h.get("label", k),
+            "posterior": p,
+            "status": status_label,
+            "midpoint": h.get("midpoint"),
+            "unit": h.get("unit", ""),
+        })
+
+    return {
+        "slug": meta.get("slug", ""),
+        "title": meta.get("title", ""),
+        "topic_status": status,
+        "leading": {
+            "key": leading_key,
+            "label": leading_label,
+            "posterior": leading_prob,
+        },
+        "confidence": confidence,
+        "confidence_text": confidence_text,
+        "uncertainty_ratio": round(uncertainty_ratio, 3),
+        "time": {
+            "day_count": day_count,
+            "horizon": horizon,
+            "note": time_note,
+        },
+        "landscape": landscape,
+        "change_triggers": change_triggers,
+        "downstream_implications": downstream_implications,
+    }
+
+
 def get_overview() -> dict:
     """
     Cross-topic overview for the mirror dashboard.

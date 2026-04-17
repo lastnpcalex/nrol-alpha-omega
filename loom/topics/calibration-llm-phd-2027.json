@@ -6,7 +6,7 @@
     "question": "What level of autonomous scientific research capability will the most capable frontier LLM demonstrate by March 31, 2027, as assessed against the Schwartz G1-G4 scale (G1=undergraduate, G2=early graduate, G3=advanced graduate with novel methodology, G4=postdoc-level independent research)?",
     "resolution": "Composite assessment at March 31, 2027 based on: (1) expert evaluations published in peer-reviewed venues or credible technical reports scoring frontier LLM research autonomy; (2) demonstrated artifacts — peer-reviewed papers where the LLM did the primary intellectual work with documented human oversight level; (3) benchmark performance on graduate-level scientific reasoning (GPQA Diamond, FrontierMath, METR autonomy evaluations). Resolution level determined by preponderance of evidence across these three axes.",
     "created": "2026-04-14T00:00:00Z",
-    "lastUpdated": "2026-04-17T15:23:00+00:00",
+    "lastUpdated": "2026-04-17T18:49:21+00:00",
     "status": "ACTIVE",
     "dayCount": 0,
     "startDate": "2026-04-14T00:00:00Z",
@@ -718,7 +718,7 @@
       "kl_divergence": 0.2291,
       "interpretation": "MODERATE"
     },
-    "lastComputed": "2026-04-17T15:23:00+00:00",
+    "lastComputed": "2026-04-17T18:49:21+00:00",
     "staleDependencies": 0,
     "calibrationHealth": "ACCEPTABLE",
     "unresolvedContradictions": 0,
@@ -745,7 +745,7 @@
         }
       },
       "indistinguishable": [],
-      "lastChecked": "2026-04-17T15:23:00+00:00"
+      "lastChecked": "2026-04-17T18:49:21+00:00"
     }
   },
   "predictionScoring": {

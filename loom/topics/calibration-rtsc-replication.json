@@ -6,7 +6,7 @@
     "question": "Will any room-temperature superconductor claim published after 2024 be independently replicated by >=2 labs within 12 months of publication?",
     "resolution": "Two independent labs (neither affiliated with the original authors) publish peer-reviewed or preprint results confirming both zero DC resistance and diamagnetic levitation (Meissner effect) at room temperature (>=15C) and ambient pressure (<= 1.1 atm) within 12 calendar months of the original claim's arXiv or journal deposit date.",
     "created": "2026-04-11T00:00:00Z",
-    "lastUpdated": "2026-04-17T15:23:00+00:00",
+    "lastUpdated": "2026-04-17T18:49:21+00:00",
     "status": "ACTIVE",
     "dayCount": 0,
     "startDate": "2026-04-11T00:00:00Z",
@@ -67,28 +67,28 @@
         "label": "Claim published and replicated (>=2 independent labs, <=12 months)",
         "midpoint": 0,
         "unit": "probability",
-        "posterior": 0.0007,
+        "posterior": 0.005,
         "description": "A credible RTSC claim is published AND two independent non-affiliated labs replicate both zero-resistance AND Meissner-effect levitation at room temperature and ambient pressure within 12 months. Would be Nobel-tier. Compound event: P(claim) * P(genuine|claim) * P(replicated|genuine). Each factor is small."
       },
       "H2": {
         "label": "Partial replication (1 lab only, or only some properties confirmed)",
         "midpoint": 0,
         "unit": "probability",
-        "posterior": 0.0041,
+        "posterior": 0.005,
         "description": "A credible claim is published and one lab replicates some aspect (e.g. resistivity anomaly but no levitation, or levitation-like behavior without zero resistance). The LK-99 trajectory: striking partial signal, ultimately non-SC explanation. Higher than H1 because partial replication is easier to achieve and harder to immediately rule out."
       },
       "H3": {
         "label": "Claim published, fails replication (<2 independent confirmations in 12 months)",
         "midpoint": 0,
         "unit": "probability",
-        "posterior": 0.0439,
+        "posterior": 0.0437,
         "description": "A credible claim appears — passes an initial plausibility bar (specific materials, characterization data, Tc claim) — but replication attempts fail or find mundane explanations. The post-LK-99 default trajectory for any new RTSC claim given current field skepticism and rapid debunking infrastructure."
       },
       "H4": {
         "label": "No credible claim published within monitoring window",
         "midpoint": 0,
         "unit": "probability",
-        "posterior": 0.9514,
+        "posterior": 0.9464,
         "description": "No preprint or publication clears the credibility bar (defined as: specific synthesized material, at least two characterization measurements, authors with institutional affiliation) within the monitoring window. Current state as of April 2026. Field has gone ~32 months post-LK-99 without a credible successor claim. Dias retracted, lost Rochester position. Hype cycle in consolidation phase."
       }
     },
@@ -588,9 +588,9 @@
       "regime": "SAFE",
       "worst_hypothesis": "H1"
     },
-    "entropy": 0.3062,
+    "entropy": 0.349,
     "maxEntropy": 2.0,
-    "uncertaintyRatio": 0.1531,
+    "uncertaintyRatio": 0.1745,
     "evidenceFreshness": {
       "fresh": 2,
       "stale": 3,
@@ -603,10 +603,10 @@
       "H4": "ADMISSIBLE"
     },
     "klFromPrior": {
-      "kl_divergence": 0.1518,
+      "kl_divergence": 0.1398,
       "interpretation": "MODERATE"
     },
-    "lastComputed": "2026-04-17T15:23:00+00:00",
+    "lastComputed": "2026-04-17T18:49:21+00:00",
     "staleDependencies": 0,
     "calibrationHealth": "ACCEPTABLE",
     "unresolvedContradictions": 0,
@@ -633,7 +633,7 @@
         }
       },
       "indistinguishable": [],
-      "lastChecked": "2026-04-17T15:23:00+00:00"
+      "lastChecked": "2026-04-17T18:49:21+00:00"
     }
   },
   "predictionScoring": {

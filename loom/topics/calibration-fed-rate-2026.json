@@ -6,7 +6,7 @@
     "question": "Where will the Federal Reserve target rate be on December 31, 2026?",
     "resolution": "FOMC official target range as announced at or following the December 2026 FOMC meeting (scheduled Dec 9-10, 2026). Resolved against the FOMC statement on federalreserve.gov.",
     "created": "2026-04-11T00:00:00Z",
-    "lastUpdated": "2026-04-17T15:22:22+00:00",
+    "lastUpdated": "2026-04-17T18:49:20+00:00",
     "status": "ACTIVE",
     "dayCount": 1,
     "startDate": "2026-04-11T00:00:00Z",
@@ -867,11 +867,11 @@
   "governance": {
     "health": "DEGRADED",
     "issues": [
-      "Majority stale evidence (9/14)",
+      "Majority stale evidence (10/14)",
       "Stale dependency: calibration-us-recession-2026.H2 assumed=0.22, actual=0.4365, drift=21.65%",
       "Stale dependency: calibration-us-recession-2026.H3 assumed=0.14, actual=0.0491, drift=9.09%",
       "Stale dependency: calibration-us-recession-2026.H4 assumed=0.09, actual=0.0029, drift=8.71%",
-      "Downstream alert: calibration-us-recession-2026 has 2 stale assumption(s) from this topic"
+      "Downstream alert: calibration-us-recession-2026 has 3 stale assumption(s) from this topic"
     ],
     "rt": {
       "rt": 0.0,
@@ -882,8 +882,8 @@
     "maxEntropy": 2.0,
     "uncertaintyRatio": 0.7806,
     "evidenceFreshness": {
-      "fresh": 5,
-      "stale": 9,
+      "fresh": 4,
+      "stale": 10,
       "total": 14
     },
     "hypothesisAdmissibility": {
@@ -896,7 +896,7 @@
       "kl_divergence": 0.2007,
       "interpretation": "MODERATE"
     },
-    "lastComputed": "2026-04-17T15:22:22+00:00",
+    "lastComputed": "2026-04-17T18:49:20+00:00",
     "staleDependencies": 3,
     "staleDependencyDetails": [
       {
@@ -935,14 +935,20 @@
           {
             "hypothesis": "H1",
             "assumed": 0.22,
-            "actual": 0.3156,
-            "drift": 0.0956
+            "actual": 0.4061,
+            "drift": 0.1861
+          },
+          {
+            "hypothesis": "H2",
+            "assumed": 0.38,
+            "actual": 0.4614,
+            "drift": 0.0814
           },
           {
             "hypothesis": "H3",
             "assumed": 0.28,
-            "actual": 0.1721,
-            "drift": 0.1079
+            "actual": 0.0699,
+            "drift": 0.2101
           }
         ]
       }
@@ -972,7 +978,7 @@
         }
       },
       "indistinguishable": [],
-      "lastChecked": "2026-04-17T15:22:22+00:00"
+      "lastChecked": "2026-04-17T18:49:21+00:00"
     }
   },
   "predictionScoring": {

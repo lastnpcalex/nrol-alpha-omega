@@ -6,7 +6,7 @@
     "question": "Will a kinetic military incident with casualties occur between PRC forces and any claimant state in the South China Sea by December 31, 2026?",
     "resolution": "Confirmed shots fired at military/coast guard vessel, ramming causing documented injury or death, boarding of military vessel resulting in injury/death, or water cannon causing documented serious injury. Must be reported by at least two independent primary sources (wire service, government statement, or verified video evidence). Commercial vessel incidents alone do not resolve.",
     "created": "2026-04-11T00:00:00Z",
-    "lastUpdated": "2026-04-17T15:21:52+00:00",
+    "lastUpdated": "2026-04-17T18:49:21+00:00",
     "status": "ACTIVE",
     "dayCount": 0,
     "startDate": "2026-04-11T00:00:00Z",
@@ -63,7 +63,7 @@
         "label": "Gray zone only — no casualties through Dec 31, 2026",
         "midpoint": 0,
         "unit": "probability",
-        "posterior": 0.9888,
+        "posterior": 0.9792,
         "description": "PRC continues harassment operations (water cannon, laser, close intercept, blocking maneuvers) but no confirmed casualties. Philippines continues resupply missions under pressure. Pattern persists without crossing kinetic threshold. Dominant historical outcome; reinforced by PH-China talks resuming and ADIZ incursions declining."
       },
       "H2": {
@@ -77,14 +77,14 @@
         "label": "Lethal incident — at least one fatality",
         "midpoint": 0,
         "unit": "probability",
-        "posterior": 0.0004,
+        "posterior": 0.005,
         "description": "A kinetic interaction results in at least one confirmed fatality on either side. Could result from: deliberate live fire, severe ramming, helicopter downing, or a water cannon incident causing drowning. PRC has historically avoided lethal outcomes due to MDT tripwire awareness, but escalation dynamics and miscalculation risk are non-trivial over an 8-month horizon."
       },
       "H4": {
         "label": "MDT Article IV invocation by Philippines",
         "midpoint": 0,
         "unit": "probability",
-        "posterior": 0.0,
+        "posterior": 0.005,
         "description": "Philippines formally invokes the 1951 Mutual Defense Treaty Article IV following a PRC attack on Philippine armed forces or public vessels. Requires: (1) lethal or severe kinetic incident, (2) Marcos administration political will to invoke, (3) US willingness to respond. Historical base rate: never invoked since treaty signed. Conditional on H3 occurring, probability of invocation estimated at ~50%, implying ~0.065 unconditional."
       }
     },
@@ -790,9 +790,9 @@
       "regime": "SAFE",
       "worst_hypothesis": "H1"
     },
-    "entropy": 0.0911,
+    "entropy": 0.1767,
     "maxEntropy": 2.0,
-    "uncertaintyRatio": 0.0456,
+    "uncertaintyRatio": 0.0883,
     "evidenceFreshness": {
       "fresh": 6,
       "stale": 5,
@@ -805,10 +805,10 @@
       "H4": "ADMISSIBLE"
     },
     "klFromPrior": {
-      "kl_divergence": 0.5438,
+      "kl_divergence": 0.5014,
       "interpretation": "WELL_EVIDENCED"
     },
-    "lastComputed": "2026-04-17T15:21:52+00:00",
+    "lastComputed": "2026-04-17T18:49:21+00:00",
     "staleDependencies": 0,
     "calibrationHealth": "ACCEPTABLE",
     "unresolvedContradictions": 0,
@@ -835,7 +835,7 @@
         }
       },
       "indistinguishable": [],
-      "lastChecked": "2026-04-17T15:21:52+00:00"
+      "lastChecked": "2026-04-17T18:49:21+00:00"
     }
   },
   "predictionScoring": {

@@ -6,7 +6,7 @@
     "question": "How long will the Strait of Hormuz remain effectively closed?",
     "resolution": "Sustained >30% of pre-war Hormuz traffic (~40 transits/day)",
     "created": "2026-03-02T00:00:00Z",
-    "lastUpdated": "2026-04-17T18:27:11+00:00",
+    "lastUpdated": "2026-04-17T18:49:21+00:00",
     "status": "ACTIVE",
     "dayCount": 45,
     "startDate": "2026-03-02T00:00:00Z",
@@ -70,25 +70,25 @@
         "label": "<6 weeks",
         "midpoint": 4,
         "unit": "weeks",
-        "posterior": 0.0
+        "posterior": 0.005
       },
       "H2": {
         "label": "6wk-4mo",
         "midpoint": 11,
         "unit": "weeks",
-        "posterior": 0.0
+        "posterior": 0.005
       },
       "H3": {
         "label": "4-12mo",
         "midpoint": 34,
         "unit": "weeks",
-        "posterior": 1.0
+        "posterior": 0.9849
       },
       "H4": {
         "label": ">12mo",
         "midpoint": 65,
         "unit": "weeks",
-        "posterior": 0.0
+        "posterior": 0.005
       }
     },
     "expectedValue": 34.0,
@@ -3763,9 +3763,9 @@
       "regime": "SAFE",
       "worst_hypothesis": "H1"
     },
-    "entropy": 0.0,
+    "entropy": 0.1363,
     "maxEntropy": 2.0,
-    "uncertaintyRatio": 0.0,
+    "uncertaintyRatio": 0.0682,
     "evidenceFreshness": {
       "fresh": 29,
       "stale": 133,
@@ -3778,10 +3778,10 @@
       "H4": "ADMISSIBLE"
     },
     "klFromPrior": {
-      "kl_divergence": 1.6094,
+      "kl_divergence": 1.5127,
       "interpretation": "WELL_EVIDENCED"
     },
-    "lastComputed": "2026-04-17T18:27:11+00:00",
+    "lastComputed": "2026-04-17T18:49:21+00:00",
     "staleDependencies": 2,
     "staleDependencyDetails": [
       {
@@ -3811,26 +3811,33 @@
           {
             "hypothesis": "H2",
             "assumed": 0.22,
-            "actual": 0.0,
-            "drift": 0.22
+            "actual": 0.005,
+            "drift": 0.215
           },
           {
             "hypothesis": "H3",
             "assumed": 0.5,
-            "actual": 0.9998,
-            "drift": 0.4998
+            "actual": 0.9849,
+            "drift": 0.4849
           },
           {
             "hypothesis": "H4",
             "assumed": 0.275,
-            "actual": 0.0002,
-            "drift": 0.2748
+            "actual": 0.005,
+            "drift": 0.27
           }
         ]
       }
     ],
     "calibrationHealth": "ACCEPTABLE",
     "unresolvedContradictions": 0,
+    "expiredHypotheses": [
+      {
+        "key": "H1",
+        "label": "<6 weeks",
+        "expiredAtDay": 42
+      }
+    ],
     "designGate": {
       "passed": true,
       "blockers": [],
@@ -3856,7 +3863,7 @@
         }
       },
       "indistinguishable": [],
-      "lastChecked": "2026-04-17T18:27:11+00:00"
+      "lastChecked": "2026-04-17T18:49:21+00:00"
     }
   },
   "dependencies": {

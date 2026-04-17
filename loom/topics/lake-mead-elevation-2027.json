@@ -5,7 +5,7 @@
     "question": "What will Lake Mead water surface elevation (feet above sea level) be on December 31, 2027?",
     "resolution": "USBR official daily reservoir elevation reading for Lake Mead for December 31, 2027, as published on the Bureau of Reclamation Lower Colorado Region daily reservoir data portal. Fallback (in order): December 30 reading if Dec 31 is missing; SNWA published Lake Mead intake elevation for the same date; Western Area Power Administration Hoover Dam daily operations report. Reading is the end-of-day elevation in feet above sea level.",
     "created": "2026-04-13T18:38:33+00:00",
-    "lastUpdated": "2026-04-17T15:23:00+00:00",
+    "lastUpdated": "2026-04-17T18:49:21+00:00",
     "status": "ACTIVE",
     "dayCount": 0,
     "startDate": "2026-04-13",
@@ -42,25 +42,25 @@
         "label": "Recovery: above 1,075 ft (exits Tier 1 shortage zone)",
         "midpoint": 1085,
         "unit": "ft",
-        "posterior": 0.0001
+        "posterior": 0.005
       },
       "H2": {
         "label": "Stable decline: 1,050-1,075 ft (remains in Tier 1 range)",
         "midpoint": 1062,
         "unit": "ft",
-        "posterior": 0.043
+        "posterior": 0.0428
       },
       "H3": {
         "label": "Record-breaking decline: 1,025-1,050 ft (Tier 2 range)",
         "midpoint": 1038,
         "unit": "ft",
-        "posterior": 0.8546
+        "posterior": 0.8505
       },
       "H4": {
         "label": "Severe decline: below 1,025 ft (Tier 3 threshold)",
         "midpoint": 1015,
         "unit": "ft",
-        "posterior": 0.1022
+        "posterior": 0.1017
       }
     },
     "expectedValue": 1036.58,
@@ -540,9 +540,9 @@
       "regime": "SAFE",
       "worst_hypothesis": "H1"
     },
-    "entropy": 0.7265,
+    "entropy": 0.7669,
     "maxEntropy": 2.0,
-    "uncertaintyRatio": 0.3633,
+    "uncertaintyRatio": 0.3835,
     "evidenceFreshness": {
       "fresh": 5,
       "stale": 1,
@@ -555,10 +555,10 @@
       "H4": "ADMISSIBLE"
     },
     "klFromPrior": {
-      "kl_divergence": 0.4219,
+      "kl_divergence": 0.4019,
       "interpretation": "MODERATE"
     },
-    "lastComputed": "2026-04-17T15:23:00+00:00",
+    "lastComputed": "2026-04-17T18:49:21+00:00",
     "staleDependencies": 0,
     "calibrationHealth": "ACCEPTABLE",
     "unresolvedContradictions": 0,
@@ -585,7 +585,7 @@
         }
       },
       "indistinguishable": [],
-      "lastChecked": "2026-04-17T15:23:00+00:00"
+      "lastChecked": "2026-04-17T18:49:21+00:00"
     }
   },
   "predictionScoring": {

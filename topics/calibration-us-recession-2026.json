@@ -6,7 +6,7 @@
     "question": "Will the US economy enter a recession (2 consecutive quarters of negative real GDP growth) by Q4 2026?",
     "resolution": "BEA official advance GDP prints for Q2 2026 (released ~July 2026) and Q3 2026 (released ~Oct 2026). Two consecutive quarters of negative real GDP growth = recession confirmed. NBER declaration is corroborating but NOT required for resolution — the quantitative criterion governs.",
     "created": "2026-04-11T00:00:00Z",
-    "lastUpdated": "2026-04-17T15:22:22+00:00",
+    "lastUpdated": "2026-04-17T18:49:21+00:00",
     "status": "ACTIVE",
     "dayCount": 1,
     "startDate": "2026-04-11T00:00:00Z",
@@ -96,28 +96,28 @@
         "label": "No recession — GDP stays positive both Q2 and Q3 2026",
         "midpoint": 0.0,
         "unit": "probability",
-        "posterior": 0.5115,
+        "posterior": 0.5104,
         "description": "US avoids two consecutive negative GDP quarters. Growth may slow to near-zero (0.0-1.0% annualized) but does not go negative. Labor market softens but holds. Fed cuts 1-2 times as insurance. Tariff impact is absorbed via margin compression and partial pass-through. Resolves: Both Q2 and Q3 BEA advance prints are positive."
       },
       "H2": {
         "label": "Technical recession — 2 negative quarters, shallow (> -1.5% annualized each)",
         "midpoint": 0.33,
         "unit": "probability",
-        "posterior": 0.4365,
+        "posterior": 0.4356,
         "description": "GDP goes negative for 2 quarters but neither quarter exceeds -1.5% annualized contraction. Unemployment rises to 4.8-5.2%. Shallow enough that NBER may delay or decline to call. Consumer spending contracts modestly. Fed cuts aggressively (3+ cuts). Resolves: Q2 or Q3 GDP negative, neither quarter worse than -1.5% ann."
       },
       "H3": {
         "label": "Significant recession — unemployment crosses 5.5%, GDP -1.5% or worse",
         "midpoint": 0.66,
         "unit": "probability",
-        "posterior": 0.0491,
+        "posterior": 0.049,
         "description": "Hard landing. GDP contracts -1.5% or worse in at least one quarter. Unemployment rises through 5.5% by Q4. Corporate layoffs accelerate. Fed pivots to emergency cuts. Credit spreads widen materially. Possible external shock amplifier (trade war escalation, financial contagion). Resolves: At least one GDP print worse than -1.5% ann AND unemployment >5.5%."
       },
       "H4": {
         "label": "Stagflation — negative GDP growth with CPI above 4%",
         "midpoint": 1.0,
         "unit": "probability",
-        "posterior": 0.0029,
+        "posterior": 0.005,
         "description": "Worst case: tariff pass-through re-ignites inflation above 4% CPI while GDP contracts. Fed is caught between cutting to support growth and holding/hiking to contain inflation. Analogues: 1973-74, 1980. Requires tariff escalation beyond current 10% universal — sector-specific hikes (autos, energy) driving simultaneous supply contraction and price increases. Resolves: GDP negative for 2 quarters AND CPI year-over-year above 4%."
       }
     },
@@ -1149,16 +1149,17 @@
   "governance": {
     "health": "DEGRADED",
     "issues": [
-      "Majority stale evidence (9/16)",
-      "Stale dependency: calibration-fed-rate-2026.H1 assumed=0.22, actual=0.3156, drift=9.56%",
-      "Stale dependency: calibration-fed-rate-2026.H3 assumed=0.28, actual=0.1721, drift=10.79%",
+      "Majority stale evidence (10/16)",
+      "Stale dependency: calibration-fed-rate-2026.H1 assumed=0.22, actual=0.4061, drift=18.61%",
+      "Stale dependency: calibration-fed-rate-2026.H2 assumed=0.38, actual=0.4614, drift=8.14%",
+      "Stale dependency: calibration-fed-rate-2026.H3 assumed=0.28, actual=0.0699, drift=21.01%",
       "Stale dependency: calibration-section122-tariffs.H2 assumed=0.18, actual=0.0069, drift=17.31%",
-      "Stale dependency: calibration-section122-tariffs.H3 assumed=0.33, actual=0.1022, drift=22.78%",
-      "Stale dependency: calibration-section122-tariffs.H4 assumed=0.42, actual=0.8908, drift=47.08%",
-      "Stale dependency: hormuz-closure.H2 assumed=0.22, actual=0.0, drift=22.00%",
-      "Stale dependency: hormuz-closure.H3 assumed=0.5, actual=0.9983, drift=49.83%",
-      "Stale dependency: hormuz-closure.H4 assumed=0.275, actual=0.0017, drift=27.33%",
-      "Downstream alert: calibration-fed-rate-2026 has 1 stale assumption(s) from this topic",
+      "Stale dependency: calibration-section122-tariffs.H3 assumed=0.33, actual=0.1017, drift=22.83%",
+      "Stale dependency: calibration-section122-tariffs.H4 assumed=0.42, actual=0.8865, drift=46.65%",
+      "Stale dependency: hormuz-closure.H2 assumed=0.22, actual=0.005, drift=21.50%",
+      "Stale dependency: hormuz-closure.H3 assumed=0.5, actual=0.9849, drift=48.49%",
+      "Stale dependency: hormuz-closure.H4 assumed=0.275, actual=0.005, drift=27.00%",
+      "Downstream alert: calibration-fed-rate-2026 has 3 stale assumption(s) from this topic",
       "Downstream alert: calibration-midterms-2026 has 1 stale assumption(s) from this topic",
       "Downstream alert: calibration-section122-tariffs has 1 stale assumption(s) from this topic"
     ],
@@ -1167,12 +1168,12 @@
       "regime": "SAFE",
       "worst_hypothesis": "H1"
     },
-    "entropy": 1.2547,
+    "entropy": 1.2689,
     "maxEntropy": 2.0,
-    "uncertaintyRatio": 0.6273,
+    "uncertaintyRatio": 0.6344,
     "evidenceFreshness": {
-      "fresh": 7,
-      "stale": 9,
+      "fresh": 6,
+      "stale": 10,
       "total": 16
     },
     "hypothesisAdmissibility": {
@@ -1182,18 +1183,27 @@
       "H4": "ADMISSIBLE"
     },
     "klFromPrior": {
-      "kl_divergence": 0.2005,
+      "kl_divergence": 0.1935,
       "interpretation": "MODERATE"
     },
-    "lastComputed": "2026-04-17T15:22:22+00:00",
-    "staleDependencies": 8,
+    "lastComputed": "2026-04-17T18:49:21+00:00",
+    "staleDependencies": 9,
     "staleDependencyDetails": [
       {
         "upstream_slug": "calibration-fed-rate-2026",
         "hypothesis": "H1",
         "assumed": 0.22,
-        "actual": 0.3156,
-        "drift": 0.0956,
+        "actual": 0.4061,
+        "drift": 0.1861,
+        "tolerance": 0.08,
+        "stale": true
+      },
+      {
+        "upstream_slug": "calibration-fed-rate-2026",
+        "hypothesis": "H2",
+        "assumed": 0.38,
+        "actual": 0.4614,
+        "drift": 0.0814,
         "tolerance": 0.08,
         "stale": true
       },
@@ -1201,8 +1211,8 @@
         "upstream_slug": "calibration-fed-rate-2026",
         "hypothesis": "H3",
         "assumed": 0.28,
-        "actual": 0.1721,
-        "drift": 0.1079,
+        "actual": 0.0699,
+        "drift": 0.2101,
         "tolerance": 0.08,
         "stale": true
       },
@@ -1219,8 +1229,8 @@
         "upstream_slug": "calibration-section122-tariffs",
         "hypothesis": "H3",
         "assumed": 0.33,
-        "actual": 0.1022,
-        "drift": 0.2278,
+        "actual": 0.1017,
+        "drift": 0.2283,
         "tolerance": 0.1,
         "stale": true
       },
@@ -1228,8 +1238,8 @@
         "upstream_slug": "calibration-section122-tariffs",
         "hypothesis": "H4",
         "assumed": 0.42,
-        "actual": 0.8908,
-        "drift": 0.4708,
+        "actual": 0.8865,
+        "drift": 0.4665,
         "tolerance": 0.1,
         "stale": true
       },
@@ -1237,8 +1247,8 @@
         "upstream_slug": "hormuz-closure",
         "hypothesis": "H2",
         "assumed": 0.22,
-        "actual": 0.0,
-        "drift": 0.22,
+        "actual": 0.005,
+        "drift": 0.215,
         "tolerance": 0.1,
         "stale": true
       },
@@ -1246,8 +1256,8 @@
         "upstream_slug": "hormuz-closure",
         "hypothesis": "H3",
         "assumed": 0.5,
-        "actual": 0.9983,
-        "drift": 0.4983,
+        "actual": 0.9849,
+        "drift": 0.4849,
         "tolerance": 0.1,
         "stale": true
       },
@@ -1255,8 +1265,8 @@
         "upstream_slug": "hormuz-closure",
         "hypothesis": "H4",
         "assumed": 0.275,
-        "actual": 0.0017,
-        "drift": 0.2733,
+        "actual": 0.005,
+        "drift": 0.27,
         "tolerance": 0.1,
         "stale": true
       }
@@ -1269,8 +1279,20 @@
           {
             "hypothesis": "H2",
             "assumed": 0.22,
-            "actual": 0.3806,
-            "drift": 0.1606
+            "actual": 0.4365,
+            "drift": 0.2165
+          },
+          {
+            "hypothesis": "H3",
+            "assumed": 0.14,
+            "actual": 0.0491,
+            "drift": 0.0909
+          },
+          {
+            "hypothesis": "H4",
+            "assumed": 0.09,
+            "actual": 0.0029,
+            "drift": 0.0871
           }
         ]
       },
@@ -1281,8 +1303,8 @@
           {
             "hypothesis": "H2",
             "assumed": 0.22,
-            "actual": 0.3806,
-            "drift": 0.1606
+            "actual": 0.4365,
+            "drift": 0.2165
           }
         ]
       },
@@ -1293,8 +1315,8 @@
           {
             "hypothesis": "H2",
             "assumed": 0.22,
-            "actual": 0.3806,
-            "drift": 0.1606
+            "actual": 0.4365,
+            "drift": 0.2165
           }
         ]
       }
@@ -1324,7 +1346,7 @@
         }
       },
       "indistinguishable": [],
-      "lastChecked": "2026-04-17T15:22:22+00:00"
+      "lastChecked": "2026-04-17T18:49:21+00:00"
     }
   },
   "predictionScoring": {

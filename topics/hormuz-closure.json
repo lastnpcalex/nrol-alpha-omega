@@ -6,7 +6,7 @@
     "question": "How long will the Strait of Hormuz remain effectively closed?",
     "resolution": "Sustained >30% of pre-war Hormuz traffic (~40 transits/day)",
     "created": "2026-03-02T00:00:00Z",
-    "lastUpdated": "2026-04-17T18:46:56+00:00",
+    "lastUpdated": "2026-04-17T18:49:21+00:00",
     "status": "ACTIVE",
     "dayCount": 45,
     "startDate": "2026-03-02T00:00:00Z",
@@ -3781,7 +3781,7 @@
       "kl_divergence": 1.5127,
       "interpretation": "WELL_EVIDENCED"
     },
-    "lastComputed": "2026-04-17T18:46:56+00:00",
+    "lastComputed": "2026-04-17T18:49:21+00:00",
     "staleDependencies": 2,
     "staleDependencyDetails": [
       {
@@ -3811,20 +3811,20 @@
           {
             "hypothesis": "H2",
             "assumed": 0.22,
-            "actual": 0.0,
-            "drift": 0.22
+            "actual": 0.005,
+            "drift": 0.215
           },
           {
             "hypothesis": "H3",
             "assumed": 0.5,
-            "actual": 1.0,
-            "drift": 0.5
+            "actual": 0.9849,
+            "drift": 0.4849
           },
           {
             "hypothesis": "H4",
             "assumed": 0.275,
-            "actual": 0.0,
-            "drift": 0.275
+            "actual": 0.005,
+            "drift": 0.27
           }
         ]
       }
@@ -3863,7 +3863,7 @@
         }
       },
       "indistinguishable": [],
-      "lastChecked": "2026-04-17T18:46:56+00:00"
+      "lastChecked": "2026-04-17T18:49:21+00:00"
     }
   },
   "dependencies": {

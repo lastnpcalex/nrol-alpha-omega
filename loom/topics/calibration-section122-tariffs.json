@@ -6,7 +6,7 @@
     "question": "What happens to the Trump administration's Section 122 10% universal tariff when it reaches its 150-day statutory limit in late July 2026?",
     "resolution": "Observable: White House action or documented inaction by July 23, 2026 (150 days from Feb 24 effective date). Resolution criteria: (a) tariff expires with no successor = H1; (b) new proclamation issues at ~10% using different authority = H2; (c) new proclamation/action at higher rate or expanded scope = H3; (d) bilateral deal(s) announced covering >=30% of affected import value with reduced rates = H4. Partial-deal-plus-continuation counts as H4 if rollback is material.",
     "created": "2026-04-11T00:00:00Z",
-    "lastUpdated": "2026-04-17T15:21:52+00:00",
+    "lastUpdated": "2026-04-17T18:49:21+00:00",
     "status": "ACTIVE",
     "dayCount": 47,
     "startDate": "2026-02-24T00:00:00Z",
@@ -63,7 +63,7 @@
         "label": "Expires as scheduled — no replacement, no extension",
         "midpoint": 0,
         "unit": "weeks",
-        "posterior": 0.0,
+        "posterior": 0.005,
         "description": "The tariff lapses on ~July 23, 2026 with no successor action. Administration makes no new proclamation, Congress does not authorize extension, Section 301 investigations have not yet produced usable tariff authority. Politically very costly — would be framed as capitulation. Requires either a court order forcing expiry or a deliberate policy reversal. Base rate for clean expiry given current posture: low.",
         "_prior_note": "7% reflects near-impossibility of deliberate no-action given political signaling. Only fires if legal constraint (court order) or unexpected political reversal."
       },
@@ -79,7 +79,7 @@
         "label": "Expanded — higher rate and/or broader product scope",
         "midpoint": 0,
         "unit": "weeks",
-        "posterior": 0.1022,
+        "posterior": 0.1017,
         "description": "At or before expiry, administration announces escalation: higher tariff rate (above 10%), expanded country coverage, expanded product scope, or a new Section 301 tariff regime (historically 25%+ on targeted categories) that replaces the universal surcharge with a more aggressive targeted structure. New Section 301 investigations into EU, Mexico, and China are the most direct pipeline. A 25% targeted tariff on EU autos or Chinese tech goods would qualify as H3 even if the universal 10% lapses.",
         "_prior_note": "33% reflects the administration's track record of using tariff deadlines as escalation moments rather than resolution moments, plus active Section 301 pipeline. H3 is the modal outcome if bilateral deals fail to materialize."
       },
@@ -87,7 +87,7 @@
         "label": "Partial rollback — bilateral deal(s) reduce tariffs on >=30% of affected import value",
         "midpoint": 0,
         "unit": "weeks",
-        "posterior": 0.8908,
+        "posterior": 0.8865,
         "description": "One or more bilateral trade agreements or framework deals (EU, Mexico, Japan, UK, Canada, or others) are announced before or at the July 23 deadline, resulting in materially reduced tariff rates on a significant share of the ~$1.2T import base. Does not require a comprehensive agreement — sector deals (e.g., EU autos, Mexican agricultural goods) that cover >=30% of affected volume qualify. May be accompanied by continuation of tariffs on non-deal partners. This is the stated preferred outcome of the administration and trading partners.",
         "_prior_note": "42% reflects: (1) bilateral deal framing as stated policy goal; (2) three active negotiating tracks (EU, Mexico/Canada, China-adjacent); (3) both sides have economic incentives before US midterm season; BUT (4) discount heavily because 3.5 months is tight for complex deals, and partial-deal announcements often get classified as 'framework' without tariff relief. Set as modal outcome but note high uncertainty."
       }
@@ -881,7 +881,7 @@
     "health": "DEGRADED",
     "issues": [
       "Majority stale evidence (10/15)",
-      "Stale dependency: calibration-us-recession-2026.H2 assumed=0.22, actual=0.3806, drift=16.06%",
+      "Stale dependency: calibration-us-recession-2026.H2 assumed=0.22, actual=0.4365, drift=21.65%",
       "Downstream alert: calibration-midterms-2026 has 3 stale assumption(s) from this topic",
       "Downstream alert: calibration-us-recession-2026 has 3 stale assumption(s) from this topic"
     ],
@@ -890,9 +890,9 @@
       "regime": "SAFE",
       "worst_hypothesis": "H1"
     },
-    "entropy": 0.5344,
+    "entropy": 0.5772,
     "maxEntropy": 2.0,
-    "uncertaintyRatio": 0.2672,
+    "uncertaintyRatio": 0.2886,
     "evidenceFreshness": {
       "fresh": 5,
       "stale": 10,
@@ -905,18 +905,18 @@
       "H4": "ADMISSIBLE"
     },
     "klFromPrior": {
-      "kl_divergence": 0.5275,
+      "kl_divergence": 0.5068,
       "interpretation": "WELL_EVIDENCED"
     },
-    "lastComputed": "2026-04-17T15:21:52+00:00",
+    "lastComputed": "2026-04-17T18:49:21+00:00",
     "staleDependencies": 1,
     "staleDependencyDetails": [
       {
         "upstream_slug": "calibration-us-recession-2026",
         "hypothesis": "H2",
         "assumed": 0.22,
-        "actual": 0.3806,
-        "drift": 0.1606,
+        "actual": 0.4365,
+        "drift": 0.2165,
         "tolerance": 0.1,
         "stale": true
       }
@@ -929,20 +929,20 @@
           {
             "hypothesis": "H2",
             "assumed": 0.18,
-            "actual": 0.0209,
-            "drift": 0.1591
+            "actual": 0.0069,
+            "drift": 0.1731
           },
           {
             "hypothesis": "H3",
             "assumed": 0.33,
-            "actual": 0.133,
-            "drift": 0.197
+            "actual": 0.1022,
+            "drift": 0.2278
           },
           {
             "hypothesis": "H4",
             "assumed": 0.42,
-            "actual": 0.845,
-            "drift": 0.425
+            "actual": 0.8908,
+            "drift": 0.4708
           }
         ]
       },
@@ -953,20 +953,20 @@
           {
             "hypothesis": "H2",
             "assumed": 0.18,
-            "actual": 0.0209,
-            "drift": 0.1591
+            "actual": 0.0069,
+            "drift": 0.1731
           },
           {
             "hypothesis": "H3",
             "assumed": 0.33,
-            "actual": 0.133,
-            "drift": 0.197
+            "actual": 0.1022,
+            "drift": 0.2278
           },
           {
             "hypothesis": "H4",
             "assumed": 0.42,
-            "actual": 0.845,
-            "drift": 0.425
+            "actual": 0.8908,
+            "drift": 0.4708
           }
         ]
       }
@@ -974,6 +974,11 @@
     "calibrationHealth": "ACCEPTABLE",
     "unresolvedContradictions": 0,
     "expiredHypotheses": [
+      {
+        "key": "H1",
+        "label": "Expires as scheduled — no replacement, no extension",
+        "expiredAtDay": 0
+      },
       {
         "key": "H2",
         "label": "Maintained at same ~10% rate via new authority",
@@ -1013,7 +1018,7 @@
         }
       },
       "indistinguishable": [],
-      "lastChecked": "2026-04-17T15:21:52+00:00"
+      "lastChecked": "2026-04-17T18:49:21+00:00"
     }
   },
   "dependencies": {

@@ -6,7 +6,7 @@
     "question": "Will Russia and Ukraine reach a formal ceasefire agreement by December 31, 2026?",
     "resolution": "A document signed by authorized representatives of both Russia and Ukraine constituting a mutual commitment to halt offensive operations across a defined line of contact — not a unilateral declaration, not a temporary humanitarian truce (Easter-style), and not a third-party mediated pause without bilateral signature. Frozen-conflict line stabilization without a signed document does NOT resolve H1.",
     "created": "2026-04-11T00:00:00Z",
-    "lastUpdated": "2026-04-17T15:21:52+00:00",
+    "lastUpdated": "2026-04-17T18:49:21+00:00",
     "status": "ACTIVE",
     "dayCount": 0,
     "startDate": "2026-04-11T00:00:00Z",
@@ -68,28 +68,28 @@
         "label": "Comprehensive peace deal — formal signed ceasefire with territorial settlement",
         "midpoint": 20,
         "unit": "weeks",
-        "posterior": 0.0004,
+        "posterior": 0.005,
         "description": "Both parties sign a document halting offensive operations and specifying a line of contact or broader territorial arrangement. Requires either Russian acceptance of current-control lines or Ukrainian acceptance of Russian territorial gains. Neither condition is met as of April 2026. Historical comp: Minsk II took ~6 months of talks after Debaltseve and still failed. Assigned 7% — non-zero because US pressure combined with Iran-war distraction could force Kyiv's hand, but Russia's maximalist demands make mutual signature highly unlikely by Dec 31."
       },
       "H2": {
         "label": "Frozen conflict — fighting stops de facto, no formal agreement",
         "midpoint": 28,
         "unit": "weeks",
-        "posterior": 0.0167,
+        "posterior": 0.0166,
         "description": "Both sides exhaust offensive momentum and fighting drops below threshold of major operations, but no document is signed. Historical comp: Korea (armistice, distinct from peace treaty), Cyprus 1974, Nagorno-Karabakh pre-2020. Assigned 22% — plausible if US disengagement from European security accelerates and both sides face attrition exhaustion, but Russia still has offensive incentive and Kyiv won't accept a line that legitimizes Russian gains."
       },
       "H3": {
         "label": "Limited truces only — episodic ceasefires, no lasting agreement",
         "midpoint": 0,
         "unit": "weeks",
-        "posterior": 0.9261,
+        "posterior": 0.9218,
         "description": "The Easter 32-hour pattern continues: holiday or crisis-driven pauses negotiated under US/Turkish/Vatican pressure, none converting to a durable arrangement. This is the modal outcome given the April 2026 baseline. Assigned 47% — highest prior because it matches current trajectory (Easter ceasefire), the structural impasse (territory), and the distracted mediator environment (Washington). Resolves as H3 if by Dec 31 there has been no sustained halt exceeding ~30 days."
       },
       "H4": {
         "label": "Escalation — new major Russian offensive or external actor military entry",
         "midpoint": 0,
         "unit": "weeks",
-        "posterior": 0.0569,
+        "posterior": 0.0566,
         "description": "Russia launches a summer/autumn offensive capturing new significant population centers (Kharkiv, Sumy, Odesa approaches), or a NATO-member country formally deploys combat troops to Ukraine triggering Russian escalation response. Assigned 24% — elevated because: (1) Russia historically uses summer operational windows, (2) UK/France military hub pledges are a declared Russian red line, (3) Washington's Iran distraction reduces deterrence credibility, (4) Russian economy showing strain but Putin faces no domestic accountability constraint."
       }
     },
@@ -811,9 +811,9 @@
       "regime": "SAFE",
       "worst_hypothesis": "H1"
     },
-    "entropy": 0.441,
+    "entropy": 0.4792,
     "maxEntropy": 2.0,
-    "uncertaintyRatio": 0.2205,
+    "uncertaintyRatio": 0.2396,
     "evidenceFreshness": {
       "fresh": 4,
       "stale": 10,
@@ -826,10 +826,10 @@
       "H4": "ADMISSIBLE"
     },
     "klFromPrior": {
-      "kl_divergence": 0.5011,
-      "interpretation": "WELL_EVIDENCED"
+      "kl_divergence": 0.4831,
+      "interpretation": "MODERATE"
     },
-    "lastComputed": "2026-04-17T15:21:52+00:00",
+    "lastComputed": "2026-04-17T18:49:21+00:00",
     "staleDependencies": 2,
     "staleDependencyDetails": [
       {
@@ -876,7 +876,7 @@
         }
       },
       "indistinguishable": [],
-      "lastChecked": "2026-04-17T15:21:52+00:00"
+      "lastChecked": "2026-04-17T18:49:21+00:00"
     }
   },
   "dependencies": {
