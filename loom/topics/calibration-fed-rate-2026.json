@@ -6,7 +6,7 @@
     "question": "Where will the Federal Reserve target rate be on December 31, 2026?",
     "resolution": "FOMC official target range as announced at or following the December 2026 FOMC meeting (scheduled Dec 9-10, 2026). Resolved against the FOMC statement on federalreserve.gov.",
     "created": "2026-04-11T00:00:00Z",
-    "lastUpdated": "2026-04-12T00:00:00Z",
+    "lastUpdated": "2026-04-17T14:01:37+00:00",
     "status": "ACTIVE",
     "dayCount": 1,
     "startDate": "2026-04-11T00:00:00Z",
@@ -67,32 +67,32 @@
         "label": "No further cuts — stays 3.50-3.75%",
         "midpoint": 3.625,
         "unit": "percent",
-        "posterior": 0.22,
+        "posterior": 0.3156,
         "description": "Fed holds all year. Tariff-driven inflation keeps CPI sticky above 3%, forcing Powell to maintain the pause indefinitely. Dot plot median signals one cut but FOMC ultimately does not deliver it. Consistent with stagflation-lite scenario where labor market softens but inflation prevents easing."
       },
       "H2": {
         "label": "One cut — 3.25-3.50%",
         "midpoint": 3.375,
         "unit": "percent",
-        "posterior": 0.38,
+        "posterior": 0.3893,
         "description": "Dot plot median outcome. Fed delivers one 25bp cut, likely in September or December. Inflation moderates gradually, unemployment ticks up to ~4.8-5.0%, but Fed moves cautiously. Most consistent with current guidance and SEP projections."
       },
       "H3": {
         "label": "Two+ cuts — 3.00-3.25% or below",
         "midpoint": 3.125,
         "unit": "percent",
-        "posterior": 0.28,
+        "posterior": 0.1721,
         "description": "Labor market deteriorates faster than expected (unemployment 5.2%+), tariff shock proves disinflationary via demand destruction, or financial conditions tighten sharply. Goldman and Bankrate both see 2-3 cuts as plausible. Requires either clear disinflation signal or meaningful growth scare."
       },
       "H4": {
         "label": "Rate hike — inflation forces reversal",
         "midpoint": 4.0,
         "unit": "percent",
-        "posterior": 0.12,
+        "posterior": 0.123,
         "description": "Tariff pass-through re-accelerates CPI to 4%+, inflation expectations become unanchored, or a dollar crisis forces the Fed's hand. Hike of 25-50bp. Historically rare once an easing cycle begins, but tariff environment creates genuine tail risk. H4 is not negligible given current policy uncertainty."
       }
     },
-    "expectedValue": 3.43,
+    "expectedValue": 3.49,
     "expectedUnit": "percent (midpoint of expected target range)",
     "expectedValueNote": "Probability-weighted midpoint: 0.22*3.625 + 0.38*3.375 + 0.28*3.125 + 0.12*4.0 = 3.43%",
     "posteriorHistory": [
@@ -105,6 +105,28 @@
           "H4": 0.12
         },
         "note": "Initial priors. Anchored on dot plot median (one cut), adjusted up for H3 given Goldman/Bankrate forecasts, assigned meaningful H4 tail for tariff inflation risk. Unemployment at 4.6% creates genuine two-way risk."
+      },
+      {
+        "date": "2026-04-17",
+        "H1": 0.3156,
+        "H2": 0.3893,
+        "H3": 0.1721,
+        "H4": 0.123,
+        "note": "Evidence ev_011: FOMC April 8 minutes show more officials see possible rate hikes in 2026; rate h",
+        "likelihoods": {
+          "H1": 0.35,
+          "H2": 0.25,
+          "H3": 0.15,
+          "H4": 0.25
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        }
       }
     ]
   },
@@ -485,7 +507,9 @@
         "FOMC"
       ],
       "claimState": "OBSERVED",
-      "weight": 1.0
+      "weight": 1.0,
+      "ledger": "DECISION",
+      "effectiveWeight": 0.25
     },
     {
       "id": "ev_002",
@@ -497,7 +521,9 @@
         "FOMC"
       ],
       "claimState": "OBSERVED",
-      "weight": 1.0
+      "weight": 1.0,
+      "ledger": "DECISION",
+      "effectiveWeight": 0.25
     },
     {
       "id": "ev_003",
@@ -508,7 +534,9 @@
         "DATA"
       ],
       "claimState": "OBSERVED",
-      "weight": 1.0
+      "weight": 1.0,
+      "ledger": "DECISION",
+      "effectiveWeight": 0.25
     },
     {
       "id": "ev_004",
@@ -520,7 +548,9 @@
       ],
       "claimState": "SUPPORTED",
       "weight": 0.6,
-      "weightNote": "Wall Street forecast, not primary source. Informative for market prior but RHETORIC-adjacent."
+      "weightNote": "Wall Street forecast, not primary source. Informative for market prior but RHETORIC-adjacent.",
+      "ledger": "DECISION",
+      "effectiveWeight": 0.5
     },
     {
       "id": "ev_005",
@@ -532,52 +562,112 @@
       ],
       "claimState": "PROPOSED",
       "weight": 0.4,
-      "weightNote": "Retail-facing forecast aggregator. Lower weight than primary Fed or primary research sources."
+      "weightNote": "Retail-facing forecast aggregator. Lower weight than primary Fed or primary research sources.",
+      "ledger": "DECISION",
+      "effectiveWeight": 0.25
     },
     {
       "id": "ev_006",
       "time": "2026-04-08T00:00:00Z",
       "text": "FOMC minutes from March 17-18 meeting released. Fed officials 'still saw rate cuts as a possibility' but stressed need to look through Iran war energy shock. Minutes show tension between inflation persistence and growth concerns. Rate hike probability rose to 14% before Iran ceasefire.",
-      "tags": ["EVENT", "FOMC"],
+      "tags": [
+        "EVENT",
+        "FOMC"
+      ],
       "source": "Federal Reserve FOMC Minutes, released April 8 2026",
       "claimState": "OBSERVED",
       "weight": 1.0,
       "posteriorImpact": "Confirms H2 as modal: cuts still on table but highly conditional. H4 (hike) probability briefly spiked during Iran conflict but has since retreated. No posterior movement — consistent with existing priors.",
-      "note": "Primary source (Federal Reserve). US News, Kraken blog both confirm same reading."
+      "note": "Primary source (Federal Reserve). US News, Kraken blog both confirm same reading.",
+      "ledger": "DECISION",
+      "effectiveWeight": 0.2283
     },
     {
       "id": "ev_007",
       "time": "2026-04-10T00:00:00Z",
       "text": "March 2026 CPI: headline +0.9% m/m (3.3% YoY) driven by energy +10.9% (Iran war gasoline +21.2%). Core CPI +0.2% m/m (2.6% YoY) — both 0.1pp BELOW consensus. Services ex-energy +0.2% m/m (3.0% YoY). Shelter +0.3% m/m (3.0% YoY, lowest since Aug 2021). Food unchanged. Real earnings -0.6% m/m.",
-      "tags": ["DATA"],
+      "tags": [
+        "DATA"
+      ],
       "source": "BLS CPI release via CNBC, April 10 2026",
       "claimState": "OBSERVED",
       "weight": 1.0,
       "posteriorImpact": "Mixed signal with H2/H3 lean. Headline inflation alarming (3.3%) but Fed will look through energy. Core below forecast is dovish signal — supports rate cut thesis. Goldman: 'Fed has room to be patient.' Key: shelter at 3.0% is lowest in 5 years — structural disinflation in stickiest component.",
-      "note": "BLS primary data. Core CPI below forecast is the critical signal. Tariff visible in apparel (+1%), airlines (+2.7%) but small magnitude."
+      "note": "BLS primary data. Core CPI below forecast is the critical signal. Tariff visible in apparel (+1%), airlines (+2.7%) but small magnitude.",
+      "ledger": "DECISION",
+      "effectiveWeight": 0.25
     },
     {
       "id": "ev_008",
       "time": "2026-04-10T00:00:00Z",
       "text": "Goldman Sachs Asset Management (Wilson-Elizondo): 'We believe the Fed will look through the energy-driven noise so long as these factors hold. The Fed has room to be patient, and every reason to do so. Today's number buys the Fed time, but the real test lies ahead.'",
-      "tags": ["ANALYSIS"],
+      "tags": [
+        "ANALYSIS"
+      ],
       "source": "Goldman Sachs Asset Management via CNBC, April 10 2026",
       "claimState": "PROPOSED",
       "weight": 0.5,
       "posteriorImpact": "NONE — ANALYSIS tag. Informative for market consensus but does not move posteriors. Confirms 'patient' framing consistent with H1 (no cut) or slow H2.",
-      "note": "Goldman is a market participant, not a Fed source. Tagged ANALYSIS per framework rules."
+      "note": "Goldman is a market participant, not a Fed source. Tagged ANALYSIS per framework rules.",
+      "ledger": "DECISION",
+      "effectiveWeight": 0.25
     },
     {
       "id": "ev_009",
-      "time": "2026-04-14T00:00:00Z",
-      "text": "Treasury Secretary Bessent told Semafor that Fed should 'wait and see' before lowering rates amid Iran war. 'Do I think rates should be lowered? Eventually. I think now that we have to wait and see.' Said Fed is 'doing the right thing by sitting and watching.' When asked if economy would still grow >4%, replied 'obviously we're going to have some make-up to do.' Separately, IMF cut global growth forecast to 3.1% (down 0.2pp), warned severe Iran war scenario could push global growth to 2% — 'close call for global recession.'",
-      "tags": ["RHETORIC", "HAWKISH"],
-      "source": "CNN",
-      "provenance": "CNN live blog citing Semafor interview (Bessent) and IMF World Economic Outlook April 2026",
-      "claimState": "OBSERVED",
-      "weight": 0.7,
-      "posteriorImpact": "NONE. Bessent is Treasury Secretary, not FOMC member — his views do not set monetary policy. Tagged RHETORIC per framework rules. However, Bessent aligning with Fed's 'wait and see' posture reinforces CAUTIOUSLY_NEUTRAL FOMC communication submodel. H1-directional (no cut pressure from executive branch) but no indicator fires. IMF forecast is global, not US-specific, and is a model projection not hard data.",
-      "note": "Source trust: CNN baseTrust 0.75. Bessent quote verified via Semafor primary source. IMF WEO is primary institutional data. Weight 0.7 for rhetoric + analysis blend. Key: Bessent implicitly conceding <4% growth — first time administration has walked back growth target."
+      "time": "2026-04-08T18:00:00Z",
+      "text": "FOMC March meeting minutes released April 8 show more Federal Reserve officials now see possible rate hikes in 2026, driven by Iran-war oil shock and tariff-driven inflation persistence. Fed held at 3.50-3.75% for 2nd consecutive meeting. Median dot plot still signals 1 cut but distribution widening.",
+      "tags": [
+        "POLICY",
+        "DATA"
+      ],
+      "source": "Federal Reserve Board / US News / Axios",
+      "claimState": "SUPPORTED",
+      "weight": 1.0,
+      "posteriorImpact": "NONE. H4-directional (hike scenario). t3_fomc_minutes_dovish requires dovish language - these minutes were hawkish, opposite direction. t1_dot_plot_shift_hawkish requires SEP dot plot to shift to zero cuts - median still shows 1 cut. No indicator fired.",
+      "note": "Multiple officials discussing hikes is a notable shift. Next FOMC May 6-7 with new SEP.",
+      "ledger": "DECISION",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_010",
+      "time": "2026-04-14T16:00:00Z",
+      "text": "Treasury Secretary Bessent told Semafor the Fed should 'wait and see' before lowering rates amid Iran war. 'Do I think rates should be lowered? Eventually. I think now that we have to wait and see.' Said Fed is 'doing the right thing by sitting and watching.' On 4%+ growth target for 2026: 'Obviously, we're going to have some make-up to do.' Comments come as Trump continues pushing for rate cuts.",
+      "tags": [
+        "RHETORIC",
+        "HAWKISH"
+      ],
+      "source": "CNN (citing Semafor interview with Bessent)",
+      "claimState": "SUPPORTED",
+      "weight": 0.0,
+      "posteriorImpact": "NONE. RHETORIC tag — Bessent is Treasury Secretary, not FOMC. Statement aligns with existing Fed posture (hold). No indicator fires. H1-directional (supports no-cut thesis) but RHETORIC from non-Fed official does not move posteriors per governor rules. Notable: Bessent now publicly at odds with Trump's rate-cut demands.",
+      "note": "CNN effectiveTrust 0.7462. Direct quote from Bessent via Semafor. RHETORIC weight = 0.0 per governor. Bessent's 'make-up to do' on growth acknowledges war damage — informative for recession topic cross-reference.",
+      "ledger": "DECISION",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_011",
+      "time": "2026-04-17T14:01:37+00:00",
+      "tag": "POLICY",
+      "tags": [
+        "POLICY"
+      ],
+      "text": "FOMC April 8 minutes show more officials see possible rate hikes in 2026; rate held at 3.50-3.75% in March; SEP median forecast still 1 cut; next decision Apr 29; Fed expects to hold until December",
+      "provenance": "OBSERVED",
+      "source": "US News/Federal Reserve",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-17T14:01:37+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: stale_evidence, quorum_failure. Reason: Evidence ev_011: FOMC April 8 minutes show more officials see possible rate hikes in 2026; rate h",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
     }
   ],
   "dataFeeds": {
@@ -717,10 +807,103 @@
     "2yr 10yr Treasury yield spread inversion 2026",
     "GDP Q1 2026 advance estimate BEA"
   ],
-  "governance": null,
+  "governance": {
+    "health": "DEGRADED",
+    "issues": [
+      "Majority stale evidence (9/12)",
+      "Near-maximum uncertainty — model is not discriminating",
+      "Stale dependency: calibration-us-recession-2026.H2 assumed=0.22, actual=0.3806, drift=16.06%"
+    ],
+    "rt": {
+      "rt": 0.0,
+      "regime": "SAFE",
+      "worst_hypothesis": "H1"
+    },
+    "entropy": 1.8637,
+    "maxEntropy": 2.0,
+    "uncertaintyRatio": 0.9318,
+    "evidenceFreshness": {
+      "fresh": 3,
+      "stale": 9,
+      "total": 12
+    },
+    "hypothesisAdmissibility": {
+      "H1": "ADMISSIBLE",
+      "H2": "ADMISSIBLE",
+      "H3": "ADMISSIBLE",
+      "H4": "ADMISSIBLE"
+    },
+    "klFromPrior": {
+      "kl_divergence": 0.0426,
+      "interpretation": "MODERATE"
+    },
+    "lastComputed": "2026-04-17T14:01:37+00:00",
+    "staleDependencies": 1,
+    "staleDependencyDetails": [
+      {
+        "upstream_slug": "calibration-us-recession-2026",
+        "hypothesis": "H2",
+        "assumed": 0.22,
+        "actual": 0.3806,
+        "drift": 0.1606,
+        "tolerance": 0.08,
+        "stale": true
+      }
+    ],
+    "calibrationHealth": "ACCEPTABLE",
+    "unresolvedContradictions": 0,
+    "designGate": {
+      "passed": true,
+      "blockers": [],
+      "warnings": [],
+      "coverage": {
+        "H1": {
+          "pos": 5,
+          "neg": 6
+        },
+        "H2": {
+          "pos": 9,
+          "neg": 5
+        },
+        "H3": {
+          "pos": 15,
+          "neg": 7
+        },
+        "H4": {
+          "pos": 6,
+          "neg": 4
+        }
+      },
+      "indistinguishable": [],
+      "lastChecked": "2026-04-17T14:01:37+00:00"
+    }
+  },
   "predictionScoring": {
     "_docs": "Calibration infrastructure. Snapshots are auto-created by engine on each posterior update. Record outcome when topic resolves (after Dec 2026 FOMC meeting), then compute_calibration_report() for Brier analysis.",
-    "snapshots": [],
+    "snapshots": [
+      {
+        "timestamp": "2026-04-17T14:01:37+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.3156,
+          "H2": 0.3893,
+          "H3": 0.1721,
+          "H4": 0.123
+        },
+        "entropy": 1.8637
+      },
+      {
+        "timestamp": "2026-04-17T14:01:37+00:00",
+        "trigger": "pipeline:ev_011",
+        "posteriors": {
+          "H1": 0.3156,
+          "H2": 0.3893,
+          "H3": 0.1721,
+          "H4": 0.123
+        },
+        "entropy": 1.8637
+      }
+    ],
     "outcomes": [],
     "brierScores": []
   },
@@ -737,5 +920,100 @@
         "tolerance": 0.08
       }
     ]
+  },
+  "contradictionTracker": {
+    "unresolved": [],
+    "resolved": [
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-08T00:00:00Z",
+        "entry_a_text": "FOMC minutes from March 17-18 meeting released. Fed officials 'still saw rate cuts as a possibility' but stressed need to look through Iran war energy shock. Minutes show tension between inflation persistence and growth concerns. Rate hike probability rose to 14% before Iran ceasefire.",
+        "entry_b_time": "2026-04-17T14:01:37+00:00",
+        "entry_b_text": "FOMC April 8 minutes show more officials see possible rate hikes in 2026; rate held at 3.50-3.75% in March; SEP median forecast still 1 cut; next decision Apr 29; Fed expects to hold until December",
+        "reason": "Numeric divergence 51.7% on metric (context: to): new=29.0, existing=14.0, threshold=10%",
+        "detected": "2026-04-17T14:01:37Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T14:01:37Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-10T00:00:00Z",
+        "entry_a_text": "Bankrate analyst consensus (April 2026): projects three 25bp cuts in 2026, bringing rate to 2.75-3.00%. Minority view in professional forecaster community.",
+        "entry_b_time": "2026-04-17T14:01:37+00:00",
+        "entry_b_text": "FOMC April 8 minutes show more officials see possible rate hikes in 2026; rate held at 3.50-3.75% in March; SEP median forecast still 1 cut; next decision Apr 29; Fed expects to hold until December",
+        "reason": "Numeric divergence 99.6% on metric (context: april): new=8.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-17T14:01:37Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T14:01:37Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-10T00:00:00Z",
+        "entry_a_text": "Goldman Sachs forecast (as of April 2026): projects two 25bp cuts in 2026, most likely in September and December, bringing rate to 3.00-3.25%. Cites tariff-driven demand weakness outweighing inflation concerns over second half.",
+        "entry_b_time": "2026-04-17T14:01:37+00:00",
+        "entry_b_text": "FOMC April 8 minutes show more officials see possible rate hikes in 2026; rate held at 3.50-3.75% in March; SEP median forecast still 1 cut; next decision Apr 29; Fed expects to hold until December",
+        "reason": "Numeric divergence 99.6% on metric (context: april): new=8.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-17T14:01:37Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T14:01:37Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-03-19T00:00:00Z",
+        "entry_a_text": "March 2026 SEP dot plot: median projection remains one 25bp cut in 2026 (to 3.25-3.50%). Range of participant views spans zero to three cuts. No participant projects a hike.",
+        "entry_b_time": "2026-04-17T14:01:37+00:00",
+        "entry_b_text": "FOMC April 8 minutes show more officials see possible rate hikes in 2026; rate held at 3.50-3.75% in March; SEP median forecast still 1 cut; next decision Apr 29; Fed expects to hold until December",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: cut, march, median, sep",
+        "detected": "2026-04-17T14:01:37Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T14:01:37Z"
+      }
+    ]
+  },
+  "sourceCalibration": {
+    "ledger": [
+      {
+        "timestamp": "2026-04-17T14:01:37Z",
+        "evidence_index": 5,
+        "confirming_index": 8,
+        "resolution": "CONFIRMED",
+        "source": "Federal Reserve FOMC Minutes, released April 8 2026",
+        "confirming_source": "Federal Reserve Board / US News / Axios",
+        "trust_delta": 0.05,
+        "original_text_snippet": "FOMC minutes from March 17-18 meeting released. Fed officials 'still saw rate cuts as a possibility' but stressed need t",
+        "confirming_text_snippet": "FOMC March meeting minutes released April 8 show more Federal Reserve officials now see possible rate hikes in 2026, dri"
+      },
+      {
+        "timestamp": "2026-04-17T14:01:37Z",
+        "evidence_index": 5,
+        "confirming_index": 10,
+        "resolution": "REFUTED",
+        "source": "Federal Reserve FOMC Minutes, released April 8 2026",
+        "confirming_source": "US News/Federal Reserve",
+        "trust_delta": -0.1,
+        "original_text_snippet": "FOMC minutes from March 17-18 meeting released. Fed officials 'still saw rate cuts as a possibility' but stressed need t",
+        "confirming_text_snippet": "FOMC April 8 minutes show more officials see possible rate hikes in 2026; rate held at 3.50-3.75% in March; SEP median f"
+      }
+    ],
+    "effectiveTrust": {
+      "Axios": 0.5,
+      "BLS CPI release": 0.5,
+      "BLS Employment Situation, April 2026 release": 0.5,
+      "Bankrate Fed Rate Forecast, April 2026": 0.5,
+      "CNN (": 0.5,
+      "Federal Reserve": 0.5,
+      "Federal Reserve Board": 0.5,
+      "Federal Reserve FOMC Minutes, released April 8 2026": 0.4565,
+      "Federal Reserve FOMC Statement, March 19 2026": 0.5,
+      "Federal Reserve Summary of Economic Projections, March 2026": 0.5,
+      "Goldman Sachs Asset Management": 0.5,
+      "Goldman Sachs Global Investment Research, April 2026": 0.5,
+      "US News": 0.5
+    },
+    "_last_scan_same_source_skipped": 1
   }
 }

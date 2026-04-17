@@ -487,7 +487,8 @@
       "posteriorImpact": "MODERATE — POSTERIORS MOVED. Indicator t2_dem_special_overperformance_plus5 FIRED: overperformance +25pp vs threshold +5pp. Applied: H1 0.42→0.49, H2 0.28→0.31, H3 0.18→0.11, H4 0.12→0.09. District is R+37 (not swing), but indicator definition includes 'any special or off-cycle election including state-level' — threshold is met on overperformance margin, not district competitiveness.",
       "note": "AP effectiveTrust 0.99. This is the strongest special election signal to date. Half of top-10 Dem overperformances have come since 2024 election. District non-competitiveness attenuates direct seat-flip relevance but the MARGIN of overperformance is the signal, not the win/loss.",
       "ledger": "DECISION",
-      "effectiveWeight": 0.25
+      "effectiveWeight": 0.25,
+      "url": "https://apnews.com"
     },
     {
       "id": "ev_002",
@@ -503,7 +504,8 @@
       "posteriorImpact": "MODERATE. Not a direct House indicator but Wisconsin is THE bellwether swing state (decided by <1pp in last 3 presidential elections). 20-point margin in a swing state judicial race is structurally significant — demonstrates extraordinary Dem enthusiasm advantage in a midterm-preview environment.",
       "note": "CNN base trust 0.75 but reporting certified election results (primary data). County-level flips in suburban/exurban areas are directly relevant to House swing district demographics.",
       "ledger": "DECISION",
-      "effectiveWeight": 0.25
+      "effectiveWeight": 0.25,
+      "url": "https://www.cnn.com"
     },
     {
       "id": "ev_003",
@@ -519,7 +521,8 @@
       "posteriorImpact": "NONE — this is ANALYSIS synthesizing multiple data points. The individual data points (ev_001, ev_002) carry the weight. The 30-0 seat flip stat is notable but is aggregate context, not a new indicator firing.",
       "note": "30-0 state legislative seat flips is a remarkable stat but each individual flip was a low-visibility race. Aggregate pattern is more informative than any single race. Tagged ANALYSIS because it requires interpretation.",
       "ledger": "DECISION",
-      "effectiveWeight": 0.25
+      "effectiveWeight": 0.25,
+      "url": "https://www.cnn.com"
     },
     {
       "id": "ev_004",
@@ -534,7 +537,8 @@
       "posteriorImpact": "NONE — matches existing prior assumption (generic ballot Dems +6-8pp). RCP +5.4 is at the lower end of the range assumed in prior justification. This is CONFIRMING data, not new information. Indicator t1_generic_ballot_sustained_plus5 requires +5pp sustained for 30+ consecutive days entering October — April reading is too early to fire.",
       "note": "RCP and Morning Consult are primary polling aggregators. +5.4 is significant — historical models associate sustained +5pp with House flip. But April is 7 months from election. Monitor monthly.",
       "ledger": "DECISION",
-      "effectiveWeight": 0.25
+      "effectiveWeight": 0.25,
+      "url": "https://apnews.com"
     },
     {
       "id": "ev_005",
@@ -549,7 +553,8 @@
       "posteriorImpact": "NONE. Cross-referenced with recession and tariff topics. CPI data is a structural input to voter sentiment, not a direct midterm indicator. Indicator t3_tariff_economic_hit_visible partially matches (tariff attribution in news coverage) but effect is small and dominated by energy. Real earnings decline is a leading indicator of economic disapproval.",
       "note": "BLS primary data. Weight 0.8 because midterm relevance is indirect — CPI affects approval which affects generic ballot which affects outcome. Chain of inference, not direct observation.",
       "ledger": "DECISION",
-      "effectiveWeight": 0.25
+      "effectiveWeight": 0.25,
+      "url": "https://apnews.com"
     },
     {
       "id": "ev_006",
@@ -564,7 +569,8 @@
       "posteriorImpact": "NONE. Single-candidate gubernatorial scandal, not party-wide. No direct House seat impact unless Swalwell resigns from Congress. Anti-indicator anti_h4_no_dem_scandal_or_collapse NOT fired — this is not a party-wide event. Posteriors unchanged.",
       "note": "CNN effectiveTrust 0.99, EVENT domain 0.99. Correctly triaged as PROPOSED (single source, investigation stage). This was the first live pipeline test entry.",
       "ledger": "DECISION",
-      "effectiveWeight": 0.2727
+      "effectiveWeight": 0.2727,
+      "url": "https://www.cnn.com"
     },
     {
       "id": "ev_007",
@@ -611,7 +617,8 @@
       "posteriorImpact": "NONE. Single-candidate scandal in CA gubernatorial race. Not a party-wide event. anti_h4_no_dem_scandal_or_collapse requires party-wide scandal or national candidate quality collapse — this is localized. No House seat vacancy yet (Swalwell has not resigned from Congress). Watchpoint triggered: monitor for resignation → special election. If resignation occurs, assess whether safe-D district special has any bearing on House control calculus.",
       "note": "Source trust: CNN EVENT domain 0.99 (tier 2, cross-topic domain). claimState SUPPORTED — withdrawal confirmed by Swalwell's own X post, corroborated by CNN, multiple quoted officials. effectiveWeight = 0.99 (SUPPORTED 1.0 x trust 0.99). Related to prior ev_005 (Manhattan DA investigation of Swalwell) but distinct event — investigation led to withdrawal.",
       "ledger": "DECISION",
-      "effectiveWeight": 0.75
+      "effectiveWeight": 0.75,
+      "url": "https://www.cnn.com"
     },
     {
       "id": "ev_010",
@@ -645,7 +652,8 @@
       "note": "Matches indicator t2_generic_ballot_dems_plus3_sustained (tier2 strong). Pre-committed effect: H1 +6pp, H3 -4pp, H4 -2pp.. Source trust: 50% (moderate).",
       "ledger": "FACT",
       "claimState": "CONTESTED",
-      "effectiveWeight": 0.5
+      "effectiveWeight": 0.5,
+      "url": "https://www.washingtonpost.com"
     },
     {
       "time": "2026-04-16T03:42:51+00:00",

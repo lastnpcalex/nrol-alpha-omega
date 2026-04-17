@@ -6,7 +6,7 @@
     "question": "Will the US economy enter a recession (2 consecutive quarters of negative real GDP growth) by Q4 2026?",
     "resolution": "BEA official advance GDP prints for Q2 2026 (released ~July 2026) and Q3 2026 (released ~Oct 2026). Two consecutive quarters of negative real GDP growth = recession confirmed. NBER declaration is corroborating but NOT required for resolution — the quantitative criterion governs.",
     "created": "2026-04-11T00:00:00Z",
-    "lastUpdated": "2026-04-16T03:43:52+00:00",
+    "lastUpdated": "2026-04-17T14:01:37+00:00",
     "status": "ACTIVE",
     "dayCount": 1,
     "startDate": "2026-04-11T00:00:00Z",
@@ -96,28 +96,28 @@
         "label": "No recession — GDP stays positive both Q2 and Q3 2026",
         "midpoint": 0.0,
         "unit": "probability",
-        "posterior": 0.58,
+        "posterior": 0.5097,
         "description": "US avoids two consecutive negative GDP quarters. Growth may slow to near-zero (0.0-1.0% annualized) but does not go negative. Labor market softens but holds. Fed cuts 1-2 times as insurance. Tariff impact is absorbed via margin compression and partial pass-through. Resolves: Both Q2 and Q3 BEA advance prints are positive."
       },
       "H2": {
         "label": "Technical recession — 2 negative quarters, shallow (> -1.5% annualized each)",
         "midpoint": 0.33,
         "unit": "probability",
-        "posterior": 0.2707,
+        "posterior": 0.3806,
         "description": "GDP goes negative for 2 quarters but neither quarter exceeds -1.5% annualized contraction. Unemployment rises to 4.8-5.2%. Shallow enough that NBER may delay or decline to call. Consumer spending contracts modestly. Fed cuts aggressively (3+ cuts). Resolves: Q2 or Q3 GDP negative, neither quarter worse than -1.5% ann."
       },
       "H3": {
         "label": "Significant recession — unemployment crosses 5.5%, GDP -1.5% or worse",
         "midpoint": 0.66,
         "unit": "probability",
-        "posterior": 0.1083,
+        "posterior": 0.0952,
         "description": "Hard landing. GDP contracts -1.5% or worse in at least one quarter. Unemployment rises through 5.5% by Q4. Corporate layoffs accelerate. Fed pivots to emergency cuts. Credit spreads widen materially. Possible external shock amplifier (trade war escalation, financial contagion). Resolves: At least one GDP print worse than -1.5% ann AND unemployment >5.5%."
       },
       "H4": {
         "label": "Stagflation — negative GDP growth with CPI above 4%",
         "midpoint": 1.0,
         "unit": "probability",
-        "posterior": 0.0411,
+        "posterior": 0.0144,
         "description": "Worst case: tariff pass-through re-ignites inflation above 4% CPI while GDP contracts. Fed is caught between cutting to support growth and holding/hiking to contain inflation. Analogues: 1973-74, 1980. Requires tariff escalation beyond current 10% universal — sector-specific hikes (autos, energy) driving simultaneous supply contraction and price increases. Resolves: GDP negative for 2 quarters AND CPI year-over-year above 4%."
       }
     },
@@ -150,6 +150,28 @@
           "H2": 0.35,
           "H3": 0.22,
           "H4": 0.13
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        }
+      },
+      {
+        "date": "2026-04-17",
+        "H1": 0.5097,
+        "H2": 0.3806,
+        "H3": 0.0952,
+        "H4": 0.0144,
+        "note": "Evidence ev_012: Q1 2026 GDP growth slowed sharply to 0.5% annualized (from 4.4% prior quarter); ",
+        "likelihoods": {
+          "H1": 0.25,
+          "H2": 0.4,
+          "H3": 0.25,
+          "H4": 0.1
         },
         "redTeam": {
           "contrarian_direction": {},
@@ -870,7 +892,8 @@
       "posteriorImpact": "NONE. Confirms existing priors: GDP positive but thin margin, risks two-sided. Musalem explicitly describes 1970s stagflation analogy but stops short of predicting it. GDPNow 2.0% is firmly in H1 territory for Q1.",
       "note": "Primary source (FOMC participant). Key signal: 'risks tilt in unfavorable directions' on BOTH mandates. This is the dual-risk framing consistent with H4 tail but baseline is H1.",
       "ledger": "DECISION",
-      "effectiveWeight": 0.25
+      "effectiveWeight": 0.25,
+      "url": "https://apnews.com"
     },
     {
       "id": "ev_002",
@@ -886,7 +909,8 @@
       "posteriorImpact": "NONE. Tariff inflation quantified at ~50% of excess — this is the most specific Fed attribution to date. Iran war extends inflation persistence risk, which is H4-directional. But Musalem says tariff effect 'should fade' — that's H1-directional. Offsetting signals, no net posterior movement.",
       "note": "Same speech as ev_001. Split into separate entry because tariff attribution and Iran inflation risk are distinct claims.",
       "ledger": "DECISION",
-      "effectiveWeight": 0.25
+      "effectiveWeight": 0.25,
+      "url": "https://apnews.com"
     },
     {
       "id": "ev_003",
@@ -902,7 +926,8 @@
       "posteriorImpact": "NONE. H2/H3-directional: labor market at breakeven is one shock away from deterioration. But Musalem explicitly says unemployment remains 'close to the natural rate.' Not yet at indicator threshold (t1_unemployment_spike_5_5 requires 5.5%). Monitoring.",
       "note": "FOMC participant explicitly flagging nonlinear labor risk. 'Rapid increase' language is unusual for Fed speeches — suggests higher-than-typical concern.",
       "ledger": "DECISION",
-      "effectiveWeight": 0.25
+      "effectiveWeight": 0.25,
+      "url": "https://apnews.com"
     },
     {
       "id": "ev_004",
@@ -917,7 +942,8 @@
       "posteriorImpact": "NONE. Confirms Fed in wait-and-see mode. Explicit hike scenario mention is notable — increases H4 tail plausibility slightly but this is a conditional statement, not a signal of intent. No indicator fired.",
       "note": "Hike mention matters: first FOMC participant to publicly articulate rate hike scenario in a prepared speech since the easing cycle began.",
       "ledger": "DECISION",
-      "effectiveWeight": 0.25
+      "effectiveWeight": 0.25,
+      "url": "https://apnews.com"
     },
     {
       "id": "ev_005",
@@ -949,7 +975,8 @@
       "posteriorImpact": "NONE. Cross-referenced with Fed Rate topic ev_007. Headline 3.3% is elevated but energy-driven (Iran), not demand-driven. Core 2.6% below forecast is H1-directional (disinflation in stickiest components). Real earnings -0.6% is H2-directional (consumer purchasing power erosion). Net: ambiguous, no posterior movement.",
       "note": "Key for recession assessment: headline vs core divergence. If energy-driven inflation fades (Iran ceasefire), headline reverts. If core continues declining, Fed has room to cut (H1). If real earnings decline persists, consumer spending weakens (H2).",
       "ledger": "DECISION",
-      "effectiveWeight": 0.25
+      "effectiveWeight": 0.25,
+      "url": "https://apnews.com"
     },
     {
       "id": "ev_007",
@@ -964,7 +991,8 @@
       "posteriorImpact": "NONE. ANALYSIS tag — Goldman forecast is informative but does not move posteriors. 30% is close to Polymarket ~25% anchor. Goldman is a market participant, not a primary data source. Noted for tracking consensus shift.",
       "note": "Goldman recession probability is widely followed but has mixed track record. Tagged ANALYSIS per framework. Weight 0.5 reflects PROPOSED claim from non-primary source.",
       "ledger": "DECISION",
-      "effectiveWeight": 0.25
+      "effectiveWeight": 0.25,
+      "url": "https://apnews.com"
     },
     {
       "id": "ev_008",
@@ -995,7 +1023,8 @@
       "posteriorImpact": "NONE. Cross-referenced with Section 122 topic ev_010. $700/household is quantified consumer burden — H2-directional (demand drag). But not yet translating to GDP contraction per GDPNow (2.0% Q1). Trade deficit unchanged undermines the policy rationale but is not recessionary per se.",
       "note": "Multiple-source convergence. Tax Foundation is nonpartisan policy research. Weight 0.8 (DATA from credible non-primary source).",
       "ledger": "DECISION",
-      "effectiveWeight": 0.25
+      "effectiveWeight": 0.25,
+      "url": "https://apnews.com"
     },
     {
       "id": "ev_010",
@@ -1011,7 +1040,8 @@
       "posteriorImpact": "NONE. ANALYSIS tag — institutional forecast. 0.2pp global growth cut is modest and assumes short war. US-specific impact not broken out (global ≠ US GDP). Severe scenario (2% global) is conditional on oil spike — not base case. No US recession indicator fires. IMF's 'better than expected pre-war' note is marginally H1-directional. Net: informative for monitoring, no posterior movement.",
       "note": "CNN effectiveTrust 0.7462. IMF is authoritative institutional source but ANALYSIS tag per governor rules. Weight attenuated: 0.7462 × 0.5 (ANALYSIS) = 0.37. Cross-reference: IMF severe scenario aligns with H4 (stagflation) if oil spike materializes domestically.",
       "ledger": "DECISION",
-      "effectiveWeight": 0.5
+      "effectiveWeight": 0.5,
+      "url": "https://www.cnn.com"
     },
     {
       "id": "ev_011",
@@ -1027,7 +1057,8 @@
       "note": "Domain keywords: index, probability, recession. No pre-registered indicator match — review whether this warrants a new indicator or evidence log entry. Source trust: 50% (moderate).",
       "ledger": "FACT",
       "claimState": "CONTESTED",
-      "effectiveWeight": 0.5
+      "effectiveWeight": 0.5,
+      "url": "https://www.cnbc.com"
     },
     {
       "time": "2026-04-16T03:43:52+00:00",
@@ -1038,27 +1069,56 @@
       "ledger": "DECISION",
       "claimState": "PROPOSED",
       "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_012",
+      "time": "2026-04-17T14:01:37+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "ECON"
+      ],
+      "text": "Q1 2026 GDP growth slowed sharply to 0.5% annualized (from 4.4% prior quarter); 7 of 12 leading indicators in warning territory simultaneously — last time this many aligned negatively was late 2007",
+      "provenance": "OBSERVED",
+      "source": "BEA/USRecessionNews",
+      "posteriorImpact": "NONE",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-17T14:01:37+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: stale_evidence, quorum_failure. Reason: Evidence ev_012: Q1 2026 GDP growth slowed sharply to 0.5% annualized (from 4.4% prior quarter); ",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
     }
   ],
   "governance": {
     "health": "DEGRADED",
     "issues": [
-      "Majority stale evidence (9/12)",
-      "Stale dependency: hormuz-closure.H2 assumed=0.22, actual=0.0809, drift=13.91%",
-      "Stale dependency: hormuz-closure.H3 assumed=0.5, actual=0.7432, drift=24.32%"
+      "Majority stale evidence (9/14)",
+      "Stale dependency: calibration-section122-tariffs.H2 assumed=0.18, actual=0.0603, drift=11.97%",
+      "Stale dependency: calibration-section122-tariffs.H4 assumed=0.42, actual=0.7035, drift=28.35%",
+      "Stale dependency: hormuz-closure.H2 assumed=0.22, actual=0.0, drift=22.00%",
+      "Stale dependency: hormuz-closure.H3 assumed=0.5, actual=0.9856, drift=48.56%",
+      "Stale dependency: hormuz-closure.H4 assumed=0.275, actual=0.0144, drift=26.06%"
     ],
     "rt": {
       "rt": 0.0,
       "regime": "SAFE",
       "worst_hypothesis": "H1"
     },
-    "entropy": 1.5027,
+    "entropy": 1.4371,
     "maxEntropy": 2.0,
-    "uncertaintyRatio": 0.7513,
+    "uncertaintyRatio": 0.7186,
     "evidenceFreshness": {
-      "fresh": 3,
+      "fresh": 5,
       "stale": 9,
-      "total": 12
+      "total": 14
     },
     "hypothesisAdmissibility": {
       "H1": "ADMISSIBLE",
@@ -1067,18 +1127,36 @@
       "H4": "ADMISSIBLE"
     },
     "klFromPrior": {
-      "kl_divergence": 0.0269,
+      "kl_divergence": 0.1067,
       "interpretation": "MODERATE"
     },
-    "lastComputed": "2026-04-16T03:43:52+00:00",
-    "staleDependencies": 2,
+    "lastComputed": "2026-04-17T14:01:37+00:00",
+    "staleDependencies": 5,
     "staleDependencyDetails": [
+      {
+        "upstream_slug": "calibration-section122-tariffs",
+        "hypothesis": "H2",
+        "assumed": 0.18,
+        "actual": 0.0603,
+        "drift": 0.1197,
+        "tolerance": 0.1,
+        "stale": true
+      },
+      {
+        "upstream_slug": "calibration-section122-tariffs",
+        "hypothesis": "H4",
+        "assumed": 0.42,
+        "actual": 0.7035,
+        "drift": 0.2835,
+        "tolerance": 0.1,
+        "stale": true
+      },
       {
         "upstream_slug": "hormuz-closure",
         "hypothesis": "H2",
         "assumed": 0.22,
-        "actual": 0.0809,
-        "drift": 0.1391,
+        "actual": 0.0,
+        "drift": 0.22,
         "tolerance": 0.1,
         "stale": true
       },
@@ -1086,8 +1164,17 @@
         "upstream_slug": "hormuz-closure",
         "hypothesis": "H3",
         "assumed": 0.5,
-        "actual": 0.7432,
-        "drift": 0.2432,
+        "actual": 0.9856,
+        "drift": 0.4856,
+        "tolerance": 0.1,
+        "stale": true
+      },
+      {
+        "upstream_slug": "hormuz-closure",
+        "hypothesis": "H4",
+        "assumed": 0.275,
+        "actual": 0.0144,
+        "drift": 0.2606,
         "tolerance": 0.1,
         "stale": true
       }
@@ -1117,7 +1204,7 @@
         }
       },
       "indistinguishable": [],
-      "lastChecked": "2026-04-16T03:43:52+00:00"
+      "lastChecked": "2026-04-17T14:01:37+00:00"
     }
   },
   "predictionScoring": {
@@ -1152,6 +1239,28 @@
           "H4": 0.0411
         },
         "entropy": 1.5027
+      },
+      {
+        "timestamp": "2026-04-17T14:01:37+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.5097,
+          "H2": 0.3806,
+          "H3": 0.0952,
+          "H4": 0.0144
+        },
+        "entropy": 1.4371
+      },
+      {
+        "timestamp": "2026-04-17T14:01:37+00:00",
+        "trigger": "pipeline:ev_012",
+        "posteriors": {
+          "H1": 0.5097,
+          "H2": 0.3806,
+          "H3": 0.0952,
+          "H4": 0.0144
+        },
+        "entropy": 1.4371
       }
     ],
     "outcomes": [],
@@ -1218,6 +1327,102 @@
         "detected": "2026-04-16T03:43:52Z",
         "resolution": "SUPERSEDED",
         "resolvedAt": "2026-04-16T03:43:52Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-16T03:43:52+00:00",
+        "entry_a_text": "Moody Analytics chief economist Mark Zandi says the Vicious Cycle Index, which has called every recession since WWII, just signaled the US is already in one. Goldman Sachs raised recession probability to 30 percent, Moody model at 48.6 percent.",
+        "entry_b_time": "2026-04-17T14:01:37+00:00",
+        "entry_b_text": "Q1 2026 GDP growth slowed sharply to 0.5% annualized (from 4.4% prior quarter); 7 of 12 leading indicators in warning territory simultaneously — last time this many aligned negatively was late 2007",
+        "reason": "Numeric divergence 98.3% on metric (context: to): new=0.5, existing=30.0, threshold=10%",
+        "detected": "2026-04-17T14:01:37Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T14:01:37Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-14T16:00:00Z",
+        "entry_a_text": "IMF World Economic Outlook April 2026: global growth forecast cut to 3.1% in 2026 (down 0.2pp from January). Assumes Iran war 'relatively short-lived.' Global inflation raised to 4.4%. Severe scenario (oil/gas prices +100-200% sustained into 2027): global growth only 2.0% — IMF calls this 'a close call for a global recession' (defined as <2%, happened only 4 times since 1980). Notes downward revision partly offset by reduced US tariff rates vs last year. Pre-war, global economy was performing better than expected.",
+        "entry_b_time": "2026-04-17T14:01:37+00:00",
+        "entry_b_text": "Q1 2026 GDP growth slowed sharply to 0.5% annualized (from 4.4% prior quarter); 7 of 12 leading indicators in warning territory simultaneously — last time this many aligned negatively was late 2007",
+        "reason": "Numeric divergence 99.9% on metric (context: growth): new=2026.0, existing=2.0, threshold=10%",
+        "detected": "2026-04-17T14:01:37Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T14:01:37Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-01T00:00:00Z",
+        "entry_a_text": "Tax Foundation analysis: 2026 Trump tariffs amount to average tax increase of $700 per US household. Trade deficit not meaningfully altered. NPR/CNBC one-year assessment: tariffs have not produced promised economic boom.",
+        "entry_b_time": "2026-04-17T14:01:37+00:00",
+        "entry_b_text": "Q1 2026 GDP growth slowed sharply to 0.5% annualized (from 4.4% prior quarter); 7 of 12 leading indicators in warning territory simultaneously — last time this many aligned negatively was late 2007",
+        "reason": "Numeric divergence 99.0% on metric (context: of): new=7.0, existing=700.0, threshold=10%",
+        "detected": "2026-04-17T14:01:37Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T14:01:37Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-06T00:00:00Z",
+        "entry_a_text": "Goldman Sachs raised US recession probability to 30% under current conditions (up from prior estimate). Cited tariff uncertainty and Iran war oil shock as primary drivers.",
+        "entry_b_time": "2026-04-17T14:01:37+00:00",
+        "entry_b_text": "Q1 2026 GDP growth slowed sharply to 0.5% annualized (from 4.4% prior quarter); 7 of 12 leading indicators in warning territory simultaneously — last time this many aligned negatively was late 2007",
+        "reason": "Numeric divergence 98.3% on metric (context: to): new=0.5, existing=30.0, threshold=10%",
+        "detected": "2026-04-17T14:01:37Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T14:01:37Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-10T00:00:00Z",
+        "entry_a_text": "March 2026 CPI: headline +0.9% m/m, 3.3% annual (highest since April 2024). Energy +10.9% (Iran war). Core CPI +0.2% m/m, 2.6% annual — below forecast. Real earnings -0.6% m/m. Tariff visible in apparel (+1%), airlines (+2.7%). Food unchanged.",
+        "entry_b_time": "2026-04-17T14:01:37+00:00",
+        "entry_b_text": "Q1 2026 GDP growth slowed sharply to 0.5% annualized (from 4.4% prior quarter); 7 of 12 leading indicators in warning territory simultaneously — last time this many aligned negatively was late 2007",
+        "reason": "Numeric divergence 91.7% on metric (context: in): new=12.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-17T14:01:37Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T14:01:37Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-03-24T00:00:00Z",
+        "entry_a_text": "S&P Global US Manufacturing PMI: 52.3 in March (up from 51.6 in February). Third consecutive month in expansion territory. But firms reporting largest increase in selling prices since August 2022 — energy cost pass-through to customers.",
+        "entry_b_time": "2026-04-17T14:01:37+00:00",
+        "entry_b_text": "Q1 2026 GDP growth slowed sharply to 0.5% annualized (from 4.4% prior quarter); 7 of 12 leading indicators in warning territory simultaneously — last time this many aligned negatively was late 2007",
+        "reason": "Numeric divergence 99.0% on metric (context: from): new=0.5, existing=51.6, threshold=10%",
+        "detected": "2026-04-17T14:01:37Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T14:01:37Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-01T00:00:00Z",
+        "entry_a_text": "Musalem: Tariffs explain about half of excess 12-month inflation above 2% (St. Louis Fed staff estimates). Effect of 2025 tariffs should fade over next couple quarters, BUT geopolitical developments (Iran war) cloud forecast — now sees more risk of persistent above-target inflation throughout 2026.",
+        "entry_b_time": "2026-04-17T14:01:37+00:00",
+        "entry_b_text": "Q1 2026 GDP growth slowed sharply to 0.5% annualized (from 4.4% prior quarter); 7 of 12 leading indicators in warning territory simultaneously — last time this many aligned negatively was late 2007",
+        "reason": "Numeric divergence 99.7% on metric (context: of): new=7.0, existing=2025.0, threshold=10%",
+        "detected": "2026-04-17T14:01:37Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T14:01:37Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-01T00:00:00Z",
+        "entry_a_text": "St. Louis Fed President Musalem (AEI speech): Baseline 2026 scenario has real GDP growing close to potential, unemployment holding around current level, core inflation gradually easing toward 2% later in year. But risks tilt unfavorable — toward weaker labor market AND greater inflation persistence simultaneously. Atlanta Fed GDPNow projects Q1 2026 growth at 2.0%. Consumer spending soft in Jan-Feb (winter storms), but tax refunds +$1,000/household and wealth effects support spending.",
+        "entry_b_time": "2026-04-17T14:01:37+00:00",
+        "entry_b_text": "Q1 2026 GDP growth slowed sharply to 0.5% annualized (from 4.4% prior quarter); 7 of 12 leading indicators in warning territory simultaneously — last time this many aligned negatively was late 2007",
+        "reason": "Numeric divergence 99.9% on metric (context: growth): new=2026.0, existing=2.0, threshold=10%",
+        "detected": "2026-04-17T14:01:37Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T14:01:37Z"
       }
     ]
   },
@@ -1232,7 +1437,9 @@
       "Goldman Sachs": 0.5,
       "S&P Global Flash PMI, March 24 2026; Trading Economics": 0.5,
       "Tax Foundation, NPR, CNBC, April 1-3 2026": 0.5,
-      "UCLA Anderson Forecast, March 4 2026": 0.5
+      "UCLA Anderson Forecast, March 4 2026": 0.5,
+      "BEA": 0.5,
+      "USRecessionNews": 0.5
     },
     "_last_scan_same_source_skipped": 6
   }

@@ -6,7 +6,7 @@
     "question": "Will a kinetic military incident with casualties occur between PRC forces and any claimant state in the South China Sea by December 31, 2026?",
     "resolution": "Confirmed shots fired at military/coast guard vessel, ramming causing documented injury or death, boarding of military vessel resulting in injury/death, or water cannon causing documented serious injury. Must be reported by at least two independent primary sources (wire service, government statement, or verified video evidence). Commercial vessel incidents alone do not resolve.",
     "created": "2026-04-11T00:00:00Z",
-    "lastUpdated": "2026-04-16T03:42:35+00:00",
+    "lastUpdated": "2026-04-17T14:15:45+00:00",
     "status": "ACTIVE",
     "dayCount": 0,
     "startDate": "2026-04-11T00:00:00Z",
@@ -63,28 +63,28 @@
         "label": "Gray zone only — no casualties through Dec 31, 2026",
         "midpoint": 0,
         "unit": "probability",
-        "posterior": 0.943,
+        "posterior": 0.9636,
         "description": "PRC continues harassment operations (water cannon, laser, close intercept, blocking maneuvers) but no confirmed casualties. Philippines continues resupply missions under pressure. Pattern persists without crossing kinetic threshold. Dominant historical outcome; reinforced by PH-China talks resuming and ADIZ incursions declining."
       },
       "H2": {
         "label": "Kinetic incident with injuries but no deaths",
         "midpoint": 0,
         "unit": "probability",
-        "posterior": 0.0501,
+        "posterior": 0.0341,
         "description": "At least one Philippine (or other claimant) sailor/guardsman sustains documented injury from PRC action (water cannon trauma, ramming injuries, physical altercation during boarding attempt). No fatalities. Most plausible escalation path given current trajectory: water cannon incidents have already come close, and proximity incidents like BRP Benguet / Jingzhou (March 30) raise collision risk."
       },
       "H3": {
         "label": "Lethal incident — at least one fatality",
         "midpoint": 0,
         "unit": "probability",
-        "posterior": 0.006,
+        "posterior": 0.002,
         "description": "A kinetic interaction results in at least one confirmed fatality on either side. Could result from: deliberate live fire, severe ramming, helicopter downing, or a water cannon incident causing drowning. PRC has historically avoided lethal outcomes due to MDT tripwire awareness, but escalation dynamics and miscalculation risk are non-trivial over an 8-month horizon."
       },
       "H4": {
         "label": "MDT Article IV invocation by Philippines",
         "midpoint": 0,
         "unit": "probability",
-        "posterior": 0.0009,
+        "posterior": 0.0002,
         "description": "Philippines formally invokes the 1951 Mutual Defense Treaty Article IV following a PRC attack on Philippine armed forces or public vessels. Requires: (1) lethal or severe kinetic incident, (2) Marcos administration political will to invoke, (3) US willingness to respond. Historical base rate: never invoked since treaty signed. Conditional on H3 occurring, probability of invocation estimated at ~50%, implying ~0.065 unconditional."
       }
     },
@@ -139,6 +139,28 @@
           "H2": 0.25,
           "H3": 0.13,
           "H4": 0.07
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        }
+      },
+      {
+        "date": "2026-04-17",
+        "H1": 0.9636,
+        "H2": 0.0341,
+        "H3": 0.002,
+        "H4": 0.0002,
+        "note": "Evidence ev_003: China deploys 352m floating barrier at Scarborough Shoal entrance (Apr 10-11); 1",
+        "likelihoods": {
+          "H1": 0.45,
+          "H2": 0.3,
+          "H3": 0.15,
+          "H4": 0.1
         },
         "redTeam": {
           "contrarian_direction": {},
@@ -609,6 +631,22 @@
       "ledger": "DECISION",
       "claimState": "PROPOSED",
       "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_003",
+      "time": "2026-04-17T14:15:45+00:00",
+      "tag": "EVENT",
+      "tags": [
+        "EVENT",
+        "FORCE"
+      ],
+      "text": "China deploys 352m floating barrier at Scarborough Shoal entrance (Apr 10-11); 10 CCG vessels at shoal Apr 5-12; Philippines accuses China of cyanide deployment at Second Thomas Shoal; US-AU-PH joint drills Apr 9-12",
+      "provenance": "OBSERVED",
+      "source": "Al Jazeera/CNN/Bloomberg",
+      "posteriorImpact": "NONE",
+      "ledger": "FACT",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 0.6
     }
   ],
   "dataFeeds": {
@@ -700,22 +738,20 @@
     "Vietnam Malaysia South China Sea China incident {YYYY-MM}"
   ],
   "governance": {
-    "health": "DEGRADED",
-    "issues": [
-      "Majority stale evidence (5/10)"
-    ],
+    "health": "HEALTHY",
+    "issues": [],
     "rt": {
       "rt": 0.0,
       "regime": "SAFE",
       "worst_hypothesis": "H1"
     },
-    "entropy": 0.3496,
+    "entropy": 0.2381,
     "maxEntropy": 2.0,
-    "uncertaintyRatio": 0.1748,
+    "uncertaintyRatio": 0.1191,
     "evidenceFreshness": {
-      "fresh": 4,
+      "fresh": 5,
       "stale": 5,
-      "total": 10
+      "total": 11
     },
     "hypothesisAdmissibility": {
       "H1": "ADMISSIBLE",
@@ -724,10 +760,10 @@
       "H4": "ADMISSIBLE"
     },
     "klFromPrior": {
-      "kl_divergence": 0.4055,
+      "kl_divergence": 0.4629,
       "interpretation": "MODERATE"
     },
-    "lastComputed": "2026-04-16T03:42:35+00:00",
+    "lastComputed": "2026-04-17T14:15:45+00:00",
     "staleDependencies": 0,
     "calibrationHealth": "ACCEPTABLE",
     "unresolvedContradictions": 0,
@@ -754,7 +790,7 @@
         }
       },
       "indistinguishable": [],
-      "lastChecked": "2026-04-16T03:42:35+00:00"
+      "lastChecked": "2026-04-17T14:15:45+00:00"
     }
   },
   "predictionScoring": {
@@ -803,6 +839,50 @@
           "H4": 0.0009
         },
         "entropy": 0.3496
+      },
+      {
+        "timestamp": "2026-04-17T14:01:37+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.995,
+          "H2": 0.0048,
+          "H3": 0.0002,
+          "H4": 0.0
+        },
+        "entropy": 0.0466
+      },
+      {
+        "timestamp": "2026-04-17T14:01:37+00:00",
+        "trigger": "pipeline:ev_003",
+        "posteriors": {
+          "H1": 0.995,
+          "H2": 0.0048,
+          "H3": 0.0002,
+          "H4": 0.0
+        },
+        "entropy": 0.0466
+      },
+      {
+        "timestamp": "2026-04-17T14:15:45+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.9636,
+          "H2": 0.0341,
+          "H3": 0.002,
+          "H4": 0.0002
+        },
+        "entropy": 0.2381
+      },
+      {
+        "timestamp": "2026-04-17T14:15:45+00:00",
+        "trigger": "pipeline:ev_003",
+        "posteriors": {
+          "H1": 0.9636,
+          "H2": 0.0341,
+          "H3": 0.002,
+          "H4": 0.0002
+        },
+        "entropy": 0.2381
       }
     ],
     "outcomes": [],
@@ -826,7 +906,30 @@
     ]
   },
   "sourceCalibration": {
-    "ledger": [],
+    "ledger": [
+      {
+        "timestamp": "2026-04-17T14:01:37Z",
+        "evidence_index": 8,
+        "confirming_index": 10,
+        "resolution": "CONFIRMED",
+        "source": "Manila Times",
+        "confirming_source": "Al Jazeera/CNN/Bloomberg",
+        "trust_delta": 0.05,
+        "original_text_snippet": "China installed a 352-meter floating barrier at the entrance to Scarborough Shoal, blocking Philippine access with coast",
+        "confirming_text_snippet": "China deploys 352m floating barrier at Scarborough Shoal entrance (Apr 10-11); 10 CCG vessels at shoal Apr 5-12; Philipp"
+      },
+      {
+        "timestamp": "2026-04-17T14:01:37Z",
+        "evidence_index": 9,
+        "confirming_index": 10,
+        "resolution": "CONFIRMED",
+        "source": "",
+        "confirming_source": "Al Jazeera/CNN/Bloomberg",
+        "trust_delta": 0.05,
+        "original_text_snippet": "GOVERNANCE WARNING on bayesian_update: stale_evidence. Reason: Evidence ev_002: China installed a 352-meter floating bar",
+        "confirming_text_snippet": "China deploys 352m floating barrier at Scarborough Shoal entrance (Apr 10-11); 10 CCG vessels at shoal Apr 5-12; Philipp"
+      }
+    ],
     "effectiveTrust": {
       "AFP joint statements": 0.5,
       "AFP official statement": 0.5,
@@ -839,8 +942,10 @@
       "Wire reports": 0.5,
       "open source tracking": 0.5,
       "wire reports": 0.5,
-      "Manila Times": 0.5
+      "Manila Times": 0.5455,
+      "Al Jazeera": 0.6,
+      "CNN": 0.75
     },
-    "_last_scan_same_source_skipped": 1
+    "_last_scan_same_source_skipped": 3
   }
 }

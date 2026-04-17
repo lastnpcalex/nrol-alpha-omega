@@ -6,7 +6,7 @@
     "question": "What happens to the Trump administration's Section 122 10% universal tariff when it reaches its 150-day statutory limit in late July 2026?",
     "resolution": "Observable: White House action or documented inaction by July 23, 2026 (150 days from Feb 24 effective date). Resolution criteria: (a) tariff expires with no successor = H1; (b) new proclamation issues at ~10% using different authority = H2; (c) new proclamation/action at higher rate or expanded scope = H3; (d) bilateral deal(s) announced covering >=30% of affected import value with reduced rates = H4. Partial-deal-plus-continuation counts as H4 if rollback is material.",
     "created": "2026-04-11T00:00:00Z",
-    "lastUpdated": "2026-04-16T03:43:52+00:00",
+    "lastUpdated": "2026-04-17T14:18:28+00:00",
     "status": "ACTIVE",
     "dayCount": 47,
     "startDate": "2026-02-24T00:00:00Z",
@@ -63,7 +63,7 @@
         "label": "Expires as scheduled — no replacement, no extension",
         "midpoint": 0,
         "unit": "weeks",
-        "posterior": 0.0059,
+        "posterior": 0.0011,
         "description": "The tariff lapses on ~July 23, 2026 with no successor action. Administration makes no new proclamation, Congress does not authorize extension, Section 301 investigations have not yet produced usable tariff authority. Politically very costly — would be framed as capitulation. Requires either a court order forcing expiry or a deliberate policy reversal. Base rate for clean expiry given current posture: low.",
         "_prior_note": "7% reflects near-impossibility of deliberate no-action given political signaling. Only fires if legal constraint (court order) or unexpected political reversal."
       },
@@ -71,7 +71,7 @@
         "label": "Maintained at same ~10% rate via new authority",
         "midpoint": 0,
         "unit": "weeks",
-        "posterior": 0.0603,
+        "posterior": 0.0209,
         "description": "Administration issues a new proclamation at roughly the same 10% rate using a different statutory basis — most likely Section 301 authority once investigations conclude, or a Section 232 national security finding, or a new IEEPA invocation with a different legal framing. Rate stays flat, scope roughly unchanged. This is the 'hold the line' outcome: no escalation, no deal, but tariffs continue.",
         "_prior_note": "18% reflects plausibility as a fallback if deals stall and escalation seems risky, but narrower than H3/H4 because straight-rate maintenance is strategically inert and doesn't match the administration's pattern of using expiry moments for leverage."
       },
@@ -79,7 +79,7 @@
         "label": "Expanded — higher rate and/or broader product scope",
         "midpoint": 0,
         "unit": "weeks",
-        "posterior": 0.2303,
+        "posterior": 0.133,
         "description": "At or before expiry, administration announces escalation: higher tariff rate (above 10%), expanded country coverage, expanded product scope, or a new Section 301 tariff regime (historically 25%+ on targeted categories) that replaces the universal surcharge with a more aggressive targeted structure. New Section 301 investigations into EU, Mexico, and China are the most direct pipeline. A 25% targeted tariff on EU autos or Chinese tech goods would qualify as H3 even if the universal 10% lapses.",
         "_prior_note": "33% reflects the administration's track record of using tariff deadlines as escalation moments rather than resolution moments, plus active Section 301 pipeline. H3 is the modal outcome if bilateral deals fail to materialize."
       },
@@ -87,7 +87,7 @@
         "label": "Partial rollback — bilateral deal(s) reduce tariffs on >=30% of affected import value",
         "midpoint": 0,
         "unit": "weeks",
-        "posterior": 0.7035,
+        "posterior": 0.845,
         "description": "One or more bilateral trade agreements or framework deals (EU, Mexico, Japan, UK, Canada, or others) are announced before or at the July 23 deadline, resulting in materially reduced tariff rates on a significant share of the ~$1.2T import base. Does not require a comprehensive agreement — sector deals (e.g., EU autos, Mexican agricultural goods) that cover >=30% of affected volume qualify. May be accompanied by continuation of tariffs on non-deal partners. This is the stated preferred outcome of the administration and trading partners.",
         "_prior_note": "42% reflects: (1) bilateral deal framing as stated policy goal; (2) three active negotiating tracks (EU, Mexico/Canada, China-adjacent); (3) both sides have economic incentives before US midterm season; BUT (4) discount heavily because 3.5 months is tight for complex deals, and partial-deal announcements often get classified as 'framework' without tariff relief. Set as modal outcome but note high uncertainty."
       }
@@ -121,6 +121,28 @@
           "H2": 0.12,
           "H3": 0.25,
           "H4": 0.6
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        }
+      },
+      {
+        "date": "2026-04-17",
+        "H1": 0.0011,
+        "H2": 0.0209,
+        "H3": 0.133,
+        "H4": 0.845,
+        "note": "Evidence ev_012: 18 bilateral trade frameworks reported as of Apr 16; Section 122 rate remains 10",
+        "likelihoods": {
+          "H1": 0.08,
+          "H2": 0.15,
+          "H3": 0.25,
+          "H4": 0.52
         },
         "redTeam": {
           "contrarian_direction": {},
@@ -636,6 +658,32 @@
       "ledger": "DECISION",
       "claimState": "PROPOSED",
       "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_012",
+      "time": "2026-04-17T14:01:37+00:00",
+      "tag": "POLICY",
+      "tags": [
+        "POLICY",
+        "ECON"
+      ],
+      "text": "18 bilateral trade frameworks reported as of Apr 16; Section 122 rate remains 10% (15% announced but no formal order); two active lawsuits at CIT (oral args Apr 10-11); July 24 expiry firm at 150 days",
+      "provenance": "OBSERVED",
+      "source": "Global Trade Alert/Fleischer Group",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-17T14:18:28+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: stale_evidence, quorum_failure. Reason: Evidence ev_012: 18 bilateral trade frameworks reported as of Apr 16; Section 122 rate remains 10",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
     }
   ],
   "dataFeeds": {
@@ -786,20 +834,23 @@
   "governance": {
     "health": "DEGRADED",
     "issues": [
-      "Majority stale evidence (10/12)"
+      "Majority stale evidence (10/14)",
+      "Stale dependency: calibration-us-recession-2026.H2 assumed=0.22, actual=0.3806, drift=16.06%",
+      "Downstream alert: calibration-midterms-2026 has 2 stale assumption(s) from this topic",
+      "Downstream alert: calibration-us-recession-2026 has 2 stale assumption(s) from this topic"
     ],
     "rt": {
       "rt": 0.0,
       "regime": "SAFE",
       "worst_hypothesis": "H1"
     },
-    "entropy": 1.1328,
+    "entropy": 0.7199,
     "maxEntropy": 2.0,
-    "uncertaintyRatio": 0.5664,
+    "uncertaintyRatio": 0.3599,
     "evidenceFreshness": {
-      "fresh": 2,
+      "fresh": 4,
       "stale": 10,
-      "total": 12
+      "total": 14
     },
     "hypothesisAdmissibility": {
       "H1": "ADMISSIBLE",
@@ -808,11 +859,60 @@
       "H4": "ADMISSIBLE"
     },
     "klFromPrior": {
-      "kl_divergence": 0.1995,
+      "kl_divergence": 0.4203,
       "interpretation": "MODERATE"
     },
-    "lastComputed": "2026-04-16T03:43:52+00:00",
-    "staleDependencies": 0,
+    "lastComputed": "2026-04-17T14:18:28+00:00",
+    "staleDependencies": 1,
+    "staleDependencyDetails": [
+      {
+        "upstream_slug": "calibration-us-recession-2026",
+        "hypothesis": "H2",
+        "assumed": 0.22,
+        "actual": 0.3806,
+        "drift": 0.1606,
+        "tolerance": 0.1,
+        "stale": true
+      }
+    ],
+    "downstreamAlerts": [
+      {
+        "downstream_slug": "calibration-midterms-2026",
+        "downstream_title": "US Midterms 2026 — House Control",
+        "stale_assumptions": [
+          {
+            "hypothesis": "H2",
+            "assumed": 0.18,
+            "actual": 0.0603,
+            "drift": 0.1197
+          },
+          {
+            "hypothesis": "H4",
+            "assumed": 0.42,
+            "actual": 0.7035,
+            "drift": 0.2835
+          }
+        ]
+      },
+      {
+        "downstream_slug": "calibration-us-recession-2026",
+        "downstream_title": "US Recession by Q4 2026",
+        "stale_assumptions": [
+          {
+            "hypothesis": "H2",
+            "assumed": 0.18,
+            "actual": 0.0603,
+            "drift": 0.1197
+          },
+          {
+            "hypothesis": "H4",
+            "assumed": 0.42,
+            "actual": 0.7035,
+            "drift": 0.2835
+          }
+        ]
+      }
+    ],
     "calibrationHealth": "ACCEPTABLE",
     "unresolvedContradictions": 0,
     "expiredHypotheses": [
@@ -860,7 +960,7 @@
         }
       },
       "indistinguishable": [],
-      "lastChecked": "2026-04-16T03:43:52+00:00"
+      "lastChecked": "2026-04-17T14:18:28+00:00"
     }
   },
   "dependencies": {
@@ -903,6 +1003,50 @@
           "H4": 0.7035
         },
         "entropy": 1.1328
+      },
+      {
+        "timestamp": "2026-04-17T14:01:37+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0002,
+          "H2": 0.0089,
+          "H3": 0.0848,
+          "H4": 0.9062
+        },
+        "entropy": 0.4937
+      },
+      {
+        "timestamp": "2026-04-17T14:01:37+00:00",
+        "trigger": "pipeline:ev_012",
+        "posteriors": {
+          "H1": 0.0002,
+          "H2": 0.0089,
+          "H3": 0.0848,
+          "H4": 0.9062
+        },
+        "entropy": 0.4937
+      },
+      {
+        "timestamp": "2026-04-17T14:18:28+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0011,
+          "H2": 0.0209,
+          "H3": 0.133,
+          "H4": 0.845
+        },
+        "entropy": 0.7199
+      },
+      {
+        "timestamp": "2026-04-17T14:18:28+00:00",
+        "trigger": "pipeline:ev_012",
+        "posteriors": {
+          "H1": 0.0011,
+          "H2": 0.0209,
+          "H3": 0.133,
+          "H4": 0.845
+        },
+        "entropy": 0.7199
       }
     ],
     "outcomes": [
@@ -1069,6 +1213,138 @@
         "detected": "2026-04-16T03:43:52Z",
         "resolution": "SUPERSEDED",
         "resolvedAt": "2026-04-16T03:43:52Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-16T03:43:52+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, stale_evidence, quorum_failure. Reason: Evidence ev_011: White House reports 18 bilateral framework trade agreements completed covering m",
+        "entry_b_time": "2026-04-17T14:01:37+00:00",
+        "entry_b_text": "18 bilateral trade frameworks reported as of Apr 16; Section 122 rate remains 10% (15% announced but no formal order); two active lawsuits at CIT (oral args Apr 10-11); July 24 expiry firm at 150 days",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: bilateral, trade",
+        "detected": "2026-04-17T14:01:37Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T14:01:37Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-16T03:43:52+00:00",
+        "entry_a_text": "White House reports 18 bilateral framework trade agreements completed covering more than half of global GDP as result of Section 122 tariffs. CIT three-judge panel heard oral arguments April 10-11 on 23-state legal challenge.",
+        "entry_b_time": "2026-04-17T14:01:37+00:00",
+        "entry_b_text": "18 bilateral trade frameworks reported as of Apr 16; Section 122 rate remains 10% (15% announced but no formal order); two active lawsuits at CIT (oral args Apr 10-11); July 24 expiry firm at 150 days",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: bilateral, cit, oral, section, trade",
+        "detected": "2026-04-17T14:01:37Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T14:01:37Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-02T00:00:00Z",
+        "entry_a_text": "One-year anniversary of 'Liberation Day' tariffs. NPR/CNBC assessments: tariffs have not produced promised economic boom. Tax Foundation estimates average household cost $700/year. Trade deficit not meaningfully altered.",
+        "entry_b_time": "2026-04-17T14:01:37+00:00",
+        "entry_b_text": "18 bilateral trade frameworks reported as of Apr 16; Section 122 rate remains 10% (15% announced but no formal order); two active lawsuits at CIT (oral args Apr 10-11); July 24 expiry firm at 150 days",
+        "reason": "Numeric divergence 97.4% on metric (context: trade): new=18.0, existing=700.0, threshold=10%",
+        "detected": "2026-04-17T14:01:37Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T14:01:37Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-10T00:00:00Z",
+        "entry_a_text": "March 2026 CPI: headline +0.9% m/m, 3.3% annual (highest since April 2024). Energy +10.9% (Iran war driven). But core CPI +0.2% m/m, 2.6% annual — both below forecast. Tariff impact visible in apparel (+1%) and airline fares (+2.7%).",
+        "entry_b_time": "2026-04-17T14:01:37+00:00",
+        "entry_b_text": "18 bilateral trade frameworks reported as of Apr 16; Section 122 rate remains 10% (15% announced but no formal order); two active lawsuits at CIT (oral args Apr 10-11); July 24 expiry firm at 150 days",
+        "reason": "Numeric divergence 98.0% on metric (context: but): new=10.0, existing=0.2, threshold=10%",
+        "detected": "2026-04-17T14:01:37Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T14:01:37Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-10T00:00:00Z",
+        "entry_a_text": "CIT oral arguments held April 10-11. Three-judge panel (Barnett, Kelly, Stanceu) sharply questioned both sides for 3+ hours. Key issue: whether 'balance-of-payments deficits' in 1974 statute covers trade deficits. Awkward for government: DOJ argued last year Section 122 had 'no obvious application' to trade deficits. Awkward for challengers: CIT itself wrote Section 122 was available when striking IEEPA tariffs.",
+        "entry_b_time": "2026-04-17T14:01:37+00:00",
+        "entry_b_text": "18 bilateral trade frameworks reported as of Apr 16; Section 122 rate remains 10% (15% announced but no formal order); two active lawsuits at CIT (oral args Apr 10-11); July 24 expiry firm at 150 days",
+        "reason": "Numeric divergence 99.1% on metric (context: trade): new=18.0, existing=1974.0, threshold=10%",
+        "detected": "2026-04-17T14:01:37Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T14:01:37Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-06T00:00:00Z",
+        "entry_a_text": "Reuters reports Trump-Xi summit planned for mid-May in Beijing. Trade war framing: China responded with reciprocal investigations. Prior Busan meeting produced truce (tariff trim + fentanyl + soybean purchases). May summit is highest-level bilateral trade engagement since Section 122.",
+        "entry_b_time": "2026-04-17T14:01:37+00:00",
+        "entry_b_text": "18 bilateral trade frameworks reported as of Apr 16; Section 122 rate remains 10% (15% announced but no formal order); two active lawsuits at CIT (oral args Apr 10-11); July 24 expiry firm at 150 days",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: bilateral, section, trade",
+        "detected": "2026-04-17T14:01:37Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T14:01:37Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-03-30T00:00:00Z",
+        "entry_a_text": "As of March 30, rate remains 10%. No formal proclamation raising to 15% has been issued despite repeated announcements. 15% rhetoric has not translated to Federal Register action.",
+        "entry_b_time": "2026-04-17T14:01:37+00:00",
+        "entry_b_text": "18 bilateral trade frameworks reported as of Apr 16; Section 122 rate remains 10% (15% announced but no formal order); two active lawsuits at CIT (oral args Apr 10-11); July 24 expiry firm at 150 days",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: formal, rate, remains",
+        "detected": "2026-04-17T14:01:37Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T14:01:37Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-03-05T00:00:00Z",
+        "entry_a_text": "24 state attorneys general (led by Oregon, Arizona, California, New York, Vermont) file suit at US Court of International Trade challenging Section 122 surcharge. Case No. 1:26-cv-01472. States argue balance-of-payments requirement not met.",
+        "entry_b_time": "2026-04-17T14:01:37+00:00",
+        "entry_b_text": "18 bilateral trade frameworks reported as of Apr 16; Section 122 rate remains 10% (15% announced but no formal order); two active lawsuits at CIT (oral args Apr 10-11); July 24 expiry firm at 150 days",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: section, trade",
+        "detected": "2026-04-17T14:01:37Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T14:01:37Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-03-04T00:00:00Z",
+        "entry_a_text": "Treasury Secretary Bessent confirms intent to raise to 15% on CNBC. Also references ongoing Section 301 investigations and Section 232 studies as successor frameworks during 150-day window.",
+        "entry_b_time": "2026-04-17T14:01:37+00:00",
+        "entry_b_text": "18 bilateral trade frameworks reported as of Apr 16; Section 122 rate remains 10% (15% announced but no formal order); two active lawsuits at CIT (oral args Apr 10-11); July 24 expiry firm at 150 days",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: frameworks, section",
+        "detected": "2026-04-17T14:01:37Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T14:01:37Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-02-21T00:00:00Z",
+        "entry_a_text": "Trump announces via social media intent to raise Section 122 rate to 15% (statutory maximum). No formal proclamation issued.",
+        "entry_b_time": "2026-04-17T14:01:37+00:00",
+        "entry_b_text": "18 bilateral trade frameworks reported as of Apr 16; Section 122 rate remains 10% (15% announced but no formal order); two active lawsuits at CIT (oral args Apr 10-11); July 24 expiry firm at 150 days",
+        "reason": "Numeric divergence 86.9% on metric (context: rate, section): new=16.0, existing=122.0, threshold=10%",
+        "detected": "2026-04-17T14:01:37Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T14:01:37Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-02-20T00:00:00Z",
+        "entry_a_text": "SCOTUS strikes IEEPA-based tariffs (Learning Resources v. Trump). Same day, Trump issues Section 122 proclamation: 10% universal import surcharge effective Feb 24. 150-day clock starts.",
+        "entry_b_time": "2026-04-17T14:01:37+00:00",
+        "entry_b_text": "18 bilateral trade frameworks reported as of Apr 16; Section 122 rate remains 10% (15% announced but no formal order); two active lawsuits at CIT (oral args Apr 10-11); July 24 expiry firm at 150 days",
+        "reason": "Numeric divergence 86.9% on metric (context: section): new=16.0, existing=122.0, threshold=10%",
+        "detected": "2026-04-17T14:01:37Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T14:01:37Z"
       }
     ]
   },
@@ -1099,7 +1375,9 @@
       "Trump social media post, Feb 21 2026": 0.5,
       "USTR": 0.5,
       "White House": 0.5,
-      "White House Proclamation, Feb 20 2026": 0.5
+      "White House Proclamation, Feb 20 2026": 0.5,
+      "Fleischer Group": 0.5,
+      "Global Trade Alert": 0.5
     },
     "_last_scan_same_source_skipped": 0
   }

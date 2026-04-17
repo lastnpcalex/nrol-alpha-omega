@@ -6,7 +6,7 @@
     "question": "Will Russia and Ukraine reach a formal ceasefire agreement by December 31, 2026?",
     "resolution": "A document signed by authorized representatives of both Russia and Ukraine constituting a mutual commitment to halt offensive operations across a defined line of contact — not a unilateral declaration, not a temporary humanitarian truce (Easter-style), and not a third-party mediated pause without bilateral signature. Frozen-conflict line stabilization without a signed document does NOT resolve H1.",
     "created": "2026-04-11T00:00:00Z",
-    "lastUpdated": "2026-04-14T03:03:00Z",
+    "lastUpdated": "2026-04-17T14:01:37+00:00",
     "status": "ACTIVE",
     "dayCount": 0,
     "startDate": "2026-04-11T00:00:00Z",
@@ -68,32 +68,32 @@
         "label": "Comprehensive peace deal — formal signed ceasefire with territorial settlement",
         "midpoint": 20,
         "unit": "weeks",
-        "posterior": 0.07,
+        "posterior": 0.0101,
         "description": "Both parties sign a document halting offensive operations and specifying a line of contact or broader territorial arrangement. Requires either Russian acceptance of current-control lines or Ukrainian acceptance of Russian territorial gains. Neither condition is met as of April 2026. Historical comp: Minsk II took ~6 months of talks after Debaltseve and still failed. Assigned 7% — non-zero because US pressure combined with Iran-war distraction could force Kyiv's hand, but Russia's maximalist demands make mutual signature highly unlikely by Dec 31."
       },
       "H2": {
         "label": "Frozen conflict — fighting stops de facto, no formal agreement",
         "midpoint": 28,
         "unit": "weeks",
-        "posterior": 0.22,
+        "posterior": 0.114,
         "description": "Both sides exhaust offensive momentum and fighting drops below threshold of major operations, but no document is signed. Historical comp: Korea (armistice, distinct from peace treaty), Cyprus 1974, Nagorno-Karabakh pre-2020. Assigned 22% — plausible if US disengagement from European security accelerates and both sides face attrition exhaustion, but Russia still has offensive incentive and Kyiv won't accept a line that legitimizes Russian gains."
       },
       "H3": {
         "label": "Limited truces only — episodic ceasefires, no lasting agreement",
         "midpoint": 0,
         "unit": "weeks",
-        "posterior": 0.47,
+        "posterior": 0.7033,
         "description": "The Easter 32-hour pattern continues: holiday or crisis-driven pauses negotiated under US/Turkish/Vatican pressure, none converting to a durable arrangement. This is the modal outcome given the April 2026 baseline. Assigned 47% — highest prior because it matches current trajectory (Easter ceasefire), the structural impasse (territory), and the distracted mediator environment (Washington). Resolves as H3 if by Dec 31 there has been no sustained halt exceeding ~30 days."
       },
       "H4": {
         "label": "Escalation — new major Russian offensive or external actor military entry",
         "midpoint": 0,
         "unit": "weeks",
-        "posterior": 0.24,
+        "posterior": 0.1727,
         "description": "Russia launches a summer/autumn offensive capturing new significant population centers (Kharkiv, Sumy, Odesa approaches), or a NATO-member country formally deploys combat troops to Ukraine triggering Russian escalation response. Assigned 24% — elevated because: (1) Russia historically uses summer operational windows, (2) UK/France military hub pledges are a declared Russian red line, (3) Washington's Iran distraction reduces deterrence credibility, (4) Russian economy showing strain but Putin faces no domestic accountability constraint."
       }
     },
-    "expectedValue": 0.07,
+    "expectedValue": 3.39,
     "expectedUnit": "P(formal ceasefire signed by Dec 31 2026)",
     "posteriorHistory": [
       {
@@ -105,6 +105,28 @@
           "H4": 0.24
         },
         "note": "Initial priors — set prospectively April 11 2026. Easter ceasefire just agreed (April 10, 32 hours). Broader talks stalled. Russia demanding full Donbas. Washington Iran-distracted."
+      },
+      {
+        "date": "2026-04-17",
+        "H1": 0.0101,
+        "H2": 0.114,
+        "H3": 0.7033,
+        "H4": 0.1727,
+        "note": "Evidence ev_011: 32-hour Orthodox Easter ceasefire expired Apr 12 with 2000+ violations each side",
+        "likelihoods": {
+          "H1": 0.05,
+          "H2": 0.18,
+          "H3": 0.52,
+          "H4": 0.25
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        }
       }
     ]
   },
@@ -544,7 +566,10 @@
       "source": "Multiple wire reports (AP, Reuters) April 10 2026",
       "claimState": "OBSERVED",
       "trustWeight": 1.0,
-      "note": "This is a confirmed event. Logged as founding context entry."
+      "note": "This is a confirmed event. Logged as founding context entry.",
+      "ledger": "DECISION",
+      "effectiveWeight": 0.2727,
+      "url": "https://www.reuters.com"
     },
     {
       "id": "init_002",
@@ -557,7 +582,9 @@
       "source": "Contextual assessment at topic creation",
       "claimState": "OBSERVED",
       "trustWeight": 0.8,
-      "note": "Assessed from open-source reporting. No single confirmatory source."
+      "note": "Assessed from open-source reporting. No single confirmatory source.",
+      "ledger": "DECISION",
+      "effectiveWeight": 0.25
     },
     {
       "id": "init_003",
@@ -571,7 +598,9 @@
       "source": "Contextual at topic creation",
       "claimState": "OBSERVED",
       "trustWeight": 0.85,
-      "note": "Russia's stated red line is verified; actual hub construction timeline is uncertain."
+      "note": "Russia's stated red line is verified; actual hub construction timeline is uncertain.",
+      "ledger": "DECISION",
+      "effectiveWeight": 0.25
     },
     {
       "id": "init_004",
@@ -584,7 +613,9 @@
       "source": "Contextual at topic creation",
       "claimState": "OBSERVED",
       "trustWeight": 0.75,
-      "note": "Tagged RHETORIC because it is a stated position, not an action."
+      "note": "Tagged RHETORIC because it is a stated position, not an action.",
+      "ledger": "DECISION",
+      "effectiveWeight": 0.25
     },
     {
       "id": "ev_005",
@@ -598,7 +629,10 @@
       "claimState": "OBSERVED",
       "trustWeight": 1.0,
       "posteriorImpact": "H3 confirmed: truce is partial and violated, consistent with 'limited truces only' hypothesis. Absence of strategic weapons (Shaheds, missiles) during truce is notable — suggests both sides can modulate escalation level. Does NOT support H2 (sustained ceasefire) or H1 (comprehensive deal).",
-      "note": "Al Jazeera base trust 0.60. AP 0.99. Violation counts from official military statements on both sides — cross-referenced. Pattern identical to 2025 Easter truce."
+      "note": "Al Jazeera base trust 0.60. AP 0.99. Violation counts from official military statements on both sides — cross-referenced. Pattern identical to 2025 Easter truce.",
+      "ledger": "DECISION",
+      "effectiveWeight": 0.25,
+      "url": "https://www.aljazeera.com"
     },
     {
       "id": "ev_006",
@@ -612,7 +646,10 @@
       "claimState": "OBSERVED",
       "trustWeight": 0.6,
       "posteriorImpact": "Fires anti-indicator anti_h1_russia_maximalism: Russia reaffirms full oblast demands. H1 -signal. Confirms H3 as modal: episodic truces with no path to agreement. Peskov statement is RHETORIC but from authoritative Kremlin source — it IS the negotiating position.",
-      "note": "Tagged RHETORIC per framework (stated position, not action). But Kremlin spokesperson statements carry operational weight — this is not punditry."
+      "note": "Tagged RHETORIC per framework (stated position, not action). But Kremlin spokesperson statements carry operational weight — this is not punditry.",
+      "ledger": "DECISION",
+      "effectiveWeight": 0.25,
+      "url": "https://www.aljazeera.com"
     },
     {
       "id": "ev_007",
@@ -626,7 +663,10 @@
       "claimState": "OBSERVED",
       "trustWeight": 0.7,
       "posteriorImpact": "Mild H2/H1 signal: Ukraine signaling willingness to freeze. But Russia's rejection is the binding constraint. Zelenskyy's proposal matches indicator t2_ukraine_territory_concession partially — accepting current lines IS a concession from pre-war borders.",
-      "note": "Zelenskyy's willingness to freeze on current lines is a significant shift from 2022-2024 position but has been Russia-rejected."
+      "note": "Zelenskyy's willingness to freeze on current lines is a significant shift from 2022-2024 position but has been Russia-rejected.",
+      "ledger": "DECISION",
+      "effectiveWeight": 0.25,
+      "url": "https://www.aljazeera.com"
     },
     {
       "id": "ev_008",
@@ -640,7 +680,10 @@
       "claimState": "OBSERVED",
       "trustWeight": 0.6,
       "posteriorImpact": "H3/H4 lean: US disengagement removes the primary external pressure for deal. Without active US mediation, structural path to H1 is blocked. Increases H3 (episodic truces) and H4 (escalation via Russian offensive advantage if Ukraine aid wavers).",
-      "note": "Al Jazeera base trust 0.60. This is contextual assessment but triangulates with absence of reported US diplomatic activity."
+      "note": "Al Jazeera base trust 0.60. This is contextual assessment but triangulates with absence of reported US diplomatic activity.",
+      "ledger": "DECISION",
+      "effectiveWeight": 0.2727,
+      "url": "https://www.aljazeera.com"
     },
     {
       "id": "ev_009",
@@ -655,7 +698,10 @@
       "claimState": "SUPPORTED",
       "weight": 1.0,
       "posteriorImpact": "NONE. H3-directional (limited truces pattern). t3_easter_truce_extended requires truce extended beyond 32 hours - truce was NOT extended. t3_prisoner_exchange_large requires >200 per side - 175 falls short. No indicator fired.",
-      "note": "Easter ceasefire is exactly the episodic pattern described in H3 prior justification."
+      "note": "Easter ceasefire is exactly the episodic pattern described in H3 prior justification.",
+      "ledger": "DECISION",
+      "effectiveWeight": 0.5,
+      "url": "https://www.aljazeera.com"
     },
     {
       "id": "ev_010",
@@ -669,22 +715,119 @@
       "claimState": "SUPPORTED",
       "weight": 1.0,
       "posteriorImpact": "NONE. Confirms H3 modal pattern. No indicator fired. t2_sustained_ceasefire_30d requires <10 artillery incidents/day for 30 consecutive days - 2,299 violations in <24h is far below threshold.",
-      "note": "Structural impasse unchanged. US distraction by Iran war reduces mediator pressure."
+      "note": "Structural impasse unchanged. US distraction by Iran war reduces mediator pressure.",
+      "ledger": "DECISION",
+      "effectiveWeight": 0.5,
+      "url": "https://www.aljazeera.com"
+    },
+    {
+      "id": "ev_011",
+      "time": "2026-04-17T14:01:37+00:00",
+      "tag": "DIPLO",
+      "tags": [
+        "DIPLO",
+        "EVENT"
+      ],
+      "text": "32-hour Orthodox Easter ceasefire expired Apr 12 with 2000+ violations each side; formal talks remain stalled; Kremlin did not coordinate ceasefire with US; Washington attention shifted to Iran war",
+      "provenance": "OBSERVED",
+      "source": "Al Jazeera/UK FCDO",
+      "posteriorImpact": "NONE",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5,
+      "url": "https://www.aljazeera.com"
+    },
+    {
+      "time": "2026-04-17T14:01:37+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, stale_evidence, quorum_failure. Reason: Evidence ev_011: 32-hour Orthodox Easter ceasefire expired Apr 12 with 2000+ violations each side",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
     }
   ],
   "watchpointAlerts": [],
   "governance": {
-    "health": "HEALTHY",
-    "issues": [],
-    "entropy": 1.755,
-    "maxEntropy": 2.0,
-    "uncertaintyRatio": 0.878,
-    "evidenceFreshness": {
-      "fresh": 10,
-      "stale": 0,
-      "window": "last_10"
+    "health": "DEGRADED",
+    "issues": [
+      "Majority stale evidence (10/12)",
+      "Stale dependency: calibration-houthi-posture.H2 assumed=0.45, actual=0.5943, drift=14.43%",
+      "Stale dependency: calibration-houthi-posture.H3 assumed=0.3, actual=0.1698, drift=13.02%"
+    ],
+    "rt": {
+      "rt": 0.0,
+      "regime": "SAFE",
+      "worst_hypothesis": "H1"
     },
-    "lastComputed": "2026-04-14T03:03:00Z"
+    "entropy": 1.2188,
+    "maxEntropy": 2.0,
+    "uncertaintyRatio": 0.6094,
+    "evidenceFreshness": {
+      "fresh": 2,
+      "stale": 10,
+      "total": 12
+    },
+    "hypothesisAdmissibility": {
+      "H1": "ADMISSIBLE",
+      "H2": "ADMISSIBLE",
+      "H3": "ADMISSIBLE",
+      "H4": "ADMISSIBLE"
+    },
+    "klFromPrior": {
+      "kl_divergence": 0.1321,
+      "interpretation": "MODERATE"
+    },
+    "lastComputed": "2026-04-17T14:01:37+00:00",
+    "staleDependencies": 2,
+    "staleDependencyDetails": [
+      {
+        "upstream_slug": "calibration-houthi-posture",
+        "hypothesis": "H2",
+        "assumed": 0.45,
+        "actual": 0.5943,
+        "drift": 0.1443,
+        "tolerance": 0.1,
+        "stale": true
+      },
+      {
+        "upstream_slug": "calibration-houthi-posture",
+        "hypothesis": "H3",
+        "assumed": 0.3,
+        "actual": 0.1698,
+        "drift": 0.1302,
+        "tolerance": 0.1,
+        "stale": true
+      }
+    ],
+    "calibrationHealth": "ACCEPTABLE",
+    "unresolvedContradictions": 0,
+    "designGate": {
+      "passed": true,
+      "blockers": [],
+      "warnings": [],
+      "coverage": {
+        "H1": {
+          "pos": 11,
+          "neg": 7
+        },
+        "H2": {
+          "pos": 14,
+          "neg": 4
+        },
+        "H3": {
+          "pos": 7,
+          "neg": 6
+        },
+        "H4": {
+          "pos": 6,
+          "neg": 13
+        }
+      },
+      "indistinguishable": [],
+      "lastChecked": "2026-04-17T14:01:37+00:00"
+    }
   },
   "dependencies": {
     "_docs": "Cross-topic dependency declarations. Upstream topics whose posteriors this topic's assumptions depend on.",
@@ -714,9 +857,150 @@
           "H4": 0.24
         },
         "note": "Founding snapshot"
+      },
+      {
+        "timestamp": "2026-04-17T14:01:37+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0101,
+          "H2": 0.114,
+          "H3": 0.7033,
+          "H4": 0.1727
+        },
+        "entropy": 1.2188
+      },
+      {
+        "timestamp": "2026-04-17T14:01:37+00:00",
+        "trigger": "pipeline:ev_011",
+        "posteriors": {
+          "H1": 0.0101,
+          "H2": 0.114,
+          "H3": 0.7033,
+          "H4": 0.1727
+        },
+        "entropy": 1.2188
       }
     ],
     "outcomes": [],
     "brierScores": []
+  },
+  "contradictionTracker": {
+    "unresolved": [],
+    "resolved": [
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-12T07:00:00Z",
+        "entry_a_text": "Both Russia and Ukraine accused each other of violating the Easter ceasefire. Ukraine recorded 2,299 violations by 7am April 12. Russia accused Kyiv of nearly 2,000 breaches. Broader peace talks remain stalled over territory. Washington attention shifted to Iran/Hormuz crisis.",
+        "entry_b_time": "2026-04-17T14:01:37+00:00",
+        "entry_b_text": "32-hour Orthodox Easter ceasefire expired Apr 12 with 2000+ violations each side; formal talks remain stalled; Kremlin did not coordinate ceasefire with US; Washington attention shifted to Iran war",
+        "reason": "Antonym pair detected: new has 'war', existing has 'peace'",
+        "detected": "2026-04-17T14:01:37Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T14:01:37Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-10T13:00:00Z",
+        "entry_a_text": "Putin declared 32-hour Orthodox Easter ceasefire beginning 4pm Moscow time Saturday April 11, running to midnight Sunday. Kyiv had proposed the truce weeks earlier. 175 POWs exchanged per side, UAE-mediated.",
+        "entry_b_time": "2026-04-17T14:01:37+00:00",
+        "entry_b_text": "32-hour Orthodox Easter ceasefire expired Apr 12 with 2000+ violations each side; formal talks remain stalled; Kremlin did not coordinate ceasefire with US; Washington attention shifted to Iran war",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: ceasefire, easter, hour, orthodox, side",
+        "detected": "2026-04-17T14:01:37Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T14:01:37Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-12T00:00:00Z",
+        "entry_a_text": "US attention confirmed shifted to Iran war. Al Jazeera: 'The process has stalled further since the outbreak of the war in the Middle East, with Washington's attention having shifted towards Iran.' No US envoy activity on Ukraine track reported in April.",
+        "entry_b_time": "2026-04-17T14:01:37+00:00",
+        "entry_b_text": "32-hour Orthodox Easter ceasefire expired Apr 12 with 2000+ violations each side; formal talks remain stalled; Kremlin did not coordinate ceasefire with US; Washington attention shifted to Iran war",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: attention, iran, shifted, stalled, war",
+        "detected": "2026-04-17T14:01:37Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T14:01:37Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-12T00:00:00Z",
+        "entry_a_text": "Easter ceasefire violations: Ukraine reports 2,299 violations (28 assault actions, 479 shellings, 747 attack drone strikes, 1,045 FPV drone strikes). Russia reports 1,971 violations (258 artillery/tank firings, 1,329 FPV drone strikes, 375 munition drops). Both sides accuse each other. However, Ukraine confirms NO long-range Shahed drones, guided aerial bombs, or missile strikes during truce — a significant de-escalation from nightly barrages.",
+        "entry_b_time": "2026-04-17T14:01:37+00:00",
+        "entry_b_text": "32-hour Orthodox Easter ceasefire expired Apr 12 with 2000+ violations each side; formal talks remain stalled; Kremlin did not coordinate ceasefire with US; Washington attention shifted to Iran war",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: ceasefire, easter, violations",
+        "detected": "2026-04-17T14:01:37Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T14:01:37Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-11T00:00:00Z",
+        "entry_a_text": "Abu Dhabi, Geneva, and Paris diplomatic tracks all stalled as of April 2026. No formal bilateral meeting scheduled. Russia has not accepted any current-control ceasefire line.",
+        "entry_b_time": "2026-04-17T14:01:37+00:00",
+        "entry_b_text": "32-hour Orthodox Easter ceasefire expired Apr 12 with 2000+ violations each side; formal talks remain stalled; Kremlin did not coordinate ceasefire with US; Washington attention shifted to Iran war",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: ceasefire, formal, stalled",
+        "detected": "2026-04-17T14:01:37Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T14:01:37Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-10T00:00:00Z",
+        "entry_a_text": "32-hour Easter ceasefire agreed between Russia and Ukraine, brokered under pressure from Washington and Vatican. Took effect April 10. No indication of extension. Both sides reported violations during the truce window.",
+        "entry_b_time": "2026-04-17T14:01:37+00:00",
+        "entry_b_text": "32-hour Orthodox Easter ceasefire expired Apr 12 with 2000+ violations each side; formal talks remain stalled; Kremlin did not coordinate ceasefire with US; Washington attention shifted to Iran war",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: ceasefire, easter, hour, violations, washington",
+        "detected": "2026-04-17T14:01:37Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T14:01:37Z"
+      }
+    ]
+  },
+  "sourceCalibration": {
+    "ledger": [
+      {
+        "timestamp": "2026-04-17T14:01:37Z",
+        "evidence_index": 0,
+        "confirming_index": 9,
+        "resolution": "CONFIRMED",
+        "source": "Multiple wire reports (AP, Reuters) April 10 2026",
+        "confirming_source": "Al Jazeera / Detroit News",
+        "trust_delta": 0.05,
+        "original_text_snippet": "32-hour Easter ceasefire agreed between Russia and Ukraine, brokered under pressure from Washington and Vatican. Took ef",
+        "confirming_text_snippet": "Both Russia and Ukraine accused each other of violating the Easter ceasefire. Ukraine recorded 2,299 violations by 7am A"
+      },
+      {
+        "timestamp": "2026-04-17T14:01:37Z",
+        "evidence_index": 7,
+        "confirming_index": 9,
+        "resolution": "CONFIRMED",
+        "source": "Al Jazeera contextual reporting, April 12 2026",
+        "confirming_source": "Al Jazeera / Detroit News",
+        "trust_delta": 0.05,
+        "original_text_snippet": "US attention confirmed shifted to Iran war. Al Jazeera: 'The process has stalled further since the outbreak of the war i",
+        "confirming_text_snippet": "Both Russia and Ukraine accused each other of violating the Easter ceasefire. Ukraine recorded 2,299 violations by 7am A"
+      }
+    ],
+    "effectiveTrust": {
+      "Al Jazeera": 0.6,
+      "Al Jazeera contextual reporting, April 12 2026": 0.5455,
+      "CNN": 0.75,
+      "Contextual assessment at topic creation": 0.5,
+      "Contextual at topic creation": 0.5,
+      "Detroit News": 0.5,
+      "Euronews": 0.5,
+      "Guardian, April 12 2026": 0.5,
+      "Kremlin (Peskov)": 0.5,
+      "Multiple wire reports (AP, Reuters) April 10 2026": 0.5455,
+      "UK FCDO": 0.5,
+      "Ukrainian General Staff (Facebook), Russian MoD (MAX app),": 0.5,
+      "Zelenskyy evening address, reported by Al Jazeera": 0.5
+    },
+    "_last_scan_same_source_skipped": 4
   }
 }

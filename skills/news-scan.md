@@ -29,15 +29,28 @@ For each news item found, use `process_headline` to automatically triage and pro
 ```python
 from framework.pipeline import process_evidence, process_headline, log_activity
 
-# Recommended: use process_headline for automatic triage and processing
-# If an indicator fires, likelihoods are derived automatically. 
-# If no indicator fires, you MUST provide likelihoods in likelihoods_by_slug to perform Bayesian update.
+# For each news item, include the URL from your web search results.
+# The URL appears in the news feed as a clickable link.
+result = process_evidence(
+    slug="topic-slug",
+    entry={
+        "text": "Factual description of the development.",
+        "source": "Source Name",
+        "tag": "EVENT",
+        "tags": ["EVENT", "DIPLO"],
+        "url": "https://www.example.com/article",  # ALWAYS include the source URL
+    },
+    likelihoods={"H1": 0.15, "H2": 0.45, "H3": 0.30, "H4": 0.10},
+    reason="Why this evidence is informative."
+)
+log_activity(result, platform="news-scan")
+
+# Or use process_headline for automatic triage across all topics:
 results = process_headline(
     headline="News headline text",
     source="Source Name",
     likelihoods_by_slug={"topic-slug": {"H1": 0.15, "H2": 0.45, "H3": 0.30, "H4": 0.10}}
 )
-
 for res in results:
     log_activity(res, platform="news-scan")
 ```

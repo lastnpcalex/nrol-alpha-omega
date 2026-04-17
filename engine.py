@@ -1461,9 +1461,11 @@ def add_evidence(topic: dict, entry: dict) -> dict:
         "posteriorImpact": entry.get("posteriorImpact", "NONE"),
     }
 
-    # Carry over optional note field
+    # Carry over optional fields
     if entry.get("note"):
         full_entry["note"] = entry["note"]
+    if entry.get("url"):
+        full_entry["url"] = entry["url"]
 
     # Information-chain tracking: entries sharing a chain ID trace to the
     # same primary source and should not count as independent corroboration.

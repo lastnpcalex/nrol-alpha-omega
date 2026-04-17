@@ -113,6 +113,7 @@ def process_evidence(
     topic = add_evidence(topic, entry)
     evidence_id = topic["evidenceLog"][-1]["id"]
     result["evidence_id"] = evidence_id
+    result["url"] = entry.get("url")
 
     # 1b. Auto-resolve contradictions created by add_evidence as SUPERSEDED.
     # In active/conflict topics, temporal evolution (ceasefire → ceasefire collapsed)
@@ -309,7 +310,7 @@ def log_activity(result: dict, platform: str = "pipeline"):
         "evidenceId": result.get("evidence_id", ""),
         "source": platform,
         "platform": platform,
-        "url": None,
+        "url": result.get("url"),
         "route": "BAYESIAN_UPDATE",
         "posteriorChange": {
             "before": result.get("posteriors_before"),
