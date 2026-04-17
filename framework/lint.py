@@ -70,6 +70,12 @@ FAILURE_MODES = [
         "pattern": r"\d+\.?\d{2,}",
         "action": "ROUND TO APPROPRIATE SIGNIFICANCE",
     },
+    {
+        "id": "dependency_laundering",
+        "name": "Dependency Laundering",
+        "pattern": r"(?i)(implied|dependency|conditional|CPT|compute_implied|marginali[sz])",
+        "action": "BLOCK — dependency-derived posteriors cannot be applied via process_evidence(). Use process_dependency() or manual update with narrative justification.",
+    },
 ]
 
 

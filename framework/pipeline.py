@@ -38,7 +38,10 @@ from engine import (
 from governor import governance_report, check_update_proposal
 from framework.scoring import snapshot_posteriors, check_expired_hypotheses
 from framework.source_ledger import auto_calibrate, scan_for_resolutions
-from framework.dependencies import propagate_alert
+from framework.dependencies import (
+    propagate_alert, validate_conditionals, compute_implied_posteriors,
+    check_cpt_staleness, get_dependencies,
+)
 
 # Try to load source DB — not fatal if missing
 _SOURCE_DB_PATH = Path(_REPO) / "sources" / "source_db.json"
@@ -324,6 +327,122 @@ def log_activity(result: dict, platform: str = "pipeline"):
 
     with open(log_path, "w", encoding="utf-8") as f:
         json.dump(log, f, indent=2, ensure_ascii=False)
+
+
+def process_dependency(
+    downstream_slug: str,
+    upstream_slug: str,
+    conditionals: dict,
+    assumption: str,
+    tolerance: float = 0.15,
+    derivation_method: str = "LLM_INTERPRETED",
+) -> dict:
+    """
+    Wire or update a cross-topic conditional probability table (CPT).
+
+    Like process_evidence() but for dependency wiring. Validates the CPT,
+    saves to topic JSON via save_topic(), runs governance, and returns
+    advisory implied posteriors (never auto-applies them).
+
+    Args:
+        downstream_slug: topic that depends on the upstream
+        upstream_slug: topic that this one depends on
+        conditionals: CPT matrix — {upstream_H: {downstream_H: prob, ...}, ...}
+                     Each row may also include a 'narrative' field (string).
+        assumption: MANDATORY narrative describing the causal relationship
+        tolerance: staleness threshold (default 0.15)
+        derivation_method: how the CPT was derived — 'LLM_INTERPRETED',
+                          'OPERATOR_SUPPLIED', or 'EMPIRICAL'
+
+    Returns:
+        dict with validation, implied posteriors, governance, and staleness info
+    """
+    if not assumption or not assumption.strip():
+        raise ValueError("Narrative assumption is MANDATORY — cannot be empty")
+
+    downstream = load_topic(downstream_slug)
+    upstream = load_topic(upstream_slug)
+
+    upstream_h_keys = list(upstream["model"]["hypotheses"].keys())
+    downstream_h_keys = list(downstream["model"]["hypotheses"].keys())
+
+    # Validate the CPT
+    validation = validate_conditionals(conditionals, upstream_h_keys, downstream_h_keys)
+    if not validation["valid"]:
+        return {
+            "downstream_slug": downstream_slug,
+            "upstream_slug": upstream_slug,
+            "valid": False,
+            "errors": validation["errors"],
+            "warnings": validation["warnings"],
+        }
+
+    # Build cptHash for staleness detection
+    indicator_count = 0
+    tiers = downstream.get("indicators", {}).get("tiers", {})
+    for tier_inds in tiers.values():
+        if isinstance(tier_inds, list):
+            indicator_count += len(tier_inds)
+
+    cpt_hash = {
+        "upstreamHypotheses": upstream_h_keys,
+        "downstreamIndicatorCount": indicator_count,
+        "derivedAt": datetime.now(timezone.utc).isoformat(),
+    }
+
+    # Build the dependency entry
+    dep_entry = {
+        "slug": upstream_slug,
+        "assumption": assumption,
+        "tolerance": tolerance,
+        "conditionals": conditionals,
+        "cptHash": cpt_hash,
+        "derivationMethod": derivation_method,
+        "lastChecked": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
+    }
+
+    # Update or insert the dependency
+    deps = downstream.setdefault("dependencies", {"upstream": []})
+    upstream_list = deps.setdefault("upstream", [])
+    replaced = False
+    for i, existing in enumerate(upstream_list):
+        if existing.get("slug") == upstream_slug:
+            upstream_list[i] = dep_entry
+            replaced = True
+            break
+    if not replaced:
+        upstream_list.append(dep_entry)
+
+    # Save with governance
+    save_topic(downstream)
+
+    # Compute implied posteriors (advisory only)
+    implied = None
+    try:
+        implied = compute_implied_posteriors(downstream, upstream_slug)
+    except Exception as e:
+        implied = {"error": str(e)}
+
+    # Run governance report
+    gov = governance_report(downstream)
+
+    # Check CPT staleness
+    staleness = check_cpt_staleness(dep_entry, upstream, downstream)
+
+    return {
+        "downstream_slug": downstream_slug,
+        "upstream_slug": upstream_slug,
+        "valid": True,
+        "errors": [],
+        "warnings": validation["warnings"],
+        "implied_posteriors": implied,
+        "governance": {
+            "health": gov.get("health"),
+            "issues": gov.get("issues"),
+        },
+        "cpt_staleness": staleness,
+        "derivation_method": derivation_method,
+    }
 
 
 # --- CLI entry point ---
