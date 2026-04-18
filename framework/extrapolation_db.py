@@ -147,6 +147,23 @@ def init_schema():
             pid INTEGER
         );
 
+        -- v0.3: per-prediction, per-critic verdicts. One row per (ideation, critic).
+        CREATE TABLE IF NOT EXISTS critic_verdicts (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            run_id INTEGER NOT NULL REFERENCES agent_runs(id) ON DELETE CASCADE,
+            ideation_id INTEGER NOT NULL REFERENCES ideations(id) ON DELETE CASCADE,
+            critic_persona TEXT NOT NULL,              -- AMBER | BLUE | GRAY | GREEN | OCHRE | RED | VIOLET
+            verdict TEXT NOT NULL,                      -- APPROVE | MODIFY | DROP | NEUTRAL
+            reasoning TEXT,
+            modified_suggestion TEXT,                   -- if MODIFY, the suggested revision
+            vetted_at TEXT NOT NULL,
+            model_name TEXT,
+            UNIQUE(run_id, ideation_id, critic_persona)
+        );
+        CREATE INDEX IF NOT EXISTS idx_cv_run ON critic_verdicts(run_id);
+        CREATE INDEX IF NOT EXISTS idx_cv_ideation ON critic_verdicts(ideation_id);
+        CREATE INDEX IF NOT EXISTS idx_cv_critic ON critic_verdicts(critic_persona);
+
         CREATE INDEX IF NOT EXISTS idx_ideations_run ON ideations(run_id);
         CREATE INDEX IF NOT EXISTS idx_ideations_topic ON ideations(topic_slug);
         CREATE INDEX IF NOT EXISTS idx_vetting_ideation ON vetting(ideation_id);
@@ -265,6 +282,61 @@ def log_meta_lint(run_id: int, critic_persona: str, portfolio_narrative: str,
              json.dumps(modify_suggestions or {}), json.dumps(gap_fill_suggestions or []),
              model_name)
         )
+
+
+def log_critic_verdict(run_id: int, ideation_id: int, critic_persona: str,
+                        verdict: str, reasoning: str = None,
+                        modified_suggestion: str = None, model_name: str = None):
+    """
+    Log a single critic's verdict on a single ideation.
+
+    verdict: APPROVE | MODIFY | DROP | NEUTRAL
+
+    Idempotent via UNIQUE(run_id, ideation_id, critic_persona) — same critic
+    can't double-vote. Re-logging replaces the existing verdict via INSERT OR REPLACE.
+    """
+    valid = {"APPROVE", "MODIFY", "DROP", "NEUTRAL"}
+    if verdict not in valid:
+        raise ValueError(f"Invalid verdict '{verdict}'. Must be one of {valid}")
+    with connect() as c:
+        c.execute(
+            "INSERT OR REPLACE INTO critic_verdicts "
+            "(run_id, ideation_id, critic_persona, verdict, reasoning, "
+            "modified_suggestion, vetted_at, model_name) "
+            "VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+            (run_id, ideation_id, critic_persona.upper(), verdict, reasoning,
+             modified_suggestion, _now_iso(), model_name)
+        )
+
+
+def get_critic_verdicts_for_ideation(ideation_id: int) -> dict:
+    """
+    Returns {critic_persona: {verdict, reasoning, modified_suggestion}, ...}
+    for a single ideation. Used when writing the final prediction to the topic JSON.
+    """
+    out = {}
+    with connect() as c:
+        cur = c.execute(
+            "SELECT critic_persona, verdict, reasoning, modified_suggestion "
+            "FROM critic_verdicts WHERE ideation_id = ?", (ideation_id,)
+        )
+        for r in cur.fetchall():
+            out[r["critic_persona"]] = {
+                "verdict": r["verdict"],
+                "reasoning": r["reasoning"],
+                "modified_suggestion": r["modified_suggestion"],
+            }
+    return out
+
+
+def count_drops_for_ideation(ideation_id: int) -> int:
+    """Count how many critics DROPPED this ideation (for consensus rule)."""
+    with connect() as c:
+        cur = c.execute(
+            "SELECT COUNT(*) as n FROM critic_verdicts "
+            "WHERE ideation_id = ? AND verdict = 'DROP'", (ideation_id,)
+        )
+        return cur.fetchone()["n"]
 
 
 def log_approved_prediction(run_id: int, ideation_id: int, prediction_id: str,

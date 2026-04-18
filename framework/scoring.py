@@ -493,6 +493,9 @@ def add_conditional_prediction(
     linked_hypothesis: str = None,
     tags: list = None,
     source: str = "operator",
+    lens: str = "HUMAN",
+    critic_verdicts: dict = None,
+    lens_agreement: list = None,
 ) -> dict:
     """
     Add a conditional prediction: "IF condition_hypothesis is true,
@@ -555,6 +558,9 @@ def add_conditional_prediction(
         "linkedHypothesis": linked_hypothesis,
         "tags": tags or [],
         "source": source,
+        "lens": (lens or "HUMAN").upper(),
+        "criticVerdicts": critic_verdicts or {},
+        "lensAgreement": lens_agreement or [],
     }
 
     preds.append(pred)

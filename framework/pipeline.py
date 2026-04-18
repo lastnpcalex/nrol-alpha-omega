@@ -460,6 +460,10 @@ def process_conditional_prediction(
     linked_topic_slug: str = None,
     linked_hypothesis: str = None,
     tags: list = None,
+    lens: str = "HUMAN",
+    critic_verdicts: dict = None,
+    lens_agreement: list = None,
+    source: str = "operator",
 ) -> dict:
     """
     Add a conditional prediction through the pipeline.
@@ -485,6 +489,10 @@ def process_conditional_prediction(
         linked_topic_slug=linked_topic_slug,
         linked_hypothesis=linked_hypothesis,
         tags=tags,
+        lens=lens,
+        critic_verdicts=critic_verdicts,
+        lens_agreement=lens_agreement,
+        source=source,
     )
 
     save_topic(topic)
