@@ -6,7 +6,7 @@
     "question": "Will Russia and Ukraine reach a formal ceasefire agreement by December 31, 2026?",
     "resolution": "A document signed by authorized representatives of both Russia and Ukraine constituting a mutual commitment to halt offensive operations across a defined line of contact — not a unilateral declaration, not a temporary humanitarian truce (Easter-style), and not a third-party mediated pause without bilateral signature. Frozen-conflict line stabilization without a signed document does NOT resolve H1.",
     "created": "2026-04-11T00:00:00Z",
-    "lastUpdated": "2026-04-17T23:08:31+00:00",
+    "lastUpdated": "2026-04-18T16:01:55+00:00",
     "status": "ACTIVE",
     "dayCount": 0,
     "startDate": "2026-04-11T00:00:00Z",
@@ -82,7 +82,7 @@
         "label": "Limited truces only — episodic ceasefires, no lasting agreement",
         "midpoint": 0,
         "unit": "weeks",
-        "posterior": 0.9772,
+        "posterior": 0.9771,
         "description": "The Easter 32-hour pattern continues: holiday or crisis-driven pauses negotiated under US/Turkish/Vatican pressure, none converting to a durable arrangement. This is the modal outcome given the April 2026 baseline. Assigned 47% — highest prior because it matches current trajectory (Easter ceasefire), the structural impasse (territory), and the distracted mediator environment (Washington). Resolves as H3 if by Dec 31 there has been no sustained halt exceeding ~30 days."
       },
       "H4": {
@@ -889,7 +889,7 @@
       "regime": "SAFE",
       "worst_hypothesis": "H1"
     },
-    "entropy": 0.1899,
+    "entropy": 0.1901,
     "maxEntropy": 2.0,
     "uncertaintyRatio": 0.095,
     "evidenceFreshness": {
@@ -904,10 +904,10 @@
       "H4": "ADMISSIBLE"
     },
     "klFromPrior": {
-      "kl_divergence": 0.6454,
+      "kl_divergence": 0.6453,
       "interpretation": "WELL_EVIDENCED"
     },
-    "lastComputed": "2026-04-17T23:08:31+00:00",
+    "lastComputed": "2026-04-18T16:01:55+00:00",
     "staleDependencies": 2,
     "staleDependencyDetails": [
       {
@@ -954,7 +954,7 @@
         }
       },
       "indistinguishable": [],
-      "lastChecked": "2026-04-17T23:08:31+00:00"
+      "lastChecked": "2026-04-18T16:01:55+00:00"
     }
   },
   "dependencies": {

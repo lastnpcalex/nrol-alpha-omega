@@ -6,7 +6,7 @@
     "question": "Which party will control the US House of Representatives after the November 2026 midterm elections?",
     "resolution": "AP/Decision Desk calls House majority on or after Election Night, November 3, 2026. Controlling party must hold 218+ seats. Final seat counts certified by mid-December 2026.",
     "created": "2026-04-11T00:00:00Z",
-    "lastUpdated": "2026-04-17T18:49:21+00:00",
+    "lastUpdated": "2026-04-18T16:01:55+00:00",
     "status": "ACTIVE",
     "dayCount": 1,
     "startDate": "2026-04-11T00:00:00Z",
@@ -65,7 +65,7 @@
         "label": "Democrats flip House (218+ seats)",
         "midpoint": 225,
         "unit": "seats",
-        "posterior": 0.9272,
+        "posterior": 0.9271,
         "description": "Democrats net enough gains to exceed 218 seats. Requires approximately a net shift of ~3 seats from current GOP margin. Historical base rate + current approval environment make this the modal outcome. A generic ballot advantage of +5pp or more, sustained through October, is the key threshold."
       },
       "H2": {
@@ -843,19 +843,20 @@
     "health": "DEGRADED",
     "issues": [
       "Majority stale evidence (10/14)",
-      "Stale dependency: calibration-us-recession-2026.H2 assumed=0.22, actual=0.4365, drift=21.65%",
-      "Stale dependency: calibration-section122-tariffs.H2 assumed=0.18, actual=0.0069, drift=17.31%",
-      "Stale dependency: calibration-section122-tariffs.H3 assumed=0.33, actual=0.1022, drift=22.78%",
-      "Stale dependency: calibration-section122-tariffs.H4 assumed=0.42, actual=0.8908, drift=47.08%"
+      "Stale dependency: calibration-us-recession-2026.H1 assumed=0.55, actual=0.7434, drift=19.34%",
+      "Stale dependency: calibration-us-recession-2026.H3 assumed=0.14, actual=0.0077, drift=13.23%",
+      "Stale dependency: calibration-section122-tariffs.H2 assumed=0.18, actual=0.0057, drift=17.43%",
+      "Stale dependency: calibration-section122-tariffs.H3 assumed=0.33, actual=0.1168, drift=21.32%",
+      "Stale dependency: calibration-section122-tariffs.H4 assumed=0.42, actual=0.8725, drift=45.25%"
     ],
     "rt": {
       "rt": 0.0,
       "regime": "SAFE",
       "worst_hypothesis": "H1"
     },
-    "entropy": 0.4286,
+    "entropy": 0.4287,
     "maxEntropy": 2.0,
-    "uncertaintyRatio": 0.2143,
+    "uncertaintyRatio": 0.2144,
     "evidenceFreshness": {
       "fresh": 4,
       "stale": 10,
@@ -868,18 +869,27 @@
       "H4": "ADMISSIBLE"
     },
     "klFromPrior": {
-      "kl_divergence": 0.6065,
+      "kl_divergence": 0.6064,
       "interpretation": "WELL_EVIDENCED"
     },
-    "lastComputed": "2026-04-17T18:49:21+00:00",
-    "staleDependencies": 4,
+    "lastComputed": "2026-04-18T16:01:55+00:00",
+    "staleDependencies": 5,
     "staleDependencyDetails": [
       {
         "upstream_slug": "calibration-us-recession-2026",
-        "hypothesis": "H2",
-        "assumed": 0.22,
-        "actual": 0.4365,
-        "drift": 0.2165,
+        "hypothesis": "H1",
+        "assumed": 0.55,
+        "actual": 0.7434,
+        "drift": 0.1934,
+        "tolerance": 0.1,
+        "stale": true
+      },
+      {
+        "upstream_slug": "calibration-us-recession-2026",
+        "hypothesis": "H3",
+        "assumed": 0.14,
+        "actual": 0.0077,
+        "drift": 0.1323,
         "tolerance": 0.1,
         "stale": true
       },
@@ -887,8 +897,8 @@
         "upstream_slug": "calibration-section122-tariffs",
         "hypothesis": "H2",
         "assumed": 0.18,
-        "actual": 0.0069,
-        "drift": 0.1731,
+        "actual": 0.0057,
+        "drift": 0.1743,
         "tolerance": 0.1,
         "stale": true
       },
@@ -896,8 +906,8 @@
         "upstream_slug": "calibration-section122-tariffs",
         "hypothesis": "H3",
         "assumed": 0.33,
-        "actual": 0.1022,
-        "drift": 0.2278,
+        "actual": 0.1168,
+        "drift": 0.2132,
         "tolerance": 0.1,
         "stale": true
       },
@@ -905,8 +915,8 @@
         "upstream_slug": "calibration-section122-tariffs",
         "hypothesis": "H4",
         "assumed": 0.42,
-        "actual": 0.8908,
-        "drift": 0.4708,
+        "actual": 0.8725,
+        "drift": 0.4525,
         "tolerance": 0.1,
         "stale": true
       }
@@ -940,7 +950,7 @@
         }
       },
       "indistinguishable": [],
-      "lastChecked": "2026-04-17T18:49:21+00:00"
+      "lastChecked": "2026-04-18T16:01:55+00:00"
     }
   },
   "dependencies": {

@@ -6,7 +6,7 @@
     "question": "Will a kinetic military incident with casualties occur between PRC forces and any claimant state in the South China Sea by December 31, 2026?",
     "resolution": "Confirmed shots fired at military/coast guard vessel, ramming causing documented injury or death, boarding of military vessel resulting in injury/death, or water cannon causing documented serious injury. Must be reported by at least two independent primary sources (wire service, government statement, or verified video evidence). Commercial vessel incidents alone do not resolve.",
     "created": "2026-04-11T00:00:00Z",
-    "lastUpdated": "2026-04-17T23:08:31+00:00",
+    "lastUpdated": "2026-04-18T16:01:55+00:00",
     "status": "ACTIVE",
     "dayCount": 0,
     "startDate": "2026-04-11T00:00:00Z",
@@ -63,28 +63,28 @@
         "label": "Gray zone only — no casualties through Dec 31, 2026",
         "midpoint": 0,
         "unit": "probability",
-        "posterior": 0.9839,
+        "posterior": 0.98,
         "description": "PRC continues harassment operations (water cannon, laser, close intercept, blocking maneuvers) but no confirmed casualties. Philippines continues resupply missions under pressure. Pattern persists without crossing kinetic threshold. Dominant historical outcome; reinforced by PH-China talks resuming and ADIZ incursions declining."
       },
       "H2": {
         "label": "Kinetic incident with injuries but no deaths",
         "midpoint": 0,
         "unit": "probability",
-        "posterior": 0.006,
+        "posterior": 0.0075,
         "description": "At least one Philippine (or other claimant) sailor/guardsman sustains documented injury from PRC action (water cannon trauma, ramming injuries, physical altercation during boarding attempt). No fatalities. Most plausible escalation path given current trajectory: water cannon incidents have already come close, and proximity incidents like BRP Benguet / Jingzhou (March 30) raise collision risk."
       },
       "H3": {
         "label": "Lethal incident — at least one fatality",
         "midpoint": 0,
         "unit": "probability",
-        "posterior": 0.005,
+        "posterior": 0.0063,
         "description": "A kinetic interaction results in at least one confirmed fatality on either side. Could result from: deliberate live fire, severe ramming, helicopter downing, or a water cannon incident causing drowning. PRC has historically avoided lethal outcomes due to MDT tripwire awareness, but escalation dynamics and miscalculation risk are non-trivial over an 8-month horizon."
       },
       "H4": {
         "label": "MDT Article IV invocation by Philippines",
         "midpoint": 0,
         "unit": "probability",
-        "posterior": 0.005,
+        "posterior": 0.0063,
         "description": "Philippines formally invokes the 1951 Mutual Defense Treaty Article IV following a PRC attack on Philippine armed forces or public vessels. Requires: (1) lethal or severe kinetic incident, (2) Marcos administration political will to invoke, (3) US willingness to respond. Historical base rate: never invoked since treaty signed. Conditional on H3 occurring, probability of invocation estimated at ~50%, implying ~0.065 unconditional."
       }
     },
@@ -852,9 +852,9 @@
       "regime": "SAFE",
       "worst_hypothesis": "H1"
     },
-    "entropy": 0.1438,
+    "entropy": 0.1736,
     "maxEntropy": 2.0,
-    "uncertaintyRatio": 0.0719,
+    "uncertaintyRatio": 0.0868,
     "evidenceFreshness": {
       "fresh": 8,
       "stale": 5,
@@ -867,10 +867,10 @@
       "H4": "ADMISSIBLE"
     },
     "klFromPrior": {
-      "kl_divergence": 0.5204,
+      "kl_divergence": 0.5055,
       "interpretation": "WELL_EVIDENCED"
     },
-    "lastComputed": "2026-04-17T23:08:31+00:00",
+    "lastComputed": "2026-04-18T16:01:55+00:00",
     "staleDependencies": 0,
     "calibrationHealth": "ACCEPTABLE",
     "unresolvedContradictions": 0,
@@ -897,7 +897,7 @@
         }
       },
       "indistinguishable": [],
-      "lastChecked": "2026-04-17T23:08:31+00:00"
+      "lastChecked": "2026-04-18T16:01:55+00:00"
     }
   },
   "predictionScoring": {

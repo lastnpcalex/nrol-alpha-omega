@@ -6,7 +6,7 @@
     "question": "How long will the Strait of Hormuz remain effectively closed?",
     "resolution": "Sustained >30% of pre-war Hormuz traffic (~40 transits/day)",
     "created": "2026-03-02T00:00:00Z",
-    "lastUpdated": "2026-04-18T13:25:55+00:00",
+    "lastUpdated": "2026-04-18T16:01:54+00:00",
     "status": "ACTIVE",
     "dayCount": 45,
     "startDate": "2026-03-02T00:00:00Z",
@@ -70,25 +70,25 @@
         "label": "<6 weeks",
         "midpoint": 4,
         "unit": "weeks",
-        "posterior": 0.005
+        "posterior": 0.0067
       },
       "H2": {
         "label": "6wk-4mo",
         "midpoint": 11,
         "unit": "weeks",
-        "posterior": 0.005
+        "posterior": 0.0067
       },
       "H3": {
         "label": "4-12mo",
         "midpoint": 34,
         "unit": "weeks",
-        "posterior": 0.9849
+        "posterior": 0.98
       },
       "H4": {
         "label": ">12mo",
         "midpoint": 65,
         "unit": "weeks",
-        "posterior": 0.005
+        "posterior": 0.0067
       }
     },
     "expectedValue": 33.89,
@@ -3879,7 +3879,7 @@
   "governance": {
     "health": "DEGRADED",
     "issues": [
-      "Majority stale evidence (135/166)",
+      "Majority stale evidence (139/166)",
       "Near-zero uncertainty — check for overconfidence",
       "Stale dependency: calibration-houthi-posture.H2 assumed=0.45, actual=0.6726, drift=22.26%",
       "Stale dependency: calibration-houthi-posture.H3 assumed=0.3, actual=0.0961, drift=20.39%",
@@ -3890,12 +3890,12 @@
       "regime": "SAFE",
       "worst_hypothesis": "H1"
     },
-    "entropy": 0.1363,
+    "entropy": 0.1737,
     "maxEntropy": 2.0,
-    "uncertaintyRatio": 0.0682,
+    "uncertaintyRatio": 0.0868,
     "evidenceFreshness": {
-      "fresh": 31,
-      "stale": 135,
+      "fresh": 27,
+      "stale": 139,
       "total": 166
     },
     "hypothesisAdmissibility": {
@@ -3905,10 +3905,10 @@
       "H4": "ADMISSIBLE"
     },
     "klFromPrior": {
-      "kl_divergence": 1.5127,
+      "kl_divergence": 1.4863,
       "interpretation": "WELL_EVIDENCED"
     },
-    "lastComputed": "2026-04-18T13:25:55+00:00",
+    "lastComputed": "2026-04-18T16:01:54+00:00",
     "staleDependencies": 2,
     "staleDependencyDetails": [
       {
@@ -3938,14 +3938,14 @@
           {
             "hypothesis": "H2",
             "assumed": 0.22,
-            "actual": 0.0059,
-            "drift": 0.2141
+            "actual": 0.005,
+            "drift": 0.215
           },
           {
             "hypothesis": "H3",
             "assumed": 0.5,
-            "actual": 0.984,
-            "drift": 0.484
+            "actual": 0.9849,
+            "drift": 0.4849
           },
           {
             "hypothesis": "H4",
@@ -3990,7 +3990,7 @@
         }
       },
       "indistinguishable": [],
-      "lastChecked": "2026-04-18T13:25:55+00:00"
+      "lastChecked": "2026-04-18T16:01:55+00:00"
     }
   },
   "dependencies": {

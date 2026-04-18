@@ -493,18 +493,12 @@ def update_posteriors(topic: dict, new_posteriors: dict[str, float],
     for k in merged:
         merged[k] = round(merged[k] / total, 4)
 
-    # Epistemic floor/ceiling for ACTIVE topics
+    # Epistemic floor/ceiling for ACTIVE topics — redistribution keeps bounds strict
     topic_status = topic.get("meta", {}).get("status", "ACTIVE")
     if topic_status != "RESOLVED":
-        _EPISTEMIC_FLOOR = 0.005
-        _EPISTEMIC_CEILING = 0.98
-        needs_clamp = any(v < _EPISTEMIC_FLOOR or v > _EPISTEMIC_CEILING
-                          for v in merged.values())
+        needs_clamp = any(v < 0.005 or v > 0.98 for v in merged.values())
         if needs_clamp:
-            clamped = {k: max(_EPISTEMIC_FLOOR, min(_EPISTEMIC_CEILING, v))
-                       for k, v in merged.items()}
-            clamp_total = sum(clamped.values())
-            merged = {k: round(v / clamp_total, 4) for k, v in clamped.items()}
+            merged = clamp_posteriors_with_redistribution(merged)
 
     # === GOVERNOR HARD GATE: Hallucination Checklist ===
     proposal_check = check_update_proposal(
@@ -729,28 +723,22 @@ def bayesian_update(topic: dict, likelihoods: dict[str, float],
 
     computed = {k: round(v / total, 4) for k, v in unnormalized.items()}
 
-    # Epistemic floor/ceiling for ACTIVE topics
+    # Epistemic floor/ceiling for ACTIVE topics — redistribution keeps bounds strict.
     # A posterior of 0.0 or 1.0 on an active topic claims certainty that the
     # resolution hasn't yet confirmed. Time uncertainty (midpoints, horizons)
     # contradicts point-mass posteriors — if H3 says "4-12 months" and we're at
     # month 1.5, claiming 100% on H3 ignores the time range we defined.
     topic_status = topic.get("meta", {}).get("status", "ACTIVE")
     if topic_status != "RESOLVED":
-        _EPISTEMIC_FLOOR = 0.005  # 0.5% minimum per hypothesis
-        _EPISTEMIC_CEILING = 0.98  # 98% maximum per hypothesis
-        needs_clamp = any(v < _EPISTEMIC_FLOOR or v > _EPISTEMIC_CEILING
-                          for v in computed.values())
+        needs_clamp = any(v < 0.005 or v > 0.98 for v in computed.values())
         if needs_clamp:
-            clamped = {k: max(_EPISTEMIC_FLOOR, min(_EPISTEMIC_CEILING, v))
-                       for k, v in computed.items()}
-            clamp_total = sum(clamped.values())
-            computed = {k: round(v / clamp_total, 4) for k, v in clamped.items()}
+            computed = clamp_posteriors_with_redistribution(computed)
             _add_evidence_raw(topic, {
                 "time": _now_iso(),
                 "tag": "INTEL",
-                "text": (f"EPISTEMIC CLAMP: posteriors clamped to [{_EPISTEMIC_FLOOR}, "
-                         f"{_EPISTEMIC_CEILING}] range — topic is ACTIVE, certainty requires "
-                         f"resolution. Pre-clamp values triggered floor/ceiling."),
+                "text": ("EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with "
+                         "redistribution — topic is ACTIVE, certainty requires resolution. "
+                         "Bounds enforced strictly via adjustable-mass redistribution."),
                 "provenance": "DERIVED",
                 "posteriorImpact": "NONE",
                 "ledger": "DECISION",
@@ -1819,6 +1807,78 @@ def update_day_count(topic: dict) -> dict:
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
+
+def clamp_posteriors_with_redistribution(
+    posteriors: dict,
+    floor: float = 0.005,
+    ceiling: float = 0.98,
+    max_iterations: int = 10,
+) -> dict:
+    """
+    Clamp posteriors to [floor, ceiling] while preserving sum = 1.0.
+
+    Naive clamp-then-renormalize can push ceiling-clamped values back above
+    the ceiling because uniform renormalization scales every value up. This
+    function redistributes the excess/deficit mass only across values that
+    are NOT at a bound, preserving strict bound enforcement.
+
+    Algorithm:
+      1. Clamp all values to [floor, ceiling]
+      2. Compute delta = 1.0 - sum(clamped)
+      3. If |delta| < 1e-6, done
+      4. Identify adjustable values:
+         - delta > 0 (need to add mass): values NOT at ceiling
+         - delta < 0 (need to remove mass): values NOT at floor
+      5. Distribute delta proportionally to current mass of adjustable values
+      6. Re-clamp and repeat (bounded iterations)
+
+    Returns new clamped+normalized dict.
+    """
+    current = dict(posteriors)
+
+    for iteration in range(max_iterations):
+        # Clamp to bounds
+        clamped = {k: max(floor, min(ceiling, v)) for k, v in current.items()}
+        total = sum(clamped.values())
+        delta = 1.0 - total
+
+        if abs(delta) < 1e-6:
+            return {k: round(v, 4) for k, v in clamped.items()}
+
+        # Identify which values can be adjusted
+        if delta > 0:
+            # Need to add mass — only non-ceiling values can receive
+            adjustable = {k: v for k, v in clamped.items() if v < ceiling - 1e-9}
+        else:
+            # Need to remove mass — only non-floor values can give
+            adjustable = {k: v for k, v in clamped.items() if v > floor + 1e-9}
+
+        if not adjustable:
+            # No room to adjust — bounds are mutually incompatible with sum=1
+            # (e.g. all at floor with n*floor > 1, or all at ceiling with n*ceiling < 1)
+            return {k: round(v, 4) for k, v in clamped.items()}
+
+        adj_total = sum(adjustable.values())
+        if adj_total <= 0:
+            # Edge case: adjustable values sum to zero, distribute equally
+            per = delta / len(adjustable)
+            current = dict(clamped)
+            for k in adjustable:
+                current[k] = clamped[k] + per
+        else:
+            # Distribute delta proportionally to current mass of adjustable values
+            current = dict(clamped)
+            for k, v in adjustable.items():
+                share = v / adj_total
+                current[k] = clamped[k] + delta * share
+
+    # Final clamp in case of floating-point drift
+    clamped = {k: max(floor, min(ceiling, v)) for k, v in current.items()}
+    total = sum(clamped.values())
+    if total > 0:
+        clamped = {k: v / total for k, v in clamped.items()}
+    return {k: round(v, 4) for k, v in clamped.items()}
+
 
 def extract_posteriors(entry: dict, hypothesis_keys: list[str] = None) -> dict:
     """
