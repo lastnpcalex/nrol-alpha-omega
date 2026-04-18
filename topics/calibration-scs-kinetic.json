@@ -6,7 +6,7 @@
     "question": "Will a kinetic military incident with casualties occur between PRC forces and any claimant state in the South China Sea by December 31, 2026?",
     "resolution": "Confirmed shots fired at military/coast guard vessel, ramming causing documented injury or death, boarding of military vessel resulting in injury/death, or water cannon causing documented serious injury. Must be reported by at least two independent primary sources (wire service, government statement, or verified video evidence). Commercial vessel incidents alone do not resolve.",
     "created": "2026-04-11T00:00:00Z",
-    "lastUpdated": "2026-04-17T18:49:21+00:00",
+    "lastUpdated": "2026-04-17T23:08:31+00:00",
     "status": "ACTIVE",
     "dayCount": 0,
     "startDate": "2026-04-11T00:00:00Z",
@@ -63,14 +63,14 @@
         "label": "Gray zone only — no casualties through Dec 31, 2026",
         "midpoint": 0,
         "unit": "probability",
-        "posterior": 0.9792,
+        "posterior": 0.9839,
         "description": "PRC continues harassment operations (water cannon, laser, close intercept, blocking maneuvers) but no confirmed casualties. Philippines continues resupply missions under pressure. Pattern persists without crossing kinetic threshold. Dominant historical outcome; reinforced by PH-China talks resuming and ADIZ incursions declining."
       },
       "H2": {
         "label": "Kinetic incident with injuries but no deaths",
         "midpoint": 0,
         "unit": "probability",
-        "posterior": 0.0108,
+        "posterior": 0.006,
         "description": "At least one Philippine (or other claimant) sailor/guardsman sustains documented injury from PRC action (water cannon trauma, ramming injuries, physical altercation during boarding attempt). No fatalities. Most plausible escalation path given current trajectory: water cannon incidents have already come close, and proximity incidents like BRP Benguet / Jingzhou (March 30) raise collision risk."
       },
       "H3": {
@@ -184,6 +184,40 @@
           "H3": 0.12,
           "H4": 0.03
         },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        }
+      },
+      {
+        "date": "2026-04-17",
+        "posteriors": {
+          "H1": 0.9839,
+          "H2": 0.006,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "priors": {
+          "H1": 0.9888,
+          "H2": 0.0108,
+          "H3": 0.0004,
+          "H4": 0.0
+        },
+        "updateMethod": "bayesian_update",
+        "evidenceRefs": [
+          "ev_005"
+        ],
+        "likelihoods": {
+          "H1": 0.55,
+          "H2": 0.3,
+          "H3": 0.1,
+          "H4": 0.05
+        },
+        "note": "Gray-zone escalation but no live fire or casualties. Reinforces H1; mild raise to H2/H4.",
         "redTeam": {
           "contrarian_direction": {},
           "counterevidence": [],
@@ -690,6 +724,34 @@
       "ledger": "FACT",
       "claimState": "CONTESTED",
       "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_005",
+      "time": "2026-04-17T23:08:31+00:00",
+      "tag": "EVENT",
+      "tags": [
+        "EVENT",
+        "MILOPS",
+        "GRAYZONE"
+      ],
+      "text": "Philippines accuses China of cyanide 'sabotage' (lab-confirmed bottles seized from Chinese vessels at Second Thomas Shoal). China installs 352m floating barrier at Scarborough Shoal Apr 10-11; 10 CCG vessels Apr 5-12. US-AU-PH joint drills Apr 9-12.",
+      "provenance": "OBSERVED",
+      "source": "Reuters/Al Jazeera",
+      "posteriorImpact": "NONE",
+      "url": "https://www.reuters.com/world/asia-pacific/china-moves-block-entrance-disputed-south-china-sea-shoal-images-show-2026-04-15/",
+      "ledger": "FACT",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 0.6
+    },
+    {
+      "time": "2026-04-17T23:08:31+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range — topic is ACTIVE, certainty requires resolution. Pre-clamp values triggered floor/ceiling.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
     }
   ],
   "dataFeeds": {
@@ -790,13 +852,13 @@
       "regime": "SAFE",
       "worst_hypothesis": "H1"
     },
-    "entropy": 0.1767,
+    "entropy": 0.1438,
     "maxEntropy": 2.0,
-    "uncertaintyRatio": 0.0883,
+    "uncertaintyRatio": 0.0719,
     "evidenceFreshness": {
-      "fresh": 6,
+      "fresh": 8,
       "stale": 5,
-      "total": 12
+      "total": 14
     },
     "hypothesisAdmissibility": {
       "H1": "ADMISSIBLE",
@@ -805,10 +867,10 @@
       "H4": "ADMISSIBLE"
     },
     "klFromPrior": {
-      "kl_divergence": 0.5014,
+      "kl_divergence": 0.5204,
       "interpretation": "WELL_EVIDENCED"
     },
-    "lastComputed": "2026-04-17T18:49:21+00:00",
+    "lastComputed": "2026-04-17T23:08:31+00:00",
     "staleDependencies": 0,
     "calibrationHealth": "ACCEPTABLE",
     "unresolvedContradictions": 0,
@@ -835,7 +897,7 @@
         }
       },
       "indistinguishable": [],
-      "lastChecked": "2026-04-17T18:49:21+00:00"
+      "lastChecked": "2026-04-17T23:08:31+00:00"
     }
   },
   "predictionScoring": {
@@ -950,6 +1012,28 @@
           "H4": 0.0
         },
         "entropy": 0.0911
+      },
+      {
+        "timestamp": "2026-04-17T23:08:31+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.9839,
+          "H2": 0.006,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "entropy": 0.1438
+      },
+      {
+        "timestamp": "2026-04-17T23:08:31+00:00",
+        "trigger": "pipeline:ev_005",
+        "posteriors": {
+          "H1": 0.9839,
+          "H2": 0.006,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "entropy": 0.1438
       }
     ],
     "outcomes": [],
@@ -1029,25 +1113,70 @@
         "trust_delta": -0.1,
         "original_text_snippet": "GOVERNANCE WARNING on bayesian_update: stale_evidence. Reason: Evidence ev_002: China installed a 352-meter floating bar",
         "confirming_text_snippet": "China installs 352m floating barrier at Scarborough Shoal entrance (Apr 10-11), 10 CCG vessels present Apr 5-12. Philipp"
+      },
+      {
+        "timestamp": "2026-04-17T23:08:31Z",
+        "evidence_index": 5,
+        "confirming_index": 12,
+        "resolution": "CONFIRMED",
+        "source": "Bloomberg / Modern Diplomacy",
+        "confirming_source": "Reuters/Al Jazeera",
+        "trust_delta": 0.05,
+        "original_text_snippet": "Philippines confirmed Chinese boats used cyanide at Second Thomas Shoal (Ayungin Shoal), calling it sabotage intended to",
+        "confirming_text_snippet": "Philippines accuses China of cyanide 'sabotage' (lab-confirmed bottles seized from Chinese vessels at Second Thomas Shoa"
+      },
+      {
+        "timestamp": "2026-04-17T23:08:31Z",
+        "evidence_index": 8,
+        "confirming_index": 12,
+        "resolution": "CONFIRMED",
+        "source": "Manila Times",
+        "confirming_source": "Reuters/Al Jazeera",
+        "trust_delta": 0.05,
+        "original_text_snippet": "China installed a 352-meter floating barrier at the entrance to Scarborough Shoal, blocking Philippine access with coast",
+        "confirming_text_snippet": "Philippines accuses China of cyanide 'sabotage' (lab-confirmed bottles seized from Chinese vessels at Second Thomas Shoa"
+      },
+      {
+        "timestamp": "2026-04-17T23:08:31Z",
+        "evidence_index": 9,
+        "confirming_index": 12,
+        "resolution": "CONFIRMED",
+        "source": "",
+        "confirming_source": "Reuters/Al Jazeera",
+        "trust_delta": 0.05,
+        "original_text_snippet": "GOVERNANCE WARNING on bayesian_update: stale_evidence. Reason: Evidence ev_002: China installed a 352-meter floating bar",
+        "confirming_text_snippet": "Philippines accuses China of cyanide 'sabotage' (lab-confirmed bottles seized from Chinese vessels at Second Thomas Shoa"
+      },
+      {
+        "timestamp": "2026-04-17T23:08:31Z",
+        "evidence_index": 11,
+        "confirming_index": 12,
+        "resolution": "CONFIRMED",
+        "source": "Bloomberg / Stars and Stripes",
+        "confirming_source": "Reuters/Al Jazeera",
+        "trust_delta": 0.05,
+        "original_text_snippet": "China installs 352m floating barrier at Scarborough Shoal entrance (Apr 10-11), 10 CCG vessels present Apr 5-12. Philipp",
+        "confirming_text_snippet": "Philippines accuses China of cyanide 'sabotage' (lab-confirmed bottles seized from Chinese vessels at Second Thomas Shoa"
       }
     ],
     "effectiveTrust": {
       "AFP joint statements": 0.5,
       "AFP official statement": 0.5,
-      "Bloomberg": 0.85,
+      "Bloomberg": 0.8816,
       "DFA statements": 0.5,
       "INDOPACOM": 0.5,
-      "Modern Diplomacy": 0.5,
+      "Modern Diplomacy": 0.5455,
       "PRC Ministry of National Defense statement": 0.5,
       "Taiwan MND reports": 0.5,
       "Wire reports": 0.5,
       "open source tracking": 0.5,
       "wire reports": 0.5,
-      "Manila Times": 0.4565,
+      "Manila Times": 0.3703,
       "Al Jazeera": 0.6,
       "CNN": 0.75,
-      "Stars and Stripes": 0.5
+      "Stars and Stripes": 0.5228,
+      "Reuters": 0.9
     },
-    "_last_scan_same_source_skipped": 6
+    "_last_scan_same_source_skipped": 7
   }
 }

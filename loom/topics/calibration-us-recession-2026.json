@@ -6,7 +6,7 @@
     "question": "Will the US economy enter a recession (2 consecutive quarters of negative real GDP growth) by Q4 2026?",
     "resolution": "BEA official advance GDP prints for Q2 2026 (released ~July 2026) and Q3 2026 (released ~Oct 2026). Two consecutive quarters of negative real GDP growth = recession confirmed. NBER declaration is corroborating but NOT required for resolution — the quantitative criterion governs.",
     "created": "2026-04-11T00:00:00Z",
-    "lastUpdated": "2026-04-17T18:49:21+00:00",
+    "lastUpdated": "2026-04-17T23:08:31+00:00",
     "status": "ACTIVE",
     "dayCount": 1,
     "startDate": "2026-04-11T00:00:00Z",
@@ -96,21 +96,21 @@
         "label": "No recession — GDP stays positive both Q2 and Q3 2026",
         "midpoint": 0.0,
         "unit": "probability",
-        "posterior": 0.5104,
+        "posterior": 0.7434,
         "description": "US avoids two consecutive negative GDP quarters. Growth may slow to near-zero (0.0-1.0% annualized) but does not go negative. Labor market softens but holds. Fed cuts 1-2 times as insurance. Tariff impact is absorbed via margin compression and partial pass-through. Resolves: Both Q2 and Q3 BEA advance prints are positive."
       },
       "H2": {
         "label": "Technical recession — 2 negative quarters, shallow (> -1.5% annualized each)",
         "midpoint": 0.33,
         "unit": "probability",
-        "posterior": 0.4356,
+        "posterior": 0.244,
         "description": "GDP goes negative for 2 quarters but neither quarter exceeds -1.5% annualized contraction. Unemployment rises to 4.8-5.2%. Shallow enough that NBER may delay or decline to call. Consumer spending contracts modestly. Fed cuts aggressively (3+ cuts). Resolves: Q2 or Q3 GDP negative, neither quarter worse than -1.5% ann."
       },
       "H3": {
         "label": "Significant recession — unemployment crosses 5.5%, GDP -1.5% or worse",
         "midpoint": 0.66,
         "unit": "probability",
-        "posterior": 0.049,
+        "posterior": 0.0077,
         "description": "Hard landing. GDP contracts -1.5% or worse in at least one quarter. Unemployment rises through 5.5% by Q4. Corporate layoffs accelerate. Fed pivots to emergency cuts. Credit spreads widen materially. Possible external shock amplifier (trade war escalation, financial contagion). Resolves: At least one GDP print worse than -1.5% ann AND unemployment >5.5%."
       },
       "H4": {
@@ -121,7 +121,7 @@
         "description": "Worst case: tariff pass-through re-ignites inflation above 4% CPI while GDP contracts. Fed is caught between cutting to support growth and holding/hiking to contain inflation. Analogues: 1973-74, 1980. Requires tariff escalation beyond current 10% universal — sector-specific hikes (autos, energy) driving simultaneous supply contraction and price increases. Resolves: GDP negative for 2 quarters AND CPI year-over-year above 4%."
       }
     },
-    "expectedValue": 0.18,
+    "expectedValue": 0.09,
     "expectedUnit": "probability_of_recession",
     "posteriorHistory": [
       {
@@ -194,6 +194,44 @@
           "H2": 0.4,
           "H3": 0.18,
           "H4": 0.07
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        }
+      },
+      {
+        "date": "2026-04-17",
+        "posteriors": {
+          "H1": 0.7434,
+          "H2": 0.244,
+          "H3": 0.0077,
+          "H4": 0.005
+        },
+        "priors": {
+          "H1": 0.5115,
+          "H2": 0.4365,
+          "H3": 0.0491,
+          "H4": 0.0029
+        },
+        "updateMethod": "bayesian_update",
+        "evidenceRefs": [
+          "ev_014"
+        ],
+        "likelihoods": {
+          "H1": 0.65,
+          "H2": 0.25,
+          "H3": 0.07,
+          "H4": 0.03
+        },
+        "note": "Falling recession odds + positive growth projections support H1; Powell's overstated-jobs caveat retains H2 tail.",
+        "turningPoint": {
+          "type": "MAJOR_SHIFT",
+          "maxShift": 0.2319
         },
         "redTeam": {
           "contrarian_direction": {},
@@ -1144,20 +1182,58 @@
       "ledger": "DECISION",
       "claimState": "PROPOSED",
       "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_014",
+      "time": "2026-04-17T23:08:31+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "MACRO"
+      ],
+      "text": "Goldman cuts 12-month US recession odds from 30% to 20%; projects 2.5% 2026 GDP vs 2.1% consensus. Polymarket ~28% recession-by-EOY. March CPI +2.4% y/y, unemployment 4.3%, payrolls +178k; Powell warns April-onward jobs may be overstated.",
+      "provenance": "OBSERVED",
+      "source": "Goldman Sachs/Polymarket",
+      "posteriorImpact": "NONE",
+      "url": "https://www.goldmansachs.com/insights/articles/us-gdp-growth-is-projected-to-outperform-economist-forecasts-in-2026",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-17T23:08:31+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range — topic is ACTIVE, certainty requires resolution. Pre-clamp values triggered floor/ceiling.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-17T23:08:31+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, stale_evidence, quorum_failure. Reason: Falling recession odds + positive growth projections support H1; Powell's overstated-jobs caveat retains H2 tail.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
     }
   ],
   "governance": {
     "health": "DEGRADED",
     "issues": [
-      "Majority stale evidence (10/16)",
-      "Stale dependency: calibration-fed-rate-2026.H1 assumed=0.22, actual=0.4061, drift=18.61%",
-      "Stale dependency: calibration-fed-rate-2026.H2 assumed=0.38, actual=0.4614, drift=8.14%",
-      "Stale dependency: calibration-fed-rate-2026.H3 assumed=0.28, actual=0.0699, drift=21.01%",
-      "Stale dependency: calibration-section122-tariffs.H2 assumed=0.18, actual=0.0069, drift=17.31%",
-      "Stale dependency: calibration-section122-tariffs.H3 assumed=0.33, actual=0.1017, drift=22.83%",
-      "Stale dependency: calibration-section122-tariffs.H4 assumed=0.42, actual=0.8865, drift=46.65%",
-      "Stale dependency: hormuz-closure.H2 assumed=0.22, actual=0.005, drift=21.50%",
-      "Stale dependency: hormuz-closure.H3 assumed=0.5, actual=0.9849, drift=48.49%",
+      "Majority stale evidence (10/19)",
+      "Stale dependency: calibration-fed-rate-2026.H1 assumed=0.22, actual=0.3331, drift=11.31%",
+      "Stale dependency: calibration-fed-rate-2026.H2 assumed=0.38, actual=0.6307, drift=25.07%",
+      "Stale dependency: calibration-fed-rate-2026.H3 assumed=0.28, actual=0.0191, drift=26.09%",
+      "Stale dependency: calibration-fed-rate-2026.H4 assumed=0.12, actual=0.0171, drift=10.29%",
+      "Stale dependency: calibration-section122-tariffs.H2 assumed=0.18, actual=0.0057, drift=17.43%",
+      "Stale dependency: calibration-section122-tariffs.H3 assumed=0.33, actual=0.1168, drift=21.32%",
+      "Stale dependency: calibration-section122-tariffs.H4 assumed=0.42, actual=0.8725, drift=45.25%",
+      "Stale dependency: hormuz-closure.H2 assumed=0.22, actual=0.0059, drift=21.41%",
+      "Stale dependency: hormuz-closure.H3 assumed=0.5, actual=0.984, drift=48.40%",
       "Stale dependency: hormuz-closure.H4 assumed=0.275, actual=0.005, drift=27.00%",
       "Downstream alert: calibration-fed-rate-2026 has 3 stale assumption(s) from this topic",
       "Downstream alert: calibration-midterms-2026 has 1 stale assumption(s) from this topic",
@@ -1168,13 +1244,13 @@
       "regime": "SAFE",
       "worst_hypothesis": "H1"
     },
-    "entropy": 1.2689,
+    "entropy": 0.9069,
     "maxEntropy": 2.0,
-    "uncertaintyRatio": 0.6344,
+    "uncertaintyRatio": 0.4535,
     "evidenceFreshness": {
-      "fresh": 6,
+      "fresh": 9,
       "stale": 10,
-      "total": 16
+      "total": 19
     },
     "hypothesisAdmissibility": {
       "H1": "ADMISSIBLE",
@@ -1183,18 +1259,18 @@
       "H4": "ADMISSIBLE"
     },
     "klFromPrior": {
-      "kl_divergence": 0.1935,
+      "kl_divergence": 0.2125,
       "interpretation": "MODERATE"
     },
-    "lastComputed": "2026-04-17T18:49:21+00:00",
-    "staleDependencies": 9,
+    "lastComputed": "2026-04-17T23:08:31+00:00",
+    "staleDependencies": 10,
     "staleDependencyDetails": [
       {
         "upstream_slug": "calibration-fed-rate-2026",
         "hypothesis": "H1",
         "assumed": 0.22,
-        "actual": 0.4061,
-        "drift": 0.1861,
+        "actual": 0.3331,
+        "drift": 0.1131,
         "tolerance": 0.08,
         "stale": true
       },
@@ -1202,8 +1278,8 @@
         "upstream_slug": "calibration-fed-rate-2026",
         "hypothesis": "H2",
         "assumed": 0.38,
-        "actual": 0.4614,
-        "drift": 0.0814,
+        "actual": 0.6307,
+        "drift": 0.2507,
         "tolerance": 0.08,
         "stale": true
       },
@@ -1211,8 +1287,17 @@
         "upstream_slug": "calibration-fed-rate-2026",
         "hypothesis": "H3",
         "assumed": 0.28,
-        "actual": 0.0699,
-        "drift": 0.2101,
+        "actual": 0.0191,
+        "drift": 0.2609,
+        "tolerance": 0.08,
+        "stale": true
+      },
+      {
+        "upstream_slug": "calibration-fed-rate-2026",
+        "hypothesis": "H4",
+        "assumed": 0.12,
+        "actual": 0.0171,
+        "drift": 0.1029,
         "tolerance": 0.08,
         "stale": true
       },
@@ -1220,8 +1305,8 @@
         "upstream_slug": "calibration-section122-tariffs",
         "hypothesis": "H2",
         "assumed": 0.18,
-        "actual": 0.0069,
-        "drift": 0.1731,
+        "actual": 0.0057,
+        "drift": 0.1743,
         "tolerance": 0.1,
         "stale": true
       },
@@ -1229,8 +1314,8 @@
         "upstream_slug": "calibration-section122-tariffs",
         "hypothesis": "H3",
         "assumed": 0.33,
-        "actual": 0.1017,
-        "drift": 0.2283,
+        "actual": 0.1168,
+        "drift": 0.2132,
         "tolerance": 0.1,
         "stale": true
       },
@@ -1238,8 +1323,8 @@
         "upstream_slug": "calibration-section122-tariffs",
         "hypothesis": "H4",
         "assumed": 0.42,
-        "actual": 0.8865,
-        "drift": 0.4665,
+        "actual": 0.8725,
+        "drift": 0.4525,
         "tolerance": 0.1,
         "stale": true
       },
@@ -1247,8 +1332,8 @@
         "upstream_slug": "hormuz-closure",
         "hypothesis": "H2",
         "assumed": 0.22,
-        "actual": 0.005,
-        "drift": 0.215,
+        "actual": 0.0059,
+        "drift": 0.2141,
         "tolerance": 0.1,
         "stale": true
       },
@@ -1256,8 +1341,8 @@
         "upstream_slug": "hormuz-closure",
         "hypothesis": "H3",
         "assumed": 0.5,
-        "actual": 0.9849,
-        "drift": 0.4849,
+        "actual": 0.984,
+        "drift": 0.484,
         "tolerance": 0.1,
         "stale": true
       },
@@ -1279,20 +1364,20 @@
           {
             "hypothesis": "H2",
             "assumed": 0.22,
-            "actual": 0.4365,
-            "drift": 0.2165
+            "actual": 0.4356,
+            "drift": 0.2156
           },
           {
             "hypothesis": "H3",
             "assumed": 0.14,
-            "actual": 0.0491,
-            "drift": 0.0909
+            "actual": 0.049,
+            "drift": 0.091
           },
           {
             "hypothesis": "H4",
             "assumed": 0.09,
-            "actual": 0.0029,
-            "drift": 0.0871
+            "actual": 0.005,
+            "drift": 0.085
           }
         ]
       },
@@ -1303,8 +1388,8 @@
           {
             "hypothesis": "H2",
             "assumed": 0.22,
-            "actual": 0.4365,
-            "drift": 0.2165
+            "actual": 0.4356,
+            "drift": 0.2156
           }
         ]
       },
@@ -1315,8 +1400,8 @@
           {
             "hypothesis": "H2",
             "assumed": 0.22,
-            "actual": 0.4365,
-            "drift": 0.2165
+            "actual": 0.4356,
+            "drift": 0.2156
           }
         ]
       }
@@ -1346,7 +1431,7 @@
         }
       },
       "indistinguishable": [],
-      "lastChecked": "2026-04-17T18:49:21+00:00"
+      "lastChecked": "2026-04-17T23:08:31+00:00"
     }
   },
   "predictionScoring": {
@@ -1425,6 +1510,28 @@
           "H4": 0.0029
         },
         "entropy": 1.2547
+      },
+      {
+        "timestamp": "2026-04-17T23:08:31+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.7434,
+          "H2": 0.244,
+          "H3": 0.0077,
+          "H4": 0.005
+        },
+        "entropy": 0.9069
+      },
+      {
+        "timestamp": "2026-04-17T23:08:31+00:00",
+        "trigger": "pipeline:ev_014",
+        "posteriors": {
+          "H1": 0.7434,
+          "H2": 0.244,
+          "H3": 0.0077,
+          "H4": 0.005
+        },
+        "entropy": 0.9069
       }
     ],
     "outcomes": [],
@@ -1719,6 +1826,126 @@
         "detected": "2026-04-17T15:22:22Z",
         "resolution": "SUPERSEDED",
         "resolvedAt": "2026-04-17T15:22:22Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T15:22:22+00:00",
+        "entry_a_text": "7 of 12 leading/coincident economic indicators in warning territory simultaneously per April 2026 dashboard — last time this many aligned negatively was late 2007. Conference Board LEI declined 8 of past 12 months through March 2026 with negative 6-month annualized rate. S&P Global rates 15% probability of mild recession in H1 2026. Fed expected to hold rates steady until December due to rising inflation.",
+        "entry_b_time": "2026-04-17T23:08:31+00:00",
+        "entry_b_text": "Goldman cuts 12-month US recession odds from 30% to 20%; projects 2.5% 2026 GDP vs 2.1% consensus. Polymarket ~28% recession-by-EOY. March CPI +2.4% y/y, unemployment 4.3%, payrolls +178k; Powell warns April-onward jobs may be overstated.",
+        "reason": "Numeric divergence 98.5% on metric (context: recession, to): new=30.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-17T23:08:31Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T23:08:31Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T14:01:37+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: stale_evidence, quorum_failure. Reason: Evidence ev_012: Q1 2026 GDP growth slowed sharply to 0.5% annualized (from 4.4% prior quarter); ",
+        "entry_b_time": "2026-04-17T23:08:31+00:00",
+        "entry_b_text": "Goldman cuts 12-month US recession odds from 30% to 20%; projects 2.5% 2026 GDP vs 2.1% consensus. Polymarket ~28% recession-by-EOY. March CPI +2.4% y/y, unemployment 4.3%, payrolls +178k; Powell warns April-onward jobs may be overstated.",
+        "reason": "Numeric divergence 98.3% on metric (context: from, to): new=30.0, existing=0.5, threshold=10%",
+        "detected": "2026-04-17T23:08:31Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T23:08:31Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T14:01:37+00:00",
+        "entry_a_text": "Q1 2026 GDP growth slowed sharply to 0.5% annualized (from 4.4% prior quarter); 7 of 12 leading indicators in warning territory simultaneously — last time this many aligned negatively was late 2007",
+        "entry_b_time": "2026-04-17T23:08:31+00:00",
+        "entry_b_text": "Goldman cuts 12-month US recession odds from 30% to 20%; projects 2.5% 2026 GDP vs 2.1% consensus. Polymarket ~28% recession-by-EOY. March CPI +2.4% y/y, unemployment 4.3%, payrolls +178k; Powell warns April-onward jobs may be overstated.",
+        "reason": "Numeric divergence 98.3% on metric (context: from, to): new=30.0, existing=0.5, threshold=10%",
+        "detected": "2026-04-17T23:08:31Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T23:08:31Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-16T03:43:52+00:00",
+        "entry_a_text": "Moody Analytics chief economist Mark Zandi says the Vicious Cycle Index, which has called every recession since WWII, just signaled the US is already in one. Goldman Sachs raised recession probability to 30 percent, Moody model at 48.6 percent.",
+        "entry_b_time": "2026-04-17T23:08:31+00:00",
+        "entry_b_text": "Goldman cuts 12-month US recession odds from 30% to 20%; projects 2.5% 2026 GDP vs 2.1% consensus. Polymarket ~28% recession-by-EOY. March CPI +2.4% y/y, unemployment 4.3%, payrolls +178k; Powell warns April-onward jobs may be overstated.",
+        "reason": "Numeric divergence 33.3% on metric (context: to): new=20.0, existing=30.0, threshold=10%",
+        "detected": "2026-04-17T23:08:31Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T23:08:31Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-14T16:00:00Z",
+        "entry_a_text": "IMF World Economic Outlook April 2026: global growth forecast cut to 3.1% in 2026 (down 0.2pp from January). Assumes Iran war 'relatively short-lived.' Global inflation raised to 4.4%. Severe scenario (oil/gas prices +100-200% sustained into 2027): global growth only 2.0% — IMF calls this 'a close call for a global recession' (defined as <2%, happened only 4 times since 1980). Notes downward revision partly offset by reduced US tariff rates vs last year. Pre-war, global economy was performing better than expected.",
+        "entry_b_time": "2026-04-17T23:08:31+00:00",
+        "entry_b_text": "Goldman cuts 12-month US recession odds from 30% to 20%; projects 2.5% 2026 GDP vs 2.1% consensus. Polymarket ~28% recession-by-EOY. March CPI +2.4% y/y, unemployment 4.3%, payrolls +178k; Powell warns April-onward jobs may be overstated.",
+        "reason": "Numeric divergence 89.7% on metric (context: to): new=30.0, existing=3.1, threshold=10%",
+        "detected": "2026-04-17T23:08:31Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T23:08:31Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-06T00:00:00Z",
+        "entry_a_text": "Goldman Sachs raised US recession probability to 30% under current conditions (up from prior estimate). Cited tariff uncertainty and Iran war oil shock as primary drivers.",
+        "entry_b_time": "2026-04-17T23:08:31+00:00",
+        "entry_b_text": "Goldman cuts 12-month US recession odds from 30% to 20%; projects 2.5% 2026 GDP vs 2.1% consensus. Polymarket ~28% recession-by-EOY. March CPI +2.4% y/y, unemployment 4.3%, payrolls +178k; Powell warns April-onward jobs may be overstated.",
+        "reason": "Numeric divergence 33.3% on metric (context: to): new=20.0, existing=30.0, threshold=10%",
+        "detected": "2026-04-17T23:08:31Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T23:08:31Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-10T00:00:00Z",
+        "entry_a_text": "March 2026 CPI: headline +0.9% m/m, 3.3% annual (highest since April 2024). Energy +10.9% (Iran war). Core CPI +0.2% m/m, 2.6% annual — below forecast. Real earnings -0.6% m/m. Tariff visible in apparel (+1%), airlines (+2.7%). Food unchanged.",
+        "entry_b_time": "2026-04-17T23:08:31+00:00",
+        "entry_b_text": "Goldman cuts 12-month US recession odds from 30% to 20%; projects 2.5% 2026 GDP vs 2.1% consensus. Polymarket ~28% recession-by-EOY. March CPI +2.4% y/y, unemployment 4.3%, payrolls +178k; Powell warns April-onward jobs may be overstated.",
+        "reason": "Numeric divergence 95.5% on metric (context: 2026): new=20.0, existing=0.9, threshold=10%",
+        "detected": "2026-04-17T23:08:31Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T23:08:31Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-03-24T00:00:00Z",
+        "entry_a_text": "S&P Global US Manufacturing PMI: 52.3 in March (up from 51.6 in February). Third consecutive month in expansion territory. But firms reporting largest increase in selling prices since August 2022 — energy cost pass-through to customers.",
+        "entry_b_time": "2026-04-17T23:08:31+00:00",
+        "entry_b_text": "Goldman cuts 12-month US recession odds from 30% to 20%; projects 2.5% 2026 GDP vs 2.1% consensus. Polymarket ~28% recession-by-EOY. March CPI +2.4% y/y, unemployment 4.3%, payrolls +178k; Powell warns April-onward jobs may be overstated.",
+        "reason": "Numeric divergence 41.9% on metric (context: from): new=30.0, existing=51.6, threshold=10%",
+        "detected": "2026-04-17T23:08:31Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T23:08:31Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-01T00:00:00Z",
+        "entry_a_text": "Musalem on labor market: 'low hire, low fire' state. Payroll growth narrowly concentrated in few sectors, at low end of breakeven rate needed to prevent unemployment from rising. Firms reporting greater reluctance to hire amid geopolitical uncertainty (S&P Global Flash PMI, March 24). 'An increase in layoffs could lead to a rapid increase in the unemployment rate.'",
+        "entry_b_time": "2026-04-17T23:08:31+00:00",
+        "entry_b_text": "Goldman cuts 12-month US recession odds from 30% to 20%; projects 2.5% 2026 GDP vs 2.1% consensus. Polymarket ~28% recession-by-EOY. March CPI +2.4% y/y, unemployment 4.3%, payrolls +178k; Powell warns April-onward jobs may be overstated.",
+        "reason": "Numeric divergence 14.3% on metric (context: march): new=28.0, existing=24.0, threshold=10%",
+        "detected": "2026-04-17T23:08:31Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T23:08:31Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-01T00:00:00Z",
+        "entry_a_text": "St. Louis Fed President Musalem (AEI speech): Baseline 2026 scenario has real GDP growing close to potential, unemployment holding around current level, core inflation gradually easing toward 2% later in year. But risks tilt unfavorable — toward weaker labor market AND greater inflation persistence simultaneously. Atlanta Fed GDPNow projects Q1 2026 growth at 2.0%. Consumer spending soft in Jan-Feb (winter storms), but tax refunds +$1,000/household and wealth effects support spending.",
+        "entry_b_time": "2026-04-17T23:08:31+00:00",
+        "entry_b_text": "Goldman cuts 12-month US recession odds from 30% to 20%; projects 2.5% 2026 GDP vs 2.1% consensus. Polymarket ~28% recession-by-EOY. March CPI +2.4% y/y, unemployment 4.3%, payrolls +178k; Powell warns April-onward jobs may be overstated.",
+        "reason": "Numeric divergence 98.5% on metric (context: projects): new=30.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-17T23:08:31Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T23:08:31Z"
       }
     ]
   },
@@ -1749,8 +1976,9 @@
       "BEA": 0.4118,
       "USRecessionNews": 0.4118,
       "S&P Global": 0.5,
-      "usrecessionnews.com": 0.5
+      "usrecessionnews.com": 0.5,
+      "Polymarket": 0.5
     },
-    "_last_scan_same_source_skipped": 6
+    "_last_scan_same_source_skipped": 7
   }
 }

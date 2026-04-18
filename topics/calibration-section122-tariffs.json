@@ -6,7 +6,7 @@
     "question": "What happens to the Trump administration's Section 122 10% universal tariff when it reaches its 150-day statutory limit in late July 2026?",
     "resolution": "Observable: White House action or documented inaction by July 23, 2026 (150 days from Feb 24 effective date). Resolution criteria: (a) tariff expires with no successor = H1; (b) new proclamation issues at ~10% using different authority = H2; (c) new proclamation/action at higher rate or expanded scope = H3; (d) bilateral deal(s) announced covering >=30% of affected import value with reduced rates = H4. Partial-deal-plus-continuation counts as H4 if rollback is material.",
     "created": "2026-04-11T00:00:00Z",
-    "lastUpdated": "2026-04-17T18:49:21+00:00",
+    "lastUpdated": "2026-04-17T23:08:31+00:00",
     "status": "ACTIVE",
     "dayCount": 47,
     "startDate": "2026-02-24T00:00:00Z",
@@ -71,7 +71,7 @@
         "label": "Maintained at same ~10% rate via new authority",
         "midpoint": 0,
         "unit": "weeks",
-        "posterior": 0.0069,
+        "posterior": 0.0057,
         "description": "Administration issues a new proclamation at roughly the same 10% rate using a different statutory basis — most likely Section 301 authority once investigations conclude, or a Section 232 national security finding, or a new IEEPA invocation with a different legal framing. Rate stays flat, scope roughly unchanged. This is the 'hold the line' outcome: no escalation, no deal, but tariffs continue.",
         "_prior_note": "18% reflects plausibility as a fallback if deals stall and escalation seems risky, but narrower than H3/H4 because straight-rate maintenance is strategically inert and doesn't match the administration's pattern of using expiry moments for leverage."
       },
@@ -79,7 +79,7 @@
         "label": "Expanded — higher rate and/or broader product scope",
         "midpoint": 0,
         "unit": "weeks",
-        "posterior": 0.1017,
+        "posterior": 0.1168,
         "description": "At or before expiry, administration announces escalation: higher tariff rate (above 10%), expanded country coverage, expanded product scope, or a new Section 301 tariff regime (historically 25%+ on targeted categories) that replaces the universal surcharge with a more aggressive targeted structure. New Section 301 investigations into EU, Mexico, and China are the most direct pipeline. A 25% targeted tariff on EU autos or Chinese tech goods would qualify as H3 even if the universal 10% lapses.",
         "_prior_note": "33% reflects the administration's track record of using tariff deadlines as escalation moments rather than resolution moments, plus active Section 301 pipeline. H3 is the modal outcome if bilateral deals fail to materialize."
       },
@@ -87,7 +87,7 @@
         "label": "Partial rollback — bilateral deal(s) reduce tariffs on >=30% of affected import value",
         "midpoint": 0,
         "unit": "weeks",
-        "posterior": 0.8865,
+        "posterior": 0.8725,
         "description": "One or more bilateral trade agreements or framework deals (EU, Mexico, Japan, UK, Canada, or others) are announced before or at the July 23 deadline, resulting in materially reduced tariff rates on a significant share of the ~$1.2T import base. Does not require a comprehensive agreement — sector deals (e.g., EU autos, Mexican agricultural goods) that cover >=30% of affected volume qualify. May be accompanied by continuation of tariffs on non-deal partners. This is the stated preferred outcome of the administration and trading partners.",
         "_prior_note": "42% reflects: (1) bilateral deal framing as stated policy goal; (2) three active negotiating tracks (EU, Mexico/Canada, China-adjacent); (3) both sides have economic incentives before US midterm season; BUT (4) discount heavily because 3.5 months is tight for complex deals, and partial-deal announcements often get classified as 'framework' without tariff relief. Set as modal outcome but note high uncertainty."
       }
@@ -166,6 +166,40 @@
           "H3": 0.35,
           "H4": 0.48
         },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        }
+      },
+      {
+        "date": "2026-04-17",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.0057,
+          "H3": 0.1168,
+          "H4": 0.8725
+        },
+        "priors": {
+          "H1": 0.0,
+          "H2": 0.0069,
+          "H3": 0.1022,
+          "H4": 0.8908
+        },
+        "updateMethod": "bayesian_update",
+        "evidenceRefs": [
+          "ev_014"
+        ],
+        "likelihoods": {
+          "H1": 0.1,
+          "H2": 0.25,
+          "H3": 0.35,
+          "H4": 0.3
+        },
+        "note": "Rate expanded from 10% to 15% boosts H3. Active litigation + no bilateral-deal signals modestly lower H4.",
         "redTeam": {
           "contrarian_direction": {},
           "counterevidence": [],
@@ -730,6 +764,34 @@
       "ledger": "FACT",
       "claimState": "CONTESTED",
       "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_014",
+      "time": "2026-04-17T23:08:31+00:00",
+      "tag": "EVENT",
+      "tags": [
+        "EVENT",
+        "LEGAL",
+        "ECON"
+      ],
+      "text": "Court of International Trade held oral argument Apr 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Proclamation 11012 Section 122 surcharge. Rate currently 15% (raised from 10% after SCOTUS struck IEEPA tariffs Feb 20). Statutory expiry July 24, 2026.",
+      "provenance": "OBSERVED",
+      "source": "White & Case/Trade Compliance Resource Hub",
+      "posteriorImpact": "NONE",
+      "url": "https://www.whitecase.com/insight-alert/trump-administration-imposes-10-section-122-tariff-plan-replace-ieepa-tariffs",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-17T23:08:31+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range — topic is ACTIVE, certainty requires resolution. Pre-clamp values triggered floor/ceiling.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
     }
   ],
   "dataFeeds": {
@@ -880,8 +942,8 @@
   "governance": {
     "health": "DEGRADED",
     "issues": [
-      "Majority stale evidence (10/15)",
-      "Stale dependency: calibration-us-recession-2026.H2 assumed=0.22, actual=0.4365, drift=21.65%",
+      "Majority stale evidence (10/17)",
+      "Stale dependency: calibration-us-recession-2026.H2 assumed=0.22, actual=0.4356, drift=21.56%",
       "Downstream alert: calibration-midterms-2026 has 3 stale assumption(s) from this topic",
       "Downstream alert: calibration-us-recession-2026 has 3 stale assumption(s) from this topic"
     ],
@@ -890,13 +952,13 @@
       "regime": "SAFE",
       "worst_hypothesis": "H1"
     },
-    "entropy": 0.5772,
+    "entropy": 0.6142,
     "maxEntropy": 2.0,
-    "uncertaintyRatio": 0.2886,
+    "uncertaintyRatio": 0.3071,
     "evidenceFreshness": {
-      "fresh": 5,
+      "fresh": 7,
       "stale": 10,
-      "total": 15
+      "total": 17
     },
     "hypothesisAdmissibility": {
       "H1": "ADMISSIBLE",
@@ -905,18 +967,18 @@
       "H4": "ADMISSIBLE"
     },
     "klFromPrior": {
-      "kl_divergence": 0.5068,
-      "interpretation": "WELL_EVIDENCED"
+      "kl_divergence": 0.4837,
+      "interpretation": "MODERATE"
     },
-    "lastComputed": "2026-04-17T18:49:21+00:00",
+    "lastComputed": "2026-04-17T23:08:31+00:00",
     "staleDependencies": 1,
     "staleDependencyDetails": [
       {
         "upstream_slug": "calibration-us-recession-2026",
         "hypothesis": "H2",
         "assumed": 0.22,
-        "actual": 0.4365,
-        "drift": 0.2165,
+        "actual": 0.4356,
+        "drift": 0.2156,
         "tolerance": 0.1,
         "stale": true
       }
@@ -935,14 +997,14 @@
           {
             "hypothesis": "H3",
             "assumed": 0.33,
-            "actual": 0.1022,
-            "drift": 0.2278
+            "actual": 0.1017,
+            "drift": 0.2283
           },
           {
             "hypothesis": "H4",
             "assumed": 0.42,
-            "actual": 0.8908,
-            "drift": 0.4708
+            "actual": 0.8865,
+            "drift": 0.4665
           }
         ]
       },
@@ -959,14 +1021,14 @@
           {
             "hypothesis": "H3",
             "assumed": 0.33,
-            "actual": 0.1022,
-            "drift": 0.2278
+            "actual": 0.1017,
+            "drift": 0.2283
           },
           {
             "hypothesis": "H4",
             "assumed": 0.42,
-            "actual": 0.8908,
-            "drift": 0.4708
+            "actual": 0.8865,
+            "drift": 0.4665
           }
         ]
       }
@@ -1018,7 +1080,7 @@
         }
       },
       "indistinguishable": [],
-      "lastChecked": "2026-04-17T18:49:21+00:00"
+      "lastChecked": "2026-04-17T23:08:31+00:00"
     }
   },
   "dependencies": {
@@ -1127,6 +1189,28 @@
           "H4": 0.8908
         },
         "entropy": 0.5344
+      },
+      {
+        "timestamp": "2026-04-17T23:08:31+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.0057,
+          "H3": 0.1168,
+          "H4": 0.8725
+        },
+        "entropy": 0.6142
+      },
+      {
+        "timestamp": "2026-04-17T23:08:31+00:00",
+        "trigger": "pipeline:ev_014",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.0057,
+          "H3": 0.1168,
+          "H4": 0.8725
+        },
+        "entropy": 0.6142
       }
     ],
     "outcomes": [
@@ -1569,6 +1653,174 @@
         "detected": "2026-04-17T15:21:52Z",
         "resolution": "SUPERSEDED",
         "resolvedAt": "2026-04-17T15:21:52Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T15:21:52+00:00",
+        "entry_a_text": "Section 122 tariffs face court challenge: CIT heard oral argument Apr 10 in Oregon v. Trump and Burlap & Barrel v. Trump. Trump modified Section 232 tariff regime for steel/aluminum/copper effective Apr 6. 15% rate increase announced but not yet implemented. 150-day expiry on Jul 24, 2026 unless Congress extends.",
+        "entry_b_time": "2026-04-17T23:08:31+00:00",
+        "entry_b_text": "Court of International Trade held oral argument Apr 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Proclamation 11012 Section 122 surcharge. Rate currently 15% (raised from 10% after SCOTUS struck IEEPA tariffs Feb 20). Statutory expiry July 24, 2026.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: apr, argument, barrel, burlap, court",
+        "detected": "2026-04-17T23:08:31Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T23:08:31Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T14:18:28+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: stale_evidence, quorum_failure. Reason: Evidence ev_012: 18 bilateral trade frameworks reported as of Apr 16; Section 122 rate remains 10",
+        "entry_b_time": "2026-04-17T23:08:31+00:00",
+        "entry_b_text": "Court of International Trade held oral argument Apr 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Proclamation 11012 Section 122 surcharge. Rate currently 15% (raised from 10% after SCOTUS struck IEEPA tariffs Feb 20). Statutory expiry July 24, 2026.",
+        "reason": "Numeric divergence 37.5% on metric (context: apr): new=10.0, existing=16.0, threshold=10%",
+        "detected": "2026-04-17T23:08:31Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T23:08:31Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T14:01:37+00:00",
+        "entry_a_text": "18 bilateral trade frameworks reported as of Apr 16; Section 122 rate remains 10% (15% announced but no formal order); two active lawsuits at CIT (oral args Apr 10-11); July 24 expiry firm at 150 days",
+        "entry_b_time": "2026-04-17T23:08:31+00:00",
+        "entry_b_text": "Court of International Trade held oral argument Apr 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Proclamation 11012 Section 122 surcharge. Rate currently 15% (raised from 10% after SCOTUS struck IEEPA tariffs Feb 20). Statutory expiry July 24, 2026.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: apr, expiry, july, oral, rate",
+        "detected": "2026-04-17T23:08:31Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T23:08:31Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-16T03:43:52+00:00",
+        "entry_a_text": "White House reports 18 bilateral framework trade agreements completed covering more than half of global GDP as result of Section 122 tariffs. CIT three-judge panel heard oral arguments April 10-11 on 23-state legal challenge.",
+        "entry_b_time": "2026-04-17T23:08:31+00:00",
+        "entry_b_text": "Court of International Trade held oral argument Apr 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Proclamation 11012 Section 122 surcharge. Rate currently 15% (raised from 10% after SCOTUS struck IEEPA tariffs Feb 20). Statutory expiry July 24, 2026.",
+        "reason": "Numeric divergence 98.9% on metric (context: section): new=11012.0, existing=122.0, threshold=10%",
+        "detected": "2026-04-17T23:08:31Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T23:08:31Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-02T00:00:00Z",
+        "entry_a_text": "One-year anniversary of 'Liberation Day' tariffs. NPR/CNBC assessments: tariffs have not produced promised economic boom. Tax Foundation estimates average household cost $700/year. Trade deficit not meaningfully altered.",
+        "entry_b_time": "2026-04-17T23:08:31+00:00",
+        "entry_b_text": "Court of International Trade held oral argument Apr 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Proclamation 11012 Section 122 surcharge. Rate currently 15% (raised from 10% after SCOTUS struck IEEPA tariffs Feb 20). Statutory expiry July 24, 2026.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: tariffs, trade",
+        "detected": "2026-04-17T23:08:31Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T23:08:31Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-10T00:00:00Z",
+        "entry_a_text": "March 2026 CPI: headline +0.9% m/m, 3.3% annual (highest since April 2024). Energy +10.9% (Iran war driven). But core CPI +0.2% m/m, 2.6% annual — both below forecast. Tariff impact visible in apparel (+1%) and airline fares (+2.7%).",
+        "entry_b_time": "2026-04-17T23:08:31+00:00",
+        "entry_b_text": "Court of International Trade held oral argument Apr 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Proclamation 11012 Section 122 surcharge. Rate currently 15% (raised from 10% after SCOTUS struck IEEPA tariffs Feb 20). Statutory expiry July 24, 2026.",
+        "reason": "Numeric divergence 90.0% on metric (context: in): new=10.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-17T23:08:31Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T23:08:31Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-10T00:00:00Z",
+        "entry_a_text": "CIT oral arguments held April 10-11. Three-judge panel (Barnett, Kelly, Stanceu) sharply questioned both sides for 3+ hours. Key issue: whether 'balance-of-payments deficits' in 1974 statute covers trade deficits. Awkward for government: DOJ argued last year Section 122 had 'no obvious application' to trade deficits. Awkward for challengers: CIT itself wrote Section 122 was available when striking IEEPA tariffs.",
+        "entry_b_time": "2026-04-17T23:08:31+00:00",
+        "entry_b_text": "Court of International Trade held oral argument Apr 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Proclamation 11012 Section 122 surcharge. Rate currently 15% (raised from 10% after SCOTUS struck IEEPA tariffs Feb 20). Statutory expiry July 24, 2026.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: held, ieepa, oral, section, tariffs",
+        "detected": "2026-04-17T23:08:31Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T23:08:31Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-06T00:00:00Z",
+        "entry_a_text": "Reuters reports Trump-Xi summit planned for mid-May in Beijing. Trade war framing: China responded with reciprocal investigations. Prior Busan meeting produced truce (tariff trim + fentanyl + soybean purchases). May summit is highest-level bilateral trade engagement since Section 122.",
+        "entry_b_time": "2026-04-17T23:08:31+00:00",
+        "entry_b_text": "Court of International Trade held oral argument Apr 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Proclamation 11012 Section 122 surcharge. Rate currently 15% (raised from 10% after SCOTUS struck IEEPA tariffs Feb 20). Statutory expiry July 24, 2026.",
+        "reason": "Numeric divergence 98.9% on metric (context: section): new=11012.0, existing=122.0, threshold=10%",
+        "detected": "2026-04-17T23:08:31Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T23:08:31Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-03-30T00:00:00Z",
+        "entry_a_text": "As of March 30, rate remains 10%. No formal proclamation raising to 15% has been issued despite repeated announcements. 15% rhetoric has not translated to Federal Register action.",
+        "entry_b_time": "2026-04-17T23:08:31+00:00",
+        "entry_b_text": "Court of International Trade held oral argument Apr 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Proclamation 11012 Section 122 surcharge. Rate currently 15% (raised from 10% after SCOTUS struck IEEPA tariffs Feb 20). Statutory expiry July 24, 2026.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: proclamation, rate",
+        "detected": "2026-04-17T23:08:31Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T23:08:31Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-03-09T00:00:00Z",
+        "entry_a_text": "Liberty Justice Center files second suit (Burlap and Barrel v. Trump, Case No. 1:26-cv-01606) on behalf of spice importer and toy company. Assigned to same 3-judge CIT panel (Barnett, Kelly, Stanceu).",
+        "entry_b_time": "2026-04-17T23:08:31+00:00",
+        "entry_b_text": "Court of International Trade held oral argument Apr 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Proclamation 11012 Section 122 surcharge. Rate currently 15% (raised from 10% after SCOTUS struck IEEPA tariffs Feb 20). Statutory expiry July 24, 2026.",
+        "reason": "Numeric divergence 100.0% on metric (context: trump): new=11012.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-17T23:08:31Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T23:08:31Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-03-05T00:00:00Z",
+        "entry_a_text": "24 state attorneys general (led by Oregon, Arizona, California, New York, Vermont) file suit at US Court of International Trade challenging Section 122 surcharge. Case No. 1:26-cv-01472. States argue balance-of-payments requirement not met.",
+        "entry_b_time": "2026-04-17T23:08:31+00:00",
+        "entry_b_text": "Court of International Trade held oral argument Apr 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Proclamation 11012 Section 122 surcharge. Rate currently 15% (raised from 10% after SCOTUS struck IEEPA tariffs Feb 20). Statutory expiry July 24, 2026.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: challenging, court, international, oregon, section",
+        "detected": "2026-04-17T23:08:31Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T23:08:31Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-03-04T00:00:00Z",
+        "entry_a_text": "Treasury Secretary Bessent confirms intent to raise to 15% on CNBC. Also references ongoing Section 301 investigations and Section 232 studies as successor frameworks during 150-day window.",
+        "entry_b_time": "2026-04-17T23:08:31+00:00",
+        "entry_b_text": "Court of International Trade held oral argument Apr 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Proclamation 11012 Section 122 surcharge. Rate currently 15% (raised from 10% after SCOTUS struck IEEPA tariffs Feb 20). Statutory expiry July 24, 2026.",
+        "reason": "Numeric divergence 97.3% on metric (context: section): new=11012.0, existing=301.0, threshold=10%",
+        "detected": "2026-04-17T23:08:31Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T23:08:31Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-02-21T00:00:00Z",
+        "entry_a_text": "Trump announces via social media intent to raise Section 122 rate to 15% (statutory maximum). No formal proclamation issued.",
+        "entry_b_time": "2026-04-17T23:08:31+00:00",
+        "entry_b_text": "Court of International Trade held oral argument Apr 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Proclamation 11012 Section 122 surcharge. Rate currently 15% (raised from 10% after SCOTUS struck IEEPA tariffs Feb 20). Statutory expiry July 24, 2026.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: proclamation, rate, section, statutory, trump",
+        "detected": "2026-04-17T23:08:31Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T23:08:31Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-02-20T00:00:00Z",
+        "entry_a_text": "SCOTUS strikes IEEPA-based tariffs (Learning Resources v. Trump). Same day, Trump issues Section 122 proclamation: 10% universal import surcharge effective Feb 24. 150-day clock starts.",
+        "entry_b_time": "2026-04-17T23:08:31+00:00",
+        "entry_b_text": "Court of International Trade held oral argument Apr 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Proclamation 11012 Section 122 surcharge. Rate currently 15% (raised from 10% after SCOTUS struck IEEPA tariffs Feb 20). Statutory expiry July 24, 2026.",
+        "reason": "Numeric divergence 98.9% on metric (context: proclamation, section, trump): new=11012.0, existing=122.0, threshold=10%",
+        "detected": "2026-04-17T23:08:31Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T23:08:31Z"
       }
     ]
   },
@@ -1584,26 +1836,83 @@
         "trust_delta": -0.1,
         "original_text_snippet": "CIT oral arguments held April 10-11. Three-judge panel (Barnett, Kelly, Stanceu) sharply questioned both sides for 3+ ho",
         "confirming_text_snippet": "White House reports 18 bilateral framework trade agreements completed covering more than half of global GDP as result of"
+      },
+      {
+        "timestamp": "2026-04-17T23:08:31Z",
+        "evidence_index": 0,
+        "confirming_index": 15,
+        "resolution": "REFUTED",
+        "source": "Supreme Court ruling + White House Proclamation, Feb 20 2026",
+        "confirming_source": "White & Case/Trade Compliance Resource Hub",
+        "trust_delta": -0.1,
+        "original_text_snippet": "SCOTUS strikes IEEPA-based tariffs (Learning Resources v. Trump). Same day, Trump issues Section 122 proclamation: 10% u",
+        "confirming_text_snippet": "Court of International Trade held oral argument Apr 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Procl"
+      },
+      {
+        "timestamp": "2026-04-17T23:08:31Z",
+        "evidence_index": 1,
+        "confirming_index": 15,
+        "resolution": "REFUTED",
+        "source": "Trump social media post, Feb 21 2026",
+        "confirming_source": "White & Case/Trade Compliance Resource Hub",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Trump announces via social media intent to raise Section 122 rate to 15% (statutory maximum). No formal proclamation iss",
+        "confirming_text_snippet": "Court of International Trade held oral argument Apr 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Procl"
+      },
+      {
+        "timestamp": "2026-04-17T23:08:31Z",
+        "evidence_index": 3,
+        "confirming_index": 15,
+        "resolution": "REFUTED",
+        "source": "CIT filing, Oregon et al. v. Trump, March 5 2026",
+        "confirming_source": "White & Case/Trade Compliance Resource Hub",
+        "trust_delta": -0.1,
+        "original_text_snippet": "24 state attorneys general (led by Oregon, Arizona, California, New York, Vermont) file suit at US Court of Internationa",
+        "confirming_text_snippet": "Court of International Trade held oral argument Apr 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Procl"
+      },
+      {
+        "timestamp": "2026-04-17T23:08:31Z",
+        "evidence_index": 12,
+        "confirming_index": 15,
+        "resolution": "REFUTED",
+        "source": "Global Trade Alert/Fleischer Group",
+        "confirming_source": "White & Case/Trade Compliance Resource Hub",
+        "trust_delta": -0.1,
+        "original_text_snippet": "18 bilateral trade frameworks reported as of Apr 16; Section 122 rate remains 10% (15% announced but no formal order); t",
+        "confirming_text_snippet": "Court of International Trade held oral argument Apr 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Procl"
+      },
+      {
+        "timestamp": "2026-04-17T23:08:31Z",
+        "evidence_index": 14,
+        "confirming_index": 15,
+        "resolution": "REFUTED",
+        "source": "Reason / National Law Review",
+        "confirming_source": "White & Case/Trade Compliance Resource Hub",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Section 122 tariffs face court challenge: CIT heard oral argument Apr 10 in Oregon v. Trump and Burlap & Barrel v. Trump",
+        "confirming_text_snippet": "Court of International Trade held oral argument Apr 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Procl"
       }
     ],
     "effectiveTrust": {
       "AP (Paul Wiseman), Chicago Tribune, April 11 2026": 0.4118,
       "BLS CPI release": 0.5,
       "CIT filing, Burlap and Barrel v. Trump, March 9 2026": 0.5,
-      "CIT filing, Oregon et al. v. Trump, March 5 2026": 0.5,
+      "CIT filing, Oregon et al. v. Trump, March 5 2026": 0.4118,
       "CNBC interview, Bessent, March 4 2026": 0.5,
       "Fleischer CHB trade advisory, March 30 2026": 0.5,
       "NPR, CNBC, Tax Foundation, April 2-3 2026": 0.5,
       "Reuters, April 6 2026": 0.5,
-      "Supreme Court ruling": 0.5,
-      "Trump social media post, Feb 21 2026": 0.5,
+      "Supreme Court ruling": 0.4118,
+      "Trump social media post, Feb 21 2026": 0.4118,
       "USTR": 0.5,
       "White House": 0.5,
-      "White House Proclamation, Feb 20 2026": 0.5,
-      "Fleischer Group": 0.5,
-      "Global Trade Alert": 0.5,
-      "National Law Review": 0.5,
-      "Reason": 0.5
+      "White House Proclamation, Feb 20 2026": 0.4118,
+      "Fleischer Group": 0.4118,
+      "Global Trade Alert": 0.4118,
+      "National Law Review": 0.4118,
+      "Reason": 0.4118,
+      "Trade Compliance Resource Hub": 0.5,
+      "White & Case": 0.5
     },
     "_last_scan_same_source_skipped": 0
   }

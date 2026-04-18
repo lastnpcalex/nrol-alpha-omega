@@ -6,7 +6,7 @@
     "question": "Will Russia and Ukraine reach a formal ceasefire agreement by December 31, 2026?",
     "resolution": "A document signed by authorized representatives of both Russia and Ukraine constituting a mutual commitment to halt offensive operations across a defined line of contact — not a unilateral declaration, not a temporary humanitarian truce (Easter-style), and not a third-party mediated pause without bilateral signature. Frozen-conflict line stabilization without a signed document does NOT resolve H1.",
     "created": "2026-04-11T00:00:00Z",
-    "lastUpdated": "2026-04-17T18:49:21+00:00",
+    "lastUpdated": "2026-04-17T23:08:31+00:00",
     "status": "ACTIVE",
     "dayCount": 0,
     "startDate": "2026-04-11T00:00:00Z",
@@ -75,25 +75,25 @@
         "label": "Frozen conflict — fighting stops de facto, no formal agreement",
         "midpoint": 28,
         "unit": "weeks",
-        "posterior": 0.0166,
+        "posterior": 0.005,
         "description": "Both sides exhaust offensive momentum and fighting drops below threshold of major operations, but no document is signed. Historical comp: Korea (armistice, distinct from peace treaty), Cyprus 1974, Nagorno-Karabakh pre-2020. Assigned 22% — plausible if US disengagement from European security accelerates and both sides face attrition exhaustion, but Russia still has offensive incentive and Kyiv won't accept a line that legitimizes Russian gains."
       },
       "H3": {
         "label": "Limited truces only — episodic ceasefires, no lasting agreement",
         "midpoint": 0,
         "unit": "weeks",
-        "posterior": 0.9218,
+        "posterior": 0.9772,
         "description": "The Easter 32-hour pattern continues: holiday or crisis-driven pauses negotiated under US/Turkish/Vatican pressure, none converting to a durable arrangement. This is the modal outcome given the April 2026 baseline. Assigned 47% — highest prior because it matches current trajectory (Easter ceasefire), the structural impasse (territory), and the distracted mediator environment (Washington). Resolves as H3 if by Dec 31 there has been no sustained halt exceeding ~30 days."
       },
       "H4": {
         "label": "Escalation — new major Russian offensive or external actor military entry",
         "midpoint": 0,
         "unit": "weeks",
-        "posterior": 0.0566,
+        "posterior": 0.0129,
         "description": "Russia launches a summer/autumn offensive capturing new significant population centers (Kharkiv, Sumy, Odesa approaches), or a NATO-member country formally deploys combat troops to Ukraine triggering Russian escalation response. Assigned 24% — elevated because: (1) Russia historically uses summer operational windows, (2) UK/France military hub pledges are a declared Russian red line, (3) Washington's Iran distraction reduces deterrence credibility, (4) Russian economy showing strain but Putin faces no domestic accountability constraint."
       }
     },
-    "expectedValue": 0.48,
+    "expectedValue": 0.24,
     "expectedUnit": "P(formal ceasefire signed by Dec 31 2026)",
     "posteriorHistory": [
       {
@@ -140,6 +140,45 @@
           "H2": 0.08,
           "H3": 0.72,
           "H4": 0.18
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        }
+      },
+      {
+        "date": "2026-04-17",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.005,
+          "H3": 0.9772,
+          "H4": 0.0129
+        },
+        "priors": {
+          "H1": 0.0004,
+          "H2": 0.0167,
+          "H3": 0.9261,
+          "H4": 0.0569
+        },
+        "updateMethod": "bayesian_update",
+        "evidenceRefs": [
+          "ev_013"
+        ],
+        "likelihoods": {
+          "H1": 0.05,
+          "H2": 0.1,
+          "H3": 0.7,
+          "H4": 0.15
+        },
+        "note": "Short symbolic truce broken; Geneva track stalled. Supports H3 (limited truces only).",
+        "turningPoint": {
+          "type": "BRANCH_DEATH",
+          "hypothesis": "H2",
+          "lastPosterior": 0.005
         },
         "redTeam": {
           "contrarian_direction": {},
@@ -796,13 +835,52 @@
       "ledger": "DECISION",
       "claimState": "PROPOSED",
       "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_013",
+      "time": "2026-04-17T23:08:31+00:00",
+      "tag": "EVENT",
+      "tags": [
+        "EVENT",
+        "DIPLO",
+        "MILOPS"
+      ],
+      "text": "32-hour Orthodox Easter ceasefire collapsed within its window. Ukraine logs 2,299 violations incl. 479 shellings and 1,700+ drone strikes; Russia claims ~2,000 breaches. US-brokered Geneva talks stalled over territory.",
+      "provenance": "OBSERVED",
+      "source": "Al Jazeera/Guardian",
+      "posteriorImpact": "NONE",
+      "url": "https://www.aljazeera.com/news/2026/4/12/ukraine-and-russia-accuse-each-other-of-breaching-easter-ceasefire",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-17T23:08:31+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range — topic is ACTIVE, certainty requires resolution. Pre-clamp values triggered floor/ceiling.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-17T23:08:31+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: stale_evidence. Reason: Short symbolic truce broken; Geneva track stalled. Supports H3 (limited truces only).",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
     }
   ],
   "watchpointAlerts": [],
   "governance": {
     "health": "DEGRADED",
     "issues": [
-      "Majority stale evidence (10/14)",
+      "Majority stale evidence (10/17)",
+      "Near-zero uncertainty — check for overconfidence",
       "Stale dependency: calibration-houthi-posture.H2 assumed=0.45, actual=0.6726, drift=22.26%",
       "Stale dependency: calibration-houthi-posture.H3 assumed=0.3, actual=0.0961, drift=20.39%"
     ],
@@ -811,13 +889,13 @@
       "regime": "SAFE",
       "worst_hypothesis": "H1"
     },
-    "entropy": 0.4792,
+    "entropy": 0.1899,
     "maxEntropy": 2.0,
-    "uncertaintyRatio": 0.2396,
+    "uncertaintyRatio": 0.095,
     "evidenceFreshness": {
-      "fresh": 4,
+      "fresh": 7,
       "stale": 10,
-      "total": 14
+      "total": 17
     },
     "hypothesisAdmissibility": {
       "H1": "ADMISSIBLE",
@@ -826,10 +904,10 @@
       "H4": "ADMISSIBLE"
     },
     "klFromPrior": {
-      "kl_divergence": 0.4831,
-      "interpretation": "MODERATE"
+      "kl_divergence": 0.6454,
+      "interpretation": "WELL_EVIDENCED"
     },
-    "lastComputed": "2026-04-17T18:49:21+00:00",
+    "lastComputed": "2026-04-17T23:08:31+00:00",
     "staleDependencies": 2,
     "staleDependencyDetails": [
       {
@@ -876,7 +954,7 @@
         }
       },
       "indistinguishable": [],
-      "lastChecked": "2026-04-17T18:49:21+00:00"
+      "lastChecked": "2026-04-17T23:08:31+00:00"
     }
   },
   "dependencies": {
@@ -951,6 +1029,28 @@
           "H4": 0.0569
         },
         "entropy": 0.441
+      },
+      {
+        "timestamp": "2026-04-17T23:08:31+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.005,
+          "H3": 0.9772,
+          "H4": 0.0129
+        },
+        "entropy": 0.1899
+      },
+      {
+        "timestamp": "2026-04-17T23:08:31+00:00",
+        "trigger": "pipeline:ev_013",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.005,
+          "H3": 0.9772,
+          "H4": 0.0129
+        },
+        "entropy": 0.1899
       }
     ],
     "outcomes": [],
@@ -1150,6 +1250,138 @@
         "detected": "2026-04-17T15:21:52Z",
         "resolution": "SUPERSEDED",
         "resolvedAt": "2026-04-17T15:21:52Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T15:21:52+00:00",
+        "entry_a_text": "32-hour Orthodox Easter ceasefire agreed Apr 10 but collapsed: 2,299 violations recorded including 479 shellings, 747 attack drone strikes, 1,045 FPV drone strikes per Ukraine; Russia claims ~2,000 Ukrainian breaches. Broader peace talks stalled as US attention shifts to Middle East. Polymarket consensus overwhelmingly against formal ceasefire by Apr 30.",
+        "entry_b_time": "2026-04-17T23:08:31+00:00",
+        "entry_b_text": "32-hour Orthodox Easter ceasefire collapsed within its window. Ukraine logs 2,299 violations incl. 479 shellings and 1,700+ drone strikes; Russia claims ~2,000 breaches. US-brokered Geneva talks stalled over territory.",
+        "reason": "Numeric divergence 99.3% on metric (context: violations): new=2.0, existing=299.0, threshold=10%",
+        "detected": "2026-04-17T23:08:31Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T23:08:31Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T14:01:37+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, stale_evidence, quorum_failure. Reason: Evidence ev_011: 32-hour Orthodox Easter ceasefire expired Apr 12 with 2000+ violations each side",
+        "entry_b_time": "2026-04-17T23:08:31+00:00",
+        "entry_b_text": "32-hour Orthodox Easter ceasefire collapsed within its window. Ukraine logs 2,299 violations incl. 479 shellings and 1,700+ drone strikes; Russia claims ~2,000 breaches. US-brokered Geneva talks stalled over territory.",
+        "reason": "Numeric divergence 83.3% on metric (context: violations): new=2.0, existing=12.0, threshold=10%",
+        "detected": "2026-04-17T23:08:31Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T23:08:31Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T14:01:37+00:00",
+        "entry_a_text": "32-hour Orthodox Easter ceasefire expired Apr 12 with 2000+ violations each side; formal talks remain stalled; Kremlin did not coordinate ceasefire with US; Washington attention shifted to Iran war",
+        "entry_b_time": "2026-04-17T23:08:31+00:00",
+        "entry_b_text": "32-hour Orthodox Easter ceasefire collapsed within its window. Ukraine logs 2,299 violations incl. 479 shellings and 1,700+ drone strikes; Russia claims ~2,000 breaches. US-brokered Geneva talks stalled over territory.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: ceasefire, easter, hour, orthodox, stalled",
+        "detected": "2026-04-17T23:08:31Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T23:08:31Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-12T07:00:00Z",
+        "entry_a_text": "Both Russia and Ukraine accused each other of violating the Easter ceasefire. Ukraine recorded 2,299 violations by 7am April 12. Russia accused Kyiv of nearly 2,000 breaches. Broader peace talks remain stalled over territory. Washington attention shifted to Iran/Hormuz crisis.",
+        "entry_b_time": "2026-04-17T23:08:31+00:00",
+        "entry_b_text": "32-hour Orthodox Easter ceasefire collapsed within its window. Ukraine logs 2,299 violations incl. 479 shellings and 1,700+ drone strikes; Russia claims ~2,000 breaches. US-brokered Geneva talks stalled over territory.",
+        "reason": "Numeric divergence 99.3% on metric (context: ukraine, violations): new=2.0, existing=299.0, threshold=10%",
+        "detected": "2026-04-17T23:08:31Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T23:08:31Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-12T00:00:00Z",
+        "entry_a_text": "US attention confirmed shifted to Iran war. Al Jazeera: 'The process has stalled further since the outbreak of the war in the Middle East, with Washington's attention having shifted towards Iran.' No US envoy activity on Ukraine track reported in April.",
+        "entry_b_time": "2026-04-17T23:08:31+00:00",
+        "entry_b_text": "32-hour Orthodox Easter ceasefire collapsed within its window. Ukraine logs 2,299 violations incl. 479 shellings and 1,700+ drone strikes; Russia claims ~2,000 breaches. US-brokered Geneva talks stalled over territory.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: stalled, ukraine",
+        "detected": "2026-04-17T23:08:31Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T23:08:31Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-12T00:00:00Z",
+        "entry_a_text": "Kremlin spokesman Peskov: Russia will NOT extend Easter truce unless Zelenskyy 'accepts well-known solutions.' States Russian forces still need 17-18% more of Donetsk region. 'Until Zelenskyy musters the courage... the special military operation will continue after the truce expires.'",
+        "entry_b_time": "2026-04-17T23:08:31+00:00",
+        "entry_b_text": "32-hour Orthodox Easter ceasefire collapsed within its window. Ukraine logs 2,299 violations incl. 479 shellings and 1,700+ drone strikes; Russia claims ~2,000 breaches. US-brokered Geneva talks stalled over territory.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: easter, russia",
+        "detected": "2026-04-17T23:08:31Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T23:08:31Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-12T00:00:00Z",
+        "entry_a_text": "Easter ceasefire violations: Ukraine reports 2,299 violations (28 assault actions, 479 shellings, 747 attack drone strikes, 1,045 FPV drone strikes). Russia reports 1,971 violations (258 artillery/tank firings, 1,329 FPV drone strikes, 375 munition drops). Both sides accuse each other. However, Ukraine confirms NO long-range Shahed drones, guided aerial bombs, or missile strikes during truce — a significant de-escalation from nightly barrages.",
+        "entry_b_time": "2026-04-17T23:08:31+00:00",
+        "entry_b_text": "32-hour Orthodox Easter ceasefire collapsed within its window. Ukraine logs 2,299 violations incl. 479 shellings and 1,700+ drone strikes; Russia claims ~2,000 breaches. US-brokered Geneva talks stalled over territory.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: ceasefire, drone, easter, russia, shellings",
+        "detected": "2026-04-17T23:08:31Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T23:08:31Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-11T00:00:00Z",
+        "entry_a_text": "Russia maintaining demand for full Donbas, Zaporizhzhia, and Kherson oblasts as precondition. No positional movement detected since 2025 talks collapsed.",
+        "entry_b_time": "2026-04-17T23:08:31+00:00",
+        "entry_b_text": "32-hour Orthodox Easter ceasefire collapsed within its window. Ukraine logs 2,299 violations incl. 479 shellings and 1,700+ drone strikes; Russia claims ~2,000 breaches. US-brokered Geneva talks stalled over territory.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: collapsed, russia, talks",
+        "detected": "2026-04-17T23:08:31Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T23:08:31Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-11T00:00:00Z",
+        "entry_a_text": "UK and France pledge 'military hubs' in Ukraine. Not combat deployment but logistical/training infrastructure with military personnel. Russia designates this a red line.",
+        "entry_b_time": "2026-04-17T23:08:31+00:00",
+        "entry_b_text": "32-hour Orthodox Easter ceasefire collapsed within its window. Ukraine logs 2,299 violations incl. 479 shellings and 1,700+ drone strikes; Russia claims ~2,000 breaches. US-brokered Geneva talks stalled over territory.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: russia, ukraine",
+        "detected": "2026-04-17T23:08:31Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T23:08:31Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-11T00:00:00Z",
+        "entry_a_text": "Abu Dhabi, Geneva, and Paris diplomatic tracks all stalled as of April 2026. No formal bilateral meeting scheduled. Russia has not accepted any current-control ceasefire line.",
+        "entry_b_time": "2026-04-17T23:08:31+00:00",
+        "entry_b_text": "32-hour Orthodox Easter ceasefire collapsed within its window. Ukraine logs 2,299 violations incl. 479 shellings and 1,700+ drone strikes; Russia claims ~2,000 breaches. US-brokered Geneva talks stalled over territory.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: ceasefire, geneva, russia, stalled",
+        "detected": "2026-04-17T23:08:31Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T23:08:31Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-10T00:00:00Z",
+        "entry_a_text": "32-hour Easter ceasefire agreed between Russia and Ukraine, brokered under pressure from Washington and Vatican. Took effect April 10. No indication of extension. Both sides reported violations during the truce window.",
+        "entry_b_time": "2026-04-17T23:08:31+00:00",
+        "entry_b_text": "32-hour Orthodox Easter ceasefire collapsed within its window. Ukraine logs 2,299 violations incl. 479 shellings and 1,700+ drone strikes; Russia claims ~2,000 breaches. US-brokered Geneva talks stalled over territory.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: brokered, ceasefire, easter, hour, russia",
+        "detected": "2026-04-17T23:08:31Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-17T23:08:31Z"
       }
     ]
   },
@@ -1209,6 +1441,39 @@
         "trust_delta": -0.1,
         "original_text_snippet": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, stale_evidence, quorum_failure. Reason: Evidence ev_011: 32",
         "confirming_text_snippet": "32-hour Orthodox Easter ceasefire agreed Apr 10 but collapsed: 2,299 violations recorded including 479 shellings, 747 at"
+      },
+      {
+        "timestamp": "2026-04-17T23:08:31Z",
+        "evidence_index": 0,
+        "confirming_index": 14,
+        "resolution": "REFUTED",
+        "source": "Multiple wire reports (AP, Reuters) April 10 2026",
+        "confirming_source": "Al Jazeera/Guardian",
+        "trust_delta": -0.1,
+        "original_text_snippet": "32-hour Easter ceasefire agreed between Russia and Ukraine, brokered under pressure from Washington and Vatican. Took ef",
+        "confirming_text_snippet": "32-hour Orthodox Easter ceasefire collapsed within its window. Ukraine logs 2,299 violations incl. 479 shellings and 1,7"
+      },
+      {
+        "timestamp": "2026-04-17T23:08:31Z",
+        "evidence_index": 4,
+        "confirming_index": 14,
+        "resolution": "REFUTED",
+        "source": "Ukrainian General Staff (Facebook), Russian MoD (MAX app), via Al Jazeera/AP/Guardian, April 12 2026",
+        "confirming_source": "Al Jazeera/Guardian",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Easter ceasefire violations: Ukraine reports 2,299 violations (28 assault actions, 479 shellings, 747 attack drone strik",
+        "confirming_text_snippet": "32-hour Orthodox Easter ceasefire collapsed within its window. Ukraine logs 2,299 violations incl. 479 shellings and 1,7"
+      },
+      {
+        "timestamp": "2026-04-17T23:08:31Z",
+        "evidence_index": 11,
+        "confirming_index": 14,
+        "resolution": "REFUTED",
+        "source": "",
+        "confirming_source": "Al Jazeera/Guardian",
+        "trust_delta": -0.1,
+        "original_text_snippet": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, stale_evidence, quorum_failure. Reason: Evidence ev_011: 32",
+        "confirming_text_snippet": "32-hour Orthodox Easter ceasefire collapsed within its window. Ukraine logs 2,299 violations incl. 479 shellings and 1,7"
       }
     ],
     "effectiveTrust": {
@@ -1221,11 +1486,12 @@
       "Euronews": 0.5,
       "Guardian, April 12 2026": 0.5,
       "Kremlin (Peskov)": 0.5,
-      "Multiple wire reports (AP, Reuters) April 10 2026": 0.4565,
+      "Multiple wire reports (AP, Reuters) April 10 2026": 0.3703,
       "UK FCDO": 0.5,
-      "Ukrainian General Staff (Facebook), Russian MoD (MAX app),": 0.4118,
-      "Zelenskyy evening address, reported by Al Jazeera": 0.5
+      "Ukrainian General Staff (Facebook), Russian MoD (MAX app),": 0.3289,
+      "Zelenskyy evening address, reported by Al Jazeera": 0.5,
+      "Guardian": 0.5
     },
-    "_last_scan_same_source_skipped": 7
+    "_last_scan_same_source_skipped": 11
   }
 }
