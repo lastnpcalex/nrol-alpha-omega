@@ -1,0 +1,1024 @@
+{
+  "meta": {
+    "slug": "calibration-local-frontier-inference-2030",
+    "title": "On-Device Frontier LLM Inference by 2030",
+    "question": "Will a model running fully on-device on a consumer smartphone (commercially available at retail price <=1500 USD, no cloud offload) achieve performance within 15% of the then-best commercially available cloud frontier API model on >=3 contemporaneous independent technical evaluations by December 31, 2030?",
+    "resolution": "Resolved YES if: (a) a consumer smartphone commercially available at <=1500 USD runs an LLM fully on-device without cloud offload; (b) >=3 independent technical evaluations confirm performance within 15% of the contemporaneous cloud frontier model using benchmark suites current at time of evaluation (not pegged to 2026 benchmarks). Resolved NO if no such product exists by 2030-12-31.",
+    "created": "",
+    "lastUpdated": "2026-04-22T05:19:57+00:00",
+    "status": "ACTIVE",
+    "dayCount": 0,
+    "startDate": "2026-04-21",
+    "classification": "CALIBRATION",
+    "topicType": "conflict",
+    "resolutionDate": "2030-12-31"
+  },
+  "tagConfig": {
+    "_docs": "CAPABILITY/HARDWARE favor H1/H2. PLATEAU/REGULATORY favor H3/H4.",
+    "availableTags": [
+      "EVENT",
+      "DATA",
+      "RHETORIC",
+      "CAPABILITY",
+      "HARDWARE",
+      "BENCHMARK",
+      "PLATEAU",
+      "REGULATORY",
+      "PREDICTION"
+    ],
+    "directionHints": {
+      "CAPABILITY": {
+        "H1": 1,
+        "H2": 1,
+        "H3": -1,
+        "H4": -1
+      },
+      "HARDWARE": {
+        "H1": 1,
+        "H2": 1,
+        "H3": -1,
+        "H4": -1
+      },
+      "BENCHMARK": {
+        "H1": 1,
+        "H2": 1,
+        "H3": -1,
+        "H4": -1
+      },
+      "PLATEAU": {
+        "H3": 1,
+        "H4": 1,
+        "H1": -1,
+        "H2": -1
+      },
+      "REGULATORY": {
+        "H3": 1,
+        "H4": 1
+      }
+    },
+    "escalationTags": [],
+    "deescalationTags": []
+  },
+  "model": {
+    "hypotheses": {
+      "H1": {
+        "label": "Fast path: consumer device with on-device frontier ships by 2028",
+        "midpoint": 2.0,
+        "unit": "years from 2026 until demonstrated",
+        "posterior": 0.08,
+        "description": "Rapid hardware scaling + quantization/distillation closes the gap faster than expected. A consumer device running a model competitive with contemporaneous cloud frontier ships commercially by end of 2028. Requires NPU leap or parameter-efficiency breakthrough not on current roadmaps.",
+        "resolution_deadline": "2028-12-31"
+      },
+      "H2": {
+        "label": "Consensus path: on-device frontier ships commercially 2029-2030",
+        "midpoint": 4.0,
+        "unit": "years from 2026 until demonstrated",
+        "posterior": 0.37,
+        "description": "Steady hardware + model efficiency gains converge at or before 2030. Most likely path: 2028-generation NPU enables competitive on-device inference by 2029-2030. Aligned with @ponder.ooo prediction (cold_004).",
+        "resolution_deadline": "2029-12-31"
+      },
+      "H3": {
+        "label": "Gap persists past 2030: hardware viable 2031-2033",
+        "midpoint": 6.0,
+        "unit": "years from 2026 until demonstrated",
+        "posterior": 0.38,
+        "description": "Hardware scales but frontier cloud models scale faster, maintaining the gap. Consumer phones eventually reach the required threshold, but not within 2030. On-device of older-gen models is feasible; within-15%-of-contemporaneous-frontier remains elusive until early 2030s.",
+        "resolution_deadline": "2030-12-31"
+      },
+      "H4": {
+        "label": "Decade-long barrier: structural limits prevent parity before 2034",
+        "midpoint": 9.0,
+        "unit": "years from 2026 until demonstrated",
+        "posterior": 0.17,
+        "description": "Structural barriers -- battery-constrained thermal envelope, bandwidth requirements, or fundamental quality/size tradeoffs -- prevent consumer smartphones from reaching contemporaneous frontier parity before 2034. Cloud offload remains architecturally necessary for frontier-class performance.",
+        "resolution_deadline": "2034-12-31"
+      }
+    },
+    "expectedValue": 0,
+    "expectedUnit": "weeks",
+    "posteriorHistory": [
+      {
+        "date": "2026-04-21",
+        "note": "Initial priors. YES-by-2030 = 45% (H1+H2). NOT-by-2030 = 55% (H3+H4). H1 fast path lower weight; H2 consensus path. H3/H4 informed by hardware roadmap analysis. cold_004 (@ponder.ooo) seeds H2 as a PREDICTION.",
+        "H1": 0.08,
+        "H2": 0.37,
+        "H3": 0.38,
+        "H4": 0.17
+      }
+    ]
+  },
+  "subModels": {},
+  "indicators": {
+    "tiers": {
+      "tier1_critical": [
+        {
+          "id": "t1_frontier_parity_before_2029",
+          "desc": "Consumer smartphone (<=1500 USD) commercially available before 2029-01-01 demonstrated running on-device LLM within 15% of contemporaneous cloud frontier on >=3 independent evaluations. Observable via product launch + benchmark reports.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 +40pp, H2 -15pp, H3 -20pp, H4 -5pp.",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 0.099099,
+            "H3": 0.078947,
+            "H4": 0.117647
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
+        },
+        {
+          "id": "t1_frontier_parity_2029_to_2030",
+          "desc": "Same criteria as t1_frontier_parity_before_2029 but product commercially available 2029-01-01 through 2030-12-31.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H2 +40pp, H1 -5pp, H3 -28pp, H4 -7pp.",
+          "likelihoods": {
+            "H1": 0.180195,
+            "H2": 1.0,
+            "H3": 0.126452,
+            "H4": 0.282659
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
+        }
+      ],
+      "tier2_strong": [
+        {
+          "id": "t2_16gb_npu_flagship",
+          "desc": "Consumer smartphone flagship ships with >=16GB unified memory accessible to on-device inference AND >=100 TOPS NPU (Apple, Qualcomm, or MediaTek). Observable via published product specs.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 +8pp, H2 +5pp, H3 -8pp, H4 -5pp.",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 0.567568,
+            "H3": 0.394737,
+            "H4": 0.352941
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false,
+          "lr_migration_warning": "design prior drift >30% — review before next firing"
+        },
+        {
+          "id": "t2_quantization_breakthrough",
+          "desc": "Peer-reviewed or major-lab publication demonstrates quantization/distillation achieving <10% quality degradation vs full-precision frontier at >=8x compression, independently verified.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 +6pp, H2 +8pp, H3 -9pp, H4 -5pp.",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 0.694981,
+            "H3": 0.43609,
+            "H4": 0.403361
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false,
+          "lr_migration_warning": "design prior drift >30% — review before next firing"
+        }
+      ],
+      "tier3_suggestive": [
+        {
+          "id": "t3_open_weight_phone_80pct",
+          "desc": "Open-weight model scoring >=80% of contemporaneous frontier runs on consumer smartphone without cloud offload in reproducible independent test.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 +3pp, H2 +5pp, H3 -5pp, H4 -3pp.",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 0.825553,
+            "H3": 0.631579,
+            "H4": 0.59893
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
+        },
+        {
+          "id": "t3_hardware_roadmap_4x",
+          "desc": "Apple, Qualcomm, or MediaTek announces a public roadmap targeting >=4x on-device inference throughput improvement within 3 years.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H2 +3pp, H3 -2pp, H4 -2pp. H1 unchanged (3yr horizon implies not before 2029).",
+          "likelihoods": {
+            "H1": 0.925,
+            "H2": 1.0,
+            "H3": 0.876316,
+            "H4": 0.816176
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
+        },
+        {
+          "id": "t3_analyst_2031_2033_window",
+          "desc": ">=3 independent hardware analysts (IDC, Gartner, Forrester, SemiAnalysis, or equivalent credible technical analysts) publish reports placing on-device frontier-class inference feasibility in the 2031-2033 window specifically, based on current NPU and memory roadmaps.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H3 +10pp, H4 -10pp. H1 and H2 unaffected (this addresses post-2030 timing only).",
+          "likelihoods": {
+            "H1": 0.791667,
+            "H2": 0.791667,
+            "H3": 1.0,
+            "H4": 0.32598
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
+        }
+      ],
+      "anti_indicators": [
+        {
+          "id": "anti_h1_thermal_analysis",
+          "desc": "Anthropic, OpenAI, or Google publish technical analysis concluding frontier-class capability requires compute budgets incompatible with consumer smartphone thermal/power constraints through 2028.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 -25pp, H2 -5pp. H3 +20pp, H4 +10pp.",
+          "likelihoods": {
+            "H1": 0.039352,
+            "H2": 0.544545,
+            "H3": 0.961014,
+            "H4": 1.0
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
+        },
+        {
+          "id": "anti_h1_h2_hardware_stall",
+          "desc": "Three consecutive Apple/Qualcomm flagship generations ship without >=12GB unified memory accessible to on-device inference.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 -15pp, H2 -10pp. H3 +15pp, H4 +10pp.",
+          "likelihoods": {
+            "H1": 0.039352,
+            "H2": 0.459459,
+            "H3": 0.878168,
+            "H4": 1.0
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
+        },
+        {
+          "id": "anti_h3_h4_gap_closing",
+          "desc": "Published research confirms on-device models (any hardware, no cloud offload) have closed to within 20% of cloud frontier on contemporaneous evaluations.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H3 -10pp, H4 -15pp. H1 +5pp, H2 +20pp.",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 0.948025,
+            "H3": 0.453441,
+            "H4": 0.072398
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false,
+          "lr_migration_warning": "design prior drift >30% — review before next firing"
+        }
+      ]
+    }
+  },
+  "actorModel": {
+    "description": "Hardware OEMs and AI labs drive the outcome. Model efficiency researchers are the key wildcard.",
+    "actors": {
+      "actor1": {
+        "name": "Key Decision Maker",
+        "role": "Primary actor whose decisions drive the outcome",
+        "decisionStyle": "How they decide (rational/impulsive/institutional/etc.)",
+        "biases": [
+          "Known bias 1"
+        ],
+        "filters": [
+          "Institutional constraint on behavior"
+        ],
+        "overrides": [
+          "Condition where filters get bypassed"
+        ]
+      },
+      "apple": {
+        "name": "Apple Inc.",
+        "role": "Consumer device OEM; controls Neural Engine NPU roadmap",
+        "decisionStyle": "Secretive roadmap, tight hardware-software integration",
+        "biases": [
+          "On-device privacy narrative is a product differentiator"
+        ],
+        "filters": [
+          "Battery life constraints",
+          "Thermal envelope"
+        ]
+      },
+      "qualcomm": {
+        "name": "Qualcomm",
+        "role": "Android flagship SoC vendor; Snapdragon AI roadmap",
+        "decisionStyle": "Competitive roadmap tied to OEM partnerships",
+        "biases": [
+          "NPU TOPS marketing arms race"
+        ],
+        "filters": [
+          "Memory bandwidth limits",
+          "Power budget"
+        ]
+      }
+    },
+    "methodology": [
+      "ACTIONS OVER RHETORIC — only verified events move posteriors",
+      "TAG EVERYTHING — separate rhetoric from action in evidence log",
+      "DON'T FRONT-RUN — set tripwires and let news confirm",
+      "SOCIALIZATION DETECTION — recognize narrative prep patterns"
+    ]
+  },
+  "evidenceLog": [
+    {
+      "id": "ev_001",
+      "time": "2026-04-21T04:15:00Z",
+      "tag": "PREDICTION",
+      "text": "Social post prediction: 'local opus on a phone by 2030' -- claim that Opus-class LLM will run fully on-device on a consumer smartphone by end of 2030. Passes all 3 PREDICTION filters (specific, testable, time-bounded).",
+      "provenance": "@ponder.ooo on Bluesky",
+      "source": "@ponder.ooo",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5,
+      "ledger": "FACT",
+      "posteriorImpact": "NONE. Prediction -- does not move posteriors. Logged for source calibration. Resolves 2030-12-31.",
+      "prediction": {
+        "deadline": "2030-12-31",
+        "claim": "Opus-class LLM runs locally on a consumer phone by 2030",
+        "resolvedDate": null,
+        "resolvedOutcome": null
+      },
+      "note": "Retroactive from cold_004. Source trust 0.50 (unknown prior)."
+    },
+    {
+      "time": "2026-04-21T15:28:43+00:00",
+      "tag": "INTEL",
+      "text": "DEADLINE MIGRATION: resolution_deadline stamped on ['H1', 'H2', 'H3', 'H4'] based on topic startDate 2026-04-21.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 1.0
+    },
+    {
+      "time": "2026-04-21T19:03:40+00:00",
+      "tag": "INTEL",
+      "text": "LR MIGRATION RESET: posteriors reset to design priors; evidence log preserved.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 1.0
+    },
+    {
+      "time": "2026-04-22T01:00:37+00:00",
+      "tag": "INTEL",
+      "text": "REPLAY BEGIN: 0 previously-fired indicators will be re-applied chronologically under current LR system. Posteriors reset to design priors; indicator state cleared. Evidence log preserved for audit.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 1.0
+    },
+    {
+      "time": "2026-04-22T01:00:37+00:00",
+      "tag": "INTEL",
+      "text": "REPLAY COMPLETE: 0 indicators applied, 0 skipped. Final posteriors: {'H1': 0.08, 'H2': 0.37, 'H3': 0.38, 'H4': 0.17}. Indicator firedDates restored to originals for audit.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 1.0
+    }
+  ],
+  "dataFeeds": {
+    "primary_metric": {
+      "label": "Primary Metric",
+      "value": 0,
+      "unit": "units",
+      "baseline": 0,
+      "asOf": ""
+    },
+    "npu_tops_flagship": {
+      "label": "Flagship smartphone NPU TOPS (best available)",
+      "value": 38,
+      "unit": "TOPS",
+      "baseline": 38,
+      "asOf": "2026-04-21",
+      "source": "Qualcomm Snapdragon 8 Elite (2025 flagship)"
+    },
+    "on_device_frontier_gap": {
+      "label": "On-device best model quality vs cloud frontier (%)",
+      "value": 65,
+      "unit": "% of contemporaneous cloud frontier",
+      "baseline": 65,
+      "asOf": "2026-04-21",
+      "source": "Estimated from Phi-4/Gemma-3 vs Opus/GPT-4o benchmarks"
+    }
+  },
+  "watchpoints": [],
+  "searchQueries": [
+    "topic keyword latest {date}",
+    "specific search query {date}"
+  ],
+  "dependencies": {
+    "_docs": "No upstream dependencies. Potentially upstream for future AI-ubiquity/always-on-agent topics.",
+    "upstream": []
+  },
+  "governance": {
+    "health": "HEALTHY",
+    "issues": [],
+    "rt": {
+      "rt": 0.0,
+      "regime": "SAFE",
+      "worst_hypothesis": "H1"
+    },
+    "entropy": 1.7873,
+    "maxEntropy": 2.0,
+    "uncertaintyRatio": 0.8937,
+    "evidenceFreshness": {
+      "fresh": 5,
+      "stale": 0,
+      "total": 5
+    },
+    "hypothesisAdmissibility": {
+      "H1": "ADMISSIBLE",
+      "H2": "ADMISSIBLE",
+      "H3": "ADMISSIBLE",
+      "H4": "ADMISSIBLE"
+    },
+    "klFromPrior": {
+      "kl_divergence": 0.0,
+      "interpretation": "MODERATE"
+    },
+    "lastComputed": "2026-04-22T05:19:57+00:00",
+    "staleDependencies": 0,
+    "calibrationHealth": "ACCEPTABLE",
+    "unresolvedContradictions": 0,
+    "designGate": {
+      "passed": true,
+      "blockers": [],
+      "warnings": [],
+      "coverage": {
+        "H1": {
+          "pos": 7,
+          "neg": 5
+        },
+        "H2": {
+          "pos": 7,
+          "neg": 4
+        },
+        "H3": {
+          "pos": 3,
+          "neg": 7
+        },
+        "H4": {
+          "pos": 2,
+          "neg": 8
+        }
+      },
+      "indistinguishable": [],
+      "lastChecked": "2026-04-22T05:19:57+00:00"
+    }
+  },
+  "predictionScoring": {
+    "_docs": "Calibration infrastructure. Snapshots are auto-created by engine on each posterior update. Record outcome when topic resolves, then compute_calibration_report() for Brier analysis.",
+    "snapshots": [],
+    "outcomes": [],
+    "brierScores": []
+  },
+  "contradictionTracker": {
+    "unresolved": [],
+    "resolved": []
+  },
+  "schemaVersion": 2,
+  "migratedAt": "2026-04-21T19:03:40+00:00",
+  "conditionalPredictions": [
+    {
+      "id": "cp_001",
+      "createdAt": "2026-04-22T02:35:32+00:00",
+      "conditionTopic": "calibration-local-frontier-inference-2030",
+      "conditionHypothesis": "H2",
+      "conditionProbAtCreation": 0.37,
+      "prediction": "IF consensus path (on-device frontier 2029-2030), THEN >=1 major chip vendor (Qualcomm, Apple, or similar) announces consumer device with on-device frontier LLM capability by Q4 2029",
+      "resolutionCriteria": "Observable: Public announcement from chip vendor of shipping consumer device with integrated frontier-class LLM inference (measured by capability benchmark or lab claims)",
+      "deadline": "2029-12-31",
+      "conditionalProbability": 0.71,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "on-device-ai",
+        "hardware-innovation",
+        "llm-deployment"
+      ],
+      "source": "agent-green",
+      "lens": "GREEN",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": "Discrete vendor announcement is a good threshold event. 0.71 fine.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "APPROVE",
+          "reasoning": "Qualcomm/Apple announcement is standard vendor roadmap event. BLUE-compatible as predictable institutional milestone.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "MODIFY",
+          "reasoning": "Vendor ANNOUNCEMENTS are easy — 'frontier-class' is vaporware until benchmarked. RED: vendors will announce; actual on-device frontier parity will lag. Also: 'or lab claims' resolution weakens this. Announcement bar is too low.",
+          "modified_suggestion": "Require independent benchmark confirmation, not lab self-report."
+        },
+        "VIOLET": {
+          "verdict": "APPROVE",
+          "reasoning": "Named chip vendors (Qualcomm, Apple) — this is agency-grounded. Cook/Amon roadmaps drive outcomes.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Binary announcement observable; clear falsifier by 2029Q4.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_002",
+      "createdAt": "2026-04-22T02:35:32+00:00",
+      "conditionTopic": "calibration-local-frontier-inference-2030",
+      "conditionHypothesis": "H2",
+      "conditionProbAtCreation": 0.37,
+      "prediction": "IF consensus path holds, THEN on-device frontier inference power consumption remains <5W at inference time by commercial shipping (2029-2030)",
+      "resolutionCriteria": "Observable: Technical specifications from vendor documentation show on-device frontier model inference power draw <5W for single-token generation",
+      "deadline": "2030-12-31",
+      "conditionalProbability": 0.65,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "hardware-efficiency",
+        "on-device-ai",
+        "power-consumption"
+      ],
+      "source": "agent-green",
+      "lens": "GREEN",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "MODIFY",
+          "reasoning": "<5W is very specific and may be gamed by vendor marketing ('average', 'token-amortized', 'after first token' etc). Specify measurement protocol.",
+          "modified_suggestion": "Specify sustained power draw over a 1000-token generation under MLPerf-style measurement."
+        },
+        "BLUE": {
+          "verdict": "APPROVE",
+          "reasoning": "Power-consumption spec is measurable. Reasonable from BLUE lens.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "MODIFY",
+          "reasoning": "<5W for frontier inference is aggressive — RED view: thermal/power constraints are harder than believed. Probability 0.65 too high; 0.45 more realistic.",
+          "modified_suggestion": "Lower probability to 0.45."
+        },
+        "VIOLET": {
+          "verdict": "NEUTRAL",
+          "reasoning": "Technical-spec observable.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Power-draw spec is technical and checkable against datasheets.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_003",
+      "createdAt": "2026-04-22T02:35:32+00:00",
+      "conditionTopic": "calibration-local-frontier-inference-2030",
+      "conditionHypothesis": "H3",
+      "conditionProbAtCreation": 0.38,
+      "prediction": "IF gap persists (hardware viable 2031-2033), THEN published research through 2029 shows fundamental hardware challenges (memory bandwidth, power density) require 2+ more years of innovation",
+      "resolutionCriteria": "Observable: Academic or industry white papers (Qualcomm, ARM, Apple, NVIDIA) published through 2029 document structural hardware barriers preventing on-device frontier inference before 2031",
+      "deadline": "2029-12-31",
+      "conditionalProbability": 0.69,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "hardware-constraints",
+        "capability-timeline",
+        "on-device-ai"
+      ],
+      "source": "agent-green",
+      "lens": "GREEN",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "NEUTRAL",
+          "reasoning": "White-paper publication tracking — framework within-continuation observable.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "APPROVE",
+          "reasoning": "White-paper documentation is institutional pattern. Reasonable.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "RED-aligned: hardware gaps persist. Good prediction.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "NEUTRAL",
+          "reasoning": "Research-literature observable.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "MODIFY",
+          "reasoning": "'Published research documents structural barriers' is cherry-pickable; any survey can find such claims.",
+          "modified_suggestion": "Narrow to quantitative benchmark — e.g., no shipping SoC meets FP8 memory bandwidth threshold X GB/s by 2029-12-31."
+        }
+      },
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_004",
+      "createdAt": "2026-04-22T02:35:34+00:00",
+      "conditionTopic": "calibration-local-frontier-inference-2030",
+      "conditionHypothesis": "H2",
+      "conditionProbAtCreation": 0.37,
+      "prediction": "IF H2 (consensus path: on-device frontier ships 2029-2030), THEN market adoption lags device availability by 12-18 months due to app-developer supply constraints; developers lack tools and economic incentives to optimize for on-device frontier models. App-store ecosystem shows <15% of top-1000 apps shipping on-device inference by 2030-12-31, despite hardware availability.",
+      "resolutionCriteria": "Observable: App-store analysis (iOS App Store, Google Play) as of 2030-12-31: sample 1,000 top apps by download count. Measure fraction with on-device LLM inference capability disclosed in feature lists or privacy labels. <15% indicates adoption lag. Cross-check against device-API adoption curves (iOS CoreML on-device model availability).",
+      "deadline": "2030-12-31",
+      "conditionalProbability": 0.56,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "supply-side-constraint",
+        "developer-inertia",
+        "adoption-lag"
+      ],
+      "source": "agent-ochre",
+      "lens": "OCHRE",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": "Adoption-lag via supply-side constraints is a solid regime-change observable.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "APPROVE",
+          "reasoning": "Developer/app adoption lag is institutional-inertia pattern BLUE recognizes. Reasonable.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "Developer inertia/adoption lag is RED-aligned.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "NEUTRAL",
+          "reasoning": "App-store observable.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "App-store sampling is replicable; 15% threshold is meaningful.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_005",
+      "createdAt": "2026-04-22T02:35:34+00:00",
+      "conditionTopic": "calibration-local-frontier-inference-2030",
+      "conditionHypothesis": "H3",
+      "conditionProbAtCreation": 0.38,
+      "prediction": "IF H3 (gap persists 2031-2033), THEN cloud-centric moat deepens: frontier model inference remains cloud-hosted monopoly; cost structure (NVIDIA opex, power, real-estate) stabilizes cloud inference marginal cost at 40-60% below on-device inference despite on-device hardware parity, driven by economies of scale lock-in and amortized R&D. Geopolitical competition drives funding toward cloud-centralization (China domestic cloud, US cloud primacy).",
+      "resolutionCriteria": "Observable: Compare marginal inference cost (per-token) cloud vs on-device 2030-2033. Cloud cost 40-60% below on-device due to amortized opex, batch processing economies, power pricing, and real-estate consolidation. Industry reports (Morgan Stanley, Goldman Sachs, Gartner AI Infrastructure) document cost structure advantage persisting despite hardware parity.",
+      "deadline": "2033-12-31",
+      "conditionalProbability": 0.59,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "moat-deepening",
+        "scale-lock-in",
+        "infrastructure-monopoly"
+      ],
+      "source": "agent-ochre",
+      "lens": "OCHRE",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": "Moat-deepening cost-structure observable is well-specified.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "APPROVE",
+          "reasoning": "Cloud cost moat persistence is economic/institutional equilibrium. Reasonable.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "Cloud moat deepening is sharp RED institutional lock-in thesis.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "NEUTRAL",
+          "reasoning": "Industry-report observable.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Cost-structure divergence is observable via industry reports; long horizon appropriate for deep-moat claim.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_006",
+      "createdAt": "2026-04-22T04:18:41+00:00",
+      "conditionTopic": "calibration-local-frontier-inference-2030",
+      "conditionHypothesis": "H4",
+      "conditionProbAtCreation": 0.17,
+      "prediction": "IF decade-long barrier holds, THEN >=2 major model labs publicly abandon on-device frontier and re-commit to cloud-centric architectures by 2031-06-30.",
+      "resolutionCriteria": "Public statements from >=2 major model labs explicitly abandoning on-device frontier targets.",
+      "deadline": "2031-06-30",
+      "conditionalProbability": 0.14,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "regime-shift",
+        "architectural-reversal",
+        "paradigm-abandonment"
+      ],
+      "source": "agent-amber",
+      "lens": "AMBER",
+      "criticVerdicts": {},
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_007",
+      "createdAt": "2026-04-22T05:19:34+00:00",
+      "conditionTopic": "calibration-local-frontier-inference-2030",
+      "conditionHypothesis": "H2",
+      "conditionProbAtCreation": 0.37,
+      "prediction": "IF consensus path holds and on-device frontier inference ships 2029-2030 (H2), THEN hardware milestones are met via Apple A19/M5-generation architectures integrating 200B or more parameter models at acceptable latency (less than 2s first-token), with commercial shipping in Apple/Samsung flagship devices by Q3 2029.",
+      "resolutionCriteria": "Apple or Samsung announces on-device frontier model with more than 150B parameters in chipset technical specs; benchmarks show less than 2s first-token latency on standard inputs; devices ship commercially in more than 50 million units within 6 months.",
+      "deadline": "2029-09-30",
+      "conditionalProbability": 0.66,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "hardware-roadmap",
+        "device-ai",
+        "commercialization"
+      ],
+      "source": "agent-blue",
+      "lens": "BLUE",
+      "criticVerdicts": [
+        {
+          "critic": "GREEN",
+          "verdict": "MODIFY",
+          "reasoning": "200B+ parameter models at <2s first-token by Q3 2029 is an acceleration scenario, not drift-forward. 15-20x parameter jump in ~3 Apple generations is aggressive.",
+          "modified_suggestion": "Reduce to 0.50. Lower parameter threshold to 70B+ or reframe as GPT-4-class benchmark performance."
+        },
+        {
+          "critic": "RED",
+          "verdict": "MODIFY",
+          "reasoning": "Resolution deadline Q3 2029 is before upper bound of H2 conditioning window (2030). Supply chain brittleness: advanced packaging requires TSMC N2 yields; geopolitical disruption could sever this. 50M unit threshold extremely aggressive. 0.66 too high.",
+          "modified_suggestion": "Lower to 0.44. Extend deadline to 2030-06-30. Add supply chain/export control failure mode as explicit disqualifier."
+        },
+        {
+          "critic": "VIOLET",
+          "verdict": "MODIFY",
+          "reasoning": "Apple has strong incentive to gate frontier inference to premium devices (margin protection), not commodity flagships. Samsung's incentive structure differs. Prediction conflates two actors with different incentive structures.",
+          "modified_suggestion": "Lower to 0.55 or add Apple Pro-line-only resolution path. Clarify Apple's incentive is to differentiate Pro tiers."
+        },
+        {
+          "critic": "OCHRE",
+          "verdict": "MODIFY",
+          "reasoning": "200B+ parameter on-device requirement at <2s first-token by Q3 2029 assumes memory bandwidth scaling not guaranteed by current DRAM/HBM roadmaps. Semiconductor supply chain path-dependence (TSMC 2nm yield curves, HBM3E constraints) is the binding constraint.",
+          "modified_suggestion": "Reduce to 0.48. Modify to 70B+ at <2s latency — consistent with projected memory bandwidth by 2029. Retain 50M unit shipment criterion."
+        },
+        {
+          "critic": "GRAY",
+          "verdict": "APPROVE",
+          "reasoning": "Specific, hardware-grounded, and testable. Apple A19/M5 generation provides concrete empirical anchor. 50M unit commercial shipping bar appropriately demanding.",
+          "modified_suggestion": null
+        }
+      ],
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_008",
+      "createdAt": "2026-04-22T05:19:34+00:00",
+      "conditionTopic": "calibration-local-frontier-inference-2030",
+      "conditionHypothesis": "H4",
+      "conditionProbAtCreation": 0.17,
+      "prediction": "IF decade-long barrier persists (H4: structural limits block parity before 2034), THEN on-device AI regime bifurcates into two tiers: premium/flagship devices get local frontier inference first, while mid-range and budget segments remain cloud-dependent indefinitely, entrenching digital inequality by 2030.",
+      "resolutionCriteria": "By end-2030, frontier models run locally only on devices above 1500 USD MSRP; cloud-inference market share in developing nations stays above 80%; smartphone market splits into frontier-local capable (top 10% price tier) vs. cloud-dependent (bottom 90%), persisting through 2030.",
+      "deadline": "2030-12-31",
+      "conditionalProbability": 0.66,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "digital-inequality-regime",
+        "hardware-bifurcation",
+        "long-term-bottleneck"
+      ],
+      "source": "agent-amber",
+      "lens": "AMBER",
+      "criticVerdicts": [
+        {
+          "critic": "GREEN",
+          "verdict": "APPROVE",
+          "reasoning": "Pure drift-forward: hardware economics, manufacturing cost curves, consumer market segmentation all support tiered-device scenario. 66% reasonable.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "RED",
+          "verdict": "APPROVE",
+          "reasoning": "Digital inequality entrenching through device price tiers is canonical second-order consequence. 0.66 reasonable, possibly understated.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "VIOLET",
+          "verdict": "APPROVE",
+          "reasoning": "Driven by named corporate actors (Apple, Samsung, Qualcomm) with clear incentive to gate premium features to high-ASP devices. Standard product differentiation rooted in margin protection. Cloud providers benefit from perpetuating cloud dependency. 66% defensible.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "OCHRE",
+          "verdict": "APPROVE",
+          "reasoning": "Structurally correct from OCHRE's lens. Device price-tier stratification for compute-intensive features is well-documented path-dependent dynamic in consumer electronics. If H4 holds, bifurcation is near-certain. 0.66 appropriate.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "GRAY",
+          "verdict": "APPROVE",
+          "reasoning": "Digital inequality framing of on-device AI bifurcation is absent from iid 521's consensus-path treatment. $1,500 MSRP threshold and 80% cloud-dependence metric in developing nations are concrete and differentiating.",
+          "modified_suggestion": null
+        }
+      ],
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_009",
+      "createdAt": "2026-04-22T05:19:57+00:00",
+      "conditionTopic": "calibration-local-frontier-inference-2030",
+      "conditionHypothesis": "H2",
+      "conditionProbAtCreation": 0.37,
+      "prediction": "IF consensus path holds and on-device frontier inference ships 2029-2030 (H2), THEN hardware milestones are met via Apple A19/M5-generation architectures integrating 200B or more parameter models at acceptable latency (less than 2s first-token), with commercial shipping in Apple/Samsung flagship devices by Q3 2029.",
+      "resolutionCriteria": "Apple or Samsung announces on-device frontier model with more than 150B parameters in chipset technical specs; benchmarks show less than 2s first-token latency on standard inputs; devices ship commercially in more than 50 million units within 6 months.",
+      "deadline": "2029-09-30",
+      "conditionalProbability": 0.66,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "hardware-roadmap",
+        "device-ai",
+        "commercialization"
+      ],
+      "source": "agent-blue",
+      "lens": "BLUE",
+      "criticVerdicts": [
+        {
+          "critic": "GREEN",
+          "verdict": "MODIFY",
+          "reasoning": "200B+ parameter models at <2s first-token by Q3 2029 is an acceleration scenario, not drift-forward. 15-20x parameter jump in ~3 Apple generations is aggressive.",
+          "modified_suggestion": "Reduce to 0.50. Lower parameter threshold to 70B+ or reframe as GPT-4-class benchmark performance."
+        },
+        {
+          "critic": "RED",
+          "verdict": "MODIFY",
+          "reasoning": "Resolution deadline Q3 2029 is before upper bound of H2 conditioning window (2030). Supply chain brittleness: advanced packaging requires TSMC N2 yields; geopolitical disruption could sever this. 50M unit threshold extremely aggressive. 0.66 too high.",
+          "modified_suggestion": "Lower to 0.44. Extend deadline to 2030-06-30. Add supply chain/export control failure mode as explicit disqualifier."
+        },
+        {
+          "critic": "VIOLET",
+          "verdict": "MODIFY",
+          "reasoning": "Apple has strong incentive to gate frontier inference to premium devices (margin protection), not commodity flagships. Samsung's incentive structure differs. Prediction conflates two actors with different incentive structures.",
+          "modified_suggestion": "Lower to 0.55 or add Apple Pro-line-only resolution path. Clarify Apple's incentive is to differentiate Pro tiers."
+        },
+        {
+          "critic": "OCHRE",
+          "verdict": "MODIFY",
+          "reasoning": "200B+ parameter on-device requirement at <2s first-token by Q3 2029 assumes memory bandwidth scaling not guaranteed by current DRAM/HBM roadmaps. Semiconductor supply chain path-dependence (TSMC 2nm yield curves, HBM3E constraints) is the binding constraint.",
+          "modified_suggestion": "Reduce to 0.48. Modify to 70B+ at <2s latency — consistent with projected memory bandwidth by 2029. Retain 50M unit shipment criterion."
+        },
+        {
+          "critic": "GRAY",
+          "verdict": "APPROVE",
+          "reasoning": "Specific, hardware-grounded, and testable. Apple A19/M5 generation provides concrete empirical anchor. 50M unit commercial shipping bar appropriately demanding.",
+          "modified_suggestion": null
+        }
+      ],
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_010",
+      "createdAt": "2026-04-22T05:19:57+00:00",
+      "conditionTopic": "calibration-local-frontier-inference-2030",
+      "conditionHypothesis": "H4",
+      "conditionProbAtCreation": 0.17,
+      "prediction": "IF decade-long barrier persists (H4: structural limits block parity before 2034), THEN on-device AI regime bifurcates into two tiers: premium/flagship devices get local frontier inference first, while mid-range and budget segments remain cloud-dependent indefinitely, entrenching digital inequality by 2030.",
+      "resolutionCriteria": "By end-2030, frontier models run locally only on devices above 1500 USD MSRP; cloud-inference market share in developing nations stays above 80%; smartphone market splits into frontier-local capable (top 10% price tier) vs. cloud-dependent (bottom 90%), persisting through 2030.",
+      "deadline": "2030-12-31",
+      "conditionalProbability": 0.66,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "digital-inequality-regime",
+        "hardware-bifurcation",
+        "long-term-bottleneck"
+      ],
+      "source": "agent-amber",
+      "lens": "AMBER",
+      "criticVerdicts": [
+        {
+          "critic": "GREEN",
+          "verdict": "APPROVE",
+          "reasoning": "Pure drift-forward: hardware economics, manufacturing cost curves, consumer market segmentation all support tiered-device scenario. 66% reasonable.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "RED",
+          "verdict": "APPROVE",
+          "reasoning": "Digital inequality entrenching through device price tiers is canonical second-order consequence. 0.66 reasonable, possibly understated.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "VIOLET",
+          "verdict": "APPROVE",
+          "reasoning": "Driven by named corporate actors (Apple, Samsung, Qualcomm) with clear incentive to gate premium features to high-ASP devices. Standard product differentiation rooted in margin protection. Cloud providers benefit from perpetuating cloud dependency. 66% defensible.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "OCHRE",
+          "verdict": "APPROVE",
+          "reasoning": "Structurally correct from OCHRE's lens. Device price-tier stratification for compute-intensive features is well-documented path-dependent dynamic in consumer electronics. If H4 holds, bifurcation is near-certain. 0.66 appropriate.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "GRAY",
+          "verdict": "APPROVE",
+          "reasoning": "Digital inequality framing of on-device AI bifurcation is absent from iid 521's consensus-path treatment. $1,500 MSRP threshold and 80% cloud-dependence metric in developing nations are concrete and differentiating.",
+          "modified_suggestion": null
+        }
+      ],
+      "lensAgreement": []
+    }
+  ]
+}

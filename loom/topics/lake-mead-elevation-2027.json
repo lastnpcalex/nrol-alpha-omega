@@ -5,12 +5,13 @@
     "question": "What will Lake Mead water surface elevation (feet above sea level) be on December 31, 2027?",
     "resolution": "USBR official daily reservoir elevation reading for Lake Mead for December 31, 2027, as published on the Bureau of Reclamation Lower Colorado Region daily reservoir data portal. Fallback (in order): December 30 reading if Dec 31 is missing; SNWA published Lake Mead intake elevation for the same date; Western Area Power Administration Hoover Dam daily operations report. Reading is the end-of-day elevation in feet above sea level.",
     "created": "2026-04-13T18:38:33+00:00",
-    "lastUpdated": "2026-04-17T18:49:21+00:00",
+    "lastUpdated": "2026-04-22T05:19:58+00:00",
     "status": "ACTIVE",
     "dayCount": 0,
     "startDate": "2026-04-13",
     "classification": "ROUTINE",
-    "topicType": "resource"
+    "topicType": "resource",
+    "resolutionDate": "2027-12-31"
   },
   "tagConfig": {
     "_docs": "Tag configuration for this topic. topicType presets: conflict, science, election, tech. Override directionHints for custom tag-to-hypothesis mappings.",
@@ -42,28 +43,28 @@
         "label": "Recovery: above 1,075 ft (exits Tier 1 shortage zone)",
         "midpoint": 1085,
         "unit": "ft",
-        "posterior": 0.005
+        "posterior": 0.06
       },
       "H2": {
         "label": "Stable decline: 1,050-1,075 ft (remains in Tier 1 range)",
         "midpoint": 1062,
         "unit": "ft",
-        "posterior": 0.0428
+        "posterior": 0.29
       },
       "H3": {
         "label": "Record-breaking decline: 1,025-1,050 ft (Tier 2 range)",
         "midpoint": 1038,
         "unit": "ft",
-        "posterior": 0.8505
+        "posterior": 0.48
       },
       "H4": {
         "label": "Severe decline: below 1,025 ft (Tier 3 threshold)",
         "midpoint": 1015,
         "unit": "ft",
-        "posterior": 0.1017
+        "posterior": 0.17
       }
     },
-    "expectedValue": 1036.58,
+    "expectedValue": 1043.87,
     "expectedUnit": "ft",
     "posteriorHistory": [
       {
@@ -75,51 +76,32 @@
         "H4": 0.15
       },
       {
-        "date": "2026-04-13",
+        "date": "2026-04-22",
         "posteriors": {
           "H1": 0.06,
           "H2": 0.29,
           "H3": 0.48,
           "H4": 0.17
         },
-        "trigger": "t3_monthly_drop_6ft FIRED",
-        "note": "Lake Mead dropped >6ft in March 2026 (from ~1,070 to 1,064 ft). Applied pre-committed effect: H3 +3pp, H4 +2pp, H1 -2pp, H2 -3pp."
-      },
-      {
-        "date": "2026-04-16",
-        "H1": 0.0037,
-        "H2": 0.1337,
-        "H3": 0.664,
-        "H4": 0.1986,
-        "note": "Evidence ev_003: Colorado Basin April 1 snowpack at historically record low levels, roughly five ",
-        "likelihoods": {
-          "H1": 0.02,
-          "H2": 0.15,
+        "priors": {
+          "H1": 0.08,
+          "H2": 0.32,
           "H3": 0.45,
-          "H4": 0.38
+          "H4": 0.15
         },
-        "redTeam": {
-          "contrarian_direction": {},
-          "counterevidence": [],
-          "unfired_indicators": [],
-          "devil_advocate_score": 0.0,
-          "challenge": "No significant shifts proposed; no challenge needed.",
-          "inference_mode": "text_heuristic"
-        }
-      },
-      {
-        "date": "2026-04-17",
-        "H1": 0.0001,
-        "H2": 0.043,
-        "H3": 0.8546,
-        "H4": 0.1022,
-        "note": "Very low snowpack and one-third normal inflow projection strongly favor continued decline into Tier 2 range (H3). Small Jan buffer unlikely to persist through summer drawdown. H4 risk elevated by drought severity.",
+        "updateMethod": "bayesian_update",
+        "evidenceRefs": [
+          "2026-04-10"
+        ],
         "likelihoods": {
-          "H1": 0.01,
-          "H2": 0.15,
-          "H3": 0.6,
-          "H4": 0.24
+          "H1": 0.661765,
+          "H2": 0.799632,
+          "H3": 0.941176,
+          "H4": 1.0
         },
+        "note": "Indicator t3_monthly_drop_6ft fired (firing #1, decay=1.000): REPLAY: Fox5 Vegas reports Lake Mead dropped >6ft since March 1. USBR confirms 1,064.16 ",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
         "redTeam": {
           "contrarian_direction": {},
           "counterevidence": [],
@@ -141,7 +123,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H3 +15pp, H4 +5pp, H1 -5pp, H2 -15pp"
+          "posteriorEffect": "H3 +15pp, H4 +5pp, H1 -5pp, H2 -15pp",
+          "likelihoods": {
+            "H1": 0.28125,
+            "H2": 0.398437,
+            "H3": 1.0,
+            "H4": 1.0
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t1_below_1025",
@@ -149,7 +140,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H4 +25pp, H3 -10pp, H2 -10pp, H1 -5pp"
+          "posteriorEffect": "H4 +25pp, H3 -10pp, H2 -10pp, H1 -5pp",
+          "likelihoods": {
+            "H1": 0.140625,
+            "H2": 0.257812,
+            "H3": 0.291667,
+            "H4": 1.0
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t1_above_1075",
@@ -157,7 +157,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H1 +25pp, H2 -10pp, H3 -10pp, H4 -5pp"
+          "posteriorEffect": "H1 +25pp, H2 -10pp, H3 -10pp, H4 -5pp",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 0.166667,
+            "H3": 0.188552,
+            "H4": 0.161616
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         }
       ],
       "tier2_strong": [
@@ -167,7 +176,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H3 +8pp, H4 +4pp, H1 -4pp, H2 -8pp"
+          "posteriorEffect": "H3 +8pp, H4 +4pp, H1 -4pp, H2 -8pp",
+          "likelihoods": {
+            "H1": 0.394737,
+            "H2": 0.592105,
+            "H3": 0.929825,
+            "H4": 1.0
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t2_snowpack_above_100",
@@ -175,7 +193,17 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H1 +8pp, H2 +4pp, H3 -8pp, H4 -4pp"
+          "posteriorEffect": "H1 +8pp, H2 +4pp, H3 -8pp, H4 -4pp",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 0.5625,
+            "H3": 0.411111,
+            "H4": 0.366667
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false,
+          "lr_migration_warning": "design prior drift >30% — review before next firing"
         },
         {
           "id": "t2_bor_projects_below_1040",
@@ -183,7 +211,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H3 +10pp, H4 +5pp, H1 -5pp, H2 -10pp"
+          "posteriorEffect": "H3 +10pp, H4 +5pp, H1 -5pp, H2 -10pp",
+          "likelihoods": {
+            "H1": 0.28125,
+            "H2": 0.515625,
+            "H3": 0.916667,
+            "H4": 1.0
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t2_powell_below_3500",
@@ -191,7 +228,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H3 +8pp, H4 +4pp, H1 -4pp, H2 -8pp"
+          "posteriorEffect": "H3 +8pp, H4 +4pp, H1 -4pp, H2 -8pp",
+          "likelihoods": {
+            "H1": 0.394737,
+            "H2": 0.592105,
+            "H3": 0.929825,
+            "H4": 1.0
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t2_winter_snowpack_above_120",
@@ -199,7 +245,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H1 +6pp, H2 +3pp, H3 -6pp, H4 -3pp"
+          "posteriorEffect": "H1 +6pp, H2 +3pp, H3 -6pp, H4 -3pp",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 0.625,
+            "H3": 0.495238,
+            "H4": 0.457143
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t2_bor_projects_below_1025",
@@ -207,7 +262,17 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H4 +10pp, H3 +3pp, H1 -5pp, H2 -8pp"
+          "posteriorEffect": "H4 +10pp, H3 +3pp, H1 -5pp, H2 -8pp",
+          "likelihoods": {
+            "H1": 0.225,
+            "H2": 0.45,
+            "H3": 0.64,
+            "H4": 1.0
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false,
+          "lr_migration_warning": "design prior drift >30% — review before next firing"
         }
       ],
       "tier3_suggestive": [
@@ -216,8 +281,17 @@
           "desc": "Lake Mead drops more than 6 ft in any single calendar month.",
           "status": "FIRED",
           "firedDate": "2026-04-10",
-          "note": "Fox5 Vegas reports Lake Mead dropped >6ft since March 1. USBR confirms 1,064.16 ft on April 6.",
-          "posteriorEffect": "H3 +3pp, H4 +2pp, H1 -2pp, H2 -3pp"
+          "note": "REPLAY: Fox5 Vegas reports Lake Mead dropped >6ft since March 1. USBR confirms 1,064.16 ",
+          "posteriorEffect": "H3 +3pp, H4 +2pp, H1 -2pp, H2 -3pp",
+          "likelihoods": {
+            "H1": 0.661765,
+            "H2": 0.799632,
+            "H3": 0.941176,
+            "H4": 1.0
+          },
+          "lr_decay": 0.65,
+          "n_firings": 1,
+          "resolution_class": false
         },
         {
           "id": "t3_water_temp_alert",
@@ -225,7 +299,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H3 +2pp, H4 +1pp, H1 -1pp, H2 -2pp"
+          "posteriorEffect": "H3 +2pp, H4 +1pp, H1 -1pp, H2 -2pp",
+          "likelihoods": {
+            "H1": 0.820313,
+            "H2": 0.878906,
+            "H3": 0.979167,
+            "H4": 1.0
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t3_algal_bloom_multi",
@@ -233,7 +316,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H3 +2pp, H1 -1pp, H2 -1pp"
+          "posteriorEffect": "H3 +2pp, H1 -1pp, H2 -1pp",
+          "likelihoods": {
+            "H1": 0.837766,
+            "H2": 0.927527,
+            "H3": 1.0,
+            "H4": 0.957447
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t3_conservation_mandate",
@@ -241,7 +333,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H2 +3pp, H1 -1pp, H3 -1pp, H4 -1pp"
+          "posteriorEffect": "H2 +3pp, H1 -1pp, H3 -1pp, H4 -1pp",
+          "likelihoods": {
+            "H1": 0.8,
+            "H2": 1.0,
+            "H3": 0.893968,
+            "H4": 0.853333
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         }
       ],
       "anti_indicators": [
@@ -251,7 +352,17 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H1 -5pp, H3 +3pp, H4 +2pp"
+          "posteriorEffect": "H1 -5pp, H3 +3pp, H4 +2pp",
+          "likelihoods": {
+            "H1": 0.330882,
+            "H2": 0.882353,
+            "H3": 0.941176,
+            "H4": 1.0
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false,
+          "lr_migration_warning": "design prior drift >30% — review before next firing"
         },
         {
           "id": "anti_h2",
@@ -259,7 +370,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H2 -8pp, H3 +6pp, H4 +2pp"
+          "posteriorEffect": "H2 -8pp, H3 +6pp, H4 +2pp",
+          "likelihoods": {
+            "H1": 0.882353,
+            "H2": 0.661765,
+            "H3": 1.0,
+            "H4": 1.0
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "anti_h3",
@@ -267,7 +387,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H3 -8pp, H1 +3pp, H2 +5pp"
+          "posteriorEffect": "H3 -8pp, H1 +3pp, H2 +5pp",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 0.840909,
+            "H3": 0.59798,
+            "H4": 0.727273
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "anti_h4",
@@ -275,7 +404,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H4 -8pp, H2 +5pp, H3 +3pp"
+          "posteriorEffect": "H4 -8pp, H2 +5pp, H3 +3pp",
+          "likelihoods": {
+            "H1": 0.864865,
+            "H2": 1.0,
+            "H3": 0.922523,
+            "H4": 0.403604
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         }
       ]
     }
@@ -488,6 +626,138 @@
       "ledger": "DECISION",
       "claimState": "PROPOSED",
       "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_005",
+      "time": "2026-04-19T00:57:10+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "HYDRO"
+      ],
+      "text": "Lake Mead elevation at 1,064.16 ft in early April 2026, reservoir 34% full (~8.8 MAF). Reclamation projects year-end elevation of 1,055.88 ft, keeping basin in Tier 1 Shortage Condition for 2026.",
+      "provenance": "OBSERVED",
+      "source": "USBR / USLakes",
+      "posteriorImpact": "NONE",
+      "url": "https://www.usbr.gov/lc/region/g4000/weekly.pdf",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-19T00:57:10+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_006",
+      "time": "2026-04-20T14:03:51+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA"
+      ],
+      "text": "Lake Mead elevation 1,064.16 ft per USBR Lower Colorado weekly hydrologic update April 6, 2026. Reservoir approximately 34% full (8.8 MAF). April 2026 unregulated inflow forecast for Lake Powell: 0.550 MAF (61% of 30-year average). Projected to remain in Tier 1 shortage with end-year elevation approximately 1,055.88 ft.",
+      "provenance": "OBSERVED",
+      "source": "US Bureau of Reclamation",
+      "posteriorImpact": "NONE",
+      "url": "https://www.usbr.gov/lc/region/g4000/weekly.pdf",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-20T14:03:51+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_007",
+      "time": "2026-04-21T03:51:21+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "WATER"
+      ],
+      "text": "USBR Apr 17, 2026 24-Month Study: Lake Mead projected at ~1,038 ft by end of June 2027 under most-probable scenario; worst-case ~1,026 ft (1 ft above Tier 3 threshold).",
+      "provenance": "OBSERVED",
+      "source": "US Bureau of Reclamation",
+      "posteriorImpact": "NONE",
+      "url": "https://www.usbr.gov/lc/region/g4000/24mo.pdf",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-21T03:51:21+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-21T19:03:41+00:00",
+      "tag": "INTEL",
+      "text": "LR MIGRATION RESET: posteriors reset to design priors; evidence log preserved.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 1.0
+    },
+    {
+      "time": "2026-04-21T22:46:02+00:00",
+      "tag": "INTEL",
+      "text": "RESOLUTION-DATE STAMPED: meta.resolutionDate=2027-12-31 (derived from meta.resolution). When past, governance flags topic as overdue for resolution.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 1.0
+    },
+    {
+      "time": "2026-04-22T01:00:38+00:00",
+      "tag": "INTEL",
+      "text": "REPLAY BEGIN: 1 previously-fired indicators will be re-applied chronologically under current LR system. Posteriors reset to design priors; indicator state cleared. Evidence log preserved for audit.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 1.0
+    },
+    {
+      "id": "ev_replay_t3_monthly_drop_6ft",
+      "time": "2026-04-10",
+      "tag": "EVENT",
+      "text": "REPLAY: indicator t3_monthly_drop_6ft fires at historical firedDate 2026-04-10. Original note: Fox5 Vegas reports Lake Mead dropped >6ft since March 1. USBR confirms 1,064.16 ft on April 6.",
+      "source": "replay",
+      "claimState": "SUPPORTED",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "FACT",
+      "effectiveWeight": 1.0
+    },
+    {
+      "time": "2026-04-22T01:00:38+00:00",
+      "tag": "INTEL",
+      "text": "REPLAY COMPLETE: 1 indicators applied, 0 skipped. Final posteriors: {'H1': 0.06, 'H2': 0.29, 'H3': 0.48, 'H4': 0.17}. Indicator firedDates restored to originals for audit.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 1.0
     }
   ],
   "dataFeeds": {
@@ -540,13 +810,13 @@
       "regime": "SAFE",
       "worst_hypothesis": "H1"
     },
-    "entropy": 0.7669,
+    "entropy": 1.7043,
     "maxEntropy": 2.0,
-    "uncertaintyRatio": 0.3835,
+    "uncertaintyRatio": 0.8521,
     "evidenceFreshness": {
-      "fresh": 5,
-      "stale": 1,
-      "total": 6
+      "fresh": 10,
+      "stale": 7,
+      "total": 17
     },
     "hypothesisAdmissibility": {
       "H1": "ADMISSIBLE",
@@ -555,10 +825,10 @@
       "H4": "ADMISSIBLE"
     },
     "klFromPrior": {
-      "kl_divergence": 0.4019,
+      "kl_divergence": 0.0064,
       "interpretation": "MODERATE"
     },
-    "lastComputed": "2026-04-17T18:49:21+00:00",
+    "lastComputed": "2026-04-22T05:19:58+00:00",
     "staleDependencies": 0,
     "calibrationHealth": "ACCEPTABLE",
     "unresolvedContradictions": 0,
@@ -585,7 +855,7 @@
         }
       },
       "indistinguishable": [],
-      "lastChecked": "2026-04-17T18:49:21+00:00"
+      "lastChecked": "2026-04-22T05:19:58+00:00"
     }
   },
   "predictionScoring": {
@@ -634,6 +904,83 @@
           "H4": 0.1022
         },
         "entropy": 0.7265
+      },
+      {
+        "timestamp": "2026-04-19T00:57:10+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.0682,
+          "H3": 0.9121,
+          "H4": 0.0147
+        },
+        "entropy": 0.513
+      },
+      {
+        "timestamp": "2026-04-19T00:57:10+00:00",
+        "trigger": "pipeline:ev_005",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.0682,
+          "H3": 0.9121,
+          "H4": 0.0147
+        },
+        "entropy": 0.513
+      },
+      {
+        "timestamp": "2026-04-20T14:03:51+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.0449,
+          "H3": 0.9451,
+          "H4": 0.005
+        },
+        "entropy": 0.3545
+      },
+      {
+        "timestamp": "2026-04-20T14:03:51+00:00",
+        "trigger": "pipeline:ev_006",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.0449,
+          "H3": 0.9451,
+          "H4": 0.005
+        },
+        "entropy": 0.3545
+      },
+      {
+        "timestamp": "2026-04-21T03:51:21+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0061,
+          "H2": 0.0077,
+          "H3": 0.98,
+          "H4": 0.0061
+        },
+        "entropy": 0.1724
+      },
+      {
+        "timestamp": "2026-04-21T03:51:21+00:00",
+        "trigger": "pipeline:ev_007",
+        "posteriors": {
+          "H1": 0.0061,
+          "H2": 0.0077,
+          "H3": 0.98,
+          "H4": 0.0061
+        },
+        "entropy": 0.1724
+      },
+      {
+        "timestamp": "2026-04-22T01:00:38+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.06,
+          "H2": 0.29,
+          "H3": 0.48,
+          "H4": 0.17
+        },
+        "entropy": 1.7043
       }
     ],
     "outcomes": [],
@@ -713,6 +1060,270 @@
         "detected": "2026-04-17T15:23:00Z",
         "resolution": "SUPERSEDED",
         "resolvedAt": "2026-04-17T15:23:00Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T15:23:00+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Very low snowpack and one-third normal inflow projection strongly favor continued decline into Tier 2 range (H3). Small Jan buffer unlikely to persist through summer drawdown. H4 risk elevated by drought severity.",
+        "entry_b_time": "2026-04-19T00:57:10+00:00",
+        "entry_b_text": "Lake Mead elevation at 1,064.16 ft in early April 2026, reservoir 34% full (~8.8 MAF). Reclamation projects year-end elevation of 1,055.88 ft, keeping basin in Tier 1 Shortage Condition for 2026.",
+        "reason": "Numeric divergence 77.3% on metric (context: .): new=8.8, existing=2.0, threshold=10%",
+        "detected": "2026-04-19T00:57:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-19T00:57:10Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T15:23:00+00:00",
+        "entry_a_text": "Lake Mead at ~34% capacity. Upper Basin snowpack near lowest levels during 2000-present drought. Apr-Jul inflow to Powell projected at one-third of normal. Mead was 1,062 ft in Jan 2026 (6.5 ft above projections). Post-2026 operating agreements under negotiation.",
+        "entry_b_time": "2026-04-19T00:57:10+00:00",
+        "entry_b_text": "Lake Mead elevation at 1,064.16 ft in early April 2026, reservoir 34% full (~8.8 MAF). Reclamation projects year-end elevation of 1,055.88 ft, keeping basin in Tier 1 Shortage Condition for 2026.",
+        "reason": "Numeric divergence 97.1% on metric (context: at, mead): new=1.0, existing=34.0, threshold=10%",
+        "detected": "2026-04-19T00:57:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-19T00:57:10Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-16T03:43:52+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Evidence ev_003: Colorado Basin April 1 snowpack at historically record low levels, roughly five ",
+        "entry_b_time": "2026-04-19T00:57:10+00:00",
+        "entry_b_text": "Lake Mead elevation at 1,064.16 ft in early April 2026, reservoir 34% full (~8.8 MAF). Reclamation projects year-end elevation of 1,055.88 ft, keeping basin in Tier 1 Shortage Condition for 2026.",
+        "reason": "Numeric divergence 98.4% on metric (context: at): new=64.16, existing=1.0, threshold=10%",
+        "detected": "2026-04-19T00:57:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-19T00:57:10Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-16T03:43:52+00:00",
+        "entry_a_text": "Colorado Basin April 1 snowpack at historically record low levels, roughly five times lower than previous record. Federal Bureau of Reclamation projects Lake Mead will reach new record-low water levels by November 2027, potentially dropping to approximately 1032 feet.",
+        "entry_b_time": "2026-04-19T00:57:10+00:00",
+        "entry_b_text": "Lake Mead elevation at 1,064.16 ft in early April 2026, reservoir 34% full (~8.8 MAF). Reclamation projects year-end elevation of 1,055.88 ft, keeping basin in Tier 1 Shortage Condition for 2026.",
+        "reason": "Numeric divergence 98.4% on metric (context: at): new=64.16, existing=1.0, threshold=10%",
+        "detected": "2026-04-19T00:57:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-19T00:57:10Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-10T00:00:00Z",
+        "entry_a_text": "Lake Mead water surface elevation at 1,064.16 ft as of April 6 (USBR weekly update). Lake has dropped more than 6 feet since March 1, now just 20 feet above the all-time record low of 1,040.94 ft from July 2022. Federal projections show Lake Mead could reach new record low of ~1,032 ft by November 2027.",
+        "entry_b_time": "2026-04-19T00:57:10+00:00",
+        "entry_b_text": "Lake Mead elevation at 1,064.16 ft in early April 2026, reservoir 34% full (~8.8 MAF). Reclamation projects year-end elevation of 1,055.88 ft, keeping basin in Tier 1 Shortage Condition for 2026.",
+        "reason": "Numeric divergence 98.4% on metric (context: at, elevation, ft): new=1.0, existing=64.16, threshold=10%",
+        "detected": "2026-04-19T00:57:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-19T00:57:10Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-12T00:00:00Z",
+        "entry_a_text": "Lake Mead dropped approximately 6 ft since March 1, 2026, now sitting 20 ft above the all-time low. Currently at approximately 35% capacity. SNWA outreach manager Bronson Mack stated the lake could drop another 16 ft by 2027. Federal projections released in March 2026 indicate Lake Mead could reach record-low water levels (~1,032 ft) by November 2027. Previous record low was approximately 1,040.94 ft, set in 2022. Very low snowpack cited as primary driver. Rising water temperatures reported as affecting water treatment operations. NPS issued harmful algal bloom advisory for Government Wash on March 13.",
+        "entry_b_time": "2026-04-19T00:57:10+00:00",
+        "entry_b_text": "Lake Mead elevation at 1,064.16 ft in early April 2026, reservoir 34% full (~8.8 MAF). Reclamation projects year-end elevation of 1,055.88 ft, keeping basin in Tier 1 Shortage Condition for 2026.",
+        "reason": "Numeric divergence 83.3% on metric (context: ft, mead): new=1.0, existing=6.0, threshold=10%",
+        "detected": "2026-04-19T00:57:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-19T00:57:10Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-19T00:57:10+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+        "entry_b_time": "2026-04-20T14:03:51+00:00",
+        "entry_b_text": "Lake Mead elevation 1,064.16 ft per USBR Lower Colorado weekly hydrologic update April 6, 2026. Reservoir approximately 34% full (8.8 MAF). April 2026 unregulated inflow forecast for Lake Powell: 0.550 MAF (61% of 30-year average). Projected to remain in Tier 1 shortage with end-year elevation approximately 1,055.88 ft.",
+        "reason": "Numeric divergence 99.5% on metric (context: with): new=1.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-20T14:03:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-20T14:03:51Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-19T00:57:10+00:00",
+        "entry_a_text": "Lake Mead elevation at 1,064.16 ft in early April 2026, reservoir 34% full (~8.8 MAF). Reclamation projects year-end elevation of 1,055.88 ft, keeping basin in Tier 1 Shortage Condition for 2026.",
+        "entry_b_time": "2026-04-20T14:03:51+00:00",
+        "entry_b_text": "Lake Mead elevation 1,064.16 ft per USBR Lower Colorado weekly hydrologic update April 6, 2026. Reservoir approximately 34% full (8.8 MAF). April 2026 unregulated inflow forecast for Lake Powell: 0.550 MAF (61% of 30-year average). Projected to remain in Tier 1 shortage with end-year elevation approximately 1,055.88 ft.",
+        "reason": "Numeric divergence 98.4% on metric (context: elevation, ft): new=1.0, existing=64.16, threshold=10%",
+        "detected": "2026-04-20T14:03:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-20T14:03:51Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T15:23:00+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Very low snowpack and one-third normal inflow projection strongly favor continued decline into Tier 2 range (H3). Small Jan buffer unlikely to persist through summer drawdown. H4 risk elevated by drought severity.",
+        "entry_b_time": "2026-04-20T14:03:51+00:00",
+        "entry_b_text": "Lake Mead elevation 1,064.16 ft per USBR Lower Colorado weekly hydrologic update April 6, 2026. Reservoir approximately 34% full (8.8 MAF). April 2026 unregulated inflow forecast for Lake Powell: 0.550 MAF (61% of 30-year average). Projected to remain in Tier 1 shortage with end-year elevation approximately 1,055.88 ft.",
+        "reason": "Numeric divergence 77.3% on metric (context: .): new=8.8, existing=2.0, threshold=10%",
+        "detected": "2026-04-20T14:03:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-20T14:03:51Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T15:23:00+00:00",
+        "entry_a_text": "Lake Mead at ~34% capacity. Upper Basin snowpack near lowest levels during 2000-present drought. Apr-Jul inflow to Powell projected at one-third of normal. Mead was 1,062 ft in Jan 2026 (6.5 ft above projections). Post-2026 operating agreements under negotiation.",
+        "entry_b_time": "2026-04-20T14:03:51+00:00",
+        "entry_b_text": "Lake Mead elevation 1,064.16 ft per USBR Lower Colorado weekly hydrologic update April 6, 2026. Reservoir approximately 34% full (8.8 MAF). April 2026 unregulated inflow forecast for Lake Powell: 0.550 MAF (61% of 30-year average). Projected to remain in Tier 1 shortage with end-year elevation approximately 1,055.88 ft.",
+        "reason": "Numeric divergence 97.1% on metric (context: lake, mead): new=1.0, existing=34.0, threshold=10%",
+        "detected": "2026-04-20T14:03:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-20T14:03:51Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-16T03:43:52+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Evidence ev_003: Colorado Basin April 1 snowpack at historically record low levels, roughly five ",
+        "entry_b_time": "2026-04-20T14:03:51+00:00",
+        "entry_b_text": "Lake Mead elevation 1,064.16 ft per USBR Lower Colorado weekly hydrologic update April 6, 2026. Reservoir approximately 34% full (8.8 MAF). April 2026 unregulated inflow forecast for Lake Powell: 0.550 MAF (61% of 30-year average). Projected to remain in Tier 1 shortage with end-year elevation approximately 1,055.88 ft.",
+        "reason": "Numeric divergence 83.3% on metric (context: april): new=6.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-20T14:03:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-20T14:03:51Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-16T03:43:52+00:00",
+        "entry_a_text": "Colorado Basin April 1 snowpack at historically record low levels, roughly five times lower than previous record. Federal Bureau of Reclamation projects Lake Mead will reach new record-low water levels by November 2027, potentially dropping to approximately 1032 feet.",
+        "entry_b_time": "2026-04-20T14:03:51+00:00",
+        "entry_b_text": "Lake Mead elevation 1,064.16 ft per USBR Lower Colorado weekly hydrologic update April 6, 2026. Reservoir approximately 34% full (8.8 MAF). April 2026 unregulated inflow forecast for Lake Powell: 0.550 MAF (61% of 30-year average). Projected to remain in Tier 1 shortage with end-year elevation approximately 1,055.88 ft.",
+        "reason": "Numeric divergence 83.3% on metric (context: april): new=6.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-20T14:03:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-20T14:03:51Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-10T00:00:00Z",
+        "entry_a_text": "Lake Mead water surface elevation at 1,064.16 ft as of April 6 (USBR weekly update). Lake has dropped more than 6 feet since March 1, now just 20 feet above the all-time record low of 1,040.94 ft from July 2022. Federal projections show Lake Mead could reach new record low of ~1,032 ft by November 2027.",
+        "entry_b_time": "2026-04-20T14:03:51+00:00",
+        "entry_b_text": "Lake Mead elevation 1,064.16 ft per USBR Lower Colorado weekly hydrologic update April 6, 2026. Reservoir approximately 34% full (8.8 MAF). April 2026 unregulated inflow forecast for Lake Powell: 0.550 MAF (61% of 30-year average). Projected to remain in Tier 1 shortage with end-year elevation approximately 1,055.88 ft.",
+        "reason": "Numeric divergence 98.4% on metric (context: elevation, ft): new=1.0, existing=64.16, threshold=10%",
+        "detected": "2026-04-20T14:03:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-20T14:03:51Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-12T00:00:00Z",
+        "entry_a_text": "Lake Mead dropped approximately 6 ft since March 1, 2026, now sitting 20 ft above the all-time low. Currently at approximately 35% capacity. SNWA outreach manager Bronson Mack stated the lake could drop another 16 ft by 2027. Federal projections released in March 2026 indicate Lake Mead could reach record-low water levels (~1,032 ft) by November 2027. Previous record low was approximately 1,040.94 ft, set in 2022. Very low snowpack cited as primary driver. Rising water temperatures reported as affecting water treatment operations. NPS issued harmful algal bloom advisory for Government Wash on March 13.",
+        "entry_b_time": "2026-04-20T14:03:51+00:00",
+        "entry_b_text": "Lake Mead elevation 1,064.16 ft per USBR Lower Colorado weekly hydrologic update April 6, 2026. Reservoir approximately 34% full (8.8 MAF). April 2026 unregulated inflow forecast for Lake Powell: 0.550 MAF (61% of 30-year average). Projected to remain in Tier 1 shortage with end-year elevation approximately 1,055.88 ft.",
+        "reason": "Numeric divergence 83.3% on metric (context: ft, mead): new=1.0, existing=6.0, threshold=10%",
+        "detected": "2026-04-20T14:03:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-20T14:03:51Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-20T14:03:51+00:00",
+        "entry_a_text": "Lake Mead elevation 1,064.16 ft per USBR Lower Colorado weekly hydrologic update April 6, 2026. Reservoir approximately 34% full (8.8 MAF). April 2026 unregulated inflow forecast for Lake Powell: 0.550 MAF (61% of 30-year average). Projected to remain in Tier 1 shortage with end-year elevation approximately 1,055.88 ft.",
+        "entry_b_time": "2026-04-21T03:51:21+00:00",
+        "entry_b_text": "USBR Apr 17, 2026 24-Month Study: Lake Mead projected at ~1,038 ft by end of June 2027 under most-probable scenario; worst-case ~1,026 ft (1 ft above Tier 3 threshold).",
+        "reason": "Numeric divergence 73.5% on metric (context: usbr): new=17.0, existing=64.16, threshold=10%",
+        "detected": "2026-04-21T03:51:21Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T03:51:21Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-19T00:57:10+00:00",
+        "entry_a_text": "Lake Mead elevation at 1,064.16 ft in early April 2026, reservoir 34% full (~8.8 MAF). Reclamation projects year-end elevation of 1,055.88 ft, keeping basin in Tier 1 Shortage Condition for 2026.",
+        "entry_b_time": "2026-04-21T03:51:21+00:00",
+        "entry_b_text": "USBR Apr 17, 2026 24-Month Study: Lake Mead projected at ~1,038 ft by end of June 2027 under most-probable scenario; worst-case ~1,026 ft (1 ft above Tier 3 threshold).",
+        "reason": "Numeric divergence 50.0% on metric (context: 2026): new=17.0, existing=34.0, threshold=10%",
+        "detected": "2026-04-21T03:51:21Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T03:51:21Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T15:23:00+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Very low snowpack and one-third normal inflow projection strongly favor continued decline into Tier 2 range (H3). Small Jan buffer unlikely to persist through summer drawdown. H4 risk elevated by drought severity.",
+        "entry_b_time": "2026-04-21T03:51:21+00:00",
+        "entry_b_text": "USBR Apr 17, 2026 24-Month Study: Lake Mead projected at ~1,038 ft by end of June 2027 under most-probable scenario; worst-case ~1,026 ft (1 ft above Tier 3 threshold).",
+        "reason": "Numeric divergence 50.0% on metric (context: tier): new=1.0, existing=2.0, threshold=10%",
+        "detected": "2026-04-21T03:51:21Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T03:51:21Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T15:23:00+00:00",
+        "entry_a_text": "Lake Mead at ~34% capacity. Upper Basin snowpack near lowest levels during 2000-present drought. Apr-Jul inflow to Powell projected at one-third of normal. Mead was 1,062 ft in Jan 2026 (6.5 ft above projections). Post-2026 operating agreements under negotiation.",
+        "entry_b_time": "2026-04-21T03:51:21+00:00",
+        "entry_b_text": "USBR Apr 17, 2026 24-Month Study: Lake Mead projected at ~1,038 ft by end of June 2027 under most-probable scenario; worst-case ~1,026 ft (1 ft above Tier 3 threshold).",
+        "reason": "Numeric divergence 61.8% on metric (context: 2026): new=17.0, existing=6.5, threshold=10%",
+        "detected": "2026-04-21T03:51:21Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T03:51:21Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-16T03:43:52+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Evidence ev_003: Colorado Basin April 1 snowpack at historically record low levels, roughly five ",
+        "entry_b_time": "2026-04-21T03:51:21+00:00",
+        "entry_b_text": "USBR Apr 17, 2026 24-Month Study: Lake Mead projected at ~1,038 ft by end of June 2027 under most-probable scenario; worst-case ~1,026 ft (1 ft above Tier 3 threshold).",
+        "reason": "Numeric divergence 97.4% on metric (context: at): new=38.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-21T03:51:21Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T03:51:21Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-16T03:43:52+00:00",
+        "entry_a_text": "Colorado Basin April 1 snowpack at historically record low levels, roughly five times lower than previous record. Federal Bureau of Reclamation projects Lake Mead will reach new record-low water levels by November 2027, potentially dropping to approximately 1032 feet.",
+        "entry_b_time": "2026-04-21T03:51:21+00:00",
+        "entry_b_text": "USBR Apr 17, 2026 24-Month Study: Lake Mead projected at ~1,038 ft by end of June 2027 under most-probable scenario; worst-case ~1,026 ft (1 ft above Tier 3 threshold).",
+        "reason": "Numeric divergence 100.0% on metric (context: by): new=1.0, existing=2027.0, threshold=10%",
+        "detected": "2026-04-21T03:51:21Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T03:51:21Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-10T00:00:00Z",
+        "entry_a_text": "Lake Mead water surface elevation at 1,064.16 ft as of April 6 (USBR weekly update). Lake has dropped more than 6 feet since March 1, now just 20 feet above the all-time record low of 1,040.94 ft from July 2022. Federal projections show Lake Mead could reach new record low of ~1,032 ft by November 2027.",
+        "entry_b_time": "2026-04-21T03:51:21+00:00",
+        "entry_b_text": "USBR Apr 17, 2026 24-Month Study: Lake Mead projected at ~1,038 ft by end of June 2027 under most-probable scenario; worst-case ~1,026 ft (1 ft above Tier 3 threshold).",
+        "reason": "Numeric divergence 64.7% on metric (context: usbr): new=17.0, existing=6.0, threshold=10%",
+        "detected": "2026-04-21T03:51:21Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T03:51:21Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-12T00:00:00Z",
+        "entry_a_text": "Lake Mead dropped approximately 6 ft since March 1, 2026, now sitting 20 ft above the all-time low. Currently at approximately 35% capacity. SNWA outreach manager Bronson Mack stated the lake could drop another 16 ft by 2027. Federal projections released in March 2026 indicate Lake Mead could reach record-low water levels (~1,032 ft) by November 2027. Previous record low was approximately 1,040.94 ft, set in 2022. Very low snowpack cited as primary driver. Rising water temperatures reported as affecting water treatment operations. NPS issued harmful algal bloom advisory for Government Wash on March 13.",
+        "entry_b_time": "2026-04-21T03:51:21+00:00",
+        "entry_b_text": "USBR Apr 17, 2026 24-Month Study: Lake Mead projected at ~1,038 ft by end of June 2027 under most-probable scenario; worst-case ~1,026 ft (1 ft above Tier 3 threshold).",
+        "reason": "Numeric divergence 94.1% on metric (context: 2026): new=17.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-21T03:51:21Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T03:51:21Z"
       }
     ]
   },
@@ -761,16 +1372,1092 @@
         "trust_delta": -0.1,
         "original_text_snippet": "Lake Mead dropped approximately 6 ft since March 1, 2026, now sitting 20 ft above the all-time low. Currently at approxi",
         "confirming_text_snippet": "Lake Mead at ~34% capacity. Upper Basin snowpack near lowest levels during 2000-present drought. Apr-Jul inflow to Powel"
+      },
+      {
+        "timestamp": "2026-04-20T14:03:51Z",
+        "evidence_index": 1,
+        "confirming_index": 8,
+        "resolution": "REFUTED",
+        "source": "USBR Lower Colorado Weekly Hydrologic Update / Fox5 Vegas",
+        "confirming_source": "US Bureau of Reclamation",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Lake Mead water surface elevation at 1,064.16 ft as of April 6 (USBR weekly update). Lake has dropped more than 6 feet s",
+        "confirming_text_snippet": "Lake Mead elevation 1,064.16 ft per USBR Lower Colorado weekly hydrologic update April 6, 2026. Reservoir approximately "
+      },
+      {
+        "timestamp": "2026-04-20T14:03:51Z",
+        "evidence_index": 6,
+        "confirming_index": 8,
+        "resolution": "REFUTED",
+        "source": "USBR / USLakes",
+        "confirming_source": "US Bureau of Reclamation",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Lake Mead elevation at 1,064.16 ft in early April 2026, reservoir 34% full (~8.8 MAF). Reclamation projects year-end ele",
+        "confirming_text_snippet": "Lake Mead elevation 1,064.16 ft per USBR Lower Colorado weekly hydrologic update April 6, 2026. Reservoir approximately "
+      },
+      {
+        "timestamp": "2026-04-21T03:51:21Z",
+        "evidence_index": 4,
+        "confirming_index": 10,
+        "resolution": "REFUTED",
+        "source": "USBR / 8 News Now",
+        "confirming_source": "US Bureau of Reclamation",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Lake Mead at ~34% capacity. Upper Basin snowpack near lowest levels during 2000-present drought. Apr-Jul inflow to Powel",
+        "confirming_text_snippet": "USBR Apr 17, 2026 24-Month Study: Lake Mead projected at ~1,038 ft by end of June 2027 under most-probable scenario; wor"
       }
     ],
     "effectiveTrust": {
       "Coyote Gulch": 0.5,
-      "Fox5 Vegas": 0.4118,
-      "The Independent (": 0.468,
-      "USBR": 0.5,
-      "USBR Lower Colorado Weekly Hydrologic Update": 0.4118,
-      "8 News Now": 0.5
+      "Fox5 Vegas": 0.3289,
+      "The Independent (": 0.502,
+      "USBR": 0.4118,
+      "USBR Lower Colorado Weekly Hydrologic Update": 0.3289,
+      "8 News Now": 0.4555,
+      "USLakes": 0.4555,
+      "US Bureau of Reclamation": 0.5
     },
-    "_last_scan_same_source_skipped": 1
-  }
+    "_last_scan_same_source_skipped": 4
+  },
+  "conditionalPredictions": [
+    {
+      "id": "cp_001",
+      "createdAt": "2026-04-19T05:50:53+00:00",
+      "conditionTopic": "lake-mead-elevation-2027",
+      "conditionHypothesis": "H2",
+      "conditionProbAtCreation": 0.0682,
+      "prediction": "IF H2 (Mead 1,050-1,075 ft, Tier 1), THEN BOR announces continued Tier 1 shortage operations for 2028 water year",
+      "resolutionCriteria": "BOR official announcement specifies Tier 1 (not Tier 2) shortage declaration for water year 2028",
+      "deadline": "2027-12-31",
+      "conditionalProbability": 0.85,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-green",
+      "lens": "GREEN",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "NEUTRAL",
+          "reasoning": "BOR announces Tier 1 given Tier 1 elevation is a near-definitional institutional outcome.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "APPROVE",
+          "reasoning": "BOR Tier 1 continuation is institutional resolution within the existing framework.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "BOR tier declaration is clean.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "BOR Tier 1 continuation under H2 is mechanically required. OK.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "APPROVE",
+          "reasoning": "Names at least one specific decision-maker controlling the outcome; incentive is implicit but traceable.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": [
+        "GREEN",
+        "OCHRE"
+      ]
+    },
+    {
+      "id": "cp_002",
+      "createdAt": "2026-04-19T05:50:53+00:00",
+      "conditionTopic": "lake-mead-elevation-2027",
+      "conditionHypothesis": "H2",
+      "conditionProbAtCreation": 0.0682,
+      "prediction": "IF H2, THEN monthly average inflow to Lake Mead for 2027 exceeds 800,000 acre-feet",
+      "resolutionCriteria": "USGS/BOR monthly streamflow cumulates >800k acre-feet for Jan 1-Dec 31 2027",
+      "deadline": "2027-12-31",
+      "conditionalProbability": 0.68,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-green",
+      "lens": "GREEN",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "NEUTRAL",
+          "reasoning": "Inflow volume is physical and well-suited to smooth-trend estimation.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "NEUTRAL",
+          "reasoning": "Inflow volume is pure physical/hydrological.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Inflow 800k AF threshold is specific.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "DROP",
+          "reasoning": "800 kAF/mo inflow is a narrow hydrological assumption. RED: climate variance makes this a coin flip masked as 0.68.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "NEUTRAL",
+          "reasoning": "Pure hydrological/physical aggregate (precipitation, snowmelt, runoff, streamflow, aquifer). No named decision-maker controls the measured variable; VIOLET lens offers no actor-incentive leverage.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": [
+        "GREEN",
+        "OCHRE"
+      ]
+    },
+    {
+      "id": "cp_003",
+      "createdAt": "2026-04-19T05:50:53+00:00",
+      "conditionTopic": "lake-mead-elevation-2027",
+      "conditionHypothesis": "H2",
+      "conditionProbAtCreation": 0.0682,
+      "prediction": "IF H2, THEN Hoover Dam power generation capacity does not fall below 70% for >2 consecutive months in 2027",
+      "resolutionCriteria": "Monthly BOR reports show capacity utilization ≥70% for ≥10 of 12 months in 2027",
+      "deadline": "2027-12-31",
+      "conditionalProbability": 0.75,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-green",
+      "lens": "GREEN",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "NEUTRAL",
+          "reasoning": "Hoover capacity given elevation band is a near-mechanical relationship.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "APPROVE",
+          "reasoning": "Hoover capacity staying above threshold reflects operational management (institutional absorption).",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Hoover capacity 70% is clean.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "Hoover capacity >=70% for 10 of 12 months captures infrastructure brittleness threshold. Good.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "APPROVE",
+          "reasoning": "Names multiple specific decision-makers (agencies, officials, firms, states) and ties the outcome to their choices. Actor-incentive traceability strong.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": [
+        "GREEN",
+        "OCHRE"
+      ]
+    },
+    {
+      "id": "cp_004",
+      "createdAt": "2026-04-19T05:50:53+00:00",
+      "conditionTopic": "lake-mead-elevation-2027",
+      "conditionHypothesis": "H3",
+      "conditionProbAtCreation": 0.9121,
+      "prediction": "IF H3 (Mead 1,025-1,050 ft, Tier 2), THEN BOR announces Tier 2 shortage operations mandatory for 2028 water year",
+      "resolutionCriteria": "BOR official announcement specifies Tier 2 (or lower) shortage declaration for water year 2028",
+      "deadline": "2027-12-31",
+      "conditionalProbability": 0.89,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-green",
+      "lens": "GREEN",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": "Tier 2 declaration given Tier 2 elevation is the prescribed institutional regime change.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "APPROVE",
+          "reasoning": "Tier 2 declaration is institutional escalation within the existing framework; not breakdown.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "BOR Tier 2 declaration clean.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "Tier 2 declaration under Tier 2 elevations is mechanically enforced. OK with vetter's MODIFY.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "APPROVE",
+          "reasoning": "Names at least one specific decision-maker controlling the outcome; incentive is implicit but traceable.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": [
+        "GREEN",
+        "OCHRE"
+      ]
+    },
+    {
+      "id": "cp_005",
+      "createdAt": "2026-04-19T05:50:53+00:00",
+      "conditionTopic": "lake-mead-elevation-2027",
+      "conditionHypothesis": "H3",
+      "conditionProbAtCreation": 0.9121,
+      "prediction": "IF H3, THEN Arizona enforces mandatory agricultural water cuts (10-20% beyond 2026 baseline) for 2028",
+      "resolutionCriteria": "ADWR issues formal order reducing agricultural allocations 10-20% from Tier 1 baseline for water year 2028",
+      "deadline": "2027-12-31",
+      "conditionalProbability": 0.88,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-green",
+      "lens": "GREEN",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": "Mandatory ag cuts under Tier 2 capture the forced institutional discontinuity.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "APPROVE",
+          "reasoning": "ADWR formal order is institutional absorption of shortage.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "AZ mandatory cuts 10-20% specific.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "AZ 10-20% ag cuts under Tier 2 is the correct institutional fire response. Good.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "APPROVE",
+          "reasoning": "Names at least one specific decision-maker controlling the outcome; incentive is implicit but traceable.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": [
+        "GREEN",
+        "OCHRE"
+      ]
+    },
+    {
+      "id": "cp_006",
+      "createdAt": "2026-04-19T05:50:53+00:00",
+      "conditionTopic": "lake-mead-elevation-2027",
+      "conditionHypothesis": "H3",
+      "conditionProbAtCreation": 0.9121,
+      "prediction": "IF H3, THEN Lake Mead elevation falls below 1,040 feet at some point during 2027",
+      "resolutionCriteria": "USGS real-time records show elevation <1,040 ft on ≥1 day between Jan 1 and Aug 15, 2027",
+      "deadline": "2027-08-15",
+      "conditionalProbability": 0.79,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-green",
+      "lens": "GREEN",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "NEUTRAL",
+          "reasoning": "Sub-1040 ft elevation excursion is a physical threshold, smooth-trend consistent with H3 framing.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "NEUTRAL",
+          "reasoning": "Elevation below threshold is pure physical outcome.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Mead <1040 day specific.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "Mead <1,040 ft during 2027 under Tier 2 pathway. Mechanically consistent. OK.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "NEUTRAL",
+          "reasoning": "Reservoir elevation / dam generation read-out is a physical aggregate. VIOLET lens neutral: no single decision-maker controls the gauge reading.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": [
+        "GREEN",
+        "OCHRE"
+      ]
+    },
+    {
+      "id": "cp_007",
+      "createdAt": "2026-04-19T05:50:53+00:00",
+      "conditionTopic": "lake-mead-elevation-2027",
+      "conditionHypothesis": "H3",
+      "conditionProbAtCreation": 0.9121,
+      "prediction": "IF H3, THEN Nevada limits Lake Mead groundwater discharge permits for ≥1 municipal water district in southern Nevada",
+      "resolutionCriteria": "NDWR denies or significantly reduces (>15%) a groundwater discharge permit application from Clark County or nearby district",
+      "deadline": "2027-12-31",
+      "conditionalProbability": 0.71,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-green",
+      "lens": "GREEN",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": "Nevada groundwater-permit denial under Tier 2 is the institutional spillover capturing regime tightening.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "APPROVE",
+          "reasoning": "NDWR permit restriction is a regulatory absorption mechanism.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "NV groundwater permit denial is a sharp specific trigger.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "NV groundwater permit restriction under Tier 2 is a second-order institutional action. Good â€” captures cascading stress.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "APPROVE",
+          "reasoning": "Names multiple specific decision-makers (agencies, officials, firms, states) and ties the outcome to their choices. Actor-incentive traceability strong.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": [
+        "GREEN",
+        "OCHRE"
+      ]
+    },
+    {
+      "id": "cp_008",
+      "createdAt": "2026-04-19T05:50:56+00:00",
+      "conditionTopic": "lake-mead-elevation-2027",
+      "conditionHypothesis": "H2",
+      "conditionProbAtCreation": 0.0682,
+      "prediction": "IF H2 (Mead 1,050-1,075 ft, Tier 1), THEN Colorado River basin precipitation anomaly for WY2027 reaches +15% to +25% above 1981-2010 mean",
+      "resolutionCriteria": "NRCS/USGS basin-wide cumulative precipitation Oct 2026-Sep 2027 at +15% to +25% vs 30-year climatological mean",
+      "deadline": "2027-09-30",
+      "conditionalProbability": 0.58,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-ochre",
+      "lens": "OCHRE",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "NEUTRAL",
+          "reasoning": "Precipitation anomaly is a meteorological smooth-trend outcome; framing is physical not institutional.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "NEUTRAL",
+          "reasoning": "Precipitation anomaly is a pure physical outcome.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Precipitation band is clean.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "DROP",
+          "reasoning": "Precipitation anomaly +15-25% above mean to sustain Tier 1 is a straight climatological optimism bet. RED: SW drought regime is the base rate; this is wishful.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "NEUTRAL",
+          "reasoning": "Pure hydrological/physical aggregate (precipitation, snowmelt, runoff, streamflow, aquifer). No named decision-maker controls the measured variable; VIOLET lens offers no actor-incentive leverage.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": [
+        "OCHRE",
+        "GREEN"
+      ]
+    },
+    {
+      "id": "cp_009",
+      "createdAt": "2026-04-19T05:50:56+00:00",
+      "conditionTopic": "lake-mead-elevation-2027",
+      "conditionHypothesis": "H2",
+      "conditionProbAtCreation": 0.0682,
+      "prediction": "IF H2, THEN municipal water demand in Las Vegas metropolitan area does NOT exceed 2024 levels by more than 3% YoY in 2027",
+      "resolutionCriteria": "Southern Nevada Water Authority reports 2027 total water deliveries within 103% of 2024 total demand",
+      "deadline": "2027-12-31",
+      "conditionalProbability": 0.64,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-ochre",
+      "lens": "OCHRE",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "NEUTRAL",
+          "reasoning": "Las Vegas demand staying within 3% of baseline is consistent with SNWA conservation regime already in place.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "APPROVE",
+          "reasoning": "Municipal demand flat reflects SNWA's conservation-institution absorption of stress.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Las Vegas demand threshold clean.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "Las Vegas demand within 103% of 2024 is a reasonable institutional-restraint indicator given conservation regs. OK.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "APPROVE",
+          "reasoning": "Names multiple specific decision-makers (agencies, officials, firms, states) and ties the outcome to their choices. Actor-incentive traceability strong.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": [
+        "OCHRE",
+        "GREEN"
+      ]
+    },
+    {
+      "id": "cp_010",
+      "createdAt": "2026-04-19T05:50:56+00:00",
+      "conditionTopic": "lake-mead-elevation-2027",
+      "conditionHypothesis": "H3",
+      "conditionProbAtCreation": 0.9121,
+      "prediction": "IF H3 (Mead 1,025-1,050 ft, Tier 2), THEN Colorado River basin precipitation for WY2027 remains 5-15% below 1981-2010 mean",
+      "resolutionCriteria": "NRCS/USGS basin-wide precipitation Oct 2026-Sep 2027 at -5% to -15% vs climatological mean",
+      "deadline": "2027-09-30",
+      "conditionalProbability": 0.73,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-ochre",
+      "lens": "OCHRE",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "NEUTRAL",
+          "reasoning": "Precipitation band under Tier 2 elevation is a physical consistency claim.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "NEUTRAL",
+          "reasoning": "Precipitation anomaly is pure physical.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Precipitation -5 to -15% specific.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "Precip 5-15% below mean driving Tier 2 is hydrology-consistent and captures the drought-regime base case. Good.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "NEUTRAL",
+          "reasoning": "Pure hydrological/physical aggregate (precipitation, snowmelt, runoff, streamflow, aquifer). No named decision-maker controls the measured variable; VIOLET lens offers no actor-incentive leverage.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": [
+        "OCHRE",
+        "GREEN"
+      ]
+    },
+    {
+      "id": "cp_011",
+      "createdAt": "2026-04-19T05:50:56+00:00",
+      "conditionTopic": "lake-mead-elevation-2027",
+      "conditionHypothesis": "H3",
+      "conditionProbAtCreation": 0.9121,
+      "prediction": "IF H3, THEN agricultural water allocations show structural demand consolidation: >10% reduction in active water rights holders in AZ+NV+CA tri-state region by Dec 2027",
+      "resolutionCriteria": "Agricultural census or ADWR data shows >10% reduction in number of active agricultural water rights holders in tri-state region by Dec 2027",
+      "deadline": "2027-12-31",
+      "conditionalProbability": 0.69,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-ochre",
+      "lens": "OCHRE",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": ">10% reduction in active water-rights holders is structural consolidation, a regime-shift outcome.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "APPROVE",
+          "reasoning": "Consolidation of water-rights holders via markets/retirement is absorption through water-market mechanisms.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Water-rights-holder reduction is a sharp structural test.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "10%+ ag water-rights holder consolidation is a structural-loss indicator. Strong.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "APPROVE",
+          "reasoning": "Names at least one specific decision-maker controlling the outcome; incentive is implicit but traceable.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": [
+        "OCHRE",
+        "GREEN"
+      ]
+    },
+    {
+      "id": "cp_012",
+      "createdAt": "2026-04-19T05:50:56+00:00",
+      "conditionTopic": "lake-mead-elevation-2027",
+      "conditionHypothesis": "H3",
+      "conditionProbAtCreation": 0.9121,
+      "prediction": "IF H3, THEN pumping depth in western Arizona groundwater basins increases 50-150 feet as farmers respond to surface allocation cuts",
+      "resolutionCriteria": "USGS water level monitoring wells in Harquahala and Avra basins show average drawdown increase of 50+ feet between Jan 2027 and Dec 2027",
+      "deadline": "2027-12-31",
+      "conditionalProbability": 0.76,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-ochre",
+      "lens": "OCHRE",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": "50-150 ft groundwater drawdown captures aquifer-regime cascade from surface cuts.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "NEUTRAL",
+          "reasoning": "Pumping depth is pure physical hydrological response.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Pumping depth 50-150 ft is measurable.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "Groundwater drawdown 50-150 ft in western AZ basins captures the exact compensatory-pumping failure mode missed in 266. Good.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "NEUTRAL",
+          "reasoning": "Pure hydrological/physical aggregate (precipitation, snowmelt, runoff, streamflow, aquifer). No named decision-maker controls the measured variable; VIOLET lens offers no actor-incentive leverage.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": [
+        "OCHRE",
+        "GREEN"
+      ]
+    },
+    {
+      "id": "cp_013",
+      "createdAt": "2026-04-19T05:50:56+00:00",
+      "conditionTopic": "lake-mead-elevation-2027",
+      "conditionHypothesis": "H3",
+      "conditionProbAtCreation": 0.9121,
+      "prediction": "IF H3, THEN California reduces Colorado River intake below 4.4 MAF QSA baseline to comply with Tier 2 apportionment",
+      "resolutionCriteria": "CDWR official accounting shows 2027 annual Colorado River diversions <4.3 MAF; structural compliance documented in USBR annual report",
+      "deadline": "2027-12-31",
+      "conditionalProbability": 0.81,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-ochre",
+      "lens": "OCHRE",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": "California dipping below 4.4 MAF QSA is a long-sacrosanct threshold crossing; captures legal-regime break.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "APPROVE",
+          "reasoning": "CA compliance with QSA/Tier 2 is California institutional absorption of shortage through its existing water-rights hierarchy; textbook BLUE outcome.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "CA <4.3 MAF diversion is clean.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "CA cutting below 4.4 MAF QSA baseline under Tier 2 is the mandatory-compliance fire. Good.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "APPROVE",
+          "reasoning": "Names multiple specific decision-makers (agencies, officials, firms, states) and ties the outcome to their choices. Actor-incentive traceability strong.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": [
+        "OCHRE",
+        "GREEN"
+      ]
+    },
+    {
+      "id": "cp_014",
+      "createdAt": "2026-04-22T02:35:33+00:00",
+      "conditionTopic": "lake-mead-elevation-2027",
+      "conditionHypothesis": "H1",
+      "conditionProbAtCreation": 0.06,
+      "prediction": "IF recovery above 1,075 ft (exits Tier 1), THEN Colorado River basin precipitation WY2027 reaches +35% to +50% above 30-year mean",
+      "resolutionCriteria": "Observable: NRCS/USGS reports Oct 2026-Sep 2027 basin precipitation +35% to +50% vs 1981-2010 climatological mean",
+      "deadline": "2027-10-01",
+      "conditionalProbability": 0.58,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "lake-mead",
+        "precipitation",
+        "water-surplus"
+      ],
+      "source": "agent-green",
+      "lens": "GREEN",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "DROP",
+          "reasoning": "+35% to +50% basin precipitation is an extreme hydrological event; pairing it as the unique driver of recovery above 1,075 ft ignores management actions (demand cuts, ICS releases). 0.58 overstates the conditional given climate trend toward aridification.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "APPROVE",
+          "reasoning": "Wet-year precipitation reaching +35-50% above mean is a natural recovery. BLUE-neutral.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "MODIFY",
+          "reasoning": "+35-50% precipitation is extreme; narrow band misses that recovery above 1,075 could happen at +20-35% with demand cuts. Probability 0.58 reasonable but RED view: megadrought structural — recovery scenario much less likely.",
+          "modified_suggestion": "Lower probability to 0.35."
+        },
+        "VIOLET": {
+          "verdict": "NEUTRAL",
+          "reasoning": "Precipitation observable.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Precipitation anomaly is directly measurable; 0.58 prob reflects low base rate correctly.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_015",
+      "createdAt": "2026-04-22T02:35:33+00:00",
+      "conditionTopic": "lake-mead-elevation-2027",
+      "conditionHypothesis": "H3",
+      "conditionProbAtCreation": 0.48,
+      "prediction": "IF Tier 2 range holds, THEN Arizona water agencies implement mandatory fallowing program reducing agricultural acreage 50-100 kAC in Pinal/Maricopa counties for 2028",
+      "resolutionCriteria": "Observable: ADWR or CAP announces mandatory fallowing program; documented acreage reduction >=50 kAC executed in 2028",
+      "deadline": "2028-06-30",
+      "conditionalProbability": 0.79,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "water-allocation",
+        "agricultural-impacts",
+        "tier-2"
+      ],
+      "source": "agent-green",
+      "lens": "GREEN",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": "Mandatory fallowing program is a discrete institutional regime-shift signal.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "APPROVE",
+          "reasoning": "Mandatory fallowing under Tier 2 is institutional mechanism working. BLUE-compatible.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "Mandatory fallowing under Tier 2 is RED-aligned structural consequence.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "APPROVE",
+          "reasoning": "ADWR/CAP decisions are named-actor-driven.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Fallowing acreage is a strong structural observable.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_016",
+      "createdAt": "2026-04-22T02:35:35+00:00",
+      "conditionTopic": "lake-mead-elevation-2027",
+      "conditionHypothesis": "H2",
+      "conditionProbAtCreation": 0.29,
+      "prediction": "IF H2 (Mead 1,050-1,075 ft, Tier 1 maintained), THEN basin-wide users consolidate adaptation infrastructure: groundwater-banking deposits, CAP-water purchase agreements, and agricultural-fallowing contracts lock in by end 2027 at >400 kAF annually. These institutional structures become sticky; even if Mead rebounds >1,075 ft in 2028, reverse-adaptation requires legislative action and faces entrenched stakeholder resistance. Structural dependency on groundwater persists.",
+      "resolutionCriteria": "Observable: (1) ADWR, CAP, and other water authorities report 2027 cumulative: groundwater banking ≥200 kAF, CAP transfers/purchases ≥100 kAF, ag fallowing contracts ≥100 kAF. (2) These contracts are multi-year (2027-2030 commitments). (3) If Mead rebounds in 2028, formal review/sunsetting of adaptation contracts shows <30% voluntary early termination despite improved surface water.",
+      "deadline": "2028-12-31",
+      "conditionalProbability": 0.71,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "institutional-lock-in",
+        "groundwater-substitution",
+        "reverse-adaptation-friction"
+      ],
+      "source": "agent-ochre",
+      "lens": "OCHRE",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": "Reverse-adaptation friction / groundwater-substitution lock-in is an excellent AMBER-style institutional path-dependence prediction.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "APPROVE",
+          "reasoning": "Adaptation contract stickiness is institutional lock-in BLUE recognizes. Reasonable.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "Groundwater-substitution institutional lock-in is sharp RED insight.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "APPROVE",
+          "reasoning": "ADWR/CAP institutional decisions named-actor-driven.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Contract-stickiness test (<30% voluntary early termination) is a well-formed reverse-adaptation observable.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_017",
+      "createdAt": "2026-04-22T02:35:35+00:00",
+      "conditionTopic": "lake-mead-elevation-2027",
+      "conditionHypothesis": "H3",
+      "conditionProbAtCreation": 0.48,
+      "prediction": "IF H3 (Mead 1,025-1,050 ft, Tier 2), THEN agricultural transition becomes structural collapse: fallowing rates accelerate to 150-200 kAC by 2027-2028 in Pinal/Maricopa counties. Forced divestment of marginal farms (sub-50 acre operations) increases 40-60% by end 2028. Farmland value in affected counties declines 15-25% below 2024 baseline as capitalization of permanent water-scarcity expectations shifts property prices.",
+      "resolutionCriteria": "Observable: (1) USDA FSA/satellite data shows 2028 irrigated acreage ≤-150 kAC vs 2024 baseline in Pinal/Maricopa. (2) Farm census or county tax assessor data shows farm-unit count declines 40-60% in affected region by 2028. (3) Agricultural land value per acre (county assessor records) declines 15-25% vs 2024 in same region.",
+      "deadline": "2028-12-31",
+      "conditionalProbability": 0.69,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "structural-transition",
+        "asset-capitalization",
+        "rural-collapse"
+      ],
+      "source": "agent-ochre",
+      "lens": "OCHRE",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": "Agricultural structural collapse with land-value capitalization is a clear regime-transition observable.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "MODIFY",
+          "reasoning": "15-25% farmland value decline assumes stuck-state with no institutional buffer. BLUE expects water markets, state purchase programs, and crop-switching (low-water crops) to partially clear. 0.69 too high.",
+          "modified_suggestion": "Lower to 0.50; consider water-market transactions softening price declines."
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "Structural agricultural collapse under Tier 2 is core RED-aligned outcome.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "NEUTRAL",
+          "reasoning": "Agricultural/asset-price observable.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Farmland value + acreage + farm-count triangulation is robust.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_018",
+      "createdAt": "2026-04-22T04:18:42+00:00",
+      "conditionTopic": "lake-mead-elevation-2027",
+      "conditionHypothesis": "H4",
+      "conditionProbAtCreation": 0.17,
+      "prediction": "IF severe decline below 1025 ft holds, THEN >=1 state formally petitions federal water-rights modification outside Colorado Compact framework by 2027-12-31.",
+      "resolutionCriteria": "Formal petition or legislation from state government requesting federal intervention to modify Colorado Compact allocation terms.",
+      "deadline": "2027-12-31",
+      "conditionalProbability": 0.31,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "regime-shift",
+        "legal-framework-failure",
+        "water-governance-collapse"
+      ],
+      "source": "agent-amber",
+      "lens": "AMBER",
+      "criticVerdicts": {},
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_019",
+      "createdAt": "2026-04-22T04:18:43+00:00",
+      "conditionTopic": "lake-mead-elevation-2027",
+      "conditionHypothesis": "H4",
+      "conditionProbAtCreation": 0.17,
+      "prediction": "IF elevation drops below 1025 feet by end 2027, THEN USGS records elevation at or below 1025 feet as of 2027-12-31 with Bureau of Reclamation citing inflow assumption failures.",
+      "resolutionCriteria": "USGS/Bureau of Reclamation publishes official Lake Mead elevation measurement at or below 1025 feet as of 2027-12-31. NOAA or USBR hydro forecast cites inflow assumptions exceeded downside scenarios.",
+      "deadline": "2028-01-15",
+      "conditionalProbability": 0.2,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "water_shortage",
+        "Lake_Mead",
+        "drought_persistence"
+      ],
+      "source": "agent-violet",
+      "lens": "VIOLET",
+      "criticVerdicts": {},
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_020",
+      "createdAt": "2026-04-22T05:19:35+00:00",
+      "conditionTopic": "lake-mead-elevation-2027",
+      "conditionHypothesis": "H1",
+      "conditionProbAtCreation": 0.06,
+      "prediction": "IF Lake Mead recovers above 1,075 ft by end-2027 (H1: exits Tier 1), THEN policy attention shifts from emergency management to long-term sustainability, with Interior Department and at least 3 state water agencies publishing multi-decadal climate-adaptation frameworks explicitly referencing post-shortage planning by Q1 2028.",
+      "resolutionCriteria": "Tier 1 emergency measures formally expire; Interior Department and at least 3 state water agencies publish sustainability/long-term framework documents by Q1 2028 that explicitly reference post-shortage planning; federal appropriations for ecosystem restoration increase more than 25% YoY.",
+      "deadline": "2028-03-31",
+      "conditionalProbability": 0.48,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "policy-regime-flip",
+        "narrative-transformation",
+        "governance-mode-shift"
+      ],
+      "source": "agent-amber",
+      "lens": "AMBER",
+      "criticVerdicts": [
+        {
+          "critic": "GREEN",
+          "verdict": "APPROVE",
+          "reasoning": "Lake Mead recovery driving policy attention from emergency to sustainability is textbook mean-reversion. 48% appropriately modest.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "RED",
+          "verdict": "MODIFY",
+          "reasoning": "Recovery above tier threshold triggers political pressure to relax restrictions, not invest in long-term frameworks. Water management institutions have repeatedly failed to institutionalize lessons from shortage periods once immediate pressure abates. 0.48 already cautious but appropriations criterion requires budget action in hostile environment.",
+          "modified_suggestion": "Lower to 0.33. Reframe: recovery triggers rollback of conservation investments, not enhancement. Add: policy attention shift must be confirmed by actual appropriations bills passed, not merely agency publications."
+        },
+        {
+          "critic": "VIOLET",
+          "verdict": "MODIFY",
+          "reasoning": "Recovery triggers political urgency reduction — bureaucratic actors after crisis passes are incentivized to declare victory and deprioritize long-term planning. Trump Interior Department has specifically rolled back Biden-era water sustainability frameworks.",
+          "modified_suggestion": "Lower to 0.34. Named actor constraint: Trump Interior Department has demonstrated preference for deregulation, not multi-decadal federal climate-adaptation frameworks."
+        },
+        {
+          "critic": "OCHRE",
+          "verdict": "MODIFY",
+          "reasoning": "Interior Department sustainability frameworks and state agency publications will materialize regardless of recovery (bureaucratically mandated by IRA and NRCS programs). 25% ecosystem restoration appropriations increase is the only meaningful distinguishing bar and may not follow from Lake Mead recovery alone.",
+          "modified_suggestion": "Reduce to 0.38. Publication criterion is nearly certain regardless of H1 — it is bureaucratically mandated. Meaningful resolution is the 25% appropriations increase, which requires legislative action that post-crisis complacency disfavors."
+        },
+        {
+          "critic": "GRAY",
+          "verdict": "MODIFY",
+          "reasoning": "Resolution criteria (Interior + 3 state agencies publishing frameworks) describes normal bureaucratic activity that would occur regardless of Lake Mead elevation. 25% YoY ecosystem restoration appropriations increase is the only meaningful distinguishing bar.",
+          "modified_suggestion": "Sharpen: require Interior Department formally lifts Tier 1 shortage designation AND at least 2 state legislatures pass updated water-use statutes explicitly referencing post-shortage conditions by Q3 2028."
+        }
+      ],
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_021",
+      "createdAt": "2026-04-22T05:19:58+00:00",
+      "conditionTopic": "lake-mead-elevation-2027",
+      "conditionHypothesis": "H1",
+      "conditionProbAtCreation": 0.06,
+      "prediction": "IF Lake Mead recovers above 1,075 ft by end-2027 (H1: exits Tier 1), THEN policy attention shifts from emergency management to long-term sustainability, with Interior Department and at least 3 state water agencies publishing multi-decadal climate-adaptation frameworks explicitly referencing post-shortage planning by Q1 2028.",
+      "resolutionCriteria": "Tier 1 emergency measures formally expire; Interior Department and at least 3 state water agencies publish sustainability/long-term framework documents by Q1 2028 that explicitly reference post-shortage planning; federal appropriations for ecosystem restoration increase more than 25% YoY.",
+      "deadline": "2028-03-31",
+      "conditionalProbability": 0.48,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "policy-regime-flip",
+        "narrative-transformation",
+        "governance-mode-shift"
+      ],
+      "source": "agent-amber",
+      "lens": "AMBER",
+      "criticVerdicts": [
+        {
+          "critic": "GREEN",
+          "verdict": "APPROVE",
+          "reasoning": "Lake Mead recovery driving policy attention from emergency to sustainability is textbook mean-reversion. 48% appropriately modest.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "RED",
+          "verdict": "MODIFY",
+          "reasoning": "Recovery above tier threshold triggers political pressure to relax restrictions, not invest in long-term frameworks. Water management institutions have repeatedly failed to institutionalize lessons from shortage periods once immediate pressure abates. 0.48 already cautious but appropriations criterion requires budget action in hostile environment.",
+          "modified_suggestion": "Lower to 0.33. Reframe: recovery triggers rollback of conservation investments, not enhancement. Add: policy attention shift must be confirmed by actual appropriations bills passed, not merely agency publications."
+        },
+        {
+          "critic": "VIOLET",
+          "verdict": "MODIFY",
+          "reasoning": "Recovery triggers political urgency reduction — bureaucratic actors after crisis passes are incentivized to declare victory and deprioritize long-term planning. Trump Interior Department has specifically rolled back Biden-era water sustainability frameworks.",
+          "modified_suggestion": "Lower to 0.34. Named actor constraint: Trump Interior Department has demonstrated preference for deregulation, not multi-decadal federal climate-adaptation frameworks."
+        },
+        {
+          "critic": "OCHRE",
+          "verdict": "MODIFY",
+          "reasoning": "Interior Department sustainability frameworks and state agency publications will materialize regardless of recovery (bureaucratically mandated by IRA and NRCS programs). 25% ecosystem restoration appropriations increase is the only meaningful distinguishing bar and may not follow from Lake Mead recovery alone.",
+          "modified_suggestion": "Reduce to 0.38. Publication criterion is nearly certain regardless of H1 — it is bureaucratically mandated. Meaningful resolution is the 25% appropriations increase, which requires legislative action that post-crisis complacency disfavors."
+        },
+        {
+          "critic": "GRAY",
+          "verdict": "MODIFY",
+          "reasoning": "Resolution criteria (Interior + 3 state agencies publishing frameworks) describes normal bureaucratic activity that would occur regardless of Lake Mead elevation. 25% YoY ecosystem restoration appropriations increase is the only meaningful distinguishing bar.",
+          "modified_suggestion": "Sharpen: require Interior Department formally lifts Tier 1 shortage designation AND at least 2 state legislatures pass updated water-use statutes explicitly referencing post-shortage conditions by Q3 2028."
+        }
+      ],
+      "lensAgreement": []
+    }
+  ],
+  "schemaVersion": 2,
+  "migratedAt": "2026-04-21T19:03:41+00:00"
 }

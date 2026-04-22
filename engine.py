@@ -64,6 +64,7 @@ def load_topic(slug: str) -> dict:
     with open(path, "r", encoding="utf-8") as f:
         topic = json.load(f)
     validate_topic(topic)
+    _eliminate_expired_hypotheses(topic)
     return topic
 
 
@@ -369,6 +370,41 @@ def create_topic(config: dict) -> dict:
     # Overlay config onto template
     _deep_merge(topic, config)
 
+    # Map top-level convenience keys into their canonical nested locations.
+    # Skill callers use a flat config dict; template uses nested structure.
+    for _k in ("slug", "title", "question", "resolution", "classification",
+               "status", "startDate", "created"):
+        if _k in config:
+            # Always override: template placeholders ("CHANGE-ME", "") must not
+            # block a caller-supplied value from landing in meta.
+            topic.setdefault("meta", {})[_k] = config[_k]
+    # hypotheses and indicators live in model.hypotheses / topic.indicators
+    if "hypotheses" in config and not isinstance(config["hypotheses"], dict):
+        pass  # malformed — skip
+    elif "hypotheses" in config:
+        # Build hypotheses with posterior from prior (skill callers use "prior")
+        merged = {}
+        for hk, hv in config["hypotheses"].items():
+            h = dict(hv)
+            if "posterior" not in h and "prior" in h:
+                h["posterior"] = h.pop("prior")
+            merged[hk] = h
+        topic.setdefault("model", {})["hypotheses"] = merged
+    if "indicators" in config:
+        cfg_inds = config["indicators"]
+        # Skill callers pass flat {tier1_critical: [...], anti_indicators: [...]}.
+        # Engine expects {tiers: {tier1_critical: [...]}, anti_indicators: [...]}.
+        # If "tiers" key already present, assume nested structure and pass through.
+        if isinstance(cfg_inds, dict) and "tiers" in cfg_inds:
+            topic["indicators"] = cfg_inds
+        elif isinstance(cfg_inds, dict):
+            tier_keys = ("tier1_critical", "tier2_strong", "tier3_suggestive")
+            tiers = {tk: cfg_inds.get(tk, []) for tk in tier_keys}
+            topic["indicators"] = {
+                "tiers": tiers,
+                "anti_indicators": cfg_inds.get("anti_indicators", []),
+            }
+
     # Set defaults
     now = _now_iso()
     topic.setdefault("meta", {})
@@ -417,6 +453,20 @@ def create_topic(config: dict) -> dict:
             })
 
     save_topic(topic)
+
+    # Auto-stamp resolution_deadline on any time-bounded hypotheses that don't have one.
+    # stamp_topic loads/saves the on-disk JSON, so reload to bring deadlines back
+    # into the returned in-memory topic.
+    try:
+        from framework.stamp_deadlines import stamp_topic
+        slug = topic["meta"].get("slug", "")
+        if slug:
+            stamp_result = stamp_topic(slug, dry_run=False)
+            if stamp_result.get("stamped"):
+                topic = load_topic(slug)
+    except ImportError:
+        pass  # framework not available — operator must stamp manually
+
     return topic
 
 
@@ -456,6 +506,132 @@ def scaffold_topic(slug: str) -> str:
 
 
 # ---------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
+# Hypothesis deadline elimination
+# ---------------------------------------------------------------------------
+
+def _eliminate_expired_hypotheses(topic: dict) -> list[str]:
+    """
+    Check each hypothesis for a `resolution_deadline` field. If now is past
+    the deadline, floor the hypothesis to 0.005 and redistribute its mass
+    proportionally to non-expired survivors — in a single batched pass.
+
+    Returns list of eliminated hypothesis keys (empty if none expired).
+
+    Rules:
+    - Hypotheses with no `resolution_deadline` field are never eliminated.
+    - All expired hypotheses are batched before any redistribution.
+    - If ALL hypotheses are expired, raises GovernanceError (topic design
+      failure — operator must intervene).
+    - Writes one DECISION-ledger evidence entry per batch (not per hypothesis).
+    - Does nothing if topic status is RESOLVED.
+    """
+    topic_status = topic.get("meta", {}).get("status", "ACTIVE")
+    if topic_status == "RESOLVED":
+        return []
+
+    hypotheses = topic["model"]["hypotheses"]
+    now_str = _now_iso()[:10]  # YYYY-MM-DD
+
+    # Batch: find all hypotheses past their deadline and not already floored
+    expired = []
+    for k, h in hypotheses.items():
+        deadline = h.get("resolution_deadline")
+        if deadline is None:
+            continue
+        if now_str > deadline[:10] and h["posterior"] > 0.005:
+            expired.append(k)
+
+    if not expired:
+        return []
+
+    # All-expired guard
+    survivors = [k for k in hypotheses if k not in expired
+                 and hypotheses[k].get("resolution_deadline") is None
+                 or k not in expired
+                 and hypotheses[k].get("resolution_deadline", "9999") >= now_str]
+    # Recompute cleanly
+    survivors = [
+        k for k in hypotheses
+        if k not in expired and (
+            hypotheses[k].get("resolution_deadline") is None
+            or hypotheses[k]["resolution_deadline"][:10] >= now_str
+        )
+    ]
+    if not survivors:
+        _add_evidence_raw(topic, {
+            "time": _now_iso(),
+            "tag": "INTEL",
+            "text": (f"DEADLINE ELIMINATION HALTED: all hypotheses "
+                     f"({', '.join(hypotheses.keys())}) are past their "
+                     f"resolution_deadline. Topic requires operator review."),
+            "provenance": "DERIVED",
+            "posteriorImpact": "NONE",
+            "ledger": "DECISION",
+            "claimState": "PROPOSED",
+            "effectiveWeight": 1.0,
+        })
+        raise GovernanceError(
+            "All hypotheses are past their resolution_deadline — topic design "
+            "failure. Operator must manually resolve or extend deadlines.",
+            failures=["all_hypotheses_expired"],
+            warnings=[],
+        )
+
+    # Collect mass to redistribute
+    freed_mass = sum(h["posterior"] - 0.005 for k, h in hypotheses.items()
+                     if k in expired)
+    survivor_total = sum(hypotheses[k]["posterior"] for k in survivors)
+
+    # Floor expired hypotheses
+    for k in expired:
+        hypotheses[k]["posterior"] = 0.005
+
+    # Redistribute proportionally to survivors
+    if survivor_total > 0:
+        for k in survivors:
+            share = hypotheses[k]["posterior"] / survivor_total
+            hypotheses[k]["posterior"] = round(
+                hypotheses[k]["posterior"] + freed_mass * share, 4
+            )
+
+    # Renormalize to exactly 1.0
+    total = sum(h["posterior"] for h in hypotheses.values())
+    for k in hypotheses:
+        hypotheses[k]["posterior"] = round(hypotheses[k]["posterior"] / total, 4)
+
+    # Audit entry
+    _add_evidence_raw(topic, {
+        "time": _now_iso(),
+        "tag": "INTEL",
+        "text": (f"DEADLINE ELIMINATION: hypothesis "
+                 f"{', '.join(expired)} past resolution_deadline "
+                 f"({', '.join(hypotheses[k].get('resolution_deadline','?') for k in expired)}). "
+                 f"Mass redistributed to {', '.join(survivors)}."),
+        "provenance": "DERIVED",
+        "posteriorImpact": "NONE",
+        "ledger": "DECISION",
+        "claimState": "SUPPORTED",
+        "effectiveWeight": 1.0,
+    })
+
+    # Append to posteriorHistory with dedicated updateMethod
+    hist = topic["model"].setdefault("posteriorHistory", [])
+    priors = extract_posteriors(hist[-1], list(hypotheses.keys())) if hist else {}
+    hist.append({
+        "date": _now_iso()[:10],
+        "posteriors": {k: h["posterior"] for k, h in hypotheses.items()},
+        "priors": priors,
+        "updateMethod": "deadline_elimination",
+        "evidenceRefs": [],
+        "eliminatedHypotheses": expired,
+        "note": (f"Auto-eliminated {', '.join(expired)} — past resolution_deadline."),
+    })
+
+    return expired
+
+
+# ---------------------------------------------------------------------------
 # Bayesian Updates
 # ---------------------------------------------------------------------------
 
@@ -473,6 +649,9 @@ def update_posteriors(topic: dict, new_posteriors: dict[str, float],
     Warnings are logged to the evidence log but the update proceeds.
     """
     hypotheses = topic["model"]["hypotheses"]
+
+    # Eliminate any hypotheses past their resolution_deadline before applying update
+    _eliminate_expired_hypotheses(topic)
 
     # Validate all keys exist
     for k in new_posteriors:
@@ -624,126 +803,154 @@ def _resolve_evidence_weight(topic: dict, evidence_refs: list[str]) -> tuple[flo
     return round(sum(weights) / len(weights), 4), detail
 
 
-def bayesian_update(topic: dict, likelihoods: dict[str, float],
-                    reason: str, evidence_refs: list[str],
-                    operator_posteriors: dict[str, float] = None) -> dict:
+def _bayes_pass(hypotheses: dict, adjusted_lrs: dict,
+                eliminated_keys: set, active_keys: list) -> dict:
+    """Single Bayes pass. Returns normalized posteriors dict."""
+    if not eliminated_keys:
+        unnorm = {k: h["posterior"] * adjusted_lrs[k] for k, h in hypotheses.items()}
+    else:
+        active_budget = 1.0 - 0.005 * len(eliminated_keys)
+        active_prior_sum = sum(hypotheses[k]["posterior"] for k in active_keys)
+        unnorm = {k: 0.005 for k in eliminated_keys}
+        if active_prior_sum > 0:
+            active_unnorm = {
+                k: (hypotheses[k]["posterior"] / active_prior_sum) * adjusted_lrs[k]
+                for k in active_keys
+            }
+            at = sum(active_unnorm.values())
+            for k in active_keys:
+                unnorm[k] = (active_unnorm[k] / at * active_budget) if at > 0 else active_budget / len(active_keys)
+        else:
+            for k in active_keys:
+                unnorm[k] = active_budget / len(active_keys)
+    total = sum(unnorm.values())
+    if total == 0:
+        raise ValueError("All unnormalized posteriors are zero")
+    return {k: round(v / total, 4) for k, v in unnorm.items()}
+
+
+def _normalize_lrs(lr_dict: dict) -> dict:
+    """Normalize a likelihoods dict so max=1.0."""
+    mx = max(lr_dict.values())
+    return {k: round(v / mx, 6) for k, v in lr_dict.items()} if mx > 0 else lr_dict
+
+
+def _attenuate_lrs(lrs: dict, weight: float) -> dict:
+    """Apply mixture-model attenuation: w*LR + (1-w)*noise."""
+    if weight >= 1.0:
+        return dict(lrs)
+    noise = sum(lrs.values()) / len(lrs)
+    return {k: round(weight * v + (1.0 - weight) * noise, 6) for k, v in lrs.items()}
+
+
+def _geo_mean_posteriors(p_lo: dict, p_hi: dict) -> dict:
+    """Post-Bayes geometric mean, renormalized to sum=1."""
+    import math as _math
+    raw = {k: _math.sqrt(p_lo[k] * p_hi[k]) for k in p_lo}
+    total = sum(raw.values())
+    return {k: round(v / total, 4) for k, v in raw.items()} if total > 0 else p_lo
+
+
+def bayesian_update(topic: dict, likelihoods: dict[str, float] = None,
+                    reason: str = "", evidence_refs: list[str] = None,
+                    operator_posteriors: dict[str, float] = None,
+                    lr_range: dict = None,
+                    lr_confidence: str = "MEDIUM") -> dict:
     """
     Mechanistic Bayesian posterior update from explicit likelihood ratios.
 
-    Unlike update_posteriors() (which accepts operator-supplied posteriors
-    directly), this function computes posteriors via Bayes' theorem:
+    Accepts either:
+      likelihoods: point LR dict {H1: float, ...} — single pass
+      lr_range: interval LR dict {H1: [lo, hi], ...} — dual pass, post-Bayes
+                geometric mean stored as point estimate
 
-        P(H_i|E) = P(E|H_i) * P(H_i) / sum_j( P(E|H_j) * P(H_j) )
-
-    likelihoods: {H1: P(E|H1), H2: P(E|H2), ...} — the probability of
-        the observed evidence under each hypothesis. Values in (0, 1].
-    reason: why the update happened.
-    evidence_refs: list of evidence log timestamps supporting this update.
-        Required (not optional) — mechanistic updates must cite evidence.
-    operator_posteriors: optional. If supplied, the function computes KL
-        divergence between the mechanically derived posteriors and the
-        operator's intuition. Divergence > 0.05 nats logs a governance
-        note. The mechanical posteriors are always the ones applied.
-
-    Returns the mutated topic (same pattern as update_posteriors).
-    Raises GovernanceError if governor pre-commit checks fail.
+    When lr_range is supplied the history entry gains posteriorRangeLo,
+    posteriorRangeHi, sensitivityFlag, and dominantHypothesisStable.
     """
     import math as _math
 
+    if likelihoods is None and lr_range is None:
+        raise ValueError("Either likelihoods or lr_range must be supplied.")
+
     hypotheses = topic["model"]["hypotheses"]
+    h_keys = list(hypotheses.keys())
 
-    # Validate: all hypothesis keys must be present
-    for k in hypotheses:
-        if k not in likelihoods:
-            raise ValueError(
-                f"Missing likelihood for hypothesis {k}. "
-                "All hypotheses must have a likelihood value."
-            )
+    # Resolve evidence weight (shared across all passes)
+    evidence_weight, weight_detail = _resolve_evidence_weight(topic, evidence_refs or [])
+    if evidence_weight < 0.3:
+        _add_evidence_raw(topic, {
+            "time": _now_iso(), "tag": "INTEL",
+            "text": (f"WEIGHT ATTENUATION: likelihoods attenuated to "
+                     f"{evidence_weight:.0%} via mixture model ({weight_detail})"),
+            "provenance": "DERIVED", "posteriorImpact": "NONE",
+            "ledger": "DECISION", "claimState": "PROPOSED", "effectiveWeight": 0.5,
+        })
 
-    # Validate: likelihoods must be positive
-    for k, l in likelihoods.items():
-        if k not in hypotheses:
-            raise ValueError(f"Unknown hypothesis: {k}")
-        if l <= 0 or l > 1:
-            raise ValueError(
-                f"Likelihood for {k} is {l} — must be in (0, 1]"
-            )
+    # Eliminated hypotheses (deadline enforcement — shared)
+    now_str = _now_iso()[:10]
+    eliminated_keys = {
+        k for k, h in hypotheses.items()
+        if h.get("resolution_deadline") is not None
+        and h["resolution_deadline"][:10] < now_str
+    }
+    active_keys = [k for k in hypotheses if k not in eliminated_keys]
 
-    # --- Mixture model attenuation ---
-    # Resolve evidence_refs to their effectiveWeights and attenuate likelihoods
-    # using a proper probabilistic mixture model:
-    #
-    #   P(E|H_i) = w * P(E|H_i, real) + (1-w) * P(E|noise)
-    #
-    # where P(E|noise) = mean of raw likelihoods (uninformative — same for all H,
-    # so it contributes zero posterior movement after normalization).
-    #
-    # This is coherent: it models "with probability w, the evidence is genuine;
-    # otherwise it's noise." Unlike linear interpolation toward 1.0, this
-    # preserves likelihood direction at all weight levels.
-    evidence_weight, weight_detail = _resolve_evidence_weight(topic, evidence_refs)
+    # --- Single-pass path (point likelihoods) ---
+    if lr_range is None:
+        for k in h_keys:
+            if k not in likelihoods:
+                raise ValueError(f"Missing likelihood for hypothesis {k}.")
+        adj = _attenuate_lrs(likelihoods, evidence_weight)
+        computed = _bayes_pass(hypotheses, adj, eliminated_keys, active_keys)
+        computed_lo = computed_hi = None
+        dominant_stable = True
+        sensitivity_flag = False
 
-    if evidence_weight < 1.0:
-        # P(E|noise) = mean likelihood (uniform across hypotheses → no update)
-        noise_likelihood = sum(likelihoods.values()) / len(likelihoods)
-
-        adjusted_likelihoods = {}
-        for k, raw_l in likelihoods.items():
-            adjusted_likelihoods[k] = round(
-                evidence_weight * raw_l + (1.0 - evidence_weight) * noise_likelihood,
-                6,
-            )
-
-        if evidence_weight < 0.3:
-            _add_evidence_raw(topic, {
-                "time": _now_iso(),
-                "tag": "INTEL",
-                "text": (f"WEIGHT ATTENUATION: bayesian_update likelihoods attenuated "
-                         f"to {evidence_weight:.0%} strength via mixture model — "
-                         f"evidence refs have low effectiveWeight ({weight_detail})"),
-                "provenance": "DERIVED",
-                "posteriorImpact": "NONE",
-                "ledger": "DECISION",
-                "claimState": "PROPOSED",
-                "effectiveWeight": 0.5,
-            })
+    # --- Dual-pass path (LR ranges) ---
     else:
-        adjusted_likelihoods = dict(likelihoods)
+        for k in h_keys:
+            if k not in lr_range:
+                raise ValueError(f"Missing lr_range entry for hypothesis {k}.")
+        lo_raw = {k: lr_range[k][0] for k in h_keys}
+        hi_raw = {k: lr_range[k][1] for k in h_keys}
+        lo_norm = _normalize_lrs(lo_raw)
+        hi_norm = _normalize_lrs(hi_raw)
+        adj_lo = _attenuate_lrs(lo_norm, evidence_weight)
+        adj_hi = _attenuate_lrs(hi_norm, evidence_weight)
+        computed_lo = _bayes_pass(hypotheses, adj_lo, eliminated_keys, active_keys)
+        computed_hi = _bayes_pass(hypotheses, adj_hi, eliminated_keys, active_keys)
+        # Point estimate: post-Bayes geometric mean
+        computed = _geo_mean_posteriors(computed_lo, computed_hi)
+        # Apply clamp to range bounds too
+        topic_status = topic.get("meta", {}).get("status", "ACTIVE")
+        if topic_status != "RESOLVED":
+            if any(v < 0.005 or v > 0.98 for v in computed_lo.values()):
+                computed_lo = clamp_posteriors_with_redistribution(computed_lo)
+            if any(v < 0.005 or v > 0.98 for v in computed_hi.values()):
+                computed_hi = clamp_posteriors_with_redistribution(computed_hi)
+        dom_lo = max(active_keys or h_keys, key=lambda k: computed_lo[k])
+        dom_hi = max(active_keys or h_keys, key=lambda k: computed_hi[k])
+        dominant_stable = (dom_lo == dom_hi)
+        width = max(computed_hi[k] - computed_lo[k] for k in h_keys)
+        sensitivity_flag = (not dominant_stable) or (width > 0.20)
+        # likelihoods for drift detection = geometric mean of lo/hi norms
+        likelihoods = _normalize_lrs(
+            {k: _math.sqrt(lo_norm[k] * hi_norm[k]) for k in h_keys}
+        )
+        adj = _attenuate_lrs(likelihoods, evidence_weight)
 
-    # Compute unnormalized posteriors: prior * adjusted likelihood
-    unnormalized = {}
-    for k, h in hypotheses.items():
-        unnormalized[k] = h["posterior"] * adjusted_likelihoods[k]
+    adjusted_likelihoods = adj
 
-    # Normalize
-    total = sum(unnormalized.values())
-    if total == 0:
-        raise ValueError("All unnormalized posteriors are zero — likelihoods "
-                         "are incompatible with current priors")
-
-    computed = {k: round(v / total, 4) for k, v in unnormalized.items()}
-
-    # Epistemic floor/ceiling for ACTIVE topics — redistribution keeps bounds strict.
-    # A posterior of 0.0 or 1.0 on an active topic claims certainty that the
-    # resolution hasn't yet confirmed. Time uncertainty (midpoints, horizons)
-    # contradicts point-mass posteriors — if H3 says "4-12 months" and we're at
-    # month 1.5, claiming 100% on H3 ignores the time range we defined.
+    # Epistemic floor/ceiling for point estimate
     topic_status = topic.get("meta", {}).get("status", "ACTIVE")
     if topic_status != "RESOLVED":
-        needs_clamp = any(v < 0.005 or v > 0.98 for v in computed.values())
-        if needs_clamp:
+        if any(v < 0.005 or v > 0.98 for v in computed.values()):
             computed = clamp_posteriors_with_redistribution(computed)
             _add_evidence_raw(topic, {
-                "time": _now_iso(),
-                "tag": "INTEL",
-                "text": ("EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with "
-                         "redistribution — topic is ACTIVE, certainty requires resolution. "
-                         "Bounds enforced strictly via adjustable-mass redistribution."),
-                "provenance": "DERIVED",
-                "posteriorImpact": "NONE",
-                "ledger": "DECISION",
-                "claimState": "PROPOSED",
-                "effectiveWeight": 0.5,
+                "time": _now_iso(), "tag": "INTEL",
+                "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+                "provenance": "DERIVED", "posteriorImpact": "NONE",
+                "ledger": "DECISION", "claimState": "PROPOSED", "effectiveWeight": 0.5,
             })
 
     # If operator also supplied their intuition, compare
@@ -780,8 +987,16 @@ def bayesian_update(topic: dict, likelihoods: dict[str, float],
             })
 
     # Governor hard gate — same checks as update_posteriors
+    _sens_meta = {}
+    if computed_lo is not None:
+        _sens_meta = {
+            "dominantHypothesisStable": dominant_stable,
+            "maxRangeWidth": max(computed_hi[k] - computed_lo[k] for k in computed_hi),
+            "lr_confidence": lr_confidence,
+        }
     proposal_check = check_update_proposal(
-        topic, computed, evidence_refs=evidence_refs, reason=reason
+        topic, computed, evidence_refs=evidence_refs, reason=reason,
+        sensitivity_meta=_sens_meta,
     )
 
     if not proposal_check["passed"]:
@@ -882,7 +1097,12 @@ def bayesian_update(topic: dict, likelihoods: dict[str, float],
         "evidenceRefs": evidence_refs or [],
         "likelihoods": likelihoods,
         "note": reason,
+        "dominantHypothesisStable": dominant_stable,
+        "sensitivityFlag": sensitivity_flag,
     }
+    if computed_lo is not None:
+        history_entry["posteriorRangeLo"] = computed_lo
+        history_entry["posteriorRangeHi"] = computed_hi
     if evidence_weight < 1.0:
         history_entry["adjustedLikelihoods"] = adjusted_likelihoods
         history_entry["evidenceWeight"] = evidence_weight
@@ -1429,6 +1649,228 @@ def fire_indicator(topic: dict, indicator_id: str,
     return topic
 
 
+def apply_indicator_effect(topic: dict, indicator_id: str,
+                           evidence_refs: list[str],
+                           note: str = "") -> dict:
+    """
+    Fire an indicator and apply its posterior effect via Bayesian update.
+
+    Handles three paths in priority order:
+      1. resolution_class indicators: apply target_posteriors directly (once only)
+      2. schemaVersion 2 indicators with 'likelihoods' dict: LR path with decay
+      3. Legacy indicators with 'posteriorEffect' string: pp-shift fallback
+
+    LR decay: LR_effective = LR_base * lr_decay^n_firings
+    Phantom precision guard: max(raw_lrs)/min(raw_lrs) > 20 blocks the update.
+    """
+    # --- Find indicator ---
+    ind = None
+    tier_key = None
+    for tk, indicators in topic["indicators"]["tiers"].items():
+        for i in indicators:
+            if i["id"] == indicator_id:
+                ind = i
+                tier_key = tk
+                break
+        if ind is not None:
+            break
+
+    if ind is None:
+        raise ValueError(f"Indicator '{indicator_id}' not found in topic")
+
+    hypotheses = topic["model"]["hypotheses"]
+    h_keys = list(hypotheses.keys())
+    priors = {k: h["posterior"] for k, h in hypotheses.items()}
+
+    # --- Path 1: resolution_class ---
+    if ind.get("resolution_class", False):
+        if ind.get("n_firings", 0) > 0:
+            raise GovernanceError(
+                f"Resolution-class indicator '{indicator_id}' has already fired. "
+                "Use reset_resolution_class() to re-enable with operator confirmation.",
+                failures=["resolution_class_already_fired"],
+                warnings=[],
+            )
+        target = ind.get("target_posteriors", {})
+        if not target:
+            raise ValueError(
+                f"Resolution-class indicator '{indicator_id}' missing 'target_posteriors'"
+            )
+        missing = [k for k in h_keys if k not in target]
+        if missing:
+            raise ValueError(
+                f"Resolution-class target_posteriors missing keys: {missing}"
+            )
+        ind["n_firings"] = ind.get("n_firings", 0) + 1
+        ind["status"] = "FIRED"
+        ind["firedDate"] = _now_iso()
+        if note:
+            ind["note"] = note
+        topic["meta"]["classification"] = compute_classification(topic)
+        return update_posteriors(
+            topic, target,
+            reason=f"Resolution-class indicator {indicator_id} fired: {note}",
+            evidence_refs=evidence_refs,
+        )
+
+    # --- Path 2: schemaVersion 2 (point likelihoods OR lr_range) ---
+    if "likelihoods" in ind or "lr_range" in ind:
+        import math as _math
+        n_firings = ind.get("n_firings", 0)
+        tier_decay_defaults = {"tier1": 0.70, "tier2": 0.65, "tier3": 0.50}
+        lr_decay = ind.get("lr_decay", tier_decay_defaults.get(tier_key, 0.65))
+        decay_factor = lr_decay ** n_firings
+
+        # MAX_LOG_WIDTH: log-space range width cap (= log(20), same as phantom_precision)
+        MAX_LOG_WIDTH = _math.log(20)
+
+        if "lr_range" in ind:
+            base_range = ind["lr_range"]
+            # Apply decay to both bounds, clamp lo to 0.0001
+            raw_range = {
+                k: [max(0.0001, base_range[k][0] * decay_factor),
+                    max(0.0001, base_range[k][1] * decay_factor)]
+                for k in h_keys
+            }
+            # Log-space explosion cap: shrink width toward geometric mean if too wide
+            capped_range = {}
+            for k in h_keys:
+                lo, hi = raw_range[k]
+                log_width = _math.log(hi / lo) if lo > 0 else MAX_LOG_WIDTH
+                if log_width > MAX_LOG_WIDTH:
+                    geo = _math.sqrt(lo * hi)
+                    half = _math.exp(MAX_LOG_WIDTH / 2)
+                    lo = geo / half
+                    hi = geo * half
+                capped_range[k] = [lo, hi]
+            # Phantom precision on hi bounds
+            hi_max = max(v[1] for v in capped_range.values())
+            hi_min = min(v[1] for v in capped_range.values())
+            if hi_min > 0 and hi_max / hi_min > 20:
+                raise GovernanceError(
+                    f"Indicator '{indicator_id}' hi-bound LR ratio {hi_max/hi_min:.1f} "
+                    "exceeds 20 (phantom_precision).",
+                    failures=["phantom_precision"], warnings=[],
+                )
+            ind["n_firings"] = n_firings + 1
+            ind["status"] = "FIRED"
+            ind["firedDate"] = _now_iso()
+            if note:
+                ind["note"] = note
+            topic["meta"]["classification"] = compute_classification(topic)
+            return bayesian_update(
+                topic, lr_range=capped_range,
+                lr_confidence=ind.get("lr_confidence", "MEDIUM"),
+                reason=(f"Indicator {indicator_id} fired "
+                        f"(firing #{n_firings + 1}, decay={decay_factor:.3f}): {note}"),
+                evidence_refs=evidence_refs,
+            )
+        else:
+            # Point likelihoods path (unchanged from before)
+            base_lrs = ind["likelihoods"]
+            raw_lrs = {k: max(0.0001, base_lrs.get(k, 1.0) * decay_factor) for k in h_keys}
+            lr_min = min(raw_lrs.values())
+            lr_max = max(raw_lrs.values())
+            if lr_min > 0 and lr_max / lr_min > 20:
+                raise GovernanceError(
+                    f"Indicator '{indicator_id}' LR ratio {lr_max/lr_min:.1f} "
+                    "exceeds 20 (phantom_precision).",
+                    failures=["phantom_precision"], warnings=[],
+                )
+            likelihoods = {k: round(v / lr_max, 6) for k, v in raw_lrs.items()}
+            ind["n_firings"] = n_firings + 1
+            ind["status"] = "FIRED"
+            ind["firedDate"] = _now_iso()
+            if note:
+                ind["note"] = note
+            topic["meta"]["classification"] = compute_classification(topic)
+            return bayesian_update(
+                topic, likelihoods=likelihoods,
+                reason=(f"Indicator {indicator_id} fired "
+                        f"(firing #{n_firings + 1}, decay={decay_factor:.3f}): {note}"),
+                evidence_refs=evidence_refs,
+            )
+
+    # --- Path 3: legacy pp-shift fallback ---
+    result = suggest_likelihoods(topic, [indicator_id])
+    if not result["ready"]:
+        raise ValueError(
+            f"Could not parse posteriorEffect for indicator '{indicator_id}': "
+            f"{result['unparseable']}"
+        )
+    ind["n_firings"] = ind.get("n_firings", 0) + 1
+    ind["status"] = "FIRED"
+    ind["firedDate"] = _now_iso()
+    if note:
+        ind["note"] = note
+    topic["meta"]["classification"] = compute_classification(topic)
+
+    return bayesian_update(
+        topic, result["suggested_likelihoods"],
+        reason=f"Indicator {indicator_id} fired (legacy pp path): {note}",
+        evidence_refs=evidence_refs,
+    )
+
+
+def reset_resolution_class(topic: dict, indicator_id: str,
+                           reason: str, confirmed: bool = False) -> dict:
+    """
+    Clear a misfired resolution-class indicator so it can fire again.
+
+    Requires confirmed=True (operator must explicitly pass True — no default
+    acceptance). Writes a DECISION-ledger evidence entry so the reset is
+    permanently auditable.
+
+    Use only when a resolution-class indicator fired on bad data (false positive).
+    """
+    if not confirmed:
+        raise ValueError(
+            "reset_resolution_class requires confirmed=True. "
+            "Pass confirmed=True only after verifying the original firing was a false positive."
+        )
+    if not reason or len(reason.strip()) < 10:
+        raise ValueError(
+            "reset_resolution_class requires a substantive reason (>=10 chars)."
+        )
+
+    ind = None
+    for tk, indicators in topic["indicators"]["tiers"].items():
+        for i in indicators:
+            if i["id"] == indicator_id:
+                ind = i
+                break
+        if ind is not None:
+            break
+
+    if ind is None:
+        raise ValueError(f"Indicator '{indicator_id}' not found in topic")
+
+    if not ind.get("resolution_class", False):
+        raise ValueError(
+            f"Indicator '{indicator_id}' is not a resolution-class indicator. "
+            "Only resolution_class indicators need this reset path."
+        )
+
+    prev_firings = ind.get("n_firings", 0)
+    ind["n_firings"] = 0
+    ind["status"] = "NOT_FIRED"
+    ind["firedDate"] = None
+
+    _add_evidence_raw(topic, {
+        "time": _now_iso(),
+        "tag": "INTEL",
+        "text": (f"RESOLUTION-CLASS RESET: indicator '{indicator_id}' reset after "
+                 f"{prev_firings} firing(s). Reason: {reason}"),
+        "provenance": "OPERATOR",
+        "posteriorImpact": "NONE",
+        "ledger": "DECISION",
+        "claimState": "SUPPORTED",
+        "effectiveWeight": 1.0,
+    })
+
+    return topic
+
+
 def partial_indicator(topic: dict, indicator_id: str, note: str) -> dict:
     """Mark an indicator as PARTIAL (partially confirmed)."""
     for tier_key, indicators in topic["indicators"]["tiers"].items():
@@ -1775,6 +2217,17 @@ def validate_topic(topic: dict) -> dict:
     total = sum(h["posterior"] for h in hypotheses.values())
     if abs(total - 1.0) > 0.02:
         raise ValueError(f"Posteriors sum to {total:.4f}, expected ~1.0")
+
+    # Validate indicator lr_decay bounds (schemaVersion 2 fields)
+    for tier_key, indicators in topic.get("indicators", {}).get("tiers", {}).items():
+        for ind in indicators:
+            lr_decay = ind.get("lr_decay")
+            if lr_decay is not None:
+                if not (0.0 < lr_decay <= 1.0):
+                    raise ValueError(
+                        f"Indicator '{ind.get('id', '?')}' has lr_decay={lr_decay}. "
+                        "Must be in (0.0, 1.0] — values > 1.0 amplify on re-fire."
+                    )
 
     # Governor: admissibility check (non-blocking on load)
     admissibility = validate_hypotheses(topic)

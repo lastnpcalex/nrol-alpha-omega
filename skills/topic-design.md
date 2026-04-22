@@ -33,10 +33,16 @@ topic = create_topic({
     "resolution": "Observable criterion that closes the question",
     "classification": "ROUTINE",
     "hypotheses": {
-        "H1": {"label": "Outcome A", "prior": 0.40, "midpoint": 100, "unit": "days"},
-        "H2": {"label": "Outcome B", "prior": 0.35, "midpoint": 200, "unit": "days"},
-        "H3": {"label": "Outcome C", "prior": 0.15, "midpoint": 50,  "unit": "days"},
-        "H4": {"label": "Outcome D", "prior": 0.10, "midpoint": 365, "unit": "days"},
+        # resolution_deadline = startDate + upper bound of label.
+        # create_topic auto-stamps these; include them explicitly anyway.
+        "H1": {"label": "<3 months",   "prior": 0.40, "midpoint": 45,  "unit": "days",
+               "resolution_deadline": "YYYY-MM-DD"},  # startDate + 3mo
+        "H2": {"label": "3-12 months", "prior": 0.35, "midpoint": 180, "unit": "days",
+               "resolution_deadline": "YYYY-MM-DD"},  # startDate + 12mo
+        "H3": {"label": "1-3 years",   "prior": 0.15, "midpoint": 730, "unit": "days",
+               "resolution_deadline": "YYYY-MM-DD"},  # startDate + 3yr
+        "H4": {"label": ">3 years",    "prior": 0.10, "midpoint": 1460,"unit": "days"},
+        # H4 has no deadline — open-ended, can never be falsified by time alone
     },
     "indicators": {
         "tier1_critical": [...],
@@ -69,6 +75,11 @@ result = run_design_gate(topic)
 - [ ] Specific (not "what happens with X")
 - [ ] Measurable (has observable resolution criterion)
 - [ ] Time-bounded (explicit deadline or tracking horizon)
+- [ ] **`meta.resolutionDate` set** — the date the topic is assessed and a
+  winning hypothesis recorded. Distinct from per-hypothesis `resolution_deadline`
+  (which falsifies individual time-bound hypotheses early). Past
+  `resolutionDate` surfaces as CRITICAL in governance_report until the topic
+  is marked RESOLVED. **If missing: `python framework/stamp_resolution_dates.py --topic <slug>`**
 
 ### Phase 2: Hypotheses (2-6)
 - [ ] Mutually exclusive
@@ -77,6 +88,12 @@ result = run_design_gate(topic)
 - [ ] Each is falsifiable (anti-indicator exists)
 - [ ] Adjacent hypotheses are distinguishable (>20% midpoint separation)
 - [ ] Priors are documented in posteriorHistory[0] with justification
+- [ ] **Time-bounded hypotheses have `resolution_deadline` set** — any hypothesis
+  whose label contains a finite upper bound (`<6 weeks`, `6wk-4mo`, `by Q3 2026`,
+  etc.) MUST have `resolution_deadline: "YYYY-MM-DD"` equal to startDate + that
+  upper bound. Open-ended hypotheses (`>12mo`, `no recession`) do not need one.
+  `create_topic` auto-stamps these, but verify in the JSON before saving.
+  **If missing: `python framework/stamp_deadlines.py --topic <slug>`**
 
 ### Phase 3: Indicators
 - [ ] Each hypothesis has at least 1 pro-indicator

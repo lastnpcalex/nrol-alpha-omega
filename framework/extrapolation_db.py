@@ -379,6 +379,18 @@ def finish_run(run_id: int, status: str = "COMPLETED", duration_sec: float = Non
         )
 
 
+def get_meta_lint_narrative(run_id: int, critic_persona: str) -> str | None:
+    """Get the portfolio narrative written by a specific critic for a run."""
+    with connect() as c:
+        cur = c.execute(
+            "SELECT portfolio_narrative FROM meta_lint "
+            "WHERE run_id = ? AND critic_persona = ? ORDER BY id DESC LIMIT 1",
+            (run_id, critic_persona)
+        )
+        row = cur.fetchone()
+        return row["portfolio_narrative"] if row else None
+
+
 def get_recent_runs(limit: int = 10) -> list:
     """Get recent sweep runs for display."""
     with connect() as c:

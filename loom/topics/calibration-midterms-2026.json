@@ -6,13 +6,14 @@
     "question": "Which party will control the US House of Representatives after the November 2026 midterm elections?",
     "resolution": "AP/Decision Desk calls House majority on or after Election Night, November 3, 2026. Controlling party must hold 218+ seats. Final seat counts certified by mid-December 2026.",
     "created": "2026-04-11T00:00:00Z",
-    "lastUpdated": "2026-04-18T16:01:55+00:00",
+    "lastUpdated": "2026-04-22T05:19:57+00:00",
     "status": "ACTIVE",
     "dayCount": 1,
     "startDate": "2026-04-11T00:00:00Z",
-    "classification": "ROUTINE",
+    "classification": "ELEVATED",
     "topicType": "election",
-    "horizon": "~207 days (Election Day: Nov 3, 2026)"
+    "horizon": "~207 days (Election Day: Nov 3, 2026)",
+    "resolutionDate": "2026-11-03"
   },
   "tagConfig": {
     "_docs": "directionHints: positive = evidence favors this H, negative = evidence cuts against. POLL data is weak signal. EVENT (special election result, candidate filing) is strong.",
@@ -65,32 +66,32 @@
         "label": "Democrats flip House (218+ seats)",
         "midpoint": 225,
         "unit": "seats",
-        "posterior": 0.9271,
+        "posterior": 0.5291,
         "description": "Democrats net enough gains to exceed 218 seats. Requires approximately a net shift of ~3 seats from current GOP margin. Historical base rate + current approval environment make this the modal outcome. A generic ballot advantage of +5pp or more, sustained through October, is the key threshold."
       },
       "H2": {
         "label": "Democrats gain seats but fall short of majority",
         "midpoint": 210,
         "unit": "seats",
-        "posterior": 0.0629,
+        "posterior": 0.3158,
         "description": "Democrats make meaningful gains (5-15 seats) but GOP retains majority below 218D seats. Consistent with a generic ballot lead of +2 to +4pp being partially absorbed by geographic/districting inefficiency. More likely if war rally effect persists into fall or Dem candidate recruitment underperforms."
       },
       "H3": {
         "label": "Republicans hold — status quo (+/- 5 seats from current margin)",
         "midpoint": 221,
         "unit": "seats",
-        "posterior": 0.005,
+        "posterior": 0.106,
         "description": "Election outcome roughly matches current seat distribution. Would represent a historic deviation from midterm pattern — only the 2002 cycle (post-9/11) and 1998 cycle (Clinton impeachment backlash) saw the president's party hold or gain. Requires sustained war rally effect, generic ballot narrowing to near-parity, or major Democratic collapse (scandal, candidate quality, GOTV failure)."
       },
       "H4": {
         "label": "Republicans gain seats",
         "midpoint": 228,
         "unit": "seats",
-        "posterior": 0.005,
+        "posterior": 0.0491,
         "description": "GOP nets additional seats over current ~220. Historically very rare for the president's party at this approval level. Would require a reversal of every current trend: generic ballot, approval, economic sentiment. Possible only under a major geopolitical/economic shock that completely reframes the election as a wartime mandate vote. Tail risk only."
       }
     },
-    "expectedValue": 224.04,
+    "expectedValue": 219.99,
     "expectedUnit": "Democratic seats (post-election)",
     "posteriorHistory": [
       {
@@ -104,28 +105,46 @@
         "note": "Initial priors. Justified by historical base rate (89% opp gains midterm), Trump approval ~41%/31% economy, generic ballot Dems +6-8pp. Moderated by active war rally effect and unusual generic ballot/presidential approval divergence."
       },
       {
-        "date": "2026-04-12T00:00:00Z",
+        "date": "2026-04-22",
         "posteriors": {
-          "H1": 0.49,
-          "H2": 0.31,
-          "H3": 0.11,
-          "H4": 0.09
+          "H1": 0.4388,
+          "H2": 0.2881,
+          "H3": 0.1612,
+          "H4": 0.1119
         },
-        "note": "Indicator t2_dem_special_overperformance_plus5 FIRED: GA-14 runoff Dem overperformance +25pp vs 2024 baseline (threshold was +5pp). Applied prescribed posteriorEffect: H1 +7pp, H2 +3pp, H3 -7pp, H4 -3pp. Sum = 1.00. Also supported by WI Supreme Court +20 margin and 30-0 state legislative seat flip pattern, but those are corroborating context, not separate indicator fires."
-      },
-      {
-        "date": "2026-04-16",
-        "H1": 0.7597,
-        "H2": 0.2003,
-        "H3": 0.0284,
-        "H4": 0.0116,
-        "note": "Evidence ev_011: Generic congressional ballot shows Democrats leading by 5.4 points sustained thr",
+        "priors": {
+          "H1": 0.42,
+          "H2": 0.28,
+          "H3": 0.18,
+          "H4": 0.12
+        },
+        "updateMethod": "bayesian_update",
+        "evidenceRefs": [
+          "2026-04-07T00:00:00Z"
+        ],
         "likelihoods": {
-          "H1": 0.6,
-          "H2": 0.25,
-          "H3": 0.1,
-          "H4": 0.05
+          "H1": 1.0,
+          "H2": 0.94898,
+          "H3": 0.52381,
+          "H4": 0.642857
         },
+        "note": "Indicator t2_dem_special_overperformance_plus5 fired (firing #1, decay=1.000): REPLAY: GA-14 special runoff: Harris (D) overperformed 2024 Biden baseline by +25pp (44.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "adjustedLikelihoods": {
+          "H1": 0.834184,
+          "H2": 0.821429,
+          "H3": 0.715136,
+          "H4": 0.744898
+        },
+        "evidenceWeight": 0.25,
+        "weightDetail": [
+          {
+            "ref": "2026-04-07T00:00:00Z",
+            "effectiveWeight": 0.25,
+            "claimState": "OBSERVED"
+          }
+        ],
         "redTeam": {
           "contrarian_direction": {},
           "counterevidence": [],
@@ -136,17 +155,37 @@
         }
       },
       {
-        "date": "2026-04-17",
-        "H1": 0.932,
-        "H2": 0.0632,
-        "H3": 0.004,
-        "H4": 0.0008,
-        "note": "Cook rating shifts toward Democrats, fundraising advantage, and 69% model probability reinforce H1 (Dem flip). Still 7 months out so uncertainty remains.",
+        "date": "2026-04-22",
+        "posteriors": {
+          "H1": 0.5291,
+          "H2": 0.3158,
+          "H3": 0.106,
+          "H4": 0.0491
+        },
+        "priors": {
+          "H1": 0.4388,
+          "H2": 0.2881,
+          "H3": 0.1612,
+          "H4": 0.1119
+        },
+        "updateMethod": "bayesian_update",
+        "evidenceRefs": [
+          "ev_015"
+        ],
         "likelihoods": {
-          "H1": 0.7,
-          "H2": 0.18,
-          "H3": 0.08,
-          "H4": 0.04
+          "H1": 0.55,
+          "H2": 0.5,
+          "H3": 0.3,
+          "H4": 0.2
+        },
+        "note": "D+3 on generic ballot is modestly supportive of Democratic House flip path (H1) and consistent with H2 gains-but-short; reduces likelihood of Republican hold or gain. Single poll — modest magnitude.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "turningPoint": {
+          "type": "THRESHOLD_CROSSED",
+          "hypothesis": "H1",
+          "from": 0.4388,
+          "to": 0.5291
         },
         "redTeam": {
           "contrarian_direction": {},
@@ -211,7 +250,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H1 +12pp, H2 +5pp, H3 -10pp, H4 -7pp. Historical: Dem flips in hostile territory (e.g., PA-18 2018, KS-04 2017) preceded wave elections."
+          "posteriorEffect": "H1 +12pp, H2 +5pp, H3 -10pp, H4 -7pp. Historical: Dem flips in hostile territory (e.g., PA-18 2018, KS-04 2017) preceded wave elections.",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 0.916667,
+            "H3": 0.345679,
+            "H4": 0.324074
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t1_generic_ballot_sustained_plus5",
@@ -219,7 +267,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H1 +15pp, H2 unchanged, H3 -10pp, H4 -5pp."
+          "posteriorEffect": "H1 +15pp, H2 unchanged, H3 -10pp, H4 -5pp.",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 0.736842,
+            "H3": 0.327485,
+            "H4": 0.429825
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t1_trump_approval_sub38",
@@ -227,7 +284,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H1 +10pp, H3 -7pp, H4 -5pp. Sub-40% approval historically maps to 25+ seat losses."
+          "posteriorEffect": "H1 +10pp, H3 -7pp, H4 -5pp. Sub-40% approval historically maps to 25+ seat losses.",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 0.807692,
+            "H3": 0.49359,
+            "H4": 0.471154
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t1_seat_model_consensus_flip",
@@ -235,7 +301,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H1 +20pp, H2 -5pp, H3 -10pp, H4 -5pp. These models are lagging but consensus shift is high-confidence signal."
+          "posteriorEffect": "H1 +20pp, H2 -5pp, H3 -10pp, H4 -5pp. These models are lagging but consensus shift is high-confidence signal.",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 0.556452,
+            "H3": 0.301075,
+            "H4": 0.395161
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         }
       ],
       "tier2_strong": [
@@ -245,7 +320,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H1 +5pp, H2 +3pp, H3 -5pp, H4 -3pp."
+          "posteriorEffect": "H1 +5pp, H2 +3pp, H3 -5pp, H4 -3pp.",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 0.989362,
+            "H3": 0.64539,
+            "H4": 0.670213
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t2_dccc_fundraising_advantage",
@@ -253,7 +337,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H1 +4pp, H2 +2pp, H3 -4pp, H4 -2pp."
+          "posteriorEffect": "H1 +4pp, H2 +2pp, H3 -4pp, H4 -2pp.",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 0.978261,
+            "H3": 0.710145,
+            "H4": 0.76087
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t2_generic_ballot_dems_plus3_sustained",
@@ -261,7 +354,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H1 +6pp, H3 -4pp, H4 -2pp."
+          "posteriorEffect": "H1 +6pp, H3 -4pp, H4 -2pp.",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 0.875,
+            "H3": 0.680556,
+            "H4": 0.729167
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t2_economy_approval_remains_sub35",
@@ -269,15 +371,33 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H1 +5pp, H2 +2pp, H3 -5pp, H4 -2pp. Economy approval is the strongest within-cycle predictor."
+          "posteriorEffect": "H1 +5pp, H2 +2pp, H3 -5pp, H4 -2pp. Economy approval is the strongest within-cycle predictor.",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 0.957447,
+            "H3": 0.64539,
+            "H4": 0.744681
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t2_dem_special_overperformance_plus5",
           "desc": "Democrat outperforms 2024 presidential baseline by +5pp or more in any special or off-cycle election (including state-level) held before October 2026. Observable: certified results plus 2024 Biden baseline in same geography.",
           "status": "FIRED",
           "firedDate": "2026-04-07T00:00:00Z",
-          "note": "GA-14 special runoff: Harris (D) overperformed 2024 Biden baseline by +25pp (44.1% vs ~19% Biden 2024 in district). Threshold was +5pp. Fired on certified AP/NBC results.",
-          "posteriorEffect": "H1 +7pp, H2 +3pp, H3 -7pp, H4 -3pp."
+          "note": "REPLAY: GA-14 special runoff: Harris (D) overperformed 2024 Biden baseline by +25pp (44.",
+          "posteriorEffect": "H1 +7pp, H2 +3pp, H3 -7pp, H4 -3pp.",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 0.94898,
+            "H3": 0.52381,
+            "H4": 0.642857
+          },
+          "lr_decay": 0.65,
+          "n_firings": 1,
+          "resolution_class": false
         },
         {
           "id": "t2_war_rally_fully_decayed",
@@ -285,7 +405,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H1 +5pp, H3 -3pp, H4 -2pp. Removes structural support for H3/H4."
+          "posteriorEffect": "H1 +5pp, H3 -3pp, H4 -2pp. Removes structural support for H3/H4.",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 0.893617,
+            "H3": 0.744681,
+            "H4": 0.744681
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t2_gop_incumbent_retirement_wave",
@@ -293,7 +422,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H1 +6pp, H2 +2pp, H3 -5pp, H4 -3pp. Open seats are significantly easier to flip than incumbent-held."
+          "posteriorEffect": "H1 +6pp, H2 +2pp, H3 -5pp, H4 -3pp. Open seats are significantly easier to flip than incumbent-held.",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 0.9375,
+            "H3": 0.631944,
+            "H4": 0.65625
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         }
       ],
       "tier3_suggestive": [
@@ -303,7 +441,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H1 +2pp, H3 -1pp, H4 -1pp. Confirms current trajectory, modest update."
+          "posteriorEffect": "H1 +2pp, H3 -1pp, H4 -1pp. Confirms current trajectory, modest update.",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 0.954545,
+            "H3": 0.901515,
+            "H4": 0.875
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t3_abortion_ballot_measure_qualified",
@@ -311,7 +458,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H1 +3pp, H2 +1pp, H3 -3pp, H4 -1pp. Turnout mobilizer for Dem-leaning voters, per 2022/2024 pattern."
+          "posteriorEffect": "H1 +3pp, H2 +1pp, H3 -3pp, H4 -1pp. Turnout mobilizer for Dem-leaning voters, per 2022/2024 pattern.",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 0.966667,
+            "H3": 0.777778,
+            "H4": 0.855556
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t3_tariff_economic_hit_visible",
@@ -319,7 +475,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H1 +2pp, H2 +1pp, H3 -2pp, H4 -1pp. Concrete economic pain translates to ballot box."
+          "posteriorEffect": "H1 +2pp, H2 +1pp, H3 -2pp, H4 -1pp. Concrete economic pain translates to ballot box.",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 0.988636,
+            "H3": 0.848485,
+            "H4": 0.875
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t3_dem_enthusiasm_gap_closing",
@@ -327,7 +492,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H1 +2pp, H3 -2pp. Dem enthusiasm historically lags in midterms; closing the gap is a necessary condition for translation of generic lead to seats."
+          "posteriorEffect": "H1 +2pp, H3 -2pp. Dem enthusiasm historically lags in midterms; closing the gap is a necessary condition for translation of generic lead to seats.",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 0.954545,
+            "H3": 0.848485,
+            "H4": 0.954545
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t3_cook_ratings_competitive_seats_expand",
@@ -335,7 +509,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H1 +2pp, H2 +1pp, H3 -2pp, H4 -1pp."
+          "posteriorEffect": "H1 +2pp, H2 +1pp, H3 -2pp, H4 -1pp.",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 0.988636,
+            "H3": 0.848485,
+            "H4": 0.875
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t3_iran_war_expands_domestically_divisive",
@@ -343,7 +526,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H1 +3pp, H3 -2pp, H4 -1pp. War protest historically mobilizes opposition base."
+          "posteriorEffect": "H1 +3pp, H3 -2pp, H4 -1pp. War protest historically mobilizes opposition base.",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 0.933333,
+            "H3": 0.82963,
+            "H4": 0.855556
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         }
       ],
       "anti_indicators": [
@@ -353,7 +545,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H1 -15pp, H2 -5pp. At generic ballot parity, historical models show GOP holds majority with districting advantage."
+          "posteriorEffect": "H1 -15pp, H2 -5pp. At generic ballot parity, historical models show GOP holds majority with districting advantage.",
+          "likelihoods": {
+            "H1": 0.642857,
+            "H2": 0.821429,
+            "H3": 1.0,
+            "H4": 1.0
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "anti_h1_special_election_gop_outperforms",
@@ -361,7 +562,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H1 -10pp, H2 -5pp, H3 +10pp, H4 +5pp."
+          "posteriorEffect": "H1 -10pp, H2 -5pp, H3 +10pp, H4 +5pp.",
+          "likelihoods": {
+            "H1": 0.489796,
+            "H2": 0.528061,
+            "H3": 1.0,
+            "H4": 0.910714
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "anti_h2_generic_ballot_sustained_plus6",
@@ -369,7 +579,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H2 -8pp (probability mass moves to H1). H2 is squeezed from above when the environment is strong enough for a flip."
+          "posteriorEffect": "H2 -8pp (probability mass moves to H1). H2 is squeezed from above when the environment is strong enough for a flip.",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 0.714286,
+            "H3": 1.0,
+            "H4": 1.0
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "anti_h3_approval_remains_sub42",
@@ -377,7 +596,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H3 -8pp, H4 -5pp. Historical GOP hold cycles (2002) required approval 60%+; 2002 Bush had 63% approval."
+          "posteriorEffect": "H3 -8pp, H4 -5pp. Historical GOP hold cycles (2002) required approval 60%+; 2002 Bush had 63% approval.",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 1.0,
+            "H3": 0.555556,
+            "H4": 0.583333
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "anti_h4_no_structural_approval_recovery",
@@ -385,7 +613,17 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H4 -8pp. Republican seat gains at sub-40% economic approval are historically unprecedented in the modern era."
+          "posteriorEffect": "H4 -8pp. Republican seat gains at sub-40% economic approval are historically unprecedented in the modern era.",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 1.0,
+            "H3": 1.0,
+            "H4": 0.333333
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false,
+          "lr_migration_warning": "design prior drift >30% — review before next firing"
         },
         {
           "id": "anti_h4_no_dem_scandal_or_collapse",
@@ -393,7 +631,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": "This is a null-event indicator — fire it if the event definitively does NOT occur by October 15, 2026.",
-          "posteriorEffect": "H4 -5pp, H3 -3pp. H4 essentially requires a Dem self-immolation event."
+          "posteriorEffect": "H4 -5pp, H3 -3pp. H4 essentially requires a Dem self-immolation event.",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 1.0,
+            "H3": 0.833333,
+            "H4": 0.583333
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         }
       ]
     }
@@ -713,6 +960,149 @@
       "ledger": "DECISION",
       "claimState": "PROPOSED",
       "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_013",
+      "time": "2026-04-19T00:57:10+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "POLITICS"
+      ],
+      "text": "Ballotpedia generic congressional ballot average shows Democrats +6 as of April 2, 2026; Morning Consult shows D 45 / R 42 in March 2026. Consistent with historical midterm pattern for incumbent-party disadvantage under second Trump term.",
+      "provenance": "OBSERVED",
+      "source": "Ballotpedia / Morning Consult",
+      "posteriorImpact": "NONE",
+      "url": "https://ballotpedia.org/Polling_Index",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-19T00:57:10+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_014",
+      "time": "2026-04-21T03:51:21+00:00",
+      "tag": "POLL",
+      "tags": [
+        "POLL",
+        "POLITICS"
+      ],
+      "text": "Nate Silver generic-ballot average D+5.6 as of Apr 21, 2026. Morning Consult Mar 16-22 data showed D 45% R 42% among RVs.",
+      "provenance": "OBSERVED",
+      "source": "Silver Bulletin / Morning Consult",
+      "posteriorImpact": "NONE",
+      "url": "https://www.natesilver.net/p/generic-ballot-average-2026-nate-silver-bulletin-congress-polls",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.4118
+    },
+    {
+      "time": "2026-04-21T03:51:21+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-21T19:03:40+00:00",
+      "tag": "INTEL",
+      "text": "LR MIGRATION RESET: posteriors reset to design priors; evidence log preserved.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 1.0
+    },
+    {
+      "time": "2026-04-21T22:46:02+00:00",
+      "tag": "INTEL",
+      "text": "RESOLUTION-DATE STAMPED: meta.resolutionDate=2026-11-03 (derived from meta.resolution). When past, governance flags topic as overdue for resolution.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 1.0
+    },
+    {
+      "time": "2026-04-22T01:00:37+00:00",
+      "tag": "INTEL",
+      "text": "REPLAY BEGIN: 1 previously-fired indicators will be re-applied chronologically under current LR system. Posteriors reset to design priors; indicator state cleared. Evidence log preserved for audit.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 1.0
+    },
+    {
+      "id": "ev_replay_t2_dem_special_overperformance_plus5",
+      "time": "2026-04-07T00:00:00Z",
+      "tag": "EVENT",
+      "text": "REPLAY: indicator t2_dem_special_overperformance_plus5 fires at historical firedDate 2026-04-07T00:00:00Z. Original note: GA-14 special runoff: Harris (D) overperformed 2024 Biden baseline by +25pp (44.1% vs ~19% Biden 202",
+      "source": "replay",
+      "claimState": "SUPPORTED",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "FACT",
+      "effectiveWeight": 1.0
+    },
+    {
+      "time": "2026-04-22T01:00:37+00:00",
+      "tag": "INTEL",
+      "text": "WEIGHT ATTENUATION: likelihoods attenuated to 25% via mixture model ([{'ref': '2026-04-07T00:00:00Z', 'effectiveWeight': 0.25, 'claimState': 'OBSERVED'}])",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-22T01:00:37+00:00",
+      "tag": "INTEL",
+      "text": "REPLAY COMPLETE: 1 indicators applied, 0 skipped. Final posteriors: {'H1': 0.4388, 'H2': 0.2881, 'H3': 0.1612, 'H4': 0.1119}. Indicator firedDates restored to originals for audit.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 1.0
+    },
+    {
+      "id": "ev_015",
+      "time": "2026-04-22T01:30:36+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "POLL"
+      ],
+      "text": "Morning Consult generic congressional ballot (field Mar 16-22 2026, n=26,406 RV): Democrats 45%, Republicans 42%, +/-1pp MoE. Consistent with D+3 lead persisting roughly 7 months from midterm.",
+      "provenance": "OBSERVED",
+      "source": "Morning Consult",
+      "posteriorImpact": "NONE",
+      "url": "https://pro.morningconsult.com/trackers/2026-midterm-election-generic-ballot-polls",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-22T01:30:36+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: stale_evidence. Reason: D+3 on generic ballot is modestly supportive of Democratic House flip path (H1) and consistent with H2 gains-but-short; reduces likelihood of Republican hold or gain. Single poll — modest magnitude.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
     }
   ],
   "dataFeeds": {
@@ -842,25 +1232,20 @@
   "governance": {
     "health": "DEGRADED",
     "issues": [
-      "Majority stale evidence (10/14)",
-      "Stale dependency: calibration-us-recession-2026.H1 assumed=0.55, actual=0.7434, drift=19.34%",
-      "Stale dependency: calibration-us-recession-2026.H3 assumed=0.14, actual=0.0077, drift=13.23%",
-      "Stale dependency: calibration-section122-tariffs.H2 assumed=0.18, actual=0.0057, drift=17.43%",
-      "Stale dependency: calibration-section122-tariffs.H3 assumed=0.33, actual=0.1168, drift=21.32%",
-      "Stale dependency: calibration-section122-tariffs.H4 assumed=0.42, actual=0.8725, drift=45.25%"
+      "Majority stale evidence (15/26)"
     ],
     "rt": {
       "rt": 0.0,
       "regime": "SAFE",
       "worst_hypothesis": "H1"
     },
-    "entropy": 0.4287,
+    "entropy": 1.5678,
     "maxEntropy": 2.0,
-    "uncertaintyRatio": 0.2144,
+    "uncertaintyRatio": 0.7839,
     "evidenceFreshness": {
-      "fresh": 4,
-      "stale": 10,
-      "total": 14
+      "fresh": 11,
+      "stale": 15,
+      "total": 26
     },
     "hypothesisAdmissibility": {
       "H1": "ADMISSIBLE",
@@ -869,58 +1254,11 @@
       "H4": "ADMISSIBLE"
     },
     "klFromPrior": {
-      "kl_divergence": 0.6064,
-      "interpretation": "WELL_EVIDENCED"
+      "kl_divergence": 0.0602,
+      "interpretation": "MODERATE"
     },
-    "lastComputed": "2026-04-18T16:01:55+00:00",
-    "staleDependencies": 5,
-    "staleDependencyDetails": [
-      {
-        "upstream_slug": "calibration-us-recession-2026",
-        "hypothesis": "H1",
-        "assumed": 0.55,
-        "actual": 0.7434,
-        "drift": 0.1934,
-        "tolerance": 0.1,
-        "stale": true
-      },
-      {
-        "upstream_slug": "calibration-us-recession-2026",
-        "hypothesis": "H3",
-        "assumed": 0.14,
-        "actual": 0.0077,
-        "drift": 0.1323,
-        "tolerance": 0.1,
-        "stale": true
-      },
-      {
-        "upstream_slug": "calibration-section122-tariffs",
-        "hypothesis": "H2",
-        "assumed": 0.18,
-        "actual": 0.0057,
-        "drift": 0.1743,
-        "tolerance": 0.1,
-        "stale": true
-      },
-      {
-        "upstream_slug": "calibration-section122-tariffs",
-        "hypothesis": "H3",
-        "assumed": 0.33,
-        "actual": 0.1168,
-        "drift": 0.2132,
-        "tolerance": 0.1,
-        "stale": true
-      },
-      {
-        "upstream_slug": "calibration-section122-tariffs",
-        "hypothesis": "H4",
-        "assumed": 0.42,
-        "actual": 0.8725,
-        "drift": 0.4525,
-        "tolerance": 0.1,
-        "stale": true
-      }
-    ],
+    "lastComputed": "2026-04-22T05:19:57+00:00",
+    "staleDependencies": 0,
     "calibrationHealth": "ACCEPTABLE",
     "unresolvedContradictions": 0,
     "designGate": {
@@ -950,7 +1288,7 @@
         }
       },
       "indistinguishable": [],
-      "lastChecked": "2026-04-18T16:01:55+00:00"
+      "lastChecked": "2026-04-22T05:19:57+00:00"
     }
   },
   "dependencies": {
@@ -1026,6 +1364,83 @@
           "H4": 0.0008
         },
         "entropy": 0.3866
+      },
+      {
+        "timestamp": "2026-04-19T00:57:10+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.9575,
+          "H2": 0.0325,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "entropy": 0.2971
+      },
+      {
+        "timestamp": "2026-04-19T00:57:10+00:00",
+        "trigger": "pipeline:ev_013",
+        "posteriors": {
+          "H1": 0.9575,
+          "H2": 0.0325,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "entropy": 0.2971
+      },
+      {
+        "timestamp": "2026-04-21T03:51:21+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.98,
+          "H2": 0.0098,
+          "H3": 0.0051,
+          "H4": 0.0051
+        },
+        "entropy": 0.1716
+      },
+      {
+        "timestamp": "2026-04-21T03:51:21+00:00",
+        "trigger": "pipeline:ev_014",
+        "posteriors": {
+          "H1": 0.98,
+          "H2": 0.0098,
+          "H3": 0.0051,
+          "H4": 0.0051
+        },
+        "entropy": 0.1716
+      },
+      {
+        "timestamp": "2026-04-22T01:00:37+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.4388,
+          "H2": 0.2881,
+          "H3": 0.1612,
+          "H4": 0.1119
+        },
+        "entropy": 1.8167
+      },
+      {
+        "timestamp": "2026-04-22T01:30:36+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.5291,
+          "H2": 0.3158,
+          "H3": 0.106,
+          "H4": 0.0491
+        },
+        "entropy": 1.5678
+      },
+      {
+        "timestamp": "2026-04-22T01:30:36+00:00",
+        "trigger": "pipeline:ev_015",
+        "posteriors": {
+          "H1": 0.5291,
+          "H2": 0.3158,
+          "H3": 0.106,
+          "H4": 0.0491
+        },
+        "entropy": 1.5678
       }
     ],
     "outcomes": [],
@@ -1153,6 +1568,282 @@
         "detected": "2026-04-17T15:22:22Z",
         "resolution": "SUPERSEDED",
         "resolvedAt": "2026-04-17T15:22:22Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T15:22:22+00:00",
+        "entry_a_text": "Democrats odds of winning House ~69%. Need net gain of 3 seats. Individual-donor fundraising advantage for Democrats. Cook Political shifting multiple seats toward Democrats: OH-01 Toss-up to Lean D, PA-08 Lean R to Toss-up. 42 battleground districts tracked (22 D, 20 R).",
+        "entry_b_time": "2026-04-19T00:57:10+00:00",
+        "entry_b_text": "Ballotpedia generic congressional ballot average shows Democrats +6 as of April 2, 2026; Morning Consult shows D 45 / R 42 in March 2026. Consistent with historical midterm pattern for incumbent-party disadvantage under second Trump term.",
+        "reason": "Numeric divergence 91.3% on metric (context: of): new=6.0, existing=69.0, threshold=10%",
+        "detected": "2026-04-19T00:57:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-19T00:57:10Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-12T20:30:00Z",
+        "entry_a_text": "FEC Q1 2026 quarterly filings due April 15. DCCC and NRCC cash-on-hand data will populate dccc_coh and nrcc_coh data feeds. In Q1 2025, DCCC raised $36.9M vs NRCC $36.7M (near parity). Indicator t2_dccc_fundraising_advantage fires if DCCC outraises NRCC by $15M+ in any quarter.",
+        "entry_b_time": "2026-04-19T00:57:10+00:00",
+        "entry_b_text": "Ballotpedia generic congressional ballot average shows Democrats +6 as of April 2, 2026; Morning Consult shows D 45 / R 42 in March 2026. Consistent with historical midterm pattern for incumbent-party disadvantage under second Trump term.",
+        "reason": "Numeric divergence 60.0% on metric (context: april): new=6.0, existing=15.0, threshold=10%",
+        "detected": "2026-04-19T00:57:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-19T00:57:10Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-12T20:00:00Z",
+        "entry_a_text": "Generic ballot streak tracker initialized. RCP average Dems +5.4pp (April 12). Ballotpedia shows +6 as of April 2. RealClearPolling Facebook shows 45.3-42.6 (D+2.7, date unclear). Sabato Crystal Ball model gives Dems strong chance to retake House based on generic ballot fundamentals. Streak counter set to 0 pending confirmation of 30 consecutive days at +5pp threshold.",
+        "entry_b_time": "2026-04-19T00:57:10+00:00",
+        "entry_b_text": "Ballotpedia generic congressional ballot average shows Democrats +6 as of April 2, 2026; Morning Consult shows D 45 / R 42 in March 2026. Consistent with historical midterm pattern for incumbent-party disadvantage under second Trump term.",
+        "reason": "Numeric divergence 50.0% on metric (context: april, shows): new=6.0, existing=12.0, threshold=10%",
+        "detected": "2026-04-19T00:57:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-19T00:57:10Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-10T00:00:00Z",
+        "entry_a_text": "March 2026 CPI: headline 3.3% annual (Iran war energy driven), core 2.6% annual. Real earnings -0.6% m/m. Tariff impact visible in goods categories. Consumer purchasing power erosion is the economic signal most relevant to midterm voting behavior.",
+        "entry_b_time": "2026-04-19T00:57:10+00:00",
+        "entry_b_text": "Ballotpedia generic congressional ballot average shows Democrats +6 as of April 2, 2026; Morning Consult shows D 45 / R 42 in March 2026. Consistent with historical midterm pattern for incumbent-party disadvantage under second Trump term.",
+        "reason": "Numeric divergence 39.4% on metric (context: 2026): new=2.0, existing=3.3, threshold=10%",
+        "detected": "2026-04-19T00:57:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-19T00:57:10Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-12T00:00:00Z",
+        "entry_a_text": "RealClearPolitics generic congressional ballot average: Democrats +5.4 (47.4% D vs 42.0% R). Morning Consult weekly tracker: Democrats lead 45%-42% among registered voters — 6-point net swing from Republican advantage at start of Trump's second term.",
+        "entry_b_time": "2026-04-19T00:57:10+00:00",
+        "entry_b_text": "Ballotpedia generic congressional ballot average shows Democrats +6 as of April 2, 2026; Morning Consult shows D 45 / R 42 in March 2026. Consistent with historical midterm pattern for incumbent-party disadvantage under second Trump term.",
+        "reason": "Numeric divergence 87.3% on metric (context: average, democrats): new=6.0, existing=47.4, threshold=10%",
+        "detected": "2026-04-19T00:57:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-19T00:57:10Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-07T00:00:00Z",
+        "entry_a_text": "CNN analysis: Since Trump returned to White House, Democrats have flipped 30 state legislative seats to Republicans' zero. Half of top-10 special election overperformances have occurred since 2024 election. National Republicans spent money in GA-14 (unusual for safe seat) and still saw 25-point Dem overperformance.",
+        "entry_b_time": "2026-04-19T00:57:10+00:00",
+        "entry_b_text": "Ballotpedia generic congressional ballot average shows Democrats +6 as of April 2, 2026; Morning Consult shows D 45 / R 42 in March 2026. Consistent with historical midterm pattern for incumbent-party disadvantage under second Trump term.",
+        "reason": "Numeric divergence 80.0% on metric (context: democrats): new=6.0, existing=30.0, threshold=10%",
+        "detected": "2026-04-19T00:57:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-19T00:57:10Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-07T00:00:00Z",
+        "entry_a_text": "Wisconsin Supreme Court race: Democratic-aligned Chris Taylor defeats Republican-aligned Maria Lazar by ~20 points. Largest margin in competitive WI Supreme Court race since 2000. Taylor flipped historically Republican counties including Jefferson (Trump +16 in 2024) and Ozaukee (Trump +10). Moves court from 4-3 to 5-2 liberal majority.",
+        "entry_b_time": "2026-04-19T00:57:10+00:00",
+        "entry_b_text": "Ballotpedia generic congressional ballot average shows Democrats +6 as of April 2, 2026; Morning Consult shows D 45 / R 42 in March 2026. Consistent with historical midterm pattern for incumbent-party disadvantage under second Trump term.",
+        "reason": "Numeric divergence 64.4% on metric (context: in): new=45.0, existing=16.0, threshold=10%",
+        "detected": "2026-04-19T00:57:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-19T00:57:10Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-07T00:00:00Z",
+        "entry_a_text": "Georgia 14th District special election runoff: Republican Clay Fuller defeats Democrat Shawn Harris 55.9%-44.1% (11.8-point margin). Trump carried district by 37 points in 2024. Harris overperformed 2024 Democratic presidential baseline by +25 points — largest Democratic overperformance in a House special election since Trump took office.",
+        "entry_b_time": "2026-04-19T00:57:10+00:00",
+        "entry_b_text": "Ballotpedia generic congressional ballot average shows Democrats +6 as of April 2, 2026; Morning Consult shows D 45 / R 42 in March 2026. Consistent with historical midterm pattern for incumbent-party disadvantage under second Trump term.",
+        "reason": "Numeric divergence 17.8% on metric (context: in): new=45.0, existing=37.0, threshold=10%",
+        "detected": "2026-04-19T00:57:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-19T00:57:10Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-19T00:57:10+00:00",
+        "entry_a_text": "Ballotpedia generic congressional ballot average shows Democrats +6 as of April 2, 2026; Morning Consult shows D 45 / R 42 in March 2026. Consistent with historical midterm pattern for incumbent-party disadvantage under second Trump term.",
+        "entry_b_time": "2026-04-21T03:51:21+00:00",
+        "entry_b_text": "Nate Silver generic-ballot average D+5.6 as of Apr 21, 2026. Morning Consult Mar 16-22 data showed D 45% R 42% among RVs.",
+        "reason": "Numeric divergence 64.3% on metric (context: as, of): new=5.6, existing=2.0, threshold=10%",
+        "detected": "2026-04-21T03:51:21Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T03:51:21Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T15:22:22+00:00",
+        "entry_a_text": "Democrats odds of winning House ~69%. Need net gain of 3 seats. Individual-donor fundraising advantage for Democrats. Cook Political shifting multiple seats toward Democrats: OH-01 Toss-up to Lean D, PA-08 Lean R to Toss-up. 42 battleground districts tracked (22 D, 20 R).",
+        "entry_b_time": "2026-04-21T03:51:21+00:00",
+        "entry_b_text": "Nate Silver generic-ballot average D+5.6 as of Apr 21, 2026. Morning Consult Mar 16-22 data showed D 45% R 42% among RVs.",
+        "reason": "Numeric divergence 91.9% on metric (context: of): new=5.6, existing=69.0, threshold=10%",
+        "detected": "2026-04-21T03:51:21Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T03:51:21Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-12T20:00:00Z",
+        "entry_a_text": "Generic ballot streak tracker initialized. RCP average Dems +5.4pp (April 12). Ballotpedia shows +6 as of April 2. RealClearPolling Facebook shows 45.3-42.6 (D+2.7, date unclear). Sabato Crystal Ball model gives Dems strong chance to retake House based on generic ballot fundamentals. Streak counter set to 0 pending confirmation of 30 consecutive days at +5pp threshold.",
+        "entry_b_time": "2026-04-21T03:51:21+00:00",
+        "entry_b_text": "Nate Silver generic-ballot average D+5.6 as of Apr 21, 2026. Morning Consult Mar 16-22 data showed D 45% R 42% among RVs.",
+        "reason": "Numeric divergence 64.3% on metric (context: as, of): new=5.6, existing=2.0, threshold=10%",
+        "detected": "2026-04-21T03:51:21Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T03:51:21Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-12T00:00:00Z",
+        "entry_a_text": "RealClearPolitics generic congressional ballot average: Democrats +5.4 (47.4% D vs 42.0% R). Morning Consult weekly tracker: Democrats lead 45%-42% among registered voters — 6-point net swing from Republican advantage at start of Trump's second term.",
+        "entry_b_time": "2026-04-21T03:51:21+00:00",
+        "entry_b_text": "Nate Silver generic-ballot average D+5.6 as of Apr 21, 2026. Morning Consult Mar 16-22 data showed D 45% R 42% among RVs.",
+        "reason": "Numeric divergence 88.2% on metric (context: average, d): new=5.6, existing=47.4, threshold=10%",
+        "detected": "2026-04-21T03:51:21Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T03:51:21Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-07T00:00:00Z",
+        "entry_a_text": "REPLAY: indicator t2_dem_special_overperformance_plus5 fires at historical firedDate 2026-04-07T00:00:00Z. Original note: GA-14 special runoff: Harris (D) overperformed 2024 Biden baseline by +25pp (44.1% vs ~19% Biden 202",
+        "entry_b_time": "2026-04-22T01:30:36+00:00",
+        "entry_b_text": "Morning Consult generic congressional ballot (field Mar 16-22 2026, n=26,406 RV): Democrats 45%, Republicans 42%, +/-1pp MoE. Consistent with D+3 lead persisting roughly 7 months from midterm.",
+        "reason": "Numeric divergence 99.9% on metric (context: d): new=3.0, existing=2024.0, threshold=10%",
+        "detected": "2026-04-22T01:30:36Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:30:36Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+        "entry_b_time": "2026-04-22T01:30:36+00:00",
+        "entry_b_text": "Morning Consult generic congressional ballot (field Mar 16-22 2026, n=26,406 RV): Democrats 45%, Republicans 42%, +/-1pp MoE. Consistent with D+3 lead persisting roughly 7 months from midterm.",
+        "reason": "Numeric divergence 99.8% on metric (context: with): new=3.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-22T01:30:36Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:30:36Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "Nate Silver generic-ballot average D+5.6 as of Apr 21, 2026. Morning Consult Mar 16-22 data showed D 45% R 42% among RVs.",
+        "entry_b_time": "2026-04-22T01:30:36+00:00",
+        "entry_b_text": "Morning Consult generic congressional ballot (field Mar 16-22 2026, n=26,406 RV): Democrats 45%, Republicans 42%, +/-1pp MoE. Consistent with D+3 lead persisting roughly 7 months from midterm.",
+        "reason": "Numeric divergence 89.7% on metric (context: 45): new=406.0, existing=42.0, threshold=10%",
+        "detected": "2026-04-22T01:30:36Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:30:36Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-19T00:57:10+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+        "entry_b_time": "2026-04-22T01:30:36+00:00",
+        "entry_b_text": "Morning Consult generic congressional ballot (field Mar 16-22 2026, n=26,406 RV): Democrats 45%, Republicans 42%, +/-1pp MoE. Consistent with D+3 lead persisting roughly 7 months from midterm.",
+        "reason": "Numeric divergence 99.8% on metric (context: with): new=3.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-22T01:30:36Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:30:36Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-19T00:57:10+00:00",
+        "entry_a_text": "Ballotpedia generic congressional ballot average shows Democrats +6 as of April 2, 2026; Morning Consult shows D 45 / R 42 in March 2026. Consistent with historical midterm pattern for incumbent-party disadvantage under second Trump term.",
+        "entry_b_time": "2026-04-22T01:30:36+00:00",
+        "entry_b_text": "Morning Consult generic congressional ballot (field Mar 16-22 2026, n=26,406 RV): Democrats 45%, Republicans 42%, +/-1pp MoE. Consistent with D+3 lead persisting roughly 7 months from midterm.",
+        "reason": "Numeric divergence 76.9% on metric (context: democrats): new=26.0, existing=6.0, threshold=10%",
+        "detected": "2026-04-22T01:30:36Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:30:36Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T15:22:22+00:00",
+        "entry_a_text": "Democrats odds of winning House ~69%. Need net gain of 3 seats. Individual-donor fundraising advantage for Democrats. Cook Political shifting multiple seats toward Democrats: OH-01 Toss-up to Lean D, PA-08 Lean R to Toss-up. 42 battleground districts tracked (22 D, 20 R).",
+        "entry_b_time": "2026-04-22T01:30:36+00:00",
+        "entry_b_text": "Morning Consult generic congressional ballot (field Mar 16-22 2026, n=26,406 RV): Democrats 45%, Republicans 42%, +/-1pp MoE. Consistent with D+3 lead persisting roughly 7 months from midterm.",
+        "reason": "Numeric divergence 86.4% on metric (context: d): new=3.0, existing=22.0, threshold=10%",
+        "detected": "2026-04-22T01:30:36Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:30:36Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-16T03:42:51+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, stale_evidence, quorum_failure. Reason: Evidence ev_011: Generic congressional ballot shows Democrats leading by 5.4 points sustained thr",
+        "entry_b_time": "2026-04-22T01:30:36+00:00",
+        "entry_b_text": "Morning Consult generic congressional ballot (field Mar 16-22 2026, n=26,406 RV): Democrats 45%, Republicans 42%, +/-1pp MoE. Consistent with D+3 lead persisting roughly 7 months from midterm.",
+        "reason": "Numeric divergence 79.2% on metric (context: democrats): new=26.0, existing=5.4, threshold=10%",
+        "detected": "2026-04-22T01:30:36Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:30:36Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-16T03:42:51+00:00",
+        "entry_a_text": "Generic congressional ballot shows Democrats leading by 5.4 points sustained through April. Democrats odds of winning the House have increased to roughly 69 percent. Lingering Iran war adds to GOP problems in midterm elections.",
+        "entry_b_time": "2026-04-22T01:30:36+00:00",
+        "entry_b_text": "Morning Consult generic congressional ballot (field Mar 16-22 2026, n=26,406 RV): Democrats 45%, Republicans 42%, +/-1pp MoE. Consistent with D+3 lead persisting roughly 7 months from midterm.",
+        "reason": "Numeric divergence 79.2% on metric (context: democrats): new=26.0, existing=5.4, threshold=10%",
+        "detected": "2026-04-22T01:30:36Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:30:36Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-10T00:00:00Z",
+        "entry_a_text": "March 2026 CPI: headline 3.3% annual (Iran war energy driven), core 2.6% annual. Real earnings -0.6% m/m. Tariff impact visible in goods categories. Consumer purchasing power erosion is the economic signal most relevant to midterm voting behavior.",
+        "entry_b_time": "2026-04-22T01:30:36+00:00",
+        "entry_b_text": "Morning Consult generic congressional ballot (field Mar 16-22 2026, n=26,406 RV): Democrats 45%, Republicans 42%, +/-1pp MoE. Consistent with D+3 lead persisting roughly 7 months from midterm.",
+        "reason": "Numeric divergence 87.3% on metric (context: 2026): new=26.0, existing=3.3, threshold=10%",
+        "detected": "2026-04-22T01:30:36Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:30:36Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-12T00:00:00Z",
+        "entry_a_text": "RealClearPolitics generic congressional ballot average: Democrats +5.4 (47.4% D vs 42.0% R). Morning Consult weekly tracker: Democrats lead 45%-42% among registered voters — 6-point net swing from Republican advantage at start of Trump's second term.",
+        "entry_b_time": "2026-04-22T01:30:36+00:00",
+        "entry_b_text": "Morning Consult generic congressional ballot (field Mar 16-22 2026, n=26,406 RV): Democrats 45%, Republicans 42%, +/-1pp MoE. Consistent with D+3 lead persisting roughly 7 months from midterm.",
+        "reason": "Numeric divergence 79.2% on metric (context: democrats): new=26.0, existing=5.4, threshold=10%",
+        "detected": "2026-04-22T01:30:36Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:30:36Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-07T00:00:00Z",
+        "entry_a_text": "CNN analysis: Since Trump returned to White House, Democrats have flipped 30 state legislative seats to Republicans' zero. Half of top-10 special election overperformances have occurred since 2024 election. National Republicans spent money in GA-14 (unusual for safe seat) and still saw 25-point Dem overperformance.",
+        "entry_b_time": "2026-04-22T01:30:36+00:00",
+        "entry_b_text": "Morning Consult generic congressional ballot (field Mar 16-22 2026, n=26,406 RV): Democrats 45%, Republicans 42%, +/-1pp MoE. Consistent with D+3 lead persisting roughly 7 months from midterm.",
+        "reason": "Numeric divergence 13.3% on metric (context: democrats): new=26.0, existing=30.0, threshold=10%",
+        "detected": "2026-04-22T01:30:36Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:30:36Z"
       }
     ]
   },
@@ -1168,29 +1859,844 @@
         "trust_delta": 0.05,
         "original_text_snippet": "Manhattan DA investigating Eric Swalwell sexual assault allegation; multiple Democrats calling for gubernatorial withdra",
         "confirming_text_snippet": "Rep. Eric Swalwell suspended California gubernatorial campaign after CNN/SF Chronicle sexual misconduct reports. 4 women"
+      },
+      {
+        "timestamp": "2026-04-19T00:57:10Z",
+        "evidence_index": 3,
+        "confirming_index": 14,
+        "resolution": "REFUTED",
+        "source": "RealClearPolling / Morning Consult tracker, April 12 2026",
+        "confirming_source": "Ballotpedia / Morning Consult",
+        "trust_delta": -0.1,
+        "original_text_snippet": "RealClearPolitics generic congressional ballot average: Democrats +5.4 (47.4% D vs 42.0% R). Morning Consult weekly trac",
+        "confirming_text_snippet": "Ballotpedia generic congressional ballot average shows Democrats +6 as of April 2, 2026; Morning Consult shows D 45 / R "
+      },
+      {
+        "timestamp": "2026-04-19T00:57:10Z",
+        "evidence_index": 10,
+        "confirming_index": 14,
+        "resolution": "REFUTED",
+        "source": "Silver Bulletin / Washington Post",
+        "confirming_source": "Ballotpedia / Morning Consult",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Generic congressional ballot shows Democrats leading by 5.4 points sustained through April. Democrats odds of winning th",
+        "confirming_text_snippet": "Ballotpedia generic congressional ballot average shows Democrats +6 as of April 2, 2026; Morning Consult shows D 45 / R "
+      },
+      {
+        "timestamp": "2026-04-21T03:51:21Z",
+        "evidence_index": 3,
+        "confirming_index": 16,
+        "resolution": "REFUTED",
+        "source": "RealClearPolling / Morning Consult tracker, April 12 2026",
+        "confirming_source": "Silver Bulletin / Morning Consult",
+        "trust_delta": -0.1,
+        "original_text_snippet": "RealClearPolitics generic congressional ballot average: Democrats +5.4 (47.4% D vs 42.0% R). Morning Consult weekly trac",
+        "confirming_text_snippet": "Nate Silver generic-ballot average D+5.6 as of Apr 21, 2026. Morning Consult Mar 16-22 data showed D 45% R 42% among RVs"
+      },
+      {
+        "timestamp": "2026-04-21T03:51:21Z",
+        "evidence_index": 6,
+        "confirming_index": 16,
+        "resolution": "REFUTED",
+        "source": "RealClearPolling / Ballotpedia / Sabato Crystal Ball",
+        "confirming_source": "Silver Bulletin / Morning Consult",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Generic ballot streak tracker initialized. RCP average Dems +5.4pp (April 12). Ballotpedia shows +6 as of April 2. RealC",
+        "confirming_text_snippet": "Nate Silver generic-ballot average D+5.6 as of Apr 21, 2026. Morning Consult Mar 16-22 data showed D 45% R 42% among RVs"
+      },
+      {
+        "timestamp": "2026-04-22T01:30:36Z",
+        "evidence_index": 0,
+        "confirming_index": 21,
+        "resolution": "CONFIRMED",
+        "source": "NBC News Decision Desk / AP, April 7 2026",
+        "confirming_source": "replay",
+        "trust_delta": 0.05,
+        "original_text_snippet": "Georgia 14th District special election runoff: Republican Clay Fuller defeats Democrat Shawn Harris 55.9%-44.1% (11.8-po",
+        "confirming_text_snippet": "REPLAY: indicator t2_dem_special_overperformance_plus5 fires at historical firedDate 2026-04-07T00:00:00Z. Original note"
+      },
+      {
+        "timestamp": "2026-04-22T01:30:36Z",
+        "evidence_index": 3,
+        "confirming_index": 24,
+        "resolution": "REFUTED",
+        "source": "RealClearPolling / Morning Consult tracker, April 12 2026",
+        "confirming_source": "Morning Consult",
+        "trust_delta": -0.1,
+        "original_text_snippet": "RealClearPolitics generic congressional ballot average: Democrats +5.4 (47.4% D vs 42.0% R). Morning Consult weekly trac",
+        "confirming_text_snippet": "Morning Consult generic congressional ballot (field Mar 16-22 2026, n=26,406 RV): Democrats 45%, Republicans 42%, +/-1pp"
+      },
+      {
+        "timestamp": "2026-04-22T01:30:36Z",
+        "evidence_index": 10,
+        "confirming_index": 24,
+        "resolution": "REFUTED",
+        "source": "Silver Bulletin / Washington Post",
+        "confirming_source": "Morning Consult",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Generic congressional ballot shows Democrats leading by 5.4 points sustained through April. Democrats odds of winning th",
+        "confirming_text_snippet": "Morning Consult generic congressional ballot (field Mar 16-22 2026, n=26,406 RV): Democrats 45%, Republicans 42%, +/-1pp"
+      },
+      {
+        "timestamp": "2026-04-22T01:30:36Z",
+        "evidence_index": 18,
+        "confirming_index": 20,
+        "resolution": "CONFIRMED",
+        "source": "",
+        "confirming_source": "",
+        "trust_delta": 0.05,
+        "original_text_snippet": "LR MIGRATION RESET: posteriors reset to design priors; evidence log preserved.",
+        "confirming_text_snippet": "REPLAY BEGIN: 1 previously-fired indicators will be re-applied chronologically under current LR system. Posteriors reset"
+      },
+      {
+        "timestamp": "2026-04-22T01:30:36Z",
+        "evidence_index": 20,
+        "confirming_index": 23,
+        "resolution": "CONFIRMED",
+        "source": "",
+        "confirming_source": "",
+        "trust_delta": 0.05,
+        "original_text_snippet": "REPLAY BEGIN: 1 previously-fired indicators will be re-applied chronologically under current LR system. Posteriors reset",
+        "confirming_text_snippet": "REPLAY COMPLETE: 1 indicators applied, 0 skipped. Final posteriors: {'H1': 0.4388, 'H2': 0.2881, 'H3': 0.1612, 'H4': 0.1"
       }
     ],
     "effectiveTrust": {
       "@mikhailgorbaechev.bsky.social": 0.5,
       "AP results, April 7 2026": 0.5,
-      "AP, April 7 2026": 0.5,
+      "AP, April 7 2026": 0.5455,
       "BLS CPI release, April 10 2026": 0.5,
-      "Ballotpedia": 0.5,
+      "Ballotpedia": 0.4118,
       "Bloomberg Government, April 7 2026": 0.5,
       "CNN": 0.75,
       "CNN analysis": 0.5,
       "CNN, April 11 2026": 0.5455,
       "Campaigns & Elections": 0.5,
       "FEC": 0.5,
-      "Morning Consult tracker, April 12 2026": 0.5,
-      "NBC News Decision Desk": 0.5,
-      "RealClearPolling": 0.5,
-      "Sabato Crystal Ball": 0.5,
-      "Silver Bulletin": 0.5,
-      "Washington Post": 0.5,
+      "Morning Consult tracker, April 12 2026": 0.2554,
+      "NBC News Decision Desk": 0.5455,
+      "RealClearPolling": 0.1936,
+      "Sabato Crystal Ball": 0.4118,
+      "Silver Bulletin": 0.3289,
+      "Washington Post": 0.3289,
       "270toWin": 0.5,
-      "Cook Political": 0.5
+      "Cook Political": 0.5,
+      "Morning Consult": 0.5,
+      "replay": 0.5
     },
-    "_last_scan_same_source_skipped": 3
-  }
+    "_last_scan_same_source_skipped": 9
+  },
+  "conditionalPredictions": [
+    {
+      "id": "cp_001",
+      "createdAt": "2026-04-19T05:50:54+00:00",
+      "conditionTopic": "calibration-midterms-2026",
+      "conditionHypothesis": "H1",
+      "conditionProbAtCreation": 0.9575,
+      "prediction": "IF Democrats flip House, THEN Democratic margin narrows to <5 net seats by 2027-06-30 due to redistricting litigation and special-election losses",
+      "resolutionCriteria": "Counting certified House seats as of June 30, 2027; net margin (Dem seats minus 218 threshold) <5; includes all redistricting court orders and special elections settled by deadline",
+      "deadline": "2027-06-30",
+      "conditionalProbability": 0.58,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-ochre",
+      "lens": "OCHRE",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": "Margin erosion via redistricting/special elections captures institutional churn after a flip.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "APPROVE",
+          "reasoning": "Margin narrowing through redistricting litigation and special elections is an institutional mechanism (courts + elections) absorbing political volatility.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Margin narrowing via litigation is a differentiated institutional prediction.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "Democratic margin collapsing to <5 by mid-2027 via redistricting and specials captures institutional fragility. Very RED.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "MODIFY",
+          "reasoning": "Measurable outcome, but the actor whose decision produces it is abstracted. Name the specific agency/official/firm and state the incentive driving the choice.",
+          "modified_suggestion": "Specify the named decision-maker (agency director, committee chair, corporate board, minister) whose choice produces the measured outcome, and state the incentive."
+        }
+      },
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_002",
+      "createdAt": "2026-04-19T05:50:54+00:00",
+      "conditionTopic": "calibration-midterms-2026",
+      "conditionHypothesis": "H1",
+      "conditionProbAtCreation": 0.9575,
+      "prediction": "IF H1, THEN real federal discretionary spending (non-defense) declines as % of GDP by 2027-12-31 relative to CBO baseline",
+      "resolutionCriteria": "CBO June 2026 baseline projection for FY2027-2028 non-defense discretionary outlays (% of GDP) vs actual enacted appropriations; decline ≥0.2pp",
+      "deadline": "2027-12-31",
+      "conditionalProbability": 0.54,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-ochre",
+      "lens": "OCHRE",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": "Structural shift in discretionary-spending share reflects fiscal-regime impact of divided government.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "NEUTRAL",
+          "reasoning": "Discretionary spending share is an aggregate fiscal outcome.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "CBO baseline vs actual is a clean counterfactual.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "Non-defense discretionary decline vs CBO baseline names fiscal brittleness. OK.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "APPROVE",
+          "reasoning": "Names multiple specific decision-makers (agencies, officials, firms, states) and ties the outcome to their choices. Actor-incentive traceability strong.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_003",
+      "createdAt": "2026-04-19T05:50:54+00:00",
+      "conditionTopic": "calibration-midterms-2026",
+      "conditionHypothesis": "H1",
+      "conditionProbAtCreation": 0.9575,
+      "prediction": "IF H1, THEN ≥1 major committee chair faces primary challenge from opposition faction in 2028",
+      "resolutionCriteria": "At least one standing committee chair (Appropriations, Ways and Means, Armed Services, Energy and Commerce, or Judiciary) faces primary opponent with ≥25% vote share in 2028 primary",
+      "deadline": "2028-12-31",
+      "conditionalProbability": 0.61,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-ochre",
+      "lens": "OCHRE",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": "Committee-chair primary challenges track intraparty realignment, a regime-level signal.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "NEUTRAL",
+          "reasoning": "Primary challenge is a political outcome rather than a resolution-mechanism claim.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Primary-challenge trigger with 25% threshold.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "Committee chair primary challenge names intra-party fracture. Good.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "APPROVE",
+          "reasoning": "Names multiple specific decision-makers (agencies, officials, firms, states) and ties the outcome to their choices. Actor-incentive traceability strong.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_004",
+      "createdAt": "2026-04-22T02:35:32+00:00",
+      "conditionTopic": "calibration-midterms-2026",
+      "conditionHypothesis": "H1",
+      "conditionProbAtCreation": 0.5291,
+      "prediction": "IF Democrats flip House, THEN Democratic majority margin peaks at 6-15 seats in initial certified results before redistricting challenges resolve.",
+      "resolutionCriteria": "Observable: House seat counts immediately after final certification of all Nov 2026 races (expected Jan-Feb 2027); Dem caucus total minus 218 threshold = 6-15 at peak certification date.",
+      "deadline": "2027-03-01",
+      "conditionalProbability": 0.69,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "elections",
+        "house-control",
+        "political-dynamics"
+      ],
+      "source": "agent-green",
+      "lens": "GREEN",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "NEUTRAL",
+          "reasoning": "House-margin certification detail — within standard political-framework mechanics.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "APPROVE",
+          "reasoning": "Narrow-margin House flip is BLUE-consistent outcome (status quo-adjacent). Reasonable.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "MODIFY",
+          "reasoning": "6-15 seat margin assumes clean blue wave. RED: either Dems don't flip (status quo sticky) or, if they do, post-election contestation/recounts push certification past March 2027 in 3-5 seats — deadline may expire before 'final certification'.",
+          "modified_suggestion": "Extend deadline to 2027-06-01."
+        },
+        "VIOLET": {
+          "verdict": "MODIFY",
+          "reasoning": "Margin depends heavily on Trump's approval trajectory, Johnson's (or successor's) redistricting responses, and specific swing-district candidate recruitment by Hakeem Jeffries' DCCC vs Hudson's NRCC. The 6-15 range is narrow; agency variance is wider. Note that Ohio, NC redistricting specifically driven by named state legislators.",
+          "modified_suggestion": "Widen margin band to 4-18 seats OR lower probability to 0.55 given wider agency-driven variance."
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Specific seat range is cleanly observable post-certification.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_005",
+      "createdAt": "2026-04-22T02:35:32+00:00",
+      "conditionTopic": "calibration-midterms-2026",
+      "conditionHypothesis": "H1",
+      "conditionProbAtCreation": 0.5291,
+      "prediction": "IF Democrats flip House, THEN House votes on >=4 major legislative packages (infrastructure, healthcare, climate, or economy) in 2027 with GOP opposition majority",
+      "resolutionCriteria": "Observable: House record shows >=4 passage votes on major bills with >100-vote GOP opposition margin; bills reach committee or floor vote",
+      "deadline": "2027-12-31",
+      "conditionalProbability": 0.65,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "legislation",
+        "house-control",
+        "partisan-polarization"
+      ],
+      "source": "agent-green",
+      "lens": "GREEN",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": "Partisan polarization lock-in is consistent with AMBER's institutional-transformation framing.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "MODIFY",
+          "reasoning": "BLUE challenges assumption of party-line gridlock — divided government historically produces compromise legislation (must-pass bills, continuing resolutions). 0.65 for 4+ heavily GOP-opposed packages is too high.",
+          "modified_suggestion": "Lower to 0.50."
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "Reasonable.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "APPROVE",
+          "reasoning": "Legislative-votes observable driven explicitly by Jeffries/Johnson strategic choices — agency-consistent.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "MODIFY",
+          "reasoning": "'>100-vote GOP opposition margin' on 4 packages is near-certain for any Dem House; low informational value.",
+          "modified_suggestion": "Tighten to enactment-rate (bills reaching President) rather than passage votes, to distinguish control-type from gridlock."
+        }
+      },
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_006",
+      "createdAt": "2026-04-22T02:35:32+00:00",
+      "conditionTopic": "calibration-midterms-2026",
+      "conditionHypothesis": "H2",
+      "conditionProbAtCreation": 0.3158,
+      "prediction": "IF Dems gain but fall short, THEN Republicans hold 218-225 seat range through 2027, maintaining narrow control",
+      "resolutionCriteria": "Observable: House seat counts after 2026 election and 2027 special elections show Republican caucus in 218-225 range",
+      "deadline": "2027-06-30",
+      "conditionalProbability": 0.71,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "elections",
+        "house-control",
+        "narrow-margins"
+      ],
+      "source": "agent-green",
+      "lens": "GREEN",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "NEUTRAL",
+          "reasoning": "Seat-range continuation prediction.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "APPROVE",
+          "reasoning": "Narrow GOP hold is institutional status-quo outcome. Reasonable.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "Reasonable.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "APPROVE",
+          "reasoning": "Reasonable given narrow-majority dynamics driven by named swing members.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Narrow margin observable; distinct from H1 and H3.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_007",
+      "createdAt": "2026-04-22T02:35:32+00:00",
+      "conditionTopic": "calibration-midterms-2026",
+      "conditionHypothesis": "H3",
+      "conditionProbAtCreation": 0.106,
+      "prediction": "IF Republicans hold status quo (±5 seats), THEN GOP majority narrows to 222-227 seats by 2027-06-30 due to 2027 special elections and early retirements",
+      "resolutionCriteria": "Observable: House seat counts show GOP in 222-227 range after 2026 election and special elections through June 2027",
+      "deadline": "2027-06-30",
+      "conditionalProbability": 0.68,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "elections",
+        "house-control",
+        "majority-dynamics"
+      ],
+      "source": "agent-green",
+      "lens": "GREEN",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "NEUTRAL",
+          "reasoning": "Seat-range continuation prediction.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "APPROVE",
+          "reasoning": "Status quo ±5 with narrowing to 222-227 is incrementalist BLUE-compatible. Reasonable.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "Reasonable.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "APPROVE",
+          "reasoning": "Special-election attrition driven by individual retirement decisions — agency-consistent.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Status-quo anchor with specific seat band.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_008",
+      "createdAt": "2026-04-22T02:35:34+00:00",
+      "conditionTopic": "calibration-midterms-2026",
+      "conditionHypothesis": "H1",
+      "conditionProbAtCreation": 0.5291,
+      "prediction": "IF H1 (Democrats flip House, 218+ seats), THEN legislative productivity remains subdued despite party control shift: divided government (Dem House, Republican Senate/President) fragments veto-points; committee markup phase expands 50-75% longer than historical median as minority leverage increases procedural obstruction. Enacted legislation count 2027-2028 declines 20-30% vs 2019-2020 divided-government baseline.",
+      "resolutionCriteria": "Observable: CQ/Congress.gov legislative tracking: (1) Measure median days from committee markup to floor vote for enacted legislation, Q1 2027-Q2 2028 vs historical 2019-2020 baseline. ≥50pp increase. (2) Count of enacted bills 2027-2028 vs 2019-2020 comparable period. 20-30% decline.",
+      "deadline": "2027-12-31",
+      "conditionalProbability": 0.59,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "veto-point-fragmentation",
+        "procedural-obstruction",
+        "legislative-sclerosis"
+      ],
+      "source": "agent-ochre",
+      "lens": "OCHRE",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": "Legislative sclerosis / veto-point fragmentation is a measurable institutional-transformation signal.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "APPROVE",
+          "reasoning": "Veto-point fragmentation is standard divided-govt pattern — BLUE sees this as the system working. Reasonable.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "Veto-point fragmentation is RED-aligned.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "APPROVE",
+          "reasoning": "Legislative-productivity observable driven by named Speaker/leader decisions.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Legislative productivity with historical baseline is clean structural test.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_009",
+      "createdAt": "2026-04-22T02:35:34+00:00",
+      "conditionTopic": "calibration-midterms-2026",
+      "conditionHypothesis": "H2",
+      "conditionProbAtCreation": 0.3158,
+      "prediction": "IF H2 (Democrats gain but fall short, 213-217 seats), THEN fragile coalition forces centrist/moderate Democratic caucus to control legislative agenda; progressive/squad faction sees policy influence decline 40-50% by 2028 relative to 2023-2024 baseline. Committee assignments favor conservative/moderate chairs; primary challenges to committee conservatives fail at <22% vote share through 2028.",
+      "resolutionCriteria": "Observable: Committee chair assignments announced Q1 2027. Compare DW-NOMINATE scores of chairs 2027 vs 2025: if H2 holds (Dems at 213-217), Republican committee chairs maintain median DW-NOMINATE score within 0.05 of 2025 baseline.",
+      "deadline": "2027-03-31",
+      "conditionalProbability": 0.62,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "coalition-fragility",
+        "ideological-reversion",
+        "structural-conservatism"
+      ],
+      "source": "agent-ochre",
+      "lens": "OCHRE",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "MODIFY",
+          "reasoning": "Resolution criterion measures Republican chair DW-NOMINATE scores, but prediction is about Democratic caucus internal dynamics and progressive influence decline. The measurement doesn't map to the claim.",
+          "modified_suggestion": "Rewrite criterion to measure Democratic committee-chair DW-NOMINATE scores or progressive-caucus member count on key committees."
+        },
+        "BLUE": {
+          "verdict": "MODIFY",
+          "reasoning": "Resolution criteria ambiguous: if Dems at 213-217, chairs would still be REPUBLICAN (GOP majority). Criterion checks Republican chair DW-NOMINATE which is measuring GOP side, not Dem coalition dynamics. Criterion does not match hypothesis.",
+          "modified_suggestion": "Rewrite criterion to measure Democratic caucus committee ranking-member assignments, or GOP chair progressive challenge vote shares."
+        },
+        "RED": {
+          "verdict": "MODIFY",
+          "reasoning": "Prediction text mentions Dem committee chairs under Dem majority, but resolution criteria references REPUBLICAN chairs — contradiction. Under H2 (Dems fall short), Republicans would keep chairs, so criteria makes sense but text does not.",
+          "modified_suggestion": "Fix text to reflect R chairs under H2 (Dems don't flip)."
+        },
+        "VIOLET": {
+          "verdict": "NEUTRAL",
+          "reasoning": "DW-NOMINATE observable.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "DROP",
+          "reasoning": "Resolution criteria are self-contradictory: prediction text says Dems gain 213-217, but resolution tests Republican committee chairs' DW-NOMINATE — Republicans would not chair committees if Dems flipped. Broken logic.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_010",
+      "createdAt": "2026-04-22T04:18:43+00:00",
+      "conditionTopic": "calibration-midterms-2026",
+      "conditionHypothesis": "H1",
+      "conditionProbAtCreation": 0.5291,
+      "prediction": "IF Democrats flip the House, THEN suburban defection in AZ, NV, PA, MI driven by tariff cost-of-living pressure enables net gain >=10 seats; exit polls confirm Democrat gains among independents in Republican suburban seats.",
+      "resolutionCriteria": "Democrats win 218+ House seats (net gain >=10 from 2024 baseline). Exit polls show Democrat gains among independents in previously Republican suburban seats.",
+      "deadline": "2026-12-31",
+      "conditionalProbability": 0.54,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "midterms",
+        "electoral_geography",
+        "suburban_swing"
+      ],
+      "source": "agent-violet",
+      "lens": "VIOLET",
+      "criticVerdicts": {},
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_011",
+      "createdAt": "2026-04-22T05:19:34+00:00",
+      "conditionTopic": "calibration-midterms-2026",
+      "conditionHypothesis": "H2",
+      "conditionProbAtCreation": 0.3158,
+      "prediction": "IF Democrats gain seats but fall short of 218-seat majority (H2 holds), THEN they secure at least 205 seats and leverage Senate control plus Presidential veto to pass bipartisan infrastructure/workforce bills in the 119th Congress (2027-2028), maintaining leverage despite House minority status.",
+      "resolutionCriteria": "2026 elections result in Democratic House gains of at least 10 seats but final count below 218 seats; bipartisan bills advance out of committee with more than 50% Democratic co-sponsorship; Congressional Quarterly records more than 3 major bills with mixed-party support.",
+      "deadline": "2027-06-30",
+      "conditionalProbability": 0.61,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "electoral-politics",
+        "legislative-adaptation",
+        "institutional-resilience"
+      ],
+      "source": "agent-blue",
+      "lens": "BLUE",
+      "criticVerdicts": [
+        {
+          "critic": "GREEN",
+          "verdict": "MODIFY",
+          "reasoning": "Bipartisan bills passing with House minority historically unusual. Resolution criteria require conditions not stated in H2 (Senate control).",
+          "modified_suggestion": "Reduce to 0.45. Require explicit Senate-control assumption and replace '3 major bills' with '2 or more significant appropriations with documented bipartisan co-sponsorship'."
+        },
+        {
+          "critic": "RED",
+          "verdict": "MODIFY",
+          "reasoning": "Republican House leadership will use committee control to block bipartisan bills from reaching floor. Requires multi-party coordination failure to somehow produce coordination success. 0.61 too high.",
+          "modified_suggestion": "Lower to 0.32. Require explicit specification of whether H2 assumes Democratic Senate control."
+        },
+        {
+          "critic": "VIOLET",
+          "verdict": "MODIFY",
+          "reasoning": "Assumes Democrats gain Senate control and Presidential veto capacity — not guaranteed under H2. If Trump is President through 2028, no Democratic veto. Bipartisan House bills require naming specific Republican defectors. 61% too high.",
+          "modified_suggestion": "Lower to 0.38. Require explicit specification of which chamber Democrats control and which President holds veto power."
+        },
+        {
+          "critic": "OCHRE",
+          "verdict": "MODIFY",
+          "reasoning": "Bipartisan major bill passage requires 60 Senate votes, which path-dependence strongly disfavors in current polarization regime. Institutional path-dependence runs strongly toward deadlock. 0.61 inadequate discount.",
+          "modified_suggestion": "Reduce to 0.35. Track budget reconciliation vehicles rather than bipartisan statute — more realistic pathway."
+        },
+        {
+          "critic": "GRAY",
+          "verdict": "MODIFY",
+          "reasoning": "Claim that House minority can 'leverage Senate control plus Presidential veto' is structurally weak — minority party does not control Senate while being in minority in the House under same political alignment.",
+          "modified_suggestion": "Reframe: IF Democrats hold Senate and gain House seats but remain in minority (H2), THEN 119th Congress passes at least 2 bipartisan bills with 20+ Republican House co-sponsors by Q4 2027."
+        }
+      ],
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_012",
+      "createdAt": "2026-04-22T05:19:34+00:00",
+      "conditionTopic": "calibration-midterms-2026",
+      "conditionHypothesis": "H3",
+      "conditionProbAtCreation": 0.106,
+      "prediction": "IF Republicans hold the House (H3), THEN the legislative regime shifts from bipartisan-deal-making to permanent veto-gridlock, triggering institutional transformation where Congress delegates emergency/infrastructure authority to executive agencies, with executive actions in 2027-2028 increasing more than 50% above 2021-2026 baseline.",
+      "resolutionCriteria": "Executive actions in 2027-2028 increase more than 50% above 2021-2026 baseline; Supreme Court reviews more than 2x annual average of statutory delegation challenges; key infrastructure/social bills pass via executive order rather than statute by end 2027.",
+      "deadline": "2027-12-31",
+      "conditionalProbability": 0.59,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "institutional-gridlock-regime",
+        "separation-of-powers-shift",
+        "executive-power-normalization"
+      ],
+      "source": "agent-amber",
+      "lens": "AMBER",
+      "criticVerdicts": [
+        {
+          "critic": "GREEN",
+          "verdict": "MODIFY",
+          "reasoning": "'More than 50% above 2021-2026 baseline' is large threshold; institutional constraints impose friction. 59% slightly high for multi-criteria prediction.",
+          "modified_suggestion": "Reduce to 0.52. Lower executive action threshold to 30% above baseline."
+        },
+        {
+          "critic": "RED",
+          "verdict": "MODIFY",
+          "reasoning": "Executive-action escalation mechanism correct but SCOTUS major-questions doctrine may constrain it. Resolution criteria conflate two different phenomena: executive delegation and unilateral executive orders.",
+          "modified_suggestion": "Maintain 0.59. Add disambiguation: specify whether 'executive actions' means EOs, agency rulemaking, or both."
+        },
+        {
+          "critic": "VIOLET",
+          "verdict": "MODIFY",
+          "reasoning": "SCOTUS (post-Chevron) has shown strong appetite for constraining executive delegation, which works against this prediction. Resolution criteria needs to account for judicial constraint.",
+          "modified_suggestion": "Lower to 0.47. Add: if SCOTUS strikes down 2+ major executive actions under major-questions doctrine, the executive-delegation pathway is blocked."
+        },
+        {
+          "critic": "OCHRE",
+          "verdict": "MODIFY",
+          "reasoning": ">50% above 2021-2026 baseline for executive actions is poorly anchored — both Biden and Trump have used executive action extensively, so baseline is already elevated. Post-Chevron doctrine significantly constrains executive delegation.",
+          "modified_suggestion": "Reduce to 0.48. Reframe around executive actions that survive judicial review, not raw count. SCOTUS delegation challenges are correct second-order indicator."
+        },
+        {
+          "critic": "GRAY",
+          "verdict": "MODIFY",
+          "reasoning": "'50% above 2021-2026 baseline' executive action metric is poorly defined — executive actions vary enormously in scope and counting methodology.",
+          "modified_suggestion": "Reframe: (1) Federal Register word-count for EOs and agency rules increases 40%+ in 2027-2028 vs 2021-2024 average; (2) at least 1 major statutory delegation challenge reaches SCOTUS; (3) at least 3 infrastructure/spending actions via executive authority that Congress declined to authorize."
+        }
+      ],
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_013",
+      "createdAt": "2026-04-22T05:19:57+00:00",
+      "conditionTopic": "calibration-midterms-2026",
+      "conditionHypothesis": "H2",
+      "conditionProbAtCreation": 0.3158,
+      "prediction": "IF Democrats gain seats but fall short of 218-seat majority (H2 holds), THEN they secure at least 205 seats and leverage Senate control plus Presidential veto to pass bipartisan infrastructure/workforce bills in the 119th Congress (2027-2028), maintaining leverage despite House minority status.",
+      "resolutionCriteria": "2026 elections result in Democratic House gains of at least 10 seats but final count below 218 seats; bipartisan bills advance out of committee with more than 50% Democratic co-sponsorship; Congressional Quarterly records more than 3 major bills with mixed-party support.",
+      "deadline": "2027-06-30",
+      "conditionalProbability": 0.61,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "electoral-politics",
+        "legislative-adaptation",
+        "institutional-resilience"
+      ],
+      "source": "agent-blue",
+      "lens": "BLUE",
+      "criticVerdicts": [
+        {
+          "critic": "GREEN",
+          "verdict": "MODIFY",
+          "reasoning": "Bipartisan bills passing with House minority historically unusual. Resolution criteria require conditions not stated in H2 (Senate control).",
+          "modified_suggestion": "Reduce to 0.45. Require explicit Senate-control assumption and replace '3 major bills' with '2 or more significant appropriations with documented bipartisan co-sponsorship'."
+        },
+        {
+          "critic": "RED",
+          "verdict": "MODIFY",
+          "reasoning": "Republican House leadership will use committee control to block bipartisan bills from reaching floor. Requires multi-party coordination failure to somehow produce coordination success. 0.61 too high.",
+          "modified_suggestion": "Lower to 0.32. Require explicit specification of whether H2 assumes Democratic Senate control."
+        },
+        {
+          "critic": "VIOLET",
+          "verdict": "MODIFY",
+          "reasoning": "Assumes Democrats gain Senate control and Presidential veto capacity — not guaranteed under H2. If Trump is President through 2028, no Democratic veto. Bipartisan House bills require naming specific Republican defectors. 61% too high.",
+          "modified_suggestion": "Lower to 0.38. Require explicit specification of which chamber Democrats control and which President holds veto power."
+        },
+        {
+          "critic": "OCHRE",
+          "verdict": "MODIFY",
+          "reasoning": "Bipartisan major bill passage requires 60 Senate votes, which path-dependence strongly disfavors in current polarization regime. Institutional path-dependence runs strongly toward deadlock. 0.61 inadequate discount.",
+          "modified_suggestion": "Reduce to 0.35. Track budget reconciliation vehicles rather than bipartisan statute — more realistic pathway."
+        },
+        {
+          "critic": "GRAY",
+          "verdict": "MODIFY",
+          "reasoning": "Claim that House minority can 'leverage Senate control plus Presidential veto' is structurally weak — minority party does not control Senate while being in minority in the House under same political alignment.",
+          "modified_suggestion": "Reframe: IF Democrats hold Senate and gain House seats but remain in minority (H2), THEN 119th Congress passes at least 2 bipartisan bills with 20+ Republican House co-sponsors by Q4 2027."
+        }
+      ],
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_014",
+      "createdAt": "2026-04-22T05:19:57+00:00",
+      "conditionTopic": "calibration-midterms-2026",
+      "conditionHypothesis": "H3",
+      "conditionProbAtCreation": 0.106,
+      "prediction": "IF Republicans hold the House (H3), THEN the legislative regime shifts from bipartisan-deal-making to permanent veto-gridlock, triggering institutional transformation where Congress delegates emergency/infrastructure authority to executive agencies, with executive actions in 2027-2028 increasing more than 50% above 2021-2026 baseline.",
+      "resolutionCriteria": "Executive actions in 2027-2028 increase more than 50% above 2021-2026 baseline; Supreme Court reviews more than 2x annual average of statutory delegation challenges; key infrastructure/social bills pass via executive order rather than statute by end 2027.",
+      "deadline": "2027-12-31",
+      "conditionalProbability": 0.59,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "institutional-gridlock-regime",
+        "separation-of-powers-shift",
+        "executive-power-normalization"
+      ],
+      "source": "agent-amber",
+      "lens": "AMBER",
+      "criticVerdicts": [
+        {
+          "critic": "GREEN",
+          "verdict": "MODIFY",
+          "reasoning": "'More than 50% above 2021-2026 baseline' is large threshold; institutional constraints impose friction. 59% slightly high for multi-criteria prediction.",
+          "modified_suggestion": "Reduce to 0.52. Lower executive action threshold to 30% above baseline."
+        },
+        {
+          "critic": "RED",
+          "verdict": "MODIFY",
+          "reasoning": "Executive-action escalation mechanism correct but SCOTUS major-questions doctrine may constrain it. Resolution criteria conflate two different phenomena: executive delegation and unilateral executive orders.",
+          "modified_suggestion": "Maintain 0.59. Add disambiguation: specify whether 'executive actions' means EOs, agency rulemaking, or both."
+        },
+        {
+          "critic": "VIOLET",
+          "verdict": "MODIFY",
+          "reasoning": "SCOTUS (post-Chevron) has shown strong appetite for constraining executive delegation, which works against this prediction. Resolution criteria needs to account for judicial constraint.",
+          "modified_suggestion": "Lower to 0.47. Add: if SCOTUS strikes down 2+ major executive actions under major-questions doctrine, the executive-delegation pathway is blocked."
+        },
+        {
+          "critic": "OCHRE",
+          "verdict": "MODIFY",
+          "reasoning": ">50% above 2021-2026 baseline for executive actions is poorly anchored — both Biden and Trump have used executive action extensively, so baseline is already elevated. Post-Chevron doctrine significantly constrains executive delegation.",
+          "modified_suggestion": "Reduce to 0.48. Reframe around executive actions that survive judicial review, not raw count. SCOTUS delegation challenges are correct second-order indicator."
+        },
+        {
+          "critic": "GRAY",
+          "verdict": "MODIFY",
+          "reasoning": "'50% above 2021-2026 baseline' executive action metric is poorly defined — executive actions vary enormously in scope and counting methodology.",
+          "modified_suggestion": "Reframe: (1) Federal Register word-count for EOs and agency rules increases 40%+ in 2027-2028 vs 2021-2024 average; (2) at least 1 major statutory delegation challenge reaches SCOTUS; (3) at least 3 infrastructure/spending actions via executive authority that Congress declined to authorize."
+        }
+      ],
+      "lensAgreement": []
+    }
+  ],
+  "schemaVersion": 2,
+  "migratedAt": "2026-04-21T19:03:40+00:00"
 }

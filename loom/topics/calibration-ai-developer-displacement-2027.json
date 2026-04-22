@@ -1,0 +1,1035 @@
+{
+  "meta": {
+    "slug": "calibration-ai-developer-displacement-2027",
+    "title": "AI-Driven Software Developer Displacement by 2027",
+    "question": "Will US software developer employment (BLS OES SOC 15-1252) decline by >=5% year-over-year in any BLS reporting period between Q1 2026 and Q4 2027?",
+    "resolution": "Resolved H1 if BLS OEWS shows >=5% YoY decline in SOC 15-1252 in any period published before 2028-03-01. H2 if 2-5% decline. H3 if -2% to +2%. H4 if >=2% growth. Resolution date: 2027-12-31.",
+    "created": "",
+    "lastUpdated": "2026-04-22T05:19:57+00:00",
+    "status": "ACTIVE",
+    "dayCount": 0,
+    "startDate": "2026-04-21",
+    "classification": "CALIBRATION",
+    "topicType": "conflict",
+    "resolutionDate": "2027-12-31"
+  },
+  "tagConfig": {
+    "_docs": "LABOR/DATA toward displacement. POLICY neutral.",
+    "availableTags": [
+      "EVENT",
+      "DATA",
+      "RHETORIC",
+      "LABOR",
+      "POLICY",
+      "REGULATORY",
+      "EARNINGS",
+      "BENCHMARK",
+      "PREDICTION"
+    ],
+    "directionHints": {
+      "LABOR": {
+        "H1": 1,
+        "H2": 1,
+        "H3": -1,
+        "H4": -1
+      },
+      "EARNINGS": {
+        "H1": 1,
+        "H2": 1,
+        "H3": -1,
+        "H4": -1
+      }
+    },
+    "escalationTags": [],
+    "deescalationTags": []
+  },
+  "model": {
+    "hypotheses": {
+      "H1": {
+        "label": "Structural displacement: >=5% YoY BLS headcount decline confirmed",
+        "midpoint": -7.0,
+        "unit": "% YoY change in SOC 15-1252 headcount",
+        "posterior": 0.18,
+        "description": "AI coding automation crosses the net-destruction threshold. BLS reports >=5% annual headcount decline. Driven by enterprise AI coding tool adoption reducing junior developer hiring and enabling productivity-based headcount freezes."
+      },
+      "H2": {
+        "label": "Measurable contraction 2-5% YoY -- below displacement threshold",
+        "midpoint": -3.5,
+        "unit": "% YoY change in SOC 15-1252 headcount",
+        "posterior": 0.3,
+        "description": "Meaningful headcount reduction below 5% threshold. AI tools reduce junior/mid hiring while senior roles stay stable. Adjacent AI-ops roles offset some losses."
+      },
+      "H3": {
+        "label": "Flat labor market -2% to +2% -- AI augments without net displacement",
+        "midpoint": 0.5,
+        "unit": "% YoY change in SOC 15-1252 headcount",
+        "posterior": 0.32,
+        "description": "AI increases developer productivity but demand grows to match. New developer-adjacent roles absorb displaced workers. BLS net headcount stays flat."
+      },
+      "H4": {
+        "label": "Net growth >=2% YoY -- AI expands developer demand",
+        "midpoint": 4.0,
+        "unit": "% YoY change in SOC 15-1252 headcount",
+        "posterior": 0.2,
+        "description": "AI lowers development costs, expanding addressable market. Historical pattern: productivity tools create more jobs than they eliminate. BLS shows continued growth."
+      }
+    },
+    "expectedValue": -0.46,
+    "expectedUnit": "weeks",
+    "posteriorHistory": [
+      {
+        "date": "2026-04-21",
+        "note": "Initial priors. Displacement (H1+H2)=48%. Flat/growth (H3+H4)=52%. Genuine uncertainty on net employment effects.",
+        "H1": 0.18,
+        "H2": 0.3,
+        "H3": 0.32,
+        "H4": 0.2
+      }
+    ]
+  },
+  "subModels": {},
+  "indicators": {
+    "tiers": {
+      "tier1_critical": [
+        {
+          "id": "t1_bls_5pct_decline",
+          "desc": "BLS OEWS reports >=5% YoY decline in SOC 15-1252 in any reporting period through 2028-Q1. Observable via BLS annual data releases.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 +40pp, H2 -15pp, H3 -18pp, H4 -7pp.",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 0.155172,
+            "H3": 0.135776,
+            "H4": 0.201724
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
+        },
+        {
+          "id": "t1_faang_dev_layoffs_30k",
+          "desc": "Apple, Alphabet, Amazon, Meta, Microsoft collectively announce >=30,000 developer-specific layoffs citing AI automation in a single quarter. Observable via earnings calls and SEC filings.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 +20pp, H2 +15pp, H3 -22pp, H4 -13pp.",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 0.710526,
+            "H3": 0.148026,
+            "H4": 0.165789
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
+        }
+      ],
+      "tier2_strong": [
+        {
+          "id": "t2_job_posting_drop_30pct",
+          "desc": "Indeed or LinkedIn developer posting volume falls >=30% from 2024 baseline in any rolling 3-month window, normalized for market cycles.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 +10pp, H2 +12pp, H3 -15pp, H4 -7pp.",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 0.9,
+            "H3": 0.341518,
+            "H4": 0.417857
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
+        },
+        {
+          "id": "t2_salary_compression_8pct",
+          "desc": "BLS OEWS shows US median software developer salary declines >=8% inflation-adjusted in any reporting period through 2028-Q1.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 +8pp, H2 +10pp, H3 -12pp, H4 -6pp.",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 0.923077,
+            "H3": 0.432692,
+            "H4": 0.484615
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
+        }
+      ],
+      "tier3_suggestive": [
+        {
+          "id": "t3_bootcamp_closures_5",
+          "desc": ">=5 major coding bootcamps (>500 enrollment/yr) close or cut enrollment >=50% in 12 months citing market saturation.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 +5pp, H2 +5pp, H3 -6pp, H4 -4pp.",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 0.913043,
+            "H3": 0.63587,
+            "H4": 0.626087
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
+        },
+        {
+          "id": "t3_bls_growth_positive",
+          "desc": "BLS OEWS shows net developer employment growth >=3% YoY in any reporting period, confirming demand expansion.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H4 +8pp, H3 +5pp. H1 -9pp, H2 -4pp.",
+          "likelihoods": {
+            "H1": 0.357143,
+            "H2": 0.619048,
+            "H3": 0.825893,
+            "H4": 1.0
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
+        },
+        {
+          "id": "t3_bls_strong_growth_5pct",
+          "desc": "BLS OEWS shows developer headcount growing >=5% YoY in any reporting period through 2028-Q1, indicating strong demand expansion well above baseline and ruling out flat/decline scenarios.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H4 +15pp. H3 -10pp, H1 -3pp, H2 -2pp.",
+          "likelihoods": {
+            "H1": 0.47619,
+            "H2": 0.533333,
+            "H3": 0.392857,
+            "H4": 1.0
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
+        }
+      ],
+      "anti_indicators": [
+        {
+          "id": "anti_h1_bls_growth_2pct",
+          "desc": "BLS OEWS shows net developer job growth >=2% YoY in SOC 15-1252 in any reporting period through 2028-Q1.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H4 +30pp, H3 +15pp. H1 -38pp, H2 -7pp.",
+          "likelihoods": {
+            "H1": 0.011111,
+            "H2": 0.306667,
+            "H3": 0.5875,
+            "H4": 1.0
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
+        },
+        {
+          "id": "anti_h1_h2_new_roles_absorb",
+          "desc": "BLS creates a new SOC classification for AI-adjacent developer roles AND reports headcount >=200,000 within 18 months, indicating absorption of displaced workers.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 -15pp, H2 -10pp. H3 +15pp, H4 +10pp.",
+          "likelihoods": {
+            "H1": 0.111111,
+            "H2": 0.444444,
+            "H3": 0.979167,
+            "H4": 1.0
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
+        },
+        {
+          "id": "anti_h3_h4_junior_unemployment",
+          "desc": "BLS CPS shows unemployment rate for developers with <5 years experience rises >=3pp above overall tech unemployment rate, signaling structural junior displacement.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H3 -20pp, H4 -15pp. H1 +25pp, H2 +10pp.",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 0.55814,
+            "H3": 0.156977,
+            "H4": 0.104651
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
+        }
+      ]
+    }
+  },
+  "actorModel": {
+    "description": "AI lab capability and enterprise CTO adoption decisions drive the outcome. BLS is the resolution authority.",
+    "actors": {
+      "actor1": {
+        "name": "Key Decision Maker",
+        "role": "Primary actor whose decisions drive the outcome",
+        "decisionStyle": "How they decide (rational/impulsive/institutional/etc.)",
+        "biases": [
+          "Known bias 1"
+        ],
+        "filters": [
+          "Institutional constraint on behavior"
+        ],
+        "overrides": [
+          "Condition where filters get bypassed"
+        ]
+      },
+      "major_ai_labs": {
+        "name": "Anthropic / OpenAI / Google DeepMind",
+        "role": "Set pace of coding automation capability",
+        "decisionStyle": "Competitive capability deployment",
+        "biases": [
+          "Revenue incentive to automate developer workflows"
+        ],
+        "filters": [
+          "Enterprise sales cycle",
+          "Liability concerns"
+        ]
+      },
+      "enterprise_ctos": {
+        "name": "Enterprise CTOs (Fortune 500)",
+        "role": "Make headcount decisions based on AI productivity gains",
+        "decisionStyle": "Conservative, ROI-driven, prefer attrition over layoffs",
+        "biases": [
+          "Output expansion over workforce reduction"
+        ],
+        "filters": [
+          "Employment law",
+          "Technical debt risk",
+          "Union agreements"
+        ]
+      }
+    },
+    "methodology": [
+      "ACTIONS OVER RHETORIC — only verified events move posteriors",
+      "TAG EVERYTHING — separate rhetoric from action in evidence log",
+      "DON'T FRONT-RUN — set tripwires and let news confirm",
+      "SOCIALIZATION DETECTION — recognize narrative prep patterns"
+    ]
+  },
+  "evidenceLog": [
+    {
+      "id": "ev_001",
+      "time": "2026-04-21T05:34:26+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "ECON"
+      ],
+      "text": "Software engineer job listings up 30% in 2026 with 67,000+ openings tracked, the highest demand in 3 years. However, 52,000 tech layoffs in Q1 2026 with ~half attributed to AI. BLS projections show 15% developer employment growth by 2034. IBM tripling US entry-level hiring. Indeed listings for software engineers up 11% annually. Net market is complex: AI both eliminating and creating roles.",
+      "provenance": "OBSERVED",
+      "source": "CNN Business / Metaintro / Final Round AI / Murray Resources",
+      "posteriorImpact": "NONE",
+      "url": "https://edition.cnn.com/2026/04/08/tech/ai-software-developer-jobs",
+      "ledger": "FACT",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.25
+    },
+    {
+      "time": "2026-04-21T05:34:26+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: 30% listings growth and IBM hiring ramp support H4 (net growth) or H3 (flat). But 52K layoffs (half AI-attributed) introduce H2 contraction signal. Net: H3 (flat) is most consistent with mixed job creation and layoff data. No BLS official YoY headcount confirmed yet.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-21T19:03:40+00:00",
+      "tag": "INTEL",
+      "text": "LR MIGRATION RESET: posteriors reset to design priors; evidence log preserved.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 1.0
+    },
+    {
+      "time": "2026-04-22T01:00:36+00:00",
+      "tag": "INTEL",
+      "text": "REPLAY BEGIN: 0 previously-fired indicators will be re-applied chronologically under current LR system. Posteriors reset to design priors; indicator state cleared. Evidence log preserved for audit.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 1.0
+    },
+    {
+      "time": "2026-04-22T01:00:36+00:00",
+      "tag": "INTEL",
+      "text": "REPLAY COMPLETE: 0 indicators applied, 0 skipped. Final posteriors: {'H1': 0.18, 'H2': 0.3, 'H3': 0.32, 'H4': 0.2}. Indicator firedDates restored to originals for audit.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 1.0
+    }
+  ],
+  "dataFeeds": {
+    "primary_metric": {
+      "label": "Primary Metric",
+      "value": 0,
+      "unit": "units",
+      "baseline": 0,
+      "asOf": ""
+    },
+    "bls_soc_15_1252": {
+      "label": "BLS SOC 15-1252 employed headcount (thousands)",
+      "value": 4400,
+      "unit": "thousands",
+      "baseline": 4400,
+      "asOf": "2024-05-01",
+      "source": "BLS OEWS 2024 estimated baseline"
+    }
+  },
+  "watchpoints": [],
+  "searchQueries": [
+    "topic keyword latest {date}",
+    "specific search query {date}"
+  ],
+  "dependencies": {
+    "_docs": "Upstream: calibration-llm-phd-2027 (G3/G4 research autonomy implies strong coding automation).",
+    "upstream": [
+      {
+        "slug": "calibration-llm-phd-2027",
+        "assumptions": {
+          "H1": 0.005,
+          "H2": 0.9458,
+          "H3": 0.0442,
+          "H4": 0.005
+        },
+        "tolerance": 0.12,
+        "reason": "G3/G4 capability significantly accelerates coding automation. If llm-phd H1/H2 shift, displacement priors should be recalibrated upward."
+      }
+    ]
+  },
+  "governance": {
+    "health": "DEGRADED",
+    "issues": [
+      "Near-maximum uncertainty — model is not discriminating",
+      "Stale dependency: calibration-llm-phd-2027.H1 assumed=0.005, actual=0.18, drift=17.50%",
+      "Stale dependency: calibration-llm-phd-2027.H2 assumed=0.9458, actual=0.38, drift=56.58%",
+      "Stale dependency: calibration-llm-phd-2027.H3 assumed=0.0442, actual=0.32, drift=27.58%"
+    ],
+    "rt": {
+      "rt": 0.0,
+      "regime": "SAFE",
+      "worst_hypothesis": "H1"
+    },
+    "entropy": 1.9568,
+    "maxEntropy": 2.0,
+    "uncertaintyRatio": 0.9784,
+    "evidenceFreshness": {
+      "fresh": 5,
+      "stale": 0,
+      "total": 5
+    },
+    "hypothesisAdmissibility": {
+      "H1": "ADMISSIBLE",
+      "H2": "ADMISSIBLE",
+      "H3": "ADMISSIBLE",
+      "H4": "ADMISSIBLE"
+    },
+    "klFromPrior": {
+      "kl_divergence": 0.0,
+      "interpretation": "MODERATE"
+    },
+    "lastComputed": "2026-04-22T05:19:57+00:00",
+    "staleDependencies": 3,
+    "staleDependencyDetails": [
+      {
+        "upstream_slug": "calibration-llm-phd-2027",
+        "hypothesis": "H1",
+        "assumed": 0.005,
+        "actual": 0.18,
+        "drift": 0.175,
+        "tolerance": 0.12,
+        "stale": true
+      },
+      {
+        "upstream_slug": "calibration-llm-phd-2027",
+        "hypothesis": "H2",
+        "assumed": 0.9458,
+        "actual": 0.38,
+        "drift": 0.5658,
+        "tolerance": 0.12,
+        "stale": true
+      },
+      {
+        "upstream_slug": "calibration-llm-phd-2027",
+        "hypothesis": "H3",
+        "assumed": 0.0442,
+        "actual": 0.32,
+        "drift": 0.2758,
+        "tolerance": 0.12,
+        "stale": true
+      }
+    ],
+    "calibrationHealth": "ACCEPTABLE",
+    "unresolvedContradictions": 0,
+    "designGate": {
+      "passed": true,
+      "blockers": [],
+      "warnings": [],
+      "coverage": {
+        "H1": {
+          "pos": 6,
+          "neg": 4
+        },
+        "H2": {
+          "pos": 5,
+          "neg": 5
+        },
+        "H3": {
+          "pos": 3,
+          "neg": 7
+        },
+        "H4": {
+          "pos": 4,
+          "neg": 6
+        }
+      },
+      "indistinguishable": [],
+      "lastChecked": "2026-04-22T05:19:57+00:00"
+    }
+  },
+  "predictionScoring": {
+    "_docs": "Calibration infrastructure. Snapshots are auto-created by engine on each posterior update. Record outcome when topic resolves, then compute_calibration_report() for Brier analysis.",
+    "snapshots": [
+      {
+        "timestamp": "2026-04-21T05:34:26+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.08,
+          "H2": 0.2444,
+          "H3": 0.4978,
+          "H4": 0.1778
+        },
+        "entropy": 1.7323
+      },
+      {
+        "timestamp": "2026-04-21T05:34:26+00:00",
+        "trigger": "pipeline:ev_001",
+        "posteriors": {
+          "H1": 0.08,
+          "H2": 0.2444,
+          "H3": 0.4978,
+          "H4": 0.1778
+        },
+        "entropy": 1.7323
+      }
+    ],
+    "outcomes": [],
+    "brierScores": []
+  },
+  "contradictionTracker": {
+    "unresolved": [],
+    "resolved": []
+  },
+  "sourceCalibration": {
+    "ledger": [],
+    "effectiveTrust": {
+      "CNN Business": 0.5,
+      "Final Round AI": 0.5,
+      "Metaintro": 0.5,
+      "Murray Resources": 0.5
+    },
+    "_last_scan_same_source_skipped": 0
+  },
+  "schemaVersion": 2,
+  "migratedAt": "2026-04-21T19:03:40+00:00",
+  "conditionalPredictions": [
+    {
+      "id": "cp_001",
+      "createdAt": "2026-04-22T02:35:31+00:00",
+      "conditionTopic": "calibration-ai-developer-displacement-2027",
+      "conditionHypothesis": "H1",
+      "conditionProbAtCreation": 0.18,
+      "prediction": "IF structural displacement >=5% YoY confirmed, THEN BLS Occupational Employment Statistics for Computer Occupations (11-3000 series) shows YoY decline of 5.0-7.5% in May 2027 vs May 2026",
+      "resolutionCriteria": "Observable: BLS OEWS May 2027 release reports aggregate software developer/engineer employment 5.0-7.5% YoY decline",
+      "deadline": "2027-06-15",
+      "conditionalProbability": 0.72,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "labor-market",
+        "ai-displacement",
+        "structural-labor"
+      ],
+      "source": "agent-green",
+      "lens": "GREEN",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "MODIFY",
+          "reasoning": "Assumes BLS OEC categories remain meaningful measurement units during structural displacement. If 5%+ YoY displacement actually happens, it likely comes with reclassification pressure, gig/contract conversion, and employer relabeling that makes the 11-3000 series itself a moving target. Narrow 5.0-7.5% band is over-precise for a regime transition.",
+          "modified_suggestion": "Widen band to 4-10% and add a qualifier that reclassification-adjusted headcount is the measurement target."
+        },
+        "BLUE": {
+          "verdict": "MODIFY",
+          "reasoning": "BLUE: 5-7.5% YoY BLS decline assumes uninterrupted structural displacement without institutional absorption. Reskilling programs, internal redeployment, and firm-level retention (esp. at hyperscalers) typically buffer headline decline. Probability 0.72 too high; BLS categories are sticky and re-classification lags.",
+          "modified_suggestion": "Lower conditional_probability to 0.55; widen range to 3.0-7.5% to allow for absorption."
+        },
+        "RED": {
+          "verdict": "MODIFY",
+          "reasoning": "Band 5.0-7.5% is too narrow for a structural displacement scenario. If H1 truly materializes with cascade effects, displacement likely overshoots upper bound as firms coordinate layoff waves (observed in 2022-2024). 0.72 probability assumes clean BLS capture, but reclassification of roles can obscure the decline.",
+          "modified_suggestion": "Widen band to 5.0-10%+ YoY decline; probability 0.60."
+        },
+        "VIOLET": {
+          "verdict": "NEUTRAL",
+          "reasoning": "BLS measurement prediction is a structural observable. Agency-free by design — VIOLET has no quarrel with measurement resolution criteria.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Clean observable tied to BLS OEWS with specific range; indicator-grade.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_002",
+      "createdAt": "2026-04-22T02:35:31+00:00",
+      "conditionTopic": "calibration-ai-developer-displacement-2027",
+      "conditionHypothesis": "H1",
+      "conditionProbAtCreation": 0.18,
+      "prediction": "IF 5%+ structural displacement holds, THEN average software developer real wage (compensation adjusted for inflation) declines 2-4% YoY in tech hubs (SF, Seattle, NYC) by Nov 2027",
+      "resolutionCriteria": "Observable: Median reported salaries in Blind/Levels/Blind Dice surveys for FAANG/hyper-scale employers 2-4% lower in Oct-Nov 2027 than Oct-Nov 2026; inflation-adjusted basis",
+      "deadline": "2027-11-30",
+      "conditionalProbability": 0.68,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "labor-market",
+        "wage-compression",
+        "ai-displacement"
+      ],
+      "source": "agent-green",
+      "lens": "GREEN",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "DROP",
+          "reasoning": "Too narrow a window (2-4%) for a regime-change scenario. If 5% structural displacement is real, wage compression could be much sharper in bottom half while top decile rises (bimodal). Blind/Levels surveys have severe selection bias during displacement — remaining respondents skew to those still employed at top firms. Measurement unlikely to resolve cleanly.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "MODIFY",
+          "reasoning": "Real wage declines 2-4% in tech hubs underestimate institutional wage stickiness (contracts, equity vesting, union pressure at Alphabet/Amazon). Labor market clearing via hours/comp mix typically buffers nominal cuts. Probability too high.",
+          "modified_suggestion": "Lower to 0.50; include total comp (equity) rather than salary only."
+        },
+        "RED": {
+          "verdict": "MODIFY",
+          "reasoning": "Wage decline of only 2-4% underestimates tail. In displacement cascades, tech-hub real wages can drop 5-10% as senior-heavy survivor cohorts accept pay cuts to retain roles. Also misses that layoffs remove high earners from survey denominator, creating composition bias that UNDERSTATES real decline.",
+          "modified_suggestion": "Widen to 2-8% decline; probability 0.55 (measurement ambiguity)."
+        },
+        "VIOLET": {
+          "verdict": "MODIFY",
+          "reasoning": "Wage outcomes in FAANG are driven by concrete compensation-committee decisions (Pichai, Zuckerberg, Nadella, Cook) responding to shareholder pressure and activist investors. Blind/Levels data reflects firm-specific choices, not inevitable structural compression. Probability likely slightly overstated.",
+          "modified_suggestion": "Lower probability to 0.60; add named-CEO comp decisions as resolution context."
+        },
+        "GRAY": {
+          "verdict": "MODIFY",
+          "reasoning": "Relies on Blind/Levels survey data which is self-reported and non-representative; inflation-adjusted basis adds measurement noise.",
+          "modified_suggestion": "Anchor to BLS Employment Cost Index or OEWS wage data for software occupations rather than crowdsourced salary surveys."
+        }
+      },
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_003",
+      "createdAt": "2026-04-22T02:35:31+00:00",
+      "conditionTopic": "calibration-ai-developer-displacement-2027",
+      "conditionHypothesis": "H2",
+      "conditionProbAtCreation": 0.3,
+      "prediction": "IF measurable contraction 2-5% YoY confirmed, THEN Q2 2027 Bureau of Labor Statistics employment data shows developer headcount decline of 2.0-5.0% YoY with hiring freeze announcements from >=2 major tech firms",
+      "resolutionCriteria": "Observable: BLS May 2027 OEWS release shows 2.0-5.0% YoY decline AND >=2 named tech firms (Google, Meta, Amazon, Microsoft, Apple) issue public hiring freeze statements Mar-May 2027",
+      "deadline": "2027-06-15",
+      "conditionalProbability": 0.71,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "labor-market",
+        "hiring-freeze",
+        "ai-displacement"
+      ],
+      "source": "agent-green",
+      "lens": "GREEN",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": "Hiring freeze announcements are a discrete threshold event — good AMBER-style observable. The conditional probability 0.71 seems calibrated for regime-shift conditions.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "APPROVE",
+          "reasoning": "Hiring freeze announcements are reversible signaling and common institutional response — plausible from BLUE lens as mild absorption. 0.71 reasonable though slightly high given freeze-then-thaw pattern.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "Reasonable. If anything, >=2 hiring freezes is too low a bar — under H2 contraction we would likely see 4-5 major firms freeze. But the conjunction is clean and observable.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "APPROVE",
+          "reasoning": "Names specific firms (Google/Meta/Amazon/Microsoft/Apple) — this is exactly the agency-driven framing VIOLET endorses. Hiring freeze announcements ARE decisions by named CEOs.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Compound observable (BLS + named firm announcements) makes H2 distinguishable from H1.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_004",
+      "createdAt": "2026-04-22T02:35:31+00:00",
+      "conditionTopic": "calibration-ai-developer-displacement-2027",
+      "conditionHypothesis": "H3",
+      "conditionProbAtCreation": 0.32,
+      "prediction": "IF flat labor market -2% to +2% YoY, THEN developer productivity metrics (lines of code per developer, features shipped per quarter) show measurable increase of 15-25% in code repositories tracked by GitHub/GitLab by Q3 2027",
+      "resolutionCriteria": "Observable: GitHub Octoverse 2027 report or equivalent academic study documents 15-25% productivity gain in developer output metrics YoY; no net displacement in employment",
+      "deadline": "2027-12-31",
+      "conditionalProbability": 0.65,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "productivity",
+        "ai-augmentation",
+        "labor-market"
+      ],
+      "source": "agent-green",
+      "lens": "GREEN",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "MODIFY",
+          "reasoning": "Lines-of-code and features-shipped are precisely the metrics that break under AI-augmentation regime change. LOC becomes negatively correlated with value in AI-assisted workflows. GitHub Octoverse measures commits, not productivity. The framework this prediction uses may stop applying exactly when H3 fires.",
+          "modified_suggestion": "Replace LOC metrics with pull-request throughput or DORA deployment frequency measures."
+        },
+        "BLUE": {
+          "verdict": "APPROVE",
+          "reasoning": "Productivity augmentation framing aligns with BLUE's institutional-adaptation view: AI absorbed as tooling, employment flat. Probability reasonable.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "MODIFY",
+          "reasoning": "15-25% productivity gain on LoC/features is a weak RED-side signal — LoC is Goodhart-prone, and AI-generated code INFLATES LoC without productivity gains. Under a 'flat market' scenario, technical debt and security-incident volume likely rises 30-50%, which RED would flag as absorbed pressure masking brittleness.",
+          "modified_suggestion": "Replace with: cybersecurity incidents attributed to AI-generated code rise 40%+ YoY per Verizon DBIR/MITRE."
+        },
+        "VIOLET": {
+          "verdict": "NEUTRAL",
+          "reasoning": "Productivity-metric observable. Outside VIOLET's agency lens.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "MODIFY",
+          "reasoning": "Lines-of-code per developer is a notoriously poor productivity proxy; GitHub Octoverse is descriptive not causal.",
+          "modified_suggestion": "Use PR merge rate, feature-ship cadence from industry survey (DORA/Stack Overflow), not LOC."
+        }
+      },
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_005",
+      "createdAt": "2026-04-22T02:35:33+00:00",
+      "conditionTopic": "calibration-ai-developer-displacement-2027",
+      "conditionHypothesis": "H1",
+      "conditionProbAtCreation": 0.18,
+      "prediction": "IF H1 (≥5% net displacement), THEN institutional hiring barriers entrench: software engineering roles shift toward credentialism and prior-employer filters as employers use screening to thin applicant pools; Ivy/Stanford/CMU filter intensity increases 25-35% in job posting requirements (explicit degree mandates, prior-employer whitelist, skill-gate specialization) by EOY 2027.",
+      "resolutionCriteria": "Observable: Quantitative analysis of job postings (LinkedIn, Indeed, AngelList) comparing Q2 2027 vs Q2 2026 baseline. Measure fraction of postings with explicit education filters, prior-employer requirements, or specialized credentialing demands. >25pp increase indicates entrenchment.",
+      "deadline": "2027-12-31",
+      "conditionalProbability": 0.68,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "labor-market",
+        "credential-gatekeeping",
+        "structural-adjustment"
+      ],
+      "source": "agent-ochre",
+      "lens": "OCHRE",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": "Credentialism-intensification is a solid AMBER-type structural-regime prediction. Measurable via job-posting scrape.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "MODIFY",
+          "reasoning": "OCHRE frames entrenchment, but BLUE expects labor market clearing: firms respond to 5% displacement by broadening talent sourcing, not narrowing credentials. Filter intensity UP 25-35pp is overshoot. 0.68 too high.",
+          "modified_suggestion": "Lower to 0.45."
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "OCHRE prediction; RED concurs that credentialism intensifies under displacement. Good structural mechanism.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "MODIFY",
+          "reasoning": "Credential-gatekeeping is a firm-by-firm decision by named CHROs/CTOs. Framing as 'structural entrenchment' obscures that specific companies (Meta famously removed degree requirements; Google and Apple made varying moves) actively toggle credentialism. The 25-35pp increase assumes uniform employer choice when heterogeneity is large.",
+          "modified_suggestion": "Lower to 0.50 — assumes uniform corporate policy shift when named-firm heterogeneity is documented."
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Credentialism signal is distinct from displacement count; adds OCHRE-style structural lens.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_006",
+      "createdAt": "2026-04-22T02:35:34+00:00",
+      "conditionTopic": "calibration-ai-developer-displacement-2027",
+      "conditionHypothesis": "H2",
+      "conditionProbAtCreation": 0.3,
+      "prediction": "IF H2 (2-5% YoY contraction, below displacement threshold), THEN labor market bifurcation persists: junior developer hiring drops 15-25% YoY as AI tooling extends junior-level task scope, while senior/architectural roles hold flat; net displacement masks composition shift where entry-level absorbed into AI tools but senior roles defensible through institutional lock-in.",
+      "resolutionCriteria": "Observable: BLS Occupational Employment Statistics Q2 2027 vs Q2 2026 shows: (1) net software developer headcount -2% to -5% YoY, (2) entry-level (0-3yr exp) roles contract 15-25% YoY, (3) senior/architect roles (10+ yr exp) within ±5% YoY.",
+      "deadline": "2027-06-30",
+      "conditionalProbability": 0.66,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "labor-market",
+        "composition-shift",
+        "entry-level-vulnerability"
+      ],
+      "source": "agent-ochre",
+      "lens": "OCHRE",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": "Bifurcation / composition shift is exactly AMBER-compatible — new structural regime inside apparent continuity. Strong.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "APPROVE",
+          "reasoning": "Composition-shift pattern (entry-level cut, senior retained) is plausible institutional adaptation. Reasonable from BLUE lens.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "Bifurcation thesis aligns with RED tail — entry-level collapse is underappreciated risk.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "APPROVE",
+          "reasoning": "Entry-level hiring decisions are made by named hiring managers responding to concrete CFO budget directives — agency-consistent even if framed structurally.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Entry-level vs senior bifurcation is distinct from 274 and adds composition detail.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_007",
+      "createdAt": "2026-04-22T04:18:41+00:00",
+      "conditionTopic": "calibration-ai-developer-displacement-2027",
+      "conditionHypothesis": "H4",
+      "conditionProbAtCreation": 0.2,
+      "prediction": "IF net growth >=2% YoY holds, THEN specialized AI-programming roles comprise >=15% of new developer hires by 2027-12-31, structural shift toward AI-augmented roles.",
+      "resolutionCriteria": ">=15% of developer job postings require RAG/prompt-engineering/fine-tuning expertise in major job boards by Q4 2027.",
+      "deadline": "2027-12-31",
+      "conditionalProbability": 0.65,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "regime-shift",
+        "labor-market-bifurcation",
+        "skill-composition"
+      ],
+      "source": "agent-amber",
+      "lens": "AMBER",
+      "criticVerdicts": {},
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_008",
+      "createdAt": "2026-04-22T04:18:42+00:00",
+      "conditionTopic": "calibration-ai-developer-displacement-2027",
+      "conditionHypothesis": "H4",
+      "conditionProbAtCreation": 0.2,
+      "prediction": "IF net developer employment grows >=2% YoY by end 2027, THEN enterprise CTOs expand legacy system maintenance using AI tooling, forcing net hiring concentrated in maintenance/legacy-system roles.",
+      "resolutionCriteria": "BLS annual tech employment data Q4 2027 vs Q4 2026 shows >=2% net growth concentrated in maintenance/legacy-system roles.",
+      "deadline": "2027-12-31",
+      "conditionalProbability": 0.28,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "labor_market",
+        "corporate_incentives",
+        "tech_employment"
+      ],
+      "source": "agent-violet",
+      "lens": "VIOLET",
+      "criticVerdicts": {},
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_009",
+      "createdAt": "2026-04-22T05:19:34+00:00",
+      "conditionTopic": "calibration-ai-developer-displacement-2027",
+      "conditionHypothesis": "H3",
+      "conditionProbAtCreation": 0.32,
+      "prediction": "IF AI augments without net displacement (H3 holds), THEN we observe institutionalized retraining programs in at least 50% of Fortune 500 tech companies by Q4 2027, with measurable upskilling completion rates and documented retention gains.",
+      "resolutionCriteria": "Corporate governance filings and HR surveys document adoption of formal retraining programs; BLS Quarterly Census shows developer cohort retention stability; LinkedIn Skills Report confirms increased tooling specialization certifications.",
+      "deadline": "2027-12-31",
+      "conditionalProbability": 0.68,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "institutional-adaptation",
+        "labor-market-dynamics",
+        "corporate-strategy"
+      ],
+      "source": "agent-blue",
+      "lens": "BLUE",
+      "criticVerdicts": [
+        {
+          "critic": "GREEN",
+          "verdict": "MODIFY",
+          "reasoning": "68% is too high given multi-stream measurability bar; corporate programs exist but proving retention gains is difficult.",
+          "modified_suggestion": "Reduce to 0.55. Simplify resolution to at least 40% of Fortune 500 tech firms report formal retraining programs in governance filings."
+        },
+        {
+          "critic": "RED",
+          "verdict": "MODIFY",
+          "reasoning": "Fortune 500 firms announce retraining programs to satisfy ESG optics then quietly defund them. History of corporate retraining pledges (IBM, GE, AT&T) shows underdelivery. 0.68 too high.",
+          "modified_suggestion": "Lower to 0.48. Add independent audit requirement for completion rates, not self-reported HR data."
+        },
+        {
+          "critic": "VIOLET",
+          "verdict": "MODIFY",
+          "reasoning": "Treats corporate adoption as driven by impersonal HR logic rather than named actor incentives. Fortune 500 tech CEOs face shareholder pressure to cut headcount, not retain it. 68% too high absent regulatory forcing function.",
+          "modified_suggestion": "Lower to 0.52. Add resolution criterion that at least one federal or state regulatory mandate or tax incentive specifically tied to retraining completion rates is in effect by Q4 2027."
+        },
+        {
+          "critic": "OCHRE",
+          "verdict": "MODIFY",
+          "reasoning": "Corporate retraining programs are largely performative HR theater — path-dependent responses to optics pressure. BLS Quarterly Census too coarse to detect developer-cohort retention at firm level.",
+          "modified_suggestion": "Reframe: programs proliferate as institutional signaling but independent audit reveals <30% completion. Probability 0.52."
+        },
+        {
+          "critic": "GRAY",
+          "verdict": "APPROVE",
+          "reasoning": "Concrete, falsifiable resolution criteria. Adds genuine signal on corporate institutional response to H3 augmentation scenario. Not duplicated elsewhere in portfolio.",
+          "modified_suggestion": null
+        }
+      ],
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_010",
+      "createdAt": "2026-04-22T05:19:57+00:00",
+      "conditionTopic": "calibration-ai-developer-displacement-2027",
+      "conditionHypothesis": "H3",
+      "conditionProbAtCreation": 0.32,
+      "prediction": "IF AI augments without net displacement (H3 holds), THEN we observe institutionalized retraining programs in at least 50% of Fortune 500 tech companies by Q4 2027, with measurable upskilling completion rates and documented retention gains.",
+      "resolutionCriteria": "Corporate governance filings and HR surveys document adoption of formal retraining programs; BLS Quarterly Census shows developer cohort retention stability; LinkedIn Skills Report confirms increased tooling specialization certifications.",
+      "deadline": "2027-12-31",
+      "conditionalProbability": 0.68,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "institutional-adaptation",
+        "labor-market-dynamics",
+        "corporate-strategy"
+      ],
+      "source": "agent-blue",
+      "lens": "BLUE",
+      "criticVerdicts": [
+        {
+          "critic": "GREEN",
+          "verdict": "MODIFY",
+          "reasoning": "68% is too high given multi-stream measurability bar; corporate programs exist but proving retention gains is difficult.",
+          "modified_suggestion": "Reduce to 0.55. Simplify resolution to at least 40% of Fortune 500 tech firms report formal retraining programs in governance filings."
+        },
+        {
+          "critic": "RED",
+          "verdict": "MODIFY",
+          "reasoning": "Fortune 500 firms announce retraining programs to satisfy ESG optics then quietly defund them. History of corporate retraining pledges (IBM, GE, AT&T) shows underdelivery. 0.68 too high.",
+          "modified_suggestion": "Lower to 0.48. Add independent audit requirement for completion rates, not self-reported HR data."
+        },
+        {
+          "critic": "VIOLET",
+          "verdict": "MODIFY",
+          "reasoning": "Treats corporate adoption as driven by impersonal HR logic rather than named actor incentives. Fortune 500 tech CEOs face shareholder pressure to cut headcount, not retain it. 68% too high absent regulatory forcing function.",
+          "modified_suggestion": "Lower to 0.52. Add resolution criterion that at least one federal or state regulatory mandate or tax incentive specifically tied to retraining completion rates is in effect by Q4 2027."
+        },
+        {
+          "critic": "OCHRE",
+          "verdict": "MODIFY",
+          "reasoning": "Corporate retraining programs are largely performative HR theater — path-dependent responses to optics pressure. BLS Quarterly Census too coarse to detect developer-cohort retention at firm level.",
+          "modified_suggestion": "Reframe: programs proliferate as institutional signaling but independent audit reveals <30% completion. Probability 0.52."
+        },
+        {
+          "critic": "GRAY",
+          "verdict": "APPROVE",
+          "reasoning": "Concrete, falsifiable resolution criteria. Adds genuine signal on corporate institutional response to H3 augmentation scenario. Not duplicated elsewhere in portfolio.",
+          "modified_suggestion": null
+        }
+      ],
+      "lensAgreement": []
+    }
+  ]
+}

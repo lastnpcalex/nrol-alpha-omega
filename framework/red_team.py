@@ -460,7 +460,8 @@ def _strongest_competitor(impact: dict, excluded_key: str) -> tuple | None:
 # ---------------------------------------------------------------------------
 
 def compute_devil_advocate_score(counterevidence: list,
-                                 proposed_shift: float) -> float:
+                                 proposed_shift: float,
+                                 range_width: float = 0.0) -> float:
     """
     Compute the strength of the counter-case relative to the proposal.
 
@@ -469,27 +470,95 @@ def compute_devil_advocate_score(counterevidence: list,
 
     Formula:
         counter_sum = sum of counterevidence weights
-        score = counter_sum / (counter_sum + abs(proposed_shift) * scale_factor)
+        base = counter_sum / (counter_sum + abs(proposed_shift) * scale_factor)
+        final = min(1.0, base + width_penalty(range_width))
 
-    The scale_factor (10.0) normalizes so that a typical shift of 0.05
-    with moderate counterevidence lands in a meaningful range.
+    range_width is the max(posteriorRangeHi - posteriorRangeLo) across all
+    hypotheses from a dual-pass bayesian_update. A wider range means the
+    proposal rests on uncertain LR estimates — width_penalty raises the DA
+    score accordingly (spec A4: wider = higher DA score).
     """
-    if not counterevidence:
+    if not counterevidence and range_width <= 0:
         return 0.0
 
-    counter_sum = sum(e["weight"] for e in counterevidence)
+    counter_sum = sum(e["weight"] for e in counterevidence) if counterevidence else 0.0
     shift_magnitude = abs(proposed_shift) if proposed_shift != 0 else 0.001
 
-    # Scale factor: a shift of 0.05 with counterevidence summing to 0.5
-    # should score ~0.5 (even match). 10x normalizes the shift into the
-    # same magnitude as summed counterevidence weights.
     SCALE = 10.0
     denominator = counter_sum + shift_magnitude * SCALE
+    base = counter_sum / denominator if denominator > 0 else 0.0
 
-    if denominator == 0:
-        return 0.0
+    # Width penalty: a 0.20 posterior range width adds ~0.15 to DA score.
+    # Capped at 0.30 so a genuinely wide range on its own can elevate DA
+    # into the moderate-counter-case band without overwhelming evidence.
+    width_penalty = min(max(range_width, 0.0) * 0.75, 0.30)
 
-    return round(min(1.0, counter_sum / denominator), 4)
+    return round(min(1.0, base + width_penalty), 4)
+
+
+def adversarial_sensitivity(topic: dict, proposed_posteriors: dict) -> dict | None:
+    """
+    For the dominant hypothesis in proposed_posteriors, compute its posterior
+    at the adversarial LR bound — the range endpoint where its posterior is
+    smallest. Reports the drop, the adversarial dominant, and whether
+    dominance flips.
+
+    Reads posteriorRangeLo / posteriorRangeHi from the latest posteriorHistory
+    entry (populated by bayesian_update when lr_range was supplied). Returns
+    None if no range data is available — the topic is using point-LR updates.
+    """
+    history = topic.get("model", {}).get("posteriorHistory", [])
+    if not history:
+        return None
+
+    last = history[-1]
+    lo = last.get("posteriorRangeLo")
+    hi = last.get("posteriorRangeHi")
+    if not (lo and hi):
+        return None
+
+    if not proposed_posteriors:
+        return None
+
+    dominant = max(proposed_posteriors, key=proposed_posteriors.get)
+    dominant_point = proposed_posteriors[dominant]
+
+    lo_val = lo.get(dominant, dominant_point)
+    hi_val = hi.get(dominant, dominant_point)
+
+    # Adversarial bound for dominant = the endpoint minimizing its posterior
+    if lo_val <= hi_val:
+        adversarial_val = lo_val
+        adv_posteriors = lo
+    else:
+        adversarial_val = hi_val
+        adv_posteriors = hi
+
+    drop = dominant_point - adversarial_val
+
+    # At the adversarial bound, who is the dominant hypothesis?
+    keys = [k for k in adv_posteriors if k in proposed_posteriors]
+    adv_dominant = max(keys, key=lambda k: adv_posteriors[k]) if keys else dominant
+    flipped = (adv_dominant != dominant)
+
+    # Max range width across all hypotheses — the overall uncertainty signal
+    max_width = 0.0
+    for k in lo:
+        if k in hi:
+            w = abs(hi[k] - lo[k])
+            if w > max_width:
+                max_width = w
+
+    return {
+        "dominant": dominant,
+        "point_estimate": round(dominant_point, 4),
+        "adversarial_bound": "lo" if adv_posteriors is lo else "hi",
+        "adversarial_estimate": round(adversarial_val, 4),
+        "drop": round(drop, 4),
+        "adversarial_dominant": adv_dominant,
+        "dominance_flipped": flipped,
+        "max_range_width": round(max_width, 4),
+    }
 
 
 # ---------------------------------------------------------------------------
@@ -517,6 +586,11 @@ def generate_red_team(topic: dict, proposed_posteriors: dict) -> dict:
     hypotheses = topic.get("model", {}).get("hypotheses", {})
     indicators = topic.get("indicators", {}).get("tiers", {})
 
+    # Adversarial sensitivity pass (spec Change 4) — reads lr_range outputs
+    # from the last bayesian_update. None if update used point LRs.
+    adv_sens = adversarial_sensitivity(topic, proposed_posteriors)
+    range_width = adv_sens["max_range_width"] if adv_sens else 0.0
+
     contrarian = {}
     all_counter = []
     per_hypothesis_scores = []
@@ -542,8 +616,9 @@ def generate_red_team(topic: dict, proposed_posteriors: dict) -> dict:
             c["proposed_direction"] = direction
         all_counter.extend(counter)
 
-        # Per-hypothesis devil's advocate score
-        da_score = compute_devil_advocate_score(counter, shift)
+        # Per-hypothesis devil's advocate score (range width boosts DA for all Hs
+        # elevated by an update built on uncertain LRs)
+        da_score = compute_devil_advocate_score(counter, shift, range_width)
         per_hypothesis_scores.append((h_key, da_score, abs(shift)))
 
     # Sort all counterevidence by weight, take top entries
@@ -562,9 +637,9 @@ def generate_red_team(topic: dict, proposed_posteriors: dict) -> dict:
         agg_score = 0.0
     agg_score = round(agg_score, 4)
 
-    # Generate challenge paragraph
+    # Generate challenge paragraph (includes adversarial sensitivity if available)
     challenge = _build_challenge(contrarian, top_counter, unfired, agg_score,
-                                 hypotheses, proposed_posteriors)
+                                 hypotheses, proposed_posteriors, adv_sens)
 
     # Check if inference was used (any entry had string posteriorImpact)
     has_string_impact = any(
@@ -572,7 +647,7 @@ def generate_red_team(topic: dict, proposed_posteriors: dict) -> dict:
         for e in topic.get("evidenceLog", [])
     )
 
-    return {
+    result = {
         "contrarian_direction": contrarian,
         "counterevidence": top_counter,
         "unfired_indicators": unfired,
@@ -580,6 +655,9 @@ def generate_red_team(topic: dict, proposed_posteriors: dict) -> dict:
         "challenge": challenge,
         "inference_mode": "text_heuristic" if has_string_impact else "explicit",
     }
+    if adv_sens is not None:
+        result["adversarial_sensitivity"] = adv_sens
+    return result
 
 
 # ---------------------------------------------------------------------------
@@ -660,7 +738,8 @@ def _infer_indicator_effect(indicator: dict, hypotheses: dict,
 
 def _build_challenge(contrarian: dict, counterevidence: list,
                      unfired: list, score: float,
-                     hypotheses: dict, proposed: dict) -> str:
+                     hypotheses: dict, proposed: dict,
+                     adv_sens: dict | None = None) -> str:
     """Build a one-paragraph devil's advocate challenge."""
     if not contrarian:
         return "No significant shifts proposed; no challenge needed."
@@ -678,6 +757,32 @@ def _build_challenge(contrarian: dict, counterevidence: list,
         f"({h_label}), proposed to {direction_word} by "
         f"{abs(biggest_shift):.3f}."
     )
+
+    # Adversarial sensitivity (only when lr_range was used in the update)
+    if adv_sens is not None:
+        dom = adv_sens["dominant"]
+        drop = adv_sens["drop"]
+        adv_val = adv_sens["adversarial_estimate"]
+        point = adv_sens["point_estimate"]
+        width = adv_sens["max_range_width"]
+        if adv_sens["dominance_flipped"]:
+            parts.append(
+                f"At the adversarial LR bound, {dom} drops from {point:.3f} "
+                f"to {adv_val:.3f} and {adv_sens['adversarial_dominant']} "
+                f"becomes dominant — the conclusion is not robust to LR "
+                f"uncertainty."
+            )
+        elif drop > 0.10:
+            parts.append(
+                f"At the adversarial LR bound, {dom} drops from {point:.3f} "
+                f"to {adv_val:.3f} ({drop:.3f} pp). Dominance holds but the "
+                f"conclusion depends materially on the upper LR estimates."
+            )
+        if width > 0.20:
+            parts.append(
+                f"Posterior range width is {width:.3f} (>0.20) — the LR "
+                f"estimates used here carry substantive uncertainty."
+            )
 
     # Cite top counterevidence
     relevant_counter = [c for c in counterevidence
@@ -747,6 +852,16 @@ def format_red_team_challenge(red_team: dict) -> str:
 
     score = red_team.get("devil_advocate_score", 0.0)
     lines.append(f"Devil's Advocate Score: {score:.2f} / 1.00")
+
+    adv = red_team.get("adversarial_sensitivity")
+    if adv:
+        flip_note = " [DOMINANCE FLIPS]" if adv["dominance_flipped"] else ""
+        lines.append(
+            f"Adversarial LR bound: {adv['dominant']} "
+            f"{adv['point_estimate']:.3f} -> {adv['adversarial_estimate']:.3f} "
+            f"(drop {adv['drop']:.3f}, width {adv['max_range_width']:.3f})"
+            f"{flip_note}"
+        )
     lines.append("")
 
     # Contrarian directions

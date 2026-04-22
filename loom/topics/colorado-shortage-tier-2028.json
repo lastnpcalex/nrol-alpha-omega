@@ -5,12 +5,13 @@
     "question": "What Lower Colorado River shortage tier will the Bureau of Reclamation declare for calendar year 2028 operations?",
     "resolution": "Official BOR Annual Operating Plan shortage tier determination for CY2028, as declared in the August 2027 24-month study. If BOR issues a revised determination before January 1, 2028, the latest revision governs. Revisions published on or after January 1, 2028 do not affect resolution. If the DCP tier framework is formally superseded before the August 2027 determination: resolution maps to whichever hypothesis best matches the actual mandatory allocation reduction imposed, measured as total Lower Basin curtailment volume (AF/yr). Tier 1 equivalent: <600K AF cut. Tier 2 equivalent: 600K-900K AF cut. Tier 3+ equivalent: >900K AF cut. If curtailment structure is novel and cannot be expressed as a single AF volume, H4 resolves. If the August 2027 AOP is explicitly marked provisional pending new guidelines, resolution uses the AOP as declared — provisional status does not prevent resolution.",
     "created": "2026-04-13T18:38:33+00:00",
-    "lastUpdated": "2026-04-17T18:49:21+00:00",
+    "lastUpdated": "2026-04-22T05:19:58+00:00",
     "status": "ACTIVE",
     "dayCount": 0,
     "startDate": "2026-04-13",
     "classification": "ROUTINE",
-    "topicType": "policy"
+    "topicType": "policy",
+    "resolutionDate": "2028-01-01"
   },
   "tagConfig": {
     "_docs": "Tag configuration for this topic. topicType presets: conflict, science, election, tech. Override directionHints for custom tag-to-hypothesis mappings.",
@@ -40,28 +41,29 @@
         "label": "Tier 1 or no shortage: current restriction level maintained, reduced, or lifted entirely (Mead stays above 1,050 ft in Aug 2027 projection)",
         "midpoint": 1,
         "unit": "tier",
-        "posterior": 0.1417
+        "posterior": 0.3,
+        "resolution_deadline": "2027-12-31"
       },
       "H2": {
         "label": "Tier 2 declared: mandatory deeper cuts to AZ, NV, MX",
         "midpoint": 2,
         "unit": "tier",
-        "posterior": 0.7087
+        "posterior": 0.45
       },
       "H3": {
         "label": "Tier 3+ or emergency measures beyond existing DCP framework",
         "midpoint": 3,
         "unit": "tier",
-        "posterior": 0.1181
+        "posterior": 0.15
       },
       "H4": {
         "label": "Unprecedented outcome: restriction level imposed that cannot be mapped to existing Tier 1/2/3 scale (new framework with novel structure, emergency federal override, or court-ordered reallocation)",
         "midpoint": 4,
         "unit": "tier",
-        "posterior": 0.0315
+        "posterior": 0.1
       }
     },
-    "expectedValue": 2.04,
+    "expectedValue": 2.01,
     "expectedUnit": "tier",
     "posteriorHistory": [
       {
@@ -71,28 +73,6 @@
         "H2": 0.45,
         "H3": 0.15,
         "H4": 0.1
-      },
-      {
-        "date": "2026-04-17",
-        "H1": 0.1417,
-        "H2": 0.7087,
-        "H3": 0.1181,
-        "H4": 0.0315,
-        "note": "Very low snowpack and projected one-third normal inflow favor Tier 2+ shortage (H2/H3). Post-2026 framework negotiations add H4 uncertainty. Lake Mead Jan 2026 was 6.5ft above projection providing small buffer.",
-        "likelihoods": {
-          "H1": 0.15,
-          "H2": 0.5,
-          "H3": 0.25,
-          "H4": 0.1
-        },
-        "redTeam": {
-          "contrarian_direction": {},
-          "counterevidence": [],
-          "unfired_indicators": [],
-          "devil_advocate_score": 0.0,
-          "challenge": "No significant shifts proposed; no challenge needed.",
-          "inference_mode": "text_heuristic"
-        }
       }
     ]
   },
@@ -106,7 +86,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H2 +30pp, H1 -20pp, H3 -5pp, H4 -5pp"
+          "posteriorEffect": "H2 +30pp, H1 -20pp, H3 -5pp, H4 -5pp",
+          "likelihoods": {
+            "H1": 0.2,
+            "H2": 1.0,
+            "H3": 0.4,
+            "H4": 0.3
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t1_bor_declares_tier3",
@@ -114,7 +103,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H3 +30pp, H1 -15pp, H2 -10pp, H4 -5pp"
+          "posteriorEffect": "H3 +30pp, H1 -15pp, H2 -10pp, H4 -5pp",
+          "likelihoods": {
+            "H1": 0.166667,
+            "H2": 0.259259,
+            "H3": 1.0,
+            "H4": 0.166667
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t1_new_framework_adopted",
@@ -122,7 +120,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H4 +30pp, H1 -10pp, H2 -10pp, H3 -10pp"
+          "posteriorEffect": "H4 +30pp, H1 -10pp, H2 -10pp, H3 -10pp",
+          "likelihoods": {
+            "H1": 0.166667,
+            "H2": 0.194444,
+            "H3": 0.083333,
+            "H4": 1.0
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         }
       ],
       "tier2_strong": [
@@ -132,7 +139,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H2 +12pp, H1 -8pp, H3 +2pp, H4 -6pp"
+          "posteriorEffect": "H2 +12pp, H1 -8pp, H3 +2pp, H4 -6pp",
+          "likelihoods": {
+            "H1": 0.578947,
+            "H2": 1.0,
+            "H3": 0.894737,
+            "H4": 0.315789
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t2_aug_projection_below_1025",
@@ -140,7 +156,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H3 +12pp, H2 -4pp, H1 -6pp, H4 -2pp"
+          "posteriorEffect": "H3 +12pp, H2 -4pp, H1 -6pp, H4 -2pp",
+          "likelihoods": {
+            "H1": 0.444444,
+            "H2": 0.506173,
+            "H3": 1.0,
+            "H4": 0.444444
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t2_interior_convenes_negotiation",
@@ -148,7 +173,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H4 +10pp, H1 -3pp, H2 -3pp, H3 -4pp"
+          "posteriorEffect": "H4 +10pp, H1 -3pp, H2 -3pp, H3 -4pp",
+          "likelihoods": {
+            "H1": 0.45,
+            "H2": 0.466667,
+            "H3": 0.366667,
+            "H4": 1.0
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t2_elevation_upstream_shift",
@@ -156,7 +190,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H2 +8pp, H3 +4pp, H1 -10pp, H4 -2pp"
+          "posteriorEffect": "H2 +8pp, H3 +4pp, H1 -10pp, H4 -2pp",
+          "likelihoods": {
+            "H1": 0.526316,
+            "H2": 0.929825,
+            "H3": 1.0,
+            "H4": 0.631579
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t2_mead_above_1065_at_midyear",
@@ -164,7 +207,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H1 +8pp, H2 +2pp, H3 -7pp, H4 -3pp"
+          "posteriorEffect": "H1 +8pp, H2 +2pp, H3 -7pp, H4 -3pp",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 0.824561,
+            "H3": 0.421053,
+            "H4": 0.552632
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t2_formal_framework_proposal",
@@ -172,7 +224,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H4 +8pp, H1 -2pp, H2 -3pp, H3 -3pp"
+          "posteriorEffect": "H4 +8pp, H1 -2pp, H2 -3pp, H3 -3pp",
+          "likelihoods": {
+            "H1": 0.518519,
+            "H2": 0.518519,
+            "H3": 0.444444,
+            "H4": 1.0
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         }
       ],
       "tier3_suggestive": [
@@ -182,7 +243,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H3 +3pp, H4 +2pp, H1 -3pp, H2 -2pp"
+          "posteriorEffect": "H3 +3pp, H4 +2pp, H1 -3pp, H2 -2pp",
+          "likelihoods": {
+            "H1": 0.75,
+            "H2": 0.796296,
+            "H3": 1.0,
+            "H4": 1.0
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t3_congress_legislation",
@@ -190,7 +260,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H4 +3pp, H3 +1pp, H1 -2pp, H2 -2pp"
+          "posteriorEffect": "H4 +3pp, H3 +1pp, H1 -2pp, H2 -2pp",
+          "likelihoods": {
+            "H1": 0.717949,
+            "H2": 0.735043,
+            "H3": 0.820513,
+            "H4": 1.0
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t3_voluntary_cuts_exceed_dcp",
@@ -198,7 +277,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H1 +3pp, H2 -1pp, H3 -1pp, H4 -1pp"
+          "posteriorEffect": "H1 +3pp, H2 -1pp, H3 -1pp, H4 -1pp",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 0.888889,
+            "H3": 0.848485,
+            "H4": 0.818182
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t3_mead_rises_vs_projection",
@@ -206,7 +294,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H1 +4pp, H2 -2pp, H3 -1pp, H4 -1pp"
+          "posteriorEffect": "H1 +4pp, H2 -2pp, H3 -1pp, H4 -1pp",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 0.843137,
+            "H3": 0.823529,
+            "H4": 0.794118
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t3_bor_interim_reduction",
@@ -214,7 +311,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H1 +3pp, H2 -1pp, H3 -1pp, H4 -1pp"
+          "posteriorEffect": "H1 +3pp, H2 -1pp, H3 -1pp, H4 -1pp",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 0.888889,
+            "H3": 0.848485,
+            "H4": 0.818182
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         }
       ],
       "anti_indicators": [
@@ -224,7 +330,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H1 -10pp, H2 +7pp, H3 +3pp"
+          "posteriorEffect": "H1 -10pp, H2 +7pp, H3 +3pp",
+          "likelihoods": {
+            "H1": 0.555556,
+            "H2": 0.962963,
+            "H3": 1.0,
+            "H4": 0.833333
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "anti_h2",
@@ -232,7 +347,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H2 -10pp, H3 +10pp"
+          "posteriorEffect": "H2 -10pp, H3 +10pp",
+          "likelihoods": {
+            "H1": 0.6,
+            "H2": 0.466667,
+            "H3": 1.0,
+            "H4": 0.6
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "anti_h3",
@@ -240,7 +364,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H3 -8pp, H1 +5pp, H2 +3pp"
+          "posteriorEffect": "H3 -8pp, H1 +5pp, H2 +3pp",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 0.914286,
+            "H3": 0.4,
+            "H4": 0.857143
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "anti_h4",
@@ -248,7 +381,17 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H4 -8pp, H1 +3pp, H2 +5pp"
+          "posteriorEffect": "H4 -8pp, H1 +3pp, H2 +5pp",
+          "likelihoods": {
+            "H1": 0.99,
+            "H2": 1.0,
+            "H3": 0.9,
+            "H4": 0.18
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false,
+          "lr_migration_warning": "design prior drift >30% — review before next firing"
         }
       ]
     }
@@ -386,6 +529,130 @@
       "ledger": "DECISION",
       "claimState": "PROPOSED",
       "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_002",
+      "time": "2026-04-19T00:57:10+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "HYDRO"
+      ],
+      "text": "Bureau of Reclamation operating Lake Mead under Tier 1 Shortage Condition in 2026; Lake Powell under Mid-Elevation Release Tier. Post-2026 interim guidelines under negotiation (2007 guidelines + 2019 DCPs expire end-2026). Mayors of major SW cities publicly warned against deeper cuts.",
+      "provenance": "OBSERVED",
+      "source": "USBR / CRS / City of Phoenix",
+      "posteriorImpact": "NONE",
+      "url": "https://www.usbr.gov/ColoradoRiverBasin/post2026/index.html",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-19T00:57:10+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-19T00:57:10+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Political resistance to deeper cuts modestly raises H1 maintained-Tier1 branch; hydrology still points H2 median for 2028.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_003",
+      "time": "2026-04-21T03:51:21+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "WATER"
+      ],
+      "text": "USBR hydraulic models indicate Lake Mead likely to fall below 1,050 ft by July 2026, triggering Tier 2 shortage for 2027 operations; Tier 1 declared for 2026. Basin snowpack and runoff trends remain below average.",
+      "provenance": "OBSERVED",
+      "source": "US Bureau of Reclamation / Nevada Current",
+      "posteriorImpact": "NONE",
+      "url": "https://www.usbr.gov/newsroom/news-release/5211",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-21T03:51:21+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-21T03:51:21+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Official Reclamation modeling projects Tier 2 declaration trigger met; supports H2 as modal outcome for 2028 operations.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-21T15:28:43+00:00",
+      "tag": "INTEL",
+      "text": "DEADLINE MIGRATION: resolution_deadline stamped on ['H1'] based on topic startDate 2026-04-13.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 1.0
+    },
+    {
+      "time": "2026-04-21T19:03:41+00:00",
+      "tag": "INTEL",
+      "text": "LR MIGRATION RESET: posteriors reset to design priors; evidence log preserved.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 1.0
+    },
+    {
+      "time": "2026-04-21T22:46:02+00:00",
+      "tag": "INTEL",
+      "text": "RESOLUTION-DATE STAMPED: meta.resolutionDate=2028-01-01 (derived from meta.resolution). When past, governance flags topic as overdue for resolution.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 1.0
+    },
+    {
+      "time": "2026-04-22T01:00:38+00:00",
+      "tag": "INTEL",
+      "text": "REPLAY BEGIN: 0 previously-fired indicators will be re-applied chronologically under current LR system. Posteriors reset to design priors; indicator state cleared. Evidence log preserved for audit.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 1.0
+    },
+    {
+      "time": "2026-04-22T01:00:38+00:00",
+      "tag": "INTEL",
+      "text": "REPLAY COMPLETE: 0 indicators applied, 0 skipped. Final posteriors: {'H1': 0.3, 'H2': 0.45, 'H3': 0.15, 'H4': 0.1}. Indicator firedDates restored to originals for audit.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 1.0
     }
   ],
   "dataFeeds": {
@@ -479,13 +746,13 @@
       "regime": "SAFE",
       "worst_hypothesis": "H1"
     },
-    "entropy": 1.2726,
+    "entropy": 1.7822,
     "maxEntropy": 2.0,
-    "uncertaintyRatio": 0.6363,
+    "uncertaintyRatio": 0.8911,
     "evidenceFreshness": {
-      "fresh": 2,
-      "stale": 0,
-      "total": 2
+      "fresh": 10,
+      "stale": 3,
+      "total": 13
     },
     "hypothesisAdmissibility": {
       "H1": "ADMISSIBLE",
@@ -494,10 +761,10 @@
       "H4": "ADMISSIBLE"
     },
     "klFromPrior": {
-      "kl_divergence": 0.151,
+      "kl_divergence": 0.0,
       "interpretation": "MODERATE"
     },
-    "lastComputed": "2026-04-17T18:49:21+00:00",
+    "lastComputed": "2026-04-22T05:19:58+00:00",
     "staleDependencies": 0,
     "calibrationHealth": "ACCEPTABLE",
     "unresolvedContradictions": 0,
@@ -524,7 +791,7 @@
         }
       },
       "indistinguishable": [],
-      "lastChecked": "2026-04-17T18:49:21+00:00"
+      "lastChecked": "2026-04-22T05:19:58+00:00"
     }
   },
   "predictionScoring": {
@@ -551,6 +818,50 @@
           "H4": 0.0315
         },
         "entropy": 1.2726
+      },
+      {
+        "timestamp": "2026-04-19T00:57:10+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0792,
+          "H2": 0.871,
+          "H3": 0.0449,
+          "H4": 0.005
+        },
+        "entropy": 0.7025
+      },
+      {
+        "timestamp": "2026-04-19T00:57:10+00:00",
+        "trigger": "pipeline:ev_002",
+        "posteriors": {
+          "H1": 0.0792,
+          "H2": 0.871,
+          "H3": 0.0449,
+          "H4": 0.005
+        },
+        "entropy": 0.7025
+      },
+      {
+        "timestamp": "2026-04-21T03:51:21+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0099,
+          "H2": 0.9733,
+          "H3": 0.0118,
+          "H4": 0.005
+        },
+        "entropy": 0.2177
+      },
+      {
+        "timestamp": "2026-04-21T03:51:21+00:00",
+        "trigger": "pipeline:ev_003",
+        "posteriors": {
+          "H1": 0.0099,
+          "H2": 0.9733,
+          "H3": 0.0118,
+          "H4": 0.005
+        },
+        "entropy": 0.2177
       }
     ],
     "outcomes": [],
@@ -558,14 +869,1294 @@
   },
   "contradictionTracker": {
     "unresolved": [],
-    "resolved": []
+    "resolved": [
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T15:23:00+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Very low snowpack and projected one-third normal inflow favor Tier 2+ shortage (H2/H3). Post-2026 framework negotiations add H4 uncertainty. Lake Mead Jan 2026 was 6.5ft above projection providing small buffer.",
+        "entry_b_time": "2026-04-19T00:57:10+00:00",
+        "entry_b_text": "Bureau of Reclamation operating Lake Mead under Tier 1 Shortage Condition in 2026; Lake Powell under Mid-Elevation Release Tier. Post-2026 interim guidelines under negotiation (2007 guidelines + 2019 DCPs expire end-2026). Mayors of major SW cities publicly warned against deeper cuts.",
+        "reason": "Numeric divergence 50.0% on metric (context: shortage, tier): new=1.0, existing=2.0, threshold=10%",
+        "detected": "2026-04-19T00:57:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-19T00:57:10Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T15:23:00+00:00",
+        "entry_a_text": "Colorado River projected to deliver just over a third of normal Apr-Jul inflow to Lake Powell as snowpack near lowest levels since 2000. Lake Powell 25% full, Lake Mead 34% full. Post-2026 operating rules under active negotiation. River flows down 20% since 2000.",
+        "entry_b_time": "2026-04-19T00:57:10+00:00",
+        "entry_b_text": "Bureau of Reclamation operating Lake Mead under Tier 1 Shortage Condition in 2026; Lake Powell under Mid-Elevation Release Tier. Post-2026 interim guidelines under negotiation (2007 guidelines + 2019 DCPs expire end-2026). Mayors of major SW cities publicly warned against deeper cuts.",
+        "reason": "Numeric divergence 96.0% on metric (context: mead): new=1.0, existing=25.0, threshold=10%",
+        "detected": "2026-04-19T00:57:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-19T00:57:10Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-19T00:57:10+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Political resistance to deeper cuts modestly raises H1 maintained-Tier1 branch; hydrology still points H2 median for 2028.",
+        "entry_b_time": "2026-04-21T03:51:21+00:00",
+        "entry_b_text": "USBR hydraulic models indicate Lake Mead likely to fall below 1,050 ft by July 2026, triggering Tier 2 shortage for 2027 operations; Tier 1 declared for 2026. Basin snowpack and runoff trends remain below average.",
+        "reason": "Numeric divergence 99.9% on metric (context: for): new=2.0, existing=2028.0, threshold=10%",
+        "detected": "2026-04-21T03:51:21Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T03:51:21Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-19T00:57:10+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+        "entry_b_time": "2026-04-21T03:51:21+00:00",
+        "entry_b_text": "USBR hydraulic models indicate Lake Mead likely to fall below 1,050 ft by July 2026, triggering Tier 2 shortage for 2027 operations; Tier 1 declared for 2026. Basin snowpack and runoff trends remain below average.",
+        "reason": "Numeric divergence 99.5% on metric (context: to): new=1.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-21T03:51:21Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T03:51:21Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-19T00:57:10+00:00",
+        "entry_a_text": "Bureau of Reclamation operating Lake Mead under Tier 1 Shortage Condition in 2026; Lake Powell under Mid-Elevation Release Tier. Post-2026 interim guidelines under negotiation (2007 guidelines + 2019 DCPs expire end-2026). Mayors of major SW cities publicly warned against deeper cuts.",
+        "entry_b_time": "2026-04-21T03:51:21+00:00",
+        "entry_b_text": "USBR hydraulic models indicate Lake Mead likely to fall below 1,050 ft by July 2026, triggering Tier 2 shortage for 2027 operations; Tier 1 declared for 2026. Basin snowpack and runoff trends remain below average.",
+        "reason": "Numeric divergence 100.0% on metric (context: tier): new=2026.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-21T03:51:21Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T03:51:21Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T15:23:00+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Very low snowpack and projected one-third normal inflow favor Tier 2+ shortage (H2/H3). Post-2026 framework negotiations add H4 uncertainty. Lake Mead Jan 2026 was 6.5ft above projection providing small buffer.",
+        "entry_b_time": "2026-04-21T03:51:21+00:00",
+        "entry_b_text": "USBR hydraulic models indicate Lake Mead likely to fall below 1,050 ft by July 2026, triggering Tier 2 shortage for 2027 operations; Tier 1 declared for 2026. Basin snowpack and runoff trends remain below average.",
+        "reason": "Numeric divergence 99.9% on metric (context: tier): new=2026.0, existing=2.0, threshold=10%",
+        "detected": "2026-04-21T03:51:21Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T03:51:21Z"
+      }
+    ]
   },
   "sourceCalibration": {
     "ledger": [],
     "effectiveTrust": {
       "8 News Now": 0.5,
-      "USBR": 0.5
+      "USBR": 0.5,
+      "CRS": 0.5,
+      "City of Phoenix": 0.5,
+      "Nevada Current": 0.5,
+      "US Bureau of Reclamation": 0.5
     },
-    "_last_scan_same_source_skipped": 0
-  }
+    "_last_scan_same_source_skipped": 1
+  },
+  "conditionalPredictions": [
+    {
+      "id": "cp_001",
+      "createdAt": "2026-04-19T05:50:53+00:00",
+      "conditionTopic": "colorado-shortage-tier-2028",
+      "conditionHypothesis": "H1",
+      "conditionProbAtCreation": 0.0792,
+      "prediction": "IF H1 (no Tier 2), THEN Lake Mead elevation remains above 1,025 ft by June 2028",
+      "resolutionCriteria": "USBR June 2028 bulletin reports elevation ≥1,025 ft projected",
+      "deadline": "2028-06-30",
+      "conditionalProbability": 0.85,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-green",
+      "lens": "GREEN",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "NEUTRAL",
+          "reasoning": "Lake Mead elevation is a physical/hydrological outcome well-modeled by smooth extrapolation absent extreme weather shocks.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "NEUTRAL",
+          "reasoning": "Reservoir elevation is a pure physical outcome.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "USBR bulletin threshold clean.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "DROP",
+          "reasoning": "Mead >=1,025 ft by June 2028 under 'no Tier 2' assumes climate/runoff benignness. RED: hydrological variance is the base case; this bakes in optimism.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "APPROVE",
+          "reasoning": "Names at least one specific decision-maker controlling the outcome; incentive is implicit but traceable.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": [
+        "GREEN",
+        "OCHRE"
+      ]
+    },
+    {
+      "id": "cp_002",
+      "createdAt": "2026-04-19T05:50:53+00:00",
+      "conditionTopic": "colorado-shortage-tier-2028",
+      "conditionHypothesis": "H1",
+      "conditionProbAtCreation": 0.0792,
+      "prediction": "IF H1, THEN Arizona water allocations for 2028 remain at current unrestricted baseline (no Tier 1 cuts enforced)",
+      "resolutionCriteria": "USBR 2028 operations final decree shows AZ CAP allocation unchanged from 2027 baseline",
+      "deadline": "2028-06-30",
+      "conditionalProbability": 0.8,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-green",
+      "lens": "GREEN",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": "No-cuts outcome given a no-Tier-2 regime is a genuine institutional-continuity claim that AMBER accepts when physical conditions support it.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "APPROVE",
+          "reasoning": "USBR decree maintaining baseline allocation reflects institutional water management working as designed.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "AZ CAP allocation unchanged is sharp.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "AZ allocations unchanged under H1 is a straight institutional-status-quo bet. Acceptable.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "APPROVE",
+          "reasoning": "Names multiple specific decision-makers (agencies, officials, firms, states) and ties the outcome to their choices. Actor-incentive traceability strong.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": [
+        "GREEN",
+        "OCHRE"
+      ]
+    },
+    {
+      "id": "cp_003",
+      "createdAt": "2026-04-19T05:50:53+00:00",
+      "conditionTopic": "colorado-shortage-tier-2028",
+      "conditionHypothesis": "H1",
+      "conditionProbAtCreation": 0.0792,
+      "prediction": "IF H1, THEN Nevada continues Tier 0 with no new restrictions on Lake Mead withdrawal",
+      "resolutionCriteria": "NDWR confirms no new Tier 1+ restrictions in 2028 decree",
+      "deadline": "2028-06-30",
+      "conditionalProbability": 0.82,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-green",
+      "lens": "GREEN",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "NEUTRAL",
+          "reasoning": "Continuation of Tier 0 is the baseline-regime claim; no discontinuity to flag.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "APPROVE",
+          "reasoning": "NDWR maintaining Tier 0 reflects regulatory absorption of status quo.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Nevada Tier 0 is clean.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "Nevada Tier 0 no new restrictions under H1. OK.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "APPROVE",
+          "reasoning": "Names at least one specific decision-maker controlling the outcome; incentive is implicit but traceable.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": [
+        "GREEN",
+        "OCHRE"
+      ]
+    },
+    {
+      "id": "cp_004",
+      "createdAt": "2026-04-19T05:50:53+00:00",
+      "conditionTopic": "colorado-shortage-tier-2028",
+      "conditionHypothesis": "H1",
+      "conditionProbAtCreation": 0.0792,
+      "prediction": "IF H1, THEN Mexican allotment under IBWC Treaty remains at 1.5 MAF",
+      "resolutionCriteria": "IBWC Minute confirms Mexico allocation unchanged from 2027",
+      "deadline": "2028-06-30",
+      "conditionalProbability": 0.78,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-green",
+      "lens": "GREEN",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "NEUTRAL",
+          "reasoning": "Treaty-allocation stability is institutional inertia in an area where inertia genuinely dominates absent compact-call crisis.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "APPROVE",
+          "reasoning": "IBWC treaty continuity is a diplomatic-institutional resolution mechanism holding.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Mexican allotment 1.5 MAF is specific.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "Mexico 1.5 MAF unchanged under H1. OK â€” though RED notes treaty pressure can arrive anytime.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "APPROVE",
+          "reasoning": "Names multiple specific decision-makers (agencies, officials, firms, states) and ties the outcome to their choices. Actor-incentive traceability strong.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": [
+        "GREEN",
+        "OCHRE"
+      ]
+    },
+    {
+      "id": "cp_005",
+      "createdAt": "2026-04-19T05:50:53+00:00",
+      "conditionTopic": "colorado-shortage-tier-2028",
+      "conditionHypothesis": "H2",
+      "conditionProbAtCreation": 0.871,
+      "prediction": "IF Tier 2 declared, THEN Arizona mandatory shortage reduction: CAP allocation reduced by 10-15%",
+      "resolutionCriteria": "USBR 2028 decree shows AZ CAP allotment ≤85% of 2027 baseline",
+      "deadline": "2028-06-30",
+      "conditionalProbability": 0.88,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-green",
+      "lens": "GREEN",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": "Mandatory 10-15% AZ cut under Tier 2 is a prescribed institutional discontinuity; correctly framed.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "APPROVE",
+          "reasoning": "Mandated reduction under USBR decree is the institutional absorption channel for shortage.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "AZ CAP <=85% is clean.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "AZ CAP -10-15% under Tier 2 is institutionally mandated. This is how the brittleness fires. Good.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "APPROVE",
+          "reasoning": "Names multiple specific decision-makers (agencies, officials, firms, states) and ties the outcome to their choices. Actor-incentive traceability strong.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": [
+        "GREEN",
+        "OCHRE"
+      ]
+    },
+    {
+      "id": "cp_006",
+      "createdAt": "2026-04-19T05:50:53+00:00",
+      "conditionTopic": "colorado-shortage-tier-2028",
+      "conditionHypothesis": "H2",
+      "conditionProbAtCreation": 0.871,
+      "prediction": "IF H2, THEN Nevada mandatory shortage reduction: LVVWD receives ≤300 kAF or equivalent proportional reduction",
+      "resolutionCriteria": "NDWR confirms Nevada 2028 allocation ≤300 kAF or equivalent percentage reduction applied",
+      "deadline": "2028-06-30",
+      "conditionalProbability": 0.84,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-green",
+      "lens": "GREEN",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": "Nevada proportional reduction under Tier 2 is the legally-triggered regime change.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "APPROVE",
+          "reasoning": "NV reduction under coordinated framework is institutional compliance.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "NV <=300 kAF is sharp.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "Nevada proportional cut under Tier 2. Mechanically correct. OK.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "APPROVE",
+          "reasoning": "Names multiple specific decision-makers (agencies, officials, firms, states) and ties the outcome to their choices. Actor-incentive traceability strong.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": [
+        "GREEN",
+        "OCHRE"
+      ]
+    },
+    {
+      "id": "cp_007",
+      "createdAt": "2026-04-19T05:50:53+00:00",
+      "conditionTopic": "colorado-shortage-tier-2028",
+      "conditionHypothesis": "H2",
+      "conditionProbAtCreation": 0.871,
+      "prediction": "IF H2, THEN Mexican allotment reduced to ~1.2 MAF or conservation surcharge applied under Minute 323",
+      "resolutionCriteria": "IBWC confirms Mexico 2028 delivery ≤1.2 MAF or conservation surcharge applied under Minute 323",
+      "deadline": "2028-06-30",
+      "conditionalProbability": 0.76,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-green",
+      "lens": "GREEN",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": "Mexico Minute-323 conservation surcharge is the cross-border institutional trigger activation.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "APPROVE",
+          "reasoning": "Minute 323 is a prebuilt diplomatic absorption mechanism; activation is textbook BLUE outcome.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Mexico <=1.2 MAF threshold clean.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "Mexico reduction to 1.2 MAF under Minute 323 surcharge is the correct treaty response to Tier 2. Good.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "APPROVE",
+          "reasoning": "Names multiple specific decision-makers (agencies, officials, firms, states) and ties the outcome to their choices. Actor-incentive traceability strong.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": [
+        "GREEN",
+        "OCHRE"
+      ]
+    },
+    {
+      "id": "cp_008",
+      "createdAt": "2026-04-19T05:50:53+00:00",
+      "conditionTopic": "colorado-shortage-tier-2028",
+      "conditionHypothesis": "H2",
+      "conditionProbAtCreation": 0.871,
+      "prediction": "IF H2, THEN AZ agriculture shifts ≥80 kAF to CAP groundwater banking or water purchase agreements",
+      "resolutionCriteria": "ADWR or CAP reports show FY2028 banking deposits ≥80 kAF from Tier 2 reductions",
+      "deadline": "2028-06-30",
+      "conditionalProbability": 0.72,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-green",
+      "lens": "GREEN",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": "80 kAF shift to banking/purchases is a structural reallocation captured as a regime-shift effect.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "APPROVE",
+          "reasoning": "Groundwater banking / water markets are market-clearing absorption mechanisms.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "CAP banking 80 kAF is specific.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "MODIFY",
+          "reasoning": "80 kAF shift to banking/purchases under Tier 2 probably understates market scramble. RED: forced fallowing and price spikes are the more likely failure mode. Suggest widening and adding fallowing indicator.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "APPROVE",
+          "reasoning": "Names multiple specific decision-makers (agencies, officials, firms, states) and ties the outcome to their choices. Actor-incentive traceability strong.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": [
+        "GREEN",
+        "OCHRE"
+      ]
+    },
+    {
+      "id": "cp_009",
+      "createdAt": "2026-04-19T05:50:55+00:00",
+      "conditionTopic": "colorado-shortage-tier-2028",
+      "conditionHypothesis": "H1",
+      "conditionProbAtCreation": 0.0792,
+      "prediction": "IF H1 (no Tier 2), THEN Upper Basin snowmelt-driven runoff for WY2027 remains sufficient: Colorado River main stem inflow ≥14 MAF for water year 2027",
+      "resolutionCriteria": "USGS annual streamflow report 2027 shows Colorado River main stem inflow ≥14 MAF for Oct 2026-Sep 2027 water year",
+      "deadline": "2028-06-30",
+      "conditionalProbability": 0.62,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-ochre",
+      "lens": "OCHRE",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "NEUTRAL",
+          "reasoning": "Upper-basin inflow estimate is physical/hydrological and appropriate as smooth-trend.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "NEUTRAL",
+          "reasoning": "Streamflow volume is pure physical.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Colorado main stem 14 MAF is clean.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "DROP",
+          "reasoning": "Upper Basin inflow >=14 MAF assumes benign hydrology. RED: this is a straight weather bet dressed as structural prediction, and the base rate over the last decade is against it.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "NEUTRAL",
+          "reasoning": "Pure hydrological/physical aggregate (precipitation, snowmelt, runoff, streamflow, aquifer). No named decision-maker controls the measured variable; VIOLET lens offers no actor-incentive leverage.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": [
+        "OCHRE",
+        "GREEN"
+      ]
+    },
+    {
+      "id": "cp_010",
+      "createdAt": "2026-04-19T05:50:55+00:00",
+      "conditionTopic": "colorado-shortage-tier-2028",
+      "conditionHypothesis": "H1",
+      "conditionProbAtCreation": 0.0792,
+      "prediction": "IF H1, THEN Lake Powell end-of-year 2027 elevation ≥3,490 ft and Lake Mead ≥1,050 ft; no compact call invoked",
+      "resolutionCriteria": "USBR reports Powell ≥3,490 ft and Mead ≥1,050 ft as of Dec 31, 2027; no compact call documented in Federal Register",
+      "deadline": "2028-06-30",
+      "conditionalProbability": 0.55,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-ochre",
+      "lens": "OCHRE",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "NEUTRAL",
+          "reasoning": "Reservoir-elevation floors given no-Tier-2 are near-mechanical operating outcomes.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "NEUTRAL",
+          "reasoning": "Reservoir elevations are pure physical, though 'no compact call' has institutional flavor.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Powell/Mead joint threshold is specific.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "DROP",
+          "reasoning": "Powell >=3,490 ft AND Mead >=1,050 ft AND no compact call assumes three conditional resiliences simultaneously. RED: any one fails; conjunction is too demanding for 0.55.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "APPROVE",
+          "reasoning": "Names multiple specific decision-makers (agencies, officials, firms, states) and ties the outcome to their choices. Actor-incentive traceability strong.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": [
+        "OCHRE",
+        "GREEN"
+      ]
+    },
+    {
+      "id": "cp_011",
+      "createdAt": "2026-04-19T05:50:55+00:00",
+      "conditionTopic": "colorado-shortage-tier-2028",
+      "conditionHypothesis": "H2",
+      "conditionProbAtCreation": 0.871,
+      "prediction": "IF Tier 2 declared, THEN cumulative human water withdrawal from Lower Basin declines 3-5% from 2027 baseline due to mandatory cuts",
+      "resolutionCriteria": "USBR annual report 2028 shows combined AZ+NV+Mexico deliveries 0.75-1.0 MAF below 2027 actual",
+      "deadline": "2028-06-30",
+      "conditionalProbability": 0.81,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-ochre",
+      "lens": "OCHRE",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": "3-5% basin-wide withdrawal decline is a structural mandatory-cut regime outcome.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "APPROVE",
+          "reasoning": "Mandated withdrawal cut under Tier 2 is institutional absorption of shortage working as designed.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Lower Basin withdrawal 3-5% decline is sharp.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "3-5% withdrawal decline under Tier 2 is the mechanical-cut consequence. Good.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "APPROVE",
+          "reasoning": "Names multiple specific decision-makers (agencies, officials, firms, states) and ties the outcome to their choices. Actor-incentive traceability strong.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": [
+        "OCHRE",
+        "GREEN"
+      ]
+    },
+    {
+      "id": "cp_012",
+      "createdAt": "2026-04-19T05:50:56+00:00",
+      "conditionTopic": "colorado-shortage-tier-2028",
+      "conditionHypothesis": "H2",
+      "conditionProbAtCreation": 0.871,
+      "prediction": "IF H2, THEN agricultural land fallowing in Arizona increases 50-120 kAC in Pinal/Maricopa counties as CAP cuts force margin farmers out",
+      "resolutionCriteria": "USDA FSA or AZDA satellite/survey data shows 2028 irrigated acreage ≥50 kAC below 2027 baseline in Pinal/Maricopa counties",
+      "deadline": "2028-06-30",
+      "conditionalProbability": 0.74,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-ochre",
+      "lens": "OCHRE",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": "50-120 kAC fallowing in Pinal/Maricopa captures agricultural-regime discontinuity under CAP cuts.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "APPROVE",
+          "reasoning": "Fallowing via market/regulatory channels is classic absorption of water-scarcity shock.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Fallowing 50-120 kAC is measurable.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "AZ fallowing 50-120 kAC in Pinal/Maricopa captures the brittleness RED specifically looks for â€” ag forced out at margin. Strong.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "APPROVE",
+          "reasoning": "Names multiple specific decision-makers (agencies, officials, firms, states) and ties the outcome to their choices. Actor-incentive traceability strong.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": [
+        "OCHRE",
+        "GREEN"
+      ]
+    },
+    {
+      "id": "cp_013",
+      "createdAt": "2026-04-19T05:50:56+00:00",
+      "conditionTopic": "colorado-shortage-tier-2028",
+      "conditionHypothesis": "H2",
+      "conditionProbAtCreation": 0.871,
+      "prediction": "IF H2, THEN Lake Mead elevation continues secular decline, reaching ≤1,000 ft by August 2028",
+      "resolutionCriteria": "USBR Lake Mead elevation bulletin August 2028 reports elevation ≤1,000 ft",
+      "deadline": "2028-08-31",
+      "conditionalProbability": 0.68,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-ochre",
+      "lens": "OCHRE",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": "<=1000 ft elevation is a dead-pool-proximate threshold crossing signaling hydrological-regime failure.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "NEUTRAL",
+          "reasoning": "Elevation outcome is pure physical.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Mead <=1000 by Aug 2028 is sharp threshold.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "Mead <=1,000 ft by August 2028 is a severe-tail indicator. RED-aligned.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "APPROVE",
+          "reasoning": "Names multiple specific decision-makers (agencies, officials, firms, states) and ties the outcome to their choices. Actor-incentive traceability strong.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_014",
+      "createdAt": "2026-04-19T05:50:56+00:00",
+      "conditionTopic": "colorado-shortage-tier-2028",
+      "conditionHypothesis": "H2",
+      "conditionProbAtCreation": 0.871,
+      "prediction": "IF H2, THEN Colorado River Compact interstate disputes increase: ≥2 formal water rights challenges or USBR compact call notices filed during 2028 calendar year",
+      "resolutionCriteria": "Federal Register or USBR notices document ≥2 compact calls, water-rights adjudications, or interstate objections filed in calendar 2028",
+      "deadline": "2028-12-31",
+      "conditionalProbability": 0.71,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-ochre",
+      "lens": "OCHRE",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": "Multiple compact calls/disputes capture institutional-regime rupture on the Colorado.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "MODIFY",
+          "reasoning": "Interstate disputes framing overstates breakdown; the Basin's doctrine history suggests disputes are processed through the existing Tier/USBR/IBWC architecture rather than full compact calls.",
+          "modified_suggestion": "IF H2, THEN Colorado River Compact framework sees >=2 formal stakeholder consultations, Section 7 negotiations, or interagency protests filed during 2028 that are absorbed through USBR-led mediation without triggering an interstate Supreme Court action."
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Compact challenge count is a clean institutional trigger.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "2+ compact disputes/water-rights challenges captures the interstate-litigation cascade. Strong RED framing.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "APPROVE",
+          "reasoning": "Names multiple specific decision-makers (agencies, officials, firms, states) and ties the outcome to their choices. Actor-incentive traceability strong.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": [
+        "OCHRE",
+        "GREEN"
+      ]
+    },
+    {
+      "id": "cp_015",
+      "createdAt": "2026-04-22T02:35:33+00:00",
+      "conditionTopic": "colorado-shortage-tier-2028",
+      "conditionHypothesis": "H1",
+      "conditionProbAtCreation": 0.3,
+      "prediction": "IF Tier 1 maintained, THEN Lake Mead elevation remains >=1,050 ft through 2027 and 2028 with inflow/outflow balance favorable",
+      "resolutionCriteria": "Observable: USBR elevation updates show Mead >=1,050 ft on 2028-06-30; no Tier 2 declaration issued for 2028",
+      "deadline": "2028-06-30",
+      "conditionalProbability": 0.76,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "water-resources",
+        "shortage-tier",
+        "lake-mead"
+      ],
+      "source": "agent-green",
+      "lens": "GREEN",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "NEUTRAL",
+          "reasoning": "Tier-1 maintained continuation prediction.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "APPROVE",
+          "reasoning": "Tier 1 maintained reflects institutional water management success. BLUE-compatible. 0.76 reasonable.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "MODIFY",
+          "reasoning": "Mead >=1,050 ft through mid-2028 is plausible base case but RED: climate surprise (dry winter 2027-28) can drop elevation rapidly. Probability 0.76 slightly high.",
+          "modified_suggestion": "Lower to 0.65."
+        },
+        "VIOLET": {
+          "verdict": "APPROVE",
+          "reasoning": "Hydrology observable; agency-neutral.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Lake Mead elevation is cleanly observable via USBR.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_016",
+      "createdAt": "2026-04-22T02:35:33+00:00",
+      "conditionTopic": "colorado-shortage-tier-2028",
+      "conditionHypothesis": "H2",
+      "conditionProbAtCreation": 0.45,
+      "prediction": "IF Tier 2 declared, THEN Arizona water allocation reduced to 85-90% of current baseline (~1.40 MAF) in 2028",
+      "resolutionCriteria": "Observable: USBR 2028 decree confirms AZ CAP allocation <1.40 MAF AND Arizona CAP delivers shortage notice to municipal water providers by 2028-06-30, triggering Stage 2 municipal conservation plans per AZ Revised Statutes.",
+      "deadline": "2028-06-30",
+      "conditionalProbability": 0.82,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "water-allocation",
+        "tier-2",
+        "shortage-mechanism"
+      ],
+      "source": "agent-green",
+      "lens": "GREEN",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": "Tier-2 allocation threshold is a statutorily defined regime boundary. Good measurement.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "APPROVE",
+          "reasoning": "Tier 2 mechanics follow pre-committed institutional framework. Measurable. 0.82 reasonable.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "Mechanical if Tier 2 declared; reasonable.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "APPROVE",
+          "reasoning": "Tier-2 allocation is mechanical once declared.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "CAP allocation threshold + municipal action is a well-formed compound.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_017",
+      "createdAt": "2026-04-22T02:35:33+00:00",
+      "conditionTopic": "colorado-shortage-tier-2028",
+      "conditionHypothesis": "H2",
+      "conditionProbAtCreation": 0.45,
+      "prediction": "IF Tier 2 holds, THEN Lake Mead elevation falls to 1,025-1,050 ft range by Aug 2028, confirming shortage trigger",
+      "resolutionCriteria": "Observable: USBR Lake Mead bulletin Aug 2028 reports elevation in 1,025-1,050 ft range",
+      "deadline": "2028-08-31",
+      "conditionalProbability": 0.85,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "lake-mead",
+        "tier-2",
+        "elevation-forecast"
+      ],
+      "source": "agent-green",
+      "lens": "GREEN",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": "Clean elevation observable at a specific date.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "APPROVE",
+          "reasoning": "Mead elevation consistent with Tier 2 trigger. Measurable. 0.85 reasonable.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "Mechanical consequence of Tier 2.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "APPROVE",
+          "reasoning": "Elevation observable.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Elevation range anchor for Tier 2.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_018",
+      "createdAt": "2026-04-22T02:35:35+00:00",
+      "conditionTopic": "colorado-shortage-tier-2028",
+      "conditionHypothesis": "H1",
+      "conditionProbAtCreation": 0.3,
+      "prediction": "IF H1 (Tier 1 maintained), THEN structural path-dependence locks in: water users have adapted to current restrictions through demand-side substitution (agricultural fallowing, groundwater banking, conservation). Lifting restrictions removes political pressure for long-term reallocation; status quo institutional inertia persists despite climate trend suggesting deeper cuts needed by 2030.",
+      "resolutionCriteria": "Observable: (1) USBR Aug 2027 projection confirms Lake Mead >=1,050 ft and Tier 1 continued for 2028. (2) ADWR 2027 annual report documents >=80 kAF agricultural fallowing and >=100 kAF groundwater banking as active demand-substitution measures confirming adaptation without deeper compact revision.",
+      "deadline": "2028-12-31",
+      "conditionalProbability": 0.68,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "institutional-inertia",
+        "climate-lag",
+        "adaptation-lock-in"
+      ],
+      "source": "agent-ochre",
+      "lens": "OCHRE",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": "Institutional inertia via demand-substitution lock-in is solid AMBER framing.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "APPROVE",
+          "reasoning": "Institutional inertia on compact revision under Tier 1 stability is BLUE-canonical status-quo absorption. Reasonable.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "Institutional inertia/climate lag is RED-aligned.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "APPROVE",
+          "reasoning": "ADWR institutional observable.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Dual-threshold observable (USBR elevation + ADWR adaptation volumes).",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_019",
+      "createdAt": "2026-04-22T04:18:42+00:00",
+      "conditionTopic": "colorado-shortage-tier-2028",
+      "conditionHypothesis": "H4",
+      "conditionProbAtCreation": 0.1,
+      "prediction": "IF unprecedented outcome holds, THEN federal court ruling or Interior Secretary declaration identifies 2028 allocation as outside existing Tier framework by 2028-09-30.",
+      "resolutionCriteria": "Federal court ruling or Interior Secretary declaration that 2028 water allocation falls outside existing Tier 1/2/3 framework.",
+      "deadline": "2028-09-30",
+      "conditionalProbability": 0.21,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "regime-shift",
+        "legal-framework-failure",
+        "interstate-conflict"
+      ],
+      "source": "agent-amber",
+      "lens": "AMBER",
+      "criticVerdicts": {},
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_020",
+      "createdAt": "2026-04-22T04:18:43+00:00",
+      "conditionTopic": "colorado-shortage-tier-2028",
+      "conditionHypothesis": "H3",
+      "conditionProbAtCreation": 0.15,
+      "prediction": "IF Tier 3+ or emergency measures beyond DCP invoked, THEN Interior Secretary issues emergency order declaring shortage level not mapped to Tier 1/2/3 by 2028-06-30.",
+      "resolutionCriteria": "Interior Department formally declares shortage level not mapped to Tier 1/2/3 by 2028-06-30. Lake Mead elevation confirms <1,020 feet by Jan 2028.",
+      "deadline": "2028-06-30",
+      "conditionalProbability": 0.18,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "water_policy",
+        "interstate_drought",
+        "Interior_incentives"
+      ],
+      "source": "agent-violet",
+      "lens": "VIOLET",
+      "criticVerdicts": {},
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_021",
+      "createdAt": "2026-04-22T05:19:35+00:00",
+      "conditionTopic": "colorado-shortage-tier-2028",
+      "conditionHypothesis": "H3",
+      "conditionProbAtCreation": 0.15,
+      "prediction": "IF Tier 3 or emergency measures are triggered (H3), THEN water governance regime shifts from allocational negotiation to emergency allocator-of-last-resort, with Interior Secretary issuing emergency orders superseding state agreements and agriculture water allocations declining more than 50% while municipal allocation stays flat.",
+      "resolutionCriteria": "Interior Secretary issues emergency water-allocation order superseding Nevada/Arizona/California agreements; agriculture water allocations decline more than 50% while municipal allocation stays flat; court cases challenging federal override authority reach appellate level by end 2027.",
+      "deadline": "2027-12-31",
+      "conditionalProbability": 0.64,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "water-governance-regime-shift",
+        "federal-authority-expansion",
+        "agricultural-displacement-phase"
+      ],
+      "source": "agent-amber",
+      "lens": "AMBER",
+      "criticVerdicts": [
+        {
+          "critic": "GREEN",
+          "verdict": "APPROVE",
+          "reasoning": "Interior Department emergency allocation authority already exists. If Tier 3 fires, institutional response path is relatively well-defined. 64% reasonable.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "RED",
+          "verdict": "MODIFY",
+          "reasoning": "Federal override of state water agreements would immediately trigger constitutional challenges. Interior Secretary orders would face injunctive relief within days. Agricultural cuts may never operationally achieve 50% magnitude during prediction window due to legal stays. 0.64 too high for operational outcome.",
+          "modified_suggestion": "Lower to 0.50. Add 'operational implementation confirmed by USDA irrigation data' as binding criterion. Flag legal stays could prevent operational implementation."
+        },
+        {
+          "critic": "VIOLET",
+          "verdict": "MODIFY",
+          "reasoning": "Arizona is a swing state, Nevada has Republican Senate representation. Interior Secretary's incentive is to negotiate face-saving compact revision, not issue emergency orders triggering political backlash. 64% too high for politically costly unilateral action.",
+          "modified_suggestion": "Lower to 0.48. Large agribusiness PAC donors have strong political leverage to resist 50% agricultural curtailment."
+        },
+        {
+          "critic": "OCHRE",
+          "verdict": "APPROVE",
+          "reasoning": "Colorado River governance under Tier 3 is precisely the resource-depletion-driven institutional transformation OCHRE models. Shift to emergency allocator-of-last-resort reflects path-dependence along 1922 Compact's internal contradiction. 0.64 appropriate.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "GRAY",
+          "verdict": "APPROVE",
+          "reasoning": "Federal override of state water agreements is high-stakes regime-shift prediction absent from other water entries. 50% agriculture allocation decline is clean distributional test.",
+          "modified_suggestion": null
+        }
+      ],
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_022",
+      "createdAt": "2026-04-22T05:19:35+00:00",
+      "conditionTopic": "colorado-shortage-tier-2028",
+      "conditionHypothesis": "H4",
+      "conditionProbAtCreation": 0.1,
+      "prediction": "IF unprecedented outcome occurs (H4: new framework/court reallocation), THEN the Colorado River legal regime undergoes structural transformation where prior-appropriation doctrine faces explicit challenge and compact renegotiation becomes existential, with at least 2 states filing suit proposing new allocation formula by 2028.",
+      "resolutionCriteria": "Court ruling or legislative proposal formally challenges 1922 Compact terms; at least 2 states file suit proposing new allocation formula; new framework legislation reaches advanced committee stage with more than 50 co-sponsors by end 2028.",
+      "deadline": "2028-12-31",
+      "conditionalProbability": 0.52,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "legal-regime-transformation",
+        "water-law-rewrite",
+        "structural-reallocation-regime-change"
+      ],
+      "source": "agent-amber",
+      "lens": "AMBER",
+      "criticVerdicts": [
+        {
+          "critic": "GREEN",
+          "verdict": "MODIFY",
+          "reasoning": "Prior-appropriation doctrine challenges require slow legal coalition-building. Two states filing suit by 2028 may understate how slowly interstate water litigation moves.",
+          "modified_suggestion": "Reduce to 0.42. Modify to 'at least 1 state files formal challenge citing 1922 Compact terms as inequitable'."
+        },
+        {
+          "critic": "RED",
+          "verdict": "APPROVE",
+          "reasoning": "Prior-appropriation doctrine challenge under shortage stress is structural legal transformation RED anticipates. Two states filing suit is low enough threshold — suits don't need to succeed. 0.52 appropriately cautious.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "VIOLET",
+          "verdict": "APPROVE",
+          "reasoning": "Requires named state attorneys general and water district legal teams to file suits — actors with clear incentives once compact terms become existentially threatening. Arizona and Nevada both have urban constituencies demanding water security. 52% appropriately calibrated.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "OCHRE",
+          "verdict": "APPROVE",
+          "reasoning": "Prior-appropriation doctrine challenge is correct structural prediction for existential resource scarcity scenario. 1922 Compact is path-dependent on hydrological baseline that climate change has structurally eliminated. Legal challenge is emergent result of physical resource constraints. 0.52 appropriate.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "GRAY",
+          "verdict": "APPROVE",
+          "reasoning": "Prior-appropriation doctrine challenge structurally distinct from iid 542's emergency-allocator framing. Both can coexist in portfolio.",
+          "modified_suggestion": null
+        }
+      ],
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_023",
+      "createdAt": "2026-04-22T05:19:58+00:00",
+      "conditionTopic": "colorado-shortage-tier-2028",
+      "conditionHypothesis": "H3",
+      "conditionProbAtCreation": 0.15,
+      "prediction": "IF Tier 3 or emergency measures are triggered (H3), THEN water governance regime shifts from allocational negotiation to emergency allocator-of-last-resort, with Interior Secretary issuing emergency orders superseding state agreements and agriculture water allocations declining more than 50% while municipal allocation stays flat.",
+      "resolutionCriteria": "Interior Secretary issues emergency water-allocation order superseding Nevada/Arizona/California agreements; agriculture water allocations decline more than 50% while municipal allocation stays flat; court cases challenging federal override authority reach appellate level by end 2027.",
+      "deadline": "2027-12-31",
+      "conditionalProbability": 0.64,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "water-governance-regime-shift",
+        "federal-authority-expansion",
+        "agricultural-displacement-phase"
+      ],
+      "source": "agent-amber",
+      "lens": "AMBER",
+      "criticVerdicts": [
+        {
+          "critic": "GREEN",
+          "verdict": "APPROVE",
+          "reasoning": "Interior Department emergency allocation authority already exists. If Tier 3 fires, institutional response path is relatively well-defined. 64% reasonable.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "RED",
+          "verdict": "MODIFY",
+          "reasoning": "Federal override of state water agreements would immediately trigger constitutional challenges. Interior Secretary orders would face injunctive relief within days. Agricultural cuts may never operationally achieve 50% magnitude during prediction window due to legal stays. 0.64 too high for operational outcome.",
+          "modified_suggestion": "Lower to 0.50. Add 'operational implementation confirmed by USDA irrigation data' as binding criterion. Flag legal stays could prevent operational implementation."
+        },
+        {
+          "critic": "VIOLET",
+          "verdict": "MODIFY",
+          "reasoning": "Arizona is a swing state, Nevada has Republican Senate representation. Interior Secretary's incentive is to negotiate face-saving compact revision, not issue emergency orders triggering political backlash. 64% too high for politically costly unilateral action.",
+          "modified_suggestion": "Lower to 0.48. Large agribusiness PAC donors have strong political leverage to resist 50% agricultural curtailment."
+        },
+        {
+          "critic": "OCHRE",
+          "verdict": "APPROVE",
+          "reasoning": "Colorado River governance under Tier 3 is precisely the resource-depletion-driven institutional transformation OCHRE models. Shift to emergency allocator-of-last-resort reflects path-dependence along 1922 Compact's internal contradiction. 0.64 appropriate.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "GRAY",
+          "verdict": "APPROVE",
+          "reasoning": "Federal override of state water agreements is high-stakes regime-shift prediction absent from other water entries. 50% agriculture allocation decline is clean distributional test.",
+          "modified_suggestion": null
+        }
+      ],
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_024",
+      "createdAt": "2026-04-22T05:19:58+00:00",
+      "conditionTopic": "colorado-shortage-tier-2028",
+      "conditionHypothesis": "H4",
+      "conditionProbAtCreation": 0.1,
+      "prediction": "IF unprecedented outcome occurs (H4: new framework/court reallocation), THEN the Colorado River legal regime undergoes structural transformation where prior-appropriation doctrine faces explicit challenge and compact renegotiation becomes existential, with at least 2 states filing suit proposing new allocation formula by 2028.",
+      "resolutionCriteria": "Court ruling or legislative proposal formally challenges 1922 Compact terms; at least 2 states file suit proposing new allocation formula; new framework legislation reaches advanced committee stage with more than 50 co-sponsors by end 2028.",
+      "deadline": "2028-12-31",
+      "conditionalProbability": 0.52,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "legal-regime-transformation",
+        "water-law-rewrite",
+        "structural-reallocation-regime-change"
+      ],
+      "source": "agent-amber",
+      "lens": "AMBER",
+      "criticVerdicts": [
+        {
+          "critic": "GREEN",
+          "verdict": "MODIFY",
+          "reasoning": "Prior-appropriation doctrine challenges require slow legal coalition-building. Two states filing suit by 2028 may understate how slowly interstate water litigation moves.",
+          "modified_suggestion": "Reduce to 0.42. Modify to 'at least 1 state files formal challenge citing 1922 Compact terms as inequitable'."
+        },
+        {
+          "critic": "RED",
+          "verdict": "APPROVE",
+          "reasoning": "Prior-appropriation doctrine challenge under shortage stress is structural legal transformation RED anticipates. Two states filing suit is low enough threshold — suits don't need to succeed. 0.52 appropriately cautious.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "VIOLET",
+          "verdict": "APPROVE",
+          "reasoning": "Requires named state attorneys general and water district legal teams to file suits — actors with clear incentives once compact terms become existentially threatening. Arizona and Nevada both have urban constituencies demanding water security. 52% appropriately calibrated.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "OCHRE",
+          "verdict": "APPROVE",
+          "reasoning": "Prior-appropriation doctrine challenge is correct structural prediction for existential resource scarcity scenario. 1922 Compact is path-dependent on hydrological baseline that climate change has structurally eliminated. Legal challenge is emergent result of physical resource constraints. 0.52 appropriate.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "GRAY",
+          "verdict": "APPROVE",
+          "reasoning": "Prior-appropriation doctrine challenge structurally distinct from iid 542's emergency-allocator framing. Both can coexist in portfolio.",
+          "modified_suggestion": null
+        }
+      ],
+      "lensAgreement": []
+    }
+  ],
+  "schemaVersion": 2,
+  "migratedAt": "2026-04-21T19:03:41+00:00"
 }

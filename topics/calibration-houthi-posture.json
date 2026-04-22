@@ -6,13 +6,14 @@
     "question": "What will Houthi military posture toward Red Sea commercial shipping look like by July 2026?",
     "resolution": "Assessed July 1, 2026 via: (1) 30-day rolling attack count against commercial vessels (attack frequency), (2) MARAD advisory status (Threat Level 1-4), (3) shipping insurance war-risk premium (% of vessel value), (4) weekly transit volume through Bab al-Mandeb as % of Jan 2024 baseline. H1 fires if ≥5 attacks/month AND >50% of Jan-2024 baseline transits re-routed. H2 fires if attacks selective (Israeli/US-linked targets only, ≤2 neutral-flag attacks/month). H3 fires if <1 commercial attack/month AND MARAD downgrades advisory. H4 fires if effective closure (≤20% of baseline transits, US NAVCENT NOTAM issued).",
     "created": "2026-04-11T00:00:00Z",
-    "lastUpdated": "2026-04-17T18:49:21+00:00",
+    "lastUpdated": "2026-04-22T05:19:57+00:00",
     "status": "ACTIVE",
     "dayCount": 1,
     "startDate": "2026-04-11T00:00:00Z",
     "classification": "ROUTINE",
     "topicType": "conflict",
-    "horizon": "~12 weeks (resolution: 2026-07-01)"
+    "horizon": "~12 weeks (resolution: 2026-07-01)",
+    "resolutionDate": "2026-07-01"
   },
   "tagConfig": {
     "_docs": "ESCALATION tags push toward H1/H4. DEESCALATION tags push toward H3. SELECTIVE tags confirm H2. RHETORIC tags are attenuated by governor.",
@@ -73,28 +74,28 @@
         "label": "Attacks resume at pre-ceasefire intensity (indiscriminate, ≥5/month)",
         "midpoint": 0,
         "unit": "probability_at_July2026",
-        "posterior": 0.1068,
+        "posterior": 0.0119,
         "description": "Houthis return to the late-2023/early-2024 campaign tempo: missile and drone strikes against any commercial vessel in or transiting the Red Sea, irrespective of flag or cargo. Threshold: ≥5 verified attacks against non-Israeli, non-US commercial shipping in a 30-day window, or public Houthi declaration ending political-screening policy. Precondition: Iran war escalates further OR Gaza conflict fully re-ignites OR Houthis perceive the ceasefire deal as a humiliation worth reversing for domestic mobilization."
       },
       "H2": {
         "label": "Selective targeting — political screening persists (current posture)",
         "midpoint": 0,
         "unit": "probability_at_July2026",
-        "posterior": 0.6726,
+        "posterior": 0.3149,
         "description": "Houthis maintain the post-May 2026 posture: attacks limited to vessels with Israeli, US, or UK links (ownership, flag, cargo destination). Neutral-flag, non-sanctioned shipping passes largely unmolested. Threshold: ≤2 neutral-flag commercial attacks/month AND ≥1 confirmed attack against Israeli/US-linked vessel. This is the current observed posture as of April 2026. Ceasefire with US (May 6) prevents American-shipping attacks but Houthis retain discretion on other targets. Most likely because it satisfies domestic mobilization narrative (solidarity with Palestine/Iran) while avoiding full US re-engagement."
       },
       "H3": {
         "label": "De facto ceasefire holds — no commercial attacks",
         "midpoint": 0,
         "unit": "probability_at_July2026",
-        "posterior": 0.0961,
+        "posterior": 0.6682,
         "description": "Houthis observe a broad commercial shipping ceasefire through July 2026, either through Iranian pressure following a larger regional settlement, US deterrence from Operation Rough Rider, or a formal extension of the May 6 deal to cover all commercial traffic. Threshold: <1 verified attack on any commercial vessel in the 30-day window before July 1, AND MARAD does not maintain a Threat Level ≥2 advisory for the Red Sea. Possible if the Iran-Israel/US war settles into frozen conflict and Houthis see no political upside to continued attacks."
       },
       "H4": {
         "label": "Escalation beyond Red Sea — Bab al-Mandeb effective closure",
         "midpoint": 0,
         "unit": "probability_at_July2026",
-        "posterior": 0.1245,
+        "posterior": 0.005,
         "description": "Houthis escalate to a de facto closure of Bab al-Mandeb, using anti-ship missiles, mines, or coordinated drone swarms to push weekly transits below 20% of Jan 2024 baseline. Threshold: US NAVCENT issues NOTAM effectively closing the strait, OR Lloyd's/JWC declares Bab al-Mandeb a war-exclusion zone, OR ≥15 attacks/month for 2 consecutive months. Requires significant Iranian resupply (weapons), Houthi willingness to absorb sustained US/Saudi airstrikes, and a political logic (e.g., Iran directing maximum economic pressure). Very high cost given Operation Rough Rider precedent."
       }
     },
@@ -112,17 +113,38 @@
         "note": "Initial priors. H2 anchored by current observed selective-targeting posture post-May 6 ceasefire. H3 non-trivial given US deterrence. H1 depressed because Houthis have incentive to maintain political-screening distinction. H4 low due to cost of Operation Rough Rider re-engagement."
       },
       {
-        "date": "2026-04-17",
-        "H1": 0.1415,
-        "H2": 0.5943,
-        "H3": 0.1698,
-        "H4": 0.0943,
-        "note": "Evidence ev_010: Houthis enter Iran war with missile/drone strikes on Israel; threaten Bab al-Man",
+        "date": "2026-04-22",
+        "posteriors": {
+          "H1": 0.024,
+          "H2": 0.288,
+          "H3": 0.672,
+          "H4": 0.016
+        },
+        "priors": {
+          "H1": 0.15,
+          "H2": 0.45,
+          "H3": 0.3,
+          "H4": 0.1
+        },
+        "updateMethod": "bayesian_update",
+        "evidenceRefs": [
+          "ev_016"
+        ],
         "likelihoods": {
-          "H1": 0.25,
-          "H2": 0.35,
-          "H3": 0.15,
-          "H4": 0.25
+          "H1": 0.05,
+          "H2": 0.2,
+          "H3": 0.7,
+          "H4": 0.05
+        },
+        "note": "Seven-month absence of Red Sea commercial attacks strongly supports H3 (de facto ceasefire holds). Houthi effort redirected to Israel strikes (not commercial shipping) and US-Houthi ceasefire terms specifically exempt American shipping. No Bab al-Mandeb closure evidence.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "turningPoint": {
+          "type": "LEADING_CHANGED",
+          "from": "H2",
+          "to": "H3",
+          "fromProb": 0.45,
+          "toProb": 0.672
         },
         "redTeam": {
           "contrarian_direction": {},
@@ -134,17 +156,36 @@
         }
       },
       {
-        "date": "2026-04-17",
-        "H1": 0.1068,
-        "H2": 0.6726,
-        "H3": 0.0961,
-        "H4": 0.1245,
-        "note": "Houthi threats to Bab al-Mandeb and entry into Iran conflict raise H4 (escalation beyond Red Sea). No confirmed commercial attacks yet keeps H2/H3 in play. H1 gets weight from resumed anti-Israel strikes.",
+        "date": "2026-04-22",
+        "posteriors": {
+          "H1": 0.0119,
+          "H2": 0.3149,
+          "H3": 0.6682,
+          "H4": 0.005
+        },
+        "priors": {
+          "H1": 0.024,
+          "H2": 0.288,
+          "H3": 0.672,
+          "H4": 0.016
+        },
+        "updateMethod": "bayesian_update",
+        "evidenceRefs": [
+          "ev_017"
+        ],
         "likelihoods": {
-          "H1": 0.2,
-          "H2": 0.3,
-          "H3": 0.15,
-          "H4": 0.35
+          "H1": 0.25,
+          "H2": 0.55,
+          "H3": 0.5,
+          "H4": 0.15
+        },
+        "note": "Missile strikes on Israel + heavy US bombing raise risk of commercial Red Sea resumption (H1/H2) but conspicuous absence of commercial attacks despite provocation keeps H3 live; slight upward pressure on H2 selective targeting most consistent with current pattern.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "turningPoint": {
+          "type": "BRANCH_DEATH",
+          "hypothesis": "H4",
+          "lastPosterior": 0.005
         },
         "redTeam": {
           "contrarian_direction": {},
@@ -227,7 +268,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": "Would confirm H1 — indiscriminate posture. Single incident may be targeting error; pattern of 3+ confirms policy shift.",
-          "posteriorEffect": "H1 +25pp, H2 -20pp, H3 -8pp, H4 +3pp"
+          "posteriorEffect": "H1 +25pp, H2 -20pp, H3 -8pp, H4 +3pp",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 0.208333,
+            "H3": 0.275,
+            "H4": 0.4875
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t1_bab_closure_notam",
@@ -235,7 +285,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": "Definitive H4 indicator. Has not occurred even at peak 2024 attack tempo — would require major escalation.",
-          "posteriorEffect": "H4 +40pp, H1 +10pp, H2 -25pp, H3 -25pp"
+          "posteriorEffect": "H4 +40pp, H1 +10pp, H2 -25pp, H3 -25pp",
+          "likelihoods": {
+            "H1": 0.333333,
+            "H2": 0.088889,
+            "H3": 0.033333,
+            "H4": 1.0
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t1_ceasefire_formal_extension",
@@ -243,7 +302,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": "Would strongly confirm H3. Requires both Houthi announcement AND MARAD verification — announcement alone is RHETORIC.",
-          "posteriorEffect": "H3 +35pp, H2 -15pp, H1 -15pp, H4 -5pp"
+          "posteriorEffect": "H3 +35pp, H2 -15pp, H1 -15pp, H4 -5pp",
+          "likelihoods": {
+            "H1": 0.015385,
+            "H2": 0.307692,
+            "H3": 1.0,
+            "H4": 0.230769
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t1_iranian_directive_ceasefire",
@@ -251,7 +319,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": "Iran controls Houthi weapons resupply and provides strategic direction. An Iranian directive is the highest-confidence H3 signal.",
-          "posteriorEffect": "H3 +30pp, H1 -15pp, H2 -10pp, H4 -5pp"
+          "posteriorEffect": "H3 +30pp, H1 -15pp, H2 -10pp, H4 -5pp",
+          "likelihoods": {
+            "H1": 0.016667,
+            "H2": 0.388889,
+            "H3": 1.0,
+            "H4": 0.25
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         }
       ],
       "tier2_strong": [
@@ -261,7 +338,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": "Sustained tempo required — single spike could be targeting error or one-off. Two-month persistence confirms operational policy.",
-          "posteriorEffect": "H1 +15pp, H4 +5pp, H3 -15pp, H2 -5pp"
+          "posteriorEffect": "H1 +15pp, H4 +5pp, H3 -15pp, H2 -5pp",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 0.444444,
+            "H3": 0.25,
+            "H4": 0.75
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t2_war_risk_premium_spike",
@@ -269,7 +355,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": "Insurance market is a leading indicator — underwriters price in attack probability before ships are hit. Premium >1.2% indicates market believes attacks are likely, not just possible.",
-          "posteriorEffect": "H1 +10pp, H4 +5pp, H3 -10pp, H2 -5pp"
+          "posteriorEffect": "H1 +10pp, H4 +5pp, H3 -10pp, H2 -5pp",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 0.533333,
+            "H3": 0.4,
+            "H4": 0.9
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t2_transit_volume_collapse",
@@ -277,7 +372,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": "Volume collapse independent of attack count — if shipping companies preemptively re-route, it signals they expect H1 or H4 regardless of current attack rate.",
-          "posteriorEffect": "H4 +15pp, H1 +10pp, H3 -15pp, H2 -10pp"
+          "posteriorEffect": "H4 +15pp, H1 +10pp, H3 -15pp, H2 -10pp",
+          "likelihoods": {
+            "H1": 0.666667,
+            "H2": 0.311111,
+            "H3": 0.2,
+            "H4": 1.0
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t2_selective_confirmed_pattern",
@@ -285,7 +389,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": "Confirms H2 operational pattern is active and policy-driven, not random. Requires both action evidence and stated criteria.",
-          "posteriorEffect": "H2 +15pp, H3 -5pp, H1 -10pp, H4 -5pp"
+          "posteriorEffect": "H2 +15pp, H3 -5pp, H1 -10pp, H4 -5pp",
+          "likelihoods": {
+            "H1": 0.25,
+            "H2": 1.0,
+            "H3": 0.625,
+            "H4": 0.375
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t2_rough_rider_halt",
@@ -293,7 +406,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": "Rough Rider continuation is the primary US lever constraining Houthi escalation. A halt removes that constraint and is H1/H2 permissive.",
-          "posteriorEffect": "H1 +8pp, H2 +5pp, H3 +5pp, H4 +3pp (ambiguous — could enable escalation OR reflect a deal)"
+          "posteriorEffect": "H1 +8pp, H2 +5pp, H3 +5pp, H4 +3pp (ambiguous — could enable escalation OR reflect a deal)",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 0.724638,
+            "H3": 0.76087,
+            "H4": 0.847826
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t2_major_carrier_return",
@@ -301,7 +423,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": "Major carriers have their own intelligence and legal exposure. A return signals their risk models see a durable H3 or low-H2 environment.",
-          "posteriorEffect": "H3 +12pp, H2 +5pp, H1 -10pp, H4 -7pp"
+          "posteriorEffect": "H3 +12pp, H2 +5pp, H1 -10pp, H4 -7pp",
+          "likelihoods": {
+            "H1": 0.238095,
+            "H2": 0.793651,
+            "H3": 1.0,
+            "H4": 0.214286
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         }
       ],
       "tier3_suggestive": [
@@ -311,7 +442,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": "RHETORIC — attenuated by governor. Houthis have a history of not matching rhetoric to action (and vice versa). Weight at ~25% of OBSERVED equivalent.",
-          "posteriorEffect": "H1 +3pp, H2 -3pp (rhetoric only — governor attenuates)"
+          "posteriorEffect": "H1 +3pp, H2 -3pp (rhetoric only — governor attenuates)",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 0.777778,
+            "H3": 0.833333,
+            "H4": 0.833333
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t3_iran_war_intensification",
@@ -319,7 +459,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": "Iran escalation increases Houthi motivation to escalate in solidarity but does not guarantee it — depends on Iranian direction and Houthi capacity.",
-          "posteriorEffect": "H1 +5pp, H4 +3pp, H3 -5pp, H2 -3pp"
+          "posteriorEffect": "H1 +5pp, H4 +3pp, H3 -5pp, H2 -3pp",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 0.7,
+            "H3": 0.625,
+            "H4": 0.975
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t3_houthi_drone_stockpile_signal",
@@ -327,7 +476,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": "Capacity indicator — resupply is a necessary but not sufficient condition for H1/H4. Depressed stockpiles constrain escalation options.",
-          "posteriorEffect": "H1 +4pp, H4 +4pp, H3 -3pp, H2 -2pp"
+          "posteriorEffect": "H1 +4pp, H4 +4pp, H3 -3pp, H2 -2pp",
+          "likelihoods": {
+            "H1": 0.904762,
+            "H2": 0.68254,
+            "H3": 0.642857,
+            "H4": 1.0
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t3_marad_downgrade",
@@ -335,7 +493,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": "MARAD advisories lag actual attack rate but provide a useful institutional consensus signal. Downgrade without major carrier return is insufficient for H3 confirmation.",
-          "posteriorEffect": "H3 +5pp, H2 +3pp, H1 -4pp, H4 -4pp"
+          "posteriorEffect": "H3 +5pp, H2 +3pp, H1 -4pp, H4 -4pp",
+          "likelihoods": {
+            "H1": 0.628571,
+            "H2": 0.914286,
+            "H3": 1.0,
+            "H4": 0.514286
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t3_oman_mediation_active",
@@ -343,7 +510,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": "Oman is the only viable back-channel. Active Omani mediation is a leading indicator of H3 — but agreements can collapse. Treat as suggestive, not confirmatory.",
-          "posteriorEffect": "H3 +5pp, H2 +3pp, H1 -4pp, H4 -3pp"
+          "posteriorEffect": "H3 +5pp, H2 +3pp, H1 -4pp, H4 -3pp",
+          "likelihoods": {
+            "H1": 0.628571,
+            "H2": 0.914286,
+            "H3": 1.0,
+            "H4": 0.6
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t3_saudi_payment_signal",
@@ -351,7 +527,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": "Saudi money flow has historically correlated with Houthi operational restraint. Would support H3 trajectory but is not dispositive.",
-          "posteriorEffect": "H3 +4pp, H2 +2pp, H1 -3pp, H4 -3pp"
+          "posteriorEffect": "H3 +4pp, H2 +2pp, H1 -3pp, H4 -3pp",
+          "likelihoods": {
+            "H1": 0.705882,
+            "H2": 0.921569,
+            "H3": 1.0,
+            "H4": 0.617647
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         }
       ],
       "anti_indicators": [
@@ -361,7 +546,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": "Sustained screening discipline for 60+ days makes H1 (indiscriminate) implausible as a July 2026 state.",
-          "posteriorEffect": "H1 -20pp"
+          "posteriorEffect": "H1 -20pp",
+          "likelihoods": {
+            "H1": 0.033333,
+            "H2": 1.0,
+            "H3": 1.0,
+            "H4": 1.0
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "anti_h2_zero_attacks_60d",
@@ -369,7 +563,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": "If even Israeli-linked vessels transit unmolested for 60 days, selective targeting is no longer the operative posture — H3 has replaced it.",
-          "posteriorEffect": "H2 -25pp, H3 +20pp"
+          "posteriorEffect": "H2 -25pp, H3 +20pp",
+          "likelihoods": {
+            "H1": 0.6,
+            "H2": 0.266667,
+            "H3": 1.0,
+            "H4": 0.6
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "anti_h3_any_attack_after_60d_peace",
@@ -377,7 +580,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": "Ceasefires with Houthis have historically been fragile. An attack after a sustained quiet period resets the assessment toward H2.",
-          "posteriorEffect": "H3 -20pp, H2 +15pp"
+          "posteriorEffect": "H3 -20pp, H2 +15pp",
+          "likelihoods": {
+            "H1": 0.75,
+            "H2": 1.0,
+            "H3": 0.25,
+            "H4": 0.75
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "anti_h4_rough_rider_sustained",
@@ -385,7 +597,17 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": "H4 (full closure) requires offensive capacity. Sustained Rough Rider attrition makes full-closure attempt operationally implausible without major resupply.",
-          "posteriorEffect": "H4 -15pp"
+          "posteriorEffect": "H4 -15pp",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 1.0,
+            "H3": 1.0,
+            "H4": 0.05
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false,
+          "lr_migration_warning": "design prior drift >30% — review before next firing"
         },
         {
           "id": "anti_h4_iran_capacity_constrained",
@@ -393,7 +615,17 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": "H4 requires Iranian resupply. If Iran is fully capacity-constrained, Houthis cannot sustain a closure campaign against US/Saudi air power.",
-          "posteriorEffect": "H4 -12pp, H1 -5pp"
+          "posteriorEffect": "H4 -12pp, H1 -5pp",
+          "likelihoods": {
+            "H1": 0.666667,
+            "H2": 1.0,
+            "H3": 1.0,
+            "H4": 0.05
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false,
+          "lr_migration_warning": "design prior drift >30% — review before next firing"
         }
       ]
     }
@@ -703,6 +935,229 @@
       "ledger": "DECISION",
       "claimState": "PROPOSED",
       "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_012",
+      "time": "2026-04-19T00:57:10+00:00",
+      "tag": "EVENT",
+      "tags": [
+        "EVENT",
+        "SECURITY"
+      ],
+      "text": "USS George H.W. Bush strike group rerouted around Africa (6,000-mile detour) due to Houthi missile/drone threat; US launched Operation Rough Rider airstrikes March 15; Houthis threatened Bab al-Mandeb chokepoint closure after short-lived ceasefire collapsed early April 2026.",
+      "provenance": "OBSERVED",
+      "source": "Defence Security Asia / Fox News / Washington Institute",
+      "posteriorImpact": "NONE",
+      "url": "https://defencesecurityasia.com/en/uss-george-hw-bush-red-sea-detour-houthi-threat-africa-bab-el-mandeb-2026/",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-19T00:57:10+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: stale_evidence, quorum_failure. Reason: Carrier group rerouting and Bab al-Mandeb closure threat strongly support H4 escalation and indiscriminate-resumption H1.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_013",
+      "time": "2026-04-20T14:03:51+00:00",
+      "tag": "EVENT",
+      "tags": [
+        "EVENT",
+        "MILOPS"
+      ],
+      "text": "US strike on Ras Issa port on April 17, 2026 killed at least 74 people, deadliest action of Operation Rough Rider (US campaign vs Houthis since March 15). Houthis have threatened to shutter Bab al-Mandeb if Gulf states join US-Israel war on Iran, but have limited active involvement to strikes on Israel; no sustained commercial Red Sea maritime attacks observed.",
+      "provenance": "OBSERVED",
+      "source": "Military Times",
+      "posteriorImpact": "NONE",
+      "url": "https://www.militarytimes.com/news/pentagon-congress/2026/04/14/amid-focus-on-strait-of-hormuz-experts-sound-warning-on-yemens-houthis-and-red-sea/",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-20T14:03:51+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-20T14:03:51+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, stale_evidence, quorum_failure. Reason: Houthis' current behavior (threats + Israel strikes without sustained commercial maritime attacks) matches H2 selective posture; US kinetic pressure plus Bab al-Mandeb rhetoric raises H4 tail; H3 de facto ceasefire inconsistent with active strike exchanges.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_014",
+      "time": "2026-04-21T03:51:21+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "MIL"
+      ],
+      "text": "No Red Sea maritime attacks recorded since September 2025 per ACLED tracking. Houthis threatened Feb 28 to resume attacks over Iran war; Apr reporting notes continued pause despite rhetoric, with analysts citing strategic patience and heavy US naval presence.",
+      "provenance": "OBSERVED",
+      "source": "ACLED / Washington Institute / The National",
+      "posteriorImpact": "NONE",
+      "url": "https://acleddata.com/platform/interactive-map-red-sea-attacks",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.4555
+    },
+    {
+      "time": "2026-04-21T03:51:21+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-21T03:51:21+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, stale_evidence, quorum_failure. Reason: Extended zero-attack pause combined with live rhetoric is the current H2 'selective/conditional' posture, not H1 resumption or H4 escalation.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_015",
+      "time": "2026-04-21T05:33:07+00:00",
+      "tag": "EVENT",
+      "tags": [
+        "EVENT",
+        "CEASEFIRE",
+        "MARITIME"
+      ],
+      "text": "Houthi forces have paused Red Sea attacks for 3+ weeks into the US-Israel-Iran war (since late February 2026), surprising analysts given prior pattern. Houthis previously ended the May 2025 ceasefire with the US in September 2025, but have not resumed commercial vessel attacks during the current Iran conflict. Red Sea attack frequency is effectively near zero.",
+      "provenance": "OBSERVED",
+      "source": "The National / gCaptain / S&P Global",
+      "posteriorImpact": "NONE",
+      "url": "https://www.thenationalnews.com/news/mena/2026/03/17/mystery-of-no-houthi-attacks-on-red-sea-ships-three-weeks-into-iran-war/",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-21T05:33:07+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-21T19:03:40+00:00",
+      "tag": "INTEL",
+      "text": "LR MIGRATION RESET: posteriors reset to design priors; evidence log preserved.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 1.0
+    },
+    {
+      "time": "2026-04-21T22:46:02+00:00",
+      "tag": "INTEL",
+      "text": "RESOLUTION-DATE STAMPED: meta.resolutionDate=2026-07-01 (derived from meta.resolution). When past, governance flags topic as overdue for resolution.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 1.0
+    },
+    {
+      "time": "2026-04-22T01:00:37+00:00",
+      "tag": "INTEL",
+      "text": "REPLAY BEGIN: 0 previously-fired indicators will be re-applied chronologically under current LR system. Posteriors reset to design priors; indicator state cleared. Evidence log preserved for audit.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 1.0
+    },
+    {
+      "time": "2026-04-22T01:00:37+00:00",
+      "tag": "INTEL",
+      "text": "REPLAY COMPLETE: 0 indicators applied, 0 skipped. Final posteriors: {'H1': 0.15, 'H2': 0.45, 'H3': 0.3, 'H4': 0.1}. Indicator firedDates restored to originals for audit.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 1.0
+    },
+    {
+      "id": "ev_016",
+      "time": "2026-04-22T01:15:47+00:00",
+      "tag": "EVENT",
+      "tags": [
+        "EVENT",
+        "MIL"
+      ],
+      "text": "No Red Sea commercial shipping attacks recorded since September 2025. During April 2026, Houthi operations focused on ballistic missile strikes against Israel (intercepted April 1 and April 2), not maritime targets. US Operation Rough Rider airstrikes on Houthi positions in Yemen continued through April (deadliest strike at Ras Issa port killed 74 on April 17). A US-Houthi ceasefire agreement halted US strikes on May 6 under terms where Houthis would not target American shipping.",
+      "provenance": "OBSERVED",
+      "source": "Washington Institute / Military Times / Wikipedia Red Sea crisis",
+      "posteriorImpact": "NONE",
+      "url": "https://www.militarytimes.com/news/pentagon-congress/2026/04/14/amid-focus-on-strait-of-hormuz-experts-sound-warning-on-yemens-houthis-and-red-sea/",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.4555
+    },
+    {
+      "time": "2026-04-22T01:15:47+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, stale_evidence, quorum_failure. Reason: Seven-month absence of Red Sea commercial attacks strongly supports H3 (de facto ceasefire holds). Houthi effort redirected to Israel strikes (not commercial shipping) and US-Houthi ceasefire terms specifically exempt American shipping. No Bab al-Mandeb closure evidence.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_017",
+      "time": "2026-04-22T01:30:35+00:00",
+      "tag": "EVENT",
+      "tags": [
+        "EVENT",
+        "MIL"
+      ],
+      "text": "Houthis resumed ballistic missile attacks on Israel Mar 28 2026 as part of Iran war; strikes continued Apr 1 and Apr 2 (intercepted). US Operation Rough Rider airstrikes ongoing since Mar 15; Ras Issa port strike Apr 17 killed 74. Notably, no Houthi attacks on Red Sea commercial shipping three weeks into Iran war despite threats.",
+      "provenance": "OBSERVED",
+      "source": "Washington Institute / Military Times",
+      "posteriorImpact": "NONE",
+      "url": "https://www.militarytimes.com/news/pentagon-congress/2026/04/14/amid-focus-on-strait-of-hormuz-experts-sound-warning-on-yemens-houthis-and-red-sea/",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.4555
+    },
+    {
+      "time": "2026-04-22T01:30:35+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
     }
   ],
   "dataFeeds": {
@@ -832,24 +1287,23 @@
     "site:maritime.dot.gov Red Sea advisory"
   ],
   "governance": {
-    "health": "DEGRADED",
+    "health": "HEALTHY",
     "issues": [
-      "Majority stale evidence (8/13)",
-      "Downstream alert: calibration-ukraine-ceasefire has 2 stale assumption(s) from this topic",
-      "Downstream alert: hormuz-closure has 2 stale assumption(s) from this topic"
+      "Downstream alert: calibration-ukraine-ceasefire has 3 stale assumption(s) from this topic",
+      "Downstream alert: hormuz-closure has 3 stale assumption(s) from this topic"
     ],
     "rt": {
       "rt": 0.0,
       "regime": "SAFE",
       "worst_hypothesis": "H1"
     },
-    "entropy": 1.4285,
+    "entropy": 1.0279,
     "maxEntropy": 2.0,
-    "uncertaintyRatio": 0.7143,
+    "uncertaintyRatio": 0.514,
     "evidenceFreshness": {
-      "fresh": 5,
-      "stale": 8,
-      "total": 13
+      "fresh": 16,
+      "stale": 15,
+      "total": 31
     },
     "hypothesisAdmissibility": {
       "H1": "ADMISSIBLE",
@@ -858,10 +1312,10 @@
       "H4": "ADMISSIBLE"
     },
     "klFromPrior": {
-      "kl_divergence": 0.1519,
+      "kl_divergence": 0.3775,
       "interpretation": "MODERATE"
     },
-    "lastComputed": "2026-04-17T18:49:21+00:00",
+    "lastComputed": "2026-04-22T05:19:57+00:00",
     "staleDependencies": 0,
     "downstreamAlerts": [
       {
@@ -869,16 +1323,22 @@
         "downstream_title": "Ukraine Formal Ceasefire by End 2026",
         "stale_assumptions": [
           {
+            "hypothesis": "H1",
+            "assumed": 0.15,
+            "actual": 0.0119,
+            "drift": 0.1381
+          },
+          {
             "hypothesis": "H2",
             "assumed": 0.45,
-            "actual": 0.6726,
-            "drift": 0.2226
+            "actual": 0.3149,
+            "drift": 0.1351
           },
           {
             "hypothesis": "H3",
             "assumed": 0.3,
-            "actual": 0.0961,
-            "drift": 0.2039
+            "actual": 0.6682,
+            "drift": 0.3682
           }
         ]
       },
@@ -887,16 +1347,22 @@
         "downstream_title": "HORMUZ STRAIT CLOSURE",
         "stale_assumptions": [
           {
+            "hypothesis": "H1",
+            "assumed": 0.15,
+            "actual": 0.0119,
+            "drift": 0.1381
+          },
+          {
             "hypothesis": "H2",
             "assumed": 0.45,
-            "actual": 0.6726,
-            "drift": 0.2226
+            "actual": 0.3149,
+            "drift": 0.1351
           },
           {
             "hypothesis": "H3",
             "assumed": 0.3,
-            "actual": 0.0961,
-            "drift": 0.2039
+            "actual": 0.6682,
+            "drift": 0.3682
           }
         ]
       }
@@ -928,7 +1394,7 @@
         }
       },
       "indistinguishable": [],
-      "lastChecked": "2026-04-17T18:49:21+00:00"
+      "lastChecked": "2026-04-22T05:19:57+00:00"
     }
   },
   "dependencies": {
@@ -1029,6 +1495,138 @@
           "H4": 0.1245
         },
         "entropy": 1.4285
+      },
+      {
+        "timestamp": "2026-04-19T00:57:10+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.1409,
+          "H2": 0.5916,
+          "H3": 0.0211,
+          "H4": 0.2464
+        },
+        "entropy": 1.4618
+      },
+      {
+        "timestamp": "2026-04-19T00:57:10+00:00",
+        "trigger": "pipeline:ev_012",
+        "posteriors": {
+          "H1": 0.1409,
+          "H2": 0.5916,
+          "H3": 0.0211,
+          "H4": 0.2464
+        },
+        "entropy": 1.4618
+      },
+      {
+        "timestamp": "2026-04-20T14:03:51+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0727,
+          "H2": 0.7633,
+          "H3": 0.005,
+          "H4": 0.1589
+        },
+        "entropy": 1.0323
+      },
+      {
+        "timestamp": "2026-04-20T14:03:51+00:00",
+        "trigger": "pipeline:ev_013",
+        "posteriors": {
+          "H1": 0.0727,
+          "H2": 0.7633,
+          "H3": 0.005,
+          "H4": 0.1589
+        },
+        "entropy": 1.0323
+      },
+      {
+        "timestamp": "2026-04-21T03:51:21+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0099,
+          "H2": 0.9717,
+          "H3": 0.005,
+          "H4": 0.0134
+        },
+        "entropy": 0.2278
+      },
+      {
+        "timestamp": "2026-04-21T03:51:21+00:00",
+        "trigger": "pipeline:ev_014",
+        "posteriors": {
+          "H1": 0.0099,
+          "H2": 0.9717,
+          "H3": 0.005,
+          "H4": 0.0134
+        },
+        "entropy": 0.2278
+      },
+      {
+        "timestamp": "2026-04-21T05:33:07+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0058,
+          "H2": 0.98,
+          "H3": 0.0084,
+          "H4": 0.0058
+        },
+        "entropy": 0.1727
+      },
+      {
+        "timestamp": "2026-04-21T05:33:07+00:00",
+        "trigger": "pipeline:ev_015",
+        "posteriors": {
+          "H1": 0.0058,
+          "H2": 0.98,
+          "H3": 0.0084,
+          "H4": 0.0058
+        },
+        "entropy": 0.1727
+      },
+      {
+        "timestamp": "2026-04-22T01:15:47+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.024,
+          "H2": 0.288,
+          "H3": 0.672,
+          "H4": 0.016
+        },
+        "entropy": 1.1272
+      },
+      {
+        "timestamp": "2026-04-22T01:15:47+00:00",
+        "trigger": "pipeline:ev_016",
+        "posteriors": {
+          "H1": 0.024,
+          "H2": 0.288,
+          "H3": 0.672,
+          "H4": 0.016
+        },
+        "entropy": 1.1272
+      },
+      {
+        "timestamp": "2026-04-22T01:30:35+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0119,
+          "H2": 0.3149,
+          "H3": 0.6682,
+          "H4": 0.005
+        },
+        "entropy": 1.0279
+      },
+      {
+        "timestamp": "2026-04-22T01:30:35+00:00",
+        "trigger": "pipeline:ev_017",
+        "posteriors": {
+          "H1": 0.0119,
+          "H2": 0.3149,
+          "H3": 0.6682,
+          "H4": 0.005
+        },
+        "entropy": 1.0279
       }
     ],
     "outcomes": [],
@@ -1204,6 +1802,990 @@
         "detected": "2026-04-17T15:21:23Z",
         "resolution": "SUPERSEDED",
         "resolvedAt": "2026-04-17T15:21:23Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T15:21:23+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: stale_evidence. Reason: Houthi threats to Bab al-Mandeb and entry into Iran conflict raise H4 (escalation beyond Red Sea). No confirmed commercial attacks yet keeps H2/H3 in play. H1 gets weight from resumed anti-Israel strikes.",
+        "entry_b_time": "2026-04-19T00:57:10+00:00",
+        "entry_b_text": "USS George H.W. Bush strike group rerouted around Africa (6,000-mile detour) due to Houthi missile/drone threat; US launched Operation Rough Rider airstrikes March 15; Houthis threatened Bab al-Mandeb chokepoint closure after short-lived ceasefire collapsed early April 2026.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: bab, houthi, mandeb",
+        "detected": "2026-04-19T00:57:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-19T00:57:10Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T15:21:23+00:00",
+        "entry_a_text": "Houthis threaten second Red Sea shipping chokepoint at Bab al-Mandeb. US conducting Operation Rough Rider airstrikes across seven Yemen provinces. Houthis entered Iran conflict with missile/drone strikes on Israel in early April. No confirmed commercial ship attacks yet since May 2025 ceasefire.",
+        "entry_b_time": "2026-04-19T00:57:10+00:00",
+        "entry_b_text": "USS George H.W. Bush strike group rerouted around Africa (6,000-mile detour) due to Houthi missile/drone threat; US launched Operation Rough Rider airstrikes March 15; Houthis threatened Bab al-Mandeb chokepoint closure after short-lived ceasefire collapsed early April 2026.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: airstrikes, april, bab, ceasefire, chokepoint",
+        "detected": "2026-04-19T00:57:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-19T00:57:10Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T14:01:37+00:00",
+        "entry_a_text": "Houthis enter Iran war with missile/drone strikes on Israel; threaten Bab al-Mandeb shipping closure; US Operation Rough Rider strikes kill 74 at Ras Issa; May 6 US-Houthi ceasefire halts American attacks but Houthis retain selective screening posture",
+        "entry_b_time": "2026-04-19T00:57:10+00:00",
+        "entry_b_text": "USS George H.W. Bush strike group rerouted around Africa (6,000-mile detour) due to Houthi missile/drone threat; US launched Operation Rough Rider airstrikes March 15; Houthis threatened Bab al-Mandeb chokepoint closure after short-lived ceasefire collapsed early April 2026.",
+        "reason": "Numeric divergence 79.7% on metric (context: rider): new=15.0, existing=74.0, threshold=10%",
+        "detected": "2026-04-19T00:57:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-19T00:57:10Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-15T12:00:00Z",
+        "entry_a_text": "Iran army warned it will block trade through the Red Sea, Gulf of Oman, and Sea of Oman if the US naval blockade on Iranian ports continues. This is an explicit threat to expand the Hormuz closure to Red Sea shipping lanes — directly relevant to Houthi operational calculus. US blockade entered day 2 with trade into/out of Iran \"completely halted.\" Iran-US ceasefire expires April 21.",
+        "entry_b_time": "2026-04-19T00:57:10+00:00",
+        "entry_b_text": "USS George H.W. Bush strike group rerouted around Africa (6,000-mile detour) due to Houthi missile/drone threat; US launched Operation Rough Rider airstrikes March 15; Houthis threatened Bab al-Mandeb chokepoint closure after short-lived ceasefire collapsed early April 2026.",
+        "reason": "Numeric divergence 99.0% on metric (context: april): new=2026.0, existing=21.0, threshold=10%",
+        "detected": "2026-04-19T00:57:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-19T00:57:10Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-08T00:00:00Z",
+        "entry_a_text": "US-Iran ceasefire agreed April 8. Houthis operating 'Bab al-Mandeb tollbooth' — screening ships via AIS for US/Israel ties, allowing others to pass. Ships transmitting declarations of no US/Israel affiliation. Pattern mirrors Iran's 'Tehran tollbooth' in Strait of Hormuz.",
+        "entry_b_time": "2026-04-19T00:57:10+00:00",
+        "entry_b_text": "USS George H.W. Bush strike group rerouted around Africa (6,000-mile detour) due to Houthi missile/drone threat; US launched Operation Rough Rider airstrikes March 15; Houthis threatened Bab al-Mandeb chokepoint closure after short-lived ceasefire collapsed early April 2026.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: april, bab, ceasefire, houthis, mandeb",
+        "detected": "2026-04-19T00:57:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-19T00:57:10Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-19T00:57:10+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: stale_evidence, quorum_failure. Reason: Carrier group rerouting and Bab al-Mandeb closure threat strongly support H4 escalation and indiscriminate-resumption H1.",
+        "entry_b_time": "2026-04-20T14:03:51+00:00",
+        "entry_b_text": "US strike on Ras Issa port on April 17, 2026 killed at least 74 people, deadliest action of Operation Rough Rider (US campaign vs Houthis since March 15). Houthis have threatened to shutter Bab al-Mandeb if Gulf states join US-Israel war on Iran, but have limited active involvement to strikes on Israel; no sustained commercial Red Sea maritime attacks observed.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: bab, mandeb",
+        "detected": "2026-04-20T14:03:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-20T14:03:51Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-19T00:57:10+00:00",
+        "entry_a_text": "USS George H.W. Bush strike group rerouted around Africa (6,000-mile detour) due to Houthi missile/drone threat; US launched Operation Rough Rider airstrikes March 15; Houthis threatened Bab al-Mandeb chokepoint closure after short-lived ceasefire collapsed early April 2026.",
+        "entry_b_time": "2026-04-20T14:03:51+00:00",
+        "entry_b_text": "US strike on Ras Issa port on April 17, 2026 killed at least 74 people, deadliest action of Operation Rough Rider (US campaign vs Houthis since March 15). Houthis have threatened to shutter Bab al-Mandeb if Gulf states join US-Israel war on Iran, but have limited active involvement to strikes on Israel; no sustained commercial Red Sea maritime attacks observed.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: april, bab, houthis, mandeb, march",
+        "detected": "2026-04-20T14:03:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-20T14:03:51Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T15:21:23+00:00",
+        "entry_a_text": "Houthis threaten second Red Sea shipping chokepoint at Bab al-Mandeb. US conducting Operation Rough Rider airstrikes across seven Yemen provinces. Houthis entered Iran conflict with missile/drone strikes on Israel in early April. No confirmed commercial ship attacks yet since May 2025 ceasefire.",
+        "entry_b_time": "2026-04-20T14:03:51+00:00",
+        "entry_b_text": "US strike on Ras Issa port on April 17, 2026 killed at least 74 people, deadliest action of Operation Rough Rider (US campaign vs Houthis since March 15). Houthis have threatened to shutter Bab al-Mandeb if Gulf states join US-Israel war on Iran, but have limited active involvement to strikes on Israel; no sustained commercial Red Sea maritime attacks observed.",
+        "reason": "Numeric divergence 99.3% on metric (context: since): new=15.0, existing=2025.0, threshold=10%",
+        "detected": "2026-04-20T14:03:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-20T14:03:51Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T14:01:37+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: stale_evidence, quorum_failure. Reason: Evidence ev_010: Houthis enter Iran war with missile/drone strikes on Israel; threaten Bab al-Man",
+        "entry_b_time": "2026-04-20T14:03:51+00:00",
+        "entry_b_text": "US strike on Ras Issa port on April 17, 2026 killed at least 74 people, deadliest action of Operation Rough Rider (US campaign vs Houthis since March 15). Houthis have threatened to shutter Bab al-Mandeb if Gulf states join US-Israel war on Iran, but have limited active involvement to strikes on Israel; no sustained commercial Red Sea maritime attacks observed.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: bab, houthis, iran, israel, strikes",
+        "detected": "2026-04-20T14:03:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-20T14:03:51Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T14:01:37+00:00",
+        "entry_a_text": "Houthis enter Iran war with missile/drone strikes on Israel; threaten Bab al-Mandeb shipping closure; US Operation Rough Rider strikes kill 74 at Ras Issa; May 6 US-Houthi ceasefire halts American attacks but Houthis retain selective screening posture",
+        "entry_b_time": "2026-04-20T14:03:51+00:00",
+        "entry_b_text": "US strike on Ras Issa port on April 17, 2026 killed at least 74 people, deadliest action of Operation Rough Rider (US campaign vs Houthis since March 15). Houthis have threatened to shutter Bab al-Mandeb if Gulf states join US-Israel war on Iran, but have limited active involvement to strikes on Israel; no sustained commercial Red Sea maritime attacks observed.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: attacks, bab, houthis, iran, israel",
+        "detected": "2026-04-20T14:03:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-20T14:03:51Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-15T12:00:00Z",
+        "entry_a_text": "Iran army warned it will block trade through the Red Sea, Gulf of Oman, and Sea of Oman if the US naval blockade on Iranian ports continues. This is an explicit threat to expand the Hormuz closure to Red Sea shipping lanes — directly relevant to Houthi operational calculus. US blockade entered day 2 with trade into/out of Iran \"completely halted.\" Iran-US ceasefire expires April 21.",
+        "entry_b_time": "2026-04-20T14:03:51+00:00",
+        "entry_b_text": "US strike on Ras Issa port on April 17, 2026 killed at least 74 people, deadliest action of Operation Rough Rider (US campaign vs Houthis since March 15). Houthis have threatened to shutter Bab al-Mandeb if Gulf states join US-Israel war on Iran, but have limited active involvement to strikes on Israel; no sustained commercial Red Sea maritime attacks observed.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: april, gulf, iran, red, sea",
+        "detected": "2026-04-20T14:03:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-20T14:03:51Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-08T00:00:00Z",
+        "entry_a_text": "Iran pulls navy from Red Sea per ship tracking reports. Reduces direct Iranian naval presence near Houthi operating area.",
+        "entry_b_time": "2026-04-20T14:03:51+00:00",
+        "entry_b_text": "US strike on Ras Issa port on April 17, 2026 killed at least 74 people, deadliest action of Operation Rough Rider (US campaign vs Houthis since March 15). Houthis have threatened to shutter Bab al-Mandeb if Gulf states join US-Israel war on Iran, but have limited active involvement to strikes on Israel; no sustained commercial Red Sea maritime attacks observed.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: iran, red, sea",
+        "detected": "2026-04-20T14:03:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-20T14:03:51Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-08T00:00:00Z",
+        "entry_a_text": "Ali Akbar Velayati (former Iranian FM): 'The unified command of the resistance front views Bab al-Mandeb as it does Hormuz. If the White House dares to repeat its foolish mistakes, the flow of global energy and trade can be disrupted with a single move.'",
+        "entry_b_time": "2026-04-20T14:03:51+00:00",
+        "entry_b_text": "US strike on Ras Issa port on April 17, 2026 killed at least 74 people, deadliest action of Operation Rough Rider (US campaign vs Houthis since March 15). Houthis have threatened to shutter Bab al-Mandeb if Gulf states join US-Israel war on Iran, but have limited active involvement to strikes on Israel; no sustained commercial Red Sea maritime attacks observed.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: bab, mandeb",
+        "detected": "2026-04-20T14:03:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-20T14:03:51Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-08T00:00:00Z",
+        "entry_a_text": "US-Iran ceasefire agreed April 8. Houthis operating 'Bab al-Mandeb tollbooth' — screening ships via AIS for US/Israel ties, allowing others to pass. Ships transmitting declarations of no US/Israel affiliation. Pattern mirrors Iran's 'Tehran tollbooth' in Strait of Hormuz.",
+        "entry_b_time": "2026-04-20T14:03:51+00:00",
+        "entry_b_text": "US strike on Ras Issa port on April 17, 2026 killed at least 74 people, deadliest action of Operation Rough Rider (US campaign vs Houthis since March 15). Houthis have threatened to shutter Bab al-Mandeb if Gulf states join US-Israel war on Iran, but have limited active involvement to strikes on Israel; no sustained commercial Red Sea maritime attacks observed.",
+        "reason": "Numeric divergence 52.9% on metric (context: april): new=17.0, existing=8.0, threshold=20%",
+        "detected": "2026-04-20T14:03:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-20T14:03:51Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-03-28T00:00:00Z",
+        "entry_a_text": "Houthis enter Iran war: fire ballistic missiles and drones at Israel. First offensive action since October 2025 pause. Targets are Israeli, NOT commercial shipping.",
+        "entry_b_time": "2026-04-20T14:03:51+00:00",
+        "entry_b_text": "US strike on Ras Issa port on April 17, 2026 killed at least 74 people, deadliest action of Operation Rough Rider (US campaign vs Houthis since March 15). Houthis have threatened to shutter Bab al-Mandeb if Gulf states join US-Israel war on Iran, but have limited active involvement to strikes on Israel; no sustained commercial Red Sea maritime attacks observed.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: action, commercial, houthis, iran, israel",
+        "detected": "2026-04-20T14:03:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-20T14:03:51Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-02-28T00:00:00Z",
+        "entry_a_text": "US-Israel launch strikes on Iran. Iran war begins. Houthis do NOT immediately resume Red Sea attacks — surprising given prior behavior and regional ally mobilization.",
+        "entry_b_time": "2026-04-20T14:03:51+00:00",
+        "entry_b_text": "US strike on Ras Issa port on April 17, 2026 killed at least 74 people, deadliest action of Operation Rough Rider (US campaign vs Houthis since March 15). Houthis have threatened to shutter Bab al-Mandeb if Gulf states join US-Israel war on Iran, but have limited active involvement to strikes on Israel; no sustained commercial Red Sea maritime attacks observed.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: attacks, houthis, iran, israel, red",
+        "detected": "2026-04-20T14:03:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-20T14:03:51Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-01-15T00:00:00Z",
+        "entry_a_text": "Maersk Line resumes Red Sea transit with successive successful trans-Suez crossings. First major carrier to return since crisis began.",
+        "entry_b_time": "2026-04-20T14:03:51+00:00",
+        "entry_b_text": "US strike on Ras Issa port on April 17, 2026 killed at least 74 people, deadliest action of Operation Rough Rider (US campaign vs Houthis since March 15). Houthis have threatened to shutter Bab al-Mandeb if Gulf states join US-Israel war on Iran, but have limited active involvement to strikes on Israel; no sustained commercial Red Sea maritime attacks observed.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: red, sea",
+        "detected": "2026-04-20T14:03:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-20T14:03:51Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2025-10-10T00:00:00Z",
+        "entry_a_text": "Houthis halt attacks on international shipping and Israel following Gaza peace plan implementation. Commercial attacks paused after ~100 incidents since November 2023.",
+        "entry_b_time": "2026-04-20T14:03:51+00:00",
+        "entry_b_text": "US strike on Ras Issa port on April 17, 2026 killed at least 74 people, deadliest action of Operation Rough Rider (US campaign vs Houthis since March 15). Houthis have threatened to shutter Bab al-Mandeb if Gulf states join US-Israel war on Iran, but have limited active involvement to strikes on Israel; no sustained commercial Red Sea maritime attacks observed.",
+        "reason": "Antonym pair detected: new has 'war', existing has 'peace'",
+        "detected": "2026-04-20T14:03:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-20T14:03:51Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-20T14:03:51+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, stale_evidence, quorum_failure. Reason: Houthis' current behavior (threats + Israel strikes without sustained commercial maritime attacks) matches H2 selective posture; US kinetic pressure plus Bab al-Mandeb rhetoric raises H4 tail; H3 de facto ceasefire inconsistent with active strike exchanges.",
+        "entry_b_time": "2026-04-21T03:51:21+00:00",
+        "entry_b_text": "No Red Sea maritime attacks recorded since September 2025 per ACLED tracking. Houthis threatened Feb 28 to resume attacks over Iran war; Apr reporting notes continued pause despite rhetoric, with analysts citing strategic patience and heavy US naval presence.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: attacks, houthis, maritime, rhetoric",
+        "detected": "2026-04-21T03:51:21Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T03:51:21Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-20T14:03:51+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+        "entry_b_time": "2026-04-21T03:51:21+00:00",
+        "entry_b_text": "No Red Sea maritime attacks recorded since September 2025 per ACLED tracking. Houthis threatened Feb 28 to resume attacks over Iran war; Apr reporting notes continued pause despite rhetoric, with analysts citing strategic patience and heavy US naval presence.",
+        "reason": "Numeric divergence 100.0% on metric (context: to): new=28.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-21T03:51:21Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T03:51:21Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-20T14:03:51+00:00",
+        "entry_a_text": "US strike on Ras Issa port on April 17, 2026 killed at least 74 people, deadliest action of Operation Rough Rider (US campaign vs Houthis since March 15). Houthis have threatened to shutter Bab al-Mandeb if Gulf states join US-Israel war on Iran, but have limited active involvement to strikes on Israel; no sustained commercial Red Sea maritime attacks observed.",
+        "entry_b_time": "2026-04-21T03:51:21+00:00",
+        "entry_b_text": "No Red Sea maritime attacks recorded since September 2025 per ACLED tracking. Houthis threatened Feb 28 to resume attacks over Iran war; Apr reporting notes continued pause despite rhetoric, with analysts citing strategic patience and heavy US naval presence.",
+        "reason": "Numeric divergence 99.3% on metric (context: since): new=2025.0, existing=15.0, threshold=10%",
+        "detected": "2026-04-21T03:51:21Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T03:51:21Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-19T00:57:10+00:00",
+        "entry_a_text": "USS George H.W. Bush strike group rerouted around Africa (6,000-mile detour) due to Houthi missile/drone threat; US launched Operation Rough Rider airstrikes March 15; Houthis threatened Bab al-Mandeb chokepoint closure after short-lived ceasefire collapsed early April 2026.",
+        "entry_b_time": "2026-04-21T03:51:21+00:00",
+        "entry_b_text": "No Red Sea maritime attacks recorded since September 2025 per ACLED tracking. Houthis threatened Feb 28 to resume attacks over Iran war; Apr reporting notes continued pause despite rhetoric, with analysts citing strategic patience and heavy US naval presence.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: houthis, threatened",
+        "detected": "2026-04-21T03:51:21Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T03:51:21Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T14:01:37+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: stale_evidence, quorum_failure. Reason: Evidence ev_010: Houthis enter Iran war with missile/drone strikes on Israel; threaten Bab al-Man",
+        "entry_b_time": "2026-04-21T03:51:21+00:00",
+        "entry_b_text": "No Red Sea maritime attacks recorded since September 2025 per ACLED tracking. Houthis threatened Feb 28 to resume attacks over Iran war; Apr reporting notes continued pause despite rhetoric, with analysts citing strategic patience and heavy US naval presence.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: houthis, iran, war",
+        "detected": "2026-04-21T03:51:21Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T03:51:21Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T14:01:37+00:00",
+        "entry_a_text": "Houthis enter Iran war with missile/drone strikes on Israel; threaten Bab al-Mandeb shipping closure; US Operation Rough Rider strikes kill 74 at Ras Issa; May 6 US-Houthi ceasefire halts American attacks but Houthis retain selective screening posture",
+        "entry_b_time": "2026-04-21T03:51:21+00:00",
+        "entry_b_text": "No Red Sea maritime attacks recorded since September 2025 per ACLED tracking. Houthis threatened Feb 28 to resume attacks over Iran war; Apr reporting notes continued pause despite rhetoric, with analysts citing strategic patience and heavy US naval presence.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: attacks, houthis, iran, war",
+        "detected": "2026-04-21T03:51:21Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T03:51:21Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-15T12:00:00Z",
+        "entry_a_text": "Iran army warned it will block trade through the Red Sea, Gulf of Oman, and Sea of Oman if the US naval blockade on Iranian ports continues. This is an explicit threat to expand the Hormuz closure to Red Sea shipping lanes — directly relevant to Houthi operational calculus. US blockade entered day 2 with trade into/out of Iran \"completely halted.\" Iran-US ceasefire expires April 21.",
+        "entry_b_time": "2026-04-21T03:51:21+00:00",
+        "entry_b_text": "No Red Sea maritime attacks recorded since September 2025 per ACLED tracking. Houthis threatened Feb 28 to resume attacks over Iran war; Apr reporting notes continued pause despite rhetoric, with analysts citing strategic patience and heavy US naval presence.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: iran, naval, red, sea",
+        "detected": "2026-04-21T03:51:21Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T03:51:21Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-08T00:00:00Z",
+        "entry_a_text": "Iran pulls navy from Red Sea per ship tracking reports. Reduces direct Iranian naval presence near Houthi operating area.",
+        "entry_b_time": "2026-04-21T03:51:21+00:00",
+        "entry_b_text": "No Red Sea maritime attacks recorded since September 2025 per ACLED tracking. Houthis threatened Feb 28 to resume attacks over Iran war; Apr reporting notes continued pause despite rhetoric, with analysts citing strategic patience and heavy US naval presence.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: iran, naval, presence, red, sea",
+        "detected": "2026-04-21T03:51:21Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T03:51:21Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-08T00:00:00Z",
+        "entry_a_text": "Lloyd's Market Association: 'Time will tell whether it is a pause or a peace... highly unlikely that trade into the Gulf will simply resume. The region remains at heightened risk with none of the underlying tension resolved.'",
+        "entry_b_time": "2026-04-21T03:51:21+00:00",
+        "entry_b_text": "No Red Sea maritime attacks recorded since September 2025 per ACLED tracking. Houthis threatened Feb 28 to resume attacks over Iran war; Apr reporting notes continued pause despite rhetoric, with analysts citing strategic patience and heavy US naval presence.",
+        "reason": "Antonym pair detected: new has 'war', existing has 'peace'",
+        "detected": "2026-04-21T03:51:21Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T03:51:21Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-08T00:00:00Z",
+        "entry_a_text": "US-Iran ceasefire agreed April 8. Houthis operating 'Bab al-Mandeb tollbooth' — screening ships via AIS for US/Israel ties, allowing others to pass. Ships transmitting declarations of no US/Israel affiliation. Pattern mirrors Iran's 'Tehran tollbooth' in Strait of Hormuz.",
+        "entry_b_time": "2026-04-21T03:51:21+00:00",
+        "entry_b_text": "No Red Sea maritime attacks recorded since September 2025 per ACLED tracking. Houthis threatened Feb 28 to resume attacks over Iran war; Apr reporting notes continued pause despite rhetoric, with analysts citing strategic patience and heavy US naval presence.",
+        "reason": "Numeric divergence 71.4% on metric (context: houthis): new=28.0, existing=8.0, threshold=10%",
+        "detected": "2026-04-21T03:51:21Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T03:51:21Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-03-28T00:00:00Z",
+        "entry_a_text": "Houthis enter Iran war: fire ballistic missiles and drones at Israel. First offensive action since October 2025 pause. Targets are Israeli, NOT commercial shipping.",
+        "entry_b_time": "2026-04-21T03:51:21+00:00",
+        "entry_b_text": "No Red Sea maritime attacks recorded since September 2025 per ACLED tracking. Houthis threatened Feb 28 to resume attacks over Iran war; Apr reporting notes continued pause despite rhetoric, with analysts citing strategic patience and heavy US naval presence.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: houthis, iran, pause, war",
+        "detected": "2026-04-21T03:51:21Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T03:51:21Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-02-28T00:00:00Z",
+        "entry_a_text": "US-Israel launch strikes on Iran. Iran war begins. Houthis do NOT immediately resume Red Sea attacks — surprising given prior behavior and regional ally mobilization.",
+        "entry_b_time": "2026-04-21T03:51:21+00:00",
+        "entry_b_text": "No Red Sea maritime attacks recorded since September 2025 per ACLED tracking. Houthis threatened Feb 28 to resume attacks over Iran war; Apr reporting notes continued pause despite rhetoric, with analysts citing strategic patience and heavy US naval presence.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: attacks, houthis, iran, red, resume",
+        "detected": "2026-04-21T03:51:21Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T03:51:21Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-01-15T00:00:00Z",
+        "entry_a_text": "Maersk Line resumes Red Sea transit with successive successful trans-Suez crossings. First major carrier to return since crisis began.",
+        "entry_b_time": "2026-04-21T03:51:21+00:00",
+        "entry_b_text": "No Red Sea maritime attacks recorded since September 2025 per ACLED tracking. Houthis threatened Feb 28 to resume attacks over Iran war; Apr reporting notes continued pause despite rhetoric, with analysts citing strategic patience and heavy US naval presence.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: red, sea",
+        "detected": "2026-04-21T03:51:21Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T03:51:21Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2025-10-10T00:00:00Z",
+        "entry_a_text": "Houthis halt attacks on international shipping and Israel following Gaza peace plan implementation. Commercial attacks paused after ~100 incidents since November 2023.",
+        "entry_b_time": "2026-04-21T03:51:21+00:00",
+        "entry_b_text": "No Red Sea maritime attacks recorded since September 2025 per ACLED tracking. Houthis threatened Feb 28 to resume attacks over Iran war; Apr reporting notes continued pause despite rhetoric, with analysts citing strategic patience and heavy US naval presence.",
+        "reason": "Antonym pair detected: new has 'war', existing has 'peace'",
+        "detected": "2026-04-21T03:51:21Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T03:51:21Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+        "entry_b_time": "2026-04-21T05:33:07+00:00",
+        "entry_b_text": "Houthi forces have paused Red Sea attacks for 3+ weeks into the US-Israel-Iran war (since late February 2026), surprising analysts given prior pattern. Houthis previously ended the May 2025 ceasefire with the US in September 2025, but have not resumed commercial vessel attacks during the current Iran conflict. Red Sea attack frequency is effectively near zero.",
+        "reason": "Numeric divergence 100.0% on metric (context: with): new=2025.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-21T05:33:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T05:33:07Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "No Red Sea maritime attacks recorded since September 2025 per ACLED tracking. Houthis threatened Feb 28 to resume attacks over Iran war; Apr reporting notes continued pause despite rhetoric, with analysts citing strategic patience and heavy US naval presence.",
+        "entry_b_time": "2026-04-21T05:33:07+00:00",
+        "entry_b_text": "Houthi forces have paused Red Sea attacks for 3+ weeks into the US-Israel-Iran war (since late February 2026), surprising analysts given prior pattern. Houthis previously ended the May 2025 ceasefire with the US in September 2025, but have not resumed commercial vessel attacks during the current Iran conflict. Red Sea attack frequency is effectively near zero.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: analysts, attacks, houthis, iran, red",
+        "detected": "2026-04-21T05:33:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T05:33:07Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-20T14:03:51+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, stale_evidence, quorum_failure. Reason: Houthis' current behavior (threats + Israel strikes without sustained commercial maritime attacks) matches H2 selective posture; US kinetic pressure plus Bab al-Mandeb rhetoric raises H4 tail; H3 de facto ceasefire inconsistent with active strike exchanges.",
+        "entry_b_time": "2026-04-21T05:33:07+00:00",
+        "entry_b_text": "Houthi forces have paused Red Sea attacks for 3+ weeks into the US-Israel-Iran war (since late February 2026), surprising analysts given prior pattern. Houthis previously ended the May 2025 ceasefire with the US in September 2025, but have not resumed commercial vessel attacks during the current Iran conflict. Red Sea attack frequency is effectively near zero.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: attacks, ceasefire, commercial, current, houthis",
+        "detected": "2026-04-21T05:33:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T05:33:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-20T14:03:51+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+        "entry_b_time": "2026-04-21T05:33:07+00:00",
+        "entry_b_text": "Houthi forces have paused Red Sea attacks for 3+ weeks into the US-Israel-Iran war (since late February 2026), surprising analysts given prior pattern. Houthis previously ended the May 2025 ceasefire with the US in September 2025, but have not resumed commercial vessel attacks during the current Iran conflict. Red Sea attack frequency is effectively near zero.",
+        "reason": "Numeric divergence 100.0% on metric (context: with): new=2025.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-21T05:33:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T05:33:07Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-20T14:03:51+00:00",
+        "entry_a_text": "US strike on Ras Issa port on April 17, 2026 killed at least 74 people, deadliest action of Operation Rough Rider (US campaign vs Houthis since March 15). Houthis have threatened to shutter Bab al-Mandeb if Gulf states join US-Israel war on Iran, but have limited active involvement to strikes on Israel; no sustained commercial Red Sea maritime attacks observed.",
+        "entry_b_time": "2026-04-21T05:33:07+00:00",
+        "entry_b_text": "Houthi forces have paused Red Sea attacks for 3+ weeks into the US-Israel-Iran war (since late February 2026), surprising analysts given prior pattern. Houthis previously ended the May 2025 ceasefire with the US in September 2025, but have not resumed commercial vessel attacks during the current Iran conflict. Red Sea attack frequency is effectively near zero.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: attacks, commercial, houthis, iran, israel",
+        "detected": "2026-04-21T05:33:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T05:33:07Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-19T00:57:10+00:00",
+        "entry_a_text": "USS George H.W. Bush strike group rerouted around Africa (6,000-mile detour) due to Houthi missile/drone threat; US launched Operation Rough Rider airstrikes March 15; Houthis threatened Bab al-Mandeb chokepoint closure after short-lived ceasefire collapsed early April 2026.",
+        "entry_b_time": "2026-04-21T05:33:07+00:00",
+        "entry_b_text": "Houthi forces have paused Red Sea attacks for 3+ weeks into the US-Israel-Iran war (since late February 2026), surprising analysts given prior pattern. Houthis previously ended the May 2025 ceasefire with the US in September 2025, but have not resumed commercial vessel attacks during the current Iran conflict. Red Sea attack frequency is effectively near zero.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: ceasefire, houthi, houthis",
+        "detected": "2026-04-21T05:33:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T05:33:07Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T15:21:23+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: stale_evidence. Reason: Houthi threats to Bab al-Mandeb and entry into Iran conflict raise H4 (escalation beyond Red Sea). No confirmed commercial attacks yet keeps H2/H3 in play. H1 gets weight from resumed anti-Israel strikes.",
+        "entry_b_time": "2026-04-21T05:33:07+00:00",
+        "entry_b_text": "Houthi forces have paused Red Sea attacks for 3+ weeks into the US-Israel-Iran war (since late February 2026), surprising analysts given prior pattern. Houthis previously ended the May 2025 ceasefire with the US in September 2025, but have not resumed commercial vessel attacks during the current Iran conflict. Red Sea attack frequency is effectively near zero.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: attacks, commercial, conflict, houthi, iran",
+        "detected": "2026-04-21T05:33:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T05:33:07Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T15:21:23+00:00",
+        "entry_a_text": "Houthis threaten second Red Sea shipping chokepoint at Bab al-Mandeb. US conducting Operation Rough Rider airstrikes across seven Yemen provinces. Houthis entered Iran conflict with missile/drone strikes on Israel in early April. No confirmed commercial ship attacks yet since May 2025 ceasefire.",
+        "entry_b_time": "2026-04-21T05:33:07+00:00",
+        "entry_b_text": "Houthi forces have paused Red Sea attacks for 3+ weeks into the US-Israel-Iran war (since late February 2026), surprising analysts given prior pattern. Houthis previously ended the May 2025 ceasefire with the US in September 2025, but have not resumed commercial vessel attacks during the current Iran conflict. Red Sea attack frequency is effectively near zero.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: attacks, ceasefire, commercial, conflict, houthis",
+        "detected": "2026-04-21T05:33:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T05:33:07Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T14:01:37+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: stale_evidence, quorum_failure. Reason: Evidence ev_010: Houthis enter Iran war with missile/drone strikes on Israel; threaten Bab al-Man",
+        "entry_b_time": "2026-04-21T05:33:07+00:00",
+        "entry_b_text": "Houthi forces have paused Red Sea attacks for 3+ weeks into the US-Israel-Iran war (since late February 2026), surprising analysts given prior pattern. Houthis previously ended the May 2025 ceasefire with the US in September 2025, but have not resumed commercial vessel attacks during the current Iran conflict. Red Sea attack frequency is effectively near zero.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: houthis, iran, israel, war",
+        "detected": "2026-04-21T05:33:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T05:33:07Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T14:01:37+00:00",
+        "entry_a_text": "Houthis enter Iran war with missile/drone strikes on Israel; threaten Bab al-Mandeb shipping closure; US Operation Rough Rider strikes kill 74 at Ras Issa; May 6 US-Houthi ceasefire halts American attacks but Houthis retain selective screening posture",
+        "entry_b_time": "2026-04-21T05:33:07+00:00",
+        "entry_b_text": "Houthi forces have paused Red Sea attacks for 3+ weeks into the US-Israel-Iran war (since late February 2026), surprising analysts given prior pattern. Houthis previously ended the May 2025 ceasefire with the US in September 2025, but have not resumed commercial vessel attacks during the current Iran conflict. Red Sea attack frequency is effectively near zero.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: attacks, ceasefire, houthi, houthis, iran",
+        "detected": "2026-04-21T05:33:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T05:33:07Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-15T12:00:00Z",
+        "entry_a_text": "Iran army warned it will block trade through the Red Sea, Gulf of Oman, and Sea of Oman if the US naval blockade on Iranian ports continues. This is an explicit threat to expand the Hormuz closure to Red Sea shipping lanes — directly relevant to Houthi operational calculus. US blockade entered day 2 with trade into/out of Iran \"completely halted.\" Iran-US ceasefire expires April 21.",
+        "entry_b_time": "2026-04-21T05:33:07+00:00",
+        "entry_b_text": "Houthi forces have paused Red Sea attacks for 3+ weeks into the US-Israel-Iran war (since late February 2026), surprising analysts given prior pattern. Houthis previously ended the May 2025 ceasefire with the US in September 2025, but have not resumed commercial vessel attacks during the current Iran conflict. Red Sea attack frequency is effectively near zero.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: ceasefire, houthi, iran, red, sea",
+        "detected": "2026-04-21T05:33:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T05:33:07Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-08T00:00:00Z",
+        "entry_a_text": "Iran pulls navy from Red Sea per ship tracking reports. Reduces direct Iranian naval presence near Houthi operating area.",
+        "entry_b_time": "2026-04-21T05:33:07+00:00",
+        "entry_b_text": "Houthi forces have paused Red Sea attacks for 3+ weeks into the US-Israel-Iran war (since late February 2026), surprising analysts given prior pattern. Houthis previously ended the May 2025 ceasefire with the US in September 2025, but have not resumed commercial vessel attacks during the current Iran conflict. Red Sea attack frequency is effectively near zero.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: houthi, iran, near, red, sea",
+        "detected": "2026-04-21T05:33:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T05:33:07Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-08T00:00:00Z",
+        "entry_a_text": "US-Iran ceasefire agreed April 8. Houthis operating 'Bab al-Mandeb tollbooth' — screening ships via AIS for US/Israel ties, allowing others to pass. Ships transmitting declarations of no US/Israel affiliation. Pattern mirrors Iran's 'Tehran tollbooth' in Strait of Hormuz.",
+        "entry_b_time": "2026-04-21T05:33:07+00:00",
+        "entry_b_text": "Houthi forces have paused Red Sea attacks for 3+ weeks into the US-Israel-Iran war (since late February 2026), surprising analysts given prior pattern. Houthis previously ended the May 2025 ceasefire with the US in September 2025, but have not resumed commercial vessel attacks during the current Iran conflict. Red Sea attack frequency is effectively near zero.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: ceasefire, houthis, iran, israel, pattern",
+        "detected": "2026-04-21T05:33:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T05:33:07Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-03-28T00:00:00Z",
+        "entry_a_text": "Houthis enter Iran war: fire ballistic missiles and drones at Israel. First offensive action since October 2025 pause. Targets are Israeli, NOT commercial shipping.",
+        "entry_b_time": "2026-04-21T05:33:07+00:00",
+        "entry_b_text": "Houthi forces have paused Red Sea attacks for 3+ weeks into the US-Israel-Iran war (since late February 2026), surprising analysts given prior pattern. Houthis previously ended the May 2025 ceasefire with the US in September 2025, but have not resumed commercial vessel attacks during the current Iran conflict. Red Sea attack frequency is effectively near zero.",
+        "reason": "Antonym pair detected: new has 'ceasefire', existing has 'offensive'",
+        "detected": "2026-04-21T05:33:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T05:33:07Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-01-15T00:00:00Z",
+        "entry_a_text": "Maersk Line resumes Red Sea transit with successive successful trans-Suez crossings. First major carrier to return since crisis began.",
+        "entry_b_time": "2026-04-21T05:33:07+00:00",
+        "entry_b_text": "Houthi forces have paused Red Sea attacks for 3+ weeks into the US-Israel-Iran war (since late February 2026), surprising analysts given prior pattern. Houthis previously ended the May 2025 ceasefire with the US in September 2025, but have not resumed commercial vessel attacks during the current Iran conflict. Red Sea attack frequency is effectively near zero.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: red, sea",
+        "detected": "2026-04-21T05:33:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T05:33:07Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2025-10-10T00:00:00Z",
+        "entry_a_text": "Houthis halt attacks on international shipping and Israel following Gaza peace plan implementation. Commercial attacks paused after ~100 incidents since November 2023.",
+        "entry_b_time": "2026-04-21T05:33:07+00:00",
+        "entry_b_text": "Houthi forces have paused Red Sea attacks for 3+ weeks into the US-Israel-Iran war (since late February 2026), surprising analysts given prior pattern. Houthis previously ended the May 2025 ceasefire with the US in September 2025, but have not resumed commercial vessel attacks during the current Iran conflict. Red Sea attack frequency is effectively near zero.",
+        "reason": "Antonym pair detected: new has 'war', existing has 'peace'",
+        "detected": "2026-04-21T05:33:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T05:33:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-22T01:00:37+00:00",
+        "entry_a_text": "REPLAY COMPLETE: 0 indicators applied, 0 skipped. Final posteriors: {'H1': 0.15, 'H2': 0.45, 'H3': 0.3, 'H4': 0.1}. Indicator firedDates restored to originals for audit.",
+        "entry_b_time": "2026-04-22T01:15:47+00:00",
+        "entry_b_text": "No Red Sea commercial shipping attacks recorded since September 2025. During April 2026, Houthi operations focused on ballistic missile strikes against Israel (intercepted April 1 and April 2), not maritime targets. US Operation Rough Rider airstrikes on Houthi positions in Yemen continued through April (deadliest strike at Ras Issa port killed 74 on April 17). A US-Houthi ceasefire agreement halted US strikes on May 6 under terms where Houthis would not target American shipping.",
+        "reason": "Numeric divergence 98.2% on metric (context: .): new=17.0, existing=0.3, threshold=10%",
+        "detected": "2026-04-22T01:15:47Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:15:47Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-21T05:33:07+00:00",
+        "entry_a_text": "Houthi forces have paused Red Sea attacks for 3+ weeks into the US-Israel-Iran war (since late February 2026), surprising analysts given prior pattern. Houthis previously ended the May 2025 ceasefire with the US in September 2025, but have not resumed commercial vessel attacks during the current Iran conflict. Red Sea attack frequency is effectively near zero.",
+        "entry_b_time": "2026-04-22T01:15:47+00:00",
+        "entry_b_text": "No Red Sea commercial shipping attacks recorded since September 2025. During April 2026, Houthi operations focused on ballistic missile strikes against Israel (intercepted April 1 and April 2), not maritime targets. US Operation Rough Rider airstrikes on Houthi positions in Yemen continued through April (deadliest strike at Ras Issa port killed 74 on April 17). A US-Houthi ceasefire agreement halted US strikes on May 6 under terms where Houthis would not target American shipping.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: attacks, ceasefire, commercial, houthi, houthis",
+        "detected": "2026-04-22T01:15:47Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:15:47Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "No Red Sea maritime attacks recorded since September 2025 per ACLED tracking. Houthis threatened Feb 28 to resume attacks over Iran war; Apr reporting notes continued pause despite rhetoric, with analysts citing strategic patience and heavy US naval presence.",
+        "entry_b_time": "2026-04-22T01:15:47+00:00",
+        "entry_b_text": "No Red Sea commercial shipping attacks recorded since September 2025. During April 2026, Houthi operations focused on ballistic missile strikes against Israel (intercepted April 1 and April 2), not maritime targets. US Operation Rough Rider airstrikes on Houthi positions in Yemen continued through April (deadliest strike at Ras Issa port killed 74 on April 17). A US-Houthi ceasefire agreement halted US strikes on May 6 under terms where Houthis would not target American shipping.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: attacks, continued, houthis, maritime, recorded",
+        "detected": "2026-04-22T01:15:47Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:15:47Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-20T14:03:51+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, stale_evidence, quorum_failure. Reason: Houthis' current behavior (threats + Israel strikes without sustained commercial maritime attacks) matches H2 selective posture; US kinetic pressure plus Bab al-Mandeb rhetoric raises H4 tail; H3 de facto ceasefire inconsistent with active strike exchanges.",
+        "entry_b_time": "2026-04-22T01:15:47+00:00",
+        "entry_b_text": "No Red Sea commercial shipping attacks recorded since September 2025. During April 2026, Houthi operations focused on ballistic missile strikes against Israel (intercepted April 1 and April 2), not maritime targets. US Operation Rough Rider airstrikes on Houthi positions in Yemen continued through April (deadliest strike at Ras Issa port killed 74 on April 17). A US-Houthi ceasefire agreement halted US strikes on May 6 under terms where Houthis would not target American shipping.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: attacks, ceasefire, commercial, houthis, israel",
+        "detected": "2026-04-22T01:15:47Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:15:47Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-20T14:03:51+00:00",
+        "entry_a_text": "US strike on Ras Issa port on April 17, 2026 killed at least 74 people, deadliest action of Operation Rough Rider (US campaign vs Houthis since March 15). Houthis have threatened to shutter Bab al-Mandeb if Gulf states join US-Israel war on Iran, but have limited active involvement to strikes on Israel; no sustained commercial Red Sea maritime attacks observed.",
+        "entry_b_time": "2026-04-22T01:15:47+00:00",
+        "entry_b_text": "No Red Sea commercial shipping attacks recorded since September 2025. During April 2026, Houthi operations focused on ballistic missile strikes against Israel (intercepted April 1 and April 2), not maritime targets. US Operation Rough Rider airstrikes on Houthi positions in Yemen continued through April (deadliest strike at Ras Issa port killed 74 on April 17). A US-Houthi ceasefire agreement halted US strikes on May 6 under terms where Houthis would not target American shipping.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: april, attacks, commercial, deadliest, houthis",
+        "detected": "2026-04-22T01:15:47Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:15:47Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-19T00:57:10+00:00",
+        "entry_a_text": "USS George H.W. Bush strike group rerouted around Africa (6,000-mile detour) due to Houthi missile/drone threat; US launched Operation Rough Rider airstrikes March 15; Houthis threatened Bab al-Mandeb chokepoint closure after short-lived ceasefire collapsed early April 2026.",
+        "entry_b_time": "2026-04-22T01:15:47+00:00",
+        "entry_b_text": "No Red Sea commercial shipping attacks recorded since September 2025. During April 2026, Houthi operations focused on ballistic missile strikes against Israel (intercepted April 1 and April 2), not maritime targets. US Operation Rough Rider airstrikes on Houthi positions in Yemen continued through April (deadliest strike at Ras Issa port killed 74 on April 17). A US-Houthi ceasefire agreement halted US strikes on May 6 under terms where Houthis would not target American shipping.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: airstrikes, april, ceasefire, houthi, houthis",
+        "detected": "2026-04-22T01:15:47Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:15:47Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T15:21:23+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: stale_evidence. Reason: Houthi threats to Bab al-Mandeb and entry into Iran conflict raise H4 (escalation beyond Red Sea). No confirmed commercial attacks yet keeps H2/H3 in play. H1 gets weight from resumed anti-Israel strikes.",
+        "entry_b_time": "2026-04-22T01:15:47+00:00",
+        "entry_b_text": "No Red Sea commercial shipping attacks recorded since September 2025. During April 2026, Houthi operations focused on ballistic missile strikes against Israel (intercepted April 1 and April 2), not maritime targets. US Operation Rough Rider airstrikes on Houthi positions in Yemen continued through April (deadliest strike at Ras Issa port killed 74 on April 17). A US-Houthi ceasefire agreement halted US strikes on May 6 under terms where Houthis would not target American shipping.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: attacks, commercial, houthi, israel, red",
+        "detected": "2026-04-22T01:15:47Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:15:47Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T15:21:23+00:00",
+        "entry_a_text": "Houthis threaten second Red Sea shipping chokepoint at Bab al-Mandeb. US conducting Operation Rough Rider airstrikes across seven Yemen provinces. Houthis entered Iran conflict with missile/drone strikes on Israel in early April. No confirmed commercial ship attacks yet since May 2025 ceasefire.",
+        "entry_b_time": "2026-04-22T01:15:47+00:00",
+        "entry_b_text": "No Red Sea commercial shipping attacks recorded since September 2025. During April 2026, Houthi operations focused on ballistic missile strikes against Israel (intercepted April 1 and April 2), not maritime targets. US Operation Rough Rider airstrikes on Houthi positions in Yemen continued through April (deadliest strike at Ras Issa port killed 74 on April 17). A US-Houthi ceasefire agreement halted US strikes on May 6 under terms where Houthis would not target American shipping.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: airstrikes, april, attacks, ceasefire, commercial",
+        "detected": "2026-04-22T01:15:47Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:15:47Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T14:01:37+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: stale_evidence, quorum_failure. Reason: Evidence ev_010: Houthis enter Iran war with missile/drone strikes on Israel; threaten Bab al-Man",
+        "entry_b_time": "2026-04-22T01:15:47+00:00",
+        "entry_b_text": "No Red Sea commercial shipping attacks recorded since September 2025. During April 2026, Houthi operations focused on ballistic missile strikes against Israel (intercepted April 1 and April 2), not maritime targets. US Operation Rough Rider airstrikes on Houthi positions in Yemen continued through April (deadliest strike at Ras Issa port killed 74 on April 17). A US-Houthi ceasefire agreement halted US strikes on May 6 under terms where Houthis would not target American shipping.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: houthis, israel, missile, strikes",
+        "detected": "2026-04-22T01:15:47Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:15:47Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T14:01:37+00:00",
+        "entry_a_text": "Houthis enter Iran war with missile/drone strikes on Israel; threaten Bab al-Mandeb shipping closure; US Operation Rough Rider strikes kill 74 at Ras Issa; May 6 US-Houthi ceasefire halts American attacks but Houthis retain selective screening posture",
+        "entry_b_time": "2026-04-22T01:15:47+00:00",
+        "entry_b_text": "No Red Sea commercial shipping attacks recorded since September 2025. During April 2026, Houthi operations focused on ballistic missile strikes against Israel (intercepted April 1 and April 2), not maritime targets. US Operation Rough Rider airstrikes on Houthi positions in Yemen continued through April (deadliest strike at Ras Issa port killed 74 on April 17). A US-Houthi ceasefire agreement halted US strikes on May 6 under terms where Houthis would not target American shipping.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: american, attacks, ceasefire, houthi, houthis",
+        "detected": "2026-04-22T01:15:47Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:15:47Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-15T12:00:00Z",
+        "entry_a_text": "Iran army warned it will block trade through the Red Sea, Gulf of Oman, and Sea of Oman if the US naval blockade on Iranian ports continues. This is an explicit threat to expand the Hormuz closure to Red Sea shipping lanes — directly relevant to Houthi operational calculus. US blockade entered day 2 with trade into/out of Iran \"completely halted.\" Iran-US ceasefire expires April 21.",
+        "entry_b_time": "2026-04-22T01:15:47+00:00",
+        "entry_b_text": "No Red Sea commercial shipping attacks recorded since September 2025. During April 2026, Houthi operations focused on ballistic missile strikes against Israel (intercepted April 1 and April 2), not maritime targets. US Operation Rough Rider airstrikes on Houthi positions in Yemen continued through April (deadliest strike at Ras Issa port killed 74 on April 17). A US-Houthi ceasefire agreement halted US strikes on May 6 under terms where Houthis would not target American shipping.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: april, ceasefire, halted, houthi, red",
+        "detected": "2026-04-22T01:15:47Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:15:47Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-08T00:00:00Z",
+        "entry_a_text": "Iran pulls navy from Red Sea per ship tracking reports. Reduces direct Iranian naval presence near Houthi operating area.",
+        "entry_b_time": "2026-04-22T01:15:47+00:00",
+        "entry_b_text": "No Red Sea commercial shipping attacks recorded since September 2025. During April 2026, Houthi operations focused on ballistic missile strikes against Israel (intercepted April 1 and April 2), not maritime targets. US Operation Rough Rider airstrikes on Houthi positions in Yemen continued through April (deadliest strike at Ras Issa port killed 74 on April 17). A US-Houthi ceasefire agreement halted US strikes on May 6 under terms where Houthis would not target American shipping.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: houthi, red, sea",
+        "detected": "2026-04-22T01:15:47Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:15:47Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-08T00:00:00Z",
+        "entry_a_text": "US-Iran ceasefire agreed April 8. Houthis operating 'Bab al-Mandeb tollbooth' — screening ships via AIS for US/Israel ties, allowing others to pass. Ships transmitting declarations of no US/Israel affiliation. Pattern mirrors Iran's 'Tehran tollbooth' in Strait of Hormuz.",
+        "entry_b_time": "2026-04-22T01:15:47+00:00",
+        "entry_b_text": "No Red Sea commercial shipping attacks recorded since September 2025. During April 2026, Houthi operations focused on ballistic missile strikes against Israel (intercepted April 1 and April 2), not maritime targets. US Operation Rough Rider airstrikes on Houthi positions in Yemen continued through April (deadliest strike at Ras Issa port killed 74 on April 17). A US-Houthi ceasefire agreement halted US strikes on May 6 under terms where Houthis would not target American shipping.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: april, ceasefire, houthis, israel",
+        "detected": "2026-04-22T01:15:47Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:15:47Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-03-28T00:00:00Z",
+        "entry_a_text": "Houthis enter Iran war: fire ballistic missiles and drones at Israel. First offensive action since October 2025 pause. Targets are Israeli, NOT commercial shipping.",
+        "entry_b_time": "2026-04-22T01:15:47+00:00",
+        "entry_b_text": "No Red Sea commercial shipping attacks recorded since September 2025. During April 2026, Houthi operations focused on ballistic missile strikes against Israel (intercepted April 1 and April 2), not maritime targets. US Operation Rough Rider airstrikes on Houthi positions in Yemen continued through April (deadliest strike at Ras Issa port killed 74 on April 17). A US-Houthi ceasefire agreement halted US strikes on May 6 under terms where Houthis would not target American shipping.",
+        "reason": "Antonym pair detected: new has 'ceasefire', existing has 'offensive'",
+        "detected": "2026-04-22T01:15:47Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:15:47Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-02-28T00:00:00Z",
+        "entry_a_text": "US-Israel launch strikes on Iran. Iran war begins. Houthis do NOT immediately resume Red Sea attacks — surprising given prior behavior and regional ally mobilization.",
+        "entry_b_time": "2026-04-22T01:15:47+00:00",
+        "entry_b_text": "No Red Sea commercial shipping attacks recorded since September 2025. During April 2026, Houthi operations focused on ballistic missile strikes against Israel (intercepted April 1 and April 2), not maritime targets. US Operation Rough Rider airstrikes on Houthi positions in Yemen continued through April (deadliest strike at Ras Issa port killed 74 on April 17). A US-Houthi ceasefire agreement halted US strikes on May 6 under terms where Houthis would not target American shipping.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: attacks, houthis, israel, red, sea",
+        "detected": "2026-04-22T01:15:47Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:15:47Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-01-15T00:00:00Z",
+        "entry_a_text": "Maersk Line resumes Red Sea transit with successive successful trans-Suez crossings. First major carrier to return since crisis began.",
+        "entry_b_time": "2026-04-22T01:15:47+00:00",
+        "entry_b_text": "No Red Sea commercial shipping attacks recorded since September 2025. During April 2026, Houthi operations focused on ballistic missile strikes against Israel (intercepted April 1 and April 2), not maritime targets. US Operation Rough Rider airstrikes on Houthi positions in Yemen continued through April (deadliest strike at Ras Issa port killed 74 on April 17). A US-Houthi ceasefire agreement halted US strikes on May 6 under terms where Houthis would not target American shipping.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: red, sea",
+        "detected": "2026-04-22T01:15:47Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:15:47Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2025-10-10T00:00:00Z",
+        "entry_a_text": "Houthis halt attacks on international shipping and Israel following Gaza peace plan implementation. Commercial attacks paused after ~100 incidents since November 2023.",
+        "entry_b_time": "2026-04-22T01:15:47+00:00",
+        "entry_b_text": "No Red Sea commercial shipping attacks recorded since September 2025. During April 2026, Houthi operations focused on ballistic missile strikes against Israel (intercepted April 1 and April 2), not maritime targets. US Operation Rough Rider airstrikes on Houthi positions in Yemen continued through April (deadliest strike at Ras Issa port killed 74 on April 17). A US-Houthi ceasefire agreement halted US strikes on May 6 under terms where Houthis would not target American shipping.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: attacks, commercial, houthis, israel, shipping",
+        "detected": "2026-04-22T01:15:47Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:15:47Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-22T01:15:47+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, stale_evidence, quorum_failure. Reason: Seven-month absence of Red Sea commercial attacks strongly supports H3 (de facto ceasefire holds). Houthi effort redirected to Israel strikes (not commercial shipping) and US-Houthi ceasefire terms specifically exempt American shipping. No Bab al-Mandeb closure evidence.",
+        "entry_b_time": "2026-04-22T01:30:35+00:00",
+        "entry_b_text": "Houthis resumed ballistic missile attacks on Israel Mar 28 2026 as part of Iran war; strikes continued Apr 1 and Apr 2 (intercepted). US Operation Rough Rider airstrikes ongoing since Mar 15; Ras Issa port strike Apr 17 killed 74. Notably, no Houthi attacks on Red Sea commercial shipping three weeks into Iran war despite threats.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: attacks, commercial, houthi, israel, red",
+        "detected": "2026-04-22T01:30:35Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:30:35Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-22T01:15:47+00:00",
+        "entry_a_text": "No Red Sea commercial shipping attacks recorded since September 2025. During April 2026, Houthi operations focused on ballistic missile strikes against Israel (intercepted April 1 and April 2), not maritime targets. US Operation Rough Rider airstrikes on Houthi positions in Yemen continued through April (deadliest strike at Ras Issa port killed 74 on April 17). A US-Houthi ceasefire agreement halted US strikes on May 6 under terms where Houthis would not target American shipping.",
+        "entry_b_time": "2026-04-22T01:30:35+00:00",
+        "entry_b_text": "Houthis resumed ballistic missile attacks on Israel Mar 28 2026 as part of Iran war; strikes continued Apr 1 and Apr 2 (intercepted). US Operation Rough Rider airstrikes ongoing since Mar 15; Ras Issa port strike Apr 17 killed 74. Notably, no Houthi attacks on Red Sea commercial shipping three weeks into Iran war despite threats.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: airstrikes, attacks, ballistic, commercial, continued",
+        "detected": "2026-04-22T01:30:35Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:30:35Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-22T01:00:37+00:00",
+        "entry_a_text": "REPLAY COMPLETE: 0 indicators applied, 0 skipped. Final posteriors: {'H1': 0.15, 'H2': 0.45, 'H3': 0.3, 'H4': 0.1}. Indicator firedDates restored to originals for audit.",
+        "entry_b_time": "2026-04-22T01:30:35+00:00",
+        "entry_b_text": "Houthis resumed ballistic missile attacks on Israel Mar 28 2026 as part of Iran war; strikes continued Apr 1 and Apr 2 (intercepted). US Operation Rough Rider airstrikes ongoing since Mar 15; Ras Issa port strike Apr 17 killed 74. Notably, no Houthi attacks on Red Sea commercial shipping three weeks into Iran war despite threats.",
+        "reason": "Numeric divergence 85.0% on metric (context: .): new=2.0, existing=0.3, threshold=10%",
+        "detected": "2026-04-22T01:30:35Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:30:35Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-21T05:33:07+00:00",
+        "entry_a_text": "Houthi forces have paused Red Sea attacks for 3+ weeks into the US-Israel-Iran war (since late February 2026), surprising analysts given prior pattern. Houthis previously ended the May 2025 ceasefire with the US in September 2025, but have not resumed commercial vessel attacks during the current Iran conflict. Red Sea attack frequency is effectively near zero.",
+        "entry_b_time": "2026-04-22T01:30:35+00:00",
+        "entry_b_text": "Houthis resumed ballistic missile attacks on Israel Mar 28 2026 as part of Iran war; strikes continued Apr 1 and Apr 2 (intercepted). US Operation Rough Rider airstrikes ongoing since Mar 15; Ras Issa port strike Apr 17 killed 74. Notably, no Houthi attacks on Red Sea commercial shipping three weeks into Iran war despite threats.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: attacks, commercial, houthi, houthis, iran",
+        "detected": "2026-04-22T01:30:35Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:30:35Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "No Red Sea maritime attacks recorded since September 2025 per ACLED tracking. Houthis threatened Feb 28 to resume attacks over Iran war; Apr reporting notes continued pause despite rhetoric, with analysts citing strategic patience and heavy US naval presence.",
+        "entry_b_time": "2026-04-22T01:30:35+00:00",
+        "entry_b_text": "Houthis resumed ballistic missile attacks on Israel Mar 28 2026 as part of Iran war; strikes continued Apr 1 and Apr 2 (intercepted). US Operation Rough Rider airstrikes ongoing since Mar 15; Ras Issa port strike Apr 17 killed 74. Notably, no Houthi attacks on Red Sea commercial shipping three weeks into Iran war despite threats.",
+        "reason": "Numeric divergence 99.3% on metric (context: since): new=15.0, existing=2025.0, threshold=10%",
+        "detected": "2026-04-22T01:30:35Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:30:35Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-20T14:03:51+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, stale_evidence, quorum_failure. Reason: Houthis' current behavior (threats + Israel strikes without sustained commercial maritime attacks) matches H2 selective posture; US kinetic pressure plus Bab al-Mandeb rhetoric raises H4 tail; H3 de facto ceasefire inconsistent with active strike exchanges.",
+        "entry_b_time": "2026-04-22T01:30:35+00:00",
+        "entry_b_text": "Houthis resumed ballistic missile attacks on Israel Mar 28 2026 as part of Iran war; strikes continued Apr 1 and Apr 2 (intercepted). US Operation Rough Rider airstrikes ongoing since Mar 15; Ras Issa port strike Apr 17 killed 74. Notably, no Houthi attacks on Red Sea commercial shipping three weeks into Iran war despite threats.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: attacks, commercial, houthis, israel, strike",
+        "detected": "2026-04-22T01:30:35Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:30:35Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-20T14:03:51+00:00",
+        "entry_a_text": "US strike on Ras Issa port on April 17, 2026 killed at least 74 people, deadliest action of Operation Rough Rider (US campaign vs Houthis since March 15). Houthis have threatened to shutter Bab al-Mandeb if Gulf states join US-Israel war on Iran, but have limited active involvement to strikes on Israel; no sustained commercial Red Sea maritime attacks observed.",
+        "entry_b_time": "2026-04-22T01:30:35+00:00",
+        "entry_b_text": "Houthis resumed ballistic missile attacks on Israel Mar 28 2026 as part of Iran war; strikes continued Apr 1 and Apr 2 (intercepted). US Operation Rough Rider airstrikes ongoing since Mar 15; Ras Issa port strike Apr 17 killed 74. Notably, no Houthi attacks on Red Sea commercial shipping three weeks into Iran war despite threats.",
+        "reason": "Numeric divergence 39.3% on metric (context: 2026, on): new=28.0, existing=17.0, threshold=20%",
+        "detected": "2026-04-22T01:30:35Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:30:35Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-19T00:57:10+00:00",
+        "entry_a_text": "USS George H.W. Bush strike group rerouted around Africa (6,000-mile detour) due to Houthi missile/drone threat; US launched Operation Rough Rider airstrikes March 15; Houthis threatened Bab al-Mandeb chokepoint closure after short-lived ceasefire collapsed early April 2026.",
+        "entry_b_time": "2026-04-22T01:30:35+00:00",
+        "entry_b_text": "Houthis resumed ballistic missile attacks on Israel Mar 28 2026 as part of Iran war; strikes continued Apr 1 and Apr 2 (intercepted). US Operation Rough Rider airstrikes ongoing since Mar 15; Ras Issa port strike Apr 17 killed 74. Notably, no Houthi attacks on Red Sea commercial shipping three weeks into Iran war despite threats.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: airstrikes, houthi, houthis, missile, operation",
+        "detected": "2026-04-22T01:30:35Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:30:35Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T15:21:23+00:00",
+        "entry_a_text": "Houthis threaten second Red Sea shipping chokepoint at Bab al-Mandeb. US conducting Operation Rough Rider airstrikes across seven Yemen provinces. Houthis entered Iran conflict with missile/drone strikes on Israel in early April. No confirmed commercial ship attacks yet since May 2025 ceasefire.",
+        "entry_b_time": "2026-04-22T01:30:35+00:00",
+        "entry_b_text": "Houthis resumed ballistic missile attacks on Israel Mar 28 2026 as part of Iran war; strikes continued Apr 1 and Apr 2 (intercepted). US Operation Rough Rider airstrikes ongoing since Mar 15; Ras Issa port strike Apr 17 killed 74. Notably, no Houthi attacks on Red Sea commercial shipping three weeks into Iran war despite threats.",
+        "reason": "Numeric divergence 99.3% on metric (context: since): new=15.0, existing=2025.0, threshold=10%",
+        "detected": "2026-04-22T01:30:35Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:30:35Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T14:01:37+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: stale_evidence, quorum_failure. Reason: Evidence ev_010: Houthis enter Iran war with missile/drone strikes on Israel; threaten Bab al-Man",
+        "entry_b_time": "2026-04-22T01:30:35+00:00",
+        "entry_b_text": "Houthis resumed ballistic missile attacks on Israel Mar 28 2026 as part of Iran war; strikes continued Apr 1 and Apr 2 (intercepted). US Operation Rough Rider airstrikes ongoing since Mar 15; Ras Issa port strike Apr 17 killed 74. Notably, no Houthi attacks on Red Sea commercial shipping three weeks into Iran war despite threats.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: houthis, iran, israel, missile, strikes",
+        "detected": "2026-04-22T01:30:35Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:30:35Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T14:01:37+00:00",
+        "entry_a_text": "Houthis enter Iran war with missile/drone strikes on Israel; threaten Bab al-Mandeb shipping closure; US Operation Rough Rider strikes kill 74 at Ras Issa; May 6 US-Houthi ceasefire halts American attacks but Houthis retain selective screening posture",
+        "entry_b_time": "2026-04-22T01:30:35+00:00",
+        "entry_b_text": "Houthis resumed ballistic missile attacks on Israel Mar 28 2026 as part of Iran war; strikes continued Apr 1 and Apr 2 (intercepted). US Operation Rough Rider airstrikes ongoing since Mar 15; Ras Issa port strike Apr 17 killed 74. Notably, no Houthi attacks on Red Sea commercial shipping three weeks into Iran war despite threats.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: attacks, houthi, houthis, iran, israel",
+        "detected": "2026-04-22T01:30:35Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:30:35Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-15T12:00:00Z",
+        "entry_a_text": "Iran army warned it will block trade through the Red Sea, Gulf of Oman, and Sea of Oman if the US naval blockade on Iranian ports continues. This is an explicit threat to expand the Hormuz closure to Red Sea shipping lanes — directly relevant to Houthi operational calculus. US blockade entered day 2 with trade into/out of Iran \"completely halted.\" Iran-US ceasefire expires April 21.",
+        "entry_b_time": "2026-04-22T01:30:35+00:00",
+        "entry_b_text": "Houthis resumed ballistic missile attacks on Israel Mar 28 2026 as part of Iran war; strikes continued Apr 1 and Apr 2 (intercepted). US Operation Rough Rider airstrikes ongoing since Mar 15; Ras Issa port strike Apr 17 killed 74. Notably, no Houthi attacks on Red Sea commercial shipping three weeks into Iran war despite threats.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: houthi, iran, red, sea, shipping",
+        "detected": "2026-04-22T01:30:35Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:30:35Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-08T00:00:00Z",
+        "entry_a_text": "Iran pulls navy from Red Sea per ship tracking reports. Reduces direct Iranian naval presence near Houthi operating area.",
+        "entry_b_time": "2026-04-22T01:30:35+00:00",
+        "entry_b_text": "Houthis resumed ballistic missile attacks on Israel Mar 28 2026 as part of Iran war; strikes continued Apr 1 and Apr 2 (intercepted). US Operation Rough Rider airstrikes ongoing since Mar 15; Ras Issa port strike Apr 17 killed 74. Notably, no Houthi attacks on Red Sea commercial shipping three weeks into Iran war despite threats.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: houthi, iran, red, sea",
+        "detected": "2026-04-22T01:30:35Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:30:35Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-03-28T00:00:00Z",
+        "entry_a_text": "Houthis enter Iran war: fire ballistic missiles and drones at Israel. First offensive action since October 2025 pause. Targets are Israeli, NOT commercial shipping.",
+        "entry_b_time": "2026-04-22T01:30:35+00:00",
+        "entry_b_text": "Houthis resumed ballistic missile attacks on Israel Mar 28 2026 as part of Iran war; strikes continued Apr 1 and Apr 2 (intercepted). US Operation Rough Rider airstrikes ongoing since Mar 15; Ras Issa port strike Apr 17 killed 74. Notably, no Houthi attacks on Red Sea commercial shipping three weeks into Iran war despite threats.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: ballistic, commercial, houthis, iran, israel",
+        "detected": "2026-04-22T01:30:35Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:30:35Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-02-28T00:00:00Z",
+        "entry_a_text": "US-Israel launch strikes on Iran. Iran war begins. Houthis do NOT immediately resume Red Sea attacks — surprising given prior behavior and regional ally mobilization.",
+        "entry_b_time": "2026-04-22T01:30:35+00:00",
+        "entry_b_text": "Houthis resumed ballistic missile attacks on Israel Mar 28 2026 as part of Iran war; strikes continued Apr 1 and Apr 2 (intercepted). US Operation Rough Rider airstrikes ongoing since Mar 15; Ras Issa port strike Apr 17 killed 74. Notably, no Houthi attacks on Red Sea commercial shipping three weeks into Iran war despite threats.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: attacks, houthis, iran, israel, red",
+        "detected": "2026-04-22T01:30:35Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:30:35Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-01-15T00:00:00Z",
+        "entry_a_text": "Maersk Line resumes Red Sea transit with successive successful trans-Suez crossings. First major carrier to return since crisis began.",
+        "entry_b_time": "2026-04-22T01:30:35+00:00",
+        "entry_b_text": "Houthis resumed ballistic missile attacks on Israel Mar 28 2026 as part of Iran war; strikes continued Apr 1 and Apr 2 (intercepted). US Operation Rough Rider airstrikes ongoing since Mar 15; Ras Issa port strike Apr 17 killed 74. Notably, no Houthi attacks on Red Sea commercial shipping three weeks into Iran war despite threats.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: red, sea",
+        "detected": "2026-04-22T01:30:35Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:30:35Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2025-10-10T00:00:00Z",
+        "entry_a_text": "Houthis halt attacks on international shipping and Israel following Gaza peace plan implementation. Commercial attacks paused after ~100 incidents since November 2023.",
+        "entry_b_time": "2026-04-22T01:30:35+00:00",
+        "entry_b_text": "Houthis resumed ballistic missile attacks on Israel Mar 28 2026 as part of Iran war; strikes continued Apr 1 and Apr 2 (intercepted). US Operation Rough Rider airstrikes ongoing since Mar 15; Ras Issa port strike Apr 17 killed 74. Notably, no Houthi attacks on Red Sea commercial shipping three weeks into Iran war despite threats.",
+        "reason": "Antonym pair detected: new has 'war', existing has 'peace'",
+        "detected": "2026-04-22T01:30:35Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:30:35Z"
       }
     ]
   },
@@ -1252,25 +2834,1332 @@
         "trust_delta": -0.1,
         "original_text_snippet": "GOVERNANCE WARNING on bayesian_update: stale_evidence, quorum_failure. Reason: Evidence ev_010: Houthis enter Iran war w",
         "confirming_text_snippet": "Houthis threaten second Red Sea shipping chokepoint at Bab al-Mandeb. US conducting Operation Rough Rider airstrikes acr"
+      },
+      {
+        "timestamp": "2026-04-19T00:57:10Z",
+        "evidence_index": 9,
+        "confirming_index": 13,
+        "resolution": "REFUTED",
+        "source": "Maritime Executive/Al Jazeera",
+        "confirming_source": "Defence Security Asia / Fox News / Washington Institute",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Houthis enter Iran war with missile/drone strikes on Israel; threaten Bab al-Mandeb shipping closure; US Operation Rough",
+        "confirming_text_snippet": "USS George H.W. Bush strike group rerouted around Africa (6,000-mile detour) due to Houthi missile/drone threat; US laun"
+      },
+      {
+        "timestamp": "2026-04-20T14:03:51Z",
+        "evidence_index": 2,
+        "confirming_index": 15,
+        "resolution": "REFUTED",
+        "source": "The National, March 17 2026 analysis",
+        "confirming_source": "Military Times",
+        "trust_delta": -0.1,
+        "original_text_snippet": "US-Israel launch strikes on Iran. Iran war begins. Houthis do NOT immediately resume Red Sea attacks — surprising given ",
+        "confirming_text_snippet": "US strike on Ras Issa port on April 17, 2026 killed at least 74 people, deadliest action of Operation Rough Rider (US ca"
+      },
+      {
+        "timestamp": "2026-04-20T14:03:51Z",
+        "evidence_index": 9,
+        "confirming_index": 15,
+        "resolution": "REFUTED",
+        "source": "Maritime Executive/Al Jazeera",
+        "confirming_source": "Military Times",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Houthis enter Iran war with missile/drone strikes on Israel; threaten Bab al-Mandeb shipping closure; US Operation Rough",
+        "confirming_text_snippet": "US strike on Ras Issa port on April 17, 2026 killed at least 74 people, deadliest action of Operation Rough Rider (US ca"
+      },
+      {
+        "timestamp": "2026-04-20T14:03:51Z",
+        "evidence_index": 11,
+        "confirming_index": 15,
+        "resolution": "REFUTED",
+        "source": "Fox News / Maritime Executive",
+        "confirming_source": "Military Times",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Houthis threaten second Red Sea shipping chokepoint at Bab al-Mandeb. US conducting Operation Rough Rider airstrikes acr",
+        "confirming_text_snippet": "US strike on Ras Issa port on April 17, 2026 killed at least 74 people, deadliest action of Operation Rough Rider (US ca"
+      },
+      {
+        "timestamp": "2026-04-20T14:03:51Z",
+        "evidence_index": 13,
+        "confirming_index": 15,
+        "resolution": "REFUTED",
+        "source": "Defence Security Asia / Fox News / Washington Institute",
+        "confirming_source": "Military Times",
+        "trust_delta": -0.1,
+        "original_text_snippet": "USS George H.W. Bush strike group rerouted around Africa (6,000-mile detour) due to Houthi missile/drone threat; US laun",
+        "confirming_text_snippet": "US strike on Ras Issa port on April 17, 2026 killed at least 74 people, deadliest action of Operation Rough Rider (US ca"
+      },
+      {
+        "timestamp": "2026-04-21T05:33:07Z",
+        "evidence_index": 0,
+        "confirming_index": 21,
+        "resolution": "REFUTED",
+        "source": "Wikipedia/multiple wire services, October 2025",
+        "confirming_source": "The National / gCaptain / S&P Global",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Houthis halt attacks on international shipping and Israel following Gaza peace plan implementation. Commercial attacks p",
+        "confirming_text_snippet": "Houthi forces have paused Red Sea attacks for 3+ weeks into the US-Israel-Iran war (since late February 2026), surprisin"
+      },
+      {
+        "timestamp": "2026-04-21T05:33:07Z",
+        "evidence_index": 2,
+        "confirming_index": 21,
+        "resolution": "REFUTED",
+        "source": "The National, March 17 2026 analysis",
+        "confirming_source": "The National / gCaptain / S&P Global",
+        "trust_delta": -0.1,
+        "original_text_snippet": "US-Israel launch strikes on Iran. Iran war begins. Houthis do NOT immediately resume Red Sea attacks — surprising given ",
+        "confirming_text_snippet": "Houthi forces have paused Red Sea attacks for 3+ weeks into the US-Israel-Iran war (since late February 2026), surprisin"
+      },
+      {
+        "timestamp": "2026-04-22T01:15:47Z",
+        "evidence_index": 0,
+        "confirming_index": 27,
+        "resolution": "REFUTED",
+        "source": "Wikipedia/multiple wire services, October 2025",
+        "confirming_source": "Washington Institute / Military Times / Wikipedia Red Sea crisis",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Houthis halt attacks on international shipping and Israel following Gaza peace plan implementation. Commercial attacks p",
+        "confirming_text_snippet": "No Red Sea commercial shipping attacks recorded since September 2025. During April 2026, Houthi operations focused on ba"
+      },
+      {
+        "timestamp": "2026-04-22T01:15:47Z",
+        "evidence_index": 3,
+        "confirming_index": 27,
+        "resolution": "REFUTED",
+        "source": "The National / multiple wire services, March 28 2026",
+        "confirming_source": "Washington Institute / Military Times / Wikipedia Red Sea crisis",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Houthis enter Iran war: fire ballistic missiles and drones at Israel. First offensive action since October 2025 pause. T",
+        "confirming_text_snippet": "No Red Sea commercial shipping attacks recorded since September 2025. During April 2026, Houthi operations focused on ba"
+      },
+      {
+        "timestamp": "2026-04-22T01:15:47Z",
+        "evidence_index": 9,
+        "confirming_index": 27,
+        "resolution": "REFUTED",
+        "source": "Maritime Executive/Al Jazeera",
+        "confirming_source": "Washington Institute / Military Times / Wikipedia Red Sea crisis",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Houthis enter Iran war with missile/drone strikes on Israel; threaten Bab al-Mandeb shipping closure; US Operation Rough",
+        "confirming_text_snippet": "No Red Sea commercial shipping attacks recorded since September 2025. During April 2026, Houthi operations focused on ba"
+      },
+      {
+        "timestamp": "2026-04-22T01:15:47Z",
+        "evidence_index": 11,
+        "confirming_index": 27,
+        "resolution": "REFUTED",
+        "source": "Fox News / Maritime Executive",
+        "confirming_source": "Washington Institute / Military Times / Wikipedia Red Sea crisis",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Houthis threaten second Red Sea shipping chokepoint at Bab al-Mandeb. US conducting Operation Rough Rider airstrikes acr",
+        "confirming_text_snippet": "No Red Sea commercial shipping attacks recorded since September 2025. During April 2026, Houthi operations focused on ba"
+      },
+      {
+        "timestamp": "2026-04-22T01:15:47Z",
+        "evidence_index": 23,
+        "confirming_index": 25,
+        "resolution": "CONFIRMED",
+        "source": "",
+        "confirming_source": "",
+        "trust_delta": 0.05,
+        "original_text_snippet": "LR MIGRATION RESET: posteriors reset to design priors; evidence log preserved.",
+        "confirming_text_snippet": "REPLAY BEGIN: 0 previously-fired indicators will be re-applied chronologically under current LR system. Posteriors reset"
+      },
+      {
+        "timestamp": "2026-04-22T01:15:47Z",
+        "evidence_index": 25,
+        "confirming_index": 26,
+        "resolution": "CONFIRMED",
+        "source": "",
+        "confirming_source": "",
+        "trust_delta": 0.05,
+        "original_text_snippet": "REPLAY BEGIN: 0 previously-fired indicators will be re-applied chronologically under current LR system. Posteriors reset",
+        "confirming_text_snippet": "REPLAY COMPLETE: 0 indicators applied, 0 skipped. Final posteriors: {'H1': 0.15, 'H2': 0.45, 'H3': 0.3, 'H4': 0.1}. Indi"
+      },
+      {
+        "timestamp": "2026-04-22T01:30:35Z",
+        "evidence_index": 0,
+        "confirming_index": 29,
+        "resolution": "REFUTED",
+        "source": "Wikipedia/multiple wire services, October 2025",
+        "confirming_source": "Washington Institute / Military Times",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Houthis halt attacks on international shipping and Israel following Gaza peace plan implementation. Commercial attacks p",
+        "confirming_text_snippet": "Houthis resumed ballistic missile attacks on Israel Mar 28 2026 as part of Iran war; strikes continued Apr 1 and Apr 2 ("
+      },
+      {
+        "timestamp": "2026-04-22T01:30:35Z",
+        "evidence_index": 2,
+        "confirming_index": 29,
+        "resolution": "REFUTED",
+        "source": "The National, March 17 2026 analysis",
+        "confirming_source": "Washington Institute / Military Times",
+        "trust_delta": -0.1,
+        "original_text_snippet": "US-Israel launch strikes on Iran. Iran war begins. Houthis do NOT immediately resume Red Sea attacks — surprising given ",
+        "confirming_text_snippet": "Houthis resumed ballistic missile attacks on Israel Mar 28 2026 as part of Iran war; strikes continued Apr 1 and Apr 2 ("
+      },
+      {
+        "timestamp": "2026-04-22T01:30:35Z",
+        "evidence_index": 3,
+        "confirming_index": 29,
+        "resolution": "REFUTED",
+        "source": "The National / multiple wire services, March 28 2026",
+        "confirming_source": "Washington Institute / Military Times",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Houthis enter Iran war: fire ballistic missiles and drones at Israel. First offensive action since October 2025 pause. T",
+        "confirming_text_snippet": "Houthis resumed ballistic missile attacks on Israel Mar 28 2026 as part of Iran war; strikes continued Apr 1 and Apr 2 ("
+      },
+      {
+        "timestamp": "2026-04-22T01:30:35Z",
+        "evidence_index": 9,
+        "confirming_index": 29,
+        "resolution": "REFUTED",
+        "source": "Maritime Executive/Al Jazeera",
+        "confirming_source": "Washington Institute / Military Times",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Houthis enter Iran war with missile/drone strikes on Israel; threaten Bab al-Mandeb shipping closure; US Operation Rough",
+        "confirming_text_snippet": "Houthis resumed ballistic missile attacks on Israel Mar 28 2026 as part of Iran war; strikes continued Apr 1 and Apr 2 ("
+      },
+      {
+        "timestamp": "2026-04-22T01:30:35Z",
+        "evidence_index": 10,
+        "confirming_index": 29,
+        "resolution": "REFUTED",
+        "source": "",
+        "confirming_source": "Washington Institute / Military Times",
+        "trust_delta": -0.1,
+        "original_text_snippet": "GOVERNANCE WARNING on bayesian_update: stale_evidence, quorum_failure. Reason: Evidence ev_010: Houthis enter Iran war w",
+        "confirming_text_snippet": "Houthis resumed ballistic missile attacks on Israel Mar 28 2026 as part of Iran war; strikes continued Apr 1 and Apr 2 ("
+      },
+      {
+        "timestamp": "2026-04-22T01:30:35Z",
+        "evidence_index": 11,
+        "confirming_index": 29,
+        "resolution": "REFUTED",
+        "source": "Fox News / Maritime Executive",
+        "confirming_source": "Washington Institute / Military Times",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Houthis threaten second Red Sea shipping chokepoint at Bab al-Mandeb. US conducting Operation Rough Rider airstrikes acr",
+        "confirming_text_snippet": "Houthis resumed ballistic missile attacks on Israel Mar 28 2026 as part of Iran war; strikes continued Apr 1 and Apr 2 ("
+      },
+      {
+        "timestamp": "2026-04-22T01:30:35Z",
+        "evidence_index": 12,
+        "confirming_index": 29,
+        "resolution": "REFUTED",
+        "source": "",
+        "confirming_source": "Washington Institute / Military Times",
+        "trust_delta": -0.1,
+        "original_text_snippet": "GOVERNANCE WARNING on bayesian_update: stale_evidence. Reason: Houthi threats to Bab al-Mandeb and entry into Iran confl",
+        "confirming_text_snippet": "Houthis resumed ballistic missile attacks on Israel Mar 28 2026 as part of Iran war; strikes continued Apr 1 and Apr 2 ("
       }
     ],
     "effectiveTrust": {
-      "Al Jazeera": 0.6,
+      "Al Jazeera": 0.4236,
       "Al Jazeera (Iran army statement)": 0.5,
       "Huax analytics), April 8 2026": 0.5,
       "Lloyd's Market Association (Neil Roberts),": 0.5,
-      "Maritime Executive": 0.5,
+      "Maritime Executive": 0.223,
       "Ship and Bunker (industry publication), April 2026": 0.5,
-      "The National": 0.5,
+      "The National": 0.3289,
       "The National (Arsenio Longo": 0.5,
-      "The National, March 17 2026 analysis": 0.3289,
+      "The National, March 17 2026 analysis": 0.1439,
       "Velayati social media post, reported by The National": 0.5,
-      "Wikipedia": 0.4118,
-      "multiple wire services, March 28 2026": 0.5,
-      "multiple wire services, October 2025": 0.4118,
+      "Wikipedia": 0.1936,
+      "multiple wire services, March 28 2026": 0.3289,
+      "multiple wire services, October 2025": 0.1936,
       "shipping industry reports, January 2026": 0.5,
-      "Fox News": 0.5
+      "Fox News": 0.3289,
+      "Defence Security Asia": 0.4555,
+      "Washington Institute": 0.4555,
+      "Military Times": 0.5,
+      "ACLED": 0.5,
+      "S&P Global": 0.5,
+      "gCaptain": 0.5,
+      "Wikipedia Red Sea crisis": 0.5
     },
-    "_last_scan_same_source_skipped": 2
-  }
+    "_last_scan_same_source_skipped": 14
+  },
+  "conditionalPredictions": [
+    {
+      "id": "cp_001",
+      "createdAt": "2026-04-19T05:50:51+00:00",
+      "conditionTopic": "calibration-houthi-posture",
+      "conditionHypothesis": "H1",
+      "conditionProbAtCreation": 0.1409,
+      "prediction": "IF attacks resume ≥5/month, THEN Suez Canal transit delays exceed 48h for 60%+ of commercial traffic by mid-June",
+      "resolutionCriteria": "Average transit delay >48h in June 2026 for ≥60% of vessels per MarineTraffic/Lloyd's",
+      "deadline": "2026-06-15",
+      "conditionalProbability": 0.78,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-green",
+      "lens": "GREEN",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": "48h/60% transit-delay threshold is a genuine cascade signal for supply-chain regime change.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "DROP",
+          "reasoning": "60%+ of commercial traffic with 48h+ delay overstates breakdown; canal operators, re-routing, and convoy systems are resolution mechanisms that absorb 5/month attacks well below this threshold.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Sharp operational metric with clear source (MarineTraffic).",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "Suez 48h delays for 60%+ under renewed attacks captures coordination failure â€” convoys don't scale. Strong failure-mode framing.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "APPROVE",
+          "reasoning": "Names at least one specific decision-maker controlling the outcome; incentive is implicit but traceable.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_002",
+      "createdAt": "2026-04-19T05:50:51+00:00",
+      "conditionTopic": "calibration-houthi-posture",
+      "conditionHypothesis": "H1",
+      "conditionProbAtCreation": 0.1409,
+      "prediction": "IF H1, THEN ≥1 major container liner announces Red Sea route suspension or surcharge >$50k per transit by end May",
+      "resolutionCriteria": "Public statement from ship operator: (a) suspension or (b) emergency surcharge ≥USD 50k per Red Sea transit",
+      "deadline": "2026-05-31",
+      "conditionalProbability": 0.82,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-green",
+      "lens": "GREEN",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": "Carrier suspension/surcharge announcement is an institutional-commitment event that marks phase shift in Red Sea risk pricing.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "APPROVE",
+          "reasoning": "Surcharge or route-suspension is a market-clearing response; insurance/shipping markets absorbing risk through pricing is BLUE-canonical.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Clean surcharge/suspension trigger.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "Liner suspension / $50k surcharge names a concrete escalation breakpoint. Falsifiable and RED-aligned.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "MODIFY",
+          "reasoning": "Measurable outcome, but the actor whose decision produces it is abstracted. Name the specific agency/official/firm and state the incentive driving the choice.",
+          "modified_suggestion": "Specify the named decision-maker (agency director, committee chair, corporate board, minister) whose choice produces the measured outcome, and state the incentive."
+        }
+      },
+      "lensAgreement": [
+        "GREEN",
+        "OCHRE"
+      ]
+    },
+    {
+      "id": "cp_003",
+      "createdAt": "2026-04-19T05:50:51+00:00",
+      "conditionTopic": "calibration-houthi-posture",
+      "conditionHypothesis": "H1",
+      "conditionProbAtCreation": 0.1409,
+      "prediction": "IF H1, THEN US-led coalition conducts ≥10 kinetic strikes against Houthi military sites by end of June",
+      "resolutionCriteria": "Confirmed airstrikes or naval ops targeting Houthi infrastructure ≥10 from CENTCOM or credible OSINT",
+      "deadline": "2026-06-30",
+      "conditionalProbability": 0.75,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-green",
+      "lens": "GREEN",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": "Sustained kinetic campaign count captures escalation threshold from posture to active war regime.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "APPROVE",
+          "reasoning": "Coalition kinetic response through CENTCOM is an institutional (UN/coalition) resolution mechanism activating as designed.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Kinetic strike count is cleanly verifiable.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "Ten+ kinetic strikes is a clear escalation ladder rung. Good.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "APPROVE",
+          "reasoning": "Names multiple specific decision-makers (agencies, officials, firms, states) and ties the outcome to their choices. Actor-incentive traceability strong.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": [
+        "GREEN",
+        "OCHRE"
+      ]
+    },
+    {
+      "id": "cp_004",
+      "createdAt": "2026-04-19T05:50:51+00:00",
+      "conditionTopic": "calibration-houthi-posture",
+      "conditionHypothesis": "H1",
+      "conditionProbAtCreation": 0.1409,
+      "prediction": "IF H1, THEN global containerized trade via Suez declines 15-25% YoY by Q2 2026",
+      "resolutionCriteria": "SCA or Clarkson data shows Q2 2026 container transits (Apr-Jun 2026) 15-25% below Q2 2025 baseline",
+      "deadline": "2026-06-30",
+      "conditionalProbability": 0.71,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-green",
+      "lens": "GREEN",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": "15-25% YoY trade decline is a discontinuity from baseline; captures network reconfiguration dynamic.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "DROP",
+          "reasoning": "15-25% YoY decline in total containerized trade via Suez overstates systemic breakdown; rerouting preserves trade volume at basin level, so aggregate drop of this magnitude conflicts with absorptive capacity.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "SCA data is authoritative.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "15-25% YoY Suez container decline is a severe-but-plausible scenario. Captures contagion.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "APPROVE",
+          "reasoning": "Names multiple specific decision-makers (agencies, officials, firms, states) and ties the outcome to their choices. Actor-incentive traceability strong.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": [
+        "GREEN",
+        "OCHRE"
+      ]
+    },
+    {
+      "id": "cp_005",
+      "createdAt": "2026-04-19T05:50:51+00:00",
+      "conditionTopic": "calibration-houthi-posture",
+      "conditionHypothesis": "H2",
+      "conditionProbAtCreation": 0.5916,
+      "prediction": "IF H2, THEN avg monthly attacks remain 2-4/month through July, concentrated on Israel/US/UK vessels",
+      "resolutionCriteria": "Monthly incident count 2-4 per UKMTO/Dryad, >75% involving Israeli/US/UK-linked assets",
+      "deadline": "2026-07-01",
+      "conditionalProbability": 0.73,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-green",
+      "lens": "GREEN",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "DROP",
+          "reasoning": "Stable 2-4/month attack rate is classic smooth extrapolation inside a conflict that has repeatedly phase-shifted on external shocks.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "APPROVE",
+          "reasoning": "Targeted rate persisting at 2-4/month concentrated on specific flags is a stable equilibrium with institutional absorption.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Monthly count with ownership attribution.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "MODIFY",
+          "reasoning": "2-4 attacks/month with >75% against named targets understates escalation risk. Suggest raising the ceiling and noting that Iranian signaling or IDF action can break the posture overnight.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "APPROVE",
+          "reasoning": "Names multiple specific decision-makers (agencies, officials, firms, states) and ties the outcome to their choices. Actor-incentive traceability strong.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": [
+        "GREEN",
+        "OCHRE"
+      ]
+    },
+    {
+      "id": "cp_006",
+      "createdAt": "2026-04-19T05:50:51+00:00",
+      "conditionTopic": "calibration-houthi-posture",
+      "conditionHypothesis": "H4",
+      "conditionProbAtCreation": 0.2464,
+      "prediction": "IF Bab al-Mandeb closure, THEN Suez Canal transits decline to 50-60% of Jan 2024 baseline by end June",
+      "resolutionCriteria": "SCA June 2026 transits at 50-60% of Jan 2024 monthly average",
+      "deadline": "2026-06-30",
+      "conditionalProbability": 0.62,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-green",
+      "lens": "GREEN",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": "Bab al-Mandeb closure is itself a threshold event; 50-60% of baseline captures the discontinuous rerouting.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "DROP",
+          "reasoning": "Assumes full Bab al-Mandeb closure; BLUE views closure as unlikely because coalition/diplomatic mechanisms deter or reopen; this hypothesis overstates durable breakdown.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Clean H4 threshold.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "50-60% Suez collapse under Bab al-Mandeb closure correctly scales the shock. RED-aligned.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "APPROVE",
+          "reasoning": "Names multiple specific decision-makers (agencies, officials, firms, states) and ties the outcome to their choices. Actor-incentive traceability strong.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": [
+        "GREEN",
+        "OCHRE"
+      ]
+    },
+    {
+      "id": "cp_007",
+      "createdAt": "2026-04-19T05:50:51+00:00",
+      "conditionTopic": "calibration-houthi-posture",
+      "conditionHypothesis": "H4",
+      "conditionProbAtCreation": 0.2464,
+      "prediction": "IF H4, THEN global oil prices increase 8-15% from April 2026 baseline by end Q2",
+      "resolutionCriteria": "WTI crude late June 2026 8-15% higher than ~April 18 2026 baseline",
+      "deadline": "2026-06-30",
+      "conditionalProbability": 0.58,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-green",
+      "lens": "GREEN",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": "Oil price step from Hormuz/Bab-el-Mandeb closure is an explicit regime-shift pricing.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "DROP",
+          "reasoning": "Oil price 8-15% shock premises persistent closure; strategic reserves + OPEC spare capacity are absorption mechanisms.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "WTI measurable, time-bounded.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "MODIFY",
+          "reasoning": "8-15% oil move on Bab al-Mandeb closure is too narrow â€” RED expects fat-tail energy response (20-40% spike on headline risk) then partial mean-reversion. Widen the band upward.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "MODIFY",
+          "reasoning": "Measurable outcome, but the actor whose decision produces it is abstracted. Name the specific agency/official/firm and state the incentive driving the choice.",
+          "modified_suggestion": "Specify the named decision-maker (agency director, committee chair, corporate board, minister) whose choice produces the measured outcome, and state the incentive."
+        }
+      },
+      "lensAgreement": [
+        "GREEN",
+        "OCHRE"
+      ]
+    },
+    {
+      "id": "cp_008",
+      "createdAt": "2026-04-19T05:50:51+00:00",
+      "conditionTopic": "calibration-houthi-posture",
+      "conditionHypothesis": "H4",
+      "conditionProbAtCreation": 0.2464,
+      "prediction": "IF H4, THEN ≥1 major oil tanker or LNG carrier announces permanent Cape reroute by end May",
+      "resolutionCriteria": "Public shipping company statement from Shell/Saudi Aramco/Equinor/Chevron routing oil/LNG exclusively around Africa through June 2026",
+      "deadline": "2026-05-31",
+      "conditionalProbability": 0.64,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-green",
+      "lens": "GREEN",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": "Permanent Cape reroute commitment is an institutional lock-in signal that outlasts the trigger event.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "DROP",
+          "reasoning": "Permanent Cape reroute announcements overstate breakdown; operators typically signal temporary reroute pending diplomatic/military resolution, not permanent reorganization.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Company-announcement trigger is sharp.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "Majors announcing permanent Cape reroute is a concrete brittleness indicator. Good.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "APPROVE",
+          "reasoning": "Names multiple specific decision-makers (agencies, officials, firms, states) and ties the outcome to their choices. Actor-incentive traceability strong.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": [
+        "GREEN",
+        "OCHRE"
+      ]
+    },
+    {
+      "id": "cp_009",
+      "createdAt": "2026-04-19T05:50:54+00:00",
+      "conditionTopic": "calibration-houthi-posture",
+      "conditionHypothesis": "H1",
+      "conditionProbAtCreation": 0.1409,
+      "prediction": "IF H1, THEN transportation cost structure experiences 5-8% net increase by end Q2 2026 across 80%+ of supply chains, expressed through longer shipping times, fuel costs, and logistics premium",
+      "resolutionCriteria": "Aggregate shipping cost indices (Drewry WCI, CCFI) show 5-8% increase from April 2026 baseline; confirmed across freight forwarding rate quotes",
+      "deadline": "2026-06-30",
+      "conditionalProbability": 0.54,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-ochre",
+      "lens": "OCHRE",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": "Economy-wide 5-8% cost step embedded across 80% of chains is a structural passthrough regime signal.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "MODIFY",
+          "reasoning": "5-8% aggregate shipping cost increase is plausible but framed as persistent structural damage; reframe as market-clearing surcharge that normalizes as insurance prices stabilize.",
+          "modified_suggestion": "IF H1, THEN aggregate shipping cost indices (Drewry WCI, CCFI) rise 5-8% above April 2026 baseline by end Q2 2026 and then stabilize at a 2-4% premium by Q4 2026 as underwriting and rerouting clear the market."
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Drewry WCI is authoritative and clean.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "5-8% aggregate logistics cost increase is a cross-supply-chain contagion measure. Good.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "APPROVE",
+          "reasoning": "Names multiple specific decision-makers (agencies, officials, firms, states) and ties the outcome to their choices. Actor-incentive traceability strong.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": [
+        "OCHRE",
+        "GREEN"
+      ]
+    },
+    {
+      "id": "cp_010",
+      "createdAt": "2026-04-19T05:50:54+00:00",
+      "conditionTopic": "calibration-houthi-posture",
+      "conditionHypothesis": "H1",
+      "conditionProbAtCreation": 0.1409,
+      "prediction": "IF H1 persists, THEN emerging-market economies (esp. South Asia, East Africa) experience measurable inflation pressure (0.3-0.7pp) by end Q2 2026, driven by shipping cost pass-through",
+      "resolutionCriteria": "Central banks' inflation reports (India RBI, Bangladesh BB, Kenya CB) document Q2 2026 inflation acceleration of 0.3-0.7pp vs Q1 2026; supply-chain cost shock identified in rate-setting minutes",
+      "deadline": "2026-06-30",
+      "conditionalProbability": 0.48,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-ochre",
+      "lens": "OCHRE",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": "EM inflation contagion via shipping is a cascade effect captured correctly.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "DROP",
+          "reasoning": "EM inflation pass-through of 0.3-0.7pp attributed to shipping overstates a single-corridor shock; central banks have absorption tools (FX, rates) and shipping is a small share of CPI basket in most EM economies.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "EM inflation pass-through is underweighted elsewhere; valuable contrast.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "EM inflation passthrough 0.3-0.7pp is the cross-border contagion RED emphasizes. OK.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "NEUTRAL",
+          "reasoning": "Pure macro/financial aggregate (index close, yield, inflation print, unemployment, margin). No single named decision-maker controls the reading directly; VIOLET lens neutral.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": [
+        "OCHRE",
+        "GREEN"
+      ]
+    },
+    {
+      "id": "cp_011",
+      "createdAt": "2026-04-19T05:50:54+00:00",
+      "conditionTopic": "calibration-houthi-posture",
+      "conditionHypothesis": "H1",
+      "conditionProbAtCreation": 0.1409,
+      "prediction": "IF H1, THEN political pressure on US/Saudi/UAE creates structural fiscal commitment: ≥USD 2-4 billion in additional military spending locked into regional defense budgets by end Q2 2026",
+      "resolutionCriteria": "Official DoD/State/Congressional appropriations allocate ≥USD 2B for Red Sea defense operations, counter-Houthi capabilities, or regional force posture; budgets enacted/committed by end Q2",
+      "deadline": "2026-06-30",
+      "conditionalProbability": 0.51,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-ochre",
+      "lens": "OCHRE",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": "Locked-in defense appropriations mark institutional ratchet, not reversible posture.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "APPROVE",
+          "reasoning": "Locked-in regional defense appropriations are institutional fiscal absorption of persistent risk.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "DoD/State appropriations trigger is falsifiable.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "$2-4B structural defense commitment captures fiscal lock-in from ongoing attacks. Good.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "APPROVE",
+          "reasoning": "Names multiple specific decision-makers (agencies, officials, firms, states) and ties the outcome to their choices. Actor-incentive traceability strong.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": [
+        "OCHRE",
+        "GREEN"
+      ]
+    },
+    {
+      "id": "cp_012",
+      "createdAt": "2026-04-19T05:50:54+00:00",
+      "conditionTopic": "calibration-houthi-posture",
+      "conditionHypothesis": "H2",
+      "conditionProbAtCreation": 0.5916,
+      "prediction": "IF H2 persists (selective targeting), THEN Red Sea becomes institutionalized asymmetry: 2-class rate structure (Israeli/US-linked vessels +$30-50k premium vs neutral cargo) entrenched as structural market feature through Q3 2026",
+      "resolutionCriteria": "Shipping market data (Lloyd's, Clarkson) shows sustained 2-class rate structure: Israeli/US-flagged or owned vessels pay 30-50% premium vs neutral vessels, persisting across June-July 2026",
+      "deadline": "2026-07-01",
+      "conditionalProbability": 0.56,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-ochre",
+      "lens": "OCHRE",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": "Two-class rate structure institutionalization is a market-regime crystallization, well-framed.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "APPROVE",
+          "reasoning": "Two-class rate structure as institutionalized equilibrium is the textbook market-clearing/absorptive outcome BLUE champions.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Two-class rate structure is a novel measurable phenomenon.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "Institutionalized two-class rate structure is a clean asymmetric-normalization indicator. Strong RED framing.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "APPROVE",
+          "reasoning": "Names multiple specific decision-makers (agencies, officials, firms, states) and ties the outcome to their choices. Actor-incentive traceability strong.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": [
+        "OCHRE",
+        "GREEN"
+      ]
+    },
+    {
+      "id": "cp_013",
+      "createdAt": "2026-04-19T05:50:54+00:00",
+      "conditionTopic": "calibration-houthi-posture",
+      "conditionHypothesis": "H2",
+      "conditionProbAtCreation": 0.5916,
+      "prediction": "IF H2 continues, THEN global financial markets internalize Red Sea risk as endemic: equity valuations of shipping operators and insurance firms stabilize at 10-15% discount to pre-2024 levels through end H1 2026",
+      "resolutionCriteria": "Equity indices of major shippers (Maersk, MSC proxies), P&I clubs, and logistics firms track 10-15% below Jan 2024 valuations through June 2026",
+      "deadline": "2026-06-30",
+      "conditionalProbability": 0.52,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-ochre",
+      "lens": "OCHRE",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": "Sustained equity discount reflects internalized regime repricing rather than transient risk-off.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "APPROVE",
+          "reasoning": "Equity valuations settling at a steady discount is market-clearing risk repricing.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "MODIFY",
+          "reasoning": "Maersk/MSC valuations track many factors; isolate Red Sea-specific discount via event study.",
+          "modified_suggestion": "IF H2 continues, THEN event-study CAR on Red Sea-relevant operators around incidents averages -2% to -5% through Q2 2026."
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "10-15% valuation discount internalized as endemic-risk pricing. Good structural-risk framing.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "APPROVE",
+          "reasoning": "Names multiple specific decision-makers (agencies, officials, firms, states) and ties the outcome to their choices. Actor-incentive traceability strong.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_014",
+      "createdAt": "2026-04-19T05:50:54+00:00",
+      "conditionTopic": "calibration-houthi-posture",
+      "conditionHypothesis": "H2",
+      "conditionProbAtCreation": 0.5916,
+      "prediction": "IF H2 persists through July, THEN insurance and reinsurance markets develop normalized Red Sea risk underwriting model: 40-50% of new hull/cargo policies include Red Sea rider clauses by Q3 2026",
+      "resolutionCriteria": "Insurance industry reports (ABI, IUMI) or Lloyd's market data show 40-50% of new hull/cargo policies include Red Sea-specific clauses as standard product by Q3 2026",
+      "deadline": "2026-06-30",
+      "conditionalProbability": 0.54,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-ochre",
+      "lens": "OCHRE",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": "Standardized Red Sea rider clauses capture institutional normalization of the new risk regime.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "APPROVE",
+          "reasoning": "Standardized Red Sea rider clauses are a classic institutional-product absorption of new risk.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Insurance-clause prevalence is a clean structural metric.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "Red Sea rider clauses becoming standard 40-50% of policies shows market-level acceptance of persistent risk. OK.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "APPROVE",
+          "reasoning": "Names multiple specific decision-makers (agencies, officials, firms, states) and ties the outcome to their choices. Actor-incentive traceability strong.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": [
+        "OCHRE",
+        "GREEN"
+      ]
+    },
+    {
+      "id": "cp_015",
+      "createdAt": "2026-04-19T05:50:54+00:00",
+      "conditionTopic": "calibration-houthi-posture",
+      "conditionHypothesis": "H4",
+      "conditionProbAtCreation": 0.2464,
+      "prediction": "IF H4, THEN 35-50% of LNG and 25-35% of oil tanker fleet deploy to non-Suez corridors on permanent contracts by Q3 2026",
+      "resolutionCriteria": "Energy shipping data shows Q3 2026: LNG capacity on Suez routes reduced to 50-65% of Jan 2024 baseline; oil tanker Suez utilization at 65-75% of baseline; capacity locked into multi-year charters",
+      "deadline": "2026-06-30",
+      "conditionalProbability": 0.44,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-ochre",
+      "lens": "OCHRE",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": "Multi-year energy charters locking in non-Suez deployment is structural commitment, not cyclical response.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "DROP",
+          "reasoning": "Multi-year LNG/oil charter lock-in for non-Suez routing overstates durability; energy fleets remain highly elastic once risk clears.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Energy-shipping specific breakdown adds signal beyond 213.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "Energy-fleet long-term reallocation is a concrete structural shift indicator. OK.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "APPROVE",
+          "reasoning": "Names at least one specific decision-maker controlling the outcome; incentive is implicit but traceable.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": [
+        "OCHRE",
+        "GREEN"
+      ]
+    },
+    {
+      "id": "cp_016",
+      "createdAt": "2026-04-19T05:50:54+00:00",
+      "conditionTopic": "calibration-houthi-posture",
+      "conditionHypothesis": "H4",
+      "conditionProbAtCreation": 0.2464,
+      "prediction": "IF H4 persists, THEN aggregate commodity price inflation 3-6pp above pre-H4 trend by end Q2 2026, with inflation expectations anchoring to higher plateau",
+      "resolutionCriteria": "CRB/S&P GSCI indices and inflation expectations (breakeven rates) show Q2 2026 inflation 3-6pp above March 2026 trend; central bank surveys show long-term expectations shifted upward",
+      "deadline": "2026-06-30",
+      "conditionalProbability": 0.44,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-ochre",
+      "lens": "OCHRE",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": "Anchoring of long-term inflation expectations to a higher plateau is exactly the regime-shift signature AMBER tracks.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "DROP",
+          "reasoning": "3-6pp commodity-price inflation with anchoring of expectations overstates breakdown; central banks and SPR-like absorption mechanisms prevent expectation unanchoring at that magnitude.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "MODIFY",
+          "reasoning": "'Inflation anchoring to higher plateau' via breakeven rates is influenced by many factors; tighten.",
+          "modified_suggestion": "IF H4 persists, THEN 5y5y inflation breakeven rises at least 40bps between Apr-Jun 2026 with shipping-cost term identified in FOMC/ECB minutes."
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "3-6pp commodity inflation with expectations-anchoring upward is the inflation-regime-shift pathway RED cares about. Good.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "NEUTRAL",
+          "reasoning": "Pure macro/financial aggregate (index close, yield, inflation print, unemployment, margin). No single named decision-maker controls the reading directly; VIOLET lens neutral.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": [
+        "OCHRE",
+        "GREEN"
+      ]
+    },
+    {
+      "id": "cp_017",
+      "createdAt": "2026-04-19T05:50:54+00:00",
+      "conditionTopic": "calibration-houthi-posture",
+      "conditionHypothesis": "H4",
+      "conditionProbAtCreation": 0.2464,
+      "prediction": "IF H4 escalates and persists, THEN geopolitical alignment of regional states crystallizes into permanent naval/surveillance coalition by Q3 2026, requiring sustained USD 5-8B annual commitment",
+      "resolutionCriteria": "Official statements from Israel, UAE, Saudi, Egypt, Djibouti, EU naval commands announce permanent joint task force; budgetary commitment ≥USD 5B annually documented in defense appropriations",
+      "deadline": "2026-06-30",
+      "conditionalProbability": 0.43,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-ochre",
+      "lens": "OCHRE",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": "Permanent multinational naval coalition with sustained appropriations is institutional crystallization.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "APPROVE",
+          "reasoning": "A permanent coalition task force with locked-in budgets is diplomatic-institutional resolution through standing mechanisms.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Permanent coalition with $5B threshold is a sharp, testable institutional outcome.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "Permanent naval coalition with $5-8B annual commitment is a coordination-cost brittleness indicator. OK.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "APPROVE",
+          "reasoning": "Names multiple specific decision-makers (agencies, officials, firms, states) and ties the outcome to their choices. Actor-incentive traceability strong.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_018",
+      "createdAt": "2026-04-22T02:35:32+00:00",
+      "conditionTopic": "calibration-houthi-posture",
+      "conditionHypothesis": "H2",
+      "conditionProbAtCreation": 0.3149,
+      "prediction": "IF selective targeting, THEN Suez Canal transits recover to 80-90% of Jan 2024 baseline by June 2026 as selective risk perception reduces insurance costs",
+      "resolutionCriteria": "Observable: Suez Canal Authority reports June 2026 monthly transits at 80-90% of Jan 2024 monthly baseline; P&I insurance war-risk premiums normalize to <2% of hull value",
+      "deadline": "2026-07-01",
+      "conditionalProbability": 0.68,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "maritime-commerce",
+        "red-sea",
+        "insurance-costs"
+      ],
+      "source": "agent-green",
+      "lens": "GREEN",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "MODIFY",
+          "reasoning": "Assumes Red Sea insurance market reprices linearly with perceived risk. In practice war-risk insurance has non-linear hysteresis — once writers exit the market, premiums remain elevated long after tactical risk reduces. 80-90% recovery may require longer than June 2026.",
+          "modified_suggestion": "Extend deadline to Dec 2026 or widen recovery band to 70-90%."
+        },
+        "BLUE": {
+          "verdict": "APPROVE",
+          "reasoning": "Suez recovery to 80-90% under selective-targeting hypothesis aligns perfectly with BLUE: systemic pressure-absorption, insurance re-prices, commerce flows. 0.68 reasonable, possibly low.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "DROP",
+          "reasoning": "Selective targeting scenario recovering to 80-90% Suez transits by June 2026 underestimates insurance-industry stickiness. Once war-risk premiums are set, they normalize over years, not months. Also assumes Houthi selective targeting is credible — historical pattern is escalation not calibration.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "MODIFY",
+          "reasoning": "Houthi posture depends on specific decisions by Abdul-Malik al-Houthi and Iranian IRGC-QF patrons (named: Esmail Qaani). Resolution treats insurance rates as emergent, but they're priced by named Lloyd's syndicates reacting to named-actor declarations. Probability reasonable but framing obscures agency.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Specific % + insurance threshold is cleanly observable via SCA data.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_019",
+      "createdAt": "2026-04-22T02:35:32+00:00",
+      "conditionTopic": "calibration-houthi-posture",
+      "conditionHypothesis": "H3",
+      "conditionProbAtCreation": 0.6682,
+      "prediction": "IF de facto ceasefire holds (no commercial attacks), THEN Suez Canal transits recover to >=95% of Jan 2024 baseline by May 2026",
+      "resolutionCriteria": "Observable: SCA reports May 2026 monthly transits >=95% of Jan 2024 baseline; commercial shipping rates normalize within 5% of pre-2024 levels",
+      "deadline": "2026-06-01",
+      "conditionalProbability": 0.75,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "maritime-commerce",
+        "red-sea",
+        "shipping-rates"
+      ],
+      "source": "agent-green",
+      "lens": "GREEN",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": "De-facto ceasefire is the regime boundary; 95% recovery is a clear observable. 0.75 ok.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "APPROVE",
+          "reasoning": "Full recovery under de facto ceasefire is BLUE-canonical market clearing. 0.75 reasonable.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "DROP",
+          "reasoning": "95% recovery by May 2026 is hopium. Shipping lanes do not reopen to full utilization in a few months after years of rerouting — carriers have renegotiated contracts, repositioned capacity. 0.75 probability egregiously high for this timeline.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "APPROVE",
+          "reasoning": "95% threshold with ceasefire scenario is defensible.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Distinct threshold from 290, tests stronger H3.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_020",
+      "createdAt": "2026-04-22T05:19:34+00:00",
+      "conditionTopic": "calibration-houthi-posture",
+      "conditionHypothesis": "H3",
+      "conditionProbAtCreation": 0.6682,
+      "prediction": "IF de facto ceasefire holds (H3 true), THEN the Red Sea naval posture regime shifts from threat-response to economic corridor guarantee, with commercial insurance normalizing and chokepoint management becoming de facto Houthi governance tool, formalizing a quasi-state-actor equilibrium by mid-2026.",
+      "resolutionCriteria": "Commercial shipping insurance premium for Red Sea routes drops below 2% of cargo value (vs. current 5-8%); at least 2 international maritime bodies acknowledge Houthi-controlled corridor operational standards; shipping logs show 90% or more transit without harassment for 3 or more consecutive months.",
+      "deadline": "2026-06-30",
+      "conditionalProbability": 0.68,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "geopolitical-regime-shift",
+        "non-state-actor-legitimacy",
+        "maritime-governance-transformation"
+      ],
+      "source": "agent-amber",
+      "lens": "AMBER",
+      "criticVerdicts": [
+        {
+          "critic": "GREEN",
+          "verdict": "MODIFY",
+          "reasoning": "Insurance premiums normalizing and maritime bodies acknowledging Houthi corridor standards implies international legitimization — unprecedented for sub-state belligerent. 68% too high.",
+          "modified_suggestion": "Reduce to 0.45. Lower insurance premium criterion to below 4% and replace maritime body acknowledgment with BIMCO/ICS guidance."
+        },
+        {
+          "critic": "RED",
+          "verdict": "DROP",
+          "reasoning": "Houthi leadership's domestic legitimacy depends on continued confrontational posture. Houthis operate under Iranian strategic direction and ideological commitments that make formalized corridor management politically impossible to admit publicly. Maritime bodies acknowledging Houthi standards would be blocked by Saudi Arabia and UAE. 0.68 dramatically too high.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "VIOLET",
+          "verdict": "MODIFY",
+          "reasoning": "Houthi leadership's domestic legitimacy depends on continued confrontational posture — normalizing corridor management undermines their revolutionary identity. 68% high given core political economy tension.",
+          "modified_suggestion": "Lower to 0.48. Maritime insurance normalization is a separate actor decision (Lloyd's, etc.) that could occur without Houthi formal governance role recognition."
+        },
+        {
+          "critic": "OCHRE",
+          "verdict": "MODIFY",
+          "reasoning": "Insurance normalization by mid-2026 too aggressive given path-dependence in maritime insurance markets. Lloyd's and JCC respond to sustained 6-12 month incident-free periods before premium normalization; actuarial models embed geopolitical risk with significant lag. 2% threshold assumes both behavioral and actuarial adjustment within 14-month window.",
+          "modified_suggestion": "Reduce to 0.48. Extend insurance normalization to sub-4% by mid-2026. Full normalization to pre-conflict levels is 2027+ outcome."
+        },
+        {
+          "critic": "GRAY",
+          "verdict": "APPROVE",
+          "reasoning": "Quasi-state-actor equilibrium framing for Houthi Red Sea posture is the most distinctive prediction in portfolio. Insurance premium normalization is a clean, market-sourced resolution metric.",
+          "modified_suggestion": null
+        }
+      ],
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_021",
+      "createdAt": "2026-04-22T05:19:57+00:00",
+      "conditionTopic": "calibration-houthi-posture",
+      "conditionHypothesis": "H3",
+      "conditionProbAtCreation": 0.6682,
+      "prediction": "IF de facto ceasefire holds (H3 true), THEN the Red Sea naval posture regime shifts from threat-response to economic corridor guarantee, with commercial insurance normalizing and chokepoint management becoming de facto Houthi governance tool, formalizing a quasi-state-actor equilibrium by mid-2026.",
+      "resolutionCriteria": "Commercial shipping insurance premium for Red Sea routes drops below 2% of cargo value (vs. current 5-8%); at least 2 international maritime bodies acknowledge Houthi-controlled corridor operational standards; shipping logs show 90% or more transit without harassment for 3 or more consecutive months.",
+      "deadline": "2026-06-30",
+      "conditionalProbability": 0.68,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "geopolitical-regime-shift",
+        "non-state-actor-legitimacy",
+        "maritime-governance-transformation"
+      ],
+      "source": "agent-amber",
+      "lens": "AMBER",
+      "criticVerdicts": [
+        {
+          "critic": "GREEN",
+          "verdict": "MODIFY",
+          "reasoning": "Insurance premiums normalizing and maritime bodies acknowledging Houthi corridor standards implies international legitimization — unprecedented for sub-state belligerent. 68% too high.",
+          "modified_suggestion": "Reduce to 0.45. Lower insurance premium criterion to below 4% and replace maritime body acknowledgment with BIMCO/ICS guidance."
+        },
+        {
+          "critic": "RED",
+          "verdict": "DROP",
+          "reasoning": "Houthi leadership's domestic legitimacy depends on continued confrontational posture. Houthis operate under Iranian strategic direction and ideological commitments that make formalized corridor management politically impossible to admit publicly. Maritime bodies acknowledging Houthi standards would be blocked by Saudi Arabia and UAE. 0.68 dramatically too high.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "VIOLET",
+          "verdict": "MODIFY",
+          "reasoning": "Houthi leadership's domestic legitimacy depends on continued confrontational posture — normalizing corridor management undermines their revolutionary identity. 68% high given core political economy tension.",
+          "modified_suggestion": "Lower to 0.48. Maritime insurance normalization is a separate actor decision (Lloyd's, etc.) that could occur without Houthi formal governance role recognition."
+        },
+        {
+          "critic": "OCHRE",
+          "verdict": "MODIFY",
+          "reasoning": "Insurance normalization by mid-2026 too aggressive given path-dependence in maritime insurance markets. Lloyd's and JCC respond to sustained 6-12 month incident-free periods before premium normalization; actuarial models embed geopolitical risk with significant lag. 2% threshold assumes both behavioral and actuarial adjustment within 14-month window.",
+          "modified_suggestion": "Reduce to 0.48. Extend insurance normalization to sub-4% by mid-2026. Full normalization to pre-conflict levels is 2027+ outcome."
+        },
+        {
+          "critic": "GRAY",
+          "verdict": "APPROVE",
+          "reasoning": "Quasi-state-actor equilibrium framing for Houthi Red Sea posture is the most distinctive prediction in portfolio. Insurance premium normalization is a clean, market-sourced resolution metric.",
+          "modified_suggestion": null
+        }
+      ],
+      "lensAgreement": []
+    }
+  ],
+  "schemaVersion": 2,
+  "migratedAt": "2026-04-21T19:03:40+00:00"
 }

@@ -45,6 +45,15 @@ node_modules/
 .env
 .env.*
 
+# --- Personal extrapolation workspace (not framework) ---
+extrapolation.db
+predictions/
+predictions-*.json
+extrapolate_green_vet.py
+extrapolate_ochre_vet.py
+test_lr_migration.py
+skills/ochre-predictions.json
+
 # Stray files from prior development
 7e004f2d922e49a79c994d9e061e9a0a.png
 add_evidence.py

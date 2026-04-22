@@ -172,6 +172,95 @@ def lint_submodels(topic):
     }
 
 
+def list_drift_flagged_indicators(topic) -> list:
+    """
+    Return all indicators carrying lr_migration_warning (drift > 30% from
+    flat-prior baseline). These have current-posterior-derived LRs that
+    materially differ from what unbiased priors would produce — they should
+    be regrounded by an operator before their next firing.
+
+    Returned entries: {indicator_id, tier, lr_basis, lr_confidence,
+    lr_migration_warning, n_firings}.
+    """
+    flagged = []
+    for tier_key, indicators in topic.get("indicators", {}).get("tiers", {}).items():
+        for ind in indicators:
+            if ind.get("lr_migration_warning"):
+                flagged.append({
+                    "indicator_id": ind.get("id", "?"),
+                    "tier": tier_key,
+                    "lr_basis": ind.get("lr_basis"),
+                    "lr_confidence": ind.get("lr_confidence"),
+                    "n_firings": ind.get("n_firings", 0),
+                    "warning": ind["lr_migration_warning"],
+                    "drift_detail": ind.get("drift_detail", ""),
+                })
+    return flagged
+
+
+def lint_indicators(topic) -> list:
+    """
+    Lint indicator LR definitions for unsupported claims.
+
+    Checks:
+    - lr_basis="expert_estimate" + lr_source=null + lr_confidence="HIGH"
+      → contradiction (phantom precision)
+    - lr_basis="converted_pp" with near-zero range width → needs regrounding
+    - lr_range present but lo > hi on any hypothesis → schema error
+    """
+    issues = []
+    for tier_key, indicators in topic.get("indicators", {}).get("tiers", {}).items():
+        for ind in indicators:
+            ind_id = ind.get("id", "?")
+            lr_basis = ind.get("lr_basis")
+            lr_source = ind.get("lr_source")
+            lr_confidence = ind.get("lr_confidence", "MEDIUM")
+            lr_range = ind.get("lr_range")
+
+            # Contradiction: HIGH confidence with no documented source
+            if (lr_basis == "expert_estimate"
+                    and not lr_source
+                    and lr_confidence == "HIGH"):
+                issues.append({
+                    "indicator_id": ind_id,
+                    "failure_mode": "unsupported_lr",
+                    "detail": ("lr_basis=expert_estimate with lr_confidence=HIGH "
+                               "but lr_source=null — claiming high confidence "
+                               "with no documented source is phantom precision."),
+                    "severity": "MEDIUM",
+                    "suggested_action": "Add lr_source or lower lr_confidence to LOW/MEDIUM",
+                })
+
+            # converted_pp near-point (zero-width range) — flag for regrounding
+            if lr_basis == "converted_pp" and lr_range:
+                max_width = max(abs(v[1] - v[0]) for v in lr_range.values())
+                if max_width < 0.05:
+                    issues.append({
+                        "indicator_id": ind_id,
+                        "failure_mode": "unsupported_lr",
+                        "detail": ("lr_basis=converted_pp with near-zero range width "
+                                   f"({max_width:.3f}) — converted from pp-shift, "
+                                   "needs grounding from reference class or literature."),
+                        "severity": "LOW",
+                        "suggested_action": "Run Phase 0 LR derivation for this indicator",
+                    })
+
+            # Schema error: lo > hi
+            if lr_range:
+                for h_key, bounds in lr_range.items():
+                    if isinstance(bounds, (list, tuple)) and len(bounds) == 2:
+                        if bounds[0] > bounds[1]:
+                            issues.append({
+                                "indicator_id": ind_id,
+                                "failure_mode": "lr_range_inverted",
+                                "detail": (f"lr_range[{h_key}] has lo={bounds[0]} > "
+                                           f"hi={bounds[1]} — inverted range."),
+                                "severity": "HIGH",
+                                "suggested_action": "Swap lo and hi values",
+                            })
+    return issues
+
+
 def run_lint(topic_name, check_history=False):
     """Run full lint on topic."""
     topic = load_topic(topic_name)
@@ -196,6 +285,11 @@ def run_lint(topic_name, check_history=False):
     results["submodel_check"] = submodel_check
     results["lint_issues"].extend(submodel_check.get("issues", []))
     results["issues_count"] += len(submodel_check.get("issues", []))
+
+    indicator_issues = lint_indicators(topic)
+    results["indicator_issues"] = indicator_issues
+    results["lint_issues"].extend(indicator_issues)
+    results["issues_count"] += len(indicator_issues)
 
     results["status"] = "CLEAN" if results["issues_count"] == 0 else "ISSUES_FOUND"
 

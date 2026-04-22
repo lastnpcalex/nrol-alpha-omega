@@ -6,7 +6,7 @@
     "question": "Where will the Federal Reserve target rate be on December 31, 2026?",
     "resolution": "FOMC official target range as announced at or following the December 2026 FOMC meeting (scheduled Dec 9-10, 2026). Resolved against the FOMC statement on federalreserve.gov.",
     "created": "2026-04-11T00:00:00Z",
-    "lastUpdated": "2026-04-17T23:08:31+00:00",
+    "lastUpdated": "2026-04-22T04:18:43+00:00",
     "status": "ACTIVE",
     "dayCount": 1,
     "startDate": "2026-04-11T00:00:00Z",
@@ -20,7 +20,8 @@
       "Sep 16-17",
       "Oct 28-29",
       "Dec 9-10"
-    ]
+    ],
+    "resolutionDate": "2026-12-31"
   },
   "tagConfig": {
     "_docs": "Tag configuration for monetary policy topic. HAWKISH tags favor H1/H4 (no cut or hike). DOVISH tags favor H2/H3 (cuts). DATA tags are neutral until values are known.",
@@ -67,32 +68,32 @@
         "label": "No further cuts — stays 3.50-3.75%",
         "midpoint": 3.625,
         "unit": "percent",
-        "posterior": 0.3331,
+        "posterior": 0.3385,
         "description": "Fed holds all year. Tariff-driven inflation keeps CPI sticky above 3%, forcing Powell to maintain the pause indefinitely. Dot plot median signals one cut but FOMC ultimately does not deliver it. Consistent with stagflation-lite scenario where labor market softens but inflation prevents easing."
       },
       "H2": {
         "label": "One cut — 3.25-3.50%",
         "midpoint": 3.375,
         "unit": "percent",
-        "posterior": 0.6307,
+        "posterior": 0.4593,
         "description": "Dot plot median outcome. Fed delivers one 25bp cut, likely in September or December. Inflation moderates gradually, unemployment ticks up to ~4.8-5.0%, but Fed moves cautiously. Most consistent with current guidance and SEP projections."
       },
       "H3": {
         "label": "Two+ cuts — 3.00-3.25% or below",
         "midpoint": 3.125,
         "unit": "percent",
-        "posterior": 0.0191,
+        "posterior": 0.1231,
         "description": "Labor market deteriorates faster than expected (unemployment 5.2%+), tariff shock proves disinflationary via demand destruction, or financial conditions tighten sharply. Goldman and Bankrate both see 2-3 cuts as plausible. Requires either clear disinflation signal or meaningful growth scare."
       },
       "H4": {
         "label": "Rate hike — inflation forces reversal",
         "midpoint": 4.0,
         "unit": "percent",
-        "posterior": 0.0171,
+        "posterior": 0.0791,
         "description": "Tariff pass-through re-accelerates CPI to 4%+, inflation expectations become unanchored, or a dollar crisis forces the Fed's hand. Hike of 25-50bp. Historically rare once an easing cycle begins, but tariff environment creates genuine tail risk. H4 is not negligible given current policy uncertainty."
       }
     },
-    "expectedValue": 3.46,
+    "expectedValue": 3.48,
     "expectedUnit": "percent (midpoint of expected target range)",
     "expectedValueNote": "Probability-weighted midpoint: 0.22*3.625 + 0.38*3.375 + 0.28*3.125 + 0.12*4.0 = 3.43%",
     "posteriorHistory": [
@@ -107,79 +108,35 @@
         "note": "Initial priors. Anchored on dot plot median (one cut), adjusted up for H3 given Goldman/Bankrate forecasts, assigned meaningful H4 tail for tariff inflation risk. Unemployment at 4.6% creates genuine two-way risk."
       },
       {
-        "date": "2026-04-17",
-        "H1": 0.3156,
-        "H2": 0.3893,
-        "H3": 0.1721,
-        "H4": 0.123,
-        "note": "Evidence ev_011: FOMC April 8 minutes show more officials see possible rate hikes in 2026; rate h",
-        "likelihoods": {
-          "H1": 0.35,
-          "H2": 0.25,
-          "H3": 0.15,
-          "H4": 0.25
-        },
-        "redTeam": {
-          "contrarian_direction": {},
-          "counterevidence": [],
-          "unfired_indicators": [],
-          "devil_advocate_score": 0.0,
-          "challenge": "No significant shifts proposed; no challenge needed.",
-          "inference_mode": "text_heuristic"
-        }
-      },
-      {
-        "date": "2026-04-17",
-        "H1": 0.4061,
-        "H2": 0.4614,
-        "H3": 0.0699,
-        "H4": 0.0625,
-        "note": "Futures pricing single cut or none. Inflation from tariffs and oil shock constrains easing. SEP median still says one cut but market skeptical. H4 hike risk rising from commodity-driven inflation.",
-        "likelihoods": {
-          "H1": 0.38,
-          "H2": 0.35,
-          "H3": 0.12,
-          "H4": 0.15
-        },
-        "redTeam": {
-          "contrarian_direction": {},
-          "counterevidence": [],
-          "unfired_indicators": [],
-          "devil_advocate_score": 0.0,
-          "challenge": "No significant shifts proposed; no challenge needed.",
-          "inference_mode": "text_heuristic"
-        }
-      },
-      {
-        "date": "2026-04-17",
+        "date": "2026-04-22",
         "posteriors": {
-          "H1": 0.3331,
-          "H2": 0.6307,
-          "H3": 0.0191,
-          "H4": 0.0171
+          "H1": 0.3385,
+          "H2": 0.4593,
+          "H3": 0.1231,
+          "H4": 0.0791
         },
         "priors": {
-          "H1": 0.4061,
-          "H2": 0.4614,
-          "H3": 0.0699,
-          "H4": 0.0625
+          "H1": 0.22,
+          "H2": 0.38,
+          "H3": 0.28,
+          "H4": 0.12
         },
         "updateMethod": "bayesian_update",
         "evidenceRefs": [
-          "ev_013"
+          "ev_018"
         ],
         "likelihoods": {
-          "H1": 0.3,
-          "H2": 0.5,
-          "H3": 0.1,
-          "H4": 0.1
+          "H1": 0.7,
+          "H2": 0.55,
+          "H3": 0.2,
+          "H4": 0.3
         },
-        "note": "Market + SEP point to exactly one cut; elevated CPI reduces multi-cut probability.",
+        "note": "Reacceleration of CPI to 3.3% + single-cut median dot + consecutive holds all compatible with H1 (no cuts) or H2 (one cut); sharply lowers H3 (two+ cuts); modestly raises H4 (hike) tail risk.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
         "turningPoint": {
-          "type": "THRESHOLD_CROSSED",
-          "hypothesis": "H2",
-          "from": 0.4614,
-          "to": 0.6307
+          "type": "MAJOR_SHIFT",
+          "maxShift": 0.1569
         },
         "redTeam": {
           "contrarian_direction": {},
@@ -277,7 +234,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "First cut: H2 +20pp, H1 -20pp. Second cut within same year: H3 +20pp, H2 -15pp."
+          "posteriorEffect": "First cut: H2 +20pp, H1 -20pp. Second cut within same year: H3 +20pp, H2 -15pp.",
+          "likelihoods": {
+            "H1": 0.05303,
+            "H2": 0.660088,
+            "H3": 1.0,
+            "H4": 0.583333
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t1_fomc_actual_hike",
@@ -285,7 +251,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H4 +40pp. H2/H3 collapse to near-zero."
+          "posteriorEffect": "H4 +40pp. H2/H3 collapse to near-zero.",
+          "likelihoods": {
+            "H1": 0.230769,
+            "H2": 0.163968,
+            "H3": 0.14011,
+            "H4": 1.0
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t1_cpi_reacceleration",
@@ -293,7 +268,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H4 +15pp, H1 +10pp, H3 -20pp."
+          "posteriorEffect": "H4 +15pp, H1 +10pp, H3 -20pp.",
+          "likelihoods": {
+            "H1": 0.646465,
+            "H2": 0.444444,
+            "H3": 0.126984,
+            "H4": 1.0
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t1_unemployment_spike",
@@ -301,7 +285,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H3 +25pp. Emergency cut scenario becomes likely. H1/H4 both -10pp."
+          "posteriorEffect": "H3 +25pp. Emergency cut scenario becomes likely. H1/H4 both -10pp.",
+          "likelihoods": {
+            "H1": 0.528302,
+            "H2": 0.528302,
+            "H3": 1.0,
+            "H4": 0.528302
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t1_dot_plot_shift_hawkish",
@@ -309,7 +302,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H1 +20pp, H4 +5pp, H2 -15pp, H3 -10pp."
+          "posteriorEffect": "H1 +20pp, H4 +5pp, H2 -15pp, H3 -10pp.",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 0.317043,
+            "H3": 0.336735,
+            "H4": 0.742063
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t1_dot_plot_shift_dovish",
@@ -317,7 +319,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H3 +20pp, H2 +5pp, H1 -15pp, H4 -10pp."
+          "posteriorEffect": "H3 +20pp, H2 +5pp, H1 -15pp, H4 -10pp.",
+          "likelihoods": {
+            "H1": 0.185606,
+            "H2": 0.660088,
+            "H3": 1.0,
+            "H4": 0.097222
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         }
       ],
       "tier2_strong": [
@@ -327,7 +338,8 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H2/H3 combined +10pp. Removes key obstacle to cuts."
+          "posteriorEffect": "H2/H3 combined +10pp. Removes key obstacle to cuts.",
+          "n_firings": 0
         },
         {
           "id": "t2_fed_funds_futures_price_2cuts",
@@ -335,7 +347,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H3 +8pp, H2 -5pp. Market is a noisy but influential signal."
+          "posteriorEffect": "H3 +8pp, H2 -5pp. Market is a noisy but influential signal.",
+          "likelihoods": {
+            "H1": 0.777778,
+            "H2": 0.675439,
+            "H3": 1.0,
+            "H4": 0.777778
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t2_payrolls_sub_50k",
@@ -343,7 +364,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H3 +10pp, H1 -5pp. Labor weakening accelerates cut timeline."
+          "posteriorEffect": "H3 +10pp, H1 -5pp. Labor weakening accelerates cut timeline.",
+          "likelihoods": {
+            "H1": 0.569378,
+            "H2": 0.736842,
+            "H3": 1.0,
+            "H4": 0.736842
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t2_powell_explicit_cut_signal",
@@ -351,7 +381,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H2 +10pp. Note: rhetoric only, must fire before T1 cut confirmation."
+          "posteriorEffect": "H2 +10pp. Note: rhetoric only, must fire before T1 cut confirmation.",
+          "likelihoods": {
+            "H1": 0.791667,
+            "H2": 1.0,
+            "H3": 0.791667,
+            "H4": 0.791667
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t2_tariff_inflation_pass_through",
@@ -359,7 +398,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H1 +8pp, H4 +5pp. Signals inflation stickier than base case."
+          "posteriorEffect": "H1 +8pp, H4 +5pp. Signals inflation stickier than base case.",
+          "likelihoods": {
+            "H1": 0.962567,
+            "H2": 0.705882,
+            "H3": 0.705882,
+            "H4": 1.0
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t2_yield_curve_inversion_deepens",
@@ -367,7 +415,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H3 +8pp. Recession signal historically precedes emergency cuts."
+          "posteriorEffect": "H3 +8pp. Recession signal historically precedes emergency cuts.",
+          "likelihoods": {
+            "H1": 0.777778,
+            "H2": 0.777778,
+            "H3": 1.0,
+            "H4": 0.777778
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t2_gdp_contraction",
@@ -375,7 +432,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H3 +15pp. Recession forces hand on cuts regardless of inflation."
+          "posteriorEffect": "H3 +15pp. Recession forces hand on cuts regardless of inflation.",
+          "likelihoods": {
+            "H1": 0.651163,
+            "H2": 0.651163,
+            "H3": 1.0,
+            "H4": 0.651163
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         }
       ],
       "tier3_suggestive": [
@@ -385,7 +451,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H2 +3pp, H3 +2pp."
+          "posteriorEffect": "H2 +3pp, H3 +2pp.",
+          "likelihoods": {
+            "H1": 0.926829,
+            "H2": 1.0,
+            "H3": 0.993031,
+            "H4": 0.926829
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t3_unemployment_4pt8",
@@ -393,7 +468,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H3 +4pp. Trending toward cut-triggering threshold."
+          "posteriorEffect": "H3 +4pp. Trending toward cut-triggering threshold.",
+          "likelihoods": {
+            "H1": 0.875,
+            "H2": 0.875,
+            "H3": 1.0,
+            "H4": 0.875
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t3_cpi_3consecutive_benign",
@@ -401,7 +485,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H2 +4pp, H3 +3pp. Disinflation narrative strengthens."
+          "posteriorEffect": "H2 +4pp, H3 +3pp. Disinflation narrative strengthens.",
+          "likelihoods": {
+            "H1": 0.903226,
+            "H2": 0.998302,
+            "H3": 1.0,
+            "H4": 0.903226
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t3_fed_vice_chair_dovish_speech",
@@ -409,7 +502,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H2 +2pp. Socialization signal for cut."
+          "posteriorEffect": "H2 +2pp. Socialization signal for cut.",
+          "likelihoods": {
+            "H1": 0.95,
+            "H2": 1.0,
+            "H3": 0.95,
+            "H4": 0.95
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t3_goldman_forecast_revision_upward",
@@ -417,7 +519,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H3 +3pp. Wall Street forecasters move together; one leading revision often precedes consensus shift."
+          "posteriorEffect": "H3 +3pp. Wall Street forecasters move together; one leading revision often precedes consensus shift.",
+          "likelihoods": {
+            "H1": 0.903226,
+            "H2": 0.903226,
+            "H3": 1.0,
+            "H4": 0.903226
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t3_tariff_rollback",
@@ -425,7 +536,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H3 +5pp, H4 -5pp. Removes key inflation upside risk."
+          "posteriorEffect": "H3 +5pp, H4 -5pp. Removes key inflation upside risk.",
+          "likelihoods": {
+            "H1": 0.848485,
+            "H2": 0.848485,
+            "H3": 1.0,
+            "H4": 0.494949
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t3_breakeven_inflation_above_3",
@@ -433,7 +553,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H4 +4pp, H3 -4pp. Market pricing in persistent above-target inflation."
+          "posteriorEffect": "H4 +4pp, H3 -4pp. Market pricing in persistent above-target inflation.",
+          "likelihoods": {
+            "H1": 0.75,
+            "H2": 0.75,
+            "H3": 0.642857,
+            "H4": 1.0
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         }
       ],
       "anti_indicators": [
@@ -443,7 +572,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H1 -25pp minimum if t1_fomc_actual_cut fires."
+          "posteriorEffect": "H1 -25pp minimum if t1_fomc_actual_cut fires.",
+          "likelihoods": {
+            "H1": 0.022727,
+            "H2": 1.0,
+            "H3": 1.0,
+            "H4": 1.0
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "anti_h2",
@@ -451,7 +589,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H2 collapses to near-zero if either H1 or H3 is confirmed."
+          "posteriorEffect": "H2 collapses to near-zero if either H1 or H3 is confirmed.",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 0.736842,
+            "H3": 1.0,
+            "H4": 1.0
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "anti_h3",
@@ -459,7 +606,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H3 -20pp if inflation regime flips to RE-ACCELERATING."
+          "posteriorEffect": "H3 -20pp if inflation regime flips to RE-ACCELERATING.",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 1.0,
+            "H3": 0.285714,
+            "H4": 1.0
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "anti_h4",
@@ -467,7 +623,17 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H4 -15pp. Hike narrative becomes implausible."
+          "posteriorEffect": "H4 -15pp. Hike narrative becomes implausible.",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 1.0,
+            "H3": 1.0,
+            "H4": 0.041667
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false,
+          "lr_migration_warning": "design prior drift >30% — review before next firing"
         }
       ]
     }
@@ -792,6 +958,201 @@
       "ledger": "DECISION",
       "claimState": "PROPOSED",
       "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_014",
+      "time": "2026-04-19T00:57:10+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "MACRO"
+      ],
+      "text": "FOMC held federal funds rate at 3.50-3.75% on March 18, 2026 (second consecutive hold); dot plot signals one 2026 cut and another in 2027. April 28-29 meeting upcoming. Middle East oil shock complicates outlook; inflation still above 2% target, labor market slowing.",
+      "provenance": "OBSERVED",
+      "source": "Federal Reserve / Yahoo Finance",
+      "posteriorImpact": "NONE",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260318a.htm",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.3289
+    },
+    {
+      "time": "2026-04-19T00:57:10+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-19T00:57:10+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: stale_evidence, quorum_failure. Reason: Dot plot continues to signal one cut; oil shock raises tail risk of hold (H1) or hike (H4) but median path unchanged.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_015",
+      "time": "2026-04-20T14:03:51+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "MACRO"
+      ],
+      "text": "FOMC held target rate at 3.50-3.75% on March 18, 2026, citing uncertain impact from US-Israel war with Iran on US economy. March SEP median projection: one rate cut in 2026. Next meeting April 29, 2026. Powell said oil crisis effects likely temporary.",
+      "provenance": "OBSERVED",
+      "source": "CNN Business",
+      "posteriorImpact": "NONE",
+      "url": "https://www.cnn.com/2026/03/18/economy/fed-march-rates-decision",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-20T14:03:51+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-20T14:03:51+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: stale_evidence, quorum_failure. Reason: SEP median at one cut directly supports H2 (3.25-3.50% end-2026); oil-price risk tilts committee toward patience, modestly supporting H1 hold; H3/H4 remain tail outcomes.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_016",
+      "time": "2026-04-21T03:51:21+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "ECON"
+      ],
+      "text": "FOMC held target range 3.50-3.75% at Mar 17-18 meeting; dot plot signals one 2026 cut and one in 2027. CME FedWatch shows 99.3% implied probability of no change at Apr 28-29 meeting. March CPI reaccelerated to 3.3% YoY.",
+      "provenance": "OBSERVED",
+      "source": "Federal Reserve / CME FedWatch",
+      "posteriorImpact": "NONE",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260318a.htm",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.2908
+    },
+    {
+      "time": "2026-04-21T03:51:21+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_017",
+      "time": "2026-04-21T05:33:37+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "POLICY"
+      ],
+      "text": "Federal Reserve held the federal funds rate at 3.5-3.75% at its March 2026 meeting. April 28-29 FOMC meeting expected to hold again. J.P. Morgan Global Research now forecasts Fed holds steady for rest of 2026, with next move a possible hike in Q3 2027. Fed Chair Powell cited geopolitical risks and prefer wait-and-see approach.",
+      "provenance": "OBSERVED",
+      "source": "J.P. Morgan / Federal Reserve / Yahoo Finance",
+      "posteriorImpact": "NONE",
+      "url": "https://finance.yahoo.com/news/live/fed-meeting-live-updates-federal-reserve-holds-rates-steady-forecasts-1-rate-cut-in-2026-180216872.html",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.3289
+    },
+    {
+      "time": "2026-04-21T05:33:37+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-21T19:03:40+00:00",
+      "tag": "INTEL",
+      "text": "LR MIGRATION RESET: posteriors reset to design priors; evidence log preserved.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 1.0
+    },
+    {
+      "time": "2026-04-21T22:46:02+00:00",
+      "tag": "INTEL",
+      "text": "RESOLUTION-DATE STAMPED: meta.resolutionDate=2026-12-31 (derived from meta.question). When past, governance flags topic as overdue for resolution.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 1.0
+    },
+    {
+      "time": "2026-04-22T01:00:37+00:00",
+      "tag": "INTEL",
+      "text": "REPLAY BEGIN: 0 previously-fired indicators will be re-applied chronologically under current LR system. Posteriors reset to design priors; indicator state cleared. Evidence log preserved for audit.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 1.0
+    },
+    {
+      "time": "2026-04-22T01:00:37+00:00",
+      "tag": "INTEL",
+      "text": "REPLAY COMPLETE: 0 indicators applied, 0 skipped. Final posteriors: {'H1': 0.22, 'H2': 0.38, 'H3': 0.28, 'H4': 0.12}. Indicator firedDates restored to originals for audit.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 1.0
+    },
+    {
+      "id": "ev_018",
+      "time": "2026-04-22T01:30:35+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "MACRO"
+      ],
+      "text": "FOMC held target range at 3.50-3.75% at March 17-18 2026 meeting (2nd consecutive hold). March CPI accelerated to 3.3% YoY (from Feb 2.4%). Dot plot projects just one cut in 2026 and another in 2027; timing unclear. Next FOMC Apr 28-29 2026.",
+      "provenance": "OBSERVED",
+      "source": "Federal Reserve",
+      "posteriorImpact": "NONE",
+      "url": "https://www.federalreserve.gov/monetarypolicy/fomcminutes20260318.htm",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.3289
+    },
+    {
+      "time": "2026-04-22T01:30:35+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Reacceleration of CPI to 3.3% + single-cut median dot + consecutive holds all compatible with H1 (no cuts) or H2 (one cut); sharply lowers H3 (two+ cuts); modestly raises H4 (hike) tail risk.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
     }
   ],
   "dataFeeds": {
@@ -932,26 +1293,22 @@
     "GDP Q1 2026 advance estimate BEA"
   ],
   "governance": {
-    "health": "DEGRADED",
+    "health": "HEALTHY",
     "issues": [
-      "Majority stale evidence (10/16)",
-      "Stale dependency: calibration-us-recession-2026.H2 assumed=0.22, actual=0.4356, drift=21.56%",
-      "Stale dependency: calibration-us-recession-2026.H3 assumed=0.14, actual=0.049, drift=9.10%",
-      "Stale dependency: calibration-us-recession-2026.H4 assumed=0.09, actual=0.005, drift=8.50%",
-      "Downstream alert: calibration-us-recession-2026 has 3 stale assumption(s) from this topic"
+      "Downstream alert: calibration-us-recession-2026 has 2 stale assumption(s) from this topic"
     ],
     "rt": {
       "rt": 0.0,
       "regime": "SAFE",
       "worst_hypothesis": "H1"
     },
-    "entropy": 1.1571,
+    "entropy": 1.7061,
     "maxEntropy": 2.0,
-    "uncertaintyRatio": 0.5786,
+    "uncertaintyRatio": 0.853,
     "evidenceFreshness": {
-      "fresh": 6,
-      "stale": 10,
-      "total": 16
+      "fresh": 17,
+      "stale": 15,
+      "total": 32
     },
     "hypothesisAdmissibility": {
       "H1": "ADMISSIBLE",
@@ -960,40 +1317,11 @@
       "H4": "ADMISSIBLE"
     },
     "klFromPrior": {
-      "kl_divergence": 0.3731,
+      "kl_divergence": 0.0988,
       "interpretation": "MODERATE"
     },
-    "lastComputed": "2026-04-17T23:08:31+00:00",
-    "staleDependencies": 3,
-    "staleDependencyDetails": [
-      {
-        "upstream_slug": "calibration-us-recession-2026",
-        "hypothesis": "H2",
-        "assumed": 0.22,
-        "actual": 0.4356,
-        "drift": 0.2156,
-        "tolerance": 0.08,
-        "stale": true
-      },
-      {
-        "upstream_slug": "calibration-us-recession-2026",
-        "hypothesis": "H3",
-        "assumed": 0.14,
-        "actual": 0.049,
-        "drift": 0.091,
-        "tolerance": 0.08,
-        "stale": true
-      },
-      {
-        "upstream_slug": "calibration-us-recession-2026",
-        "hypothesis": "H4",
-        "assumed": 0.09,
-        "actual": 0.005,
-        "drift": 0.085,
-        "tolerance": 0.08,
-        "stale": true
-      }
-    ],
+    "lastComputed": "2026-04-22T04:18:43+00:00",
+    "staleDependencies": 0,
     "downstreamAlerts": [
       {
         "downstream_slug": "calibration-us-recession-2026",
@@ -1002,20 +1330,14 @@
           {
             "hypothesis": "H1",
             "assumed": 0.22,
-            "actual": 0.4061,
-            "drift": 0.1861
-          },
-          {
-            "hypothesis": "H2",
-            "assumed": 0.38,
-            "actual": 0.4614,
-            "drift": 0.0814
+            "actual": 0.3385,
+            "drift": 0.1185
           },
           {
             "hypothesis": "H3",
             "assumed": 0.28,
-            "actual": 0.0699,
-            "drift": 0.2101
+            "actual": 0.1231,
+            "drift": 0.1569
           }
         ]
       }
@@ -1045,7 +1367,7 @@
         }
       },
       "indistinguishable": [],
-      "lastChecked": "2026-04-17T23:08:31+00:00"
+      "lastChecked": "2026-04-22T04:18:43+00:00"
     }
   },
   "predictionScoring": {
@@ -1116,6 +1438,116 @@
           "H4": 0.0171
         },
         "entropy": 1.1571
+      },
+      {
+        "timestamp": "2026-04-19T00:57:10+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.2491,
+          "H2": 0.7409,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "entropy": 0.8965
+      },
+      {
+        "timestamp": "2026-04-19T00:57:10+00:00",
+        "trigger": "pipeline:ev_014",
+        "posteriors": {
+          "H1": 0.2491,
+          "H2": 0.7409,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "entropy": 0.8965
+      },
+      {
+        "timestamp": "2026-04-20T14:03:51+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.1425,
+          "H2": 0.8475,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "entropy": 0.6793
+      },
+      {
+        "timestamp": "2026-04-20T14:03:51+00:00",
+        "trigger": "pipeline:ev_015",
+        "posteriors": {
+          "H1": 0.1425,
+          "H2": 0.8475,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "entropy": 0.6793
+      },
+      {
+        "timestamp": "2026-04-21T03:51:21+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0957,
+          "H2": 0.8943,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "entropy": 0.5445
+      },
+      {
+        "timestamp": "2026-04-21T03:51:21+00:00",
+        "trigger": "pipeline:ev_016",
+        "posteriors": {
+          "H1": 0.0957,
+          "H2": 0.8943,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "entropy": 0.5445
+      },
+      {
+        "timestamp": "2026-04-21T05:33:37+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0148,
+          "H2": 0.9724,
+          "H3": 0.0078,
+          "H4": 0.005
+        },
+        "entropy": 0.2221
+      },
+      {
+        "timestamp": "2026-04-21T05:33:37+00:00",
+        "trigger": "pipeline:ev_017",
+        "posteriors": {
+          "H1": 0.0148,
+          "H2": 0.9724,
+          "H3": 0.0078,
+          "H4": 0.005
+        },
+        "entropy": 0.2221
+      },
+      {
+        "timestamp": "2026-04-22T01:30:35+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.3385,
+          "H2": 0.4593,
+          "H3": 0.1231,
+          "H4": 0.0791
+        },
+        "entropy": 1.7061
+      },
+      {
+        "timestamp": "2026-04-22T01:30:35+00:00",
+        "trigger": "pipeline:ev_018",
+        "posteriors": {
+          "H1": 0.3385,
+          "H2": 0.4593,
+          "H3": 0.1231,
+          "H4": 0.0791
+        },
+        "entropy": 1.7061
       }
     ],
     "outcomes": [],
@@ -1461,6 +1893,870 @@
         "detected": "2026-04-17T23:08:31Z",
         "resolution": "SUPERSEDED",
         "resolvedAt": "2026-04-17T23:08:31Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T23:08:31+00:00",
+        "entry_a_text": "Polymarket prices 99.3% no-change at April 28-29 FOMC; March CPI re-accelerated to 3.3% y/y on energy (ME tensions), payrolls +178k, unemployment 4.3%. Fed March SEP retains median of one 2026 cut.",
+        "entry_b_time": "2026-04-19T00:57:10+00:00",
+        "entry_b_text": "FOMC held federal funds rate at 3.50-3.75% on March 18, 2026 (second consecutive hold); dot plot signals one 2026 cut and another in 2027. April 28-29 meeting upcoming. Middle East oil shock complicates outlook; inflation still above 2% target, labor market slowing.",
+        "reason": "Numeric divergence 81.7% on metric (context: on): new=18.0, existing=3.3, threshold=10%",
+        "detected": "2026-04-19T00:57:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-19T00:57:10Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T15:22:22+00:00",
+        "entry_a_text": "Fed held rates at 3.50-3.75% in March. Next FOMC decision Apr 29. March SEP median projects one cut in 2026. Futures pricing: no easing until Sep/Oct at earliest, single cut this year. Rising inflation from tariffs and oil shock (Hormuz) constraining rate path.",
+        "entry_b_time": "2026-04-19T00:57:10+00:00",
+        "entry_b_text": "FOMC held federal funds rate at 3.50-3.75% on March 18, 2026 (second consecutive hold); dot plot signals one 2026 cut and another in 2027. April 28-29 meeting upcoming. Middle East oil shock complicates outlook; inflation still above 2% target, labor market slowing.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: cut, fomc, held, inflation, march",
+        "detected": "2026-04-19T00:57:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-19T00:57:10Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T14:01:37+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: stale_evidence, quorum_failure. Reason: Evidence ev_011: FOMC April 8 minutes show more officials see possible rate hikes in 2026; rate h",
+        "entry_b_time": "2026-04-19T00:57:10+00:00",
+        "entry_b_text": "FOMC held federal funds rate at 3.50-3.75% on March 18, 2026 (second consecutive hold); dot plot signals one 2026 cut and another in 2027. April 28-29 meeting upcoming. Middle East oil shock complicates outlook; inflation still above 2% target, labor market slowing.",
+        "reason": "Numeric divergence 99.6% on metric (context: april): new=2027.0, existing=8.0, threshold=10%",
+        "detected": "2026-04-19T00:57:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-19T00:57:10Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T14:01:37+00:00",
+        "entry_a_text": "FOMC April 8 minutes show more officials see possible rate hikes in 2026; rate held at 3.50-3.75% in March; SEP median forecast still 1 cut; next decision Apr 29; Fed expects to hold until December",
+        "entry_b_time": "2026-04-19T00:57:10+00:00",
+        "entry_b_text": "FOMC held federal funds rate at 3.50-3.75% on March 18, 2026 (second consecutive hold); dot plot signals one 2026 cut and another in 2027. April 28-29 meeting upcoming. Middle East oil shock complicates outlook; inflation still above 2% target, labor market slowing.",
+        "reason": "Numeric divergence 100.0% on metric (context: cut): new=2026.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-19T00:57:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-19T00:57:10Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-14T16:00:00Z",
+        "entry_a_text": "Treasury Secretary Bessent told Semafor the Fed should 'wait and see' before lowering rates amid Iran war. 'Do I think rates should be lowered? Eventually. I think now that we have to wait and see.' Said Fed is 'doing the right thing by sitting and watching.' On 4%+ growth target for 2026: 'Obviously, we're going to have some make-up to do.' Comments come as Trump continues pushing for rate cuts.",
+        "entry_b_time": "2026-04-19T00:57:10+00:00",
+        "entry_b_text": "FOMC held federal funds rate at 3.50-3.75% on March 18, 2026 (second consecutive hold); dot plot signals one 2026 cut and another in 2027. April 28-29 meeting upcoming. Middle East oil shock complicates outlook; inflation still above 2% target, labor market slowing.",
+        "reason": "Numeric divergence 77.8% on metric (context: on): new=18.0, existing=4.0, threshold=10%",
+        "detected": "2026-04-19T00:57:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-19T00:57:10Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-08T18:00:00Z",
+        "entry_a_text": "FOMC March meeting minutes released April 8 show more Federal Reserve officials now see possible rate hikes in 2026, driven by Iran-war oil shock and tariff-driven inflation persistence. Fed held at 3.50-3.75% for 2nd consecutive meeting. Median dot plot still signals 1 cut but distribution widening.",
+        "entry_b_time": "2026-04-19T00:57:10+00:00",
+        "entry_b_text": "FOMC held federal funds rate at 3.50-3.75% on March 18, 2026 (second consecutive hold); dot plot signals one 2026 cut and another in 2027. April 28-29 meeting upcoming. Middle East oil shock complicates outlook; inflation still above 2% target, labor market slowing.",
+        "reason": "Numeric divergence 100.0% on metric (context: cut, plot, signals): new=2026.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-19T00:57:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-19T00:57:10Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-10T00:00:00Z",
+        "entry_a_text": "March 2026 CPI: headline +0.9% m/m (3.3% YoY) driven by energy +10.9% (Iran war gasoline +21.2%). Core CPI +0.2% m/m (2.6% YoY) — both 0.1pp BELOW consensus. Services ex-energy +0.2% m/m (3.0% YoY). Shelter +0.3% m/m (3.0% YoY, lowest since Aug 2021). Food unchanged. Real earnings -0.6% m/m.",
+        "entry_b_time": "2026-04-19T00:57:10+00:00",
+        "entry_b_text": "FOMC held federal funds rate at 3.50-3.75% on March 18, 2026 (second consecutive hold); dot plot signals one 2026 cut and another in 2027. April 28-29 meeting upcoming. Middle East oil shock complicates outlook; inflation still above 2% target, labor market slowing.",
+        "reason": "Numeric divergence 99.1% on metric (context: march): new=18.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-19T00:57:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-19T00:57:10Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-01T00:00:00Z",
+        "entry_a_text": "March 2026 BLS employment report: unemployment 4.6%, non-farm payrolls +145,000. Labor market softening gradually but not deteriorating. Wages +3.8% YoY.",
+        "entry_b_time": "2026-04-19T00:57:10+00:00",
+        "entry_b_text": "FOMC held federal funds rate at 3.50-3.75% on March 18, 2026 (second consecutive hold); dot plot signals one 2026 cut and another in 2027. April 28-29 meeting upcoming. Middle East oil shock complicates outlook; inflation still above 2% target, labor market slowing.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: labor, march, market",
+        "detected": "2026-04-19T00:57:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-19T00:57:10Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-03-19T00:00:00Z",
+        "entry_a_text": "March 2026 SEP dot plot: median projection remains one 25bp cut in 2026 (to 3.25-3.50%). Range of participant views spans zero to three cuts. No participant projects a hike.",
+        "entry_b_time": "2026-04-19T00:57:10+00:00",
+        "entry_b_text": "FOMC held federal funds rate at 3.50-3.75% on March 18, 2026 (second consecutive hold); dot plot signals one 2026 cut and another in 2027. April 28-29 meeting upcoming. Middle East oil shock complicates outlook; inflation still above 2% target, labor market slowing.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: cut, dot, march, plot",
+        "detected": "2026-04-19T00:57:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-19T00:57:10Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-03-19T00:00:00Z",
+        "entry_a_text": "FOMC holds target rate steady at 3.50-3.75% at March 2026 meeting. Statement reiterates 'data dependent' approach. Powell press conference emphasizes tariff uncertainty on both inflation and growth outlooks.",
+        "entry_b_time": "2026-04-19T00:57:10+00:00",
+        "entry_b_text": "FOMC held federal funds rate at 3.50-3.75% on March 18, 2026 (second consecutive hold); dot plot signals one 2026 cut and another in 2027. April 28-29 meeting upcoming. Middle East oil shock complicates outlook; inflation still above 2% target, labor market slowing.",
+        "reason": "Numeric divergence 99.1% on metric (context: 3.50-3.75, march): new=18.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-19T00:57:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-19T00:57:10Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-19T00:57:10+00:00",
+        "entry_a_text": "FOMC held federal funds rate at 3.50-3.75% on March 18, 2026 (second consecutive hold); dot plot signals one 2026 cut and another in 2027. April 28-29 meeting upcoming. Middle East oil shock complicates outlook; inflation still above 2% target, labor market slowing.",
+        "entry_b_time": "2026-04-20T14:03:51+00:00",
+        "entry_b_text": "FOMC held target rate at 3.50-3.75% on March 18, 2026, citing uncertain impact from US-Israel war with Iran on US economy. March SEP median projection: one rate cut in 2026. Next meeting April 29, 2026. Powell said oil crisis effects likely temporary.",
+        "reason": "Numeric divergence 99.1% on metric (context: march, on): new=18.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-20T14:03:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-20T14:03:51Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T23:08:31+00:00",
+        "entry_a_text": "Polymarket prices 99.3% no-change at April 28-29 FOMC; March CPI re-accelerated to 3.3% y/y on energy (ME tensions), payrolls +178k, unemployment 4.3%. Fed March SEP retains median of one 2026 cut.",
+        "entry_b_time": "2026-04-20T14:03:51+00:00",
+        "entry_b_text": "FOMC held target rate at 3.50-3.75% on March 18, 2026, citing uncertain impact from US-Israel war with Iran on US economy. March SEP median projection: one rate cut in 2026. Next meeting April 29, 2026. Powell said oil crisis effects likely temporary.",
+        "reason": "Numeric divergence 81.7% on metric (context: on): new=18.0, existing=3.3, threshold=10%",
+        "detected": "2026-04-20T14:03:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-20T14:03:51Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T15:22:22+00:00",
+        "entry_a_text": "Fed held rates at 3.50-3.75% in March. Next FOMC decision Apr 29. March SEP median projects one cut in 2026. Futures pricing: no easing until Sep/Oct at earliest, single cut this year. Rising inflation from tariffs and oil shock (Hormuz) constraining rate path.",
+        "entry_b_time": "2026-04-20T14:03:51+00:00",
+        "entry_b_text": "FOMC held target rate at 3.50-3.75% on March 18, 2026, citing uncertain impact from US-Israel war with Iran on US economy. March SEP median projection: one rate cut in 2026. Next meeting April 29, 2026. Powell said oil crisis effects likely temporary.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: cut, fomc, held, march, median",
+        "detected": "2026-04-20T14:03:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-20T14:03:51Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T14:01:37+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: stale_evidence, quorum_failure. Reason: Evidence ev_011: FOMC April 8 minutes show more officials see possible rate hikes in 2026; rate h",
+        "entry_b_time": "2026-04-20T14:03:51+00:00",
+        "entry_b_text": "FOMC held target rate at 3.50-3.75% on March 18, 2026, citing uncertain impact from US-Israel war with Iran on US economy. March SEP median projection: one rate cut in 2026. Next meeting April 29, 2026. Powell said oil crisis effects likely temporary.",
+        "reason": "Numeric divergence 99.6% on metric (context: april): new=2026.0, existing=8.0, threshold=10%",
+        "detected": "2026-04-20T14:03:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-20T14:03:51Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T14:01:37+00:00",
+        "entry_a_text": "FOMC April 8 minutes show more officials see possible rate hikes in 2026; rate held at 3.50-3.75% in March; SEP median forecast still 1 cut; next decision Apr 29; Fed expects to hold until December",
+        "entry_b_time": "2026-04-20T14:03:51+00:00",
+        "entry_b_text": "FOMC held target rate at 3.50-3.75% on March 18, 2026, citing uncertain impact from US-Israel war with Iran on US economy. March SEP median projection: one rate cut in 2026. Next meeting April 29, 2026. Powell said oil crisis effects likely temporary.",
+        "reason": "Numeric divergence 99.6% on metric (context: april): new=2026.0, existing=8.0, threshold=10%",
+        "detected": "2026-04-20T14:03:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-20T14:03:51Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-14T16:00:00Z",
+        "entry_a_text": "Treasury Secretary Bessent told Semafor the Fed should 'wait and see' before lowering rates amid Iran war. 'Do I think rates should be lowered? Eventually. I think now that we have to wait and see.' Said Fed is 'doing the right thing by sitting and watching.' On 4%+ growth target for 2026: 'Obviously, we're going to have some make-up to do.' Comments come as Trump continues pushing for rate cuts.",
+        "entry_b_time": "2026-04-20T14:03:51+00:00",
+        "entry_b_text": "FOMC held target rate at 3.50-3.75% on March 18, 2026, citing uncertain impact from US-Israel war with Iran on US economy. March SEP median projection: one rate cut in 2026. Next meeting April 29, 2026. Powell said oil crisis effects likely temporary.",
+        "reason": "Numeric divergence 77.8% on metric (context: on): new=18.0, existing=4.0, threshold=10%",
+        "detected": "2026-04-20T14:03:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-20T14:03:51Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-08T18:00:00Z",
+        "entry_a_text": "FOMC March meeting minutes released April 8 show more Federal Reserve officials now see possible rate hikes in 2026, driven by Iran-war oil shock and tariff-driven inflation persistence. Fed held at 3.50-3.75% for 2nd consecutive meeting. Median dot plot still signals 1 cut but distribution widening.",
+        "entry_b_time": "2026-04-20T14:03:51+00:00",
+        "entry_b_text": "FOMC held target rate at 3.50-3.75% on March 18, 2026, citing uncertain impact from US-Israel war with Iran on US economy. March SEP median projection: one rate cut in 2026. Next meeting April 29, 2026. Powell said oil crisis effects likely temporary.",
+        "reason": "Numeric divergence 99.6% on metric (context: april): new=2026.0, existing=8.0, threshold=10%",
+        "detected": "2026-04-20T14:03:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-20T14:03:51Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-10T00:00:00Z",
+        "entry_a_text": "March 2026 CPI: headline +0.9% m/m (3.3% YoY) driven by energy +10.9% (Iran war gasoline +21.2%). Core CPI +0.2% m/m (2.6% YoY) — both 0.1pp BELOW consensus. Services ex-energy +0.2% m/m (3.0% YoY). Shelter +0.3% m/m (3.0% YoY, lowest since Aug 2021). Food unchanged. Real earnings -0.6% m/m.",
+        "entry_b_time": "2026-04-20T14:03:51+00:00",
+        "entry_b_text": "FOMC held target rate at 3.50-3.75% on March 18, 2026, citing uncertain impact from US-Israel war with Iran on US economy. March SEP median projection: one rate cut in 2026. Next meeting April 29, 2026. Powell said oil crisis effects likely temporary.",
+        "reason": "Numeric divergence 99.1% on metric (context: march): new=18.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-20T14:03:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-20T14:03:51Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-10T00:00:00Z",
+        "entry_a_text": "Bankrate analyst consensus (April 2026): projects three 25bp cuts in 2026, bringing rate to 2.75-3.00%. Minority view in professional forecaster community.",
+        "entry_b_time": "2026-04-20T14:03:51+00:00",
+        "entry_b_text": "FOMC held target rate at 3.50-3.75% on March 18, 2026, citing uncertain impact from US-Israel war with Iran on US economy. March SEP median projection: one rate cut in 2026. Next meeting April 29, 2026. Powell said oil crisis effects likely temporary.",
+        "reason": "Numeric divergence 98.6% on metric (context: april): new=29.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-20T14:03:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-20T14:03:51Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-10T00:00:00Z",
+        "entry_a_text": "Goldman Sachs forecast (as of April 2026): projects two 25bp cuts in 2026, most likely in September and December, bringing rate to 3.00-3.25%. Cites tariff-driven demand weakness outweighing inflation concerns over second half.",
+        "entry_b_time": "2026-04-20T14:03:51+00:00",
+        "entry_b_text": "FOMC held target rate at 3.50-3.75% on March 18, 2026, citing uncertain impact from US-Israel war with Iran on US economy. March SEP median projection: one rate cut in 2026. Next meeting April 29, 2026. Powell said oil crisis effects likely temporary.",
+        "reason": "Numeric divergence 98.6% on metric (context: april): new=29.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-20T14:03:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-20T14:03:51Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-01T00:00:00Z",
+        "entry_a_text": "March 2026 BLS employment report: unemployment 4.6%, non-farm payrolls +145,000. Labor market softening gradually but not deteriorating. Wages +3.8% YoY.",
+        "entry_b_time": "2026-04-20T14:03:51+00:00",
+        "entry_b_text": "FOMC held target rate at 3.50-3.75% on March 18, 2026, citing uncertain impact from US-Israel war with Iran on US economy. March SEP median projection: one rate cut in 2026. Next meeting April 29, 2026. Powell said oil crisis effects likely temporary.",
+        "reason": "Numeric divergence 99.1% on metric (context: march): new=18.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-20T14:03:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-20T14:03:51Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-03-19T00:00:00Z",
+        "entry_a_text": "March 2026 SEP dot plot: median projection remains one 25bp cut in 2026 (to 3.25-3.50%). Range of participant views spans zero to three cuts. No participant projects a hike.",
+        "entry_b_time": "2026-04-20T14:03:51+00:00",
+        "entry_b_text": "FOMC held target rate at 3.50-3.75% on March 18, 2026, citing uncertain impact from US-Israel war with Iran on US economy. March SEP median projection: one rate cut in 2026. Next meeting April 29, 2026. Powell said oil crisis effects likely temporary.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: cut, march, median, projection, sep",
+        "detected": "2026-04-20T14:03:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-20T14:03:51Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-03-19T00:00:00Z",
+        "entry_a_text": "FOMC holds target rate steady at 3.50-3.75% at March 2026 meeting. Statement reiterates 'data dependent' approach. Powell press conference emphasizes tariff uncertainty on both inflation and growth outlooks.",
+        "entry_b_time": "2026-04-20T14:03:51+00:00",
+        "entry_b_text": "FOMC held target rate at 3.50-3.75% on March 18, 2026, citing uncertain impact from US-Israel war with Iran on US economy. March SEP median projection: one rate cut in 2026. Next meeting April 29, 2026. Powell said oil crisis effects likely temporary.",
+        "reason": "Numeric divergence 99.1% on metric (context: 3.50-3.75, march): new=18.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-20T14:03:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-20T14:03:51Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-20T14:03:51+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+        "entry_b_time": "2026-04-21T03:51:21+00:00",
+        "entry_b_text": "FOMC held target range 3.50-3.75% at Mar 17-18 meeting; dot plot signals one 2026 cut and one in 2027. CME FedWatch shows 99.3% implied probability of no change at Apr 28-29 meeting. March CPI reaccelerated to 3.3% YoY.",
+        "reason": "Numeric divergence 99.8% on metric (context: to): new=3.3, existing=0.005, threshold=10%",
+        "detected": "2026-04-21T03:51:21Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T03:51:21Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-20T14:03:51+00:00",
+        "entry_a_text": "FOMC held target rate at 3.50-3.75% on March 18, 2026, citing uncertain impact from US-Israel war with Iran on US economy. March SEP median projection: one rate cut in 2026. Next meeting April 29, 2026. Powell said oil crisis effects likely temporary.",
+        "entry_b_time": "2026-04-21T03:51:21+00:00",
+        "entry_b_text": "FOMC held target range 3.50-3.75% at Mar 17-18 meeting; dot plot signals one 2026 cut and one in 2027. CME FedWatch shows 99.3% implied probability of no change at Apr 28-29 meeting. March CPI reaccelerated to 3.3% YoY.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: cut, fomc, held, march, meeting",
+        "detected": "2026-04-21T03:51:21Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T03:51:21Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-19T00:57:10+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: stale_evidence, quorum_failure. Reason: Dot plot continues to signal one cut; oil shock raises tail risk of hold (H1) or hike (H4) but median path unchanged.",
+        "entry_b_time": "2026-04-21T03:51:21+00:00",
+        "entry_b_text": "FOMC held target range 3.50-3.75% at Mar 17-18 meeting; dot plot signals one 2026 cut and one in 2027. CME FedWatch shows 99.3% implied probability of no change at Apr 28-29 meeting. March CPI reaccelerated to 3.3% YoY.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: cut, dot, plot",
+        "detected": "2026-04-21T03:51:21Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T03:51:21Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-19T00:57:10+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+        "entry_b_time": "2026-04-21T03:51:21+00:00",
+        "entry_b_text": "FOMC held target range 3.50-3.75% at Mar 17-18 meeting; dot plot signals one 2026 cut and one in 2027. CME FedWatch shows 99.3% implied probability of no change at Apr 28-29 meeting. March CPI reaccelerated to 3.3% YoY.",
+        "reason": "Numeric divergence 99.8% on metric (context: to): new=3.3, existing=0.005, threshold=10%",
+        "detected": "2026-04-21T03:51:21Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T03:51:21Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-19T00:57:10+00:00",
+        "entry_a_text": "FOMC held federal funds rate at 3.50-3.75% on March 18, 2026 (second consecutive hold); dot plot signals one 2026 cut and another in 2027. April 28-29 meeting upcoming. Middle East oil shock complicates outlook; inflation still above 2% target, labor market slowing.",
+        "entry_b_time": "2026-04-21T03:51:21+00:00",
+        "entry_b_text": "FOMC held target range 3.50-3.75% at Mar 17-18 meeting; dot plot signals one 2026 cut and one in 2027. CME FedWatch shows 99.3% implied probability of no change at Apr 28-29 meeting. March CPI reaccelerated to 3.3% YoY.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: cut, dot, fomc, held, march",
+        "detected": "2026-04-21T03:51:21Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T03:51:21Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T23:08:31+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, stale_evidence, quorum_failure. Reason: Market + SEP point to exactly one cut; elevated CPI reduces multi-cut probability.",
+        "entry_b_time": "2026-04-21T03:51:21+00:00",
+        "entry_b_text": "FOMC held target range 3.50-3.75% at Mar 17-18 meeting; dot plot signals one 2026 cut and one in 2027. CME FedWatch shows 99.3% implied probability of no change at Apr 28-29 meeting. March CPI reaccelerated to 3.3% YoY.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: cpi, cut, probability",
+        "detected": "2026-04-21T03:51:21Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T03:51:21Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T23:08:31+00:00",
+        "entry_a_text": "Polymarket prices 99.3% no-change at April 28-29 FOMC; March CPI re-accelerated to 3.3% y/y on energy (ME tensions), payrolls +178k, unemployment 4.3%. Fed March SEP retains median of one 2026 cut.",
+        "entry_b_time": "2026-04-21T03:51:21+00:00",
+        "entry_b_text": "FOMC held target range 3.50-3.75% at Mar 17-18 meeting; dot plot signals one 2026 cut and one in 2027. CME FedWatch shows 99.3% implied probability of no change at Apr 28-29 meeting. March CPI reaccelerated to 3.3% YoY.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: change, cpi, cut, fomc, march",
+        "detected": "2026-04-21T03:51:21Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T03:51:21Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T14:01:37+00:00",
+        "entry_a_text": "FOMC April 8 minutes show more officials see possible rate hikes in 2026; rate held at 3.50-3.75% in March; SEP median forecast still 1 cut; next decision Apr 29; Fed expects to hold until December",
+        "entry_b_time": "2026-04-21T03:51:21+00:00",
+        "entry_b_text": "FOMC held target range 3.50-3.75% at Mar 17-18 meeting; dot plot signals one 2026 cut and one in 2027. CME FedWatch shows 99.3% implied probability of no change at Apr 28-29 meeting. March CPI reaccelerated to 3.3% YoY.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: apr, cut, fomc, held, march",
+        "detected": "2026-04-21T03:51:21Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T03:51:21Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-14T16:00:00Z",
+        "entry_a_text": "Treasury Secretary Bessent told Semafor the Fed should 'wait and see' before lowering rates amid Iran war. 'Do I think rates should be lowered? Eventually. I think now that we have to wait and see.' Said Fed is 'doing the right thing by sitting and watching.' On 4%+ growth target for 2026: 'Obviously, we're going to have some make-up to do.' Comments come as Trump continues pushing for rate cuts.",
+        "entry_b_time": "2026-04-21T03:51:21+00:00",
+        "entry_b_text": "FOMC held target range 3.50-3.75% at Mar 17-18 meeting; dot plot signals one 2026 cut and one in 2027. CME FedWatch shows 99.3% implied probability of no change at Apr 28-29 meeting. March CPI reaccelerated to 3.3% YoY.",
+        "reason": "Numeric divergence 99.8% on metric (context: and): new=2026.0, existing=4.0, threshold=10%",
+        "detected": "2026-04-21T03:51:21Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T03:51:21Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-08T18:00:00Z",
+        "entry_a_text": "FOMC March meeting minutes released April 8 show more Federal Reserve officials now see possible rate hikes in 2026, driven by Iran-war oil shock and tariff-driven inflation persistence. Fed held at 3.50-3.75% for 2nd consecutive meeting. Median dot plot still signals 1 cut but distribution widening.",
+        "entry_b_time": "2026-04-21T03:51:21+00:00",
+        "entry_b_text": "FOMC held target range 3.50-3.75% at Mar 17-18 meeting; dot plot signals one 2026 cut and one in 2027. CME FedWatch shows 99.3% implied probability of no change at Apr 28-29 meeting. March CPI reaccelerated to 3.3% YoY.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: cut, dot, fomc, held, march",
+        "detected": "2026-04-21T03:51:21Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T03:51:21Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-10T00:00:00Z",
+        "entry_a_text": "March 2026 CPI: headline +0.9% m/m (3.3% YoY) driven by energy +10.9% (Iran war gasoline +21.2%). Core CPI +0.2% m/m (2.6% YoY) — both 0.1pp BELOW consensus. Services ex-energy +0.2% m/m (3.0% YoY). Shelter +0.3% m/m (3.0% YoY, lowest since Aug 2021). Food unchanged. Real earnings -0.6% m/m.",
+        "entry_b_time": "2026-04-21T03:51:21+00:00",
+        "entry_b_text": "FOMC held target range 3.50-3.75% at Mar 17-18 meeting; dot plot signals one 2026 cut and one in 2027. CME FedWatch shows 99.3% implied probability of no change at Apr 28-29 meeting. March CPI reaccelerated to 3.3% YoY.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: cpi, march, yoy",
+        "detected": "2026-04-21T03:51:21Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T03:51:21Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-08T00:00:00Z",
+        "entry_a_text": "FOMC minutes from March 17-18 meeting released. Fed officials 'still saw rate cuts as a possibility' but stressed need to look through Iran war energy shock. Minutes show tension between inflation persistence and growth concerns. Rate hike probability rose to 14% before Iran ceasefire.",
+        "entry_b_time": "2026-04-21T03:51:21+00:00",
+        "entry_b_text": "FOMC held target range 3.50-3.75% at Mar 17-18 meeting; dot plot signals one 2026 cut and one in 2027. CME FedWatch shows 99.3% implied probability of no change at Apr 28-29 meeting. March CPI reaccelerated to 3.3% YoY.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: fomc, march, meeting, probability",
+        "detected": "2026-04-21T03:51:21Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T03:51:21Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-10T00:00:00Z",
+        "entry_a_text": "Bankrate analyst consensus (April 2026): projects three 25bp cuts in 2026, bringing rate to 2.75-3.00%. Minority view in professional forecaster community.",
+        "entry_b_time": "2026-04-21T03:51:21+00:00",
+        "entry_b_text": "FOMC held target range 3.50-3.75% at Mar 17-18 meeting; dot plot signals one 2026 cut and one in 2027. CME FedWatch shows 99.3% implied probability of no change at Apr 28-29 meeting. March CPI reaccelerated to 3.3% YoY.",
+        "reason": "Numeric divergence 99.8% on metric (context: to): new=3.3, existing=2026.0, threshold=10%",
+        "detected": "2026-04-21T03:51:21Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T03:51:21Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-10T00:00:00Z",
+        "entry_a_text": "Goldman Sachs forecast (as of April 2026): projects two 25bp cuts in 2026, most likely in September and December, bringing rate to 3.00-3.25%. Cites tariff-driven demand weakness outweighing inflation concerns over second half.",
+        "entry_b_time": "2026-04-21T03:51:21+00:00",
+        "entry_b_text": "FOMC held target range 3.50-3.75% at Mar 17-18 meeting; dot plot signals one 2026 cut and one in 2027. CME FedWatch shows 99.3% implied probability of no change at Apr 28-29 meeting. March CPI reaccelerated to 3.3% YoY.",
+        "reason": "Numeric divergence 95.1% on metric (context: of): new=99.3, existing=2026.0, threshold=10%",
+        "detected": "2026-04-21T03:51:21Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T03:51:21Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-01T00:00:00Z",
+        "entry_a_text": "March 2026 BLS employment report: unemployment 4.6%, non-farm payrolls +145,000. Labor market softening gradually but not deteriorating. Wages +3.8% YoY.",
+        "entry_b_time": "2026-04-21T03:51:21+00:00",
+        "entry_b_text": "FOMC held target range 3.50-3.75% at Mar 17-18 meeting; dot plot signals one 2026 cut and one in 2027. CME FedWatch shows 99.3% implied probability of no change at Apr 28-29 meeting. March CPI reaccelerated to 3.3% YoY.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: march, yoy",
+        "detected": "2026-04-21T03:51:21Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T03:51:21Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-03-19T00:00:00Z",
+        "entry_a_text": "March 2026 SEP dot plot: median projection remains one 25bp cut in 2026 (to 3.25-3.50%). Range of participant views spans zero to three cuts. No participant projects a hike.",
+        "entry_b_time": "2026-04-21T03:51:21+00:00",
+        "entry_b_text": "FOMC held target range 3.50-3.75% at Mar 17-18 meeting; dot plot signals one 2026 cut and one in 2027. CME FedWatch shows 99.3% implied probability of no change at Apr 28-29 meeting. March CPI reaccelerated to 3.3% YoY.",
+        "reason": "Numeric divergence 99.8% on metric (context: to): new=3.3, existing=2026.0, threshold=10%",
+        "detected": "2026-04-21T03:51:21Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T03:51:21Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-03-19T00:00:00Z",
+        "entry_a_text": "FOMC holds target rate steady at 3.50-3.75% at March 2026 meeting. Statement reiterates 'data dependent' approach. Powell press conference emphasizes tariff uncertainty on both inflation and growth outlooks.",
+        "entry_b_time": "2026-04-21T03:51:21+00:00",
+        "entry_b_text": "FOMC held target range 3.50-3.75% at Mar 17-18 meeting; dot plot signals one 2026 cut and one in 2027. CME FedWatch shows 99.3% implied probability of no change at Apr 28-29 meeting. March CPI reaccelerated to 3.3% YoY.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: fomc, march, meeting, target",
+        "detected": "2026-04-21T03:51:21Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T03:51:21Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+        "entry_b_time": "2026-04-21T05:33:37+00:00",
+        "entry_b_text": "Federal Reserve held the federal funds rate at 3.5-3.75% at its March 2026 meeting. April 28-29 FOMC meeting expected to hold again. J.P. Morgan Global Research now forecasts Fed holds steady for rest of 2026, with next move a possible hike in Q3 2027. Fed Chair Powell cited geopolitical risks and prefer wait-and-see approach.",
+        "reason": "Numeric divergence 100.0% on metric (context: with): new=2026.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-21T05:33:37Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T05:33:37Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "FOMC held target range 3.50-3.75% at Mar 17-18 meeting; dot plot signals one 2026 cut and one in 2027. CME FedWatch shows 99.3% implied probability of no change at Apr 28-29 meeting. March CPI reaccelerated to 3.3% YoY.",
+        "entry_b_time": "2026-04-21T05:33:37+00:00",
+        "entry_b_text": "Federal Reserve held the federal funds rate at 3.5-3.75% at its March 2026 meeting. April 28-29 FOMC meeting expected to hold again. J.P. Morgan Global Research now forecasts Fed holds steady for rest of 2026, with next move a possible hike in Q3 2027. Fed Chair Powell cited geopolitical risks and prefer wait-and-see approach.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: fomc, held, march, meeting",
+        "detected": "2026-04-21T05:33:37Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T05:33:37Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-20T14:03:51+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+        "entry_b_time": "2026-04-21T05:33:37+00:00",
+        "entry_b_text": "Federal Reserve held the federal funds rate at 3.5-3.75% at its March 2026 meeting. April 28-29 FOMC meeting expected to hold again. J.P. Morgan Global Research now forecasts Fed holds steady for rest of 2026, with next move a possible hike in Q3 2027. Fed Chair Powell cited geopolitical risks and prefer wait-and-see approach.",
+        "reason": "Numeric divergence 100.0% on metric (context: with): new=2026.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-21T05:33:37Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T05:33:37Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-20T14:03:51+00:00",
+        "entry_a_text": "FOMC held target rate at 3.50-3.75% on March 18, 2026, citing uncertain impact from US-Israel war with Iran on US economy. March SEP median projection: one rate cut in 2026. Next meeting April 29, 2026. Powell said oil crisis effects likely temporary.",
+        "entry_b_time": "2026-04-21T05:33:37+00:00",
+        "entry_b_text": "Federal Reserve held the federal funds rate at 3.5-3.75% at its March 2026 meeting. April 28-29 FOMC meeting expected to hold again. J.P. Morgan Global Research now forecasts Fed holds steady for rest of 2026, with next move a possible hike in Q3 2027. Fed Chair Powell cited geopolitical risks and prefer wait-and-see approach.",
+        "reason": "Numeric divergence 99.1% on metric (context: march): new=2026.0, existing=18.0, threshold=10%",
+        "detected": "2026-04-21T05:33:37Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T05:33:37Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-19T00:57:10+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+        "entry_b_time": "2026-04-21T05:33:37+00:00",
+        "entry_b_text": "Federal Reserve held the federal funds rate at 3.5-3.75% at its March 2026 meeting. April 28-29 FOMC meeting expected to hold again. J.P. Morgan Global Research now forecasts Fed holds steady for rest of 2026, with next move a possible hike in Q3 2027. Fed Chair Powell cited geopolitical risks and prefer wait-and-see approach.",
+        "reason": "Numeric divergence 100.0% on metric (context: with): new=2026.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-21T05:33:37Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T05:33:37Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-19T00:57:10+00:00",
+        "entry_a_text": "FOMC held federal funds rate at 3.50-3.75% on March 18, 2026 (second consecutive hold); dot plot signals one 2026 cut and another in 2027. April 28-29 meeting upcoming. Middle East oil shock complicates outlook; inflation still above 2% target, labor market slowing.",
+        "entry_b_time": "2026-04-21T05:33:37+00:00",
+        "entry_b_text": "Federal Reserve held the federal funds rate at 3.5-3.75% at its March 2026 meeting. April 28-29 FOMC meeting expected to hold again. J.P. Morgan Global Research now forecasts Fed holds steady for rest of 2026, with next move a possible hike in Q3 2027. Fed Chair Powell cited geopolitical risks and prefer wait-and-see approach.",
+        "reason": "Numeric divergence 99.1% on metric (context: march): new=2026.0, existing=18.0, threshold=10%",
+        "detected": "2026-04-21T05:33:37Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T05:33:37Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T23:08:31+00:00",
+        "entry_a_text": "Polymarket prices 99.3% no-change at April 28-29 FOMC; March CPI re-accelerated to 3.3% y/y on energy (ME tensions), payrolls +178k, unemployment 4.3%. Fed March SEP retains median of one 2026 cut.",
+        "entry_b_time": "2026-04-21T05:33:37+00:00",
+        "entry_b_text": "Federal Reserve held the federal funds rate at 3.5-3.75% at its March 2026 meeting. April 28-29 FOMC meeting expected to hold again. J.P. Morgan Global Research now forecasts Fed holds steady for rest of 2026, with next move a possible hike in Q3 2027. Fed Chair Powell cited geopolitical risks and prefer wait-and-see approach.",
+        "reason": "Numeric divergence 95.1% on metric (context: april, at): new=2026.0, existing=99.3, threshold=10%",
+        "detected": "2026-04-21T05:33:37Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T05:33:37Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T15:22:22+00:00",
+        "entry_a_text": "Fed held rates at 3.50-3.75% in March. Next FOMC decision Apr 29. March SEP median projects one cut in 2026. Futures pricing: no easing until Sep/Oct at earliest, single cut this year. Rising inflation from tariffs and oil shock (Hormuz) constraining rate path.",
+        "entry_b_time": "2026-04-21T05:33:37+00:00",
+        "entry_b_text": "Federal Reserve held the federal funds rate at 3.5-3.75% at its March 2026 meeting. April 28-29 FOMC meeting expected to hold again. J.P. Morgan Global Research now forecasts Fed holds steady for rest of 2026, with next move a possible hike in Q3 2027. Fed Chair Powell cited geopolitical risks and prefer wait-and-see approach.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: fed, fomc, held, march, next",
+        "detected": "2026-04-21T05:33:37Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T05:33:37Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T14:01:37+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: stale_evidence, quorum_failure. Reason: Evidence ev_011: FOMC April 8 minutes show more officials see possible rate hikes in 2026; rate h",
+        "entry_b_time": "2026-04-21T05:33:37+00:00",
+        "entry_b_text": "Federal Reserve held the federal funds rate at 3.5-3.75% at its March 2026 meeting. April 28-29 FOMC meeting expected to hold again. J.P. Morgan Global Research now forecasts Fed holds steady for rest of 2026, with next move a possible hike in Q3 2027. Fed Chair Powell cited geopolitical risks and prefer wait-and-see approach.",
+        "reason": "Numeric divergence 99.6% on metric (context: april): new=2026.0, existing=8.0, threshold=10%",
+        "detected": "2026-04-21T05:33:37Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T05:33:37Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T14:01:37+00:00",
+        "entry_a_text": "FOMC April 8 minutes show more officials see possible rate hikes in 2026; rate held at 3.50-3.75% in March; SEP median forecast still 1 cut; next decision Apr 29; Fed expects to hold until December",
+        "entry_b_time": "2026-04-21T05:33:37+00:00",
+        "entry_b_text": "Federal Reserve held the federal funds rate at 3.5-3.75% at its March 2026 meeting. April 28-29 FOMC meeting expected to hold again. J.P. Morgan Global Research now forecasts Fed holds steady for rest of 2026, with next move a possible hike in Q3 2027. Fed Chair Powell cited geopolitical risks and prefer wait-and-see approach.",
+        "reason": "Numeric divergence 99.6% on metric (context: april): new=2026.0, existing=8.0, threshold=10%",
+        "detected": "2026-04-21T05:33:37Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T05:33:37Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-14T16:00:00Z",
+        "entry_a_text": "Treasury Secretary Bessent told Semafor the Fed should 'wait and see' before lowering rates amid Iran war. 'Do I think rates should be lowered? Eventually. I think now that we have to wait and see.' Said Fed is 'doing the right thing by sitting and watching.' On 4%+ growth target for 2026: 'Obviously, we're going to have some make-up to do.' Comments come as Trump continues pushing for rate cuts.",
+        "entry_b_time": "2026-04-21T05:33:37+00:00",
+        "entry_b_text": "Federal Reserve held the federal funds rate at 3.5-3.75% at its March 2026 meeting. April 28-29 FOMC meeting expected to hold again. J.P. Morgan Global Research now forecasts Fed holds steady for rest of 2026, with next move a possible hike in Q3 2027. Fed Chair Powell cited geopolitical risks and prefer wait-and-see approach.",
+        "reason": "Numeric divergence 99.8% on metric (context: for): new=2026.0, existing=4.0, threshold=10%",
+        "detected": "2026-04-21T05:33:37Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T05:33:37Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-08T18:00:00Z",
+        "entry_a_text": "FOMC March meeting minutes released April 8 show more Federal Reserve officials now see possible rate hikes in 2026, driven by Iran-war oil shock and tariff-driven inflation persistence. Fed held at 3.50-3.75% for 2nd consecutive meeting. Median dot plot still signals 1 cut but distribution widening.",
+        "entry_b_time": "2026-04-21T05:33:37+00:00",
+        "entry_b_text": "Federal Reserve held the federal funds rate at 3.5-3.75% at its March 2026 meeting. April 28-29 FOMC meeting expected to hold again. J.P. Morgan Global Research now forecasts Fed holds steady for rest of 2026, with next move a possible hike in Q3 2027. Fed Chair Powell cited geopolitical risks and prefer wait-and-see approach.",
+        "reason": "Numeric divergence 99.6% on metric (context: april): new=2026.0, existing=8.0, threshold=10%",
+        "detected": "2026-04-21T05:33:37Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T05:33:37Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-03-19T00:00:00Z",
+        "entry_a_text": "March 2026 SEP dot plot: median projection remains one 25bp cut in 2026 (to 3.25-3.50%). Range of participant views spans zero to three cuts. No participant projects a hike.",
+        "entry_b_time": "2026-04-21T05:33:37+00:00",
+        "entry_b_text": "Federal Reserve held the federal funds rate at 3.5-3.75% at its March 2026 meeting. April 28-29 FOMC meeting expected to hold again. J.P. Morgan Global Research now forecasts Fed holds steady for rest of 2026, with next move a possible hike in Q3 2027. Fed Chair Powell cited geopolitical risks and prefer wait-and-see approach.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: hike, march",
+        "detected": "2026-04-21T05:33:37Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-21T05:33:37Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-22T01:00:37+00:00",
+        "entry_a_text": "REPLAY COMPLETE: 0 indicators applied, 0 skipped. Final posteriors: {'H1': 0.22, 'H2': 0.38, 'H3': 0.28, 'H4': 0.12}. Indicator firedDates restored to originals for audit.",
+        "entry_b_time": "2026-04-22T01:30:35+00:00",
+        "entry_b_text": "FOMC held target range at 3.50-3.75% at March 17-18 2026 meeting (2nd consecutive hold). March CPI accelerated to 3.3% YoY (from Feb 2.4%). Dot plot projects just one cut in 2026 and another in 2027; timing unclear. Next FOMC Apr 28-29 2026.",
+        "reason": "Numeric divergence 88.3% on metric (context: .): new=2.4, existing=0.28, threshold=10%",
+        "detected": "2026-04-22T01:30:35Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:30:35Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T05:33:37+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+        "entry_b_time": "2026-04-22T01:30:35+00:00",
+        "entry_b_text": "FOMC held target range at 3.50-3.75% at March 17-18 2026 meeting (2nd consecutive hold). March CPI accelerated to 3.3% YoY (from Feb 2.4%). Dot plot projects just one cut in 2026 and another in 2027; timing unclear. Next FOMC Apr 28-29 2026.",
+        "reason": "Numeric divergence 99.8% on metric (context: to): new=3.3, existing=0.005, threshold=10%",
+        "detected": "2026-04-22T01:30:35Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:30:35Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+        "entry_b_time": "2026-04-22T01:30:35+00:00",
+        "entry_b_text": "FOMC held target range at 3.50-3.75% at March 17-18 2026 meeting (2nd consecutive hold). March CPI accelerated to 3.3% YoY (from Feb 2.4%). Dot plot projects just one cut in 2026 and another in 2027; timing unclear. Next FOMC Apr 28-29 2026.",
+        "reason": "Numeric divergence 99.8% on metric (context: to): new=3.3, existing=0.005, threshold=10%",
+        "detected": "2026-04-22T01:30:35Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:30:35Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "FOMC held target range 3.50-3.75% at Mar 17-18 meeting; dot plot signals one 2026 cut and one in 2027. CME FedWatch shows 99.3% implied probability of no change at Apr 28-29 meeting. March CPI reaccelerated to 3.3% YoY.",
+        "entry_b_time": "2026-04-22T01:30:35+00:00",
+        "entry_b_text": "FOMC held target range at 3.50-3.75% at March 17-18 2026 meeting (2nd consecutive hold). March CPI accelerated to 3.3% YoY (from Feb 2.4%). Dot plot projects just one cut in 2026 and another in 2027; timing unclear. Next FOMC Apr 28-29 2026.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: apr, cpi, cut, dot, fomc",
+        "detected": "2026-04-22T01:30:35Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:30:35Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-20T14:03:51+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+        "entry_b_time": "2026-04-22T01:30:35+00:00",
+        "entry_b_text": "FOMC held target range at 3.50-3.75% at March 17-18 2026 meeting (2nd consecutive hold). March CPI accelerated to 3.3% YoY (from Feb 2.4%). Dot plot projects just one cut in 2026 and another in 2027; timing unclear. Next FOMC Apr 28-29 2026.",
+        "reason": "Numeric divergence 99.8% on metric (context: to): new=3.3, existing=0.005, threshold=10%",
+        "detected": "2026-04-22T01:30:35Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:30:35Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-20T14:03:51+00:00",
+        "entry_a_text": "FOMC held target rate at 3.50-3.75% on March 18, 2026, citing uncertain impact from US-Israel war with Iran on US economy. March SEP median projection: one rate cut in 2026. Next meeting April 29, 2026. Powell said oil crisis effects likely temporary.",
+        "entry_b_time": "2026-04-22T01:30:35+00:00",
+        "entry_b_text": "FOMC held target range at 3.50-3.75% at March 17-18 2026 meeting (2nd consecutive hold). March CPI accelerated to 3.3% YoY (from Feb 2.4%). Dot plot projects just one cut in 2026 and another in 2027; timing unclear. Next FOMC Apr 28-29 2026.",
+        "reason": "Numeric divergence 99.1% on metric (context: march): new=2026.0, existing=18.0, threshold=10%",
+        "detected": "2026-04-22T01:30:35Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:30:35Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-19T00:57:10+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+        "entry_b_time": "2026-04-22T01:30:35+00:00",
+        "entry_b_text": "FOMC held target range at 3.50-3.75% at March 17-18 2026 meeting (2nd consecutive hold). March CPI accelerated to 3.3% YoY (from Feb 2.4%). Dot plot projects just one cut in 2026 and another in 2027; timing unclear. Next FOMC Apr 28-29 2026.",
+        "reason": "Numeric divergence 99.8% on metric (context: to): new=3.3, existing=0.005, threshold=10%",
+        "detected": "2026-04-22T01:30:35Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:30:35Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-19T00:57:10+00:00",
+        "entry_a_text": "FOMC held federal funds rate at 3.50-3.75% on March 18, 2026 (second consecutive hold); dot plot signals one 2026 cut and another in 2027. April 28-29 meeting upcoming. Middle East oil shock complicates outlook; inflation still above 2% target, labor market slowing.",
+        "entry_b_time": "2026-04-22T01:30:35+00:00",
+        "entry_b_text": "FOMC held target range at 3.50-3.75% at March 17-18 2026 meeting (2nd consecutive hold). March CPI accelerated to 3.3% YoY (from Feb 2.4%). Dot plot projects just one cut in 2026 and another in 2027; timing unclear. Next FOMC Apr 28-29 2026.",
+        "reason": "Numeric divergence 99.1% on metric (context: consecutive, march): new=2026.0, existing=18.0, threshold=10%",
+        "detected": "2026-04-22T01:30:35Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:30:35Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T23:08:31+00:00",
+        "entry_a_text": "Polymarket prices 99.3% no-change at April 28-29 FOMC; March CPI re-accelerated to 3.3% y/y on energy (ME tensions), payrolls +178k, unemployment 4.3%. Fed March SEP retains median of one 2026 cut.",
+        "entry_b_time": "2026-04-22T01:30:35+00:00",
+        "entry_b_text": "FOMC held target range at 3.50-3.75% at March 17-18 2026 meeting (2nd consecutive hold). March CPI accelerated to 3.3% YoY (from Feb 2.4%). Dot plot projects just one cut in 2026 and another in 2027; timing unclear. Next FOMC Apr 28-29 2026.",
+        "reason": "Numeric divergence 95.1% on metric (context: at): new=2026.0, existing=99.3, threshold=10%",
+        "detected": "2026-04-22T01:30:35Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:30:35Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T15:22:22+00:00",
+        "entry_a_text": "Fed held rates at 3.50-3.75% in March. Next FOMC decision Apr 29. March SEP median projects one cut in 2026. Futures pricing: no easing until Sep/Oct at earliest, single cut this year. Rising inflation from tariffs and oil shock (Hormuz) constraining rate path.",
+        "entry_b_time": "2026-04-22T01:30:35+00:00",
+        "entry_b_text": "FOMC held target range at 3.50-3.75% at March 17-18 2026 meeting (2nd consecutive hold). March CPI accelerated to 3.3% YoY (from Feb 2.4%). Dot plot projects just one cut in 2026 and another in 2027; timing unclear. Next FOMC Apr 28-29 2026.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: apr, cut, fomc, held, march",
+        "detected": "2026-04-22T01:30:35Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:30:35Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T14:01:37+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: stale_evidence, quorum_failure. Reason: Evidence ev_011: FOMC April 8 minutes show more officials see possible rate hikes in 2026; rate h",
+        "entry_b_time": "2026-04-22T01:30:35+00:00",
+        "entry_b_text": "FOMC held target range at 3.50-3.75% at March 17-18 2026 meeting (2nd consecutive hold). March CPI accelerated to 3.3% YoY (from Feb 2.4%). Dot plot projects just one cut in 2026 and another in 2027; timing unclear. Next FOMC Apr 28-29 2026.",
+        "reason": "Numeric divergence 99.6% on metric (context: fomc): new=2026.0, existing=8.0, threshold=10%",
+        "detected": "2026-04-22T01:30:35Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:30:35Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T14:01:37+00:00",
+        "entry_a_text": "FOMC April 8 minutes show more officials see possible rate hikes in 2026; rate held at 3.50-3.75% in March; SEP median forecast still 1 cut; next decision Apr 29; Fed expects to hold until December",
+        "entry_b_time": "2026-04-22T01:30:35+00:00",
+        "entry_b_text": "FOMC held target range at 3.50-3.75% at March 17-18 2026 meeting (2nd consecutive hold). March CPI accelerated to 3.3% YoY (from Feb 2.4%). Dot plot projects just one cut in 2026 and another in 2027; timing unclear. Next FOMC Apr 28-29 2026.",
+        "reason": "Numeric divergence 88.6% on metric (context: to): new=3.3, existing=29.0, threshold=10%",
+        "detected": "2026-04-22T01:30:35Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:30:35Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-14T16:00:00Z",
+        "entry_a_text": "Treasury Secretary Bessent told Semafor the Fed should 'wait and see' before lowering rates amid Iran war. 'Do I think rates should be lowered? Eventually. I think now that we have to wait and see.' Said Fed is 'doing the right thing by sitting and watching.' On 4%+ growth target for 2026: 'Obviously, we're going to have some make-up to do.' Comments come as Trump continues pushing for rate cuts.",
+        "entry_b_time": "2026-04-22T01:30:35+00:00",
+        "entry_b_text": "FOMC held target range at 3.50-3.75% at March 17-18 2026 meeting (2nd consecutive hold). March CPI accelerated to 3.3% YoY (from Feb 2.4%). Dot plot projects just one cut in 2026 and another in 2027; timing unclear. Next FOMC Apr 28-29 2026.",
+        "reason": "Numeric divergence 99.8% on metric (context: and): new=2026.0, existing=4.0, threshold=10%",
+        "detected": "2026-04-22T01:30:35Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:30:35Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-08T18:00:00Z",
+        "entry_a_text": "FOMC March meeting minutes released April 8 show more Federal Reserve officials now see possible rate hikes in 2026, driven by Iran-war oil shock and tariff-driven inflation persistence. Fed held at 3.50-3.75% for 2nd consecutive meeting. Median dot plot still signals 1 cut but distribution widening.",
+        "entry_b_time": "2026-04-22T01:30:35+00:00",
+        "entry_b_text": "FOMC held target range at 3.50-3.75% at March 17-18 2026 meeting (2nd consecutive hold). March CPI accelerated to 3.3% YoY (from Feb 2.4%). Dot plot projects just one cut in 2026 and another in 2027; timing unclear. Next FOMC Apr 28-29 2026.",
+        "reason": "Numeric divergence 58.3% on metric (context: plot): new=2.4, existing=1.0, threshold=10%",
+        "detected": "2026-04-22T01:30:35Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:30:35Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-10T00:00:00Z",
+        "entry_a_text": "March 2026 CPI: headline +0.9% m/m (3.3% YoY) driven by energy +10.9% (Iran war gasoline +21.2%). Core CPI +0.2% m/m (2.6% YoY) — both 0.1pp BELOW consensus. Services ex-energy +0.2% m/m (3.0% YoY). Shelter +0.3% m/m (3.0% YoY, lowest since Aug 2021). Food unchanged. Real earnings -0.6% m/m.",
+        "entry_b_time": "2026-04-22T01:30:35+00:00",
+        "entry_b_text": "FOMC held target range at 3.50-3.75% at March 17-18 2026 meeting (2nd consecutive hold). March CPI accelerated to 3.3% YoY (from Feb 2.4%). Dot plot projects just one cut in 2026 and another in 2027; timing unclear. Next FOMC Apr 28-29 2026.",
+        "reason": "Numeric divergence 99.8% on metric (context: cpi): new=3.3, existing=2026.0, threshold=10%",
+        "detected": "2026-04-22T01:30:35Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:30:35Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-08T00:00:00Z",
+        "entry_a_text": "FOMC minutes from March 17-18 meeting released. Fed officials 'still saw rate cuts as a possibility' but stressed need to look through Iran war energy shock. Minutes show tension between inflation persistence and growth concerns. Rate hike probability rose to 14% before Iran ceasefire.",
+        "entry_b_time": "2026-04-22T01:30:35+00:00",
+        "entry_b_text": "FOMC held target range at 3.50-3.75% at March 17-18 2026 meeting (2nd consecutive hold). March CPI accelerated to 3.3% YoY (from Feb 2.4%). Dot plot projects just one cut in 2026 and another in 2027; timing unclear. Next FOMC Apr 28-29 2026.",
+        "reason": "Numeric divergence 76.4% on metric (context: to): new=3.3, existing=14.0, threshold=10%",
+        "detected": "2026-04-22T01:30:35Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:30:35Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-10T00:00:00Z",
+        "entry_a_text": "Bankrate analyst consensus (April 2026): projects three 25bp cuts in 2026, bringing rate to 2.75-3.00%. Minority view in professional forecaster community.",
+        "entry_b_time": "2026-04-22T01:30:35+00:00",
+        "entry_b_text": "FOMC held target range at 3.50-3.75% at March 17-18 2026 meeting (2nd consecutive hold). March CPI accelerated to 3.3% YoY (from Feb 2.4%). Dot plot projects just one cut in 2026 and another in 2027; timing unclear. Next FOMC Apr 28-29 2026.",
+        "reason": "Numeric divergence 99.8% on metric (context: to): new=3.3, existing=2026.0, threshold=10%",
+        "detected": "2026-04-22T01:30:35Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:30:35Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-01T00:00:00Z",
+        "entry_a_text": "March 2026 BLS employment report: unemployment 4.6%, non-farm payrolls +145,000. Labor market softening gradually but not deteriorating. Wages +3.8% YoY.",
+        "entry_b_time": "2026-04-22T01:30:35+00:00",
+        "entry_b_text": "FOMC held target range at 3.50-3.75% at March 17-18 2026 meeting (2nd consecutive hold). March CPI accelerated to 3.3% YoY (from Feb 2.4%). Dot plot projects just one cut in 2026 and another in 2027; timing unclear. Next FOMC Apr 28-29 2026.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: march, yoy",
+        "detected": "2026-04-22T01:30:35Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:30:35Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-03-19T00:00:00Z",
+        "entry_a_text": "March 2026 SEP dot plot: median projection remains one 25bp cut in 2026 (to 3.25-3.50%). Range of participant views spans zero to three cuts. No participant projects a hike.",
+        "entry_b_time": "2026-04-22T01:30:35+00:00",
+        "entry_b_text": "FOMC held target range at 3.50-3.75% at March 17-18 2026 meeting (2nd consecutive hold). March CPI accelerated to 3.3% YoY (from Feb 2.4%). Dot plot projects just one cut in 2026 and another in 2027; timing unclear. Next FOMC Apr 28-29 2026.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: cut, dot, march, plot, projects",
+        "detected": "2026-04-22T01:30:35Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T01:30:35Z"
       }
     ]
   },
@@ -1531,26 +2827,1065 @@
         "trust_delta": -0.1,
         "original_text_snippet": "FOMC April 8 minutes show more officials see possible rate hikes in 2026; rate held at 3.50-3.75% in March; SEP median f",
         "confirming_text_snippet": "Polymarket prices 99.3% no-change at April 28-29 FOMC; March CPI re-accelerated to 3.3% y/y on energy (ME tensions), pay"
+      },
+      {
+        "timestamp": "2026-04-19T00:57:10Z",
+        "evidence_index": 8,
+        "confirming_index": 16,
+        "resolution": "REFUTED",
+        "source": "Federal Reserve Board / US News / Axios",
+        "confirming_source": "Federal Reserve / Yahoo Finance",
+        "trust_delta": -0.1,
+        "original_text_snippet": "FOMC March meeting minutes released April 8 show more Federal Reserve officials now see possible rate hikes in 2026, dri",
+        "confirming_text_snippet": "FOMC held federal funds rate at 3.50-3.75% on March 18, 2026 (second consecutive hold); dot plot signals one 2026 cut an"
+      },
+      {
+        "timestamp": "2026-04-20T14:03:51Z",
+        "evidence_index": 8,
+        "confirming_index": 19,
+        "resolution": "REFUTED",
+        "source": "Federal Reserve Board / US News / Axios",
+        "confirming_source": "CNN Business",
+        "trust_delta": -0.1,
+        "original_text_snippet": "FOMC March meeting minutes released April 8 show more Federal Reserve officials now see possible rate hikes in 2026, dri",
+        "confirming_text_snippet": "FOMC held target rate at 3.50-3.75% on March 18, 2026, citing uncertain impact from US-Israel war with Iran on US econom"
+      },
+      {
+        "timestamp": "2026-04-20T14:03:51Z",
+        "evidence_index": 10,
+        "confirming_index": 19,
+        "resolution": "REFUTED",
+        "source": "US News/Federal Reserve",
+        "confirming_source": "CNN Business",
+        "trust_delta": -0.1,
+        "original_text_snippet": "FOMC April 8 minutes show more officials see possible rate hikes in 2026; rate held at 3.50-3.75% in March; SEP median f",
+        "confirming_text_snippet": "FOMC held target rate at 3.50-3.75% on March 18, 2026, citing uncertain impact from US-Israel war with Iran on US econom"
+      },
+      {
+        "timestamp": "2026-04-20T14:03:51Z",
+        "evidence_index": 14,
+        "confirming_index": 19,
+        "resolution": "REFUTED",
+        "source": "Yahoo Finance/Polymarket",
+        "confirming_source": "CNN Business",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Polymarket prices 99.3% no-change at April 28-29 FOMC; March CPI re-accelerated to 3.3% y/y on energy (ME tensions), pay",
+        "confirming_text_snippet": "FOMC held target rate at 3.50-3.75% on March 18, 2026, citing uncertain impact from US-Israel war with Iran on US econom"
+      },
+      {
+        "timestamp": "2026-04-20T14:03:51Z",
+        "evidence_index": 16,
+        "confirming_index": 19,
+        "resolution": "REFUTED",
+        "source": "Federal Reserve / Yahoo Finance",
+        "confirming_source": "CNN Business",
+        "trust_delta": -0.1,
+        "original_text_snippet": "FOMC held federal funds rate at 3.50-3.75% on March 18, 2026 (second consecutive hold); dot plot signals one 2026 cut an",
+        "confirming_text_snippet": "FOMC held target rate at 3.50-3.75% on March 18, 2026, citing uncertain impact from US-Israel war with Iran on US econom"
+      },
+      {
+        "timestamp": "2026-04-21T03:51:21Z",
+        "evidence_index": 8,
+        "confirming_index": 22,
+        "resolution": "REFUTED",
+        "source": "Federal Reserve Board / US News / Axios",
+        "confirming_source": "Federal Reserve / CME FedWatch",
+        "trust_delta": -0.1,
+        "original_text_snippet": "FOMC March meeting minutes released April 8 show more Federal Reserve officials now see possible rate hikes in 2026, dri",
+        "confirming_text_snippet": "FOMC held target range 3.50-3.75% at Mar 17-18 meeting; dot plot signals one 2026 cut and one in 2027. CME FedWatch show"
+      },
+      {
+        "timestamp": "2026-04-21T03:51:21Z",
+        "evidence_index": 19,
+        "confirming_index": 22,
+        "resolution": "REFUTED",
+        "source": "CNN Business",
+        "confirming_source": "Federal Reserve / CME FedWatch",
+        "trust_delta": -0.1,
+        "original_text_snippet": "FOMC held target rate at 3.50-3.75% on March 18, 2026, citing uncertain impact from US-Israel war with Iran on US econom",
+        "confirming_text_snippet": "FOMC held target range 3.50-3.75% at Mar 17-18 meeting; dot plot signals one 2026 cut and one in 2027. CME FedWatch show"
+      },
+      {
+        "timestamp": "2026-04-21T05:33:37Z",
+        "evidence_index": 0,
+        "confirming_index": 24,
+        "resolution": "REFUTED",
+        "source": "Federal Reserve FOMC Statement, March 19 2026",
+        "confirming_source": "J.P. Morgan / Federal Reserve / Yahoo Finance",
+        "trust_delta": -0.1,
+        "original_text_snippet": "FOMC holds target rate steady at 3.50-3.75% at March 2026 meeting. Statement reiterates 'data dependent' approach. Powel",
+        "confirming_text_snippet": "Federal Reserve held the federal funds rate at 3.5-3.75% at its March 2026 meeting. April 28-29 FOMC meeting expected to"
+      },
+      {
+        "timestamp": "2026-04-21T05:33:37Z",
+        "evidence_index": 8,
+        "confirming_index": 24,
+        "resolution": "REFUTED",
+        "source": "Federal Reserve Board / US News / Axios",
+        "confirming_source": "J.P. Morgan / Federal Reserve / Yahoo Finance",
+        "trust_delta": -0.1,
+        "original_text_snippet": "FOMC March meeting minutes released April 8 show more Federal Reserve officials now see possible rate hikes in 2026, dri",
+        "confirming_text_snippet": "Federal Reserve held the federal funds rate at 3.5-3.75% at its March 2026 meeting. April 28-29 FOMC meeting expected to"
+      },
+      {
+        "timestamp": "2026-04-21T05:33:37Z",
+        "evidence_index": 19,
+        "confirming_index": 24,
+        "resolution": "REFUTED",
+        "source": "CNN Business",
+        "confirming_source": "J.P. Morgan / Federal Reserve / Yahoo Finance",
+        "trust_delta": -0.1,
+        "original_text_snippet": "FOMC held target rate at 3.50-3.75% on March 18, 2026, citing uncertain impact from US-Israel war with Iran on US econom",
+        "confirming_text_snippet": "Federal Reserve held the federal funds rate at 3.5-3.75% at its March 2026 meeting. April 28-29 FOMC meeting expected to"
+      },
+      {
+        "timestamp": "2026-04-22T01:30:35Z",
+        "evidence_index": 8,
+        "confirming_index": 30,
+        "resolution": "REFUTED",
+        "source": "Federal Reserve Board / US News / Axios",
+        "confirming_source": "Federal Reserve",
+        "trust_delta": -0.1,
+        "original_text_snippet": "FOMC March meeting minutes released April 8 show more Federal Reserve officials now see possible rate hikes in 2026, dri",
+        "confirming_text_snippet": "FOMC held target range at 3.50-3.75% at March 17-18 2026 meeting (2nd consecutive hold). March CPI accelerated to 3.3% Y"
+      },
+      {
+        "timestamp": "2026-04-22T01:30:35Z",
+        "evidence_index": 12,
+        "confirming_index": 30,
+        "resolution": "REFUTED",
+        "source": "CNBC / Yahoo Finance",
+        "confirming_source": "Federal Reserve",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Fed held rates at 3.50-3.75% in March. Next FOMC decision Apr 29. March SEP median projects one cut in 2026. Futures pri",
+        "confirming_text_snippet": "FOMC held target range at 3.50-3.75% at March 17-18 2026 meeting (2nd consecutive hold). March CPI accelerated to 3.3% Y"
+      },
+      {
+        "timestamp": "2026-04-22T01:30:35Z",
+        "evidence_index": 19,
+        "confirming_index": 30,
+        "resolution": "REFUTED",
+        "source": "CNN Business",
+        "confirming_source": "Federal Reserve",
+        "trust_delta": -0.1,
+        "original_text_snippet": "FOMC held target rate at 3.50-3.75% on March 18, 2026, citing uncertain impact from US-Israel war with Iran on US econom",
+        "confirming_text_snippet": "FOMC held target range at 3.50-3.75% at March 17-18 2026 meeting (2nd consecutive hold). March CPI accelerated to 3.3% Y"
+      },
+      {
+        "timestamp": "2026-04-22T01:30:35Z",
+        "evidence_index": 26,
+        "confirming_index": 28,
+        "resolution": "CONFIRMED",
+        "source": "",
+        "confirming_source": "",
+        "trust_delta": 0.05,
+        "original_text_snippet": "LR MIGRATION RESET: posteriors reset to design priors; evidence log preserved.",
+        "confirming_text_snippet": "REPLAY BEGIN: 0 previously-fired indicators will be re-applied chronologically under current LR system. Posteriors reset"
+      },
+      {
+        "timestamp": "2026-04-22T01:30:35Z",
+        "evidence_index": 28,
+        "confirming_index": 29,
+        "resolution": "CONFIRMED",
+        "source": "",
+        "confirming_source": "",
+        "trust_delta": 0.05,
+        "original_text_snippet": "REPLAY BEGIN: 0 previously-fired indicators will be re-applied chronologically under current LR system. Posteriors reset",
+        "confirming_text_snippet": "REPLAY COMPLETE: 0 indicators applied, 0 skipped. Final posteriors: {'H1': 0.22, 'H2': 0.38, 'H3': 0.28, 'H4': 0.12}. In"
       }
     ],
     "effectiveTrust": {
-      "Axios": 0.3289,
+      "Axios": 0.0761,
       "BLS CPI release": 0.5,
       "BLS Employment Situation, April 2026 release": 0.5,
       "Bankrate Fed Rate Forecast, April 2026": 0.5,
       "CNN (": 0.5,
       "Federal Reserve": 0.3289,
-      "Federal Reserve Board": 0.3289,
+      "Federal Reserve Board": 0.0761,
       "Federal Reserve FOMC Minutes, released April 8 2026": 0.4565,
-      "Federal Reserve FOMC Statement, March 19 2026": 0.5,
+      "Federal Reserve FOMC Statement, March 19 2026": 0.4118,
       "Federal Reserve Summary of Economic Projections, March 2026": 0.5,
       "Goldman Sachs Asset Management": 0.5,
       "Goldman Sachs Global Investment Research, April 2026": 0.5,
-      "US News": 0.1936,
-      "CNBC": 0.65,
-      "Yahoo Finance": 0.5,
-      "Polymarket": 0.5
+      "US News": 0.05,
+      "CNBC": 0.6084,
+      "Yahoo Finance": 0.3693,
+      "Polymarket": 0.4555,
+      "CNN Business": 0.3693,
+      "CME FedWatch": 0.5,
+      "J.P. Morgan": 0.5
     },
-    "_last_scan_same_source_skipped": 2
-  }
+    "_last_scan_same_source_skipped": 16
+  },
+  "conditionalPredictions": [
+    {
+      "id": "cp_001",
+      "createdAt": "2026-04-19T05:50:51+00:00",
+      "conditionTopic": "calibration-fed-rate-2026",
+      "conditionHypothesis": "H1",
+      "conditionProbAtCreation": 0.2491,
+      "prediction": "IF no cuts (3.50-3.75%), THEN 2Y Treasury remains ≥3.5% through year-end",
+      "resolutionCriteria": "CME FedWatch 2Y close ≥3.5% on 2026-12-31",
+      "deadline": "2026-12-31",
+      "conditionalProbability": 0.78,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-green",
+      "lens": "GREEN",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "DROP",
+          "reasoning": "Assumes yield curve anchoring persists under sustained real-rate stress. AMBER sees regime risk in term-premium dynamics once the pause extends past historical norms.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "NEUTRAL",
+          "reasoning": "2Y yield level is a pure aggregate market outcome; no institutional resolution mechanism at stake.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Clean falsifiable CME close metric; directly tests no-cut transmission to 2Y.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "MODIFY",
+          "reasoning": "2Y >=3.5% is directionally fine under a pause scenario, but RED notes that if inflation reaccelerates or UST auction demand cracks, the 2Y could blow through 4.0%+. The ceiling-less phrasing misses the tail where rates go up, not just stay put.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "APPROVE",
+          "reasoning": "Names multiple specific decision-makers (agencies, officials, firms, states) and ties the outcome to their choices. Actor-incentive traceability strong.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": [
+        "GREEN",
+        "OCHRE"
+      ]
+    },
+    {
+      "id": "cp_002",
+      "createdAt": "2026-04-19T05:50:51+00:00",
+      "conditionTopic": "calibration-fed-rate-2026",
+      "conditionHypothesis": "H1",
+      "conditionProbAtCreation": 0.2491,
+      "prediction": "IF no cuts, THEN Fed publishes Dec FOMC minutes showing no consensus on 2027 rate path with hawkish dissent citing persistent inflation",
+      "resolutionCriteria": "Dec 2026 FOMC minutes contain explicit hawkish hold or deferred-2027-cuts language",
+      "deadline": "2026-12-31",
+      "conditionalProbability": 0.72,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-green",
+      "lens": "GREEN",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": "Explicit hawkish-dissent framing captures an institutional fracture signal inside the FOMC consensus.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "APPROVE",
+          "reasoning": "FOMC minutes language is exactly the institutional resolution channel BLUE privileges: Fed communication as an absorptive mechanism managing expectations.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "MODIFY",
+          "reasoning": "FOMC minutes parsing of 'hawkish language' is subjective; tighten to dissent-vote count.",
+          "modified_suggestion": "IF no cuts, THEN Dec 2026 FOMC minutes show at least 2 dissenting votes favoring either cut or hike."
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "Names institutional brittleness well: hawkish dissent and no-consensus language is exactly the 'committee fracture' pattern RED looks for. Falsifiable and sharp.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "APPROVE",
+          "reasoning": "Names multiple specific decision-makers (agencies, officials, firms, states) and ties the outcome to their choices. Actor-incentive traceability strong.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_003",
+      "createdAt": "2026-04-19T05:50:51+00:00",
+      "conditionTopic": "calibration-fed-rate-2026",
+      "conditionHypothesis": "H1",
+      "conditionProbAtCreation": 0.2491,
+      "prediction": "IF H1 holds, THEN core PCE inflation in Dec 2026 remains ≥2.6%",
+      "resolutionCriteria": "BEA Dec 2026 PCE core ≥2.6% YoY",
+      "deadline": "2026-12-31",
+      "conditionalProbability": 0.7,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-green",
+      "lens": "GREEN",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "NEUTRAL",
+          "reasoning": "Inflation persistence at sticky levels is a smooth-trend claim with no imminent regime discontinuity.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "NEUTRAL",
+          "reasoning": "Core PCE level is a pure aggregate macro outcome; no explicit resolution-mechanism framing.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "DROP",
+          "reasoning": "Core PCE >=2.6% is effectively the causal precondition for 'no cuts'; tautological with H1.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "Sticky core PCE >=2.6% correctly names the failure mode for the Fed (inflation won't fall to target). This is RED-coherent.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "NEUTRAL",
+          "reasoning": "Pure macro/financial aggregate (index close, yield, inflation print, unemployment, margin). No single named decision-maker controls the reading directly; VIOLET lens neutral.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_004",
+      "createdAt": "2026-04-19T05:50:51+00:00",
+      "conditionTopic": "calibration-fed-rate-2026",
+      "conditionHypothesis": "H2",
+      "conditionProbAtCreation": 0.7409,
+      "prediction": "IF one cut by Sept or Dec, THEN Fed funds futures for Q1 2027 show ≥50% probability of second cut by Nov 2026",
+      "resolutionCriteria": "CME FedWatch probability for Jan or March 2027 cut ≥50% as of 2026-11-30",
+      "deadline": "2026-11-30",
+      "conditionalProbability": 0.73,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-green",
+      "lens": "GREEN",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "NEUTRAL",
+          "reasoning": "Market-implied probability levels are meta-indicators that evolve continuously; no structural threshold.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "APPROVE",
+          "reasoning": "Fed funds futures pricing a follow-on cut is exactly the market-clearing/forward guidance mechanism BLUE expects: smooth institutional transmission.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "CME FedWatch probability threshold is a clean instrument.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "Futures pricing-in further cuts after one cut is consistent with a fragile-Fed narrative. Acceptable.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "APPROVE",
+          "reasoning": "Names multiple specific decision-makers (agencies, officials, firms, states) and ties the outcome to their choices. Actor-incentive traceability strong.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": [
+        "GREEN",
+        "OCHRE"
+      ]
+    },
+    {
+      "id": "cp_005",
+      "createdAt": "2026-04-19T05:50:51+00:00",
+      "conditionTopic": "calibration-fed-rate-2026",
+      "conditionHypothesis": "H2",
+      "conditionProbAtCreation": 0.7409,
+      "prediction": "IF one cut, THEN unemployment rises to 4.5-5.0% by Dec 2026",
+      "resolutionCriteria": "BLS Nov 2026 unemployment 4.5-5.0%",
+      "deadline": "2026-12-10",
+      "conditionalProbability": 0.7,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-green",
+      "lens": "GREEN",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "MODIFY",
+          "reasoning": "Directionally right that unemployment rises, but a 4.5-5.0% band smooths over the Sahm-threshold crossing that would itself force deeper cuts.",
+          "modified_suggestion": "IF one cut by Sept, THEN unemployment crosses the Sahm-rule threshold (3m avg >0.5pp above 12m trough) by Dec 2026, triggering market repricing to >=3 cuts in first half 2027."
+        },
+        "BLUE": {
+          "verdict": "DROP",
+          "reasoning": "A rise to 4.5-5.0% after only one cut overstates labor-market breakdown; Fed guidance + absorption usually prevents a 100bp jump in 8 months from a single-cut regime.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Counterintuitive one-cut-with-rising-unemployment is informative if it resolves.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "Unemployment rising to 4.5-5.0% with a cut correctly identifies that the cut would be reactive to labor weakness. RED-coherent.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "NEUTRAL",
+          "reasoning": "Pure macro/financial aggregate (index close, yield, inflation print, unemployment, margin). No single named decision-maker controls the reading directly; VIOLET lens neutral.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": [
+        "GREEN",
+        "OCHRE"
+      ]
+    },
+    {
+      "id": "cp_006",
+      "createdAt": "2026-04-19T05:50:53+00:00",
+      "conditionTopic": "calibration-fed-rate-2026",
+      "conditionHypothesis": "H1",
+      "conditionProbAtCreation": 0.2491,
+      "prediction": "IF no cuts (3.50-3.75%), THEN credit spreads (HY-OAS) widen to 400-450bps by Sept 2026, reflecting accumulated stress from sustained real rates above neutral",
+      "resolutionCriteria": "Bloomberg HY OAS index closes 400-450bps range on any date in Sept 2026",
+      "deadline": "2026-09-30",
+      "conditionalProbability": 0.62,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-ochre",
+      "lens": "OCHRE",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": "HY-OAS 400-450bps widening captures accumulated-stress threshold crossing, a classic credit-regime break.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "DROP",
+          "reasoning": "HY OAS widening to 400-450bps on sustained pause overstates credit-market breakdown; primary-market access and Fed liquidity facilities typically absorb stress before spreads move this wide without recession.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "HY OAS widening under sustained rates is a real stress indicator distinct from GREEN's bullish reads.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "HY OAS widening to 400-450bps under sustained restrictive rates is exactly RED's thesis â€” credit is the crack point. Strong.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "NEUTRAL",
+          "reasoning": "Pure macro/financial aggregate (index close, yield, inflation print, unemployment, margin). No single named decision-maker controls the reading directly; VIOLET lens neutral.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": [
+        "OCHRE",
+        "GREEN"
+      ]
+    },
+    {
+      "id": "cp_007",
+      "createdAt": "2026-04-19T05:50:53+00:00",
+      "conditionTopic": "calibration-fed-rate-2026",
+      "conditionHypothesis": "H1",
+      "conditionProbAtCreation": 0.2491,
+      "prediction": "IF pause continues, THEN 10Y Treasury yield falls to 3.8-4.0% by end-Q3 2026, as global rate cuts (ECB, BoE) and slower US growth drive term-premium compression regardless of Fed action",
+      "resolutionCriteria": "CME 10Y Treasury futures settle in 3.8-4.0% yield range on 2026-09-30",
+      "deadline": "2026-09-30",
+      "conditionalProbability": 0.58,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-ochre",
+      "lens": "OCHRE",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": "Term-premium compression through global decoupling is a regime-shift argument, not smooth extrapolation.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "APPROVE",
+          "reasoning": "Global rate-cut synchronization compressing term premium is a classic institutional-channel absorption story.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "MODIFY",
+          "reasoning": "Assumes global rate-cut synchronization; rephrase so term-premium mechanism is falsifiable without that shared assumption.",
+          "modified_suggestion": "IF no cuts, THEN 10Y term premium (ACM model) declines by at least 30bps between Apr-Sep 2026 regardless of ECB/BoE path."
+        },
+        "RED": {
+          "verdict": "MODIFY",
+          "reasoning": "10Y compressing to 3.8-4.0% on global rate cuts is plausible but understates term-premium blowout risk (fiscal, auction failure). Suggest widening band to include an upside tail.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "NEUTRAL",
+          "reasoning": "Pure macro/financial aggregate (index close, yield, inflation print, unemployment, margin). No single named decision-maker controls the reading directly; VIOLET lens neutral.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": [
+        "OCHRE",
+        "GREEN"
+      ]
+    },
+    {
+      "id": "cp_008",
+      "createdAt": "2026-04-19T05:50:53+00:00",
+      "conditionTopic": "calibration-fed-rate-2026",
+      "conditionHypothesis": "H1",
+      "conditionProbAtCreation": 0.2491,
+      "prediction": "IF pause continues through Q3, THEN residential investment (% of GDP) contracts to 5.8-5.9% by Q3 2026, reflecting housing demand destruction from mortgage rates stuck above 6.5%",
+      "resolutionCriteria": "BEA Q3 2026 GDP release shows residential fixed investment < 6.0% of GDP",
+      "deadline": "2026-10-28",
+      "conditionalProbability": 0.67,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-ochre",
+      "lens": "OCHRE",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": "Residential-investment contraction below 6% of GDP is a housing-regime threshold.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "NEUTRAL",
+          "reasoning": "Residential investment share is an aggregate; not a specific mechanism claim.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Residential investment pct GDP is sharp and genuinely tests housing demand destruction.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "Residential investment contraction to <6% of GDP from mortgage-rate pressure names the housing channel cracking. RED-aligned.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "NEUTRAL",
+          "reasoning": "Pure macro/financial aggregate (index close, yield, inflation print, unemployment, margin). No single named decision-maker controls the reading directly; VIOLET lens neutral.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": [
+        "OCHRE",
+        "GREEN"
+      ]
+    },
+    {
+      "id": "cp_009",
+      "createdAt": "2026-04-19T05:50:53+00:00",
+      "conditionTopic": "calibration-fed-rate-2026",
+      "conditionHypothesis": "H2",
+      "conditionProbAtCreation": 0.7409,
+      "prediction": "IF one cut occurs, THEN 10Y Treasury yield compresses to 3.6-3.8% by end-2026, as global rate-cut cycle synchronizes and reshapes term structure independent of Fed",
+      "resolutionCriteria": "CME 10Y Treasury futures yield 3.6-3.8% on 2026-12-31",
+      "deadline": "2026-12-31",
+      "conditionalProbability": 0.64,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-ochre",
+      "lens": "OCHRE",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": "Term-structure reshaping independent of Fed is explicit regime-shift framing.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "APPROVE",
+          "reasoning": "Global-cycle synchronization reshaping term structure is institutional macro-channel absorption.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "MODIFY",
+          "reasoning": "Redundant with 208 under different hypothesis; reframe to test rate-cut pass-through specifically.",
+          "modified_suggestion": "IF one cut, THEN correlation of daily 10Y moves with Fed-funds-futures moves <0.35 in Q4 2026."
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "10Y compression to 3.6-3.8% on global cut cycle is coherent with coordinated easing. OK.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "NEUTRAL",
+          "reasoning": "Pure macro/financial aggregate (index close, yield, inflation print, unemployment, margin). No single named decision-maker controls the reading directly; VIOLET lens neutral.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": [
+        "OCHRE",
+        "GREEN"
+      ]
+    },
+    {
+      "id": "cp_010",
+      "createdAt": "2026-04-19T05:50:53+00:00",
+      "conditionTopic": "calibration-fed-rate-2026",
+      "conditionHypothesis": "H2",
+      "conditionProbAtCreation": 0.7409,
+      "prediction": "IF one cut lands in H2 2026, THEN US current account deficit widens to -5.2% to -5.5% of GDP in Q4 2026, reflecting lower real rates boosting demand and import growth",
+      "resolutionCriteria": "BEA Q4 2026 GDP release (Jan 2027) shows current account ≤ -5.2% of GDP",
+      "deadline": "2027-01-31",
+      "conditionalProbability": 0.59,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-ochre",
+      "lens": "OCHRE",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": "Current-account widening to -5.2% is a structural macro imbalance signal, correctly framed.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "NEUTRAL",
+          "reasoning": "Current-account deficit is an aggregate outcome.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Current-account-deficit widening is a novel lens not in GREEN portfolio; valuable contrast.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "Current account deficit widening to -5.2 to -5.5% under cut cycle correctly flags external imbalance buildup. Strong RED framing.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "NEUTRAL",
+          "reasoning": "Pure macro/financial aggregate (index close, yield, inflation print, unemployment, margin). No single named decision-maker controls the reading directly; VIOLET lens neutral.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": [
+        "OCHRE",
+        "GREEN"
+      ]
+    },
+    {
+      "id": "cp_011",
+      "createdAt": "2026-04-19T05:50:53+00:00",
+      "conditionTopic": "calibration-fed-rate-2026",
+      "conditionHypothesis": "H2",
+      "conditionProbAtCreation": 0.7409,
+      "prediction": "IF one cut, THEN corporate debt-to-EBITDA for S&P 500 rises to 2.8-3.0x by Q4 2026, as lower rates enable refinancing and M&A activity accelerates",
+      "resolutionCriteria": "Bloomberg or Fed SPF reports median S&P 500 leverage 2.8-3.0x for Q4 2026",
+      "deadline": "2026-12-31",
+      "conditionalProbability": 0.61,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-ochre",
+      "lens": "OCHRE",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": "Leverage ratchet under renewed easing captures cycle-regime inflection.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "NEUTRAL",
+          "reasoning": "Corporate leverage is an aggregate; mechanism not explicit.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Corporate leverage tracking is differentiated and falsifiable.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "Corporate leverage to 2.8-3.0x on cut-driven refi/M&A is a brittleness accumulation indicator. Good.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "NEUTRAL",
+          "reasoning": "Pure macro/financial aggregate (index close, yield, inflation print, unemployment, margin). No single named decision-maker controls the reading directly; VIOLET lens neutral.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": [
+        "OCHRE",
+        "GREEN"
+      ]
+    },
+    {
+      "id": "cp_012",
+      "createdAt": "2026-04-22T02:35:31+00:00",
+      "conditionTopic": "calibration-fed-rate-2026",
+      "conditionHypothesis": "H1",
+      "conditionProbAtCreation": 0.3385,
+      "prediction": "IF no further cuts (3.50-3.75%), THEN Fed publishes 2027 SEP Summary projections (Dec 2026 FOMC) showing median fed funds rate >=3.5% with hawkish dot dots dispersed high",
+      "resolutionCriteria": "Observable: Dec 2026 FOMC Summary of Economic Projections dot plot median year-end 2027 projection >=3.5%; dissent or hawkish commentary in minutes",
+      "deadline": "2026-12-31",
+      "conditionalProbability": 0.74,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "monetary-policy",
+        "fed-funds",
+        "inflation"
+      ],
+      "source": "agent-green",
+      "lens": "GREEN",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "NEUTRAL",
+          "reasoning": "Fed SEP projection mechanics — within-framework monetary-policy signaling, not a regime shift.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "APPROVE",
+          "reasoning": "Fed hawkish hold narrative is institutional baseline; SEP projections have clear precedent. 0.74 reasonable.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "Hawkish hold is RED-aligned. Reasonable.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "MODIFY",
+          "reasoning": "Fed dot plot is literally the output of 19 named FOMC participants' individual projections. Powell's communication strategy and Trump's ongoing pressure on the Fed (potential Powell replacement 2026) introduces agency variables that probability doesn't account for. Trump has publicly demanded cuts — his appointees (Bowman, Waller) skew dovish.",
+          "modified_suggestion": "Lower to 0.60; Trump-appointee composition of FOMC plus explicit WH pressure makes hawkish-hold less likely."
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Dot plot median is unambiguous. Clean indicator.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_013",
+      "createdAt": "2026-04-22T02:35:31+00:00",
+      "conditionTopic": "calibration-fed-rate-2026",
+      "conditionHypothesis": "H2",
+      "conditionProbAtCreation": 0.4593,
+      "prediction": "IF one cut by Dec (3.25-3.50%), THEN CME FedWatch probability for >=2 cuts in 2027 reaches 60%+ by Nov 2026 meeting conclusion",
+      "resolutionCriteria": "Observable: FOMC November 2026 post-meeting statement or minutes reference conditions for additional easing in 2027; AND CME FedWatch as of 2026-11-30 shows >=60% probability for >=2 cumulative 2027 cuts.",
+      "deadline": "2026-11-30",
+      "conditionalProbability": 0.71,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "monetary-policy",
+        "fed-funds",
+        "forward-guidance"
+      ],
+      "source": "agent-green",
+      "lens": "GREEN",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "NEUTRAL",
+          "reasoning": "CME FedWatch forward pricing — framework-continuation measurement.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "APPROVE",
+          "reasoning": "Forward guidance + CME probability pivot is standard institutional signaling. BLUE-compatible diplomatic-style telegraphing.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "MODIFY",
+          "reasoning": "CME FedWatch at 60%+ for 2+ cuts in 2027 by Nov 2026 is aggressive timing. Markets often price more cuts than deliver; but 0.71 overconfident on market coordination. Also, Fed communicating 2027 path at Nov meeting when dot plot isn't released until Dec is unusual.",
+          "modified_suggestion": "Lower probability to 0.55."
+        },
+        "VIOLET": {
+          "verdict": "APPROVE",
+          "reasoning": "CME FedWatch is market-priced; reasonable given Powell's reaction function.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Compound observable with FedWatch + FOMC language is strong.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_014",
+      "createdAt": "2026-04-22T02:35:32+00:00",
+      "conditionTopic": "calibration-fed-rate-2026",
+      "conditionHypothesis": "H3",
+      "conditionProbAtCreation": 0.1231,
+      "prediction": "IF two+ cuts by Dec (3.00-3.25% or below), THEN unemployment rises to 4.7-5.1% range by Nov 2026, confirming Phillips curve correlation",
+      "resolutionCriteria": "Observable: BLS monthly unemployment report for November 2026 shows rate in 4.7-5.1% range; Fed minutes acknowledge Phillips curve-driven rate cuts",
+      "deadline": "2026-12-15",
+      "conditionalProbability": 0.69,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "unemployment",
+        "monetary-policy",
+        "phillips-curve"
+      ],
+      "source": "agent-green",
+      "lens": "GREEN",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "MODIFY",
+          "reasoning": "Phillips curve correlation has been broken/unreliable for 15+ years — assuming it as confirmable co-movement is exactly the stale-framework problem AMBER flags. Remove the Phillips-curve framing.",
+          "modified_suggestion": "Decouple the unemployment target from Phillips-curve attribution; just observe whether unemployment lands in 4.7-5.1% and Fed language cites labor slack (not Phillips mechanism specifically)."
+        },
+        "BLUE": {
+          "verdict": "MODIFY",
+          "reasoning": "Phillips-curve correlation has broken down in recent cycles; Fed doesn't always cut on unemployment rise. Narrow 4.7-5.1% range is overly precise. 0.69 too high.",
+          "modified_suggestion": "Lower to 0.45; widen UE range to 4.5-5.3%."
+        },
+        "RED": {
+          "verdict": "MODIFY",
+          "reasoning": "Phillips curve correlation is WEAKER than assumed — 2+ cuts can happen from financial-stability concerns without UE rising. RED would flag this as mechanism-assumption error. Also, UE 4.7-5.1% is a narrow band.",
+          "modified_suggestion": "Widen band to 4.5-5.5%; drop Phillips curve attribution requirement."
+        },
+        "VIOLET": {
+          "verdict": "NEUTRAL",
+          "reasoning": "Phillips-curve correlation observable — structural measurement.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "MODIFY",
+          "reasoning": "Conflates H3 (two cuts) with Phillips curve confirmation — Fed can cut for reasons beyond unemployment (financial conditions, disinflation). Observable for 'Fed minutes acknowledge Phillips curve-driven rate cuts' is subjective.",
+          "modified_suggestion": "Drop the Phillips curve framing clause; test only unemployment range 4.7-5.1% as the downstream observable."
+        }
+      },
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_015",
+      "createdAt": "2026-04-22T02:35:32+00:00",
+      "conditionTopic": "calibration-fed-rate-2026",
+      "conditionHypothesis": "H4",
+      "conditionProbAtCreation": 0.0791,
+      "prediction": "IF rate hike (inflation forces reversal), THEN CPI headline inflation remains >=4% YoY through Q4 2026, forcing Fed to signal rate hold or hike at Dec FOMC",
+      "resolutionCriteria": "Observable: BLS CPI report for Nov 2026 shows headline inflation >=4% YoY; Fed Dec 2026 FOMC statement signals hold or hike for 2027",
+      "deadline": "2026-12-31",
+      "conditionalProbability": 0.62,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "inflation",
+        "monetary-policy",
+        "fed-funds"
+      ],
+      "source": "agent-green",
+      "lens": "GREEN",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": "Inflation reversal scenario — H4 is the regime-break branch. 0.62 reasonable.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "MODIFY",
+          "reasoning": "CPI >=4% YoY through Q4 2026 is unlikely given disinflationary trajectory and institutional absorption (supply chain normalization). BLUE sees continued uncertainty-collapse on inflation. 0.62 too high.",
+          "modified_suggestion": "Lower to 0.35."
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "Stagflation path is RED-aligned. Probability reasonable given tariff-driven inflation risk.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "MODIFY",
+          "reasoning": "Rate hike scenario ignores Trump's well-documented willingness to fire/replace Powell if hikes occur. Powell's term ends May 2026, and Trump has explicitly threatened to name a shadow chair. Probability of Fed 'signaling hike' under Trump-picked chair is near zero regardless of CPI.",
+          "modified_suggestion": "Lower to 0.35; Trump's personnel leverage over Fed chairmanship (successor appointed 2026) makes hawkish signal politically suppressed."
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Tail-scenario anchor needed for Fed topic triangulation.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_016",
+      "createdAt": "2026-04-22T02:35:34+00:00",
+      "conditionTopic": "calibration-fed-rate-2026",
+      "conditionHypothesis": "H3",
+      "conditionProbAtCreation": 0.1231,
+      "prediction": "IF H3 (two+ cuts to 3.00-3.25% or below), THEN liquidity cascade forces faster-than-planned second cut: financial conditions ease rapidly after first cut (mid-cycle announcement); equity rallies 5-8% within 3 weeks; Fed forced to cut again by September to prevent overheating expectations despite inflation remaining >2.4% core PCE.",
+      "resolutionCriteria": "Observable: (1) First cut occurs by July 31, 2026. (2) S&P 500 rallies 5-8% in 15-21 days post-cut. (3) Fed releases next cut (second cumulative 2026 cut) by Sept 30, 2026. (4) Core PCE YoY ≥2.4% at time of second cut announcement. Condition fires if (1) AND (2) AND (3) AND (4).",
+      "deadline": "2026-09-30",
+      "conditionalProbability": 0.59,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "financial-conditions-cascade",
+        "policy-asymmetry",
+        "expectation-feedback"
+      ],
+      "source": "agent-ochre",
+      "lens": "OCHRE",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": "Four-part conjunction (cut-timing, equity rally, second cut, inflation >2.4%) is a specific cascade-mechanism observable.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "MODIFY",
+          "reasoning": "Forced second cut by Sept requires narrow sequencing. BLUE sees institutional patience — Fed holds between cuts regardless of equity rally. 0.59 too high.",
+          "modified_suggestion": "Lower to 0.40."
+        },
+        "RED": {
+          "verdict": "MODIFY",
+          "reasoning": "Conjunction of 4 specific conditions is stringent — 0.59 probability too high for 4-part AND. Also, Fed cutting twice by Sept while PCE >2.4% assumes policy error visible only in hindsight.",
+          "modified_suggestion": "Lower probability to 0.40."
+        },
+        "VIOLET": {
+          "verdict": "MODIFY",
+          "reasoning": "Assumes 'Fed forced' by 'financial conditions' — classic structural-determinism framing that VIOLET rejects. Powell's Fed has a track record of resisting market pressure. The 'cascade' describes market pricing, not Powell's decision function. Compound AND-condition low anyway.",
+          "modified_suggestion": "Lower to 0.40; Powell repeatedly demonstrated willingness to resist market pressure. 'Forced' framing underweights agency."
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Four-condition compound is tight and falsifiable.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_017",
+      "createdAt": "2026-04-22T04:18:41+00:00",
+      "conditionTopic": "calibration-fed-rate-2026",
+      "conditionHypothesis": "H1",
+      "conditionProbAtCreation": 0.3385,
+      "prediction": "IF no further cuts holds, THEN core PCE rebounds to >3.5% by Q4 2026 and Fed funds futures reprice >50bps within 60 days, forcing credibility reassessment.",
+      "resolutionCriteria": "PCE inflation >3.5% on any monthly print Q3-Q4 2026, followed by >50bps Fed funds futures repricing within next 60 days.",
+      "deadline": "2026-11-30",
+      "conditionalProbability": 0.24,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "regime-shift",
+        "inflation-surprise",
+        "credibility-test"
+      ],
+      "source": "agent-amber",
+      "lens": "AMBER",
+      "criticVerdicts": {},
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_018",
+      "createdAt": "2026-04-22T04:18:43+00:00",
+      "conditionTopic": "calibration-fed-rate-2026",
+      "conditionHypothesis": "H2",
+      "conditionProbAtCreation": 0.4593,
+      "prediction": "IF one cut occurs by year-end 2026, THEN Powell cuts exactly once in Q3 2026 (25bps to 3.25-3.50% range) citing inflation moderation, then holds through year-end.",
+      "resolutionCriteria": "Fed funds effective rate 3.25-3.50% by 2026-12-31. FOMC statement cites inflation moderation for one 25bps cut in Q3 2026. No additional cuts or hikes.",
+      "deadline": "2026-12-31",
+      "conditionalProbability": 0.48,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "monetary_policy",
+        "political_economy",
+        "inflation"
+      ],
+      "source": "agent-violet",
+      "lens": "VIOLET",
+      "criticVerdicts": {},
+      "lensAgreement": []
+    }
+  ],
+  "schemaVersion": 2,
+  "migratedAt": "2026-04-21T19:03:40+00:00"
 }

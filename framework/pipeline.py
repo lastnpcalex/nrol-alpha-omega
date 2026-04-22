@@ -118,7 +118,7 @@ def process_evidence(
 
     # 1. Add evidence with governor enrichment
     topic = add_evidence(topic, entry)
-    evidence_id = topic["evidenceLog"][-1]["id"]
+    evidence_id = topic["evidenceLog"][-1].get("id", f"ev_{len(topic['evidenceLog']):03d}")
     result["evidence_id"] = evidence_id
     result["evidence_text"] = entry.get("text", "")
     result["url"] = entry.get("url")

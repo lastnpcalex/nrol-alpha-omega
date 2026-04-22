@@ -1,0 +1,841 @@
+{
+  "meta": {
+    "slug": "calibration-ai-corporate-moat-2028",
+    "title": "AI Corporate Market Concentration by 2028",
+    "question": "By 2028-Q4, do the top-3 commercial generative-AI API providers hold ≥60% combined revenue share of the global commercial GenAI API market, as reported by at least one major market-research firm (Gartner, IDC, Bloomberg Intelligence, or equivalent)?",
+    "resolution": "Resolved H1 (hyper-concentrated) if best available market-research data shows top-3 providers at ≥75% combined revenue share. H2 (concentrated) if 60-74%. H3 (fragmented) if 40-59%. H4 (commoditized) if <40%. Primary source: Gartner/IDC annual AI market report or Bloomberg Intelligence published before 2029-03-01. Fallback: consensus of ≥3 analyst firms. resolutionDate: 2028-12-31.",
+    "created": "",
+    "lastUpdated": "2026-04-22T18:41:05+00:00",
+    "status": "ACTIVE",
+    "dayCount": 0,
+    "startDate": "2026-04-22",
+    "classification": "CALIBRATION",
+    "topicType": "tech",
+    "resolutionDate": "2028-12-31"
+  },
+  "tagConfig": {
+    "_docs": "EARNINGS/BENCHMARK/SURVEY favor H1/H2 (concentration) or H3/H4 (fragmentation) per direction. REGULATORY always favors H3/H4.",
+    "availableTags": [
+      "EVENT",
+      "DATA",
+      "RHETORIC",
+      "EARNINGS",
+      "REGULATORY",
+      "BENCHMARK",
+      "SURVEY",
+      "PREDICTION",
+      "ACQUISITION"
+    ],
+    "directionHints": {
+      "REGULATORY": {
+        "H3": 1,
+        "H4": 1,
+        "H1": -1,
+        "H2": -1
+      },
+      "ACQUISITION": {
+        "H1": 1,
+        "H2": 1,
+        "H3": -1,
+        "H4": -1
+      }
+    },
+    "escalationTags": [
+      "ACQUISITION"
+    ],
+    "deescalationTags": [
+      "REGULATORY"
+    ]
+  },
+  "model": {
+    "hypotheses": {
+      "H1": {
+        "label": "Hyper-concentrated: top-3 hold ≥75% GenAI API revenue share",
+        "midpoint": 80,
+        "unit": "% top-3 combined revenue share",
+        "description": "OpenAI/Google/Anthropic maintain dominant moat. Open-weights models fail commercially. Infrastructure lock-in (contracts, fine-tuning, compliance) sustains oligopoly. Malone's local-models thesis fails at commercial scale.",
+        "posterior": 0.3935
+      },
+      "H2": {
+        "label": "Concentrated oligopoly: top-3 hold 60-74% GenAI API revenue share",
+        "midpoint": 67,
+        "unit": "% top-3 combined revenue share",
+        "description": "Top-3 remain dominant but face meaningful competition from open-weights commercial deployments (Meta Llama, Mistral, Cohere) and regional providers. Significant moat persists via safety certs, RLHF quality, and enterprise SLAs.",
+        "posterior": 0.5383
+      },
+      "H3": {
+        "label": "Fragmented market: top-3 hold 40-59% GenAI API revenue share",
+        "midpoint": 50,
+        "unit": "% top-3 combined revenue share",
+        "description": "Open-weights commercial adoption, regional providers, and enterprise self-hosting erode top-3 share. Llama commercial licensing, Mistral B2B, and self-hosted deployments collectively capture >40% of enterprise spend.",
+        "posterior": 0.0632
+      },
+      "H4": {
+        "label": "Commoditized: top-3 hold <40% GenAI API revenue share",
+        "midpoint": 30,
+        "unit": "% top-3 combined revenue share",
+        "description": "Open-weights achieve commercial parity — capability gap closes, inference costs equalize, enterprises self-host at scale. Top-3 moat collapses. Validates Malone's claim that local models are too accessible for a durable moat.",
+        "posterior": 0.005
+      }
+    },
+    "expectedValue": 70.86,
+    "expectedUnit": "weeks",
+    "posteriorHistory": [
+      {
+        "date": "2026-04-22",
+        "note": "Initial priors. OpenAI/Google/Anthropic estimated at >80% GenAI API share Q1 2026 (no authoritative public figure — analyst consensus). Concentrated-camp prior (H1+H2=60%) reflects current dominance and structural advantages (enterprise contracts, safety certs, RLHF quality). Fragmentation-camp (H3+H4=40%) reflects Meta Llama commercial trajectory, open-weights benchmark convergence trend, and historical pattern of infrastructure commoditization within 3-5 years of tech waves. H2 > H1 because full 75%+ lock-in requires no meaningful open-weights commercial revenue — less likely given Meta's strategic commitment to Llama. Prior informed by Bsky thread (proptermalone/lastnpcalex debate, 2026-04-22) — moat debate sourced from social media RHETORIC, no fired indicators.",
+        "H1": 0.25,
+        "H2": 0.35,
+        "H3": 0.28,
+        "H4": 0.12
+      },
+      {
+        "date": "2026-04-22",
+        "posteriors": {
+          "H1": 0.3515,
+          "H2": 0.4306,
+          "H3": 0.1968,
+          "H4": 0.0211
+        },
+        "priors": {
+          "H1": 0.25,
+          "H2": 0.35,
+          "H3": 0.28,
+          "H4": 0.12
+        },
+        "updateMethod": "bayesian_update",
+        "evidenceRefs": [
+          "ev_002"
+        ],
+        "likelihoods": {
+          "H1": 0.4,
+          "H2": 0.35,
+          "H3": 0.2,
+          "H4": 0.05
+        },
+        "note": "Directional concentration signal: top-3 enterprise LLM share reported ~88%, consistent with H1/H2. Not Gartner/IDC annual — t1_top3_80pct_share_confirmed NOT FIRED. Likelihoods tilt toward concentration but conservative (analyst synthesis, not audited).",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        }
+      },
+      {
+        "date": "2026-04-22",
+        "posteriors": {
+          "H1": 0.423,
+          "H2": 0.4535,
+          "H3": 0.1185,
+          "H4": 0.005
+        },
+        "priors": {
+          "H1": 0.3515,
+          "H2": 0.4306,
+          "H3": 0.1968,
+          "H4": 0.0211
+        },
+        "updateMethod": "bayesian_update",
+        "evidenceRefs": [
+          "ev_003"
+        ],
+        "likelihoods": {
+          "H1": 0.4,
+          "H2": 0.35,
+          "H3": 0.2,
+          "H4": 0.05
+        },
+        "note": "Directional concentration signal: top-3 enterprise LLM share reported ~88%, consistent with H1/H2. Not Gartner/IDC annual — t1_top3_80pct_share_confirmed NOT FIRED. Analyst synthesis only.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "turningPoint": {
+          "type": "BRANCH_DEATH",
+          "hypothesis": "H4",
+          "lastPosterior": 0.005
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        }
+      },
+      {
+        "date": "2026-04-22",
+        "posteriors": {
+          "H1": 0.4207,
+          "H2": 0.4933,
+          "H3": 0.081,
+          "H4": 0.005
+        },
+        "priors": {
+          "H1": 0.423,
+          "H2": 0.4535,
+          "H3": 0.1185,
+          "H4": 0.005
+        },
+        "updateMethod": "bayesian_update",
+        "evidenceRefs": [
+          "ev_003"
+        ],
+        "likelihoods": {
+          "H1": 0.32,
+          "H2": 0.35,
+          "H3": 0.22,
+          "H4": 0.11
+        },
+        "note": "Meta hedging toward closed-source weakens the open-weights commercial revenue thesis driving H3/H4. No indicator fires (not an acquisition, not a revenue disclosure). Mild concentration tilt.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        }
+      },
+      {
+        "date": "2026-04-22",
+        "posteriors": {
+          "H1": 0.3935,
+          "H2": 0.5383,
+          "H3": 0.0632,
+          "H4": 0.005
+        },
+        "priors": {
+          "H1": 0.4207,
+          "H2": 0.4933,
+          "H3": 0.081,
+          "H4": 0.005
+        },
+        "updateMethod": "bayesian_update",
+        "evidenceRefs": [
+          "ev_004"
+        ],
+        "likelihoods": {
+          "H1": 0.3,
+          "H2": 0.35,
+          "H3": 0.25,
+          "H4": 0.1
+        },
+        "note": "Non-designation is the opposite of t2_regulatory_concentration_finding firing. Removes near-term regulatory tailwind for H3/H4. Tagged EVENT (not REGULATORY) because no formal action taken — absence of action. Mild concentration tilt.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "turningPoint": {
+          "type": "THRESHOLD_CROSSED",
+          "hypothesis": "H2",
+          "from": 0.4933,
+          "to": 0.5383
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        }
+      }
+    ]
+  },
+  "subModels": {},
+  "indicators": {
+    "tiers": {
+      "tier1_critical": [
+        {
+          "id": "t1_top3_80pct_share_confirmed",
+          "desc": "Gartner, IDC, or Bloomberg Intelligence publishes annual GenAI API market report showing top-3 providers at ≥80% combined revenue share in any calendar year 2026-2028. Observable via published market research reports.",
+          "posteriorEffect": "H1 +25pp, H2 +8pp, H3 -22pp, H4 -11pp",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        },
+        {
+          "id": "t1_open_weights_5b_revenue",
+          "desc": "An open-weights AI provider (Meta Llama API, Mistral, Cohere, or equivalent) reports ≥$5B annual GenAI API revenue in any annual earnings or Bloomberg-verified report before 2028-12-31. Observable via SEC filings or earnings calls.",
+          "posteriorEffect": "H3 +20pp, H4 +15pp, H1 -20pp, H2 -15pp",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        }
+      ],
+      "tier2_strong": [
+        {
+          "id": "t2_llama_enterprise_30pct",
+          "desc": "Gartner or State of AI annual survey confirms ≥30% of Fortune 500 enterprise AI deployments run primarily on open-weights models without top-3 API fees.",
+          "posteriorEffect": "H3 +12pp, H4 +8pp, H1 -12pp, H2 -8pp",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        },
+        {
+          "id": "t2_openai_60b_annual",
+          "desc": "OpenAI discloses ≥$60B annual revenue with ≥65% attributed to GenAI API/enterprise products (per IPO S-1, annual report, or Bloomberg verified figure).",
+          "posteriorEffect": "H1 +12pp, H2 +8pp, H3 -12pp, H4 -8pp",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        },
+        {
+          "id": "t2_regulatory_concentration_finding",
+          "desc": "EU Digital Markets Act enforcement or US DOJ/FTC filing formally classifies AI API market as unlawfully concentrated or designates a major AI provider as 'gatekeeper' with structural remedy orders.",
+          "posteriorEffect": "H3 +10pp, H4 +8pp, H1 -10pp, H2 -8pp",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        }
+      ],
+      "tier3_suggestive": [
+        {
+          "id": "t3_benchmark_parity_open_closed",
+          "desc": "Best open-weights model scores within 10% of best closed frontier model on ≥3 major benchmarks (HELM, LMSYS Chatbot Arena ELO, MMLU-Pro) for ≥2 consecutive quarters.",
+          "posteriorEffect": "H3 +5pp, H4 +3pp, H1 -5pp, H2 -3pp",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        },
+        {
+          "id": "t3_multivendor_enterprise_40pct",
+          "desc": "Stack Overflow Developer Survey or State of AI shows ≥40% of enterprises regularly use ≥3 different AI providers (low lock-in signal).",
+          "posteriorEffect": "H3 +3pp, H4 +3pp, H1 -3pp, H2 -3pp",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        }
+      ],
+      "anti_indicators": [
+        {
+          "id": "anti_h1_open_commercial_revenue",
+          "desc": "Open-weights provider reports >$5B annual commercial revenue — contradicts hyper-concentrated moat.",
+          "posteriorEffect": "H1 -15pp (redistributed to H3+H4)",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        },
+        {
+          "id": "anti_h2_sub50_fragmentation",
+          "desc": "Major research firm publishes top-3 combined revenue share below 50% — contradicts oligopoly.",
+          "posteriorEffect": "H2 -15pp (redistributed to H3+H4)",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        },
+        {
+          "id": "anti_h3_mega_acquisition",
+          "desc": "Top-3 provider acquires leading open-weights competitor (Meta AI, Mistral, Cohere, or equivalent with >$3B valuation) — market reconsolidates.",
+          "posteriorEffect": "H3 -12pp, H4 -8pp (redistributed to H1+H2)",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        },
+        {
+          "id": "anti_h4_persistent_dominance",
+          "desc": "Top-3 maintain ≥70% combined share through 2027 with no regulatory challenge and no open-weights provider exceeding $1B commercial revenue — H4 commoditization implausible.",
+          "posteriorEffect": "H4 -8pp (redistributed to H1+H2)",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        }
+      ]
+    }
+  },
+  "actorModel": {
+    "description": "Commercial AI market concentration driven by provider pricing, open-source release strategy, hyperscaler lock-in, and regulatory intervention.",
+    "actors": {
+      "openai": {
+        "name": "OpenAI",
+        "role": "Current market leader — largest GenAI API revenue and developer mindshare",
+        "decisionStyle": "Rational/commercial. Capped-profit structure creates IPO pressure. Balance revenue growth vs. developer adoption.",
+        "biases": [
+          "Anchoring to current enterprise contracts",
+          "Reluctance to commoditize core API"
+        ],
+        "filters": [
+          "Microsoft partnership constraints",
+          "Board oversight"
+        ],
+        "overrides": [
+          "Open-weights parity threat could force price cuts or open-sourcing older models"
+        ]
+      },
+      "google_deepmind": {
+        "name": "Google DeepMind / Gemini",
+        "role": "Second-largest — defends via GCP infrastructure lock-in and enterprise integration",
+        "decisionStyle": "Institutional/defensive. TPU access, GCP bundling, Workspace integration as moat.",
+        "biases": [
+          "Internal competition between Search and Cloud AI divisions"
+        ],
+        "filters": [
+          "DOJ antitrust scrutiny (existing search monopoly case)"
+        ],
+        "overrides": [
+          "OpenAI dominance threat could force aggressive price undercutting"
+        ]
+      },
+      "meta_ai": {
+        "name": "Meta AI (Llama)",
+        "role": "Key swing actor — open Llama release undermines moat for all parties including Meta",
+        "decisionStyle": "Strategic openness. Meta benefits from preventing OpenAI/Google monopoly (lowers own inference costs). Zuckerberg: 'open-source is right AND good for Meta'.",
+        "biases": [
+          "Reluctance to build API business competing with own social AI"
+        ],
+        "filters": [
+          "FTC consent decree",
+          "EU GDPR on training data"
+        ],
+        "overrides": [
+          "Revenue pressure could shift Llama from open to commercial API model"
+        ]
+      },
+      "regulators": {
+        "name": "EU/US Regulatory Bodies (DMA, FTC, DOJ)",
+        "role": "Structural intervention risk",
+        "decisionStyle": "Institutional/precedent-bound. EU DMA already designates gatekeepers; AI-specific provisions likely 2026-2028.",
+        "biases": [
+          "Slow to act on novel tech; prefer ex-ante frameworks"
+        ],
+        "filters": [
+          "Political appetite varies by administration"
+        ],
+        "overrides": [
+          "Consumer harm evidence or China AI threat could accelerate intervention"
+        ]
+      }
+    },
+    "methodology": [
+      "ACTIONS OVER RHETORIC — only verified revenue figures and published reports move posteriors",
+      "WATCH META — Llama commercial trajectory is the single most important swing variable for H3/H4",
+      "DON'T FRONT-RUN regulatory filings; wait for formal designations not press releases",
+      "TAG STATEMENTS — CEO open-source pledges = RHETORIC until revenue confirms"
+    ]
+  },
+  "evidenceLog": [
+    {
+      "id": "ev_001",
+      "time": "2026-04-22T17:40:00Z",
+      "text": "@proptermalone posted on Bluesky: 'I don't think the AI corps are going to successfully take over the world. Local models are too accessible. Not enough moat.' Exchange with @lastnpcalex.agency on GPU demand and consumer VRAM pricing.",
+      "tags": [
+        "RHETORIC"
+      ],
+      "source": "@proptermalone.bsky.social",
+      "claimState": "PROPOSED",
+      "posteriorImpact": "NONE. Rhetoric as evidence — opinion without verifiable data. No indicator threshold met. 5-check: rhetoric_as_evidence flagged. Source trust: 0.50 (unknown_fallback).",
+      "threadRef": "at://did:plc:e6n7jxtu2qrhwvp3j6ib6sq6/app.bsky.feed.post/3mk425b2dq22k",
+      "ledger": "DECISION",
+      "effectiveWeight": 0.25
+    },
+    {
+      "id": "ev_002",
+      "time": "2026-04-22T18:40:37+00:00",
+      "tag": "EARNINGS",
+      "tags": [
+        "EARNINGS",
+        "DATA"
+      ],
+      "text": "Analyst/press reports April 2026: Anthropic ARR ~$30B surpasses OpenAI ~$25B; enterprise LLM spend share reported as Anthropic 40%, OpenAI 27%, Google 21% (combined top-3 ~88%). Not yet confirmed by Gartner/IDC annual report.",
+      "provenance": "OBSERVED",
+      "source": "Multiple (SaaStr, TradingKey, Menlo-style analyst syntheses)",
+      "posteriorImpact": "NONE",
+      "url": "https://www.saastr.com/anthropic-just-passed-openai-in-revenue-while-spending-4x-less-to-train-their-models/",
+      "ledger": "DECISION",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-22T18:40:37+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Directional concentration signal: top-3 enterprise LLM share reported ~88%, consistent with H1/H2. Not Gartner/IDC annual — t1_top3_80pct_share_confirmed NOT FIRED. Likelihoods tilt toward concentration but conservative (analyst synthesis, not audited).",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-22T18:40:46+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_003",
+      "time": "2026-04-22T18:41:05+00:00",
+      "tag": "EVENT",
+      "tags": [
+        "EVENT"
+      ],
+      "text": "Meta Superintelligence Labs released Muse Spark in April 2026 as a closed-source model, departing from Llama open-weights tradition. Raises questions about Meta commitment to open-weights releases. Llama 4 Scout/Maverick remain open.",
+      "provenance": "OBSERVED",
+      "source": "TechTarget / Neuronad coverage",
+      "posteriorImpact": "NONE",
+      "url": "https://www.techtarget.com/searchenterpriseai/news/366622436/With-Llama-4-Meta-ups-stakes-in-open-model-race",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-22T18:41:05+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_004",
+      "time": "2026-04-22T18:41:05+00:00",
+      "tag": "EVENT",
+      "tags": [
+        "EVENT"
+      ],
+      "text": "EU Commission as of April 2026 has NOT designated AI as a core platform service under DMA. Commission hesitant due to lack of clarity on gatekeeper definition for AI. No structural remedy orders against AI providers. April 15 2026 DMA preliminary findings to Google concerned search, not AI.",
+      "provenance": "OBSERVED",
+      "source": "TechPolicy.Press / WilmerHale analysis",
+      "posteriorImpact": "NONE",
+      "url": "https://www.techpolicy.press/will-the-eu-designate-ai-under-the-digital-markets-act/",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-22T18:41:05+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    }
+  ],
+  "dataFeeds": {
+    "top3_genai_api_revenue_share": {
+      "label": "Top-3 GenAI API combined revenue share",
+      "value": null,
+      "unit": "% combined revenue share",
+      "baseline": null,
+      "asOf": "2026-04-22",
+      "source": "Gartner/IDC annual AI market report (target Q1 annually)",
+      "note": "No authoritative public figure at topic creation. Bloomberg Second Measure may have quarterly estimates."
+    },
+    "open_closed_benchmark_gap": {
+      "label": "Best open-weights vs. best closed model benchmark gap",
+      "value": null,
+      "unit": "% gap on HELM / Open LLM Leaderboard composite",
+      "baseline": null,
+      "asOf": "2026-04-22",
+      "source": "LMSYS Chatbot Arena ELO, HuggingFace Open LLM Leaderboard, Stanford HELM"
+    },
+    "enterprise_multivendor_rate": {
+      "label": "% enterprises regularly using ≥3 AI providers",
+      "value": null,
+      "unit": "%",
+      "baseline": null,
+      "asOf": "2026-04-22",
+      "source": "Stack Overflow Developer Survey, State of AI Report (annual)"
+    }
+  },
+  "watchpoints": [
+    "Gartner/IDC annual AI market share report — watch Q1 each year for prior-year data",
+    "OpenAI IPO S-1 or annual revenue disclosure with product-line breakdown",
+    "Meta earnings calls: any Llama commercial revenue line item",
+    "EU DMA AI gatekeeper designations (expected 2026-2027)",
+    "US DOJ/FTC AI market concentration filings",
+    "Open LLM Leaderboard: watch for best open-weights closing to within 10% of closed frontier"
+  ],
+  "searchQueries": [
+    "GenAI API market share 2027 Gartner IDC",
+    "OpenAI revenue market share 2027",
+    "Meta Llama commercial revenue enterprise 2027",
+    "open source LLM enterprise market share 2027",
+    "EU Digital Markets Act AI gatekeeper 2027",
+    "AI API market concentration antitrust 2027"
+  ],
+  "dependencies": {
+    "_docs": "No upstream dependencies. Downstream: calibration-vram-price-reversion-2028 uses moat posteriors as demand-side input.",
+    "upstream": []
+  },
+  "governance": {
+    "health": "HEALTHY",
+    "issues": [
+      "Downstream alert: calibration-vram-price-reversion-2028 has 2 stale assumption(s) from this topic"
+    ],
+    "rt": {
+      "rt": 0.0,
+      "regime": "SAFE",
+      "worst_hypothesis": "H1"
+    },
+    "entropy": 1.3005,
+    "maxEntropy": 2.0,
+    "uncertaintyRatio": 0.6502,
+    "evidenceFreshness": {
+      "fresh": 8,
+      "stale": 0,
+      "total": 8
+    },
+    "hypothesisAdmissibility": {
+      "H1": "ADMISSIBLE",
+      "H2": "ADMISSIBLE",
+      "H3": "ADMISSIBLE",
+      "H4": "ADMISSIBLE"
+    },
+    "klFromPrior": {
+      "kl_divergence": 0.3003,
+      "interpretation": "MODERATE"
+    },
+    "lastComputed": "2026-04-22T18:41:05+00:00",
+    "staleDependencies": 0,
+    "downstreamAlerts": [
+      {
+        "downstream_slug": "calibration-vram-price-reversion-2028",
+        "downstream_title": "Consumer GPU VRAM Price Reversion by 2028",
+        "stale_assumptions": [
+          {
+            "hypothesis": "H1",
+            "assumed": 0.25,
+            "actual": 0.4207,
+            "drift": 0.1707
+          },
+          {
+            "hypothesis": "H3",
+            "assumed": 0.28,
+            "actual": 0.081,
+            "drift": 0.199
+          }
+        ]
+      }
+    ],
+    "calibrationHealth": "ACCEPTABLE",
+    "unresolvedContradictions": 0,
+    "designGate": {
+      "passed": true,
+      "blockers": [],
+      "warnings": [
+        "H1 and H2 labels overlap by 75% — are these actually distinct outcomes?",
+        "H1 and H3 labels overlap by 75% — are these actually distinct outcomes?",
+        "H1 and H4 labels overlap by 75% — are these actually distinct outcomes?",
+        "H2 and H4 labels overlap by 75% — are these actually distinct outcomes?",
+        "H3 and H4 labels overlap by 75% — are these actually distinct outcomes?"
+      ],
+      "coverage": {
+        "H1": {
+          "pos": 4,
+          "neg": 6
+        },
+        "H2": {
+          "pos": 4,
+          "neg": 8
+        },
+        "H3": {
+          "pos": 7,
+          "neg": 3
+        },
+        "H4": {
+          "pos": 7,
+          "neg": 6
+        }
+      },
+      "indistinguishable": [],
+      "lastChecked": "2026-04-22T18:41:05+00:00"
+    }
+  },
+  "predictionScoring": {
+    "_docs": "Calibration infrastructure. Snapshots are auto-created by engine on each posterior update. Record outcome when topic resolves, then compute_calibration_report() for Brier analysis.",
+    "snapshots": [
+      {
+        "timestamp": "2026-04-22T18:40:37+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.3515,
+          "H2": 0.4306,
+          "H3": 0.1968,
+          "H4": 0.0211
+        },
+        "entropy": 1.6326
+      },
+      {
+        "timestamp": "2026-04-22T18:40:37+00:00",
+        "trigger": "pipeline:ev_002",
+        "posteriors": {
+          "H1": 0.3515,
+          "H2": 0.4306,
+          "H3": 0.1968,
+          "H4": 0.0211
+        },
+        "entropy": 1.6326
+      },
+      {
+        "timestamp": "2026-04-22T18:40:46+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.423,
+          "H2": 0.4535,
+          "H3": 0.1185,
+          "H4": 0.005
+        },
+        "entropy": 1.4453
+      },
+      {
+        "timestamp": "2026-04-22T18:40:46+00:00",
+        "trigger": "pipeline:ev_003",
+        "posteriors": {
+          "H1": 0.423,
+          "H2": 0.4535,
+          "H3": 0.1185,
+          "H4": 0.005
+        },
+        "entropy": 1.4453
+      },
+      {
+        "timestamp": "2026-04-22T18:41:05+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.4207,
+          "H2": 0.4933,
+          "H3": 0.081,
+          "H4": 0.005
+        },
+        "entropy": 1.3603
+      },
+      {
+        "timestamp": "2026-04-22T18:41:05+00:00",
+        "trigger": "pipeline:ev_003",
+        "posteriors": {
+          "H1": 0.4207,
+          "H2": 0.4933,
+          "H3": 0.081,
+          "H4": 0.005
+        },
+        "entropy": 1.3603
+      },
+      {
+        "timestamp": "2026-04-22T18:41:05+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.3935,
+          "H2": 0.5383,
+          "H3": 0.0632,
+          "H4": 0.005
+        },
+        "entropy": 1.3005
+      },
+      {
+        "timestamp": "2026-04-22T18:41:05+00:00",
+        "trigger": "pipeline:ev_004",
+        "posteriors": {
+          "H1": 0.3935,
+          "H2": 0.5383,
+          "H3": 0.0632,
+          "H4": 0.005
+        },
+        "entropy": 1.3005
+      }
+    ],
+    "outcomes": [],
+    "brierScores": []
+  },
+  "slug": "calibration-ai-corporate-moat-2028",
+  "title": "AI Corporate Market Concentration by 2028",
+  "question": "By 2028-Q4, do the top-3 commercial generative-AI API providers hold ≥60% combined revenue share of the global commercial GenAI API market, as reported by at least one major market-research firm (Gartner, IDC, Bloomberg Intelligence, or equivalent)?",
+  "resolution": "Resolved H1 (hyper-concentrated) if best available market-research data shows top-3 providers at ≥75% combined revenue share. H2 (concentrated) if 60-74%. H3 (fragmented) if 40-59%. H4 (commoditized) if <40%. Primary source: Gartner/IDC annual AI market report or Bloomberg Intelligence published before 2029-03-01. Fallback: consensus of ≥3 analyst firms. resolutionDate: 2028-12-31.",
+  "classification": "CALIBRATION",
+  "startDate": "2026-04-22",
+  "resolutionDate": "2028-12-31",
+  "hypotheses": {
+    "H1": {
+      "label": "Hyper-concentrated: top-3 hold ≥75% GenAI API revenue share",
+      "prior": 0.25,
+      "midpoint": 80,
+      "unit": "% top-3 combined revenue share",
+      "description": "OpenAI/Google/Anthropic maintain dominant moat. Open-weights models fail commercially. Infrastructure lock-in (contracts, fine-tuning, compliance) sustains oligopoly. Malone's local-models thesis fails at commercial scale."
+    },
+    "H2": {
+      "label": "Concentrated oligopoly: top-3 hold 60-74% GenAI API revenue share",
+      "prior": 0.35,
+      "midpoint": 67,
+      "unit": "% top-3 combined revenue share",
+      "description": "Top-3 remain dominant but face meaningful competition from open-weights commercial deployments (Meta Llama, Mistral, Cohere) and regional providers. Significant moat persists via safety certs, RLHF quality, and enterprise SLAs."
+    },
+    "H3": {
+      "label": "Fragmented market: top-3 hold 40-59% GenAI API revenue share",
+      "prior": 0.28,
+      "midpoint": 50,
+      "unit": "% top-3 combined revenue share",
+      "description": "Open-weights commercial adoption, regional providers, and enterprise self-hosting erode top-3 share. Llama commercial licensing, Mistral B2B, and self-hosted deployments collectively capture >40% of enterprise spend."
+    },
+    "H4": {
+      "label": "Commoditized: top-3 hold <40% GenAI API revenue share",
+      "prior": 0.12,
+      "midpoint": 30,
+      "unit": "% top-3 combined revenue share",
+      "description": "Open-weights achieve commercial parity — capability gap closes, inference costs equalize, enterprises self-host at scale. Top-3 moat collapses. Validates Malone's claim that local models are too accessible for a durable moat."
+    }
+  },
+  "contradictionTracker": {
+    "unresolved": [],
+    "resolved": [
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-22T18:40:37+00:00",
+        "entry_a_text": "Analyst/press reports April 2026: Anthropic ARR ~$30B surpasses OpenAI ~$25B; enterprise LLM spend share reported as Anthropic 40%, OpenAI 27%, Google 21% (combined top-3 ~88%). Not yet confirmed by Gartner/IDC annual report.",
+        "entry_b_time": "2026-04-22T18:41:05+00:00",
+        "entry_b_text": "Meta Superintelligence Labs released Muse Spark in April 2026 as a closed-source model, departing from Llama open-weights tradition. Raises questions about Meta commitment to open-weights releases. Llama 4 Scout/Maverick remain open.",
+        "reason": "Numeric divergence 98.0% on metric (context: as): new=2026.0, existing=40.0, threshold=10%",
+        "detected": "2026-04-22T18:41:05Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T18:41:05Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-22T18:41:05+00:00",
+        "entry_a_text": "Meta Superintelligence Labs released Muse Spark in April 2026 as a closed-source model, departing from Llama open-weights tradition. Raises questions about Meta commitment to open-weights releases. Llama 4 Scout/Maverick remain open.",
+        "entry_b_time": "2026-04-22T18:41:05+00:00",
+        "entry_b_text": "EU Commission as of April 2026 has NOT designated AI as a core platform service under DMA. Commission hesitant due to lack of clarity on gatekeeper definition for AI. No structural remedy orders against AI providers. April 15 2026 DMA preliminary findings to Google concerned search, not AI.",
+        "reason": "Numeric divergence 99.3% on metric (context: april): new=15.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-22T18:41:05Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T18:41:05Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-22T18:40:37+00:00",
+        "entry_a_text": "Analyst/press reports April 2026: Anthropic ARR ~$30B surpasses OpenAI ~$25B; enterprise LLM spend share reported as Anthropic 40%, OpenAI 27%, Google 21% (combined top-3 ~88%). Not yet confirmed by Gartner/IDC annual report.",
+        "entry_b_time": "2026-04-22T18:41:05+00:00",
+        "entry_b_text": "EU Commission as of April 2026 has NOT designated AI as a core platform service under DMA. Commission hesitant due to lack of clarity on gatekeeper definition for AI. No structural remedy orders against AI providers. April 15 2026 DMA preliminary findings to Google concerned search, not AI.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: april, google",
+        "detected": "2026-04-22T18:41:05Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T18:41:05Z"
+      }
+    ]
+  },
+  "sourceCalibration": {
+    "ledger": [],
+    "effectiveTrust": {
+      "@proptermalone.bsky.social": 0.5,
+      "Multiple (SaaStr, TradingKey, Menlo-style analyst syntheses)": 0.5,
+      "Neuronad coverage": 0.5,
+      "TechTarget": 0.5,
+      "TechPolicy.Press": 0.5,
+      "WilmerHale analysis": 0.5
+    },
+    "_last_scan_same_source_skipped": 0
+  }
+}

@@ -1,0 +1,877 @@
+{
+  "meta": {
+    "slug": "calibration-ai-elections-2027",
+    "title": "AI-Generated Content as Electoral Factor by 2027",
+    "question": "Will AI-generated content (synthetic media, deepfakes, LLM-written political messaging at scale) be officially attributed as a material factor in altering the outcome of a national election in a G20 country by December 31, 2027?",
+    "resolution": "Resolved H1 if a government electoral authority, parliamentary inquiry, court, or equivalent official body in a G20 country officially attributes AI-generated content as a material factor (>=1% vote share swing or outcome reversal) in a national election by 2027-12-31. H2 if credible investigative reporting (>=3 independent outlets) documents significant AI influence without official attribution. H3 if AI deployed at scale but no documented material effect. H4 if investigations find AI influence negligible or overstated. Resolution date: 2027-12-31.",
+    "created": "",
+    "lastUpdated": "2026-04-22T05:19:57+00:00",
+    "status": "ACTIVE",
+    "dayCount": 0,
+    "startDate": "2026-04-21",
+    "classification": "CALIBRATION",
+    "topicType": "conflict",
+    "resolutionDate": "2027-12-31"
+  },
+  "tagConfig": {
+    "_docs": "EVENT/DISINFORMATION toward influence. RHETORIC = AI-threat claims without evidence.",
+    "availableTags": [
+      "EVENT",
+      "DATA",
+      "RHETORIC",
+      "DIPLO",
+      "POLICY",
+      "REGULATORY",
+      "DISINFORMATION",
+      "CAPABILITY",
+      "PREDICTION"
+    ],
+    "directionHints": {
+      "EVENT": {
+        "H1": 1,
+        "H2": 1,
+        "H3": -1,
+        "H4": -1
+      },
+      "DISINFORMATION": {
+        "H1": 1,
+        "H2": 1,
+        "H3": -1,
+        "H4": -1
+      },
+      "CAPABILITY": {
+        "H1": 1,
+        "H2": 1
+      },
+      "REGULATORY": {
+        "H3": 1,
+        "H4": 1
+      }
+    },
+    "escalationTags": [],
+    "deescalationTags": []
+  },
+  "model": {
+    "hypotheses": {
+      "H1": {
+        "label": "Official attribution: AI content confirmed material electoral factor by government body",
+        "midpoint": 3.5,
+        "unit": "AI influence attribution score (0=none, 4=confirmed official)",
+        "posterior": 0.15,
+        "description": "An official government body (electoral commission, parliamentary inquiry, court) formally attributes AI-generated content as a material factor in a national election outcome. Sets legal/regulatory precedent. Most likely in a close election where synthetic media is forensically traced to a vote margin."
+      },
+      "H2": {
+        "label": "Documented influence: significant AI role confirmed by journalism, no official attribution",
+        "midpoint": 2.5,
+        "unit": "AI influence attribution score (0=none, 4=confirmed official)",
+        "posterior": 0.3,
+        "description": "Multiple credible independent investigations document significant AI content deployment during a national election with plausible evidence of effect, but no official body formally attributes outcome change. Common path: investigative journalism + academic analysis without legal conclusion."
+      },
+      "H3": {
+        "label": "Deployed at scale: AI content present but no material electoral effect confirmed",
+        "midpoint": 1.5,
+        "unit": "AI influence attribution score (0=none, 4=confirmed official)",
+        "posterior": 0.35,
+        "description": "AI-generated political content is widely deployed and documented but post-election analysis finds no credible evidence of material vote share impact. Voters prove resilient, AI content cancels across campaigns, or platform moderation limits spread."
+      },
+      "H4": {
+        "label": "Overstated threat: investigations find negligible real-world electoral effect",
+        "midpoint": 0.5,
+        "unit": "AI influence attribution score (0=none, 4=confirmed official)",
+        "posterior": 0.2,
+        "description": "Rigorous post-election investigations find AI-generated content had negligible real-world electoral effect. Threat overstated relative to traditional disinformation. AI content exists but no attributable electoral impact by 2027."
+      }
+    },
+    "expectedValue": 0,
+    "expectedUnit": "weeks",
+    "posteriorHistory": [
+      {
+        "date": "2026-04-21",
+        "note": "Initial priors. H1=15% (high official bar). H2=30% (most plausible: journalism documents without official ruling). H3=35% modal (AI present, effect unproven). H4=20%. Connected to calibration-midterms-2026.",
+        "H1": 0.15,
+        "H2": 0.3,
+        "H3": 0.35,
+        "H4": 0.2
+      }
+    ]
+  },
+  "subModels": {},
+  "indicators": {
+    "tiers": {
+      "tier1_critical": [
+        {
+          "id": "t1_official_attribution_ruling",
+          "desc": "Electoral commission, parliamentary inquiry, or court in a G20 country officially attributes AI-generated content as a material factor (>=1% vote swing or outcome reversal) in a national election. Observable via official government documents.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 +45pp, H2 -15pp, H3 -22pp, H4 -8pp.",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 0.136364,
+            "H3": 0.101299,
+            "H4": 0.163636
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
+        },
+        {
+          "id": "t1_court_ai_electoral_interference",
+          "desc": "A court in a G20 country issues a ruling finding AI-generated content constituted electoral interference or fraud, with causal findings about vote impact. Observable via court documents.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 +35pp, H2 +5pp, H3 -28pp, H4 -12pp.",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 0.35,
+            "H3": 0.06,
+            "H4": 0.12
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
+        }
+      ],
+      "tier2_strong": [
+        {
+          "id": "t2_electoral_authority_investigation",
+          "desc": "Electoral authority in a G20 country opens a formal investigation into AI-generated content's role in a specific national election, with public announcement. Observable via official communications.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H2 +25pp, H1 +10pp, H3 -25pp, H4 -10pp.",
+          "likelihoods": {
+            "H1": 0.909091,
+            "H2": 1.0,
+            "H3": 0.155844,
+            "H4": 0.272727
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
+        },
+        {
+          "id": "t2_forensic_ai_campaign_documented",
+          "desc": ">=3 independent credible sources (major news organizations, academic institutions, or platform transparency reports) document a coordinated AI-generated content campaign in a G20 national election at scale (millions of impressions) with targeting evidence.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H2 +20pp, H1 +8pp, H3 -18pp, H4 -10pp.",
+          "likelihoods": {
+            "H1": 0.92,
+            "H2": 1.0,
+            "H3": 0.291429,
+            "H4": 0.3
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
+        }
+      ],
+      "tier3_suggestive": [
+        {
+          "id": "t3_platform_ai_election_removals",
+          "desc": "Major platform (Meta, Google, X) publishes a transparency report disclosing removal of >=1 million AI-generated political posts in a G20 election context within a 3-month election window.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H2 +8pp, H3 +5pp. H1 +3pp, H4 -16pp.",
+          "likelihoods": {
+            "H1": 0.947368,
+            "H2": 1.0,
+            "H3": 0.902256,
+            "H4": 0.157895
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
+        },
+        {
+          "id": "t3_ai_elections_legislation",
+          "desc": "A G20 country passes AI-in-elections legislation explicitly citing documented risks from a recent election within 12 months post-election.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H2 +5pp, H3 +5pp. H1 +2pp, H4 -12pp.",
+          "likelihoods": {
+            "H1": 0.971429,
+            "H2": 1.0,
+            "H3": 0.979592,
+            "H4": 0.342857
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
+        }
+      ],
+      "anti_indicators": [
+        {
+          "id": "anti_h1_h2_no_investigation",
+          "desc": "No G20 electoral authority opens an investigation into AI content in any national election through 2026, despite AI content being documented as present.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 -30pp, H2 -15pp. H3 +25pp, H4 +20pp.",
+          "likelihoods": {
+            "H1": 0.016667,
+            "H2": 0.25,
+            "H3": 0.857143,
+            "H4": 1.0
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
+        },
+        {
+          "id": "anti_h1_clean_election_finding",
+          "desc": "Post-election analysis by >=2 credible independent institutions concludes AI-generated content had negligible measured impact on vote share in the most AI-prominent G20 election of 2026-2027.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H4 +28pp, H3 +18pp. H1 -33pp, H2 -13pp.",
+          "likelihoods": {
+            "H1": 0.013889,
+            "H2": 0.236111,
+            "H3": 0.630952,
+            "H4": 1.0
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
+        },
+        {
+          "id": "anti_h3_h4_causal_effect_confirmed",
+          "desc": "Peer-reviewed study using voter panel data finds statistically significant effect of AI-generated content exposure on vote choice in a G20 national election, with credible causal identification.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H3 -20pp, H4 -15pp. H1 +20pp, H2 +15pp.",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 0.642857,
+            "H3": 0.183673,
+            "H4": 0.107143
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
+        }
+      ]
+    }
+  },
+  "actorModel": {
+    "description": "State and non-state actors deploy AI content; electoral authorities and courts are the resolution authorities.",
+    "actors": {
+      "actor1": {
+        "name": "Key Decision Maker",
+        "role": "Primary actor whose decisions drive the outcome",
+        "decisionStyle": "How they decide (rational/impulsive/institutional/etc.)",
+        "biases": [
+          "Known bias 1"
+        ],
+        "filters": [
+          "Institutional constraint on behavior"
+        ],
+        "overrides": [
+          "Condition where filters get bypassed"
+        ]
+      },
+      "state_nonstate_actors": {
+        "name": "Domestic campaigns, foreign intelligence services, PACs",
+        "role": "Deploy AI-generated content in elections",
+        "decisionStyle": "Strategic, deniable, opportunistic",
+        "biases": [
+          "Asymmetric incentive to use if adversary perceived as using"
+        ],
+        "filters": [
+          "Attribution risk",
+          "Platform moderation",
+          "Legal exposure"
+        ]
+      },
+      "electoral_authorities": {
+        "name": "G20 electoral authorities (FEC, CEC, etc.)",
+        "role": "Investigate and attribute electoral interference",
+        "decisionStyle": "Legalistic, politically constrained",
+        "biases": [
+          "Reluctance to attribute causation in close elections"
+        ],
+        "filters": [
+          "Evidentiary standards",
+          "Political sensitivity"
+        ]
+      }
+    },
+    "methodology": [
+      "ACTIONS OVER RHETORIC — only verified events move posteriors",
+      "TAG EVERYTHING — separate rhetoric from action in evidence log",
+      "DON'T FRONT-RUN — set tripwires and let news confirm",
+      "SOCIALIZATION DETECTION — recognize narrative prep patterns"
+    ]
+  },
+  "evidenceLog": [
+    {
+      "time": "2026-04-21T19:03:40+00:00",
+      "tag": "INTEL",
+      "text": "LR MIGRATION RESET: posteriors reset to design priors; evidence log preserved.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 1.0
+    },
+    {
+      "time": "2026-04-22T01:00:37+00:00",
+      "tag": "INTEL",
+      "text": "REPLAY BEGIN: 0 previously-fired indicators will be re-applied chronologically under current LR system. Posteriors reset to design priors; indicator state cleared. Evidence log preserved for audit.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 1.0
+    },
+    {
+      "time": "2026-04-22T01:00:37+00:00",
+      "tag": "INTEL",
+      "text": "REPLAY COMPLETE: 0 indicators applied, 0 skipped. Final posteriors: {'H1': 0.15, 'H2': 0.3, 'H3': 0.35, 'H4': 0.2}. Indicator firedDates restored to originals for audit.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 1.0
+    }
+  ],
+  "dataFeeds": {
+    "primary_metric": {
+      "label": "Primary Metric",
+      "value": 0,
+      "unit": "units",
+      "baseline": 0,
+      "asOf": ""
+    },
+    "g20_elections_2026_2027": {
+      "label": "Major G20 national elections scheduled 2026-2027",
+      "value": 8,
+      "unit": "elections scheduled",
+      "baseline": 8,
+      "asOf": "2026-04-21",
+      "source": "Electoral calendar: US midterms Nov 2026, France, Germany, others"
+    }
+  },
+  "watchpoints": [],
+  "searchQueries": [
+    "topic keyword latest {date}",
+    "specific search query {date}"
+  ],
+  "dependencies": {
+    "_docs": "Connected to calibration-midterms-2026 (US Nov 2026 midterms are the highest-profile G20 election in this window).",
+    "upstream": [
+      {
+        "slug": "calibration-midterms-2026",
+        "assumptions": {},
+        "tolerance": 0.15,
+        "reason": "US 2026 midterms are the most watched G20 election in this window. Midterms findings feed directly into this topic evidence log."
+      }
+    ]
+  },
+  "governance": {
+    "health": "DEGRADED",
+    "issues": [
+      "Near-maximum uncertainty — model is not discriminating"
+    ],
+    "rt": {
+      "rt": 0.0,
+      "regime": "SAFE",
+      "worst_hypothesis": "H1"
+    },
+    "entropy": 1.9261,
+    "maxEntropy": 2.0,
+    "uncertaintyRatio": 0.963,
+    "evidenceFreshness": {
+      "fresh": 3,
+      "stale": 0,
+      "total": 3
+    },
+    "hypothesisAdmissibility": {
+      "H1": "ADMISSIBLE",
+      "H2": "ADMISSIBLE",
+      "H3": "ADMISSIBLE",
+      "H4": "ADMISSIBLE"
+    },
+    "klFromPrior": {
+      "kl_divergence": 0.0,
+      "interpretation": "MODERATE"
+    },
+    "lastComputed": "2026-04-22T05:19:57+00:00",
+    "staleDependencies": 0,
+    "calibrationHealth": "ACCEPTABLE",
+    "unresolvedContradictions": 0,
+    "designGate": {
+      "passed": true,
+      "blockers": [],
+      "warnings": [],
+      "coverage": {
+        "H1": {
+          "pos": 7,
+          "neg": 2
+        },
+        "H2": {
+          "pos": 6,
+          "neg": 3
+        },
+        "H3": {
+          "pos": 4,
+          "neg": 5
+        },
+        "H4": {
+          "pos": 2,
+          "neg": 7
+        }
+      },
+      "indistinguishable": [],
+      "lastChecked": "2026-04-22T05:19:57+00:00"
+    }
+  },
+  "predictionScoring": {
+    "_docs": "Calibration infrastructure. Snapshots are auto-created by engine on each posterior update. Record outcome when topic resolves, then compute_calibration_report() for Brier analysis.",
+    "snapshots": [],
+    "outcomes": [],
+    "brierScores": []
+  },
+  "contradictionTracker": {
+    "unresolved": [],
+    "resolved": []
+  },
+  "schemaVersion": 2,
+  "migratedAt": "2026-04-21T19:03:40+00:00",
+  "conditionalPredictions": [
+    {
+      "id": "cp_001",
+      "createdAt": "2026-04-22T02:35:31+00:00",
+      "conditionTopic": "calibration-ai-elections-2027",
+      "conditionHypothesis": "H2",
+      "conditionProbAtCreation": 0.3,
+      "prediction": "IF significant AI role confirmed by journalism without official attribution, THEN >=3 major media outlets (NYT, WaPo, Reuters, AP, Guardian) publish documented investigations showing AI electoral influence in 2024/2026 cycle by end 2027",
+      "resolutionCriteria": "Observable: >=3 named major news organizations publish investigative reports documenting AI-generated content deployment in electoral campaigns; quantitative evidence of distribution/reach provided",
+      "deadline": "2027-12-31",
+      "conditionalProbability": 0.72,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "election-integrity",
+        "ai-influence",
+        "journalism"
+      ],
+      "source": "agent-green",
+      "lens": "GREEN",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": "Media outlets are lower-bar attributors than government. 0.72 reasonable.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "APPROVE",
+          "reasoning": "Major outlets publishing investigations is a well-trodden institutional path. 0.72 reasonable.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "Journalism path is plausible; 0.72 probability reasonable. RED would note this is a low bar — 3 outlets will publish SOMETHING even absent material influence due to narrative incentive.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "APPROVE",
+          "reasoning": "Journalism-driven observable doesn't require government agency; probability reasonable.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Specific outlet list and quantitative reach requirement keeps this from being vague.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_002",
+      "createdAt": "2026-04-22T02:35:31+00:00",
+      "conditionTopic": "calibration-ai-elections-2027",
+      "conditionHypothesis": "H3",
+      "conditionProbAtCreation": 0.35,
+      "prediction": "IF AI content deployed at scale but no material electoral effect, THEN independent post-election analysis finds >=30 documented instances of AI-generated electoral content (deepfakes, synthetic audio, mass-personalized text) but voter behavior studies show no >1pp attribution to such content",
+      "resolutionCriteria": "Observable: Academic or watchdog analysis documents >=30 distinct AI-generated electoral content instances with technical proof; concurrent voter survey shows <1pp attribution to AI content in electoral decision-making",
+      "deadline": "2027-12-31",
+      "conditionalProbability": 0.7,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "election-integrity",
+        "ai-content",
+        "voter-behavior"
+      ],
+      "source": "agent-green",
+      "lens": "GREEN",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "MODIFY",
+          "reasoning": "Assumes voter-behavior surveys remain valid instruments in an environment where voters cannot distinguish AI from non-AI content. The <1pp attribution finding is nearly unfalsifiable since voters cannot introspect on influence from content they didn't recognize as AI.",
+          "modified_suggestion": "Replace survey attribution with content-exposure studies (did AI content reach >X% of voters in contested districts) rather than self-reported decision attribution."
+        },
+        "BLUE": {
+          "verdict": "APPROVE",
+          "reasoning": "BLUE-consistent: AI content deployed but systemically absorbed (voters detect/discount it). Aligns with uncertainty-collapse narrative. 0.70 reasonable.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "MODIFY",
+          "reasoning": "The <1pp voter-attribution measurement is RED's trap: voter surveys systematically under-detect influence because respondents don't know what swayed them. Absence of survey-attributed impact does NOT equal absence of impact. Prediction structurally cannot fail-safe for H3.",
+          "modified_suggestion": "Add second observable: independent RCT or field experiment with pre-registered design must also fail to find >1pp effect."
+        },
+        "VIOLET": {
+          "verdict": "APPROVE",
+          "reasoning": "Academic/watchdog resolution path is agency-neutral and reasonable.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "The 30-instance + <1pp attribution combo is the strongest null-result test in the portfolio.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_003",
+      "createdAt": "2026-04-22T02:35:34+00:00",
+      "conditionTopic": "calibration-ai-elections-2027",
+      "conditionHypothesis": "H1",
+      "conditionProbAtCreation": 0.15,
+      "prediction": "IF H1 (official attribution: AI content confirmed material electoral factor by government body), THEN regulatory cascade follows institutional path-dependence: within 18 months, ≥3 other democracies (UK, Canada, Australia, EU member) adopt similar formal attribution protocols or mandatory disclosure regimes, driven not by efficacy evidence but by regulatory monoculture and compliance demonstration.",
+      "resolutionCriteria": "Observable: Enacted or tabled legislation in ≥3 OECD democracies (outside initial jurisdiction) mandating AI-generated campaign content disclosure, attribution, or labeling by 2027-12-31. Legislation need not share identical mechanism; common feature is formal AI content attestation.",
+      "deadline": "2027-12-31",
+      "conditionalProbability": 0.71,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "regulatory-cascade",
+        "institutional-monoculture",
+        "path-dependence"
+      ],
+      "source": "agent-ochre",
+      "lens": "OCHRE",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": "Regulatory-cascade prediction captures institutional monoculture dynamics AMBER values.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "APPROVE",
+          "reasoning": "Regulatory cascade via OECD peer adoption is institutional path-dependence that BLUE recognizes. Reasonable.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "Regulatory cascade is RED-aligned institutional-monoculture prediction.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "MODIFY",
+          "reasoning": "Requires explicit actions by named leaders: Starmer (UK), Carney (Canada successor), Albanese (Australia), von der Leyen (EU). Each has distinct coalition constraints. Blanket 18-month cascade ignores UK parliament timing, Canada election cycle, EU co-decision procedure. Probability overstated.",
+          "modified_suggestion": "Lower to 0.55; coalition arithmetic in 3 of these 4 jurisdictions makes 18-month cascade aggressive."
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Regulatory cascade observable across 3 democracies is strong path-dependence test.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_004",
+      "createdAt": "2026-04-22T02:35:34+00:00",
+      "conditionTopic": "calibration-ai-elections-2027",
+      "conditionHypothesis": "H1",
+      "conditionProbAtCreation": 0.15,
+      "prediction": "IF H1 (official attribution), THEN campaign finance structure shifts toward content-authentication infrastructure investment: major parties and PACs allocate ≥USD 30-50M combined to content verification, deepfake detection tools, and attribution systems across 2026-2027 cycle, regardless of evidence linking attribution to electoral outcomes (sunk-cost lock-in).",
+      "resolutionCriteria": "Observable: Aggregate spending tracked by FEC, state election authorities, and campaign disclosure databases. ≥USD 30M allocated to content verification/attribution tools in 2026-2027 election cycle. Cross-reference FEC filings (campaign/PAC expenditure reports) for vendor spending.",
+      "deadline": "2027-12-31",
+      "conditionalProbability": 0.64,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "institutional-investment",
+        "sunk-cost-lock-in",
+        "electoral-infrastructure"
+      ],
+      "source": "agent-ochre",
+      "lens": "OCHRE",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "APPROVE",
+          "reasoning": "Sunk-cost institutional-investment lock-in is a real AMBER-style mechanism.",
+          "modified_suggestion": null
+        },
+        "BLUE": {
+          "verdict": "APPROVE",
+          "reasoning": "Content-verification spending is institutional response to regulatory push. Reasonable.",
+          "modified_suggestion": null
+        },
+        "RED": {
+          "verdict": "MODIFY",
+          "reasoning": "$30-50M aggregate is LOW. Once regulatory mandates appear, compliance spend scales to $100M+ across major parties + vendors. RED: understates institutional capture.",
+          "modified_suggestion": "Widen upper bound to $150M; probability 0.72."
+        },
+        "VIOLET": {
+          "verdict": "APPROVE",
+          "reasoning": "Campaign finance is literally named-actor spending — agency-grounded.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "MODIFY",
+          "reasoning": "FEC vendor spending categorization for 'content verification' is not a standard reporting line — disaggregation may be infeasible.",
+          "modified_suggestion": "Soften to vendor self-reporting (major vendors like Clarity, Deeptrace publish contract values) or industry-survey based estimate."
+        }
+      },
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_005",
+      "createdAt": "2026-04-22T02:35:34+00:00",
+      "conditionTopic": "calibration-ai-elections-2027",
+      "conditionHypothesis": "H2",
+      "conditionProbAtCreation": 0.3,
+      "prediction": "IF H2 (documented influence but no official attribution), THEN narratives solidify institutional priors: election postmortems cite AI content as contributing factor in ≥5 major races, but attribution remains speculative and driven by journalistic narrative logic rather than forensic evidence; structural incentive for attribution-seeking (career advancement for researchers, regulatory signal-sending) dominates causal rigor.",
+      "resolutionCriteria": "Observable: >=5 peer-reviewed academic or think-tank analyses published through June 2027 attribute AI-generated content as contributing factor in named major races, with counterfactual methodology or statistical significance documented. Named races must be identified by author.",
+      "deadline": "2027-06-30",
+      "conditionalProbability": 0.69,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "narrative-lock-in",
+        "attribution-bias",
+        "structural-incentive"
+      ],
+      "source": "agent-ochre",
+      "lens": "OCHRE",
+      "criticVerdicts": {
+        "AMBER": {
+          "verdict": "MODIFY",
+          "reasoning": "Resolution threshold (5 academic analyses naming races) may be too narrow — post-election attribution papers often cluster in specific races (e.g., 2020 election saw hundreds of AI-content analyses but only a handful named specific races with counterfactual methodology). Widen or lower the count.",
+          "modified_suggestion": "Lower from 5 named-races-with-counterfactual to 3 named races or 5 analyses regardless of counterfactual methodology."
+        },
+        "BLUE": {
+          "verdict": "MODIFY",
+          "reasoning": "5+ peer-reviewed/think-tank studies by June 2027 attributing to named races is tight timeline given publication lag. 0.69 too high.",
+          "modified_suggestion": "Lower to 0.50."
+        },
+        "RED": {
+          "verdict": "APPROVE",
+          "reasoning": "Narrative lock-in aligns with RED institutional-brittleness view.",
+          "modified_suggestion": null
+        },
+        "VIOLET": {
+          "verdict": "NEUTRAL",
+          "reasoning": "Academic attribution observable.",
+          "modified_suggestion": null
+        },
+        "GRAY": {
+          "verdict": "APPROVE",
+          "reasoning": "Academic/think-tank attribution is observable via citation databases.",
+          "modified_suggestion": null
+        }
+      },
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_006",
+      "createdAt": "2026-04-22T04:18:41+00:00",
+      "conditionTopic": "calibration-ai-elections-2027",
+      "conditionHypothesis": "H4",
+      "conditionProbAtCreation": 0.2,
+      "prediction": "IF overstated threat holds, THEN court disputes cite inability to distinguish AI-generated from authentic voter communications in >=2 US state contests by 2027-12-31.",
+      "resolutionCriteria": "Court documents in state-level election disputes explicitly cite indistinguishability of synthetic media as basis for inability to verify electorate legitimacy.",
+      "deadline": "2027-12-31",
+      "conditionalProbability": 0.28,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "regime-shift",
+        "epistemic-breakdown",
+        "institutional-crisis"
+      ],
+      "source": "agent-amber",
+      "lens": "AMBER",
+      "criticVerdicts": {},
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_007",
+      "createdAt": "2026-04-22T04:18:42+00:00",
+      "conditionTopic": "calibration-ai-elections-2027",
+      "conditionHypothesis": "H4",
+      "conditionProbAtCreation": 0.2,
+      "prediction": "IF investigations find negligible electoral effect, THEN FEC audits, DOJ memos, or official state election boards publish findings of AI-content presence but negligible impact by 2027-12-31.",
+      "resolutionCriteria": "FEC audit reports, DOJ memos, or official state election board findings explicitly state AI-generated content present but negligible impact. Must be from official body.",
+      "deadline": "2027-12-31",
+      "conditionalProbability": 0.22,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "election_security",
+        "AI_misuse",
+        "deepfakes"
+      ],
+      "source": "agent-violet",
+      "lens": "VIOLET",
+      "criticVerdicts": {},
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_008",
+      "createdAt": "2026-04-22T05:19:34+00:00",
+      "conditionTopic": "calibration-ai-elections-2027",
+      "conditionHypothesis": "H3",
+      "conditionProbAtCreation": 0.35,
+      "prediction": "IF AI-generated content deployed at scale without material electoral effect (H3 holds), THEN regulatory frameworks stabilize around AI disclosure standards by Q2 2027, with more than 70% of major platforms implementing automated detection systems, and at least 3 major democracies adopt interoperable election-integrity APIs.",
+      "resolutionCriteria": "FTC enforcement actions document platform compliance with disclosure requirements; election integrity databases show less than 2% undetected synthetic content in monitored sample; regulatory agencies confirm cross-border interoperability.",
+      "deadline": "2027-06-30",
+      "conditionalProbability": 0.62,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "regulatory-adaptation",
+        "technology-governance",
+        "election-integrity"
+      ],
+      "source": "agent-blue",
+      "lens": "BLUE",
+      "criticVerdicts": [
+        {
+          "critic": "GREEN",
+          "verdict": "MODIFY",
+          "reasoning": "'3 democracies adopt interoperable election-integrity APIs by Q2 2027' is a regime-change ask, not drift-forward. Interoperability agreements between national election bodies are slow.",
+          "modified_suggestion": "Reduce to 0.50. Replace interoperability API criterion with: at least 3 major democracies publish draft technical standards for AI-content disclosure."
+        },
+        {
+          "critic": "RED",
+          "verdict": "MODIFY",
+          "reasoning": "Regulatory arbitrage: platforms implement minimum standard of most permissive jurisdiction. '2% undetected synthetic content' is measurement-impossible — you cannot audit what you cannot detect. 0.62 too optimistic.",
+          "modified_suggestion": "Lower to 0.38. Drop undetectable synthetic content criterion. Replace with independent red-team audits finding evasion rates below 10% in monitored elections."
+        },
+        {
+          "critic": "VIOLET",
+          "verdict": "MODIFY",
+          "reasoning": "A Trump FTC is far less likely to pursue aggressive disclosure enforcement. '70% of major platforms' criterion could be met through self-regulatory theater. EU-US interoperability assumes diplomatic coordination current US executive is actively undermining.",
+          "modified_suggestion": "Lower to 0.44. Add that resolution requires at least one binding federal enforcement action with financial penalty."
+        },
+        {
+          "critic": "OCHRE",
+          "verdict": "MODIFY",
+          "reasoning": "Regulatory stabilization by Q2 2027 assumes legislative and agency velocity that democracies structurally cannot sustain. Institutional path-dependence in regulatory bodies operates on multi-year cycles. 3-democracy interoperable API requires treaty-equivalent coordination taking 5-10 years minimum. 0.62 too high.",
+          "modified_suggestion": "Reduce to 0.38. At least 1 democracy adopts domestic disclosure standards; platforms implement detection covering 40%+ of monitored synthetic content. Interoperability is 2029+ outcome."
+        },
+        {
+          "critic": "GRAY",
+          "verdict": "MODIFY",
+          "reasoning": "The 70% platform detection threshold and 3-nation interoperability bar are internally coherent but the deadline (Q2 2027) is aggressive. Resolution criteria conflates FTC enforcement (US-only) with cross-border interoperability claims.",
+          "modified_suggestion": "Split resolution into two independent bars: (1) US domestic disclosure compliance documented by FTC by Q4 2027, and (2) at least 2 democracies adopt interoperable election-integrity standards by Q2 2028."
+        }
+      ],
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_009",
+      "createdAt": "2026-04-22T05:19:57+00:00",
+      "conditionTopic": "calibration-ai-elections-2027",
+      "conditionHypothesis": "H3",
+      "conditionProbAtCreation": 0.35,
+      "prediction": "IF AI-generated content deployed at scale without material electoral effect (H3 holds), THEN regulatory frameworks stabilize around AI disclosure standards by Q2 2027, with more than 70% of major platforms implementing automated detection systems, and at least 3 major democracies adopt interoperable election-integrity APIs.",
+      "resolutionCriteria": "FTC enforcement actions document platform compliance with disclosure requirements; election integrity databases show less than 2% undetected synthetic content in monitored sample; regulatory agencies confirm cross-border interoperability.",
+      "deadline": "2027-06-30",
+      "conditionalProbability": 0.62,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [
+        "regulatory-adaptation",
+        "technology-governance",
+        "election-integrity"
+      ],
+      "source": "agent-blue",
+      "lens": "BLUE",
+      "criticVerdicts": [
+        {
+          "critic": "GREEN",
+          "verdict": "MODIFY",
+          "reasoning": "'3 democracies adopt interoperable election-integrity APIs by Q2 2027' is a regime-change ask, not drift-forward. Interoperability agreements between national election bodies are slow.",
+          "modified_suggestion": "Reduce to 0.50. Replace interoperability API criterion with: at least 3 major democracies publish draft technical standards for AI-content disclosure."
+        },
+        {
+          "critic": "RED",
+          "verdict": "MODIFY",
+          "reasoning": "Regulatory arbitrage: platforms implement minimum standard of most permissive jurisdiction. '2% undetected synthetic content' is measurement-impossible — you cannot audit what you cannot detect. 0.62 too optimistic.",
+          "modified_suggestion": "Lower to 0.38. Drop undetectable synthetic content criterion. Replace with independent red-team audits finding evasion rates below 10% in monitored elections."
+        },
+        {
+          "critic": "VIOLET",
+          "verdict": "MODIFY",
+          "reasoning": "A Trump FTC is far less likely to pursue aggressive disclosure enforcement. '70% of major platforms' criterion could be met through self-regulatory theater. EU-US interoperability assumes diplomatic coordination current US executive is actively undermining.",
+          "modified_suggestion": "Lower to 0.44. Add that resolution requires at least one binding federal enforcement action with financial penalty."
+        },
+        {
+          "critic": "OCHRE",
+          "verdict": "MODIFY",
+          "reasoning": "Regulatory stabilization by Q2 2027 assumes legislative and agency velocity that democracies structurally cannot sustain. Institutional path-dependence in regulatory bodies operates on multi-year cycles. 3-democracy interoperable API requires treaty-equivalent coordination taking 5-10 years minimum. 0.62 too high.",
+          "modified_suggestion": "Reduce to 0.38. At least 1 democracy adopts domestic disclosure standards; platforms implement detection covering 40%+ of monitored synthetic content. Interoperability is 2029+ outcome."
+        },
+        {
+          "critic": "GRAY",
+          "verdict": "MODIFY",
+          "reasoning": "The 70% platform detection threshold and 3-nation interoperability bar are internally coherent but the deadline (Q2 2027) is aggressive. Resolution criteria conflates FTC enforcement (US-only) with cross-border interoperability claims.",
+          "modified_suggestion": "Split resolution into two independent bars: (1) US domestic disclosure compliance documented by FTC by Q4 2027, and (2) at least 2 democracies adopt interoperable election-integrity standards by Q2 2028."
+        }
+      ],
+      "lensAgreement": []
+    }
+  ]
+}

@@ -1,0 +1,815 @@
+{
+  "meta": {
+    "slug": "calibration-vram-price-reversion-2028",
+    "title": "Consumer GPU VRAM Price Reversion by 2028",
+    "question": "By 2028-12-31, has the street price of top-tier consumer discrete GPUs (RTX 5080-class or nearest equivalent-tier) reverted to within 20% of the inflation-adjusted equivalent-tier consumer GPU price from 2024-Q4, as tracked by major GPU pricing databases?",
+    "resolution": "Resolved H1 (full reversion) if NowInStock, TechPowerUp, or equivalent shows RTX 5080-class 90-day average street price within 20% of inflation-adjusted 2024-Q4 RTX 4080 baseline (est. $1,050-$1,150 CPI-adjusted) for ≥3 consecutive months before 2028-12-31. H2 if 20-50% above baseline at resolution date. H3 if 50-100% above. H4 if >100% above baseline or NVIDIA exits consumer discrete GPU segment. resolutionDate: 2028-12-31.",
+    "created": "",
+    "lastUpdated": "2026-04-22T18:47:00+00:00",
+    "status": "ACTIVE",
+    "dayCount": 0,
+    "startDate": "2026-04-22",
+    "classification": "CALIBRATION",
+    "topicType": "tech",
+    "resolutionDate": "2028-12-31"
+  },
+  "tagConfig": {
+    "_docs": "SUPPLY/HARDWARE favor H1/H2 (normalization). DEMAND/EARNINGS (hyperscaler) favor H3/H4. REGULATORY neutral.",
+    "availableTags": [
+      "EVENT",
+      "DATA",
+      "RHETORIC",
+      "HARDWARE",
+      "EARNINGS",
+      "SUPPLY",
+      "DEMAND",
+      "BENCHMARK",
+      "PREDICTION"
+    ],
+    "directionHints": {
+      "SUPPLY": {
+        "H1": 1,
+        "H2": 1,
+        "H3": -1,
+        "H4": -1
+      },
+      "DEMAND": {
+        "H3": 1,
+        "H4": 1,
+        "H1": -1,
+        "H2": -1
+      },
+      "HARDWARE": {
+        "H1": 1,
+        "H2": 1
+      }
+    },
+    "escalationTags": [
+      "DEMAND"
+    ],
+    "deescalationTags": [
+      "SUPPLY"
+    ]
+  },
+  "model": {
+    "hypotheses": {
+      "H1": {
+        "label": "Full reversion: street price within 20% of inflation-adj pre-surge (Q4-24) baseline",
+        "midpoint": 10,
+        "unit": "% above inflation-adjusted 2024-Q4 baseline",
+        "description": "Malone's 'short-term market problem' thesis — new fab capacity (TSMC 2nm, HBM4), AMD competition, and inference efficiency gains normalize consumer GPU supply/demand. RTX 5080-class returns to historical tier pricing by 2028.",
+        "posterior": 0.0568
+      },
+      "H2": {
+        "label": "Moderate elevated plateau: 20-50% above inflation-adj pre-surge baseline",
+        "midpoint": 35,
+        "unit": "% above inflation-adjusted 2024-Q4 baseline",
+        "description": "Data-center demand partially eases but doesn't fully normalize. New fab capacity reduces scarcity but doesn't eliminate it. Pricing settles above historical norms but consumers can still buy at some premium.",
+        "posterior": 0.426
+      },
+      "H3": {
+        "label": "Sustained high elevation: 50-100% above inflation-adj pre-surge baseline",
+        "midpoint": 75,
+        "unit": "% above inflation-adjusted 2024-Q4 baseline",
+        "description": "Alex's thesis — AI/data-center demand structurally outpaces consumer GPU supply. HBM allocation remains prioritized for enterprise. Consumers face persistent scarcity and elevated prices through 2028. lowrhoufo '10-year horizon' view plausible.",
+        "posterior": 0.4821
+      },
+      "H4": {
+        "label": "Structural escalation/bifurcation: street price over 100% above pre-surge baseline or NVIDIA exits consumer GPU",
+        "midpoint": 150,
+        "unit": "% above inflation-adjusted 2024-Q4 baseline",
+        "description": "NVIDIA formally de-prioritizes or exits consumer discrete GPU segment to maximize data-center margins. Consumer cards become niche/legacy. Gaming GPU market bifurcates from AI silicon. Street prices extreme or consumer tier disappears as a market.",
+        "posterior": 0.0352
+      }
+    },
+    "expectedValue": 56.92,
+    "expectedUnit": "weeks",
+    "posteriorHistory": [
+      {
+        "date": "2026-04-22",
+        "note": "Initial priors. Sourced from Bsky thread (proptermalone/lastnpcalex, 2026-04-22) — moat/VRAM debate. H1 (full reversion) = 35%: historical pattern of GPU price normalization after demand shocks (crypto GPU crunch 2021-2022 normalized by 2023), HBM4 fab buildout expected 2026-2027, AMD competitive pressure. H2 (moderate plateau) = 30%: data-center demand may ease partially but AI inference growth sustains some premium. H3 (sustained high) = 22%: Alex's thesis — structural demand outpaces fab expansion; prior reduced vs. H1/H2 because historical precedent favors normalization. H4 (structural escalation/bifurcation) = 13%: NVIDIA consumer exit is possible but faces antitrust and brand risk; treated as tail. No fired indicators at creation. Priors reflect base rates from prior GPU price cycles plus AI demand novelty discount.",
+        "H1": 0.35,
+        "H2": 0.3,
+        "H3": 0.22,
+        "H4": 0.13
+      },
+      {
+        "date": "2026-04-22",
+        "posteriors": {
+          "H1": 0.1489,
+          "H2": 0.3191,
+          "H3": 0.4213,
+          "H4": 0.1106
+        },
+        "priors": {
+          "H1": 0.35,
+          "H2": 0.3,
+          "H3": 0.22,
+          "H4": 0.13
+        },
+        "updateMethod": "bayesian_update",
+        "evidenceRefs": [
+          "ev_004"
+        ],
+        "likelihoods": {
+          "H1": 0.1,
+          "H2": 0.25,
+          "H3": 0.45,
+          "H4": 0.2
+        },
+        "note": "Structural HBM supply constraint projected through 2028-2029 per SemiAnalysis. Hyperscaler memory capex 4x since 2023 indicates sustained demand pressure. No pre-committed indicator fires (t1_hbm_supply_normalization requires consumer allocation RESTORED, not constrained). Directionally supports H3/H4. Likelihoods weight H3 highest given projected supply gap timing aligns with 2028 resolution.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "turningPoint": {
+          "type": "LEADING_CHANGED",
+          "from": "H1",
+          "to": "H3",
+          "fromProb": 0.35,
+          "toProb": 0.4213
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        }
+      },
+      {
+        "date": "2026-04-22",
+        "posteriors": {
+          "H1": 0.0568,
+          "H2": 0.426,
+          "H3": 0.4821,
+          "H4": 0.0352
+        },
+        "priors": {
+          "H1": 0.1489,
+          "H2": 0.3191,
+          "H3": 0.4213,
+          "H4": 0.1106
+        },
+        "updateMethod": "bayesian_update",
+        "evidenceRefs": [
+          "ev_005"
+        ],
+        "likelihoods": {
+          "H1": 0.12,
+          "H2": 0.42,
+          "H3": 0.36,
+          "H4": 0.1
+        },
+        "note": "Current (April 2026) RTX 5080 spot price is ~25% above MSRP — within H2 band. t2_street_price_normalized (within 15% of MSRP for 3 months) NOT fired. anti_h2_extreme_escalation (5090 >200% MSRP for 1 month) NOT fired (5090 at ~91%). Not recycled_intel vs ev_003: ev_003 was Q1 2026 data with higher spreads (5090 at 75-200%); this is April 2026 snapshot showing partial softening on 5080 but persistent premium. H2 weighted highest since current 5080 price sits squarely in H2 band with 2.5yr runway.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        }
+      }
+    ]
+  },
+  "subModels": {},
+  "indicators": {
+    "tiers": {
+      "tier1_critical": [
+        {
+          "id": "t1_hbm_supply_normalization",
+          "desc": "SK Hynix, Micron, and/or Samsung collectively announce HBM4 production volume sufficient for both data-center and consumer demand without consumer allocation cuts (confirmed in earnings or IDC memory report). Observable threshold: IDC or TechInsights reports consumer GPU HBM allocation restored to ≥2022 levels.",
+          "posteriorEffect": "H1 +25pp, H2 +8pp, H3 -20pp, H4 -13pp",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        },
+        {
+          "id": "t1_nvidia_exits_consumer",
+          "desc": "NVIDIA formally announces discontinuation or indefinite delay of consumer discrete GPU line (GeForce/RTX), dedicating all capacity to H-series/B-series data-center successors. Observable via official product roadmap announcement or 10-K filing.",
+          "posteriorEffect": "H4 +30pp, H3 +15pp, H1 -25pp, H2 -20pp",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        }
+      ],
+      "tier2_strong": [
+        {
+          "id": "t2_street_price_normalized",
+          "desc": "90-day average street price of RTX 5080-class (or current-gen equivalent) GPU within 15% of MSRP for ≥3 consecutive months, per TechPowerUp or NowInStock tracking.",
+          "posteriorEffect": "H1 +15pp, H2 +8pp, H3 -15pp, H4 -8pp",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        },
+        {
+          "id": "t2_amd_25pct_gpu_share",
+          "desc": "AMD captures ≥25% of discrete GPU unit sales for ≥6 consecutive months per JonPeddie Research quarterly GPU report (increases competitive supply pressure).",
+          "posteriorEffect": "H1 +10pp, H2 +7pp, H3 -10pp, H4 -7pp",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        },
+        {
+          "id": "t2_hyperscaler_capex_cut",
+          "desc": "≥2 major hyperscalers (Microsoft, Google, Amazon, Meta) announce ≥20% GPU capex reduction in consecutive quarterly earnings calls — eases data-center demand pressure.",
+          "posteriorEffect": "H1 +10pp, H2 +8pp, H3 -10pp, H4 -8pp",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        }
+      ],
+      "tier3_suggestive": [
+        {
+          "id": "t3_tsmc_capacity_expand",
+          "desc": "TSMC announces ≥30% YoY capacity increase for 3nm/2nm process node (increases overall wafer supply that feeds both GPU and HBM production).",
+          "posteriorEffect": "H1 +5pp, H2 +4pp, H3 -5pp, H4 -4pp",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        },
+        {
+          "id": "t3_inference_efficiency_gains",
+          "desc": "Published research (peer-reviewed or major lab technical report) demonstrates >50% reduction in per-inference VRAM requirements for frontier-equivalent models — reduces per-query GPU demand and enterprise VRAM pressure.",
+          "posteriorEffect": "H1 +4pp, H2 +3pp, H3 -4pp, H4 -3pp",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        }
+      ],
+      "anti_indicators": [
+        {
+          "id": "anti_h1_persistent_waitlist",
+          "desc": "Consumer GPU waitlists >4 weeks at MSRP persist into 2028-Q2 per NowInStock tracking — demand structurally exceeds supply, full reversion implausible.",
+          "posteriorEffect": "H1 -15pp (redistributed to H2+H3)",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        },
+        {
+          "id": "anti_h2_extreme_escalation",
+          "desc": "RTX 5090-class (or equivalent top-tier consumer GPU) street price exceeds 200% of MSRP for ≥1 month — moderate plateau trajectory no longer credible.",
+          "posteriorEffect": "H2 -15pp (redistributed to H3+H4)",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        },
+        {
+          "id": "anti_h3_full_normalization",
+          "desc": "RTX 5080-class GPU street price within 10% of MSRP for ≥6 consecutive months per TechPowerUp — sustained high elevation thesis falsified.",
+          "posteriorEffect": "H3 -15pp (redistributed to H1+H2)",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        },
+        {
+          "id": "anti_h4_consumer_line_confirmed",
+          "desc": "NVIDIA launches new consumer-specific GPU series with ≥xx70-class at ≤$800 MSRP before 2028 — confirms continued commitment to consumer discrete GPU market.",
+          "posteriorEffect": "H4 -15pp (redistributed to H1+H2+H3)",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        }
+      ]
+    }
+  },
+  "actorModel": {
+    "description": "Consumer VRAM pricing driven by NVIDIA supply strategy, AMD competitive pressure, HBM memory producers, and hyperscaler demand-side decisions.",
+    "actors": {
+      "nvidia": {
+        "name": "NVIDIA",
+        "role": "Supply-side monopolist — controls discrete GPU design and allocates HBM between consumer and data-center",
+        "decisionStyle": "Rational profit maximizer. Data-center gross margin (~70%) > consumer (~50%). Incentive to prioritize enterprise allocation.",
+        "biases": [
+          "Short-term revenue maximization over long-term consumer brand loyalty"
+        ],
+        "filters": [
+          "Antitrust scrutiny if consumer GPU market is abandoned",
+          "AMD competitive pressure"
+        ],
+        "overrides": [
+          "If AMD gains >30% market share, NVIDIA may rebalance consumer allocation to defend share"
+        ]
+      },
+      "amd": {
+        "name": "AMD (Radeon)",
+        "role": "Competitive challenger — benefits from NVIDIA supply constraints, incentivized to fill consumer gap",
+        "decisionStyle": "Opportunistic. RDNA architecture competitive at mid-range but trails NVIDIA at top tier.",
+        "biases": [
+          "Historically slow to capture top-tier GPU segment despite competitive pricing"
+        ],
+        "filters": [
+          "TSMC capacity allocation constraints (shared with NVIDIA)"
+        ],
+        "overrides": [
+          "NVIDIA consumer exit would create a clear lane for AMD to capture enthusiast segment"
+        ]
+      },
+      "hbm_producers": {
+        "name": "SK Hynix / Micron / Samsung",
+        "role": "Supply-side HBM memory oligopoly — allocation decisions between enterprise and consumer drive VRAM scarcity",
+        "decisionStyle": "Institutional/profit-driven. Enterprise HBM (H100/B200) at 5-8x premium over consumer GDDR. Rational to prioritize enterprise.",
+        "biases": [
+          "Reluctance to invest in consumer HBM capacity when enterprise margins are higher"
+        ],
+        "filters": [
+          "Multi-year supply agreements with NVIDIA for data-center HBM"
+        ],
+        "overrides": [
+          "Consumer demand spike or government fab subsidies (CHIPS Act) could shift allocation"
+        ]
+      },
+      "hyperscalers": {
+        "name": "Microsoft / Google / Meta / Amazon",
+        "role": "Demand-side — training and inference GPU capex directly competes with consumer GPU supply",
+        "decisionStyle": "Institutional/competitive. AI infrastructure seen as strategic moat; capex driven by competitive pressure rather than ROI.",
+        "biases": [
+          "GPU hoarding behavior — buy ahead of demand to avoid supply constraints"
+        ],
+        "filters": [
+          "Quarterly earnings pressure if capex exceeds return thresholds"
+        ],
+        "overrides": [
+          "Macro downturn or AI investment write-downs could trigger rapid capex pullback"
+        ]
+      }
+    },
+    "methodology": [
+      "ACTIONS OVER RHETORIC — pricing trackers and earnings capex figures, not analyst predictions",
+      "WATCH HBM ALLOCATION — the single most important supply-side signal is memory producer allocation between enterprise and consumer",
+      "TRACK AMD SHARE — JonPeddie Research quarterly GPU shipments are the cleanest competitive signal",
+      "HYPERSCALER CAPEX IS UPSTREAM — Microsoft/Google/Meta/Amazon GPU capex guidance moves before consumer prices react"
+    ]
+  },
+  "evidenceLog": [
+    {
+      "id": "ev_001",
+      "time": "2026-04-22T17:41:00Z",
+      "text": "@lastnpcalex.agency posted on Bluesky: 'I think that misunderstands the mechanism though. AI corps GPU demand 2x'd VRAM prices for consumers in < 1 quarter.' Responding to @proptermalone's claim that AI corps lack moat. No data source cited for the 2x figure.",
+      "tags": [
+        "RHETORIC"
+      ],
+      "source": "@lastnpcalex.agency",
+      "claimState": "PROPOSED",
+      "posteriorImpact": "NONE. Claim requires source verification before it can be treated as DATA. 5-check: phantom_precision flagged (specific '2x in <1 quarter' claim without cited SKU, retailer, or date range). Source trust: 0.50 (unknown_fallback). Upgrade to DATA when underlying source (e.g., TechPowerUp price history, NowInStock data) is provided.",
+      "threadRef": "at://did:plc:ccxl3ictrlvtrrgh5swvvg47/app.bsky.feed.post/3mk427mj46s2n",
+      "ledger": "DECISION",
+      "effectiveWeight": 0.25
+    },
+    {
+      "id": "ev_002",
+      "time": "2026-04-22T17:42:00Z",
+      "text": "@proptermalone responded: 'yeah, that's a short term market problem.' @lowrhoufo.bsky.social replied: 'Depends a lot on what short-term means imo, but it passes the sniff test on like a 10 year horizon for me.'",
+      "tags": [
+        "RHETORIC"
+      ],
+      "source": "@proptermalone.bsky.social / @lowrhoufo.bsky.social",
+      "claimState": "PROPOSED",
+      "posteriorImpact": "NONE. Both posts are opinion on duration, not verifiable data. 5-check: rhetoric_as_evidence flagged for both. 10-year horizon comment is analyst intuition — no model or data cited. Source trust: 0.50 (unknown_fallback).",
+      "threadRef": "at://did:plc:e6n7jxtu2qrhwvp3j6ib6sq6/app.bsky.feed.post/3mk42aftujk2k",
+      "ledger": "DECISION",
+      "effectiveWeight": 0.25
+    },
+    {
+      "time": "2026-04-22T18:04:53+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on posterior update: quorum_failure. Reason: Restore initial priors — corrupted during indicator patch (stamp_deadlines side effect). Correct values from posteriorHistory[0].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_003",
+      "time": "2026-04-22T00:00:00Z",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "HARDWARE",
+        "SUPPLY",
+        "DEMAND"
+      ],
+      "text": "Multiple sources confirm consumer GPU prices elevated significantly vs. MSRP in Q1 2026, driven by AI/data-center demand crowding out GDDR7 and HBM supply. RTX 5090 ($1,999 MSRP) trading at $3,000-$6,000 street (75-200% above MSRP); RTX 5080 ($999 MSRP) at $1,599+ retail (45-60% above MSRP). RTX 5090 Founders Edition sold out in 8 minutes at launch. Server ECC RAM prices roughly doubled since Q3 2025. AI projected to consume ~20% of total DRAM production in 2026. 30-40% reduction in consumer GPU production allocation reported. Sources: TechSpot Q1 2026 GPU Pricing Update; BuySellRam memory economics; WccFTech RTX 5090 price trajectory; TrackaLacker RTX 5090 tracker; XDA Developers.",
+      "provenance": "TechSpot Q1 2026 GPU Pricing Update; BuySellRam memory economics; WccFTech RTX 5090 price trajectory; TrackaLacker RTX 5090 tracker; XDA Developers",
+      "source": "Multi-source corroboration (TechSpot / BuySellRam / WccFTech / TrackaLacker / XDA)",
+      "posteriorImpact": "NONE. Verified DATA — prices elevated 45-200% above MSRP. Directional toward H3. No pre-committed indicator threshold met: t2_street_price_normalized requires WITHIN 15% (opposite); anti_h1_persistent_waitlist requires 2028-Q2 persistence (too early); t1_hbm_supply_normalization not yet fired. FLAG: add tier3 indicator for sustained >40% premium in 2026 at next design review.",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_004",
+      "time": "2026-04-22T18:46:44+00:00",
+      "tag": "DEMAND",
+      "tags": [
+        "DATA",
+        "DEMAND",
+        "SUPPLY",
+        "EARNINGS"
+      ],
+      "text": "SemiAnalysis (via Tom's Hardware, 2026-04): Memory will consume ~30% of hyperscaler AI data center spending in CY2026, a 4x increase over 2023 (~8%). HBM demand growing 80-100%/yr vs supply growing 50-60%/yr; gap not expected to close until 2028-2029. HBM3E and HBM4 supply fully allocated through 2026 with hyperscalers locking multi-year contracts. NVIDIA retains preferential supply terms; AMD structurally more exposed to memory cost inflation.",
+      "provenance": "OBSERVED",
+      "source": "Tom's Hardware / SemiAnalysis",
+      "posteriorImpact": "NONE",
+      "url": "https://www.tomshardware.com/tech-industry/memory-will-consume-30-percent-of-hyperscaler-spending-this-year",
+      "ledger": "DECISION",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-22T18:46:44+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Structural HBM supply constraint projected through 2028-2029 per SemiAnalysis. Hyperscaler memory capex 4x since 2023 indicates sustained demand pressure. No pre-committed indicator fires (t1_hbm_supply_normalization requires consumer allocation RESTORED, not constrained). Directionally supports H3/H4. Likelihoods weight H3 highest given projected supply gap timing aligns with 2028 resolution.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_005",
+      "time": "2026-04-22T18:47:00+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "HARDWARE"
+      ],
+      "text": "April 2026 street price snapshot: RTX 5080 at $1,249 on Amazon (~25% above $999 MSRP); RTX 5090 at $3,818 on Amazon (~91% above $1,999 MSRP); cheapest AIB 5090 (ASUS TUF) at $2,909 (~46% above MSRP). Per BestValueGPU / TrackaLacker / Tom's Hardware trackers. RTX 5080 premium in H2 band (20-50%); RTX 5090 premium straddling H2/H3 boundary. 90-day rolling average not yet established.",
+      "provenance": "OBSERVED",
+      "source": "Tom's Hardware GPU price tracker / BestValueGPU / TrackaLacker",
+      "posteriorImpact": "NONE",
+      "url": "https://www.tomshardware.com/pc-components/gpus/lowest-gpu-prices-tracking",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-22T18:47:00+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Current (April 2026) RTX 5080 spot price is ~25% above MSRP — within H2 band. t2_street_price_normalized (within 15% of MSRP for 3 months) NOT fired. anti_h2_extreme_escalation (5090 >200% MSRP for 1 month) NOT fired (5090 at ~91%). Not recycled_intel vs ev_003: ev_003 was Q1 2026 data with higher spreads (5090 at 75-200%); this is April 2026 snapshot showing partial softening on 5080 but persistent premium. H2 weighted highest since current 5080 price sits squarely in H2 band with 2.5yr runway.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    }
+  ],
+  "dataFeeds": {
+    "rtx_5080_street_msrp_ratio": {
+      "label": "RTX 5080-class GPU 90-day avg street/MSRP ratio",
+      "value": null,
+      "unit": "% (street / MSRP)",
+      "baseline": null,
+      "asOf": "2026-04-22",
+      "source": "TechPowerUp GPU price tracker, NowInStock",
+      "note": "MSRP anchor: RTX 5080 = $999, RTX 5090 = $1,999 (NVIDIA launch pricing Jan 2025). Establish 90-day baseline on topic activation."
+    },
+    "consumer_gpu_stock_availability": {
+      "label": "% of major retailers with RTX 5080-class in stock at MSRP",
+      "value": null,
+      "unit": "%",
+      "baseline": null,
+      "asOf": "2026-04-22",
+      "source": "NowInStock, stock tracker alerts"
+    },
+    "hbm_enterprise_consumer_split": {
+      "label": "HBM memory production split: enterprise vs. consumer allocation",
+      "value": null,
+      "unit": "% enterprise allocation",
+      "baseline": null,
+      "asOf": "2026-04-22",
+      "source": "IDC Memory Tracker, TechInsights, SK Hynix/Micron earnings calls",
+      "note": "Proxy for structural demand pressure. Enterprise allocation >80% = structural constraint for consumer."
+    },
+    "amd_discrete_gpu_market_share": {
+      "label": "AMD discrete GPU unit market share",
+      "value": null,
+      "unit": "%",
+      "baseline": null,
+      "asOf": "2026-04-22",
+      "source": "JonPeddie Research quarterly GPU shipments report"
+    }
+  },
+  "watchpoints": [
+    "TechPowerUp/NowInStock: RTX 5080/5090 street vs. MSRP weekly",
+    "NVIDIA quarterly earnings: data-center vs. gaming revenue split (signals allocation priority)",
+    "SK Hynix/Micron/Samsung earnings: HBM production volume and customer allocation commentary",
+    "JonPeddie Research quarterly GPU shipments (AMD market share signal)",
+    "Hyperscaler (MSFT/GOOG/META/AMZN) GPU capex guidance in quarterly earnings",
+    "TSMC capacity utilization reports (3nm/2nm node — upstream of both GPU and HBM supply)"
+  ],
+  "searchQueries": [
+    "RTX 5090 street price 2027 TechPowerUp",
+    "consumer GPU VRAM shortage 2027",
+    "HBM memory supply data center consumer allocation 2027",
+    "NVIDIA gaming GPU revenue 2027 earnings",
+    "AMD Radeon market share 2027 JonPeddie",
+    "GPU price normalization 2027 2028"
+  ],
+  "dependencies": {
+    "_docs": "Upstream: calibration-ai-corporate-moat-2028. If top-3 moat persists (H1/H2), training demand remains high — supports H3/H4 elevated prices. If moat erodes (H3/H4), training demand drops — supports H1/H2 price reversion. Downstream: calibration-local-frontier-inference-2030 (VRAM normalization enables consumer hardware for local inference).",
+    "upstream": [
+      {
+        "slug": "calibration-ai-corporate-moat-2028",
+        "assumptions": {
+          "H1": 0.25,
+          "H2": 0.35,
+          "H3": 0.28,
+          "H4": 0.12
+        },
+        "tolerance": 0.15,
+        "reason": "Moat persistence (H1/H2) implies sustained hyperscaler training demand → structural GPU scarcity → supports VRAM H3/H4. Moat erosion (H3/H4) implies reduced training demand and inference efficiency gains → supports VRAM H1/H2 reversion. If moat posteriors shift >15pp, recalibrate VRAM priors."
+      }
+    ]
+  },
+  "governance": {
+    "health": "HEALTHY",
+    "issues": [
+      "Stale dependency: calibration-ai-corporate-moat-2028.H2 assumed=0.35, actual=0.5383, drift=18.83%",
+      "Stale dependency: calibration-ai-corporate-moat-2028.H3 assumed=0.28, actual=0.0632, drift=21.68%"
+    ],
+    "rt": {
+      "rt": 0.0,
+      "regime": "SAFE",
+      "worst_hypothesis": "H1"
+    },
+    "entropy": 1.4369,
+    "maxEntropy": 2.0,
+    "uncertaintyRatio": 0.7185,
+    "evidenceFreshness": {
+      "fresh": 8,
+      "stale": 0,
+      "total": 8
+    },
+    "hypothesisAdmissibility": {
+      "H1": "ADMISSIBLE",
+      "H2": "ADMISSIBLE",
+      "H3": "ADMISSIBLE",
+      "H4": "ADMISSIBLE"
+    },
+    "klFromPrior": {
+      "kl_divergence": 0.3783,
+      "interpretation": "MODERATE"
+    },
+    "lastComputed": "2026-04-22T18:47:00+00:00",
+    "staleDependencies": 2,
+    "staleDependencyDetails": [
+      {
+        "upstream_slug": "calibration-ai-corporate-moat-2028",
+        "hypothesis": "H2",
+        "assumed": 0.35,
+        "actual": 0.5383,
+        "drift": 0.1883,
+        "tolerance": 0.15,
+        "stale": true
+      },
+      {
+        "upstream_slug": "calibration-ai-corporate-moat-2028",
+        "hypothesis": "H3",
+        "assumed": 0.28,
+        "actual": 0.0632,
+        "drift": 0.2168,
+        "tolerance": 0.15,
+        "stale": true
+      }
+    ],
+    "calibrationHealth": "ACCEPTABLE",
+    "unresolvedContradictions": 0,
+    "designGate": {
+      "passed": true,
+      "blockers": [],
+      "warnings": [
+        "meta.resolution may not be objectively observable — does it describe something a third party could verify?"
+      ],
+      "coverage": {
+        "H1": {
+          "pos": 8,
+          "neg": 2
+        },
+        "H2": {
+          "pos": 9,
+          "neg": 3
+        },
+        "H3": {
+          "pos": 4,
+          "neg": 9
+        },
+        "H4": {
+          "pos": 2,
+          "neg": 8
+        }
+      },
+      "indistinguishable": [],
+      "lastChecked": "2026-04-22T18:47:00+00:00"
+    }
+  },
+  "predictionScoring": {
+    "_docs": "Calibration infrastructure. Snapshots are auto-created by engine on each posterior update. Record outcome when topic resolves, then compute_calibration_report() for Brier analysis.",
+    "snapshots": [
+      {
+        "timestamp": "2026-04-22T18:04:53+00:00",
+        "trigger": "posterior_update",
+        "posteriors": {
+          "H1": 0.35,
+          "H2": 0.3,
+          "H3": 0.22,
+          "H4": 0.13
+        },
+        "entropy": 1.9144
+      },
+      {
+        "timestamp": "2026-04-22T18:46:44+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.1489,
+          "H2": 0.3191,
+          "H3": 0.4213,
+          "H4": 0.1106
+        },
+        "entropy": 1.8117
+      },
+      {
+        "timestamp": "2026-04-22T18:46:44+00:00",
+        "trigger": "pipeline:ev_004",
+        "posteriors": {
+          "H1": 0.1489,
+          "H2": 0.3191,
+          "H3": 0.4213,
+          "H4": 0.1106
+        },
+        "entropy": 1.8117
+      },
+      {
+        "timestamp": "2026-04-22T18:47:00+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0568,
+          "H2": 0.426,
+          "H3": 0.4821,
+          "H4": 0.0352
+        },
+        "entropy": 1.4369
+      },
+      {
+        "timestamp": "2026-04-22T18:47:00+00:00",
+        "trigger": "pipeline:ev_005",
+        "posteriors": {
+          "H1": 0.0568,
+          "H2": 0.426,
+          "H3": 0.4821,
+          "H4": 0.0352
+        },
+        "entropy": 1.4369
+      }
+    ],
+    "outcomes": [],
+    "brierScores": []
+  },
+  "slug": "calibration-vram-price-reversion-2028",
+  "title": "Consumer GPU VRAM Price Reversion by 2028",
+  "question": "By 2028-12-31, has the street price of top-tier consumer discrete GPUs (RTX 5080-class or nearest equivalent-tier) reverted to within 20% of the inflation-adjusted equivalent-tier consumer GPU price from 2024-Q4, as tracked by major GPU pricing databases?",
+  "resolution": "Resolved H1 (full reversion) if NowInStock, TechPowerUp, or equivalent shows RTX 5080-class 90-day average street price within 20% of inflation-adjusted 2024-Q4 RTX 4080 baseline (est. $1,050-$1,150 CPI-adjusted) for ≥3 consecutive months before 2028-12-31. H2 if 20-50% above baseline at resolution date. H3 if 50-100% above. H4 if >100% above baseline or NVIDIA exits consumer discrete GPU segment. resolutionDate: 2028-12-31.",
+  "classification": "CALIBRATION",
+  "startDate": "2026-04-22",
+  "resolutionDate": "2028-12-31",
+  "hypotheses": {
+    "H1": {
+      "label": "Full reversion: street price within 20% of inflation-adj 2024-Q4 baseline",
+      "prior": 0.35,
+      "midpoint": 10,
+      "unit": "% above inflation-adjusted 2024-Q4 baseline",
+      "description": "Malone's 'short-term market problem' thesis — new fab capacity (TSMC 2nm, HBM4), AMD competition, and inference efficiency gains normalize consumer GPU supply/demand. RTX 5080-class returns to historical tier pricing by 2028."
+    },
+    "H2": {
+      "label": "Moderate elevated plateau: 20-50% above inflation-adj 2024-Q4 baseline",
+      "prior": 0.3,
+      "midpoint": 35,
+      "unit": "% above inflation-adjusted 2024-Q4 baseline",
+      "description": "Data-center demand partially eases but doesn't fully normalize. New fab capacity reduces scarcity but doesn't eliminate it. Pricing settles above historical norms but consumers can still buy at some premium."
+    },
+    "H3": {
+      "label": "Sustained high elevation: 50-100% above inflation-adj 2024-Q4 baseline",
+      "prior": 0.22,
+      "midpoint": 75,
+      "unit": "% above inflation-adjusted 2024-Q4 baseline",
+      "description": "Alex's thesis — AI/data-center demand structurally outpaces consumer GPU supply. HBM allocation remains prioritized for enterprise. Consumers face persistent scarcity and elevated prices through 2028. lowrhoufo '10-year horizon' view plausible."
+    },
+    "H4": {
+      "label": "Structural escalation or bifurcation: >100% above baseline or NVIDIA exits consumer",
+      "prior": 0.13,
+      "midpoint": 150,
+      "unit": "% above inflation-adjusted 2024-Q4 baseline",
+      "description": "NVIDIA formally de-prioritizes or exits consumer discrete GPU segment to maximize data-center margins. Consumer cards become niche/legacy. Gaming GPU market bifurcates from AI silicon. Street prices extreme or consumer tier disappears as a market."
+    }
+  },
+  "contradictionTracker": {
+    "unresolved": [],
+    "resolved": [
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-22T00:00:00Z",
+        "entry_a_text": "Multiple sources confirm consumer GPU prices elevated significantly vs. MSRP in Q1 2026, driven by AI/data-center demand crowding out GDDR7 and HBM supply. RTX 5090 ($1,999 MSRP) trading at $3,000-$6,000 street (75-200% above MSRP); RTX 5080 ($999 MSRP) at $1,599+ retail (45-60% above MSRP). RTX 5090 Founders Edition sold out in 8 minutes at launch. Server ECC RAM prices roughly doubled since Q3 2025. AI projected to consume ~20% of total DRAM production in 2026. 30-40% reduction in consumer GPU production allocation reported. Sources: TechSpot Q1 2026 GPU Pricing Update; BuySellRam memory economics; WccFTech RTX 5090 price trajectory; TrackaLacker RTX 5090 tracker; XDA Developers.",
+        "entry_b_time": "2026-04-22T18:46:44+00:00",
+        "entry_b_text": "SemiAnalysis (via Tom's Hardware, 2026-04): Memory will consume ~30% of hyperscaler AI data center spending in CY2026, a 4x increase over 2023 (~8%). HBM demand growing 80-100%/yr vs supply growing 50-60%/yr; gap not expected to close until 2028-2029. HBM3E and HBM4 supply fully allocated through 2026 with hyperscalers locking multi-year contracts. NVIDIA retains preferential supply terms; AMD structurally more exposed to memory cost inflation.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: center, consume, data, demand, hbm",
+        "detected": "2026-04-22T18:46:44Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T18:46:44Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-22T17:41:00Z",
+        "entry_a_text": "@lastnpcalex.agency posted on Bluesky: 'I think that misunderstands the mechanism though. AI corps GPU demand 2x'd VRAM prices for consumers in < 1 quarter.' Responding to @proptermalone's claim that AI corps lack moat. No data source cited for the 2x figure.",
+        "entry_b_time": "2026-04-22T18:46:44+00:00",
+        "entry_b_text": "SemiAnalysis (via Tom's Hardware, 2026-04): Memory will consume ~30% of hyperscaler AI data center spending in CY2026, a 4x increase over 2023 (~8%). HBM demand growing 80-100%/yr vs supply growing 50-60%/yr; gap not expected to close until 2028-2029. HBM3E and HBM4 supply fully allocated through 2026 with hyperscalers locking multi-year contracts. NVIDIA retains preferential supply terms; AMD structurally more exposed to memory cost inflation.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: data, demand",
+        "detected": "2026-04-22T18:46:44Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T18:46:44Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-22T17:41:00Z",
+        "entry_a_text": "@lastnpcalex.agency posted on Bluesky: 'I think that misunderstands the mechanism though. AI corps GPU demand 2x'd VRAM prices for consumers in < 1 quarter.' Responding to @proptermalone's claim that AI corps lack moat. No data source cited for the 2x figure.",
+        "entry_b_time": "2026-04-22T00:00:00Z",
+        "entry_b_text": "Multiple sources confirm consumer GPU prices elevated significantly vs. MSRP in Q1 2026, driven by AI/data-center demand crowding out GDDR7 and HBM supply. RTX 5090 ($1,999 MSRP) trading at $3,000-$6,000 street (75-200% above MSRP); RTX 5080 ($999 MSRP) at $1,599+ retail (45-60% above MSRP). RTX 5090 Founders Edition sold out in 8 minutes at launch. Server ECC RAM prices roughly doubled since Q3 2025. AI projected to consume ~20% of total DRAM production in 2026. 30-40% reduction in consumer GPU production allocation reported. Sources: TechSpot Q1 2026 GPU Pricing Update; BuySellRam memory economics; WccFTech RTX 5090 price trajectory; TrackaLacker RTX 5090 tracker; XDA Developers.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: data, demand, gpu, prices",
+        "detected": "2026-04-22T18:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T18:46:44Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-22T18:46:44+00:00",
+        "entry_a_text": "SemiAnalysis (via Tom's Hardware, 2026-04): Memory will consume ~30% of hyperscaler AI data center spending in CY2026, a 4x increase over 2023 (~8%). HBM demand growing 80-100%/yr vs supply growing 50-60%/yr; gap not expected to close until 2028-2029. HBM3E and HBM4 supply fully allocated through 2026 with hyperscalers locking multi-year contracts. NVIDIA retains preferential supply terms; AMD structurally more exposed to memory cost inflation.",
+        "entry_b_time": "2026-04-22T18:47:00+00:00",
+        "entry_b_text": "April 2026 street price snapshot: RTX 5080 at $1,249 on Amazon (~25% above $999 MSRP); RTX 5090 at $3,818 on Amazon (~91% above $1,999 MSRP); cheapest AIB 5090 (ASUS TUF) at $2,909 (~46% above MSRP). Per BestValueGPU / TrackaLacker / Tom's Hardware trackers. RTX 5080 premium in H2 band (20-50%); RTX 5090 premium straddling H2/H3 boundary. 90-day rolling average not yet established.",
+        "reason": "Numeric divergence 97.7% on metric (context: .): new=46.0, existing=2023.0, threshold=10%",
+        "detected": "2026-04-22T18:47:00Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T18:47:00Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-22T00:00:00Z",
+        "entry_a_text": "Multiple sources confirm consumer GPU prices elevated significantly vs. MSRP in Q1 2026, driven by AI/data-center demand crowding out GDDR7 and HBM supply. RTX 5090 ($1,999 MSRP) trading at $3,000-$6,000 street (75-200% above MSRP); RTX 5080 ($999 MSRP) at $1,599+ retail (45-60% above MSRP). RTX 5090 Founders Edition sold out in 8 minutes at launch. Server ECC RAM prices roughly doubled since Q3 2025. AI projected to consume ~20% of total DRAM production in 2026. 30-40% reduction in consumer GPU production allocation reported. Sources: TechSpot Q1 2026 GPU Pricing Update; BuySellRam memory economics; WccFTech RTX 5090 price trajectory; TrackaLacker RTX 5090 tracker; XDA Developers.",
+        "entry_b_time": "2026-04-22T18:47:00+00:00",
+        "entry_b_text": "April 2026 street price snapshot: RTX 5080 at $1,249 on Amazon (~25% above $999 MSRP); RTX 5090 at $3,818 on Amazon (~91% above $1,999 MSRP); cheapest AIB 5090 (ASUS TUF) at $2,909 (~46% above MSRP). Per BestValueGPU / TrackaLacker / Tom's Hardware trackers. RTX 5080 premium in H2 band (20-50%); RTX 5090 premium straddling H2/H3 boundary. 90-day rolling average not yet established.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: above, msrp, price, rtx, street",
+        "detected": "2026-04-22T18:47:00Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T18:47:00Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-22T17:42:00Z",
+        "entry_a_text": "@proptermalone responded: 'yeah, that's a short term market problem.' @lowrhoufo.bsky.social replied: 'Depends a lot on what short-term means imo, but it passes the sniff test on like a 10 year horizon for me.'",
+        "entry_b_time": "2026-04-22T18:47:00+00:00",
+        "entry_b_text": "April 2026 street price snapshot: RTX 5080 at $1,249 on Amazon (~25% above $999 MSRP); RTX 5090 at $3,818 on Amazon (~91% above $1,999 MSRP); cheapest AIB 5090 (ASUS TUF) at $2,909 (~46% above MSRP). Per BestValueGPU / TrackaLacker / Tom's Hardware trackers. RTX 5080 premium in H2 band (20-50%); RTX 5090 premium straddling H2/H3 boundary. 90-day rolling average not yet established.",
+        "reason": "Numeric divergence 90.0% on metric (context: on): new=1.0, existing=10.0, threshold=10%",
+        "detected": "2026-04-22T18:47:00Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T18:47:00Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-22T17:41:00Z",
+        "entry_a_text": "@lastnpcalex.agency posted on Bluesky: 'I think that misunderstands the mechanism though. AI corps GPU demand 2x'd VRAM prices for consumers in < 1 quarter.' Responding to @proptermalone's claim that AI corps lack moat. No data source cited for the 2x figure.",
+        "entry_b_time": "2026-04-22T18:47:00+00:00",
+        "entry_b_text": "April 2026 street price snapshot: RTX 5080 at $1,249 on Amazon (~25% above $999 MSRP); RTX 5090 at $3,818 on Amazon (~91% above $1,999 MSRP); cheapest AIB 5090 (ASUS TUF) at $2,909 (~46% above MSRP). Per BestValueGPU / TrackaLacker / Tom's Hardware trackers. RTX 5080 premium in H2 band (20-50%); RTX 5090 premium straddling H2/H3 boundary. 90-day rolling average not yet established.",
+        "reason": "Numeric divergence 100.0% on metric (context: in): new=5080.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-22T18:47:00Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T18:47:00Z"
+      }
+    ]
+  },
+  "sourceCalibration": {
+    "ledger": [],
+    "effectiveTrust": {
+      "@lastnpcalex.agency": 0.5,
+      "@lowrhoufo.bsky.social": 0.5,
+      "@proptermalone.bsky.social": 0.5,
+      "BuySellRam": 0.5,
+      "Multi-source corroboration (TechSpot": 0.5,
+      "SemiAnalysis": 0.5,
+      "Tom's Hardware": 0.5,
+      "TrackaLacker": 0.5,
+      "WccFTech": 0.5,
+      "XDA)": 0.5,
+      "BestValueGPU": 0.5,
+      "Tom's Hardware GPU price tracker": 0.5
+    },
+    "_last_scan_same_source_skipped": 1
+  }
+}

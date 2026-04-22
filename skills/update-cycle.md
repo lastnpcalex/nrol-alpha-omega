@@ -55,6 +55,65 @@ result = process_evidence(
 )
 ```
 
+## LR reference table — pick calibrated likelihoods
+
+When supplying `likelihoods` or specifying `lr_range` on an indicator,
+resist the urge to pick round numbers. Anchor to this table. These are
+posterior-odds multipliers: LR=2 means the evidence doubles the prior
+odds for that hypothesis; LR=10 means a ten-fold update.
+
+### Single-value LRs
+
+| LR value | Odds change | Interpretation |
+|----------|-------------|----------------|
+| 0.1  | divide odds 10× | evidence strongly argues *against* this H — near-falsifying |
+| 0.3  | divide odds ~3×  | evidence clearly tilts away from this H |
+| 0.7  | divide odds ~1.5× | mild tilt away — barely distinguishable from neutral |
+| **1.0**  | **no change**   | **neutral — do not use this indicator to update H** |
+| 1.5  | multiply ~1.5×  | mild tilt toward this H |
+| 2.0  | double the odds | moderate evidence — "twice as likely if H is true" |
+| 4.0  | multiply 4×     | strong evidence — consistent with H being true |
+| 10.0 | multiply 10×    | very strong — rarely occurs absent H |
+| 20.0 | multiply 20×    | **engine cap (phantom_precision)** — anything higher is blocked |
+
+Rule of thumb: if you'd say *"this evidence is a tiebreaker"*, you mean LR ≈ 1.5–3.
+*"This evidence is clear"* → LR ≈ 3–7. *"This is decisive absent other evidence"* → LR ≥ 10.
+Claims of LR > 20 need a referenced base rate; you almost never have one.
+
+### LR ranges (for `lr_range` on indicators)
+
+A range `[lo, hi]` represents genuine uncertainty about evidence strength.
+Width convention from the spec:
+
+| Range width (ratio hi/lo) | Confidence | When to use |
+|---------------------------|------------|-------------|
+| hi/lo ≤ 1.3 (narrow)      | HIGH       | reference-class data with known P(E\|H) — set `lr_basis: "reference_class"` and cite `lr_source` |
+| hi/lo ~ 2                 | MEDIUM     | literature-derived midpoint, rough interval — set `lr_basis: "literature"` |
+| hi/lo ≥ 2× midpoint       | LOW        | expert estimate, no data — `lr_basis: "expert_estimate"`, `lr_source: null` |
+
+**Hard rule**: `lr_confidence: "HIGH"` requires a non-null `lr_source`. The
+lint fires `unsupported_lr` otherwise — high confidence with no documented
+source is phantom precision.
+
+**Another hard rule**: an `lr_range` with width = 0 (lo == hi) is a point
+estimate masquerading as a range. The sensitivity analysis returns
+dominance_stable=True trivially. Only use zero-width ranges for
+migrated-from-pp indicators, flagged for regrounding.
+
+### Calibration anchors by evidence type
+
+| Evidence example | Typical LR |
+|------------------|-----------|
+| single anonymous source asserts X | 1.2–1.8 |
+| two independent named sources corroborate X | 2.5–4.0 |
+| confirmed official statement / primary-source document | 4.0–8.0 |
+| physical/observable event (satellite imagery, market data, verified release) | 6.0–15.0 |
+| reference-class base rate with n > 30 comparable events | cite, don't guess |
+
+If you catch yourself assigning LR=5 to everything, you're not
+calibrating — you're picking a number. Use this table to locate what
+the evidence is actually worth, then write the matching LR.
+
 ## Prerequisites
 
 - The indicator's observable criteria must be **verified**, not just plausible

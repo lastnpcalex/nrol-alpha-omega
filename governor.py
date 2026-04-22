@@ -895,7 +895,7 @@ FAILURE_MODES = [
 
 def check_update_proposal(topic: dict, proposed_posteriors: dict[str, float],
                           evidence_refs: list[str] = None,
-                          reason: str = "") -> dict:
+                          reason: str = "", **kwargs) -> dict:
     """
     Run the hallucination failure mode checklist against a proposed
     posterior update. Returns pass/fail per mode with explanations.
@@ -985,6 +985,40 @@ def check_update_proposal(topic: dict, proposed_posteriors: dict[str, float],
         results["warnings"].append("stale_evidence")
     else:
         results["checks"]["stale_evidence"] = {"passed": True}
+
+    # 4b. Sensitivity analysis (populated by bayesian_update when lr_range used)
+    sensitivity_meta = kwargs.get("sensitivity_meta", {})
+    if sensitivity_meta:
+        dominant_stable = sensitivity_meta.get("dominantHypothesisStable", True)
+        width = sensitivity_meta.get("maxRangeWidth", 0.0)
+        lr_confidence = sensitivity_meta.get("lr_confidence", "MEDIUM")
+        topic_classification = topic.get("meta", {}).get("classification", "ROUTINE")
+        if not dominant_stable:
+            detail = "Dominant hypothesis flips across LR range — conclusion not robust"
+            # Hard block only when ALERT classification (conclusion drives decisions).
+            # LOW confidence on non-ALERT topics is a critical warning, not a block:
+            # uncertain evidence is still informative, just flagged.
+            if topic_classification == "ALERT":
+                results["checks"]["conclusion_sensitive"] = {
+                    "passed": False, "detail": detail,
+                }
+                results["failures"].append("conclusion_sensitive")
+                results["passed"] = False
+            else:
+                severity = "CRITICAL" if lr_confidence == "LOW" else "WARNING"
+                results["checks"]["conclusion_sensitive"] = {
+                    "passed": False,
+                    "detail": f"{detail} [{severity}: lr_confidence={lr_confidence}]",
+                }
+                results["warnings"].append("conclusion_sensitive")
+        elif width > 0.20:
+            results["checks"]["wide_uncertainty"] = {
+                "passed": False,
+                "detail": f"Posterior range width {width:.2f} > 0.20 — LR estimates need grounding",
+            }
+            results["warnings"].append("wide_uncertainty")
+        else:
+            results["checks"]["conclusion_sensitive"] = {"passed": True}
 
     # 5. Circular Reasoning
     reason_lower = reason.lower()
@@ -1285,6 +1319,33 @@ def governance_report(topic: dict) -> dict:
 
     if kl_prior["interpretation"] == "PRIOR_DOMINATED":
         issues.append("Posterior may be prior-dominated (low KL from initial prior)")
+
+    # Drift-flagged indicators surface from migration: they have LRs derived
+    # from inflated posteriors and should be regrounded before next firing.
+    try:
+        from framework.lint import list_drift_flagged_indicators
+        drift_inds = list_drift_flagged_indicators(topic)
+        if drift_inds:
+            ids = [d["indicator_id"] for d in drift_inds]
+            issues.append(
+                f"DRIFT-FLAGGED indicators ({len(drift_inds)}) need regrounding "
+                f"before next firing: {', '.join(ids[:5])}"
+                + (f" (+{len(ids)-5} more)" if len(ids) > 5 else "")
+            )
+    except ImportError:
+        pass
+
+    # Topic-level resolution date signals the whole topic is due for resolution.
+    # Does NOT auto-resolve; operator must run skills/resolve.md to pick a winner.
+    resolution_date = topic.get("meta", {}).get("resolutionDate")
+    if resolution_date and topic_status not in ("RESOLVED", "ARCHIVED"):
+        now_str = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+        if str(resolution_date)[:10] < now_str:
+            issues.append(
+                f"CRITICAL: Topic past resolutionDate ({resolution_date}) but still "
+                f"{topic_status} — run skills/resolve.md to record the winning "
+                f"hypothesis and lock posteriors."
+            )
 
     health = "HEALTHY" if len(issues) == 0 else "DEGRADED" if len(issues) <= 2 else "CRITICAL"
 

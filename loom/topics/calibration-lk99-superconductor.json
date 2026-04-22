@@ -6,7 +6,7 @@
     "question": "Is LK-99 (copper-substituted lead apatite) a room-temperature, ambient-pressure superconductor as claimed by Lee & Kim (2023)?",
     "resolution": "Resolved when: (a) 3+ independent labs replicate zero-resistance AND diamagnetic levitation in LK-99 samples, OR (b) 3+ independent labs fail to replicate AND a credible structural/electronic explanation for the original observations emerges.",
     "created": "2023-07-22T00:00:00Z",
-    "lastUpdated": "2026-04-17T18:49:21+00:00",
+    "lastUpdated": "2026-04-22T01:01:03+00:00",
     "status": "RESOLVED",
     "dayCount": 25,
     "startDate": "2023-07-22T00:00:00Z",
@@ -57,32 +57,32 @@
         "label": "Genuine RTSC â€” LK-99 is a room-temp superconductor",
         "midpoint": 4,
         "unit": "weeks",
-        "posterior": 0.01,
+        "posterior": 0.0,
         "description": "The Lee & Kim claim is correct. LK-99 exhibits zero resistance and Meissner effect at room temperature and ambient pressure. Would be Nobel-tier discovery."
       },
       "H2": {
         "label": "Partial â€” real but not full SC (e.g., filamentary, diamagnetic, but not bulk SC)",
         "midpoint": 6,
         "unit": "weeks",
-        "posterior": 0.02,
+        "posterior": 0.0,
         "description": "Something genuinely novel is happening in the material (unusual diamagnetism, resistivity drop) but it falls short of true superconductivity. Could be a phase transition, Cu2S impurity effect, or structural anomaly."
       },
       "H3": {
         "label": "Not SC â€” mundane explanation (impurities, measurement error, Cu2S)",
         "midpoint": 4,
         "unit": "weeks",
-        "posterior": 0.9,
+        "posterior": 1.0,
         "description": "The observations have a conventional explanation: Cu2S phase transition at ~104C, ferromagnetism mimicking levitation, resistivity artifacts from sample geometry. No superconductivity."
       },
       "H4": {
         "label": "Fraud or severe methodological failure",
         "midpoint": 8,
         "unit": "weeks",
-        "posterior": 0.07,
+        "posterior": 0.0,
         "description": "The original claim is based on fabricated data, cherry-picked samples, or fundamental measurement errors so severe they constitute scientific misconduct."
       }
     },
-    "expectedValue": 0,
+    "expectedValue": 5.18,
     "expectedUnit": "probability_of_SC",
     "posteriorHistory": [
       {
@@ -100,74 +100,121 @@
         "H4": 0.2
       },
       {
-        "date": "2023-07-28T10:00:00Z",
+        "date": "2026-04-22",
         "posteriors": {
-          "H1": 0.12,
-          "H2": 0.28,
-          "H3": 0.42,
-          "H4": 0.18
+          "H1": 0.0993,
+          "H2": 0.1985,
+          "H3": 0.5037,
+          "H4": 0.1985
         },
-        "note": "Partial levitation video + social media hype shifts H2 up slightly",
-        "H1": 0.12,
-        "H2": 0.28,
-        "H3": 0.42,
-        "H4": 0.18
-      },
-      {
-        "date": "2023-08-01T09:00:00Z",
-        "posteriors": {
-          "H1": 0.15,
-          "H2": 0.3,
-          "H3": 0.38,
-          "H4": 0.17
-        },
-        "note": "DFT flat bands provide some theoretical support",
-        "H1": 0.15,
-        "H2": 0.3,
-        "H3": 0.38,
-        "H4": 0.17
-      },
-      {
-        "date": "2023-08-03T20:00:00Z",
-        "posteriors": {
-          "H1": 0.08,
+        "priors": {
+          "H1": 0.1,
           "H2": 0.2,
-          "H3": 0.55,
-          "H4": 0.17
+          "H3": 0.5,
+          "H4": 0.2
         },
-        "note": "Multiple failed replications + Cu2S explanation emerging",
-        "H1": 0.08,
-        "H2": 0.2,
-        "H3": 0.55,
-        "H4": 0.17
+        "updateMethod": "bayesian_update",
+        "evidenceRefs": [
+          "2023-07-26T14:00:00Z"
+        ],
+        "likelihoods": {
+          "H1": 0.943396,
+          "H2": 0.943396,
+          "H3": 1.0,
+          "H4": 0.943396
+        },
+        "note": "Indicator t3_expert_skepticism fired (firing #1, decay=1.000): REPLAY: Multiple condensed matter physicists flagged methodological issues from day one",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "adjustedLikelihoods": {
+          "H1": 0.954009,
+          "H2": 0.954009,
+          "H3": 0.96816,
+          "H4": 0.954009
+        },
+        "evidenceWeight": 0.25,
+        "weightDetail": [
+          {
+            "ref": "2023-07-26T14:00:00Z",
+            "effectiveWeight": 0.25,
+            "claimState": "PROPOSED"
+          }
+        ],
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        }
       },
       {
-        "date": "2023-08-08T15:00:00Z",
+        "date": "2026-04-22",
         "posteriors": {
-          "H1": 0.02,
-          "H2": 0.05,
-          "H3": 0.83,
-          "H4": 0.1
+          "H1": 0.1079,
+          "H2": 0.1966,
+          "H3": 0.4989,
+          "H4": 0.1966
         },
-        "note": "IBS single crystal definitively negative. Cu2S explains everything.",
-        "H1": 0.02,
-        "H2": 0.05,
-        "H3": 0.83,
-        "H4": 0.1
+        "priors": {
+          "H1": 0.0993,
+          "H2": 0.1985,
+          "H3": 0.5037,
+          "H4": 0.1985
+        },
+        "updateMethod": "bayesian_update",
+        "evidenceRefs": [
+          "2023-07-28T10:00:00Z"
+        ],
+        "likelihoods": {
+          "H1": 1.0,
+          "H2": 0.833333,
+          "H3": 0.833333,
+          "H4": 0.833333
+        },
+        "note": "Indicator t3_social_media_video fired (firing #1, decay=1.000): REPLAY: Multiple viral videos from Chinese labs, none showing definitive SC",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "adjustedLikelihoods": {
+          "H1": 0.9375,
+          "H2": 0.854166,
+          "H3": 0.854166,
+          "H4": 0.854166
+        },
+        "evidenceWeight": 0.5,
+        "weightDetail": [
+          {
+            "ref": "2023-07-28T10:00:00Z",
+            "effectiveWeight": 0.5,
+            "claimState": "CONTESTED"
+          }
+        ],
+        "turningPoint": {
+          "type": "THRESHOLD_CROSSED",
+          "hypothesis": "H3",
+          "from": 0.5037,
+          "to": 0.4989
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        }
       },
       {
-        "date": "2023-08-16T10:00:00Z",
+        "date": "2026-04-22",
         "posteriors": {
-          "H1": 0.01,
-          "H2": 0.02,
-          "H3": 0.9,
-          "H4": 0.07
+          "H1": 0.0,
+          "H2": 0.0,
+          "H3": 1.0,
+          "H4": 0.0
         },
-        "note": "RESOLVED: Scientific consensus - not a superconductor. Cu2S impurity.",
-        "H1": 0.01,
-        "H2": 0.02,
-        "H3": 0.9,
-        "H4": 0.07
+        "note": "RE-LOCK POST-REPLAY: winner=H3. Princeton/Beihang/Berkeley/BARC/NICST/IFW Dresden replications: no SC. Cu2S impurity explained resistance drop. (Re-locked after erroneous replay.)",
+        "updateMethod": "topic_resolved"
       }
     ]
   },
@@ -194,7 +241,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H1 +25pp, H3 -15pp, H4 -10pp"
+          "posteriorEffect": "H1 +25pp, H3 -15pp, H4 -10pp",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 0.285714,
+            "H3": 0.2,
+            "H4": 0.142857
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t1_meissner_confirmed",
@@ -202,25 +258,52 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H1 +30pp"
+          "posteriorEffect": "H1 +30pp",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 0.25,
+            "H3": 0.25,
+            "H4": 0.25
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t1_bulk_failure",
           "desc": "3+ independent labs fail to observe any SC signatures in high-quality samples",
-          "status": "FIRED",
-          "firedDate": "2023-08-08T15:00:00Z",
+          "status": "NOT_FIRED",
+          "firedDate": null,
           "note": "6+ labs failed replication including IBS single-crystal study",
-          "posteriorEffect": "H3 +25pp, H1 -20pp"
+          "posteriorEffect": "H3 +25pp, H1 -20pp",
+          "likelihoods": {
+            "H1": 0.033333,
+            "H2": 0.666667,
+            "H3": 1.0,
+            "H4": 0.666667
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         }
       ],
       "tier2_strong": [
         {
           "id": "t2_partial_levitation",
           "desc": "Lab observes partial levitation or diamagnetic response but not full Meissner",
-          "status": "FIRED",
-          "firedDate": "2023-07-28T10:00:00Z",
+          "status": "NOT_FIRED",
+          "firedDate": null,
           "note": "Huazhong University video showed partial levitation (later explained by ferromagnetic Cu2S)",
-          "posteriorEffect": "H2 +15pp"
+          "posteriorEffect": "H2 +15pp",
+          "likelihoods": {
+            "H1": 0.571429,
+            "H2": 1.0,
+            "H3": 0.571429,
+            "H4": 0.571429
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t2_resistivity_drop",
@@ -228,23 +311,51 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H2 +10pp, H3 -5pp"
+          "posteriorEffect": "H2 +10pp, H3 -5pp",
+          "likelihoods": {
+            "H1": 0.666667,
+            "H2": 1.0,
+            "H3": 0.6,
+            "H4": 0.666667
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "t2_cu2s_explanation",
           "desc": "Cu2S structural phase transition identified as explanation for observed effects",
-          "status": "FIRED",
-          "firedDate": "2023-08-06T10:00:00Z",
+          "status": "NOT_FIRED",
+          "firedDate": null,
           "note": "UMD identified Cu2S phase transition at 104C as cause of resistivity drop",
-          "posteriorEffect": "H3 +15pp, H1 -10pp, H2 -5pp"
+          "posteriorEffect": "H3 +15pp, H1 -10pp, H2 -5pp",
+          "likelihoods": {
+            "H1": 0.038462,
+            "H2": 0.576923,
+            "H3": 1.0,
+            "H4": 0.769231
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false,
+          "lr_migration_warning": "design prior drift >30% — review before next firing"
         },
         {
           "id": "t2_dft_flat_bands",
           "desc": "DFT calculations show flat bands near Fermi level in Cu-substituted lead apatite",
-          "status": "FIRED",
-          "firedDate": "2023-08-01T09:00:00Z",
+          "status": "NOT_FIRED",
+          "firedDate": null,
           "note": "Sinead Griffin (LBNL) DFT showed flat bands, but this alone doesn't prove SC",
-          "posteriorEffect": "H1 +5pp, H2 +5pp"
+          "posteriorEffect": "H1 +5pp, H2 +5pp",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 0.833333,
+            "H3": 0.666667,
+            "H4": 0.666667
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         }
       ],
       "tier3_suggestive": [
@@ -253,42 +364,80 @@
           "desc": "Viral video showing levitation/resistance drop (unvetted lab, no peer review)",
           "status": "FIRED",
           "firedDate": "2023-07-28T10:00:00Z",
-          "note": "Multiple viral videos from Chinese labs, none showing definitive SC",
-          "posteriorEffect": "Weak signal only: H1 +2pp if corroborated"
+          "note": "REPLAY: Multiple viral videos from Chinese labs, none showing definitive SC",
+          "posteriorEffect": "Weak signal only: H1 +2pp if corroborated",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 0.833333,
+            "H3": 0.833333,
+            "H4": 0.833333
+          },
+          "lr_decay": 0.65,
+          "n_firings": 1,
+          "resolution_class": false
         },
         {
           "id": "t3_preprint_posted",
           "desc": "New preprint with replication attempt (positive or negative)",
-          "status": "FIRED",
-          "firedDate": "2023-08-02T11:00:00Z",
+          "status": "NOT_FIRED",
+          "firedDate": null,
           "note": "Dozens of preprints posted, overwhelmingly negative replications",
-          "posteriorEffect": "Direction depends on content"
+          "posteriorEffect": "Direction depends on content",
+          "n_firings": 0
         },
         {
           "id": "t3_expert_skepticism",
           "desc": "Prominent condensed matter physicists express skepticism on specific technical grounds",
           "status": "FIRED",
           "firedDate": "2023-07-26T14:00:00Z",
-          "note": "Multiple condensed matter physicists flagged methodological issues from day one",
-          "posteriorEffect": "H3 +3pp"
+          "note": "REPLAY: Multiple condensed matter physicists flagged methodological issues from day one",
+          "posteriorEffect": "H3 +3pp",
+          "likelihoods": {
+            "H1": 0.943396,
+            "H2": 0.943396,
+            "H3": 1.0,
+            "H4": 0.943396
+          },
+          "lr_decay": 0.65,
+          "n_firings": 1,
+          "resolution_class": false
         }
       ],
       "anti_indicators": [
         {
           "id": "anti_h1",
           "desc": "Failed replication by well-resourced lab (e.g., Argonne, Max Planck)",
-          "status": "FIRED",
-          "firedDate": "2023-08-08T15:00:00Z",
+          "status": "NOT_FIRED",
+          "firedDate": null,
           "note": "6+ well-resourced labs failed replication",
-          "posteriorEffect": "H1 -10pp per failure"
+          "posteriorEffect": "H1 -10pp per failure",
+          "likelihoods": {
+            "H1": 0.05,
+            "H2": 1.0,
+            "H3": 1.0,
+            "H4": 1.0
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false,
+          "lr_migration_warning": "design prior drift >30% — review before next firing"
         },
         {
           "id": "anti_h2",
           "desc": "Diamagnetic signal fully explained by ferromagnetic impurity (Cu2S or similar)",
-          "status": "FIRED",
-          "firedDate": "2023-08-07T09:00:00Z",
+          "status": "NOT_FIRED",
+          "firedDate": null,
           "note": "Diamagnetic signal fully explained by ferromagnetic Cu2S impurity",
-          "posteriorEffect": "H2 -15pp"
+          "posteriorEffect": "H2 -15pp",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 0.25,
+            "H3": 1.0,
+            "H4": 1.0
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         },
         {
           "id": "anti_h3",
@@ -296,7 +445,17 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H3 -20pp"
+          "posteriorEffect": "H3 -20pp",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 1.0,
+            "H3": 0.6,
+            "H4": 1.0
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false,
+          "lr_migration_warning": "design prior drift >30% — review before next firing"
         },
         {
           "id": "anti_h4",
@@ -304,7 +463,16 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null,
-          "posteriorEffect": "H4 -10pp"
+          "posteriorEffect": "H4 -10pp",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 1.0,
+            "H3": 1.0,
+            "H4": 0.5
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         }
       ]
     }
@@ -534,6 +702,90 @@
       "ledger": "FACT",
       "claimState": "CONTESTED",
       "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-21T19:03:40+00:00",
+      "tag": "INTEL",
+      "text": "LR MIGRATION RESET: posteriors reset to design priors; evidence log preserved.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 1.0
+    },
+    {
+      "time": "2026-04-22T00:06:09+00:00",
+      "tag": "INTEL",
+      "text": "TOPIC RESOLUTION LOCK: posteriors set to H3=1.0 (winning hypothesis). Rationale: Aug-Oct 2023 replication attempts (Princeton, Beihang, Berkeley, BARC, NICST, IFW Dresden) found no superconductivity. Cu2S impurity explained the resistance drop near 105C. Diamagnetic levitation traced to ferromagnetic Fe impurities. No genuine SC behavior reproduced.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 1.0
+    },
+    {
+      "time": "2026-04-22T01:00:37+00:00",
+      "tag": "INTEL",
+      "text": "REPLAY BEGIN: 9 previously-fired indicators will be re-applied chronologically under current LR system. Posteriors reset to design priors; indicator state cleared. Evidence log preserved for audit.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 1.0
+    },
+    {
+      "id": "ev_replay_t3_expert_skepticism",
+      "time": "2023-07-26T14:00:00Z",
+      "tag": "EVENT",
+      "text": "REPLAY: indicator t3_expert_skepticism fires at historical firedDate 2023-07-26T14:00:00Z. Original note: Multiple condensed matter physicists flagged methodological issues from day one",
+      "source": "replay",
+      "claimState": "SUPPORTED",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "FACT",
+      "effectiveWeight": 1.0
+    },
+    {
+      "time": "2026-04-22T01:00:37+00:00",
+      "tag": "INTEL",
+      "text": "WEIGHT ATTENUATION: likelihoods attenuated to 25% via mixture model ([{'ref': '2023-07-26T14:00:00Z', 'effectiveWeight': 0.25, 'claimState': 'PROPOSED'}])",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_replay_t3_social_media_video",
+      "time": "2023-07-28T10:00:00Z",
+      "tag": "EVENT",
+      "text": "REPLAY: indicator t3_social_media_video fires at historical firedDate 2023-07-28T10:00:00Z. Original note: Multiple viral videos from Chinese labs, none showing definitive SC",
+      "source": "replay",
+      "claimState": "SUPPORTED",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "FACT",
+      "effectiveWeight": 1.0
+    },
+    {
+      "time": "2026-04-22T01:00:37+00:00",
+      "tag": "INTEL",
+      "text": "REPLAY COMPLETE: 2 indicators applied, 7 skipped. Final posteriors: {'H1': 0.1079, 'H2': 0.1966, 'H3': 0.4989, 'H4': 0.1966}. Indicator firedDates restored to originals for audit.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 1.0
+    },
+    {
+      "time": "2026-04-22T01:01:03+00:00",
+      "tag": "INTEL",
+      "text": "RE-LOCK: replay erroneously unlocked a RESOLVED topic. Posteriors restored to H3=1.0. Princeton/Beihang/Berkeley/BARC/NICST/IFW Dresden replications: no SC. Cu2S impurity explained resistance drop. (Re-locked after erroneous replay.)",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 1.0
     }
   ],
   "dataFeeds": {
@@ -590,7 +842,8 @@
   "governance": {
     "health": "DEGRADED",
     "issues": [
-      "Majority stale evidence (15/15)",
+      "Majority stale evidence (17/23)",
+      "Near-zero uncertainty — check for overconfidence",
       "100 unresolved contradictions"
     ],
     "rt": {
@@ -598,13 +851,13 @@
       "regime": "SAFE",
       "worst_hypothesis": "H1"
     },
-    "entropy": 0.5847,
+    "entropy": 0.0,
     "maxEntropy": 2.0,
-    "uncertaintyRatio": 0.2923,
+    "uncertaintyRatio": 0.0,
     "evidenceFreshness": {
-      "fresh": 0,
-      "stale": 15,
-      "total": 15
+      "fresh": 6,
+      "stale": 17,
+      "total": 23
     },
     "hypothesisAdmissibility": {
       "H1": "ADMISSIBLE",
@@ -613,10 +866,10 @@
       "H4": "ADMISSIBLE"
     },
     "klFromPrior": {
-      "kl_divergence": 0.3864,
-      "interpretation": "MODERATE"
+      "kl_divergence": 0.6931,
+      "interpretation": "WELL_EVIDENCED"
     },
-    "lastComputed": "2026-04-17T18:49:21+00:00",
+    "lastComputed": "2026-04-22T01:01:03+00:00",
     "staleDependencies": 0,
     "calibrationHealth": "WELL_CALIBRATED",
     "unresolvedContradictions": 100,
@@ -645,7 +898,7 @@
         }
       },
       "indistinguishable": [],
-      "lastChecked": "2026-04-17T18:49:21+00:00"
+      "lastChecked": "2026-04-22T01:01:03+00:00"
     }
   },
   "predictionScoring": {
@@ -721,6 +974,28 @@
         },
         "entropy": 0.5847,
         "note": "RESOLVED: Scientific consensus - not a superconductor. Cu2S impurity."
+      },
+      {
+        "timestamp": "2026-04-22T01:00:37+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0993,
+          "H2": 0.1985,
+          "H3": 0.5037,
+          "H4": 0.1985
+        },
+        "entropy": 1.7553
+      },
+      {
+        "timestamp": "2026-04-22T01:00:37+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.1079,
+          "H2": 0.1966,
+          "H3": 0.4989,
+          "H4": 0.1966
+        },
+        "entropy": 1.7698
       }
     ],
     "outcomes": [
@@ -2202,5 +2477,7 @@
         "scoring_method": "outcome"
       }
     ]
-  }
+  },
+  "schemaVersion": 2,
+  "migratedAt": "2026-04-21T19:03:40+00:00"
 }

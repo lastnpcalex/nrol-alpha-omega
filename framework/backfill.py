@@ -52,18 +52,34 @@ def _now_iso() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
-def _parse_posterior_impact(impact_str: str) -> dict:
+def _parse_posterior_impact(impact_str) -> dict:
     """
-    Parse a posteriorImpact string into hypothesis direction signals.
+    Parse a posteriorImpact value into hypothesis direction signals.
 
-    Examples:
+    Accepts schemaVersion 1 strings or schemaVersion 2 structured dicts.
+
+    String examples:
         "H1 +5pp, H3 -3pp"         -> {"H1": 1, "H3": -1}
         "H3 +10pp - smoking gun"    -> {"H3": 1}
-        "H2 -5pp, H3 +5pp"         -> {"H2": -1, "H3": 1}
         "NONE"                      -> {}
-        "Resolution: H3 confirmed"  -> {"H3": 1}
-        "Weak signal only"          -> {}
+    Dict example (schemaVersion 2):
+        {"indicatorId": "t2_x", "lrApplied": {...}, "outcome": "FIRED"}
+        -> {"indicatorId": "t2_x"} direction signals extracted from lrApplied keys
     """
+    # schemaVersion 2: structured dict
+    if isinstance(impact_str, dict):
+        signals = {}
+        lr_applied = impact_str.get("lrApplied", {})
+        if lr_applied:
+            max_lr = max(lr_applied.values()) if lr_applied else 1.0
+            min_lr = min(lr_applied.values()) if lr_applied else 1.0
+            for h, lr in lr_applied.items():
+                if lr >= max_lr * 0.8:
+                    signals[h] = 1
+                elif lr <= min_lr * 1.2 and lr < 0.5:
+                    signals[h] = -1
+        return signals
+
     if not impact_str or impact_str == "NONE":
         return {}
 
@@ -171,6 +187,12 @@ def score_against_outcome(topic: dict, winning_hypothesis: str,
     scoring_log = []
 
     for i, entry in enumerate(evidence):
+        # Skip auto-generated deadline elimination entries — they have no source
+        # and attributing the posterior drop to an evidence source corrupts calibration.
+        if entry.get("ledger") == "DECISION" and "DEADLINE ELIMINATION" in entry.get("text", ""):
+            skipped += 1
+            continue
+
         impact_str = entry.get("posteriorImpact", "NONE")
         signals = _parse_posterior_impact(impact_str)
 
