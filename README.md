@@ -283,6 +283,10 @@ framework/
 ├── topic_design_gate.py   Pre-governor design gate — coverage matrix, distinguishability, prior justification + adversarial prompt
 ├── runner.py              CLI orchestrator
 ├── lint.py                Evidence log linting (failure mode checks)
+├── migrate_to_lr.py       Migrate legacy posteriorEffect pp shifts to likelihood-ratio form
+├── replay_indicators.py   Replay historical indicator fires under LR semantics for backtest
+├── stamp_deadlines.py     Stamp/normalize indicator and prediction deadlines across topics
+├── stamp_resolution_dates.py  Stamp resolution dates on topics from meta + hypothesis midpoints
 └── test.py                Hypothesis test registry
 
 skills/                    AI assistant skill prompts (read by AGENTS.md, GEMINI.md, Claude Code commands)
@@ -295,7 +299,10 @@ skills/                    AI assistant skill prompts (read by AGENTS.md, GEMINI
 ├── source-trust.md        5-tier source trust chain, register and calibrate sources
 ├── red-team.md            Devil's advocate challenges, contrarian scoring
 ├── calibration.md         Record outcomes, Brier scoring, backfill pipeline
-└── resolve.md             Prediction sweep — resolve expired predictions, calibrate sources
+├── resolve.md             Prediction sweep — resolve expired predictions, calibrate sources
+├── extrapolate.md         Agent pipeline for generating and vetting long-horizon predictions
+├── extrapolation-tuning.md Tuning notes for the extrapolation pipeline (personas, sweeps, thresholds)
+└── news-scan.md           Automated multi-topic news sweep
 
 loom/                      Standalone canvas dashboards (runs inside A Shadow Loom iframe)
 ├── index.html             Per-topic dashboard — posteriors, indicators, evidence, governor health
