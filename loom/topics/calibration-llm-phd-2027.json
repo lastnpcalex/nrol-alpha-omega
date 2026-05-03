@@ -6,14 +6,17 @@
     "question": "What level of autonomous scientific research capability will the most capable frontier LLM demonstrate by March 31, 2027, as assessed against the Schwartz G1-G4 scale (G1=undergraduate, G2=early graduate, G3=advanced graduate with novel methodology, G4=postdoc-level independent research)?",
     "resolution": "Composite assessment at March 31, 2027 based on: (1) expert evaluations published in peer-reviewed venues or credible technical reports scoring frontier LLM research autonomy; (2) demonstrated artifacts — peer-reviewed papers where the LLM did the primary intellectual work with documented human oversight level; (3) benchmark performance on graduate-level scientific reasoning (GPQA Diamond, FrontierMath, METR autonomy evaluations). Resolution level determined by preponderance of evidence across these three axes.",
     "created": "2026-04-14T00:00:00Z",
-    "lastUpdated": "2026-04-22T05:19:57+00:00",
+    "lastUpdated": "2026-04-29T02:30:59+00:00",
     "status": "ACTIVE",
     "dayCount": 0,
     "startDate": "2026-04-14T00:00:00Z",
     "classification": "ROUTINE",
     "topicType": "tech",
     "horizon": "~351 days (through March 31, 2027)",
-    "resolutionDate": "2027-03-31"
+    "resolutionDate": "2027-03-31",
+    "lens": "GREEN",
+    "lensSetAt": "2026-04-26T21:22:21+00:00",
+    "lensSetReason": ""
   },
   "tagConfig": {
     "_docs": "Tag configuration for AI capabilities topic. CAPABILITY tags favor H1/H2 (fast progress). PLATEAU tags favor H3/H4 (slowdown). BENCHMARK tags are neutral until values are known.",
@@ -60,32 +63,32 @@
         "label": "G4 — Postdoc-level autonomy achieved",
         "midpoint": 4.0,
         "unit": "G-level (Schwartz scale)",
-        "posterior": 0.18,
+        "posterior": 0.0067,
         "description": "Schwartz prediction confirmed. By March 2027, a frontier LLM autonomously identifies promising research directions and executes novel scientific work with minimal human guidance (<10% of total intellectual effort). 'Taste' problem substantially solved through training innovation, self-play, or emergent capability. Evidence: multiple peer-reviewed papers with LLM as primary author, GPQA Diamond >95%, FrontierMath score >60%, credible expert panels rate capability at postdoc level."
       },
       "H2": {
         "label": "G3 — Advanced graduate, taste gap persists",
         "midpoint": 3.0,
         "unit": "G-level (Schwartz scale)",
-        "posterior": 0.38,
+        "posterior": 0.98,
         "description": "Significant capability gains but 'taste' remains unsolved. LLMs execute complex research tasks fluently — can derive novel results, write correct proofs, design experiments — but still require human direction on which problems are worth pursuing and which approaches are promising. Qualitative leap over G2 but falls short of independent research. Evidence: step-function benchmark improvements, successful complex research assistance documented, but expert consensus is 'brilliant technician, not a scientist.'"
       },
       "H3": {
         "label": "G2-G2.5 — Plateau at current capability level",
         "midpoint": 2.3,
         "unit": "G-level (Schwartz scale)",
-        "posterior": 0.32,
+        "posterior": 0.0067,
         "description": "Scaling hits diminishing returns. Incremental benchmark gains but no qualitative leap in research autonomy. 'Taste' proves deeply hard — possibly requiring architectural innovation beyond current transformer paradigm. Evidence: benchmark scores improve 5-15% but plateau, no convincing autonomous research artifacts, scaling laws show flattening returns on reasoning tasks, multiple expert assessments converge on 'impressive but not qualitatively different from 2025.'"
       },
       "H4": {
         "label": "Below G2 — Capability ceiling or regression",
         "midpoint": 1.5,
         "unit": "G-level (Schwartz scale)",
-        "posterior": 0.12,
+        "posterior": 0.0067,
         "description": "External disruption or fundamental architectural limitation prevents progress. Possible causes: major regulatory intervention (compute caps, training restrictions), catastrophic safety incident triggers industry pause, data wall (no new training signal available), economic downturn cuts AI investment, or discovered fundamental limitation of transformer architecture for open-ended reasoning. Evidence: no new frontier model release for 6+ months, benchmark stagnation or regression, lab pivots to non-LLM approaches."
       }
     },
-    "expectedValue": 2.97,
+    "expectedValue": 2.99,
     "expectedUnit": "G-level (Schwartz scale, 1-4)",
     "expectedValueNote": "Probability-weighted: 0.18*4.0 + 0.38*3.0 + 0.32*2.3 + 0.12*1.5 = 2.82. Between G2.5 and G3 — market-implied expectation is meaningful progress but short of the Schwartz prediction.",
     "posteriorHistory": [
@@ -97,7 +100,329 @@
           "H3": 0.32,
           "H4": 0.12
         },
-        "note": "Initial priors. H2 (G3) is modal — fast trajectory from G1→G2 in ~4 months (mid-2025 to late-2025) suggests continued progress, but 'taste' is plausibly a qualitative barrier, not just a scaling problem. H3 assigned substantial weight (0.32) reflecting scaling skeptics and 'bitter lesson' uncertainty. H1 at 0.18 reflects that Schwartz's 'blunt extrapolation' is aggressive — he himself caveats it heavily. H4 tail risk at 0.12 for regulatory/economic/architectural disruption."
+        "note": "Initial priors. H2 (G3) is modal — fast trajectory from G1→G2 in ~4 months (mid-2025 to late-2025) suggests continued progress, but 'taste' is plausibly a qualitative barrier, not just a scaling problem. H3 assigned substantial weight (0.32) reflecting scaling skeptics and 'bitter lesson' uncertainty. H1 at 0.18 reflects that Schwartz's 'blunt extrapolation' is aggressive — he himself caveats it heavily. H4 tail risk at 0.12 for regulatory/economic/architectural disruption.",
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        }
+      },
+      {
+        "date": "2026-04-24",
+        "posteriors": {
+          "H1": 0.149,
+          "H2": 0.5662,
+          "H3": 0.2649,
+          "H4": 0.0199
+        },
+        "priors": {
+          "H1": 0.18,
+          "H2": 0.38,
+          "H3": 0.32,
+          "H4": 0.12
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_007"
+        ],
+        "likelihoods": {
+          "H1": 0.25,
+          "H2": 0.45,
+          "H3": 0.25,
+          "H4": 0.05
+        },
+        "note": "Continued benchmark progress but research-level ceiling (FrontierMath Tier 4, postdoc taste) unbroken; supports H2.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "turningPoint": {
+          "type": "THRESHOLD_CROSSED",
+          "hypothesis": "H2",
+          "from": 0.38,
+          "to": 0.5662
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-24",
+        "posteriors": {
+          "H1": 0.1713,
+          "H2": 0.7323,
+          "H3": 0.0914,
+          "H4": 0.005
+        },
+        "priors": {
+          "H1": 0.149,
+          "H2": 0.5662,
+          "H3": 0.2649,
+          "H4": 0.0199
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_008"
+        ],
+        "likelihoods": {
+          "H1": 0.4,
+          "H2": 0.45,
+          "H3": 0.12,
+          "H4": 0.03
+        },
+        "note": "Three independent autonomous-research agent papers in one month with measurable superhuman-baseline gains argue for advanced graduate autonomy (H2) with meaningful H1 signal.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "turningPoint": {
+          "type": "BRANCH_DEATH",
+          "hypothesis": "H4",
+          "lastPosterior": 0.005
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-24",
+        "posteriors": {
+          "H1": 0.063,
+          "H2": 0.8984,
+          "H3": 0.0336,
+          "H4": 0.005
+        },
+        "priors": {
+          "H1": 0.1713,
+          "H2": 0.7323,
+          "H3": 0.0914,
+          "H4": 0.005
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_009"
+        ],
+        "likelihoods": {
+          "H1": 0.3,
+          "H2": 1.0,
+          "H3": 0.3,
+          "H4": 0.05
+        },
+        "note": "Advanced graduate-level benchmark performance with persistent taste/autonomy gap — consistent with G3.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "turningPoint": {
+          "type": "MAJOR_SHIFT",
+          "maxShift": 0.1661
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-25",
+        "posteriors": {
+          "H1": 0.0113,
+          "H2": 0.9685,
+          "H3": 0.0151,
+          "H4": 0.005
+        },
+        "priors": {
+          "H1": 0.063,
+          "H2": 0.8984,
+          "H3": 0.0336,
+          "H4": 0.005
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_010"
+        ],
+        "likelihoods": {
+          "H1": 0.1,
+          "H2": 0.6,
+          "H3": 0.25,
+          "H4": 0.05
+        },
+        "note": "Strong information-retrieval performance but no postdoc-level autonomy demonstrated supports H2 (G3 advanced grad with persistent taste gap).",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-25",
+        "posteriors": {
+          "H1": 0.009,
+          "H2": 0.98,
+          "H3": 0.0055,
+          "H4": 0.0055
+        },
+        "priors": {
+          "H1": 0.0113,
+          "H2": 0.9685,
+          "H3": 0.0151,
+          "H4": 0.005
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_011"
+        ],
+        "likelihoods": {
+          "H1": 0.7,
+          "H2": 1.0,
+          "H3": 0.15,
+          "H4": 0.02
+        },
+        "note": "GPQA-D superhuman scores plus FrontierMath crossing 50% Tier-1-3 strongly support G3+ capability (H2) with rising probability of postdoc-autonomy-equivalent (H1).",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-26",
+        "posteriors": {
+          "H1": 0.0067,
+          "H2": 0.98,
+          "H3": 0.0067,
+          "H4": 0.0067
+        },
+        "priors": {
+          "H1": 0.009,
+          "H2": 0.98,
+          "H3": 0.0055,
+          "H4": 0.0055
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_012"
+        ],
+        "likelihoods": {
+          "H1": 0.1,
+          "H2": 0.95,
+          "H3": 0.05,
+          "H4": 0.005
+        },
+        "note": "5h autonomous horizon and 7-month doubling time aligns with steady G3 progression; not yet at postdoc-autonomy bar.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-26",
+        "posteriors": {
+          "H1": 0.0067,
+          "H2": 0.98,
+          "H3": 0.0067,
+          "H4": 0.0067
+        },
+        "priors": {
+          "H1": 0.0067,
+          "H2": 0.98,
+          "H3": 0.0067,
+          "H4": 0.0067
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_013"
+        ],
+        "likelihoods": {
+          "H1": 0.5,
+          "H2": 1.0,
+          "H3": 0.4,
+          "H4": 0.1
+        },
+        "note": "Continuing capability gains in coding/agents fit H2 advanced-graduate band; no observable G4 threshold.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
       }
     ]
   },
@@ -357,6 +682,22 @@
           "lr_decay": 0.65,
           "n_firings": 0,
           "resolution_class": false
+        },
+        {
+          "id": "t2_autonomous_research_framework",
+          "desc": "An autonomous multi-agent research framework (LLM as primary intellectual driver) is published on arXiv or in a peer-reviewed venue and demonstrates a reproducible >20% improvement over single-shot or strong evolutionary baselines on a recognized scientific benchmark (e.g., LLM pretraining loss, BioMed-AQA, traffic forecasting, math/algorithmic tasks). Distinct from t1_autonomous_paper: this captures system-level research capability via benchmark gains rather than peer-reviewed publication of the artifact itself.",
+          "posteriorEffect": "H1 +6pp, H2 +4pp, H3 -7pp, H4 -3pp.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        },
+        {
+          "id": "t2_grad_benchmark_saturation",
+          "desc": "Top two frontier models on a graduate-level science benchmark (GPQA Diamond, FrontierMath, equivalent) BOTH (a) score above the human PhD-expert baseline by >20pp, AND (b) fall within 3pp of saturation (or within 3pp of each other above 90%). Triggers on benchmark saturation rather than crossing a fixed threshold — protects against the case where the 95% threshold is never hit because the benchmark stops discriminating first.",
+          "posteriorEffect": "H1 +10pp, H2 +2pp, H3 -8pp, H4 -4pp.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
         }
       ],
       "tier3_suggestive": [
@@ -470,6 +811,22 @@
           "lr_decay": 0.65,
           "n_firings": 0,
           "resolution_class": false
+        },
+        {
+          "id": "t3_deep_research_synthesis",
+          "desc": "A productized 'Deep Research' or equivalent retrieval+synthesis agent from a major lab (Google, OpenAI, Anthropic, Perplexity) achieves >90% citation accuracy or >100 effective-citation average on a published PhD-level research-task benchmark (DeepResearch Bench or equivalent). Captures retrieval+synthesis capability as distinct from autonomous research execution.",
+          "posteriorEffect": "H1 +2pp, H2 +3pp, H3 -4pp, H4 -1pp.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        },
+        {
+          "id": "t3_research_math_stratification",
+          "desc": "Top-tier research-level math benchmarks (FrontierMath Tier 4 or LemmaBench research-level) remain >20pp below saturation while standard graduate math benchmarks (FrontierMath Tier 1-3, MATH-500, or equivalents) reach >=95% on the same model generation. Captures the 'taste/novelty bottleneck' that distinguishes G3 (advanced graduate, solves known problems) from G4 (postdoc, poses+solves novel problems). Observable via published benchmark splits with explicit tier-by-tier scores.",
+          "posteriorEffect": "H2 +5pp, H3 +1pp, H1 -5pp, H4 -1pp.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
         }
       ],
       "anti_indicators": [
@@ -543,7 +900,8 @@
           "lr_migration_warning": "design prior drift >30% — review before next firing"
         }
       ]
-    }
+    },
+    "anti_indicators": []
   },
   "actorModel": {
     "description": "Unlike geopolitical topics, the 'actors' here are AI research labs whose training decisions, architecture choices, and release strategies determine the trajectory. Secondary actors are regulators and the academic evaluation community. Key tension: labs are incentivized to overclaim capability while genuinely pursuing breakthroughs; independent evaluators provide calibration but lag behind lab-internal assessments.",
@@ -840,6 +1198,267 @@
       "ledger": "DECISION",
       "claimState": "SUPPORTED",
       "effectiveWeight": 1.0
+    },
+    {
+      "id": "ev_007",
+      "time": "2026-04-24T02:25:42+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "SCI"
+      ],
+      "text": "LemmaBench live research-level math benchmark iterated Feb 2026 with GPT-5 judged best-performing; Gemini 3 Pro and GPT-5.2 Pro achieve 100.0 on standard math benchmarks; FrontierMath Tier 4 (research-level) remains unsaturated.",
+      "provenance": "OBSERVED",
+      "source": "arXiv / Epoch AI / llm-stats",
+      "posteriorImpact": "NONE",
+      "url": "https://arxiv.org/html/2602.24173v1",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-24T02:25:42+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Continued benchmark progress but research-level ceiling (FrontierMath Tier 4, postdoc taste) unbroken; supports H2.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_008",
+      "time": "2026-04-24T13:49:14+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "RESEARCH",
+        "AI"
+      ],
+      "text": "AlphaLab (arXiv:2604.08590) autonomous multi-agent research framework published April 2026: end-to-end dataset-to-paper cycle, 22% lower validation loss vs single-shot baseline on LLM pretraining, beat traffic-forecasting baselines 23-25%. BioMedAgent achieved 77% success on 327-task BioMed-AQA benchmark. CORAL showed 3-10x improvement over evolutionary-search baselines across 10 math/algorithmic tasks.",
+      "provenance": "OBSERVED",
+      "source": "arXiv / Nature Biomedical Engineering",
+      "posteriorImpact": "NONE",
+      "url": "https://richlyai.com/blog/alphalab-autonomous-multi-agent-research-with-advanced-llms-ai-news/",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-24T13:49:14+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-24T13:49:14+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Three independent autonomous-research agent papers in one month with measurable superhuman-baseline gains argue for advanced graduate autonomy (H2) with meaningful H1 signal.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_009",
+      "time": "2026-04-24T19:30:14+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "AI"
+      ],
+      "text": "GPT-5.4 Pro leads FrontierMath at 50% as of 4/8/2026; Claude Opus 4 GPQA Diamond 83.1% (above 65% PhD expert baseline); frontier models tied near Intelligence Index 57 but no reports of autonomous postdoc-level research execution.",
+      "provenance": "OBSERVED",
+      "source": "BenchLM / Artificial Analysis",
+      "posteriorImpact": "NONE",
+      "url": "https://benchlm.ai/benchmarks/frontierMath",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-24T19:30:14+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-24T19:30:14+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Advanced graduate-level benchmark performance with persistent taste/autonomy gap — consistent with G3.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_010",
+      "time": "2026-04-25T13:19:54+00:00",
+      "tag": "BENCHMARK",
+      "tags": [
+        "BENCHMARK",
+        "AI"
+      ],
+      "text": "DeepResearch Bench released - 100 PhD-level research tasks across 22 fields evaluated by RACE/FACT frameworks. Best models (Gemini 2.5 Pro Deep Research, Perplexity Deep Research) score well on retrieval and citation but autonomous postdoc-level synthesis not demonstrated.",
+      "provenance": "OBSERVED",
+      "source": "DeepResearch Bench team",
+      "posteriorImpact": "NONE",
+      "url": "https://deepresearch-bench.github.io/",
+      "ledger": "DECISION",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-25T13:19:54+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-25T13:19:54+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: stale_evidence. Reason: Strong information-retrieval performance but no postdoc-level autonomy demonstrated supports H2 (G3 advanced grad with persistent taste gap).",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_011",
+      "time": "2026-04-25T14:24:51+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "TECH"
+      ],
+      "text": "April 24, 2026 leaderboards: GPT-5.5 Pro 52.4% on FrontierMath (research-level math), GPT-5.5 51.7%, GPT-5.4 Pro 50%. GPQA-Diamond (PhD-level science) — Gemini 3.1 Pro 94.3%, Claude Opus 4.6 91.3%, GPT-5.3 Codex 81%. Human PhD experts ~65-70% on GPQA-D; non-experts ~34%. Frontier models now exceed domain-expert ceilings on GPQA-D.",
+      "provenance": "OBSERVED",
+      "source": "BenchLM, Epoch AI FrontierMath, llm-stats.com leaderboard",
+      "posteriorImpact": "NONE",
+      "url": "https://benchlm.ai/benchmarks/frontierMath",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-25T14:24:51+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-25T14:55:35+00:00",
+      "tag": "INTEL",
+      "text": "INDICATOR ADDED: t2_autonomous_research_framework (tier2_strong). posteriorEffect=H1 +6pp, H2 +4pp, H3 -7pp, H4 -3pp.. Rationale: Captures AlphaLab/BioMedAgent/CORAL-class systems (ev_008). Tier2 because arXiv != Nature and benchmark gains != novel intellectual contribution. Modest H1+H2 push because these systems show research-process capability without demonstrating taste/judgment..",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-25T14:55:35+00:00",
+      "tag": "INTEL",
+      "text": "INDICATOR ADDED: t2_grad_benchmark_saturation (tier2_strong). posteriorEffect=H1 +10pp, H2 +2pp, H3 -8pp, H4 -4pp.. Rationale: Resolves ev_005/ev_009/ev_011 pattern (94.5% cluster exceeding 65% PhD baseline). Saturation-aware companion to t1_gpqa_diamond_95 — addresses the case where benchmark stops discriminating before the >95% threshold is crossed..",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-25T14:55:35+00:00",
+      "tag": "INTEL",
+      "text": "INDICATOR ADDED: t3_deep_research_synthesis (tier3_suggestive). posteriorEffect=H1 +2pp, H2 +3pp, H3 -4pp, H4 -1pp.. Rationale: Captures ev_006-class evidence (Gemini Deep Research, Perplexity). Small posterior effect because retrieval-synthesis is the step before 'taste' per Schwartz. Mainly evidence for H2 (advanced graduate, taste gap persists). Tier3 because downstream of capability rather than directly demonstrating it..",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-26T16:32:51+00:00",
+      "tag": "INTEL",
+      "text": "INDICATOR ADDED: t3_research_math_stratification (tier3_suggestive). posteriorEffect=H2 +5pp, H3 +1pp, H1 -5pp, H4 -1pp.. Rationale: Design-review of ev_006/007/008/009/011 (none_impact_saturation alert). ev_007 noted FrontierMath Tier 4 unsaturated while standard math benchmarks saturate at 100; ev_009/011 show FrontierMath ~50-52% with GPQA-D >91% (above human PhD ceiling). This stratification — routine math saturating while research math plateaus — is a measurable G3 ceiling signal not captured by existing indicators (t2_frontiermath_double is a single-axis doubling threshold; t2_grad_benchmark_saturation is QA-saturation only). Pre-committed effect is modest because stratification is a slow-moving structural signal..",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_012",
+      "time": "2026-04-26T16:59:08+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "AI",
+        "RESEARCH"
+      ],
+      "text": "METR tracking Oct 2025-Jan 2026 shows 99.9th percentile turn duration nearly doubled (<25 min -> >45 min); long-horizon doubling time ~196 days (~7 months). Frontier coding agents work autonomously up to ~5 hours. Anthropic measuring agent autonomy paper documents domains and risk.",
+      "provenance": "OBSERVED",
+      "source": "METR / Anthropic / Sequoia",
+      "posteriorImpact": "NONE",
+      "url": "https://www.anthropic.com/research/measuring-agent-autonomy",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.4118
+    },
+    {
+      "time": "2026-04-26T16:59:08+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_013",
+      "time": "2026-04-26T19:27:10+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "AI"
+      ],
+      "text": "April 2026 leaderboards: Claude Opus 4.7 leads SWE-bench Verified at 82.0%; Gemini 3.1 Pro Preview ties top of Intelligence Index with 1M-token context. Strong agentic-coding gains but no validated postdoc-level autonomous research output.",
+      "provenance": "OBSERVED",
+      "source": "BenchLM / llm-stats / ofox.ai",
+      "posteriorImpact": "NONE",
+      "url": "https://benchlm.ai/llm-agent-benchmarks",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.4555
+    },
+    {
+      "time": "2026-04-26T19:27:10+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
     }
   ],
   "dataFeeds": {
@@ -957,22 +1576,22 @@
   "governance": {
     "health": "DEGRADED",
     "issues": [
-      "Near-maximum uncertainty — model is not discriminating",
-      "Downstream alert: calibration-ai-developer-displacement-2027 has 3 stale assumption(s) from this topic",
-      "Downstream alert: calibration-ai-productivity-premium-2027 has 3 stale assumption(s) from this topic"
+      "Majority stale evidence (28/37)",
+      "Near-zero uncertainty — check for overconfidence",
+      "Downstream alert: calibration-ai-developer-displacement-2027 has 2 stale assumption(s) from this topic"
     ],
     "rt": {
       "rt": 0.0,
       "regime": "SAFE",
       "worst_hypothesis": "H1"
     },
-    "entropy": 1.8689,
+    "entropy": 0.1737,
     "maxEntropy": 2.0,
-    "uncertaintyRatio": 0.9345,
+    "uncertaintyRatio": 0.0868,
     "evidenceFreshness": {
       "fresh": 9,
-      "stale": 7,
-      "total": 16
+      "stale": 28,
+      "total": 37
     },
     "hypothesisAdmissibility": {
       "H1": "ADMISSIBLE",
@@ -981,10 +1600,10 @@
       "H4": "ADMISSIBLE"
     },
     "klFromPrior": {
-      "kl_divergence": 0.0,
-      "interpretation": "MODERATE"
+      "kl_divergence": 0.8611,
+      "interpretation": "WELL_EVIDENCED"
     },
-    "lastComputed": "2026-04-22T05:19:57+00:00",
+    "lastComputed": "2026-04-29T02:30:59+00:00",
     "staleDependencies": 0,
     "downstreamAlerts": [
       {
@@ -993,75 +1612,52 @@
         "stale_assumptions": [
           {
             "hypothesis": "H1",
-            "assumed": 0.005,
-            "actual": 0.18,
-            "drift": 0.175
+            "assumed": 0.1713,
+            "actual": 0.0067,
+            "drift": 0.1646
           },
           {
             "hypothesis": "H2",
-            "assumed": 0.9458,
-            "actual": 0.38,
-            "drift": 0.5658
-          },
-          {
-            "hypothesis": "H3",
-            "assumed": 0.0442,
-            "actual": 0.32,
-            "drift": 0.2758
-          }
-        ]
-      },
-      {
-        "downstream_slug": "calibration-ai-productivity-premium-2027",
-        "downstream_title": "AI Total Factor Productivity Premium by 2027",
-        "stale_assumptions": [
-          {
-            "hypothesis": "H1",
-            "assumed": 0.005,
-            "actual": 0.18,
-            "drift": 0.175
-          },
-          {
-            "hypothesis": "H2",
-            "assumed": 0.9458,
-            "actual": 0.38,
-            "drift": 0.5658
-          },
-          {
-            "hypothesis": "H3",
-            "assumed": 0.0442,
-            "actual": 0.32,
-            "drift": 0.2758
+            "assumed": 0.7323,
+            "actual": 0.98,
+            "drift": 0.2477
           }
         ]
       }
     ],
     "calibrationHealth": "ACCEPTABLE",
     "unresolvedContradictions": 0,
+    "reviewed_alerts": [
+      {
+        "signature": "none_impact_saturation:calibration-llm-phd-2027",
+        "timestamp": "2026-04-26T16:32:51+00:00",
+        "reason": "review_topic_design completed. Added 1 tier3 indicator (t3_research_math_stratification) for the routine-vs-research math stratification dimension surfaced by ev_007/009/011. Diagnosis: most of the saturation alert reflects triage execution — ev_006 fits t3_deep_research_synthesis (Perplexity 90.24% citation accuracy, Gemini 111.21 effective citations); ev_008 fits t2_autonomous_research_framework (AlphaLab 22% pretraining-loss win, BioMedAgent 77%, CORAL 3-10x); ev_011's GPQA-D Gemini 94.3% / Claude 91.3% fits t2_grad_benchmark_saturation and crosses anti_h3's >90% threshold. Recommend separate fire_indicator passes on those four evidences. Posteriors not mutated in this action."
+      }
+    ],
     "designGate": {
       "passed": true,
       "blockers": [],
       "warnings": [],
       "coverage": {
         "H1": {
-          "pos": 12,
-          "neg": 6
+          "pos": 15,
+          "neg": 7
         },
         "H2": {
-          "pos": 11,
+          "pos": 15,
           "neg": 6
         },
         "H3": {
-          "pos": 4,
-          "neg": 11
+          "pos": 5,
+          "neg": 14
         },
         "H4": {
           "pos": 5,
-          "neg": 6
+          "neg": 10
         }
       },
       "indistinguishable": [],
-      "lastChecked": "2026-04-22T05:19:57+00:00"
+      "lastChecked": "2026-04-29T02:30:59+00:00"
     }
   },
   "predictionScoring": {
@@ -1154,6 +1750,160 @@
           "H4": 0.005
         },
         "entropy": 0.3514
+      },
+      {
+        "timestamp": "2026-04-24T02:25:42+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.149,
+          "H2": 0.5662,
+          "H3": 0.2649,
+          "H4": 0.0199
+        },
+        "entropy": 1.494
+      },
+      {
+        "timestamp": "2026-04-24T02:25:42+00:00",
+        "trigger": "pipeline:ev_007",
+        "posteriors": {
+          "H1": 0.149,
+          "H2": 0.5662,
+          "H3": 0.2649,
+          "H4": 0.0199
+        },
+        "entropy": 1.494
+      },
+      {
+        "timestamp": "2026-04-24T13:49:14+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.1713,
+          "H2": 0.7323,
+          "H3": 0.0914,
+          "H4": 0.005
+        },
+        "entropy": 1.1189
+      },
+      {
+        "timestamp": "2026-04-24T13:49:14+00:00",
+        "trigger": "pipeline:ev_008",
+        "posteriors": {
+          "H1": 0.1713,
+          "H2": 0.7323,
+          "H3": 0.0914,
+          "H4": 0.005
+        },
+        "entropy": 1.1189
+      },
+      {
+        "timestamp": "2026-04-24T19:30:14+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.063,
+          "H2": 0.8984,
+          "H3": 0.0336,
+          "H4": 0.005
+        },
+        "entropy": 0.5928
+      },
+      {
+        "timestamp": "2026-04-24T19:30:14+00:00",
+        "trigger": "pipeline:ev_009",
+        "posteriors": {
+          "H1": 0.063,
+          "H2": 0.8984,
+          "H3": 0.0336,
+          "H4": 0.005
+        },
+        "entropy": 0.5928
+      },
+      {
+        "timestamp": "2026-04-25T13:19:54+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0113,
+          "H2": 0.9685,
+          "H3": 0.0151,
+          "H4": 0.005
+        },
+        "entropy": 0.2474
+      },
+      {
+        "timestamp": "2026-04-25T13:19:54+00:00",
+        "trigger": "pipeline:ev_010",
+        "posteriors": {
+          "H1": 0.0113,
+          "H2": 0.9685,
+          "H3": 0.0151,
+          "H4": 0.005
+        },
+        "entropy": 0.2474
+      },
+      {
+        "timestamp": "2026-04-25T14:24:51+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.009,
+          "H2": 0.98,
+          "H3": 0.0055,
+          "H4": 0.0055
+        },
+        "entropy": 0.1723
+      },
+      {
+        "timestamp": "2026-04-25T14:24:51+00:00",
+        "trigger": "pipeline:ev_011",
+        "posteriors": {
+          "H1": 0.009,
+          "H2": 0.98,
+          "H3": 0.0055,
+          "H4": 0.0055
+        },
+        "entropy": 0.1723
+      },
+      {
+        "timestamp": "2026-04-26T16:59:08+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0067,
+          "H2": 0.98,
+          "H3": 0.0067,
+          "H4": 0.0067
+        },
+        "entropy": 0.1737
+      },
+      {
+        "timestamp": "2026-04-26T16:59:08+00:00",
+        "trigger": "pipeline:ev_012",
+        "posteriors": {
+          "H1": 0.0067,
+          "H2": 0.98,
+          "H3": 0.0067,
+          "H4": 0.0067
+        },
+        "entropy": 0.1737
+      },
+      {
+        "timestamp": "2026-04-26T19:27:10+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0067,
+          "H2": 0.98,
+          "H3": 0.0067,
+          "H4": 0.0067
+        },
+        "entropy": 0.1737
+      },
+      {
+        "timestamp": "2026-04-26T19:27:10+00:00",
+        "trigger": "pipeline:ev_013",
+        "posteriors": {
+          "H1": 0.0067,
+          "H2": 0.98,
+          "H3": 0.0067,
+          "H4": 0.0067
+        },
+        "entropy": 0.1737
       }
     ],
     "outcomes": [],
@@ -1317,24 +2067,1261 @@
         "detected": "2026-04-21T03:51:21Z",
         "resolution": "SUPERSEDED",
         "resolvedAt": "2026-04-21T03:51:21Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Strong deep-research tooling but no autonomous novel research milestone — consistent with H2 graduate-level taste-gap regime.",
+        "entry_b_time": "2026-04-24T02:25:42+00:00",
+        "entry_b_text": "LemmaBench live research-level math benchmark iterated Feb 2026 with GPT-5 judged best-performing; Gemini 3 Pro and GPT-5.2 Pro achieve 100.0 on standard math benchmarks; FrontierMath Tier 4 (research-level) remains unsaturated.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: level, research",
+        "detected": "2026-04-24T02:25:42Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:42Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+        "entry_b_time": "2026-04-24T02:25:42+00:00",
+        "entry_b_text": "LemmaBench live research-level math benchmark iterated Feb 2026 with GPT-5 judged best-performing; Gemini 3 Pro and GPT-5.2 Pro achieve 100.0 on standard math benchmarks; FrontierMath Tier 4 (research-level) remains unsaturated.",
+        "reason": "Numeric divergence 100.0% on metric (context: with): new=2026.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-24T02:25:42Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:42Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "DeepResearch Bench (100 PhD-level research tasks, 22 fields) results: Gemini-2.5-Pro Deep Research averages 111.21 effective citations; Perplexity Deep Research leads citation accuracy at 90.24%. Benchmarks measure retrieval+synthesis quality, not autonomous research execution.",
+        "entry_b_time": "2026-04-24T02:25:42+00:00",
+        "entry_b_text": "LemmaBench live research-level math benchmark iterated Feb 2026 with GPT-5 judged best-performing; Gemini 3 Pro and GPT-5.2 Pro achieve 100.0 on standard math benchmarks; FrontierMath Tier 4 (research-level) remains unsaturated.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: benchmarks, gemini, level, pro, research",
+        "detected": "2026-04-24T02:25:42Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:42Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-19T00:57:11+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: GPQA saturation with benchmark-level mastery but no demonstration of autonomous novel research supports H2 advanced-graduate plateau.",
+        "entry_b_time": "2026-04-24T02:25:42+00:00",
+        "entry_b_text": "LemmaBench live research-level math benchmark iterated Feb 2026 with GPT-5 judged best-performing; Gemini 3 Pro and GPT-5.2 Pro achieve 100.0 on standard math benchmarks; FrontierMath Tier 4 (research-level) remains unsaturated.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: benchmark, level, research",
+        "detected": "2026-04-24T02:25:42Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:42Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-19T00:57:11+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+        "entry_b_time": "2026-04-24T02:25:42+00:00",
+        "entry_b_text": "LemmaBench live research-level math benchmark iterated Feb 2026 with GPT-5 judged best-performing; Gemini 3 Pro and GPT-5.2 Pro achieve 100.0 on standard math benchmarks; FrontierMath Tier 4 (research-level) remains unsaturated.",
+        "reason": "Numeric divergence 100.0% on metric (context: with): new=2026.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-24T02:25:42Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:42Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-19T00:57:11+00:00",
+        "entry_a_text": "GPQA-Diamond leaderboard as of April 2026 shows top frontier models clustered 91-94.5% (Claude Mythos Preview 94.5%, Gemini 3.1 Pro Preview 94.1%, GPT-5.4 92.0-92.8%). Benchmark approaching saturation; top 2.1 points spread. PhD experts score 65%.",
+        "entry_b_time": "2026-04-24T02:25:42+00:00",
+        "entry_b_text": "LemmaBench live research-level math benchmark iterated Feb 2026 with GPT-5 judged best-performing; Gemini 3 Pro and GPT-5.2 Pro achieve 100.0 on standard math benchmarks; FrontierMath Tier 4 (research-level) remains unsaturated.",
+        "reason": "Numeric divergence 96.8% on metric (context: gemini, pro): new=3.0, existing=94.5, threshold=10%",
+        "detected": "2026-04-24T02:25:42Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:42Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T15:23:00+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Automated research agents outperforming humans on some tasks supports G3-G4. Anthropic W2S result is strong signal for advancing autonomous research. But full PhD-level autonomy (G4) requires taste/novelty not yet demonstrated at scale.",
+        "entry_b_time": "2026-04-24T02:25:42+00:00",
+        "entry_b_text": "LemmaBench live research-level math benchmark iterated Feb 2026 with GPT-5 judged best-performing; Gemini 3 Pro and GPT-5.2 Pro achieve 100.0 on standard math benchmarks; FrontierMath Tier 4 (research-level) remains unsaturated.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: level, research",
+        "detected": "2026-04-24T02:25:42Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:42Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-03-23T00:00:00Z",
+        "entry_a_text": "Matthew Schwartz (Harvard physics professor, IAIFI) publishes 'Vibe Physics' on Anthropic's research blog. Reports completing a peer-reviewed theoretical physics paper (arXiv:2601.02484, C-parameter Sudakov shoulder) using Claude Opus 4.5 with ~50-60 hours human oversight over 2 weeks. Rates Claude at G2 level (early graduate student). Predicts 'blunt extrapolation' puts LLMs at PhD/postdoc level by ~March 2027. Identifies 'taste' as the single missing capability. Notes Claude was profoundly creative but made frequent errors requiring human verification, including faking results and adjusting parameters without proper derivation.",
+        "entry_b_time": "2026-04-24T02:25:42+00:00",
+        "entry_b_text": "LemmaBench live research-level math benchmark iterated Feb 2026 with GPT-5 judged best-performing; Gemini 3 Pro and GPT-5.2 Pro achieve 100.0 on standard math benchmarks; FrontierMath Tier 4 (research-level) remains unsaturated.",
+        "reason": "Numeric divergence 99.8% on metric (context: with): new=2026.0, existing=4.5, threshold=10%",
+        "detected": "2026-04-24T02:25:42Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:42Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T02:25:42+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Continued benchmark progress but research-level ceiling (FrontierMath Tier 4, postdoc taste) unbroken; supports H2.",
+        "entry_b_time": "2026-04-24T13:49:14+00:00",
+        "entry_b_text": "AlphaLab (arXiv:2604.08590) autonomous multi-agent research framework published April 2026: end-to-end dataset-to-paper cycle, 22% lower validation loss vs single-shot baseline on LLM pretraining, beat traffic-forecasting baselines 23-25%. BioMedAgent achieved 77% success on 327-task BioMed-AQA benchmark. CORAL showed 3-10x improvement over evolutionary-search baselines across 10 math/algorithmic tasks.",
+        "reason": "Antonym pair detected: new has 'success', existing has 'failure'",
+        "detected": "2026-04-24T13:49:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:42+00:00",
+        "entry_a_text": "LemmaBench live research-level math benchmark iterated Feb 2026 with GPT-5 judged best-performing; Gemini 3 Pro and GPT-5.2 Pro achieve 100.0 on standard math benchmarks; FrontierMath Tier 4 (research-level) remains unsaturated.",
+        "entry_b_time": "2026-04-24T13:49:14+00:00",
+        "entry_b_text": "AlphaLab (arXiv:2604.08590) autonomous multi-agent research framework published April 2026: end-to-end dataset-to-paper cycle, 22% lower validation loss vs single-shot baseline on LLM pretraining, beat traffic-forecasting baselines 23-25%. BioMedAgent achieved 77% success on 327-task BioMed-AQA benchmark. CORAL showed 3-10x improvement over evolutionary-search baselines across 10 math/algorithmic tasks.",
+        "reason": "Numeric divergence 23.0% on metric (context: on): new=77.0, existing=100.0, threshold=10%",
+        "detected": "2026-04-24T13:49:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-22T01:00:37+00:00",
+        "entry_a_text": "REPLAY COMPLETE: 0 indicators applied, 0 skipped. Final posteriors: {'H1': 0.18, 'H2': 0.38, 'H3': 0.32, 'H4': 0.12}. Indicator firedDates restored to originals for audit.",
+        "entry_b_time": "2026-04-24T13:49:14+00:00",
+        "entry_b_text": "AlphaLab (arXiv:2604.08590) autonomous multi-agent research framework published April 2026: end-to-end dataset-to-paper cycle, 22% lower validation loss vs single-shot baseline on LLM pretraining, beat traffic-forecasting baselines 23-25%. BioMedAgent achieved 77% success on 327-task BioMed-AQA benchmark. CORAL showed 3-10x improvement over evolutionary-search baselines across 10 math/algorithmic tasks.",
+        "reason": "Numeric divergence 99.6% on metric (context: .): new=77.0, existing=0.32, threshold=10%",
+        "detected": "2026-04-24T13:49:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:14Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Strong deep-research tooling but no autonomous novel research milestone — consistent with H2 graduate-level taste-gap regime.",
+        "entry_b_time": "2026-04-24T13:49:14+00:00",
+        "entry_b_text": "AlphaLab (arXiv:2604.08590) autonomous multi-agent research framework published April 2026: end-to-end dataset-to-paper cycle, 22% lower validation loss vs single-shot baseline on LLM pretraining, beat traffic-forecasting baselines 23-25%. BioMedAgent achieved 77% success on 327-task BioMed-AQA benchmark. CORAL showed 3-10x improvement over evolutionary-search baselines across 10 math/algorithmic tasks.",
+        "reason": "Antonym pair detected: new has 'success', existing has 'failure'",
+        "detected": "2026-04-24T13:49:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:14Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "DeepResearch Bench (100 PhD-level research tasks, 22 fields) results: Gemini-2.5-Pro Deep Research averages 111.21 effective citations; Perplexity Deep Research leads citation accuracy at 90.24%. Benchmarks measure retrieval+synthesis quality, not autonomous research execution.",
+        "entry_b_time": "2026-04-24T13:49:14+00:00",
+        "entry_b_text": "AlphaLab (arXiv:2604.08590) autonomous multi-agent research framework published April 2026: end-to-end dataset-to-paper cycle, 22% lower validation loss vs single-shot baseline on LLM pretraining, beat traffic-forecasting baselines 23-25%. BioMedAgent achieved 77% success on 327-task BioMed-AQA benchmark. CORAL showed 3-10x improvement over evolutionary-search baselines across 10 math/algorithmic tasks.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: autonomous, research, tasks",
+        "detected": "2026-04-24T13:49:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:14Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-19T00:57:11+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: GPQA saturation with benchmark-level mastery but no demonstration of autonomous novel research supports H2 advanced-graduate plateau.",
+        "entry_b_time": "2026-04-24T13:49:14+00:00",
+        "entry_b_text": "AlphaLab (arXiv:2604.08590) autonomous multi-agent research framework published April 2026: end-to-end dataset-to-paper cycle, 22% lower validation loss vs single-shot baseline on LLM pretraining, beat traffic-forecasting baselines 23-25%. BioMedAgent achieved 77% success on 327-task BioMed-AQA benchmark. CORAL showed 3-10x improvement over evolutionary-search baselines across 10 math/algorithmic tasks.",
+        "reason": "Antonym pair detected: new has 'success', existing has 'failure'",
+        "detected": "2026-04-24T13:49:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-19T00:57:11+00:00",
+        "entry_a_text": "GPQA-Diamond leaderboard as of April 2026 shows top frontier models clustered 91-94.5% (Claude Mythos Preview 94.5%, Gemini 3.1 Pro Preview 94.1%, GPT-5.4 92.0-92.8%). Benchmark approaching saturation; top 2.1 points spread. PhD experts score 65%.",
+        "entry_b_time": "2026-04-24T13:49:14+00:00",
+        "entry_b_text": "AlphaLab (arXiv:2604.08590) autonomous multi-agent research framework published April 2026: end-to-end dataset-to-paper cycle, 22% lower validation loss vs single-shot baseline on LLM pretraining, beat traffic-forecasting baselines 23-25%. BioMedAgent achieved 77% success on 327-task BioMed-AQA benchmark. CORAL showed 3-10x improvement over evolutionary-search baselines across 10 math/algorithmic tasks.",
+        "reason": "Numeric divergence 18.2% on metric (context: .): new=77.0, existing=94.1, threshold=10%",
+        "detected": "2026-04-24T13:49:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:14Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T15:23:00+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Automated research agents outperforming humans on some tasks supports G3-G4. Anthropic W2S result is strong signal for advancing autonomous research. But full PhD-level autonomy (G4) requires taste/novelty not yet demonstrated at scale.",
+        "entry_b_time": "2026-04-24T13:49:14+00:00",
+        "entry_b_text": "AlphaLab (arXiv:2604.08590) autonomous multi-agent research framework published April 2026: end-to-end dataset-to-paper cycle, 22% lower validation loss vs single-shot baseline on LLM pretraining, beat traffic-forecasting baselines 23-25%. BioMedAgent achieved 77% success on 327-task BioMed-AQA benchmark. CORAL showed 3-10x improvement over evolutionary-search baselines across 10 math/algorithmic tasks.",
+        "reason": "Antonym pair detected: new has 'success', existing has 'failure'",
+        "detected": "2026-04-24T13:49:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:14Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-16T03:44:07+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: stale_evidence, quorum_failure. Reason: Evidence ev_003: METR research shows AI task duration doubling every seven months, from one-hour ",
+        "entry_b_time": "2026-04-24T13:49:14+00:00",
+        "entry_b_text": "AlphaLab (arXiv:2604.08590) autonomous multi-agent research framework published April 2026: end-to-end dataset-to-paper cycle, 22% lower validation loss vs single-shot baseline on LLM pretraining, beat traffic-forecasting baselines 23-25%. BioMedAgent achieved 77% success on 327-task BioMed-AQA benchmark. CORAL showed 3-10x improvement over evolutionary-search baselines across 10 math/algorithmic tasks.",
+        "reason": "Antonym pair detected: new has 'success', existing has 'failure'",
+        "detected": "2026-04-24T13:49:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-16T03:44:07+00:00",
+        "entry_a_text": "METR research shows AI task duration doubling every seven months, from one-hour tasks in early 2025 to eight-hour autonomous workstreams by late 2026. DeepResearch Bench: top models score 48-49 out of 100 on PhD-level research tasks across 22 fields.",
+        "entry_b_time": "2026-04-24T13:49:14+00:00",
+        "entry_b_text": "AlphaLab (arXiv:2604.08590) autonomous multi-agent research framework published April 2026: end-to-end dataset-to-paper cycle, 22% lower validation loss vs single-shot baseline on LLM pretraining, beat traffic-forecasting baselines 23-25%. BioMedAgent achieved 77% success on 327-task BioMed-AQA benchmark. CORAL showed 3-10x improvement over evolutionary-search baselines across 10 math/algorithmic tasks.",
+        "reason": "Numeric divergence 22.2% on metric (context: autonomous): new=2604.0859, existing=2025.0, threshold=10%",
+        "detected": "2026-04-24T13:49:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-03-23T00:00:00Z",
+        "entry_a_text": "Schwartz predicts that 'blunt extrapolation' of the G1-to-G2 trajectory (achieved in ~4 months) puts frontier LLMs at G4 (PhD/postdoc-level autonomous research) by approximately March 2027.",
+        "entry_b_time": "2026-04-24T13:49:14+00:00",
+        "entry_b_text": "AlphaLab (arXiv:2604.08590) autonomous multi-agent research framework published April 2026: end-to-end dataset-to-paper cycle, 22% lower validation loss vs single-shot baseline on LLM pretraining, beat traffic-forecasting baselines 23-25%. BioMedAgent achieved 77% success on 327-task BioMed-AQA benchmark. CORAL showed 3-10x improvement over evolutionary-search baselines across 10 math/algorithmic tasks.",
+        "reason": "Numeric divergence 94.8% on metric (context: achieved): new=77.0, existing=4.0, threshold=10%",
+        "detected": "2026-04-24T13:49:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:14Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T13:49:14+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Three independent autonomous-research agent papers in one month with measurable superhuman-baseline gains argue for advanced graduate autonomy (H2) with meaningful H1 signal.",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "GPT-5.4 Pro leads FrontierMath at 50% as of 4/8/2026; Claude Opus 4 GPQA Diamond 83.1% (above 65% PhD expert baseline); frontier models tied near Intelligence Index 57 but no reports of autonomous postdoc-level research execution.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: autonomous, baseline, research",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T13:49:14+00:00",
+        "entry_a_text": "AlphaLab (arXiv:2604.08590) autonomous multi-agent research framework published April 2026: end-to-end dataset-to-paper cycle, 22% lower validation loss vs single-shot baseline on LLM pretraining, beat traffic-forecasting baselines 23-25%. BioMedAgent achieved 77% success on 327-task BioMed-AQA benchmark. CORAL showed 3-10x improvement over evolutionary-search baselines across 10 math/algorithmic tasks.",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "GPT-5.4 Pro leads FrontierMath at 50% as of 4/8/2026; Claude Opus 4 GPQA Diamond 83.1% (above 65% PhD expert baseline); frontier models tied near Intelligence Index 57 but no reports of autonomous postdoc-level research execution.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: autonomous, baseline, research",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T02:25:42+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Continued benchmark progress but research-level ceiling (FrontierMath Tier 4, postdoc taste) unbroken; supports H2.",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "GPT-5.4 Pro leads FrontierMath at 50% as of 4/8/2026; Claude Opus 4 GPQA Diamond 83.1% (above 65% PhD expert baseline); frontier models tied near Intelligence Index 57 but no reports of autonomous postdoc-level research execution.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: frontiermath, level, postdoc, research",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T02:25:42+00:00",
+        "entry_a_text": "LemmaBench live research-level math benchmark iterated Feb 2026 with GPT-5 judged best-performing; Gemini 3 Pro and GPT-5.2 Pro achieve 100.0 on standard math benchmarks; FrontierMath Tier 4 (research-level) remains unsaturated.",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "GPT-5.4 Pro leads FrontierMath at 50% as of 4/8/2026; Claude Opus 4 GPQA Diamond 83.1% (above 65% PhD expert baseline); frontier models tied near Intelligence Index 57 but no reports of autonomous postdoc-level research execution.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: frontiermath, gpt, level, pro, research",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "DeepResearch Bench (100 PhD-level research tasks, 22 fields) results: Gemini-2.5-Pro Deep Research averages 111.21 effective citations; Perplexity Deep Research leads citation accuracy at 90.24%. Benchmarks measure retrieval+synthesis quality, not autonomous research execution.",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "GPT-5.4 Pro leads FrontierMath at 50% as of 4/8/2026; Claude Opus 4 GPQA Diamond 83.1% (above 65% PhD expert baseline); frontier models tied near Intelligence Index 57 but no reports of autonomous postdoc-level research execution.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: autonomous, execution, leads, level, phd",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-19T00:57:11+00:00",
+        "entry_a_text": "GPQA-Diamond leaderboard as of April 2026 shows top frontier models clustered 91-94.5% (Claude Mythos Preview 94.5%, Gemini 3.1 Pro Preview 94.1%, GPT-5.4 92.0-92.8%). Benchmark approaching saturation; top 2.1 points spread. PhD experts score 65%.",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "GPT-5.4 Pro leads FrontierMath at 50% as of 4/8/2026; Claude Opus 4 GPQA Diamond 83.1% (above 65% PhD expert baseline); frontier models tied near Intelligence Index 57 but no reports of autonomous postdoc-level research execution.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: claude, diamond, frontier, gpqa, gpt",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T15:23:00+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Automated research agents outperforming humans on some tasks supports G3-G4. Anthropic W2S result is strong signal for advancing autonomous research. But full PhD-level autonomy (G4) requires taste/novelty not yet demonstrated at scale.",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "GPT-5.4 Pro leads FrontierMath at 50% as of 4/8/2026; Claude Opus 4 GPQA Diamond 83.1% (above 65% PhD expert baseline); frontier models tied near Intelligence Index 57 but no reports of autonomous postdoc-level research execution.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: autonomous, level, phd, research",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T15:23:00+00:00",
+        "entry_a_text": "Anthropic publishes automated weak-to-strong researcher that outperforms human researchers on alignment tasks. Sakana AI Scientist system automates full research lifecycle (hypothesis to manuscript). Edison Kosmos autonomous AI scientist used by 50,000+ researchers. Microsoft forecasts AI as active scientific collaborator in 2026. NextBigFuture declares 2026 breakthrough year for AI world models.",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "GPT-5.4 Pro leads FrontierMath at 50% as of 4/8/2026; Claude Opus 4 GPQA Diamond 83.1% (above 65% PhD expert baseline); frontier models tied near Intelligence Index 57 but no reports of autonomous postdoc-level research execution.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: autonomous, models, research",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-16T03:44:07+00:00",
+        "entry_a_text": "METR research shows AI task duration doubling every seven months, from one-hour tasks in early 2025 to eight-hour autonomous workstreams by late 2026. DeepResearch Bench: top models score 48-49 out of 100 on PhD-level research tasks across 22 fields.",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "GPT-5.4 Pro leads FrontierMath at 50% as of 4/8/2026; Claude Opus 4 GPQA Diamond 83.1% (above 65% PhD expert baseline); frontier models tied near Intelligence Index 57 but no reports of autonomous postdoc-level research execution.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: autonomous, level, models, phd, research",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-03-23T00:00:00Z",
+        "entry_a_text": "Schwartz predicts that 'blunt extrapolation' of the G1-to-G2 trajectory (achieved in ~4 months) puts frontier LLMs at G4 (PhD/postdoc-level autonomous research) by approximately March 2027.",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "GPT-5.4 Pro leads FrontierMath at 50% as of 4/8/2026; Claude Opus 4 GPQA Diamond 83.1% (above 65% PhD expert baseline); frontier models tied near Intelligence Index 57 but no reports of autonomous postdoc-level research execution.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: autonomous, frontier, level, phd, postdoc",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-03-23T00:00:00Z",
+        "entry_a_text": "Matthew Schwartz (Harvard physics professor, IAIFI) publishes 'Vibe Physics' on Anthropic's research blog. Reports completing a peer-reviewed theoretical physics paper (arXiv:2601.02484, C-parameter Sudakov shoulder) using Claude Opus 4.5 with ~50-60 hours human oversight over 2 weeks. Rates Claude at G2 level (early graduate student). Predicts 'blunt extrapolation' puts LLMs at PhD/postdoc level by ~March 2027. Identifies 'taste' as the single missing capability. Notes Claude was profoundly creative but made frequent errors requiring human verification, including faking results and adjusting parameters without proper derivation.",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "GPT-5.4 Pro leads FrontierMath at 50% as of 4/8/2026; Claude Opus 4 GPQA Diamond 83.1% (above 65% PhD expert baseline); frontier models tied near Intelligence Index 57 but no reports of autonomous postdoc-level research execution.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: claude, level, opus, phd, postdoc",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T19:30:14+00:00",
+        "entry_a_text": "GPT-5.4 Pro leads FrontierMath at 50% as of 4/8/2026; Claude Opus 4 GPQA Diamond 83.1% (above 65% PhD expert baseline); frontier models tied near Intelligence Index 57 but no reports of autonomous postdoc-level research execution.",
+        "entry_b_time": "2026-04-25T13:19:54+00:00",
+        "entry_b_text": "DeepResearch Bench released - 100 PhD-level research tasks across 22 fields evaluated by RACE/FACT frameworks. Best models (Gemini 2.5 Pro Deep Research, Perplexity Deep Research) score well on retrieval and citation but autonomous postdoc-level synthesis not demonstrated.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: autonomous, level, models, phd, postdoc",
+        "detected": "2026-04-25T13:19:54Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:54Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T13:49:14+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Three independent autonomous-research agent papers in one month with measurable superhuman-baseline gains argue for advanced graduate autonomy (H2) with meaningful H1 signal.",
+        "entry_b_time": "2026-04-25T13:19:54+00:00",
+        "entry_b_text": "DeepResearch Bench released - 100 PhD-level research tasks across 22 fields evaluated by RACE/FACT frameworks. Best models (Gemini 2.5 Pro Deep Research, Perplexity Deep Research) score well on retrieval and citation but autonomous postdoc-level synthesis not demonstrated.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: autonomous, research",
+        "detected": "2026-04-25T13:19:54Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:54Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T13:49:14+00:00",
+        "entry_a_text": "AlphaLab (arXiv:2604.08590) autonomous multi-agent research framework published April 2026: end-to-end dataset-to-paper cycle, 22% lower validation loss vs single-shot baseline on LLM pretraining, beat traffic-forecasting baselines 23-25%. BioMedAgent achieved 77% success on 327-task BioMed-AQA benchmark. CORAL showed 3-10x improvement over evolutionary-search baselines across 10 math/algorithmic tasks.",
+        "entry_b_time": "2026-04-25T13:19:54+00:00",
+        "entry_b_text": "DeepResearch Bench released - 100 PhD-level research tasks across 22 fields evaluated by RACE/FACT frameworks. Best models (Gemini 2.5 Pro Deep Research, Perplexity Deep Research) score well on retrieval and citation but autonomous postdoc-level synthesis not demonstrated.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: across, autonomous, research, tasks",
+        "detected": "2026-04-25T13:19:54Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:54Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T02:25:42+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Continued benchmark progress but research-level ceiling (FrontierMath Tier 4, postdoc taste) unbroken; supports H2.",
+        "entry_b_time": "2026-04-25T13:19:54+00:00",
+        "entry_b_text": "DeepResearch Bench released - 100 PhD-level research tasks across 22 fields evaluated by RACE/FACT frameworks. Best models (Gemini 2.5 Pro Deep Research, Perplexity Deep Research) score well on retrieval and citation but autonomous postdoc-level synthesis not demonstrated.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: level, postdoc, research",
+        "detected": "2026-04-25T13:19:54Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:54Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T02:25:42+00:00",
+        "entry_a_text": "LemmaBench live research-level math benchmark iterated Feb 2026 with GPT-5 judged best-performing; Gemini 3 Pro and GPT-5.2 Pro achieve 100.0 on standard math benchmarks; FrontierMath Tier 4 (research-level) remains unsaturated.",
+        "entry_b_time": "2026-04-25T13:19:54+00:00",
+        "entry_b_text": "DeepResearch Bench released - 100 PhD-level research tasks across 22 fields evaluated by RACE/FACT frameworks. Best models (Gemini 2.5 Pro Deep Research, Perplexity Deep Research) score well on retrieval and citation but autonomous postdoc-level synthesis not demonstrated.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: best, gemini, level, pro, research",
+        "detected": "2026-04-25T13:19:54Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:54Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Strong deep-research tooling but no autonomous novel research milestone — consistent with H2 graduate-level taste-gap regime.",
+        "entry_b_time": "2026-04-25T13:19:54+00:00",
+        "entry_b_text": "DeepResearch Bench released - 100 PhD-level research tasks across 22 fields evaluated by RACE/FACT frameworks. Best models (Gemini 2.5 Pro Deep Research, Perplexity Deep Research) score well on retrieval and citation but autonomous postdoc-level synthesis not demonstrated.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: autonomous, deep, level, research",
+        "detected": "2026-04-25T13:19:54Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:54Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "DeepResearch Bench (100 PhD-level research tasks, 22 fields) results: Gemini-2.5-Pro Deep Research averages 111.21 effective citations; Perplexity Deep Research leads citation accuracy at 90.24%. Benchmarks measure retrieval+synthesis quality, not autonomous research execution.",
+        "entry_b_time": "2026-04-25T13:19:54+00:00",
+        "entry_b_text": "DeepResearch Bench released - 100 PhD-level research tasks across 22 fields evaluated by RACE/FACT frameworks. Best models (Gemini 2.5 Pro Deep Research, Perplexity Deep Research) score well on retrieval and citation but autonomous postdoc-level synthesis not demonstrated.",
+        "reason": "Numeric divergence 78.0% on metric (context: phd-level, research, tasks): new=100.0, existing=22.0, threshold=10%",
+        "detected": "2026-04-25T13:19:54Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:54Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-19T00:57:11+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: GPQA saturation with benchmark-level mastery but no demonstration of autonomous novel research supports H2 advanced-graduate plateau.",
+        "entry_b_time": "2026-04-25T13:19:54+00:00",
+        "entry_b_text": "DeepResearch Bench released - 100 PhD-level research tasks across 22 fields evaluated by RACE/FACT frameworks. Best models (Gemini 2.5 Pro Deep Research, Perplexity Deep Research) score well on retrieval and citation but autonomous postdoc-level synthesis not demonstrated.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: autonomous, level, research",
+        "detected": "2026-04-25T13:19:54Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:54Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-19T00:57:11+00:00",
+        "entry_a_text": "GPQA-Diamond leaderboard as of April 2026 shows top frontier models clustered 91-94.5% (Claude Mythos Preview 94.5%, Gemini 3.1 Pro Preview 94.1%, GPT-5.4 92.0-92.8%). Benchmark approaching saturation; top 2.1 points spread. PhD experts score 65%.",
+        "entry_b_time": "2026-04-25T13:19:54+00:00",
+        "entry_b_text": "DeepResearch Bench released - 100 PhD-level research tasks across 22 fields evaluated by RACE/FACT frameworks. Best models (Gemini 2.5 Pro Deep Research, Perplexity Deep Research) score well on retrieval and citation but autonomous postdoc-level synthesis not demonstrated.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: gemini, models, phd, pro, score",
+        "detected": "2026-04-25T13:19:54Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:54Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T15:23:00+00:00",
+        "entry_a_text": "Anthropic publishes automated weak-to-strong researcher that outperforms human researchers on alignment tasks. Sakana AI Scientist system automates full research lifecycle (hypothesis to manuscript). Edison Kosmos autonomous AI scientist used by 50,000+ researchers. Microsoft forecasts AI as active scientific collaborator in 2026. NextBigFuture declares 2026 breakthrough year for AI world models.",
+        "entry_b_time": "2026-04-25T13:19:54+00:00",
+        "entry_b_text": "DeepResearch Bench released - 100 PhD-level research tasks across 22 fields evaluated by RACE/FACT frameworks. Best models (Gemini 2.5 Pro Deep Research, Perplexity Deep Research) score well on retrieval and citation but autonomous postdoc-level synthesis not demonstrated.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: autonomous, models, research, tasks",
+        "detected": "2026-04-25T13:19:54Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:54Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-16T03:44:07+00:00",
+        "entry_a_text": "METR research shows AI task duration doubling every seven months, from one-hour tasks in early 2025 to eight-hour autonomous workstreams by late 2026. DeepResearch Bench: top models score 48-49 out of 100 on PhD-level research tasks across 22 fields.",
+        "entry_b_time": "2026-04-25T13:19:54+00:00",
+        "entry_b_text": "DeepResearch Bench released - 100 PhD-level research tasks across 22 fields evaluated by RACE/FACT frameworks. Best models (Gemini 2.5 Pro Deep Research, Perplexity Deep Research) score well on retrieval and citation but autonomous postdoc-level synthesis not demonstrated.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: across, autonomous, bench, deepresearch, fields",
+        "detected": "2026-04-25T13:19:54Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:54Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-03-23T00:00:00Z",
+        "entry_a_text": "Schwartz predicts that 'blunt extrapolation' of the G1-to-G2 trajectory (achieved in ~4 months) puts frontier LLMs at G4 (PhD/postdoc-level autonomous research) by approximately March 2027.",
+        "entry_b_time": "2026-04-25T13:19:54+00:00",
+        "entry_b_text": "DeepResearch Bench released - 100 PhD-level research tasks across 22 fields evaluated by RACE/FACT frameworks. Best models (Gemini 2.5 Pro Deep Research, Perplexity Deep Research) score well on retrieval and citation but autonomous postdoc-level synthesis not demonstrated.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: autonomous, level, phd, postdoc, research",
+        "detected": "2026-04-25T13:19:54Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:54Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-03-23T00:00:00Z",
+        "entry_a_text": "Matthew Schwartz (Harvard physics professor, IAIFI) publishes 'Vibe Physics' on Anthropic's research blog. Reports completing a peer-reviewed theoretical physics paper (arXiv:2601.02484, C-parameter Sudakov shoulder) using Claude Opus 4.5 with ~50-60 hours human oversight over 2 weeks. Rates Claude at G2 level (early graduate student). Predicts 'blunt extrapolation' puts LLMs at PhD/postdoc level by ~March 2027. Identifies 'taste' as the single missing capability. Notes Claude was profoundly creative but made frequent errors requiring human verification, including faking results and adjusting parameters without proper derivation.",
+        "entry_b_time": "2026-04-25T13:19:54+00:00",
+        "entry_b_text": "DeepResearch Bench released - 100 PhD-level research tasks across 22 fields evaluated by RACE/FACT frameworks. Best models (Gemini 2.5 Pro Deep Research, Perplexity Deep Research) score well on retrieval and citation but autonomous postdoc-level synthesis not demonstrated.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: level, phd, postdoc, research",
+        "detected": "2026-04-25T13:19:54Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:54Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T13:19:54+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-25T14:24:51+00:00",
+        "entry_b_text": "April 24, 2026 leaderboards: GPT-5.5 Pro 52.4% on FrontierMath (research-level math), GPT-5.5 51.7%, GPT-5.4 Pro 50%. GPQA-Diamond (PhD-level science) — Gemini 3.1 Pro 94.3%, Claude Opus 4.6 91.3%, GPT-5.3 Codex 81%. Human PhD experts ~65-70% on GPQA-D; non-experts ~34%. Frontier models now exceed domain-expert ceilings on GPQA-D.",
+        "reason": "Numeric divergence 100.0% on metric (context: .): new=50.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-25T14:24:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:51Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-25T13:19:54+00:00",
+        "entry_a_text": "DeepResearch Bench released - 100 PhD-level research tasks across 22 fields evaluated by RACE/FACT frameworks. Best models (Gemini 2.5 Pro Deep Research, Perplexity Deep Research) score well on retrieval and citation but autonomous postdoc-level synthesis not demonstrated.",
+        "entry_b_time": "2026-04-25T14:24:51+00:00",
+        "entry_b_text": "April 24, 2026 leaderboards: GPT-5.5 Pro 52.4% on FrontierMath (research-level math), GPT-5.5 51.7%, GPT-5.4 Pro 50%. GPQA-Diamond (PhD-level science) — Gemini 3.1 Pro 94.3%, Claude Opus 4.6 91.3%, GPT-5.3 Codex 81%. Human PhD experts ~65-70% on GPQA-D; non-experts ~34%. Frontier models now exceed domain-expert ceilings on GPQA-D.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: gemini, level, models, phd, pro",
+        "detected": "2026-04-25T14:24:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:51Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T19:30:14+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-25T14:24:51+00:00",
+        "entry_b_text": "April 24, 2026 leaderboards: GPT-5.5 Pro 52.4% on FrontierMath (research-level math), GPT-5.5 51.7%, GPT-5.4 Pro 50%. GPQA-Diamond (PhD-level science) — Gemini 3.1 Pro 94.3%, Claude Opus 4.6 91.3%, GPT-5.3 Codex 81%. Human PhD experts ~65-70% on GPQA-D; non-experts ~34%. Frontier models now exceed domain-expert ceilings on GPQA-D.",
+        "reason": "Numeric divergence 100.0% on metric (context: .): new=50.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-25T14:24:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:51Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T19:30:14+00:00",
+        "entry_a_text": "GPT-5.4 Pro leads FrontierMath at 50% as of 4/8/2026; Claude Opus 4 GPQA Diamond 83.1% (above 65% PhD expert baseline); frontier models tied near Intelligence Index 57 but no reports of autonomous postdoc-level research execution.",
+        "entry_b_time": "2026-04-25T14:24:51+00:00",
+        "entry_b_text": "April 24, 2026 leaderboards: GPT-5.5 Pro 52.4% on FrontierMath (research-level math), GPT-5.5 51.7%, GPT-5.4 Pro 50%. GPQA-Diamond (PhD-level science) — Gemini 3.1 Pro 94.3%, Claude Opus 4.6 91.3%, GPT-5.3 Codex 81%. Human PhD experts ~65-70% on GPQA-D; non-experts ~34%. Frontier models now exceed domain-expert ceilings on GPQA-D.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: claude, diamond, expert, frontier, frontiermath",
+        "detected": "2026-04-25T14:24:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:51Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:14+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-25T14:24:51+00:00",
+        "entry_b_text": "April 24, 2026 leaderboards: GPT-5.5 Pro 52.4% on FrontierMath (research-level math), GPT-5.5 51.7%, GPT-5.4 Pro 50%. GPQA-Diamond (PhD-level science) — Gemini 3.1 Pro 94.3%, Claude Opus 4.6 91.3%, GPT-5.3 Codex 81%. Human PhD experts ~65-70% on GPQA-D; non-experts ~34%. Frontier models now exceed domain-expert ceilings on GPQA-D.",
+        "reason": "Numeric divergence 100.0% on metric (context: .): new=50.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-25T14:24:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:51Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:14+00:00",
+        "entry_a_text": "AlphaLab (arXiv:2604.08590) autonomous multi-agent research framework published April 2026: end-to-end dataset-to-paper cycle, 22% lower validation loss vs single-shot baseline on LLM pretraining, beat traffic-forecasting baselines 23-25%. BioMedAgent achieved 77% success on 327-task BioMed-AQA benchmark. CORAL showed 3-10x improvement over evolutionary-search baselines across 10 math/algorithmic tasks.",
+        "entry_b_time": "2026-04-25T14:24:51+00:00",
+        "entry_b_text": "April 24, 2026 leaderboards: GPT-5.5 Pro 52.4% on FrontierMath (research-level math), GPT-5.5 51.7%, GPT-5.4 Pro 50%. GPQA-Diamond (PhD-level science) — Gemini 3.1 Pro 94.3%, Claude Opus 4.6 91.3%, GPT-5.3 Codex 81%. Human PhD experts ~65-70% on GPQA-D; non-experts ~34%. Frontier models now exceed domain-expert ceilings on GPQA-D.",
+        "reason": "Numeric divergence 98.8% on metric (context: april): new=24.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-25T14:24:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:51Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:42+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Continued benchmark progress but research-level ceiling (FrontierMath Tier 4, postdoc taste) unbroken; supports H2.",
+        "entry_b_time": "2026-04-25T14:24:51+00:00",
+        "entry_b_text": "April 24, 2026 leaderboards: GPT-5.5 Pro 52.4% on FrontierMath (research-level math), GPT-5.5 51.7%, GPT-5.4 Pro 50%. GPQA-Diamond (PhD-level science) — Gemini 3.1 Pro 94.3%, Claude Opus 4.6 91.3%, GPT-5.3 Codex 81%. Human PhD experts ~65-70% on GPQA-D; non-experts ~34%. Frontier models now exceed domain-expert ceilings on GPQA-D.",
+        "reason": "Numeric divergence 92.4% on metric (context: frontiermath): new=52.4, existing=4.0, threshold=10%",
+        "detected": "2026-04-25T14:24:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:51Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:42+00:00",
+        "entry_a_text": "LemmaBench live research-level math benchmark iterated Feb 2026 with GPT-5 judged best-performing; Gemini 3 Pro and GPT-5.2 Pro achieve 100.0 on standard math benchmarks; FrontierMath Tier 4 (research-level) remains unsaturated.",
+        "entry_b_time": "2026-04-25T14:24:51+00:00",
+        "entry_b_text": "April 24, 2026 leaderboards: GPT-5.5 Pro 52.4% on FrontierMath (research-level math), GPT-5.5 51.7%, GPT-5.4 Pro 50%. GPQA-Diamond (PhD-level science) — Gemini 3.1 Pro 94.3%, Claude Opus 4.6 91.3%, GPT-5.3 Codex 81%. Human PhD experts ~65-70% on GPQA-D; non-experts ~34%. Frontier models now exceed domain-expert ceilings on GPQA-D.",
+        "reason": "Numeric divergence 99.9% on metric (context: pro): new=2026.0, existing=3.0, threshold=10%",
+        "detected": "2026-04-25T14:24:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:51Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-22T01:00:37+00:00",
+        "entry_a_text": "REPLAY COMPLETE: 0 indicators applied, 0 skipped. Final posteriors: {'H1': 0.18, 'H2': 0.38, 'H3': 0.32, 'H4': 0.12}. Indicator firedDates restored to originals for audit.",
+        "entry_b_time": "2026-04-25T14:24:51+00:00",
+        "entry_b_text": "April 24, 2026 leaderboards: GPT-5.5 Pro 52.4% on FrontierMath (research-level math), GPT-5.5 51.7%, GPT-5.4 Pro 50%. GPQA-Diamond (PhD-level science) — Gemini 3.1 Pro 94.3%, Claude Opus 4.6 91.3%, GPT-5.3 Codex 81%. Human PhD experts ~65-70% on GPQA-D; non-experts ~34%. Frontier models now exceed domain-expert ceilings on GPQA-D.",
+        "reason": "Numeric divergence 99.4% on metric (context: .): new=50.0, existing=0.32, threshold=10%",
+        "detected": "2026-04-25T14:24:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:51Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Strong deep-research tooling but no autonomous novel research milestone — consistent with H2 graduate-level taste-gap regime.",
+        "entry_b_time": "2026-04-25T14:24:51+00:00",
+        "entry_b_text": "April 24, 2026 leaderboards: GPT-5.5 Pro 52.4% on FrontierMath (research-level math), GPT-5.5 51.7%, GPT-5.4 Pro 50%. GPQA-Diamond (PhD-level science) — Gemini 3.1 Pro 94.3%, Claude Opus 4.6 91.3%, GPT-5.3 Codex 81%. Human PhD experts ~65-70% on GPQA-D; non-experts ~34%. Frontier models now exceed domain-expert ceilings on GPQA-D.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: level, research",
+        "detected": "2026-04-25T14:24:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:51Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "DeepResearch Bench (100 PhD-level research tasks, 22 fields) results: Gemini-2.5-Pro Deep Research averages 111.21 effective citations; Perplexity Deep Research leads citation accuracy at 90.24%. Benchmarks measure retrieval+synthesis quality, not autonomous research execution.",
+        "entry_b_time": "2026-04-25T14:24:51+00:00",
+        "entry_b_text": "April 24, 2026 leaderboards: GPT-5.5 Pro 52.4% on FrontierMath (research-level math), GPT-5.5 51.7%, GPT-5.4 Pro 50%. GPQA-Diamond (PhD-level science) — Gemini 3.1 Pro 94.3%, Claude Opus 4.6 91.3%, GPT-5.3 Codex 81%. Human PhD experts ~65-70% on GPQA-D; non-experts ~34%. Frontier models now exceed domain-expert ceilings on GPQA-D.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: gemini, level, phd, pro, research",
+        "detected": "2026-04-25T14:24:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:51Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-19T00:57:11+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: GPQA saturation with benchmark-level mastery but no demonstration of autonomous novel research supports H2 advanced-graduate plateau.",
+        "entry_b_time": "2026-04-25T14:24:51+00:00",
+        "entry_b_text": "April 24, 2026 leaderboards: GPT-5.5 Pro 52.4% on FrontierMath (research-level math), GPT-5.5 51.7%, GPT-5.4 Pro 50%. GPQA-Diamond (PhD-level science) — Gemini 3.1 Pro 94.3%, Claude Opus 4.6 91.3%, GPT-5.3 Codex 81%. Human PhD experts ~65-70% on GPQA-D; non-experts ~34%. Frontier models now exceed domain-expert ceilings on GPQA-D.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: gpqa, level, research",
+        "detected": "2026-04-25T14:24:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:51Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-19T00:57:11+00:00",
+        "entry_a_text": "GPQA-Diamond leaderboard as of April 2026 shows top frontier models clustered 91-94.5% (Claude Mythos Preview 94.5%, Gemini 3.1 Pro Preview 94.1%, GPT-5.4 92.0-92.8%). Benchmark approaching saturation; top 2.1 points spread. PhD experts score 65%.",
+        "entry_b_time": "2026-04-25T14:24:51+00:00",
+        "entry_b_text": "April 24, 2026 leaderboards: GPT-5.5 Pro 52.4% on FrontierMath (research-level math), GPT-5.5 51.7%, GPT-5.4 Pro 50%. GPQA-Diamond (PhD-level science) — Gemini 3.1 Pro 94.3%, Claude Opus 4.6 91.3%, GPT-5.3 Codex 81%. Human PhD experts ~65-70% on GPQA-D; non-experts ~34%. Frontier models now exceed domain-expert ceilings on GPQA-D.",
+        "reason": "Numeric divergence 98.8% on metric (context: april): new=24.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-25T14:24:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:51Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T15:23:00+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Automated research agents outperforming humans on some tasks supports G3-G4. Anthropic W2S result is strong signal for advancing autonomous research. But full PhD-level autonomy (G4) requires taste/novelty not yet demonstrated at scale.",
+        "entry_b_time": "2026-04-25T14:24:51+00:00",
+        "entry_b_text": "April 24, 2026 leaderboards: GPT-5.5 Pro 52.4% on FrontierMath (research-level math), GPT-5.5 51.7%, GPT-5.4 Pro 50%. GPQA-Diamond (PhD-level science) — Gemini 3.1 Pro 94.3%, Claude Opus 4.6 91.3%, GPT-5.3 Codex 81%. Human PhD experts ~65-70% on GPQA-D; non-experts ~34%. Frontier models now exceed domain-expert ceilings on GPQA-D.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: level, phd, research",
+        "detected": "2026-04-25T14:24:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:51Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T15:23:00+00:00",
+        "entry_a_text": "Anthropic publishes automated weak-to-strong researcher that outperforms human researchers on alignment tasks. Sakana AI Scientist system automates full research lifecycle (hypothesis to manuscript). Edison Kosmos autonomous AI scientist used by 50,000+ researchers. Microsoft forecasts AI as active scientific collaborator in 2026. NextBigFuture declares 2026 breakthrough year for AI world models.",
+        "entry_b_time": "2026-04-25T14:24:51+00:00",
+        "entry_b_text": "April 24, 2026 leaderboards: GPT-5.5 Pro 52.4% on FrontierMath (research-level math), GPT-5.5 51.7%, GPT-5.4 Pro 50%. GPQA-Diamond (PhD-level science) — Gemini 3.1 Pro 94.3%, Claude Opus 4.6 91.3%, GPT-5.3 Codex 81%. Human PhD experts ~65-70% on GPQA-D; non-experts ~34%. Frontier models now exceed domain-expert ceilings on GPQA-D.",
+        "reason": "Numeric divergence 98.8% on metric (context: 2026): new=24.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-25T14:24:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:51Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-16T03:44:07+00:00",
+        "entry_a_text": "METR research shows AI task duration doubling every seven months, from one-hour tasks in early 2025 to eight-hour autonomous workstreams by late 2026. DeepResearch Bench: top models score 48-49 out of 100 on PhD-level research tasks across 22 fields.",
+        "entry_b_time": "2026-04-25T14:24:51+00:00",
+        "entry_b_text": "April 24, 2026 leaderboards: GPT-5.5 Pro 52.4% on FrontierMath (research-level math), GPT-5.5 51.7%, GPT-5.4 Pro 50%. GPQA-Diamond (PhD-level science) — Gemini 3.1 Pro 94.3%, Claude Opus 4.6 91.3%, GPT-5.3 Codex 81%. Human PhD experts ~65-70% on GPQA-D; non-experts ~34%. Frontier models now exceed domain-expert ceilings on GPQA-D.",
+        "reason": "Numeric divergence 47.6% on metric (context: on): new=52.4, existing=100.0, threshold=10%",
+        "detected": "2026-04-25T14:24:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:51Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-03-23T00:00:00Z",
+        "entry_a_text": "Schwartz predicts that 'blunt extrapolation' of the G1-to-G2 trajectory (achieved in ~4 months) puts frontier LLMs at G4 (PhD/postdoc-level autonomous research) by approximately March 2027.",
+        "entry_b_time": "2026-04-25T14:24:51+00:00",
+        "entry_b_text": "April 24, 2026 leaderboards: GPT-5.5 Pro 52.4% on FrontierMath (research-level math), GPT-5.5 51.7%, GPT-5.4 Pro 50%. GPQA-Diamond (PhD-level science) — Gemini 3.1 Pro 94.3%, Claude Opus 4.6 91.3%, GPT-5.3 Codex 81%. Human PhD experts ~65-70% on GPQA-D; non-experts ~34%. Frontier models now exceed domain-expert ceilings on GPQA-D.",
+        "reason": "Numeric divergence 88.2% on metric (context: frontier): new=34.0, existing=4.0, threshold=10%",
+        "detected": "2026-04-25T14:24:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:51Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-03-23T00:00:00Z",
+        "entry_a_text": "Matthew Schwartz (Harvard physics professor, IAIFI) publishes 'Vibe Physics' on Anthropic's research blog. Reports completing a peer-reviewed theoretical physics paper (arXiv:2601.02484, C-parameter Sudakov shoulder) using Claude Opus 4.5 with ~50-60 hours human oversight over 2 weeks. Rates Claude at G2 level (early graduate student). Predicts 'blunt extrapolation' puts LLMs at PhD/postdoc level by ~March 2027. Identifies 'taste' as the single missing capability. Notes Claude was profoundly creative but made frequent errors requiring human verification, including faking results and adjusting parameters without proper derivation.",
+        "entry_b_time": "2026-04-25T14:24:51+00:00",
+        "entry_b_text": "April 24, 2026 leaderboards: GPT-5.5 Pro 52.4% on FrontierMath (research-level math), GPT-5.5 51.7%, GPT-5.4 Pro 50%. GPQA-Diamond (PhD-level science) — Gemini 3.1 Pro 94.3%, Claude Opus 4.6 91.3%, GPT-5.3 Codex 81%. Human PhD experts ~65-70% on GPQA-D; non-experts ~34%. Frontier models now exceed domain-expert ceilings on GPQA-D.",
+        "reason": "Numeric divergence 31.1% on metric (context: claude): new=3.1, existing=4.5, threshold=10%",
+        "detected": "2026-04-25T14:24:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:51Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-26T16:32:51+00:00",
+        "entry_a_text": "INDICATOR ADDED: t3_research_math_stratification (tier3_suggestive). posteriorEffect=H2 +5pp, H3 +1pp, H1 -5pp, H4 -1pp.. Rationale: Design-review of ev_006/007/008/009/011 (none_impact_saturation alert). ev_007 noted FrontierMath Tier 4 unsaturated while standard math benchmarks saturate at 100; ev_009/011 show FrontierMath ~50-52% with GPQA-D >91% (above human PhD ceiling). This stratification — routine math saturating while research math plateaus — is a measurable G3 ceiling signal not captured by existing indicators (t2_frontiermath_double is a single-axis doubling threshold; t2_grad_benchmark_saturation is QA-saturation only). Pre-committed effect is modest because stratification is a slow-moving structural signal..",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "METR tracking Oct 2025-Jan 2026 shows 99.9th percentile turn duration nearly doubled (<25 min -> >45 min); long-horizon doubling time ~196 days (~7 months). Frontier coding agents work autonomously up to ~5 hours. Anthropic measuring agent autonomy paper documents domains and risk.",
+        "reason": "Numeric divergence 36.4% on metric (context: .): new=7.0, existing=11.0, threshold=10%",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T14:55:35+00:00",
+        "entry_a_text": "INDICATOR ADDED: t2_grad_benchmark_saturation (tier2_strong). posteriorEffect=H1 +10pp, H2 +2pp, H3 -8pp, H4 -4pp.. Rationale: Resolves ev_005/ev_009/ev_011 pattern (94.5% cluster exceeding 65% PhD baseline). Saturation-aware companion to t1_gpqa_diamond_95 — addresses the case where benchmark stops discriminating before the >95% threshold is crossed..",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "METR tracking Oct 2025-Jan 2026 shows 99.9th percentile turn duration nearly doubled (<25 min -> >45 min); long-horizon doubling time ~196 days (~7 months). Frontier coding agents work autonomously up to ~5 hours. Anthropic measuring agent autonomy paper documents domains and risk.",
+        "reason": "Numeric divergence 89.2% on metric (context: .): new=7.0, existing=65.0, threshold=10%",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T14:24:51+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "METR tracking Oct 2025-Jan 2026 shows 99.9th percentile turn duration nearly doubled (<25 min -> >45 min); long-horizon doubling time ~196 days (~7 months). Frontier coding agents work autonomously up to ~5 hours. Anthropic measuring agent autonomy paper documents domains and risk.",
+        "reason": "Numeric divergence 99.9% on metric (context: .): new=7.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T14:24:51+00:00",
+        "entry_a_text": "April 24, 2026 leaderboards: GPT-5.5 Pro 52.4% on FrontierMath (research-level math), GPT-5.5 51.7%, GPT-5.4 Pro 50%. GPQA-Diamond (PhD-level science) — Gemini 3.1 Pro 94.3%, Claude Opus 4.6 91.3%, GPT-5.3 Codex 81%. Human PhD experts ~65-70% on GPQA-D; non-experts ~34%. Frontier models now exceed domain-expert ceilings on GPQA-D.",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "METR tracking Oct 2025-Jan 2026 shows 99.9th percentile turn duration nearly doubled (<25 min -> >45 min); long-horizon doubling time ~196 days (~7 months). Frontier coding agents work autonomously up to ~5 hours. Anthropic measuring agent autonomy paper documents domains and risk.",
+        "reason": "Numeric divergence 86.0% on metric (context: .): new=7.0, existing=50.0, threshold=10%",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T13:19:54+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "METR tracking Oct 2025-Jan 2026 shows 99.9th percentile turn duration nearly doubled (<25 min -> >45 min); long-horizon doubling time ~196 days (~7 months). Frontier coding agents work autonomously up to ~5 hours. Anthropic measuring agent autonomy paper documents domains and risk.",
+        "reason": "Numeric divergence 99.9% on metric (context: .): new=7.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T13:19:54+00:00",
+        "entry_a_text": "DeepResearch Bench released - 100 PhD-level research tasks across 22 fields evaluated by RACE/FACT frameworks. Best models (Gemini 2.5 Pro Deep Research, Perplexity Deep Research) score well on retrieval and citation but autonomous postdoc-level synthesis not demonstrated.",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "METR tracking Oct 2025-Jan 2026 shows 99.9th percentile turn duration nearly doubled (<25 min -> >45 min); long-horizon doubling time ~196 days (~7 months). Frontier coding agents work autonomously up to ~5 hours. Anthropic measuring agent autonomy paper documents domains and risk.",
+        "reason": "Numeric divergence 75.0% on metric (context: -): new=25.0, existing=100.0, threshold=10%",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T19:30:14+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "METR tracking Oct 2025-Jan 2026 shows 99.9th percentile turn duration nearly doubled (<25 min -> >45 min); long-horizon doubling time ~196 days (~7 months). Frontier coding agents work autonomously up to ~5 hours. Anthropic measuring agent autonomy paper documents domains and risk.",
+        "reason": "Numeric divergence 99.9% on metric (context: .): new=7.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:14+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "METR tracking Oct 2025-Jan 2026 shows 99.9th percentile turn duration nearly doubled (<25 min -> >45 min); long-horizon doubling time ~196 days (~7 months). Frontier coding agents work autonomously up to ~5 hours. Anthropic measuring agent autonomy paper documents domains and risk.",
+        "reason": "Numeric divergence 99.9% on metric (context: .): new=7.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:14+00:00",
+        "entry_a_text": "AlphaLab (arXiv:2604.08590) autonomous multi-agent research framework published April 2026: end-to-end dataset-to-paper cycle, 22% lower validation loss vs single-shot baseline on LLM pretraining, beat traffic-forecasting baselines 23-25%. BioMedAgent achieved 77% success on 327-task BioMed-AQA benchmark. CORAL showed 3-10x improvement over evolutionary-search baselines across 10 math/algorithmic tasks.",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "METR tracking Oct 2025-Jan 2026 shows 99.9th percentile turn duration nearly doubled (<25 min -> >45 min); long-horizon doubling time ~196 days (~7 months). Frontier coding agents work autonomously up to ~5 hours. Anthropic measuring agent autonomy paper documents domains and risk.",
+        "reason": "Numeric divergence 90.9% on metric (context: .): new=7.0, existing=77.0, threshold=10%",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-22T01:00:37+00:00",
+        "entry_a_text": "REPLAY COMPLETE: 0 indicators applied, 0 skipped. Final posteriors: {'H1': 0.18, 'H2': 0.38, 'H3': 0.32, 'H4': 0.12}. Indicator firedDates restored to originals for audit.",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "METR tracking Oct 2025-Jan 2026 shows 99.9th percentile turn duration nearly doubled (<25 min -> >45 min); long-horizon doubling time ~196 days (~7 months). Frontier coding agents work autonomously up to ~5 hours. Anthropic measuring agent autonomy paper documents domains and risk.",
+        "reason": "Numeric divergence 95.4% on metric (context: .): new=7.0, existing=0.32, threshold=10%",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "METR tracking Oct 2025-Jan 2026 shows 99.9th percentile turn duration nearly doubled (<25 min -> >45 min); long-horizon doubling time ~196 days (~7 months). Frontier coding agents work autonomously up to ~5 hours. Anthropic measuring agent autonomy paper documents domains and risk.",
+        "reason": "Numeric divergence 99.9% on metric (context: to): new=5.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "DeepResearch Bench (100 PhD-level research tasks, 22 fields) results: Gemini-2.5-Pro Deep Research averages 111.21 effective citations; Perplexity Deep Research leads citation accuracy at 90.24%. Benchmarks measure retrieval+synthesis quality, not autonomous research execution.",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "METR tracking Oct 2025-Jan 2026 shows 99.9th percentile turn duration nearly doubled (<25 min -> >45 min); long-horizon doubling time ~196 days (~7 months). Frontier coding agents work autonomously up to ~5 hours. Anthropic measuring agent autonomy paper documents domains and risk.",
+        "reason": "Numeric divergence 92.2% on metric (context: .): new=7.0, existing=90.24, threshold=10%",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-19T00:57:11+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "METR tracking Oct 2025-Jan 2026 shows 99.9th percentile turn duration nearly doubled (<25 min -> >45 min); long-horizon doubling time ~196 days (~7 months). Frontier coding agents work autonomously up to ~5 hours. Anthropic measuring agent autonomy paper documents domains and risk.",
+        "reason": "Numeric divergence 99.9% on metric (context: to): new=5.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-19T00:57:11+00:00",
+        "entry_a_text": "GPQA-Diamond leaderboard as of April 2026 shows top frontier models clustered 91-94.5% (Claude Mythos Preview 94.5%, Gemini 3.1 Pro Preview 94.1%, GPT-5.4 92.0-92.8%). Benchmark approaching saturation; top 2.1 points spread. PhD experts score 65%.",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "METR tracking Oct 2025-Jan 2026 shows 99.9th percentile turn duration nearly doubled (<25 min -> >45 min); long-horizon doubling time ~196 days (~7 months). Frontier coding agents work autonomously up to ~5 hours. Anthropic measuring agent autonomy paper documents domains and risk.",
+        "reason": "Numeric divergence 99.7% on metric (context: frontier): new=7.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T15:23:00+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Automated research agents outperforming humans on some tasks supports G3-G4. Anthropic W2S result is strong signal for advancing autonomous research. But full PhD-level autonomy (G4) requires taste/novelty not yet demonstrated at scale.",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "METR tracking Oct 2025-Jan 2026 shows 99.9th percentile turn duration nearly doubled (<25 min -> >45 min); long-horizon doubling time ~196 days (~7 months). Frontier coding agents work autonomously up to ~5 hours. Anthropic measuring agent autonomy paper documents domains and risk.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: agents, anthropic, autonomy",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-16T03:44:07+00:00",
+        "entry_a_text": "METR research shows AI task duration doubling every seven months, from one-hour tasks in early 2025 to eight-hour autonomous workstreams by late 2026. DeepResearch Bench: top models score 48-49 out of 100 on PhD-level research tasks across 22 fields.",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "METR tracking Oct 2025-Jan 2026 shows 99.9th percentile turn duration nearly doubled (<25 min -> >45 min); long-horizon doubling time ~196 days (~7 months). Frontier coding agents work autonomously up to ~5 hours. Anthropic measuring agent autonomy paper documents domains and risk.",
+        "reason": "Numeric divergence 99.8% on metric (context: to): new=5.0, existing=2025.0, threshold=10%",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-03-23T00:00:00Z",
+        "entry_a_text": "Schwartz predicts that 'blunt extrapolation' of the G1-to-G2 trajectory (achieved in ~4 months) puts frontier LLMs at G4 (PhD/postdoc-level autonomous research) by approximately March 2027.",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "METR tracking Oct 2025-Jan 2026 shows 99.9th percentile turn duration nearly doubled (<25 min -> >45 min); long-horizon doubling time ~196 days (~7 months). Frontier coding agents work autonomously up to ~5 hours. Anthropic measuring agent autonomy paper documents domains and risk.",
+        "reason": "Numeric divergence 98.0% on metric (context: months): new=196.0, existing=4.0, threshold=10%",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-26T16:32:51+00:00",
+        "entry_a_text": "INDICATOR ADDED: t3_research_math_stratification (tier3_suggestive). posteriorEffect=H2 +5pp, H3 +1pp, H1 -5pp, H4 -1pp.. Rationale: Design-review of ev_006/007/008/009/011 (none_impact_saturation alert). ev_007 noted FrontierMath Tier 4 unsaturated while standard math benchmarks saturate at 100; ev_009/011 show FrontierMath ~50-52% with GPQA-D >91% (above human PhD ceiling). This stratification — routine math saturating while research math plateaus — is a measurable G3 ceiling signal not captured by existing indicators (t2_frontiermath_double is a single-axis doubling threshold; t2_grad_benchmark_saturation is QA-saturation only). Pre-committed effect is modest because stratification is a slow-moving structural signal..",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "April 2026 leaderboards: Claude Opus 4.7 leads SWE-bench Verified at 82.0%; Gemini 3.1 Pro Preview ties top of Intelligence Index with 1M-token context. Strong agentic-coding gains but no validated postdoc-level autonomous research output.",
+        "reason": "Numeric divergence 18.0% on metric (context: at): new=82.0, existing=100.0, threshold=10%",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-25T14:55:35+00:00",
+        "entry_a_text": "INDICATOR ADDED: t3_deep_research_synthesis (tier3_suggestive). posteriorEffect=H1 +2pp, H2 +3pp, H3 -4pp, H4 -1pp.. Rationale: Captures ev_006-class evidence (Gemini Deep Research, Perplexity). Small posterior effect because retrieval-synthesis is the step before 'taste' per Schwartz. Mainly evidence for H2 (advanced graduate, taste gap persists). Tier3 because downstream of capability rather than directly demonstrating it..",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "April 2026 leaderboards: Claude Opus 4.7 leads SWE-bench Verified at 82.0%; Gemini 3.1 Pro Preview ties top of Intelligence Index with 1M-token context. Strong agentic-coding gains but no validated postdoc-level autonomous research output.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: gemini, research",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-25T14:55:35+00:00",
+        "entry_a_text": "INDICATOR ADDED: t2_autonomous_research_framework (tier2_strong). posteriorEffect=H1 +6pp, H2 +4pp, H3 -7pp, H4 -3pp.. Rationale: Captures AlphaLab/BioMedAgent/CORAL-class systems (ev_008). Tier2 because arXiv != Nature and benchmark gains != novel intellectual contribution. Modest H1+H2 push because these systems show research-process capability without demonstrating taste/judgment..",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "April 2026 leaderboards: Claude Opus 4.7 leads SWE-bench Verified at 82.0%; Gemini 3.1 Pro Preview ties top of Intelligence Index with 1M-token context. Strong agentic-coding gains but no validated postdoc-level autonomous research output.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: autonomous, gains, research, strong",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-25T14:24:51+00:00",
+        "entry_a_text": "April 24, 2026 leaderboards: GPT-5.5 Pro 52.4% on FrontierMath (research-level math), GPT-5.5 51.7%, GPT-5.4 Pro 50%. GPQA-Diamond (PhD-level science) — Gemini 3.1 Pro 94.3%, Claude Opus 4.6 91.3%, GPT-5.3 Codex 81%. Human PhD experts ~65-70% on GPQA-D; non-experts ~34%. Frontier models now exceed domain-expert ceilings on GPQA-D.",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "April 2026 leaderboards: Claude Opus 4.7 leads SWE-bench Verified at 82.0%; Gemini 3.1 Pro Preview ties top of Intelligence Index with 1M-token context. Strong agentic-coding gains but no validated postdoc-level autonomous research output.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: april, claude, gemini, leaderboards, level",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-25T13:19:54+00:00",
+        "entry_a_text": "DeepResearch Bench released - 100 PhD-level research tasks across 22 fields evaluated by RACE/FACT frameworks. Best models (Gemini 2.5 Pro Deep Research, Perplexity Deep Research) score well on retrieval and citation but autonomous postdoc-level synthesis not demonstrated.",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "April 2026 leaderboards: Claude Opus 4.7 leads SWE-bench Verified at 82.0%; Gemini 3.1 Pro Preview ties top of Intelligence Index with 1M-token context. Strong agentic-coding gains but no validated postdoc-level autonomous research output.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: autonomous, bench, gemini, level, postdoc",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T19:30:14+00:00",
+        "entry_a_text": "GPT-5.4 Pro leads FrontierMath at 50% as of 4/8/2026; Claude Opus 4 GPQA Diamond 83.1% (above 65% PhD expert baseline); frontier models tied near Intelligence Index 57 but no reports of autonomous postdoc-level research execution.",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "April 2026 leaderboards: Claude Opus 4.7 leads SWE-bench Verified at 82.0%; Gemini 3.1 Pro Preview ties top of Intelligence Index with 1M-token context. Strong agentic-coding gains but no validated postdoc-level autonomous research output.",
+        "reason": "Numeric divergence 99.8% on metric (context: claude): new=2026.0, existing=4.0, threshold=10%",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T13:49:14+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Three independent autonomous-research agent papers in one month with measurable superhuman-baseline gains argue for advanced graduate autonomy (H2) with meaningful H1 signal.",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "April 2026 leaderboards: Claude Opus 4.7 leads SWE-bench Verified at 82.0%; Gemini 3.1 Pro Preview ties top of Intelligence Index with 1M-token context. Strong agentic-coding gains but no validated postdoc-level autonomous research output.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: autonomous, gains, research",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T13:49:14+00:00",
+        "entry_a_text": "AlphaLab (arXiv:2604.08590) autonomous multi-agent research framework published April 2026: end-to-end dataset-to-paper cycle, 22% lower validation loss vs single-shot baseline on LLM pretraining, beat traffic-forecasting baselines 23-25%. BioMedAgent achieved 77% success on 327-task BioMed-AQA benchmark. CORAL showed 3-10x improvement over evolutionary-search baselines across 10 math/algorithmic tasks.",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "April 2026 leaderboards: Claude Opus 4.7 leads SWE-bench Verified at 82.0%; Gemini 3.1 Pro Preview ties top of Intelligence Index with 1M-token context. Strong agentic-coding gains but no validated postdoc-level autonomous research output.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: april, autonomous, research",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T02:25:42+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Continued benchmark progress but research-level ceiling (FrontierMath Tier 4, postdoc taste) unbroken; supports H2.",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "April 2026 leaderboards: Claude Opus 4.7 leads SWE-bench Verified at 82.0%; Gemini 3.1 Pro Preview ties top of Intelligence Index with 1M-token context. Strong agentic-coding gains but no validated postdoc-level autonomous research output.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: level, postdoc, research",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T02:25:42+00:00",
+        "entry_a_text": "LemmaBench live research-level math benchmark iterated Feb 2026 with GPT-5 judged best-performing; Gemini 3 Pro and GPT-5.2 Pro achieve 100.0 on standard math benchmarks; FrontierMath Tier 4 (research-level) remains unsaturated.",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "April 2026 leaderboards: Claude Opus 4.7 leads SWE-bench Verified at 82.0%; Gemini 3.1 Pro Preview ties top of Intelligence Index with 1M-token context. Strong agentic-coding gains but no validated postdoc-level autonomous research output.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: gemini, level, pro, research",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "DeepResearch Bench (100 PhD-level research tasks, 22 fields) results: Gemini-2.5-Pro Deep Research averages 111.21 effective citations; Perplexity Deep Research leads citation accuracy at 90.24%. Benchmarks measure retrieval+synthesis quality, not autonomous research execution.",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "April 2026 leaderboards: Claude Opus 4.7 leads SWE-bench Verified at 82.0%; Gemini 3.1 Pro Preview ties top of Intelligence Index with 1M-token context. Strong agentic-coding gains but no validated postdoc-level autonomous research output.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: autonomous, bench, gemini, leads, level",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-19T00:57:11+00:00",
+        "entry_a_text": "GPQA-Diamond leaderboard as of April 2026 shows top frontier models clustered 91-94.5% (Claude Mythos Preview 94.5%, Gemini 3.1 Pro Preview 94.1%, GPT-5.4 92.0-92.8%). Benchmark approaching saturation; top 2.1 points spread. PhD experts score 65%.",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "April 2026 leaderboards: Claude Opus 4.7 leads SWE-bench Verified at 82.0%; Gemini 3.1 Pro Preview ties top of Intelligence Index with 1M-token context. Strong agentic-coding gains but no validated postdoc-level autonomous research output.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: april, claude, gemini, preview, pro",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T15:23:00+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Automated research agents outperforming humans on some tasks supports G3-G4. Anthropic W2S result is strong signal for advancing autonomous research. But full PhD-level autonomy (G4) requires taste/novelty not yet demonstrated at scale.",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "April 2026 leaderboards: Claude Opus 4.7 leads SWE-bench Verified at 82.0%; Gemini 3.1 Pro Preview ties top of Intelligence Index with 1M-token context. Strong agentic-coding gains but no validated postdoc-level autonomous research output.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: autonomous, level, research, strong",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T15:23:00+00:00",
+        "entry_a_text": "Anthropic publishes automated weak-to-strong researcher that outperforms human researchers on alignment tasks. Sakana AI Scientist system automates full research lifecycle (hypothesis to manuscript). Edison Kosmos autonomous AI scientist used by 50,000+ researchers. Microsoft forecasts AI as active scientific collaborator in 2026. NextBigFuture declares 2026 breakthrough year for AI world models.",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "April 2026 leaderboards: Claude Opus 4.7 leads SWE-bench Verified at 82.0%; Gemini 3.1 Pro Preview ties top of Intelligence Index with 1M-token context. Strong agentic-coding gains but no validated postdoc-level autonomous research output.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: autonomous, research, strong",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-16T03:44:07+00:00",
+        "entry_a_text": "METR research shows AI task duration doubling every seven months, from one-hour tasks in early 2025 to eight-hour autonomous workstreams by late 2026. DeepResearch Bench: top models score 48-49 out of 100 on PhD-level research tasks across 22 fields.",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "April 2026 leaderboards: Claude Opus 4.7 leads SWE-bench Verified at 82.0%; Gemini 3.1 Pro Preview ties top of Intelligence Index with 1M-token context. Strong agentic-coding gains but no validated postdoc-level autonomous research output.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: autonomous, bench, level, research, top",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-03-23T00:00:00Z",
+        "entry_a_text": "Schwartz predicts that 'blunt extrapolation' of the G1-to-G2 trajectory (achieved in ~4 months) puts frontier LLMs at G4 (PhD/postdoc-level autonomous research) by approximately March 2027.",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "April 2026 leaderboards: Claude Opus 4.7 leads SWE-bench Verified at 82.0%; Gemini 3.1 Pro Preview ties top of Intelligence Index with 1M-token context. Strong agentic-coding gains but no validated postdoc-level autonomous research output.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: autonomous, level, postdoc, research",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-03-23T00:00:00Z",
+        "entry_a_text": "Matthew Schwartz (Harvard physics professor, IAIFI) publishes 'Vibe Physics' on Anthropic's research blog. Reports completing a peer-reviewed theoretical physics paper (arXiv:2601.02484, C-parameter Sudakov shoulder) using Claude Opus 4.5 with ~50-60 hours human oversight over 2 weeks. Rates Claude at G2 level (early graduate student). Predicts 'blunt extrapolation' puts LLMs at PhD/postdoc level by ~March 2027. Identifies 'taste' as the single missing capability. Notes Claude was profoundly creative but made frequent errors requiring human verification, including faking results and adjusting parameters without proper derivation.",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "April 2026 leaderboards: Claude Opus 4.7 leads SWE-bench Verified at 82.0%; Gemini 3.1 Pro Preview ties top of Intelligence Index with 1M-token context. Strong agentic-coding gains but no validated postdoc-level autonomous research output.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: claude, level, opus, postdoc, research",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
       }
     ]
   },
   "sourceCalibration": {
-    "ledger": [],
+    "ledger": [
+      {
+        "timestamp": "2026-04-24T02:25:42Z",
+        "evidence_index": 12,
+        "confirming_index": 14,
+        "resolution": "CONFIRMED",
+        "source": "",
+        "confirming_source": "",
+        "trust_delta": 0.05,
+        "original_text_snippet": "LR MIGRATION RESET: posteriors reset to design priors; evidence log preserved.",
+        "confirming_text_snippet": "REPLAY BEGIN: 0 previously-fired indicators will be re-applied chronologically under current LR system. Posteriors reset"
+      },
+      {
+        "timestamp": "2026-04-24T02:25:42Z",
+        "evidence_index": 14,
+        "confirming_index": 15,
+        "resolution": "CONFIRMED",
+        "source": "",
+        "confirming_source": "",
+        "trust_delta": 0.05,
+        "original_text_snippet": "REPLAY BEGIN: 0 previously-fired indicators will be re-applied chronologically under current LR system. Posteriors reset",
+        "confirming_text_snippet": "REPLAY COMPLETE: 0 indicators applied, 0 skipped. Final posteriors: {'H1': 0.18, 'H2': 0.38, 'H3': 0.32, 'H4': 0.12}. In"
+      },
+      {
+        "timestamp": "2026-04-24T19:30:14Z",
+        "evidence_index": 1,
+        "confirming_index": 21,
+        "resolution": "REFUTED",
+        "source": "Matthew Schwartz via Anthropic Research Blog",
+        "confirming_source": "BenchLM / Artificial Analysis",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Schwartz predicts that 'blunt extrapolation' of the G1-to-G2 trajectory (achieved in ~4 months) puts frontier LLMs at G4",
+        "confirming_text_snippet": "GPT-5.4 Pro leads FrontierMath at 50% as of 4/8/2026; Claude Opus 4 GPQA Diamond 83.1% (above 65% PhD expert baseline); "
+      },
+      {
+        "timestamp": "2026-04-25T13:19:54Z",
+        "evidence_index": 2,
+        "confirming_index": 24,
+        "resolution": "REFUTED",
+        "source": "METR / DeepResearch Bench",
+        "confirming_source": "DeepResearch Bench team",
+        "trust_delta": -0.1,
+        "original_text_snippet": "METR research shows AI task duration doubling every seven months, from one-hour tasks in early 2025 to eight-hour autono",
+        "confirming_text_snippet": "DeepResearch Bench released - 100 PhD-level research tasks across 22 fields evaluated by RACE/FACT frameworks. Best mode"
+      },
+      {
+        "timestamp": "2026-04-25T13:19:54Z",
+        "evidence_index": 9,
+        "confirming_index": 24,
+        "resolution": "REFUTED",
+        "source": "DeepResearch Bench / arXiv",
+        "confirming_source": "DeepResearch Bench team",
+        "trust_delta": -0.1,
+        "original_text_snippet": "DeepResearch Bench (100 PhD-level research tasks, 22 fields) results: Gemini-2.5-Pro Deep Research averages 111.21 effec",
+        "confirming_text_snippet": "DeepResearch Bench released - 100 PhD-level research tasks across 22 fields evaluated by RACE/FACT frameworks. Best mode"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:51Z",
+        "evidence_index": 6,
+        "confirming_index": 27,
+        "resolution": "REFUTED",
+        "source": "BracAI / Artificial Analysis / LM Council",
+        "confirming_source": "BenchLM, Epoch AI FrontierMath, llm-stats.com leaderboard",
+        "trust_delta": -0.1,
+        "original_text_snippet": "GPQA-Diamond leaderboard as of April 2026 shows top frontier models clustered 91-94.5% (Claude Mythos Preview 94.5%, Gem",
+        "confirming_text_snippet": "April 24, 2026 leaderboards: GPT-5.5 Pro 52.4% on FrontierMath (research-level math), GPT-5.5 51.7%, GPT-5.4 Pro 50%. GP"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:51Z",
+        "evidence_index": 21,
+        "confirming_index": 27,
+        "resolution": "REFUTED",
+        "source": "BenchLM / Artificial Analysis",
+        "confirming_source": "BenchLM, Epoch AI FrontierMath, llm-stats.com leaderboard",
+        "trust_delta": -0.1,
+        "original_text_snippet": "GPT-5.4 Pro leads FrontierMath at 50% as of 4/8/2026; Claude Opus 4 GPQA Diamond 83.1% (above 65% PhD expert baseline); ",
+        "confirming_text_snippet": "April 24, 2026 leaderboards: GPT-5.5 Pro 52.4% on FrontierMath (research-level math), GPT-5.5 51.7%, GPT-5.4 Pro 50%. GP"
+      },
+      {
+        "timestamp": "2026-04-26T19:27:10Z",
+        "evidence_index": 27,
+        "confirming_index": 35,
+        "resolution": "REFUTED",
+        "source": "BenchLM, Epoch AI FrontierMath, llm-stats.com leaderboard",
+        "confirming_source": "BenchLM / llm-stats / ofox.ai",
+        "trust_delta": -0.1,
+        "original_text_snippet": "April 24, 2026 leaderboards: GPT-5.5 Pro 52.4% on FrontierMath (research-level math), GPT-5.5 51.7%, GPT-5.4 Pro 50%. GP",
+        "confirming_text_snippet": "April 2026 leaderboards: Claude Opus 4.7 leads SWE-bench Verified at 82.0%; Gemini 3.1 Pro Preview ties top of Intellige"
+      }
+    ],
     "effectiveTrust": {
-      "DeepResearch Bench": 0.5,
-      "METR": 0.5,
-      "Matthew Schwartz": 0.5,
+      "DeepResearch Bench": 0.3693,
+      "METR": 0.4118,
+      "Matthew Schwartz": 0.4118,
       "Anthropic": 0.5,
       "Microsoft Research": 0.5,
       "Sakana AI": 0.5,
-      "Artificial Analysis": 0.5,
-      "BracAI": 0.5,
-      "LM Council": 0.5,
-      "arXiv": 0.5
+      "Artificial Analysis": 0.4118,
+      "BracAI": 0.4555,
+      "LM Council": 0.4555,
+      "arXiv": 0.4555,
+      "Epoch AI": 0.5,
+      "llm-stats": 0.5,
+      "Nature Biomedical Engineering": 0.5,
+      "BenchLM": 0.4555,
+      "DeepResearch Bench team": 0.5,
+      "BenchLM, Epoch AI FrontierMath, llm-stats.com leaderboard": 0.4555,
+      "Sequoia": 0.5,
+      "ofox.ai": 0.5
     },
-    "_last_scan_same_source_skipped": 2
+    "_last_scan_same_source_skipped": 10
   },
   "conditionalPredictions": [
     {

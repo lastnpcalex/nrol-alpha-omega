@@ -31,7 +31,81 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         if path == "/triage":
             return self._handle_triage()
 
+        if path == "/trigger":
+            return self._handle_trigger()
+
         self.send_error(404)
+
+    def _handle_trigger(self):
+        """
+        Queue an action-alert trigger for Claude to process.
+
+        Body: {action, slug, severity, context}
+            action    — one of: fire_indicator, run_red_team,
+                         review_topic_design, mark_reviewed
+            slug      — topic slug
+            severity  — alert severity (REVIEW_NEEDED | ATTENTION)
+            context   — dict with action-specific fields (indicator_id,
+                         evidence_id, evidence_ids, alert_signature, reason)
+
+        Writes a filled-in copy of canvas/triggers/review-action.md to
+        canvas/triggers/pending/<timestamp>-<slug>-<action>.md so Claude
+        can pick it up and route through the appropriate skill.
+        """
+        from datetime import datetime, timezone
+        content_length = int(self.headers.get("Content-Length", 0))
+        body = self.rfile.read(content_length)
+        try:
+            data = json.loads(body)
+        except json.JSONDecodeError:
+            self.send_error(400, "Invalid JSON")
+            return
+
+        action = (data.get("action") or "").strip()
+        slug = (data.get("slug") or "").strip()
+        severity = (data.get("severity") or "ATTENTION").strip()
+        context = data.get("context") or {}
+
+        allowed = {"fire_indicator", "run_red_team", "review_topic_design", "mark_reviewed", "review_dependencies", "rederive_downstream", "update_assumption", "accept_drift", "set_topic_lens", "rebuild_topic", "promote_replay"}
+        if action not in allowed:
+            self.send_error(400, f"invalid action (allowed: {sorted(allowed)})")
+            return
+        if not slug:
+            self.send_error(400, "slug required")
+            return
+
+        # Find project root by walking up from this file until we hit canvas/
+        here = Path(__file__).resolve()
+        project_root = here.parent.parent
+        tpl_path = project_root / "canvas" / "triggers" / "review-action.md"
+        pending_dir = project_root / "canvas" / "triggers" / "pending"
+        pending_dir.mkdir(parents=True, exist_ok=True)
+
+        try:
+            template = tpl_path.read_text(encoding="utf-8")
+        except FileNotFoundError:
+            self.send_error(500, "review-action.md template missing")
+            return
+
+        context_json = json.dumps(context, ensure_ascii=False, indent=2)
+        filled = (template
+                  .replace("{{action}}", action)
+                  .replace("{{slug}}", slug)
+                  .replace("{{severity}}", severity)
+                  .replace("{{context}}", context_json))
+
+        ts = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+        # keep filenames filesystem-safe
+        safe_slug = "".join(c for c in slug if c.isalnum() or c in "-_")[:48] or "unknown"
+        out_path = pending_dir / f"{ts}-{safe_slug}-{action}.md"
+        out_path.write_text(filled, encoding="utf-8")
+
+        self._send_json({
+            "ok": True,
+            "trigger_file": str(out_path.relative_to(project_root)),
+            "action": action,
+            "slug": slug,
+        })
 
     def _handle_triage(self):
         content_length = int(self.headers.get("Content-Length", 0))

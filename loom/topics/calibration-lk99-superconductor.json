@@ -6,7 +6,7 @@
     "question": "Is LK-99 (copper-substituted lead apatite) a room-temperature, ambient-pressure superconductor as claimed by Lee & Kim (2023)?",
     "resolution": "Resolved when: (a) 3+ independent labs replicate zero-resistance AND diamagnetic levitation in LK-99 samples, OR (b) 3+ independent labs fail to replicate AND a credible structural/electronic explanation for the original observations emerges.",
     "created": "2023-07-22T00:00:00Z",
-    "lastUpdated": "2026-04-22T01:01:03+00:00",
+    "lastUpdated": "2026-04-29T02:30:58+00:00",
     "status": "RESOLVED",
     "dayCount": 25,
     "startDate": "2023-07-22T00:00:00Z",
@@ -97,7 +97,13 @@
         "H1": 0.1,
         "H2": 0.2,
         "H3": 0.5,
-        "H4": 0.2
+        "H4": 0.2,
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        }
       },
       {
         "date": "2026-04-22",
@@ -113,7 +119,7 @@
           "H3": 0.5,
           "H4": 0.2
         },
-        "updateMethod": "bayesian_update",
+        "updateMethod": "bayesian_update_legacy",
         "evidenceRefs": [
           "2023-07-26T14:00:00Z"
         ],
@@ -147,7 +153,14 @@
           "devil_advocate_score": 0.0,
           "challenge": "No significant shifts proposed; no challenge needed.",
           "inference_mode": "text_heuristic"
-        }
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
       },
       {
         "date": "2026-04-22",
@@ -163,7 +176,7 @@
           "H3": 0.5037,
           "H4": 0.1985
         },
-        "updateMethod": "bayesian_update",
+        "updateMethod": "bayesian_update_legacy",
         "evidenceRefs": [
           "2023-07-28T10:00:00Z"
         ],
@@ -203,7 +216,14 @@
           "devil_advocate_score": 0.0,
           "challenge": "No significant shifts proposed; no challenge needed.",
           "inference_mode": "text_heuristic"
-        }
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
       },
       {
         "date": "2026-04-22",
@@ -214,7 +234,13 @@
           "H4": 0.0
         },
         "note": "RE-LOCK POST-REPLAY: winner=H3. Princeton/Beihang/Berkeley/BARC/NICST/IFW Dresden replications: no SC. Cu2S impurity explained resistance drop. (Re-locked after erroneous replay.)",
-        "updateMethod": "topic_resolved"
+        "updateMethod": "topic_resolved",
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        }
       }
     ]
   },
@@ -842,7 +868,7 @@
   "governance": {
     "health": "DEGRADED",
     "issues": [
-      "Majority stale evidence (17/23)",
+      "Majority stale evidence (23/23)",
       "Near-zero uncertainty — check for overconfidence",
       "100 unresolved contradictions"
     ],
@@ -855,8 +881,8 @@
     "maxEntropy": 2.0,
     "uncertaintyRatio": 0.0,
     "evidenceFreshness": {
-      "fresh": 6,
-      "stale": 17,
+      "fresh": 0,
+      "stale": 23,
       "total": 23
     },
     "hypothesisAdmissibility": {
@@ -869,7 +895,7 @@
       "kl_divergence": 0.6931,
       "interpretation": "WELL_EVIDENCED"
     },
-    "lastComputed": "2026-04-22T01:01:03+00:00",
+    "lastComputed": "2026-04-29T02:30:58+00:00",
     "staleDependencies": 0,
     "calibrationHealth": "WELL_CALIBRATED",
     "unresolvedContradictions": 100,
@@ -898,7 +924,7 @@
         }
       },
       "indistinguishable": [],
-      "lastChecked": "2026-04-22T01:01:03+00:00"
+      "lastChecked": "2026-04-29T02:30:59+00:00"
     }
   },
   "predictionScoring": {

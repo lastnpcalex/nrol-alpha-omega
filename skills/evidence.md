@@ -17,6 +17,7 @@ DO NOT manually edit JSON files. Use the pipeline.
 ```python
 from framework.pipeline import process_evidence, log_activity
 
+# Indicator-match path: provide fired_indicator_id; LRs come from indicator
 result = process_evidence(
     slug="topic-slug",
     entry={
@@ -27,8 +28,15 @@ result = process_evidence(
         "time": "2026-04-15T12:00:00Z",  # when it happened, not when you're logging
         "note": "Optional context",
     },
-    likelihoods={"H1": 0.15, "H2": 0.45, "H3": 0.30, "H4": 0.10},
-    reason="Why this evidence is informative."
+    fired_indicator_id="t2_specific_indicator",
+    reason="Why this indicator's observable threshold is met."
+)
+
+# Park path: no matching indicator, evidence parks
+result = process_evidence(
+    slug="topic-slug",
+    entry={...},
+    # no fired_indicator_id → parks; posteriors unchanged
 )
 
 log_activity(result, platform="evidence")
@@ -48,16 +56,21 @@ log_activity(result, platform="evidence")
 - **Save with snapshot**: embeds governance into the topic JSON
 - **Dependency check**: flags stale downstream assumptions
 
-## Likelihood guidance
+## Likelihoods come from indicators, not from you
 
-You MUST supply likelihoods to get a Bayesian update. Ask: "How likely
-is this evidence if H_i is true?"
+Likelihoods are pre-committed at indicator design time and stored in
+`indicator.likelihoods`. When you fire an indicator via `fired_indicator_id`,
+the engine reads the indicator's pre-committed LRs and applies them
+(attenuated by source trust, decayed by prior firings, de-correlated if
+same `causal_event_id`).
 
-- P(E|H) close to 1.0 = this evidence is exactly what you'd expect under H
-- P(E|H) close to 0.0 = this evidence would be very surprising under H
-- All likelihoods must be in (0, 1]. They do NOT need to sum to 1.
-- If you cannot assess likelihoods, pass `likelihoods=None` — evidence is
-  logged but posteriors do not move. This is the "MONITOR" path.
+If no indicator covers the evidence, **park** by calling
+`process_evidence` without `fired_indicator_id`. Posteriors do not move.
+The operator runs cleanup later via `skills/cleanup-indicator-sweep.md`.
+
+You do NOT supply freeform LRs. The freeform path was removed because
+operators (and AI assistants) used it to commit context-anchored LRs that
+pegged 17 topics at clamp ceilings.
 
 ## Valid tags (from governor.py EVIDENCE_TTL)
 

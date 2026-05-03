@@ -12,6 +12,9 @@ topics/*.json
 # Calibration topics are tracked — these are the empirical record
 !topics/calibration-*.json
 
+# Archived topics (contaminated by pre-gate freeform-LR loophole, kept locally for reference)
+topics/_archive_*/
+
 # Agent instructions (agent-specific, not part of the framework)
 CLAUDE.md
 .claude/

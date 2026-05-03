@@ -5,7 +5,7 @@
     "question": "Will AI-generated content (synthetic media, deepfakes, LLM-written political messaging at scale) be officially attributed as a material factor in altering the outcome of a national election in a G20 country by December 31, 2027?",
     "resolution": "Resolved H1 if a government electoral authority, parliamentary inquiry, court, or equivalent official body in a G20 country officially attributes AI-generated content as a material factor (>=1% vote share swing or outcome reversal) in a national election by 2027-12-31. H2 if credible investigative reporting (>=3 independent outlets) documents significant AI influence without official attribution. H3 if AI deployed at scale but no documented material effect. H4 if investigations find AI influence negligible or overstated. Resolution date: 2027-12-31.",
     "created": "",
-    "lastUpdated": "2026-04-22T05:19:57+00:00",
+    "lastUpdated": "2026-04-29T02:30:58+00:00",
     "status": "ACTIVE",
     "dayCount": 0,
     "startDate": "2026-04-21",
@@ -57,32 +57,32 @@
         "label": "Official attribution: AI content confirmed material electoral factor by government body",
         "midpoint": 3.5,
         "unit": "AI influence attribution score (0=none, 4=confirmed official)",
-        "posterior": 0.15,
+        "posterior": 0.005,
         "description": "An official government body (electoral commission, parliamentary inquiry, court) formally attributes AI-generated content as a material factor in a national election outcome. Sets legal/regulatory precedent. Most likely in a close election where synthetic media is forensically traced to a vote margin."
       },
       "H2": {
         "label": "Documented influence: significant AI role confirmed by journalism, no official attribution",
         "midpoint": 2.5,
         "unit": "AI influence attribution score (0=none, 4=confirmed official)",
-        "posterior": 0.3,
+        "posterior": 0.9552,
         "description": "Multiple credible independent investigations document significant AI content deployment during a national election with plausible evidence of effect, but no official body formally attributes outcome change. Common path: investigative journalism + academic analysis without legal conclusion."
       },
       "H3": {
         "label": "Deployed at scale: AI content present but no material electoral effect confirmed",
         "midpoint": 1.5,
         "unit": "AI influence attribution score (0=none, 4=confirmed official)",
-        "posterior": 0.35,
+        "posterior": 0.0348,
         "description": "AI-generated political content is widely deployed and documented but post-election analysis finds no credible evidence of material vote share impact. Voters prove resilient, AI content cancels across campaigns, or platform moderation limits spread."
       },
       "H4": {
         "label": "Overstated threat: investigations find negligible real-world electoral effect",
         "midpoint": 0.5,
         "unit": "AI influence attribution score (0=none, 4=confirmed official)",
-        "posterior": 0.2,
+        "posterior": 0.005,
         "description": "Rigorous post-election investigations find AI-generated content had negligible real-world electoral effect. Threat overstated relative to traditional disinformation. AI content exists but no attributable electoral impact by 2027."
       }
     },
-    "expectedValue": 0,
+    "expectedValue": 2.46,
     "expectedUnit": "weeks",
     "posteriorHistory": [
       {
@@ -91,7 +91,337 @@
         "H1": 0.15,
         "H2": 0.3,
         "H3": 0.35,
-        "H4": 0.2
+        "H4": 0.2,
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        }
+      },
+      {
+        "date": "2026-04-24",
+        "posteriors": {
+          "H1": 0.0623,
+          "H2": 0.3322,
+          "H3": 0.5087,
+          "H4": 0.0969
+        },
+        "priors": {
+          "H1": 0.15,
+          "H2": 0.3,
+          "H3": 0.35,
+          "H4": 0.2
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_001"
+        ],
+        "likelihoods": {
+          "H1": 0.12,
+          "H2": 0.32,
+          "H3": 0.42,
+          "H4": 0.14
+        },
+        "note": "AI content deployed at scale but no official material electoral attribution; supports H3.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "turningPoint": {
+          "type": "THRESHOLD_CROSSED",
+          "hypothesis": "H3",
+          "from": 0.35,
+          "to": 0.5087
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-24",
+        "posteriors": {
+          "H1": 0.0347,
+          "H2": 0.5132,
+          "H3": 0.4401,
+          "H4": 0.012
+        },
+        "priors": {
+          "H1": 0.0623,
+          "H2": 0.3322,
+          "H3": 0.5087,
+          "H4": 0.0969
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_002"
+        ],
+        "likelihoods": {
+          "H1": 0.18,
+          "H2": 0.5,
+          "H3": 0.28,
+          "H4": 0.04
+        },
+        "note": "Documented party-sponsored AI content and voter-influence survey data tilt toward H2 documented-influence without yet rising to official attribution (H1).",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "turningPoint": {
+          "type": "LEADING_CHANGED",
+          "from": "H3",
+          "to": "H2",
+          "fromProb": 0.5087,
+          "toProb": 0.5132
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-24",
+        "posteriors": {
+          "H1": 0.0084,
+          "H2": 0.6165,
+          "H3": 0.3701,
+          "H4": 0.005
+        },
+        "priors": {
+          "H1": 0.0347,
+          "H2": 0.5132,
+          "H3": 0.4401,
+          "H4": 0.012
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_003"
+        ],
+        "likelihoods": {
+          "H1": 0.2,
+          "H2": 1.0,
+          "H3": 0.7,
+          "H4": 0.05
+        },
+        "note": "Industrial-scale deployment with journalistic attribution rising; no official government determination yet — H2 most supported.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "turningPoint": {
+          "type": "BRANCH_DEATH",
+          "hypothesis": "H4",
+          "lastPosterior": 0.005
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-25",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.7458,
+          "H3": 0.2442,
+          "H4": 0.005
+        },
+        "priors": {
+          "H1": 0.0084,
+          "H2": 0.6165,
+          "H3": 0.3701,
+          "H4": 0.005
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_004"
+        ],
+        "likelihoods": {
+          "H1": 0.1,
+          "H2": 0.55,
+          "H3": 0.3,
+          "H4": 0.05
+        },
+        "note": "Documented deployments at scale by major party committees with journalistic attribution support H2 (documented influence); tail toward H1 (official attribution) widens.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "turningPoint": {
+          "type": "BRANCH_DEATH",
+          "hypothesis": "H1",
+          "lastPosterior": 0.005
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-25",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.8507,
+          "H3": 0.1393,
+          "H4": 0.005
+        },
+        "priors": {
+          "H1": 0.005,
+          "H2": 0.7458,
+          "H3": 0.2442,
+          "H4": 0.005
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_005"
+        ],
+        "likelihoods": {
+          "H1": 0.4,
+          "H2": 1.0,
+          "H3": 0.5,
+          "H4": 0.05
+        },
+        "note": "High-profile deployments documented in journalism but no government-body attribution of material electoral effect — squarely in H2.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-26",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.9229,
+          "H3": 0.0671,
+          "H4": 0.005
+        },
+        "priors": {
+          "H1": 0.005,
+          "H2": 0.8507,
+          "H3": 0.1393,
+          "H4": 0.005
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_006"
+        ],
+        "likelihoods": {
+          "H1": 0.05,
+          "H2": 0.9,
+          "H3": 0.4,
+          "H4": 0.005
+        },
+        "note": "Deployed at scale with major-party deepfake ads + 31-state regulatory response = canonical H2 (documented influence).",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-26",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.9552,
+          "H3": 0.0348,
+          "H4": 0.005
+        },
+        "priors": {
+          "H1": 0.005,
+          "H2": 0.9229,
+          "H3": 0.0671,
+          "H4": 0.005
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_007"
+        ],
+        "likelihoods": {
+          "H1": 0.5,
+          "H2": 1.0,
+          "H3": 0.5,
+          "H4": 0.1
+        },
+        "note": "Documented deployment + journalist attribution but no government finding of materiality fits H2.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
       }
     ]
   },
@@ -341,6 +671,231 @@
       "ledger": "DECISION",
       "claimState": "SUPPORTED",
       "effectiveWeight": 1.0
+    },
+    {
+      "id": "ev_001",
+      "time": "2026-04-24T02:25:41+00:00",
+      "tag": "EVENT",
+      "tags": [
+        "EVENT",
+        "POLI"
+      ],
+      "text": "Documented 2025 deepfake cases in Romania (May 2025 presidential scam videos) and Czech parliamentary election; Nigeria 2027 election preparation flagged; no federal US legislation passed and state-level regulation uneven.",
+      "provenance": "OBSERVED",
+      "source": "Brennan Center / Tech Cabal / Wikipedia",
+      "posteriorImpact": "NONE",
+      "url": "https://www.brennancenter.org/our-work/analysis-opinion/gauging-ai-threat-free-and-fair-elections",
+      "ledger": "FACT",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-24T02:25:41+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: AI content deployed at scale but no official material electoral attribution; supports H3.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_002",
+      "time": "2026-04-24T13:49:15+00:00",
+      "tag": "EVENT",
+      "tags": [
+        "EVENT",
+        "POL",
+        "AI"
+      ],
+      "text": "2026 US midterms: NRSC released fabricated AI video of Dem Senate candidate James Talarico (March 2026); OECD.AI logged at least 5 confirmed deepfake incidents this cycle. 31 US states have enacted election-deepfake laws; no federal ban. Survey data: ~50% of voters say deepfakes influenced their decisions. Academic framing calls 2026 first electoral cycle with industrial-scale political deepfakes.",
+      "provenance": "OBSERVED",
+      "source": "CNN / OECD.AI / Brennan Center",
+      "posteriorImpact": "NONE",
+      "url": "https://www.cnn.com/2026/03/13/politics/james-talarico-ai-deepfake-republicans-midterms",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-24T13:49:15+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Documented party-sponsored AI content and voter-influence survey data tilt toward H2 documented-influence without yet rising to official attribution (H1).",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_003",
+      "time": "2026-04-24T19:30:14+00:00",
+      "tag": "EVENT",
+      "tags": [
+        "EVENT",
+        "AI",
+        "POL"
+      ],
+      "text": "NRSC published full-clip AI-generated Talarico deepfake 3/11, first political deepfake with realistic candidate recreation for entire clip; American Prospect 4/17: US politics 'inundated' with AI deepfakes at industrial scale; no government body has yet officially attributed material electoral effect.",
+      "provenance": "OBSERVED",
+      "source": "CNN / OECD.AI incident tracker",
+      "posteriorImpact": "NONE",
+      "url": "https://oecd.ai/en/incidents/2026-03-28-b14f",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-24T19:30:14+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-24T19:30:14+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Industrial-scale deployment with journalistic attribution rising; no official government determination yet — H2 most supported.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_004",
+      "time": "2026-04-25T13:19:54+00:00",
+      "tag": "EVENT",
+      "tags": [
+        "EVENT",
+        "AI",
+        "POL"
+      ],
+      "text": "2026 midterms first cycle with AI deepfakes deployed at industrial scale: Republican AI deepfake ad of Graham Platner (April 16); NRSC deepfake of James Talarico (March 13); 31 US states have deepfake-in-elections laws. No federal regulation; OECD logged AI deepfakes-mislead-voters incident March 28.",
+      "provenance": "OBSERVED",
+      "source": "CNN / Bangor Daily News / OECD.AI",
+      "posteriorImpact": "NONE",
+      "url": "https://www.cnn.com/2026/03/13/politics/james-talarico-ai-deepfake-republicans-midterms",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-25T13:19:54+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-25T13:19:54+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Documented deployments at scale by major party committees with journalistic attribution support H2 (documented influence); tail toward H1 (official attribution) widens.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_005",
+      "time": "2026-04-25T14:24:50+00:00",
+      "tag": "EVENT",
+      "tags": [
+        "EVENT",
+        "POLI",
+        "TECH"
+      ],
+      "text": "March 2026: NRSC released a deepfake video of Texas Democratic Senate candidate James Talarico — first ad with synthetic candidate speaking lifelike for extended duration. Republicans deploying deepfakes more frequently than Democrats this cycle (1-of-3 recent national ads). 31 states have deepfake-in-elections statutes; no federal law. OECD AI Incident DB logged 2026-03-28 case.",
+      "provenance": "OBSERVED",
+      "source": "CNN, OECD AI Incidents, American Prospect",
+      "posteriorImpact": "NONE",
+      "url": "https://www.cnn.com/2026/03/13/politics/james-talarico-ai-deepfake-republicans-midterms",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-25T14:24:50+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-25T14:24:50+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: High-profile deployments documented in journalism but no government-body attribution of material electoral effect — squarely in H2.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_006",
+      "time": "2026-04-26T16:59:07+00:00",
+      "tag": "EVENT",
+      "tags": [
+        "EVENT",
+        "POLICY",
+        "AI"
+      ],
+      "text": "NRSC released AI deepfake of Texas Senate Dem candidate James Talarico in mid-March 2026; ~31 US states now have laws regulating election deepfakes (Public Citizen tracker); no federal regulation. Detroit News, American Prospect, OECD AI Incidents document deployed deepfake ads at scale across primary races.",
+      "provenance": "OBSERVED",
+      "source": "CNN / Detroit News / Public Citizen",
+      "posteriorImpact": "NONE",
+      "url": "https://www.cnn.com/2026/03/13/politics/james-talarico-ai-deepfake-republicans-midterms",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-26T16:59:07+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_007",
+      "time": "2026-04-26T19:27:11+00:00",
+      "tag": "EVENT",
+      "tags": [
+        "EVENT",
+        "AI",
+        "POLITICS"
+      ],
+      "text": "March-April 2026 reporting (Detroit News, OECD.AI, American Prospect): AI-generated political ads deployed in 2026 US midterm cycle, including NRSC deepfake of Texas candidate James Talarico. 31 US states have deepfake-in-elections laws; no federal regulation. EU AI Act Article 50 disclosure obligations enforceable from August 2026.",
+      "provenance": "OBSERVED",
+      "source": "Detroit News / OECD.AI / Public Citizen tracker",
+      "posteriorImpact": "NONE",
+      "url": "https://oecd.ai/en/incidents/2026-03-28-b14f",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.4118
+    },
+    {
+      "time": "2026-04-26T19:27:11+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
     }
   ],
   "dataFeeds": {
@@ -379,20 +934,20 @@
   "governance": {
     "health": "DEGRADED",
     "issues": [
-      "Near-maximum uncertainty — model is not discriminating"
+      "Majority stale evidence (16/20)"
     ],
     "rt": {
       "rt": 0.0,
       "regime": "SAFE",
       "worst_hypothesis": "H1"
     },
-    "entropy": 1.9261,
+    "entropy": 0.3082,
     "maxEntropy": 2.0,
-    "uncertaintyRatio": 0.963,
+    "uncertaintyRatio": 0.1541,
     "evidenceFreshness": {
-      "fresh": 3,
-      "stale": 0,
-      "total": 3
+      "fresh": 4,
+      "stale": 16,
+      "total": 20
     },
     "hypothesisAdmissibility": {
       "H1": "ADMISSIBLE",
@@ -401,10 +956,10 @@
       "H4": "ADMISSIBLE"
     },
     "klFromPrior": {
-      "kl_divergence": 0.0,
-      "interpretation": "MODERATE"
+      "kl_divergence": 0.9905,
+      "interpretation": "WELL_EVIDENCED"
     },
-    "lastComputed": "2026-04-22T05:19:57+00:00",
+    "lastComputed": "2026-04-29T02:30:58+00:00",
     "staleDependencies": 0,
     "calibrationHealth": "ACCEPTABLE",
     "unresolvedContradictions": 0,
@@ -431,18 +986,438 @@
         }
       },
       "indistinguishable": [],
-      "lastChecked": "2026-04-22T05:19:57+00:00"
+      "lastChecked": "2026-04-29T02:30:58+00:00"
     }
   },
   "predictionScoring": {
     "_docs": "Calibration infrastructure. Snapshots are auto-created by engine on each posterior update. Record outcome when topic resolves, then compute_calibration_report() for Brier analysis.",
-    "snapshots": [],
+    "snapshots": [
+      {
+        "timestamp": "2026-04-24T02:25:41+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0623,
+          "H2": 0.3322,
+          "H3": 0.5087,
+          "H4": 0.0969
+        },
+        "entropy": 1.6
+      },
+      {
+        "timestamp": "2026-04-24T02:25:41+00:00",
+        "trigger": "pipeline:ev_001",
+        "posteriors": {
+          "H1": 0.0623,
+          "H2": 0.3322,
+          "H3": 0.5087,
+          "H4": 0.0969
+        },
+        "entropy": 1.6
+      },
+      {
+        "timestamp": "2026-04-24T13:49:15+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0347,
+          "H2": 0.5132,
+          "H3": 0.4401,
+          "H4": 0.012
+        },
+        "entropy": 1.2599
+      },
+      {
+        "timestamp": "2026-04-24T13:49:15+00:00",
+        "trigger": "pipeline:ev_002",
+        "posteriors": {
+          "H1": 0.0347,
+          "H2": 0.5132,
+          "H3": 0.4401,
+          "H4": 0.012
+        },
+        "entropy": 1.2599
+      },
+      {
+        "timestamp": "2026-04-24T19:30:14+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0084,
+          "H2": 0.6165,
+          "H3": 0.3701,
+          "H4": 0.005
+        },
+        "entropy": 1.0571
+      },
+      {
+        "timestamp": "2026-04-24T19:30:14+00:00",
+        "trigger": "pipeline:ev_003",
+        "posteriors": {
+          "H1": 0.0084,
+          "H2": 0.6165,
+          "H3": 0.3701,
+          "H4": 0.005
+        },
+        "entropy": 1.0571
+      },
+      {
+        "timestamp": "2026-04-25T13:19:54+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.7458,
+          "H3": 0.2442,
+          "H4": 0.005
+        },
+        "entropy": 0.8887
+      },
+      {
+        "timestamp": "2026-04-25T13:19:54+00:00",
+        "trigger": "pipeline:ev_004",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.7458,
+          "H3": 0.2442,
+          "H4": 0.005
+        },
+        "entropy": 0.8887
+      },
+      {
+        "timestamp": "2026-04-25T14:24:50+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.8507,
+          "H3": 0.1393,
+          "H4": 0.005
+        },
+        "entropy": 0.671
+      },
+      {
+        "timestamp": "2026-04-25T14:24:50+00:00",
+        "trigger": "pipeline:ev_005",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.8507,
+          "H3": 0.1393,
+          "H4": 0.005
+        },
+        "entropy": 0.671
+      },
+      {
+        "timestamp": "2026-04-26T16:59:07+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.9229,
+          "H3": 0.0671,
+          "H4": 0.005
+        },
+        "entropy": 0.4448
+      },
+      {
+        "timestamp": "2026-04-26T16:59:07+00:00",
+        "trigger": "pipeline:ev_006",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.9229,
+          "H3": 0.0671,
+          "H4": 0.005
+        },
+        "entropy": 0.4448
+      },
+      {
+        "timestamp": "2026-04-26T19:27:11+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.9552,
+          "H3": 0.0348,
+          "H4": 0.005
+        },
+        "entropy": 0.3082
+      },
+      {
+        "timestamp": "2026-04-26T19:27:11+00:00",
+        "trigger": "pipeline:ev_007",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.9552,
+          "H3": 0.0348,
+          "H4": 0.005
+        },
+        "entropy": 0.3082
+      }
+    ],
     "outcomes": [],
     "brierScores": []
   },
   "contradictionTracker": {
     "unresolved": [],
-    "resolved": []
+    "resolved": [
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: AI content deployed at scale but no official material electoral attribution; supports H3.",
+        "entry_b_time": "2026-04-24T13:49:15+00:00",
+        "entry_b_text": "2026 US midterms: NRSC released fabricated AI video of Dem Senate candidate James Talarico (March 2026); OECD.AI logged at least 5 confirmed deepfake incidents this cycle. 31 US states have enacted election-deepfake laws; no federal ban. Survey data: ~50% of voters say deepfakes influenced their decisions. Academic framing calls 2026 first electoral cycle with industrial-scale political deepfakes.",
+        "reason": "Negation marker 'fabricated' in new entry, absent from existing. Shared subjects: electoral, scale",
+        "detected": "2026-04-24T13:49:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:15Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "Documented 2025 deepfake cases in Romania (May 2025 presidential scam videos) and Czech parliamentary election; Nigeria 2027 election preparation flagged; no federal US legislation passed and state-level regulation uneven.",
+        "entry_b_time": "2026-04-24T13:49:15+00:00",
+        "entry_b_text": "2026 US midterms: NRSC released fabricated AI video of Dem Senate candidate James Talarico (March 2026); OECD.AI logged at least 5 confirmed deepfake incidents this cycle. 31 US states have enacted election-deepfake laws; no federal ban. Survey data: ~50% of voters say deepfakes influenced their decisions. Academic framing calls 2026 first electoral cycle with industrial-scale political deepfakes.",
+        "reason": "Negation marker 'fabricated' in new entry, absent from existing. Shared subjects: deepfake, election, federal",
+        "detected": "2026-04-24T13:49:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:15Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T13:49:15+00:00",
+        "entry_a_text": "2026 US midterms: NRSC released fabricated AI video of Dem Senate candidate James Talarico (March 2026); OECD.AI logged at least 5 confirmed deepfake incidents this cycle. 31 US states have enacted election-deepfake laws; no federal ban. Survey data: ~50% of voters say deepfakes influenced their decisions. Academic framing calls 2026 first electoral cycle with industrial-scale political deepfakes.",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "NRSC published full-clip AI-generated Talarico deepfake 3/11, first political deepfake with realistic candidate recreation for entire clip; American Prospect 4/17: US politics 'inundated' with AI deepfakes at industrial scale; no government body has yet officially attributed material electoral effect.",
+        "reason": "Negation marker 'fabricated' in existing entry, absent from new. Shared subjects: candidate, deepfake, deepfakes, electoral, first",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "Documented 2025 deepfake cases in Romania (May 2025 presidential scam videos) and Czech parliamentary election; Nigeria 2027 election preparation flagged; no federal US legislation passed and state-level regulation uneven.",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "NRSC published full-clip AI-generated Talarico deepfake 3/11, first political deepfake with realistic candidate recreation for entire clip; American Prospect 4/17: US politics 'inundated' with AI deepfakes at industrial scale; no government body has yet officially attributed material electoral effect.",
+        "reason": "Numeric divergence 99.9% on metric (context: deepfake): new=3.0, existing=2025.0, threshold=10%",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T19:30:14+00:00",
+        "entry_a_text": "NRSC published full-clip AI-generated Talarico deepfake 3/11, first political deepfake with realistic candidate recreation for entire clip; American Prospect 4/17: US politics 'inundated' with AI deepfakes at industrial scale; no government body has yet officially attributed material electoral effect.",
+        "entry_b_time": "2026-04-25T13:19:54+00:00",
+        "entry_b_text": "2026 midterms first cycle with AI deepfakes deployed at industrial scale: Republican AI deepfake ad of Graham Platner (April 16); NRSC deepfake of James Talarico (March 13); 31 US states have deepfake-in-elections laws. No federal regulation; OECD logged AI deepfakes-mislead-voters incident March 28.",
+        "reason": "Numeric divergence 99.9% on metric (context: first): new=2026.0, existing=3.0, threshold=10%",
+        "detected": "2026-04-25T13:19:54Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:54Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T13:49:15+00:00",
+        "entry_a_text": "2026 US midterms: NRSC released fabricated AI video of Dem Senate candidate James Talarico (March 2026); OECD.AI logged at least 5 confirmed deepfake incidents this cycle. 31 US states have enacted election-deepfake laws; no federal ban. Survey data: ~50% of voters say deepfakes influenced their decisions. Academic framing calls 2026 first electoral cycle with industrial-scale political deepfakes.",
+        "entry_b_time": "2026-04-25T13:19:54+00:00",
+        "entry_b_text": "2026 midterms first cycle with AI deepfakes deployed at industrial scale: Republican AI deepfake ad of Graham Platner (April 16); NRSC deepfake of James Talarico (March 13); 31 US states have deepfake-in-elections laws. No federal regulation; OECD logged AI deepfakes-mislead-voters incident March 28.",
+        "reason": "Negation marker 'fabricated' in existing entry, absent from new. Shared subjects: cycle, deepfake, deepfakes, federal, first",
+        "detected": "2026-04-25T13:19:54Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:54Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "Documented 2025 deepfake cases in Romania (May 2025 presidential scam videos) and Czech parliamentary election; Nigeria 2027 election preparation flagged; no federal US legislation passed and state-level regulation uneven.",
+        "entry_b_time": "2026-04-25T13:19:54+00:00",
+        "entry_b_text": "2026 midterms first cycle with AI deepfakes deployed at industrial scale: Republican AI deepfake ad of Graham Platner (April 16); NRSC deepfake of James Talarico (March 13); 31 US states have deepfake-in-elections laws. No federal regulation; OECD logged AI deepfakes-mislead-voters incident March 28.",
+        "reason": "Numeric divergence 99.2% on metric (context: deepfake): new=16.0, existing=2025.0, threshold=10%",
+        "detected": "2026-04-25T13:19:54Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:54Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T13:19:54+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "March 2026: NRSC released a deepfake video of Texas Democratic Senate candidate James Talarico — first ad with synthetic candidate speaking lifelike for extended duration. Republicans deploying deepfakes more frequently than Democrats this cycle (1-of-3 recent national ads). 31 states have deepfake-in-elections statutes; no federal law. OECD AI Incident DB logged 2026-03-28 case.",
+        "reason": "Numeric divergence 100.0% on metric (context: .): new=31.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T13:19:54+00:00",
+        "entry_a_text": "2026 midterms first cycle with AI deepfakes deployed at industrial scale: Republican AI deepfake ad of Graham Platner (April 16); NRSC deepfake of James Talarico (March 13); 31 US states have deepfake-in-elections laws. No federal regulation; OECD logged AI deepfakes-mislead-voters incident March 28.",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "March 2026: NRSC released a deepfake video of Texas Democratic Senate candidate James Talarico — first ad with synthetic candidate speaking lifelike for extended duration. Republicans deploying deepfakes more frequently than Democrats this cycle (1-of-3 recent national ads). 31 states have deepfake-in-elections statutes; no federal law. OECD AI Incident DB logged 2026-03-28 case.",
+        "reason": "Numeric divergence 99.2% on metric (context: nrsc): new=2026.0, existing=16.0, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T19:30:14+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "March 2026: NRSC released a deepfake video of Texas Democratic Senate candidate James Talarico — first ad with synthetic candidate speaking lifelike for extended duration. Republicans deploying deepfakes more frequently than Democrats this cycle (1-of-3 recent national ads). 31 states have deepfake-in-elections statutes; no federal law. OECD AI Incident DB logged 2026-03-28 case.",
+        "reason": "Numeric divergence 100.0% on metric (context: .): new=31.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T13:49:15+00:00",
+        "entry_a_text": "2026 US midterms: NRSC released fabricated AI video of Dem Senate candidate James Talarico (March 2026); OECD.AI logged at least 5 confirmed deepfake incidents this cycle. 31 US states have enacted election-deepfake laws; no federal ban. Survey data: ~50% of voters say deepfakes influenced their decisions. Academic framing calls 2026 first electoral cycle with industrial-scale political deepfakes.",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "March 2026: NRSC released a deepfake video of Texas Democratic Senate candidate James Talarico — first ad with synthetic candidate speaking lifelike for extended duration. Republicans deploying deepfakes more frequently than Democrats this cycle (1-of-3 recent national ads). 31 states have deepfake-in-elections statutes; no federal law. OECD AI Incident DB logged 2026-03-28 case.",
+        "reason": "Negation marker 'fabricated' in existing entry, absent from new. Shared subjects: candidate, cycle, deepfake, deepfakes, federal",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-22T01:00:37+00:00",
+        "entry_a_text": "REPLAY COMPLETE: 0 indicators applied, 0 skipped. Final posteriors: {'H1': 0.15, 'H2': 0.3, 'H3': 0.35, 'H4': 0.2}. Indicator firedDates restored to originals for audit.",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "March 2026: NRSC released a deepfake video of Texas Democratic Senate candidate James Talarico — first ad with synthetic candidate speaking lifelike for extended duration. Republicans deploying deepfakes more frequently than Democrats this cycle (1-of-3 recent national ads). 31 states have deepfake-in-elections statutes; no federal law. OECD AI Incident DB logged 2026-03-28 case.",
+        "reason": "Numeric divergence 98.9% on metric (context: .): new=31.0, existing=0.35, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T14:24:50+00:00",
+        "entry_a_text": "March 2026: NRSC released a deepfake video of Texas Democratic Senate candidate James Talarico — first ad with synthetic candidate speaking lifelike for extended duration. Republicans deploying deepfakes more frequently than Democrats this cycle (1-of-3 recent national ads). 31 states have deepfake-in-elections statutes; no federal law. OECD AI Incident DB logged 2026-03-28 case.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "NRSC released AI deepfake of Texas Senate Dem candidate James Talarico in mid-March 2026; ~31 US states now have laws regulating election deepfakes (Public Citizen tracker); no federal regulation. Detroit News, American Prospect, OECD AI Incidents document deployed deepfake ads at scale across primary races.",
+        "reason": "Numeric divergence 98.5% on metric (context: states): new=2026.0, existing=31.0, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T13:19:54+00:00",
+        "entry_a_text": "2026 midterms first cycle with AI deepfakes deployed at industrial scale: Republican AI deepfake ad of Graham Platner (April 16); NRSC deepfake of James Talarico (March 13); 31 US states have deepfake-in-elections laws. No federal regulation; OECD logged AI deepfakes-mislead-voters incident March 28.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "NRSC released AI deepfake of Texas Senate Dem candidate James Talarico in mid-March 2026; ~31 US states now have laws regulating election deepfakes (Public Citizen tracker); no federal regulation. Detroit News, American Prospect, OECD AI Incidents document deployed deepfake ads at scale across primary races.",
+        "reason": "Numeric divergence 99.4% on metric (context: 31, states, talarico): new=2026.0, existing=13.0, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T19:30:14+00:00",
+        "entry_a_text": "NRSC published full-clip AI-generated Talarico deepfake 3/11, first political deepfake with realistic candidate recreation for entire clip; American Prospect 4/17: US politics 'inundated' with AI deepfakes at industrial scale; no government body has yet officially attributed material electoral effect.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "NRSC released AI deepfake of Texas Senate Dem candidate James Talarico in mid-March 2026; ~31 US states now have laws regulating election deepfakes (Public Citizen tracker); no federal regulation. Detroit News, American Prospect, OECD AI Incidents document deployed deepfake ads at scale across primary races.",
+        "reason": "Numeric divergence 99.9% on metric (context: talarico): new=2026.0, existing=3.0, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T13:49:15+00:00",
+        "entry_a_text": "2026 US midterms: NRSC released fabricated AI video of Dem Senate candidate James Talarico (March 2026); OECD.AI logged at least 5 confirmed deepfake incidents this cycle. 31 US states have enacted election-deepfake laws; no federal ban. Survey data: ~50% of voters say deepfakes influenced their decisions. Academic framing calls 2026 first electoral cycle with industrial-scale political deepfakes.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "NRSC released AI deepfake of Texas Senate Dem candidate James Talarico in mid-March 2026; ~31 US states now have laws regulating election deepfakes (Public Citizen tracker); no federal regulation. Detroit News, American Prospect, OECD AI Incidents document deployed deepfake ads at scale across primary races.",
+        "reason": "Negation marker 'fabricated' in existing entry, absent from new. Shared subjects: candidate, deepfake, deepfakes, dem, election",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "Documented 2025 deepfake cases in Romania (May 2025 presidential scam videos) and Czech parliamentary election; Nigeria 2027 election preparation flagged; no federal US legislation passed and state-level regulation uneven.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "NRSC released AI deepfake of Texas Senate Dem candidate James Talarico in mid-March 2026; ~31 US states now have laws regulating election deepfakes (Public Citizen tracker); no federal regulation. Detroit News, American Prospect, OECD AI Incidents document deployed deepfake ads at scale across primary races.",
+        "reason": "Numeric divergence 98.5% on metric (context: in): new=31.0, existing=2025.0, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-26T16:59:07+00:00",
+        "entry_a_text": "NRSC released AI deepfake of Texas Senate Dem candidate James Talarico in mid-March 2026; ~31 US states now have laws regulating election deepfakes (Public Citizen tracker); no federal regulation. Detroit News, American Prospect, OECD AI Incidents document deployed deepfake ads at scale across primary races.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "March-April 2026 reporting (Detroit News, OECD.AI, American Prospect): AI-generated political ads deployed in 2026 US midterm cycle, including NRSC deepfake of Texas candidate James Talarico. 31 US states have deepfake-in-elections laws; no federal regulation. EU AI Act Article 50 disclosure obligations enforceable from August 2026.",
+        "reason": "Numeric divergence 98.5% on metric (context: in, us): new=2026.0, existing=31.0, threshold=10%",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T14:24:50+00:00",
+        "entry_a_text": "March 2026: NRSC released a deepfake video of Texas Democratic Senate candidate James Talarico — first ad with synthetic candidate speaking lifelike for extended duration. Republicans deploying deepfakes more frequently than Democrats this cycle (1-of-3 recent national ads). 31 states have deepfake-in-elections statutes; no federal law. OECD AI Incident DB logged 2026-03-28 case.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "March-April 2026 reporting (Detroit News, OECD.AI, American Prospect): AI-generated political ads deployed in 2026 US midterm cycle, including NRSC deepfake of Texas candidate James Talarico. 31 US states have deepfake-in-elections laws; no federal regulation. EU AI Act Article 50 disclosure obligations enforceable from August 2026.",
+        "reason": "Numeric divergence 98.5% on metric (context: ads): new=2026.0, existing=31.0, threshold=10%",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T13:19:54+00:00",
+        "entry_a_text": "2026 midterms first cycle with AI deepfakes deployed at industrial scale: Republican AI deepfake ad of Graham Platner (April 16); NRSC deepfake of James Talarico (March 13); 31 US states have deepfake-in-elections laws. No federal regulation; OECD logged AI deepfakes-mislead-voters incident March 28.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "March-April 2026 reporting (Detroit News, OECD.AI, American Prospect): AI-generated political ads deployed in 2026 US midterm cycle, including NRSC deepfake of Texas candidate James Talarico. 31 US states have deepfake-in-elections laws; no federal regulation. EU AI Act Article 50 disclosure obligations enforceable from August 2026.",
+        "reason": "Numeric divergence 99.4% on metric (context: us): new=2026.0, existing=13.0, threshold=10%",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T19:30:14+00:00",
+        "entry_a_text": "NRSC published full-clip AI-generated Talarico deepfake 3/11, first political deepfake with realistic candidate recreation for entire clip; American Prospect 4/17: US politics 'inundated' with AI deepfakes at industrial scale; no government body has yet officially attributed material electoral effect.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "March-April 2026 reporting (Detroit News, OECD.AI, American Prospect): AI-generated political ads deployed in 2026 US midterm cycle, including NRSC deepfake of Texas candidate James Talarico. 31 US states have deepfake-in-elections laws; no federal regulation. EU AI Act Article 50 disclosure obligations enforceable from August 2026.",
+        "reason": "Numeric divergence 99.8% on metric (context: us): new=2026.0, existing=4.0, threshold=10%",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T13:49:15+00:00",
+        "entry_a_text": "2026 US midterms: NRSC released fabricated AI video of Dem Senate candidate James Talarico (March 2026); OECD.AI logged at least 5 confirmed deepfake incidents this cycle. 31 US states have enacted election-deepfake laws; no federal ban. Survey data: ~50% of voters say deepfakes influenced their decisions. Academic framing calls 2026 first electoral cycle with industrial-scale political deepfakes.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "March-April 2026 reporting (Detroit News, OECD.AI, American Prospect): AI-generated political ads deployed in 2026 US midterm cycle, including NRSC deepfake of Texas candidate James Talarico. 31 US states have deepfake-in-elections laws; no federal regulation. EU AI Act Article 50 disclosure obligations enforceable from August 2026.",
+        "reason": "Negation marker 'fabricated' in existing entry, absent from new. Shared subjects: candidate, cycle, deepfake, federal, james",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      }
+    ]
   },
   "schemaVersion": 2,
   "migratedAt": "2026-04-21T19:03:40+00:00",
@@ -873,5 +1848,89 @@
       ],
       "lensAgreement": []
     }
-  ]
+  ],
+  "sourceCalibration": {
+    "ledger": [
+      {
+        "timestamp": "2026-04-24T02:25:41Z",
+        "evidence_index": 0,
+        "confirming_index": 1,
+        "resolution": "CONFIRMED",
+        "source": "",
+        "confirming_source": "",
+        "trust_delta": 0.05,
+        "original_text_snippet": "LR MIGRATION RESET: posteriors reset to design priors; evidence log preserved.",
+        "confirming_text_snippet": "REPLAY BEGIN: 0 previously-fired indicators will be re-applied chronologically under current LR system. Posteriors reset"
+      },
+      {
+        "timestamp": "2026-04-24T02:25:41Z",
+        "evidence_index": 1,
+        "confirming_index": 2,
+        "resolution": "CONFIRMED",
+        "source": "",
+        "confirming_source": "",
+        "trust_delta": 0.05,
+        "original_text_snippet": "REPLAY BEGIN: 0 previously-fired indicators will be re-applied chronologically under current LR system. Posteriors reset",
+        "confirming_text_snippet": "REPLAY COMPLETE: 0 indicators applied, 0 skipped. Final posteriors: {'H1': 0.15, 'H2': 0.3, 'H3': 0.35, 'H4': 0.2}. Indi"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:50Z",
+        "evidence_index": 5,
+        "confirming_index": 13,
+        "resolution": "REFUTED",
+        "source": "CNN / OECD.AI / Brennan Center",
+        "confirming_source": "CNN, OECD AI Incidents, American Prospect",
+        "trust_delta": -0.1,
+        "original_text_snippet": "2026 US midterms: NRSC released fabricated AI video of Dem Senate candidate James Talarico (March 2026); OECD.AI logged ",
+        "confirming_text_snippet": "March 2026: NRSC released a deepfake video of Texas Democratic Senate candidate James Talarico — first ad with synthetic"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:50Z",
+        "evidence_index": 10,
+        "confirming_index": 13,
+        "resolution": "REFUTED",
+        "source": "CNN / Bangor Daily News / OECD.AI",
+        "confirming_source": "CNN, OECD AI Incidents, American Prospect",
+        "trust_delta": -0.1,
+        "original_text_snippet": "2026 midterms first cycle with AI deepfakes deployed at industrial scale: Republican AI deepfake ad of Graham Platner (A",
+        "confirming_text_snippet": "March 2026: NRSC released a deepfake video of Texas Democratic Senate candidate James Talarico — first ad with synthetic"
+      },
+      {
+        "timestamp": "2026-04-26T16:59:07Z",
+        "evidence_index": 13,
+        "confirming_index": 16,
+        "resolution": "REFUTED",
+        "source": "CNN, OECD AI Incidents, American Prospect",
+        "confirming_source": "CNN / Detroit News / Public Citizen",
+        "trust_delta": -0.1,
+        "original_text_snippet": "March 2026: NRSC released a deepfake video of Texas Democratic Senate candidate James Talarico — first ad with synthetic",
+        "confirming_text_snippet": "NRSC released AI deepfake of Texas Senate Dem candidate James Talarico in mid-March 2026; ~31 US states now have laws re"
+      },
+      {
+        "timestamp": "2026-04-26T19:27:11Z",
+        "evidence_index": 13,
+        "confirming_index": 18,
+        "resolution": "REFUTED",
+        "source": "CNN, OECD AI Incidents, American Prospect",
+        "confirming_source": "Detroit News / OECD.AI / Public Citizen tracker",
+        "trust_delta": -0.1,
+        "original_text_snippet": "March 2026: NRSC released a deepfake video of Texas Democratic Senate candidate James Talarico — first ad with synthetic",
+        "confirming_text_snippet": "March-April 2026 reporting (Detroit News, OECD.AI, American Prospect): AI-generated political ads deployed in 2026 US mi"
+      }
+    ],
+    "effectiveTrust": {
+      "Brennan Center": 0.4555,
+      "Tech Cabal": 0.5,
+      "Wikipedia": 0.5,
+      "CNN": 0.6774,
+      "OECD.AI": 0.4118,
+      "OECD.AI incident tracker": 0.5,
+      "Bangor Daily News": 0.4555,
+      "CNN, OECD AI Incidents, American Prospect": 0.4118,
+      "Detroit News": 0.5,
+      "Public Citizen": 0.5,
+      "Public Citizen tracker": 0.5
+    },
+    "_last_scan_same_source_skipped": 10
+  }
 }

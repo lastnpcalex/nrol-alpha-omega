@@ -8,6 +8,46 @@ Fire an indicator and update posteriors through the Bayesian pipeline.
 - A pre-registered indicator's threshold has been met
 - You need to apply a Bayesian update with likelihood ratios
 
+## Hard rules enforced by the engine
+
+These are not suggestions. `bayesian_update` and `check_update_proposal` will
+**raise an exception and refuse the update** if any of these are violated:
+
+1. **No likelihood may be ≥ 0.99 or ≤ 0.01.** P(E|H)=1.0 means "this evidence is
+   logically impossible under any other hypothesis," which is almost never
+   honest from a news observation. If you genuinely mean near-certain, use
+   `0.95` / `0.05`. Resolution flows go through `update_posteriors`, not here.
+2. **Shifts > 15% require ≥ 2 evidence refs.** A single observation cannot
+   move the model by more than 15 percentage points on any hypothesis.
+3. **Duplicate or same-information-chain refs are rejected.** Bayes assumes
+   independent observations; recycled wires don't count as multiple updates.
+   Use `informationChain` on evidence entries to flag correlation.
+4. **Past 0.85 max posterior requires a recent red-team.** Any update that
+   would push `max(posterior) > 0.85` requires a `redTeam` entry in the
+   topic's `posteriorHistory` within the last 30 days. Run `skills/red-team.md`
+   first; record the devil-advocate result on the next history entry.
+
+If the pipeline raises, **fix the cause** (deduplicate, calibrate likelihoods,
+run a red-team) — do not attempt to bypass the gate.
+
+## Lens (LR provenance)
+
+Every `bayesian_update` records which **lens** generated its likelihoods, on
+the `posteriorHistory[i].lrSource` field. The engine resolves the lens in this
+order:
+
+1. Explicit `lens=` argument on the call (rare — only for one-off overrides)
+2. `topic.meta.lens` (set by the operator via the canvas lens picker)
+3. Fallback: `"OPERATOR_JUDGMENT"`
+
+**The engine validates the lens against `VALID_LENSES` and raises if unknown.**
+The fallback is a real lens with its own track record, not a free pass.
+
+**Apply the lens in your reasoning** — see `skills/news-scan.md` for the
+per-lens table of reasoning frames. Lens-stamped LRs that don't actually
+reflect lens-driven thinking corrupt the calibration data; the gates catch
+the math but not the framing. Make the lens visible in your `reason=` text.
+
 ## Pipeline call
 
 DO NOT manually edit JSON files. Use the pipeline.
@@ -50,10 +90,15 @@ result = process_evidence(
         "tag": "DIPLO",
         "tags": ["DIPLO", "POLICY"],
     },
-    likelihoods={"H1": 0.15, "H2": 0.45, "H3": 0.30, "H4": 0.10},
-    reason="[Why this evidence is informative and directional assessment]"
+    fired_indicator_id="t2_specific_indicator",  # the indicator that matched
+    reason="[Why this indicator's observable threshold is met by this evidence]"
 )
 ```
+
+**Note:** `bayesian_update` requires `indicator_id`. There is no freeform
+path. If no existing indicator matches the evidence, **park** by omitting
+`fired_indicator_id`. The LR reference table below is for indicator
+authoring (during cleanup-indicator-sweep), not per-update freeform LRs.
 
 ## LR reference table — pick calibrated likelihoods
 

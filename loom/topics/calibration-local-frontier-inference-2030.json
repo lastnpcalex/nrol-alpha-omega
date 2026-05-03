@@ -5,13 +5,16 @@
     "question": "Will a model running fully on-device on a consumer smartphone (commercially available at retail price <=1500 USD, no cloud offload) achieve performance within 15% of the then-best commercially available cloud frontier API model on >=3 contemporaneous independent technical evaluations by December 31, 2030?",
     "resolution": "Resolved YES if: (a) a consumer smartphone commercially available at <=1500 USD runs an LLM fully on-device without cloud offload; (b) >=3 independent technical evaluations confirm performance within 15% of the contemporaneous cloud frontier model using benchmark suites current at time of evaluation (not pegged to 2026 benchmarks). Resolved NO if no such product exists by 2030-12-31.",
     "created": "",
-    "lastUpdated": "2026-04-22T05:19:57+00:00",
+    "lastUpdated": "2026-04-29T02:30:59+00:00",
     "status": "ACTIVE",
     "dayCount": 0,
     "startDate": "2026-04-21",
     "classification": "CALIBRATION",
     "topicType": "conflict",
-    "resolutionDate": "2030-12-31"
+    "resolutionDate": "2030-12-31",
+    "lens": "GREEN",
+    "lensSetAt": "2026-04-26T21:22:02+00:00",
+    "lensSetReason": ""
   },
   "tagConfig": {
     "_docs": "CAPABILITY/HARDWARE favor H1/H2. PLATEAU/REGULATORY favor H3/H4.",
@@ -65,7 +68,7 @@
         "label": "Fast path: consumer device with on-device frontier ships by 2028",
         "midpoint": 2.0,
         "unit": "years from 2026 until demonstrated",
-        "posterior": 0.08,
+        "posterior": 0.005,
         "description": "Rapid hardware scaling + quantization/distillation closes the gap faster than expected. A consumer device running a model competitive with contemporaneous cloud frontier ships commercially by end of 2028. Requires NPU leap or parameter-efficiency breakthrough not on current roadmaps.",
         "resolution_deadline": "2028-12-31"
       },
@@ -73,7 +76,7 @@
         "label": "Consensus path: on-device frontier ships commercially 2029-2030",
         "midpoint": 4.0,
         "unit": "years from 2026 until demonstrated",
-        "posterior": 0.37,
+        "posterior": 0.8667,
         "description": "Steady hardware + model efficiency gains converge at or before 2030. Most likely path: 2028-generation NPU enables competitive on-device inference by 2029-2030. Aligned with @ponder.ooo prediction (cold_004).",
         "resolution_deadline": "2029-12-31"
       },
@@ -81,7 +84,7 @@
         "label": "Gap persists past 2030: hardware viable 2031-2033",
         "midpoint": 6.0,
         "unit": "years from 2026 until demonstrated",
-        "posterior": 0.38,
+        "posterior": 0.1233,
         "description": "Hardware scales but frontier cloud models scale faster, maintaining the gap. Consumer phones eventually reach the required threshold, but not within 2030. On-device of older-gen models is feasible; within-15%-of-contemporaneous-frontier remains elusive until early 2030s.",
         "resolution_deadline": "2030-12-31"
       },
@@ -89,12 +92,12 @@
         "label": "Decade-long barrier: structural limits prevent parity before 2034",
         "midpoint": 9.0,
         "unit": "years from 2026 until demonstrated",
-        "posterior": 0.17,
+        "posterior": 0.005,
         "description": "Structural barriers -- battery-constrained thermal envelope, bandwidth requirements, or fundamental quality/size tradeoffs -- prevent consumer smartphones from reaching contemporaneous frontier parity before 2034. Cloud offload remains architecturally necessary for frontier-class performance.",
         "resolution_deadline": "2034-12-31"
       }
     },
-    "expectedValue": 0,
+    "expectedValue": 4.26,
     "expectedUnit": "weeks",
     "posteriorHistory": [
       {
@@ -103,7 +106,159 @@
         "H1": 0.08,
         "H2": 0.37,
         "H3": 0.38,
-        "H4": 0.17
+        "H4": 0.17,
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        }
+      },
+      {
+        "date": "2026-04-25",
+        "posteriors": {
+          "H1": 0.0768,
+          "H2": 0.592,
+          "H3": 0.304,
+          "H4": 0.0272
+        },
+        "priors": {
+          "H1": 0.08,
+          "H2": 0.37,
+          "H3": 0.38,
+          "H4": 0.17
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_006"
+        ],
+        "likelihoods": {
+          "H1": 0.6,
+          "H2": 1.0,
+          "H3": 0.5,
+          "H4": 0.1
+        },
+        "note": "Clear secular narrowing on desktop hardware supports H2 (consumer-frontier 2029-2030) and modestly raises H1 odds; mobile bandwidth gap keeps H3 alive.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "turningPoint": {
+          "type": "LEADING_CHANGED",
+          "from": "H3",
+          "to": "H2",
+          "fromProb": 0.38,
+          "toProb": 0.592
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-26",
+        "posteriors": {
+          "H1": 0.0111,
+          "H2": 0.7954,
+          "H3": 0.1885,
+          "H4": 0.005
+        },
+        "priors": {
+          "H1": 0.0768,
+          "H2": 0.592,
+          "H3": 0.304,
+          "H4": 0.0272
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_007"
+        ],
+        "likelihoods": {
+          "H1": 0.07,
+          "H2": 0.65,
+          "H3": 0.3,
+          "H4": 0.03
+        },
+        "note": "On-device 8B at 73 MMLU plus ~25-30x bandwidth deficit = consensus 2029-30 commercialization track (H2).",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "turningPoint": {
+          "type": "BRANCH_DEATH",
+          "hypothesis": "H4",
+          "lastPosterior": 0.005
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-26",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.8667,
+          "H3": 0.1233,
+          "H4": 0.005
+        },
+        "priors": {
+          "H1": 0.0111,
+          "H2": 0.7954,
+          "H3": 0.1885,
+          "H4": 0.005
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_008"
+        ],
+        "likelihoods": {
+          "H1": 0.3,
+          "H2": 1.0,
+          "H3": 0.6,
+          "H4": 0.1
+        },
+        "note": "Hardware scaling toward 30-50 TOPS fits 2029-2030 commercial-frontier path (H2); not yet 2028.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "turningPoint": {
+          "type": "BRANCH_DEATH",
+          "hypothesis": "H1",
+          "lastPosterior": 0.005
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
       }
     ]
   },
@@ -162,8 +317,7 @@
           },
           "lr_decay": 0.65,
           "n_firings": 0,
-          "resolution_class": false,
-          "lr_migration_warning": "design prior drift >30% — review before next firing"
+          "resolution_class": false
         },
         {
           "id": "t2_quantization_breakthrough",
@@ -180,8 +334,24 @@
           },
           "lr_decay": 0.65,
           "n_firings": 0,
+          "resolution_class": false
+        },
+        {
+          "id": "t2_consumer_gpu_gap_under_3mo",
+          "desc": "Independent benchmark (Epoch AI or peer) shows best on-device consumer-GPU model within 3 months of contemporaneous cloud frontier on >=3 evals. Leading indicator for smartphone path via downscale.",
+          "posteriorEffect": "H1 +5pp, H2 +5pp, H3 -7pp, H4 -3pp.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "lr_decay": 0.65,
+          "n_firings": 0,
           "resolution_class": false,
-          "lr_migration_warning": "design prior drift >30% — review before next firing"
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 0.698545,
+            "H3": 0.502024,
+            "H4": 0.506787
+          }
         }
       ],
       "tier3_suggestive": [
@@ -235,6 +405,40 @@
           "lr_decay": 0.65,
           "n_firings": 0,
           "resolution_class": false
+        },
+        {
+          "id": "t3_moe_active_param_efficiency",
+          "desc": "Frontier-tier model (within 20% of contemporaneous cloud frontier on >=2 evals) demonstrated on consumer smartphone with <=5B active parameters via sparse-MoE architecture, reproducible.",
+          "posteriorEffect": "H1 +4pp, H2 +6pp, H3 -6pp, H4 -4pp.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false,
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 0.774775,
+            "H3": 0.561404,
+            "H4": 0.509804
+          }
+        },
+        {
+          "id": "t3_smartphone_50pct_parity",
+          "desc": "Consumer smartphone (<=1500 USD) on-device model reaches >=50% of contemporaneous cloud frontier on >=2 independent evals. Bridges t2 hardware spec and t3_open_weight_phone_80pct.",
+          "posteriorEffect": "H1 +3pp, H2 +5pp, H3 -5pp, H4 -3pp.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false,
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 0.825553,
+            "H3": 0.631579,
+            "H4": 0.59893
+          }
         }
       ],
       "anti_indicators": [
@@ -287,8 +491,24 @@
           },
           "lr_decay": 0.65,
           "n_firings": 0,
+          "resolution_class": false
+        },
+        {
+          "id": "anti_smartphone_gap_stagnant",
+          "desc": "Three consecutive flagship smartphone generations show <10pp improvement in best on-device % of contemporaneous frontier.",
+          "posteriorEffect": "H1 -10pp, H2 -10pp, H3 +12pp, H4 +8pp.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "lr_decay": 0.65,
+          "n_firings": 0,
           "resolution_class": false,
-          "lr_migration_warning": "design prior drift >30% — review before next firing"
+          "likelihoods": {
+            "H1": 0.0425,
+            "H2": 0.496216,
+            "H3": 0.894737,
+            "H4": 1.0
+          }
         }
       ]
     }
@@ -401,6 +621,250 @@
       "ledger": "DECISION",
       "claimState": "SUPPORTED",
       "effectiveWeight": 1.0
+    },
+    {
+      "id": "ev_002",
+      "time": "2026-04-24T02:25:42+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "TECH"
+      ],
+      "text": "Llama 4 Scout 109B MoE (17B active) with 10M token context window runs on single 24GB consumer GPU with native multimodal support; RTX 5090 runs models matching 6-12 months-ago frontier; EXO framework enables pooling VRAM across heterogeneous devices.",
+      "provenance": "OBSERVED",
+      "source": "Epoch AI / Fluence / BIZON",
+      "posteriorImpact": "NONE",
+      "url": "https://epoch.ai/data-insights/consumer-gpu-model-gap",
+      "ledger": "FACT",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-24T02:25:42+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: 6-12 month frontier-to-consumer gap trend supports H2 (2029-2030 on-device frontier); slight update upward on H1 from EXO/quantization.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_003",
+      "time": "2026-04-24T13:49:16+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "TECH",
+        "AI"
+      ],
+      "text": "2026 state-of-union: single RTX 5090 (~$2.5k MSRP, current street $2.9-5k) can locally run models matching frontier quality from 6-12 months prior. Gemma 4 MoE (26B total / 4B active) runs at 85 tok/s on AMD Ryzen AI MAX+ 128GB. Mobile NPUs now approach V100-era TOPS. MoE dominates 7/10 top local models. Epoch AI estimates consumer-GPU-to-frontier gap narrowing to <1 year.",
+      "provenance": "OBSERVED",
+      "source": "Chandra On-Device LLMs / Epoch AI / Tom's Hardware",
+      "posteriorImpact": "NONE",
+      "url": "https://v-chandra.github.io/on-device-llms/",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-24T13:49:16+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-24T13:49:16+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Consumer-to-frontier gap tightening to <1 year plus MoE efficiency gains lift H1 fast-path odds while H2 remains modal.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_004",
+      "time": "2026-04-24T19:30:15+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "AI",
+        "HARDWARE"
+      ],
+      "text": "Epoch AI data: single RTX 5090 (<$2500) runs open models matching frontier performance from 6-12 months prior. DeepSeek 4/24 previews model 'closing gap' with frontier. Smartphone (<=$1500, no cloud) on-device frontier parity NOT yet demonstrated.",
+      "provenance": "OBSERVED",
+      "source": "Epoch AI / TechCrunch",
+      "posteriorImpact": "NONE",
+      "url": "https://epoch.ai/data-insights/consumer-gpu-model-gap",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-24T19:30:15+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-24T19:30:15+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: GPU-class local frontier parity real but smartphone target remains harder — consistent with 2029-2030 consensus path.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_005",
+      "time": "2026-04-25T13:19:54+00:00",
+      "tag": "EVENT",
+      "tags": [
+        "EVENT",
+        "AI",
+        "TECH"
+      ],
+      "text": "Alibaba released Qwen 3.6-35B-A3B (April 14, 2026) - sparse MoE with 35B total / 3B active params, designed for compute-efficient frontier-tier deployment; runs on prosumer hardware. Apple, Qualcomm advancing on-device NPU stacks.",
+      "provenance": "OBSERVED",
+      "source": "Alibaba / Spheron / Lushbinary",
+      "posteriorImpact": "NONE",
+      "url": "https://www.spheron.network/blog/deepseek-vs-llama-4-vs-qwen3/",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-25T13:19:54+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-25T13:48:04+00:00",
+      "tag": "INTEL",
+      "text": "REPLAY BEGIN: 0 previously-fired indicators will be re-applied chronologically under current LR system. Posteriors reset to design priors; indicator state cleared. Evidence log preserved for audit.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 1.0
+    },
+    {
+      "time": "2026-04-25T13:48:04+00:00",
+      "tag": "INTEL",
+      "text": "REPLAY COMPLETE: 0 indicators applied, 0 skipped. Final posteriors: {'H1': 0.08, 'H2': 0.37, 'H3': 0.38, 'H4': 0.17}. Indicator firedDates restored to originals for audit.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 1.0
+    },
+    {
+      "id": "ev_006",
+      "time": "2026-04-25T14:24:51+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "TECH"
+      ],
+      "text": "Epoch AI April 2026: a single RTX 5090 (~$2.5k) can locally run models matching frontier LLM performance from 6-12 months ago. MoE architectures (Llama 4, DeepSeek V3.2, Qwen 3.5, Gemma 4, Mistral Small 4) dominate frontier with sparse routing. Quantization (Q4_K_M+) cuts VRAM 50-75% with low quality loss. But mobile bandwidth (50-90 GB/s) vs DC (2-3 TB/s) leaves a 30-50x decode-bound gap.",
+      "provenance": "OBSERVED",
+      "source": "Epoch AI, on-device LLM survey 2026, llama.cpp/ollama community",
+      "posteriorImpact": "NONE",
+      "url": "https://epoch.ai/data-insights/consumer-gpu-model-gap",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-25T14:24:51+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Clear secular narrowing on desktop hardware supports H2 (consumer-frontier 2029-2030) and modestly raises H1 odds; mobile bandwidth gap keeps H3 alive.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_007",
+      "time": "2026-04-26T16:59:08+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "AI",
+        "HARDWARE"
+      ],
+      "text": "April 2026 on-device LLM landscape: mobile devices have 50-90 GB/s memory bandwidth vs 2-3 TB/s data-center GPUs; Llama 3.3 8B Q4_K_M scores 73 on MMLU on consumer hardware (GPT-4-class only 2 yrs ago); each Snapdragon generation yields ~50% prefill / >100% decode improvement. NPU-prefill + CPU/GPU-decode hybrid emerging as standard.",
+      "provenance": "OBSERVED",
+      "source": "v-chandra State of On-Device LLMs / arXiv 2410.03613",
+      "posteriorImpact": "NONE",
+      "url": "https://v-chandra.github.io/on-device-llms/",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-26T16:59:08+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-26T16:59:08+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: On-device 8B at 73 MMLU plus ~25-30x bandwidth deficit = consensus 2029-30 commercialization track (H2).",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_008",
+      "time": "2026-04-26T19:27:11+00:00",
+      "tag": "ANALYSIS",
+      "tags": [
+        "ANALYSIS",
+        "AI",
+        "HARDWARE"
+      ],
+      "text": "April 2026 SemiEngineering / aimagicx: Apple M4 + A18 Neural Engines deliver up to 38 TOPS; Snapdragon X Elite / 8 Gen 4 Hexagon NPU up to 45 TOPS; on-device 'goldilocks' is 3-30B parameters. Industry consensus: cloud still required for frontier reasoning, broad world knowledge, long multi-turn.",
+      "provenance": "OBSERVED",
+      "source": "SemiEngineering / AI Magicx / Tether QVAC",
+      "posteriorImpact": "NONE",
+      "url": "https://semiengineering.com/the-on-device-llm-revolution/",
+      "ledger": "DECISION",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-26T19:27:11+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
     }
   ],
   "dataFeeds": {
@@ -438,20 +902,23 @@
     "upstream": []
   },
   "governance": {
-    "health": "HEALTHY",
-    "issues": [],
+    "health": "DEGRADED",
+    "issues": [
+      "Majority stale evidence (15/24)",
+      "Downstream alert: calibration-local-llm-usage-share-2028 has 3 stale assumption(s) from this topic"
+    ],
     "rt": {
       "rt": 0.0,
       "regime": "SAFE",
       "worst_hypothesis": "H1"
     },
-    "entropy": 1.7873,
+    "entropy": 0.6277,
     "maxEntropy": 2.0,
-    "uncertaintyRatio": 0.8937,
+    "uncertaintyRatio": 0.3139,
     "evidenceFreshness": {
-      "fresh": 5,
-      "stale": 0,
-      "total": 5
+      "fresh": 9,
+      "stale": 15,
+      "total": 24
     },
     "hypothesisAdmissibility": {
       "H1": "ADMISSIBLE",
@@ -460,11 +927,37 @@
       "H4": "ADMISSIBLE"
     },
     "klFromPrior": {
-      "kl_divergence": 0.0,
-      "interpretation": "MODERATE"
+      "kl_divergence": 0.5675,
+      "interpretation": "WELL_EVIDENCED"
     },
-    "lastComputed": "2026-04-22T05:19:57+00:00",
+    "lastComputed": "2026-04-29T02:30:59+00:00",
     "staleDependencies": 0,
+    "downstreamAlerts": [
+      {
+        "downstream_slug": "calibration-local-llm-usage-share-2028",
+        "downstream_title": "Local vs API LLM Inference Usage Share by 2028",
+        "stale_assumptions": [
+          {
+            "hypothesis": "H1",
+            "assumed": 0.25,
+            "actual": 0.005,
+            "drift": 0.245
+          },
+          {
+            "hypothesis": "H2",
+            "assumed": 0.25,
+            "actual": 0.8667,
+            "drift": 0.6167
+          },
+          {
+            "hypothesis": "H4",
+            "assumed": 0.25,
+            "actual": 0.005,
+            "drift": 0.245
+          }
+        ]
+      }
+    ],
     "calibrationHealth": "ACCEPTABLE",
     "unresolvedContradictions": 0,
     "designGate": {
@@ -473,35 +966,575 @@
       "warnings": [],
       "coverage": {
         "H1": {
-          "pos": 7,
-          "neg": 5
+          "pos": 10,
+          "neg": 6
         },
         "H2": {
-          "pos": 7,
-          "neg": 4
+          "pos": 10,
+          "neg": 5
         },
         "H3": {
-          "pos": 3,
-          "neg": 7
+          "pos": 4,
+          "neg": 10
         },
         "H4": {
-          "pos": 2,
-          "neg": 8
+          "pos": 3,
+          "neg": 11
         }
       },
       "indistinguishable": [],
-      "lastChecked": "2026-04-22T05:19:57+00:00"
+      "lastChecked": "2026-04-29T02:30:59+00:00"
     }
   },
   "predictionScoring": {
     "_docs": "Calibration infrastructure. Snapshots are auto-created by engine on each posterior update. Record outcome when topic resolves, then compute_calibration_report() for Brier analysis.",
-    "snapshots": [],
+    "snapshots": [
+      {
+        "timestamp": "2026-04-24T02:25:42+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.047,
+          "H2": 0.5794,
+          "H3": 0.3347,
+          "H4": 0.0388
+        },
+        "entropy": 1.3739
+      },
+      {
+        "timestamp": "2026-04-24T02:25:42+00:00",
+        "trigger": "pipeline:ev_002",
+        "posteriors": {
+          "H1": 0.047,
+          "H2": 0.5794,
+          "H3": 0.3347,
+          "H4": 0.0388
+        },
+        "entropy": 1.3739
+      },
+      {
+        "timestamp": "2026-04-24T13:49:16+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0427,
+          "H2": 0.7905,
+          "H3": 0.1617,
+          "H4": 0.005
+        },
+        "entropy": 0.9256
+      },
+      {
+        "timestamp": "2026-04-24T13:49:16+00:00",
+        "trigger": "pipeline:ev_003",
+        "posteriors": {
+          "H1": 0.0427,
+          "H2": 0.7905,
+          "H3": 0.1617,
+          "H4": 0.005
+        },
+        "entropy": 0.9256
+      },
+      {
+        "timestamp": "2026-04-24T19:30:15+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0147,
+          "H2": 0.9061,
+          "H3": 0.0741,
+          "H4": 0.005
+        },
+        "entropy": 0.5348
+      },
+      {
+        "timestamp": "2026-04-24T19:30:15+00:00",
+        "trigger": "pipeline:ev_004",
+        "posteriors": {
+          "H1": 0.0147,
+          "H2": 0.9061,
+          "H3": 0.0741,
+          "H4": 0.005
+        },
+        "entropy": 0.5348
+      },
+      {
+        "timestamp": "2026-04-25T13:19:54+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.9776,
+          "H3": 0.0124,
+          "H4": 0.005
+        },
+        "entropy": 0.1869
+      },
+      {
+        "timestamp": "2026-04-25T13:19:54+00:00",
+        "trigger": "pipeline:ev_005",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.9776,
+          "H3": 0.0124,
+          "H4": 0.005
+        },
+        "entropy": 0.1869
+      },
+      {
+        "timestamp": "2026-04-25T14:24:51+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0768,
+          "H2": 0.592,
+          "H3": 0.304,
+          "H4": 0.0272
+        },
+        "entropy": 1.3958
+      },
+      {
+        "timestamp": "2026-04-25T14:24:51+00:00",
+        "trigger": "pipeline:ev_006",
+        "posteriors": {
+          "H1": 0.0768,
+          "H2": 0.592,
+          "H3": 0.304,
+          "H4": 0.0272
+        },
+        "entropy": 1.3958
+      },
+      {
+        "timestamp": "2026-04-26T16:59:08+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0111,
+          "H2": 0.7954,
+          "H3": 0.1885,
+          "H4": 0.005
+        },
+        "entropy": 0.8268
+      },
+      {
+        "timestamp": "2026-04-26T16:59:08+00:00",
+        "trigger": "pipeline:ev_007",
+        "posteriors": {
+          "H1": 0.0111,
+          "H2": 0.7954,
+          "H3": 0.1885,
+          "H4": 0.005
+        },
+        "entropy": 0.8268
+      },
+      {
+        "timestamp": "2026-04-26T19:27:11+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.8667,
+          "H3": 0.1233,
+          "H4": 0.005
+        },
+        "entropy": 0.6277
+      },
+      {
+        "timestamp": "2026-04-26T19:27:11+00:00",
+        "trigger": "pipeline:ev_008",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.8667,
+          "H3": 0.1233,
+          "H4": 0.005
+        },
+        "entropy": 0.6277
+      }
+    ],
     "outcomes": [],
     "brierScores": []
   },
   "contradictionTracker": {
     "unresolved": [],
-    "resolved": []
+    "resolved": [
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:42+00:00",
+        "entry_a_text": "Llama 4 Scout 109B MoE (17B active) with 10M token context window runs on single 24GB consumer GPU with native multimodal support; RTX 5090 runs models matching 6-12 months-ago frontier; EXO framework enables pooling VRAM across heterogeneous devices.",
+        "entry_b_time": "2026-04-24T13:49:16+00:00",
+        "entry_b_text": "2026 state-of-union: single RTX 5090 (~$2.5k MSRP, current street $2.9-5k) can locally run models matching frontier quality from 6-12 months prior. Gemma 4 MoE (26B total / 4B active) runs at 85 tok/s on AMD Ryzen AI MAX+ 128GB. Mobile NPUs now approach V100-era TOPS. MoE dominates 7/10 top local models. Epoch AI estimates consumer-GPU-to-frontier gap narrowing to <1 year.",
+        "reason": "Numeric divergence 60.2% on metric (context: rtx): new=2026.0, existing=5090.0, threshold=10%",
+        "detected": "2026-04-24T13:49:16Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:16Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T13:49:16+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Consumer-to-frontier gap tightening to <1 year plus MoE efficiency gains lift H1 fast-path odds while H2 remains modal.",
+        "entry_b_time": "2026-04-24T19:30:15+00:00",
+        "entry_b_text": "Epoch AI data: single RTX 5090 (<$2500) runs open models matching frontier performance from 6-12 months prior. DeepSeek 4/24 previews model 'closing gap' with frontier. Smartphone (<=$1500, no cloud) on-device frontier parity NOT yet demonstrated.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: frontier, gap",
+        "detected": "2026-04-24T19:30:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:15Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T13:49:16+00:00",
+        "entry_a_text": "2026 state-of-union: single RTX 5090 (~$2.5k MSRP, current street $2.9-5k) can locally run models matching frontier quality from 6-12 months prior. Gemma 4 MoE (26B total / 4B active) runs at 85 tok/s on AMD Ryzen AI MAX+ 128GB. Mobile NPUs now approach V100-era TOPS. MoE dominates 7/10 top local models. Epoch AI estimates consumer-GPU-to-frontier gap narrowing to <1 year.",
+        "entry_b_time": "2026-04-24T19:30:15+00:00",
+        "entry_b_text": "Epoch AI data: single RTX 5090 (<$2500) runs open models matching frontier performance from 6-12 months prior. DeepSeek 4/24 previews model 'closing gap' with frontier. Smartphone (<=$1500, no cloud) on-device frontier parity NOT yet demonstrated.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: epoch, frontier, gap, matching, models",
+        "detected": "2026-04-24T19:30:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:15Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T02:25:42+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: 6-12 month frontier-to-consumer gap trend supports H2 (2029-2030 on-device frontier); slight update upward on H1 from EXO/quantization.",
+        "entry_b_time": "2026-04-24T19:30:15+00:00",
+        "entry_b_text": "Epoch AI data: single RTX 5090 (<$2500) runs open models matching frontier performance from 6-12 months prior. DeepSeek 4/24 previews model 'closing gap' with frontier. Smartphone (<=$1500, no cloud) on-device frontier parity NOT yet demonstrated.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: device, frontier, gap",
+        "detected": "2026-04-24T19:30:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:15Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T02:25:42+00:00",
+        "entry_a_text": "Llama 4 Scout 109B MoE (17B active) with 10M token context window runs on single 24GB consumer GPU with native multimodal support; RTX 5090 runs models matching 6-12 months-ago frontier; EXO framework enables pooling VRAM across heterogeneous devices.",
+        "entry_b_time": "2026-04-24T19:30:15+00:00",
+        "entry_b_text": "Epoch AI data: single RTX 5090 (<$2500) runs open models matching frontier performance from 6-12 months prior. DeepSeek 4/24 previews model 'closing gap' with frontier. Smartphone (<=$1500, no cloud) on-device frontier parity NOT yet demonstrated.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: frontier, matching, models, months, rtx",
+        "detected": "2026-04-24T19:30:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:15Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-21T04:15:00Z",
+        "entry_a_text": "Social post prediction: 'local opus on a phone by 2030' -- claim that Opus-class LLM will run fully on-device on a consumer smartphone by end of 2030. Passes all 3 PREDICTION filters (specific, testable, time-bounded).",
+        "entry_b_time": "2026-04-24T19:30:15+00:00",
+        "entry_b_text": "Epoch AI data: single RTX 5090 (<$2500) runs open models matching frontier performance from 6-12 months prior. DeepSeek 4/24 previews model 'closing gap' with frontier. Smartphone (<=$1500, no cloud) on-device frontier parity NOT yet demonstrated.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: device, smartphone",
+        "detected": "2026-04-24T19:30:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:15Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T19:30:15+00:00",
+        "entry_a_text": "Epoch AI data: single RTX 5090 (<$2500) runs open models matching frontier performance from 6-12 months prior. DeepSeek 4/24 previews model 'closing gap' with frontier. Smartphone (<=$1500, no cloud) on-device frontier parity NOT yet demonstrated.",
+        "entry_b_time": "2026-04-25T13:19:54+00:00",
+        "entry_b_text": "Alibaba released Qwen 3.6-35B-A3B (April 14, 2026) - sparse MoE with 35B total / 3B active params, designed for compute-efficient frontier-tier deployment; runs on prosumer hardware. Apple, Qualcomm advancing on-device NPU stacks.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: device, frontier, runs",
+        "detected": "2026-04-25T13:19:54Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:54Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:16+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Consumer-to-frontier gap tightening to <1 year plus MoE efficiency gains lift H1 fast-path odds while H2 remains modal.",
+        "entry_b_time": "2026-04-25T13:19:54+00:00",
+        "entry_b_text": "Alibaba released Qwen 3.6-35B-A3B (April 14, 2026) - sparse MoE with 35B total / 3B active params, designed for compute-efficient frontier-tier deployment; runs on prosumer hardware. Apple, Qualcomm advancing on-device NPU stacks.",
+        "reason": "Numeric divergence 100.0% on metric (context: moe): new=2026.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-25T13:19:54Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:54Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:16+00:00",
+        "entry_a_text": "2026 state-of-union: single RTX 5090 (~$2.5k MSRP, current street $2.9-5k) can locally run models matching frontier quality from 6-12 months prior. Gemma 4 MoE (26B total / 4B active) runs at 85 tok/s on AMD Ryzen AI MAX+ 128GB. Mobile NPUs now approach V100-era TOPS. MoE dominates 7/10 top local models. Epoch AI estimates consumer-GPU-to-frontier gap narrowing to <1 year.",
+        "entry_b_time": "2026-04-25T13:19:54+00:00",
+        "entry_b_text": "Alibaba released Qwen 3.6-35B-A3B (April 14, 2026) - sparse MoE with 35B total / 3B active params, designed for compute-efficient frontier-tier deployment; runs on prosumer hardware. Apple, Qualcomm advancing on-device NPU stacks.",
+        "reason": "Numeric divergence 99.8% on metric (context: moe): new=2026.0, existing=4.0, threshold=10%",
+        "detected": "2026-04-25T13:19:54Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:54Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:42+00:00",
+        "entry_a_text": "Llama 4 Scout 109B MoE (17B active) with 10M token context window runs on single 24GB consumer GPU with native multimodal support; RTX 5090 runs models matching 6-12 months-ago frontier; EXO framework enables pooling VRAM across heterogeneous devices.",
+        "entry_b_time": "2026-04-25T13:19:54+00:00",
+        "entry_b_text": "Alibaba released Qwen 3.6-35B-A3B (April 14, 2026) - sparse MoE with 35B total / 3B active params, designed for compute-efficient frontier-tier deployment; runs on prosumer hardware. Apple, Qualcomm advancing on-device NPU stacks.",
+        "reason": "Numeric divergence 99.8% on metric (context: moe): new=2026.0, existing=4.0, threshold=10%",
+        "detected": "2026-04-25T13:19:54Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:54Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T13:19:54+00:00",
+        "entry_a_text": "Alibaba released Qwen 3.6-35B-A3B (April 14, 2026) - sparse MoE with 35B total / 3B active params, designed for compute-efficient frontier-tier deployment; runs on prosumer hardware. Apple, Qualcomm advancing on-device NPU stacks.",
+        "entry_b_time": "2026-04-25T14:24:51+00:00",
+        "entry_b_text": "Epoch AI April 2026: a single RTX 5090 (~$2.5k) can locally run models matching frontier LLM performance from 6-12 months ago. MoE architectures (Llama 4, DeepSeek V3.2, Qwen 3.5, Gemma 4, Mistral Small 4) dominate frontier with sparse routing. Quantization (Q4_K_M+) cuts VRAM 50-75% with low quality loss. But mobile bandwidth (50-90 GB/s) vs DC (2-3 TB/s) leaves a 30-50x decode-bound gap.",
+        "reason": "Numeric divergence 99.3% on metric (context: april): new=2026.0, existing=14.0, threshold=10%",
+        "detected": "2026-04-25T14:24:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:51Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T19:30:15+00:00",
+        "entry_a_text": "Epoch AI data: single RTX 5090 (<$2500) runs open models matching frontier performance from 6-12 months prior. DeepSeek 4/24 previews model 'closing gap' with frontier. Smartphone (<=$1500, no cloud) on-device frontier parity NOT yet demonstrated.",
+        "entry_b_time": "2026-04-25T14:24:51+00:00",
+        "entry_b_text": "Epoch AI April 2026: a single RTX 5090 (~$2.5k) can locally run models matching frontier LLM performance from 6-12 months ago. MoE architectures (Llama 4, DeepSeek V3.2, Qwen 3.5, Gemma 4, Mistral Small 4) dominate frontier with sparse routing. Quantization (Q4_K_M+) cuts VRAM 50-75% with low quality loss. But mobile bandwidth (50-90 GB/s) vs DC (2-3 TB/s) leaves a 30-50x decode-bound gap.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: deepseek, epoch, frontier, gap, matching",
+        "detected": "2026-04-25T14:24:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:51Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:16+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Consumer-to-frontier gap tightening to <1 year plus MoE efficiency gains lift H1 fast-path odds while H2 remains modal.",
+        "entry_b_time": "2026-04-25T14:24:51+00:00",
+        "entry_b_text": "Epoch AI April 2026: a single RTX 5090 (~$2.5k) can locally run models matching frontier LLM performance from 6-12 months ago. MoE architectures (Llama 4, DeepSeek V3.2, Qwen 3.5, Gemma 4, Mistral Small 4) dominate frontier with sparse routing. Quantization (Q4_K_M+) cuts VRAM 50-75% with low quality loss. But mobile bandwidth (50-90 GB/s) vs DC (2-3 TB/s) leaves a 30-50x decode-bound gap.",
+        "reason": "Numeric divergence 75.0% on metric (context: moe): new=4.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-25T14:24:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:51Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:16+00:00",
+        "entry_a_text": "2026 state-of-union: single RTX 5090 (~$2.5k MSRP, current street $2.9-5k) can locally run models matching frontier quality from 6-12 months prior. Gemma 4 MoE (26B total / 4B active) runs at 85 tok/s on AMD Ryzen AI MAX+ 128GB. Mobile NPUs now approach V100-era TOPS. MoE dominates 7/10 top local models. Epoch AI estimates consumer-GPU-to-frontier gap narrowing to <1 year.",
+        "entry_b_time": "2026-04-25T14:24:51+00:00",
+        "entry_b_text": "Epoch AI April 2026: a single RTX 5090 (~$2.5k) can locally run models matching frontier LLM performance from 6-12 months ago. MoE architectures (Llama 4, DeepSeek V3.2, Qwen 3.5, Gemma 4, Mistral Small 4) dominate frontier with sparse routing. Quantization (Q4_K_M+) cuts VRAM 50-75% with low quality loss. But mobile bandwidth (50-90 GB/s) vs DC (2-3 TB/s) leaves a 30-50x decode-bound gap.",
+        "reason": "Numeric divergence 60.2% on metric (context: rtx, single): new=2026.0, existing=5090.0, threshold=10%",
+        "detected": "2026-04-25T14:24:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:51Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:42+00:00",
+        "entry_a_text": "Llama 4 Scout 109B MoE (17B active) with 10M token context window runs on single 24GB consumer GPU with native multimodal support; RTX 5090 runs models matching 6-12 months-ago frontier; EXO framework enables pooling VRAM across heterogeneous devices.",
+        "entry_b_time": "2026-04-25T14:24:51+00:00",
+        "entry_b_text": "Epoch AI April 2026: a single RTX 5090 (~$2.5k) can locally run models matching frontier LLM performance from 6-12 months ago. MoE architectures (Llama 4, DeepSeek V3.2, Qwen 3.5, Gemma 4, Mistral Small 4) dominate frontier with sparse routing. Quantization (Q4_K_M+) cuts VRAM 50-75% with low quality loss. But mobile bandwidth (50-90 GB/s) vs DC (2-3 TB/s) leaves a 30-50x decode-bound gap.",
+        "reason": "Numeric divergence 60.2% on metric (context: rtx): new=2026.0, existing=5090.0, threshold=10%",
+        "detected": "2026-04-25T14:24:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:51Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T04:15:00Z",
+        "entry_a_text": "Social post prediction: 'local opus on a phone by 2030' -- claim that Opus-class LLM will run fully on-device on a consumer smartphone by end of 2030. Passes all 3 PREDICTION filters (specific, testable, time-bounded).",
+        "entry_b_time": "2026-04-25T14:24:51+00:00",
+        "entry_b_text": "Epoch AI April 2026: a single RTX 5090 (~$2.5k) can locally run models matching frontier LLM performance from 6-12 months ago. MoE architectures (Llama 4, DeepSeek V3.2, Qwen 3.5, Gemma 4, Mistral Small 4) dominate frontier with sparse routing. Quantization (Q4_K_M+) cuts VRAM 50-75% with low quality loss. But mobile bandwidth (50-90 GB/s) vs DC (2-3 TB/s) leaves a 30-50x decode-bound gap.",
+        "reason": "Numeric divergence 60.1% on metric (context: a): new=5090.0, existing=2030.0, threshold=10%",
+        "detected": "2026-04-25T14:24:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:51Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T14:24:51+00:00",
+        "entry_a_text": "Epoch AI April 2026: a single RTX 5090 (~$2.5k) can locally run models matching frontier LLM performance from 6-12 months ago. MoE architectures (Llama 4, DeepSeek V3.2, Qwen 3.5, Gemma 4, Mistral Small 4) dominate frontier with sparse routing. Quantization (Q4_K_M+) cuts VRAM 50-75% with low quality loss. But mobile bandwidth (50-90 GB/s) vs DC (2-3 TB/s) leaves a 30-50x decode-bound gap.",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "April 2026 on-device LLM landscape: mobile devices have 50-90 GB/s memory bandwidth vs 2-3 TB/s data-center GPUs; Llama 3.3 8B Q4_K_M scores 73 on MMLU on consumer hardware (GPT-4-class only 2 yrs ago); each Snapdragon generation yields ~50% prefill / >100% decode improvement. NPU-prefill + CPU/GPU-decode hybrid emerging as standard.",
+        "reason": "Numeric divergence 17.5% on metric (context: llama): new=3.3, existing=4.0, threshold=10%",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T13:19:54+00:00",
+        "entry_a_text": "Alibaba released Qwen 3.6-35B-A3B (April 14, 2026) - sparse MoE with 35B total / 3B active params, designed for compute-efficient frontier-tier deployment; runs on prosumer hardware. Apple, Qualcomm advancing on-device NPU stacks.",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "April 2026 on-device LLM landscape: mobile devices have 50-90 GB/s memory bandwidth vs 2-3 TB/s data-center GPUs; Llama 3.3 8B Q4_K_M scores 73 on MMLU on consumer hardware (GPT-4-class only 2 yrs ago); each Snapdragon generation yields ~50% prefill / >100% decode improvement. NPU-prefill + CPU/GPU-decode hybrid emerging as standard.",
+        "reason": "Numeric divergence 99.3% on metric (context: april): new=2026.0, existing=14.0, threshold=10%",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T19:30:15+00:00",
+        "entry_a_text": "Epoch AI data: single RTX 5090 (<$2500) runs open models matching frontier performance from 6-12 months prior. DeepSeek 4/24 previews model 'closing gap' with frontier. Smartphone (<=$1500, no cloud) on-device frontier parity NOT yet demonstrated.",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "April 2026 on-device LLM landscape: mobile devices have 50-90 GB/s memory bandwidth vs 2-3 TB/s data-center GPUs; Llama 3.3 8B Q4_K_M scores 73 on MMLU on consumer hardware (GPT-4-class only 2 yrs ago); each Snapdragon generation yields ~50% prefill / >100% decode improvement. NPU-prefill + CPU/GPU-decode hybrid emerging as standard.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: data, device",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:16+00:00",
+        "entry_a_text": "2026 state-of-union: single RTX 5090 (~$2.5k MSRP, current street $2.9-5k) can locally run models matching frontier quality from 6-12 months prior. Gemma 4 MoE (26B total / 4B active) runs at 85 tok/s on AMD Ryzen AI MAX+ 128GB. Mobile NPUs now approach V100-era TOPS. MoE dominates 7/10 top local models. Epoch AI estimates consumer-GPU-to-frontier gap narrowing to <1 year.",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "April 2026 on-device LLM landscape: mobile devices have 50-90 GB/s memory bandwidth vs 2-3 TB/s data-center GPUs; Llama 3.3 8B Q4_K_M scores 73 on MMLU on consumer hardware (GPT-4-class only 2 yrs ago); each Snapdragon generation yields ~50% prefill / >100% decode improvement. NPU-prefill + CPU/GPU-decode hybrid emerging as standard.",
+        "reason": "Numeric divergence 14.1% on metric (context: on): new=73.0, existing=85.0, threshold=10%",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:42+00:00",
+        "entry_a_text": "Llama 4 Scout 109B MoE (17B active) with 10M token context window runs on single 24GB consumer GPU with native multimodal support; RTX 5090 runs models matching 6-12 months-ago frontier; EXO framework enables pooling VRAM across heterogeneous devices.",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "April 2026 on-device LLM landscape: mobile devices have 50-90 GB/s memory bandwidth vs 2-3 TB/s data-center GPUs; Llama 3.3 8B Q4_K_M scores 73 on MMLU on consumer hardware (GPT-4-class only 2 yrs ago); each Snapdragon generation yields ~50% prefill / >100% decode improvement. NPU-prefill + CPU/GPU-decode hybrid emerging as standard.",
+        "reason": "Numeric divergence 17.5% on metric (context: llama): new=3.3, existing=4.0, threshold=10%",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-26T16:59:08+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: On-device 8B at 73 MMLU plus ~25-30x bandwidth deficit = consensus 2029-30 commercialization track (H2).",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "April 2026 SemiEngineering / aimagicx: Apple M4 + A18 Neural Engines deliver up to 38 TOPS; Snapdragon X Elite / 8 Gen 4 Hexagon NPU up to 45 TOPS; on-device 'goldilocks' is 3-30B parameters. Industry consensus: cloud still required for frontier reasoning, broad world knowledge, long multi-turn.",
+        "reason": "Numeric divergence 38.4% on metric (context: on-device): new=45.0, existing=73.0, threshold=10%",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-26T16:59:08+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "April 2026 SemiEngineering / aimagicx: Apple M4 + A18 Neural Engines deliver up to 38 TOPS; Snapdragon X Elite / 8 Gen 4 Hexagon NPU up to 45 TOPS; on-device 'goldilocks' is 3-30B parameters. Industry consensus: cloud still required for frontier reasoning, broad world knowledge, long multi-turn.",
+        "reason": "Numeric divergence 100.0% on metric (context: to): new=38.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-26T16:59:08+00:00",
+        "entry_a_text": "April 2026 on-device LLM landscape: mobile devices have 50-90 GB/s memory bandwidth vs 2-3 TB/s data-center GPUs; Llama 3.3 8B Q4_K_M scores 73 on MMLU on consumer hardware (GPT-4-class only 2 yrs ago); each Snapdragon generation yields ~50% prefill / >100% decode improvement. NPU-prefill + CPU/GPU-decode hybrid emerging as standard.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "April 2026 SemiEngineering / aimagicx: Apple M4 + A18 Neural Engines deliver up to 38 TOPS; Snapdragon X Elite / 8 Gen 4 Hexagon NPU up to 45 TOPS; on-device 'goldilocks' is 3-30B parameters. Industry consensus: cloud still required for frontier reasoning, broad world knowledge, long multi-turn.",
+        "reason": "Numeric divergence 24.0% on metric (context: snapdragon): new=38.0, existing=50.0, threshold=10%",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T14:24:51+00:00",
+        "entry_a_text": "Epoch AI April 2026: a single RTX 5090 (~$2.5k) can locally run models matching frontier LLM performance from 6-12 months ago. MoE architectures (Llama 4, DeepSeek V3.2, Qwen 3.5, Gemma 4, Mistral Small 4) dominate frontier with sparse routing. Quantization (Q4_K_M+) cuts VRAM 50-75% with low quality loss. But mobile bandwidth (50-90 GB/s) vs DC (2-3 TB/s) leaves a 30-50x decode-bound gap.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "April 2026 SemiEngineering / aimagicx: Apple M4 + A18 Neural Engines deliver up to 38 TOPS; Snapdragon X Elite / 8 Gen 4 Hexagon NPU up to 45 TOPS; on-device 'goldilocks' is 3-30B parameters. Industry consensus: cloud still required for frontier reasoning, broad world knowledge, long multi-turn.",
+        "reason": "Numeric divergence 56.2% on metric (context: 4): new=8.0, existing=3.5, threshold=10%",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T13:19:54+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "April 2026 SemiEngineering / aimagicx: Apple M4 + A18 Neural Engines deliver up to 38 TOPS; Snapdragon X Elite / 8 Gen 4 Hexagon NPU up to 45 TOPS; on-device 'goldilocks' is 3-30B parameters. Industry consensus: cloud still required for frontier reasoning, broad world knowledge, long multi-turn.",
+        "reason": "Numeric divergence 100.0% on metric (context: to): new=38.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T13:19:54+00:00",
+        "entry_a_text": "Alibaba released Qwen 3.6-35B-A3B (April 14, 2026) - sparse MoE with 35B total / 3B active params, designed for compute-efficient frontier-tier deployment; runs on prosumer hardware. Apple, Qualcomm advancing on-device NPU stacks.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "April 2026 SemiEngineering / aimagicx: Apple M4 + A18 Neural Engines deliver up to 38 TOPS; Snapdragon X Elite / 8 Gen 4 Hexagon NPU up to 45 TOPS; on-device 'goldilocks' is 3-30B parameters. Industry consensus: cloud still required for frontier reasoning, broad world knowledge, long multi-turn.",
+        "reason": "Numeric divergence 99.3% on metric (context: april): new=2026.0, existing=14.0, threshold=10%",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T19:30:15+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "April 2026 SemiEngineering / aimagicx: Apple M4 + A18 Neural Engines deliver up to 38 TOPS; Snapdragon X Elite / 8 Gen 4 Hexagon NPU up to 45 TOPS; on-device 'goldilocks' is 3-30B parameters. Industry consensus: cloud still required for frontier reasoning, broad world knowledge, long multi-turn.",
+        "reason": "Numeric divergence 100.0% on metric (context: to): new=38.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T19:30:15+00:00",
+        "entry_a_text": "Epoch AI data: single RTX 5090 (<$2500) runs open models matching frontier performance from 6-12 months prior. DeepSeek 4/24 previews model 'closing gap' with frontier. Smartphone (<=$1500, no cloud) on-device frontier parity NOT yet demonstrated.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "April 2026 SemiEngineering / aimagicx: Apple M4 + A18 Neural Engines deliver up to 38 TOPS; Snapdragon X Elite / 8 Gen 4 Hexagon NPU up to 45 TOPS; on-device 'goldilocks' is 3-30B parameters. Industry consensus: cloud still required for frontier reasoning, broad world knowledge, long multi-turn.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: cloud, device, frontier",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:16+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Consumer-to-frontier gap tightening to <1 year plus MoE efficiency gains lift H1 fast-path odds while H2 remains modal.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "April 2026 SemiEngineering / aimagicx: Apple M4 + A18 Neural Engines deliver up to 38 TOPS; Snapdragon X Elite / 8 Gen 4 Hexagon NPU up to 45 TOPS; on-device 'goldilocks' is 3-30B parameters. Industry consensus: cloud still required for frontier reasoning, broad world knowledge, long multi-turn.",
+        "reason": "Numeric divergence 97.4% on metric (context: to): new=38.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:16+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "April 2026 SemiEngineering / aimagicx: Apple M4 + A18 Neural Engines deliver up to 38 TOPS; Snapdragon X Elite / 8 Gen 4 Hexagon NPU up to 45 TOPS; on-device 'goldilocks' is 3-30B parameters. Industry consensus: cloud still required for frontier reasoning, broad world knowledge, long multi-turn.",
+        "reason": "Numeric divergence 100.0% on metric (context: to): new=38.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:16+00:00",
+        "entry_a_text": "2026 state-of-union: single RTX 5090 (~$2.5k MSRP, current street $2.9-5k) can locally run models matching frontier quality from 6-12 months prior. Gemma 4 MoE (26B total / 4B active) runs at 85 tok/s on AMD Ryzen AI MAX+ 128GB. Mobile NPUs now approach V100-era TOPS. MoE dominates 7/10 top local models. Epoch AI estimates consumer-GPU-to-frontier gap narrowing to <1 year.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "April 2026 SemiEngineering / aimagicx: Apple M4 + A18 Neural Engines deliver up to 38 TOPS; Snapdragon X Elite / 8 Gen 4 Hexagon NPU up to 45 TOPS; on-device 'goldilocks' is 3-30B parameters. Industry consensus: cloud still required for frontier reasoning, broad world knowledge, long multi-turn.",
+        "reason": "Numeric divergence 97.4% on metric (context: to): new=38.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      }
+    ]
   },
   "schemaVersion": 2,
   "migratedAt": "2026-04-21T19:03:40+00:00",
@@ -1020,5 +2053,150 @@
       ],
       "lensAgreement": []
     }
-  ]
+  ],
+  "sourceCalibration": {
+    "ledger": [
+      {
+        "timestamp": "2026-04-24T02:25:42Z",
+        "evidence_index": 2,
+        "confirming_index": 3,
+        "resolution": "CONFIRMED",
+        "source": "",
+        "confirming_source": "",
+        "trust_delta": 0.05,
+        "original_text_snippet": "LR MIGRATION RESET: posteriors reset to design priors; evidence log preserved.",
+        "confirming_text_snippet": "REPLAY BEGIN: 0 previously-fired indicators will be re-applied chronologically under current LR system. Posteriors reset"
+      },
+      {
+        "timestamp": "2026-04-24T02:25:42Z",
+        "evidence_index": 3,
+        "confirming_index": 4,
+        "resolution": "CONFIRMED",
+        "source": "",
+        "confirming_source": "",
+        "trust_delta": 0.05,
+        "original_text_snippet": "REPLAY BEGIN: 0 previously-fired indicators will be re-applied chronologically under current LR system. Posteriors reset",
+        "confirming_text_snippet": "REPLAY COMPLETE: 0 indicators applied, 0 skipped. Final posteriors: {'H1': 0.08, 'H2': 0.37, 'H3': 0.38, 'H4': 0.17}. In"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:51Z",
+        "evidence_index": 2,
+        "confirming_index": 15,
+        "resolution": "CONFIRMED",
+        "source": "",
+        "confirming_source": "",
+        "trust_delta": 0.05,
+        "original_text_snippet": "LR MIGRATION RESET: posteriors reset to design priors; evidence log preserved.",
+        "confirming_text_snippet": "REPLAY BEGIN: 0 previously-fired indicators will be re-applied chronologically under current LR system. Posteriors reset"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:51Z",
+        "evidence_index": 3,
+        "confirming_index": 15,
+        "resolution": "CONFIRMED",
+        "source": "",
+        "confirming_source": "",
+        "trust_delta": 0.05,
+        "original_text_snippet": "REPLAY BEGIN: 0 previously-fired indicators will be re-applied chronologically under current LR system. Posteriors reset",
+        "confirming_text_snippet": "REPLAY BEGIN: 0 previously-fired indicators will be re-applied chronologically under current LR system. Posteriors reset"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:51Z",
+        "evidence_index": 3,
+        "confirming_index": 16,
+        "resolution": "CONFIRMED",
+        "source": "",
+        "confirming_source": "",
+        "trust_delta": 0.05,
+        "original_text_snippet": "REPLAY BEGIN: 0 previously-fired indicators will be re-applied chronologically under current LR system. Posteriors reset",
+        "confirming_text_snippet": "REPLAY COMPLETE: 0 indicators applied, 0 skipped. Final posteriors: {'H1': 0.08, 'H2': 0.37, 'H3': 0.38, 'H4': 0.17}. In"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:51Z",
+        "evidence_index": 4,
+        "confirming_index": 15,
+        "resolution": "CONFIRMED",
+        "source": "",
+        "confirming_source": "",
+        "trust_delta": 0.05,
+        "original_text_snippet": "REPLAY COMPLETE: 0 indicators applied, 0 skipped. Final posteriors: {'H1': 0.08, 'H2': 0.37, 'H3': 0.38, 'H4': 0.17}. In",
+        "confirming_text_snippet": "REPLAY BEGIN: 0 previously-fired indicators will be re-applied chronologically under current LR system. Posteriors reset"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:51Z",
+        "evidence_index": 4,
+        "confirming_index": 16,
+        "resolution": "CONFIRMED",
+        "source": "",
+        "confirming_source": "",
+        "trust_delta": 0.05,
+        "original_text_snippet": "REPLAY COMPLETE: 0 indicators applied, 0 skipped. Final posteriors: {'H1': 0.08, 'H2': 0.37, 'H3': 0.38, 'H4': 0.17}. In",
+        "confirming_text_snippet": "REPLAY COMPLETE: 0 indicators applied, 0 skipped. Final posteriors: {'H1': 0.08, 'H2': 0.37, 'H3': 0.38, 'H4': 0.17}. In"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:51Z",
+        "evidence_index": 5,
+        "confirming_index": 17,
+        "resolution": "REFUTED",
+        "source": "Epoch AI / Fluence / BIZON",
+        "confirming_source": "Epoch AI, on-device LLM survey 2026, llama.cpp/ollama community",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Llama 4 Scout 109B MoE (17B active) with 10M token context window runs on single 24GB consumer GPU with native multimoda",
+        "confirming_text_snippet": "Epoch AI April 2026: a single RTX 5090 (~$2.5k) can locally run models matching frontier LLM performance from 6-12 month"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:51Z",
+        "evidence_index": 7,
+        "confirming_index": 17,
+        "resolution": "REFUTED",
+        "source": "Chandra On-Device LLMs / Epoch AI / Tom's Hardware",
+        "confirming_source": "Epoch AI, on-device LLM survey 2026, llama.cpp/ollama community",
+        "trust_delta": -0.1,
+        "original_text_snippet": "2026 state-of-union: single RTX 5090 (~$2.5k MSRP, current street $2.9-5k) can locally run models matching frontier qual",
+        "confirming_text_snippet": "Epoch AI April 2026: a single RTX 5090 (~$2.5k) can locally run models matching frontier LLM performance from 6-12 month"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:51Z",
+        "evidence_index": 10,
+        "confirming_index": 17,
+        "resolution": "REFUTED",
+        "source": "Epoch AI / TechCrunch",
+        "confirming_source": "Epoch AI, on-device LLM survey 2026, llama.cpp/ollama community",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Epoch AI data: single RTX 5090 (<$2500) runs open models matching frontier performance from 6-12 months prior. DeepSeek ",
+        "confirming_text_snippet": "Epoch AI April 2026: a single RTX 5090 (~$2.5k) can locally run models matching frontier LLM performance from 6-12 month"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:51Z",
+        "evidence_index": 15,
+        "confirming_index": 16,
+        "resolution": "CONFIRMED",
+        "source": "",
+        "confirming_source": "",
+        "trust_delta": 0.05,
+        "original_text_snippet": "REPLAY BEGIN: 0 previously-fired indicators will be re-applied chronologically under current LR system. Posteriors reset",
+        "confirming_text_snippet": "REPLAY COMPLETE: 0 indicators applied, 0 skipped. Final posteriors: {'H1': 0.08, 'H2': 0.37, 'H3': 0.38, 'H4': 0.17}. In"
+      }
+    ],
+    "effectiveTrust": {
+      "@ponder.ooo": 0.5,
+      "BIZON": 0.4555,
+      "Epoch AI": 0.3693,
+      "Fluence": 0.4555,
+      "Chandra On-Device LLMs": 0.4555,
+      "Tom's Hardware": 0.4555,
+      "TechCrunch": 0.4555,
+      "Alibaba": 0.5,
+      "Lushbinary": 0.5,
+      "Spheron": 0.5,
+      "Epoch AI, on-device LLM survey 2026, llama.cpp": 0.5,
+      "ollama community": 0.5,
+      "arXiv 2410.03613": 0.5,
+      "v-chandra State of On-Device LLMs": 0.5,
+      "AI Magicx": 0.5,
+      "SemiEngineering": 0.5,
+      "Tether QVAC": 0.5
+    },
+    "_last_scan_same_source_skipped": 3
+  }
 }

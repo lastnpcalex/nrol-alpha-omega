@@ -5,13 +5,16 @@
     "question": "By 2028-12-31, has the street price of top-tier consumer discrete GPUs (RTX 5080-class or nearest equivalent-tier) reverted to within 20% of the inflation-adjusted equivalent-tier consumer GPU price from 2024-Q4, as tracked by major GPU pricing databases?",
     "resolution": "Resolved H1 (full reversion) if NowInStock, TechPowerUp, or equivalent shows RTX 5080-class 90-day average street price within 20% of inflation-adjusted 2024-Q4 RTX 4080 baseline (est. $1,050-$1,150 CPI-adjusted) for ≥3 consecutive months before 2028-12-31. H2 if 20-50% above baseline at resolution date. H3 if 50-100% above. H4 if >100% above baseline or NVIDIA exits consumer discrete GPU segment. resolutionDate: 2028-12-31.",
     "created": "",
-    "lastUpdated": "2026-04-22T18:47:00+00:00",
+    "lastUpdated": "2026-04-29T02:30:59+00:00",
     "status": "ACTIVE",
     "dayCount": 0,
     "startDate": "2026-04-22",
     "classification": "CALIBRATION",
     "topicType": "tech",
-    "resolutionDate": "2028-12-31"
+    "resolutionDate": "2028-12-31",
+    "lens": "GREEN",
+    "lensSetAt": "2026-04-26T21:11:30+00:00",
+    "lensSetReason": ""
   },
   "tagConfig": {
     "_docs": "SUPPLY/HARDWARE favor H1/H2 (normalization). DEMAND/EARNINGS (hyperscaler) favor H3/H4. REGULATORY neutral.",
@@ -58,31 +61,31 @@
         "midpoint": 10,
         "unit": "% above inflation-adjusted 2024-Q4 baseline",
         "description": "Malone's 'short-term market problem' thesis — new fab capacity (TSMC 2nm, HBM4), AMD competition, and inference efficiency gains normalize consumer GPU supply/demand. RTX 5080-class returns to historical tier pricing by 2028.",
-        "posterior": 0.0568
+        "posterior": 0.0067
       },
       "H2": {
         "label": "Moderate elevated plateau: 20-50% above inflation-adj pre-surge baseline",
         "midpoint": 35,
         "unit": "% above inflation-adjusted 2024-Q4 baseline",
         "description": "Data-center demand partially eases but doesn't fully normalize. New fab capacity reduces scarcity but doesn't eliminate it. Pricing settles above historical norms but consumers can still buy at some premium.",
-        "posterior": 0.426
+        "posterior": 0.0067
       },
       "H3": {
         "label": "Sustained high elevation: 50-100% above inflation-adj pre-surge baseline",
         "midpoint": 75,
         "unit": "% above inflation-adjusted 2024-Q4 baseline",
         "description": "Alex's thesis — AI/data-center demand structurally outpaces consumer GPU supply. HBM allocation remains prioritized for enterprise. Consumers face persistent scarcity and elevated prices through 2028. lowrhoufo '10-year horizon' view plausible.",
-        "posterior": 0.4821
+        "posterior": 0.98
       },
       "H4": {
         "label": "Structural escalation/bifurcation: street price over 100% above pre-surge baseline or NVIDIA exits consumer GPU",
         "midpoint": 150,
         "unit": "% above inflation-adjusted 2024-Q4 baseline",
         "description": "NVIDIA formally de-prioritizes or exits consumer discrete GPU segment to maximize data-center margins. Consumer cards become niche/legacy. Gaming GPU market bifurcates from AI silicon. Street prices extreme or consumer tier disappears as a market.",
-        "posterior": 0.0352
+        "posterior": 0.0067
       }
     },
-    "expectedValue": 56.92,
+    "expectedValue": 74.81,
     "expectedUnit": "weeks",
     "posteriorHistory": [
       {
@@ -91,7 +94,13 @@
         "H1": 0.35,
         "H2": 0.3,
         "H3": 0.22,
-        "H4": 0.13
+        "H4": 0.13,
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        }
       },
       {
         "date": "2026-04-22",
@@ -107,7 +116,7 @@
           "H3": 0.22,
           "H4": 0.13
         },
-        "updateMethod": "bayesian_update",
+        "updateMethod": "bayesian_update_legacy",
         "evidenceRefs": [
           "ev_004"
         ],
@@ -134,7 +143,14 @@
           "devil_advocate_score": 0.0,
           "challenge": "No significant shifts proposed; no challenge needed.",
           "inference_mode": "text_heuristic"
-        }
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
       },
       {
         "date": "2026-04-22",
@@ -150,7 +166,7 @@
           "H3": 0.4213,
           "H4": 0.1106
         },
-        "updateMethod": "bayesian_update",
+        "updateMethod": "bayesian_update_legacy",
         "evidenceRefs": [
           "ev_005"
         ],
@@ -170,7 +186,329 @@
           "devil_advocate_score": 0.0,
           "challenge": "No significant shifts proposed; no challenge needed.",
           "inference_mode": "text_heuristic"
-        }
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-24",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.2456,
+          "H3": 0.7328,
+          "H4": 0.0166
+        },
+        "priors": {
+          "H1": 0.0568,
+          "H2": 0.426,
+          "H3": 0.4821,
+          "H4": 0.0352
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_006"
+        ],
+        "likelihoods": {
+          "H1": 0.02,
+          "H2": 0.22,
+          "H3": 0.58,
+          "H4": 0.18
+        },
+        "note": "53% premium sustained with structural GDDR7 shortage supports H3 (50-100% elevation); slight uptick toward H4 given specialty pricing.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "turningPoint": {
+          "type": "BRANCH_DEATH",
+          "hypothesis": "H1",
+          "lastPosterior": 0.005
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-24",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.0711,
+          "H3": 0.9182,
+          "H4": 0.0058
+        },
+        "priors": {
+          "H1": 0.005,
+          "H2": 0.2456,
+          "H3": 0.7328,
+          "H4": 0.0166
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_007"
+        ],
+        "likelihoods": {
+          "H1": 0.02,
+          "H2": 0.15,
+          "H3": 0.65,
+          "H4": 0.18
+        },
+        "note": "75%+ markup persists with structural memory scarcity; H1 reversion implausible, H3 sustained-high modal, H4 escalation meaningful.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "turningPoint": {
+          "type": "MAJOR_SHIFT",
+          "maxShift": 0.1854
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-24",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.0224,
+          "H3": 0.9676,
+          "H4": 0.005
+        },
+        "priors": {
+          "H1": 0.005,
+          "H2": 0.0711,
+          "H3": 0.9182,
+          "H4": 0.0058
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_008"
+        ],
+        "likelihoods": {
+          "H1": 0.02,
+          "H2": 0.3,
+          "H3": 1.0,
+          "H4": 0.5
+        },
+        "note": "Recent price trajectory moving AWAY from pre-surge baseline — strongly consistent with sustained high elevation, adds weight toward structural escalation.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "turningPoint": {
+          "type": "BRANCH_DEATH",
+          "hypothesis": "H4",
+          "lastPosterior": 0.005
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-25",
+        "posteriors": {
+          "H1": 0.0067,
+          "H2": 0.0067,
+          "H3": 0.98,
+          "H4": 0.0067
+        },
+        "priors": {
+          "H1": 0.005,
+          "H2": 0.0224,
+          "H3": 0.9676,
+          "H4": 0.005
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_009"
+        ],
+        "likelihoods": {
+          "H1": 0.005,
+          "H2": 0.05,
+          "H3": 0.65,
+          "H4": 0.295
+        },
+        "note": "Street prices ~95% above MSRP and structural memory shortage strongly support sustained-high (H3) and increase H4 (>100% / bifurcation) tail; reversion paths H1/H2 receive vanishing weight.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-25",
+        "posteriors": {
+          "H1": 0.0067,
+          "H2": 0.0067,
+          "H3": 0.98,
+          "H4": 0.0067
+        },
+        "priors": {
+          "H1": 0.0067,
+          "H2": 0.0067,
+          "H3": 0.98,
+          "H4": 0.0067
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_010"
+        ],
+        "likelihoods": {
+          "H1": 0.05,
+          "H2": 0.2,
+          "H3": 1.0,
+          "H4": 0.7
+        },
+        "note": "Street prices firmly in 50-100% above-baseline band (H3) with substantial mass for structural escalation/bifurcation (H4) given persistence.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-26",
+        "posteriors": {
+          "H1": 0.0067,
+          "H2": 0.0067,
+          "H3": 0.98,
+          "H4": 0.0067
+        },
+        "priors": {
+          "H1": 0.0067,
+          "H2": 0.0067,
+          "H3": 0.98,
+          "H4": 0.0067
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_011"
+        ],
+        "likelihoods": {
+          "H1": 0.005,
+          "H2": 0.1,
+          "H3": 0.9,
+          "H4": 0.4
+        },
+        "note": "Sustained 75%+ premium with memory-shortage causation matches H3 band; minor upweight to H4 tail given structural memory constraint.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-26",
+        "posteriors": {
+          "H1": 0.0067,
+          "H2": 0.0067,
+          "H3": 0.98,
+          "H4": 0.0067
+        },
+        "priors": {
+          "H1": 0.0067,
+          "H2": 0.0067,
+          "H3": 0.98,
+          "H4": 0.0067
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_012"
+        ],
+        "likelihoods": {
+          "H1": 0.05,
+          "H2": 0.2,
+          "H3": 1.0,
+          "H4": 0.7
+        },
+        "note": "Street ~83% above MSRP fits H3 (50-100% elevated) with material weight migrating toward H4 structural escalation.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
       }
     ]
   },
@@ -219,6 +557,14 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null
+        },
+        {
+          "id": "t2_sustained_elevated_pricing",
+          "desc": "90-day average street price of RTX 5080-class (or current-gen equivalent) consumer GPU sits 50-100% above inflation-adjusted Q4-2024 baseline for ge 2 consecutive quarters across ge 3 major price trackers (TechPowerUp, NowInStock, TrackaLacker, BestValueGPU, Tom's Hardware GPU tracker).",
+          "posteriorEffect": "H3 +8pp, H1 -3pp, H2 -3pp, H4 -2pp",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
         }
       ],
       "tier3_suggestive": [
@@ -234,6 +580,14 @@
           "id": "t3_inference_efficiency_gains",
           "desc": "Published research (peer-reviewed or major lab technical report) demonstrates >50% reduction in per-inference VRAM requirements for frontier-equivalent models — reduces per-query GPU demand and enterprise VRAM pressure.",
           "posteriorEffect": "H1 +4pp, H2 +3pp, H3 -4pp, H4 -3pp",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        },
+        {
+          "id": "t3_premium_drift_to_h4",
+          "desc": "Median street price of top-tier consumer SKU (RTX 5090-class) exceeds 100% above inflation-adjusted Q4-2024 baseline for ge 2 consecutive quarters AND halo/prototype variants (e.g. 128GB cards) sustain >$10,000 pricing per Tom's Hardware / WccFTech tracking.",
+          "posteriorEffect": "H4 +5pp, H3 -4pp, H2 -1pp",
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null
@@ -271,9 +625,18 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null
+        },
+        {
+          "id": "anti_h1_extended_premium_2026",
+          "desc": "Consumer GPU street prices remain >40% above inflation-adjusted Q4-2024 baseline through end of 2026-Q4 across major SKUs and trackers. Earlier-firing companion to anti_h1_persistent_waitlist (which requires 2028-Q2 persistence).",
+          "posteriorEffect": "H1 -8pp (redistributed to H2+H3+H4 proportionally)",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
         }
       ]
-    }
+    },
+    "anti_indicators": []
   },
   "actorModel": {
     "description": "Consumer VRAM pricing driven by NVIDIA supply strategy, AMD competitive pressure, HBM memory producers, and hyperscaler demand-side decisions.",
@@ -455,6 +818,248 @@
       "ledger": "DECISION",
       "claimState": "PROPOSED",
       "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_006",
+      "time": "2026-04-24T02:25:42+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "TECH"
+      ],
+      "text": "RTX 5090 floor price reached $3,049.99 by February 2026 (~53% above MSRP); GDDR7 chronically undersupplied with AI data centers prioritized; 128GB VRAM 'prototype' variant selling at $13,000.",
+      "provenance": "OBSERVED",
+      "source": "Wccftech / Tom's Hardware / Best Value GPU",
+      "posteriorImpact": "NONE",
+      "url": "https://bestvaluegpu.com/history/new-and-used-rtx-5090-price-history-and-specs/",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-24T02:25:42+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-24T02:25:42+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: 53% premium sustained with structural GDDR7 shortage supports H3 (50-100% elevation); slight uptick toward H4 given specialty pricing.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_007",
+      "time": "2026-04-24T13:49:16+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "TECH",
+        "ECON"
+      ],
+      "text": "April 2026: RTX 5090 ($1,999 MSRP) street prices $2,900-$3,400 mid-range, premium/liquid variants >$5,000; most units 75%+ over MSRP. Memory scarcity described as structural (data-center AI demand competing with consumer GDDR7). RTX 5080 similarly elevated. No sign of mid-2026 reversion.",
+      "provenance": "OBSERVED",
+      "source": "Tom's Hardware / TrackaLacker / gpudeals",
+      "posteriorImpact": "NONE",
+      "url": "https://www.tomshardware.com/pc-components/gpus/upgraded-nvidia-rtx-5090-gets-128gb-vram-and-usd13-000-price-tag-super-limited-gpu-is-described-as-a-prototype",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.4118
+    },
+    {
+      "time": "2026-04-24T13:49:16+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-24T13:49:16+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: 75%+ markup persists with structural memory scarcity; H1 reversion implausible, H3 sustained-high modal, H4 escalation meaningful.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_008",
+      "time": "2026-04-24T19:30:15+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "HARDWARE",
+        "MARKET"
+      ],
+      "text": "Tom's Hardware: VRAM costs roughly 50% higher for cards currently on shelves, +$40-50 per 16GB; RTX 50-series +19% average over 3 months. GDDR6/6X = 20-25% of GPU production cost; AI-driven memory shortages pushing 2026 GPU prices sharply higher.",
+      "provenance": "OBSERVED",
+      "source": "Tom's Hardware",
+      "posteriorImpact": "NONE",
+      "url": "https://www.tomshardware.com/pc-components/gpus/lowest-gpu-prices-tracking",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-24T19:30:15+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_009",
+      "time": "2026-04-25T13:19:54+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "TECH"
+      ],
+      "text": "RTX 5090 selling ~$3,899 on Amazon vs $1,999 MSRP (~95% premium); GDDR7 supply structurally constrained by AI demand; AIB models start ~$2,900 and exceed $5,000 for liquid-cooled variants. NVIDIA prototype 128GB RTX 5090 priced at $13,000.",
+      "provenance": "OBSERVED",
+      "source": "TrackaLacker / Tom's Hardware / WCCFTech",
+      "posteriorImpact": "NONE",
+      "url": "https://www.trackalacker.com/articles/news/nvidia-rtx-5090-price-increase-2026",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.3289
+    },
+    {
+      "time": "2026-04-25T13:19:54+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_010",
+      "time": "2026-04-25T14:24:51+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "TECH",
+        "ECON"
+      ],
+      "text": "April 2026: RTX 5090 retail $3,899 on Amazon (~95% above $1,999 MSRP); RTX 5080 ~$1,300+ vs $999 MSRP. Multiple price trackers report 5090/5080 priced 75%+ above MSRP. AIB models $2,900-$3,400+; premium liquid-cooled $5,000+. AMD/NVIDIA reportedly continuing Q1 2026 consumer price increases.",
+      "provenance": "OBSERVED",
+      "source": "TrackaLacker, gpudeals.net, BestValueGPU, Tom's Hardware",
+      "posteriorImpact": "NONE",
+      "url": "https://www.trackalacker.com/articles/news/nvidia-rtx-5090-price-increase-2026",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-25T14:24:51+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-26T03:10:36+00:00",
+      "tag": "INTEL",
+      "text": "INDICATOR ADDED: t2_sustained_elevated_pricing (tier2_strong). posteriorEffect=H3 +8pp, H1 -3pp, H2 -3pp, H4 -2pp. Rationale: Closes 'none_impact_saturation' gap surfaced by ev_003-ev_010: 8 confirming DATA observations on H3-band pricing landed as NONE because no pro-H3 observable existed. Effect magnitude kept moderate because H3 already at 0.98 (limited room)..",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-26T03:10:36+00:00",
+      "tag": "INTEL",
+      "text": "INDICATOR ADDED: t3_premium_drift_to_h4 (tier3_suggestive). posteriorEffect=H4 +5pp, H3 -4pp, H2 -1pp. Rationale: Distinguishes H3 band (50-100% premium) from H4 escalation. ev_006 ($13k 128GB variant) and ev_009/ev_010 (RTX 5090 ~95% premium) sit on the H3/H4 boundary with no firing path. Without this, H4 cannot accumulate evidence even when reality drifts into its territory..",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-26T03:10:37+00:00",
+      "tag": "INTEL",
+      "text": "INDICATOR ADDED: anti_h1_extended_premium_2026 (anti_indicators). posteriorEffect=H1 -8pp (redistributed to H2+H3+H4 proportionally). Rationale: Existing anti-H1 indicator cannot fire until 2028-Q2 — too late for the framework to ratify what 2026 evidence already shows: full reversion is increasingly implausible. This is an earlier falsification path for H1, not a duplicate..",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_011",
+      "time": "2026-04-26T16:59:08+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "HARDWARE"
+      ],
+      "text": "April 2026 retail RTX 5090: Founders Edition $1,999.99 MSRP largely unavailable; AIB cards $2,909-$3,510 (75%+ above MSRP); liquid variants past $5,000. RTX 5090/5080 most price-elevated in lineup with GDDR7 memory shortage cited as bottleneck driver.",
+      "provenance": "OBSERVED",
+      "source": "Tom's Hardware / TrackaLacker",
+      "posteriorImpact": "NONE",
+      "url": "https://www.trackalacker.com/articles/news/nvidia-rtx-5090-price-increase-2026",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.2908
+    },
+    {
+      "time": "2026-04-26T16:59:08+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_012",
+      "time": "2026-04-26T19:27:12+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "HARDWARE"
+      ],
+      "text": "April 2026: NVIDIA RTX 5090 average street price ~$3,658 vs $1,999 MSRP — base models above $3,000, premium models above $5,000. GDDR7 chronic undersupply named primary driver; Tom's Hardware reports 128GB RTX 5090 prototype at $13,000. Trajectory pushing H3 toward H4 boundary.",
+      "provenance": "OBSERVED",
+      "source": "GPU Poet / Tech4Gamers / Tom's Hardware",
+      "posteriorImpact": "NONE",
+      "url": "https://gpupoet.com/gpu/learn/price/april-2026/nvidia-geforce-rtx-5090",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.4555
+    },
+    {
+      "time": "2026-04-26T19:27:12+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
     }
   ],
   "dataFeeds": {
@@ -526,23 +1131,26 @@
     ]
   },
   "governance": {
-    "health": "HEALTHY",
+    "health": "DEGRADED",
     "issues": [
-      "Stale dependency: calibration-ai-corporate-moat-2028.H2 assumed=0.35, actual=0.5383, drift=18.83%",
-      "Stale dependency: calibration-ai-corporate-moat-2028.H3 assumed=0.28, actual=0.0632, drift=21.68%"
+      "Majority stale evidence (14/27)",
+      "Near-zero uncertainty — check for overconfidence",
+      "Stale dependency: calibration-ai-corporate-moat-2028.H1 assumed=0.25, actual=0.9728, drift=72.28%",
+      "Stale dependency: calibration-ai-corporate-moat-2028.H2 assumed=0.35, actual=0.0172, drift=33.28%",
+      "Stale dependency: calibration-ai-corporate-moat-2028.H3 assumed=0.28, actual=0.005, drift=27.50%"
     ],
     "rt": {
       "rt": 0.0,
       "regime": "SAFE",
       "worst_hypothesis": "H1"
     },
-    "entropy": 1.4369,
+    "entropy": 0.1737,
     "maxEntropy": 2.0,
-    "uncertaintyRatio": 0.7185,
+    "uncertaintyRatio": 0.0868,
     "evidenceFreshness": {
-      "fresh": 8,
-      "stale": 0,
-      "total": 8
+      "fresh": 13,
+      "stale": 14,
+      "total": 27
     },
     "hypothesisAdmissibility": {
       "H1": "ADMISSIBLE",
@@ -551,18 +1159,27 @@
       "H4": "ADMISSIBLE"
     },
     "klFromPrior": {
-      "kl_divergence": 0.3783,
-      "interpretation": "MODERATE"
+      "kl_divergence": 1.3922,
+      "interpretation": "WELL_EVIDENCED"
     },
-    "lastComputed": "2026-04-22T18:47:00+00:00",
-    "staleDependencies": 2,
+    "lastComputed": "2026-04-29T02:30:59+00:00",
+    "staleDependencies": 3,
     "staleDependencyDetails": [
+      {
+        "upstream_slug": "calibration-ai-corporate-moat-2028",
+        "hypothesis": "H1",
+        "assumed": 0.25,
+        "actual": 0.9728,
+        "drift": 0.7228,
+        "tolerance": 0.15,
+        "stale": true
+      },
       {
         "upstream_slug": "calibration-ai-corporate-moat-2028",
         "hypothesis": "H2",
         "assumed": 0.35,
-        "actual": 0.5383,
-        "drift": 0.1883,
+        "actual": 0.0172,
+        "drift": 0.3328,
         "tolerance": 0.15,
         "stale": true
       },
@@ -570,14 +1187,21 @@
         "upstream_slug": "calibration-ai-corporate-moat-2028",
         "hypothesis": "H3",
         "assumed": 0.28,
-        "actual": 0.0632,
-        "drift": 0.2168,
+        "actual": 0.005,
+        "drift": 0.275,
         "tolerance": 0.15,
         "stale": true
       }
     ],
     "calibrationHealth": "ACCEPTABLE",
     "unresolvedContradictions": 0,
+    "reviewed_alerts": [
+      {
+        "signature": "none_impact_saturation:calibration-vram-price-reversion-2028",
+        "timestamp": "2026-04-26T03:10:37+00:00",
+        "reason": "Design review complete. Filed 3 indicator proposals: t2_sustained_elevated_pricing (pro-H3), t3_premium_drift_to_h4 (pro-H4), anti_h1_extended_premium_2026 (earlier H1 falsifier). Evidence ev_003-ev_010 was structurally unfireable; gap closed."
+      }
+    ],
     "designGate": {
       "passed": true,
       "blockers": [],
@@ -587,23 +1211,23 @@
       "coverage": {
         "H1": {
           "pos": 8,
-          "neg": 2
+          "neg": 4
         },
         "H2": {
-          "pos": 9,
-          "neg": 3
+          "pos": 10,
+          "neg": 5
         },
         "H3": {
-          "pos": 4,
-          "neg": 9
+          "pos": 6,
+          "neg": 10
         },
         "H4": {
-          "pos": 2,
-          "neg": 8
+          "pos": 4,
+          "neg": 10
         }
       },
       "indistinguishable": [],
-      "lastChecked": "2026-04-22T18:47:00+00:00"
+      "lastChecked": "2026-04-29T02:30:59+00:00"
     }
   },
   "predictionScoring": {
@@ -663,6 +1287,160 @@
           "H4": 0.0352
         },
         "entropy": 1.4369
+      },
+      {
+        "timestamp": "2026-04-24T02:25:42+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.2456,
+          "H3": 0.7328,
+          "H4": 0.0166
+        },
+        "entropy": 0.9625
+      },
+      {
+        "timestamp": "2026-04-24T02:25:42+00:00",
+        "trigger": "pipeline:ev_006",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.2456,
+          "H3": 0.7328,
+          "H4": 0.0166
+        },
+        "entropy": 0.9625
+      },
+      {
+        "timestamp": "2026-04-24T13:49:16+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.0711,
+          "H3": 0.9182,
+          "H4": 0.0058
+        },
+        "entropy": 0.4655
+      },
+      {
+        "timestamp": "2026-04-24T13:49:16+00:00",
+        "trigger": "pipeline:ev_007",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.0711,
+          "H3": 0.9182,
+          "H4": 0.0058
+        },
+        "entropy": 0.4655
+      },
+      {
+        "timestamp": "2026-04-24T19:30:15+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.0224,
+          "H3": 0.9676,
+          "H4": 0.005
+        },
+        "entropy": 0.2452
+      },
+      {
+        "timestamp": "2026-04-24T19:30:15+00:00",
+        "trigger": "pipeline:ev_008",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.0224,
+          "H3": 0.9676,
+          "H4": 0.005
+        },
+        "entropy": 0.2452
+      },
+      {
+        "timestamp": "2026-04-25T13:19:54+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0067,
+          "H2": 0.0067,
+          "H3": 0.98,
+          "H4": 0.0067
+        },
+        "entropy": 0.1737
+      },
+      {
+        "timestamp": "2026-04-25T13:19:54+00:00",
+        "trigger": "pipeline:ev_009",
+        "posteriors": {
+          "H1": 0.0067,
+          "H2": 0.0067,
+          "H3": 0.98,
+          "H4": 0.0067
+        },
+        "entropy": 0.1737
+      },
+      {
+        "timestamp": "2026-04-25T14:24:51+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0067,
+          "H2": 0.0067,
+          "H3": 0.98,
+          "H4": 0.0067
+        },
+        "entropy": 0.1737
+      },
+      {
+        "timestamp": "2026-04-25T14:24:51+00:00",
+        "trigger": "pipeline:ev_010",
+        "posteriors": {
+          "H1": 0.0067,
+          "H2": 0.0067,
+          "H3": 0.98,
+          "H4": 0.0067
+        },
+        "entropy": 0.1737
+      },
+      {
+        "timestamp": "2026-04-26T16:59:08+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0067,
+          "H2": 0.0067,
+          "H3": 0.98,
+          "H4": 0.0067
+        },
+        "entropy": 0.1737
+      },
+      {
+        "timestamp": "2026-04-26T16:59:08+00:00",
+        "trigger": "pipeline:ev_011",
+        "posteriors": {
+          "H1": 0.0067,
+          "H2": 0.0067,
+          "H3": 0.98,
+          "H4": 0.0067
+        },
+        "entropy": 0.1737
+      },
+      {
+        "timestamp": "2026-04-26T19:27:12+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0067,
+          "H2": 0.0067,
+          "H3": 0.98,
+          "H4": 0.0067
+        },
+        "entropy": 0.1737
+      },
+      {
+        "timestamp": "2026-04-26T19:27:12+00:00",
+        "trigger": "pipeline:ev_012",
+        "posteriors": {
+          "H1": 0.0067,
+          "H2": 0.0067,
+          "H3": 0.98,
+          "H4": 0.0067
+        },
+        "entropy": 0.1737
       }
     ],
     "outcomes": [],
@@ -791,25 +1569,937 @@
         "detected": "2026-04-22T18:47:00Z",
         "resolution": "SUPERSEDED",
         "resolvedAt": "2026-04-22T18:47:00Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-22T18:47:00+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Current (April 2026) RTX 5080 spot price is ~25% above MSRP — within H2 band. t2_street_price_normalized (within 15% of MSRP for 3 months) NOT fired. anti_h2_extreme_escalation (5090 >200% MSRP for 1 month) NOT fired (5090 at ~91%). Not recycled_intel vs ev_003: ev_003 was Q1 2026 data with higher spreads (5090 at 75-200%); this is April 2026 snapshot showing partial softening on 5080 but persistent premium. H2 weighted highest since current 5080 price sits squarely in H2 band with 2.5yr runway.",
+        "entry_b_time": "2026-04-24T02:25:42+00:00",
+        "entry_b_text": "RTX 5090 floor price reached $3,049.99 by February 2026 (~53% above MSRP); GDDR7 chronically undersupplied with AI data centers prioritized; 128GB VRAM 'prototype' variant selling at $13,000.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: above, data, msrp, price, rtx",
+        "detected": "2026-04-24T02:25:42Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:42Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-22T18:47:00+00:00",
+        "entry_a_text": "April 2026 street price snapshot: RTX 5080 at $1,249 on Amazon (~25% above $999 MSRP); RTX 5090 at $3,818 on Amazon (~91% above $1,999 MSRP); cheapest AIB 5090 (ASUS TUF) at $2,909 (~46% above MSRP). Per BestValueGPU / TrackaLacker / Tom's Hardware trackers. RTX 5080 premium in H2 band (20-50%); RTX 5090 premium straddling H2/H3 boundary. 90-day rolling average not yet established.",
+        "entry_b_time": "2026-04-24T02:25:42+00:00",
+        "entry_b_text": "RTX 5090 floor price reached $3,049.99 by February 2026 (~53% above MSRP); GDDR7 chronically undersupplied with AI data centers prioritized; 128GB VRAM 'prototype' variant selling at $13,000.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: above, msrp, price, rtx",
+        "detected": "2026-04-24T02:25:42Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:42Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-22T00:00:00Z",
+        "entry_a_text": "Multiple sources confirm consumer GPU prices elevated significantly vs. MSRP in Q1 2026, driven by AI/data-center demand crowding out GDDR7 and HBM supply. RTX 5090 ($1,999 MSRP) trading at $3,000-$6,000 street (75-200% above MSRP); RTX 5080 ($999 MSRP) at $1,599+ retail (45-60% above MSRP). RTX 5090 Founders Edition sold out in 8 minutes at launch. Server ECC RAM prices roughly doubled since Q3 2025. AI projected to consume ~20% of total DRAM production in 2026. 30-40% reduction in consumer GPU production allocation reported. Sources: TechSpot Q1 2026 GPU Pricing Update; BuySellRam memory economics; WccFTech RTX 5090 price trajectory; TrackaLacker RTX 5090 tracker; XDA Developers.",
+        "entry_b_time": "2026-04-24T02:25:42+00:00",
+        "entry_b_text": "RTX 5090 floor price reached $3,049.99 by February 2026 (~53% above MSRP); GDDR7 chronically undersupplied with AI data centers prioritized; 128GB VRAM 'prototype' variant selling at $13,000.",
+        "reason": "Numeric divergence 100.0% on metric (context: rtx): new=5090.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-24T02:25:42Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:42Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-22T17:41:00Z",
+        "entry_a_text": "@lastnpcalex.agency posted on Bluesky: 'I think that misunderstands the mechanism though. AI corps GPU demand 2x'd VRAM prices for consumers in < 1 quarter.' Responding to @proptermalone's claim that AI corps lack moat. No data source cited for the 2x figure.",
+        "entry_b_time": "2026-04-24T02:25:42+00:00",
+        "entry_b_text": "RTX 5090 floor price reached $3,049.99 by February 2026 (~53% above MSRP); GDDR7 chronically undersupplied with AI data centers prioritized; 128GB VRAM 'prototype' variant selling at $13,000.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: data, vram",
+        "detected": "2026-04-24T02:25:42Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:42Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T02:25:42+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: 53% premium sustained with structural GDDR7 shortage supports H3 (50-100% elevation); slight uptick toward H4 given specialty pricing.",
+        "entry_b_time": "2026-04-24T13:49:16+00:00",
+        "entry_b_text": "April 2026: RTX 5090 ($1,999 MSRP) street prices $2,900-$3,400 mid-range, premium/liquid variants >$5,000; most units 75%+ over MSRP. Memory scarcity described as structural (data-center AI demand competing with consumer GDDR7). RTX 5080 similarly elevated. No sign of mid-2026 reversion.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: gddr, premium, structural",
+        "detected": "2026-04-24T13:49:16Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:16Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:42+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-24T13:49:16+00:00",
+        "entry_b_text": "April 2026: RTX 5090 ($1,999 MSRP) street prices $2,900-$3,400 mid-range, premium/liquid variants >$5,000; most units 75%+ over MSRP. Memory scarcity described as structural (data-center AI demand competing with consumer GDDR7). RTX 5080 similarly elevated. No sign of mid-2026 reversion.",
+        "reason": "Numeric divergence 100.0% on metric (context: .): new=5080.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-24T13:49:16Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:16Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T02:25:42+00:00",
+        "entry_a_text": "RTX 5090 floor price reached $3,049.99 by February 2026 (~53% above MSRP); GDDR7 chronically undersupplied with AI data centers prioritized; 128GB VRAM 'prototype' variant selling at $13,000.",
+        "entry_b_time": "2026-04-24T13:49:16+00:00",
+        "entry_b_text": "April 2026: RTX 5090 ($1,999 MSRP) street prices $2,900-$3,400 mid-range, premium/liquid variants >$5,000; most units 75%+ over MSRP. Memory scarcity described as structural (data-center AI demand competing with consumer GDDR7). RTX 5080 similarly elevated. No sign of mid-2026 reversion.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: data, gddr, msrp, rtx",
+        "detected": "2026-04-24T13:49:16Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:16Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-22T18:47:00+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Current (April 2026) RTX 5080 spot price is ~25% above MSRP — within H2 band. t2_street_price_normalized (within 15% of MSRP for 3 months) NOT fired. anti_h2_extreme_escalation (5090 >200% MSRP for 1 month) NOT fired (5090 at ~91%). Not recycled_intel vs ev_003: ev_003 was Q1 2026 data with higher spreads (5090 at 75-200%); this is April 2026 snapshot showing partial softening on 5080 but persistent premium. H2 weighted highest since current 5080 price sits squarely in H2 band with 2.5yr runway.",
+        "entry_b_time": "2026-04-24T13:49:16+00:00",
+        "entry_b_text": "April 2026: RTX 5090 ($1,999 MSRP) street prices $2,900-$3,400 mid-range, premium/liquid variants >$5,000; most units 75%+ over MSRP. Memory scarcity described as structural (data-center AI demand competing with consumer GDDR7). RTX 5080 similarly elevated. No sign of mid-2026 reversion.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: april, data, msrp, premium, rtx",
+        "detected": "2026-04-24T13:49:16Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:16Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-22T18:47:00+00:00",
+        "entry_a_text": "April 2026 street price snapshot: RTX 5080 at $1,249 on Amazon (~25% above $999 MSRP); RTX 5090 at $3,818 on Amazon (~91% above $1,999 MSRP); cheapest AIB 5090 (ASUS TUF) at $2,909 (~46% above MSRP). Per BestValueGPU / TrackaLacker / Tom's Hardware trackers. RTX 5080 premium in H2 band (20-50%); RTX 5090 premium straddling H2/H3 boundary. 90-day rolling average not yet established.",
+        "entry_b_time": "2026-04-24T13:49:16+00:00",
+        "entry_b_text": "April 2026: RTX 5090 ($1,999 MSRP) street prices $2,900-$3,400 mid-range, premium/liquid variants >$5,000; most units 75%+ over MSRP. Memory scarcity described as structural (data-center AI demand competing with consumer GDDR7). RTX 5080 similarly elevated. No sign of mid-2026 reversion.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: april, msrp, premium, rtx, street",
+        "detected": "2026-04-24T13:49:16Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:16Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-22T18:46:44+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Structural HBM supply constraint projected through 2028-2029 per SemiAnalysis. Hyperscaler memory capex 4x since 2023 indicates sustained demand pressure. No pre-committed indicator fires (t1_hbm_supply_normalization requires consumer allocation RESTORED, not constrained). Directionally supports H3/H4. Likelihoods weight H3 highest given projected supply gap timing aligns with 2028 resolution.",
+        "entry_b_time": "2026-04-24T13:49:16+00:00",
+        "entry_b_text": "April 2026: RTX 5090 ($1,999 MSRP) street prices $2,900-$3,400 mid-range, premium/liquid variants >$5,000; most units 75%+ over MSRP. Memory scarcity described as structural (data-center AI demand competing with consumer GDDR7). RTX 5080 similarly elevated. No sign of mid-2026 reversion.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: consumer, demand, memory, structural",
+        "detected": "2026-04-24T13:49:16Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:16Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-22T18:46:44+00:00",
+        "entry_a_text": "SemiAnalysis (via Tom's Hardware, 2026-04): Memory will consume ~30% of hyperscaler AI data center spending in CY2026, a 4x increase over 2023 (~8%). HBM demand growing 80-100%/yr vs supply growing 50-60%/yr; gap not expected to close until 2028-2029. HBM3E and HBM4 supply fully allocated through 2026 with hyperscalers locking multi-year contracts. NVIDIA retains preferential supply terms; AMD structurally more exposed to memory cost inflation.",
+        "entry_b_time": "2026-04-24T13:49:16+00:00",
+        "entry_b_text": "April 2026: RTX 5090 ($1,999 MSRP) street prices $2,900-$3,400 mid-range, premium/liquid variants >$5,000; most units 75%+ over MSRP. Memory scarcity described as structural (data-center AI demand competing with consumer GDDR7). RTX 5080 similarly elevated. No sign of mid-2026 reversion.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: center, data, demand, memory",
+        "detected": "2026-04-24T13:49:16Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:16Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-22T00:00:00Z",
+        "entry_a_text": "Multiple sources confirm consumer GPU prices elevated significantly vs. MSRP in Q1 2026, driven by AI/data-center demand crowding out GDDR7 and HBM supply. RTX 5090 ($1,999 MSRP) trading at $3,000-$6,000 street (75-200% above MSRP); RTX 5080 ($999 MSRP) at $1,599+ retail (45-60% above MSRP). RTX 5090 Founders Edition sold out in 8 minutes at launch. Server ECC RAM prices roughly doubled since Q3 2025. AI projected to consume ~20% of total DRAM production in 2026. 30-40% reduction in consumer GPU production allocation reported. Sources: TechSpot Q1 2026 GPU Pricing Update; BuySellRam memory economics; WccFTech RTX 5090 price trajectory; TrackaLacker RTX 5090 tracker; XDA Developers.",
+        "entry_b_time": "2026-04-24T13:49:16+00:00",
+        "entry_b_text": "April 2026: RTX 5090 ($1,999 MSRP) street prices $2,900-$3,400 mid-range, premium/liquid variants >$5,000; most units 75%+ over MSRP. Memory scarcity described as structural (data-center AI demand competing with consumer GDDR7). RTX 5080 similarly elevated. No sign of mid-2026 reversion.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: center, consumer, data, demand, elevated",
+        "detected": "2026-04-24T13:49:16Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:16Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T13:49:16+00:00",
+        "entry_a_text": "April 2026: RTX 5090 ($1,999 MSRP) street prices $2,900-$3,400 mid-range, premium/liquid variants >$5,000; most units 75%+ over MSRP. Memory scarcity described as structural (data-center AI demand competing with consumer GDDR7). RTX 5080 similarly elevated. No sign of mid-2026 reversion.",
+        "entry_b_time": "2026-04-24T19:30:15+00:00",
+        "entry_b_text": "Tom's Hardware: VRAM costs roughly 50% higher for cards currently on shelves, +$40-50 per 16GB; RTX 50-series +19% average over 3 months. GDDR6/6X = 20-25% of GPU production cost; AI-driven memory shortages pushing 2026 GPU prices sharply higher.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: gddr, memory, prices, rtx",
+        "detected": "2026-04-24T19:30:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:42+00:00",
+        "entry_a_text": "RTX 5090 floor price reached $3,049.99 by February 2026 (~53% above MSRP); GDDR7 chronically undersupplied with AI data centers prioritized; 128GB VRAM 'prototype' variant selling at $13,000.",
+        "entry_b_time": "2026-04-24T19:30:15+00:00",
+        "entry_b_text": "Tom's Hardware: VRAM costs roughly 50% higher for cards currently on shelves, +$40-50 per 16GB; RTX 50-series +19% average over 3 months. GDDR6/6X = 20-25% of GPU production cost; AI-driven memory shortages pushing 2026 GPU prices sharply higher.",
+        "reason": "Numeric divergence 99.6% on metric (context: rtx): new=19.0, existing=5090.0, threshold=10%",
+        "detected": "2026-04-24T19:30:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:15Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-22T18:47:00+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Current (April 2026) RTX 5080 spot price is ~25% above MSRP — within H2 band. t2_street_price_normalized (within 15% of MSRP for 3 months) NOT fired. anti_h2_extreme_escalation (5090 >200% MSRP for 1 month) NOT fired (5090 at ~91%). Not recycled_intel vs ev_003: ev_003 was Q1 2026 data with higher spreads (5090 at 75-200%); this is April 2026 snapshot showing partial softening on 5080 but persistent premium. H2 weighted highest since current 5080 price sits squarely in H2 band with 2.5yr runway.",
+        "entry_b_time": "2026-04-24T19:30:15+00:00",
+        "entry_b_text": "Tom's Hardware: VRAM costs roughly 50% higher for cards currently on shelves, +$40-50 per 16GB; RTX 50-series +19% average over 3 months. GDDR6/6X = 20-25% of GPU production cost; AI-driven memory shortages pushing 2026 GPU prices sharply higher.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: higher, months, rtx",
+        "detected": "2026-04-24T19:30:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:15Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-22T18:47:00+00:00",
+        "entry_a_text": "April 2026 street price snapshot: RTX 5080 at $1,249 on Amazon (~25% above $999 MSRP); RTX 5090 at $3,818 on Amazon (~91% above $1,999 MSRP); cheapest AIB 5090 (ASUS TUF) at $2,909 (~46% above MSRP). Per BestValueGPU / TrackaLacker / Tom's Hardware trackers. RTX 5080 premium in H2 band (20-50%); RTX 5090 premium straddling H2/H3 boundary. 90-day rolling average not yet established.",
+        "entry_b_time": "2026-04-24T19:30:15+00:00",
+        "entry_b_text": "Tom's Hardware: VRAM costs roughly 50% higher for cards currently on shelves, +$40-50 per 16GB; RTX 50-series +19% average over 3 months. GDDR6/6X = 20-25% of GPU production cost; AI-driven memory shortages pushing 2026 GPU prices sharply higher.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: average, hardware, rtx, tom",
+        "detected": "2026-04-24T19:30:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:15Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-22T18:46:44+00:00",
+        "entry_a_text": "SemiAnalysis (via Tom's Hardware, 2026-04): Memory will consume ~30% of hyperscaler AI data center spending in CY2026, a 4x increase over 2023 (~8%). HBM demand growing 80-100%/yr vs supply growing 50-60%/yr; gap not expected to close until 2028-2029. HBM3E and HBM4 supply fully allocated through 2026 with hyperscalers locking multi-year contracts. NVIDIA retains preferential supply terms; AMD structurally more exposed to memory cost inflation.",
+        "entry_b_time": "2026-04-24T19:30:15+00:00",
+        "entry_b_text": "Tom's Hardware: VRAM costs roughly 50% higher for cards currently on shelves, +$40-50 per 16GB; RTX 50-series +19% average over 3 months. GDDR6/6X = 20-25% of GPU production cost; AI-driven memory shortages pushing 2026 GPU prices sharply higher.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: cost, hardware, memory, tom",
+        "detected": "2026-04-24T19:30:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-22T00:00:00Z",
+        "entry_a_text": "Multiple sources confirm consumer GPU prices elevated significantly vs. MSRP in Q1 2026, driven by AI/data-center demand crowding out GDDR7 and HBM supply. RTX 5090 ($1,999 MSRP) trading at $3,000-$6,000 street (75-200% above MSRP); RTX 5080 ($999 MSRP) at $1,599+ retail (45-60% above MSRP). RTX 5090 Founders Edition sold out in 8 minutes at launch. Server ECC RAM prices roughly doubled since Q3 2025. AI projected to consume ~20% of total DRAM production in 2026. 30-40% reduction in consumer GPU production allocation reported. Sources: TechSpot Q1 2026 GPU Pricing Update; BuySellRam memory economics; WccFTech RTX 5090 price trajectory; TrackaLacker RTX 5090 tracker; XDA Developers.",
+        "entry_b_time": "2026-04-24T19:30:15+00:00",
+        "entry_b_text": "Tom's Hardware: VRAM costs roughly 50% higher for cards currently on shelves, +$40-50 per 16GB; RTX 50-series +19% average over 3 months. GDDR6/6X = 20-25% of GPU production cost; AI-driven memory shortages pushing 2026 GPU prices sharply higher.",
+        "reason": "Numeric divergence 99.6% on metric (context: rtx): new=19.0, existing=5090.0, threshold=10%",
+        "detected": "2026-04-24T19:30:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-22T17:42:00Z",
+        "entry_a_text": "@proptermalone responded: 'yeah, that's a short term market problem.' @lowrhoufo.bsky.social replied: 'Depends a lot on what short-term means imo, but it passes the sniff test on like a 10 year horizon for me.'",
+        "entry_b_time": "2026-04-24T19:30:15+00:00",
+        "entry_b_text": "Tom's Hardware: VRAM costs roughly 50% higher for cards currently on shelves, +$40-50 per 16GB; RTX 50-series +19% average over 3 months. GDDR6/6X = 20-25% of GPU production cost; AI-driven memory shortages pushing 2026 GPU prices sharply higher.",
+        "reason": "Numeric divergence 80.0% on metric (context: for): new=50.0, existing=10.0, threshold=10%",
+        "detected": "2026-04-24T19:30:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:15Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-22T17:41:00Z",
+        "entry_a_text": "@lastnpcalex.agency posted on Bluesky: 'I think that misunderstands the mechanism though. AI corps GPU demand 2x'd VRAM prices for consumers in < 1 quarter.' Responding to @proptermalone's claim that AI corps lack moat. No data source cited for the 2x figure.",
+        "entry_b_time": "2026-04-24T19:30:15+00:00",
+        "entry_b_text": "Tom's Hardware: VRAM costs roughly 50% higher for cards currently on shelves, +$40-50 per 16GB; RTX 50-series +19% average over 3 months. GDDR6/6X = 20-25% of GPU production cost; AI-driven memory shortages pushing 2026 GPU prices sharply higher.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: gpu, prices, vram",
+        "detected": "2026-04-24T19:30:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T19:30:15+00:00",
+        "entry_a_text": "Tom's Hardware: VRAM costs roughly 50% higher for cards currently on shelves, +$40-50 per 16GB; RTX 50-series +19% average over 3 months. GDDR6/6X = 20-25% of GPU production cost; AI-driven memory shortages pushing 2026 GPU prices sharply higher.",
+        "entry_b_time": "2026-04-25T13:19:54+00:00",
+        "entry_b_text": "RTX 5090 selling ~$3,899 on Amazon vs $1,999 MSRP (~95% premium); GDDR7 supply structurally constrained by AI demand; AIB models start ~$2,900 and exceed $5,000 for liquid-cooled variants. NVIDIA prototype 128GB RTX 5090 priced at $13,000.",
+        "reason": "Numeric divergence 99.6% on metric (context: rtx): new=5090.0, existing=19.0, threshold=10%",
+        "detected": "2026-04-25T13:19:54Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:54Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T13:49:16+00:00",
+        "entry_a_text": "April 2026: RTX 5090 ($1,999 MSRP) street prices $2,900-$3,400 mid-range, premium/liquid variants >$5,000; most units 75%+ over MSRP. Memory scarcity described as structural (data-center AI demand competing with consumer GDDR7). RTX 5080 similarly elevated. No sign of mid-2026 reversion.",
+        "entry_b_time": "2026-04-25T13:19:54+00:00",
+        "entry_b_text": "RTX 5090 selling ~$3,899 on Amazon vs $1,999 MSRP (~95% premium); GDDR7 supply structurally constrained by AI demand; AIB models start ~$2,900 and exceed $5,000 for liquid-cooled variants. NVIDIA prototype 128GB RTX 5090 priced at $13,000.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: demand, gddr, liquid, msrp, premium",
+        "detected": "2026-04-25T13:19:54Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:54Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:42+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: 53% premium sustained with structural GDDR7 shortage supports H3 (50-100% elevation); slight uptick toward H4 given specialty pricing.",
+        "entry_b_time": "2026-04-25T13:19:54+00:00",
+        "entry_b_text": "RTX 5090 selling ~$3,899 on Amazon vs $1,999 MSRP (~95% premium); GDDR7 supply structurally constrained by AI demand; AIB models start ~$2,900 and exceed $5,000 for liquid-cooled variants. NVIDIA prototype 128GB RTX 5090 priced at $13,000.",
+        "reason": "Numeric divergence 94.7% on metric (context: premium): new=999.0, existing=53.0, threshold=10%",
+        "detected": "2026-04-25T13:19:54Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:54Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:42+00:00",
+        "entry_a_text": "RTX 5090 floor price reached $3,049.99 by February 2026 (~53% above MSRP); GDDR7 chronically undersupplied with AI data centers prioritized; 128GB VRAM 'prototype' variant selling at $13,000.",
+        "entry_b_time": "2026-04-25T13:19:54+00:00",
+        "entry_b_text": "RTX 5090 selling ~$3,899 on Amazon vs $1,999 MSRP (~95% premium); GDDR7 supply structurally constrained by AI demand; AIB models start ~$2,900 and exceed $5,000 for liquid-cooled variants. NVIDIA prototype 128GB RTX 5090 priced at $13,000.",
+        "reason": "Numeric divergence 99.0% on metric (context: $3): new=5090.0, existing=49.99, threshold=10%",
+        "detected": "2026-04-25T13:19:54Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:54Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-22T18:47:00+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Current (April 2026) RTX 5080 spot price is ~25% above MSRP — within H2 band. t2_street_price_normalized (within 15% of MSRP for 3 months) NOT fired. anti_h2_extreme_escalation (5090 >200% MSRP for 1 month) NOT fired (5090 at ~91%). Not recycled_intel vs ev_003: ev_003 was Q1 2026 data with higher spreads (5090 at 75-200%); this is April 2026 snapshot showing partial softening on 5080 but persistent premium. H2 weighted highest since current 5080 price sits squarely in H2 band with 2.5yr runway.",
+        "entry_b_time": "2026-04-25T13:19:54+00:00",
+        "entry_b_text": "RTX 5090 selling ~$3,899 on Amazon vs $1,999 MSRP (~95% premium); GDDR7 supply structurally constrained by AI demand; AIB models start ~$2,900 and exceed $5,000 for liquid-cooled variants. NVIDIA prototype 128GB RTX 5090 priced at $13,000.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: msrp, premium, rtx",
+        "detected": "2026-04-25T13:19:54Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:54Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-22T18:47:00+00:00",
+        "entry_a_text": "April 2026 street price snapshot: RTX 5080 at $1,249 on Amazon (~25% above $999 MSRP); RTX 5090 at $3,818 on Amazon (~91% above $1,999 MSRP); cheapest AIB 5090 (ASUS TUF) at $2,909 (~46% above MSRP). Per BestValueGPU / TrackaLacker / Tom's Hardware trackers. RTX 5080 premium in H2 band (20-50%); RTX 5090 premium straddling H2/H3 boundary. 90-day rolling average not yet established.",
+        "entry_b_time": "2026-04-25T13:19:54+00:00",
+        "entry_b_text": "RTX 5090 selling ~$3,899 on Amazon vs $1,999 MSRP (~95% premium); GDDR7 supply structurally constrained by AI demand; AIB models start ~$2,900 and exceed $5,000 for liquid-cooled variants. NVIDIA prototype 128GB RTX 5090 priced at $13,000.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: aib, amazon, msrp, premium, rtx",
+        "detected": "2026-04-25T13:19:54Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:54Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-22T18:46:44+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Structural HBM supply constraint projected through 2028-2029 per SemiAnalysis. Hyperscaler memory capex 4x since 2023 indicates sustained demand pressure. No pre-committed indicator fires (t1_hbm_supply_normalization requires consumer allocation RESTORED, not constrained). Directionally supports H3/H4. Likelihoods weight H3 highest given projected supply gap timing aligns with 2028 resolution.",
+        "entry_b_time": "2026-04-25T13:19:54+00:00",
+        "entry_b_text": "RTX 5090 selling ~$3,899 on Amazon vs $1,999 MSRP (~95% premium); GDDR7 supply structurally constrained by AI demand; AIB models start ~$2,900 and exceed $5,000 for liquid-cooled variants. NVIDIA prototype 128GB RTX 5090 priced at $13,000.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: constrained, demand, supply",
+        "detected": "2026-04-25T13:19:54Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:54Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-22T18:46:44+00:00",
+        "entry_a_text": "SemiAnalysis (via Tom's Hardware, 2026-04): Memory will consume ~30% of hyperscaler AI data center spending in CY2026, a 4x increase over 2023 (~8%). HBM demand growing 80-100%/yr vs supply growing 50-60%/yr; gap not expected to close until 2028-2029. HBM3E and HBM4 supply fully allocated through 2026 with hyperscalers locking multi-year contracts. NVIDIA retains preferential supply terms; AMD structurally more exposed to memory cost inflation.",
+        "entry_b_time": "2026-04-25T13:19:54+00:00",
+        "entry_b_text": "RTX 5090 selling ~$3,899 on Amazon vs $1,999 MSRP (~95% premium); GDDR7 supply structurally constrained by AI demand; AIB models start ~$2,900 and exceed $5,000 for liquid-cooled variants. NVIDIA prototype 128GB RTX 5090 priced at $13,000.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: demand, nvidia, structurally, supply",
+        "detected": "2026-04-25T13:19:54Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:54Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-22T00:00:00Z",
+        "entry_a_text": "Multiple sources confirm consumer GPU prices elevated significantly vs. MSRP in Q1 2026, driven by AI/data-center demand crowding out GDDR7 and HBM supply. RTX 5090 ($1,999 MSRP) trading at $3,000-$6,000 street (75-200% above MSRP); RTX 5080 ($999 MSRP) at $1,599+ retail (45-60% above MSRP). RTX 5090 Founders Edition sold out in 8 minutes at launch. Server ECC RAM prices roughly doubled since Q3 2025. AI projected to consume ~20% of total DRAM production in 2026. 30-40% reduction in consumer GPU production allocation reported. Sources: TechSpot Q1 2026 GPU Pricing Update; BuySellRam memory economics; WccFTech RTX 5090 price trajectory; TrackaLacker RTX 5090 tracker; XDA Developers.",
+        "entry_b_time": "2026-04-25T13:19:54+00:00",
+        "entry_b_text": "RTX 5090 selling ~$3,899 on Amazon vs $1,999 MSRP (~95% premium); GDDR7 supply structurally constrained by AI demand; AIB models start ~$2,900 and exceed $5,000 for liquid-cooled variants. NVIDIA prototype 128GB RTX 5090 priced at $13,000.",
+        "reason": "Numeric divergence 100.0% on metric (context: rtx): new=5090.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-25T13:19:54Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:54Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-22T17:42:00Z",
+        "entry_a_text": "@proptermalone responded: 'yeah, that's a short term market problem.' @lowrhoufo.bsky.social replied: 'Depends a lot on what short-term means imo, but it passes the sniff test on like a 10 year horizon for me.'",
+        "entry_b_time": "2026-04-25T13:19:54+00:00",
+        "entry_b_text": "RTX 5090 selling ~$3,899 on Amazon vs $1,999 MSRP (~95% premium); GDDR7 supply structurally constrained by AI demand; AIB models start ~$2,900 and exceed $5,000 for liquid-cooled variants. NVIDIA prototype 128GB RTX 5090 priced at $13,000.",
+        "reason": "Numeric divergence 70.0% on metric (context: on): new=3.0, existing=10.0, threshold=10%",
+        "detected": "2026-04-25T13:19:54Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:54Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-22T17:41:00Z",
+        "entry_a_text": "@lastnpcalex.agency posted on Bluesky: 'I think that misunderstands the mechanism though. AI corps GPU demand 2x'd VRAM prices for consumers in < 1 quarter.' Responding to @proptermalone's claim that AI corps lack moat. No data source cited for the 2x figure.",
+        "entry_b_time": "2026-04-25T13:19:54+00:00",
+        "entry_b_text": "RTX 5090 selling ~$3,899 on Amazon vs $1,999 MSRP (~95% premium); GDDR7 supply structurally constrained by AI demand; AIB models start ~$2,900 and exceed $5,000 for liquid-cooled variants. NVIDIA prototype 128GB RTX 5090 priced at $13,000.",
+        "reason": "Numeric divergence 80.0% on metric (context: for): new=5.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-25T13:19:54Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:54Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T13:19:54+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-25T14:24:51+00:00",
+        "entry_b_text": "April 2026: RTX 5090 retail $3,899 on Amazon (~95% above $1,999 MSRP); RTX 5080 ~$1,300+ vs $999 MSRP. Multiple price trackers report 5090/5080 priced 75%+ above MSRP. AIB models $2,900-$3,400+; premium liquid-cooled $5,000+. AMD/NVIDIA reportedly continuing Q1 2026 consumer price increases.",
+        "reason": "Numeric divergence 99.9% on metric (context: .): new=5.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-25T14:24:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:51Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T13:19:54+00:00",
+        "entry_a_text": "RTX 5090 selling ~$3,899 on Amazon vs $1,999 MSRP (~95% premium); GDDR7 supply structurally constrained by AI demand; AIB models start ~$2,900 and exceed $5,000 for liquid-cooled variants. NVIDIA prototype 128GB RTX 5090 priced at $13,000.",
+        "entry_b_time": "2026-04-25T14:24:51+00:00",
+        "entry_b_text": "April 2026: RTX 5090 retail $3,899 on Amazon (~95% above $1,999 MSRP); RTX 5080 ~$1,300+ vs $999 MSRP. Multiple price trackers report 5090/5080 priced 75%+ above MSRP. AIB models $2,900-$3,400+; premium liquid-cooled $5,000+. AMD/NVIDIA reportedly continuing Q1 2026 consumer price increases.",
+        "reason": "Numeric divergence 60.2% on metric (context: rtx): new=2026.0, existing=5090.0, threshold=10%",
+        "detected": "2026-04-25T14:24:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:51Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T19:30:15+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-25T14:24:51+00:00",
+        "entry_b_text": "April 2026: RTX 5090 retail $3,899 on Amazon (~95% above $1,999 MSRP); RTX 5080 ~$1,300+ vs $999 MSRP. Multiple price trackers report 5090/5080 priced 75%+ above MSRP. AIB models $2,900-$3,400+; premium liquid-cooled $5,000+. AMD/NVIDIA reportedly continuing Q1 2026 consumer price increases.",
+        "reason": "Numeric divergence 99.9% on metric (context: .): new=5.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-25T14:24:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:51Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T19:30:15+00:00",
+        "entry_a_text": "Tom's Hardware: VRAM costs roughly 50% higher for cards currently on shelves, +$40-50 per 16GB; RTX 50-series +19% average over 3 months. GDDR6/6X = 20-25% of GPU production cost; AI-driven memory shortages pushing 2026 GPU prices sharply higher.",
+        "entry_b_time": "2026-04-25T14:24:51+00:00",
+        "entry_b_text": "April 2026: RTX 5090 retail $3,899 on Amazon (~95% above $1,999 MSRP); RTX 5080 ~$1,300+ vs $999 MSRP. Multiple price trackers report 5090/5080 priced 75%+ above MSRP. AIB models $2,900-$3,400+; premium liquid-cooled $5,000+. AMD/NVIDIA reportedly continuing Q1 2026 consumer price increases.",
+        "reason": "Numeric divergence 99.1% on metric (context: rtx): new=2026.0, existing=19.0, threshold=10%",
+        "detected": "2026-04-25T14:24:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:51Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:16+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-25T14:24:51+00:00",
+        "entry_b_text": "April 2026: RTX 5090 retail $3,899 on Amazon (~95% above $1,999 MSRP); RTX 5080 ~$1,300+ vs $999 MSRP. Multiple price trackers report 5090/5080 priced 75%+ above MSRP. AIB models $2,900-$3,400+; premium liquid-cooled $5,000+. AMD/NVIDIA reportedly continuing Q1 2026 consumer price increases.",
+        "reason": "Numeric divergence 99.9% on metric (context: .): new=5.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-25T14:24:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:51Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T13:49:16+00:00",
+        "entry_a_text": "April 2026: RTX 5090 ($1,999 MSRP) street prices $2,900-$3,400 mid-range, premium/liquid variants >$5,000; most units 75%+ over MSRP. Memory scarcity described as structural (data-center AI demand competing with consumer GDDR7). RTX 5080 similarly elevated. No sign of mid-2026 reversion.",
+        "entry_b_time": "2026-04-25T14:24:51+00:00",
+        "entry_b_text": "April 2026: RTX 5090 retail $3,899 on Amazon (~95% above $1,999 MSRP); RTX 5080 ~$1,300+ vs $999 MSRP. Multiple price trackers report 5090/5080 priced 75%+ above MSRP. AIB models $2,900-$3,400+; premium liquid-cooled $5,000+. AMD/NVIDIA reportedly continuing Q1 2026 consumer price increases.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: april, consumer, liquid, msrp, premium",
+        "detected": "2026-04-25T14:24:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:51Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:42+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: 53% premium sustained with structural GDDR7 shortage supports H3 (50-100% elevation); slight uptick toward H4 given specialty pricing.",
+        "entry_b_time": "2026-04-25T14:24:51+00:00",
+        "entry_b_text": "April 2026: RTX 5090 retail $3,899 on Amazon (~95% above $1,999 MSRP); RTX 5080 ~$1,300+ vs $999 MSRP. Multiple price trackers report 5090/5080 priced 75%+ above MSRP. AIB models $2,900-$3,400+; premium liquid-cooled $5,000+. AMD/NVIDIA reportedly continuing Q1 2026 consumer price increases.",
+        "reason": "Numeric divergence 96.2% on metric (context: premium): new=2.0, existing=53.0, threshold=10%",
+        "detected": "2026-04-25T14:24:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:51Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:42+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-25T14:24:51+00:00",
+        "entry_b_text": "April 2026: RTX 5090 retail $3,899 on Amazon (~95% above $1,999 MSRP); RTX 5080 ~$1,300+ vs $999 MSRP. Multiple price trackers report 5090/5080 priced 75%+ above MSRP. AIB models $2,900-$3,400+; premium liquid-cooled $5,000+. AMD/NVIDIA reportedly continuing Q1 2026 consumer price increases.",
+        "reason": "Numeric divergence 99.9% on metric (context: .): new=5.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-25T14:24:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:51Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:42+00:00",
+        "entry_a_text": "RTX 5090 floor price reached $3,049.99 by February 2026 (~53% above MSRP); GDDR7 chronically undersupplied with AI data centers prioritized; 128GB VRAM 'prototype' variant selling at $13,000.",
+        "entry_b_time": "2026-04-25T14:24:51+00:00",
+        "entry_b_text": "April 2026: RTX 5090 retail $3,899 on Amazon (~95% above $1,999 MSRP); RTX 5080 ~$1,300+ vs $999 MSRP. Multiple price trackers report 5090/5080 priced 75%+ above MSRP. AIB models $2,900-$3,400+; premium liquid-cooled $5,000+. AMD/NVIDIA reportedly continuing Q1 2026 consumer price increases.",
+        "reason": "Numeric divergence 60.2% on metric (context: rtx): new=2026.0, existing=5090.0, threshold=10%",
+        "detected": "2026-04-25T14:24:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:51Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-22T18:47:00+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Current (April 2026) RTX 5080 spot price is ~25% above MSRP — within H2 band. t2_street_price_normalized (within 15% of MSRP for 3 months) NOT fired. anti_h2_extreme_escalation (5090 >200% MSRP for 1 month) NOT fired (5090 at ~91%). Not recycled_intel vs ev_003: ev_003 was Q1 2026 data with higher spreads (5090 at 75-200%); this is April 2026 snapshot showing partial softening on 5080 but persistent premium. H2 weighted highest since current 5080 price sits squarely in H2 band with 2.5yr runway.",
+        "entry_b_time": "2026-04-25T14:24:51+00:00",
+        "entry_b_text": "April 2026: RTX 5090 retail $3,899 on Amazon (~95% above $1,999 MSRP); RTX 5080 ~$1,300+ vs $999 MSRP. Multiple price trackers report 5090/5080 priced 75%+ above MSRP. AIB models $2,900-$3,400+; premium liquid-cooled $5,000+. AMD/NVIDIA reportedly continuing Q1 2026 consumer price increases.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: above, april, msrp, premium, price",
+        "detected": "2026-04-25T14:24:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:51Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-22T18:47:00+00:00",
+        "entry_a_text": "April 2026 street price snapshot: RTX 5080 at $1,249 on Amazon (~25% above $999 MSRP); RTX 5090 at $3,818 on Amazon (~91% above $1,999 MSRP); cheapest AIB 5090 (ASUS TUF) at $2,909 (~46% above MSRP). Per BestValueGPU / TrackaLacker / Tom's Hardware trackers. RTX 5080 premium in H2 band (20-50%); RTX 5090 premium straddling H2/H3 boundary. 90-day rolling average not yet established.",
+        "entry_b_time": "2026-04-25T14:24:51+00:00",
+        "entry_b_text": "April 2026: RTX 5090 retail $3,899 on Amazon (~95% above $1,999 MSRP); RTX 5080 ~$1,300+ vs $999 MSRP. Multiple price trackers report 5090/5080 priced 75%+ above MSRP. AIB models $2,900-$3,400+; premium liquid-cooled $5,000+. AMD/NVIDIA reportedly continuing Q1 2026 consumer price increases.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: above, aib, amazon, april, msrp",
+        "detected": "2026-04-25T14:24:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:51Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-22T18:46:44+00:00",
+        "entry_a_text": "SemiAnalysis (via Tom's Hardware, 2026-04): Memory will consume ~30% of hyperscaler AI data center spending in CY2026, a 4x increase over 2023 (~8%). HBM demand growing 80-100%/yr vs supply growing 50-60%/yr; gap not expected to close until 2028-2029. HBM3E and HBM4 supply fully allocated through 2026 with hyperscalers locking multi-year contracts. NVIDIA retains preferential supply terms; AMD structurally more exposed to memory cost inflation.",
+        "entry_b_time": "2026-04-25T14:24:51+00:00",
+        "entry_b_text": "April 2026: RTX 5090 retail $3,899 on Amazon (~95% above $1,999 MSRP); RTX 5080 ~$1,300+ vs $999 MSRP. Multiple price trackers report 5090/5080 priced 75%+ above MSRP. AIB models $2,900-$3,400+; premium liquid-cooled $5,000+. AMD/NVIDIA reportedly continuing Q1 2026 consumer price increases.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: amd, nvidia",
+        "detected": "2026-04-25T14:24:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:51Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-22T00:00:00Z",
+        "entry_a_text": "Multiple sources confirm consumer GPU prices elevated significantly vs. MSRP in Q1 2026, driven by AI/data-center demand crowding out GDDR7 and HBM supply. RTX 5090 ($1,999 MSRP) trading at $3,000-$6,000 street (75-200% above MSRP); RTX 5080 ($999 MSRP) at $1,599+ retail (45-60% above MSRP). RTX 5090 Founders Edition sold out in 8 minutes at launch. Server ECC RAM prices roughly doubled since Q3 2025. AI projected to consume ~20% of total DRAM production in 2026. 30-40% reduction in consumer GPU production allocation reported. Sources: TechSpot Q1 2026 GPU Pricing Update; BuySellRam memory economics; WccFTech RTX 5090 price trajectory; TrackaLacker RTX 5090 tracker; XDA Developers.",
+        "entry_b_time": "2026-04-25T14:24:51+00:00",
+        "entry_b_text": "April 2026: RTX 5090 retail $3,899 on Amazon (~95% above $1,999 MSRP); RTX 5080 ~$1,300+ vs $999 MSRP. Multiple price trackers report 5090/5080 priced 75%+ above MSRP. AIB models $2,900-$3,400+; premium liquid-cooled $5,000+. AMD/NVIDIA reportedly continuing Q1 2026 consumer price increases.",
+        "reason": "Numeric divergence 60.2% on metric (context: rtx): new=2026.0, existing=5090.0, threshold=10%",
+        "detected": "2026-04-25T14:24:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:51Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-22T17:42:00Z",
+        "entry_a_text": "@proptermalone responded: 'yeah, that's a short term market problem.' @lowrhoufo.bsky.social replied: 'Depends a lot on what short-term means imo, but it passes the sniff test on like a 10 year horizon for me.'",
+        "entry_b_time": "2026-04-25T14:24:51+00:00",
+        "entry_b_text": "April 2026: RTX 5090 retail $3,899 on Amazon (~95% above $1,999 MSRP); RTX 5080 ~$1,300+ vs $999 MSRP. Multiple price trackers report 5090/5080 priced 75%+ above MSRP. AIB models $2,900-$3,400+; premium liquid-cooled $5,000+. AMD/NVIDIA reportedly continuing Q1 2026 consumer price increases.",
+        "reason": "Numeric divergence 70.0% on metric (context: on): new=3.0, existing=10.0, threshold=10%",
+        "detected": "2026-04-25T14:24:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:51Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-26T03:10:36+00:00",
+        "entry_a_text": "INDICATOR ADDED: t3_premium_drift_to_h4 (tier3_suggestive). posteriorEffect=H4 +5pp, H3 -4pp, H2 -1pp. Rationale: Distinguishes H3 band (50-100% premium) from H4 escalation. ev_006 ($13k 128GB variant) and ev_009/ev_010 (RTX 5090 ~95% premium) sit on the H3/H4 boundary with no firing path. Without this, H4 cannot accumulate evidence even when reality drifts into its territory..",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "April 2026 retail RTX 5090: Founders Edition $1,999.99 MSRP largely unavailable; AIB cards $2,909-$3,510 (75%+ above MSRP); liquid variants past $5,000. RTX 5090/5080 most price-elevated in lineup with GDDR7 memory shortage cited as bottleneck driver.",
+        "reason": "Numeric divergence 60.2% on metric (context: rtx): new=2026.0, existing=5090.0, threshold=10%",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T14:24:51+00:00",
+        "entry_a_text": "April 2026: RTX 5090 retail $3,899 on Amazon (~95% above $1,999 MSRP); RTX 5080 ~$1,300+ vs $999 MSRP. Multiple price trackers report 5090/5080 priced 75%+ above MSRP. AIB models $2,900-$3,400+; premium liquid-cooled $5,000+. AMD/NVIDIA reportedly continuing Q1 2026 consumer price increases.",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "April 2026 retail RTX 5090: Founders Edition $1,999.99 MSRP largely unavailable; AIB cards $2,909-$3,510 (75%+ above MSRP); liquid variants past $5,000. RTX 5090/5080 most price-elevated in lineup with GDDR7 memory shortage cited as bottleneck driver.",
+        "reason": "Numeric divergence 60.2% on metric (context: april, retail, rtx): new=2026.0, existing=5090.0, threshold=10%",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T13:19:54+00:00",
+        "entry_a_text": "RTX 5090 selling ~$3,899 on Amazon vs $1,999 MSRP (~95% premium); GDDR7 supply structurally constrained by AI demand; AIB models start ~$2,900 and exceed $5,000 for liquid-cooled variants. NVIDIA prototype 128GB RTX 5090 priced at $13,000.",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "April 2026 retail RTX 5090: Founders Edition $1,999.99 MSRP largely unavailable; AIB cards $2,909-$3,510 (75%+ above MSRP); liquid variants past $5,000. RTX 5090/5080 most price-elevated in lineup with GDDR7 memory shortage cited as bottleneck driver.",
+        "reason": "Numeric divergence 60.2% on metric (context: rtx): new=2026.0, existing=5090.0, threshold=10%",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T19:30:15+00:00",
+        "entry_a_text": "Tom's Hardware: VRAM costs roughly 50% higher for cards currently on shelves, +$40-50 per 16GB; RTX 50-series +19% average over 3 months. GDDR6/6X = 20-25% of GPU production cost; AI-driven memory shortages pushing 2026 GPU prices sharply higher.",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "April 2026 retail RTX 5090: Founders Edition $1,999.99 MSRP largely unavailable; AIB cards $2,909-$3,510 (75%+ above MSRP); liquid variants past $5,000. RTX 5090/5080 most price-elevated in lineup with GDDR7 memory shortage cited as bottleneck driver.",
+        "reason": "Numeric divergence 99.1% on metric (context: rtx): new=2026.0, existing=19.0, threshold=10%",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T13:49:16+00:00",
+        "entry_a_text": "April 2026: RTX 5090 ($1,999 MSRP) street prices $2,900-$3,400 mid-range, premium/liquid variants >$5,000; most units 75%+ over MSRP. Memory scarcity described as structural (data-center AI demand competing with consumer GDDR7). RTX 5080 similarly elevated. No sign of mid-2026 reversion.",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "April 2026 retail RTX 5090: Founders Edition $1,999.99 MSRP largely unavailable; AIB cards $2,909-$3,510 (75%+ above MSRP); liquid variants past $5,000. RTX 5090/5080 most price-elevated in lineup with GDDR7 memory shortage cited as bottleneck driver.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: april, elevated, gddr, liquid, memory",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:42+00:00",
+        "entry_a_text": "RTX 5090 floor price reached $3,049.99 by February 2026 (~53% above MSRP); GDDR7 chronically undersupplied with AI data centers prioritized; 128GB VRAM 'prototype' variant selling at $13,000.",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "April 2026 retail RTX 5090: Founders Edition $1,999.99 MSRP largely unavailable; AIB cards $2,909-$3,510 (75%+ above MSRP); liquid variants past $5,000. RTX 5090/5080 most price-elevated in lineup with GDDR7 memory shortage cited as bottleneck driver.",
+        "reason": "Numeric divergence 60.2% on metric (context: rtx): new=2026.0, existing=5090.0, threshold=10%",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-22T18:47:00+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Current (April 2026) RTX 5080 spot price is ~25% above MSRP — within H2 band. t2_street_price_normalized (within 15% of MSRP for 3 months) NOT fired. anti_h2_extreme_escalation (5090 >200% MSRP for 1 month) NOT fired (5090 at ~91%). Not recycled_intel vs ev_003: ev_003 was Q1 2026 data with higher spreads (5090 at 75-200%); this is April 2026 snapshot showing partial softening on 5080 but persistent premium. H2 weighted highest since current 5080 price sits squarely in H2 band with 2.5yr runway.",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "April 2026 retail RTX 5090: Founders Edition $1,999.99 MSRP largely unavailable; AIB cards $2,909-$3,510 (75%+ above MSRP); liquid variants past $5,000. RTX 5090/5080 most price-elevated in lineup with GDDR7 memory shortage cited as bottleneck driver.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: above, april, msrp, price, rtx",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-22T18:47:00+00:00",
+        "entry_a_text": "April 2026 street price snapshot: RTX 5080 at $1,249 on Amazon (~25% above $999 MSRP); RTX 5090 at $3,818 on Amazon (~91% above $1,999 MSRP); cheapest AIB 5090 (ASUS TUF) at $2,909 (~46% above MSRP). Per BestValueGPU / TrackaLacker / Tom's Hardware trackers. RTX 5080 premium in H2 band (20-50%); RTX 5090 premium straddling H2/H3 boundary. 90-day rolling average not yet established.",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "April 2026 retail RTX 5090: Founders Edition $1,999.99 MSRP largely unavailable; AIB cards $2,909-$3,510 (75%+ above MSRP); liquid variants past $5,000. RTX 5090/5080 most price-elevated in lineup with GDDR7 memory shortage cited as bottleneck driver.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: above, aib, april, msrp, price",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-22T00:00:00Z",
+        "entry_a_text": "Multiple sources confirm consumer GPU prices elevated significantly vs. MSRP in Q1 2026, driven by AI/data-center demand crowding out GDDR7 and HBM supply. RTX 5090 ($1,999 MSRP) trading at $3,000-$6,000 street (75-200% above MSRP); RTX 5080 ($999 MSRP) at $1,599+ retail (45-60% above MSRP). RTX 5090 Founders Edition sold out in 8 minutes at launch. Server ECC RAM prices roughly doubled since Q3 2025. AI projected to consume ~20% of total DRAM production in 2026. 30-40% reduction in consumer GPU production allocation reported. Sources: TechSpot Q1 2026 GPU Pricing Update; BuySellRam memory economics; WccFTech RTX 5090 price trajectory; TrackaLacker RTX 5090 tracker; XDA Developers.",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "April 2026 retail RTX 5090: Founders Edition $1,999.99 MSRP largely unavailable; AIB cards $2,909-$3,510 (75%+ above MSRP); liquid variants past $5,000. RTX 5090/5080 most price-elevated in lineup with GDDR7 memory shortage cited as bottleneck driver.",
+        "reason": "Numeric divergence 60.2% on metric (context: rtx): new=2026.0, existing=5090.0, threshold=10%",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-22T17:41:00Z",
+        "entry_a_text": "@lastnpcalex.agency posted on Bluesky: 'I think that misunderstands the mechanism though. AI corps GPU demand 2x'd VRAM prices for consumers in < 1 quarter.' Responding to @proptermalone's claim that AI corps lack moat. No data source cited for the 2x figure.",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "April 2026 retail RTX 5090: Founders Edition $1,999.99 MSRP largely unavailable; AIB cards $2,909-$3,510 (75%+ above MSRP); liquid variants past $5,000. RTX 5090/5080 most price-elevated in lineup with GDDR7 memory shortage cited as bottleneck driver.",
+        "reason": "Numeric divergence 100.0% on metric (context: in): new=5080.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-26T16:59:08+00:00",
+        "entry_a_text": "April 2026 retail RTX 5090: Founders Edition $1,999.99 MSRP largely unavailable; AIB cards $2,909-$3,510 (75%+ above MSRP); liquid variants past $5,000. RTX 5090/5080 most price-elevated in lineup with GDDR7 memory shortage cited as bottleneck driver.",
+        "entry_b_time": "2026-04-26T19:27:12+00:00",
+        "entry_b_text": "April 2026: NVIDIA RTX 5090 average street price ~$3,658 vs $1,999 MSRP — base models above $3,000, premium models above $5,000. GDDR7 chronic undersupply named primary driver; Tom's Hardware reports 128GB RTX 5090 prototype at $13,000. Trajectory pushing H3 toward H4 boundary.",
+        "reason": "Numeric divergence 60.2% on metric (context: rtx): new=2026.0, existing=5090.0, threshold=10%",
+        "detected": "2026-04-26T19:27:12Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:12Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-26T03:10:36+00:00",
+        "entry_a_text": "INDICATOR ADDED: t3_premium_drift_to_h4 (tier3_suggestive). posteriorEffect=H4 +5pp, H3 -4pp, H2 -1pp. Rationale: Distinguishes H3 band (50-100% premium) from H4 escalation. ev_006 ($13k 128GB variant) and ev_009/ev_010 (RTX 5090 ~95% premium) sit on the H3/H4 boundary with no firing path. Without this, H4 cannot accumulate evidence even when reality drifts into its territory..",
+        "entry_b_time": "2026-04-26T19:27:12+00:00",
+        "entry_b_text": "April 2026: NVIDIA RTX 5090 average street price ~$3,658 vs $1,999 MSRP — base models above $3,000, premium models above $5,000. GDDR7 chronic undersupply named primary driver; Tom's Hardware reports 128GB RTX 5090 prototype at $13,000. Trajectory pushing H3 toward H4 boundary.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: boundary, premium, rtx",
+        "detected": "2026-04-26T19:27:12Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:12Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-26T03:10:36+00:00",
+        "entry_a_text": "INDICATOR ADDED: t2_sustained_elevated_pricing (tier2_strong). posteriorEffect=H3 +8pp, H1 -3pp, H2 -3pp, H4 -2pp. Rationale: Closes 'none_impact_saturation' gap surfaced by ev_003-ev_010: 8 confirming DATA observations on H3-band pricing landed as NONE because no pro-H3 observable existed. Effect magnitude kept moderate because H3 already at 0.98 (limited room)..",
+        "entry_b_time": "2026-04-26T19:27:12+00:00",
+        "entry_b_text": "April 2026: NVIDIA RTX 5090 average street price ~$3,658 vs $1,999 MSRP — base models above $3,000, premium models above $5,000. GDDR7 chronic undersupply named primary driver; Tom's Hardware reports 128GB RTX 5090 prototype at $13,000. Trajectory pushing H3 toward H4 boundary.",
+        "reason": "Numeric divergence 100.0% on metric (context: at): new=5090.0, existing=0.98, threshold=10%",
+        "detected": "2026-04-26T19:27:12Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:12Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T14:24:51+00:00",
+        "entry_a_text": "April 2026: RTX 5090 retail $3,899 on Amazon (~95% above $1,999 MSRP); RTX 5080 ~$1,300+ vs $999 MSRP. Multiple price trackers report 5090/5080 priced 75%+ above MSRP. AIB models $2,900-$3,400+; premium liquid-cooled $5,000+. AMD/NVIDIA reportedly continuing Q1 2026 consumer price increases.",
+        "entry_b_time": "2026-04-26T19:27:12+00:00",
+        "entry_b_text": "April 2026: NVIDIA RTX 5090 average street price ~$3,658 vs $1,999 MSRP — base models above $3,000, premium models above $5,000. GDDR7 chronic undersupply named primary driver; Tom's Hardware reports 128GB RTX 5090 prototype at $13,000. Trajectory pushing H3 toward H4 boundary.",
+        "reason": "Numeric divergence 60.2% on metric (context: april, rtx): new=2026.0, existing=5090.0, threshold=10%",
+        "detected": "2026-04-26T19:27:12Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:12Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T13:19:54+00:00",
+        "entry_a_text": "RTX 5090 selling ~$3,899 on Amazon vs $1,999 MSRP (~95% premium); GDDR7 supply structurally constrained by AI demand; AIB models start ~$2,900 and exceed $5,000 for liquid-cooled variants. NVIDIA prototype 128GB RTX 5090 priced at $13,000.",
+        "entry_b_time": "2026-04-26T19:27:12+00:00",
+        "entry_b_text": "April 2026: NVIDIA RTX 5090 average street price ~$3,658 vs $1,999 MSRP — base models above $3,000, premium models above $5,000. GDDR7 chronic undersupply named primary driver; Tom's Hardware reports 128GB RTX 5090 prototype at $13,000. Trajectory pushing H3 toward H4 boundary.",
+        "reason": "Numeric divergence 60.2% on metric (context: rtx): new=2026.0, existing=5090.0, threshold=10%",
+        "detected": "2026-04-26T19:27:12Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:12Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T19:30:15+00:00",
+        "entry_a_text": "Tom's Hardware: VRAM costs roughly 50% higher for cards currently on shelves, +$40-50 per 16GB; RTX 50-series +19% average over 3 months. GDDR6/6X = 20-25% of GPU production cost; AI-driven memory shortages pushing 2026 GPU prices sharply higher.",
+        "entry_b_time": "2026-04-26T19:27:12+00:00",
+        "entry_b_text": "April 2026: NVIDIA RTX 5090 average street price ~$3,658 vs $1,999 MSRP — base models above $3,000, premium models above $5,000. GDDR7 chronic undersupply named primary driver; Tom's Hardware reports 128GB RTX 5090 prototype at $13,000. Trajectory pushing H3 toward H4 boundary.",
+        "reason": "Numeric divergence 99.1% on metric (context: rtx): new=2026.0, existing=19.0, threshold=10%",
+        "detected": "2026-04-26T19:27:12Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:12Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T13:49:16+00:00",
+        "entry_a_text": "April 2026: RTX 5090 ($1,999 MSRP) street prices $2,900-$3,400 mid-range, premium/liquid variants >$5,000; most units 75%+ over MSRP. Memory scarcity described as structural (data-center AI demand competing with consumer GDDR7). RTX 5080 similarly elevated. No sign of mid-2026 reversion.",
+        "entry_b_time": "2026-04-26T19:27:12+00:00",
+        "entry_b_text": "April 2026: NVIDIA RTX 5090 average street price ~$3,658 vs $1,999 MSRP — base models above $3,000, premium models above $5,000. GDDR7 chronic undersupply named primary driver; Tom's Hardware reports 128GB RTX 5090 prototype at $13,000. Trajectory pushing H3 toward H4 boundary.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: april, gddr, msrp, premium, rtx",
+        "detected": "2026-04-26T19:27:12Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:12Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:42+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: 53% premium sustained with structural GDDR7 shortage supports H3 (50-100% elevation); slight uptick toward H4 given specialty pricing.",
+        "entry_b_time": "2026-04-26T19:27:12+00:00",
+        "entry_b_text": "April 2026: NVIDIA RTX 5090 average street price ~$3,658 vs $1,999 MSRP — base models above $3,000, premium models above $5,000. GDDR7 chronic undersupply named primary driver; Tom's Hardware reports 128GB RTX 5090 prototype at $13,000. Trajectory pushing H3 toward H4 boundary.",
+        "reason": "Numeric divergence 94.3% on metric (context: premium): new=3.0, existing=53.0, threshold=10%",
+        "detected": "2026-04-26T19:27:12Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:12Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:42+00:00",
+        "entry_a_text": "RTX 5090 floor price reached $3,049.99 by February 2026 (~53% above MSRP); GDDR7 chronically undersupplied with AI data centers prioritized; 128GB VRAM 'prototype' variant selling at $13,000.",
+        "entry_b_time": "2026-04-26T19:27:12+00:00",
+        "entry_b_text": "April 2026: NVIDIA RTX 5090 average street price ~$3,658 vs $1,999 MSRP — base models above $3,000, premium models above $5,000. GDDR7 chronic undersupply named primary driver; Tom's Hardware reports 128GB RTX 5090 prototype at $13,000. Trajectory pushing H3 toward H4 boundary.",
+        "reason": "Numeric divergence 60.2% on metric (context: rtx): new=2026.0, existing=5090.0, threshold=10%",
+        "detected": "2026-04-26T19:27:12Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:12Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-22T18:47:00+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Current (April 2026) RTX 5080 spot price is ~25% above MSRP — within H2 band. t2_street_price_normalized (within 15% of MSRP for 3 months) NOT fired. anti_h2_extreme_escalation (5090 >200% MSRP for 1 month) NOT fired (5090 at ~91%). Not recycled_intel vs ev_003: ev_003 was Q1 2026 data with higher spreads (5090 at 75-200%); this is April 2026 snapshot showing partial softening on 5080 but persistent premium. H2 weighted highest since current 5080 price sits squarely in H2 band with 2.5yr runway.",
+        "entry_b_time": "2026-04-26T19:27:12+00:00",
+        "entry_b_text": "April 2026: NVIDIA RTX 5090 average street price ~$3,658 vs $1,999 MSRP — base models above $3,000, premium models above $5,000. GDDR7 chronic undersupply named primary driver; Tom's Hardware reports 128GB RTX 5090 prototype at $13,000. Trajectory pushing H3 toward H4 boundary.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: above, april, msrp, premium, price",
+        "detected": "2026-04-26T19:27:12Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:12Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-22T18:47:00+00:00",
+        "entry_a_text": "April 2026 street price snapshot: RTX 5080 at $1,249 on Amazon (~25% above $999 MSRP); RTX 5090 at $3,818 on Amazon (~91% above $1,999 MSRP); cheapest AIB 5090 (ASUS TUF) at $2,909 (~46% above MSRP). Per BestValueGPU / TrackaLacker / Tom's Hardware trackers. RTX 5080 premium in H2 band (20-50%); RTX 5090 premium straddling H2/H3 boundary. 90-day rolling average not yet established.",
+        "entry_b_time": "2026-04-26T19:27:12+00:00",
+        "entry_b_text": "April 2026: NVIDIA RTX 5090 average street price ~$3,658 vs $1,999 MSRP — base models above $3,000, premium models above $5,000. GDDR7 chronic undersupply named primary driver; Tom's Hardware reports 128GB RTX 5090 prototype at $13,000. Trajectory pushing H3 toward H4 boundary.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: above, april, average, boundary, hardware",
+        "detected": "2026-04-26T19:27:12Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:12Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-22T18:46:44+00:00",
+        "entry_a_text": "SemiAnalysis (via Tom's Hardware, 2026-04): Memory will consume ~30% of hyperscaler AI data center spending in CY2026, a 4x increase over 2023 (~8%). HBM demand growing 80-100%/yr vs supply growing 50-60%/yr; gap not expected to close until 2028-2029. HBM3E and HBM4 supply fully allocated through 2026 with hyperscalers locking multi-year contracts. NVIDIA retains preferential supply terms; AMD structurally more exposed to memory cost inflation.",
+        "entry_b_time": "2026-04-26T19:27:12+00:00",
+        "entry_b_text": "April 2026: NVIDIA RTX 5090 average street price ~$3,658 vs $1,999 MSRP — base models above $3,000, premium models above $5,000. GDDR7 chronic undersupply named primary driver; Tom's Hardware reports 128GB RTX 5090 prototype at $13,000. Trajectory pushing H3 toward H4 boundary.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: hardware, nvidia, tom",
+        "detected": "2026-04-26T19:27:12Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:12Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-22T00:00:00Z",
+        "entry_a_text": "Multiple sources confirm consumer GPU prices elevated significantly vs. MSRP in Q1 2026, driven by AI/data-center demand crowding out GDDR7 and HBM supply. RTX 5090 ($1,999 MSRP) trading at $3,000-$6,000 street (75-200% above MSRP); RTX 5080 ($999 MSRP) at $1,599+ retail (45-60% above MSRP). RTX 5090 Founders Edition sold out in 8 minutes at launch. Server ECC RAM prices roughly doubled since Q3 2025. AI projected to consume ~20% of total DRAM production in 2026. 30-40% reduction in consumer GPU production allocation reported. Sources: TechSpot Q1 2026 GPU Pricing Update; BuySellRam memory economics; WccFTech RTX 5090 price trajectory; TrackaLacker RTX 5090 tracker; XDA Developers.",
+        "entry_b_time": "2026-04-26T19:27:12+00:00",
+        "entry_b_text": "April 2026: NVIDIA RTX 5090 average street price ~$3,658 vs $1,999 MSRP — base models above $3,000, premium models above $5,000. GDDR7 chronic undersupply named primary driver; Tom's Hardware reports 128GB RTX 5090 prototype at $13,000. Trajectory pushing H3 toward H4 boundary.",
+        "reason": "Numeric divergence 60.2% on metric (context: rtx): new=2026.0, existing=5090.0, threshold=10%",
+        "detected": "2026-04-26T19:27:12Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:12Z"
       }
     ]
   },
   "sourceCalibration": {
-    "ledger": [],
+    "ledger": [
+      {
+        "timestamp": "2026-04-24T02:25:42Z",
+        "evidence_index": 3,
+        "confirming_index": 8,
+        "resolution": "REFUTED",
+        "source": "Multi-source corroboration (TechSpot / BuySellRam / WccFTech / TrackaLacker / XDA)",
+        "confirming_source": "Wccftech / Tom's Hardware / Best Value GPU",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Multiple sources confirm consumer GPU prices elevated significantly vs. MSRP in Q1 2026, driven by AI/data-center demand",
+        "confirming_text_snippet": "RTX 5090 floor price reached $3,049.99 by February 2026 (~53% above MSRP); GDDR7 chronically undersupplied with AI data "
+      },
+      {
+        "timestamp": "2026-04-24T19:30:15Z",
+        "evidence_index": 3,
+        "confirming_index": 14,
+        "resolution": "REFUTED",
+        "source": "Multi-source corroboration (TechSpot / BuySellRam / WccFTech / TrackaLacker / XDA)",
+        "confirming_source": "Tom's Hardware",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Multiple sources confirm consumer GPU prices elevated significantly vs. MSRP in Q1 2026, driven by AI/data-center demand",
+        "confirming_text_snippet": "Tom's Hardware: VRAM costs roughly 50% higher for cards currently on shelves, +$40-50 per 16GB; RTX 50-series +19% avera"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:51Z",
+        "evidence_index": 3,
+        "confirming_index": 18,
+        "resolution": "REFUTED",
+        "source": "Multi-source corroboration (TechSpot / BuySellRam / WccFTech / TrackaLacker / XDA)",
+        "confirming_source": "TrackaLacker, gpudeals.net, BestValueGPU, Tom's Hardware",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Multiple sources confirm consumer GPU prices elevated significantly vs. MSRP in Q1 2026, driven by AI/data-center demand",
+        "confirming_text_snippet": "April 2026: RTX 5090 retail $3,899 on Amazon (~95% above $1,999 MSRP); RTX 5080 ~$1,300+ vs $999 MSRP. Multiple price tr"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:51Z",
+        "evidence_index": 6,
+        "confirming_index": 18,
+        "resolution": "REFUTED",
+        "source": "Tom's Hardware GPU price tracker / BestValueGPU / TrackaLacker",
+        "confirming_source": "TrackaLacker, gpudeals.net, BestValueGPU, Tom's Hardware",
+        "trust_delta": -0.1,
+        "original_text_snippet": "April 2026 street price snapshot: RTX 5080 at $1,249 on Amazon (~25% above $999 MSRP); RTX 5090 at $3,818 on Amazon (~91",
+        "confirming_text_snippet": "April 2026: RTX 5090 retail $3,899 on Amazon (~95% above $1,999 MSRP); RTX 5080 ~$1,300+ vs $999 MSRP. Multiple price tr"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:51Z",
+        "evidence_index": 16,
+        "confirming_index": 18,
+        "resolution": "REFUTED",
+        "source": "TrackaLacker / Tom's Hardware / WCCFTech",
+        "confirming_source": "TrackaLacker, gpudeals.net, BestValueGPU, Tom's Hardware",
+        "trust_delta": -0.1,
+        "original_text_snippet": "RTX 5090 selling ~$3,899 on Amazon vs $1,999 MSRP (~95% premium); GDDR7 supply structurally constrained by AI demand; AI",
+        "confirming_text_snippet": "April 2026: RTX 5090 retail $3,899 on Amazon (~95% above $1,999 MSRP); RTX 5080 ~$1,300+ vs $999 MSRP. Multiple price tr"
+      },
+      {
+        "timestamp": "2026-04-26T16:59:08Z",
+        "evidence_index": 18,
+        "confirming_index": 23,
+        "resolution": "REFUTED",
+        "source": "TrackaLacker, gpudeals.net, BestValueGPU, Tom's Hardware",
+        "confirming_source": "Tom's Hardware / TrackaLacker",
+        "trust_delta": -0.1,
+        "original_text_snippet": "April 2026: RTX 5090 retail $3,899 on Amazon (~95% above $1,999 MSRP); RTX 5080 ~$1,300+ vs $999 MSRP. Multiple price tr",
+        "confirming_text_snippet": "April 2026 retail RTX 5090: Founders Edition $1,999.99 MSRP largely unavailable; AIB cards $2,909-$3,510 (75%+ above MSR"
+      },
+      {
+        "timestamp": "2026-04-26T19:27:12Z",
+        "evidence_index": 6,
+        "confirming_index": 25,
+        "resolution": "REFUTED",
+        "source": "Tom's Hardware GPU price tracker / BestValueGPU / TrackaLacker",
+        "confirming_source": "GPU Poet / Tech4Gamers / Tom's Hardware",
+        "trust_delta": -0.1,
+        "original_text_snippet": "April 2026 street price snapshot: RTX 5080 at $1,249 on Amazon (~25% above $999 MSRP); RTX 5090 at $3,818 on Amazon (~91",
+        "confirming_text_snippet": "April 2026: NVIDIA RTX 5090 average street price ~$3,658 vs $1,999 MSRP — base models above $3,000, premium models above"
+      },
+      {
+        "timestamp": "2026-04-26T19:27:12Z",
+        "evidence_index": 18,
+        "confirming_index": 25,
+        "resolution": "REFUTED",
+        "source": "TrackaLacker, gpudeals.net, BestValueGPU, Tom's Hardware",
+        "confirming_source": "GPU Poet / Tech4Gamers / Tom's Hardware",
+        "trust_delta": -0.1,
+        "original_text_snippet": "April 2026: RTX 5090 retail $3,899 on Amazon (~95% above $1,999 MSRP); RTX 5080 ~$1,300+ vs $999 MSRP. Multiple price tr",
+        "confirming_text_snippet": "April 2026: NVIDIA RTX 5090 average street price ~$3,658 vs $1,999 MSRP — base models above $3,000, premium models above"
+      }
+    ],
     "effectiveTrust": {
       "@lastnpcalex.agency": 0.5,
       "@lowrhoufo.bsky.social": 0.5,
       "@proptermalone.bsky.social": 0.5,
-      "BuySellRam": 0.5,
-      "Multi-source corroboration (TechSpot": 0.5,
+      "BuySellRam": 0.3693,
+      "Multi-source corroboration (TechSpot": 0.3693,
       "SemiAnalysis": 0.5,
-      "Tom's Hardware": 0.5,
-      "TrackaLacker": 0.5,
-      "WccFTech": 0.5,
-      "XDA)": 0.5,
-      "BestValueGPU": 0.5,
-      "Tom's Hardware GPU price tracker": 0.5
+      "Tom's Hardware": 0.4555,
+      "TrackaLacker": 0.2554,
+      "WccFTech": 0.3693,
+      "XDA)": 0.3693,
+      "BestValueGPU": 0.4118,
+      "Tom's Hardware GPU price tracker": 0.4118,
+      "Best Value GPU": 0.5,
+      "Wccftech": 0.5,
+      "gpudeals": 0.5,
+      "WCCFTech": 0.4555,
+      "TrackaLacker, gpudeals.net, BestValueGPU, Tom's Hardware": 0.4118,
+      "GPU Poet": 0.5,
+      "Tech4Gamers": 0.5
     },
-    "_last_scan_same_source_skipped": 1
+    "_last_scan_same_source_skipped": 28
   }
 }

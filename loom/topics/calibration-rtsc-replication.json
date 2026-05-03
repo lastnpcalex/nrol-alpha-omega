@@ -6,14 +6,17 @@
     "question": "Will any room-temperature superconductor claim published after 2024 be independently replicated by >=2 labs within 12 months of publication?",
     "resolution": "Two independent labs (neither affiliated with the original authors) publish peer-reviewed or preprint results confirming both zero DC resistance and diamagnetic levitation (Meissner effect) at room temperature (>=15C) and ambient pressure (<= 1.1 atm) within 12 calendar months of the original claim's arXiv or journal deposit date.",
     "created": "2026-04-11T00:00:00Z",
-    "lastUpdated": "2026-04-22T05:19:57+00:00",
+    "lastUpdated": "2026-04-29T02:30:59+00:00",
     "status": "ACTIVE",
     "dayCount": 0,
     "startDate": "2026-04-11T00:00:00Z",
     "classification": "ROUTINE",
     "topicType": "science",
     "horizon": "Rolling 12-month window from any new credible claim. Topic remains open until a claim fires or window closes without one.",
-    "notes": "Window is claim-triggered. If no credible claim is made, H4 resolves as TRUE at end of monitoring period (defined as 24 months from topic creation, i.e. April 2028). Ranga Dias retractions (2023-2024) and LK-99 debunking (Aug 2023) set the current epistemic baseline. Post-LK-99 replication speed record: ~2 weeks to first failure. Field discipline improved markedly."
+    "notes": "Window is claim-triggered. If no credible claim is made, H4 resolves as TRUE at end of monitoring period (defined as 24 months from topic creation, i.e. April 2028). Ranga Dias retractions (2023-2024) and LK-99 debunking (Aug 2023) set the current epistemic baseline. Post-LK-99 replication speed record: ~2 weeks to first failure. Field discipline improved markedly.",
+    "lens": "GREEN",
+    "lensSetAt": "2026-04-26T21:22:14+00:00",
+    "lensSetReason": ""
   },
   "tagConfig": {
     "_docs": "Science topic. EXPERIMENTAL = lab measurement published (moves H1/H2 up or H3/H4 down). RETRACTION = published withdrawal of claim. METHODOLOGY = structural critique of experimental design. DATA = numerical feed update. RHETORIC = press release, news quote, social media hype — does not move posteriors alone.",
@@ -67,7 +70,7 @@
         "label": "Claim published and replicated (>=2 independent labs, <=12 months)",
         "midpoint": 0,
         "unit": "probability",
-        "posterior": 0.02,
+        "posterior": 0.0067,
         "description": "A credible RTSC claim is published AND two independent non-affiliated labs replicate both zero-resistance AND Meissner-effect levitation at room temperature and ambient pressure within 12 months. Would be Nobel-tier. Compound event: P(claim) * P(genuine|claim) * P(replicated|genuine). Each factor is small.",
         "resolution_deadline": "2027-04-11"
       },
@@ -75,14 +78,14 @@
         "label": "Partial replication (1 lab only, or only some properties confirmed)",
         "midpoint": 0,
         "unit": "probability",
-        "posterior": 0.05,
+        "posterior": 0.0067,
         "description": "A credible claim is published and one lab replicates some aspect (e.g. resistivity anomaly but no levitation, or levitation-like behavior without zero resistance). The LK-99 trajectory: striking partial signal, ultimately non-SC explanation. Higher than H1 because partial replication is easier to achieve and harder to immediately rule out."
       },
       "H3": {
         "label": "Claim published, fails replication (<2 independent confirmations in 12 months)",
         "midpoint": 0,
         "unit": "probability",
-        "posterior": 0.18,
+        "posterior": 0.0067,
         "description": "A credible claim appears — passes an initial plausibility bar (specific materials, characterization data, Tc claim) — but replication attempts fail or find mundane explanations. The post-LK-99 default trajectory for any new RTSC claim given current field skepticism and rapid debunking infrastructure.",
         "resolution_deadline": "2027-04-11"
       },
@@ -90,7 +93,7 @@
         "label": "No credible claim published within monitoring window",
         "midpoint": 0,
         "unit": "probability",
-        "posterior": 0.75,
+        "posterior": 0.98,
         "description": "No preprint or publication clears the credibility bar (defined as: specific synthesized material, at least two characterization measurements, authors with institutional affiliation) within the monitoring window. Current state as of April 2026. Field has gone ~32 months post-LK-99 without a credible successor claim. Dias retracted, lost Rochester position. Hype cycle in consolidation phase."
       }
     },
@@ -105,7 +108,276 @@
           "H3": 0.18,
           "H4": 0.75
         },
-        "note": "Initial priors. Anchored to post-LK-99 base rate (~32 months no credible claim), Dias retractions, historical RTSC failure rate. H4 dominant."
+        "note": "Initial priors. Anchored to post-LK-99 base rate (~32 months no credible claim), Dias retractions, historical RTSC failure rate. H4 dominant.",
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        }
+      },
+      {
+        "date": "2026-04-24",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.005,
+          "H3": 0.0399,
+          "H4": 0.9501
+        },
+        "priors": {
+          "H1": 0.02,
+          "H2": 0.05,
+          "H3": 0.18,
+          "H4": 0.75
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_007"
+        ],
+        "likelihoods": {
+          "H1": 0.02,
+          "H2": 0.04,
+          "H3": 0.14,
+          "H4": 0.8
+        },
+        "note": "No credible claim within monitoring window; field remains in hydride high-pressure regime. Supports H4 strongly.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "turningPoint": {
+          "type": "BRANCH_DEATH",
+          "hypothesis": "H1",
+          "lastPosterior": 0.005
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-24",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.005,
+          "H3": 0.0124,
+          "H4": 0.9776
+        },
+        "priors": {
+          "H1": 0.005,
+          "H2": 0.005,
+          "H3": 0.0399,
+          "H4": 0.9501
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_008"
+        ],
+        "likelihoods": {
+          "H1": 0.05,
+          "H2": 0.1,
+          "H3": 0.3,
+          "H4": 1.0
+        },
+        "note": "Progress on high-Tc ambient pressure but no RT claim triggering replication window — maintains 'no credible claim' posterior.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-25",
+        "posteriors": {
+          "H1": 0.0067,
+          "H2": 0.0067,
+          "H3": 0.0067,
+          "H4": 0.98
+        },
+        "priors": {
+          "H1": 0.005,
+          "H2": 0.005,
+          "H3": 0.0124,
+          "H4": 0.9776
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_009"
+        ],
+        "likelihoods": {
+          "H1": 0.02,
+          "H2": 0.05,
+          "H3": 0.13,
+          "H4": 0.8
+        },
+        "note": "Continued absence of credible replicated claim reinforces H4 (no credible claim in window).",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-25",
+        "posteriors": {
+          "H1": 0.0067,
+          "H2": 0.0067,
+          "H3": 0.0067,
+          "H4": 0.98
+        },
+        "priors": {
+          "H1": 0.0067,
+          "H2": 0.0067,
+          "H3": 0.0067,
+          "H4": 0.98
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_010"
+        ],
+        "likelihoods": {
+          "H1": 0.02,
+          "H2": 0.1,
+          "H3": 0.2,
+          "H4": 1.0
+        },
+        "note": "No credible ambient-pressure RTSC claim within window; status quo strongly supports H4.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-26",
+        "posteriors": {
+          "H1": 0.0067,
+          "H2": 0.0067,
+          "H3": 0.0067,
+          "H4": 0.98
+        },
+        "priors": {
+          "H1": 0.0067,
+          "H2": 0.0067,
+          "H3": 0.0067,
+          "H4": 0.98
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_011"
+        ],
+        "likelihoods": {
+          "H1": 0.005,
+          "H2": 0.01,
+          "H3": 0.05,
+          "H4": 0.95
+        },
+        "note": "Tightened post-LK-99 validation bar with no material clearing it strongly confirms H4 (no credible claim in window).",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-26",
+        "posteriors": {
+          "H1": 0.0067,
+          "H2": 0.0067,
+          "H3": 0.0067,
+          "H4": 0.98
+        },
+        "priors": {
+          "H1": 0.0067,
+          "H2": 0.0067,
+          "H3": 0.0067,
+          "H4": 0.98
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_012"
+        ],
+        "likelihoods": {
+          "H1": 0.1,
+          "H2": 0.2,
+          "H3": 0.3,
+          "H4": 1.0
+        },
+        "note": "No new credible RTSC claim within scan window reinforces H4 baseline.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
       }
     ]
   },
@@ -738,6 +1010,178 @@
       "ledger": "DECISION",
       "claimState": "SUPPORTED",
       "effectiveWeight": 1.0
+    },
+    {
+      "id": "ev_007",
+      "time": "2026-04-24T02:25:41+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "SCI"
+      ],
+      "text": "As of April 2026, highest independently validated critical temperature remains ~260K for LaH10 under 170-190 GPa pressure; no ambient-pressure RTSC material has satisfied all five community validation criteria; LK-99 remains debunked (Cu2S impurity explanation).",
+      "provenance": "OBSERVED",
+      "source": "Physics World / Science AAAS",
+      "posteriorImpact": "NONE",
+      "url": "https://physicsworld.com/a/room-temperature-superconductor-lk-99-fails-replication-tests/",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.4118
+    },
+    {
+      "time": "2026-04-24T02:25:41+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-24T02:25:41+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: No credible claim within monitoring window; field remains in hydride high-pressure regime. Supports H4 strongly.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_008",
+      "time": "2026-04-24T19:30:15+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "SCIENCE"
+      ],
+      "text": "University of Houston TcSUH announced Tc=151K ambient pressure superconductor via pressure-quenching (record for ambient, but far below room temperature). No post-2024 RT superconductor claim has been published that triggers the monitoring window.",
+      "provenance": "OBSERVED",
+      "source": "phys.org / PatSnap",
+      "posteriorImpact": "NONE",
+      "url": "https://phys.org/news/2026-03-ceramic-shatters-longstanding-high-temperature.html",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.4555
+    },
+    {
+      "time": "2026-04-24T19:30:15+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_009",
+      "time": "2026-04-25T13:19:53+00:00",
+      "tag": "INTEL",
+      "tags": [
+        "INTEL",
+        "SCIENCE"
+      ],
+      "text": "No new RTSC claim with credible replication during scan window; international team published research agenda (March 2026); LK-99 episode remains conclusively explained by Cu2S impurity.",
+      "provenance": "OBSERVED",
+      "source": "phys.org / TU Graz",
+      "posteriorImpact": "NONE",
+      "url": "https://phys.org/news/2026-03-room-temperature-superconductor-scientists-agenda.html",
+      "ledger": "DECISION",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-25T13:19:53+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_010",
+      "time": "2026-04-25T14:24:50+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "TECH"
+      ],
+      "text": "April 2026 community status: no material satisfies all five RTSC validation criteria (zero-resistance >273K, Meissner via SQUID, specific-heat anomaly, multi-lab independent replication, ambient-pressure stability). Highest validated Tc remains LaH10 at ~260K under 170-190 GPa. LK-99 consensus remains debunked.",
+      "provenance": "OBSERVED",
+      "source": "Quantum Insider, PatSnap, AAAS Science blog",
+      "posteriorImpact": "NONE",
+      "url": "https://www.patsnap.com/resources/blog/articles/room-temperature-superconductor-research-2026-landscape/",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-25T14:24:50+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_011",
+      "time": "2026-04-26T16:59:07+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "SCIENCE"
+      ],
+      "text": "Field-level review: post-LK-99 community has adopted five mandatory validation criteria (4-probe zero R above 273K; SQUID Meissner; specific heat anomaly; >=3 independent labs within 6 months; ambient-pressure stability >=24h). No material has satisfied all five as of April 2026.",
+      "provenance": "OBSERVED",
+      "source": "Physics World / community review",
+      "posteriorImpact": "NONE",
+      "url": "https://physicsworld.com/a/room-temperature-superconductor-lk-99-fails-replication-tests/",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.3693
+    },
+    {
+      "time": "2026-04-26T16:59:07+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_012",
+      "time": "2026-04-26T19:27:10+00:00",
+      "tag": "ANALYSIS",
+      "tags": [
+        "ANALYSIS",
+        "SCIENCE"
+      ],
+      "text": "April 2026 review (PatSnap, myScience): no material has satisfied all five validation criteria for room-temperature ambient-pressure superconductivity. Highest validated Tc remains ~260K LaH10 at 170-190 GPa. International team published a research-agenda framework rather than a replication claim.",
+      "provenance": "OBSERVED",
+      "source": "PatSnap / myScience / phys.org",
+      "posteriorImpact": "NONE",
+      "url": "https://phys.org/news/2026-03-room-temperature-superconductor-scientists-agenda.html",
+      "ledger": "DECISION",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.3289
+    },
+    {
+      "time": "2026-04-26T19:27:10+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
     }
   ],
   "dataFeeds": {
@@ -807,20 +1251,23 @@
     "Meissner effect room temperature 2026 lab confirmation"
   ],
   "governance": {
-    "health": "HEALTHY",
-    "issues": [],
+    "health": "DEGRADED",
+    "issues": [
+      "Majority stale evidence (19/26)",
+      "Near-zero uncertainty — check for overconfidence"
+    ],
     "rt": {
       "rt": 0.0,
       "regime": "SAFE",
       "worst_hypothesis": "H1"
     },
-    "entropy": 1.0856,
+    "entropy": 0.1737,
     "maxEntropy": 2.0,
-    "uncertaintyRatio": 0.5428,
+    "uncertaintyRatio": 0.0868,
     "evidenceFreshness": {
-      "fresh": 8,
-      "stale": 5,
-      "total": 13
+      "fresh": 7,
+      "stale": 19,
+      "total": 26
     },
     "hypothesisAdmissibility": {
       "H1": "ADMISSIBLE",
@@ -829,13 +1276,20 @@
       "H4": "ADMISSIBLE"
     },
     "klFromPrior": {
-      "kl_divergence": 0.0,
+      "kl_divergence": 0.2193,
       "interpretation": "MODERATE"
     },
-    "lastComputed": "2026-04-22T05:19:57+00:00",
+    "lastComputed": "2026-04-29T02:30:59+00:00",
     "staleDependencies": 0,
     "calibrationHealth": "ACCEPTABLE",
     "unresolvedContradictions": 0,
+    "reviewed_alerts": [
+      {
+        "signature": "none_impact_saturation:calibration-rtsc-replication",
+        "timestamp": "2026-04-26T16:18:47+00:00",
+        "reason": "Design review (ev_006-ev_010): all 5 entries are null status snapshots during a no-active-claim window. Existing indicators correctly require active claim for firing; H4=0.98 already reflects null regime. No design change needed — adding null-sweep indicators would inflate H4 past confidence guardrails and double-count the same observation. Auto-suppressed after review_topic_design completion."
+      }
+    ],
     "designGate": {
       "passed": true,
       "blockers": [],
@@ -859,7 +1313,7 @@
         }
       },
       "indistinguishable": [],
-      "lastChecked": "2026-04-22T05:19:58+00:00"
+      "lastChecked": "2026-04-29T02:30:59+00:00"
     }
   },
   "predictionScoring": {
@@ -923,6 +1377,138 @@
       {
         "timestamp": "2026-04-21T03:51:21+00:00",
         "trigger": "pipeline:ev_006",
+        "posteriors": {
+          "H1": 0.0067,
+          "H2": 0.0067,
+          "H3": 0.0067,
+          "H4": 0.98
+        },
+        "entropy": 0.1737
+      },
+      {
+        "timestamp": "2026-04-24T02:25:41+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.005,
+          "H3": 0.0399,
+          "H4": 0.9501
+        },
+        "entropy": 0.332
+      },
+      {
+        "timestamp": "2026-04-24T02:25:41+00:00",
+        "trigger": "pipeline:ev_007",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.005,
+          "H3": 0.0399,
+          "H4": 0.9501
+        },
+        "entropy": 0.332
+      },
+      {
+        "timestamp": "2026-04-24T19:30:15+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.005,
+          "H3": 0.0124,
+          "H4": 0.9776
+        },
+        "entropy": 0.1869
+      },
+      {
+        "timestamp": "2026-04-24T19:30:15+00:00",
+        "trigger": "pipeline:ev_008",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.005,
+          "H3": 0.0124,
+          "H4": 0.9776
+        },
+        "entropy": 0.1869
+      },
+      {
+        "timestamp": "2026-04-25T13:19:53+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0067,
+          "H2": 0.0067,
+          "H3": 0.0067,
+          "H4": 0.98
+        },
+        "entropy": 0.1737
+      },
+      {
+        "timestamp": "2026-04-25T13:19:53+00:00",
+        "trigger": "pipeline:ev_009",
+        "posteriors": {
+          "H1": 0.0067,
+          "H2": 0.0067,
+          "H3": 0.0067,
+          "H4": 0.98
+        },
+        "entropy": 0.1737
+      },
+      {
+        "timestamp": "2026-04-25T14:24:50+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0067,
+          "H2": 0.0067,
+          "H3": 0.0067,
+          "H4": 0.98
+        },
+        "entropy": 0.1737
+      },
+      {
+        "timestamp": "2026-04-25T14:24:50+00:00",
+        "trigger": "pipeline:ev_010",
+        "posteriors": {
+          "H1": 0.0067,
+          "H2": 0.0067,
+          "H3": 0.0067,
+          "H4": 0.98
+        },
+        "entropy": 0.1737
+      },
+      {
+        "timestamp": "2026-04-26T16:59:07+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0067,
+          "H2": 0.0067,
+          "H3": 0.0067,
+          "H4": 0.98
+        },
+        "entropy": 0.1737
+      },
+      {
+        "timestamp": "2026-04-26T16:59:07+00:00",
+        "trigger": "pipeline:ev_011",
+        "posteriors": {
+          "H1": 0.0067,
+          "H2": 0.0067,
+          "H3": 0.0067,
+          "H4": 0.98
+        },
+        "entropy": 0.1737
+      },
+      {
+        "timestamp": "2026-04-26T19:27:10+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0067,
+          "H2": 0.0067,
+          "H3": 0.0067,
+          "H4": 0.98
+        },
+        "entropy": 0.1737
+      },
+      {
+        "timestamp": "2026-04-26T19:27:10+00:00",
+        "trigger": "pipeline:ev_012",
         "posteriors": {
           "H1": 0.0067,
           "H2": 0.0067,
@@ -1034,6 +1620,282 @@
         "detected": "2026-04-21T03:51:21Z",
         "resolution": "SUPERSEDED",
         "resolvedAt": "2026-04-21T03:51:21Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "Phys.org Mar 2026: international team published research agenda for RTSC — no new credible claim. Community-established 2026 validation criteria (zero-R >273K 4-probe, Meissner SQUID, specific heat anomaly, >=3 independent replications in 6mo, ambient-pressure 24h stability) — no material has satisfied all five as of April 2026. Best validated: LaH10 ~260K at 170-190 GPa.",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "As of April 2026, highest independently validated critical temperature remains ~260K for LaH10 under 170-190 GPa pressure; no ambient-pressure RTSC material has satisfied all five community validation criteria; LK-99 remains debunked (Cu2S impurity explanation).",
+        "reason": "Negation marker 'debunked' in new entry, absent from existing. Shared subjects: ambient, april, community, criteria, five",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-19T00:57:10+00:00",
+        "entry_a_text": "As of April 2026, no material has satisfied the five mandatory RTSC validation criteria (zero resistance above 273K, Meissner via SQUID, specific-heat anomaly, three-group replication within 6mo, ambient-pressure stability). Hydride systems remain only confirmed near-RT superconductors but require 100-200+ GPa.",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "As of April 2026, highest independently validated critical temperature remains ~260K for LaH10 under 170-190 GPa pressure; no ambient-pressure RTSC material has satisfied all five community validation criteria; LK-99 remains debunked (Cu2S impurity explanation).",
+        "reason": "Negation marker 'debunked' in new entry, absent from existing. Shared subjects: ambient, april, criteria, five, gpa",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T15:23:00+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, stale_evidence, quorum_failure. Reason: No new credible RTSC claims. Research roadmaps and screening tools are precursors, not breakthroughs. H4 (no credible claim) remains dominant.",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "As of April 2026, highest independently validated critical temperature remains ~260K for LaH10 under 170-190 GPa pressure; no ambient-pressure RTSC material has satisfied all five community validation criteria; LK-99 remains debunked (Cu2S impurity explanation).",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: remains, rtsc",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T15:23:00+00:00",
+        "entry_a_text": "No room-temperature superconductor claim independently replicated as of April 2026. PNAS March 2026 roadmap calls for coordinated global push — notes no fundamental physics barrier but engineering challenge remains. Penn State zentropy theory (Oct 2025) enables computational screening of candidates. SLAC stabilized nickelate at room pressure (Feb 2025) but not room temperature. Highest validated Tc remains ~260K under extreme pressure.",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "As of April 2026, highest independently validated critical temperature remains ~260K for LaH10 under 170-190 GPa pressure; no ambient-pressure RTSC material has satisfied all five community validation criteria; LK-99 remains debunked (Cu2S impurity explanation).",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: april, highest, independently, pressure, remains",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-11T00:00:00Z",
+        "entry_a_text": "Topic initialized. As of April 2026, no credible post-2024 RTSC claim identified in literature. ~32 months since LK-99 debunking. Field in high-skepticism, rapid-debunking posture. Initial priors set: H4=0.75, H3=0.18, H2=0.05, H1=0.02.",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "As of April 2026, highest independently validated critical temperature remains ~260K for LaH10 under 170-190 GPa pressure; no ambient-pressure RTSC material has satisfied all five community validation criteria; LK-99 remains debunked (Cu2S impurity explanation).",
+        "reason": "Negation marker 'debunked' in new entry, absent from existing. Shared subjects: april, rtsc",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "As of April 2026, highest independently validated critical temperature remains ~260K for LaH10 under 170-190 GPa pressure; no ambient-pressure RTSC material has satisfied all five community validation criteria; LK-99 remains debunked (Cu2S impurity explanation).",
+        "entry_b_time": "2026-04-24T19:30:15+00:00",
+        "entry_b_text": "University of Houston TcSUH announced Tc=151K ambient pressure superconductor via pressure-quenching (record for ambient, but far below room temperature). No post-2024 RT superconductor claim has been published that triggers the monitoring window.",
+        "reason": "Negation marker 'debunked' in existing entry, absent from new. Shared subjects: ambient, pressure, temperature",
+        "detected": "2026-04-24T19:30:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:15Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T15:23:00+00:00",
+        "entry_a_text": "No room-temperature superconductor claim independently replicated as of April 2026. PNAS March 2026 roadmap calls for coordinated global push — notes no fundamental physics barrier but engineering challenge remains. Penn State zentropy theory (Oct 2025) enables computational screening of candidates. SLAC stabilized nickelate at room pressure (Feb 2025) but not room temperature. Highest validated Tc remains ~260K under extreme pressure.",
+        "entry_b_time": "2026-04-24T19:30:15+00:00",
+        "entry_b_text": "University of Houston TcSUH announced Tc=151K ambient pressure superconductor via pressure-quenching (record for ambient, but far below room temperature). No post-2024 RT superconductor claim has been published that triggers the monitoring window.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: claim, pressure, room, superconductor, temperature",
+        "detected": "2026-04-24T19:30:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:15Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "As of April 2026, highest independently validated critical temperature remains ~260K for LaH10 under 170-190 GPa pressure; no ambient-pressure RTSC material has satisfied all five community validation criteria; LK-99 remains debunked (Cu2S impurity explanation).",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "No new RTSC claim with credible replication during scan window; international team published research agenda (March 2026); LK-99 episode remains conclusively explained by Cu2S impurity.",
+        "reason": "Negation marker 'debunked' in existing entry, absent from new. Shared subjects: impurity, remains, rtsc",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T15:23:00+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, stale_evidence, quorum_failure. Reason: No new credible RTSC claims. Research roadmaps and screening tools are precursors, not breakthroughs. H4 (no credible claim) remains dominant.",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "No new RTSC claim with credible replication during scan window; international team published research agenda (March 2026); LK-99 episode remains conclusively explained by Cu2S impurity.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: claim, credible, remains, research, rtsc",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T15:23:00+00:00",
+        "entry_a_text": "No room-temperature superconductor claim independently replicated as of April 2026. PNAS March 2026 roadmap calls for coordinated global push — notes no fundamental physics barrier but engineering challenge remains. Penn State zentropy theory (Oct 2025) enables computational screening of candidates. SLAC stabilized nickelate at room pressure (Feb 2025) but not room temperature. Highest validated Tc remains ~260K under extreme pressure.",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "No new RTSC claim with credible replication during scan window; international team published research agenda (March 2026); LK-99 episode remains conclusively explained by Cu2S impurity.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: claim, march, remains",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-11T00:00:00Z",
+        "entry_a_text": "Topic initialized. As of April 2026, no credible post-2024 RTSC claim identified in literature. ~32 months since LK-99 debunking. Field in high-skepticism, rapid-debunking posture. Initial priors set: H4=0.75, H3=0.18, H2=0.05, H1=0.02.",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "No new RTSC claim with credible replication during scan window; international team published research agenda (March 2026); LK-99 episode remains conclusively explained by Cu2S impurity.",
+        "reason": "Numeric divergence 98.4% on metric (context: lk-99): new=2026.0, existing=32.0, threshold=10%",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "As of April 2026, highest independently validated critical temperature remains ~260K for LaH10 under 170-190 GPa pressure; no ambient-pressure RTSC material has satisfied all five community validation criteria; LK-99 remains debunked (Cu2S impurity explanation).",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "April 2026 community status: no material satisfies all five RTSC validation criteria (zero-resistance >273K, Meissner via SQUID, specific-heat anomaly, multi-lab independent replication, ambient-pressure stability). Highest validated Tc remains LaH10 at ~260K under 170-190 GPa. LK-99 consensus remains debunked.",
+        "reason": "Negation marker 'debunked' in existing entry, absent from new. Shared subjects: ambient, april, community, criteria, debunked",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T15:23:00+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, stale_evidence, quorum_failure. Reason: No new credible RTSC claims. Research roadmaps and screening tools are precursors, not breakthroughs. H4 (no credible claim) remains dominant.",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "April 2026 community status: no material satisfies all five RTSC validation criteria (zero-resistance >273K, Meissner via SQUID, specific-heat anomaly, multi-lab independent replication, ambient-pressure stability). Highest validated Tc remains LaH10 at ~260K under 170-190 GPa. LK-99 consensus remains debunked.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: remains, rtsc",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T15:23:00+00:00",
+        "entry_a_text": "No room-temperature superconductor claim independently replicated as of April 2026. PNAS March 2026 roadmap calls for coordinated global push — notes no fundamental physics barrier but engineering challenge remains. Penn State zentropy theory (Oct 2025) enables computational screening of candidates. SLAC stabilized nickelate at room pressure (Feb 2025) but not room temperature. Highest validated Tc remains ~260K under extreme pressure.",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "April 2026 community status: no material satisfies all five RTSC validation criteria (zero-resistance >273K, Meissner via SQUID, specific-heat anomaly, multi-lab independent replication, ambient-pressure stability). Highest validated Tc remains LaH10 at ~260K under 170-190 GPa. LK-99 consensus remains debunked.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: april, highest, pressure, remains, under",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-12T00:00:00Z",
+        "entry_a_text": "LK-99 debunked: multiple independent labs (Beijing, Stuttgart, Maryland, others) find Cu2S phase transition explains resistivity anomaly; no zero-resistance; Meissner effect attributed to ferromagnetism. Consensus: not a superconductor. [HISTORICAL BASELINE]",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "April 2026 community status: no material satisfies all five RTSC validation criteria (zero-resistance >273K, Meissner via SQUID, specific-heat anomaly, multi-lab independent replication, ambient-pressure stability). Highest validated Tc remains LaH10 at ~260K under 170-190 GPa. LK-99 consensus remains debunked.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: anomaly, consensus, debunked, independent, meissner",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "As of April 2026, highest independently validated critical temperature remains ~260K for LaH10 under 170-190 GPa pressure; no ambient-pressure RTSC material has satisfied all five community validation criteria; LK-99 remains debunked (Cu2S impurity explanation).",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "Field-level review: post-LK-99 community has adopted five mandatory validation criteria (4-probe zero R above 273K; SQUID Meissner; specific heat anomaly; >=3 independent labs within 6 months; ambient-pressure stability >=24h). No material has satisfied all five as of April 2026.",
+        "reason": "Negation marker 'debunked' in existing entry, absent from new. Shared subjects: ambient, april, community, criteria, five",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "Phys.org Mar 2026: international team published research agenda for RTSC — no new credible claim. Community-established 2026 validation criteria (zero-R >273K 4-probe, Meissner SQUID, specific heat anomaly, >=3 independent replications in 6mo, ambient-pressure 24h stability) — no material has satisfied all five as of April 2026. Best validated: LaH10 ~260K at 170-190 GPa.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "Field-level review: post-LK-99 community has adopted five mandatory validation criteria (4-probe zero R above 273K; SQUID Meissner; specific heat anomaly; >=3 independent labs within 6 months; ambient-pressure stability >=24h). No material has satisfied all five as of April 2026.",
+        "reason": "Numeric divergence 50.0% on metric (context: independent): new=6.0, existing=3.0, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T15:23:00+00:00",
+        "entry_a_text": "No room-temperature superconductor claim independently replicated as of April 2026. PNAS March 2026 roadmap calls for coordinated global push — notes no fundamental physics barrier but engineering challenge remains. Penn State zentropy theory (Oct 2025) enables computational screening of candidates. SLAC stabilized nickelate at room pressure (Feb 2025) but not room temperature. Highest validated Tc remains ~260K under extreme pressure.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "Field-level review: post-LK-99 community has adopted five mandatory validation criteria (4-probe zero R above 273K; SQUID Meissner; specific heat anomaly; >=3 independent labs within 6 months; ambient-pressure stability >=24h). No material has satisfied all five as of April 2026.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: april, pressure",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-11T00:00:00Z",
+        "entry_a_text": "Topic initialized. As of April 2026, no credible post-2024 RTSC claim identified in literature. ~32 months since LK-99 debunking. Field in high-skepticism, rapid-debunking posture. Initial priors set: H4=0.75, H3=0.18, H2=0.05, H1=0.02.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "Field-level review: post-LK-99 community has adopted five mandatory validation criteria (4-probe zero R above 273K; SQUID Meissner; specific heat anomaly; >=3 independent labs within 6 months; ambient-pressure stability >=24h). No material has satisfied all five as of April 2026.",
+        "reason": "Numeric divergence 81.2% on metric (context: months): new=6.0, existing=32.0, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2023-08-12T00:00:00Z",
+        "entry_a_text": "LK-99 debunked: multiple independent labs (Beijing, Stuttgart, Maryland, others) find Cu2S phase transition explains resistivity anomaly; no zero-resistance; Meissner effect attributed to ferromagnetism. Consensus: not a superconductor. [HISTORICAL BASELINE]",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "Field-level review: post-LK-99 community has adopted five mandatory validation criteria (4-probe zero R above 273K; SQUID Meissner; specific heat anomaly; >=3 independent labs within 6 months; ambient-pressure stability >=24h). No material has satisfied all five as of April 2026.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: anomaly, independent, labs, meissner, zero",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "As of April 2026, highest independently validated critical temperature remains ~260K for LaH10 under 170-190 GPa pressure; no ambient-pressure RTSC material has satisfied all five community validation criteria; LK-99 remains debunked (Cu2S impurity explanation).",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "April 2026 review (PatSnap, myScience): no material has satisfied all five validation criteria for room-temperature ambient-pressure superconductivity. Highest validated Tc remains ~260K LaH10 at 170-190 GPa. International team published a research-agenda framework rather than a replication claim.",
+        "reason": "Negation marker 'debunked' in existing entry, absent from new. Shared subjects: ambient, april, criteria, five, gpa",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T15:23:00+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, stale_evidence, quorum_failure. Reason: No new credible RTSC claims. Research roadmaps and screening tools are precursors, not breakthroughs. H4 (no credible claim) remains dominant.",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "April 2026 review (PatSnap, myScience): no material has satisfied all five validation criteria for room-temperature ambient-pressure superconductivity. Highest validated Tc remains ~260K LaH10 at 170-190 GPa. International team published a research-agenda framework rather than a replication claim.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: claim, remains, research",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T15:23:00+00:00",
+        "entry_a_text": "No room-temperature superconductor claim independently replicated as of April 2026. PNAS March 2026 roadmap calls for coordinated global push — notes no fundamental physics barrier but engineering challenge remains. Penn State zentropy theory (Oct 2025) enables computational screening of candidates. SLAC stabilized nickelate at room pressure (Feb 2025) but not room temperature. Highest validated Tc remains ~260K under extreme pressure.",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "April 2026 review (PatSnap, myScience): no material has satisfied all five validation criteria for room-temperature ambient-pressure superconductivity. Highest validated Tc remains ~260K LaH10 at 170-190 GPa. International team published a research-agenda framework rather than a replication claim.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: april, claim, highest, pressure, remains",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
       }
     ]
   },
@@ -1049,22 +1911,181 @@
         "trust_delta": -0.1,
         "original_text_snippet": "As of April 2026, no material has satisfied the five mandatory RTSC validation criteria (zero resistance above 273K, Mei",
         "confirming_text_snippet": "Phys.org Mar 2026: international team published research agenda for RTSC — no new credible claim. Community-established "
+      },
+      {
+        "timestamp": "2026-04-24T02:25:41Z",
+        "evidence_index": 3,
+        "confirming_index": 13,
+        "resolution": "REFUTED",
+        "source": "PNAS / ScienceDaily",
+        "confirming_source": "Physics World / Science AAAS",
+        "trust_delta": -0.1,
+        "original_text_snippet": "No room-temperature superconductor claim independently replicated as of April 2026. PNAS March 2026 roadmap calls for co",
+        "confirming_text_snippet": "As of April 2026, highest independently validated critical temperature remains ~260K for LaH10 under 170-190 GPa pressur"
+      },
+      {
+        "timestamp": "2026-04-24T02:25:41Z",
+        "evidence_index": 7,
+        "confirming_index": 13,
+        "resolution": "REFUTED",
+        "source": "Phys.org / myScience / Science AAAS blog",
+        "confirming_source": "Physics World / Science AAAS",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Phys.org Mar 2026: international team published research agenda for RTSC — no new credible claim. Community-established ",
+        "confirming_text_snippet": "As of April 2026, highest independently validated critical temperature remains ~260K for LaH10 under 170-190 GPa pressur"
+      },
+      {
+        "timestamp": "2026-04-24T02:25:41Z",
+        "evidence_index": 10,
+        "confirming_index": 11,
+        "resolution": "CONFIRMED",
+        "source": "",
+        "confirming_source": "",
+        "trust_delta": 0.05,
+        "original_text_snippet": "LR MIGRATION RESET: posteriors reset to design priors; evidence log preserved.",
+        "confirming_text_snippet": "REPLAY BEGIN: 0 previously-fired indicators will be re-applied chronologically under current LR system. Posteriors reset"
+      },
+      {
+        "timestamp": "2026-04-24T02:25:41Z",
+        "evidence_index": 11,
+        "confirming_index": 12,
+        "resolution": "CONFIRMED",
+        "source": "",
+        "confirming_source": "",
+        "trust_delta": 0.05,
+        "original_text_snippet": "REPLAY BEGIN: 0 previously-fired indicators will be re-applied chronologically under current LR system. Posteriors reset",
+        "confirming_text_snippet": "REPLAY COMPLETE: 0 indicators applied, 0 skipped. Final posteriors: {'H1': 0.02, 'H2': 0.05, 'H3': 0.18, 'H4': 0.75}. In"
+      },
+      {
+        "timestamp": "2026-04-25T13:19:53Z",
+        "evidence_index": 7,
+        "confirming_index": 18,
+        "resolution": "REFUTED",
+        "source": "Phys.org / myScience / Science AAAS blog",
+        "confirming_source": "phys.org / TU Graz",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Phys.org Mar 2026: international team published research agenda for RTSC — no new credible claim. Community-established ",
+        "confirming_text_snippet": "No new RTSC claim with credible replication during scan window; international team published research agenda (March 2026"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:50Z",
+        "evidence_index": 5,
+        "confirming_index": 20,
+        "resolution": "REFUTED",
+        "source": "PatSnap / Quantum Insider / Physics World",
+        "confirming_source": "Quantum Insider, PatSnap, AAAS Science blog",
+        "trust_delta": -0.1,
+        "original_text_snippet": "As of April 2026, no material has satisfied the five mandatory RTSC validation criteria (zero resistance above 273K, Mei",
+        "confirming_text_snippet": "April 2026 community status: no material satisfies all five RTSC validation criteria (zero-resistance >273K, Meissner vi"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:50Z",
+        "evidence_index": 7,
+        "confirming_index": 20,
+        "resolution": "REFUTED",
+        "source": "Phys.org / myScience / Science AAAS blog",
+        "confirming_source": "Quantum Insider, PatSnap, AAAS Science blog",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Phys.org Mar 2026: international team published research agenda for RTSC — no new credible claim. Community-established ",
+        "confirming_text_snippet": "April 2026 community status: no material satisfies all five RTSC validation criteria (zero-resistance >273K, Meissner vi"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:50Z",
+        "evidence_index": 13,
+        "confirming_index": 20,
+        "resolution": "REFUTED",
+        "source": "Physics World / Science AAAS",
+        "confirming_source": "Quantum Insider, PatSnap, AAAS Science blog",
+        "trust_delta": -0.1,
+        "original_text_snippet": "As of April 2026, highest independently validated critical temperature remains ~260K for LaH10 under 170-190 GPa pressur",
+        "confirming_text_snippet": "April 2026 community status: no material satisfies all five RTSC validation criteria (zero-resistance >273K, Meissner vi"
+      },
+      {
+        "timestamp": "2026-04-26T16:59:07Z",
+        "evidence_index": 7,
+        "confirming_index": 22,
+        "resolution": "REFUTED",
+        "source": "Phys.org / myScience / Science AAAS blog",
+        "confirming_source": "Physics World / community review",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Phys.org Mar 2026: international team published research agenda for RTSC — no new credible claim. Community-established ",
+        "confirming_text_snippet": "Field-level review: post-LK-99 community has adopted five mandatory validation criteria (4-probe zero R above 273K; SQUI"
+      },
+      {
+        "timestamp": "2026-04-26T16:59:07Z",
+        "evidence_index": 20,
+        "confirming_index": 22,
+        "resolution": "REFUTED",
+        "source": "Quantum Insider, PatSnap, AAAS Science blog",
+        "confirming_source": "Physics World / community review",
+        "trust_delta": -0.1,
+        "original_text_snippet": "April 2026 community status: no material satisfies all five RTSC validation criteria (zero-resistance >273K, Meissner vi",
+        "confirming_text_snippet": "Field-level review: post-LK-99 community has adopted five mandatory validation criteria (4-probe zero R above 273K; SQUI"
+      },
+      {
+        "timestamp": "2026-04-26T19:27:10Z",
+        "evidence_index": 3,
+        "confirming_index": 24,
+        "resolution": "REFUTED",
+        "source": "PNAS / ScienceDaily",
+        "confirming_source": "PatSnap / myScience / phys.org",
+        "trust_delta": -0.1,
+        "original_text_snippet": "No room-temperature superconductor claim independently replicated as of April 2026. PNAS March 2026 roadmap calls for co",
+        "confirming_text_snippet": "April 2026 review (PatSnap, myScience): no material has satisfied all five validation criteria for room-temperature ambi"
+      },
+      {
+        "timestamp": "2026-04-26T19:27:10Z",
+        "evidence_index": 13,
+        "confirming_index": 24,
+        "resolution": "REFUTED",
+        "source": "Physics World / Science AAAS",
+        "confirming_source": "PatSnap / myScience / phys.org",
+        "trust_delta": -0.1,
+        "original_text_snippet": "As of April 2026, highest independently validated critical temperature remains ~260K for LaH10 under 170-190 GPa pressur",
+        "confirming_text_snippet": "April 2026 review (PatSnap, myScience): no material has satisfied all five validation criteria for room-temperature ambi"
+      },
+      {
+        "timestamp": "2026-04-26T19:27:10Z",
+        "evidence_index": 20,
+        "confirming_index": 24,
+        "resolution": "REFUTED",
+        "source": "Quantum Insider, PatSnap, AAAS Science blog",
+        "confirming_source": "PatSnap / myScience / phys.org",
+        "trust_delta": -0.1,
+        "original_text_snippet": "April 2026 community status: no material satisfies all five RTSC validation criteria (zero-resistance >273K, Meissner vi",
+        "confirming_text_snippet": "April 2026 review (PatSnap, myScience): no material has satisfied all five validation criteria for room-temperature ambi"
+      },
+      {
+        "timestamp": "2026-04-26T19:27:10Z",
+        "evidence_index": 22,
+        "confirming_index": 24,
+        "resolution": "REFUTED",
+        "source": "Physics World / community review",
+        "confirming_source": "PatSnap / myScience / phys.org",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Field-level review: post-LK-99 community has adopted five mandatory validation criteria (4-probe zero R above 273K; SQUI",
+        "confirming_text_snippet": "April 2026 review (PatSnap, myScience): no material has satisfied all five validation criteria for room-temperature ambi"
       }
     ],
     "effectiveTrust": {
       "Multiple peer-reviewed publications, Nature Materials (2023)": 0.5,
       "Nature retraction notice; Rochester University statement": 0.5,
-      "PNAS": 0.5,
-      "ScienceDaily": 0.5,
+      "PNAS": 0.4118,
+      "ScienceDaily": 0.4118,
       "Topic initialization": 0.5,
       "PatSnap": 0.4118,
-      "Physics World": 0.4118,
+      "Physics World": 0.2908,
       "Quantum Insider": 0.4118,
-      "Phys.org": 0.5,
-      "Science AAAS blog": 0.5,
-      "myScience": 0.5
+      "Phys.org": 0.3289,
+      "Science AAAS blog": 0.3289,
+      "myScience": 0.3289,
+      "Science AAAS": 0.4118,
+      "phys.org": 0.5,
+      "TU Graz": 0.5,
+      "Quantum Insider, PatSnap, AAAS Science blog": 0.4118,
+      "community review": 0.4555
     },
-    "_last_scan_same_source_skipped": 0
+    "_last_scan_same_source_skipped": 9
   },
   "conditionalPredictions": [
     {

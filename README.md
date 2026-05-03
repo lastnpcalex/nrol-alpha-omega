@@ -12,6 +12,18 @@ Governor-gated Bayesian estimation engine that scaffolds the human-LLM pair so n
 
 Not a forecasting tool. A framework for navigating uncertainty across every domain that matters to your life — geopolitics, economics, AI, climate, finance — with tracked beliefs, auditable reasoning, and calibration feedback that tells you where you're actually wrong.
 
+## State (May 2026 reset)
+
+The framework is post-reset. The earlier topic corpus (24 topics) was contaminated by a freeform-LR loophole that let operators commit context-anchored likelihood ratios outside the indicator schema; the resulting saturated posteriors couldn't be cleanly recovered. Those topics are archived locally (gitignored) and the project starts over with fresh topics authored under the current gates:
+
+- `bayesian_update` requires an indicator id (no freeform LRs)
+- `add_indicator` requires an active cleanup session
+- Indicator shape declarations (`single_observation` / `per_event_member` / `ladder_rung`) are part of topic design
+- Causal de-correlation, saturation red-team, and confidence-inflation gates are enforced at fire time
+- Multi-round news scan with adaptive `lastScanned` window and per-hypothesis + wildcard search subagents
+
+The lessons from the contaminated run are folded into `skills/` and the engine. The `calibration-lk99-superconductor` and `calibration-750gev-diphoton` topics (RESOLVED with real Brier outcomes) are kept in archive as the only legitimate calibration record from the prior run.
+
 ## Why This Exists
 
 You want to understand what's happening in the world without becoming a full-time forecaster. You want to drop a headline into a system and know whether it matters, how much, and to what. You want a record of how your beliefs actually evolved, not how you remember them evolving. And you want the LLM helping you to be structurally prevented from doing what LLMs do worst: confidently agreeing with whatever you already believe.

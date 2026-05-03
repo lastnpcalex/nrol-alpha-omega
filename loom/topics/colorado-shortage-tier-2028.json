@@ -5,13 +5,16 @@
     "question": "What Lower Colorado River shortage tier will the Bureau of Reclamation declare for calendar year 2028 operations?",
     "resolution": "Official BOR Annual Operating Plan shortage tier determination for CY2028, as declared in the August 2027 24-month study. If BOR issues a revised determination before January 1, 2028, the latest revision governs. Revisions published on or after January 1, 2028 do not affect resolution. If the DCP tier framework is formally superseded before the August 2027 determination: resolution maps to whichever hypothesis best matches the actual mandatory allocation reduction imposed, measured as total Lower Basin curtailment volume (AF/yr). Tier 1 equivalent: <600K AF cut. Tier 2 equivalent: 600K-900K AF cut. Tier 3+ equivalent: >900K AF cut. If curtailment structure is novel and cannot be expressed as a single AF volume, H4 resolves. If the August 2027 AOP is explicitly marked provisional pending new guidelines, resolution uses the AOP as declared — provisional status does not prevent resolution.",
     "created": "2026-04-13T18:38:33+00:00",
-    "lastUpdated": "2026-04-22T05:19:58+00:00",
+    "lastUpdated": "2026-04-29T02:30:59+00:00",
     "status": "ACTIVE",
     "dayCount": 0,
     "startDate": "2026-04-13",
     "classification": "ROUTINE",
     "topicType": "policy",
-    "resolutionDate": "2028-01-01"
+    "resolutionDate": "2028-01-01",
+    "lens": "GREEN",
+    "lensSetAt": "2026-04-26T21:21:46+00:00",
+    "lensSetReason": ""
   },
   "tagConfig": {
     "_docs": "Tag configuration for this topic. topicType presets: conflict, science, election, tech. Override directionHints for custom tag-to-hypothesis mappings.",
@@ -41,26 +44,26 @@
         "label": "Tier 1 or no shortage: current restriction level maintained, reduced, or lifted entirely (Mead stays above 1,050 ft in Aug 2027 projection)",
         "midpoint": 1,
         "unit": "tier",
-        "posterior": 0.3,
+        "posterior": 0.0067,
         "resolution_deadline": "2027-12-31"
       },
       "H2": {
         "label": "Tier 2 declared: mandatory deeper cuts to AZ, NV, MX",
         "midpoint": 2,
         "unit": "tier",
-        "posterior": 0.45
+        "posterior": 0.98
       },
       "H3": {
         "label": "Tier 3+ or emergency measures beyond existing DCP framework",
         "midpoint": 3,
         "unit": "tier",
-        "posterior": 0.15
+        "posterior": 0.0067
       },
       "H4": {
         "label": "Unprecedented outcome: restriction level imposed that cannot be mapped to existing Tier 1/2/3 scale (new framework with novel structure, emergency federal override, or court-ordered reallocation)",
         "midpoint": 4,
         "unit": "tier",
-        "posterior": 0.1
+        "posterior": 0.0067
       }
     },
     "expectedValue": 2.01,
@@ -72,7 +75,328 @@
         "H1": 0.3,
         "H2": 0.45,
         "H3": 0.15,
-        "H4": 0.1
+        "H4": 0.1,
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        }
+      },
+      {
+        "date": "2026-04-24",
+        "posteriors": {
+          "H1": 0.4239,
+          "H2": 0.4945,
+          "H3": 0.0565,
+          "H4": 0.0251
+        },
+        "priors": {
+          "H1": 0.3,
+          "H2": 0.45,
+          "H3": 0.15,
+          "H4": 0.1
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_004"
+        ],
+        "likelihoods": {
+          "H1": 0.45,
+          "H2": 0.35,
+          "H3": 0.12,
+          "H4": 0.08
+        },
+        "note": "Current Tier 1 maintained without deeper cuts; extraordinary conservation avoiding Tier 2 so far. Slight update toward H1 for 2028 outlook.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-24",
+        "posteriors": {
+          "H1": 0.2557,
+          "H2": 0.7052,
+          "H3": 0.0341,
+          "H4": 0.005
+        },
+        "priors": {
+          "H1": 0.4239,
+          "H2": 0.4945,
+          "H3": 0.0565,
+          "H4": 0.0251
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_005"
+        ],
+        "likelihoods": {
+          "H1": 0.22,
+          "H2": 0.52,
+          "H3": 0.22,
+          "H4": 0.04
+        },
+        "note": "Record-low snowpack and record-hot March accelerate 2028-tier risk toward Tier 2 while Tier 1 remains the current operating tier.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "turningPoint": {
+          "type": "BRANCH_DEATH",
+          "hypothesis": "H4",
+          "lastPosterior": 0.005
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-24",
+        "posteriors": {
+          "H1": 0.0968,
+          "H2": 0.8897,
+          "H3": 0.0086,
+          "H4": 0.005
+        },
+        "priors": {
+          "H1": 0.2557,
+          "H2": 0.7052,
+          "H3": 0.0341,
+          "H4": 0.005
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_006"
+        ],
+        "likelihoods": {
+          "H1": 0.3,
+          "H2": 1.0,
+          "H3": 0.2,
+          "H4": 0.05
+        },
+        "note": "Continued drawdown on trajectory toward Tier 2 for 2028 ops; extreme outcomes low-probability.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "turningPoint": {
+          "type": "MAJOR_SHIFT",
+          "maxShift": 0.1845
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-25",
+        "posteriors": {
+          "H1": 0.0152,
+          "H2": 0.9748,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "priors": {
+          "H1": 0.0968,
+          "H2": 0.8897,
+          "H3": 0.0086,
+          "H4": 0.005
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_007"
+        ],
+        "likelihoods": {
+          "H1": 0.1,
+          "H2": 0.7,
+          "H3": 0.15,
+          "H4": 0.05
+        },
+        "note": "Reservoir trajectory and EIS framework structurally point to Tier 2 (H2); Tier 3+ remains tail unless 2027 inflows collapse.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "turningPoint": {
+          "type": "BRANCH_DEATH",
+          "hypothesis": "H3",
+          "lastPosterior": 0.005
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-25",
+        "posteriors": {
+          "H1": 0.0067,
+          "H2": 0.98,
+          "H3": 0.0067,
+          "H4": 0.0067
+        },
+        "priors": {
+          "H1": 0.0152,
+          "H2": 0.9748,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_008"
+        ],
+        "likelihoods": {
+          "H1": 0.2,
+          "H2": 1.0,
+          "H3": 0.4,
+          "H4": 0.1
+        },
+        "note": "Continued elevation decline plus regulatory transition both point toward Tier 2 declaration trajectory by 2028 — supports H2.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-26",
+        "posteriors": {
+          "H1": 0.0068,
+          "H2": 0.98,
+          "H3": 0.0066,
+          "H4": 0.0066
+        },
+        "priors": {
+          "H1": 0.0067,
+          "H2": 0.98,
+          "H3": 0.0067,
+          "H4": 0.0067
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_009"
+        ],
+        "likelihoods": {
+          "H1": 0.3,
+          "H2": 0.4,
+          "H3": 0.2,
+          "H4": 0.25
+        },
+        "note": "USBR most-probable run shows Tier 1 not Tier 2 for 2027 ops; post-2026 guidelines may redefine tiers entirely. Modest downweight from current H2=0.98.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-26",
+        "posteriors": {
+          "H1": 0.0067,
+          "H2": 0.98,
+          "H3": 0.0067,
+          "H4": 0.0067
+        },
+        "priors": {
+          "H1": 0.0068,
+          "H2": 0.98,
+          "H3": 0.0066,
+          "H4": 0.0066
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_010"
+        ],
+        "likelihoods": {
+          "H1": 0.1,
+          "H2": 1.0,
+          "H3": 0.4,
+          "H4": 0.1
+        },
+        "note": "Hydraulic models point directly at Tier 2 (H2) for 2028 operations; no signs of Tier 3+ or framework rupture.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
       }
     ]
   },
@@ -321,6 +645,30 @@
           "lr_decay": 0.65,
           "n_firings": 0,
           "resolution_class": false
+        },
+        {
+          "id": "t3_basin_inflow_below_60pct",
+          "desc": "BOR monthly 24-month study or April-July inflow forecast projects unregulated inflow into Lake Powell below 60 percent of normal.",
+          "posteriorEffect": "H2 +4pp, H3 +2pp, H1 -5pp, H4 -1pp",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        },
+        {
+          "id": "t3_mead_eoy2026_projected_below_1055",
+          "desc": "Any BOR 24-month study projects Lake Mead end-of-year 2026 elevation below 1055 ft (April 2026 baseline 1055.88 ft).",
+          "posteriorEffect": "H2 +5pp, H3 +1pp, H1 -5pp, H4 -1pp",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        },
+        {
+          "id": "t3_upstream_augmentation_action",
+          "desc": "Federal or basin-state action augmenting Powell or Mead inflows: Flaming Gorge / Blue Mesa / Navajo release announcement, conservation pool release over 100 KAF, or formal voluntary cuts beyond current DCP commitments.",
+          "posteriorEffect": "H1 +3pp, H2 -2pp, H3 -1pp, H4 0pp",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
         }
       ],
       "anti_indicators": [
@@ -394,7 +742,8 @@
           "lr_migration_warning": "design prior drift >30% — review before next firing"
         }
       ]
-    }
+    },
+    "anti_indicators": []
   },
   "actorModel": {
     "description": "Policy/institutional actors who declare and implement shortage tiers, plus federal actors who could replace the framework entirely.",
@@ -653,6 +1002,247 @@
       "ledger": "DECISION",
       "claimState": "SUPPORTED",
       "effectiveWeight": 1.0
+    },
+    {
+      "id": "ev_004",
+      "time": "2026-04-24T02:25:41+00:00",
+      "tag": "POLICY",
+      "tags": [
+        "POLICY",
+        "ENV"
+      ],
+      "text": "Reclamation August 24-Month Study determined Lower Basin remains in Tier 1 shortage for 2026 water year; planned release 7.48 MAF; post-2026 operational plan to be finalized by 2026-10-01.",
+      "provenance": "OBSERVED",
+      "source": "US Bureau of Reclamation / CAP",
+      "posteriorImpact": "NONE",
+      "url": "https://knowyourwaternews.com/reclamation-declares-tier-1-shortage-for-2026/",
+      "ledger": "DECISION",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-24T02:25:41+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Current Tier 1 maintained without deeper cuts; extraordinary conservation avoiding Tier 2 so far. Slight update toward H1 for 2028 outlook.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_005",
+      "time": "2026-04-24T13:49:15+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "HYDRO"
+      ],
+      "text": "USBR April 17 2026 24-Month Study: Colorado River system storage at 36% of capacity; lowest snowpack on record combined with record-breaking March heat intensified Basin drought. Lake Mead expected to stay in Tier 1 through 2026 at 1,055.88 ft EoY, 20 ft below shortage trigger but declining. Post-2026 operating framework still under negotiation.",
+      "provenance": "OBSERVED",
+      "source": "US Bureau of Reclamation",
+      "posteriorImpact": "NONE",
+      "url": "https://www.usbr.gov/lc/region/g4000/24mo.pdf",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-24T13:49:15+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-24T13:49:15+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Record-low snowpack and record-hot March accelerate 2028-tier risk toward Tier 2 while Tier 1 remains the current operating tier.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_006",
+      "time": "2026-04-24T19:30:15+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "CLIMATE"
+      ],
+      "text": "April 2026 USBR 24-month study: Tier 1 shortage maintained for 2026 (Mead 1,055.88 ft projected); Mead dropping ~20ft during 2026; Flaming Gorge augmentation plan approved 4/22 as states rush to prop up Powell. Trajectory consistent with 2028 Tier 2 declaration risk.",
+      "provenance": "OBSERVED",
+      "source": "USBR / Salt Lake Tribune",
+      "posteriorImpact": "NONE",
+      "url": "https://www.usbr.gov/lc/region/g4000/24mo.pdf",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.3289
+    },
+    {
+      "time": "2026-04-24T19:30:15+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-24T19:30:15+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Continued drawdown on trajectory toward Tier 2 for 2028 ops; extreme outcomes low-probability.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_007",
+      "time": "2026-04-25T13:19:53+00:00",
+      "tag": "POLICY",
+      "tags": [
+        "POLICY",
+        "ENV"
+      ],
+      "text": "Reclamation operating Lake Mead in Tier 1 shortage during 2026; Post-2026 EIS draft released January 9, 2026 covers operations starting 2027; Mead trajectory points toward Tier 2 thresholds.",
+      "provenance": "OBSERVED",
+      "source": "USBR Post-2026 / Congress.gov CRS",
+      "posteriorImpact": "NONE",
+      "url": "https://www.usbr.gov/ColoradoRiverBasin/post2026/index.html",
+      "ledger": "DECISION",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-25T13:19:53+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_008",
+      "time": "2026-04-25T14:24:50+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "ENVIRO",
+        "POLICY"
+      ],
+      "text": "Lake Mead operating in Tier 1 Shortage Condition for 2026 with projected EOY elevation ~1,063 ft. Post-2026 Operations process underway; 2007 Interim Guidelines and 2019 DCPs expire end of 2026. Inflow forecast 46% of normal continues structural drought pressure.",
+      "provenance": "OBSERVED",
+      "source": "Bureau of Reclamation",
+      "posteriorImpact": "NONE",
+      "url": "https://www.usbr.gov/ColoradoRiverBasin/post2026/index.html",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-25T14:24:50+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-26T00:20:05+00:00",
+      "tag": "INTEL",
+      "text": "INDICATOR ADDED: t3_basin_inflow_below_60pct (tier3_suggestive). posteriorEffect=H2 +4pp, H3 +2pp, H1 -5pp, H4 -1pp. Rationale: Closes hydrology-precursor coverage gap surfaced by ev_001/002/003/005/006/008. Approved 2026-04-25 after review_topic_design..",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-26T00:20:06+00:00",
+      "tag": "INTEL",
+      "text": "INDICATOR ADDED: t3_mead_eoy2026_projected_below_1055 (tier3_suggestive). posteriorEffect=H2 +5pp, H3 +1pp, H1 -5pp, H4 -1pp. Rationale: Captures intra-cycle Mead trajectory pre-Aug 2027. Approved by operator 2026-04-25..",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-26T00:20:06+00:00",
+      "tag": "INTEL",
+      "text": "INDICATOR ADDED: t3_upstream_augmentation_action (tier3_suggestive). posteriorEffect=H1 +3pp, H2 -2pp, H3 -1pp, H4 0pp. Rationale: ev_006 Flaming Gorge augmentation plan approved 4/22 had no indicator home. Augmentation actions prop up reservoirs and lean against deeper-cut hypotheses. Approved by operator 2026-04-25..",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_009",
+      "time": "2026-04-26T16:59:07+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "POLICY",
+        "WATER"
+      ],
+      "text": "USBR Apr 2026 24-month study projects Lake Mead at 1,055.88 ft (Tier 1 shortage) under most-probable scenario; post-2026 operational guidelines to be finalized Oct 1, 2026; draft EIS released Jan 9, 2026 received 18,000+ public comments.",
+      "provenance": "OBSERVED",
+      "source": "USBR",
+      "posteriorImpact": "NONE",
+      "url": "https://www.usbr.gov/lc/region/g4000/24mo.pdf",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.2908
+    },
+    {
+      "time": "2026-04-26T16:59:07+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_010",
+      "time": "2026-04-26T19:27:11+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "WATER"
+      ],
+      "text": "USBR April 2026 modeling: Lake Mead expected to drop below 1,050 ft by July 2026, triggering Tier 2 shortage. Nevada's Colorado River allocation already cut 21,000 AFY under Tier 1; Tier 2 would add another 4,000 AFY cut. AZ DWR continues Tier 1 baseline.",
+      "provenance": "OBSERVED",
+      "source": "USBR / Nevada Current / AZ DWR",
+      "posteriorImpact": "NONE",
+      "url": "https://www.usbr.gov/newsroom/news-release/5211",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.2908
+    },
+    {
+      "time": "2026-04-26T19:27:11+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
     }
   ],
   "dataFeeds": {
@@ -739,20 +1329,23 @@
     ]
   },
   "governance": {
-    "health": "HEALTHY",
-    "issues": [],
+    "health": "DEGRADED",
+    "issues": [
+      "Majority stale evidence (23/32)",
+      "Near-zero uncertainty — check for overconfidence"
+    ],
     "rt": {
       "rt": 0.0,
       "regime": "SAFE",
       "worst_hypothesis": "H1"
     },
-    "entropy": 1.7822,
+    "entropy": 0.1737,
     "maxEntropy": 2.0,
-    "uncertaintyRatio": 0.8911,
+    "uncertaintyRatio": 0.0868,
     "evidenceFreshness": {
-      "fresh": 10,
-      "stale": 3,
-      "total": 13
+      "fresh": 9,
+      "stale": 23,
+      "total": 32
     },
     "hypothesisAdmissibility": {
       "H1": "ADMISSIBLE",
@@ -761,37 +1354,44 @@
       "H4": "ADMISSIBLE"
     },
     "klFromPrior": {
-      "kl_divergence": 0.0,
-      "interpretation": "MODERATE"
+      "kl_divergence": 0.6983,
+      "interpretation": "WELL_EVIDENCED"
     },
-    "lastComputed": "2026-04-22T05:19:58+00:00",
+    "lastComputed": "2026-04-29T02:30:59+00:00",
     "staleDependencies": 0,
     "calibrationHealth": "ACCEPTABLE",
     "unresolvedContradictions": 0,
+    "reviewed_alerts": [
+      {
+        "signature": "none_impact_saturation:colorado-shortage-tier-2028",
+        "timestamp": "2026-04-25T20:46:40+00:00",
+        "reason": "auto-suppressed after review_topic_design completion - 3 tier3 indicator gaps identified, proposed for operator approval"
+      }
+    ],
     "designGate": {
       "passed": true,
       "blockers": [],
       "warnings": [],
       "coverage": {
         "H1": {
-          "pos": 6,
-          "neg": 11
+          "pos": 7,
+          "neg": 13
         },
         "H2": {
-          "pos": 7,
-          "neg": 11
+          "pos": 9,
+          "neg": 12
         },
         "H3": {
-          "pos": 8,
-          "neg": 9
+          "pos": 10,
+          "neg": 10
         },
         "H4": {
-          "pos": 5,
-          "neg": 10
+          "pos": 6,
+          "neg": 13
         }
       },
       "indistinguishable": [],
-      "lastChecked": "2026-04-22T05:19:58+00:00"
+      "lastChecked": "2026-04-29T02:30:59+00:00"
     }
   },
   "predictionScoring": {
@@ -862,6 +1462,160 @@
           "H4": 0.005
         },
         "entropy": 0.2177
+      },
+      {
+        "timestamp": "2026-04-24T02:25:41+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.4239,
+          "H2": 0.4945,
+          "H3": 0.0565,
+          "H4": 0.0251
+        },
+        "entropy": 1.3949
+      },
+      {
+        "timestamp": "2026-04-24T02:25:41+00:00",
+        "trigger": "pipeline:ev_004",
+        "posteriors": {
+          "H1": 0.4239,
+          "H2": 0.4945,
+          "H3": 0.0565,
+          "H4": 0.0251
+        },
+        "entropy": 1.3949
+      },
+      {
+        "timestamp": "2026-04-24T13:49:15+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.2557,
+          "H2": 0.7052,
+          "H3": 0.0341,
+          "H4": 0.005
+        },
+        "entropy": 1.0629
+      },
+      {
+        "timestamp": "2026-04-24T13:49:15+00:00",
+        "trigger": "pipeline:ev_005",
+        "posteriors": {
+          "H1": 0.2557,
+          "H2": 0.7052,
+          "H3": 0.0341,
+          "H4": 0.005
+        },
+        "entropy": 1.0629
+      },
+      {
+        "timestamp": "2026-04-24T19:30:15+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0968,
+          "H2": 0.8897,
+          "H3": 0.0086,
+          "H4": 0.005
+        },
+        "entropy": 0.5733
+      },
+      {
+        "timestamp": "2026-04-24T19:30:15+00:00",
+        "trigger": "pipeline:ev_006",
+        "posteriors": {
+          "H1": 0.0968,
+          "H2": 0.8897,
+          "H3": 0.0086,
+          "H4": 0.005
+        },
+        "entropy": 0.5733
+      },
+      {
+        "timestamp": "2026-04-25T13:19:53+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0152,
+          "H2": 0.9748,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "entropy": 0.2041
+      },
+      {
+        "timestamp": "2026-04-25T13:19:53+00:00",
+        "trigger": "pipeline:ev_007",
+        "posteriors": {
+          "H1": 0.0152,
+          "H2": 0.9748,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "entropy": 0.2041
+      },
+      {
+        "timestamp": "2026-04-25T14:24:50+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0067,
+          "H2": 0.98,
+          "H3": 0.0067,
+          "H4": 0.0067
+        },
+        "entropy": 0.1737
+      },
+      {
+        "timestamp": "2026-04-25T14:24:50+00:00",
+        "trigger": "pipeline:ev_008",
+        "posteriors": {
+          "H1": 0.0067,
+          "H2": 0.98,
+          "H3": 0.0067,
+          "H4": 0.0067
+        },
+        "entropy": 0.1737
+      },
+      {
+        "timestamp": "2026-04-26T16:59:07+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0068,
+          "H2": 0.98,
+          "H3": 0.0066,
+          "H4": 0.0066
+        },
+        "entropy": 0.1731
+      },
+      {
+        "timestamp": "2026-04-26T16:59:07+00:00",
+        "trigger": "pipeline:ev_009",
+        "posteriors": {
+          "H1": 0.0068,
+          "H2": 0.98,
+          "H3": 0.0066,
+          "H4": 0.0066
+        },
+        "entropy": 0.1731
+      },
+      {
+        "timestamp": "2026-04-26T19:27:11+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0067,
+          "H2": 0.98,
+          "H3": 0.0067,
+          "H4": 0.0067
+        },
+        "entropy": 0.1737
+      },
+      {
+        "timestamp": "2026-04-26T19:27:11+00:00",
+        "trigger": "pipeline:ev_010",
+        "posteriors": {
+          "H1": 0.0067,
+          "H2": 0.98,
+          "H3": 0.0067,
+          "H4": 0.0067
+        },
+        "entropy": 0.1737
       }
     ],
     "outcomes": [],
@@ -941,20 +1695,1293 @@
         "detected": "2026-04-21T03:51:21Z",
         "resolution": "SUPERSEDED",
         "resolvedAt": "2026-04-21T03:51:21Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Official Reclamation modeling projects Tier 2 declaration trigger met; supports H2 as modal outcome for 2028 operations.",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "Reclamation August 24-Month Study determined Lower Basin remains in Tier 1 shortage for 2026 water year; planned release 7.48 MAF; post-2026 operational plan to be finalized by 2026-10-01.",
+        "reason": "Numeric divergence 50.0% on metric (context: tier): new=1.0, existing=2.0, threshold=10%",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "USBR hydraulic models indicate Lake Mead likely to fall below 1,050 ft by July 2026, triggering Tier 2 shortage for 2027 operations; Tier 1 declared for 2026. Basin snowpack and runoff trends remain below average.",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "Reclamation August 24-Month Study determined Lower Basin remains in Tier 1 shortage for 2026 water year; planned release 7.48 MAF; post-2026 operational plan to be finalized by 2026-10-01.",
+        "reason": "Numeric divergence 100.0% on metric (context: tier): new=1.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-19T00:57:10+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Political resistance to deeper cuts modestly raises H1 maintained-Tier1 branch; hydrology still points H2 median for 2028.",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "Reclamation August 24-Month Study determined Lower Basin remains in Tier 1 shortage for 2026 water year; planned release 7.48 MAF; post-2026 operational plan to be finalized by 2026-10-01.",
+        "reason": "Numeric divergence 100.0% on metric (context: for): new=1.0, existing=2028.0, threshold=10%",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-19T00:57:10+00:00",
+        "entry_a_text": "Bureau of Reclamation operating Lake Mead under Tier 1 Shortage Condition in 2026; Lake Powell under Mid-Elevation Release Tier. Post-2026 interim guidelines under negotiation (2007 guidelines + 2019 DCPs expire end-2026). Mayors of major SW cities publicly warned against deeper cuts.",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "Reclamation August 24-Month Study determined Lower Basin remains in Tier 1 shortage for 2026 water year; planned release 7.48 MAF; post-2026 operational plan to be finalized by 2026-10-01.",
+        "reason": "Numeric divergence 100.0% on metric (context: in, shortage): new=1.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T15:23:00+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Very low snowpack and projected one-third normal inflow favor Tier 2+ shortage (H2/H3). Post-2026 framework negotiations add H4 uncertainty. Lake Mead Jan 2026 was 6.5ft above projection providing small buffer.",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "Reclamation August 24-Month Study determined Lower Basin remains in Tier 1 shortage for 2026 water year; planned release 7.48 MAF; post-2026 operational plan to be finalized by 2026-10-01.",
+        "reason": "Numeric divergence 50.0% on metric (context: shortage, tier): new=1.0, existing=2.0, threshold=10%",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T15:23:00+00:00",
+        "entry_a_text": "Colorado River projected to deliver just over a third of normal Apr-Jul inflow to Lake Powell as snowpack near lowest levels since 2000. Lake Powell 25% full, Lake Mead 34% full. Post-2026 operating rules under active negotiation. River flows down 20% since 2000.",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "Reclamation August 24-Month Study determined Lower Basin remains in Tier 1 shortage for 2026 water year; planned release 7.48 MAF; post-2026 operational plan to be finalized by 2026-10-01.",
+        "reason": "Numeric divergence 78.0% on metric (context: post-2026): new=7.48, existing=34.0, threshold=10%",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Current Tier 1 maintained without deeper cuts; extraordinary conservation avoiding Tier 2 so far. Slight update toward H1 for 2028 outlook.",
+        "entry_b_time": "2026-04-24T13:49:15+00:00",
+        "entry_b_text": "USBR April 17 2026 24-Month Study: Colorado River system storage at 36% of capacity; lowest snowpack on record combined with record-breaking March heat intensified Basin drought. Lake Mead expected to stay in Tier 1 through 2026 at 1,055.88 ft EoY, 20 ft below shortage trigger but declining. Post-2026 operating framework still under negotiation.",
+        "reason": "Numeric divergence 50.0% on metric (context: tier): new=1.0, existing=2.0, threshold=10%",
+        "detected": "2026-04-24T13:49:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "Reclamation August 24-Month Study determined Lower Basin remains in Tier 1 shortage for 2026 water year; planned release 7.48 MAF; post-2026 operational plan to be finalized by 2026-10-01.",
+        "entry_b_time": "2026-04-24T13:49:15+00:00",
+        "entry_b_text": "USBR April 17 2026 24-Month Study: Colorado River system storage at 36% of capacity; lowest snowpack on record combined with record-breaking March heat intensified Basin drought. Lake Mead expected to stay in Tier 1 through 2026 at 1,055.88 ft EoY, 20 ft below shortage trigger but declining. Post-2026 operating framework still under negotiation.",
+        "reason": "Numeric divergence 94.1% on metric (context: 2026): new=17.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-24T13:49:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Official Reclamation modeling projects Tier 2 declaration trigger met; supports H2 as modal outcome for 2028 operations.",
+        "entry_b_time": "2026-04-24T13:49:15+00:00",
+        "entry_b_text": "USBR April 17 2026 24-Month Study: Colorado River system storage at 36% of capacity; lowest snowpack on record combined with record-breaking March heat intensified Basin drought. Lake Mead expected to stay in Tier 1 through 2026 at 1,055.88 ft EoY, 20 ft below shortage trigger but declining. Post-2026 operating framework still under negotiation.",
+        "reason": "Numeric divergence 50.0% on metric (context: tier): new=1.0, existing=2.0, threshold=10%",
+        "detected": "2026-04-24T13:49:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "USBR hydraulic models indicate Lake Mead likely to fall below 1,050 ft by July 2026, triggering Tier 2 shortage for 2027 operations; Tier 1 declared for 2026. Basin snowpack and runoff trends remain below average.",
+        "entry_b_time": "2026-04-24T13:49:15+00:00",
+        "entry_b_text": "USBR April 17 2026 24-Month Study: Colorado River system storage at 36% of capacity; lowest snowpack on record combined with record-breaking March heat intensified Basin drought. Lake Mead expected to stay in Tier 1 through 2026 at 1,055.88 ft EoY, 20 ft below shortage trigger but declining. Post-2026 operating framework still under negotiation.",
+        "reason": "Numeric divergence 88.2% on metric (context: 2026): new=17.0, existing=2.0, threshold=10%",
+        "detected": "2026-04-24T13:49:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-19T00:57:10+00:00",
+        "entry_a_text": "Bureau of Reclamation operating Lake Mead under Tier 1 Shortage Condition in 2026; Lake Powell under Mid-Elevation Release Tier. Post-2026 interim guidelines under negotiation (2007 guidelines + 2019 DCPs expire end-2026). Mayors of major SW cities publicly warned against deeper cuts.",
+        "entry_b_time": "2026-04-24T13:49:15+00:00",
+        "entry_b_text": "USBR April 17 2026 24-Month Study: Colorado River system storage at 36% of capacity; lowest snowpack on record combined with record-breaking March heat intensified Basin drought. Lake Mead expected to stay in Tier 1 through 2026 at 1,055.88 ft EoY, 20 ft below shortage trigger but declining. Post-2026 operating framework still under negotiation.",
+        "reason": "Numeric divergence 100.0% on metric (context: in): new=1.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-24T13:49:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T15:23:00+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Very low snowpack and projected one-third normal inflow favor Tier 2+ shortage (H2/H3). Post-2026 framework negotiations add H4 uncertainty. Lake Mead Jan 2026 was 6.5ft above projection providing small buffer.",
+        "entry_b_time": "2026-04-24T13:49:15+00:00",
+        "entry_b_text": "USBR April 17 2026 24-Month Study: Colorado River system storage at 36% of capacity; lowest snowpack on record combined with record-breaking March heat intensified Basin drought. Lake Mead expected to stay in Tier 1 through 2026 at 1,055.88 ft EoY, 20 ft below shortage trigger but declining. Post-2026 operating framework still under negotiation.",
+        "reason": "Numeric divergence 50.0% on metric (context: tier): new=1.0, existing=2.0, threshold=10%",
+        "detected": "2026-04-24T13:49:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T15:23:00+00:00",
+        "entry_a_text": "Colorado River projected to deliver just over a third of normal Apr-Jul inflow to Lake Powell as snowpack near lowest levels since 2000. Lake Powell 25% full, Lake Mead 34% full. Post-2026 operating rules under active negotiation. River flows down 20% since 2000.",
+        "entry_b_time": "2026-04-24T13:49:15+00:00",
+        "entry_b_text": "USBR April 17 2026 24-Month Study: Colorado River system storage at 36% of capacity; lowest snowpack on record combined with record-breaking March heat intensified Basin drought. Lake Mead expected to stay in Tier 1 through 2026 at 1,055.88 ft EoY, 20 ft below shortage trigger but declining. Post-2026 operating framework still under negotiation.",
+        "reason": "Numeric divergence 98.2% on metric (context: lowest): new=36.0, existing=2000.0, threshold=10%",
+        "detected": "2026-04-24T13:49:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:15+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Record-low snowpack and record-hot March accelerate 2028-tier risk toward Tier 2 while Tier 1 remains the current operating tier.",
+        "entry_b_time": "2026-04-24T19:30:15+00:00",
+        "entry_b_text": "April 2026 USBR 24-month study: Tier 1 shortage maintained for 2026 (Mead 1,055.88 ft projected); Mead dropping ~20ft during 2026; Flaming Gorge augmentation plan approved 4/22 as states rush to prop up Powell. Trajectory consistent with 2028 Tier 2 declaration risk.",
+        "reason": "Numeric divergence 50.0% on metric (context: tier): new=1.0, existing=2.0, threshold=10%",
+        "detected": "2026-04-24T19:30:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:15+00:00",
+        "entry_a_text": "USBR April 17 2026 24-Month Study: Colorado River system storage at 36% of capacity; lowest snowpack on record combined with record-breaking March heat intensified Basin drought. Lake Mead expected to stay in Tier 1 through 2026 at 1,055.88 ft EoY, 20 ft below shortage trigger but declining. Post-2026 operating framework still under negotiation.",
+        "entry_b_time": "2026-04-24T19:30:15+00:00",
+        "entry_b_text": "April 2026 USBR 24-month study: Tier 1 shortage maintained for 2026 (Mead 1,055.88 ft projected); Mead dropping ~20ft during 2026; Flaming Gorge augmentation plan approved 4/22 as states rush to prop up Powell. Trajectory consistent with 2028 Tier 2 declaration risk.",
+        "reason": "Numeric divergence 99.2% on metric (context: 24-month, april, study): new=2026.0, existing=17.0, threshold=10%",
+        "detected": "2026-04-24T19:30:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Current Tier 1 maintained without deeper cuts; extraordinary conservation avoiding Tier 2 so far. Slight update toward H1 for 2028 outlook.",
+        "entry_b_time": "2026-04-24T19:30:15+00:00",
+        "entry_b_text": "April 2026 USBR 24-month study: Tier 1 shortage maintained for 2026 (Mead 1,055.88 ft projected); Mead dropping ~20ft during 2026; Flaming Gorge augmentation plan approved 4/22 as states rush to prop up Powell. Trajectory consistent with 2028 Tier 2 declaration risk.",
+        "reason": "Numeric divergence 50.0% on metric (context: tier): new=1.0, existing=2.0, threshold=10%",
+        "detected": "2026-04-24T19:30:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "Reclamation August 24-Month Study determined Lower Basin remains in Tier 1 shortage for 2026 water year; planned release 7.48 MAF; post-2026 operational plan to be finalized by 2026-10-01.",
+        "entry_b_time": "2026-04-24T19:30:15+00:00",
+        "entry_b_text": "April 2026 USBR 24-month study: Tier 1 shortage maintained for 2026 (Mead 1,055.88 ft projected); Mead dropping ~20ft during 2026; Flaming Gorge augmentation plan approved 4/22 as states rush to prop up Powell. Trajectory consistent with 2028 Tier 2 declaration risk.",
+        "reason": "Numeric divergence 100.0% on metric (context: for, shortage): new=1.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-24T19:30:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Official Reclamation modeling projects Tier 2 declaration trigger met; supports H2 as modal outcome for 2028 operations.",
+        "entry_b_time": "2026-04-24T19:30:15+00:00",
+        "entry_b_text": "April 2026 USBR 24-month study: Tier 1 shortage maintained for 2026 (Mead 1,055.88 ft projected); Mead dropping ~20ft during 2026; Flaming Gorge augmentation plan approved 4/22 as states rush to prop up Powell. Trajectory consistent with 2028 Tier 2 declaration risk.",
+        "reason": "Numeric divergence 50.0% on metric (context: tier): new=1.0, existing=2.0, threshold=10%",
+        "detected": "2026-04-24T19:30:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+        "entry_b_time": "2026-04-24T19:30:15+00:00",
+        "entry_b_text": "April 2026 USBR 24-month study: Tier 1 shortage maintained for 2026 (Mead 1,055.88 ft projected); Mead dropping ~20ft during 2026; Flaming Gorge augmentation plan approved 4/22 as states rush to prop up Powell. Trajectory consistent with 2028 Tier 2 declaration risk.",
+        "reason": "Numeric divergence 100.0% on metric (context: with): new=2028.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-24T19:30:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "USBR hydraulic models indicate Lake Mead likely to fall below 1,050 ft by July 2026, triggering Tier 2 shortage for 2027 operations; Tier 1 declared for 2026. Basin snowpack and runoff trends remain below average.",
+        "entry_b_time": "2026-04-24T19:30:15+00:00",
+        "entry_b_text": "April 2026 USBR 24-month study: Tier 1 shortage maintained for 2026 (Mead 1,055.88 ft projected); Mead dropping ~20ft during 2026; Flaming Gorge augmentation plan approved 4/22 as states rush to prop up Powell. Trajectory consistent with 2028 Tier 2 declaration risk.",
+        "reason": "Numeric divergence 100.0% on metric (context: tier): new=1.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-24T19:30:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-19T00:57:10+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Political resistance to deeper cuts modestly raises H1 maintained-Tier1 branch; hydrology still points H2 median for 2028.",
+        "entry_b_time": "2026-04-24T19:30:15+00:00",
+        "entry_b_text": "April 2026 USBR 24-month study: Tier 1 shortage maintained for 2026 (Mead 1,055.88 ft projected); Mead dropping ~20ft during 2026; Flaming Gorge augmentation plan approved 4/22 as states rush to prop up Powell. Trajectory consistent with 2028 Tier 2 declaration risk.",
+        "reason": "Numeric divergence 100.0% on metric (context: for): new=1.0, existing=2028.0, threshold=10%",
+        "detected": "2026-04-24T19:30:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-19T00:57:10+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+        "entry_b_time": "2026-04-24T19:30:15+00:00",
+        "entry_b_text": "April 2026 USBR 24-month study: Tier 1 shortage maintained for 2026 (Mead 1,055.88 ft projected); Mead dropping ~20ft during 2026; Flaming Gorge augmentation plan approved 4/22 as states rush to prop up Powell. Trajectory consistent with 2028 Tier 2 declaration risk.",
+        "reason": "Numeric divergence 100.0% on metric (context: with): new=2028.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-24T19:30:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-19T00:57:10+00:00",
+        "entry_a_text": "Bureau of Reclamation operating Lake Mead under Tier 1 Shortage Condition in 2026; Lake Powell under Mid-Elevation Release Tier. Post-2026 interim guidelines under negotiation (2007 guidelines + 2019 DCPs expire end-2026). Mayors of major SW cities publicly warned against deeper cuts.",
+        "entry_b_time": "2026-04-24T19:30:15+00:00",
+        "entry_b_text": "April 2026 USBR 24-month study: Tier 1 shortage maintained for 2026 (Mead 1,055.88 ft projected); Mead dropping ~20ft during 2026; Flaming Gorge augmentation plan approved 4/22 as states rush to prop up Powell. Trajectory consistent with 2028 Tier 2 declaration risk.",
+        "reason": "Numeric divergence 100.0% on metric (context: shortage): new=1.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-24T19:30:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T15:23:00+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Very low snowpack and projected one-third normal inflow favor Tier 2+ shortage (H2/H3). Post-2026 framework negotiations add H4 uncertainty. Lake Mead Jan 2026 was 6.5ft above projection providing small buffer.",
+        "entry_b_time": "2026-04-24T19:30:15+00:00",
+        "entry_b_text": "April 2026 USBR 24-month study: Tier 1 shortage maintained for 2026 (Mead 1,055.88 ft projected); Mead dropping ~20ft during 2026; Flaming Gorge augmentation plan approved 4/22 as states rush to prop up Powell. Trajectory consistent with 2028 Tier 2 declaration risk.",
+        "reason": "Numeric divergence 50.0% on metric (context: shortage, tier): new=1.0, existing=2.0, threshold=10%",
+        "detected": "2026-04-24T19:30:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T15:23:00+00:00",
+        "entry_a_text": "Colorado River projected to deliver just over a third of normal Apr-Jul inflow to Lake Powell as snowpack near lowest levels since 2000. Lake Powell 25% full, Lake Mead 34% full. Post-2026 operating rules under active negotiation. River flows down 20% since 2000.",
+        "entry_b_time": "2026-04-24T19:30:15+00:00",
+        "entry_b_text": "April 2026 USBR 24-month study: Tier 1 shortage maintained for 2026 (Mead 1,055.88 ft projected); Mead dropping ~20ft during 2026; Flaming Gorge augmentation plan approved 4/22 as states rush to prop up Powell. Trajectory consistent with 2028 Tier 2 declaration risk.",
+        "reason": "Numeric divergence 98.8% on metric (context: mead): new=2026.0, existing=25.0, threshold=10%",
+        "detected": "2026-04-24T19:30:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T19:30:15+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Continued drawdown on trajectory toward Tier 2 for 2028 ops; extreme outcomes low-probability.",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Reclamation operating Lake Mead in Tier 1 shortage during 2026; Post-2026 EIS draft released January 9, 2026 covers operations starting 2027; Mead trajectory points toward Tier 2 thresholds.",
+        "reason": "Numeric divergence 50.0% on metric (context: tier): new=1.0, existing=2.0, threshold=10%",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T19:30:15+00:00",
+        "entry_a_text": "April 2026 USBR 24-month study: Tier 1 shortage maintained for 2026 (Mead 1,055.88 ft projected); Mead dropping ~20ft during 2026; Flaming Gorge augmentation plan approved 4/22 as states rush to prop up Powell. Trajectory consistent with 2028 Tier 2 declaration risk.",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Reclamation operating Lake Mead in Tier 1 shortage during 2026; Post-2026 EIS draft released January 9, 2026 covers operations starting 2027; Mead trajectory points toward Tier 2 thresholds.",
+        "reason": "Numeric divergence 100.0% on metric (context: mead, shortage): new=1.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:15+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Record-low snowpack and record-hot March accelerate 2028-tier risk toward Tier 2 while Tier 1 remains the current operating tier.",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Reclamation operating Lake Mead in Tier 1 shortage during 2026; Post-2026 EIS draft released January 9, 2026 covers operations starting 2027; Mead trajectory points toward Tier 2 thresholds.",
+        "reason": "Numeric divergence 50.0% on metric (context: tier): new=1.0, existing=2.0, threshold=10%",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:15+00:00",
+        "entry_a_text": "USBR April 17 2026 24-Month Study: Colorado River system storage at 36% of capacity; lowest snowpack on record combined with record-breaking March heat intensified Basin drought. Lake Mead expected to stay in Tier 1 through 2026 at 1,055.88 ft EoY, 20 ft below shortage trigger but declining. Post-2026 operating framework still under negotiation.",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Reclamation operating Lake Mead in Tier 1 shortage during 2026; Post-2026 EIS draft released January 9, 2026 covers operations starting 2027; Mead trajectory points toward Tier 2 thresholds.",
+        "reason": "Numeric divergence 94.1% on metric (context: 2026): new=1.0, existing=17.0, threshold=10%",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Current Tier 1 maintained without deeper cuts; extraordinary conservation avoiding Tier 2 so far. Slight update toward H1 for 2028 outlook.",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Reclamation operating Lake Mead in Tier 1 shortage during 2026; Post-2026 EIS draft released January 9, 2026 covers operations starting 2027; Mead trajectory points toward Tier 2 thresholds.",
+        "reason": "Numeric divergence 50.0% on metric (context: tier): new=1.0, existing=2.0, threshold=10%",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "Reclamation August 24-Month Study determined Lower Basin remains in Tier 1 shortage for 2026 water year; planned release 7.48 MAF; post-2026 operational plan to be finalized by 2026-10-01.",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Reclamation operating Lake Mead in Tier 1 shortage during 2026; Post-2026 EIS draft released January 9, 2026 covers operations starting 2027; Mead trajectory points toward Tier 2 thresholds.",
+        "reason": "Numeric divergence 100.0% on metric (context: shortage): new=1.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Official Reclamation modeling projects Tier 2 declaration trigger met; supports H2 as modal outcome for 2028 operations.",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Reclamation operating Lake Mead in Tier 1 shortage during 2026; Post-2026 EIS draft released January 9, 2026 covers operations starting 2027; Mead trajectory points toward Tier 2 thresholds.",
+        "reason": "Numeric divergence 50.0% on metric (context: tier): new=1.0, existing=2.0, threshold=10%",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "USBR hydraulic models indicate Lake Mead likely to fall below 1,050 ft by July 2026, triggering Tier 2 shortage for 2027 operations; Tier 1 declared for 2026. Basin snowpack and runoff trends remain below average.",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Reclamation operating Lake Mead in Tier 1 shortage during 2026; Post-2026 EIS draft released January 9, 2026 covers operations starting 2027; Mead trajectory points toward Tier 2 thresholds.",
+        "reason": "Numeric divergence 100.0% on metric (context: tier): new=1.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-19T00:57:10+00:00",
+        "entry_a_text": "Bureau of Reclamation operating Lake Mead under Tier 1 Shortage Condition in 2026; Lake Powell under Mid-Elevation Release Tier. Post-2026 interim guidelines under negotiation (2007 guidelines + 2019 DCPs expire end-2026). Mayors of major SW cities publicly warned against deeper cuts.",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Reclamation operating Lake Mead in Tier 1 shortage during 2026; Post-2026 EIS draft released January 9, 2026 covers operations starting 2027; Mead trajectory points toward Tier 2 thresholds.",
+        "reason": "Numeric divergence 100.0% on metric (context: in, shortage): new=1.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T15:23:00+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Very low snowpack and projected one-third normal inflow favor Tier 2+ shortage (H2/H3). Post-2026 framework negotiations add H4 uncertainty. Lake Mead Jan 2026 was 6.5ft above projection providing small buffer.",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Reclamation operating Lake Mead in Tier 1 shortage during 2026; Post-2026 EIS draft released January 9, 2026 covers operations starting 2027; Mead trajectory points toward Tier 2 thresholds.",
+        "reason": "Numeric divergence 50.0% on metric (context: shortage, tier): new=1.0, existing=2.0, threshold=10%",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T15:23:00+00:00",
+        "entry_a_text": "Colorado River projected to deliver just over a third of normal Apr-Jul inflow to Lake Powell as snowpack near lowest levels since 2000. Lake Powell 25% full, Lake Mead 34% full. Post-2026 operating rules under active negotiation. River flows down 20% since 2000.",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Reclamation operating Lake Mead in Tier 1 shortage during 2026; Post-2026 EIS draft released January 9, 2026 covers operations starting 2027; Mead trajectory points toward Tier 2 thresholds.",
+        "reason": "Numeric divergence 96.0% on metric (context: mead): new=1.0, existing=25.0, threshold=10%",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T13:19:53+00:00",
+        "entry_a_text": "Reclamation operating Lake Mead in Tier 1 shortage during 2026; Post-2026 EIS draft released January 9, 2026 covers operations starting 2027; Mead trajectory points toward Tier 2 thresholds.",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Lake Mead operating in Tier 1 Shortage Condition for 2026 with projected EOY elevation ~1,063 ft. Post-2026 Operations process underway; 2007 Interim Guidelines and 2019 DCPs expire end of 2026. Inflow forecast 46% of normal continues structural drought pressure.",
+        "reason": "Numeric divergence 100.0% on metric (context: shortage): new=1.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T19:30:15+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Continued drawdown on trajectory toward Tier 2 for 2028 ops; extreme outcomes low-probability.",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Lake Mead operating in Tier 1 Shortage Condition for 2026 with projected EOY elevation ~1,063 ft. Post-2026 Operations process underway; 2007 Interim Guidelines and 2019 DCPs expire end of 2026. Inflow forecast 46% of normal continues structural drought pressure.",
+        "reason": "Numeric divergence 50.0% on metric (context: for, tier): new=1.0, existing=2.0, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T19:30:15+00:00",
+        "entry_a_text": "April 2026 USBR 24-month study: Tier 1 shortage maintained for 2026 (Mead 1,055.88 ft projected); Mead dropping ~20ft during 2026; Flaming Gorge augmentation plan approved 4/22 as states rush to prop up Powell. Trajectory consistent with 2028 Tier 2 declaration risk.",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Lake Mead operating in Tier 1 Shortage Condition for 2026 with projected EOY elevation ~1,063 ft. Post-2026 Operations process underway; 2007 Interim Guidelines and 2019 DCPs expire end of 2026. Inflow forecast 46% of normal continues structural drought pressure.",
+        "reason": "Numeric divergence 100.0% on metric (context: for, shortage): new=1.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:15+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Record-low snowpack and record-hot March accelerate 2028-tier risk toward Tier 2 while Tier 1 remains the current operating tier.",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Lake Mead operating in Tier 1 Shortage Condition for 2026 with projected EOY elevation ~1,063 ft. Post-2026 Operations process underway; 2007 Interim Guidelines and 2019 DCPs expire end of 2026. Inflow forecast 46% of normal continues structural drought pressure.",
+        "reason": "Numeric divergence 50.0% on metric (context: tier): new=1.0, existing=2.0, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:15+00:00",
+        "entry_a_text": "USBR April 17 2026 24-Month Study: Colorado River system storage at 36% of capacity; lowest snowpack on record combined with record-breaking March heat intensified Basin drought. Lake Mead expected to stay in Tier 1 through 2026 at 1,055.88 ft EoY, 20 ft below shortage trigger but declining. Post-2026 operating framework still under negotiation.",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Lake Mead operating in Tier 1 Shortage Condition for 2026 with projected EOY elevation ~1,063 ft. Post-2026 Operations process underway; 2007 Interim Guidelines and 2019 DCPs expire end of 2026. Inflow forecast 46% of normal continues structural drought pressure.",
+        "reason": "Numeric divergence 100.0% on metric (context: tier): new=1.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Current Tier 1 maintained without deeper cuts; extraordinary conservation avoiding Tier 2 so far. Slight update toward H1 for 2028 outlook.",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Lake Mead operating in Tier 1 Shortage Condition for 2026 with projected EOY elevation ~1,063 ft. Post-2026 Operations process underway; 2007 Interim Guidelines and 2019 DCPs expire end of 2026. Inflow forecast 46% of normal continues structural drought pressure.",
+        "reason": "Numeric divergence 50.0% on metric (context: tier): new=1.0, existing=2.0, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "Reclamation August 24-Month Study determined Lower Basin remains in Tier 1 shortage for 2026 water year; planned release 7.48 MAF; post-2026 operational plan to be finalized by 2026-10-01.",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Lake Mead operating in Tier 1 Shortage Condition for 2026 with projected EOY elevation ~1,063 ft. Post-2026 Operations process underway; 2007 Interim Guidelines and 2019 DCPs expire end of 2026. Inflow forecast 46% of normal continues structural drought pressure.",
+        "reason": "Numeric divergence 100.0% on metric (context: for, shortage): new=1.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Official Reclamation modeling projects Tier 2 declaration trigger met; supports H2 as modal outcome for 2028 operations.",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Lake Mead operating in Tier 1 Shortage Condition for 2026 with projected EOY elevation ~1,063 ft. Post-2026 Operations process underway; 2007 Interim Guidelines and 2019 DCPs expire end of 2026. Inflow forecast 46% of normal continues structural drought pressure.",
+        "reason": "Numeric divergence 50.0% on metric (context: tier): new=1.0, existing=2.0, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Lake Mead operating in Tier 1 Shortage Condition for 2026 with projected EOY elevation ~1,063 ft. Post-2026 Operations process underway; 2007 Interim Guidelines and 2019 DCPs expire end of 2026. Inflow forecast 46% of normal continues structural drought pressure.",
+        "reason": "Numeric divergence 100.0% on metric (context: with): new=2026.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "USBR hydraulic models indicate Lake Mead likely to fall below 1,050 ft by July 2026, triggering Tier 2 shortage for 2027 operations; Tier 1 declared for 2026. Basin snowpack and runoff trends remain below average.",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Lake Mead operating in Tier 1 Shortage Condition for 2026 with projected EOY elevation ~1,063 ft. Post-2026 Operations process underway; 2007 Interim Guidelines and 2019 DCPs expire end of 2026. Inflow forecast 46% of normal continues structural drought pressure.",
+        "reason": "Numeric divergence 100.0% on metric (context: tier): new=1.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-19T00:57:10+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Political resistance to deeper cuts modestly raises H1 maintained-Tier1 branch; hydrology still points H2 median for 2028.",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Lake Mead operating in Tier 1 Shortage Condition for 2026 with projected EOY elevation ~1,063 ft. Post-2026 Operations process underway; 2007 Interim Guidelines and 2019 DCPs expire end of 2026. Inflow forecast 46% of normal continues structural drought pressure.",
+        "reason": "Numeric divergence 100.0% on metric (context: for): new=1.0, existing=2028.0, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-19T00:57:10+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Lake Mead operating in Tier 1 Shortage Condition for 2026 with projected EOY elevation ~1,063 ft. Post-2026 Operations process underway; 2007 Interim Guidelines and 2019 DCPs expire end of 2026. Inflow forecast 46% of normal continues structural drought pressure.",
+        "reason": "Numeric divergence 100.0% on metric (context: with): new=2026.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-19T00:57:10+00:00",
+        "entry_a_text": "Bureau of Reclamation operating Lake Mead under Tier 1 Shortage Condition in 2026; Lake Powell under Mid-Elevation Release Tier. Post-2026 interim guidelines under negotiation (2007 guidelines + 2019 DCPs expire end-2026). Mayors of major SW cities publicly warned against deeper cuts.",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Lake Mead operating in Tier 1 Shortage Condition for 2026 with projected EOY elevation ~1,063 ft. Post-2026 Operations process underway; 2007 Interim Guidelines and 2019 DCPs expire end of 2026. Inflow forecast 46% of normal continues structural drought pressure.",
+        "reason": "Numeric divergence 100.0% on metric (context: condition, in, shortage): new=1.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T15:23:00+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Very low snowpack and projected one-third normal inflow favor Tier 2+ shortage (H2/H3). Post-2026 framework negotiations add H4 uncertainty. Lake Mead Jan 2026 was 6.5ft above projection providing small buffer.",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Lake Mead operating in Tier 1 Shortage Condition for 2026 with projected EOY elevation ~1,063 ft. Post-2026 Operations process underway; 2007 Interim Guidelines and 2019 DCPs expire end of 2026. Inflow forecast 46% of normal continues structural drought pressure.",
+        "reason": "Numeric divergence 50.0% on metric (context: shortage, tier): new=1.0, existing=2.0, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T15:23:00+00:00",
+        "entry_a_text": "Colorado River projected to deliver just over a third of normal Apr-Jul inflow to Lake Powell as snowpack near lowest levels since 2000. Lake Powell 25% full, Lake Mead 34% full. Post-2026 operating rules under active negotiation. River flows down 20% since 2000.",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Lake Mead operating in Tier 1 Shortage Condition for 2026 with projected EOY elevation ~1,063 ft. Post-2026 Operations process underway; 2007 Interim Guidelines and 2019 DCPs expire end of 2026. Inflow forecast 46% of normal continues structural drought pressure.",
+        "reason": "Numeric divergence 97.1% on metric (context: operating): new=1.0, existing=34.0, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-26T00:20:06+00:00",
+        "entry_a_text": "INDICATOR ADDED: t3_mead_eoy2026_projected_below_1055 (tier3_suggestive). posteriorEffect=H2 +5pp, H3 +1pp, H1 -5pp, H4 -1pp. Rationale: Captures intra-cycle Mead trajectory pre-Aug 2027. Approved by operator 2026-04-25..",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "USBR Apr 2026 24-month study projects Lake Mead at 1,055.88 ft (Tier 1 shortage) under most-probable scenario; post-2026 operational guidelines to be finalized Oct 1, 2026; draft EIS released Jan 9, 2026 received 18,000+ public comments.",
+        "reason": "Numeric divergence 100.0% on metric (context: mead): new=1.0, existing=2027.0, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T14:24:50+00:00",
+        "entry_a_text": "Lake Mead operating in Tier 1 Shortage Condition for 2026 with projected EOY elevation ~1,063 ft. Post-2026 Operations process underway; 2007 Interim Guidelines and 2019 DCPs expire end of 2026. Inflow forecast 46% of normal continues structural drought pressure.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "USBR Apr 2026 24-month study projects Lake Mead at 1,055.88 ft (Tier 1 shortage) under most-probable scenario; post-2026 operational guidelines to be finalized Oct 1, 2026; draft EIS released Jan 9, 2026 received 18,000+ public comments.",
+        "reason": "Numeric divergence 98.2% on metric (context: tier): new=55.88, existing=1.0, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T13:19:53+00:00",
+        "entry_a_text": "Reclamation operating Lake Mead in Tier 1 shortage during 2026; Post-2026 EIS draft released January 9, 2026 covers operations starting 2027; Mead trajectory points toward Tier 2 thresholds.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "USBR Apr 2026 24-month study projects Lake Mead at 1,055.88 ft (Tier 1 shortage) under most-probable scenario; post-2026 operational guidelines to be finalized Oct 1, 2026; draft EIS released Jan 9, 2026 received 18,000+ public comments.",
+        "reason": "Numeric divergence 100.0% on metric (context: mead): new=1.0, existing=2027.0, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T19:30:15+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Continued drawdown on trajectory toward Tier 2 for 2028 ops; extreme outcomes low-probability.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "USBR Apr 2026 24-month study projects Lake Mead at 1,055.88 ft (Tier 1 shortage) under most-probable scenario; post-2026 operational guidelines to be finalized Oct 1, 2026; draft EIS released Jan 9, 2026 received 18,000+ public comments.",
+        "reason": "Numeric divergence 50.0% on metric (context: tier): new=1.0, existing=2.0, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T19:30:15+00:00",
+        "entry_a_text": "April 2026 USBR 24-month study: Tier 1 shortage maintained for 2026 (Mead 1,055.88 ft projected); Mead dropping ~20ft during 2026; Flaming Gorge augmentation plan approved 4/22 as states rush to prop up Powell. Trajectory consistent with 2028 Tier 2 declaration risk.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "USBR Apr 2026 24-month study projects Lake Mead at 1,055.88 ft (Tier 1 shortage) under most-probable scenario; post-2026 operational guidelines to be finalized Oct 1, 2026; draft EIS released Jan 9, 2026 received 18,000+ public comments.",
+        "reason": "Numeric divergence 100.0% on metric (context: 24-month, study): new=2026.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:15+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Record-low snowpack and record-hot March accelerate 2028-tier risk toward Tier 2 while Tier 1 remains the current operating tier.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "USBR Apr 2026 24-month study projects Lake Mead at 1,055.88 ft (Tier 1 shortage) under most-probable scenario; post-2026 operational guidelines to be finalized Oct 1, 2026; draft EIS released Jan 9, 2026 received 18,000+ public comments.",
+        "reason": "Numeric divergence 50.0% on metric (context: tier): new=1.0, existing=2.0, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:15+00:00",
+        "entry_a_text": "USBR April 17 2026 24-Month Study: Colorado River system storage at 36% of capacity; lowest snowpack on record combined with record-breaking March heat intensified Basin drought. Lake Mead expected to stay in Tier 1 through 2026 at 1,055.88 ft EoY, 20 ft below shortage trigger but declining. Post-2026 operating framework still under negotiation.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "USBR Apr 2026 24-month study projects Lake Mead at 1,055.88 ft (Tier 1 shortage) under most-probable scenario; post-2026 operational guidelines to be finalized Oct 1, 2026; draft EIS released Jan 9, 2026 received 18,000+ public comments.",
+        "reason": "Numeric divergence 99.2% on metric (context: 24-month, study, usbr): new=2026.0, existing=17.0, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Current Tier 1 maintained without deeper cuts; extraordinary conservation avoiding Tier 2 so far. Slight update toward H1 for 2028 outlook.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "USBR Apr 2026 24-month study projects Lake Mead at 1,055.88 ft (Tier 1 shortage) under most-probable scenario; post-2026 operational guidelines to be finalized Oct 1, 2026; draft EIS released Jan 9, 2026 received 18,000+ public comments.",
+        "reason": "Numeric divergence 50.0% on metric (context: tier): new=1.0, existing=2.0, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "Reclamation August 24-Month Study determined Lower Basin remains in Tier 1 shortage for 2026 water year; planned release 7.48 MAF; post-2026 operational plan to be finalized by 2026-10-01.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "USBR Apr 2026 24-month study projects Lake Mead at 1,055.88 ft (Tier 1 shortage) under most-probable scenario; post-2026 operational guidelines to be finalized Oct 1, 2026; draft EIS released Jan 9, 2026 received 18,000+ public comments.",
+        "reason": "Numeric divergence 98.2% on metric (context: tier): new=55.88, existing=1.0, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Official Reclamation modeling projects Tier 2 declaration trigger met; supports H2 as modal outcome for 2028 operations.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "USBR Apr 2026 24-month study projects Lake Mead at 1,055.88 ft (Tier 1 shortage) under most-probable scenario; post-2026 operational guidelines to be finalized Oct 1, 2026; draft EIS released Jan 9, 2026 received 18,000+ public comments.",
+        "reason": "Numeric divergence 99.9% on metric (context: projects): new=2026.0, existing=2.0, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "USBR hydraulic models indicate Lake Mead likely to fall below 1,050 ft by July 2026, triggering Tier 2 shortage for 2027 operations; Tier 1 declared for 2026. Basin snowpack and runoff trends remain below average.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "USBR Apr 2026 24-month study projects Lake Mead at 1,055.88 ft (Tier 1 shortage) under most-probable scenario; post-2026 operational guidelines to be finalized Oct 1, 2026; draft EIS released Jan 9, 2026 received 18,000+ public comments.",
+        "reason": "Numeric divergence 98.0% on metric (context: ft): new=1.0, existing=50.0, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-19T00:57:10+00:00",
+        "entry_a_text": "Bureau of Reclamation operating Lake Mead under Tier 1 Shortage Condition in 2026; Lake Powell under Mid-Elevation Release Tier. Post-2026 interim guidelines under negotiation (2007 guidelines + 2019 DCPs expire end-2026). Mayors of major SW cities publicly warned against deeper cuts.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "USBR Apr 2026 24-month study projects Lake Mead at 1,055.88 ft (Tier 1 shortage) under most-probable scenario; post-2026 operational guidelines to be finalized Oct 1, 2026; draft EIS released Jan 9, 2026 received 18,000+ public comments.",
+        "reason": "Numeric divergence 100.0% on metric (context: lake): new=1.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T15:23:00+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Very low snowpack and projected one-third normal inflow favor Tier 2+ shortage (H2/H3). Post-2026 framework negotiations add H4 uncertainty. Lake Mead Jan 2026 was 6.5ft above projection providing small buffer.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "USBR Apr 2026 24-month study projects Lake Mead at 1,055.88 ft (Tier 1 shortage) under most-probable scenario; post-2026 operational guidelines to be finalized Oct 1, 2026; draft EIS released Jan 9, 2026 received 18,000+ public comments.",
+        "reason": "Numeric divergence 50.0% on metric (context: tier): new=1.0, existing=2.0, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T15:23:00+00:00",
+        "entry_a_text": "Colorado River projected to deliver just over a third of normal Apr-Jul inflow to Lake Powell as snowpack near lowest levels since 2000. Lake Powell 25% full, Lake Mead 34% full. Post-2026 operating rules under active negotiation. River flows down 20% since 2000.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "USBR Apr 2026 24-month study projects Lake Mead at 1,055.88 ft (Tier 1 shortage) under most-probable scenario; post-2026 operational guidelines to be finalized Oct 1, 2026; draft EIS released Jan 9, 2026 received 18,000+ public comments.",
+        "reason": "Numeric divergence 100.0% on metric (context: lake): new=1.0, existing=2000.0, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-26T16:59:07+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "USBR April 2026 modeling: Lake Mead expected to drop below 1,050 ft by July 2026, triggering Tier 2 shortage. Nevada's Colorado River allocation already cut 21,000 AFY under Tier 1; Tier 2 would add another 4,000 AFY cut. AZ DWR continues Tier 1 baseline.",
+        "reason": "Numeric divergence 99.5% on metric (context: to): new=1.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-26T16:59:07+00:00",
+        "entry_a_text": "USBR Apr 2026 24-month study projects Lake Mead at 1,055.88 ft (Tier 1 shortage) under most-probable scenario; post-2026 operational guidelines to be finalized Oct 1, 2026; draft EIS released Jan 9, 2026 received 18,000+ public comments.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "USBR April 2026 modeling: Lake Mead expected to drop below 1,050 ft by July 2026, triggering Tier 2 shortage. Nevada's Colorado River allocation already cut 21,000 AFY under Tier 1; Tier 2 would add another 4,000 AFY cut. AZ DWR continues Tier 1 baseline.",
+        "reason": "Numeric divergence 100.0% on metric (context: lake, mead): new=2026.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-26T00:20:06+00:00",
+        "entry_a_text": "INDICATOR ADDED: t3_upstream_augmentation_action (tier3_suggestive). posteriorEffect=H1 +3pp, H2 -2pp, H3 -1pp, H4 0pp. Rationale: ev_006 Flaming Gorge augmentation plan approved 4/22 had no indicator home. Augmentation actions prop up reservoirs and lean against deeper-cut hypotheses. Approved by operator 2026-04-25..",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "USBR April 2026 modeling: Lake Mead expected to drop below 1,050 ft by July 2026, triggering Tier 2 shortage. Nevada's Colorado River allocation already cut 21,000 AFY under Tier 1; Tier 2 would add another 4,000 AFY cut. AZ DWR continues Tier 1 baseline.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: cut, tier",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-26T00:20:06+00:00",
+        "entry_a_text": "INDICATOR ADDED: t3_mead_eoy2026_projected_below_1055 (tier3_suggestive). posteriorEffect=H2 +5pp, H3 +1pp, H1 -5pp, H4 -1pp. Rationale: Captures intra-cycle Mead trajectory pre-Aug 2027. Approved by operator 2026-04-25..",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "USBR April 2026 modeling: Lake Mead expected to drop below 1,050 ft by July 2026, triggering Tier 2 shortage. Nevada's Colorado River allocation already cut 21,000 AFY under Tier 1; Tier 2 would add another 4,000 AFY cut. AZ DWR continues Tier 1 baseline.",
+        "reason": "Numeric divergence 100.0% on metric (context: by): new=1.0, existing=2027.0, threshold=10%",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-26T00:20:05+00:00",
+        "entry_a_text": "INDICATOR ADDED: t3_basin_inflow_below_60pct (tier3_suggestive). posteriorEffect=H2 +4pp, H3 +2pp, H1 -5pp, H4 -1pp. Rationale: Closes hydrology-precursor coverage gap surfaced by ev_001/002/003/005/006/008. Approved 2026-04-25 after review_topic_design..",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "USBR April 2026 modeling: Lake Mead expected to drop below 1,050 ft by July 2026, triggering Tier 2 shortage. Nevada's Colorado River allocation already cut 21,000 AFY under Tier 1; Tier 2 would add another 4,000 AFY cut. AZ DWR continues Tier 1 baseline.",
+        "reason": "Numeric divergence 50.0% on metric (context: by): new=1.0, existing=2.0, threshold=10%",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T14:24:50+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "USBR April 2026 modeling: Lake Mead expected to drop below 1,050 ft by July 2026, triggering Tier 2 shortage. Nevada's Colorado River allocation already cut 21,000 AFY under Tier 1; Tier 2 would add another 4,000 AFY cut. AZ DWR continues Tier 1 baseline.",
+        "reason": "Numeric divergence 99.5% on metric (context: to): new=1.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T14:24:50+00:00",
+        "entry_a_text": "Lake Mead operating in Tier 1 Shortage Condition for 2026 with projected EOY elevation ~1,063 ft. Post-2026 Operations process underway; 2007 Interim Guidelines and 2019 DCPs expire end of 2026. Inflow forecast 46% of normal continues structural drought pressure.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "USBR April 2026 modeling: Lake Mead expected to drop below 1,050 ft by July 2026, triggering Tier 2 shortage. Nevada's Colorado River allocation already cut 21,000 AFY under Tier 1; Tier 2 would add another 4,000 AFY cut. AZ DWR continues Tier 1 baseline.",
+        "reason": "Numeric divergence 20.6% on metric (context: 1): new=50.0, existing=63.0, threshold=10%",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T13:19:53+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "USBR April 2026 modeling: Lake Mead expected to drop below 1,050 ft by July 2026, triggering Tier 2 shortage. Nevada's Colorado River allocation already cut 21,000 AFY under Tier 1; Tier 2 would add another 4,000 AFY cut. AZ DWR continues Tier 1 baseline.",
+        "reason": "Numeric divergence 99.5% on metric (context: to): new=1.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T13:19:53+00:00",
+        "entry_a_text": "Reclamation operating Lake Mead in Tier 1 shortage during 2026; Post-2026 EIS draft released January 9, 2026 covers operations starting 2027; Mead trajectory points toward Tier 2 thresholds.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "USBR April 2026 modeling: Lake Mead expected to drop below 1,050 ft by July 2026, triggering Tier 2 shortage. Nevada's Colorado River allocation already cut 21,000 AFY under Tier 1; Tier 2 would add another 4,000 AFY cut. AZ DWR continues Tier 1 baseline.",
+        "reason": "Numeric divergence 100.0% on metric (context: mead): new=2026.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T19:30:15+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Continued drawdown on trajectory toward Tier 2 for 2028 ops; extreme outcomes low-probability.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "USBR April 2026 modeling: Lake Mead expected to drop below 1,050 ft by July 2026, triggering Tier 2 shortage. Nevada's Colorado River allocation already cut 21,000 AFY under Tier 1; Tier 2 would add another 4,000 AFY cut. AZ DWR continues Tier 1 baseline.",
+        "reason": "Numeric divergence 99.9% on metric (context: tier): new=2026.0, existing=2.0, threshold=10%",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T19:30:15+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "USBR April 2026 modeling: Lake Mead expected to drop below 1,050 ft by July 2026, triggering Tier 2 shortage. Nevada's Colorado River allocation already cut 21,000 AFY under Tier 1; Tier 2 would add another 4,000 AFY cut. AZ DWR continues Tier 1 baseline.",
+        "reason": "Numeric divergence 99.5% on metric (context: to): new=1.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T19:30:15+00:00",
+        "entry_a_text": "April 2026 USBR 24-month study: Tier 1 shortage maintained for 2026 (Mead 1,055.88 ft projected); Mead dropping ~20ft during 2026; Flaming Gorge augmentation plan approved 4/22 as states rush to prop up Powell. Trajectory consistent with 2028 Tier 2 declaration risk.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "USBR April 2026 modeling: Lake Mead expected to drop below 1,050 ft by July 2026, triggering Tier 2 shortage. Nevada's Colorado River allocation already cut 21,000 AFY under Tier 1; Tier 2 would add another 4,000 AFY cut. AZ DWR continues Tier 1 baseline.",
+        "reason": "Numeric divergence 100.0% on metric (context: mead): new=2026.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:15+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Record-low snowpack and record-hot March accelerate 2028-tier risk toward Tier 2 while Tier 1 remains the current operating tier.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "USBR April 2026 modeling: Lake Mead expected to drop below 1,050 ft by July 2026, triggering Tier 2 shortage. Nevada's Colorado River allocation already cut 21,000 AFY under Tier 1; Tier 2 would add another 4,000 AFY cut. AZ DWR continues Tier 1 baseline.",
+        "reason": "Numeric divergence 96.0% on metric (context: 1): new=50.0, existing=2.0, threshold=10%",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:15+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "USBR April 2026 modeling: Lake Mead expected to drop below 1,050 ft by July 2026, triggering Tier 2 shortage. Nevada's Colorado River allocation already cut 21,000 AFY under Tier 1; Tier 2 would add another 4,000 AFY cut. AZ DWR continues Tier 1 baseline.",
+        "reason": "Numeric divergence 99.5% on metric (context: to): new=1.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:15+00:00",
+        "entry_a_text": "USBR April 17 2026 24-Month Study: Colorado River system storage at 36% of capacity; lowest snowpack on record combined with record-breaking March heat intensified Basin drought. Lake Mead expected to stay in Tier 1 through 2026 at 1,055.88 ft EoY, 20 ft below shortage trigger but declining. Post-2026 operating framework still under negotiation.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "USBR April 2026 modeling: Lake Mead expected to drop below 1,050 ft by July 2026, triggering Tier 2 shortage. Nevada's Colorado River allocation already cut 21,000 AFY under Tier 1; Tier 2 would add another 4,000 AFY cut. AZ DWR continues Tier 1 baseline.",
+        "reason": "Numeric divergence 99.2% on metric (context: april, usbr): new=2026.0, existing=17.0, threshold=10%",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Current Tier 1 maintained without deeper cuts; extraordinary conservation avoiding Tier 2 so far. Slight update toward H1 for 2028 outlook.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "USBR April 2026 modeling: Lake Mead expected to drop below 1,050 ft by July 2026, triggering Tier 2 shortage. Nevada's Colorado River allocation already cut 21,000 AFY under Tier 1; Tier 2 would add another 4,000 AFY cut. AZ DWR continues Tier 1 baseline.",
+        "reason": "Numeric divergence 100.0% on metric (context: tier): new=2026.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "Reclamation August 24-Month Study determined Lower Basin remains in Tier 1 shortage for 2026 water year; planned release 7.48 MAF; post-2026 operational plan to be finalized by 2026-10-01.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "USBR April 2026 modeling: Lake Mead expected to drop below 1,050 ft by July 2026, triggering Tier 2 shortage. Nevada's Colorado River allocation already cut 21,000 AFY under Tier 1; Tier 2 would add another 4,000 AFY cut. AZ DWR continues Tier 1 baseline.",
+        "reason": "Numeric divergence 97.5% on metric (context: 1): new=50.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Official Reclamation modeling projects Tier 2 declaration trigger met; supports H2 as modal outcome for 2028 operations.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "USBR April 2026 modeling: Lake Mead expected to drop below 1,050 ft by July 2026, triggering Tier 2 shortage. Nevada's Colorado River allocation already cut 21,000 AFY under Tier 1; Tier 2 would add another 4,000 AFY cut. AZ DWR continues Tier 1 baseline.",
+        "reason": "Numeric divergence 99.9% on metric (context: modeling): new=2026.0, existing=2.0, threshold=10%",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "USBR April 2026 modeling: Lake Mead expected to drop below 1,050 ft by July 2026, triggering Tier 2 shortage. Nevada's Colorado River allocation already cut 21,000 AFY under Tier 1; Tier 2 would add another 4,000 AFY cut. AZ DWR continues Tier 1 baseline.",
+        "reason": "Numeric divergence 99.5% on metric (context: to): new=1.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "USBR hydraulic models indicate Lake Mead likely to fall below 1,050 ft by July 2026, triggering Tier 2 shortage for 2027 operations; Tier 1 declared for 2026. Basin snowpack and runoff trends remain below average.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "USBR April 2026 modeling: Lake Mead expected to drop below 1,050 ft by July 2026, triggering Tier 2 shortage. Nevada's Colorado River allocation already cut 21,000 AFY under Tier 1; Tier 2 would add another 4,000 AFY cut. AZ DWR continues Tier 1 baseline.",
+        "reason": "Numeric divergence 98.0% on metric (context: below, by, ft): new=1.0, existing=50.0, threshold=10%",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-19T00:57:10+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "USBR April 2026 modeling: Lake Mead expected to drop below 1,050 ft by July 2026, triggering Tier 2 shortage. Nevada's Colorado River allocation already cut 21,000 AFY under Tier 1; Tier 2 would add another 4,000 AFY cut. AZ DWR continues Tier 1 baseline.",
+        "reason": "Numeric divergence 99.5% on metric (context: to): new=1.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-19T00:57:10+00:00",
+        "entry_a_text": "Bureau of Reclamation operating Lake Mead under Tier 1 Shortage Condition in 2026; Lake Powell under Mid-Elevation Release Tier. Post-2026 interim guidelines under negotiation (2007 guidelines + 2019 DCPs expire end-2026). Mayors of major SW cities publicly warned against deeper cuts.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "USBR April 2026 modeling: Lake Mead expected to drop below 1,050 ft by July 2026, triggering Tier 2 shortage. Nevada's Colorado River allocation already cut 21,000 AFY under Tier 1; Tier 2 would add another 4,000 AFY cut. AZ DWR continues Tier 1 baseline.",
+        "reason": "Numeric divergence 100.0% on metric (context: mead): new=2026.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T15:23:00+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Very low snowpack and projected one-third normal inflow favor Tier 2+ shortage (H2/H3). Post-2026 framework negotiations add H4 uncertainty. Lake Mead Jan 2026 was 6.5ft above projection providing small buffer.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "USBR April 2026 modeling: Lake Mead expected to drop below 1,050 ft by July 2026, triggering Tier 2 shortage. Nevada's Colorado River allocation already cut 21,000 AFY under Tier 1; Tier 2 would add another 4,000 AFY cut. AZ DWR continues Tier 1 baseline.",
+        "reason": "Numeric divergence 99.9% on metric (context: tier): new=2026.0, existing=2.0, threshold=10%",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T15:23:00+00:00",
+        "entry_a_text": "Colorado River projected to deliver just over a third of normal Apr-Jul inflow to Lake Powell as snowpack near lowest levels since 2000. Lake Powell 25% full, Lake Mead 34% full. Post-2026 operating rules under active negotiation. River flows down 20% since 2000.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "USBR April 2026 modeling: Lake Mead expected to drop below 1,050 ft by July 2026, triggering Tier 2 shortage. Nevada's Colorado River allocation already cut 21,000 AFY under Tier 1; Tier 2 would add another 4,000 AFY cut. AZ DWR continues Tier 1 baseline.",
+        "reason": "Numeric divergence 98.8% on metric (context: lake, mead): new=2026.0, existing=25.0, threshold=10%",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
       }
     ]
   },
   "sourceCalibration": {
-    "ledger": [],
+    "ledger": [
+      {
+        "timestamp": "2026-04-24T02:25:41Z",
+        "evidence_index": 8,
+        "confirming_index": 10,
+        "resolution": "CONFIRMED",
+        "source": "",
+        "confirming_source": "",
+        "trust_delta": 0.05,
+        "original_text_snippet": "DEADLINE MIGRATION: resolution_deadline stamped on ['H1'] based on topic startDate 2026-04-13.",
+        "confirming_text_snippet": "RESOLUTION-DATE STAMPED: meta.resolutionDate=2028-01-01 (derived from meta.resolution). When past, governance flags topi"
+      },
+      {
+        "timestamp": "2026-04-24T02:25:41Z",
+        "evidence_index": 9,
+        "confirming_index": 11,
+        "resolution": "CONFIRMED",
+        "source": "",
+        "confirming_source": "",
+        "trust_delta": 0.05,
+        "original_text_snippet": "LR MIGRATION RESET: posteriors reset to design priors; evidence log preserved.",
+        "confirming_text_snippet": "REPLAY BEGIN: 0 previously-fired indicators will be re-applied chronologically under current LR system. Posteriors reset"
+      },
+      {
+        "timestamp": "2026-04-24T02:25:41Z",
+        "evidence_index": 11,
+        "confirming_index": 12,
+        "resolution": "CONFIRMED",
+        "source": "",
+        "confirming_source": "",
+        "trust_delta": 0.05,
+        "original_text_snippet": "REPLAY BEGIN: 0 previously-fired indicators will be re-applied chronologically under current LR system. Posteriors reset",
+        "confirming_text_snippet": "REPLAY COMPLETE: 0 indicators applied, 0 skipped. Final posteriors: {'H1': 0.3, 'H2': 0.45, 'H3': 0.15, 'H4': 0.1}. Indi"
+      },
+      {
+        "timestamp": "2026-04-24T13:49:15Z",
+        "evidence_index": 0,
+        "confirming_index": 15,
+        "resolution": "REFUTED",
+        "source": "8 News Now / USBR",
+        "confirming_source": "US Bureau of Reclamation",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Colorado River projected to deliver just over a third of normal Apr-Jul inflow to Lake Powell as snowpack near lowest le",
+        "confirming_text_snippet": "USBR April 17 2026 24-Month Study: Colorado River system storage at 36% of capacity; lowest snowpack on record combined "
+      },
+      {
+        "timestamp": "2026-04-24T13:49:15Z",
+        "evidence_index": 2,
+        "confirming_index": 15,
+        "resolution": "REFUTED",
+        "source": "USBR / CRS / City of Phoenix",
+        "confirming_source": "US Bureau of Reclamation",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Bureau of Reclamation operating Lake Mead under Tier 1 Shortage Condition in 2026; Lake Powell under Mid-Elevation Relea",
+        "confirming_text_snippet": "USBR April 17 2026 24-Month Study: Colorado River system storage at 36% of capacity; lowest snowpack on record combined "
+      },
+      {
+        "timestamp": "2026-04-24T19:30:15Z",
+        "evidence_index": 15,
+        "confirming_index": 18,
+        "resolution": "REFUTED",
+        "source": "US Bureau of Reclamation",
+        "confirming_source": "USBR / Salt Lake Tribune",
+        "trust_delta": -0.1,
+        "original_text_snippet": "USBR April 17 2026 24-Month Study: Colorado River system storage at 36% of capacity; lowest snowpack on record combined ",
+        "confirming_text_snippet": "April 2026 USBR 24-month study: Tier 1 shortage maintained for 2026 (Mead 1,055.88 ft projected); Mead dropping ~20ft du"
+      },
+      {
+        "timestamp": "2026-04-25T13:19:53Z",
+        "evidence_index": 2,
+        "confirming_index": 21,
+        "resolution": "REFUTED",
+        "source": "USBR / CRS / City of Phoenix",
+        "confirming_source": "USBR Post-2026 / Congress.gov CRS",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Bureau of Reclamation operating Lake Mead under Tier 1 Shortage Condition in 2026; Lake Powell under Mid-Elevation Relea",
+        "confirming_text_snippet": "Reclamation operating Lake Mead in Tier 1 shortage during 2026; Post-2026 EIS draft released January 9, 2026 covers oper"
+      },
+      {
+        "timestamp": "2026-04-25T13:19:53Z",
+        "evidence_index": 15,
+        "confirming_index": 21,
+        "resolution": "REFUTED",
+        "source": "US Bureau of Reclamation",
+        "confirming_source": "USBR Post-2026 / Congress.gov CRS",
+        "trust_delta": -0.1,
+        "original_text_snippet": "USBR April 17 2026 24-Month Study: Colorado River system storage at 36% of capacity; lowest snowpack on record combined ",
+        "confirming_text_snippet": "Reclamation operating Lake Mead in Tier 1 shortage during 2026; Post-2026 EIS draft released January 9, 2026 covers oper"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:50Z",
+        "evidence_index": 0,
+        "confirming_index": 23,
+        "resolution": "REFUTED",
+        "source": "8 News Now / USBR",
+        "confirming_source": "Bureau of Reclamation",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Colorado River projected to deliver just over a third of normal Apr-Jul inflow to Lake Powell as snowpack near lowest le",
+        "confirming_text_snippet": "Lake Mead operating in Tier 1 Shortage Condition for 2026 with projected EOY elevation ~1,063 ft. Post-2026 Operations p"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:50Z",
+        "evidence_index": 1,
+        "confirming_index": 23,
+        "resolution": "REFUTED",
+        "source": "",
+        "confirming_source": "Bureau of Reclamation",
+        "trust_delta": -0.1,
+        "original_text_snippet": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Very low snowpack and projected one",
+        "confirming_text_snippet": "Lake Mead operating in Tier 1 Shortage Condition for 2026 with projected EOY elevation ~1,063 ft. Post-2026 Operations p"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:50Z",
+        "evidence_index": 2,
+        "confirming_index": 23,
+        "resolution": "REFUTED",
+        "source": "USBR / CRS / City of Phoenix",
+        "confirming_source": "Bureau of Reclamation",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Bureau of Reclamation operating Lake Mead under Tier 1 Shortage Condition in 2026; Lake Powell under Mid-Elevation Relea",
+        "confirming_text_snippet": "Lake Mead operating in Tier 1 Shortage Condition for 2026 with projected EOY elevation ~1,063 ft. Post-2026 Operations p"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:50Z",
+        "evidence_index": 15,
+        "confirming_index": 23,
+        "resolution": "REFUTED",
+        "source": "US Bureau of Reclamation",
+        "confirming_source": "Bureau of Reclamation",
+        "trust_delta": -0.1,
+        "original_text_snippet": "USBR April 17 2026 24-Month Study: Colorado River system storage at 36% of capacity; lowest snowpack on record combined ",
+        "confirming_text_snippet": "Lake Mead operating in Tier 1 Shortage Condition for 2026 with projected EOY elevation ~1,063 ft. Post-2026 Operations p"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:50Z",
+        "evidence_index": 21,
+        "confirming_index": 23,
+        "resolution": "REFUTED",
+        "source": "USBR Post-2026 / Congress.gov CRS",
+        "confirming_source": "Bureau of Reclamation",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Reclamation operating Lake Mead in Tier 1 shortage during 2026; Post-2026 EIS draft released January 9, 2026 covers oper",
+        "confirming_text_snippet": "Lake Mead operating in Tier 1 Shortage Condition for 2026 with projected EOY elevation ~1,063 ft. Post-2026 Operations p"
+      },
+      {
+        "timestamp": "2026-04-26T16:59:07Z",
+        "evidence_index": 13,
+        "confirming_index": 28,
+        "resolution": "REFUTED",
+        "source": "US Bureau of Reclamation / CAP",
+        "confirming_source": "USBR",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Reclamation August 24-Month Study determined Lower Basin remains in Tier 1 shortage for 2026 water year; planned release",
+        "confirming_text_snippet": "USBR Apr 2026 24-month study projects Lake Mead at 1,055.88 ft (Tier 1 shortage) under most-probable scenario; post-2026"
+      },
+      {
+        "timestamp": "2026-04-26T16:59:07Z",
+        "evidence_index": 15,
+        "confirming_index": 28,
+        "resolution": "REFUTED",
+        "source": "US Bureau of Reclamation",
+        "confirming_source": "USBR",
+        "trust_delta": -0.1,
+        "original_text_snippet": "USBR April 17 2026 24-Month Study: Colorado River system storage at 36% of capacity; lowest snowpack on record combined ",
+        "confirming_text_snippet": "USBR Apr 2026 24-month study projects Lake Mead at 1,055.88 ft (Tier 1 shortage) under most-probable scenario; post-2026"
+      },
+      {
+        "timestamp": "2026-04-26T16:59:07Z",
+        "evidence_index": 21,
+        "confirming_index": 28,
+        "resolution": "REFUTED",
+        "source": "USBR Post-2026 / Congress.gov CRS",
+        "confirming_source": "USBR",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Reclamation operating Lake Mead in Tier 1 shortage during 2026; Post-2026 EIS draft released January 9, 2026 covers oper",
+        "confirming_text_snippet": "USBR Apr 2026 24-month study projects Lake Mead at 1,055.88 ft (Tier 1 shortage) under most-probable scenario; post-2026"
+      },
+      {
+        "timestamp": "2026-04-26T16:59:07Z",
+        "evidence_index": 23,
+        "confirming_index": 28,
+        "resolution": "REFUTED",
+        "source": "Bureau of Reclamation",
+        "confirming_source": "USBR",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Lake Mead operating in Tier 1 Shortage Condition for 2026 with projected EOY elevation ~1,063 ft. Post-2026 Operations p",
+        "confirming_text_snippet": "USBR Apr 2026 24-month study projects Lake Mead at 1,055.88 ft (Tier 1 shortage) under most-probable scenario; post-2026"
+      },
+      {
+        "timestamp": "2026-04-26T19:27:11Z",
+        "evidence_index": 15,
+        "confirming_index": 30,
+        "resolution": "REFUTED",
+        "source": "US Bureau of Reclamation",
+        "confirming_source": "USBR / Nevada Current / AZ DWR",
+        "trust_delta": -0.1,
+        "original_text_snippet": "USBR April 17 2026 24-Month Study: Colorado River system storage at 36% of capacity; lowest snowpack on record combined ",
+        "confirming_text_snippet": "USBR April 2026 modeling: Lake Mead expected to drop below 1,050 ft by July 2026, triggering Tier 2 shortage. Nevada's C"
+      }
+    ],
     "effectiveTrust": {
-      "8 News Now": 0.5,
-      "USBR": 0.5,
-      "CRS": 0.5,
-      "City of Phoenix": 0.5,
+      "8 News Now": 0.4118,
+      "USBR": 0.2908,
+      "CRS": 0.3693,
+      "City of Phoenix": 0.3693,
       "Nevada Current": 0.5,
-      "US Bureau of Reclamation": 0.5
+      "US Bureau of Reclamation": 0.2554,
+      "CAP": 0.4555,
+      "Salt Lake Tribune": 0.5,
+      "Congress.gov CRS": 0.4118,
+      "USBR Post-2026": 0.4118,
+      "Bureau of Reclamation": 0.4555,
+      "AZ DWR": 0.5
     },
-    "_last_scan_same_source_skipped": 1
+    "_last_scan_same_source_skipped": 14
   },
   "conditionalPredictions": [
     {

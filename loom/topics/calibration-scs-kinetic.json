@@ -6,14 +6,17 @@
     "question": "Will a kinetic military incident with casualties occur between PRC forces and any claimant state in the South China Sea by December 31, 2026?",
     "resolution": "Confirmed shots fired at military/coast guard vessel, ramming causing documented injury or death, boarding of military vessel resulting in injury/death, or water cannon causing documented serious injury. Must be reported by at least two independent primary sources (wire service, government statement, or verified video evidence). Commercial vessel incidents alone do not resolve.",
     "created": "2026-04-11T00:00:00Z",
-    "lastUpdated": "2026-04-22T05:19:58+00:00",
+    "lastUpdated": "2026-04-29T02:30:59+00:00",
     "status": "ACTIVE",
     "dayCount": 0,
     "startDate": "2026-04-11T00:00:00Z",
     "classification": "ROUTINE",
     "topicType": "conflict",
     "horizon": "~8 months (resolution: 2026-12-31)",
-    "resolutionDate": "2026-12-31"
+    "resolutionDate": "2026-12-31",
+    "lens": "GREEN",
+    "lensSetAt": "2026-04-26T21:21:59+00:00",
+    "lensSetReason": ""
   },
   "tagConfig": {
     "_docs": "MILITARY = PLA/PCG/AFP actions verified by imagery or official statement. EVENT = incident confirmed. RHETORIC = statements, warnings, demands. DIPLOMATIC = talks, frameworks, backchannel signals. DATA = quantitative feed updates. INTEL = unverified or single-source claim.",
@@ -64,7 +67,7 @@
         "label": "Gray zone only — no casualties through Dec 31, 2026",
         "midpoint": 0,
         "unit": "probability",
-        "posterior": 0.7582,
+        "posterior": 0.98,
         "description": "PRC continues harassment operations (water cannon, laser, close intercept, blocking maneuvers) but no confirmed casualties. Philippines continues resupply missions under pressure. Pattern persists without crossing kinetic threshold. Dominant historical outcome; reinforced by PH-China talks resuming and ADIZ incursions declining.",
         "resolution_deadline": "2026-12-31"
       },
@@ -72,21 +75,21 @@
         "label": "Kinetic incident with injuries but no deaths",
         "midpoint": 0,
         "unit": "probability",
-        "posterior": 0.1856,
+        "posterior": 0.0067,
         "description": "At least one Philippine (or other claimant) sailor/guardsman sustains documented injury from PRC action (water cannon trauma, ramming injuries, physical altercation during boarding attempt). No fatalities. Most plausible escalation path given current trajectory: water cannon incidents have already come close, and proximity incidents like BRP Benguet / Jingzhou (March 30) raise collision risk."
       },
       "H3": {
         "label": "Lethal incident — at least one fatality",
         "midpoint": 0,
         "unit": "probability",
-        "posterior": 0.0414,
+        "posterior": 0.0067,
         "description": "A kinetic interaction results in at least one confirmed fatality on either side. Could result from: deliberate live fire, severe ramming, helicopter downing, or a water cannon incident causing drowning. PRC has historically avoided lethal outcomes due to MDT tripwire awareness, but escalation dynamics and miscalculation risk are non-trivial over an 8-month horizon."
       },
       "H4": {
         "label": "MDT Article IV invocation by Philippines",
         "midpoint": 0,
         "unit": "probability",
-        "posterior": 0.0148,
+        "posterior": 0.0067,
         "description": "Philippines formally invokes the 1951 Mutual Defense Treaty Article IV following a PRC attack on Philippine armed forces or public vessels. Requires: (1) lethal or severe kinetic incident, (2) Marcos administration political will to invoke, (3) US willingness to respond. Historical base rate: never invoked since treaty signed. Conditional on H3 occurring, probability of invocation estimated at ~50%, implying ~0.065 unconditional."
       }
     },
@@ -105,7 +108,13 @@
         "H1": 0.55,
         "H2": 0.25,
         "H3": 0.13,
-        "H4": 0.07
+        "H4": 0.07,
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        }
       },
       {
         "date": "2026-04-22",
@@ -121,7 +130,7 @@
           "H3": 0.13,
           "H4": 0.07
         },
-        "updateMethod": "bayesian_update",
+        "updateMethod": "bayesian_update_legacy",
         "evidenceRefs": [
           "ev_010"
         ],
@@ -145,7 +154,368 @@
           "devil_advocate_score": 0.0,
           "challenge": "No significant shifts proposed; no challenge needed.",
           "inference_mode": "text_heuristic"
-        }
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-24",
+        "posteriors": {
+          "H1": 0.8422,
+          "H2": 0.1374,
+          "H3": 0.0154,
+          "H4": 0.005
+        },
+        "priors": {
+          "H1": 0.7582,
+          "H2": 0.1856,
+          "H3": 0.0414,
+          "H4": 0.0148
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_011"
+        ],
+        "likelihoods": {
+          "H1": 0.45,
+          "H2": 0.3,
+          "H3": 0.15,
+          "H4": 0.1
+        },
+        "note": "Balikatan 2026 with Japan signals sustained US-PH-Japan trilateral commitment; t3_ph_assertiveness_increase partially relevant but no indicator fires. Deterrence effect supports H1 but increased contact frequency nudges H2 slightly.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "turningPoint": {
+          "type": "BRANCH_DEATH",
+          "hypothesis": "H4",
+          "lastPosterior": 0.005
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-24",
+        "posteriors": {
+          "H1": 0.943,
+          "H2": 0.047,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "priors": {
+          "H1": 0.8422,
+          "H2": 0.1374,
+          "H3": 0.0154,
+          "H4": 0.005
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_012"
+        ],
+        "likelihoods": {
+          "H1": 0.72,
+          "H2": 0.22,
+          "H3": 0.04,
+          "H4": 0.02
+        },
+        "note": "Gray-zone escalation continues (cyanide, barriers, exercises) but no casualties reported; H1 remains dominant, slight pressure toward H2.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "turningPoint": {
+          "type": "BRANCH_DEATH",
+          "hypothesis": "H3",
+          "lastPosterior": 0.005
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-24",
+        "posteriors": {
+          "H1": 0.98,
+          "H2": 0.0096,
+          "H3": 0.0052,
+          "H4": 0.0052
+        },
+        "priors": {
+          "H1": 0.943,
+          "H2": 0.047,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_013"
+        ],
+        "likelihoods": {
+          "H1": 0.8,
+          "H2": 0.15,
+          "H3": 0.03,
+          "H4": 0.02
+        },
+        "note": "Escalating gray-zone harassment without kinetic contact sustains H1 dominance.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-24",
+        "posteriors": {
+          "H1": 0.98,
+          "H2": 0.0067,
+          "H3": 0.0067,
+          "H4": 0.0067
+        },
+        "priors": {
+          "H1": 0.98,
+          "H2": 0.0096,
+          "H3": 0.0052,
+          "H4": 0.0052
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_014"
+        ],
+        "likelihoods": {
+          "H1": 1.0,
+          "H2": 0.3,
+          "H3": 0.1,
+          "H4": 0.05
+        },
+        "note": "Escalating gray-zone pressure but incidents remain non-kinetic; strongly consistent with 'gray zone only'.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-25",
+        "posteriors": {
+          "H1": 0.98,
+          "H2": 0.0067,
+          "H3": 0.0067,
+          "H4": 0.0067
+        },
+        "priors": {
+          "H1": 0.98,
+          "H2": 0.0067,
+          "H3": 0.0067,
+          "H4": 0.0067
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_015"
+        ],
+        "likelihoods": {
+          "H1": 0.65,
+          "H2": 0.2,
+          "H3": 0.1,
+          "H4": 0.05
+        },
+        "note": "Pattern of escalating gray-zone tactics with no deaths confirms H1 baseline; rising hostility modestly raises H2/H3 tail probability.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-25",
+        "posteriors": {
+          "H1": 0.98,
+          "H2": 0.0067,
+          "H3": 0.0067,
+          "H4": 0.0067
+        },
+        "priors": {
+          "H1": 0.98,
+          "H2": 0.0067,
+          "H3": 0.0067,
+          "H4": 0.0067
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_016"
+        ],
+        "likelihoods": {
+          "H1": 1.0,
+          "H2": 0.4,
+          "H3": 0.05,
+          "H4": 0.02
+        },
+        "note": "Three coercion events without injuries or fatalities — pattern strongly consistent with H1 (gray-zone only); modest residual probability for H2.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-26",
+        "posteriors": {
+          "H1": 0.98,
+          "H2": 0.0067,
+          "H3": 0.0067,
+          "H4": 0.0067
+        },
+        "priors": {
+          "H1": 0.98,
+          "H2": 0.0067,
+          "H3": 0.0067,
+          "H4": 0.0067
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_017"
+        ],
+        "likelihoods": {
+          "H1": 0.9,
+          "H2": 0.15,
+          "H3": 0.02,
+          "H4": 0.02
+        },
+        "note": "Gray-zone escalation (cyanide, barricades, near miss) continues without casualties — canonical H1.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-26",
+        "posteriors": {
+          "H1": 0.98,
+          "H2": 0.0067,
+          "H3": 0.0067,
+          "H4": 0.0067
+        },
+        "priors": {
+          "H1": 0.98,
+          "H2": 0.0067,
+          "H3": 0.0067,
+          "H4": 0.0067
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_018"
+        ],
+        "likelihoods": {
+          "H1": 1.0,
+          "H2": 0.5,
+          "H3": 0.1,
+          "H4": 0.05
+        },
+        "note": "Sustained gray-zone escalation without casualties remains consistent with H1; no MDT trigger.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
       }
     ]
   },
@@ -362,6 +732,40 @@
           "n_firings": 0,
           "resolution_class": false,
           "lr_migration_warning": "design prior drift >30% — review before next firing"
+        },
+        {
+          "id": "t2_chemical_environmental_sabotage",
+          "desc": "State-authority lab confirmation of toxic/chemical agent (cyanide, poison, etc.) deployed by state-linked vessels against a Philippine-claimed feature or personnel. Requires PH national-government lab result plus AFP/NSC statement attributing deployment.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 -12pp, H2 +10pp, H3 +2pp. Novel coercion vector short of kinetic.",
+          "likelihoods": {
+            "H1": 0.45,
+            "H2": 1.0,
+            "H3": 0.75,
+            "H4": 0.55
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
+        },
+        {
+          "id": "t2_access_denial_barrier_emplacement",
+          "desc": "PRC emplaces physical access-denial barrier (floating barrier, boom, or similar) >=100m at a contested Philippine-claimed feature, with CCG or PLAN vessels holding station >=72 hours. Confirmed by satellite imagery and PCG/AFP statement.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 -10pp, H2 +9pp, H3 +1pp. Structural access denial qualitatively harder to reverse than harassment.",
+          "likelihoods": {
+            "H1": 0.5,
+            "H2": 1.0,
+            "H3": 0.7,
+            "H4": 0.5
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
         }
       ],
       "tier3_suggestive": [
@@ -462,6 +866,23 @@
             "H2": 0.777778,
             "H3": 0.957265,
             "H4": 1.0
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false
+        },
+        {
+          "id": "t3_trilateral_japan_combat_participation",
+          "desc": "Japan participates in a combat-role (not observer/logistics) phase of a US-Philippines bilateral exercise (e.g., Balikatan). Requires MoD/DoD/AFP confirmation of Japanese forces in live-fire or integrated-maneuver role.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 +4pp, H2 +2pp, H3 -4pp, H4 -2pp. Deterrence dominates; minor entanglement risk.",
+          "likelihoods": {
+            "H1": 1.0,
+            "H2": 0.85,
+            "H3": 0.55,
+            "H4": 0.6
           },
           "lr_decay": 0.65,
           "n_firings": 0,
@@ -1039,6 +1460,255 @@
       "ledger": "DECISION",
       "claimState": "PROPOSED",
       "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_011",
+      "time": "2026-04-24T02:07:38+00:00",
+      "tag": "EVENT",
+      "tags": [
+        "EVENT",
+        "MIL",
+        "DIPLO"
+      ],
+      "text": "Balikatan 2026 joint exercises began April 20 with US, Philippines and Japan (first-time major Japan participation). Exercises highlight Philippines more active defense posture. No kinetic incidents or casualties.",
+      "provenance": "OBSERVED",
+      "source": "RFA / Stars and Stripes",
+      "posteriorImpact": "NONE",
+      "url": "https://www.rfa.org/english/southchinasea/2026/04/21/philippines-balikatan-defense-china-military-exercises/",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.4575
+    },
+    {
+      "time": "2026-04-24T02:07:38+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-24T02:07:38+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: stale_evidence. Reason: Balikatan 2026 with Japan signals sustained US-PH-Japan trilateral commitment; t3_ph_assertiveness_increase partially relevant but no indicator fires. Deterrence effect supports H1 but increased contact frequency nudges H2 slightly.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_012",
+      "time": "2026-04-24T02:25:41+00:00",
+      "tag": "EVENT",
+      "tags": [
+        "EVENT",
+        "MIL"
+      ],
+      "text": "Philippines accused Chinese fishermen of cyanide poisoning Spratly waters (April 2026); China installed floating barrier at Scarborough Shoal; US-Australia-Philippines drills April 9-12; Balikatan 2026 opened 2026-04-20 with Japan in combat role for first time. No reported casualties.",
+      "provenance": "OBSERVED",
+      "source": "Bloomberg / Indo-Pacific Defense Forum / RFA",
+      "posteriorImpact": "NONE",
+      "url": "https://www.bloomberg.com/news/articles/2026-04-13/philippines-says-china-boats-cyanide-threatens-military-outpost",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-24T02:25:41+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-24T02:25:41+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: stale_evidence, quorum_failure. Reason: Gray-zone escalation continues (cyanide, barriers, exercises) but no casualties reported; H1 remains dominant, slight pressure toward H2.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_013",
+      "time": "2026-04-24T13:49:14+00:00",
+      "tag": "EVENT",
+      "tags": [
+        "EVENT",
+        "DIPLO",
+        "MIL"
+      ],
+      "text": "April 13 Philippine NSC confirmed cyanide seized from Chinese fishing-vessel dinghies near Second Thomas Shoal; environmental sabotage claim, no casualties. China erected barricade (4 fishing boats, CCG ship, floating barrier) at Scarborough Shoal (satellite imagery Apr 10-11). US-Australia-Philippines held second joint drills April 9-12. All gray-zone; no kinetic exchanges, no casualties.",
+      "provenance": "OBSERVED",
+      "source": "Al Jazeera / Bloomberg / Reuters",
+      "posteriorImpact": "NONE",
+      "url": "https://www.aljazeera.com/news/2026/4/13/philippines-accuses-china-of-using-cyanide-to-poison-south-china-sea-atoll",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.3009
+    },
+    {
+      "time": "2026-04-24T13:49:14+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-24T18:44:37.936122+00:00",
+      "tag": "INTEL",
+      "text": "TOPIC DESIGN UPDATE: added 3 indicators (t2_chemical_environmental_sabotage, t2_access_denial_barrier_emplacement, t3_trilateral_japan_combat_participation) per review over ev_005-ev_013. Operator-confirmed. No indicators fired; no posterior change.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 1.0
+    },
+    {
+      "id": "ev_014",
+      "time": "2026-04-24T19:30:14+00:00",
+      "tag": "EVENT",
+      "tags": [
+        "EVENT",
+        "MIL"
+      ],
+      "text": "Philippines accused China of cyanide release around Spratly Islands 4/13; near-miss between Chinese and Philippine warships near Thitu 3/30; joint US-Australia-Philippines exercises 4/9-12. No kinetic casualties reported.",
+      "provenance": "OBSERVED",
+      "source": "Bloomberg / Stars and Stripes",
+      "posteriorImpact": "NONE",
+      "url": "https://www.stripes.com/theaters/asia_pacific/2026-03-30/warships-philippines-china-south-china-sea-21225432.html",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.4575
+    },
+    {
+      "time": "2026-04-24T19:30:14+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_015",
+      "time": "2026-04-25T13:19:53+00:00",
+      "tag": "EVENT",
+      "tags": [
+        "EVENT",
+        "MIL"
+      ],
+      "text": "Philippines accuses China of cyanide deployment near Second Thomas Shoal (April 13); China builds new floating barricade at Scarborough Shoal (April 10-11); US-Australia-Philippines joint drills April 9-12. No casualties.",
+      "provenance": "OBSERVED",
+      "source": "Reuters / Al Jazeera / Bloomberg",
+      "posteriorImpact": "NONE",
+      "url": "https://www.aljazeera.com/news/2026/4/13/philippines-accuses-china-of-using-cyanide-to-poison-south-china-sea-atoll",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.3009
+    },
+    {
+      "time": "2026-04-25T13:19:53+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_016",
+      "time": "2026-04-25T14:24:49+00:00",
+      "tag": "EVENT",
+      "tags": [
+        "EVENT",
+        "MIL",
+        "DIPLO"
+      ],
+      "text": "Three escalation events in last 30 days, all gray-zone: (1) March 30 PH-CN warship near-miss near Thitu; (2) April 10-11 satellite imagery showed China placing floating barriers and maritime militia at Scarborough Shoal blocking access; (3) April 13 Philippines accused Chinese fishermen of cyanide pouring around Spratly atoll. No casualties or weapons fire.",
+      "provenance": "OBSERVED",
+      "source": "Stars and Stripes, Al Jazeera, CNN, Vision Times",
+      "posteriorImpact": "NONE",
+      "url": "https://www.aljazeera.com/news/2026/4/13/philippines-accuses-china-of-using-cyanide-to-poison-south-china-sea-atoll",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-25T14:24:49+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_017",
+      "time": "2026-04-26T16:59:07+00:00",
+      "tag": "EVENT",
+      "tags": [
+        "EVENT",
+        "MIL"
+      ],
+      "text": "Apr 13: PH Navy reports cyanide seized from Chinese boats around Spratly atoll; Chinese crew accused of poisoning shoal in March 2026. Apr 10-11 satellite shows new Chinese floating barricade and 6 maritime militia vessels at Scarborough Shoal. Mar 30: PH and Chinese warships in near-miss. No casualties.",
+      "provenance": "OBSERVED",
+      "source": "Reuters / Al Jazeera / Stars and Stripes",
+      "posteriorImpact": "NONE",
+      "url": "https://www.aljazeera.com/news/2026/4/13/philippines-accuses-china-of-using-cyanide-to-poison-south-china-sea-atoll",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.0796
+    },
+    {
+      "time": "2026-04-26T16:59:07+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_018",
+      "time": "2026-04-26T19:27:10+00:00",
+      "tag": "EVENT",
+      "tags": [
+        "EVENT",
+        "GEOPOL"
+      ],
+      "text": "April 2026: Philippines accused China of cyanide use at Second Thomas Shoal (Apr 13); satellite imagery showed China constructing a barricade at Scarborough Shoal entrance using fishing boats, coast-guard ship and floating barrier (Apr 10-11); US/Australia/PH held second 2026 joint drills. No confirmed kinetic injuries or fatalities.",
+      "provenance": "OBSERVED",
+      "source": "Bloomberg / Reuters / US News",
+      "posteriorImpact": "NONE",
+      "url": "https://www.cnn.com/2026/04/13/asia/philippines-china-cyanide-accusation-intl-hnk",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.3608
+    },
+    {
+      "time": "2026-04-26T19:27:10+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
     }
   ],
   "dataFeeds": {
@@ -1132,20 +1802,21 @@
   "governance": {
     "health": "DEGRADED",
     "issues": [
-      "Majority stale evidence (15/29)"
+      "Majority stale evidence (43/48)",
+      "Near-zero uncertainty — check for overconfidence"
     ],
     "rt": {
       "rt": 0.0,
       "regime": "SAFE",
       "worst_hypothesis": "H1"
     },
-    "entropy": 1.0339,
+    "entropy": 0.1737,
     "maxEntropy": 2.0,
-    "uncertaintyRatio": 0.517,
+    "uncertaintyRatio": 0.0868,
     "evidenceFreshness": {
-      "fresh": 13,
-      "stale": 15,
-      "total": 29
+      "fresh": 4,
+      "stale": 43,
+      "total": 48
     },
     "hypothesisAdmissibility": {
       "H1": "ADMISSIBLE",
@@ -1154,37 +1825,44 @@
       "H4": "ADMISSIBLE"
     },
     "klFromPrior": {
-      "kl_divergence": 0.1178,
-      "interpretation": "MODERATE"
+      "kl_divergence": 0.5062,
+      "interpretation": "WELL_EVIDENCED"
     },
-    "lastComputed": "2026-04-22T05:19:58+00:00",
+    "lastComputed": "2026-04-29T02:30:59+00:00",
     "staleDependencies": 0,
     "calibrationHealth": "ACCEPTABLE",
     "unresolvedContradictions": 0,
+    "reviewed_alerts": [
+      {
+        "signature": "none_impact_saturation:calibration-scs-kinetic",
+        "timestamp": "2026-04-26T16:15:13+00:00",
+        "reason": "Topic-design review on ev_007-ev_016. Verdict: no coverage gap, no new indicators proposed. All five recurring evidence dimensions (cyanide/Second-Thomas, Scarborough barrier, Balikatan-w/-Japan, US-AUS-PH drills, Thitu near-miss) map to existing indicators (t2_chemical_environmental_sabotage, t2_access_denial_barrier_emplacement, t3_trilateral_japan_combat_participation, t3_us_ph_exercises_completed, t2_warship_proximity_under_100m). NONE outcomes are threshold-correct: chem-sabotage requires state-linked attribution (evidence says 'Chinese fishermen' - militia link unestablished); trilateral requires confirmed combat-role (Balikatan still in opening phase); warship proximity requires <100m quantitative distance ('near-miss' is qualitative); claim-states are CONTESTED for PRC-denied accusations. Caveat: Scarborough 352m/6-day/satellite-confirmed barrier appears to meet t2_access_denial_barrier_emplacement threshold and may warrant separate operator re-evaluation as a fire_indicator action - this is a triage matter, not a design defect."
+      }
+    ],
     "designGate": {
       "passed": true,
       "blockers": [],
       "warnings": [],
       "coverage": {
         "H1": {
-          "pos": 5,
-          "neg": 11
+          "pos": 6,
+          "neg": 13
         },
         "H2": {
-          "pos": 10,
+          "pos": 13,
           "neg": 4
         },
         "H3": {
-          "pos": 12,
-          "neg": 4
+          "pos": 14,
+          "neg": 5
         },
         "H4": {
           "pos": 6,
-          "neg": 4
+          "neg": 5
         }
       },
       "indistinguishable": [],
-      "lastChecked": "2026-04-22T05:19:58+00:00"
+      "lastChecked": "2026-04-29T02:30:59+00:00"
     }
   },
   "predictionScoring": {
@@ -1431,6 +2109,182 @@
           "H4": 0.0148
         },
         "entropy": 1.0339
+      },
+      {
+        "timestamp": "2026-04-24T02:07:38+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.8422,
+          "H2": 0.1374,
+          "H3": 0.0154,
+          "H4": 0.005
+        },
+        "entropy": 0.7331
+      },
+      {
+        "timestamp": "2026-04-24T02:07:38+00:00",
+        "trigger": "pipeline:ev_011",
+        "posteriors": {
+          "H1": 0.8422,
+          "H2": 0.1374,
+          "H3": 0.0154,
+          "H4": 0.005
+        },
+        "entropy": 0.7331
+      },
+      {
+        "timestamp": "2026-04-24T02:25:41+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.943,
+          "H2": 0.047,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "entropy": 0.3636
+      },
+      {
+        "timestamp": "2026-04-24T02:25:41+00:00",
+        "trigger": "pipeline:ev_012",
+        "posteriors": {
+          "H1": 0.943,
+          "H2": 0.047,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "entropy": 0.3636
+      },
+      {
+        "timestamp": "2026-04-24T13:49:14+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.98,
+          "H2": 0.0096,
+          "H3": 0.0052,
+          "H4": 0.0052
+        },
+        "entropy": 0.1718
+      },
+      {
+        "timestamp": "2026-04-24T13:49:14+00:00",
+        "trigger": "pipeline:ev_013",
+        "posteriors": {
+          "H1": 0.98,
+          "H2": 0.0096,
+          "H3": 0.0052,
+          "H4": 0.0052
+        },
+        "entropy": 0.1718
+      },
+      {
+        "timestamp": "2026-04-24T19:30:14+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.98,
+          "H2": 0.0067,
+          "H3": 0.0067,
+          "H4": 0.0067
+        },
+        "entropy": 0.1737
+      },
+      {
+        "timestamp": "2026-04-24T19:30:14+00:00",
+        "trigger": "pipeline:ev_014",
+        "posteriors": {
+          "H1": 0.98,
+          "H2": 0.0067,
+          "H3": 0.0067,
+          "H4": 0.0067
+        },
+        "entropy": 0.1737
+      },
+      {
+        "timestamp": "2026-04-25T13:19:53+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.98,
+          "H2": 0.0067,
+          "H3": 0.0067,
+          "H4": 0.0067
+        },
+        "entropy": 0.1737
+      },
+      {
+        "timestamp": "2026-04-25T13:19:53+00:00",
+        "trigger": "pipeline:ev_015",
+        "posteriors": {
+          "H1": 0.98,
+          "H2": 0.0067,
+          "H3": 0.0067,
+          "H4": 0.0067
+        },
+        "entropy": 0.1737
+      },
+      {
+        "timestamp": "2026-04-25T14:24:49+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.98,
+          "H2": 0.0067,
+          "H3": 0.0067,
+          "H4": 0.0067
+        },
+        "entropy": 0.1737
+      },
+      {
+        "timestamp": "2026-04-25T14:24:49+00:00",
+        "trigger": "pipeline:ev_016",
+        "posteriors": {
+          "H1": 0.98,
+          "H2": 0.0067,
+          "H3": 0.0067,
+          "H4": 0.0067
+        },
+        "entropy": 0.1737
+      },
+      {
+        "timestamp": "2026-04-26T16:59:07+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.98,
+          "H2": 0.0067,
+          "H3": 0.0067,
+          "H4": 0.0067
+        },
+        "entropy": 0.1737
+      },
+      {
+        "timestamp": "2026-04-26T16:59:07+00:00",
+        "trigger": "pipeline:ev_017",
+        "posteriors": {
+          "H1": 0.98,
+          "H2": 0.0067,
+          "H3": 0.0067,
+          "H4": 0.0067
+        },
+        "entropy": 0.1737
+      },
+      {
+        "timestamp": "2026-04-26T19:27:10+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.98,
+          "H2": 0.0067,
+          "H3": 0.0067,
+          "H4": 0.0067
+        },
+        "entropy": 0.1737
+      },
+      {
+        "timestamp": "2026-04-26T19:27:10+00:00",
+        "trigger": "pipeline:ev_018",
+        "posteriors": {
+          "H1": 0.98,
+          "H2": 0.0067,
+          "H3": 0.0067,
+          "H4": 0.0067
+        },
+        "entropy": 0.1737
       }
     ],
     "outcomes": [],
@@ -2122,6 +2976,1554 @@
         "detected": "2026-04-22T01:30:35Z",
         "resolution": "SUPERSEDED",
         "resolvedAt": "2026-04-22T01:30:35Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T05:32:49+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+        "entry_b_time": "2026-04-24T02:07:38+00:00",
+        "entry_b_text": "Balikatan 2026 joint exercises began April 20 with US, Philippines and Japan (first-time major Japan participation). Exercises highlight Philippines more active defense posture. No kinetic incidents or casualties.",
+        "reason": "Numeric divergence 100.0% on metric (context: with): new=20.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-24T02:07:38Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:07:38Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T05:32:49+00:00",
+        "entry_a_text": "China erected a 352-meter floating barrier at the entrance to Scarborough Shoal on April 10-11, with 6 maritime militia and 10 coast guard vessels positioned at the shoal through April 12. No kinetic incidents or casualties reported. Balikatan 2026 exercises (US, Philippines, Australia, Japan) began April 20.",
+        "entry_b_time": "2026-04-24T02:07:38+00:00",
+        "entry_b_text": "Balikatan 2026 joint exercises began April 20 with US, Philippines and Japan (first-time major Japan participation). Exercises highlight Philippines more active defense posture. No kinetic incidents or casualties.",
+        "reason": "Numeric divergence 99.0% on metric (context: began): new=2026.0, existing=20.0, threshold=10%",
+        "detected": "2026-04-24T02:07:38Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:07:38Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+        "entry_b_time": "2026-04-24T02:07:38+00:00",
+        "entry_b_text": "Balikatan 2026 joint exercises began April 20 with US, Philippines and Japan (first-time major Japan participation). Exercises highlight Philippines more active defense posture. No kinetic incidents or casualties.",
+        "reason": "Numeric divergence 100.0% on metric (context: with): new=20.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-24T02:07:38Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:07:38Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-20T14:03:51+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+        "entry_b_time": "2026-04-24T02:07:38+00:00",
+        "entry_b_text": "Balikatan 2026 joint exercises began April 20 with US, Philippines and Japan (first-time major Japan participation). Exercises highlight Philippines more active defense posture. No kinetic incidents or casualties.",
+        "reason": "Numeric divergence 100.0% on metric (context: with): new=20.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-24T02:07:38Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:07:38Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-20T14:03:51+00:00",
+        "entry_a_text": "Philippines April 13 accused China of cyanide use after lab tests confirmed toxin in bottles seized at Second Thomas Shoal; officials called it sabotage. Separately, China installed 352m floating barrier at Scarborough Shoal entrance April 10-11 (satellite imagery). No casualties; both incidents remain gray-zone coercion.",
+        "entry_b_time": "2026-04-24T02:07:38+00:00",
+        "entry_b_text": "Balikatan 2026 joint exercises began April 20 with US, Philippines and Japan (first-time major Japan participation). Exercises highlight Philippines more active defense posture. No kinetic incidents or casualties.",
+        "reason": "Numeric divergence 35.0% on metric (context: april, philippines): new=20.0, existing=13.0, threshold=10%",
+        "detected": "2026-04-24T02:07:38Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:07:38Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-19T00:57:10+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+        "entry_b_time": "2026-04-24T02:07:38+00:00",
+        "entry_b_text": "Balikatan 2026 joint exercises began April 20 with US, Philippines and Japan (first-time major Japan participation). Exercises highlight Philippines more active defense posture. No kinetic incidents or casualties.",
+        "reason": "Numeric divergence 100.0% on metric (context: with): new=20.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-24T02:07:38Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:07:38Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T23:08:31+00:00",
+        "entry_a_text": "Philippines accuses China of cyanide 'sabotage' (lab-confirmed bottles seized from Chinese vessels at Second Thomas Shoal). China installs 352m floating barrier at Scarborough Shoal Apr 10-11; 10 CCG vessels Apr 5-12. US-AU-PH joint drills Apr 9-12.",
+        "entry_b_time": "2026-04-24T02:07:38+00:00",
+        "entry_b_text": "Balikatan 2026 joint exercises began April 20 with US, Philippines and Japan (first-time major Japan participation). Exercises highlight Philippines more active defense posture. No kinetic incidents or casualties.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: joint, philippines",
+        "detected": "2026-04-24T02:07:38Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:07:38Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T15:21:52+00:00",
+        "entry_a_text": "China installs 352m floating barrier at Scarborough Shoal entrance (Apr 10-11), 10 CCG vessels present Apr 5-12. Philippines discovers cyanide on Chinese boats near military outpost. US-Australia-Philippines conduct 4-day joint drills Apr 9-12 with FA-50s and USS Ashland. PH-CN warship near-miss reported Mar 30.",
+        "entry_b_time": "2026-04-24T02:07:38+00:00",
+        "entry_b_text": "Balikatan 2026 joint exercises began April 20 with US, Philippines and Japan (first-time major Japan participation). Exercises highlight Philippines more active defense posture. No kinetic incidents or casualties.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: joint, philippines",
+        "detected": "2026-04-24T02:07:38Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:07:38Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T14:15:45+00:00",
+        "entry_a_text": "China deploys 352m floating barrier at Scarborough Shoal entrance (Apr 10-11); 10 CCG vessels at shoal Apr 5-12; Philippines accuses China of cyanide deployment at Second Thomas Shoal; US-AU-PH joint drills Apr 9-12",
+        "entry_b_time": "2026-04-24T02:07:38+00:00",
+        "entry_b_text": "Balikatan 2026 joint exercises began April 20 with US, Philippines and Japan (first-time major Japan participation). Exercises highlight Philippines more active defense posture. No kinetic incidents or casualties.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: joint, philippines",
+        "detected": "2026-04-24T02:07:38Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:07:38Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-01T00:00:00Z",
+        "entry_a_text": "500+ US-Philippines joint military exercises planned for 2026, including Balikatan. Largest planned exercise cadence in bilateral history.",
+        "entry_b_time": "2026-04-24T02:07:38+00:00",
+        "entry_b_text": "Balikatan 2026 joint exercises began April 20 with US, Philippines and Japan (first-time major Japan participation). Exercises highlight Philippines more active defense posture. No kinetic incidents or casualties.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: balikatan, exercises, joint, philippines",
+        "detected": "2026-04-24T02:07:38Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:07:38Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-01T00:00:00Z",
+        "entry_a_text": "ADIZ incursions trending below 200/month as of April 2026, down from 300+/month peak.",
+        "entry_b_time": "2026-04-24T02:07:38+00:00",
+        "entry_b_text": "Balikatan 2026 joint exercises began April 20 with US, Philippines and Japan (first-time major Japan participation). Exercises highlight Philippines more active defense posture. No kinetic incidents or casualties.",
+        "reason": "Numeric divergence 99.0% on metric (context: april): new=20.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-24T02:07:38Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:07:38Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-01T00:00:00Z",
+        "entry_a_text": "China defense ministry urges Philippines to 'stop provocations' in the South China Sea. Statement issued following BRP Benguet incident.",
+        "entry_b_time": "2026-04-24T02:07:38+00:00",
+        "entry_b_text": "Balikatan 2026 joint exercises began April 20 with US, Philippines and Japan (first-time major Japan participation). Exercises highlight Philippines more active defense posture. No kinetic incidents or casualties.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: defense, philippines",
+        "detected": "2026-04-24T02:07:38Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:07:38Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:07:38+00:00",
+        "entry_a_text": "Balikatan 2026 joint exercises began April 20 with US, Philippines and Japan (first-time major Japan participation). Exercises highlight Philippines more active defense posture. No kinetic incidents or casualties.",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "Philippines accused Chinese fishermen of cyanide poisoning Spratly waters (April 2026); China installed floating barrier at Scarborough Shoal; US-Australia-Philippines drills April 9-12; Balikatan 2026 opened 2026-04-20 with Japan in combat role for first time. No reported casualties.",
+        "reason": "Numeric divergence 99.0% on metric (context: april): new=2026.0, existing=20.0, threshold=10%",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T05:32:49+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "Philippines accused Chinese fishermen of cyanide poisoning Spratly waters (April 2026); China installed floating barrier at Scarborough Shoal; US-Australia-Philippines drills April 9-12; Balikatan 2026 opened 2026-04-20 with Japan in combat role for first time. No reported casualties.",
+        "reason": "Numeric divergence 100.0% on metric (context: with): new=2026.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T05:32:49+00:00",
+        "entry_a_text": "China erected a 352-meter floating barrier at the entrance to Scarborough Shoal on April 10-11, with 6 maritime militia and 10 coast guard vessels positioned at the shoal through April 12. No kinetic incidents or casualties reported. Balikatan 2026 exercises (US, Philippines, Australia, Japan) began April 20.",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "Philippines accused Chinese fishermen of cyanide poisoning Spratly waters (April 2026); China installed floating barrier at Scarborough Shoal; US-Australia-Philippines drills April 9-12; Balikatan 2026 opened 2026-04-20 with Japan in combat role for first time. No reported casualties.",
+        "reason": "Numeric divergence 99.7% on metric (context: april): new=2026.0, existing=6.0, threshold=10%",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "Philippines accused Chinese fishermen of cyanide poisoning Spratly waters (April 2026); China installed floating barrier at Scarborough Shoal; US-Australia-Philippines drills April 9-12; Balikatan 2026 opened 2026-04-20 with Japan in combat role for first time. No reported casualties.",
+        "reason": "Numeric divergence 100.0% on metric (context: with): new=2026.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-20T14:03:51+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "Philippines accused Chinese fishermen of cyanide poisoning Spratly waters (April 2026); China installed floating barrier at Scarborough Shoal; US-Australia-Philippines drills April 9-12; Balikatan 2026 opened 2026-04-20 with Japan in combat role for first time. No reported casualties.",
+        "reason": "Numeric divergence 100.0% on metric (context: with): new=2026.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-20T14:03:51+00:00",
+        "entry_a_text": "Philippines April 13 accused China of cyanide use after lab tests confirmed toxin in bottles seized at Second Thomas Shoal; officials called it sabotage. Separately, China installed 352m floating barrier at Scarborough Shoal entrance April 10-11 (satellite imagery). No casualties; both incidents remain gray-zone coercion.",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "Philippines accused Chinese fishermen of cyanide poisoning Spratly waters (April 2026); China installed floating barrier at Scarborough Shoal; US-Australia-Philippines drills April 9-12; Balikatan 2026 opened 2026-04-20 with Japan in combat role for first time. No reported casualties.",
+        "reason": "Numeric divergence 99.4% on metric (context: april, china): new=2026.0, existing=13.0, threshold=10%",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-19T00:57:10+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "Philippines accused Chinese fishermen of cyanide poisoning Spratly waters (April 2026); China installed floating barrier at Scarborough Shoal; US-Australia-Philippines drills April 9-12; Balikatan 2026 opened 2026-04-20 with Japan in combat role for first time. No reported casualties.",
+        "reason": "Numeric divergence 100.0% on metric (context: with): new=2026.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T23:08:31+00:00",
+        "entry_a_text": "Philippines accuses China of cyanide 'sabotage' (lab-confirmed bottles seized from Chinese vessels at Second Thomas Shoal). China installs 352m floating barrier at Scarborough Shoal Apr 10-11; 10 CCG vessels Apr 5-12. US-AU-PH joint drills Apr 9-12.",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "Philippines accused Chinese fishermen of cyanide poisoning Spratly waters (April 2026); China installed floating barrier at Scarborough Shoal; US-Australia-Philippines drills April 9-12; Balikatan 2026 opened 2026-04-20 with Japan in combat role for first time. No reported casualties.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: barrier, china, chinese, cyanide, drills",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T15:21:52+00:00",
+        "entry_a_text": "China installs 352m floating barrier at Scarborough Shoal entrance (Apr 10-11), 10 CCG vessels present Apr 5-12. Philippines discovers cyanide on Chinese boats near military outpost. US-Australia-Philippines conduct 4-day joint drills Apr 9-12 with FA-50s and USS Ashland. PH-CN warship near-miss reported Mar 30.",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "Philippines accused Chinese fishermen of cyanide poisoning Spratly waters (April 2026); China installed floating barrier at Scarborough Shoal; US-Australia-Philippines drills April 9-12; Balikatan 2026 opened 2026-04-20 with Japan in combat role for first time. No reported casualties.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: australia, barrier, china, chinese, cyanide",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T14:15:45+00:00",
+        "entry_a_text": "China deploys 352m floating barrier at Scarborough Shoal entrance (Apr 10-11); 10 CCG vessels at shoal Apr 5-12; Philippines accuses China of cyanide deployment at Second Thomas Shoal; US-AU-PH joint drills Apr 9-12",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "Philippines accused Chinese fishermen of cyanide poisoning Spratly waters (April 2026); China installed floating barrier at Scarborough Shoal; US-Australia-Philippines drills April 9-12; Balikatan 2026 opened 2026-04-20 with Japan in combat role for first time. No reported casualties.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: barrier, china, cyanide, drills, floating",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-16T03:42:35+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: stale_evidence. Reason: Evidence ev_002: China installed a 352-meter floating barrier at the entrance to Scarborough Shoa",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "Philippines accused Chinese fishermen of cyanide poisoning Spratly waters (April 2026); China installed floating barrier at Scarborough Shoal; US-Australia-Philippines drills April 9-12; Balikatan 2026 opened 2026-04-20 with Japan in combat role for first time. No reported casualties.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: barrier, china, floating, installed, scarborough",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-16T03:42:35+00:00",
+        "entry_a_text": "China installed a 352-meter floating barrier at the entrance to Scarborough Shoal, blocking Philippine access with coast guard ships and fishing boats",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "Philippines accused Chinese fishermen of cyanide poisoning Spratly waters (April 2026); China installed floating barrier at Scarborough Shoal; US-Australia-Philippines drills April 9-12; Balikatan 2026 opened 2026-04-20 with Japan in combat role for first time. No reported casualties.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: barrier, china, floating, installed, scarborough",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-16T03:42:13+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, stale_evidence, quorum_failure. Reason: Evidence ev_001: Philippines says China fired flares directly at its coast guard aircraft over th",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "Philippines accused Chinese fishermen of cyanide poisoning Spratly waters (April 2026); China installed floating barrier at Scarborough Shoal; US-Australia-Philippines drills April 9-12; Balikatan 2026 opened 2026-04-20 with Japan in combat role for first time. No reported casualties.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: china, philippines",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-16T03:42:13+00:00",
+        "entry_a_text": "Philippines says China fired flares directly at its coast guard aircraft over the Spratly Islands in the disputed South China Sea, calling it a clear and deliberate act of bullying",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "Philippines accused Chinese fishermen of cyanide poisoning Spratly waters (April 2026); China installed floating barrier at Scarborough Shoal; US-Australia-Philippines drills April 9-12; Balikatan 2026 opened 2026-04-20 with Japan in combat role for first time. No reported casualties.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: china, philippines, spratly",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-13T00:00:00Z",
+        "entry_a_text": "Philippines confirmed Chinese boats used cyanide at Second Thomas Shoal (Ayungin Shoal), calling it sabotage intended to kill local fish populations and deprive Navy personnel of a food source. Lab tests confirmed cyanide in seized bottles. Philippine NSC Spokesperson Cornelio Valencia warned the substance could weaken the reef supporting the grounded warship BRP Sierra Madre.",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "Philippines accused Chinese fishermen of cyanide poisoning Spratly waters (April 2026); China installed floating barrier at Scarborough Shoal; US-Australia-Philippines drills April 9-12; Balikatan 2026 opened 2026-04-20 with Japan in combat role for first time. No reported casualties.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: chinese, cyanide, philippines, shoal",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-01T00:00:00Z",
+        "entry_a_text": "500+ US-Philippines joint military exercises planned for 2026, including Balikatan. Largest planned exercise cadence in bilateral history.",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "Philippines accused Chinese fishermen of cyanide poisoning Spratly waters (April 2026); China installed floating barrier at Scarborough Shoal; US-Australia-Philippines drills April 9-12; Balikatan 2026 opened 2026-04-20 with Japan in combat role for first time. No reported casualties.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: balikatan, philippines",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-01T00:00:00Z",
+        "entry_a_text": "China defense ministry urges Philippines to 'stop provocations' in the South China Sea. Statement issued following BRP Benguet incident.",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "Philippines accused Chinese fishermen of cyanide poisoning Spratly waters (April 2026); China installed floating barrier at Scarborough Shoal; US-Australia-Philippines drills April 9-12; Balikatan 2026 opened 2026-04-20 with Japan in combat role for first time. No reported casualties.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: china, philippines",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "Philippines accused Chinese fishermen of cyanide poisoning Spratly waters (April 2026); China installed floating barrier at Scarborough Shoal; US-Australia-Philippines drills April 9-12; Balikatan 2026 opened 2026-04-20 with Japan in combat role for first time. No reported casualties.",
+        "entry_b_time": "2026-04-24T13:49:14+00:00",
+        "entry_b_text": "April 13 Philippine NSC confirmed cyanide seized from Chinese fishing-vessel dinghies near Second Thomas Shoal; environmental sabotage claim, no casualties. China erected barricade (4 fishing boats, CCG ship, floating barrier) at Scarborough Shoal (satellite imagery Apr 10-11). US-Australia-Philippines held second joint drills April 9-12. All gray-zone; no kinetic exchanges, no casualties.",
+        "reason": "Numeric divergence 99.4% on metric (context: april): new=13.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-24T13:49:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:07:38+00:00",
+        "entry_a_text": "Balikatan 2026 joint exercises began April 20 with US, Philippines and Japan (first-time major Japan participation). Exercises highlight Philippines more active defense posture. No kinetic incidents or casualties.",
+        "entry_b_time": "2026-04-24T13:49:14+00:00",
+        "entry_b_text": "April 13 Philippine NSC confirmed cyanide seized from Chinese fishing-vessel dinghies near Second Thomas Shoal; environmental sabotage claim, no casualties. China erected barricade (4 fishing boats, CCG ship, floating barrier) at Scarborough Shoal (satellite imagery Apr 10-11). US-Australia-Philippines held second joint drills April 9-12. All gray-zone; no kinetic exchanges, no casualties.",
+        "reason": "Numeric divergence 35.0% on metric (context: april): new=13.0, existing=20.0, threshold=10%",
+        "detected": "2026-04-24T13:49:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:14Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-22T01:30:35+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, stale_evidence, quorum_failure. Reason: Escalation but strictly gray-zone — environmental sabotage + physical barricade without injuries strengthens H1 path; does not advance toward kinetic/lethal thresholds.",
+        "entry_b_time": "2026-04-24T13:49:14+00:00",
+        "entry_b_text": "April 13 Philippine NSC confirmed cyanide seized from Chinese fishing-vessel dinghies near Second Thomas Shoal; environmental sabotage claim, no casualties. China erected barricade (4 fishing boats, CCG ship, floating barrier) at Scarborough Shoal (satellite imagery Apr 10-11). US-Australia-Philippines held second joint drills April 9-12. All gray-zone; no kinetic exchanges, no casualties.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: barricade, environmental, gray, kinetic, sabotage",
+        "detected": "2026-04-24T13:49:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T05:32:49+00:00",
+        "entry_a_text": "China erected a 352-meter floating barrier at the entrance to Scarborough Shoal on April 10-11, with 6 maritime militia and 10 coast guard vessels positioned at the shoal through April 12. No kinetic incidents or casualties reported. Balikatan 2026 exercises (US, Philippines, Australia, Japan) began April 20.",
+        "entry_b_time": "2026-04-24T13:49:14+00:00",
+        "entry_b_text": "April 13 Philippine NSC confirmed cyanide seized from Chinese fishing-vessel dinghies near Second Thomas Shoal; environmental sabotage claim, no casualties. China erected barricade (4 fishing boats, CCG ship, floating barrier) at Scarborough Shoal (satellite imagery Apr 10-11). US-Australia-Philippines held second joint drills April 9-12. All gray-zone; no kinetic exchanges, no casualties.",
+        "reason": "Numeric divergence 53.8% on metric (context: april): new=13.0, existing=6.0, threshold=10%",
+        "detected": "2026-04-24T13:49:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-20T14:03:51+00:00",
+        "entry_a_text": "Philippines April 13 accused China of cyanide use after lab tests confirmed toxin in bottles seized at Second Thomas Shoal; officials called it sabotage. Separately, China installed 352m floating barrier at Scarborough Shoal entrance April 10-11 (satellite imagery). No casualties; both incidents remain gray-zone coercion.",
+        "entry_b_time": "2026-04-24T13:49:14+00:00",
+        "entry_b_text": "April 13 Philippine NSC confirmed cyanide seized from Chinese fishing-vessel dinghies near Second Thomas Shoal; environmental sabotage claim, no casualties. China erected barricade (4 fishing boats, CCG ship, floating barrier) at Scarborough Shoal (satellite imagery Apr 10-11). US-Australia-Philippines held second joint drills April 9-12. All gray-zone; no kinetic exchanges, no casualties.",
+        "reason": "Numeric divergence 69.2% on metric (context: china): new=4.0, existing=13.0, threshold=10%",
+        "detected": "2026-04-24T13:49:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:14Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T23:08:31+00:00",
+        "entry_a_text": "Philippines accuses China of cyanide 'sabotage' (lab-confirmed bottles seized from Chinese vessels at Second Thomas Shoal). China installs 352m floating barrier at Scarborough Shoal Apr 10-11; 10 CCG vessels Apr 5-12. US-AU-PH joint drills Apr 9-12.",
+        "entry_b_time": "2026-04-24T13:49:14+00:00",
+        "entry_b_text": "April 13 Philippine NSC confirmed cyanide seized from Chinese fishing-vessel dinghies near Second Thomas Shoal; environmental sabotage claim, no casualties. China erected barricade (4 fishing boats, CCG ship, floating barrier) at Scarborough Shoal (satellite imagery Apr 10-11). US-Australia-Philippines held second joint drills April 9-12. All gray-zone; no kinetic exchanges, no casualties.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: apr, barrier, ccg, china, chinese",
+        "detected": "2026-04-24T13:49:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:14Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T15:21:52+00:00",
+        "entry_a_text": "China installs 352m floating barrier at Scarborough Shoal entrance (Apr 10-11), 10 CCG vessels present Apr 5-12. Philippines discovers cyanide on Chinese boats near military outpost. US-Australia-Philippines conduct 4-day joint drills Apr 9-12 with FA-50s and USS Ashland. PH-CN warship near-miss reported Mar 30.",
+        "entry_b_time": "2026-04-24T13:49:14+00:00",
+        "entry_b_text": "April 13 Philippine NSC confirmed cyanide seized from Chinese fishing-vessel dinghies near Second Thomas Shoal; environmental sabotage claim, no casualties. China erected barricade (4 fishing boats, CCG ship, floating barrier) at Scarborough Shoal (satellite imagery Apr 10-11). US-Australia-Philippines held second joint drills April 9-12. All gray-zone; no kinetic exchanges, no casualties.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: apr, australia, barrier, boats, ccg",
+        "detected": "2026-04-24T13:49:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:14Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T14:15:45+00:00",
+        "entry_a_text": "China deploys 352m floating barrier at Scarborough Shoal entrance (Apr 10-11); 10 CCG vessels at shoal Apr 5-12; Philippines accuses China of cyanide deployment at Second Thomas Shoal; US-AU-PH joint drills Apr 9-12",
+        "entry_b_time": "2026-04-24T13:49:14+00:00",
+        "entry_b_text": "April 13 Philippine NSC confirmed cyanide seized from Chinese fishing-vessel dinghies near Second Thomas Shoal; environmental sabotage claim, no casualties. China erected barricade (4 fishing boats, CCG ship, floating barrier) at Scarborough Shoal (satellite imagery Apr 10-11). US-Australia-Philippines held second joint drills April 9-12. All gray-zone; no kinetic exchanges, no casualties.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: apr, barrier, ccg, china, cyanide",
+        "detected": "2026-04-24T13:49:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:14Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-16T03:42:35+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: stale_evidence. Reason: Evidence ev_002: China installed a 352-meter floating barrier at the entrance to Scarborough Shoa",
+        "entry_b_time": "2026-04-24T13:49:14+00:00",
+        "entry_b_text": "April 13 Philippine NSC confirmed cyanide seized from Chinese fishing-vessel dinghies near Second Thomas Shoal; environmental sabotage claim, no casualties. China erected barricade (4 fishing boats, CCG ship, floating barrier) at Scarborough Shoal (satellite imagery Apr 10-11). US-Australia-Philippines held second joint drills April 9-12. All gray-zone; no kinetic exchanges, no casualties.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: barrier, china, floating, scarborough",
+        "detected": "2026-04-24T13:49:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:14Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-16T03:42:35+00:00",
+        "entry_a_text": "China installed a 352-meter floating barrier at the entrance to Scarborough Shoal, blocking Philippine access with coast guard ships and fishing boats",
+        "entry_b_time": "2026-04-24T13:49:14+00:00",
+        "entry_b_text": "April 13 Philippine NSC confirmed cyanide seized from Chinese fishing-vessel dinghies near Second Thomas Shoal; environmental sabotage claim, no casualties. China erected barricade (4 fishing boats, CCG ship, floating barrier) at Scarborough Shoal (satellite imagery Apr 10-11). US-Australia-Philippines held second joint drills April 9-12. All gray-zone; no kinetic exchanges, no casualties.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: barrier, boats, china, fishing, floating",
+        "detected": "2026-04-24T13:49:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:14Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-16T03:42:13+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, stale_evidence, quorum_failure. Reason: Evidence ev_001: Philippines says China fired flares directly at its coast guard aircraft over th",
+        "entry_b_time": "2026-04-24T13:49:14+00:00",
+        "entry_b_text": "April 13 Philippine NSC confirmed cyanide seized from Chinese fishing-vessel dinghies near Second Thomas Shoal; environmental sabotage claim, no casualties. China erected barricade (4 fishing boats, CCG ship, floating barrier) at Scarborough Shoal (satellite imagery Apr 10-11). US-Australia-Philippines held second joint drills April 9-12. All gray-zone; no kinetic exchanges, no casualties.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: china, philippines",
+        "detected": "2026-04-24T13:49:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:14Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-16T03:42:13+00:00",
+        "entry_a_text": "Philippines says China fired flares directly at its coast guard aircraft over the Spratly Islands in the disputed South China Sea, calling it a clear and deliberate act of bullying",
+        "entry_b_time": "2026-04-24T13:49:14+00:00",
+        "entry_b_text": "April 13 Philippine NSC confirmed cyanide seized from Chinese fishing-vessel dinghies near Second Thomas Shoal; environmental sabotage claim, no casualties. China erected barricade (4 fishing boats, CCG ship, floating barrier) at Scarborough Shoal (satellite imagery Apr 10-11). US-Australia-Philippines held second joint drills April 9-12. All gray-zone; no kinetic exchanges, no casualties.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: china, philippines",
+        "detected": "2026-04-24T13:49:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:14Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-13T00:00:00Z",
+        "entry_a_text": "Philippines confirmed Chinese boats used cyanide at Second Thomas Shoal (Ayungin Shoal), calling it sabotage intended to kill local fish populations and deprive Navy personnel of a food source. Lab tests confirmed cyanide in seized bottles. Philippine NSC Spokesperson Cornelio Valencia warned the substance could weaken the reef supporting the grounded warship BRP Sierra Madre.",
+        "entry_b_time": "2026-04-24T13:49:14+00:00",
+        "entry_b_text": "April 13 Philippine NSC confirmed cyanide seized from Chinese fishing-vessel dinghies near Second Thomas Shoal; environmental sabotage claim, no casualties. China erected barricade (4 fishing boats, CCG ship, floating barrier) at Scarborough Shoal (satellite imagery Apr 10-11). US-Australia-Philippines held second joint drills April 9-12. All gray-zone; no kinetic exchanges, no casualties.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: boats, chinese, confirmed, cyanide, nsc",
+        "detected": "2026-04-24T13:49:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:14Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-01T00:00:00Z",
+        "entry_a_text": "500+ US-Philippines joint military exercises planned for 2026, including Balikatan. Largest planned exercise cadence in bilateral history.",
+        "entry_b_time": "2026-04-24T13:49:14+00:00",
+        "entry_b_text": "April 13 Philippine NSC confirmed cyanide seized from Chinese fishing-vessel dinghies near Second Thomas Shoal; environmental sabotage claim, no casualties. China erected barricade (4 fishing boats, CCG ship, floating barrier) at Scarborough Shoal (satellite imagery Apr 10-11). US-Australia-Philippines held second joint drills April 9-12. All gray-zone; no kinetic exchanges, no casualties.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: joint, philippines",
+        "detected": "2026-04-24T13:49:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-01T00:00:00Z",
+        "entry_a_text": "ADIZ incursions trending below 200/month as of April 2026, down from 300+/month peak.",
+        "entry_b_time": "2026-04-24T13:49:14+00:00",
+        "entry_b_text": "April 13 Philippine NSC confirmed cyanide seized from Chinese fishing-vessel dinghies near Second Thomas Shoal; environmental sabotage claim, no casualties. China erected barricade (4 fishing boats, CCG ship, floating barrier) at Scarborough Shoal (satellite imagery Apr 10-11). US-Australia-Philippines held second joint drills April 9-12. All gray-zone; no kinetic exchanges, no casualties.",
+        "reason": "Numeric divergence 99.4% on metric (context: april): new=13.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-24T13:49:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:14Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-01T00:00:00Z",
+        "entry_a_text": "China defense ministry urges Philippines to 'stop provocations' in the South China Sea. Statement issued following BRP Benguet incident.",
+        "entry_b_time": "2026-04-24T13:49:14+00:00",
+        "entry_b_text": "April 13 Philippine NSC confirmed cyanide seized from Chinese fishing-vessel dinghies near Second Thomas Shoal; environmental sabotage claim, no casualties. China erected barricade (4 fishing boats, CCG ship, floating barrier) at Scarborough Shoal (satellite imagery Apr 10-11). US-Australia-Philippines held second joint drills April 9-12. All gray-zone; no kinetic exchanges, no casualties.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: china, philippines",
+        "detected": "2026-04-24T13:49:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "Philippines accused Chinese fishermen of cyanide poisoning Spratly waters (April 2026); China installed floating barrier at Scarborough Shoal; US-Australia-Philippines drills April 9-12; Balikatan 2026 opened 2026-04-20 with Japan in combat role for first time. No reported casualties.",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "Philippines accused China of cyanide release around Spratly Islands 4/13; near-miss between Chinese and Philippine warships near Thitu 3/30; joint US-Australia-Philippines exercises 4/9-12. No kinetic casualties reported.",
+        "reason": "Numeric divergence 99.8% on metric (context: spratly): new=4.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:07:38+00:00",
+        "entry_a_text": "Balikatan 2026 joint exercises began April 20 with US, Philippines and Japan (first-time major Japan participation). Exercises highlight Philippines more active defense posture. No kinetic incidents or casualties.",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "Philippines accused China of cyanide release around Spratly Islands 4/13; near-miss between Chinese and Philippine warships near Thitu 3/30; joint US-Australia-Philippines exercises 4/9-12. No kinetic casualties reported.",
+        "reason": "Numeric divergence 99.9% on metric (context: joint): new=3.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-22T01:30:35+00:00",
+        "entry_a_text": "Philippines confirmed cyanide on Chinese boats around Second Thomas Shoal Apr 13 2026, calling it sabotage. Satellite imagery Apr 10-11 shows China barricaded Scarborough Shoal entrance with four fishing boats, coast guard ship, and new floating barrier; ten CCG vessels present Apr 5-12. No casualties.",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "Philippines accused China of cyanide release around Spratly Islands 4/13; near-miss between Chinese and Philippine warships near Thitu 3/30; joint US-Australia-Philippines exercises 4/9-12. No kinetic casualties reported.",
+        "reason": "Numeric divergence 99.8% on metric (context: 13): new=4.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T05:32:49+00:00",
+        "entry_a_text": "China erected a 352-meter floating barrier at the entrance to Scarborough Shoal on April 10-11, with 6 maritime militia and 10 coast guard vessels positioned at the shoal through April 12. No kinetic incidents or casualties reported. Balikatan 2026 exercises (US, Philippines, Australia, Japan) began April 20.",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "Philippines accused China of cyanide release around Spratly Islands 4/13; near-miss between Chinese and Philippine warships near Thitu 3/30; joint US-Australia-Philippines exercises 4/9-12. No kinetic casualties reported.",
+        "reason": "Numeric divergence 98.5% on metric (context: exercises): new=30.0, existing=2026.0, threshold=20%",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T23:08:31+00:00",
+        "entry_a_text": "Philippines accuses China of cyanide 'sabotage' (lab-confirmed bottles seized from Chinese vessels at Second Thomas Shoal). China installs 352m floating barrier at Scarborough Shoal Apr 10-11; 10 CCG vessels Apr 5-12. US-AU-PH joint drills Apr 9-12.",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "Philippines accused China of cyanide release around Spratly Islands 4/13; near-miss between Chinese and Philippine warships near Thitu 3/30; joint US-Australia-Philippines exercises 4/9-12. No kinetic casualties reported.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: china, chinese, cyanide, joint, philippines",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T15:21:52+00:00",
+        "entry_a_text": "China installs 352m floating barrier at Scarborough Shoal entrance (Apr 10-11), 10 CCG vessels present Apr 5-12. Philippines discovers cyanide on Chinese boats near military outpost. US-Australia-Philippines conduct 4-day joint drills Apr 9-12 with FA-50s and USS Ashland. PH-CN warship near-miss reported Mar 30.",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "Philippines accused China of cyanide release around Spratly Islands 4/13; near-miss between Chinese and Philippine warships near Thitu 3/30; joint US-Australia-Philippines exercises 4/9-12. No kinetic casualties reported.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: australia, china, chinese, cyanide, joint",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T14:15:45+00:00",
+        "entry_a_text": "China deploys 352m floating barrier at Scarborough Shoal entrance (Apr 10-11); 10 CCG vessels at shoal Apr 5-12; Philippines accuses China of cyanide deployment at Second Thomas Shoal; US-AU-PH joint drills Apr 9-12",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "Philippines accused China of cyanide release around Spratly Islands 4/13; near-miss between Chinese and Philippine warships near Thitu 3/30; joint US-Australia-Philippines exercises 4/9-12. No kinetic casualties reported.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: china, cyanide, joint, philippines",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-16T03:42:35+00:00",
+        "entry_a_text": "China installed a 352-meter floating barrier at the entrance to Scarborough Shoal, blocking Philippine access with coast guard ships and fishing boats",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "Philippines accused China of cyanide release around Spratly Islands 4/13; near-miss between Chinese and Philippine warships near Thitu 3/30; joint US-Australia-Philippines exercises 4/9-12. No kinetic casualties reported.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: china, philippine",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-16T03:42:13+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, stale_evidence, quorum_failure. Reason: Evidence ev_001: Philippines says China fired flares directly at its coast guard aircraft over th",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "Philippines accused China of cyanide release around Spratly Islands 4/13; near-miss between Chinese and Philippine warships near Thitu 3/30; joint US-Australia-Philippines exercises 4/9-12. No kinetic casualties reported.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: china, philippines",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-16T03:42:13+00:00",
+        "entry_a_text": "Philippines says China fired flares directly at its coast guard aircraft over the Spratly Islands in the disputed South China Sea, calling it a clear and deliberate act of bullying",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "Philippines accused China of cyanide release around Spratly Islands 4/13; near-miss between Chinese and Philippine warships near Thitu 3/30; joint US-Australia-Philippines exercises 4/9-12. No kinetic casualties reported.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: china, islands, philippines, spratly",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-13T00:00:00Z",
+        "entry_a_text": "Philippines confirmed Chinese boats used cyanide at Second Thomas Shoal (Ayungin Shoal), calling it sabotage intended to kill local fish populations and deprive Navy personnel of a food source. Lab tests confirmed cyanide in seized bottles. Philippine NSC Spokesperson Cornelio Valencia warned the substance could weaken the reef supporting the grounded warship BRP Sierra Madre.",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "Philippines accused China of cyanide release around Spratly Islands 4/13; near-miss between Chinese and Philippine warships near Thitu 3/30; joint US-Australia-Philippines exercises 4/9-12. No kinetic casualties reported.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: chinese, cyanide, philippine, philippines",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-01T00:00:00Z",
+        "entry_a_text": "500+ US-Philippines joint military exercises planned for 2026, including Balikatan. Largest planned exercise cadence in bilateral history.",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "Philippines accused China of cyanide release around Spratly Islands 4/13; near-miss between Chinese and Philippine warships near Thitu 3/30; joint US-Australia-Philippines exercises 4/9-12. No kinetic casualties reported.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: exercises, joint, philippines",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-01T00:00:00Z",
+        "entry_a_text": "China defense ministry urges Philippines to 'stop provocations' in the South China Sea. Statement issued following BRP Benguet incident.",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "Philippines accused China of cyanide release around Spratly Islands 4/13; near-miss between Chinese and Philippine warships near Thitu 3/30; joint US-Australia-Philippines exercises 4/9-12. No kinetic casualties reported.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: china, philippines",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:14+00:00",
+        "entry_a_text": "April 13 Philippine NSC confirmed cyanide seized from Chinese fishing-vessel dinghies near Second Thomas Shoal; environmental sabotage claim, no casualties. China erected barricade (4 fishing boats, CCG ship, floating barrier) at Scarborough Shoal (satellite imagery Apr 10-11). US-Australia-Philippines held second joint drills April 9-12. All gray-zone; no kinetic exchanges, no casualties.",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Philippines accuses China of cyanide deployment near Second Thomas Shoal (April 13); China builds new floating barricade at Scarborough Shoal (April 10-11); US-Australia-Philippines joint drills April 9-12. No casualties.",
+        "reason": "Numeric divergence 69.2% on metric (context: china): new=13.0, existing=4.0, threshold=10%",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "Philippines accused Chinese fishermen of cyanide poisoning Spratly waters (April 2026); China installed floating barrier at Scarborough Shoal; US-Australia-Philippines drills April 9-12; Balikatan 2026 opened 2026-04-20 with Japan in combat role for first time. No reported casualties.",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Philippines accuses China of cyanide deployment near Second Thomas Shoal (April 13); China builds new floating barricade at Scarborough Shoal (April 10-11); US-Australia-Philippines joint drills April 9-12. No casualties.",
+        "reason": "Numeric divergence 99.4% on metric (context: april, china): new=13.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:07:38+00:00",
+        "entry_a_text": "Balikatan 2026 joint exercises began April 20 with US, Philippines and Japan (first-time major Japan participation). Exercises highlight Philippines more active defense posture. No kinetic incidents or casualties.",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Philippines accuses China of cyanide deployment near Second Thomas Shoal (April 13); China builds new floating barricade at Scarborough Shoal (April 10-11); US-Australia-Philippines joint drills April 9-12. No casualties.",
+        "reason": "Numeric divergence 35.0% on metric (context: april): new=13.0, existing=20.0, threshold=10%",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-22T01:30:35+00:00",
+        "entry_a_text": "Philippines confirmed cyanide on Chinese boats around Second Thomas Shoal Apr 13 2026, calling it sabotage. Satellite imagery Apr 10-11 shows China barricaded Scarborough Shoal entrance with four fishing boats, coast guard ship, and new floating barrier; ten CCG vessels present Apr 5-12. No casualties.",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Philippines accuses China of cyanide deployment near Second Thomas Shoal (April 13); China builds new floating barricade at Scarborough Shoal (April 10-11); US-Australia-Philippines joint drills April 9-12. No casualties.",
+        "reason": "Numeric divergence 99.4% on metric (context: shoal): new=13.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T05:32:49+00:00",
+        "entry_a_text": "China erected a 352-meter floating barrier at the entrance to Scarborough Shoal on April 10-11, with 6 maritime militia and 10 coast guard vessels positioned at the shoal through April 12. No kinetic incidents or casualties reported. Balikatan 2026 exercises (US, Philippines, Australia, Japan) began April 20.",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Philippines accuses China of cyanide deployment near Second Thomas Shoal (April 13); China builds new floating barricade at Scarborough Shoal (April 10-11); US-Australia-Philippines joint drills April 9-12. No casualties.",
+        "reason": "Numeric divergence 53.8% on metric (context: april): new=13.0, existing=6.0, threshold=10%",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T23:08:31+00:00",
+        "entry_a_text": "Philippines accuses China of cyanide 'sabotage' (lab-confirmed bottles seized from Chinese vessels at Second Thomas Shoal). China installs 352m floating barrier at Scarborough Shoal Apr 10-11; 10 CCG vessels Apr 5-12. US-AU-PH joint drills Apr 9-12.",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Philippines accuses China of cyanide deployment near Second Thomas Shoal (April 13); China builds new floating barricade at Scarborough Shoal (April 10-11); US-Australia-Philippines joint drills April 9-12. No casualties.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: accuses, china, cyanide, drills, floating",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T15:21:52+00:00",
+        "entry_a_text": "China installs 352m floating barrier at Scarborough Shoal entrance (Apr 10-11), 10 CCG vessels present Apr 5-12. Philippines discovers cyanide on Chinese boats near military outpost. US-Australia-Philippines conduct 4-day joint drills Apr 9-12 with FA-50s and USS Ashland. PH-CN warship near-miss reported Mar 30.",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Philippines accuses China of cyanide deployment near Second Thomas Shoal (April 13); China builds new floating barricade at Scarborough Shoal (April 10-11); US-Australia-Philippines joint drills April 9-12. No casualties.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: australia, china, cyanide, drills, floating",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T14:15:45+00:00",
+        "entry_a_text": "China deploys 352m floating barrier at Scarborough Shoal entrance (Apr 10-11); 10 CCG vessels at shoal Apr 5-12; Philippines accuses China of cyanide deployment at Second Thomas Shoal; US-AU-PH joint drills Apr 9-12",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Philippines accuses China of cyanide deployment near Second Thomas Shoal (April 13); China builds new floating barricade at Scarborough Shoal (April 10-11); US-Australia-Philippines joint drills April 9-12. No casualties.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: accuses, china, cyanide, deployment, drills",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-16T03:42:35+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: stale_evidence. Reason: Evidence ev_002: China installed a 352-meter floating barrier at the entrance to Scarborough Shoa",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Philippines accuses China of cyanide deployment near Second Thomas Shoal (April 13); China builds new floating barricade at Scarborough Shoal (April 10-11); US-Australia-Philippines joint drills April 9-12. No casualties.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: china, floating, scarborough",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-16T03:42:35+00:00",
+        "entry_a_text": "China installed a 352-meter floating barrier at the entrance to Scarborough Shoal, blocking Philippine access with coast guard ships and fishing boats",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Philippines accuses China of cyanide deployment near Second Thomas Shoal (April 13); China builds new floating barricade at Scarborough Shoal (April 10-11); US-Australia-Philippines joint drills April 9-12. No casualties.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: china, floating, scarborough, shoal",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-16T03:42:13+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, stale_evidence, quorum_failure. Reason: Evidence ev_001: Philippines says China fired flares directly at its coast guard aircraft over th",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Philippines accuses China of cyanide deployment near Second Thomas Shoal (April 13); China builds new floating barricade at Scarborough Shoal (April 10-11); US-Australia-Philippines joint drills April 9-12. No casualties.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: china, philippines",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-16T03:42:13+00:00",
+        "entry_a_text": "Philippines says China fired flares directly at its coast guard aircraft over the Spratly Islands in the disputed South China Sea, calling it a clear and deliberate act of bullying",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Philippines accuses China of cyanide deployment near Second Thomas Shoal (April 13); China builds new floating barricade at Scarborough Shoal (April 10-11); US-Australia-Philippines joint drills April 9-12. No casualties.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: china, philippines",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-13T00:00:00Z",
+        "entry_a_text": "Philippines confirmed Chinese boats used cyanide at Second Thomas Shoal (Ayungin Shoal), calling it sabotage intended to kill local fish populations and deprive Navy personnel of a food source. Lab tests confirmed cyanide in seized bottles. Philippine NSC Spokesperson Cornelio Valencia warned the substance could weaken the reef supporting the grounded warship BRP Sierra Madre.",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Philippines accuses China of cyanide deployment near Second Thomas Shoal (April 13); China builds new floating barricade at Scarborough Shoal (April 10-11); US-Australia-Philippines joint drills April 9-12. No casualties.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: cyanide, philippines, second, shoal, thomas",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-01T00:00:00Z",
+        "entry_a_text": "500+ US-Philippines joint military exercises planned for 2026, including Balikatan. Largest planned exercise cadence in bilateral history.",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Philippines accuses China of cyanide deployment near Second Thomas Shoal (April 13); China builds new floating barricade at Scarborough Shoal (April 10-11); US-Australia-Philippines joint drills April 9-12. No casualties.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: joint, philippines",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-01T00:00:00Z",
+        "entry_a_text": "ADIZ incursions trending below 200/month as of April 2026, down from 300+/month peak.",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Philippines accuses China of cyanide deployment near Second Thomas Shoal (April 13); China builds new floating barricade at Scarborough Shoal (April 10-11); US-Australia-Philippines joint drills April 9-12. No casualties.",
+        "reason": "Numeric divergence 99.4% on metric (context: april): new=13.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-01T00:00:00Z",
+        "entry_a_text": "China defense ministry urges Philippines to 'stop provocations' in the South China Sea. Statement issued following BRP Benguet incident.",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Philippines accuses China of cyanide deployment near Second Thomas Shoal (April 13); China builds new floating barricade at Scarborough Shoal (April 10-11); US-Australia-Philippines joint drills April 9-12. No casualties.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: china, philippines",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T13:19:53+00:00",
+        "entry_a_text": "Philippines accuses China of cyanide deployment near Second Thomas Shoal (April 13); China builds new floating barricade at Scarborough Shoal (April 10-11); US-Australia-Philippines joint drills April 9-12. No casualties.",
+        "entry_b_time": "2026-04-25T14:24:49+00:00",
+        "entry_b_text": "Three escalation events in last 30 days, all gray-zone: (1) March 30 PH-CN warship near-miss near Thitu; (2) April 10-11 satellite imagery showed China placing floating barriers and maritime militia at Scarborough Shoal blocking access; (3) April 13 Philippines accused Chinese fishermen of cyanide pouring around Spratly atoll. No casualties or weapons fire.",
+        "reason": "Numeric divergence 84.6% on metric (context: april): new=2.0, existing=13.0, threshold=10%",
+        "detected": "2026-04-25T14:24:49Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:49Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T19:30:14+00:00",
+        "entry_a_text": "Philippines accused China of cyanide release around Spratly Islands 4/13; near-miss between Chinese and Philippine warships near Thitu 3/30; joint US-Australia-Philippines exercises 4/9-12. No kinetic casualties reported.",
+        "entry_b_time": "2026-04-25T14:24:49+00:00",
+        "entry_b_text": "Three escalation events in last 30 days, all gray-zone: (1) March 30 PH-CN warship near-miss near Thitu; (2) April 10-11 satellite imagery showed China placing floating barriers and maritime militia at Scarborough Shoal blocking access; (3) April 13 Philippines accused Chinese fishermen of cyanide pouring around Spratly atoll. No casualties or weapons fire.",
+        "reason": "Numeric divergence 66.7% on metric (context: 30): new=1.0, existing=3.0, threshold=10%",
+        "detected": "2026-04-25T14:24:49Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:49Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:14+00:00",
+        "entry_a_text": "April 13 Philippine NSC confirmed cyanide seized from Chinese fishing-vessel dinghies near Second Thomas Shoal; environmental sabotage claim, no casualties. China erected barricade (4 fishing boats, CCG ship, floating barrier) at Scarborough Shoal (satellite imagery Apr 10-11). US-Australia-Philippines held second joint drills April 9-12. All gray-zone; no kinetic exchanges, no casualties.",
+        "entry_b_time": "2026-04-25T14:24:49+00:00",
+        "entry_b_text": "Three escalation events in last 30 days, all gray-zone: (1) March 30 PH-CN warship near-miss near Thitu; (2) April 10-11 satellite imagery showed China placing floating barriers and maritime militia at Scarborough Shoal blocking access; (3) April 13 Philippines accused Chinese fishermen of cyanide pouring around Spratly atoll. No casualties or weapons fire.",
+        "reason": "Numeric divergence 84.6% on metric (context: april): new=2.0, existing=13.0, threshold=10%",
+        "detected": "2026-04-25T14:24:49Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:49Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "Philippines accused Chinese fishermen of cyanide poisoning Spratly waters (April 2026); China installed floating barrier at Scarborough Shoal; US-Australia-Philippines drills April 9-12; Balikatan 2026 opened 2026-04-20 with Japan in combat role for first time. No reported casualties.",
+        "entry_b_time": "2026-04-25T14:24:49+00:00",
+        "entry_b_text": "Three escalation events in last 30 days, all gray-zone: (1) March 30 PH-CN warship near-miss near Thitu; (2) April 10-11 satellite imagery showed China placing floating barriers and maritime militia at Scarborough Shoal blocking access; (3) April 13 Philippines accused Chinese fishermen of cyanide pouring around Spratly atoll. No casualties or weapons fire.",
+        "reason": "Numeric divergence 99.9% on metric (context: april): new=2.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-25T14:24:49Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:49Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:07:38+00:00",
+        "entry_a_text": "Balikatan 2026 joint exercises began April 20 with US, Philippines and Japan (first-time major Japan participation). Exercises highlight Philippines more active defense posture. No kinetic incidents or casualties.",
+        "entry_b_time": "2026-04-25T14:24:49+00:00",
+        "entry_b_text": "Three escalation events in last 30 days, all gray-zone: (1) March 30 PH-CN warship near-miss near Thitu; (2) April 10-11 satellite imagery showed China placing floating barriers and maritime militia at Scarborough Shoal blocking access; (3) April 13 Philippines accused Chinese fishermen of cyanide pouring around Spratly atoll. No casualties or weapons fire.",
+        "reason": "Numeric divergence 90.0% on metric (context: april): new=2.0, existing=20.0, threshold=10%",
+        "detected": "2026-04-25T14:24:49Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:49Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-22T01:30:35+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, stale_evidence, quorum_failure. Reason: Escalation but strictly gray-zone — environmental sabotage + physical barricade without injuries strengthens H1 path; does not advance toward kinetic/lethal thresholds.",
+        "entry_b_time": "2026-04-25T14:24:49+00:00",
+        "entry_b_text": "Three escalation events in last 30 days, all gray-zone: (1) March 30 PH-CN warship near-miss near Thitu; (2) April 10-11 satellite imagery showed China placing floating barriers and maritime militia at Scarborough Shoal blocking access; (3) April 13 Philippines accused Chinese fishermen of cyanide pouring around Spratly atoll. No casualties or weapons fire.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: escalation, gray, zone",
+        "detected": "2026-04-25T14:24:49Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:49Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-22T01:30:35+00:00",
+        "entry_a_text": "Philippines confirmed cyanide on Chinese boats around Second Thomas Shoal Apr 13 2026, calling it sabotage. Satellite imagery Apr 10-11 shows China barricaded Scarborough Shoal entrance with four fishing boats, coast guard ship, and new floating barrier; ten CCG vessels present Apr 5-12. No casualties.",
+        "entry_b_time": "2026-04-25T14:24:49+00:00",
+        "entry_b_text": "Three escalation events in last 30 days, all gray-zone: (1) March 30 PH-CN warship near-miss near Thitu; (2) April 10-11 satellite imagery showed China placing floating barriers and maritime militia at Scarborough Shoal blocking access; (3) April 13 Philippines accused Chinese fishermen of cyanide pouring around Spratly atoll. No casualties or weapons fire.",
+        "reason": "Numeric divergence 76.9% on metric (context: shoal): new=3.0, existing=13.0, threshold=10%",
+        "detected": "2026-04-25T14:24:49Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:49Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T05:32:49+00:00",
+        "entry_a_text": "China erected a 352-meter floating barrier at the entrance to Scarborough Shoal on April 10-11, with 6 maritime militia and 10 coast guard vessels positioned at the shoal through April 12. No kinetic incidents or casualties reported. Balikatan 2026 exercises (US, Philippines, Australia, Japan) began April 20.",
+        "entry_b_time": "2026-04-25T14:24:49+00:00",
+        "entry_b_text": "Three escalation events in last 30 days, all gray-zone: (1) March 30 PH-CN warship near-miss near Thitu; (2) April 10-11 satellite imagery showed China placing floating barriers and maritime militia at Scarborough Shoal blocking access; (3) April 13 Philippines accused Chinese fishermen of cyanide pouring around Spratly atoll. No casualties or weapons fire.",
+        "reason": "Numeric divergence 66.7% on metric (context: 10-11, april): new=2.0, existing=6.0, threshold=10%",
+        "detected": "2026-04-25T14:24:49Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:49Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "Philippine navy seized bottles containing cyanide from Chinese boats at Second Thomas Shoal Apr 13, confirmed by lab tests. Separately, satellite imagery Apr 10-11 shows China installed floating barricade and positioned coast guard ship at Scarborough Shoal entrance. No casualties.",
+        "entry_b_time": "2026-04-25T14:24:49+00:00",
+        "entry_b_text": "Three escalation events in last 30 days, all gray-zone: (1) March 30 PH-CN warship near-miss near Thitu; (2) April 10-11 satellite imagery showed China placing floating barriers and maritime militia at Scarborough Shoal blocking access; (3) April 13 Philippines accused Chinese fishermen of cyanide pouring around Spratly atoll. No casualties or weapons fire.",
+        "reason": "Numeric divergence 76.9% on metric (context: shoal): new=3.0, existing=13.0, threshold=10%",
+        "detected": "2026-04-25T14:24:49Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:49Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-20T14:03:51+00:00",
+        "entry_a_text": "Philippines April 13 accused China of cyanide use after lab tests confirmed toxin in bottles seized at Second Thomas Shoal; officials called it sabotage. Separately, China installed 352m floating barrier at Scarborough Shoal entrance April 10-11 (satellite imagery). No casualties; both incidents remain gray-zone coercion.",
+        "entry_b_time": "2026-04-25T14:24:49+00:00",
+        "entry_b_text": "Three escalation events in last 30 days, all gray-zone: (1) March 30 PH-CN warship near-miss near Thitu; (2) April 10-11 satellite imagery showed China placing floating barriers and maritime militia at Scarborough Shoal blocking access; (3) April 13 Philippines accused Chinese fishermen of cyanide pouring around Spratly atoll. No casualties or weapons fire.",
+        "reason": "Numeric divergence 84.6% on metric (context: april): new=2.0, existing=13.0, threshold=10%",
+        "detected": "2026-04-25T14:24:49Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:49Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T23:08:31+00:00",
+        "entry_a_text": "Philippines accuses China of cyanide 'sabotage' (lab-confirmed bottles seized from Chinese vessels at Second Thomas Shoal). China installs 352m floating barrier at Scarborough Shoal Apr 10-11; 10 CCG vessels Apr 5-12. US-AU-PH joint drills Apr 9-12.",
+        "entry_b_time": "2026-04-25T14:24:49+00:00",
+        "entry_b_text": "Three escalation events in last 30 days, all gray-zone: (1) March 30 PH-CN warship near-miss near Thitu; (2) April 10-11 satellite imagery showed China placing floating barriers and maritime militia at Scarborough Shoal blocking access; (3) April 13 Philippines accused Chinese fishermen of cyanide pouring around Spratly atoll. No casualties or weapons fire.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: china, chinese, cyanide, floating, philippines",
+        "detected": "2026-04-25T14:24:49Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:49Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T15:21:52+00:00",
+        "entry_a_text": "China installs 352m floating barrier at Scarborough Shoal entrance (Apr 10-11), 10 CCG vessels present Apr 5-12. Philippines discovers cyanide on Chinese boats near military outpost. US-Australia-Philippines conduct 4-day joint drills Apr 9-12 with FA-50s and USS Ashland. PH-CN warship near-miss reported Mar 30.",
+        "entry_b_time": "2026-04-25T14:24:49+00:00",
+        "entry_b_text": "Three escalation events in last 30 days, all gray-zone: (1) March 30 PH-CN warship near-miss near Thitu; (2) April 10-11 satellite imagery showed China placing floating barriers and maritime militia at Scarborough Shoal blocking access; (3) April 13 Philippines accused Chinese fishermen of cyanide pouring around Spratly atoll. No casualties or weapons fire.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: china, chinese, cyanide, floating, miss",
+        "detected": "2026-04-25T14:24:49Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:49Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T14:15:45+00:00",
+        "entry_a_text": "China deploys 352m floating barrier at Scarborough Shoal entrance (Apr 10-11); 10 CCG vessels at shoal Apr 5-12; Philippines accuses China of cyanide deployment at Second Thomas Shoal; US-AU-PH joint drills Apr 9-12",
+        "entry_b_time": "2026-04-25T14:24:49+00:00",
+        "entry_b_text": "Three escalation events in last 30 days, all gray-zone: (1) March 30 PH-CN warship near-miss near Thitu; (2) April 10-11 satellite imagery showed China placing floating barriers and maritime militia at Scarborough Shoal blocking access; (3) April 13 Philippines accused Chinese fishermen of cyanide pouring around Spratly atoll. No casualties or weapons fire.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: china, cyanide, floating, philippines, scarborough",
+        "detected": "2026-04-25T14:24:49Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:49Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-16T03:42:35+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: stale_evidence. Reason: Evidence ev_002: China installed a 352-meter floating barrier at the entrance to Scarborough Shoa",
+        "entry_b_time": "2026-04-25T14:24:49+00:00",
+        "entry_b_text": "Three escalation events in last 30 days, all gray-zone: (1) March 30 PH-CN warship near-miss near Thitu; (2) April 10-11 satellite imagery showed China placing floating barriers and maritime militia at Scarborough Shoal blocking access; (3) April 13 Philippines accused Chinese fishermen of cyanide pouring around Spratly atoll. No casualties or weapons fire.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: china, floating, scarborough",
+        "detected": "2026-04-25T14:24:49Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:49Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-16T03:42:35+00:00",
+        "entry_a_text": "China installed a 352-meter floating barrier at the entrance to Scarborough Shoal, blocking Philippine access with coast guard ships and fishing boats",
+        "entry_b_time": "2026-04-25T14:24:49+00:00",
+        "entry_b_text": "Three escalation events in last 30 days, all gray-zone: (1) March 30 PH-CN warship near-miss near Thitu; (2) April 10-11 satellite imagery showed China placing floating barriers and maritime militia at Scarborough Shoal blocking access; (3) April 13 Philippines accused Chinese fishermen of cyanide pouring around Spratly atoll. No casualties or weapons fire.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: access, blocking, china, floating, scarborough",
+        "detected": "2026-04-25T14:24:49Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:49Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-16T03:42:13+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, stale_evidence, quorum_failure. Reason: Evidence ev_001: Philippines says China fired flares directly at its coast guard aircraft over th",
+        "entry_b_time": "2026-04-25T14:24:49+00:00",
+        "entry_b_text": "Three escalation events in last 30 days, all gray-zone: (1) March 30 PH-CN warship near-miss near Thitu; (2) April 10-11 satellite imagery showed China placing floating barriers and maritime militia at Scarborough Shoal blocking access; (3) April 13 Philippines accused Chinese fishermen of cyanide pouring around Spratly atoll. No casualties or weapons fire.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: china, philippines",
+        "detected": "2026-04-25T14:24:49Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:49Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-16T03:42:13+00:00",
+        "entry_a_text": "Philippines says China fired flares directly at its coast guard aircraft over the Spratly Islands in the disputed South China Sea, calling it a clear and deliberate act of bullying",
+        "entry_b_time": "2026-04-25T14:24:49+00:00",
+        "entry_b_text": "Three escalation events in last 30 days, all gray-zone: (1) March 30 PH-CN warship near-miss near Thitu; (2) April 10-11 satellite imagery showed China placing floating barriers and maritime militia at Scarborough Shoal blocking access; (3) April 13 Philippines accused Chinese fishermen of cyanide pouring around Spratly atoll. No casualties or weapons fire.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: china, philippines, spratly",
+        "detected": "2026-04-25T14:24:49Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:49Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-13T00:00:00Z",
+        "entry_a_text": "Philippines confirmed Chinese boats used cyanide at Second Thomas Shoal (Ayungin Shoal), calling it sabotage intended to kill local fish populations and deprive Navy personnel of a food source. Lab tests confirmed cyanide in seized bottles. Philippine NSC Spokesperson Cornelio Valencia warned the substance could weaken the reef supporting the grounded warship BRP Sierra Madre.",
+        "entry_b_time": "2026-04-25T14:24:49+00:00",
+        "entry_b_text": "Three escalation events in last 30 days, all gray-zone: (1) March 30 PH-CN warship near-miss near Thitu; (2) April 10-11 satellite imagery showed China placing floating barriers and maritime militia at Scarborough Shoal blocking access; (3) April 13 Philippines accused Chinese fishermen of cyanide pouring around Spratly atoll. No casualties or weapons fire.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: chinese, cyanide, philippines, shoal, warship",
+        "detected": "2026-04-25T14:24:49Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:49Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-01T00:00:00Z",
+        "entry_a_text": "ADIZ incursions trending below 200/month as of April 2026, down from 300+/month peak.",
+        "entry_b_time": "2026-04-25T14:24:49+00:00",
+        "entry_b_text": "Three escalation events in last 30 days, all gray-zone: (1) March 30 PH-CN warship near-miss near Thitu; (2) April 10-11 satellite imagery showed China placing floating barriers and maritime militia at Scarborough Shoal blocking access; (3) April 13 Philippines accused Chinese fishermen of cyanide pouring around Spratly atoll. No casualties or weapons fire.",
+        "reason": "Numeric divergence 99.9% on metric (context: april): new=2.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-25T14:24:49Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:49Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-Q1",
+        "entry_a_text": "PH-China high-level talks resumed in Q1 2026 after earlier suspension. Back-channel reportedly active.",
+        "entry_b_time": "2026-04-25T14:24:49+00:00",
+        "entry_b_text": "Three escalation events in last 30 days, all gray-zone: (1) March 30 PH-CN warship near-miss near Thitu; (2) April 10-11 satellite imagery showed China placing floating barriers and maritime militia at Scarborough Shoal blocking access; (3) April 13 Philippines accused Chinese fishermen of cyanide pouring around Spratly atoll. No casualties or weapons fire.",
+        "reason": "Numeric divergence 98.5% on metric (context: in): new=30.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-25T14:24:49Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:49Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-01T00:00:00Z",
+        "entry_a_text": "China defense ministry urges Philippines to 'stop provocations' in the South China Sea. Statement issued following BRP Benguet incident.",
+        "entry_b_time": "2026-04-25T14:24:49+00:00",
+        "entry_b_text": "Three escalation events in last 30 days, all gray-zone: (1) March 30 PH-CN warship near-miss near Thitu; (2) April 10-11 satellite imagery showed China placing floating barriers and maritime militia at Scarborough Shoal blocking access; (3) April 13 Philippines accused Chinese fishermen of cyanide pouring around Spratly atoll. No casualties or weapons fire.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: china, philippines",
+        "detected": "2026-04-25T14:24:49Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:49Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T14:24:49+00:00",
+        "entry_a_text": "Three escalation events in last 30 days, all gray-zone: (1) March 30 PH-CN warship near-miss near Thitu; (2) April 10-11 satellite imagery showed China placing floating barriers and maritime militia at Scarborough Shoal blocking access; (3) April 13 Philippines accused Chinese fishermen of cyanide pouring around Spratly atoll. No casualties or weapons fire.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "Apr 13: PH Navy reports cyanide seized from Chinese boats around Spratly atoll; Chinese crew accused of poisoning shoal in March 2026. Apr 10-11 satellite shows new Chinese floating barricade and 6 maritime militia vessels at Scarborough Shoal. Mar 30: PH and Chinese warships in near-miss. No casualties.",
+        "reason": "Numeric divergence 98.5% on metric (context: in): new=2026.0, existing=30.0, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T13:19:53+00:00",
+        "entry_a_text": "Philippines accuses China of cyanide deployment near Second Thomas Shoal (April 13); China builds new floating barricade at Scarborough Shoal (April 10-11); US-Australia-Philippines joint drills April 9-12. No casualties.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "Apr 13: PH Navy reports cyanide seized from Chinese boats around Spratly atoll; Chinese crew accused of poisoning shoal in March 2026. Apr 10-11 satellite shows new Chinese floating barricade and 6 maritime militia vessels at Scarborough Shoal. Mar 30: PH and Chinese warships in near-miss. No casualties.",
+        "reason": "Numeric divergence 99.4% on metric (context: shoal): new=2026.0, existing=13.0, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T19:30:14+00:00",
+        "entry_a_text": "Philippines accused China of cyanide release around Spratly Islands 4/13; near-miss between Chinese and Philippine warships near Thitu 3/30; joint US-Australia-Philippines exercises 4/9-12. No kinetic casualties reported.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "Apr 13: PH Navy reports cyanide seized from Chinese boats around Spratly atoll; Chinese crew accused of poisoning shoal in March 2026. Apr 10-11 satellite shows new Chinese floating barricade and 6 maritime militia vessels at Scarborough Shoal. Mar 30: PH and Chinese warships in near-miss. No casualties.",
+        "reason": "Numeric divergence 56.7% on metric (context: chinese): new=30.0, existing=13.0, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:14+00:00",
+        "entry_a_text": "April 13 Philippine NSC confirmed cyanide seized from Chinese fishing-vessel dinghies near Second Thomas Shoal; environmental sabotage claim, no casualties. China erected barricade (4 fishing boats, CCG ship, floating barrier) at Scarborough Shoal (satellite imagery Apr 10-11). US-Australia-Philippines held second joint drills April 9-12. All gray-zone; no kinetic exchanges, no casualties.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "Apr 13: PH Navy reports cyanide seized from Chinese boats around Spratly atoll; Chinese crew accused of poisoning shoal in March 2026. Apr 10-11 satellite shows new Chinese floating barricade and 6 maritime militia vessels at Scarborough Shoal. Mar 30: PH and Chinese warships in near-miss. No casualties.",
+        "reason": "Numeric divergence 33.3% on metric (context: barricade): new=6.0, existing=4.0, threshold=20%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "Philippines accused Chinese fishermen of cyanide poisoning Spratly waters (April 2026); China installed floating barrier at Scarborough Shoal; US-Australia-Philippines drills April 9-12; Balikatan 2026 opened 2026-04-20 with Japan in combat role for first time. No reported casualties.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "Apr 13: PH Navy reports cyanide seized from Chinese boats around Spratly atoll; Chinese crew accused of poisoning shoal in March 2026. Apr 10-11 satellite shows new Chinese floating barricade and 6 maritime militia vessels at Scarborough Shoal. Mar 30: PH and Chinese warships in near-miss. No casualties.",
+        "reason": "Numeric divergence 99.7% on metric (context: floating): new=6.0, existing=2026.0, threshold=20%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-22T01:30:35+00:00",
+        "entry_a_text": "Philippines confirmed cyanide on Chinese boats around Second Thomas Shoal Apr 13 2026, calling it sabotage. Satellite imagery Apr 10-11 shows China barricaded Scarborough Shoal entrance with four fishing boats, coast guard ship, and new floating barrier; ten CCG vessels present Apr 5-12. No casualties.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "Apr 13: PH Navy reports cyanide seized from Chinese boats around Spratly atoll; Chinese crew accused of poisoning shoal in March 2026. Apr 10-11 satellite shows new Chinese floating barricade and 6 maritime militia vessels at Scarborough Shoal. Mar 30: PH and Chinese warships in near-miss. No casualties.",
+        "reason": "Numeric divergence 99.4% on metric (context: apr): new=13.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T05:32:49+00:00",
+        "entry_a_text": "China erected a 352-meter floating barrier at the entrance to Scarborough Shoal on April 10-11, with 6 maritime militia and 10 coast guard vessels positioned at the shoal through April 12. No kinetic incidents or casualties reported. Balikatan 2026 exercises (US, Philippines, Australia, Japan) began April 20.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "Apr 13: PH Navy reports cyanide seized from Chinese boats around Spratly atoll; Chinese crew accused of poisoning shoal in March 2026. Apr 10-11 satellite shows new Chinese floating barricade and 6 maritime militia vessels at Scarborough Shoal. Mar 30: PH and Chinese warships in near-miss. No casualties.",
+        "reason": "Numeric divergence 99.7% on metric (context: 10-11): new=2026.0, existing=6.0, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "Philippine navy seized bottles containing cyanide from Chinese boats at Second Thomas Shoal Apr 13, confirmed by lab tests. Separately, satellite imagery Apr 10-11 shows China installed floating barricade and positioned coast guard ship at Scarborough Shoal entrance. No casualties.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "Apr 13: PH Navy reports cyanide seized from Chinese boats around Spratly atoll; Chinese crew accused of poisoning shoal in March 2026. Apr 10-11 satellite shows new Chinese floating barricade and 6 maritime militia vessels at Scarborough Shoal. Mar 30: PH and Chinese warships in near-miss. No casualties.",
+        "reason": "Numeric divergence 99.4% on metric (context: apr, shoal): new=2026.0, existing=13.0, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T23:08:31+00:00",
+        "entry_a_text": "Philippines accuses China of cyanide 'sabotage' (lab-confirmed bottles seized from Chinese vessels at Second Thomas Shoal). China installs 352m floating barrier at Scarborough Shoal Apr 10-11; 10 CCG vessels Apr 5-12. US-AU-PH joint drills Apr 9-12.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "Apr 13: PH Navy reports cyanide seized from Chinese boats around Spratly atoll; Chinese crew accused of poisoning shoal in March 2026. Apr 10-11 satellite shows new Chinese floating barricade and 6 maritime militia vessels at Scarborough Shoal. Mar 30: PH and Chinese warships in near-miss. No casualties.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: apr, chinese, cyanide, floating, scarborough",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T15:21:52+00:00",
+        "entry_a_text": "China installs 352m floating barrier at Scarborough Shoal entrance (Apr 10-11), 10 CCG vessels present Apr 5-12. Philippines discovers cyanide on Chinese boats near military outpost. US-Australia-Philippines conduct 4-day joint drills Apr 9-12 with FA-50s and USS Ashland. PH-CN warship near-miss reported Mar 30.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "Apr 13: PH Navy reports cyanide seized from Chinese boats around Spratly atoll; Chinese crew accused of poisoning shoal in March 2026. Apr 10-11 satellite shows new Chinese floating barricade and 6 maritime militia vessels at Scarborough Shoal. Mar 30: PH and Chinese warships in near-miss. No casualties.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: apr, boats, chinese, cyanide, floating",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T14:15:45+00:00",
+        "entry_a_text": "China deploys 352m floating barrier at Scarborough Shoal entrance (Apr 10-11); 10 CCG vessels at shoal Apr 5-12; Philippines accuses China of cyanide deployment at Second Thomas Shoal; US-AU-PH joint drills Apr 9-12",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "Apr 13: PH Navy reports cyanide seized from Chinese boats around Spratly atoll; Chinese crew accused of poisoning shoal in March 2026. Apr 10-11 satellite shows new Chinese floating barricade and 6 maritime militia vessels at Scarborough Shoal. Mar 30: PH and Chinese warships in near-miss. No casualties.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: apr, cyanide, floating, scarborough, shoal",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-16T03:42:35+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: stale_evidence. Reason: Evidence ev_002: China installed a 352-meter floating barrier at the entrance to Scarborough Shoa",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "Apr 13: PH Navy reports cyanide seized from Chinese boats around Spratly atoll; Chinese crew accused of poisoning shoal in March 2026. Apr 10-11 satellite shows new Chinese floating barricade and 6 maritime militia vessels at Scarborough Shoal. Mar 30: PH and Chinese warships in near-miss. No casualties.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: floating, scarborough",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-16T03:42:35+00:00",
+        "entry_a_text": "China installed a 352-meter floating barrier at the entrance to Scarborough Shoal, blocking Philippine access with coast guard ships and fishing boats",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "Apr 13: PH Navy reports cyanide seized from Chinese boats around Spratly atoll; Chinese crew accused of poisoning shoal in March 2026. Apr 10-11 satellite shows new Chinese floating barricade and 6 maritime militia vessels at Scarborough Shoal. Mar 30: PH and Chinese warships in near-miss. No casualties.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: boats, floating, scarborough, shoal",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-13T00:00:00Z",
+        "entry_a_text": "Philippines confirmed Chinese boats used cyanide at Second Thomas Shoal (Ayungin Shoal), calling it sabotage intended to kill local fish populations and deprive Navy personnel of a food source. Lab tests confirmed cyanide in seized bottles. Philippine NSC Spokesperson Cornelio Valencia warned the substance could weaken the reef supporting the grounded warship BRP Sierra Madre.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "Apr 13: PH Navy reports cyanide seized from Chinese boats around Spratly atoll; Chinese crew accused of poisoning shoal in March 2026. Apr 10-11 satellite shows new Chinese floating barricade and 6 maritime militia vessels at Scarborough Shoal. Mar 30: PH and Chinese warships in near-miss. No casualties.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: boats, chinese, cyanide, navy, seized",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-26T16:59:07+00:00",
+        "entry_a_text": "Apr 13: PH Navy reports cyanide seized from Chinese boats around Spratly atoll; Chinese crew accused of poisoning shoal in March 2026. Apr 10-11 satellite shows new Chinese floating barricade and 6 maritime militia vessels at Scarborough Shoal. Mar 30: PH and Chinese warships in near-miss. No casualties.",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "April 2026: Philippines accused China of cyanide use at Second Thomas Shoal (Apr 13); satellite imagery showed China constructing a barricade at Scarborough Shoal entrance using fishing boats, coast-guard ship and floating barrier (Apr 10-11); US/Australia/PH held second 2026 joint drills. No confirmed kinetic injuries or fatalities.",
+        "reason": "Numeric divergence 99.4% on metric (context: apr, satellite, shoal): new=13.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T14:24:49+00:00",
+        "entry_a_text": "Three escalation events in last 30 days, all gray-zone: (1) March 30 PH-CN warship near-miss near Thitu; (2) April 10-11 satellite imagery showed China placing floating barriers and maritime militia at Scarborough Shoal blocking access; (3) April 13 Philippines accused Chinese fishermen of cyanide pouring around Spratly atoll. No casualties or weapons fire.",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "April 2026: Philippines accused China of cyanide use at Second Thomas Shoal (Apr 13); satellite imagery showed China constructing a barricade at Scarborough Shoal entrance using fishing boats, coast-guard ship and floating barrier (Apr 10-11); US/Australia/PH held second 2026 joint drills. No confirmed kinetic injuries or fatalities.",
+        "reason": "Numeric divergence 99.9% on metric (context: april): new=2026.0, existing=2.0, threshold=10%",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T13:19:53+00:00",
+        "entry_a_text": "Philippines accuses China of cyanide deployment near Second Thomas Shoal (April 13); China builds new floating barricade at Scarborough Shoal (April 10-11); US-Australia-Philippines joint drills April 9-12. No casualties.",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "April 2026: Philippines accused China of cyanide use at Second Thomas Shoal (Apr 13); satellite imagery showed China constructing a barricade at Scarborough Shoal entrance using fishing boats, coast-guard ship and floating barrier (Apr 10-11); US/Australia/PH held second 2026 joint drills. No confirmed kinetic injuries or fatalities.",
+        "reason": "Numeric divergence 99.4% on metric (context: april, china): new=2026.0, existing=13.0, threshold=10%",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T19:30:14+00:00",
+        "entry_a_text": "Philippines accused China of cyanide release around Spratly Islands 4/13; near-miss between Chinese and Philippine warships near Thitu 3/30; joint US-Australia-Philippines exercises 4/9-12. No kinetic casualties reported.",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "April 2026: Philippines accused China of cyanide use at Second Thomas Shoal (Apr 13); satellite imagery showed China constructing a barricade at Scarborough Shoal entrance using fishing boats, coast-guard ship and floating barrier (Apr 10-11); US/Australia/PH held second 2026 joint drills. No confirmed kinetic injuries or fatalities.",
+        "reason": "Numeric divergence 99.9% on metric (context: joint): new=2026.0, existing=3.0, threshold=10%",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:14+00:00",
+        "entry_a_text": "April 13 Philippine NSC confirmed cyanide seized from Chinese fishing-vessel dinghies near Second Thomas Shoal; environmental sabotage claim, no casualties. China erected barricade (4 fishing boats, CCG ship, floating barrier) at Scarborough Shoal (satellite imagery Apr 10-11). US-Australia-Philippines held second joint drills April 9-12. All gray-zone; no kinetic exchanges, no casualties.",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "April 2026: Philippines accused China of cyanide use at Second Thomas Shoal (Apr 13); satellite imagery showed China constructing a barricade at Scarborough Shoal entrance using fishing boats, coast-guard ship and floating barrier (Apr 10-11); US/Australia/PH held second 2026 joint drills. No confirmed kinetic injuries or fatalities.",
+        "reason": "Numeric divergence 99.4% on metric (context: april): new=2026.0, existing=13.0, threshold=10%",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:07:38+00:00",
+        "entry_a_text": "Balikatan 2026 joint exercises began April 20 with US, Philippines and Japan (first-time major Japan participation). Exercises highlight Philippines more active defense posture. No kinetic incidents or casualties.",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "April 2026: Philippines accused China of cyanide use at Second Thomas Shoal (Apr 13); satellite imagery showed China constructing a barricade at Scarborough Shoal entrance using fishing boats, coast-guard ship and floating barrier (Apr 10-11); US/Australia/PH held second 2026 joint drills. No confirmed kinetic injuries or fatalities.",
+        "reason": "Numeric divergence 99.0% on metric (context: april, philippines): new=2026.0, existing=20.0, threshold=10%",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-22T01:30:35+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, stale_evidence, quorum_failure. Reason: Escalation but strictly gray-zone — environmental sabotage + physical barricade without injuries strengthens H1 path; does not advance toward kinetic/lethal thresholds.",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "April 2026: Philippines accused China of cyanide use at Second Thomas Shoal (Apr 13); satellite imagery showed China constructing a barricade at Scarborough Shoal entrance using fishing boats, coast-guard ship and floating barrier (Apr 10-11); US/Australia/PH held second 2026 joint drills. No confirmed kinetic injuries or fatalities.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: barricade, injuries, kinetic",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-22T01:30:35+00:00",
+        "entry_a_text": "Philippines confirmed cyanide on Chinese boats around Second Thomas Shoal Apr 13 2026, calling it sabotage. Satellite imagery Apr 10-11 shows China barricaded Scarborough Shoal entrance with four fishing boats, coast guard ship, and new floating barrier; ten CCG vessels present Apr 5-12. No casualties.",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "April 2026: Philippines accused China of cyanide use at Second Thomas Shoal (Apr 13); satellite imagery showed China constructing a barricade at Scarborough Shoal entrance using fishing boats, coast-guard ship and floating barrier (Apr 10-11); US/Australia/PH held second 2026 joint drills. No confirmed kinetic injuries or fatalities.",
+        "reason": "Numeric divergence 99.4% on metric (context: apr, shoal): new=13.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T05:32:49+00:00",
+        "entry_a_text": "China erected a 352-meter floating barrier at the entrance to Scarborough Shoal on April 10-11, with 6 maritime militia and 10 coast guard vessels positioned at the shoal through April 12. No kinetic incidents or casualties reported. Balikatan 2026 exercises (US, Philippines, Australia, Japan) began April 20.",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "April 2026: Philippines accused China of cyanide use at Second Thomas Shoal (Apr 13); satellite imagery showed China constructing a barricade at Scarborough Shoal entrance using fishing boats, coast-guard ship and floating barrier (Apr 10-11); US/Australia/PH held second 2026 joint drills. No confirmed kinetic injuries or fatalities.",
+        "reason": "Numeric divergence 99.7% on metric (context: april): new=2026.0, existing=6.0, threshold=10%",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-20T14:03:51+00:00",
+        "entry_a_text": "Philippines April 13 accused China of cyanide use after lab tests confirmed toxin in bottles seized at Second Thomas Shoal; officials called it sabotage. Separately, China installed 352m floating barrier at Scarborough Shoal entrance April 10-11 (satellite imagery). No casualties; both incidents remain gray-zone coercion.",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "April 2026: Philippines accused China of cyanide use at Second Thomas Shoal (Apr 13); satellite imagery showed China constructing a barricade at Scarborough Shoal entrance using fishing boats, coast-guard ship and floating barrier (Apr 10-11); US/Australia/PH held second 2026 joint drills. No confirmed kinetic injuries or fatalities.",
+        "reason": "Numeric divergence 99.4% on metric (context: accused, april, china): new=2026.0, existing=13.0, threshold=10%",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T23:08:31+00:00",
+        "entry_a_text": "Philippines accuses China of cyanide 'sabotage' (lab-confirmed bottles seized from Chinese vessels at Second Thomas Shoal). China installs 352m floating barrier at Scarborough Shoal Apr 10-11; 10 CCG vessels Apr 5-12. US-AU-PH joint drills Apr 9-12.",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "April 2026: Philippines accused China of cyanide use at Second Thomas Shoal (Apr 13); satellite imagery showed China constructing a barricade at Scarborough Shoal entrance using fishing boats, coast-guard ship and floating barrier (Apr 10-11); US/Australia/PH held second 2026 joint drills. No confirmed kinetic injuries or fatalities.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: apr, barrier, china, confirmed, cyanide",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T15:21:52+00:00",
+        "entry_a_text": "China installs 352m floating barrier at Scarborough Shoal entrance (Apr 10-11), 10 CCG vessels present Apr 5-12. Philippines discovers cyanide on Chinese boats near military outpost. US-Australia-Philippines conduct 4-day joint drills Apr 9-12 with FA-50s and USS Ashland. PH-CN warship near-miss reported Mar 30.",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "April 2026: Philippines accused China of cyanide use at Second Thomas Shoal (Apr 13); satellite imagery showed China constructing a barricade at Scarborough Shoal entrance using fishing boats, coast-guard ship and floating barrier (Apr 10-11); US/Australia/PH held second 2026 joint drills. No confirmed kinetic injuries or fatalities.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: apr, australia, barrier, boats, china",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T14:15:45+00:00",
+        "entry_a_text": "China deploys 352m floating barrier at Scarborough Shoal entrance (Apr 10-11); 10 CCG vessels at shoal Apr 5-12; Philippines accuses China of cyanide deployment at Second Thomas Shoal; US-AU-PH joint drills Apr 9-12",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "April 2026: Philippines accused China of cyanide use at Second Thomas Shoal (Apr 13); satellite imagery showed China constructing a barricade at Scarborough Shoal entrance using fishing boats, coast-guard ship and floating barrier (Apr 10-11); US/Australia/PH held second 2026 joint drills. No confirmed kinetic injuries or fatalities.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: apr, barrier, china, cyanide, drills",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-16T03:42:35+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: stale_evidence. Reason: Evidence ev_002: China installed a 352-meter floating barrier at the entrance to Scarborough Shoa",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "April 2026: Philippines accused China of cyanide use at Second Thomas Shoal (Apr 13); satellite imagery showed China constructing a barricade at Scarborough Shoal entrance using fishing boats, coast-guard ship and floating barrier (Apr 10-11); US/Australia/PH held second 2026 joint drills. No confirmed kinetic injuries or fatalities.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: barrier, china, entrance, floating, scarborough",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-16T03:42:35+00:00",
+        "entry_a_text": "China installed a 352-meter floating barrier at the entrance to Scarborough Shoal, blocking Philippine access with coast guard ships and fishing boats",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "April 2026: Philippines accused China of cyanide use at Second Thomas Shoal (Apr 13); satellite imagery showed China constructing a barricade at Scarborough Shoal entrance using fishing boats, coast-guard ship and floating barrier (Apr 10-11); US/Australia/PH held second 2026 joint drills. No confirmed kinetic injuries or fatalities.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: barrier, boats, china, coast, entrance",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-16T03:42:13+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, stale_evidence, quorum_failure. Reason: Evidence ev_001: Philippines says China fired flares directly at its coast guard aircraft over th",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "April 2026: Philippines accused China of cyanide use at Second Thomas Shoal (Apr 13); satellite imagery showed China constructing a barricade at Scarborough Shoal entrance using fishing boats, coast-guard ship and floating barrier (Apr 10-11); US/Australia/PH held second 2026 joint drills. No confirmed kinetic injuries or fatalities.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: china, coast, guard, philippines",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-16T03:42:13+00:00",
+        "entry_a_text": "Philippines says China fired flares directly at its coast guard aircraft over the Spratly Islands in the disputed South China Sea, calling it a clear and deliberate act of bullying",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "April 2026: Philippines accused China of cyanide use at Second Thomas Shoal (Apr 13); satellite imagery showed China constructing a barricade at Scarborough Shoal entrance using fishing boats, coast-guard ship and floating barrier (Apr 10-11); US/Australia/PH held second 2026 joint drills. No confirmed kinetic injuries or fatalities.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: china, coast, guard, philippines",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-13T00:00:00Z",
+        "entry_a_text": "Philippines confirmed Chinese boats used cyanide at Second Thomas Shoal (Ayungin Shoal), calling it sabotage intended to kill local fish populations and deprive Navy personnel of a food source. Lab tests confirmed cyanide in seized bottles. Philippine NSC Spokesperson Cornelio Valencia warned the substance could weaken the reef supporting the grounded warship BRP Sierra Madre.",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "April 2026: Philippines accused China of cyanide use at Second Thomas Shoal (Apr 13); satellite imagery showed China constructing a barricade at Scarborough Shoal entrance using fishing boats, coast-guard ship and floating barrier (Apr 10-11); US/Australia/PH held second 2026 joint drills. No confirmed kinetic injuries or fatalities.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: boats, confirmed, cyanide, philippines, second",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-01T00:00:00Z",
+        "entry_a_text": "500+ US-Philippines joint military exercises planned for 2026, including Balikatan. Largest planned exercise cadence in bilateral history.",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "April 2026: Philippines accused China of cyanide use at Second Thomas Shoal (Apr 13); satellite imagery showed China constructing a barricade at Scarborough Shoal entrance using fishing boats, coast-guard ship and floating barrier (Apr 10-11); US/Australia/PH held second 2026 joint drills. No confirmed kinetic injuries or fatalities.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: joint, philippines",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-01T00:00:00Z",
+        "entry_a_text": "China defense ministry urges Philippines to 'stop provocations' in the South China Sea. Statement issued following BRP Benguet incident.",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "April 2026: Philippines accused China of cyanide use at Second Thomas Shoal (Apr 13); satellite imagery showed China constructing a barricade at Scarborough Shoal entrance using fishing boats, coast-guard ship and floating barrier (Apr 10-11); US/Australia/PH held second 2026 joint drills. No confirmed kinetic injuries or fatalities.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: china, philippines",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
       }
     ]
   },
@@ -2412,30 +4814,397 @@
         "trust_delta": 0.05,
         "original_text_snippet": "REPLAY BEGIN: 0 previously-fired indicators will be re-applied chronologically under current LR system. Posteriors reset",
         "confirming_text_snippet": "REPLAY COMPLETE: 0 indicators applied, 0 skipped. Final posteriors: {'H1': 0.55, 'H2': 0.25, 'H3': 0.13, 'H4': 0.07}. In"
+      },
+      {
+        "timestamp": "2026-04-24T02:07:38Z",
+        "evidence_index": 4,
+        "confirming_index": 29,
+        "resolution": "REFUTED",
+        "source": "INDOPACOM / AFP joint statements",
+        "confirming_source": "RFA / Stars and Stripes",
+        "trust_delta": -0.1,
+        "original_text_snippet": "500+ US-Philippines joint military exercises planned for 2026, including Balikatan. Largest planned exercise cadence in ",
+        "confirming_text_snippet": "Balikatan 2026 joint exercises began April 20 with US, Philippines and Japan (first-time major Japan participation). Exe"
+      },
+      {
+        "timestamp": "2026-04-24T02:07:38Z",
+        "evidence_index": 20,
+        "confirming_index": 29,
+        "resolution": "REFUTED",
+        "source": "Rappler / Vision Times / FDD / Al Jazeera",
+        "confirming_source": "RFA / Stars and Stripes",
+        "trust_delta": -0.1,
+        "original_text_snippet": "China erected a 352-meter floating barrier at the entrance to Scarborough Shoal on April 10-11, with 6 maritime militia ",
+        "confirming_text_snippet": "Balikatan 2026 joint exercises began April 20 with US, Philippines and Japan (first-time major Japan participation). Exe"
+      },
+      {
+        "timestamp": "2026-04-24T02:25:41Z",
+        "evidence_index": 8,
+        "confirming_index": 32,
+        "resolution": "REFUTED",
+        "source": "Manila Times",
+        "confirming_source": "Bloomberg / Indo-Pacific Defense Forum / RFA",
+        "trust_delta": -0.1,
+        "original_text_snippet": "China installed a 352-meter floating barrier at the entrance to Scarborough Shoal, blocking Philippine access with coast",
+        "confirming_text_snippet": "Philippines accused Chinese fishermen of cyanide poisoning Spratly waters (April 2026); China installed floating barrier"
+      },
+      {
+        "timestamp": "2026-04-24T02:25:41Z",
+        "evidence_index": 9,
+        "confirming_index": 32,
+        "resolution": "REFUTED",
+        "source": "",
+        "confirming_source": "Bloomberg / Indo-Pacific Defense Forum / RFA",
+        "trust_delta": -0.1,
+        "original_text_snippet": "GOVERNANCE WARNING on bayesian_update: stale_evidence. Reason: Evidence ev_002: China installed a 352-meter floating bar",
+        "confirming_text_snippet": "Philippines accused Chinese fishermen of cyanide poisoning Spratly waters (April 2026); China installed floating barrier"
+      },
+      {
+        "timestamp": "2026-04-24T02:25:41Z",
+        "evidence_index": 12,
+        "confirming_index": 32,
+        "resolution": "REFUTED",
+        "source": "Reuters/Al Jazeera",
+        "confirming_source": "Bloomberg / Indo-Pacific Defense Forum / RFA",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Philippines accuses China of cyanide 'sabotage' (lab-confirmed bottles seized from Chinese vessels at Second Thomas Shoa",
+        "confirming_text_snippet": "Philippines accused Chinese fishermen of cyanide poisoning Spratly waters (April 2026); China installed floating barrier"
+      },
+      {
+        "timestamp": "2026-04-24T02:25:41Z",
+        "evidence_index": 16,
+        "confirming_index": 32,
+        "resolution": "REFUTED",
+        "source": "Al Jazeera",
+        "confirming_source": "Bloomberg / Indo-Pacific Defense Forum / RFA",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Philippines April 13 accused China of cyanide use after lab tests confirmed toxin in bottles seized at Second Thomas Sho",
+        "confirming_text_snippet": "Philippines accused Chinese fishermen of cyanide poisoning Spratly waters (April 2026); China installed floating barrier"
+      },
+      {
+        "timestamp": "2026-04-24T02:25:41Z",
+        "evidence_index": 20,
+        "confirming_index": 32,
+        "resolution": "REFUTED",
+        "source": "Rappler / Vision Times / FDD / Al Jazeera",
+        "confirming_source": "Bloomberg / Indo-Pacific Defense Forum / RFA",
+        "trust_delta": -0.1,
+        "original_text_snippet": "China erected a 352-meter floating barrier at the entrance to Scarborough Shoal on April 10-11, with 6 maritime militia ",
+        "confirming_text_snippet": "Philippines accused Chinese fishermen of cyanide poisoning Spratly waters (April 2026); China installed floating barrier"
+      },
+      {
+        "timestamp": "2026-04-24T02:25:41Z",
+        "evidence_index": 27,
+        "confirming_index": 32,
+        "resolution": "REFUTED",
+        "source": "Reuters / Al Jazeera",
+        "confirming_source": "Bloomberg / Indo-Pacific Defense Forum / RFA",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Philippines confirmed cyanide on Chinese boats around Second Thomas Shoal Apr 13 2026, calling it sabotage. Satellite im",
+        "confirming_text_snippet": "Philippines accused Chinese fishermen of cyanide poisoning Spratly waters (April 2026); China installed floating barrier"
+      },
+      {
+        "timestamp": "2026-04-24T13:49:14Z",
+        "evidence_index": 8,
+        "confirming_index": 35,
+        "resolution": "REFUTED",
+        "source": "Manila Times",
+        "confirming_source": "Al Jazeera / Bloomberg / Reuters",
+        "trust_delta": -0.1,
+        "original_text_snippet": "China installed a 352-meter floating barrier at the entrance to Scarborough Shoal, blocking Philippine access with coast",
+        "confirming_text_snippet": "April 13 Philippine NSC confirmed cyanide seized from Chinese fishing-vessel dinghies near Second Thomas Shoal; environm"
+      },
+      {
+        "timestamp": "2026-04-24T13:49:14Z",
+        "evidence_index": 9,
+        "confirming_index": 35,
+        "resolution": "REFUTED",
+        "source": "",
+        "confirming_source": "Al Jazeera / Bloomberg / Reuters",
+        "trust_delta": -0.1,
+        "original_text_snippet": "GOVERNANCE WARNING on bayesian_update: stale_evidence. Reason: Evidence ev_002: China installed a 352-meter floating bar",
+        "confirming_text_snippet": "April 13 Philippine NSC confirmed cyanide seized from Chinese fishing-vessel dinghies near Second Thomas Shoal; environm"
+      },
+      {
+        "timestamp": "2026-04-24T19:30:14Z",
+        "evidence_index": 20,
+        "confirming_index": 38,
+        "resolution": "REFUTED",
+        "source": "Rappler / Vision Times / FDD / Al Jazeera",
+        "confirming_source": "Bloomberg / Stars and Stripes",
+        "trust_delta": -0.1,
+        "original_text_snippet": "China erected a 352-meter floating barrier at the entrance to Scarborough Shoal on April 10-11, with 6 maritime militia ",
+        "confirming_text_snippet": "Philippines accused China of cyanide release around Spratly Islands 4/13; near-miss between Chinese and Philippine warsh"
+      },
+      {
+        "timestamp": "2026-04-24T19:30:14Z",
+        "evidence_index": 27,
+        "confirming_index": 38,
+        "resolution": "REFUTED",
+        "source": "Reuters / Al Jazeera",
+        "confirming_source": "Bloomberg / Stars and Stripes",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Philippines confirmed cyanide on Chinese boats around Second Thomas Shoal Apr 13 2026, calling it sabotage. Satellite im",
+        "confirming_text_snippet": "Philippines accused China of cyanide release around Spratly Islands 4/13; near-miss between Chinese and Philippine warsh"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:49Z",
+        "evidence_index": 8,
+        "confirming_index": 42,
+        "resolution": "REFUTED",
+        "source": "Manila Times",
+        "confirming_source": "Stars and Stripes, Al Jazeera, CNN, Vision Times",
+        "trust_delta": -0.1,
+        "original_text_snippet": "China installed a 352-meter floating barrier at the entrance to Scarborough Shoal, blocking Philippine access with coast",
+        "confirming_text_snippet": "Three escalation events in last 30 days, all gray-zone: (1) March 30 PH-CN warship near-miss near Thitu; (2) April 10-11"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:49Z",
+        "evidence_index": 10,
+        "confirming_index": 42,
+        "resolution": "REFUTED",
+        "source": "Al Jazeera/CNN/Bloomberg",
+        "confirming_source": "Stars and Stripes, Al Jazeera, CNN, Vision Times",
+        "trust_delta": -0.1,
+        "original_text_snippet": "China deploys 352m floating barrier at Scarborough Shoal entrance (Apr 10-11); 10 CCG vessels at shoal Apr 5-12; Philipp",
+        "confirming_text_snippet": "Three escalation events in last 30 days, all gray-zone: (1) March 30 PH-CN warship near-miss near Thitu; (2) April 10-11"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:49Z",
+        "evidence_index": 11,
+        "confirming_index": 42,
+        "resolution": "REFUTED",
+        "source": "Bloomberg / Stars and Stripes",
+        "confirming_source": "Stars and Stripes, Al Jazeera, CNN, Vision Times",
+        "trust_delta": -0.1,
+        "original_text_snippet": "China installs 352m floating barrier at Scarborough Shoal entrance (Apr 10-11), 10 CCG vessels present Apr 5-12. Philipp",
+        "confirming_text_snippet": "Three escalation events in last 30 days, all gray-zone: (1) March 30 PH-CN warship near-miss near Thitu; (2) April 10-11"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:49Z",
+        "evidence_index": 12,
+        "confirming_index": 42,
+        "resolution": "REFUTED",
+        "source": "Reuters/Al Jazeera",
+        "confirming_source": "Stars and Stripes, Al Jazeera, CNN, Vision Times",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Philippines accuses China of cyanide 'sabotage' (lab-confirmed bottles seized from Chinese vessels at Second Thomas Shoa",
+        "confirming_text_snippet": "Three escalation events in last 30 days, all gray-zone: (1) March 30 PH-CN warship near-miss near Thitu; (2) April 10-11"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:49Z",
+        "evidence_index": 14,
+        "confirming_index": 42,
+        "resolution": "REFUTED",
+        "source": "Al Jazeera / Bloomberg / CNN / Rappler",
+        "confirming_source": "Stars and Stripes, Al Jazeera, CNN, Vision Times",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Philippines accused China of cyanide contamination at Second Thomas Shoal (lab-confirmed) and of installing 352m floatin",
+        "confirming_text_snippet": "Three escalation events in last 30 days, all gray-zone: (1) March 30 PH-CN warship near-miss near Thitu; (2) April 10-11"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:49Z",
+        "evidence_index": 16,
+        "confirming_index": 42,
+        "resolution": "REFUTED",
+        "source": "Al Jazeera",
+        "confirming_source": "Stars and Stripes, Al Jazeera, CNN, Vision Times",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Philippines April 13 accused China of cyanide use after lab tests confirmed toxin in bottles seized at Second Thomas Sho",
+        "confirming_text_snippet": "Three escalation events in last 30 days, all gray-zone: (1) March 30 PH-CN warship near-miss near Thitu; (2) April 10-11"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:49Z",
+        "evidence_index": 18,
+        "confirming_index": 42,
+        "resolution": "REFUTED",
+        "source": "Al Jazeera / Bloomberg / Rappler",
+        "confirming_source": "Stars and Stripes, Al Jazeera, CNN, Vision Times",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Philippine navy seized bottles containing cyanide from Chinese boats at Second Thomas Shoal Apr 13, confirmed by lab tes",
+        "confirming_text_snippet": "Three escalation events in last 30 days, all gray-zone: (1) March 30 PH-CN warship near-miss near Thitu; (2) April 10-11"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:49Z",
+        "evidence_index": 20,
+        "confirming_index": 42,
+        "resolution": "REFUTED",
+        "source": "Rappler / Vision Times / FDD / Al Jazeera",
+        "confirming_source": "Stars and Stripes, Al Jazeera, CNN, Vision Times",
+        "trust_delta": -0.1,
+        "original_text_snippet": "China erected a 352-meter floating barrier at the entrance to Scarborough Shoal on April 10-11, with 6 maritime militia ",
+        "confirming_text_snippet": "Three escalation events in last 30 days, all gray-zone: (1) March 30 PH-CN warship near-miss near Thitu; (2) April 10-11"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:49Z",
+        "evidence_index": 27,
+        "confirming_index": 42,
+        "resolution": "REFUTED",
+        "source": "Reuters / Al Jazeera",
+        "confirming_source": "Stars and Stripes, Al Jazeera, CNN, Vision Times",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Philippines confirmed cyanide on Chinese boats around Second Thomas Shoal Apr 13 2026, calling it sabotage. Satellite im",
+        "confirming_text_snippet": "Three escalation events in last 30 days, all gray-zone: (1) March 30 PH-CN warship near-miss near Thitu; (2) April 10-11"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:49Z",
+        "evidence_index": 32,
+        "confirming_index": 42,
+        "resolution": "REFUTED",
+        "source": "Bloomberg / Indo-Pacific Defense Forum / RFA",
+        "confirming_source": "Stars and Stripes, Al Jazeera, CNN, Vision Times",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Philippines accused Chinese fishermen of cyanide poisoning Spratly waters (April 2026); China installed floating barrier",
+        "confirming_text_snippet": "Three escalation events in last 30 days, all gray-zone: (1) March 30 PH-CN warship near-miss near Thitu; (2) April 10-11"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:49Z",
+        "evidence_index": 34,
+        "confirming_index": 42,
+        "resolution": "REFUTED",
+        "source": "",
+        "confirming_source": "Stars and Stripes, Al Jazeera, CNN, Vision Times",
+        "trust_delta": -0.1,
+        "original_text_snippet": "GOVERNANCE WARNING on bayesian_update: stale_evidence, quorum_failure. Reason: Gray-zone escalation continues (cyanide, ",
+        "confirming_text_snippet": "Three escalation events in last 30 days, all gray-zone: (1) March 30 PH-CN warship near-miss near Thitu; (2) April 10-11"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:49Z",
+        "evidence_index": 35,
+        "confirming_index": 42,
+        "resolution": "REFUTED",
+        "source": "Al Jazeera / Bloomberg / Reuters",
+        "confirming_source": "Stars and Stripes, Al Jazeera, CNN, Vision Times",
+        "trust_delta": -0.1,
+        "original_text_snippet": "April 13 Philippine NSC confirmed cyanide seized from Chinese fishing-vessel dinghies near Second Thomas Shoal; environm",
+        "confirming_text_snippet": "Three escalation events in last 30 days, all gray-zone: (1) March 30 PH-CN warship near-miss near Thitu; (2) April 10-11"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:49Z",
+        "evidence_index": 38,
+        "confirming_index": 42,
+        "resolution": "REFUTED",
+        "source": "Bloomberg / Stars and Stripes",
+        "confirming_source": "Stars and Stripes, Al Jazeera, CNN, Vision Times",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Philippines accused China of cyanide release around Spratly Islands 4/13; near-miss between Chinese and Philippine warsh",
+        "confirming_text_snippet": "Three escalation events in last 30 days, all gray-zone: (1) March 30 PH-CN warship near-miss near Thitu; (2) April 10-11"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:49Z",
+        "evidence_index": 40,
+        "confirming_index": 42,
+        "resolution": "REFUTED",
+        "source": "Reuters / Al Jazeera / Bloomberg",
+        "confirming_source": "Stars and Stripes, Al Jazeera, CNN, Vision Times",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Philippines accuses China of cyanide deployment near Second Thomas Shoal (April 13); China builds new floating barricade",
+        "confirming_text_snippet": "Three escalation events in last 30 days, all gray-zone: (1) March 30 PH-CN warship near-miss near Thitu; (2) April 10-11"
+      },
+      {
+        "timestamp": "2026-04-26T16:59:07Z",
+        "evidence_index": 32,
+        "confirming_index": 44,
+        "resolution": "REFUTED",
+        "source": "Bloomberg / Indo-Pacific Defense Forum / RFA",
+        "confirming_source": "Reuters / Al Jazeera / Stars and Stripes",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Philippines accused Chinese fishermen of cyanide poisoning Spratly waters (April 2026); China installed floating barrier",
+        "confirming_text_snippet": "Apr 13: PH Navy reports cyanide seized from Chinese boats around Spratly atoll; Chinese crew accused of poisoning shoal "
+      },
+      {
+        "timestamp": "2026-04-26T16:59:07Z",
+        "evidence_index": 42,
+        "confirming_index": 44,
+        "resolution": "REFUTED",
+        "source": "Stars and Stripes, Al Jazeera, CNN, Vision Times",
+        "confirming_source": "Reuters / Al Jazeera / Stars and Stripes",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Three escalation events in last 30 days, all gray-zone: (1) March 30 PH-CN warship near-miss near Thitu; (2) April 10-11",
+        "confirming_text_snippet": "Apr 13: PH Navy reports cyanide seized from Chinese boats around Spratly atoll; Chinese crew accused of poisoning shoal "
+      },
+      {
+        "timestamp": "2026-04-26T19:27:10Z",
+        "evidence_index": 8,
+        "confirming_index": 46,
+        "resolution": "REFUTED",
+        "source": "Manila Times",
+        "confirming_source": "Bloomberg / Reuters / US News",
+        "trust_delta": -0.1,
+        "original_text_snippet": "China installed a 352-meter floating barrier at the entrance to Scarborough Shoal, blocking Philippine access with coast",
+        "confirming_text_snippet": "April 2026: Philippines accused China of cyanide use at Second Thomas Shoal (Apr 13); satellite imagery showed China con"
+      },
+      {
+        "timestamp": "2026-04-26T19:27:10Z",
+        "evidence_index": 9,
+        "confirming_index": 46,
+        "resolution": "REFUTED",
+        "source": "",
+        "confirming_source": "Bloomberg / Reuters / US News",
+        "trust_delta": -0.1,
+        "original_text_snippet": "GOVERNANCE WARNING on bayesian_update: stale_evidence. Reason: Evidence ev_002: China installed a 352-meter floating bar",
+        "confirming_text_snippet": "April 2026: Philippines accused China of cyanide use at Second Thomas Shoal (Apr 13); satellite imagery showed China con"
+      },
+      {
+        "timestamp": "2026-04-26T19:27:10Z",
+        "evidence_index": 16,
+        "confirming_index": 46,
+        "resolution": "REFUTED",
+        "source": "Al Jazeera",
+        "confirming_source": "Bloomberg / Reuters / US News",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Philippines April 13 accused China of cyanide use after lab tests confirmed toxin in bottles seized at Second Thomas Sho",
+        "confirming_text_snippet": "April 2026: Philippines accused China of cyanide use at Second Thomas Shoal (Apr 13); satellite imagery showed China con"
+      },
+      {
+        "timestamp": "2026-04-26T19:27:10Z",
+        "evidence_index": 20,
+        "confirming_index": 46,
+        "resolution": "REFUTED",
+        "source": "Rappler / Vision Times / FDD / Al Jazeera",
+        "confirming_source": "Bloomberg / Reuters / US News",
+        "trust_delta": -0.1,
+        "original_text_snippet": "China erected a 352-meter floating barrier at the entrance to Scarborough Shoal on April 10-11, with 6 maritime militia ",
+        "confirming_text_snippet": "April 2026: Philippines accused China of cyanide use at Second Thomas Shoal (Apr 13); satellite imagery showed China con"
+      },
+      {
+        "timestamp": "2026-04-26T19:27:10Z",
+        "evidence_index": 42,
+        "confirming_index": 46,
+        "resolution": "REFUTED",
+        "source": "Stars and Stripes, Al Jazeera, CNN, Vision Times",
+        "confirming_source": "Bloomberg / Reuters / US News",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Three escalation events in last 30 days, all gray-zone: (1) March 30 PH-CN warship near-miss near Thitu; (2) April 10-11",
+        "confirming_text_snippet": "April 2026: Philippines accused China of cyanide use at Second Thomas Shoal (Apr 13); satellite imagery showed China con"
       }
     ],
     "effectiveTrust": {
-      "AFP joint statements": 0.5,
+      "AFP joint statements": 0.4118,
       "AFP official statement": 0.5,
-      "Bloomberg": 0.7375,
+      "Bloomberg": 0.3608,
       "DFA statements": 0.5,
-      "INDOPACOM": 0.5,
+      "INDOPACOM": 0.4118,
       "Modern Diplomacy": 0.3703,
       "PRC Ministry of National Defense statement": 0.5,
       "Taiwan MND reports": 0.5,
       "Wire reports": 0.5,
       "open source tracking": 0.5,
       "wire reports": 0.5,
-      "Manila Times": 0.4156,
-      "Al Jazeera": 0.6,
-      "CNN": 0.75,
-      "Stars and Stripes": 0.4575,
-      "Reuters": 0.9,
-      "Rappler": 0.5,
-      "FDD": 0.5,
-      "Vision Times": 0.5
+      "Manila Times": 0.2584,
+      "Al Jazeera": 0.0571,
+      "CNN": 0.6774,
+      "Stars and Stripes": 0.3712,
+      "Reuters": 0.7209,
+      "Rappler": 0.223,
+      "FDD": 0.2908,
+      "Vision Times": 0.2908,
+      "RFA": 0.4118,
+      "Indo-Pacific Defense Forum": 0.4118,
+      "Stars and Stripes, Al Jazeera, CNN, Vision Times": 0.4118,
+      "US News": 0.5
     },
-    "_last_scan_same_source_skipped": 33
+    "_last_scan_same_source_skipped": 99
   },
   "conditionalPredictions": [
     {

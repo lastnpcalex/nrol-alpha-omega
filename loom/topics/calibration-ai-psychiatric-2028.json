@@ -1,0 +1,1653 @@
+{
+  "meta": {
+    "slug": "calibration-ai-psychiatric-2028",
+    "title": "AI Chat Use Linked to Psychiatric Incidence by 2028",
+    "question": "By December 31, 2028, what level of evidence will exist linking extended consumer AI chatbot use to clinically measurable psychiatric outcomes (psychosis, mania, first-episode bipolar, or severe belief miscalibration)?",
+    "resolution": "H1 if peer-reviewed epidemiology (cohort/case-control/ITS) or national surveillance data reports a statistically significant association (>=10% over pre-2023 trend, p<0.01, or IRR/OR CI excluding 1.0) between heavy AI chat use and FEP/mania/schizophrenia-spectrum incidence in a defined adult cohort, with the authors/agency framing the exposure variable as chatbot use. H2 if no population-level association but peer-reviewed case series (n>=20) or vulnerable-population cohort studies document AI-precipitated episodes above plausible base rates. H3 if preregistered RCTs (n>=200, effect >0.2 SD, p<0.01) document belief-calibration degradation from extended AI chat but no peer-reviewed clinical-incidence signal. H4 if no peer-reviewed support on any tier by 2028-12-31, OR literature exists but systematic reviews conclude findings are methodologically contested without consensus (fails to establish any of H1-H3). Definition: 'heavy AI chat use' = study-defined threshold, typically >=7 sessions/week or >=60 min/day averaged over >=3 months. 'Defined adult cohort' = 18+ with comparison group.",
+    "created": "",
+    "lastUpdated": "2026-04-29T02:30:58+00:00",
+    "status": "ACTIVE",
+    "dayCount": 0,
+    "startDate": "2026-04-23",
+    "classification": "CALIBRATION",
+    "topicType": "conflict",
+    "lens": "GREEN",
+    "lensSetAt": "2026-04-26T21:21:58+00:00",
+    "lensSetReason": ""
+  },
+  "tagConfig": {
+    "_docs": "Tag configuration for this topic. topicType presets: conflict, science, election, tech. Override directionHints for custom tag-to-hypothesis mappings.",
+    "availableTags": [
+      "EVENT",
+      "DATA",
+      "RHETORIC",
+      "INTEL",
+      "ANALYSIS"
+    ],
+    "directionHints": {},
+    "escalationTags": [],
+    "deescalationTags": []
+  },
+  "model": {
+    "hypotheses": {
+      "H1": {
+        "label": "Population-level psychiatric signal attributed to AI chat use",
+        "midpoint": 4,
+        "unit": "evidence tier (1=anecdote, 4=population epi)",
+        "description": "Peer-reviewed epidemiology or national surveillance reports a statistically significant association (not necessarily causal) between heavy AI chat use and psychosis/mania/FEP incidence at population scale, with the exposure variable framed as chatbot use. Extends deepfates's schizophrenia-spectrum prediction to bipolar FEP per lastnpcalex.",
+        "posterior": 0.0067
+      },
+      "H2": {
+        "label": "Subpopulation clinical signal only; no population effect",
+        "midpoint": 2.5,
+        "unit": "evidence tier (1=anecdote, 4=population epi)",
+        "description": "No detectable population-level shift, but peer-reviewed case series (n>=20) or vulnerable-cohort studies document AI-precipitated episodes. Matches lastnpcalex's conditional framing: weak hypothesis holds, strong holds for vulnerable subset.",
+        "posterior": 0.98
+      },
+      "H3": {
+        "label": "Belief-calibration effect documented; no clinical signal",
+        "midpoint": 1.5,
+        "unit": "evidence tier (1=anecdote, 4=population epi)",
+        "description": "Preregistered RCTs or surveys show extended AI chat measurably degrades belief calibration (tautologer's 'weak hypothesis'), but no peer-reviewed clinical signal by deadline.",
+        "posterior": 0.0067
+      },
+      "H4": {
+        "label": "Null: no reliable signal on any axis; moral-panic framing vindicated",
+        "midpoint": 0.5,
+        "unit": "evidence tier (1=anecdote, 4=population epi)",
+        "description": "By 2028-12-31, no peer-reviewed support survives methodological scrutiny on any tier. Either no signal emerges, OR systematic reviews conclude published findings are confounded/unreplicated/contested without establishing H1/H2/H3. Matches jcorvinus's 'moral panic' framing, including the 'contested literature without consensus' state.",
+        "posterior": 0.0067
+      }
+    },
+    "expectedValue": 2.49,
+    "expectedUnit": "weeks",
+    "posteriorHistory": [
+      {
+        "date": "2026-04-23",
+        "note": "Initial priors from Bluesky thread (tautologer/godoglyness/lastnpcalex/jcorvinus, 2026-04-23). H1=15% (schizophrenia ED admissions not visibly rising per tautologer; 2.5-yr window tight). H2=35% modal (lastnpcalex: if weak true, strong likely true in vulnerable subset; case reports trickling). H3=30% (tautologer: weak hypothesis 'obviously true but underspecified'; RCTs tractable). H4=20% (jcorvinus's 'moral panic' framing; requires null across all three tiers). Base-rate anchor: novel consumer tech -> peer-reviewed population-level psychiatric association within 3 years of mainstream adoption has historically occurred rarely — social media/depression took ~10 years to produce Twenge et al. (2018) and remains contested; video-games/aggression literature is still unresolved after 25 years; smartphone/sleep effects emerged in ~5 years but are sub-clinical. Rough reference class: ~5-10% for clean population signal within 3 years. H1=15% sits above that range on the reasoning that AI chat is a more intensive, personalized, and socially substitutive modality than prior ambient exposures, warranting a modest upward adjustment from the base rate.",
+        "H1": 0.15,
+        "H2": 0.35,
+        "H3": 0.3,
+        "H4": 0.2,
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        }
+      },
+      {
+        "date": "2026-04-24",
+        "posteriors": {
+          "H1": 0.0934,
+          "H2": 0.5813,
+          "H3": 0.2699,
+          "H4": 0.0554
+        },
+        "priors": {
+          "H1": 0.15,
+          "H2": 0.35,
+          "H3": 0.3,
+          "H4": 0.2
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_001"
+        ],
+        "likelihoods": {
+          "H1": 0.18,
+          "H2": 0.48,
+          "H3": 0.26,
+          "H4": 0.08
+        },
+        "note": "Early clinical data from psychiatric service system documents subpopulation harm; supports H2 (subpopulation signal) over H1 (population-level) given no epidemiological attribution yet.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "turningPoint": {
+          "type": "THRESHOLD_CROSSED",
+          "hypothesis": "H2",
+          "from": 0.35,
+          "to": 0.5813
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-24",
+        "posteriors": {
+          "H1": 0.0326,
+          "H2": 0.8371,
+          "H3": 0.1254,
+          "H4": 0.005
+        },
+        "priors": {
+          "H1": 0.0934,
+          "H2": 0.5813,
+          "H3": 0.2699,
+          "H4": 0.0554
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_002"
+        ],
+        "likelihoods": {
+          "H1": 0.15,
+          "H2": 0.62,
+          "H3": 0.2,
+          "H4": 0.03
+        },
+        "note": "Multiple 2026 peer-reviewed studies show clinical-subpopulation signal; no population-level epidemiological signal yet.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "turningPoint": {
+          "type": "BRANCH_DEATH",
+          "hypothesis": "H4",
+          "lastPosterior": 0.005
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-24",
+        "posteriors": {
+          "H1": 0.0107,
+          "H2": 0.9157,
+          "H3": 0.0686,
+          "H4": 0.005
+        },
+        "priors": {
+          "H1": 0.0326,
+          "H2": 0.8371,
+          "H3": 0.1254,
+          "H4": 0.005
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_003"
+        ],
+        "likelihoods": {
+          "H1": 0.3,
+          "H2": 1.0,
+          "H3": 0.5,
+          "H4": 0.02
+        },
+        "note": "Peer-reviewed subpopulation signal in psychiatric patients, no population-level signal yet — most consistent with H2.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-25",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.9732,
+          "H3": 0.0168,
+          "H4": 0.005
+        },
+        "priors": {
+          "H1": 0.0107,
+          "H2": 0.9157,
+          "H3": 0.0686,
+          "H4": 0.005
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_004"
+        ],
+        "likelihoods": {
+          "H1": 0.15,
+          "H2": 0.65,
+          "H3": 0.15,
+          "H4": 0.05
+        },
+        "note": "Replicated subpopulation clinical signal across peer-reviewed and case-report literature confirms H2; nudges H1 (population signal) tail upward; weakens H4 (null).",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "turningPoint": {
+          "type": "BRANCH_DEATH",
+          "hypothesis": "H1",
+          "lastPosterior": 0.005
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-25",
+        "posteriors": {
+          "H1": 0.0054,
+          "H2": 0.98,
+          "H3": 0.0092,
+          "H4": 0.0054
+        },
+        "priors": {
+          "H1": 0.005,
+          "H2": 0.9732,
+          "H3": 0.0168,
+          "H4": 0.005
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_005"
+        ],
+        "likelihoods": {
+          "H1": 0.6,
+          "H2": 1.0,
+          "H3": 0.5,
+          "H4": 0.05
+        },
+        "note": "First peer-reviewed clinical-record evidence is firmly subpopulation-level (H2); OpenAI prevalence figures hint at population-level potential — modest H1 mass increase warranted.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-26",
+        "posteriors": {
+          "H1": 0.0067,
+          "H2": 0.98,
+          "H3": 0.0067,
+          "H4": 0.0067
+        },
+        "priors": {
+          "H1": 0.0054,
+          "H2": 0.98,
+          "H3": 0.0092,
+          "H4": 0.0054
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_006"
+        ],
+        "likelihoods": {
+          "H1": 0.05,
+          "H2": 0.95,
+          "H3": 0.3,
+          "H4": 0.05
+        },
+        "note": "Clinical case-series accumulation but explicit absence of population studies = canonical H2 (subpop signal only).",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-26",
+        "posteriors": {
+          "H1": 0.0067,
+          "H2": 0.98,
+          "H3": 0.0067,
+          "H4": 0.0067
+        },
+        "priors": {
+          "H1": 0.0067,
+          "H2": 0.98,
+          "H3": 0.0067,
+          "H4": 0.0067
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_007"
+        ],
+        "likelihoods": {
+          "H1": 0.6,
+          "H2": 1.0,
+          "H3": 0.3,
+          "H4": 0.1
+        },
+        "note": "Subpopulation clinical signal documented; population-level psychiatric incidence attribution still unproven, fits H2.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      }
+    ]
+  },
+  "subModels": {},
+  "indicators": {
+    "tiers": {
+      "tier1_critical": [
+        {
+          "id": "t1_population_epidemiology",
+          "desc": "Peer-reviewed epidemiological study (cohort/case-control/ITS) reports statistically significant association (IRR/OR CI excluding 1.0, or >=10% over pre-2023 trend with p<0.01) between heavy AI chat use and FEP/mania/schizophrenia-spectrum incidence in a defined adult cohort.",
+          "posteriorEffect": "H1 +20-30pp, H4 -15-25pp",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        },
+        {
+          "id": "t1_surveillance_signal",
+          "desc": "National surveillance (CDC/NSDUH/NIMH/NHS/equivalent) publishes data showing FEP or bipolar FEP incidence rising >10% above pre-2023 trend in high-AI-use demographic subgroups, with agency framing the exposure as chatbot use (not merely 'screen time').",
+          "posteriorEffect": "H1 +15-25pp, H4 -10-20pp",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        }
+      ],
+      "tier2_strong": [
+        {
+          "id": "t2_clinical_case_series",
+          "desc": "Peer-reviewed clinical case series (n>=20) of AI-precipitated psychotic/manic episodes in indexed psychiatric journal (Lancet Psychiatry, JAMA Psychiatry, etc.).",
+          "posteriorEffect": "H2 +10-15pp, H4 -5-10pp",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        },
+        {
+          "id": "t2_vulnerable_cohort",
+          "desc": "Peer-reviewed prospective cohort in bipolar/schizotypal/high-risk population finds significant elevated episode risk with heavy AI use.",
+          "posteriorEffect": "H2 +10-15pp, H1 +5pp, H4 -10pp",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        },
+        {
+          "id": "t2_preregistered_rct_calibration",
+          "desc": "Preregistered RCT shows extended AI chat measurably degrades belief calibration (effect >0.2 SD, p<0.01, n>=200).",
+          "posteriorEffect": "H3 +10-15pp, H2 +3pp, H4 -8pp",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        },
+        {
+          "id": "t2_ehr_retrospective_cohort",
+          "desc": "Peer-reviewed retrospective EHR/clinical-records study (n>=10,000 patient records, indexed psychiatric or general-medical journal) identifies a defined subset of AI-chatbot-related psychiatric clinical notes/episodes with descriptive characterization of harm pattern. Distinguishes from t2_clinical_case_series (prospective collection) and t2_vulnerable_cohort (prospective cohort design).",
+          "posteriorEffect": "H2 +8-12pp, H1 +2pp, H4 -8pp",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        },
+        {
+          "id": "t2_ai_lab_quantitative_prevalence",
+          "desc": "Major AI lab (OpenAI, Anthropic, Google DeepMind, Meta) publishes quantitative population prevalence rates for clinically-framed user states (psychosis/mania indicators, suicidal planning, manic disinhibition) across its weekly active user base. Threshold: prevalence figure with denominator >=10M users, clinical framing explicit, published in system card / safety report / peer-reviewed venue.",
+          "posteriorEffect": "H1 +5-8pp, H2 +5-8pp, H4 -10-15pp",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        }
+      ],
+      "tier3_suggestive": [
+        {
+          "id": "t3_professional_society_advisory",
+          "desc": "APA, WHO, NIMH, RCPsych, or equivalent issues formal clinical advisory on AI-linked psychiatric risk.",
+          "posteriorEffect": "H1 +2pp, H2 +3pp, H4 -3pp",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        },
+        {
+          "id": "t3_crisis_line_data",
+          "desc": "Mental-health crisis-line aggregators (988, Samaritans) publish data showing AI-referenced calls are associated with acute crisis markers (suicide risk, psychotic symptoms, manic presentation) — not merely general distress or information-seeking.",
+          "posteriorEffect": "H2 +3-5pp, H4 -2pp",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        },
+        {
+          "id": "t3_ai_lab_safety_disclosure",
+          "desc": "Major AI lab publishes internal safety data disclosing measured rates of concerning user interactions with explicit clinical framing (psychotic content, manic disinhibition, delusional reinforcement) — not just 'unhealthy attachment' or general misuse.",
+          "posteriorEffect": "H2 +3-5pp, H4 -2pp",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        },
+        {
+          "id": "t3_survey_calibration_degradation",
+          "desc": "Large observational survey (n>=1000) in peer-reviewed venue finds heavy-AI-chat users show measurably worse factual/numerical calibration vs light users, controlling for baseline education and media diet.",
+          "posteriorEffect": "H3 +4-6pp, H4 -3pp",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        },
+        {
+          "id": "t3_preprint_surge",
+          "desc": "PubMed-indexed journals OR medRxiv/PsyArXiv show >=5 preprints/year specifically on AI-chat-linked psychiatric outcomes (not commentaries), up from current baseline.",
+          "posteriorEffect": "H2 +2pp, H1 +1pp",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        },
+        {
+          "id": "t3_nih_rfa",
+          "desc": "NIH/NIMH issues a Request for Applications (RFA) or Notice of Special Interest (NOSI) specifically targeting AI-chat psychiatric effects — signals ~2-year-ahead funded research pipeline.",
+          "posteriorEffect": "H1 +1pp, H2 +2pp, H4 -2pp",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        },
+        {
+          "id": "t3_model_behavior_benchmarking",
+          "desc": "Peer-reviewed evaluation in indexed venue measuring frontier-model clinical-safety response quality on standardized psychiatric scenarios (psychotic content, manic disinhibition, suicidal ideation), reporting elevated inappropriate-response rates (>=2x baseline or >=20% absolute) vs human-clinician benchmark.",
+          "posteriorEffect": "H4 -3-5pp, H2 +2pp",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        }
+      ],
+      "anti_indicators": [
+        {
+          "id": "anti_h1",
+          "desc": "Two or more large (n>10k) peer-reviewed epidemiological reviews by 2028 find no population-level AI-psychiatric signal after controlling for social media / screen time / isolation.",
+          "posteriorEffect": "H1 -10-15pp, H4 +10pp",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        },
+        {
+          "id": "anti_h2",
+          "desc": "Peer-reviewed systematic review of case series finds no plausible causal mechanism beyond base rate + confounding.",
+          "posteriorEffect": "H2 -10-15pp, H4 +8pp",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        },
+        {
+          "id": "anti_h3",
+          "desc": "Two or more preregistered RCTs (n>=200 each) find null effect of extended AI use on belief calibration.",
+          "posteriorEffect": "H3 -10-15pp, H4 +10pp",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        },
+        {
+          "id": "anti_h4",
+          "desc": "Any tier1 indicator fires, OR two or more tier2 indicators fire from different evidence types.",
+          "posteriorEffect": "H4 -15-25pp",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        },
+        {
+          "id": "anti_h2_discriminator",
+          "desc": "Preregistered cohort study in vulnerable population (bipolar/schizotypal) finds NO elevated episode risk with heavy AI use despite RCT-confirmed belief-calibration effects — separates H2 from H3 by showing the weak effect does not escalate clinically.",
+          "posteriorEffect": "H2 -8-12pp, H3 +5-8pp",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        }
+      ]
+    },
+    "anti_indicators": []
+  },
+  "actorModel": {
+    "description": "Psychiatric research community generates the evidence that resolves this topic. Regulators and AI labs can force disclosure. Media shapes narrative but does not fire indicators.",
+    "actors": {
+      "psychiatric_research": {
+        "name": "Psychiatric research community (NIMH, Lancet Psychiatry, JAMA Psychiatry, Schizophrenia Bulletin, Bipolar Disorders editors + principal investigators)",
+        "role": "Gatekeepers of evidence tiers 2-4. Publication decisions determine whether case reports become case series and whether cohort studies get funded.",
+        "decisionStyle": "Institutional, slow, evidence-weighted. Typical 18-24 month lag from topic salience to cohort study publication.",
+        "biases": [
+          "Publication bias toward novel findings",
+          "Conservatism on new etiological claims",
+          "Methodological demand for prospective designs"
+        ],
+        "filters": [
+          "Peer review",
+          "Funding cycles",
+          "IRB approval"
+        ],
+        "overrides": [
+          "High-visibility case clusters can accelerate funding; political pressure if moral panic intensifies; preprints bypass review lag but are discounted"
+        ]
+      },
+      "regulators": {
+        "name": "FDA (US), EMA (EU), MHRA (UK), FTC",
+        "role": "Can issue advisories or compel safety disclosures from AI labs, creating t2/t3 evidence.",
+        "decisionStyle": "Reactive to documented harms; pre-market authority limited for general-purpose AI chat.",
+        "biases": [
+          "Political exposure to AI industry",
+          "Regulatory capture concerns"
+        ],
+        "filters": [
+          "Requires documented harm patterns before action"
+        ],
+        "overrides": [
+          "Congressional hearings following high-profile incidents; EU AI Act enforcement pathways"
+        ]
+      },
+      "ai_labs": {
+        "name": "OpenAI, Anthropic, Google DeepMind, Meta AI safety teams",
+        "role": "Hold internal telemetry that could fire t3_ai_lab_safety_disclosure. Unlikely to disclose voluntarily; may be compelled.",
+        "decisionStyle": "Risk-averse on disclosure; safety teams occasionally publish aggregate data.",
+        "biases": [
+          "Reputational protection",
+          "Competitive secrecy"
+        ],
+        "filters": [
+          "Legal review of any disclosure",
+          "Product-team pushback"
+        ],
+        "overrides": [
+          "Regulatory subpoena",
+          "Whistleblower disclosures",
+          "Anthropic-style transparency norms"
+        ]
+      },
+      "media_and_commentariat": {
+        "name": "General media, tech commentariat, social media (Bluesky, Twitter)",
+        "role": "Shapes salience and availability bias. Does NOT fire indicators (RHETORIC tag).",
+        "decisionStyle": "Narrative-driven; 'AI psychosis' framing vs 'moral panic is the moral panic' counter-framing both present.",
+        "biases": [
+          "Availability heuristic amplification",
+          "Framing wars"
+        ],
+        "filters": [],
+        "overrides": []
+      }
+    },
+    "methodology": [
+      "ACTIONS OVER RHETORIC — only peer-reviewed publications, surveillance data, and regulatory actions move posteriors",
+      "TAG EVERYTHING — op-eds and viral threads are RHETORIC regardless of author",
+      "DON'T FRONT-RUN — case reports are not case series; single studies are not replicated findings",
+      "UNIFORM PRIOR CRITIQUE (lastnpcalex) — don't let one disconfirming indicator collapse the full hypothesis space"
+    ]
+  },
+  "evidenceLog": [
+    {
+      "id": "ev_001",
+      "time": "2026-04-24T02:25:41+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "HEALTH"
+      ],
+      "text": "STAT News 2026-04-16 warns voice-first chatbots will worsen AI mental health threat; PMC published early data on potentially harmful consequences of AI chatbot use among patients with mental illness from large psychiatric service system; NEJM AI RCT shows Therabot effective for depression/anxiety/eating-disorder symptoms.",
+      "provenance": "OBSERVED",
+      "source": "STAT / NEJM AI / PMC",
+      "posteriorImpact": "NONE",
+      "url": "https://www.statnews.com/2026/04/16/voice-chatbots-ai-psychosis-mental-health/",
+      "ledger": "FACT",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-24T02:25:41+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Early clinical data from psychiatric service system documents subpopulation harm; supports H2 (subpopulation signal) over H1 (population-level) given no epidemiological attribution yet.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_002",
+      "time": "2026-04-24T13:49:16+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "RESEARCH",
+        "AI"
+      ],
+      "text": "Danish study of 53,974 psychiatric patients identified 126 with clinical notes documenting chatbot-linked harm (delusion reinforcement prominent). JMIR scoping review of 71 articles Sept 2025-Jan 2026 on psychiatric adverse events tied to GenAI chatbots. Stanford HAI found elevated stigma and inappropriate responses. Brown cataloged 15 distinct ethical risks. ChatGPT 26x more likely to issue inappropriate responses to psychotic symptoms; GPT-5 Auto 9x.",
+      "provenance": "OBSERVED",
+      "source": "Acta Psychiatrica Scandinavica / JMIR Mental Health / Stanford HAI",
+      "posteriorImpact": "NONE",
+      "url": "https://onlinelibrary.wiley.com/doi/10.1111/acps.70068",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-24T13:49:16+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-24T13:49:16+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Multiple 2026 peer-reviewed studies show clinical-subpopulation signal; no population-level epidemiological signal yet.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_003",
+      "time": "2026-04-24T19:30:14+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "AI",
+        "HEALTH"
+      ],
+      "text": "Olsen et al. 2026 (Acta Psychiatrica Scandinavica): early data from large psychiatric service system finds 'first indication of potentially harmful consequences of AI chatbot use' especially re delusions in mental illness patients. FDA DHAC 11/6/2025 reviewed but no GenAI mental-health device authorized. StatNews 4/16: voice chatbots expected to worsen mental-health threat.",
+      "provenance": "OBSERVED",
+      "source": "Acta Psychiatrica Scandinavica / StatNews",
+      "posteriorImpact": "NONE",
+      "url": "https://onlinelibrary.wiley.com/doi/10.1111/acps.70068",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-24T19:30:14+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_004",
+      "time": "2026-04-25T13:19:54+00:00",
+      "tag": "STUDY",
+      "tags": [
+        "STUDY",
+        "AI",
+        "HEALTH"
+      ],
+      "text": "JMIR Mental Health (2026) scoping review of 71 articles documenting 36 AI-chatbot-linked mental health crisis cases; psychiatric hospitalization second-most-reported outcome after suicide. ICANotes clinical guide (Feb 27, 2026) on AI sycophancy / ChatGPT psychosis. PsyPost reports new study linking ChatGPT use to worsened psychiatric symptoms.",
+      "provenance": "OBSERVED",
+      "source": "JMIR Mental Health / PsyPost / ICANotes",
+      "posteriorImpact": "NONE",
+      "url": "https://mental.jmir.org/2026/1/e93040",
+      "ledger": "DECISION",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-25T13:19:54+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_005",
+      "time": "2026-04-25T14:24:51+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "TECH",
+        "HEALTH"
+      ],
+      "text": "Olsen et al. (Acta Psychiatrica Scandinavica 2026): 53,974 Danish psychiatric patients, 126 with chatbot-related clinical notes showing increased suicidal ideation, self-harm, disordered eating, OCD symptoms — subpopulation harm signal documented. JMIR Mental Health 2026 scoping review of 71 articles (Sep 2025-Jan 2026) maps reported harms (esp. youth suicide). OpenAI disclosed 0.07% weekly users show psychosis/mania signs, 0.15% show suicidal planning indicators. Stanford reports on 'delusional spirals' from AI relationships.",
+      "provenance": "OBSERVED",
+      "source": "Acta Psychiatrica Scandinavica, JMIR Mental Health, Stanford HAI, OpenAI",
+      "posteriorImpact": "NONE",
+      "url": "https://onlinelibrary.wiley.com/doi/10.1111/acps.70068",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-25T14:24:51+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-25T14:31:56+00:00",
+      "tag": "INTEL",
+      "text": "INDICATOR ADDED: t2_ehr_retrospective_cohort (tier2_strong). posteriorEffect=H2 +8-12pp, H1 +2pp, H4 -8pp. Rationale: Olsen et al. 2026 (Danish 53,974-patient chart review, 126 chatbot-related notes) is a major evidence type that did not map cleanly to existing t2 indicators. Retrospective EHR studies establish subpopulation harm at meaningful sample sizes but cannot resolve population-level causality..",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-25T14:31:56+00:00",
+      "tag": "INTEL",
+      "text": "INDICATOR ADDED: t2_ai_lab_quantitative_prevalence (tier2_strong). posteriorEffect=H1 +5-8pp, H2 +5-8pp, H4 -10-15pp. Rationale: OpenAI 0.07% weekly psychosis/mania disclosure (ev_005) is quantitative population-scale data that exceeded what t3_ai_lab_safety_disclosure was scoped for. Bridges anecdote and population epi; pushes both H1 and H2 because data type informs scale but cannot attribute causality without external epidemiology..",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-25T14:31:56+00:00",
+      "tag": "INTEL",
+      "text": "INDICATOR ADDED: t3_model_behavior_benchmarking (tier3_suggestive). posteriorEffect=H4 -3-5pp, H2 +2pp. Rationale: Stanford HAI ChatGPT 26x inappropriate-response finding (ev_002) establishes mechanism-side evidence with no existing indicator. Model-behavior benchmarking weakens H4 (moral panic) by showing harm pathway exists; cannot distinguish H1/H2/H3 alone..",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_006",
+      "time": "2026-04-26T16:59:08+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "HEALTH",
+        "AI"
+      ],
+      "text": "JMIR Mental Health (Feb 2026 scoping review): suicide most-reported harm (35/61 reports). UCSF psychiatrist Sakata reports 12 cases of psychosis-like symptoms tied to extended chatbot use (mostly young adults with prior vulnerability). Psychiatric Times Feb 2026 recommends clinicians document AI use at intake. Cambridge BJP commentary on chatbot psychosis. No epidemiological/population studies yet.",
+      "provenance": "OBSERVED",
+      "source": "JMIR / Cambridge BJP / Psychiatric Times",
+      "posteriorImpact": "NONE",
+      "url": "https://mental.jmir.org/2026/1/e93040",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-26T16:59:08+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_007",
+      "time": "2026-04-26T19:27:11+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "HEALTH",
+        "AI"
+      ],
+      "text": "OpenAI disclosed (Oct 2025) ~560,000 of 800M weekly users showing possible signs of psychotic/manic mental-health emergencies. JMIR Mental Health 2026 scoping review documents psychiatric adverse events. Illinois Wellness and Oversight for Psychological Resources Act (Aug 2025) bans AI in licensed therapy roles. UCSF/Pulitzer: clinical case reports of chatbot psychosis but no population-scale epidemiology yet.",
+      "provenance": "OBSERVED",
+      "source": "Psychiatric News / JMIR / UCSF",
+      "posteriorImpact": "NONE",
+      "url": "https://psychiatryonline.org/doi/10.1176/appi.pn.2025.10.10.5",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-26T19:27:11+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    }
+  ],
+  "dataFeeds": {
+    "primary_metric": {
+      "label": "Primary Metric",
+      "value": 0,
+      "unit": "units",
+      "baseline": 0,
+      "asOf": ""
+    }
+  },
+  "watchpoints": [
+    "Lancet Psychiatry / JAMA Psychiatry / Schizophrenia Bulletin TOC",
+    "NIMH surveillance releases on FEP incidence",
+    "APA/RCPsych annual meeting abstracts",
+    "OpenAI/Anthropic system cards and safety papers",
+    "Preregistration platforms (OSF, AsPredicted) for belief-calibration RCTs"
+  ],
+  "searchQueries": [
+    "AI chatbot psychosis peer-reviewed {date}",
+    "LLM bipolar first episode case series {date}",
+    "chatbot belief calibration RCT preregistered {date}",
+    "schizophrenia spectrum incidence surveillance {date}"
+  ],
+  "dependencies": {
+    "_docs": "Cross-topic dependency declarations. Upstream topics whose posteriors this topic's assumptions depend on. Checked mechanically on save — stale assumptions surface as governance issues.",
+    "upstream": []
+  },
+  "governance": {
+    "health": "DEGRADED",
+    "issues": [
+      "Majority stale evidence (10/18)",
+      "Near-zero uncertainty — check for overconfidence"
+    ],
+    "rt": {
+      "rt": 0.0,
+      "regime": "SAFE",
+      "worst_hypothesis": "H1"
+    },
+    "entropy": 0.1737,
+    "maxEntropy": 2.0,
+    "uncertaintyRatio": 0.0868,
+    "evidenceFreshness": {
+      "fresh": 8,
+      "stale": 10,
+      "total": 18
+    },
+    "hypothesisAdmissibility": {
+      "H1": "ADMISSIBLE",
+      "H2": "ADMISSIBLE",
+      "H3": "ADMISSIBLE",
+      "H4": "ADMISSIBLE"
+    },
+    "klFromPrior": {
+      "kl_divergence": 0.94,
+      "interpretation": "WELL_EVIDENCED"
+    },
+    "lastComputed": "2026-04-29T02:30:58+00:00",
+    "staleDependencies": 0,
+    "calibrationHealth": "ACCEPTABLE",
+    "unresolvedContradictions": 0,
+    "reviewed_alerts": [
+      {
+        "signature": "none_impact_saturation:calibration-ai-psychiatric-2028",
+        "timestamp": "2026-04-25T15:28:18+00:00",
+        "reason": "Design review complete: 3 new indicators added at 2026-04-25T14:31:56 (t2_ehr_retrospective_cohort, t2_ai_lab_quantitative_prevalence, t3_model_behavior_benchmarking) cover the evidence types in ev_001/002/003/005 (large EHR chart reviews, AI-lab population prevalence disclosures, model-behavior benchmarking) that previously had NONE posteriorImpact. No further indicator additions required this cycle."
+      }
+    ],
+    "designGate": {
+      "passed": true,
+      "blockers": [],
+      "warnings": [],
+      "coverage": {
+        "H1": {
+          "pos": 8,
+          "neg": 1
+        },
+        "H2": {
+          "pos": 11,
+          "neg": 2
+        },
+        "H3": {
+          "pos": 3,
+          "neg": 1
+        },
+        "H4": {
+          "pos": 3,
+          "neg": 14
+        }
+      },
+      "indistinguishable": [],
+      "lastChecked": "2026-04-29T02:30:58+00:00"
+    }
+  },
+  "predictionScoring": {
+    "_docs": "Calibration infrastructure. Snapshots are auto-created by engine on each posterior update. Record outcome when topic resolves, then compute_calibration_report() for Brier analysis.",
+    "snapshots": [
+      {
+        "timestamp": "2026-04-24T02:25:41+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0934,
+          "H2": 0.5813,
+          "H3": 0.2699,
+          "H4": 0.0554
+        },
+        "entropy": 1.5156
+      },
+      {
+        "timestamp": "2026-04-24T02:25:41+00:00",
+        "trigger": "pipeline:ev_001",
+        "posteriors": {
+          "H1": 0.0934,
+          "H2": 0.5813,
+          "H3": 0.2699,
+          "H4": 0.0554
+        },
+        "entropy": 1.5156
+      },
+      {
+        "timestamp": "2026-04-24T13:49:16+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0326,
+          "H2": 0.8371,
+          "H3": 0.1254,
+          "H4": 0.005
+        },
+        "entropy": 0.7896
+      },
+      {
+        "timestamp": "2026-04-24T13:49:16+00:00",
+        "trigger": "pipeline:ev_002",
+        "posteriors": {
+          "H1": 0.0326,
+          "H2": 0.8371,
+          "H3": 0.1254,
+          "H4": 0.005
+        },
+        "entropy": 0.7896
+      },
+      {
+        "timestamp": "2026-04-24T19:30:14+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0107,
+          "H2": 0.9157,
+          "H3": 0.0686,
+          "H4": 0.005
+        },
+        "entropy": 0.4898
+      },
+      {
+        "timestamp": "2026-04-24T19:30:14+00:00",
+        "trigger": "pipeline:ev_003",
+        "posteriors": {
+          "H1": 0.0107,
+          "H2": 0.9157,
+          "H3": 0.0686,
+          "H4": 0.005
+        },
+        "entropy": 0.4898
+      },
+      {
+        "timestamp": "2026-04-25T13:19:54+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.9732,
+          "H3": 0.0168,
+          "H4": 0.005
+        },
+        "entropy": 0.2136
+      },
+      {
+        "timestamp": "2026-04-25T13:19:54+00:00",
+        "trigger": "pipeline:ev_004",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.9732,
+          "H3": 0.0168,
+          "H4": 0.005
+        },
+        "entropy": 0.2136
+      },
+      {
+        "timestamp": "2026-04-25T14:24:51+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0054,
+          "H2": 0.98,
+          "H3": 0.0092,
+          "H4": 0.0054
+        },
+        "entropy": 0.1721
+      },
+      {
+        "timestamp": "2026-04-25T14:24:51+00:00",
+        "trigger": "pipeline:ev_005",
+        "posteriors": {
+          "H1": 0.0054,
+          "H2": 0.98,
+          "H3": 0.0092,
+          "H4": 0.0054
+        },
+        "entropy": 0.1721
+      },
+      {
+        "timestamp": "2026-04-26T16:59:08+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0067,
+          "H2": 0.98,
+          "H3": 0.0067,
+          "H4": 0.0067
+        },
+        "entropy": 0.1737
+      },
+      {
+        "timestamp": "2026-04-26T16:59:08+00:00",
+        "trigger": "pipeline:ev_006",
+        "posteriors": {
+          "H1": 0.0067,
+          "H2": 0.98,
+          "H3": 0.0067,
+          "H4": 0.0067
+        },
+        "entropy": 0.1737
+      },
+      {
+        "timestamp": "2026-04-26T19:27:11+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0067,
+          "H2": 0.98,
+          "H3": 0.0067,
+          "H4": 0.0067
+        },
+        "entropy": 0.1737
+      },
+      {
+        "timestamp": "2026-04-26T19:27:11+00:00",
+        "trigger": "pipeline:ev_007",
+        "posteriors": {
+          "H1": 0.0067,
+          "H2": 0.98,
+          "H3": 0.0067,
+          "H4": 0.0067
+        },
+        "entropy": 0.1737
+      }
+    ],
+    "outcomes": [],
+    "brierScores": []
+  },
+  "slug": "calibration-ai-psychiatric-2028",
+  "title": "AI Chat Use Linked to Psychiatric Incidence by 2028",
+  "question": "By December 31, 2028, what level of evidence will exist linking extended consumer AI chatbot use to clinically measurable psychiatric outcomes (psychosis, mania, first-episode bipolar, or severe belief miscalibration)?",
+  "resolution": "H1 if peer-reviewed epidemiology or national surveillance finds >=10% over-trend incidence shift in FEP/mania/schizophrenia-spectrum admissions attributable to AI chat. H2 if no population signal but peer-reviewed case series (n>=20) or vulnerable-cohort studies document AI-precipitated episodes above base rate. H3 if preregistered RCTs show belief-calibration degradation but no clinical signal. H4 if null across all tiers by 2028-12-31.",
+  "classification": "CALIBRATION",
+  "topicType": "science",
+  "startDate": "2026-04-23",
+  "resolutionDate": "2028-12-31",
+  "hypotheses": {
+    "H1": {
+      "label": "Population-level psychiatric signal attributed to AI chat use",
+      "prior": 0.15,
+      "midpoint": 4,
+      "unit": "evidence tier (1=anecdote, 4=population epi)",
+      "description": "Peer-reviewed epidemiology or national surveillance data shows AI chat use associated with a measurable increase in psychosis/mania/FEP incidence at population scale. Extends deepfates's schizophrenia-spectrum prediction to bipolar FEP per lastnpcalex."
+    },
+    "H2": {
+      "label": "Subpopulation clinical signal only; no population effect",
+      "prior": 0.35,
+      "midpoint": 2.5,
+      "unit": "evidence tier (1=anecdote, 4=population epi)",
+      "description": "No detectable population-level shift, but peer-reviewed case series (n>=20) or vulnerable-cohort studies document AI-precipitated episodes. Matches lastnpcalex's conditional framing: weak hypothesis holds, strong holds for vulnerable subset."
+    },
+    "H3": {
+      "label": "Belief-calibration effect documented; no clinical signal",
+      "prior": 0.3,
+      "midpoint": 1.5,
+      "unit": "evidence tier (1=anecdote, 4=population epi)",
+      "description": "Preregistered RCTs or surveys show extended AI chat measurably degrades belief calibration (tautologer's 'weak hypothesis'), but no peer-reviewed clinical signal by deadline."
+    },
+    "H4": {
+      "label": "Null: no reliable signal on any axis; moral-panic framing vindicated",
+      "prior": 0.2,
+      "midpoint": 0.5,
+      "unit": "evidence tier (1=anecdote, 4=population epi)",
+      "description": "No peer-reviewed support for AI-specific psychiatric or calibration effects beyond base rates and media availability bias. Matches jcorvinus's 'moral panic' framing."
+    }
+  },
+  "contradictionTracker": {
+    "unresolved": [],
+    "resolved": [
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Early clinical data from psychiatric service system documents subpopulation harm; supports H2 (subpopulation signal) over H1 (population-level) given no epidemiological attribution yet.",
+        "entry_b_time": "2026-04-24T13:49:16+00:00",
+        "entry_b_text": "Danish study of 53,974 psychiatric patients identified 126 with clinical notes documenting chatbot-linked harm (delusion reinforcement prominent). JMIR scoping review of 71 articles Sept 2025-Jan 2026 on psychiatric adverse events tied to GenAI chatbots. Stanford HAI found elevated stigma and inappropriate responses. Brown cataloged 15 distinct ethical risks. ChatGPT 26x more likely to issue inappropriate responses to psychotic symptoms; GPT-5 Auto 9x.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: clinical, harm, psychiatric",
+        "detected": "2026-04-24T13:49:16Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:16Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T13:49:16+00:00",
+        "entry_a_text": "Danish study of 53,974 psychiatric patients identified 126 with clinical notes documenting chatbot-linked harm (delusion reinforcement prominent). JMIR scoping review of 71 articles Sept 2025-Jan 2026 on psychiatric adverse events tied to GenAI chatbots. Stanford HAI found elevated stigma and inappropriate responses. Brown cataloged 15 distinct ethical risks. ChatGPT 26x more likely to issue inappropriate responses to psychotic symptoms; GPT-5 Auto 9x.",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "Olsen et al. 2026 (Acta Psychiatrica Scandinavica): early data from large psychiatric service system finds 'first indication of potentially harmful consequences of AI chatbot use' especially re delusions in mental illness patients. FDA DHAC 11/6/2025 reviewed but no GenAI mental-health device authorized. StatNews 4/16: voice chatbots expected to worsen mental-health threat.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: chatbot, chatbots, genai, patients, psychiatric",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "STAT News 2026-04-16 warns voice-first chatbots will worsen AI mental health threat; PMC published early data on potentially harmful consequences of AI chatbot use among patients with mental illness from large psychiatric service system; NEJM AI RCT shows Therabot effective for depression/anxiety/eating-disorder symptoms.",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "Olsen et al. 2026 (Acta Psychiatrica Scandinavica): early data from large psychiatric service system finds 'first indication of potentially harmful consequences of AI chatbot use' especially re delusions in mental illness patients. FDA DHAC 11/6/2025 reviewed but no GenAI mental-health device authorized. StatNews 4/16: voice chatbots expected to worsen mental-health threat.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: chatbot, chatbots, consequences, data, early",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T19:30:14+00:00",
+        "entry_a_text": "Olsen et al. 2026 (Acta Psychiatrica Scandinavica): early data from large psychiatric service system finds 'first indication of potentially harmful consequences of AI chatbot use' especially re delusions in mental illness patients. FDA DHAC 11/6/2025 reviewed but no GenAI mental-health device authorized. StatNews 4/16: voice chatbots expected to worsen mental-health threat.",
+        "entry_b_time": "2026-04-25T13:19:54+00:00",
+        "entry_b_text": "JMIR Mental Health (2026) scoping review of 71 articles documenting 36 AI-chatbot-linked mental health crisis cases; psychiatric hospitalization second-most-reported outcome after suicide. ICANotes clinical guide (Feb 27, 2026) on AI sycophancy / ChatGPT psychosis. PsyPost reports new study linking ChatGPT use to worsened psychiatric symptoms.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: chatbot, health, mental, psychiatric, use",
+        "detected": "2026-04-25T13:19:54Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:54Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:16+00:00",
+        "entry_a_text": "Danish study of 53,974 psychiatric patients identified 126 with clinical notes documenting chatbot-linked harm (delusion reinforcement prominent). JMIR scoping review of 71 articles Sept 2025-Jan 2026 on psychiatric adverse events tied to GenAI chatbots. Stanford HAI found elevated stigma and inappropriate responses. Brown cataloged 15 distinct ethical risks. ChatGPT 26x more likely to issue inappropriate responses to psychotic symptoms; GPT-5 Auto 9x.",
+        "entry_b_time": "2026-04-25T13:19:54+00:00",
+        "entry_b_text": "JMIR Mental Health (2026) scoping review of 71 articles documenting 36 AI-chatbot-linked mental health crisis cases; psychiatric hospitalization second-most-reported outcome after suicide. ICANotes clinical guide (Feb 27, 2026) on AI sycophancy / ChatGPT psychosis. PsyPost reports new study linking ChatGPT use to worsened psychiatric symptoms.",
+        "reason": "Numeric divergence 97.4% on metric (context: of): new=2026.0, existing=53.0, threshold=10%",
+        "detected": "2026-04-25T13:19:54Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:54Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Early clinical data from psychiatric service system documents subpopulation harm; supports H2 (subpopulation signal) over H1 (population-level) given no epidemiological attribution yet.",
+        "entry_b_time": "2026-04-25T13:19:54+00:00",
+        "entry_b_text": "JMIR Mental Health (2026) scoping review of 71 articles documenting 36 AI-chatbot-linked mental health crisis cases; psychiatric hospitalization second-most-reported outcome after suicide. ICANotes clinical guide (Feb 27, 2026) on AI sycophancy / ChatGPT psychosis. PsyPost reports new study linking ChatGPT use to worsened psychiatric symptoms.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: clinical, psychiatric",
+        "detected": "2026-04-25T13:19:54Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:54Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T13:19:54+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-25T14:24:51+00:00",
+        "entry_b_text": "Olsen et al. (Acta Psychiatrica Scandinavica 2026): 53,974 Danish psychiatric patients, 126 with chatbot-related clinical notes showing increased suicidal ideation, self-harm, disordered eating, OCD symptoms — subpopulation harm signal documented. JMIR Mental Health 2026 scoping review of 71 articles (Sep 2025-Jan 2026) maps reported harms (esp. youth suicide). OpenAI disclosed 0.07% weekly users show psychosis/mania signs, 0.15% show suicidal planning indicators. Stanford reports on 'delusional spirals' from AI relationships.",
+        "reason": "Numeric divergence 92.9% on metric (context: .): new=0.07, existing=0.005, threshold=10%",
+        "detected": "2026-04-25T14:24:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:51Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T13:19:54+00:00",
+        "entry_a_text": "JMIR Mental Health (2026) scoping review of 71 articles documenting 36 AI-chatbot-linked mental health crisis cases; psychiatric hospitalization second-most-reported outcome after suicide. ICANotes clinical guide (Feb 27, 2026) on AI sycophancy / ChatGPT psychosis. PsyPost reports new study linking ChatGPT use to worsened psychiatric symptoms.",
+        "entry_b_time": "2026-04-25T14:24:51+00:00",
+        "entry_b_text": "Olsen et al. (Acta Psychiatrica Scandinavica 2026): 53,974 Danish psychiatric patients, 126 with chatbot-related clinical notes showing increased suicidal ideation, self-harm, disordered eating, OCD symptoms — subpopulation harm signal documented. JMIR Mental Health 2026 scoping review of 71 articles (Sep 2025-Jan 2026) maps reported harms (esp. youth suicide). OpenAI disclosed 0.07% weekly users show psychosis/mania signs, 0.15% show suicidal planning indicators. Stanford reports on 'delusional spirals' from AI relationships.",
+        "reason": "Numeric divergence 49.1% on metric (context: 2026): new=53.0, existing=27.0, threshold=10%",
+        "detected": "2026-04-25T14:24:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:51Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T19:30:14+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-25T14:24:51+00:00",
+        "entry_b_text": "Olsen et al. (Acta Psychiatrica Scandinavica 2026): 53,974 Danish psychiatric patients, 126 with chatbot-related clinical notes showing increased suicidal ideation, self-harm, disordered eating, OCD symptoms — subpopulation harm signal documented. JMIR Mental Health 2026 scoping review of 71 articles (Sep 2025-Jan 2026) maps reported harms (esp. youth suicide). OpenAI disclosed 0.07% weekly users show psychosis/mania signs, 0.15% show suicidal planning indicators. Stanford reports on 'delusional spirals' from AI relationships.",
+        "reason": "Numeric divergence 92.9% on metric (context: .): new=0.07, existing=0.005, threshold=10%",
+        "detected": "2026-04-25T14:24:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:51Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T19:30:14+00:00",
+        "entry_a_text": "Olsen et al. 2026 (Acta Psychiatrica Scandinavica): early data from large psychiatric service system finds 'first indication of potentially harmful consequences of AI chatbot use' especially re delusions in mental illness patients. FDA DHAC 11/6/2025 reviewed but no GenAI mental-health device authorized. StatNews 4/16: voice chatbots expected to worsen mental-health threat.",
+        "entry_b_time": "2026-04-25T14:24:51+00:00",
+        "entry_b_text": "Olsen et al. (Acta Psychiatrica Scandinavica 2026): 53,974 Danish psychiatric patients, 126 with chatbot-related clinical notes showing increased suicidal ideation, self-harm, disordered eating, OCD symptoms — subpopulation harm signal documented. JMIR Mental Health 2026 scoping review of 71 articles (Sep 2025-Jan 2026) maps reported harms (esp. youth suicide). OpenAI disclosed 0.07% weekly users show psychosis/mania signs, 0.15% show suicidal planning indicators. Stanford reports on 'delusional spirals' from AI relationships.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: acta, chatbot, health, mental, olsen",
+        "detected": "2026-04-25T14:24:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:51Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T13:49:16+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Multiple 2026 peer-reviewed studies show clinical-subpopulation signal; no population-level epidemiological signal yet.",
+        "entry_b_time": "2026-04-25T14:24:51+00:00",
+        "entry_b_text": "Olsen et al. (Acta Psychiatrica Scandinavica 2026): 53,974 Danish psychiatric patients, 126 with chatbot-related clinical notes showing increased suicidal ideation, self-harm, disordered eating, OCD symptoms — subpopulation harm signal documented. JMIR Mental Health 2026 scoping review of 71 articles (Sep 2025-Jan 2026) maps reported harms (esp. youth suicide). OpenAI disclosed 0.07% weekly users show psychosis/mania signs, 0.15% show suicidal planning indicators. Stanford reports on 'delusional spirals' from AI relationships.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: clinical, show, signal, subpopulation",
+        "detected": "2026-04-25T14:24:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:51Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:16+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-25T14:24:51+00:00",
+        "entry_b_text": "Olsen et al. (Acta Psychiatrica Scandinavica 2026): 53,974 Danish psychiatric patients, 126 with chatbot-related clinical notes showing increased suicidal ideation, self-harm, disordered eating, OCD symptoms — subpopulation harm signal documented. JMIR Mental Health 2026 scoping review of 71 articles (Sep 2025-Jan 2026) maps reported harms (esp. youth suicide). OpenAI disclosed 0.07% weekly users show psychosis/mania signs, 0.15% show suicidal planning indicators. Stanford reports on 'delusional spirals' from AI relationships.",
+        "reason": "Numeric divergence 92.9% on metric (context: .): new=0.07, existing=0.005, threshold=10%",
+        "detected": "2026-04-25T14:24:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:51Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:16+00:00",
+        "entry_a_text": "Danish study of 53,974 psychiatric patients identified 126 with clinical notes documenting chatbot-linked harm (delusion reinforcement prominent). JMIR scoping review of 71 articles Sept 2025-Jan 2026 on psychiatric adverse events tied to GenAI chatbots. Stanford HAI found elevated stigma and inappropriate responses. Brown cataloged 15 distinct ethical risks. ChatGPT 26x more likely to issue inappropriate responses to psychotic symptoms; GPT-5 Auto 9x.",
+        "entry_b_time": "2026-04-25T14:24:51+00:00",
+        "entry_b_text": "Olsen et al. (Acta Psychiatrica Scandinavica 2026): 53,974 Danish psychiatric patients, 126 with chatbot-related clinical notes showing increased suicidal ideation, self-harm, disordered eating, OCD symptoms — subpopulation harm signal documented. JMIR Mental Health 2026 scoping review of 71 articles (Sep 2025-Jan 2026) maps reported harms (esp. youth suicide). OpenAI disclosed 0.07% weekly users show psychosis/mania signs, 0.15% show suicidal planning indicators. Stanford reports on 'delusional spirals' from AI relationships.",
+        "reason": "Numeric divergence 97.4% on metric (context: 974, danish): new=2026.0, existing=53.0, threshold=10%",
+        "detected": "2026-04-25T14:24:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:51Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Early clinical data from psychiatric service system documents subpopulation harm; supports H2 (subpopulation signal) over H1 (population-level) given no epidemiological attribution yet.",
+        "entry_b_time": "2026-04-25T14:24:51+00:00",
+        "entry_b_text": "Olsen et al. (Acta Psychiatrica Scandinavica 2026): 53,974 Danish psychiatric patients, 126 with chatbot-related clinical notes showing increased suicidal ideation, self-harm, disordered eating, OCD symptoms — subpopulation harm signal documented. JMIR Mental Health 2026 scoping review of 71 articles (Sep 2025-Jan 2026) maps reported harms (esp. youth suicide). OpenAI disclosed 0.07% weekly users show psychosis/mania signs, 0.15% show suicidal planning indicators. Stanford reports on 'delusional spirals' from AI relationships.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: clinical, harm, psychiatric, signal, subpopulation",
+        "detected": "2026-04-25T14:24:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:51Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-25T14:31:56+00:00",
+        "entry_a_text": "INDICATOR ADDED: t2_ai_lab_quantitative_prevalence (tier2_strong). posteriorEffect=H1 +5-8pp, H2 +5-8pp, H4 -10-15pp. Rationale: OpenAI 0.07% weekly psychosis/mania disclosure (ev_005) is quantitative population-scale data that exceeded what t3_ai_lab_safety_disclosure was scoped for. Bridges anecdote and population epi; pushes both H1 and H2 because data type informs scale but cannot attribute causality without external epidemiology..",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "JMIR Mental Health (Feb 2026 scoping review): suicide most-reported harm (35/61 reports). UCSF psychiatrist Sakata reports 12 cases of psychosis-like symptoms tied to extended chatbot use (mostly young adults with prior vulnerability). Psychiatric Times Feb 2026 recommends clinicians document AI use at intake. Cambridge BJP commentary on chatbot psychosis. No epidemiological/population studies yet.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: population, psychosis",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-25T14:31:56+00:00",
+        "entry_a_text": "INDICATOR ADDED: t2_ehr_retrospective_cohort (tier2_strong). posteriorEffect=H2 +8-12pp, H1 +2pp, H4 -8pp. Rationale: Olsen et al. 2026 (Danish 53,974-patient chart review, 126 chatbot-related notes) is a major evidence type that did not map cleanly to existing t2 indicators. Retrospective EHR studies establish subpopulation harm at meaningful sample sizes but cannot resolve population-level causality..",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "JMIR Mental Health (Feb 2026 scoping review): suicide most-reported harm (35/61 reports). UCSF psychiatrist Sakata reports 12 cases of psychosis-like symptoms tied to extended chatbot use (mostly young adults with prior vulnerability). Psychiatric Times Feb 2026 recommends clinicians document AI use at intake. Cambridge BJP commentary on chatbot psychosis. No epidemiological/population studies yet.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: chatbot, harm, population, review, studies",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T14:24:51+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "JMIR Mental Health (Feb 2026 scoping review): suicide most-reported harm (35/61 reports). UCSF psychiatrist Sakata reports 12 cases of psychosis-like symptoms tied to extended chatbot use (mostly young adults with prior vulnerability). Psychiatric Times Feb 2026 recommends clinicians document AI use at intake. Cambridge BJP commentary on chatbot psychosis. No epidemiological/population studies yet.",
+        "reason": "Numeric divergence 100.0% on metric (context: .): new=35.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-25T14:24:51+00:00",
+        "entry_a_text": "Olsen et al. (Acta Psychiatrica Scandinavica 2026): 53,974 Danish psychiatric patients, 126 with chatbot-related clinical notes showing increased suicidal ideation, self-harm, disordered eating, OCD symptoms — subpopulation harm signal documented. JMIR Mental Health 2026 scoping review of 71 articles (Sep 2025-Jan 2026) maps reported harms (esp. youth suicide). OpenAI disclosed 0.07% weekly users show psychosis/mania signs, 0.15% show suicidal planning indicators. Stanford reports on 'delusional spirals' from AI relationships.",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "JMIR Mental Health (Feb 2026 scoping review): suicide most-reported harm (35/61 reports). UCSF psychiatrist Sakata reports 12 cases of psychosis-like symptoms tied to extended chatbot use (mostly young adults with prior vulnerability). Psychiatric Times Feb 2026 recommends clinicians document AI use at intake. Cambridge BJP commentary on chatbot psychosis. No epidemiological/population studies yet.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: chatbot, harm, health, jmir, mental",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T13:19:54+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "JMIR Mental Health (Feb 2026 scoping review): suicide most-reported harm (35/61 reports). UCSF psychiatrist Sakata reports 12 cases of psychosis-like symptoms tied to extended chatbot use (mostly young adults with prior vulnerability). Psychiatric Times Feb 2026 recommends clinicians document AI use at intake. Cambridge BJP commentary on chatbot psychosis. No epidemiological/population studies yet.",
+        "reason": "Numeric divergence 100.0% on metric (context: .): new=35.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-25T13:19:54+00:00",
+        "entry_a_text": "JMIR Mental Health (2026) scoping review of 71 articles documenting 36 AI-chatbot-linked mental health crisis cases; psychiatric hospitalization second-most-reported outcome after suicide. ICANotes clinical guide (Feb 27, 2026) on AI sycophancy / ChatGPT psychosis. PsyPost reports new study linking ChatGPT use to worsened psychiatric symptoms.",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "JMIR Mental Health (Feb 2026 scoping review): suicide most-reported harm (35/61 reports). UCSF psychiatrist Sakata reports 12 cases of psychosis-like symptoms tied to extended chatbot use (mostly young adults with prior vulnerability). Psychiatric Times Feb 2026 recommends clinicians document AI use at intake. Cambridge BJP commentary on chatbot psychosis. No epidemiological/population studies yet.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: cases, chatbot, feb, health, jmir",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T19:30:14+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "JMIR Mental Health (Feb 2026 scoping review): suicide most-reported harm (35/61 reports). UCSF psychiatrist Sakata reports 12 cases of psychosis-like symptoms tied to extended chatbot use (mostly young adults with prior vulnerability). Psychiatric Times Feb 2026 recommends clinicians document AI use at intake. Cambridge BJP commentary on chatbot psychosis. No epidemiological/population studies yet.",
+        "reason": "Numeric divergence 100.0% on metric (context: .): new=35.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:16+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "JMIR Mental Health (Feb 2026 scoping review): suicide most-reported harm (35/61 reports). UCSF psychiatrist Sakata reports 12 cases of psychosis-like symptoms tied to extended chatbot use (mostly young adults with prior vulnerability). Psychiatric Times Feb 2026 recommends clinicians document AI use at intake. Cambridge BJP commentary on chatbot psychosis. No epidemiological/population studies yet.",
+        "reason": "Numeric divergence 100.0% on metric (context: .): new=35.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T13:49:16+00:00",
+        "entry_a_text": "Danish study of 53,974 psychiatric patients identified 126 with clinical notes documenting chatbot-linked harm (delusion reinforcement prominent). JMIR scoping review of 71 articles Sept 2025-Jan 2026 on psychiatric adverse events tied to GenAI chatbots. Stanford HAI found elevated stigma and inappropriate responses. Brown cataloged 15 distinct ethical risks. ChatGPT 26x more likely to issue inappropriate responses to psychotic symptoms; GPT-5 Auto 9x.",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "JMIR Mental Health (Feb 2026 scoping review): suicide most-reported harm (35/61 reports). UCSF psychiatrist Sakata reports 12 cases of psychosis-like symptoms tied to extended chatbot use (mostly young adults with prior vulnerability). Psychiatric Times Feb 2026 recommends clinicians document AI use at intake. Cambridge BJP commentary on chatbot psychosis. No epidemiological/population studies yet.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: chatbot, harm, jmir, psychiatric, review",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "STAT News 2026-04-16 warns voice-first chatbots will worsen AI mental health threat; PMC published early data on potentially harmful consequences of AI chatbot use among patients with mental illness from large psychiatric service system; NEJM AI RCT shows Therabot effective for depression/anxiety/eating-disorder symptoms.",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "JMIR Mental Health (Feb 2026 scoping review): suicide most-reported harm (35/61 reports). UCSF psychiatrist Sakata reports 12 cases of psychosis-like symptoms tied to extended chatbot use (mostly young adults with prior vulnerability). Psychiatric Times Feb 2026 recommends clinicians document AI use at intake. Cambridge BJP commentary on chatbot psychosis. No epidemiological/population studies yet.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: chatbot, health, mental, psychiatric, symptoms",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-26T16:59:08+00:00",
+        "entry_a_text": "JMIR Mental Health (Feb 2026 scoping review): suicide most-reported harm (35/61 reports). UCSF psychiatrist Sakata reports 12 cases of psychosis-like symptoms tied to extended chatbot use (mostly young adults with prior vulnerability). Psychiatric Times Feb 2026 recommends clinicians document AI use at intake. Cambridge BJP commentary on chatbot psychosis. No epidemiological/population studies yet.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "OpenAI disclosed (Oct 2025) ~560,000 of 800M weekly users showing possible signs of psychotic/manic mental-health emergencies. JMIR Mental Health 2026 scoping review documents psychiatric adverse events. Illinois Wellness and Oversight for Psychological Resources Act (Aug 2025) bans AI in licensed therapy roles. UCSF/Pulitzer: clinical case reports of chatbot psychosis but no population-scale epidemiology yet.",
+        "reason": "Numeric divergence 99.4% on metric (context: of): new=2025.0, existing=12.0, threshold=10%",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-25T14:31:56+00:00",
+        "entry_a_text": "INDICATOR ADDED: t2_ai_lab_quantitative_prevalence (tier2_strong). posteriorEffect=H1 +5-8pp, H2 +5-8pp, H4 -10-15pp. Rationale: OpenAI 0.07% weekly psychosis/mania disclosure (ev_005) is quantitative population-scale data that exceeded what t3_ai_lab_safety_disclosure was scoped for. Bridges anecdote and population epi; pushes both H1 and H2 because data type informs scale but cannot attribute causality without external epidemiology..",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "OpenAI disclosed (Oct 2025) ~560,000 of 800M weekly users showing possible signs of psychotic/manic mental-health emergencies. JMIR Mental Health 2026 scoping review documents psychiatric adverse events. Illinois Wellness and Oversight for Psychological Resources Act (Aug 2025) bans AI in licensed therapy roles. UCSF/Pulitzer: clinical case reports of chatbot psychosis but no population-scale epidemiology yet.",
+        "reason": "Antonym pair detected: new has 'closed', existing has 'open'",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-25T14:31:56+00:00",
+        "entry_a_text": "INDICATOR ADDED: t2_ehr_retrospective_cohort (tier2_strong). posteriorEffect=H2 +8-12pp, H1 +2pp, H4 -8pp. Rationale: Olsen et al. 2026 (Danish 53,974-patient chart review, 126 chatbot-related notes) is a major evidence type that did not map cleanly to existing t2 indicators. Retrospective EHR studies establish subpopulation harm at meaningful sample sizes but cannot resolve population-level causality..",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "OpenAI disclosed (Oct 2025) ~560,000 of 800M weekly users showing possible signs of psychotic/manic mental-health emergencies. JMIR Mental Health 2026 scoping review documents psychiatric adverse events. Illinois Wellness and Oversight for Psychological Resources Act (Aug 2025) bans AI in licensed therapy roles. UCSF/Pulitzer: clinical case reports of chatbot psychosis but no population-scale epidemiology yet.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: chatbot, population, review",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-25T14:24:51+00:00",
+        "entry_a_text": "Olsen et al. (Acta Psychiatrica Scandinavica 2026): 53,974 Danish psychiatric patients, 126 with chatbot-related clinical notes showing increased suicidal ideation, self-harm, disordered eating, OCD symptoms — subpopulation harm signal documented. JMIR Mental Health 2026 scoping review of 71 articles (Sep 2025-Jan 2026) maps reported harms (esp. youth suicide). OpenAI disclosed 0.07% weekly users show psychosis/mania signs, 0.15% show suicidal planning indicators. Stanford reports on 'delusional spirals' from AI relationships.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "OpenAI disclosed (Oct 2025) ~560,000 of 800M weekly users showing possible signs of psychotic/manic mental-health emergencies. JMIR Mental Health 2026 scoping review documents psychiatric adverse events. Illinois Wellness and Oversight for Psychological Resources Act (Aug 2025) bans AI in licensed therapy roles. UCSF/Pulitzer: clinical case reports of chatbot psychosis but no population-scale epidemiology yet.",
+        "reason": "Antonym pair detected: new has 'open', existing has 'closed'",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-25T13:19:54+00:00",
+        "entry_a_text": "JMIR Mental Health (2026) scoping review of 71 articles documenting 36 AI-chatbot-linked mental health crisis cases; psychiatric hospitalization second-most-reported outcome after suicide. ICANotes clinical guide (Feb 27, 2026) on AI sycophancy / ChatGPT psychosis. PsyPost reports new study linking ChatGPT use to worsened psychiatric symptoms.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "OpenAI disclosed (Oct 2025) ~560,000 of 800M weekly users showing possible signs of psychotic/manic mental-health emergencies. JMIR Mental Health 2026 scoping review documents psychiatric adverse events. Illinois Wellness and Oversight for Psychological Resources Act (Aug 2025) bans AI in licensed therapy roles. UCSF/Pulitzer: clinical case reports of chatbot psychosis but no population-scale epidemiology yet.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: chatbot, clinical, health, jmir, mental",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T19:30:14+00:00",
+        "entry_a_text": "Olsen et al. 2026 (Acta Psychiatrica Scandinavica): early data from large psychiatric service system finds 'first indication of potentially harmful consequences of AI chatbot use' especially re delusions in mental illness patients. FDA DHAC 11/6/2025 reviewed but no GenAI mental-health device authorized. StatNews 4/16: voice chatbots expected to worsen mental-health threat.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "OpenAI disclosed (Oct 2025) ~560,000 of 800M weekly users showing possible signs of psychotic/manic mental-health emergencies. JMIR Mental Health 2026 scoping review documents psychiatric adverse events. Illinois Wellness and Oversight for Psychological Resources Act (Aug 2025) bans AI in licensed therapy roles. UCSF/Pulitzer: clinical case reports of chatbot psychosis but no population-scale epidemiology yet.",
+        "reason": "Numeric divergence 98.0% on metric (context: 2025): new=560.0, existing=11.0, threshold=10%",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T13:49:16+00:00",
+        "entry_a_text": "Danish study of 53,974 psychiatric patients identified 126 with clinical notes documenting chatbot-linked harm (delusion reinforcement prominent). JMIR scoping review of 71 articles Sept 2025-Jan 2026 on psychiatric adverse events tied to GenAI chatbots. Stanford HAI found elevated stigma and inappropriate responses. Brown cataloged 15 distinct ethical risks. ChatGPT 26x more likely to issue inappropriate responses to psychotic symptoms; GPT-5 Auto 9x.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "OpenAI disclosed (Oct 2025) ~560,000 of 800M weekly users showing possible signs of psychotic/manic mental-health emergencies. JMIR Mental Health 2026 scoping review documents psychiatric adverse events. Illinois Wellness and Oversight for Psychological Resources Act (Aug 2025) bans AI in licensed therapy roles. UCSF/Pulitzer: clinical case reports of chatbot psychosis but no population-scale epidemiology yet.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: adverse, chatbot, clinical, events, jmir",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "STAT News 2026-04-16 warns voice-first chatbots will worsen AI mental health threat; PMC published early data on potentially harmful consequences of AI chatbot use among patients with mental illness from large psychiatric service system; NEJM AI RCT shows Therabot effective for depression/anxiety/eating-disorder symptoms.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "OpenAI disclosed (Oct 2025) ~560,000 of 800M weekly users showing possible signs of psychotic/manic mental-health emergencies. JMIR Mental Health 2026 scoping review documents psychiatric adverse events. Illinois Wellness and Oversight for Psychological Resources Act (Aug 2025) bans AI in licensed therapy roles. UCSF/Pulitzer: clinical case reports of chatbot psychosis but no population-scale epidemiology yet.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: chatbot, health, mental, psychiatric",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      }
+    ]
+  },
+  "sourceCalibration": {
+    "ledger": [
+      {
+        "timestamp": "2026-04-24T19:30:14Z",
+        "evidence_index": 0,
+        "confirming_index": 5,
+        "resolution": "REFUTED",
+        "source": "STAT / NEJM AI / PMC",
+        "confirming_source": "Acta Psychiatrica Scandinavica / StatNews",
+        "trust_delta": -0.1,
+        "original_text_snippet": "STAT News 2026-04-16 warns voice-first chatbots will worsen AI mental health threat; PMC published early data on potenti",
+        "confirming_text_snippet": "Olsen et al. 2026 (Acta Psychiatrica Scandinavica): early data from large psychiatric service system finds 'first indica"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:51Z",
+        "evidence_index": 2,
+        "confirming_index": 9,
+        "resolution": "REFUTED",
+        "source": "Acta Psychiatrica Scandinavica / JMIR Mental Health / Stanford HAI",
+        "confirming_source": "Acta Psychiatrica Scandinavica, JMIR Mental Health, Stanford HAI, OpenAI",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Danish study of 53,974 psychiatric patients identified 126 with clinical notes documenting chatbot-linked harm (delusion",
+        "confirming_text_snippet": "Olsen et al. (Acta Psychiatrica Scandinavica 2026): 53,974 Danish psychiatric patients, 126 with chatbot-related clinica"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:51Z",
+        "evidence_index": 7,
+        "confirming_index": 9,
+        "resolution": "REFUTED",
+        "source": "JMIR Mental Health / PsyPost / ICANotes",
+        "confirming_source": "Acta Psychiatrica Scandinavica, JMIR Mental Health, Stanford HAI, OpenAI",
+        "trust_delta": -0.1,
+        "original_text_snippet": "JMIR Mental Health (2026) scoping review of 71 articles documenting 36 AI-chatbot-linked mental health crisis cases; psy",
+        "confirming_text_snippet": "Olsen et al. (Acta Psychiatrica Scandinavica 2026): 53,974 Danish psychiatric patients, 126 with chatbot-related clinica"
+      },
+      {
+        "timestamp": "2026-04-26T16:59:08Z",
+        "evidence_index": 7,
+        "confirming_index": 14,
+        "resolution": "REFUTED",
+        "source": "JMIR Mental Health / PsyPost / ICANotes",
+        "confirming_source": "JMIR / Cambridge BJP / Psychiatric Times",
+        "trust_delta": -0.1,
+        "original_text_snippet": "JMIR Mental Health (2026) scoping review of 71 articles documenting 36 AI-chatbot-linked mental health crisis cases; psy",
+        "confirming_text_snippet": "JMIR Mental Health (Feb 2026 scoping review): suicide most-reported harm (35/61 reports). UCSF psychiatrist Sakata repor"
+      },
+      {
+        "timestamp": "2026-04-26T16:59:08Z",
+        "evidence_index": 9,
+        "confirming_index": 14,
+        "resolution": "REFUTED",
+        "source": "Acta Psychiatrica Scandinavica, JMIR Mental Health, Stanford HAI, OpenAI",
+        "confirming_source": "JMIR / Cambridge BJP / Psychiatric Times",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Olsen et al. (Acta Psychiatrica Scandinavica 2026): 53,974 Danish psychiatric patients, 126 with chatbot-related clinica",
+        "confirming_text_snippet": "JMIR Mental Health (Feb 2026 scoping review): suicide most-reported harm (35/61 reports). UCSF psychiatrist Sakata repor"
+      },
+      {
+        "timestamp": "2026-04-26T19:27:11Z",
+        "evidence_index": 7,
+        "confirming_index": 16,
+        "resolution": "REFUTED",
+        "source": "JMIR Mental Health / PsyPost / ICANotes",
+        "confirming_source": "Psychiatric News / JMIR / UCSF",
+        "trust_delta": -0.1,
+        "original_text_snippet": "JMIR Mental Health (2026) scoping review of 71 articles documenting 36 AI-chatbot-linked mental health crisis cases; psy",
+        "confirming_text_snippet": "OpenAI disclosed (Oct 2025) ~560,000 of 800M weekly users showing possible signs of psychotic/manic mental-health emerge"
+      },
+      {
+        "timestamp": "2026-04-26T19:27:11Z",
+        "evidence_index": 9,
+        "confirming_index": 16,
+        "resolution": "REFUTED",
+        "source": "Acta Psychiatrica Scandinavica, JMIR Mental Health, Stanford HAI, OpenAI",
+        "confirming_source": "Psychiatric News / JMIR / UCSF",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Olsen et al. (Acta Psychiatrica Scandinavica 2026): 53,974 Danish psychiatric patients, 126 with chatbot-related clinica",
+        "confirming_text_snippet": "OpenAI disclosed (Oct 2025) ~560,000 of 800M weekly users showing possible signs of psychotic/manic mental-health emerge"
+      }
+    ],
+    "effectiveTrust": {
+      "NEJM AI": 0.4555,
+      "PMC": 0.4555,
+      "STAT": 0.4555,
+      "Acta Psychiatrica Scandinavica": 0.4555,
+      "JMIR Mental Health": 0.3289,
+      "Stanford HAI": 0.4555,
+      "StatNews": 0.5,
+      "ICANotes": 0.3693,
+      "PsyPost": 0.3693,
+      "Acta Psychiatrica Scandinavica, JMIR Mental Health, Stanford HAI, OpenAI": 0.4118,
+      "Cambridge BJP": 0.5,
+      "JMIR": 0.5,
+      "Psychiatric Times": 0.5,
+      "Psychiatric News": 0.5,
+      "UCSF": 0.5
+    },
+    "_last_scan_same_source_skipped": 3
+  }
+}

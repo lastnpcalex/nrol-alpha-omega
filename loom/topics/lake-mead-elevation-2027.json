@@ -5,13 +5,16 @@
     "question": "What will Lake Mead water surface elevation (feet above sea level) be on December 31, 2027?",
     "resolution": "USBR official daily reservoir elevation reading for Lake Mead for December 31, 2027, as published on the Bureau of Reclamation Lower Colorado Region daily reservoir data portal. Fallback (in order): December 30 reading if Dec 31 is missing; SNWA published Lake Mead intake elevation for the same date; Western Area Power Administration Hoover Dam daily operations report. Reading is the end-of-day elevation in feet above sea level.",
     "created": "2026-04-13T18:38:33+00:00",
-    "lastUpdated": "2026-04-22T05:19:58+00:00",
+    "lastUpdated": "2026-04-29T02:31:00+00:00",
     "status": "ACTIVE",
     "dayCount": 0,
     "startDate": "2026-04-13",
     "classification": "ROUTINE",
     "topicType": "resource",
-    "resolutionDate": "2027-12-31"
+    "resolutionDate": "2027-12-31",
+    "lens": "GREEN",
+    "lensSetAt": "2026-04-26T21:22:38+00:00",
+    "lensSetReason": ""
   },
   "tagConfig": {
     "_docs": "Tag configuration for this topic. topicType presets: conflict, science, election, tech. Override directionHints for custom tag-to-hypothesis mappings.",
@@ -43,30 +46,228 @@
         "label": "Recovery: above 1,075 ft (exits Tier 1 shortage zone)",
         "midpoint": 1085,
         "unit": "ft",
-        "posterior": 0.06
+        "posterior": 0.005
       },
       "H2": {
         "label": "Stable decline: 1,050-1,075 ft (remains in Tier 1 range)",
         "midpoint": 1062,
         "unit": "ft",
-        "posterior": 0.29
+        "posterior": 0.2877
       },
       "H3": {
         "label": "Record-breaking decline: 1,025-1,050 ft (Tier 2 range)",
         "midpoint": 1038,
         "unit": "ft",
-        "posterior": 0.48
+        "posterior": 0.6932
       },
       "H4": {
         "label": "Severe decline: below 1,025 ft (Tier 3 threshold)",
         "midpoint": 1015,
         "unit": "ft",
-        "posterior": 0.17
+        "posterior": 0.0141
       }
     },
-    "expectedValue": 1043.87,
+    "expectedValue": 1038.61,
     "expectedUnit": "ft",
     "posteriorHistory": [
+      {
+        "date": "2026-04-26",
+        "timestamp": "2026-04-26T21:35:40+00:00",
+        "posteriors": {
+          "H1": 0.0141,
+          "H2": 0.3238,
+          "H3": 0.5902,
+          "H4": 0.0719
+        },
+        "priors": {
+          "H1": 0.08,
+          "H2": 0.32,
+          "H3": 0.45,
+          "H4": 0.15
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_005"
+        ],
+        "likelihoods": {
+          "H1": 0.134977,
+          "H2": 0.771454,
+          "H3": 1.0,
+          "H4": 0.365518
+        },
+        "note": "REPLAY[GREEN] Lake Mead elevation at 1,064.16 ft in early April 2026, reservoir 34% full (~8.8",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "lrSource": {
+          "lens": "GREEN",
+          "lensSetAt": "2026-04-26T21:22:38+00:00",
+          "source": "explicit"
+        },
+        "posteriorRangeLo": {
+          "H1": 0.0169,
+          "H2": 0.3162,
+          "H3": 0.6034,
+          "H4": 0.0635
+        },
+        "posteriorRangeHi": {
+          "H1": 0.0118,
+          "H2": 0.3309,
+          "H3": 0.5761,
+          "H4": 0.0812
+        },
+        "turningPoint": {
+          "type": "THRESHOLD_CROSSED",
+          "hypothesis": "H3",
+          "from": 0.45,
+          "to": 0.5902
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-26",
+        "timestamp": "2026-04-26T21:40:28+00:00",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.3829,
+          "H3": 0.5894,
+          "H4": 0.0227
+        },
+        "priors": {
+          "H1": 0.0141,
+          "H2": 0.3238,
+          "H3": 0.5902,
+          "H4": 0.0719
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_009"
+        ],
+        "likelihoods": {
+          "H1": 0.177778,
+          "H2": 1.0,
+          "H3": 0.844444,
+          "H4": 0.266667
+        },
+        "note": "REPLAY[GREEN] USBR weekly hydrologic update April 20 2026: Lake Mead elevation 1,064.16 ft, do",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "lrSource": {
+          "lens": "GREEN",
+          "lensSetAt": "2026-04-26T21:22:38+00:00",
+          "source": "explicit"
+        },
+        "posteriorRangeLo": {
+          "H1": 0.005,
+          "H2": 0.3829,
+          "H3": 0.5894,
+          "H4": 0.0227
+        },
+        "posteriorRangeHi": {
+          "H1": 0.005,
+          "H2": 0.3829,
+          "H3": 0.5894,
+          "H4": 0.0227
+        },
+        "turningPoint": {
+          "type": "BRANCH_DEATH",
+          "hypothesis": "H1",
+          "lastPosterior": 0.005
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic",
+          "adversarial_sensitivity": {
+            "dominant": "H3",
+            "point_estimate": 0.5894,
+            "adversarial_bound": "hi",
+            "adversarial_estimate": 0.5761,
+            "drop": 0.0133,
+            "adversarial_dominant": "H3",
+            "dominance_flipped": false,
+            "max_range_width": 0.0273
+          }
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-26",
+        "timestamp": "2026-04-26T21:46:12+00:00",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.2877,
+          "H3": 0.6932,
+          "H4": 0.0141
+        },
+        "priors": {
+          "H1": 0.005,
+          "H2": 0.3829,
+          "H3": 0.5894,
+          "H4": 0.0227
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_013"
+        ],
+        "likelihoods": {
+          "H1": 0.066227,
+          "H2": 0.638666,
+          "H3": 1.0,
+          "H4": 0.530502
+        },
+        "note": "REPLAY[GREEN] USBR April 2026 24-month study: Lake Mead at ~1,046 ft early April (down ~6 ft f",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "lrSource": {
+          "lens": "GREEN",
+          "lensSetAt": "2026-04-26T21:22:38+00:00",
+          "source": "explicit"
+        },
+        "posteriorRangeLo": {
+          "H1": 0.005,
+          "H2": 0.2317,
+          "H3": 0.7527,
+          "H4": 0.0107
+        },
+        "posteriorRangeHi": {
+          "H1": 0.005,
+          "H2": 0.3503,
+          "H3": 0.6262,
+          "H4": 0.0184
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic",
+          "adversarial_sensitivity": {
+            "dominant": "H3",
+            "point_estimate": 0.6932,
+            "adversarial_bound": "lo",
+            "adversarial_estimate": 0.5894,
+            "drop": 0.1038,
+            "adversarial_dominant": "H3",
+            "dominance_flipped": false,
+            "max_range_width": 0.0
+          }
+        },
+        "legacyMethod": true
+      }
+    ],
+    "_preReplayHistory": [
       {
         "date": "2026-04-13",
         "note": "Initial priors. Lake Mead at ~1,061 ft (35% capacity, 20 ft above record low). BOR 24-month study projects possible record low (~1,032 ft) by Nov 2027. Very low 2025-26 snowpack. H3 (0.45): favored by BOR most-probable projection landing in 1,025-1,050 range. H2 (0.32): current-level inertia + conservation measures could hold elevation above 1,050 — requires near-average snowpack. H1 (0.08): would require above-average snowpack for 2 consecutive years to recover 14+ ft — historically rare during megadrought (occurred once since 2000, in 2023 winter). H4 (0.15): BOR CRSS model 10th-percentile exceedance runs show ~12-18% probability of sub-1,025 by end of 2027 depending on hydrology assumptions; 0.15 is consistent with the pessimistic-but-not-extreme tail.",
@@ -110,8 +311,298 @@
           "challenge": "No significant shifts proposed; no challenge needed.",
           "inference_mode": "text_heuristic"
         }
+      },
+      {
+        "date": "2026-04-24",
+        "posteriors": {
+          "H1": 0.0093,
+          "H2": 0.493,
+          "H3": 0.4451,
+          "H4": 0.0526
+        },
+        "priors": {
+          "H1": 0.06,
+          "H2": 0.29,
+          "H3": 0.48,
+          "H4": 0.17
+        },
+        "updateMethod": "bayesian_update",
+        "evidenceRefs": [
+          "ev_008"
+        ],
+        "likelihoods": {
+          "H1": 0.05,
+          "H2": 0.55,
+          "H3": 0.3,
+          "H4": 0.1
+        },
+        "note": "Current elevation in 1,050-1,075 ft Tier-1 range and projection staying there support H2.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "turningPoint": {
+          "type": "LEADING_CHANGED",
+          "from": "H3",
+          "to": "H2",
+          "fromProb": 0.48,
+          "toProb": 0.493
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        }
+      },
+      {
+        "date": "2026-04-24",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.5047,
+          "H3": 0.4774,
+          "H4": 0.0128
+        },
+        "priors": {
+          "H1": 0.0093,
+          "H2": 0.493,
+          "H3": 0.4451,
+          "H4": 0.0526
+        },
+        "updateMethod": "bayesian_update",
+        "evidenceRefs": [
+          "ev_009"
+        ],
+        "likelihoods": {
+          "H1": 0.04,
+          "H2": 0.42,
+          "H3": 0.44,
+          "H4": 0.1
+        },
+        "note": "Current elevation trajectory plus downward revision favor H2/H3; H1 recovery above 1,075 ft remains implausible within year.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "turningPoint": {
+          "type": "BRANCH_DEATH",
+          "hypothesis": "H1",
+          "lastPosterior": 0.005
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        }
+      },
+      {
+        "date": "2026-04-24",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.4536,
+          "H3": 0.5364,
+          "H4": 0.005
+        },
+        "priors": {
+          "H1": 0.005,
+          "H2": 0.5047,
+          "H3": 0.4774,
+          "H4": 0.0128
+        },
+        "updateMethod": "bayesian_update",
+        "evidenceRefs": [
+          "ev_010"
+        ],
+        "likelihoods": {
+          "H1": 0.02,
+          "H2": 0.8,
+          "H3": 1.0,
+          "H4": 0.3
+        },
+        "note": "Current elevation and projected 20ft decline in 2026 consistent with Tier 2 range by end-2027; mildly supports record-breaking decline.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "turningPoint": {
+          "type": "LEADING_CHANGED",
+          "from": "H2",
+          "to": "H3",
+          "fromProb": 0.5047,
+          "toProb": 0.5364
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        }
+      },
+      {
+        "date": "2026-04-25",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.2942,
+          "H3": 0.6958,
+          "H4": 0.005
+        },
+        "priors": {
+          "H1": 0.005,
+          "H2": 0.4536,
+          "H3": 0.5364,
+          "H4": 0.005
+        },
+        "updateMethod": "bayesian_update",
+        "evidenceRefs": [
+          "ev_011"
+        ],
+        "likelihoods": {
+          "H1": 0.005,
+          "H2": 0.3,
+          "H3": 0.6,
+          "H4": 0.095
+        },
+        "note": "Trajectory points to crossing 1,050 ft into Tier-2 range (H3); recovery (H1) effectively impossible; severe collapse (H4) tail rising modestly.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "turningPoint": {
+          "type": "MAJOR_SHIFT",
+          "maxShift": 0.1594
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        }
+      },
+      {
+        "date": "2026-04-25",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.2004,
+          "H3": 0.7896,
+          "H4": 0.005
+        },
+        "priors": {
+          "H1": 0.005,
+          "H2": 0.2942,
+          "H3": 0.6958,
+          "H4": 0.005
+        },
+        "updateMethod": "bayesian_update",
+        "evidenceRefs": [
+          "ev_012"
+        ],
+        "likelihoods": {
+          "H1": 0.05,
+          "H2": 0.6,
+          "H3": 1.0,
+          "H4": 0.2
+        },
+        "note": "20-foot drop to ~1,043 ft trajectory points squarely into Tier 2 range (H3); H2 retains weight given hydrology variance.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        }
+      },
+      {
+        "date": "2026-04-26",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.0288,
+          "H3": 0.9612,
+          "H4": 0.005
+        },
+        "priors": {
+          "H1": 0.005,
+          "H2": 0.2004,
+          "H3": 0.7896,
+          "H4": 0.005
+        },
+        "updateMethod": "bayesian_update",
+        "evidenceRefs": [
+          "ev_013"
+        ],
+        "likelihoods": {
+          "H1": 0.005,
+          "H2": 0.1,
+          "H3": 0.85,
+          "H4": 0.2
+        },
+        "note": "Current 1,046 ft with projected 20 ft further decline over next 12 months puts EOY 2027 squarely in the H3 band; slight upweight to H4 tail.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "turningPoint": {
+          "type": "MAJOR_SHIFT",
+          "maxShift": 0.1716
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        }
+      },
+      {
+        "date": "2026-04-26",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.0203,
+          "H3": 0.9697,
+          "H4": 0.005
+        },
+        "priors": {
+          "H1": 0.005,
+          "H2": 0.0288,
+          "H3": 0.9612,
+          "H4": 0.005
+        },
+        "updateMethod": "bayesian_update",
+        "evidenceRefs": [
+          "ev_014"
+        ],
+        "likelihoods": {
+          "H1": 0.1,
+          "H2": 0.7,
+          "H3": 1.0,
+          "H4": 0.3
+        },
+        "note": "Above-projection current elevation tempers H3 slightly but trajectory still points to 1,025-1,050 ft band by EOY 2027.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        }
       }
-    ]
+    ],
+    "_preReplayPosteriors": {
+      "H1": 0.005,
+      "H2": 0.0203,
+      "H3": 0.9697,
+      "H4": 0.005
+    },
+    "_replayPromotedFrom": {
+      "lens": "GREEN",
+      "run_id": "20260426T212831Z",
+      "promoted_at": "2026-04-26T22:08:18.209317+00:00"
+    }
   },
   "subModels": {},
   "indicators": {
@@ -758,6 +1249,215 @@
       "ledger": "DECISION",
       "claimState": "SUPPORTED",
       "effectiveWeight": 1.0
+    },
+    {
+      "id": "ev_008",
+      "time": "2026-04-24T02:25:41+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "ENV"
+      ],
+      "text": "USBR 2026-04-20 weekly hydrologic update: Lake Mead elevation 1,064.16 ft; April 2026 Most Probable 24-Month Study projects 1,056.87 ft on 2026-12-31 and Tier 1 Shortage continued.",
+      "provenance": "OBSERVED",
+      "source": "US Bureau of Reclamation",
+      "posteriorImpact": "NONE",
+      "url": "https://www.usbr.gov/lc/region/g4000/weekly.pdf",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-24T02:25:41+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Current elevation in 1,050-1,075 ft Tier-1 range and projection staying there support H2.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_009",
+      "time": "2026-04-24T13:49:15+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "HYDRO"
+      ],
+      "text": "USBR weekly hydrologic update April 20 2026: Lake Mead elevation 1,064.16 ft, down 0.67 ft from previous 24-Month Study. March 2026 projection range for EoY-2026 Mead: 1,054.36-1,063.43 ft. System at 21,448 kaf (37% capacity).",
+      "provenance": "OBSERVED",
+      "source": "US Bureau of Reclamation",
+      "posteriorImpact": "NONE",
+      "url": "https://www.usbr.gov/lc/region/g4000/weekly.pdf",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-24T13:49:15+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_010",
+      "time": "2026-04-24T19:30:14+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "CLIMATE"
+      ],
+      "text": "Lake Mead dropped over 6 feet since 3/1 to approximately 1,062-1,065 ft in late April 2026, nearing July 2022 record low; April 24-month study projects further ~20 ft decline in 2026; current Tier 1 shortage.",
+      "provenance": "OBSERVED",
+      "source": "USBR 24-Month Study / Fox5 Vegas",
+      "posteriorImpact": "NONE",
+      "url": "https://www.usbr.gov/lc/region/g4000/24mo.pdf",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.2237
+    },
+    {
+      "time": "2026-04-24T19:30:14+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_011",
+      "time": "2026-04-25T13:19:53+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "ENV"
+      ],
+      "text": "Lake Mead surface elevation ~1,046-1,058 ft late April 2026 after dropping ~6 ft in March; Reclamation will reduce inflows by 1.48 MAF through April 2027; outlets project additional ~20 ft drop over next 12 months.",
+      "provenance": "OBSERVED",
+      "source": "USBR 24-Month Study / KTNV / 8 News Now",
+      "posteriorImpact": "NONE",
+      "url": "https://www.usbr.gov/lc/region/g4000/24mo.pdf",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.4555
+    },
+    {
+      "time": "2026-04-25T13:19:53+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-25T13:19:53+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, stale_evidence, quorum_failure. Reason: Trajectory points to crossing 1,050 ft into Tier-2 range (H3); recovery (H1) effectively impossible; severe collapse (H4) tail rising modestly.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_012",
+      "time": "2026-04-25T14:24:50+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "ENVIRO"
+      ],
+      "text": "Bureau of Reclamation April 2026 24-Month Study: Lake Mead currently 1,062-1,065 ft (~34% full); projected 1,063.43 ft at December 31, 2026 under most-probable scenario. Water Year 2026 inflow forecast 4,401 kaf (46% of normal). Projected ~20-foot decline over 2026 due to reduced Powell releases.",
+      "provenance": "OBSERVED",
+      "source": "Bureau of Reclamation, KTNV",
+      "posteriorImpact": "NONE",
+      "url": "https://www.usbr.gov/lc/region/g4000/24mo.pdf",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-25T14:24:50+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_013",
+      "time": "2026-04-26T16:59:07+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "WATER"
+      ],
+      "text": "USBR April 2026 24-month study: Lake Mead at ~1,046 ft early April (down ~6 ft from early March's ~1,052 ft); projected to drop a further ~20 ft over next 12 months; current Tier 1 shortage projected to continue with elevation 1,055.88 ft per most-probable scenario.",
+      "provenance": "OBSERVED",
+      "source": "USBR 24-Month Study / KTNV",
+      "posteriorImpact": "NONE",
+      "url": "https://www.usbr.gov/lc/region/g4000/24mo.pdf",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.4555
+    },
+    {
+      "time": "2026-04-26T16:59:07+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-26T16:59:07+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Current 1,046 ft with projected 20 ft further decline over next 12 months puts EOY 2027 squarely in the H3 band; slight upweight to H4 tail.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_014",
+      "time": "2026-04-26T19:27:10+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "WATER"
+      ],
+      "text": "USBR April 2026 24-Month Study: Lake Mead currently at 1,062.38 ft, ~6.5 ft above projections, with Tier 1 holding through 2026 but hydraulic models show elevation likely falling below 1,050 ft by July 2026 — triggering Tier 2 for 2027 operations.",
+      "provenance": "OBSERVED",
+      "source": "USBR / 8 News Now / Nevada Independent",
+      "posteriorImpact": "NONE",
+      "url": "https://www.usbr.gov/lc/region/g4000/24mo.pdf",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.1673
+    },
+    {
+      "time": "2026-04-26T19:27:10+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
     }
   ],
   "dataFeeds": {
@@ -803,20 +1503,22 @@
     "upstream": []
   },
   "governance": {
-    "health": "HEALTHY",
-    "issues": [],
+    "health": "DEGRADED",
+    "issues": [
+      "Majority stale evidence (23/33)"
+    ],
     "rt": {
       "rt": 0.0,
       "regime": "SAFE",
       "worst_hypothesis": "H1"
     },
-    "entropy": 1.7043,
+    "entropy": 1.0085,
     "maxEntropy": 2.0,
-    "uncertaintyRatio": 0.8521,
+    "uncertaintyRatio": 0.5042,
     "evidenceFreshness": {
       "fresh": 10,
-      "stale": 7,
-      "total": 17
+      "stale": 23,
+      "total": 33
     },
     "hypothesisAdmissibility": {
       "H1": "ADMISSIBLE",
@@ -825,10 +1527,10 @@
       "H4": "ADMISSIBLE"
     },
     "klFromPrior": {
-      "kl_divergence": 0.0064,
+      "kl_divergence": 0.0493,
       "interpretation": "MODERATE"
     },
-    "lastComputed": "2026-04-22T05:19:58+00:00",
+    "lastComputed": "2026-04-29T02:31:00+00:00",
     "staleDependencies": 0,
     "calibrationHealth": "ACCEPTABLE",
     "unresolvedContradictions": 0,
@@ -855,7 +1557,7 @@
         }
       },
       "indistinguishable": [],
-      "lastChecked": "2026-04-22T05:19:58+00:00"
+      "lastChecked": "2026-04-29T02:31:00+00:00"
     }
   },
   "predictionScoring": {
@@ -981,6 +1683,160 @@
           "H4": 0.17
         },
         "entropy": 1.7043
+      },
+      {
+        "timestamp": "2026-04-24T02:25:41+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0093,
+          "H2": 0.493,
+          "H3": 0.4451,
+          "H4": 0.0526
+        },
+        "entropy": 1.3091
+      },
+      {
+        "timestamp": "2026-04-24T02:25:41+00:00",
+        "trigger": "pipeline:ev_008",
+        "posteriors": {
+          "H1": 0.0093,
+          "H2": 0.493,
+          "H3": 0.4451,
+          "H4": 0.0526
+        },
+        "entropy": 1.3091
+      },
+      {
+        "timestamp": "2026-04-24T13:49:15+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.5047,
+          "H3": 0.4774,
+          "H4": 0.0128
+        },
+        "entropy": 1.1258
+      },
+      {
+        "timestamp": "2026-04-24T13:49:15+00:00",
+        "trigger": "pipeline:ev_009",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.5047,
+          "H3": 0.4774,
+          "H4": 0.0128
+        },
+        "entropy": 1.1258
+      },
+      {
+        "timestamp": "2026-04-24T19:30:14+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.4536,
+          "H3": 0.5364,
+          "H4": 0.005
+        },
+        "entropy": 1.0758
+      },
+      {
+        "timestamp": "2026-04-24T19:30:14+00:00",
+        "trigger": "pipeline:ev_010",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.4536,
+          "H3": 0.5364,
+          "H4": 0.005
+        },
+        "entropy": 1.0758
+      },
+      {
+        "timestamp": "2026-04-25T13:19:53+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.2942,
+          "H3": 0.6958,
+          "H4": 0.005
+        },
+        "entropy": 0.9598
+      },
+      {
+        "timestamp": "2026-04-25T13:19:53+00:00",
+        "trigger": "pipeline:ev_011",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.2942,
+          "H3": 0.6958,
+          "H4": 0.005
+        },
+        "entropy": 0.9598
+      },
+      {
+        "timestamp": "2026-04-25T14:24:50+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.2004,
+          "H3": 0.7896,
+          "H4": 0.005
+        },
+        "entropy": 0.8103
+      },
+      {
+        "timestamp": "2026-04-25T14:24:50+00:00",
+        "trigger": "pipeline:ev_012",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.2004,
+          "H3": 0.7896,
+          "H4": 0.005
+        },
+        "entropy": 0.8103
+      },
+      {
+        "timestamp": "2026-04-26T16:59:07+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.0288,
+          "H3": 0.9612,
+          "H4": 0.005
+        },
+        "entropy": 0.2787
+      },
+      {
+        "timestamp": "2026-04-26T16:59:07+00:00",
+        "trigger": "pipeline:ev_013",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.0288,
+          "H3": 0.9612,
+          "H4": 0.005
+        },
+        "entropy": 0.2787
+      },
+      {
+        "timestamp": "2026-04-26T19:27:10+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.0203,
+          "H3": 0.9697,
+          "H4": 0.005
+        },
+        "entropy": 0.2336
+      },
+      {
+        "timestamp": "2026-04-26T19:27:10+00:00",
+        "trigger": "pipeline:ev_014",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.0203,
+          "H3": 0.9697,
+          "H4": 0.005
+        },
+        "entropy": 0.2336
       }
     ],
     "outcomes": [],
@@ -1324,6 +2180,1506 @@
         "detected": "2026-04-21T03:51:21Z",
         "resolution": "SUPERSEDED",
         "resolvedAt": "2026-04-21T03:51:21Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-10",
+        "entry_a_text": "REPLAY: indicator t3_monthly_drop_6ft fires at historical firedDate 2026-04-10. Original note: Fox5 Vegas reports Lake Mead dropped >6ft since March 1. USBR confirms 1,064.16 ft on April 6.",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "USBR 2026-04-20 weekly hydrologic update: Lake Mead elevation 1,064.16 ft; April 2026 Most Probable 24-Month Study projects 1,056.87 ft on 2026-12-31 and Tier 1 Shortage continued.",
+        "reason": "Numeric divergence 98.4% on metric (context: april, ft): new=1.0, existing=64.16, threshold=10%",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "USBR Apr 17, 2026 24-Month Study: Lake Mead projected at ~1,038 ft by end of June 2027 under most-probable scenario; worst-case ~1,026 ft (1 ft above Tier 3 threshold).",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "USBR 2026-04-20 weekly hydrologic update: Lake Mead elevation 1,064.16 ft; April 2026 Most Probable 24-Month Study projects 1,056.87 ft on 2026-12-31 and Tier 1 Shortage continued.",
+        "reason": "Numeric divergence 100.0% on metric (context: lake): new=1.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-20T14:03:51+00:00",
+        "entry_a_text": "Lake Mead elevation 1,064.16 ft per USBR Lower Colorado weekly hydrologic update April 6, 2026. Reservoir approximately 34% full (8.8 MAF). April 2026 unregulated inflow forecast for Lake Powell: 0.550 MAF (61% of 30-year average). Projected to remain in Tier 1 shortage with end-year elevation approximately 1,055.88 ft.",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "USBR 2026-04-20 weekly hydrologic update: Lake Mead elevation 1,064.16 ft; April 2026 Most Probable 24-Month Study projects 1,056.87 ft on 2026-12-31 and Tier 1 Shortage continued.",
+        "reason": "Numeric divergence 98.4% on metric (context: elevation, ft, mead): new=1.0, existing=64.16, threshold=10%",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-19T00:57:10+00:00",
+        "entry_a_text": "Lake Mead elevation at 1,064.16 ft in early April 2026, reservoir 34% full (~8.8 MAF). Reclamation projects year-end elevation of 1,055.88 ft, keeping basin in Tier 1 Shortage Condition for 2026.",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "USBR 2026-04-20 weekly hydrologic update: Lake Mead elevation 1,064.16 ft; April 2026 Most Probable 24-Month Study projects 1,056.87 ft on 2026-12-31 and Tier 1 Shortage continued.",
+        "reason": "Numeric divergence 98.4% on metric (context: elevation, ft): new=1.0, existing=64.16, threshold=10%",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T15:23:00+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Very low snowpack and one-third normal inflow projection strongly favor continued decline into Tier 2 range (H3). Small Jan buffer unlikely to persist through summer drawdown. H4 risk elevated by drought severity.",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "USBR 2026-04-20 weekly hydrologic update: Lake Mead elevation 1,064.16 ft; April 2026 Most Probable 24-Month Study projects 1,056.87 ft on 2026-12-31 and Tier 1 Shortage continued.",
+        "reason": "Numeric divergence 50.0% on metric (context: tier): new=1.0, existing=2.0, threshold=10%",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T15:23:00+00:00",
+        "entry_a_text": "Lake Mead at ~34% capacity. Upper Basin snowpack near lowest levels during 2000-present drought. Apr-Jul inflow to Powell projected at one-third of normal. Mead was 1,062 ft in Jan 2026 (6.5 ft above projections). Post-2026 operating agreements under negotiation.",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "USBR 2026-04-20 weekly hydrologic update: Lake Mead elevation 1,064.16 ft; April 2026 Most Probable 24-Month Study projects 1,056.87 ft on 2026-12-31 and Tier 1 Shortage continued.",
+        "reason": "Numeric divergence 97.1% on metric (context: lake, mead): new=1.0, existing=34.0, threshold=10%",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-16T03:43:52+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Evidence ev_003: Colorado Basin April 1 snowpack at historically record low levels, roughly five ",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "USBR 2026-04-20 weekly hydrologic update: Lake Mead elevation 1,064.16 ft; April 2026 Most Probable 24-Month Study projects 1,056.87 ft on 2026-12-31 and Tier 1 Shortage continued.",
+        "reason": "Numeric divergence 98.4% on metric (context: april): new=64.16, existing=1.0, threshold=10%",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-16T03:43:52+00:00",
+        "entry_a_text": "Colorado Basin April 1 snowpack at historically record low levels, roughly five times lower than previous record. Federal Bureau of Reclamation projects Lake Mead will reach new record-low water levels by November 2027, potentially dropping to approximately 1032 feet.",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "USBR 2026-04-20 weekly hydrologic update: Lake Mead elevation 1,064.16 ft; April 2026 Most Probable 24-Month Study projects 1,056.87 ft on 2026-12-31 and Tier 1 Shortage continued.",
+        "reason": "Numeric divergence 98.4% on metric (context: april): new=64.16, existing=1.0, threshold=10%",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-10T00:00:00Z",
+        "entry_a_text": "Lake Mead water surface elevation at 1,064.16 ft as of April 6 (USBR weekly update). Lake has dropped more than 6 feet since March 1, now just 20 feet above the all-time record low of 1,040.94 ft from July 2022. Federal projections show Lake Mead could reach new record low of ~1,032 ft by November 2027.",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "USBR 2026-04-20 weekly hydrologic update: Lake Mead elevation 1,064.16 ft; April 2026 Most Probable 24-Month Study projects 1,056.87 ft on 2026-12-31 and Tier 1 Shortage continued.",
+        "reason": "Numeric divergence 98.4% on metric (context: elevation, ft): new=1.0, existing=64.16, threshold=10%",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-12T00:00:00Z",
+        "entry_a_text": "Lake Mead dropped approximately 6 ft since March 1, 2026, now sitting 20 ft above the all-time low. Currently at approximately 35% capacity. SNWA outreach manager Bronson Mack stated the lake could drop another 16 ft by 2027. Federal projections released in March 2026 indicate Lake Mead could reach record-low water levels (~1,032 ft) by November 2027. Previous record low was approximately 1,040.94 ft, set in 2022. Very low snowpack cited as primary driver. Rising water temperatures reported as affecting water treatment operations. NPS issued harmful algal bloom advisory for Government Wash on March 13.",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "USBR 2026-04-20 weekly hydrologic update: Lake Mead elevation 1,064.16 ft; April 2026 Most Probable 24-Month Study projects 1,056.87 ft on 2026-12-31 and Tier 1 Shortage continued.",
+        "reason": "Numeric divergence 83.3% on metric (context: ft, mead): new=1.0, existing=6.0, threshold=10%",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Current elevation in 1,050-1,075 ft Tier-1 range and projection staying there support H2.",
+        "entry_b_time": "2026-04-24T13:49:15+00:00",
+        "entry_b_text": "USBR weekly hydrologic update April 20 2026: Lake Mead elevation 1,064.16 ft, down 0.67 ft from previous 24-Month Study. March 2026 projection range for EoY-2026 Mead: 1,054.36-1,063.43 ft. System at 21,448 kaf (37% capacity).",
+        "reason": "Numeric divergence 100.0% on metric (context: elevation): new=2026.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-24T13:49:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "USBR 2026-04-20 weekly hydrologic update: Lake Mead elevation 1,064.16 ft; April 2026 Most Probable 24-Month Study projects 1,056.87 ft on 2026-12-31 and Tier 1 Shortage continued.",
+        "entry_b_time": "2026-04-24T13:49:15+00:00",
+        "entry_b_text": "USBR weekly hydrologic update April 20 2026: Lake Mead elevation 1,064.16 ft, down 0.67 ft from previous 24-Month Study. March 2026 projection range for EoY-2026 Mead: 1,054.36-1,063.43 ft. System at 21,448 kaf (37% capacity).",
+        "reason": "Numeric divergence 95.0% on metric (context: april, lake, mead): new=20.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-24T13:49:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-22T01:00:38+00:00",
+        "entry_a_text": "REPLAY COMPLETE: 1 indicators applied, 0 skipped. Final posteriors: {'H1': 0.06, 'H2': 0.29, 'H3': 0.48, 'H4': 0.17}. Indicator firedDates restored to originals for audit.",
+        "entry_b_time": "2026-04-24T13:49:15+00:00",
+        "entry_b_text": "USBR weekly hydrologic update April 20 2026: Lake Mead elevation 1,064.16 ft, down 0.67 ft from previous 24-Month Study. March 2026 projection range for EoY-2026 Mead: 1,054.36-1,063.43 ft. System at 21,448 kaf (37% capacity).",
+        "reason": "Numeric divergence 98.7% on metric (context: .): new=37.0, existing=0.48, threshold=10%",
+        "detected": "2026-04-24T13:49:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-10",
+        "entry_a_text": "REPLAY: indicator t3_monthly_drop_6ft fires at historical firedDate 2026-04-10. Original note: Fox5 Vegas reports Lake Mead dropped >6ft since March 1. USBR confirms 1,064.16 ft on April 6.",
+        "entry_b_time": "2026-04-24T13:49:15+00:00",
+        "entry_b_text": "USBR weekly hydrologic update April 20 2026: Lake Mead elevation 1,064.16 ft, down 0.67 ft from previous 24-Month Study. March 2026 projection range for EoY-2026 Mead: 1,054.36-1,063.43 ft. System at 21,448 kaf (37% capacity).",
+        "reason": "Numeric divergence 68.8% on metric (context: april): new=20.0, existing=64.16, threshold=10%",
+        "detected": "2026-04-24T13:49:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+        "entry_b_time": "2026-04-24T13:49:15+00:00",
+        "entry_b_text": "USBR weekly hydrologic update April 20 2026: Lake Mead elevation 1,064.16 ft, down 0.67 ft from previous 24-Month Study. March 2026 projection range for EoY-2026 Mead: 1,054.36-1,063.43 ft. System at 21,448 kaf (37% capacity).",
+        "reason": "Numeric divergence 100.0% on metric (context: range): new=2026.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-24T13:49:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "USBR Apr 17, 2026 24-Month Study: Lake Mead projected at ~1,038 ft by end of June 2027 under most-probable scenario; worst-case ~1,026 ft (1 ft above Tier 3 threshold).",
+        "entry_b_time": "2026-04-24T13:49:15+00:00",
+        "entry_b_text": "USBR weekly hydrologic update April 20 2026: Lake Mead elevation 1,064.16 ft, down 0.67 ft from previous 24-Month Study. March 2026 projection range for EoY-2026 Mead: 1,054.36-1,063.43 ft. System at 21,448 kaf (37% capacity).",
+        "reason": "Numeric divergence 15.0% on metric (context: 2026): new=20.0, existing=17.0, threshold=10%",
+        "detected": "2026-04-24T13:49:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-20T14:03:51+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+        "entry_b_time": "2026-04-24T13:49:15+00:00",
+        "entry_b_text": "USBR weekly hydrologic update April 20 2026: Lake Mead elevation 1,064.16 ft, down 0.67 ft from previous 24-Month Study. March 2026 projection range for EoY-2026 Mead: 1,054.36-1,063.43 ft. System at 21,448 kaf (37% capacity).",
+        "reason": "Numeric divergence 100.0% on metric (context: range): new=2026.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-24T13:49:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-20T14:03:51+00:00",
+        "entry_a_text": "Lake Mead elevation 1,064.16 ft per USBR Lower Colorado weekly hydrologic update April 6, 2026. Reservoir approximately 34% full (8.8 MAF). April 2026 unregulated inflow forecast for Lake Powell: 0.550 MAF (61% of 30-year average). Projected to remain in Tier 1 shortage with end-year elevation approximately 1,055.88 ft.",
+        "entry_b_time": "2026-04-24T13:49:15+00:00",
+        "entry_b_text": "USBR weekly hydrologic update April 20 2026: Lake Mead elevation 1,064.16 ft, down 0.67 ft from previous 24-Month Study. March 2026 projection range for EoY-2026 Mead: 1,054.36-1,063.43 ft. System at 21,448 kaf (37% capacity).",
+        "reason": "Numeric divergence 95.0% on metric (context: lake, mead): new=20.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-24T13:49:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-19T00:57:10+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+        "entry_b_time": "2026-04-24T13:49:15+00:00",
+        "entry_b_text": "USBR weekly hydrologic update April 20 2026: Lake Mead elevation 1,064.16 ft, down 0.67 ft from previous 24-Month Study. March 2026 projection range for EoY-2026 Mead: 1,054.36-1,063.43 ft. System at 21,448 kaf (37% capacity).",
+        "reason": "Numeric divergence 100.0% on metric (context: range): new=2026.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-24T13:49:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-19T00:57:10+00:00",
+        "entry_a_text": "Lake Mead elevation at 1,064.16 ft in early April 2026, reservoir 34% full (~8.8 MAF). Reclamation projects year-end elevation of 1,055.88 ft, keeping basin in Tier 1 Shortage Condition for 2026.",
+        "entry_b_time": "2026-04-24T13:49:15+00:00",
+        "entry_b_text": "USBR weekly hydrologic update April 20 2026: Lake Mead elevation 1,064.16 ft, down 0.67 ft from previous 24-Month Study. March 2026 projection range for EoY-2026 Mead: 1,054.36-1,063.43 ft. System at 21,448 kaf (37% capacity).",
+        "reason": "Numeric divergence 95.0% on metric (context: mead): new=20.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-24T13:49:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T15:23:00+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Very low snowpack and one-third normal inflow projection strongly favor continued decline into Tier 2 range (H3). Small Jan buffer unlikely to persist through summer drawdown. H4 risk elevated by drought severity.",
+        "entry_b_time": "2026-04-24T13:49:15+00:00",
+        "entry_b_text": "USBR weekly hydrologic update April 20 2026: Lake Mead elevation 1,064.16 ft, down 0.67 ft from previous 24-Month Study. March 2026 projection range for EoY-2026 Mead: 1,054.36-1,063.43 ft. System at 21,448 kaf (37% capacity).",
+        "reason": "Numeric divergence 99.9% on metric (context: range): new=2026.0, existing=2.0, threshold=10%",
+        "detected": "2026-04-24T13:49:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T15:23:00+00:00",
+        "entry_a_text": "Lake Mead at ~34% capacity. Upper Basin snowpack near lowest levels during 2000-present drought. Apr-Jul inflow to Powell projected at one-third of normal. Mead was 1,062 ft in Jan 2026 (6.5 ft above projections). Post-2026 operating agreements under negotiation.",
+        "entry_b_time": "2026-04-24T13:49:15+00:00",
+        "entry_b_text": "USBR weekly hydrologic update April 20 2026: Lake Mead elevation 1,064.16 ft, down 0.67 ft from previous 24-Month Study. March 2026 projection range for EoY-2026 Mead: 1,054.36-1,063.43 ft. System at 21,448 kaf (37% capacity).",
+        "reason": "Numeric divergence 41.2% on metric (context: lake, mead): new=20.0, existing=34.0, threshold=10%",
+        "detected": "2026-04-24T13:49:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-16T03:43:52+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Evidence ev_003: Colorado Basin April 1 snowpack at historically record low levels, roughly five ",
+        "entry_b_time": "2026-04-24T13:49:15+00:00",
+        "entry_b_text": "USBR weekly hydrologic update April 20 2026: Lake Mead elevation 1,064.16 ft, down 0.67 ft from previous 24-Month Study. March 2026 projection range for EoY-2026 Mead: 1,054.36-1,063.43 ft. System at 21,448 kaf (37% capacity).",
+        "reason": "Numeric divergence 95.0% on metric (context: april): new=20.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-24T13:49:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-16T03:43:52+00:00",
+        "entry_a_text": "Colorado Basin April 1 snowpack at historically record low levels, roughly five times lower than previous record. Federal Bureau of Reclamation projects Lake Mead will reach new record-low water levels by November 2027, potentially dropping to approximately 1032 feet.",
+        "entry_b_time": "2026-04-24T13:49:15+00:00",
+        "entry_b_text": "USBR weekly hydrologic update April 20 2026: Lake Mead elevation 1,064.16 ft, down 0.67 ft from previous 24-Month Study. March 2026 projection range for EoY-2026 Mead: 1,054.36-1,063.43 ft. System at 21,448 kaf (37% capacity).",
+        "reason": "Numeric divergence 95.0% on metric (context: april): new=20.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-24T13:49:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-10T00:00:00Z",
+        "entry_a_text": "Lake Mead water surface elevation at 1,064.16 ft as of April 6 (USBR weekly update). Lake has dropped more than 6 feet since March 1, now just 20 feet above the all-time record low of 1,040.94 ft from July 2022. Federal projections show Lake Mead could reach new record low of ~1,032 ft by November 2027.",
+        "entry_b_time": "2026-04-24T13:49:15+00:00",
+        "entry_b_text": "USBR weekly hydrologic update April 20 2026: Lake Mead elevation 1,064.16 ft, down 0.67 ft from previous 24-Month Study. March 2026 projection range for EoY-2026 Mead: 1,054.36-1,063.43 ft. System at 21,448 kaf (37% capacity).",
+        "reason": "Numeric divergence 70.0% on metric (context: april, update): new=20.0, existing=6.0, threshold=10%",
+        "detected": "2026-04-24T13:49:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-12T00:00:00Z",
+        "entry_a_text": "Lake Mead dropped approximately 6 ft since March 1, 2026, now sitting 20 ft above the all-time low. Currently at approximately 35% capacity. SNWA outreach manager Bronson Mack stated the lake could drop another 16 ft by 2027. Federal projections released in March 2026 indicate Lake Mead could reach record-low water levels (~1,032 ft) by November 2027. Previous record low was approximately 1,040.94 ft, set in 2022. Very low snowpack cited as primary driver. Rising water temperatures reported as affecting water treatment operations. NPS issued harmful algal bloom advisory for Government Wash on March 13.",
+        "entry_b_time": "2026-04-24T13:49:15+00:00",
+        "entry_b_text": "USBR weekly hydrologic update April 20 2026: Lake Mead elevation 1,064.16 ft, down 0.67 ft from previous 24-Month Study. March 2026 projection range for EoY-2026 Mead: 1,054.36-1,063.43 ft. System at 21,448 kaf (37% capacity).",
+        "reason": "Numeric divergence 70.0% on metric (context: mead): new=20.0, existing=6.0, threshold=10%",
+        "detected": "2026-04-24T13:49:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:15+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "Lake Mead dropped over 6 feet since 3/1 to approximately 1,062-1,065 ft in late April 2026, nearing July 2022 record low; April 24-month study projects further ~20 ft decline in 2026; current Tier 1 shortage.",
+        "reason": "Numeric divergence 99.8% on metric (context: to): new=3.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:15+00:00",
+        "entry_a_text": "USBR weekly hydrologic update April 20 2026: Lake Mead elevation 1,064.16 ft, down 0.67 ft from previous 24-Month Study. March 2026 projection range for EoY-2026 Mead: 1,054.36-1,063.43 ft. System at 21,448 kaf (37% capacity).",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "Lake Mead dropped over 6 feet since 3/1 to approximately 1,062-1,065 ft in late April 2026, nearing July 2022 record low; April 24-month study projects further ~20 ft decline in 2026; current Tier 1 shortage.",
+        "reason": "Numeric divergence 70.0% on metric (context: mead): new=6.0, existing=20.0, threshold=10%",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Current elevation in 1,050-1,075 ft Tier-1 range and projection staying there support H2.",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "Lake Mead dropped over 6 feet since 3/1 to approximately 1,062-1,065 ft in late April 2026, nearing July 2022 record low; April 24-month study projects further ~20 ft decline in 2026; current Tier 1 shortage.",
+        "reason": "Numeric divergence 96.0% on metric (context: 1): new=3.0, existing=75.0, threshold=10%",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "USBR 2026-04-20 weekly hydrologic update: Lake Mead elevation 1,064.16 ft; April 2026 Most Probable 24-Month Study projects 1,056.87 ft on 2026-12-31 and Tier 1 Shortage continued.",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "Lake Mead dropped over 6 feet since 3/1 to approximately 1,062-1,065 ft in late April 2026, nearing July 2022 record low; April 24-month study projects further ~20 ft decline in 2026; current Tier 1 shortage.",
+        "reason": "Numeric divergence 83.3% on metric (context: mead): new=6.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-10",
+        "entry_a_text": "REPLAY: indicator t3_monthly_drop_6ft fires at historical firedDate 2026-04-10. Original note: Fox5 Vegas reports Lake Mead dropped >6ft since March 1. USBR confirms 1,064.16 ft on April 6.",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "Lake Mead dropped over 6 feet since 3/1 to approximately 1,062-1,065 ft in late April 2026, nearing July 2022 record low; April 24-month study projects further ~20 ft decline in 2026; current Tier 1 shortage.",
+        "reason": "Numeric divergence 83.3% on metric (context: since): new=6.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "Lake Mead dropped over 6 feet since 3/1 to approximately 1,062-1,065 ft in late April 2026, nearing July 2022 record low; April 24-month study projects further ~20 ft decline in 2026; current Tier 1 shortage.",
+        "reason": "Numeric divergence 99.8% on metric (context: to): new=3.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "USBR Apr 17, 2026 24-Month Study: Lake Mead projected at ~1,038 ft by end of June 2027 under most-probable scenario; worst-case ~1,026 ft (1 ft above Tier 3 threshold).",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "Lake Mead dropped over 6 feet since 3/1 to approximately 1,062-1,065 ft in late April 2026, nearing July 2022 record low; April 24-month study projects further ~20 ft decline in 2026; current Tier 1 shortage.",
+        "reason": "Numeric divergence 83.3% on metric (context: mead): new=6.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-20T14:03:51+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "Lake Mead dropped over 6 feet since 3/1 to approximately 1,062-1,065 ft in late April 2026, nearing July 2022 record low; April 24-month study projects further ~20 ft decline in 2026; current Tier 1 shortage.",
+        "reason": "Numeric divergence 99.8% on metric (context: to): new=3.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-20T14:03:51+00:00",
+        "entry_a_text": "Lake Mead elevation 1,064.16 ft per USBR Lower Colorado weekly hydrologic update April 6, 2026. Reservoir approximately 34% full (8.8 MAF). April 2026 unregulated inflow forecast for Lake Powell: 0.550 MAF (61% of 30-year average). Projected to remain in Tier 1 shortage with end-year elevation approximately 1,055.88 ft.",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "Lake Mead dropped over 6 feet since 3/1 to approximately 1,062-1,065 ft in late April 2026, nearing July 2022 record low; April 24-month study projects further ~20 ft decline in 2026; current Tier 1 shortage.",
+        "reason": "Numeric divergence 83.3% on metric (context: mead): new=6.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-19T00:57:10+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "Lake Mead dropped over 6 feet since 3/1 to approximately 1,062-1,065 ft in late April 2026, nearing July 2022 record low; April 24-month study projects further ~20 ft decline in 2026; current Tier 1 shortage.",
+        "reason": "Numeric divergence 99.8% on metric (context: to): new=3.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-19T00:57:10+00:00",
+        "entry_a_text": "Lake Mead elevation at 1,064.16 ft in early April 2026, reservoir 34% full (~8.8 MAF). Reclamation projects year-end elevation of 1,055.88 ft, keeping basin in Tier 1 Shortage Condition for 2026.",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "Lake Mead dropped over 6 feet since 3/1 to approximately 1,062-1,065 ft in late April 2026, nearing July 2022 record low; April 24-month study projects further ~20 ft decline in 2026; current Tier 1 shortage.",
+        "reason": "Numeric divergence 83.3% on metric (context: mead): new=6.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T15:23:00+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Very low snowpack and one-third normal inflow projection strongly favor continued decline into Tier 2 range (H3). Small Jan buffer unlikely to persist through summer drawdown. H4 risk elevated by drought severity.",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "Lake Mead dropped over 6 feet since 3/1 to approximately 1,062-1,065 ft in late April 2026, nearing July 2022 record low; April 24-month study projects further ~20 ft decline in 2026; current Tier 1 shortage.",
+        "reason": "Numeric divergence 90.0% on metric (context: decline): new=20.0, existing=2.0, threshold=10%",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T15:23:00+00:00",
+        "entry_a_text": "Lake Mead at ~34% capacity. Upper Basin snowpack near lowest levels during 2000-present drought. Apr-Jul inflow to Powell projected at one-third of normal. Mead was 1,062 ft in Jan 2026 (6.5 ft above projections). Post-2026 operating agreements under negotiation.",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "Lake Mead dropped over 6 feet since 3/1 to approximately 1,062-1,065 ft in late April 2026, nearing July 2022 record low; April 24-month study projects further ~20 ft decline in 2026; current Tier 1 shortage.",
+        "reason": "Numeric divergence 82.4% on metric (context: mead): new=6.0, existing=34.0, threshold=10%",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-16T03:43:52+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Evidence ev_003: Colorado Basin April 1 snowpack at historically record low levels, roughly five ",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "Lake Mead dropped over 6 feet since 3/1 to approximately 1,062-1,065 ft in late April 2026, nearing July 2022 record low; April 24-month study projects further ~20 ft decline in 2026; current Tier 1 shortage.",
+        "reason": "Numeric divergence 100.0% on metric (context: april): new=2026.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-16T03:43:52+00:00",
+        "entry_a_text": "Colorado Basin April 1 snowpack at historically record low levels, roughly five times lower than previous record. Federal Bureau of Reclamation projects Lake Mead will reach new record-low water levels by November 2027, potentially dropping to approximately 1032 feet.",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "Lake Mead dropped over 6 feet since 3/1 to approximately 1,062-1,065 ft in late April 2026, nearing July 2022 record low; April 24-month study projects further ~20 ft decline in 2026; current Tier 1 shortage.",
+        "reason": "Numeric divergence 99.9% on metric (context: to): new=3.0, existing=2027.0, threshold=10%",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-10T00:00:00Z",
+        "entry_a_text": "Lake Mead water surface elevation at 1,064.16 ft as of April 6 (USBR weekly update). Lake has dropped more than 6 feet since March 1, now just 20 feet above the all-time record low of 1,040.94 ft from July 2022. Federal projections show Lake Mead could reach new record low of ~1,032 ft by November 2027.",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "Lake Mead dropped over 6 feet since 3/1 to approximately 1,062-1,065 ft in late April 2026, nearing July 2022 record low; April 24-month study projects further ~20 ft decline in 2026; current Tier 1 shortage.",
+        "reason": "Numeric divergence 83.3% on metric (context: feet, since): new=6.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-12T00:00:00Z",
+        "entry_a_text": "Lake Mead dropped approximately 6 ft since March 1, 2026, now sitting 20 ft above the all-time low. Currently at approximately 35% capacity. SNWA outreach manager Bronson Mack stated the lake could drop another 16 ft by 2027. Federal projections released in March 2026 indicate Lake Mead could reach record-low water levels (~1,032 ft) by November 2027. Previous record low was approximately 1,040.94 ft, set in 2022. Very low snowpack cited as primary driver. Rising water temperatures reported as affecting water treatment operations. NPS issued harmful algal bloom advisory for Government Wash on March 13.",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "Lake Mead dropped over 6 feet since 3/1 to approximately 1,062-1,065 ft in late April 2026, nearing July 2022 record low; April 24-month study projects further ~20 ft decline in 2026; current Tier 1 shortage.",
+        "reason": "Numeric divergence 83.3% on metric (context: since): new=6.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T19:30:14+00:00",
+        "entry_a_text": "Lake Mead dropped over 6 feet since 3/1 to approximately 1,062-1,065 ft in late April 2026, nearing July 2022 record low; April 24-month study projects further ~20 ft decline in 2026; current Tier 1 shortage.",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Lake Mead surface elevation ~1,046-1,058 ft late April 2026 after dropping ~6 ft in March; Reclamation will reduce inflows by 1.48 MAF through April 2027; outlets project additional ~20 ft drop over next 12 months.",
+        "reason": "Numeric divergence 83.3% on metric (context: mead): new=1.0, existing=6.0, threshold=10%",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:15+00:00",
+        "entry_a_text": "USBR weekly hydrologic update April 20 2026: Lake Mead elevation 1,064.16 ft, down 0.67 ft from previous 24-Month Study. March 2026 projection range for EoY-2026 Mead: 1,054.36-1,063.43 ft. System at 21,448 kaf (37% capacity).",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Lake Mead surface elevation ~1,046-1,058 ft late April 2026 after dropping ~6 ft in March; Reclamation will reduce inflows by 1.48 MAF through April 2027; outlets project additional ~20 ft drop over next 12 months.",
+        "reason": "Numeric divergence 95.0% on metric (context: mead): new=1.0, existing=20.0, threshold=10%",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Current elevation in 1,050-1,075 ft Tier-1 range and projection staying there support H2.",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Lake Mead surface elevation ~1,046-1,058 ft late April 2026 after dropping ~6 ft in March; Reclamation will reduce inflows by 1.48 MAF through April 2027; outlets project additional ~20 ft drop over next 12 months.",
+        "reason": "Numeric divergence 98.7% on metric (context: ft): new=1.0, existing=75.0, threshold=10%",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "USBR 2026-04-20 weekly hydrologic update: Lake Mead elevation 1,064.16 ft; April 2026 Most Probable 24-Month Study projects 1,056.87 ft on 2026-12-31 and Tier 1 Shortage continued.",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Lake Mead surface elevation ~1,046-1,058 ft late April 2026 after dropping ~6 ft in March; Reclamation will reduce inflows by 1.48 MAF through April 2027; outlets project additional ~20 ft drop over next 12 months.",
+        "reason": "Numeric divergence 98.4% on metric (context: elevation, ft, mead): new=1.0, existing=64.16, threshold=10%",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-10",
+        "entry_a_text": "REPLAY: indicator t3_monthly_drop_6ft fires at historical firedDate 2026-04-10. Original note: Fox5 Vegas reports Lake Mead dropped >6ft since March 1. USBR confirms 1,064.16 ft on April 6.",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Lake Mead surface elevation ~1,046-1,058 ft late April 2026 after dropping ~6 ft in March; Reclamation will reduce inflows by 1.48 MAF through April 2027; outlets project additional ~20 ft drop over next 12 months.",
+        "reason": "Numeric divergence 98.4% on metric (context: ft): new=1.0, existing=64.16, threshold=10%",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "USBR Apr 17, 2026 24-Month Study: Lake Mead projected at ~1,038 ft by end of June 2027 under most-probable scenario; worst-case ~1,026 ft (1 ft above Tier 3 threshold).",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Lake Mead surface elevation ~1,046-1,058 ft late April 2026 after dropping ~6 ft in March; Reclamation will reduce inflows by 1.48 MAF through April 2027; outlets project additional ~20 ft drop over next 12 months.",
+        "reason": "Numeric divergence 97.4% on metric (context: ft): new=1.0, existing=38.0, threshold=10%",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-20T14:03:51+00:00",
+        "entry_a_text": "Lake Mead elevation 1,064.16 ft per USBR Lower Colorado weekly hydrologic update April 6, 2026. Reservoir approximately 34% full (8.8 MAF). April 2026 unregulated inflow forecast for Lake Powell: 0.550 MAF (61% of 30-year average). Projected to remain in Tier 1 shortage with end-year elevation approximately 1,055.88 ft.",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Lake Mead surface elevation ~1,046-1,058 ft late April 2026 after dropping ~6 ft in March; Reclamation will reduce inflows by 1.48 MAF through April 2027; outlets project additional ~20 ft drop over next 12 months.",
+        "reason": "Numeric divergence 98.4% on metric (context: elevation, ft, mead): new=1.0, existing=64.16, threshold=10%",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-19T00:57:10+00:00",
+        "entry_a_text": "Lake Mead elevation at 1,064.16 ft in early April 2026, reservoir 34% full (~8.8 MAF). Reclamation projects year-end elevation of 1,055.88 ft, keeping basin in Tier 1 Shortage Condition for 2026.",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Lake Mead surface elevation ~1,046-1,058 ft late April 2026 after dropping ~6 ft in March; Reclamation will reduce inflows by 1.48 MAF through April 2027; outlets project additional ~20 ft drop over next 12 months.",
+        "reason": "Numeric divergence 98.4% on metric (context: elevation, ft): new=1.0, existing=64.16, threshold=10%",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T15:23:00+00:00",
+        "entry_a_text": "Lake Mead at ~34% capacity. Upper Basin snowpack near lowest levels during 2000-present drought. Apr-Jul inflow to Powell projected at one-third of normal. Mead was 1,062 ft in Jan 2026 (6.5 ft above projections). Post-2026 operating agreements under negotiation.",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Lake Mead surface elevation ~1,046-1,058 ft late April 2026 after dropping ~6 ft in March; Reclamation will reduce inflows by 1.48 MAF through April 2027; outlets project additional ~20 ft drop over next 12 months.",
+        "reason": "Numeric divergence 97.1% on metric (context: mead): new=1.0, existing=34.0, threshold=10%",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-16T03:43:52+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Evidence ev_003: Colorado Basin April 1 snowpack at historically record low levels, roughly five ",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Lake Mead surface elevation ~1,046-1,058 ft late April 2026 after dropping ~6 ft in March; Reclamation will reduce inflows by 1.48 MAF through April 2027; outlets project additional ~20 ft drop over next 12 months.",
+        "reason": "Numeric divergence 98.3% on metric (context: april): new=58.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-16T03:43:52+00:00",
+        "entry_a_text": "Colorado Basin April 1 snowpack at historically record low levels, roughly five times lower than previous record. Federal Bureau of Reclamation projects Lake Mead will reach new record-low water levels by November 2027, potentially dropping to approximately 1032 feet.",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Lake Mead surface elevation ~1,046-1,058 ft late April 2026 after dropping ~6 ft in March; Reclamation will reduce inflows by 1.48 MAF through April 2027; outlets project additional ~20 ft drop over next 12 months.",
+        "reason": "Numeric divergence 98.3% on metric (context: april): new=58.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-10T00:00:00Z",
+        "entry_a_text": "Lake Mead water surface elevation at 1,064.16 ft as of April 6 (USBR weekly update). Lake has dropped more than 6 feet since March 1, now just 20 feet above the all-time record low of 1,040.94 ft from July 2022. Federal projections show Lake Mead could reach new record low of ~1,032 ft by November 2027.",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Lake Mead surface elevation ~1,046-1,058 ft late April 2026 after dropping ~6 ft in March; Reclamation will reduce inflows by 1.48 MAF through April 2027; outlets project additional ~20 ft drop over next 12 months.",
+        "reason": "Numeric divergence 98.4% on metric (context: elevation, ft): new=1.0, existing=64.16, threshold=10%",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-12T00:00:00Z",
+        "entry_a_text": "Lake Mead dropped approximately 6 ft since March 1, 2026, now sitting 20 ft above the all-time low. Currently at approximately 35% capacity. SNWA outreach manager Bronson Mack stated the lake could drop another 16 ft by 2027. Federal projections released in March 2026 indicate Lake Mead could reach record-low water levels (~1,032 ft) by November 2027. Previous record low was approximately 1,040.94 ft, set in 2022. Very low snowpack cited as primary driver. Rising water temperatures reported as affecting water treatment operations. NPS issued harmful algal bloom advisory for Government Wash on March 13.",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Lake Mead surface elevation ~1,046-1,058 ft late April 2026 after dropping ~6 ft in March; Reclamation will reduce inflows by 1.48 MAF through April 2027; outlets project additional ~20 ft drop over next 12 months.",
+        "reason": "Numeric divergence 83.3% on metric (context: ft, mead): new=1.0, existing=6.0, threshold=10%",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T13:19:53+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, stale_evidence, quorum_failure. Reason: Trajectory points to crossing 1,050 ft into Tier-2 range (H3); recovery (H1) effectively impossible; severe collapse (H4) tail rising modestly.",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Bureau of Reclamation April 2026 24-Month Study: Lake Mead currently 1,062-1,065 ft (~34% full); projected 1,063.43 ft at December 31, 2026 under most-probable scenario. Water Year 2026 inflow forecast 4,401 kaf (46% of normal). Projected ~20-foot decline over 2026 due to reduced Powell releases.",
+        "reason": "Numeric divergence 98.0% on metric (context: ft): new=1.0, existing=50.0, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T13:19:53+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Bureau of Reclamation April 2026 24-Month Study: Lake Mead currently 1,062-1,065 ft (~34% full); projected 1,063.43 ft at December 31, 2026 under most-probable scenario. Water Year 2026 inflow forecast 4,401 kaf (46% of normal). Projected ~20-foot decline over 2026 due to reduced Powell releases.",
+        "reason": "Numeric divergence 100.0% on metric (context: .): new=46.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T13:19:53+00:00",
+        "entry_a_text": "Lake Mead surface elevation ~1,046-1,058 ft late April 2026 after dropping ~6 ft in March; Reclamation will reduce inflows by 1.48 MAF through April 2027; outlets project additional ~20 ft drop over next 12 months.",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Bureau of Reclamation April 2026 24-Month Study: Lake Mead currently 1,062-1,065 ft (~34% full); projected 1,063.43 ft at December 31, 2026 under most-probable scenario. Water Year 2026 inflow forecast 4,401 kaf (46% of normal). Projected ~20-foot decline over 2026 due to reduced Powell releases.",
+        "reason": "Numeric divergence 97.1% on metric (context: april): new=2026.0, existing=58.0, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T19:30:14+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Bureau of Reclamation April 2026 24-Month Study: Lake Mead currently 1,062-1,065 ft (~34% full); projected 1,063.43 ft at December 31, 2026 under most-probable scenario. Water Year 2026 inflow forecast 4,401 kaf (46% of normal). Projected ~20-foot decline over 2026 due to reduced Powell releases.",
+        "reason": "Numeric divergence 100.0% on metric (context: .): new=46.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T19:30:14+00:00",
+        "entry_a_text": "Lake Mead dropped over 6 feet since 3/1 to approximately 1,062-1,065 ft in late April 2026, nearing July 2022 record low; April 24-month study projects further ~20 ft decline in 2026; current Tier 1 shortage.",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Bureau of Reclamation April 2026 24-Month Study: Lake Mead currently 1,062-1,065 ft (~34% full); projected 1,063.43 ft at December 31, 2026 under most-probable scenario. Water Year 2026 inflow forecast 4,401 kaf (46% of normal). Projected ~20-foot decline over 2026 due to reduced Powell releases.",
+        "reason": "Numeric divergence 99.0% on metric (context: study): new=2026.0, existing=20.0, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:15+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Bureau of Reclamation April 2026 24-Month Study: Lake Mead currently 1,062-1,065 ft (~34% full); projected 1,063.43 ft at December 31, 2026 under most-probable scenario. Water Year 2026 inflow forecast 4,401 kaf (46% of normal). Projected ~20-foot decline over 2026 due to reduced Powell releases.",
+        "reason": "Numeric divergence 100.0% on metric (context: .): new=46.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:15+00:00",
+        "entry_a_text": "USBR weekly hydrologic update April 20 2026: Lake Mead elevation 1,064.16 ft, down 0.67 ft from previous 24-Month Study. March 2026 projection range for EoY-2026 Mead: 1,054.36-1,063.43 ft. System at 21,448 kaf (37% capacity).",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Bureau of Reclamation April 2026 24-Month Study: Lake Mead currently 1,062-1,065 ft (~34% full); projected 1,063.43 ft at December 31, 2026 under most-probable scenario. Water Year 2026 inflow forecast 4,401 kaf (46% of normal). Projected ~20-foot decline over 2026 due to reduced Powell releases.",
+        "reason": "Numeric divergence 99.0% on metric (context: april, lake): new=2026.0, existing=20.0, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Current elevation in 1,050-1,075 ft Tier-1 range and projection staying there support H2.",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Bureau of Reclamation April 2026 24-Month Study: Lake Mead currently 1,062-1,065 ft (~34% full); projected 1,063.43 ft at December 31, 2026 under most-probable scenario. Water Year 2026 inflow forecast 4,401 kaf (46% of normal). Projected ~20-foot decline over 2026 due to reduced Powell releases.",
+        "reason": "Numeric divergence 98.7% on metric (context: ft): new=1.0, existing=75.0, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "USBR 2026-04-20 weekly hydrologic update: Lake Mead elevation 1,064.16 ft; April 2026 Most Probable 24-Month Study projects 1,056.87 ft on 2026-12-31 and Tier 1 Shortage continued.",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Bureau of Reclamation April 2026 24-Month Study: Lake Mead currently 1,062-1,065 ft (~34% full); projected 1,063.43 ft at December 31, 2026 under most-probable scenario. Water Year 2026 inflow forecast 4,401 kaf (46% of normal). Projected ~20-foot decline over 2026 due to reduced Powell releases.",
+        "reason": "Numeric divergence 100.0% on metric (context: april, lake): new=2026.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-22T01:00:38+00:00",
+        "entry_a_text": "REPLAY COMPLETE: 1 indicators applied, 0 skipped. Final posteriors: {'H1': 0.06, 'H2': 0.29, 'H3': 0.48, 'H4': 0.17}. Indicator firedDates restored to originals for audit.",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Bureau of Reclamation April 2026 24-Month Study: Lake Mead currently 1,062-1,065 ft (~34% full); projected 1,063.43 ft at December 31, 2026 under most-probable scenario. Water Year 2026 inflow forecast 4,401 kaf (46% of normal). Projected ~20-foot decline over 2026 due to reduced Powell releases.",
+        "reason": "Numeric divergence 99.0% on metric (context: .): new=46.0, existing=0.48, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-10",
+        "entry_a_text": "REPLAY: indicator t3_monthly_drop_6ft fires at historical firedDate 2026-04-10. Original note: Fox5 Vegas reports Lake Mead dropped >6ft since March 1. USBR confirms 1,064.16 ft on April 6.",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Bureau of Reclamation April 2026 24-Month Study: Lake Mead currently 1,062-1,065 ft (~34% full); projected 1,063.43 ft at December 31, 2026 under most-probable scenario. Water Year 2026 inflow forecast 4,401 kaf (46% of normal). Projected ~20-foot decline over 2026 due to reduced Powell releases.",
+        "reason": "Numeric divergence 96.8% on metric (context: april): new=2026.0, existing=64.16, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Bureau of Reclamation April 2026 24-Month Study: Lake Mead currently 1,062-1,065 ft (~34% full); projected 1,063.43 ft at December 31, 2026 under most-probable scenario. Water Year 2026 inflow forecast 4,401 kaf (46% of normal). Projected ~20-foot decline over 2026 due to reduced Powell releases.",
+        "reason": "Numeric divergence 100.0% on metric (context: to): new=2026.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "USBR Apr 17, 2026 24-Month Study: Lake Mead projected at ~1,038 ft by end of June 2027 under most-probable scenario; worst-case ~1,026 ft (1 ft above Tier 3 threshold).",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Bureau of Reclamation April 2026 24-Month Study: Lake Mead currently 1,062-1,065 ft (~34% full); projected 1,063.43 ft at December 31, 2026 under most-probable scenario. Water Year 2026 inflow forecast 4,401 kaf (46% of normal). Projected ~20-foot decline over 2026 due to reduced Powell releases.",
+        "reason": "Numeric divergence 99.2% on metric (context: 24-month, study): new=2026.0, existing=17.0, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-20T14:03:51+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Bureau of Reclamation April 2026 24-Month Study: Lake Mead currently 1,062-1,065 ft (~34% full); projected 1,063.43 ft at December 31, 2026 under most-probable scenario. Water Year 2026 inflow forecast 4,401 kaf (46% of normal). Projected ~20-foot decline over 2026 due to reduced Powell releases.",
+        "reason": "Numeric divergence 100.0% on metric (context: to): new=2026.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-20T14:03:51+00:00",
+        "entry_a_text": "Lake Mead elevation 1,064.16 ft per USBR Lower Colorado weekly hydrologic update April 6, 2026. Reservoir approximately 34% full (8.8 MAF). April 2026 unregulated inflow forecast for Lake Powell: 0.550 MAF (61% of 30-year average). Projected to remain in Tier 1 shortage with end-year elevation approximately 1,055.88 ft.",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Bureau of Reclamation April 2026 24-Month Study: Lake Mead currently 1,062-1,065 ft (~34% full); projected 1,063.43 ft at December 31, 2026 under most-probable scenario. Water Year 2026 inflow forecast 4,401 kaf (46% of normal). Projected ~20-foot decline over 2026 due to reduced Powell releases.",
+        "reason": "Numeric divergence 100.0% on metric (context: lake): new=2026.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-19T00:57:10+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Bureau of Reclamation April 2026 24-Month Study: Lake Mead currently 1,062-1,065 ft (~34% full); projected 1,063.43 ft at December 31, 2026 under most-probable scenario. Water Year 2026 inflow forecast 4,401 kaf (46% of normal). Projected ~20-foot decline over 2026 due to reduced Powell releases.",
+        "reason": "Numeric divergence 100.0% on metric (context: to): new=2026.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-19T00:57:10+00:00",
+        "entry_a_text": "Lake Mead elevation at 1,064.16 ft in early April 2026, reservoir 34% full (~8.8 MAF). Reclamation projects year-end elevation of 1,055.88 ft, keeping basin in Tier 1 Shortage Condition for 2026.",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Bureau of Reclamation April 2026 24-Month Study: Lake Mead currently 1,062-1,065 ft (~34% full); projected 1,063.43 ft at December 31, 2026 under most-probable scenario. Water Year 2026 inflow forecast 4,401 kaf (46% of normal). Projected ~20-foot decline over 2026 due to reduced Powell releases.",
+        "reason": "Numeric divergence 98.3% on metric (context: april): new=2026.0, existing=34.0, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T15:23:00+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Very low snowpack and one-third normal inflow projection strongly favor continued decline into Tier 2 range (H3). Small Jan buffer unlikely to persist through summer drawdown. H4 risk elevated by drought severity.",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Bureau of Reclamation April 2026 24-Month Study: Lake Mead currently 1,062-1,065 ft (~34% full); projected 1,063.43 ft at December 31, 2026 under most-probable scenario. Water Year 2026 inflow forecast 4,401 kaf (46% of normal). Projected ~20-foot decline over 2026 due to reduced Powell releases.",
+        "reason": "Numeric divergence 95.7% on metric (context: .): new=46.0, existing=2.0, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T15:23:00+00:00",
+        "entry_a_text": "Lake Mead at ~34% capacity. Upper Basin snowpack near lowest levels during 2000-present drought. Apr-Jul inflow to Powell projected at one-third of normal. Mead was 1,062 ft in Jan 2026 (6.5 ft above projections). Post-2026 operating agreements under negotiation.",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Bureau of Reclamation April 2026 24-Month Study: Lake Mead currently 1,062-1,065 ft (~34% full); projected 1,063.43 ft at December 31, 2026 under most-probable scenario. Water Year 2026 inflow forecast 4,401 kaf (46% of normal). Projected ~20-foot decline over 2026 due to reduced Powell releases.",
+        "reason": "Numeric divergence 98.3% on metric (context: lake): new=2026.0, existing=34.0, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-16T03:43:52+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Evidence ev_003: Colorado Basin April 1 snowpack at historically record low levels, roughly five ",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Bureau of Reclamation April 2026 24-Month Study: Lake Mead currently 1,062-1,065 ft (~34% full); projected 1,063.43 ft at December 31, 2026 under most-probable scenario. Water Year 2026 inflow forecast 4,401 kaf (46% of normal). Projected ~20-foot decline over 2026 due to reduced Powell releases.",
+        "reason": "Numeric divergence 100.0% on metric (context: april): new=2026.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-16T03:43:52+00:00",
+        "entry_a_text": "Colorado Basin April 1 snowpack at historically record low levels, roughly five times lower than previous record. Federal Bureau of Reclamation projects Lake Mead will reach new record-low water levels by November 2027, potentially dropping to approximately 1032 feet.",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Bureau of Reclamation April 2026 24-Month Study: Lake Mead currently 1,062-1,065 ft (~34% full); projected 1,063.43 ft at December 31, 2026 under most-probable scenario. Water Year 2026 inflow forecast 4,401 kaf (46% of normal). Projected ~20-foot decline over 2026 due to reduced Powell releases.",
+        "reason": "Numeric divergence 100.0% on metric (context: april): new=2026.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-10T00:00:00Z",
+        "entry_a_text": "Lake Mead water surface elevation at 1,064.16 ft as of April 6 (USBR weekly update). Lake has dropped more than 6 feet since March 1, now just 20 feet above the all-time record low of 1,040.94 ft from July 2022. Federal projections show Lake Mead could reach new record low of ~1,032 ft by November 2027.",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Bureau of Reclamation April 2026 24-Month Study: Lake Mead currently 1,062-1,065 ft (~34% full); projected 1,063.43 ft at December 31, 2026 under most-probable scenario. Water Year 2026 inflow forecast 4,401 kaf (46% of normal). Projected ~20-foot decline over 2026 due to reduced Powell releases.",
+        "reason": "Numeric divergence 96.8% on metric (context: of): new=2026.0, existing=64.16, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-12T00:00:00Z",
+        "entry_a_text": "Lake Mead dropped approximately 6 ft since March 1, 2026, now sitting 20 ft above the all-time low. Currently at approximately 35% capacity. SNWA outreach manager Bronson Mack stated the lake could drop another 16 ft by 2027. Federal projections released in March 2026 indicate Lake Mead could reach record-low water levels (~1,032 ft) by November 2027. Previous record low was approximately 1,040.94 ft, set in 2022. Very low snowpack cited as primary driver. Rising water temperatures reported as affecting water treatment operations. NPS issued harmful algal bloom advisory for Government Wash on March 13.",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Bureau of Reclamation April 2026 24-Month Study: Lake Mead currently 1,062-1,065 ft (~34% full); projected 1,063.43 ft at December 31, 2026 under most-probable scenario. Water Year 2026 inflow forecast 4,401 kaf (46% of normal). Projected ~20-foot decline over 2026 due to reduced Powell releases.",
+        "reason": "Numeric divergence 83.3% on metric (context: ft, mead): new=1.0, existing=6.0, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T14:24:50+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "USBR April 2026 24-month study: Lake Mead at ~1,046 ft early April (down ~6 ft from early March's ~1,052 ft); projected to drop a further ~20 ft over next 12 months; current Tier 1 shortage projected to continue with elevation 1,055.88 ft per most-probable scenario.",
+        "reason": "Numeric divergence 100.0% on metric (context: to): new=52.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T14:24:50+00:00",
+        "entry_a_text": "Bureau of Reclamation April 2026 24-Month Study: Lake Mead currently 1,062-1,065 ft (~34% full); projected 1,063.43 ft at December 31, 2026 under most-probable scenario. Water Year 2026 inflow forecast 4,401 kaf (46% of normal). Projected ~20-foot decline over 2026 due to reduced Powell releases.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "USBR April 2026 24-month study: Lake Mead at ~1,046 ft early April (down ~6 ft from early March's ~1,052 ft); projected to drop a further ~20 ft over next 12 months; current Tier 1 shortage projected to continue with elevation 1,055.88 ft per most-probable scenario.",
+        "reason": "Numeric divergence 100.0% on metric (context: lake): new=2026.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T13:19:53+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, stale_evidence, quorum_failure. Reason: Trajectory points to crossing 1,050 ft into Tier-2 range (H3); recovery (H1) effectively impossible; severe collapse (H4) tail rising modestly.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "USBR April 2026 24-month study: Lake Mead at ~1,046 ft early April (down ~6 ft from early March's ~1,052 ft); projected to drop a further ~20 ft over next 12 months; current Tier 1 shortage projected to continue with elevation 1,055.88 ft per most-probable scenario.",
+        "reason": "Numeric divergence 98.0% on metric (context: ft): new=1.0, existing=50.0, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T13:19:53+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "USBR April 2026 24-month study: Lake Mead at ~1,046 ft early April (down ~6 ft from early March's ~1,052 ft); projected to drop a further ~20 ft over next 12 months; current Tier 1 shortage projected to continue with elevation 1,055.88 ft per most-probable scenario.",
+        "reason": "Numeric divergence 100.0% on metric (context: to): new=52.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T13:19:53+00:00",
+        "entry_a_text": "Lake Mead surface elevation ~1,046-1,058 ft late April 2026 after dropping ~6 ft in March; Reclamation will reduce inflows by 1.48 MAF through April 2027; outlets project additional ~20 ft drop over next 12 months.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "USBR April 2026 24-month study: Lake Mead at ~1,046 ft early April (down ~6 ft from early March's ~1,052 ft); projected to drop a further ~20 ft over next 12 months; current Tier 1 shortage projected to continue with elevation 1,055.88 ft per most-probable scenario.",
+        "reason": "Numeric divergence 97.1% on metric (context: april): new=2026.0, existing=58.0, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T19:30:14+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "USBR April 2026 24-month study: Lake Mead at ~1,046 ft early April (down ~6 ft from early March's ~1,052 ft); projected to drop a further ~20 ft over next 12 months; current Tier 1 shortage projected to continue with elevation 1,055.88 ft per most-probable scenario.",
+        "reason": "Numeric divergence 100.0% on metric (context: to): new=52.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T19:30:14+00:00",
+        "entry_a_text": "Lake Mead dropped over 6 feet since 3/1 to approximately 1,062-1,065 ft in late April 2026, nearing July 2022 record low; April 24-month study projects further ~20 ft decline in 2026; current Tier 1 shortage.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "USBR April 2026 24-month study: Lake Mead at ~1,046 ft early April (down ~6 ft from early March's ~1,052 ft); projected to drop a further ~20 ft over next 12 months; current Tier 1 shortage projected to continue with elevation 1,055.88 ft per most-probable scenario.",
+        "reason": "Numeric divergence 99.0% on metric (context: study): new=2026.0, existing=20.0, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:15+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "USBR April 2026 24-month study: Lake Mead at ~1,046 ft early April (down ~6 ft from early March's ~1,052 ft); projected to drop a further ~20 ft over next 12 months; current Tier 1 shortage projected to continue with elevation 1,055.88 ft per most-probable scenario.",
+        "reason": "Numeric divergence 100.0% on metric (context: to): new=52.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:15+00:00",
+        "entry_a_text": "USBR weekly hydrologic update April 20 2026: Lake Mead elevation 1,064.16 ft, down 0.67 ft from previous 24-Month Study. March 2026 projection range for EoY-2026 Mead: 1,054.36-1,063.43 ft. System at 21,448 kaf (37% capacity).",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "USBR April 2026 24-month study: Lake Mead at ~1,046 ft early April (down ~6 ft from early March's ~1,052 ft); projected to drop a further ~20 ft over next 12 months; current Tier 1 shortage projected to continue with elevation 1,055.88 ft per most-probable scenario.",
+        "reason": "Numeric divergence 99.0% on metric (context: april, lake): new=2026.0, existing=20.0, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Current elevation in 1,050-1,075 ft Tier-1 range and projection staying there support H2.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "USBR April 2026 24-month study: Lake Mead at ~1,046 ft early April (down ~6 ft from early March's ~1,052 ft); projected to drop a further ~20 ft over next 12 months; current Tier 1 shortage projected to continue with elevation 1,055.88 ft per most-probable scenario.",
+        "reason": "Numeric divergence 98.7% on metric (context: ft): new=1.0, existing=75.0, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "USBR 2026-04-20 weekly hydrologic update: Lake Mead elevation 1,064.16 ft; April 2026 Most Probable 24-Month Study projects 1,056.87 ft on 2026-12-31 and Tier 1 Shortage continued.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "USBR April 2026 24-month study: Lake Mead at ~1,046 ft early April (down ~6 ft from early March's ~1,052 ft); projected to drop a further ~20 ft over next 12 months; current Tier 1 shortage projected to continue with elevation 1,055.88 ft per most-probable scenario.",
+        "reason": "Numeric divergence 100.0% on metric (context: april, lake): new=2026.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-10",
+        "entry_a_text": "REPLAY: indicator t3_monthly_drop_6ft fires at historical firedDate 2026-04-10. Original note: Fox5 Vegas reports Lake Mead dropped >6ft since March 1. USBR confirms 1,064.16 ft on April 6.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "USBR April 2026 24-month study: Lake Mead at ~1,046 ft early April (down ~6 ft from early March's ~1,052 ft); projected to drop a further ~20 ft over next 12 months; current Tier 1 shortage projected to continue with elevation 1,055.88 ft per most-probable scenario.",
+        "reason": "Numeric divergence 100.0% on metric (context: usbr): new=2026.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "USBR April 2026 24-month study: Lake Mead at ~1,046 ft early April (down ~6 ft from early March's ~1,052 ft); projected to drop a further ~20 ft over next 12 months; current Tier 1 shortage projected to continue with elevation 1,055.88 ft per most-probable scenario.",
+        "reason": "Numeric divergence 100.0% on metric (context: to): new=52.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "USBR Apr 17, 2026 24-Month Study: Lake Mead projected at ~1,038 ft by end of June 2027 under most-probable scenario; worst-case ~1,026 ft (1 ft above Tier 3 threshold).",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "USBR April 2026 24-month study: Lake Mead at ~1,046 ft early April (down ~6 ft from early March's ~1,052 ft); projected to drop a further ~20 ft over next 12 months; current Tier 1 shortage projected to continue with elevation 1,055.88 ft per most-probable scenario.",
+        "reason": "Numeric divergence 99.2% on metric (context: 24-month, study, usbr): new=2026.0, existing=17.0, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-20T14:03:51+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "USBR April 2026 24-month study: Lake Mead at ~1,046 ft early April (down ~6 ft from early March's ~1,052 ft); projected to drop a further ~20 ft over next 12 months; current Tier 1 shortage projected to continue with elevation 1,055.88 ft per most-probable scenario.",
+        "reason": "Numeric divergence 100.0% on metric (context: to): new=52.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-20T14:03:51+00:00",
+        "entry_a_text": "Lake Mead elevation 1,064.16 ft per USBR Lower Colorado weekly hydrologic update April 6, 2026. Reservoir approximately 34% full (8.8 MAF). April 2026 unregulated inflow forecast for Lake Powell: 0.550 MAF (61% of 30-year average). Projected to remain in Tier 1 shortage with end-year elevation approximately 1,055.88 ft.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "USBR April 2026 24-month study: Lake Mead at ~1,046 ft early April (down ~6 ft from early March's ~1,052 ft); projected to drop a further ~20 ft over next 12 months; current Tier 1 shortage projected to continue with elevation 1,055.88 ft per most-probable scenario.",
+        "reason": "Numeric divergence 100.0% on metric (context: lake): new=2026.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-19T00:57:10+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "USBR April 2026 24-month study: Lake Mead at ~1,046 ft early April (down ~6 ft from early March's ~1,052 ft); projected to drop a further ~20 ft over next 12 months; current Tier 1 shortage projected to continue with elevation 1,055.88 ft per most-probable scenario.",
+        "reason": "Numeric divergence 100.0% on metric (context: to): new=52.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-19T00:57:10+00:00",
+        "entry_a_text": "Lake Mead elevation at 1,064.16 ft in early April 2026, reservoir 34% full (~8.8 MAF). Reclamation projects year-end elevation of 1,055.88 ft, keeping basin in Tier 1 Shortage Condition for 2026.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "USBR April 2026 24-month study: Lake Mead at ~1,046 ft early April (down ~6 ft from early March's ~1,052 ft); projected to drop a further ~20 ft over next 12 months; current Tier 1 shortage projected to continue with elevation 1,055.88 ft per most-probable scenario.",
+        "reason": "Numeric divergence 98.3% on metric (context: april): new=2026.0, existing=34.0, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T15:23:00+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Very low snowpack and one-third normal inflow projection strongly favor continued decline into Tier 2 range (H3). Small Jan buffer unlikely to persist through summer drawdown. H4 risk elevated by drought severity.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "USBR April 2026 24-month study: Lake Mead at ~1,046 ft early April (down ~6 ft from early March's ~1,052 ft); projected to drop a further ~20 ft over next 12 months; current Tier 1 shortage projected to continue with elevation 1,055.88 ft per most-probable scenario.",
+        "reason": "Numeric divergence 83.3% on metric (context: tier): new=12.0, existing=2.0, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T15:23:00+00:00",
+        "entry_a_text": "Lake Mead at ~34% capacity. Upper Basin snowpack near lowest levels during 2000-present drought. Apr-Jul inflow to Powell projected at one-third of normal. Mead was 1,062 ft in Jan 2026 (6.5 ft above projections). Post-2026 operating agreements under negotiation.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "USBR April 2026 24-month study: Lake Mead at ~1,046 ft early April (down ~6 ft from early March's ~1,052 ft); projected to drop a further ~20 ft over next 12 months; current Tier 1 shortage projected to continue with elevation 1,055.88 ft per most-probable scenario.",
+        "reason": "Numeric divergence 98.3% on metric (context: lake): new=2026.0, existing=34.0, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-16T03:43:52+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Evidence ev_003: Colorado Basin April 1 snowpack at historically record low levels, roughly five ",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "USBR April 2026 24-month study: Lake Mead at ~1,046 ft early April (down ~6 ft from early March's ~1,052 ft); projected to drop a further ~20 ft over next 12 months; current Tier 1 shortage projected to continue with elevation 1,055.88 ft per most-probable scenario.",
+        "reason": "Numeric divergence 100.0% on metric (context: april): new=2026.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-16T03:43:52+00:00",
+        "entry_a_text": "Colorado Basin April 1 snowpack at historically record low levels, roughly five times lower than previous record. Federal Bureau of Reclamation projects Lake Mead will reach new record-low water levels by November 2027, potentially dropping to approximately 1032 feet.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "USBR April 2026 24-month study: Lake Mead at ~1,046 ft early April (down ~6 ft from early March's ~1,052 ft); projected to drop a further ~20 ft over next 12 months; current Tier 1 shortage projected to continue with elevation 1,055.88 ft per most-probable scenario.",
+        "reason": "Numeric divergence 100.0% on metric (context: april): new=2026.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-10T00:00:00Z",
+        "entry_a_text": "Lake Mead water surface elevation at 1,064.16 ft as of April 6 (USBR weekly update). Lake has dropped more than 6 feet since March 1, now just 20 feet above the all-time record low of 1,040.94 ft from July 2022. Federal projections show Lake Mead could reach new record low of ~1,032 ft by November 2027.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "USBR April 2026 24-month study: Lake Mead at ~1,046 ft early April (down ~6 ft from early March's ~1,052 ft); projected to drop a further ~20 ft over next 12 months; current Tier 1 shortage projected to continue with elevation 1,055.88 ft per most-probable scenario.",
+        "reason": "Numeric divergence 99.7% on metric (context: april, usbr): new=2026.0, existing=6.0, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-12T00:00:00Z",
+        "entry_a_text": "Lake Mead dropped approximately 6 ft since March 1, 2026, now sitting 20 ft above the all-time low. Currently at approximately 35% capacity. SNWA outreach manager Bronson Mack stated the lake could drop another 16 ft by 2027. Federal projections released in March 2026 indicate Lake Mead could reach record-low water levels (~1,032 ft) by November 2027. Previous record low was approximately 1,040.94 ft, set in 2022. Very low snowpack cited as primary driver. Rising water temperatures reported as affecting water treatment operations. NPS issued harmful algal bloom advisory for Government Wash on March 13.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "USBR April 2026 24-month study: Lake Mead at ~1,046 ft early April (down ~6 ft from early March's ~1,052 ft); projected to drop a further ~20 ft over next 12 months; current Tier 1 shortage projected to continue with elevation 1,055.88 ft per most-probable scenario.",
+        "reason": "Numeric divergence 83.3% on metric (context: ft, mead): new=1.0, existing=6.0, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-26T16:59:07+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Current 1,046 ft with projected 20 ft further decline over next 12 months puts EOY 2027 squarely in the H3 band; slight upweight to H4 tail.",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "USBR April 2026 24-Month Study: Lake Mead currently at 1,062.38 ft, ~6.5 ft above projections, with Tier 1 holding through 2026 but hydraulic models show elevation likely falling below 1,050 ft by July 2026 — triggering Tier 2 for 2027 operations.",
+        "reason": "Numeric divergence 97.8% on metric (context: ft): new=1.0, existing=46.0, threshold=10%",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-26T16:59:07+00:00",
+        "entry_a_text": "USBR April 2026 24-month study: Lake Mead at ~1,046 ft early April (down ~6 ft from early March's ~1,052 ft); projected to drop a further ~20 ft over next 12 months; current Tier 1 shortage projected to continue with elevation 1,055.88 ft per most-probable scenario.",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "USBR April 2026 24-Month Study: Lake Mead currently at 1,062.38 ft, ~6.5 ft above projections, with Tier 1 holding through 2026 but hydraulic models show elevation likely falling below 1,050 ft by July 2026 — triggering Tier 2 for 2027 operations.",
+        "reason": "Numeric divergence 100.0% on metric (context: lake): new=2026.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T14:24:50+00:00",
+        "entry_a_text": "Bureau of Reclamation April 2026 24-Month Study: Lake Mead currently 1,062-1,065 ft (~34% full); projected 1,063.43 ft at December 31, 2026 under most-probable scenario. Water Year 2026 inflow forecast 4,401 kaf (46% of normal). Projected ~20-foot decline over 2026 due to reduced Powell releases.",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "USBR April 2026 24-Month Study: Lake Mead currently at 1,062.38 ft, ~6.5 ft above projections, with Tier 1 holding through 2026 but hydraulic models show elevation likely falling below 1,050 ft by July 2026 — triggering Tier 2 for 2027 operations.",
+        "reason": "Numeric divergence 100.0% on metric (context: lake): new=2026.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T13:19:53+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, stale_evidence, quorum_failure. Reason: Trajectory points to crossing 1,050 ft into Tier-2 range (H3); recovery (H1) effectively impossible; severe collapse (H4) tail rising modestly.",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "USBR April 2026 24-Month Study: Lake Mead currently at 1,062.38 ft, ~6.5 ft above projections, with Tier 1 holding through 2026 but hydraulic models show elevation likely falling below 1,050 ft by July 2026 — triggering Tier 2 for 2027 operations.",
+        "reason": "Numeric divergence 98.0% on metric (context: ft): new=1.0, existing=50.0, threshold=10%",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T13:19:53+00:00",
+        "entry_a_text": "Lake Mead surface elevation ~1,046-1,058 ft late April 2026 after dropping ~6 ft in March; Reclamation will reduce inflows by 1.48 MAF through April 2027; outlets project additional ~20 ft drop over next 12 months.",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "USBR April 2026 24-Month Study: Lake Mead currently at 1,062.38 ft, ~6.5 ft above projections, with Tier 1 holding through 2026 but hydraulic models show elevation likely falling below 1,050 ft by July 2026 — triggering Tier 2 for 2027 operations.",
+        "reason": "Numeric divergence 97.1% on metric (context: april): new=2026.0, existing=58.0, threshold=10%",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T19:30:14+00:00",
+        "entry_a_text": "Lake Mead dropped over 6 feet since 3/1 to approximately 1,062-1,065 ft in late April 2026, nearing July 2022 record low; April 24-month study projects further ~20 ft decline in 2026; current Tier 1 shortage.",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "USBR April 2026 24-Month Study: Lake Mead currently at 1,062.38 ft, ~6.5 ft above projections, with Tier 1 holding through 2026 but hydraulic models show elevation likely falling below 1,050 ft by July 2026 — triggering Tier 2 for 2027 operations.",
+        "reason": "Numeric divergence 99.0% on metric (context: study): new=2026.0, existing=20.0, threshold=10%",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:15+00:00",
+        "entry_a_text": "USBR weekly hydrologic update April 20 2026: Lake Mead elevation 1,064.16 ft, down 0.67 ft from previous 24-Month Study. March 2026 projection range for EoY-2026 Mead: 1,054.36-1,063.43 ft. System at 21,448 kaf (37% capacity).",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "USBR April 2026 24-Month Study: Lake Mead currently at 1,062.38 ft, ~6.5 ft above projections, with Tier 1 holding through 2026 but hydraulic models show elevation likely falling below 1,050 ft by July 2026 — triggering Tier 2 for 2027 operations.",
+        "reason": "Numeric divergence 99.0% on metric (context: april, lake): new=2026.0, existing=20.0, threshold=10%",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Current elevation in 1,050-1,075 ft Tier-1 range and projection staying there support H2.",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "USBR April 2026 24-Month Study: Lake Mead currently at 1,062.38 ft, ~6.5 ft above projections, with Tier 1 holding through 2026 but hydraulic models show elevation likely falling below 1,050 ft by July 2026 — triggering Tier 2 for 2027 operations.",
+        "reason": "Numeric divergence 98.7% on metric (context: ft): new=1.0, existing=75.0, threshold=10%",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "USBR 2026-04-20 weekly hydrologic update: Lake Mead elevation 1,064.16 ft; April 2026 Most Probable 24-Month Study projects 1,056.87 ft on 2026-12-31 and Tier 1 Shortage continued.",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "USBR April 2026 24-Month Study: Lake Mead currently at 1,062.38 ft, ~6.5 ft above projections, with Tier 1 holding through 2026 but hydraulic models show elevation likely falling below 1,050 ft by July 2026 — triggering Tier 2 for 2027 operations.",
+        "reason": "Numeric divergence 100.0% on metric (context: april, lake): new=2026.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-10",
+        "entry_a_text": "REPLAY: indicator t3_monthly_drop_6ft fires at historical firedDate 2026-04-10. Original note: Fox5 Vegas reports Lake Mead dropped >6ft since March 1. USBR confirms 1,064.16 ft on April 6.",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "USBR April 2026 24-Month Study: Lake Mead currently at 1,062.38 ft, ~6.5 ft above projections, with Tier 1 holding through 2026 but hydraulic models show elevation likely falling below 1,050 ft by July 2026 — triggering Tier 2 for 2027 operations.",
+        "reason": "Numeric divergence 100.0% on metric (context: usbr): new=2026.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "USBR April 2026 24-Month Study: Lake Mead currently at 1,062.38 ft, ~6.5 ft above projections, with Tier 1 holding through 2026 but hydraulic models show elevation likely falling below 1,050 ft by July 2026 — triggering Tier 2 for 2027 operations.",
+        "reason": "Numeric divergence 99.5% on metric (context: with): new=1.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "USBR Apr 17, 2026 24-Month Study: Lake Mead projected at ~1,038 ft by end of June 2027 under most-probable scenario; worst-case ~1,026 ft (1 ft above Tier 3 threshold).",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "USBR April 2026 24-Month Study: Lake Mead currently at 1,062.38 ft, ~6.5 ft above projections, with Tier 1 holding through 2026 but hydraulic models show elevation likely falling below 1,050 ft by July 2026 — triggering Tier 2 for 2027 operations.",
+        "reason": "Numeric divergence 99.2% on metric (context: 24-month, study, usbr): new=2026.0, existing=17.0, threshold=10%",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-20T14:03:51+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "USBR April 2026 24-Month Study: Lake Mead currently at 1,062.38 ft, ~6.5 ft above projections, with Tier 1 holding through 2026 but hydraulic models show elevation likely falling below 1,050 ft by July 2026 — triggering Tier 2 for 2027 operations.",
+        "reason": "Numeric divergence 99.5% on metric (context: with): new=1.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-20T14:03:51+00:00",
+        "entry_a_text": "Lake Mead elevation 1,064.16 ft per USBR Lower Colorado weekly hydrologic update April 6, 2026. Reservoir approximately 34% full (8.8 MAF). April 2026 unregulated inflow forecast for Lake Powell: 0.550 MAF (61% of 30-year average). Projected to remain in Tier 1 shortage with end-year elevation approximately 1,055.88 ft.",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "USBR April 2026 24-Month Study: Lake Mead currently at 1,062.38 ft, ~6.5 ft above projections, with Tier 1 holding through 2026 but hydraulic models show elevation likely falling below 1,050 ft by July 2026 — triggering Tier 2 for 2027 operations.",
+        "reason": "Numeric divergence 100.0% on metric (context: lake): new=2026.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-19T00:57:10+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "USBR April 2026 24-Month Study: Lake Mead currently at 1,062.38 ft, ~6.5 ft above projections, with Tier 1 holding through 2026 but hydraulic models show elevation likely falling below 1,050 ft by July 2026 — triggering Tier 2 for 2027 operations.",
+        "reason": "Numeric divergence 99.5% on metric (context: with): new=1.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-19T00:57:10+00:00",
+        "entry_a_text": "Lake Mead elevation at 1,064.16 ft in early April 2026, reservoir 34% full (~8.8 MAF). Reclamation projects year-end elevation of 1,055.88 ft, keeping basin in Tier 1 Shortage Condition for 2026.",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "USBR April 2026 24-Month Study: Lake Mead currently at 1,062.38 ft, ~6.5 ft above projections, with Tier 1 holding through 2026 but hydraulic models show elevation likely falling below 1,050 ft by July 2026 — triggering Tier 2 for 2027 operations.",
+        "reason": "Numeric divergence 98.3% on metric (context: april): new=2026.0, existing=34.0, threshold=10%",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T15:23:00+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Very low snowpack and one-third normal inflow projection strongly favor continued decline into Tier 2 range (H3). Small Jan buffer unlikely to persist through summer drawdown. H4 risk elevated by drought severity.",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "USBR April 2026 24-Month Study: Lake Mead currently at 1,062.38 ft, ~6.5 ft above projections, with Tier 1 holding through 2026 but hydraulic models show elevation likely falling below 1,050 ft by July 2026 — triggering Tier 2 for 2027 operations.",
+        "reason": "Numeric divergence 50.0% on metric (context: tier): new=1.0, existing=2.0, threshold=10%",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T15:23:00+00:00",
+        "entry_a_text": "Lake Mead at ~34% capacity. Upper Basin snowpack near lowest levels during 2000-present drought. Apr-Jul inflow to Powell projected at one-third of normal. Mead was 1,062 ft in Jan 2026 (6.5 ft above projections). Post-2026 operating agreements under negotiation.",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "USBR April 2026 24-Month Study: Lake Mead currently at 1,062.38 ft, ~6.5 ft above projections, with Tier 1 holding through 2026 but hydraulic models show elevation likely falling below 1,050 ft by July 2026 — triggering Tier 2 for 2027 operations.",
+        "reason": "Numeric divergence 98.3% on metric (context: lake): new=2026.0, existing=34.0, threshold=10%",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-16T03:43:52+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Evidence ev_003: Colorado Basin April 1 snowpack at historically record low levels, roughly five ",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "USBR April 2026 24-Month Study: Lake Mead currently at 1,062.38 ft, ~6.5 ft above projections, with Tier 1 holding through 2026 but hydraulic models show elevation likely falling below 1,050 ft by July 2026 — triggering Tier 2 for 2027 operations.",
+        "reason": "Numeric divergence 100.0% on metric (context: april): new=2026.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-16T03:43:52+00:00",
+        "entry_a_text": "Colorado Basin April 1 snowpack at historically record low levels, roughly five times lower than previous record. Federal Bureau of Reclamation projects Lake Mead will reach new record-low water levels by November 2027, potentially dropping to approximately 1032 feet.",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "USBR April 2026 24-Month Study: Lake Mead currently at 1,062.38 ft, ~6.5 ft above projections, with Tier 1 holding through 2026 but hydraulic models show elevation likely falling below 1,050 ft by July 2026 — triggering Tier 2 for 2027 operations.",
+        "reason": "Numeric divergence 100.0% on metric (context: april): new=2026.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-10T00:00:00Z",
+        "entry_a_text": "Lake Mead water surface elevation at 1,064.16 ft as of April 6 (USBR weekly update). Lake has dropped more than 6 feet since March 1, now just 20 feet above the all-time record low of 1,040.94 ft from July 2022. Federal projections show Lake Mead could reach new record low of ~1,032 ft by November 2027.",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "USBR April 2026 24-Month Study: Lake Mead currently at 1,062.38 ft, ~6.5 ft above projections, with Tier 1 holding through 2026 but hydraulic models show elevation likely falling below 1,050 ft by July 2026 — triggering Tier 2 for 2027 operations.",
+        "reason": "Numeric divergence 99.7% on metric (context: april, usbr): new=2026.0, existing=6.0, threshold=10%",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-12T00:00:00Z",
+        "entry_a_text": "Lake Mead dropped approximately 6 ft since March 1, 2026, now sitting 20 ft above the all-time low. Currently at approximately 35% capacity. SNWA outreach manager Bronson Mack stated the lake could drop another 16 ft by 2027. Federal projections released in March 2026 indicate Lake Mead could reach record-low water levels (~1,032 ft) by November 2027. Previous record low was approximately 1,040.94 ft, set in 2022. Very low snowpack cited as primary driver. Rising water temperatures reported as affecting water treatment operations. NPS issued harmful algal bloom advisory for Government Wash on March 13.",
+        "entry_b_time": "2026-04-26T19:27:10+00:00",
+        "entry_b_text": "USBR April 2026 24-Month Study: Lake Mead currently at 1,062.38 ft, ~6.5 ft above projections, with Tier 1 holding through 2026 but hydraulic models show elevation likely falling below 1,050 ft by July 2026 — triggering Tier 2 for 2027 operations.",
+        "reason": "Antonym pair detected: new has 'falling', existing has 'rising'",
+        "detected": "2026-04-26T19:27:10Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:10Z"
       }
     ]
   },
@@ -1405,19 +3761,464 @@
         "trust_delta": -0.1,
         "original_text_snippet": "Lake Mead at ~34% capacity. Upper Basin snowpack near lowest levels during 2000-present drought. Apr-Jul inflow to Powel",
         "confirming_text_snippet": "USBR Apr 17, 2026 24-Month Study: Lake Mead projected at ~1,038 ft by end of June 2027 under most-probable scenario; wor"
+      },
+      {
+        "timestamp": "2026-04-24T02:25:41Z",
+        "evidence_index": 0,
+        "confirming_index": 15,
+        "resolution": "CONFIRMED",
+        "source": "The Independent (citing FOX 5 Vegas, Nevada Current, NPS)",
+        "confirming_source": "replay",
+        "trust_delta": 0.05,
+        "original_text_snippet": "Lake Mead dropped approximately 6 ft since March 1, 2026, now sitting 20 ft above the all-time low. Currently at approxi",
+        "confirming_text_snippet": "REPLAY: indicator t3_monthly_drop_6ft fires at historical firedDate 2026-04-10. Original note: Fox5 Vegas reports Lake M"
+      },
+      {
+        "timestamp": "2026-04-24T02:25:41Z",
+        "evidence_index": 1,
+        "confirming_index": 15,
+        "resolution": "CONFIRMED",
+        "source": "USBR Lower Colorado Weekly Hydrologic Update / Fox5 Vegas",
+        "confirming_source": "replay",
+        "trust_delta": 0.05,
+        "original_text_snippet": "Lake Mead water surface elevation at 1,064.16 ft as of April 6 (USBR weekly update). Lake has dropped more than 6 feet s",
+        "confirming_text_snippet": "REPLAY: indicator t3_monthly_drop_6ft fires at historical firedDate 2026-04-10. Original note: Fox5 Vegas reports Lake M"
+      },
+      {
+        "timestamp": "2026-04-24T02:25:41Z",
+        "evidence_index": 1,
+        "confirming_index": 17,
+        "resolution": "REFUTED",
+        "source": "USBR Lower Colorado Weekly Hydrologic Update / Fox5 Vegas",
+        "confirming_source": "US Bureau of Reclamation",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Lake Mead water surface elevation at 1,064.16 ft as of April 6 (USBR weekly update). Lake has dropped more than 6 feet s",
+        "confirming_text_snippet": "USBR 2026-04-20 weekly hydrologic update: Lake Mead elevation 1,064.16 ft; April 2026 Most Probable 24-Month Study proje"
+      },
+      {
+        "timestamp": "2026-04-24T02:25:41Z",
+        "evidence_index": 6,
+        "confirming_index": 17,
+        "resolution": "REFUTED",
+        "source": "USBR / USLakes",
+        "confirming_source": "US Bureau of Reclamation",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Lake Mead elevation at 1,064.16 ft in early April 2026, reservoir 34% full (~8.8 MAF). Reclamation projects year-end ele",
+        "confirming_text_snippet": "USBR 2026-04-20 weekly hydrologic update: Lake Mead elevation 1,064.16 ft; April 2026 Most Probable 24-Month Study proje"
+      },
+      {
+        "timestamp": "2026-04-24T02:25:41Z",
+        "evidence_index": 12,
+        "confirming_index": 14,
+        "resolution": "CONFIRMED",
+        "source": "",
+        "confirming_source": "",
+        "trust_delta": 0.05,
+        "original_text_snippet": "LR MIGRATION RESET: posteriors reset to design priors; evidence log preserved.",
+        "confirming_text_snippet": "REPLAY BEGIN: 1 previously-fired indicators will be re-applied chronologically under current LR system. Posteriors reset"
+      },
+      {
+        "timestamp": "2026-04-24T02:25:41Z",
+        "evidence_index": 14,
+        "confirming_index": 16,
+        "resolution": "CONFIRMED",
+        "source": "",
+        "confirming_source": "",
+        "trust_delta": 0.05,
+        "original_text_snippet": "REPLAY BEGIN: 1 previously-fired indicators will be re-applied chronologically under current LR system. Posteriors reset",
+        "confirming_text_snippet": "REPLAY COMPLETE: 1 indicators applied, 0 skipped. Final posteriors: {'H1': 0.06, 'H2': 0.29, 'H3': 0.48, 'H4': 0.17}. In"
+      },
+      {
+        "timestamp": "2026-04-24T13:49:15Z",
+        "evidence_index": 0,
+        "confirming_index": 19,
+        "resolution": "REFUTED",
+        "source": "The Independent (citing FOX 5 Vegas, Nevada Current, NPS)",
+        "confirming_source": "US Bureau of Reclamation",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Lake Mead dropped approximately 6 ft since March 1, 2026, now sitting 20 ft above the all-time low. Currently at approxi",
+        "confirming_text_snippet": "USBR weekly hydrologic update April 20 2026: Lake Mead elevation 1,064.16 ft, down 0.67 ft from previous 24-Month Study."
+      },
+      {
+        "timestamp": "2026-04-24T13:49:15Z",
+        "evidence_index": 1,
+        "confirming_index": 19,
+        "resolution": "REFUTED",
+        "source": "USBR Lower Colorado Weekly Hydrologic Update / Fox5 Vegas",
+        "confirming_source": "US Bureau of Reclamation",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Lake Mead water surface elevation at 1,064.16 ft as of April 6 (USBR weekly update). Lake has dropped more than 6 feet s",
+        "confirming_text_snippet": "USBR weekly hydrologic update April 20 2026: Lake Mead elevation 1,064.16 ft, down 0.67 ft from previous 24-Month Study."
+      },
+      {
+        "timestamp": "2026-04-24T13:49:15Z",
+        "evidence_index": 15,
+        "confirming_index": 19,
+        "resolution": "REFUTED",
+        "source": "replay",
+        "confirming_source": "US Bureau of Reclamation",
+        "trust_delta": -0.1,
+        "original_text_snippet": "REPLAY: indicator t3_monthly_drop_6ft fires at historical firedDate 2026-04-10. Original note: Fox5 Vegas reports Lake M",
+        "confirming_text_snippet": "USBR weekly hydrologic update April 20 2026: Lake Mead elevation 1,064.16 ft, down 0.67 ft from previous 24-Month Study."
+      },
+      {
+        "timestamp": "2026-04-24T19:30:14Z",
+        "evidence_index": 2,
+        "confirming_index": 21,
+        "resolution": "REFUTED",
+        "source": "USBR / Coyote Gulch",
+        "confirming_source": "USBR 24-Month Study / Fox5 Vegas",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Colorado Basin April 1 snowpack at historically record low levels, roughly five times lower than previous record. Federa",
+        "confirming_text_snippet": "Lake Mead dropped over 6 feet since 3/1 to approximately 1,062-1,065 ft in late April 2026, nearing July 2022 record low"
+      },
+      {
+        "timestamp": "2026-04-24T19:30:14Z",
+        "evidence_index": 6,
+        "confirming_index": 21,
+        "resolution": "REFUTED",
+        "source": "USBR / USLakes",
+        "confirming_source": "USBR 24-Month Study / Fox5 Vegas",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Lake Mead elevation at 1,064.16 ft in early April 2026, reservoir 34% full (~8.8 MAF). Reclamation projects year-end ele",
+        "confirming_text_snippet": "Lake Mead dropped over 6 feet since 3/1 to approximately 1,062-1,065 ft in late April 2026, nearing July 2022 record low"
+      },
+      {
+        "timestamp": "2026-04-24T19:30:14Z",
+        "evidence_index": 8,
+        "confirming_index": 21,
+        "resolution": "REFUTED",
+        "source": "US Bureau of Reclamation",
+        "confirming_source": "USBR 24-Month Study / Fox5 Vegas",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Lake Mead elevation 1,064.16 ft per USBR Lower Colorado weekly hydrologic update April 6, 2026. Reservoir approximately ",
+        "confirming_text_snippet": "Lake Mead dropped over 6 feet since 3/1 to approximately 1,062-1,065 ft in late April 2026, nearing July 2022 record low"
+      },
+      {
+        "timestamp": "2026-04-24T19:30:14Z",
+        "evidence_index": 10,
+        "confirming_index": 21,
+        "resolution": "REFUTED",
+        "source": "US Bureau of Reclamation",
+        "confirming_source": "USBR 24-Month Study / Fox5 Vegas",
+        "trust_delta": -0.1,
+        "original_text_snippet": "USBR Apr 17, 2026 24-Month Study: Lake Mead projected at ~1,038 ft by end of June 2027 under most-probable scenario; wor",
+        "confirming_text_snippet": "Lake Mead dropped over 6 feet since 3/1 to approximately 1,062-1,065 ft in late April 2026, nearing July 2022 record low"
+      },
+      {
+        "timestamp": "2026-04-24T19:30:14Z",
+        "evidence_index": 17,
+        "confirming_index": 21,
+        "resolution": "REFUTED",
+        "source": "US Bureau of Reclamation",
+        "confirming_source": "USBR 24-Month Study / Fox5 Vegas",
+        "trust_delta": -0.1,
+        "original_text_snippet": "USBR 2026-04-20 weekly hydrologic update: Lake Mead elevation 1,064.16 ft; April 2026 Most Probable 24-Month Study proje",
+        "confirming_text_snippet": "Lake Mead dropped over 6 feet since 3/1 to approximately 1,062-1,065 ft in late April 2026, nearing July 2022 record low"
+      },
+      {
+        "timestamp": "2026-04-24T19:30:14Z",
+        "evidence_index": 19,
+        "confirming_index": 21,
+        "resolution": "REFUTED",
+        "source": "US Bureau of Reclamation",
+        "confirming_source": "USBR 24-Month Study / Fox5 Vegas",
+        "trust_delta": -0.1,
+        "original_text_snippet": "USBR weekly hydrologic update April 20 2026: Lake Mead elevation 1,064.16 ft, down 0.67 ft from previous 24-Month Study.",
+        "confirming_text_snippet": "Lake Mead dropped over 6 feet since 3/1 to approximately 1,062-1,065 ft in late April 2026, nearing July 2022 record low"
+      },
+      {
+        "timestamp": "2026-04-25T13:19:53Z",
+        "evidence_index": 1,
+        "confirming_index": 23,
+        "resolution": "REFUTED",
+        "source": "USBR Lower Colorado Weekly Hydrologic Update / Fox5 Vegas",
+        "confirming_source": "USBR 24-Month Study / KTNV / 8 News Now",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Lake Mead water surface elevation at 1,064.16 ft as of April 6 (USBR weekly update). Lake has dropped more than 6 feet s",
+        "confirming_text_snippet": "Lake Mead surface elevation ~1,046-1,058 ft late April 2026 after dropping ~6 ft in March; Reclamation will reduce inflo"
+      },
+      {
+        "timestamp": "2026-04-25T13:19:53Z",
+        "evidence_index": 6,
+        "confirming_index": 23,
+        "resolution": "REFUTED",
+        "source": "USBR / USLakes",
+        "confirming_source": "USBR 24-Month Study / KTNV / 8 News Now",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Lake Mead elevation at 1,064.16 ft in early April 2026, reservoir 34% full (~8.8 MAF). Reclamation projects year-end ele",
+        "confirming_text_snippet": "Lake Mead surface elevation ~1,046-1,058 ft late April 2026 after dropping ~6 ft in March; Reclamation will reduce inflo"
+      },
+      {
+        "timestamp": "2026-04-25T13:19:53Z",
+        "evidence_index": 15,
+        "confirming_index": 23,
+        "resolution": "REFUTED",
+        "source": "replay",
+        "confirming_source": "USBR 24-Month Study / KTNV / 8 News Now",
+        "trust_delta": -0.1,
+        "original_text_snippet": "REPLAY: indicator t3_monthly_drop_6ft fires at historical firedDate 2026-04-10. Original note: Fox5 Vegas reports Lake M",
+        "confirming_text_snippet": "Lake Mead surface elevation ~1,046-1,058 ft late April 2026 after dropping ~6 ft in March; Reclamation will reduce inflo"
+      },
+      {
+        "timestamp": "2026-04-25T13:19:53Z",
+        "evidence_index": 19,
+        "confirming_index": 23,
+        "resolution": "REFUTED",
+        "source": "US Bureau of Reclamation",
+        "confirming_source": "USBR 24-Month Study / KTNV / 8 News Now",
+        "trust_delta": -0.1,
+        "original_text_snippet": "USBR weekly hydrologic update April 20 2026: Lake Mead elevation 1,064.16 ft, down 0.67 ft from previous 24-Month Study.",
+        "confirming_text_snippet": "Lake Mead surface elevation ~1,046-1,058 ft late April 2026 after dropping ~6 ft in March; Reclamation will reduce inflo"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:50Z",
+        "evidence_index": 4,
+        "confirming_index": 26,
+        "resolution": "REFUTED",
+        "source": "USBR / 8 News Now",
+        "confirming_source": "Bureau of Reclamation, KTNV",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Lake Mead at ~34% capacity. Upper Basin snowpack near lowest levels during 2000-present drought. Apr-Jul inflow to Powel",
+        "confirming_text_snippet": "Bureau of Reclamation April 2026 24-Month Study: Lake Mead currently 1,062-1,065 ft (~34% full); projected 1,063.43 ft a"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:50Z",
+        "evidence_index": 6,
+        "confirming_index": 26,
+        "resolution": "REFUTED",
+        "source": "USBR / USLakes",
+        "confirming_source": "Bureau of Reclamation, KTNV",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Lake Mead elevation at 1,064.16 ft in early April 2026, reservoir 34% full (~8.8 MAF). Reclamation projects year-end ele",
+        "confirming_text_snippet": "Bureau of Reclamation April 2026 24-Month Study: Lake Mead currently 1,062-1,065 ft (~34% full); projected 1,063.43 ft a"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:50Z",
+        "evidence_index": 8,
+        "confirming_index": 26,
+        "resolution": "REFUTED",
+        "source": "US Bureau of Reclamation",
+        "confirming_source": "Bureau of Reclamation, KTNV",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Lake Mead elevation 1,064.16 ft per USBR Lower Colorado weekly hydrologic update April 6, 2026. Reservoir approximately ",
+        "confirming_text_snippet": "Bureau of Reclamation April 2026 24-Month Study: Lake Mead currently 1,062-1,065 ft (~34% full); projected 1,063.43 ft a"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:50Z",
+        "evidence_index": 10,
+        "confirming_index": 26,
+        "resolution": "REFUTED",
+        "source": "US Bureau of Reclamation",
+        "confirming_source": "Bureau of Reclamation, KTNV",
+        "trust_delta": -0.1,
+        "original_text_snippet": "USBR Apr 17, 2026 24-Month Study: Lake Mead projected at ~1,038 ft by end of June 2027 under most-probable scenario; wor",
+        "confirming_text_snippet": "Bureau of Reclamation April 2026 24-Month Study: Lake Mead currently 1,062-1,065 ft (~34% full); projected 1,063.43 ft a"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:50Z",
+        "evidence_index": 17,
+        "confirming_index": 26,
+        "resolution": "REFUTED",
+        "source": "US Bureau of Reclamation",
+        "confirming_source": "Bureau of Reclamation, KTNV",
+        "trust_delta": -0.1,
+        "original_text_snippet": "USBR 2026-04-20 weekly hydrologic update: Lake Mead elevation 1,064.16 ft; April 2026 Most Probable 24-Month Study proje",
+        "confirming_text_snippet": "Bureau of Reclamation April 2026 24-Month Study: Lake Mead currently 1,062-1,065 ft (~34% full); projected 1,063.43 ft a"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:50Z",
+        "evidence_index": 19,
+        "confirming_index": 26,
+        "resolution": "REFUTED",
+        "source": "US Bureau of Reclamation",
+        "confirming_source": "Bureau of Reclamation, KTNV",
+        "trust_delta": -0.1,
+        "original_text_snippet": "USBR weekly hydrologic update April 20 2026: Lake Mead elevation 1,064.16 ft, down 0.67 ft from previous 24-Month Study.",
+        "confirming_text_snippet": "Bureau of Reclamation April 2026 24-Month Study: Lake Mead currently 1,062-1,065 ft (~34% full); projected 1,063.43 ft a"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:50Z",
+        "evidence_index": 21,
+        "confirming_index": 26,
+        "resolution": "REFUTED",
+        "source": "USBR 24-Month Study / Fox5 Vegas",
+        "confirming_source": "Bureau of Reclamation, KTNV",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Lake Mead dropped over 6 feet since 3/1 to approximately 1,062-1,065 ft in late April 2026, nearing July 2022 record low",
+        "confirming_text_snippet": "Bureau of Reclamation April 2026 24-Month Study: Lake Mead currently 1,062-1,065 ft (~34% full); projected 1,063.43 ft a"
+      },
+      {
+        "timestamp": "2026-04-26T16:59:07Z",
+        "evidence_index": 1,
+        "confirming_index": 28,
+        "resolution": "REFUTED",
+        "source": "USBR Lower Colorado Weekly Hydrologic Update / Fox5 Vegas",
+        "confirming_source": "USBR 24-Month Study / KTNV",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Lake Mead water surface elevation at 1,064.16 ft as of April 6 (USBR weekly update). Lake has dropped more than 6 feet s",
+        "confirming_text_snippet": "USBR April 2026 24-month study: Lake Mead at ~1,046 ft early April (down ~6 ft from early March's ~1,052 ft); projected "
+      },
+      {
+        "timestamp": "2026-04-26T16:59:07Z",
+        "evidence_index": 6,
+        "confirming_index": 28,
+        "resolution": "REFUTED",
+        "source": "USBR / USLakes",
+        "confirming_source": "USBR 24-Month Study / KTNV",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Lake Mead elevation at 1,064.16 ft in early April 2026, reservoir 34% full (~8.8 MAF). Reclamation projects year-end ele",
+        "confirming_text_snippet": "USBR April 2026 24-month study: Lake Mead at ~1,046 ft early April (down ~6 ft from early March's ~1,052 ft); projected "
+      },
+      {
+        "timestamp": "2026-04-26T16:59:07Z",
+        "evidence_index": 8,
+        "confirming_index": 28,
+        "resolution": "REFUTED",
+        "source": "US Bureau of Reclamation",
+        "confirming_source": "USBR 24-Month Study / KTNV",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Lake Mead elevation 1,064.16 ft per USBR Lower Colorado weekly hydrologic update April 6, 2026. Reservoir approximately ",
+        "confirming_text_snippet": "USBR April 2026 24-month study: Lake Mead at ~1,046 ft early April (down ~6 ft from early March's ~1,052 ft); projected "
+      },
+      {
+        "timestamp": "2026-04-26T16:59:07Z",
+        "evidence_index": 10,
+        "confirming_index": 28,
+        "resolution": "REFUTED",
+        "source": "US Bureau of Reclamation",
+        "confirming_source": "USBR 24-Month Study / KTNV",
+        "trust_delta": -0.1,
+        "original_text_snippet": "USBR Apr 17, 2026 24-Month Study: Lake Mead projected at ~1,038 ft by end of June 2027 under most-probable scenario; wor",
+        "confirming_text_snippet": "USBR April 2026 24-month study: Lake Mead at ~1,046 ft early April (down ~6 ft from early March's ~1,052 ft); projected "
+      },
+      {
+        "timestamp": "2026-04-26T16:59:07Z",
+        "evidence_index": 15,
+        "confirming_index": 28,
+        "resolution": "REFUTED",
+        "source": "replay",
+        "confirming_source": "USBR 24-Month Study / KTNV",
+        "trust_delta": -0.1,
+        "original_text_snippet": "REPLAY: indicator t3_monthly_drop_6ft fires at historical firedDate 2026-04-10. Original note: Fox5 Vegas reports Lake M",
+        "confirming_text_snippet": "USBR April 2026 24-month study: Lake Mead at ~1,046 ft early April (down ~6 ft from early March's ~1,052 ft); projected "
+      },
+      {
+        "timestamp": "2026-04-26T16:59:07Z",
+        "evidence_index": 17,
+        "confirming_index": 28,
+        "resolution": "REFUTED",
+        "source": "US Bureau of Reclamation",
+        "confirming_source": "USBR 24-Month Study / KTNV",
+        "trust_delta": -0.1,
+        "original_text_snippet": "USBR 2026-04-20 weekly hydrologic update: Lake Mead elevation 1,064.16 ft; April 2026 Most Probable 24-Month Study proje",
+        "confirming_text_snippet": "USBR April 2026 24-month study: Lake Mead at ~1,046 ft early April (down ~6 ft from early March's ~1,052 ft); projected "
+      },
+      {
+        "timestamp": "2026-04-26T16:59:07Z",
+        "evidence_index": 19,
+        "confirming_index": 28,
+        "resolution": "REFUTED",
+        "source": "US Bureau of Reclamation",
+        "confirming_source": "USBR 24-Month Study / KTNV",
+        "trust_delta": -0.1,
+        "original_text_snippet": "USBR weekly hydrologic update April 20 2026: Lake Mead elevation 1,064.16 ft, down 0.67 ft from previous 24-Month Study.",
+        "confirming_text_snippet": "USBR April 2026 24-month study: Lake Mead at ~1,046 ft early April (down ~6 ft from early March's ~1,052 ft); projected "
+      },
+      {
+        "timestamp": "2026-04-26T16:59:07Z",
+        "evidence_index": 26,
+        "confirming_index": 28,
+        "resolution": "REFUTED",
+        "source": "Bureau of Reclamation, KTNV",
+        "confirming_source": "USBR 24-Month Study / KTNV",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Bureau of Reclamation April 2026 24-Month Study: Lake Mead currently 1,062-1,065 ft (~34% full); projected 1,063.43 ft a",
+        "confirming_text_snippet": "USBR April 2026 24-month study: Lake Mead at ~1,046 ft early April (down ~6 ft from early March's ~1,052 ft); projected "
+      },
+      {
+        "timestamp": "2026-04-26T19:27:10Z",
+        "evidence_index": 1,
+        "confirming_index": 31,
+        "resolution": "REFUTED",
+        "source": "USBR Lower Colorado Weekly Hydrologic Update / Fox5 Vegas",
+        "confirming_source": "USBR / 8 News Now / Nevada Independent",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Lake Mead water surface elevation at 1,064.16 ft as of April 6 (USBR weekly update). Lake has dropped more than 6 feet s",
+        "confirming_text_snippet": "USBR April 2026 24-Month Study: Lake Mead currently at 1,062.38 ft, ~6.5 ft above projections, with Tier 1 holding throu"
+      },
+      {
+        "timestamp": "2026-04-26T19:27:10Z",
+        "evidence_index": 10,
+        "confirming_index": 31,
+        "resolution": "REFUTED",
+        "source": "US Bureau of Reclamation",
+        "confirming_source": "USBR / 8 News Now / Nevada Independent",
+        "trust_delta": -0.1,
+        "original_text_snippet": "USBR Apr 17, 2026 24-Month Study: Lake Mead projected at ~1,038 ft by end of June 2027 under most-probable scenario; wor",
+        "confirming_text_snippet": "USBR April 2026 24-Month Study: Lake Mead currently at 1,062.38 ft, ~6.5 ft above projections, with Tier 1 holding throu"
+      },
+      {
+        "timestamp": "2026-04-26T19:27:10Z",
+        "evidence_index": 17,
+        "confirming_index": 31,
+        "resolution": "REFUTED",
+        "source": "US Bureau of Reclamation",
+        "confirming_source": "USBR / 8 News Now / Nevada Independent",
+        "trust_delta": -0.1,
+        "original_text_snippet": "USBR 2026-04-20 weekly hydrologic update: Lake Mead elevation 1,064.16 ft; April 2026 Most Probable 24-Month Study proje",
+        "confirming_text_snippet": "USBR April 2026 24-Month Study: Lake Mead currently at 1,062.38 ft, ~6.5 ft above projections, with Tier 1 holding throu"
+      },
+      {
+        "timestamp": "2026-04-26T19:27:10Z",
+        "evidence_index": 19,
+        "confirming_index": 31,
+        "resolution": "REFUTED",
+        "source": "US Bureau of Reclamation",
+        "confirming_source": "USBR / 8 News Now / Nevada Independent",
+        "trust_delta": -0.1,
+        "original_text_snippet": "USBR weekly hydrologic update April 20 2026: Lake Mead elevation 1,064.16 ft, down 0.67 ft from previous 24-Month Study.",
+        "confirming_text_snippet": "USBR April 2026 24-Month Study: Lake Mead currently at 1,062.38 ft, ~6.5 ft above projections, with Tier 1 holding throu"
+      },
+      {
+        "timestamp": "2026-04-26T19:27:10Z",
+        "evidence_index": 21,
+        "confirming_index": 31,
+        "resolution": "REFUTED",
+        "source": "USBR 24-Month Study / Fox5 Vegas",
+        "confirming_source": "USBR / 8 News Now / Nevada Independent",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Lake Mead dropped over 6 feet since 3/1 to approximately 1,062-1,065 ft in late April 2026, nearing July 2022 record low",
+        "confirming_text_snippet": "USBR April 2026 24-Month Study: Lake Mead currently at 1,062.38 ft, ~6.5 ft above projections, with Tier 1 holding throu"
+      },
+      {
+        "timestamp": "2026-04-26T19:27:10Z",
+        "evidence_index": 28,
+        "confirming_index": 31,
+        "resolution": "REFUTED",
+        "source": "USBR 24-Month Study / KTNV",
+        "confirming_source": "USBR / 8 News Now / Nevada Independent",
+        "trust_delta": -0.1,
+        "original_text_snippet": "USBR April 2026 24-month study: Lake Mead at ~1,046 ft early April (down ~6 ft from early March's ~1,052 ft); projected ",
+        "confirming_text_snippet": "USBR April 2026 24-Month Study: Lake Mead currently at 1,062.38 ft, ~6.5 ft above projections, with Tier 1 holding throu"
       }
     ],
     "effectiveTrust": {
-      "Coyote Gulch": 0.5,
-      "Fox5 Vegas": 0.3289,
-      "The Independent (": 0.502,
-      "USBR": 0.4118,
-      "USBR Lower Colorado Weekly Hydrologic Update": 0.3289,
-      "8 News Now": 0.4555,
-      "USLakes": 0.4555,
-      "US Bureau of Reclamation": 0.5
+      "Coyote Gulch": 0.4555,
+      "Fox5 Vegas": 0.0647,
+      "The Independent (": 0.5484,
+      "USBR": 0.1673,
+      "USBR Lower Colorado Weekly Hydrologic Update": 0.0899,
+      "8 News Now": 0.4118,
+      "USLakes": 0.2554,
+      "US Bureau of Reclamation": 0.0545,
+      "replay": 0.3693,
+      "USBR 24-Month Study": 0.3693,
+      "KTNV": 0.4555,
+      "Bureau of Reclamation, KTNV": 0.4555,
+      "Nevada Independent": 0.5
     },
-    "_last_scan_same_source_skipped": 4
+    "_last_scan_same_source_skipped": 18
   },
   "conditionalPredictions": [
     {

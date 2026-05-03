@@ -5,13 +5,16 @@
     "question": "Will peer-reviewed research or official G7 government statistics confirm that AI-adopting firms demonstrate >=1% higher total factor productivity (TFP) growth than non-adopting peers over any 12-month period between 2025 and 2027?",
     "resolution": "Resolved H1 if >=1 peer-reviewed study or official G7 stat release confirms >=2% TFP premium for AI adopters over any 12-month window 2025-2027. H2 if confirmed premium is 0.5-2%. H3 if studies are mixed/inconclusive. H4 if no significant premium confirmed. Resolution date: 2027-12-31.",
     "created": "",
-    "lastUpdated": "2026-04-22T05:19:57+00:00",
+    "lastUpdated": "2026-04-29T02:30:58+00:00",
     "status": "ACTIVE",
     "dayCount": 0,
     "startDate": "2026-04-21",
     "classification": "CALIBRATION",
     "topicType": "conflict",
-    "resolutionDate": "2027-12-31"
+    "resolutionDate": "2027-12-31",
+    "lens": "GREEN",
+    "lensSetAt": "2026-04-26T21:21:58+00:00",
+    "lensSetReason": ""
   },
   "tagConfig": {
     "_docs": "DATA/BENCHMARK favor confirmed premium. RHETORIC = opinion without data.",
@@ -53,32 +56,32 @@
         "label": "Strong premium: >=2% TFP differential confirmed in peer-reviewed or government data",
         "midpoint": 3.0,
         "unit": "% TFP growth differential (AI vs non-AI adopters)",
-        "posterior": 0.2,
+        "posterior": 0.0067,
         "description": "A clearly measurable productivity gap emerges in official or peer-reviewed data. AI tools provide sufficient leverage on knowledge work to manifest in aggregate firm-level TFP. Historically significant, comparable to electrification or IT."
       },
       "H2": {
         "label": "Marginal premium: 0.5-2% TFP differential confirmed",
         "midpoint": 1.0,
         "unit": "% TFP growth differential (AI vs non-AI adopters)",
-        "posterior": 0.35,
+        "posterior": 0.98,
         "description": "Real but modest TFP gains, concentrated in specific industries. Visible in firm-level studies but may not show clearly in national accounts. Consistent with early-stage GPT diffusion patterns."
       },
       "H3": {
         "label": "Mixed/inconclusive: studies disagree or effect too heterogeneous to confirm",
         "midpoint": 0.2,
         "unit": "% TFP growth differential (AI vs non-AI adopters)",
-        "posterior": 0.28,
+        "posterior": 0.0067,
         "description": "Significant variation by sector, firm size, and adoption quality. Some firms gain substantially; others see no effect. Aggregate washes out or cannot be credibly measured with 2027-available data."
       },
       "H4": {
         "label": "No premium: AI redistributes rather than creates aggregate productivity",
         "midpoint": -0.5,
         "unit": "% TFP growth differential (AI vs non-AI adopters)",
-        "posterior": 0.17,
+        "posterior": 0.0067,
         "description": "AI primarily reallocates gains (winner-take-more dynamics) rather than creating surplus. No significant TFP premium when controlling for selection effects. AI is a competitive necessity, not a productivity lever, by 2027."
       }
     },
-    "expectedValue": 0,
+    "expectedValue": 1.0,
     "expectedUnit": "weeks",
     "posteriorHistory": [
       {
@@ -87,7 +90,330 @@
         "H1": 0.2,
         "H2": 0.35,
         "H3": 0.28,
-        "H4": 0.17
+        "H4": 0.17,
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        }
+      },
+      {
+        "date": "2026-04-24",
+        "posteriors": {
+          "H1": 0.2152,
+          "H2": 0.5273,
+          "H3": 0.2209,
+          "H4": 0.0366
+        },
+        "priors": {
+          "H1": 0.2,
+          "H2": 0.35,
+          "H3": 0.28,
+          "H4": 0.17
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_001"
+        ],
+        "likelihoods": {
+          "H1": 0.3,
+          "H2": 0.42,
+          "H3": 0.22,
+          "H4": 0.06
+        },
+        "note": "Sectoral productivity differentials and wage premia suggest real but not-yet-TFP-aggregate premium; supports H2 with nontrivial H1.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "turningPoint": {
+          "type": "THRESHOLD_CROSSED",
+          "hypothesis": "H2",
+          "from": 0.35,
+          "to": 0.5273
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-24",
+        "posteriors": {
+          "H1": 0.1205,
+          "H2": 0.7789,
+          "H3": 0.0956,
+          "H4": 0.005
+        },
+        "priors": {
+          "H1": 0.2152,
+          "H2": 0.5273,
+          "H3": 0.2209,
+          "H4": 0.0366
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_002"
+        ],
+        "likelihoods": {
+          "H1": 0.22,
+          "H2": 0.58,
+          "H3": 0.17,
+          "H4": 0.03
+        },
+        "note": "Concentrated gains among leaders with modest aggregate signal support H2 marginal premium band.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "turningPoint": {
+          "type": "BRANCH_DEATH",
+          "hypothesis": "H4",
+          "lastPosterior": 0.005
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-24",
+        "posteriors": {
+          "H1": 0.1775,
+          "H2": 0.8033,
+          "H3": 0.0141,
+          "H4": 0.005
+        },
+        "priors": {
+          "H1": 0.1205,
+          "H2": 0.7789,
+          "H3": 0.0956,
+          "H4": 0.005
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_003"
+        ],
+        "likelihoods": {
+          "H1": 1.0,
+          "H2": 0.7,
+          "H3": 0.1,
+          "H4": 0.02
+        },
+        "note": "Large cross-industry productivity differentials consistent with >=2% TFP differential when translated to firm-level.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-25",
+        "posteriors": {
+          "H1": 0.063,
+          "H2": 0.927,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "priors": {
+          "H1": 0.1775,
+          "H2": 0.8033,
+          "H3": 0.0141,
+          "H4": 0.005
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_004"
+        ],
+        "likelihoods": {
+          "H1": 0.2,
+          "H2": 0.65,
+          "H3": 0.1,
+          "H4": 0.05
+        },
+        "note": "Modest aggregate TFP and small per-firm AI-patent effect supports H2 (marginal premium 0.5-2%); large premium (H1) less likely; null (H4) weakens.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "turningPoint": {
+          "type": "BRANCH_DEATH",
+          "hypothesis": "H3",
+          "lastPosterior": 0.005
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-25",
+        "posteriors": {
+          "H1": 0.1007,
+          "H2": 0.8893,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "priors": {
+          "H1": 0.063,
+          "H2": 0.927,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_005"
+        ],
+        "likelihoods": {
+          "H1": 1.0,
+          "H2": 0.6,
+          "H3": 0.1,
+          "H4": 0.02
+        },
+        "note": "Multiple peer-reviewed and central-bank studies converging on >=2% TFP differential at firm and industry level — strong support for H1 (strong premium).",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-26",
+        "posteriors": {
+          "H1": 0.0111,
+          "H2": 0.9789,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "priors": {
+          "H1": 0.1007,
+          "H2": 0.8893,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_006"
+        ],
+        "likelihoods": {
+          "H1": 0.05,
+          "H2": 0.5,
+          "H3": 0.45,
+          "H4": 0.2
+        },
+        "note": "Goldman's null aggregate finding + Penn Wharton's modest 0.0475 pp 2026 projection cut against a near-term 'strong premium' read; minor shift H2 -> H3.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-26",
+        "posteriors": {
+          "H1": 0.0067,
+          "H2": 0.98,
+          "H3": 0.0067,
+          "H4": 0.0067
+        },
+        "priors": {
+          "H1": 0.0111,
+          "H2": 0.9789,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_007"
+        ],
+        "likelihoods": {
+          "H1": 0.4,
+          "H2": 1.0,
+          "H3": 0.5,
+          "H4": 0.2
+        },
+        "note": "Measured TFP contribution in 0.05-0.6 pp/yr range fits H2 marginal premium; not yet H1 strong premium.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
       }
     ]
   },
@@ -164,6 +490,14 @@
           "lr_decay": 0.65,
           "n_firings": 0,
           "resolution_class": false
+        },
+        {
+          "id": "t2_firm_level_labor_productivity_causal",
+          "desc": ">=2 causal firm-level studies (different research groups, peer-reviewed or NBER WP) find labour productivity premium >=3% for AI adopters vs controls, with credible identification. Distinct from TFP — supports productivity-channel hypothesis but does not directly resolve the TFP question.",
+          "posteriorEffect": "H2 +10pp, H1 +5pp. H3 -10pp, H4 -5pp.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
         }
       ],
       "tier3_suggestive": [
@@ -217,6 +551,22 @@
           "lr_decay": 0.65,
           "n_firings": 0,
           "resolution_class": false
+        },
+        {
+          "id": "t3_aggregate_tfp_modest_2025_2026",
+          "desc": "BLS or G7 statistical agency reports realized 2025 or 2026 private nonfarm TFP growth within 0.5pp of the 2015-2019 trend (no observed inflection above trend), AND no official agency commentary attributes acceleration to AI adoption. Observable on annual TFP releases.",
+          "posteriorEffect": "H1 -8pp, H2 +6pp, H3 +1pp, H4 +1pp.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        },
+        {
+          "id": "t3_gains_concentration_heterogeneity",
+          "desc": "Credible study (PwC, McKinsey, NBER, Atlanta Fed, BIS) reports the top quintile of AI adopters captures >=50% of measured productivity or economic gains, indicating heterogeneous rather than broad-based effects.",
+          "posteriorEffect": "H3 +6pp, H1 -3pp, H2 -2pp, H4 -1pp.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
         }
       ],
       "anti_indicators": [
@@ -272,7 +622,17 @@
           "resolution_class": false
         }
       ]
-    }
+    },
+    "anti_indicators": [
+      {
+        "id": "anti_h1_institutional_forecasts_modest",
+        "desc": ">=3 credible institutional projections (CBO, Fed, BLS, Penn Wharton, Goldman, IMF, OECD, BIS) published within a 12-month rolling window converge on AI TFP contribution <=0.6pp annually through 2027.",
+        "posteriorEffect": "H1 -10pp, H2 +6pp, H3 +3pp, H4 +1pp.",
+        "status": "NOT_FIRED",
+        "firedDate": null,
+        "note": null
+      }
+    ]
   },
   "actorModel": {
     "description": "Academic economists and statistical agencies are the resolution authorities. AI lab claims are RHETORIC unless backed by independent data.",
@@ -353,6 +713,260 @@
       "ledger": "DECISION",
       "claimState": "SUPPORTED",
       "effectiveWeight": 1.0
+    },
+    {
+      "id": "ev_001",
+      "time": "2026-04-24T02:25:41+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "ECON"
+      ],
+      "text": "PwC 2025 Global AI Jobs Barometer: AI skills command 56% wage premium (up from 25%); productivity growth quadrupled in most AI-exposed industries (7% -> 27%, 2018-2024); Hartley et al 2026 finds small positive wage effects with 35.9% US workers using GenAI by Dec 2025; TFP projection +0.09pp in 2027.",
+      "provenance": "OBSERVED",
+      "source": "PwC / Penn Wharton Budget Model",
+      "posteriorImpact": "NONE",
+      "url": "https://www.pwc.com/gx/en/news-room/press-releases/2025/ai-linked-to-a-fourfold-increase-in-productivity-growth.html",
+      "ledger": "FACT",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-24T02:25:41+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Sectoral productivity differentials and wage premia suggest real but not-yet-TFP-aggregate premium; supports H2 with nontrivial H1.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_002",
+      "time": "2026-04-24T13:49:16+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "ECON",
+        "AI"
+      ],
+      "text": "PwC 2026 AI Performance Study (Apr 13): top 20% of firms capture ~75% of AI economic gains. Atlanta Fed/NBER March 2026 survey of ~750 executives: adoption widespread, productivity gains 'measurable but modest, accelerating.' Aghion/Bunel estimate AI +0.25-0.6 pp TFP growth annually over next decade; historical-analog estimates 0.8-1.3 pp.",
+      "provenance": "OBSERVED",
+      "source": "PwC / Atlanta Fed / NBER",
+      "posteriorImpact": "NONE",
+      "url": "https://www.pwc.com/gx/en/news-room/press-releases/2026/pwc-2026-ai-performance-study.html",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-24T13:49:16+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-24T13:49:16+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Concentrated gains among leaders with modest aggregate signal support H2 marginal premium band.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_003",
+      "time": "2026-04-24T19:30:14+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "AI",
+        "LABOR"
+      ],
+      "text": "PwC 2025 AI Jobs Barometer: productivity growth in AI-exposed industries 27% (vs 7% 2018-2022); AI-skill wage premium 56% (up from 25%); Industries +1 SD AI exposure saw +10% productivity, +3.9% jobs, +4.8% wages.",
+      "provenance": "OBSERVED",
+      "source": "PwC / WEF",
+      "posteriorImpact": "NONE",
+      "url": "https://www.pwc.com/gx/en/news-room/press-releases/2025/ai-linked-to-a-fourfold-increase-in-productivity-growth.html",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-24T19:30:14+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_004",
+      "time": "2026-04-25T13:19:54+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "AI",
+        "ECON"
+      ],
+      "text": "BLS reports private nonfarm TFP +0.8% in 2025 (released March 19, 2026); Chicago Fed (Feb 2026) finds AI-patent firms see 0.3% TFP boost vs 8x lower for standard software patents over 5-year horizon.",
+      "provenance": "OBSERVED",
+      "source": "BLS / Chicago Fed Letter 518",
+      "posteriorImpact": "NONE",
+      "url": "https://www.chicagofed.org/publications/chicago-fed-letter/2026/518",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-25T13:19:54+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-25T13:19:54+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Modest aggregate TFP and small per-firm AI-patent effect supports H2 (marginal premium 0.5-2%); large premium (H1) less likely; null (H4) weakens.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_005",
+      "time": "2026-04-25T14:24:50+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "ECON"
+      ],
+      "text": "Aldasoro et al. (2026) causal study of 12,000+ EU firms: AI adoption raises labour productivity 4% on average, no short-run employment loss. Industries with 1-stdev higher AI exposure saw +10% productivity, +3.9% jobs, +4.8% wages in 2024 (cumulative through early 2026). AI-skilled workers earn 56% wage premium (up from 25% prior year). Hartley et al. 2026 finds small positive wage effects.",
+      "provenance": "OBSERVED",
+      "source": "Aldasoro et al. via CEPR VoxEU, PwC AI Jobs Barometer 2025/26, Singularity Hub",
+      "posteriorImpact": "NONE",
+      "url": "https://cepr.org/voxeu/columns/how-ai-affecting-productivity-and-jobs-europe",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-25T14:24:50+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_006",
+      "time": "2026-04-26T16:59:07+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "ECON",
+        "AI"
+      ],
+      "text": "Goldman Sachs (Mar 3, 2026): 'no meaningful relationship between AI and productivity at the economy-wide level' but median 30% productivity gain in two specific use cases. Penn Wharton Budget Model projects AI TFP contribution ~0.0475 pp in 2026, accelerating through decade. Post-ChatGPT TFP averaging 1.11% YoY vs 1.23% historical mean.",
+      "provenance": "OBSERVED",
+      "source": "Goldman / Penn Wharton / Fortune",
+      "posteriorImpact": "NONE",
+      "url": "https://fortune.com/2026/03/03/goldman-earnings-ai-anxiety-no-meaningful-impact-productivity-economy-30-percent-in-2-areas/",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-26T16:59:07+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-26T18:30:51+00:00",
+      "tag": "INTEL",
+      "text": "INDICATOR ADDED: t2_firm_level_labor_productivity_causal (tier2_strong). posteriorEffect=H2 +10pp, H1 +5pp. H3 -10pp, H4 -5pp.. Rationale: Closes a coverage gap revealed by ev_005 (Aldasoro 12k EU firms +4% labour productivity, causal) and ev_003 (PwC +10% productivity in high-AI-exposure industries). Existing tier-2 indicator t2_firm_level_studies_x3 specifies TFP, but the actual empirical literature reports labour productivity. Without this indicator, robust microeconomic evidence triages to NONE..",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-26T18:30:51+00:00",
+      "tag": "INTEL",
+      "text": "INDICATOR ADDED: t3_aggregate_tfp_modest_2025_2026 (tier3_suggestive). posteriorEffect=H1 -8pp, H2 +6pp, H3 +1pp, H4 +1pp.. Rationale: Closes a coverage gap revealed by ev_004 (BLS private nonfarm TFP +0.8% in 2025, in line with 2015-2019 trend, no inflection) and ev_006 (Goldman: 'no meaningful relationship between AI and productivity at the economy-wide level'; Penn Wharton +0.0475pp 2026). Currently no indicator captures the *absence* of aggregate TFP acceleration as anti-H1 evidence; this asymmetry is what produces NONE_IMPACT saturation against H1..",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-26T18:30:51+00:00",
+      "tag": "INTEL",
+      "text": "INDICATOR ADDED: t3_gains_concentration_heterogeneity (tier3_suggestive). posteriorEffect=H3 +6pp, H1 -3pp, H2 -2pp, H4 -1pp.. Rationale: Closes a coverage gap revealed by ev_002 (PwC 2026: top 20% capture ~75% of AI gains). Concentration is a direct H3 (mixed/heterogeneous) signal; no existing indicator captures distribution of gains, so this evidence dimension was triaging to NONE..",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-26T18:30:51+00:00",
+      "tag": "INTEL",
+      "text": "INDICATOR ADDED: anti_h1_institutional_forecasts_modest (anti_indicators). posteriorEffect=H1 -10pp, H2 +6pp, H3 +3pp, H4 +1pp.. Rationale: Closes a coverage gap revealed by ev_002 (Aghion/Bunel 0.25-0.6pp), ev_001 (Penn Wharton +0.09pp 2027), ev_006 (Penn Wharton +0.0475pp 2026, Goldman skeptic). Existing anti-indicators require null findings or meta-analyses; institutional forecast clustering below the H1 threshold is anti-H1 evidence in its own right and currently has no home..",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_007",
+      "time": "2026-04-26T19:27:11+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "MACRO",
+        "AI"
+      ],
+      "text": "St. Louis Fed Jan 2026 estimates GenAI contribution to TFP growth at ~0.048 pp in 2026 (up from 0.011 pp in 2025). Penn Wharton Budget Model: 1.5% productivity/GDP boost by 2035. PwC: top 20% of firms capture 75% of AI economic gains. Acemoglu maintains <0.66% cumulative TFP gain over 10 years.",
+      "provenance": "OBSERVED",
+      "source": "St. Louis Fed / Penn Wharton / PwC",
+      "posteriorImpact": "NONE",
+      "url": "https://www.stlouisfed.org/on-the-economy/2026/jan/tracking-ai-contribution-gdp-growth",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.3289
+    },
+    {
+      "time": "2026-04-26T19:27:11+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
     }
   ],
   "dataFeeds": {
@@ -396,23 +1010,20 @@
   "governance": {
     "health": "DEGRADED",
     "issues": [
-      "Near-maximum uncertainty — model is not discriminating",
-      "Stale dependency: calibration-llm-phd-2027.H1 assumed=0.005, actual=0.18, drift=17.50%",
-      "Stale dependency: calibration-llm-phd-2027.H2 assumed=0.9458, actual=0.38, drift=56.58%",
-      "Stale dependency: calibration-llm-phd-2027.H3 assumed=0.0442, actual=0.32, drift=27.58%"
+      "Near-zero uncertainty — check for overconfidence"
     ],
     "rt": {
       "rt": 0.0,
       "regime": "SAFE",
       "worst_hypothesis": "H1"
     },
-    "entropy": 1.9433,
+    "entropy": 0.1737,
     "maxEntropy": 2.0,
-    "uncertaintyRatio": 0.9717,
+    "uncertaintyRatio": 0.0868,
     "evidenceFreshness": {
-      "fresh": 3,
-      "stale": 0,
-      "total": 3
+      "fresh": 13,
+      "stale": 10,
+      "total": 23
     },
     "hypothesisAdmissibility": {
       "H1": "ADMISSIBLE",
@@ -421,77 +1032,667 @@
       "H4": "ADMISSIBLE"
     },
     "klFromPrior": {
-      "kl_divergence": 0.0,
-      "interpretation": "MODERATE"
+      "kl_divergence": 0.9396,
+      "interpretation": "WELL_EVIDENCED"
     },
-    "lastComputed": "2026-04-22T05:19:57+00:00",
-    "staleDependencies": 3,
-    "staleDependencyDetails": [
-      {
-        "upstream_slug": "calibration-llm-phd-2027",
-        "hypothesis": "H1",
-        "assumed": 0.005,
-        "actual": 0.18,
-        "drift": 0.175,
-        "tolerance": 0.12,
-        "stale": true
-      },
-      {
-        "upstream_slug": "calibration-llm-phd-2027",
-        "hypothesis": "H2",
-        "assumed": 0.9458,
-        "actual": 0.38,
-        "drift": 0.5658,
-        "tolerance": 0.12,
-        "stale": true
-      },
-      {
-        "upstream_slug": "calibration-llm-phd-2027",
-        "hypothesis": "H3",
-        "assumed": 0.0442,
-        "actual": 0.32,
-        "drift": 0.2758,
-        "tolerance": 0.12,
-        "stale": true
-      }
-    ],
+    "lastComputed": "2026-04-29T02:30:58+00:00",
+    "staleDependencies": 0,
     "calibrationHealth": "ACCEPTABLE",
     "unresolvedContradictions": 0,
+    "reviewed_alerts": [
+      {
+        "signature": "none_impact_saturation:calibration-ai-productivity-premium-2027",
+        "timestamp": "2026-04-26T18:30:51+00:00",
+        "reason": "review_topic_design completed: 4 indicators proposed to close coverage gaps (firm-level labour productivity, aggregate TFP modest, gains concentration, institutional forecast clustering). Ev_001-ev_006 reflect dimensions the prior indicator set did not cover; saturation was a coverage problem, not an evidence problem."
+      }
+    ],
     "designGate": {
       "passed": true,
       "blockers": [],
       "warnings": [],
       "coverage": {
         "H1": {
-          "pos": 7,
-          "neg": 3
+          "pos": 8,
+          "neg": 5
         },
         "H2": {
-          "pos": 6,
-          "neg": 4
+          "pos": 8,
+          "neg": 5
         },
         "H3": {
-          "pos": 2,
-          "neg": 8
+          "pos": 4,
+          "neg": 9
         },
         "H4": {
-          "pos": 3,
-          "neg": 7
+          "pos": 4,
+          "neg": 9
         }
       },
       "indistinguishable": [],
-      "lastChecked": "2026-04-22T05:19:57+00:00"
+      "lastChecked": "2026-04-29T02:30:58+00:00"
     }
   },
   "predictionScoring": {
     "_docs": "Calibration infrastructure. Snapshots are auto-created by engine on each posterior update. Record outcome when topic resolves, then compute_calibration_report() for Brier analysis.",
-    "snapshots": [],
+    "snapshots": [
+      {
+        "timestamp": "2026-04-24T02:25:41+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.2152,
+          "H2": 0.5273,
+          "H3": 0.2209,
+          "H4": 0.0366
+        },
+        "entropy": 1.6197
+      },
+      {
+        "timestamp": "2026-04-24T02:25:41+00:00",
+        "trigger": "pipeline:ev_001",
+        "posteriors": {
+          "H1": 0.2152,
+          "H2": 0.5273,
+          "H3": 0.2209,
+          "H4": 0.0366
+        },
+        "entropy": 1.6197
+      },
+      {
+        "timestamp": "2026-04-24T13:49:16+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.1205,
+          "H2": 0.7789,
+          "H3": 0.0956,
+          "H4": 0.005
+        },
+        "entropy": 1.0107
+      },
+      {
+        "timestamp": "2026-04-24T13:49:16+00:00",
+        "trigger": "pipeline:ev_002",
+        "posteriors": {
+          "H1": 0.1205,
+          "H2": 0.7789,
+          "H3": 0.0956,
+          "H4": 0.005
+        },
+        "entropy": 1.0107
+      },
+      {
+        "timestamp": "2026-04-24T19:30:14+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.1775,
+          "H2": 0.8033,
+          "H3": 0.0141,
+          "H4": 0.005
+        },
+        "entropy": 0.8214
+      },
+      {
+        "timestamp": "2026-04-24T19:30:14+00:00",
+        "trigger": "pipeline:ev_003",
+        "posteriors": {
+          "H1": 0.1775,
+          "H2": 0.8033,
+          "H3": 0.0141,
+          "H4": 0.005
+        },
+        "entropy": 0.8214
+      },
+      {
+        "timestamp": "2026-04-25T13:19:54+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.063,
+          "H2": 0.927,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "entropy": 0.4291
+      },
+      {
+        "timestamp": "2026-04-25T13:19:54+00:00",
+        "trigger": "pipeline:ev_004",
+        "posteriors": {
+          "H1": 0.063,
+          "H2": 0.927,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "entropy": 0.4291
+      },
+      {
+        "timestamp": "2026-04-25T14:24:50+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.1007,
+          "H2": 0.8893,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "entropy": 0.5605
+      },
+      {
+        "timestamp": "2026-04-25T14:24:50+00:00",
+        "trigger": "pipeline:ev_005",
+        "posteriors": {
+          "H1": 0.1007,
+          "H2": 0.8893,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "entropy": 0.5605
+      },
+      {
+        "timestamp": "2026-04-26T16:59:07+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0111,
+          "H2": 0.9789,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "entropy": 0.1786
+      },
+      {
+        "timestamp": "2026-04-26T16:59:07+00:00",
+        "trigger": "pipeline:ev_006",
+        "posteriors": {
+          "H1": 0.0111,
+          "H2": 0.9789,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "entropy": 0.1786
+      },
+      {
+        "timestamp": "2026-04-26T19:27:11+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0067,
+          "H2": 0.98,
+          "H3": 0.0067,
+          "H4": 0.0067
+        },
+        "entropy": 0.1737
+      },
+      {
+        "timestamp": "2026-04-26T19:27:11+00:00",
+        "trigger": "pipeline:ev_007",
+        "posteriors": {
+          "H1": 0.0067,
+          "H2": 0.98,
+          "H3": 0.0067,
+          "H4": 0.0067
+        },
+        "entropy": 0.1737
+      }
+    ],
     "outcomes": [],
     "brierScores": []
   },
   "contradictionTracker": {
     "unresolved": [],
-    "resolved": []
+    "resolved": [
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "PwC 2025 Global AI Jobs Barometer: AI skills command 56% wage premium (up from 25%); productivity growth quadrupled in most AI-exposed industries (7% -> 27%, 2018-2024); Hartley et al 2026 finds small positive wage effects with 35.9% US workers using GenAI by Dec 2025; TFP projection +0.09pp in 2027.",
+        "entry_b_time": "2026-04-24T13:49:16+00:00",
+        "entry_b_text": "PwC 2026 AI Performance Study (Apr 13): top 20% of firms capture ~75% of AI economic gains. Atlanta Fed/NBER March 2026 survey of ~750 executives: adoption widespread, productivity gains 'measurable but modest, accelerating.' Aghion/Bunel estimate AI +0.25-0.6 pp TFP growth annually over next decade; historical-analog estimates 0.8-1.3 pp.",
+        "reason": "Numeric divergence 97.2% on metric (context: ai): new=2026.0, existing=56.0, threshold=10%",
+        "detected": "2026-04-24T13:49:16Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:16Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:16+00:00",
+        "entry_a_text": "PwC 2026 AI Performance Study (Apr 13): top 20% of firms capture ~75% of AI economic gains. Atlanta Fed/NBER March 2026 survey of ~750 executives: adoption widespread, productivity gains 'measurable but modest, accelerating.' Aghion/Bunel estimate AI +0.25-0.6 pp TFP growth annually over next decade; historical-analog estimates 0.8-1.3 pp.",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "PwC 2025 AI Jobs Barometer: productivity growth in AI-exposed industries 27% (vs 7% 2018-2022); AI-skill wage premium 56% (up from 25%); Industries +1 SD AI exposure saw +10% productivity, +3.9% jobs, +4.8% wages.",
+        "reason": "Numeric divergence 96.3% on metric (context: ai): new=2025.0, existing=75.0, threshold=10%",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "PwC 2025 Global AI Jobs Barometer: AI skills command 56% wage premium (up from 25%); productivity growth quadrupled in most AI-exposed industries (7% -> 27%, 2018-2024); Hartley et al 2026 finds small positive wage effects with 35.9% US workers using GenAI by Dec 2025; TFP projection +0.09pp in 2027.",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "PwC 2025 AI Jobs Barometer: productivity growth in AI-exposed industries 27% (vs 7% 2018-2022); AI-skill wage premium 56% (up from 25%); Industries +1 SD AI exposure saw +10% productivity, +3.9% jobs, +4.8% wages.",
+        "reason": "Numeric divergence 97.2% on metric (context: ai): new=2025.0, existing=56.0, threshold=10%",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T19:30:14+00:00",
+        "entry_a_text": "PwC 2025 AI Jobs Barometer: productivity growth in AI-exposed industries 27% (vs 7% 2018-2022); AI-skill wage premium 56% (up from 25%); Industries +1 SD AI exposure saw +10% productivity, +3.9% jobs, +4.8% wages.",
+        "entry_b_time": "2026-04-25T13:19:54+00:00",
+        "entry_b_text": "BLS reports private nonfarm TFP +0.8% in 2025 (released March 19, 2026); Chicago Fed (Feb 2026) finds AI-patent firms see 0.3% TFP boost vs 8x lower for standard software patents over 5-year horizon.",
+        "reason": "Numeric divergence 97.0% on metric (context: in): new=0.8, existing=27.0, threshold=10%",
+        "detected": "2026-04-25T13:19:54Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:54Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:16+00:00",
+        "entry_a_text": "PwC 2026 AI Performance Study (Apr 13): top 20% of firms capture ~75% of AI economic gains. Atlanta Fed/NBER March 2026 survey of ~750 executives: adoption widespread, productivity gains 'measurable but modest, accelerating.' Aghion/Bunel estimate AI +0.25-0.6 pp TFP growth annually over next decade; historical-analog estimates 0.8-1.3 pp.",
+        "entry_b_time": "2026-04-25T13:19:54+00:00",
+        "entry_b_text": "BLS reports private nonfarm TFP +0.8% in 2025 (released March 19, 2026); Chicago Fed (Feb 2026) finds AI-patent firms see 0.3% TFP boost vs 8x lower for standard software patents over 5-year horizon.",
+        "reason": "Numeric divergence 99.1% on metric (context: fed, march): new=19.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-25T13:19:54Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:54Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "PwC 2025 Global AI Jobs Barometer: AI skills command 56% wage premium (up from 25%); productivity growth quadrupled in most AI-exposed industries (7% -> 27%, 2018-2024); Hartley et al 2026 finds small positive wage effects with 35.9% US workers using GenAI by Dec 2025; TFP projection +0.09pp in 2027.",
+        "entry_b_time": "2026-04-25T13:19:54+00:00",
+        "entry_b_text": "BLS reports private nonfarm TFP +0.8% in 2025 (released March 19, 2026); Chicago Fed (Feb 2026) finds AI-patent firms see 0.3% TFP boost vs 8x lower for standard software patents over 5-year horizon.",
+        "reason": "Numeric divergence 100.0% on metric (context: tfp): new=0.8, existing=2025.0, threshold=10%",
+        "detected": "2026-04-25T13:19:54Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:54Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-25T13:19:54+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Modest aggregate TFP and small per-firm AI-patent effect supports H2 (marginal premium 0.5-2%); large premium (H1) less likely; null (H4) weakens.",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Aldasoro et al. (2026) causal study of 12,000+ EU firms: AI adoption raises labour productivity 4% on average, no short-run employment loss. Industries with 1-stdev higher AI exposure saw +10% productivity, +3.9% jobs, +4.8% wages in 2024 (cumulative through early 2026). AI-skilled workers earn 56% wage premium (up from 25% prior year). Hartley et al. 2026 finds small positive wage effects.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: premium, small",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T13:19:54+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Aldasoro et al. (2026) causal study of 12,000+ EU firms: AI adoption raises labour productivity 4% on average, no short-run employment loss. Industries with 1-stdev higher AI exposure saw +10% productivity, +3.9% jobs, +4.8% wages in 2024 (cumulative through early 2026). AI-skilled workers earn 56% wage premium (up from 25% prior year). Hartley et al. 2026 finds small positive wage effects.",
+        "reason": "Numeric divergence 100.0% on metric (context: .): new=2026.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-25T13:19:54+00:00",
+        "entry_a_text": "BLS reports private nonfarm TFP +0.8% in 2025 (released March 19, 2026); Chicago Fed (Feb 2026) finds AI-patent firms see 0.3% TFP boost vs 8x lower for standard software patents over 5-year horizon.",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Aldasoro et al. (2026) causal study of 12,000+ EU firms: AI adoption raises labour productivity 4% on average, no short-run employment loss. Industries with 1-stdev higher AI exposure saw +10% productivity, +3.9% jobs, +4.8% wages in 2024 (cumulative through early 2026). AI-skilled workers earn 56% wage premium (up from 25% prior year). Hartley et al. 2026 finds small positive wage effects.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: finds, firms, year",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T19:30:14+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Aldasoro et al. (2026) causal study of 12,000+ EU firms: AI adoption raises labour productivity 4% on average, no short-run employment loss. Industries with 1-stdev higher AI exposure saw +10% productivity, +3.9% jobs, +4.8% wages in 2024 (cumulative through early 2026). AI-skilled workers earn 56% wage premium (up from 25% prior year). Hartley et al. 2026 finds small positive wage effects.",
+        "reason": "Numeric divergence 100.0% on metric (context: .): new=2026.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T19:30:14+00:00",
+        "entry_a_text": "PwC 2025 AI Jobs Barometer: productivity growth in AI-exposed industries 27% (vs 7% 2018-2022); AI-skill wage premium 56% (up from 25%); Industries +1 SD AI exposure saw +10% productivity, +3.9% jobs, +4.8% wages.",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Aldasoro et al. (2026) causal study of 12,000+ EU firms: AI adoption raises labour productivity 4% on average, no short-run employment loss. Industries with 1-stdev higher AI exposure saw +10% productivity, +3.9% jobs, +4.8% wages in 2024 (cumulative through early 2026). AI-skilled workers earn 56% wage premium (up from 25% prior year). Hartley et al. 2026 finds small positive wage effects.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: exposure, industries, jobs, premium, productivity",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:16+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Aldasoro et al. (2026) causal study of 12,000+ EU firms: AI adoption raises labour productivity 4% on average, no short-run employment loss. Industries with 1-stdev higher AI exposure saw +10% productivity, +3.9% jobs, +4.8% wages in 2024 (cumulative through early 2026). AI-skilled workers earn 56% wage premium (up from 25% prior year). Hartley et al. 2026 finds small positive wage effects.",
+        "reason": "Numeric divergence 100.0% on metric (context: .): new=2026.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T13:49:16+00:00",
+        "entry_a_text": "PwC 2026 AI Performance Study (Apr 13): top 20% of firms capture ~75% of AI economic gains. Atlanta Fed/NBER March 2026 survey of ~750 executives: adoption widespread, productivity gains 'measurable but modest, accelerating.' Aghion/Bunel estimate AI +0.25-0.6 pp TFP growth annually over next decade; historical-analog estimates 0.8-1.3 pp.",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Aldasoro et al. (2026) causal study of 12,000+ EU firms: AI adoption raises labour productivity 4% on average, no short-run employment loss. Industries with 1-stdev higher AI exposure saw +10% productivity, +3.9% jobs, +4.8% wages in 2024 (cumulative through early 2026). AI-skilled workers earn 56% wage premium (up from 25% prior year). Hartley et al. 2026 finds small positive wage effects.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: adoption, firms, productivity, study",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Sectoral productivity differentials and wage premia suggest real but not-yet-TFP-aggregate premium; supports H2 with nontrivial H1.",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Aldasoro et al. (2026) causal study of 12,000+ EU firms: AI adoption raises labour productivity 4% on average, no short-run employment loss. Industries with 1-stdev higher AI exposure saw +10% productivity, +3.9% jobs, +4.8% wages in 2024 (cumulative through early 2026). AI-skilled workers earn 56% wage premium (up from 25% prior year). Hartley et al. 2026 finds small positive wage effects.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: premium, productivity, wage",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "PwC 2025 Global AI Jobs Barometer: AI skills command 56% wage premium (up from 25%); productivity growth quadrupled in most AI-exposed industries (7% -> 27%, 2018-2024); Hartley et al 2026 finds small positive wage effects with 35.9% US workers using GenAI by Dec 2025; TFP projection +0.09pp in 2027.",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Aldasoro et al. (2026) causal study of 12,000+ EU firms: AI adoption raises labour productivity 4% on average, no short-run employment loss. Industries with 1-stdev higher AI exposure saw +10% productivity, +3.9% jobs, +4.8% wages in 2024 (cumulative through early 2026). AI-skilled workers earn 56% wage premium (up from 25% prior year). Hartley et al. 2026 finds small positive wage effects.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: effects, finds, hartley, industries, jobs",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-22T01:00:37+00:00",
+        "entry_a_text": "REPLAY COMPLETE: 0 indicators applied, 0 skipped. Final posteriors: {'H1': 0.2, 'H2': 0.35, 'H3': 0.28, 'H4': 0.17}. Indicator firedDates restored to originals for audit.",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Aldasoro et al. (2026) causal study of 12,000+ EU firms: AI adoption raises labour productivity 4% on average, no short-run employment loss. Industries with 1-stdev higher AI exposure saw +10% productivity, +3.9% jobs, +4.8% wages in 2024 (cumulative through early 2026). AI-skilled workers earn 56% wage premium (up from 25% prior year). Hartley et al. 2026 finds small positive wage effects.",
+        "reason": "Numeric divergence 100.0% on metric (context: .): new=2026.0, existing=0.28, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T14:24:50+00:00",
+        "entry_a_text": "Aldasoro et al. (2026) causal study of 12,000+ EU firms: AI adoption raises labour productivity 4% on average, no short-run employment loss. Industries with 1-stdev higher AI exposure saw +10% productivity, +3.9% jobs, +4.8% wages in 2024 (cumulative through early 2026). AI-skilled workers earn 56% wage premium (up from 25% prior year). Hartley et al. 2026 finds small positive wage effects.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "Goldman Sachs (Mar 3, 2026): 'no meaningful relationship between AI and productivity at the economy-wide level' but median 30% productivity gain in two specific use cases. Penn Wharton Budget Model projects AI TFP contribution ~0.0475 pp in 2026, accelerating through decade. Post-ChatGPT TFP averaging 1.11% YoY vs 1.23% historical mean.",
+        "reason": "Numeric divergence 25.0% on metric (context: no): new=3.0, existing=4.0, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T13:19:54+00:00",
+        "entry_a_text": "BLS reports private nonfarm TFP +0.8% in 2025 (released March 19, 2026); Chicago Fed (Feb 2026) finds AI-patent firms see 0.3% TFP boost vs 8x lower for standard software patents over 5-year horizon.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "Goldman Sachs (Mar 3, 2026): 'no meaningful relationship between AI and productivity at the economy-wide level' but median 30% productivity gain in two specific use cases. Penn Wharton Budget Model projects AI TFP contribution ~0.0475 pp in 2026, accelerating through decade. Post-ChatGPT TFP averaging 1.11% YoY vs 1.23% historical mean.",
+        "reason": "Numeric divergence 84.2% on metric (context: 2026): new=3.0, existing=19.0, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T19:30:14+00:00",
+        "entry_a_text": "PwC 2025 AI Jobs Barometer: productivity growth in AI-exposed industries 27% (vs 7% 2018-2022); AI-skill wage premium 56% (up from 25%); Industries +1 SD AI exposure saw +10% productivity, +3.9% jobs, +4.8% wages.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "Goldman Sachs (Mar 3, 2026): 'no meaningful relationship between AI and productivity at the economy-wide level' but median 30% productivity gain in two specific use cases. Penn Wharton Budget Model projects AI TFP contribution ~0.0475 pp in 2026, accelerating through decade. Post-ChatGPT TFP averaging 1.11% YoY vs 1.23% historical mean.",
+        "reason": "Numeric divergence 66.7% on metric (context: productivity): new=30.0, existing=10.0, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T13:49:16+00:00",
+        "entry_a_text": "PwC 2026 AI Performance Study (Apr 13): top 20% of firms capture ~75% of AI economic gains. Atlanta Fed/NBER March 2026 survey of ~750 executives: adoption widespread, productivity gains 'measurable but modest, accelerating.' Aghion/Bunel estimate AI +0.25-0.6 pp TFP growth annually over next decade; historical-analog estimates 0.8-1.3 pp.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "Goldman Sachs (Mar 3, 2026): 'no meaningful relationship between AI and productivity at the economy-wide level' but median 30% productivity gain in two specific use cases. Penn Wharton Budget Model projects AI TFP contribution ~0.0475 pp in 2026, accelerating through decade. Post-ChatGPT TFP averaging 1.11% YoY vs 1.23% historical mean.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: accelerating, decade, historical, productivity, tfp",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Sectoral productivity differentials and wage premia suggest real but not-yet-TFP-aggregate premium; supports H2 with nontrivial H1.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "Goldman Sachs (Mar 3, 2026): 'no meaningful relationship between AI and productivity at the economy-wide level' but median 30% productivity gain in two specific use cases. Penn Wharton Budget Model projects AI TFP contribution ~0.0475 pp in 2026, accelerating through decade. Post-ChatGPT TFP averaging 1.11% YoY vs 1.23% historical mean.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: productivity, tfp",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "PwC 2025 Global AI Jobs Barometer: AI skills command 56% wage premium (up from 25%); productivity growth quadrupled in most AI-exposed industries (7% -> 27%, 2018-2024); Hartley et al 2026 finds small positive wage effects with 35.9% US workers using GenAI by Dec 2025; TFP projection +0.09pp in 2027.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "Goldman Sachs (Mar 3, 2026): 'no meaningful relationship between AI and productivity at the economy-wide level' but median 30% productivity gain in two specific use cases. Penn Wharton Budget Model projects AI TFP contribution ~0.0475 pp in 2026, accelerating through decade. Post-ChatGPT TFP averaging 1.11% YoY vs 1.23% historical mean.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: productivity, tfp",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-26T18:30:51+00:00",
+        "entry_a_text": "INDICATOR ADDED: anti_h1_institutional_forecasts_modest (anti_indicators). posteriorEffect=H1 -10pp, H2 +6pp, H3 +3pp, H4 +1pp.. Rationale: Closes a coverage gap revealed by ev_002 (Aghion/Bunel 0.25-0.6pp), ev_001 (Penn Wharton +0.09pp 2027), ev_006 (Penn Wharton +0.0475pp 2026, Goldman skeptic). Existing anti-indicators require null findings or meta-analyses; institutional forecast clustering below the H1 threshold is anti-H1 evidence in its own right and currently has no home..",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "St. Louis Fed Jan 2026 estimates GenAI contribution to TFP growth at ~0.048 pp in 2026 (up from 0.011 pp in 2025). Penn Wharton Budget Model: 1.5% productivity/GDP boost by 2035. PwC: top 20% of firms capture 75% of AI economic gains. Acemoglu maintains <0.66% cumulative TFP gain over 10 years.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: penn, wharton",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-26T18:30:51+00:00",
+        "entry_a_text": "INDICATOR ADDED: t3_gains_concentration_heterogeneity (tier3_suggestive). posteriorEffect=H3 +6pp, H1 -3pp, H2 -2pp, H4 -1pp.. Rationale: Closes a coverage gap revealed by ev_002 (PwC 2026: top 20% capture ~75% of AI gains). Concentration is a direct H3 (mixed/heterogeneous) signal; no existing indicator captures distribution of gains, so this evidence dimension was triaging to NONE..",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "St. Louis Fed Jan 2026 estimates GenAI contribution to TFP growth at ~0.048 pp in 2026 (up from 0.011 pp in 2025). Penn Wharton Budget Model: 1.5% productivity/GDP boost by 2035. PwC: top 20% of firms capture 75% of AI economic gains. Acemoglu maintains <0.66% cumulative TFP gain over 10 years.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: capture, gains, pwc, top",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-26T18:30:51+00:00",
+        "entry_a_text": "INDICATOR ADDED: t3_aggregate_tfp_modest_2025_2026 (tier3_suggestive). posteriorEffect=H1 -8pp, H2 +6pp, H3 +1pp, H4 +1pp.. Rationale: Closes a coverage gap revealed by ev_004 (BLS private nonfarm TFP +0.8% in 2025, in line with 2015-2019 trend, no inflection) and ev_006 (Goldman: 'no meaningful relationship between AI and productivity at the economy-wide level'; Penn Wharton +0.0475pp 2026). Currently no indicator captures the *absence* of aggregate TFP acceleration as anti-H1 evidence; this asymmetry is what produces NONE_IMPACT saturation against H1..",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "St. Louis Fed Jan 2026 estimates GenAI contribution to TFP growth at ~0.048 pp in 2026 (up from 0.011 pp in 2025). Penn Wharton Budget Model: 1.5% productivity/GDP boost by 2035. PwC: top 20% of firms capture 75% of AI economic gains. Acemoglu maintains <0.66% cumulative TFP gain over 10 years.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: penn, productivity, tfp, wharton",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-26T18:30:51+00:00",
+        "entry_a_text": "INDICATOR ADDED: t2_firm_level_labor_productivity_causal (tier2_strong). posteriorEffect=H2 +10pp, H1 +5pp. H3 -10pp, H4 -5pp.. Rationale: Closes a coverage gap revealed by ev_005 (Aldasoro 12k EU firms +4% labour productivity, causal) and ev_003 (PwC +10% productivity in high-AI-exposure industries). Existing tier-2 indicator t2_firm_level_studies_x3 specifies TFP, but the actual empirical literature reports labour productivity. Without this indicator, robust microeconomic evidence triages to NONE..",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "St. Louis Fed Jan 2026 estimates GenAI contribution to TFP growth at ~0.048 pp in 2026 (up from 0.011 pp in 2025). Penn Wharton Budget Model: 1.5% productivity/GDP boost by 2035. PwC: top 20% of firms capture 75% of AI economic gains. Acemoglu maintains <0.66% cumulative TFP gain over 10 years.",
+        "reason": "Numeric divergence 99.5% on metric (context: in): new=0.048, existing=10.0, threshold=10%",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-26T16:59:07+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "St. Louis Fed Jan 2026 estimates GenAI contribution to TFP growth at ~0.048 pp in 2026 (up from 0.011 pp in 2025). Penn Wharton Budget Model: 1.5% productivity/GDP boost by 2035. PwC: top 20% of firms capture 75% of AI economic gains. Acemoglu maintains <0.66% cumulative TFP gain over 10 years.",
+        "reason": "Numeric divergence 100.0% on metric (context: .): new=2025.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-26T16:59:07+00:00",
+        "entry_a_text": "Goldman Sachs (Mar 3, 2026): 'no meaningful relationship between AI and productivity at the economy-wide level' but median 30% productivity gain in two specific use cases. Penn Wharton Budget Model projects AI TFP contribution ~0.0475 pp in 2026, accelerating through decade. Post-ChatGPT TFP averaging 1.11% YoY vs 1.23% historical mean.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "St. Louis Fed Jan 2026 estimates GenAI contribution to TFP growth at ~0.048 pp in 2026 (up from 0.011 pp in 2025). Penn Wharton Budget Model: 1.5% productivity/GDP boost by 2035. PwC: top 20% of firms capture 75% of AI economic gains. Acemoglu maintains <0.66% cumulative TFP gain over 10 years.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: budget, contribution, gain, model, penn",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T14:24:50+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "St. Louis Fed Jan 2026 estimates GenAI contribution to TFP growth at ~0.048 pp in 2026 (up from 0.011 pp in 2025). Penn Wharton Budget Model: 1.5% productivity/GDP boost by 2035. PwC: top 20% of firms capture 75% of AI economic gains. Acemoglu maintains <0.66% cumulative TFP gain over 10 years.",
+        "reason": "Numeric divergence 100.0% on metric (context: .): new=2025.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-25T14:24:50+00:00",
+        "entry_a_text": "Aldasoro et al. (2026) causal study of 12,000+ EU firms: AI adoption raises labour productivity 4% on average, no short-run employment loss. Industries with 1-stdev higher AI exposure saw +10% productivity, +3.9% jobs, +4.8% wages in 2024 (cumulative through early 2026). AI-skilled workers earn 56% wage premium (up from 25% prior year). Hartley et al. 2026 finds small positive wage effects.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "St. Louis Fed Jan 2026 estimates GenAI contribution to TFP growth at ~0.048 pp in 2026 (up from 0.011 pp in 2025). Penn Wharton Budget Model: 1.5% productivity/GDP boost by 2035. PwC: top 20% of firms capture 75% of AI economic gains. Acemoglu maintains <0.66% cumulative TFP gain over 10 years.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: cumulative, firms, productivity",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T13:19:54+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "St. Louis Fed Jan 2026 estimates GenAI contribution to TFP growth at ~0.048 pp in 2026 (up from 0.011 pp in 2025). Penn Wharton Budget Model: 1.5% productivity/GDP boost by 2035. PwC: top 20% of firms capture 75% of AI economic gains. Acemoglu maintains <0.66% cumulative TFP gain over 10 years.",
+        "reason": "Numeric divergence 100.0% on metric (context: .): new=2025.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T13:19:54+00:00",
+        "entry_a_text": "BLS reports private nonfarm TFP +0.8% in 2025 (released March 19, 2026); Chicago Fed (Feb 2026) finds AI-patent firms see 0.3% TFP boost vs 8x lower for standard software patents over 5-year horizon.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "St. Louis Fed Jan 2026 estimates GenAI contribution to TFP growth at ~0.048 pp in 2026 (up from 0.011 pp in 2025). Penn Wharton Budget Model: 1.5% productivity/GDP boost by 2035. PwC: top 20% of firms capture 75% of AI economic gains. Acemoglu maintains <0.66% cumulative TFP gain over 10 years.",
+        "reason": "Numeric divergence 99.1% on metric (context: fed): new=2026.0, existing=19.0, threshold=10%",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T19:30:14+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "St. Louis Fed Jan 2026 estimates GenAI contribution to TFP growth at ~0.048 pp in 2026 (up from 0.011 pp in 2025). Penn Wharton Budget Model: 1.5% productivity/GDP boost by 2035. PwC: top 20% of firms capture 75% of AI economic gains. Acemoglu maintains <0.66% cumulative TFP gain over 10 years.",
+        "reason": "Numeric divergence 100.0% on metric (context: .): new=2025.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T19:30:14+00:00",
+        "entry_a_text": "PwC 2025 AI Jobs Barometer: productivity growth in AI-exposed industries 27% (vs 7% 2018-2022); AI-skill wage premium 56% (up from 25%); Industries +1 SD AI exposure saw +10% productivity, +3.9% jobs, +4.8% wages.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "St. Louis Fed Jan 2026 estimates GenAI contribution to TFP growth at ~0.048 pp in 2026 (up from 0.011 pp in 2025). Penn Wharton Budget Model: 1.5% productivity/GDP boost by 2035. PwC: top 20% of firms capture 75% of AI economic gains. Acemoglu maintains <0.66% cumulative TFP gain over 10 years.",
+        "reason": "Numeric divergence 99.8% on metric (context: in): new=0.048, existing=27.0, threshold=10%",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:16+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "St. Louis Fed Jan 2026 estimates GenAI contribution to TFP growth at ~0.048 pp in 2026 (up from 0.011 pp in 2025). Penn Wharton Budget Model: 1.5% productivity/GDP boost by 2035. PwC: top 20% of firms capture 75% of AI economic gains. Acemoglu maintains <0.66% cumulative TFP gain over 10 years.",
+        "reason": "Numeric divergence 100.0% on metric (context: .): new=2025.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:16+00:00",
+        "entry_a_text": "PwC 2026 AI Performance Study (Apr 13): top 20% of firms capture ~75% of AI economic gains. Atlanta Fed/NBER March 2026 survey of ~750 executives: adoption widespread, productivity gains 'measurable but modest, accelerating.' Aghion/Bunel estimate AI +0.25-0.6 pp TFP growth annually over next decade; historical-analog estimates 0.8-1.3 pp.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "St. Louis Fed Jan 2026 estimates GenAI contribution to TFP growth at ~0.048 pp in 2026 (up from 0.011 pp in 2025). Penn Wharton Budget Model: 1.5% productivity/GDP boost by 2035. PwC: top 20% of firms capture 75% of AI economic gains. Acemoglu maintains <0.66% cumulative TFP gain over 10 years.",
+        "reason": "Numeric divergence 100.0% on metric (context: 2026): new=0.048, existing=750.0, threshold=10%",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "PwC 2025 Global AI Jobs Barometer: AI skills command 56% wage premium (up from 25%); productivity growth quadrupled in most AI-exposed industries (7% -> 27%, 2018-2024); Hartley et al 2026 finds small positive wage effects with 35.9% US workers using GenAI by Dec 2025; TFP projection +0.09pp in 2027.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "St. Louis Fed Jan 2026 estimates GenAI contribution to TFP growth at ~0.048 pp in 2026 (up from 0.011 pp in 2025). Penn Wharton Budget Model: 1.5% productivity/GDP boost by 2035. PwC: top 20% of firms capture 75% of AI economic gains. Acemoglu maintains <0.66% cumulative TFP gain over 10 years.",
+        "reason": "Numeric divergence 99.8% on metric (context: growth): new=0.048, existing=25.0, threshold=10%",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-22T01:00:37+00:00",
+        "entry_a_text": "REPLAY COMPLETE: 0 indicators applied, 0 skipped. Final posteriors: {'H1': 0.2, 'H2': 0.35, 'H3': 0.28, 'H4': 0.17}. Indicator firedDates restored to originals for audit.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "St. Louis Fed Jan 2026 estimates GenAI contribution to TFP growth at ~0.048 pp in 2026 (up from 0.011 pp in 2025). Penn Wharton Budget Model: 1.5% productivity/GDP boost by 2035. PwC: top 20% of firms capture 75% of AI economic gains. Acemoglu maintains <0.66% cumulative TFP gain over 10 years.",
+        "reason": "Numeric divergence 100.0% on metric (context: .): new=2025.0, existing=0.28, threshold=10%",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      }
+    ]
   },
   "schemaVersion": 2,
   "migratedAt": "2026-04-21T19:03:40+00:00",
@@ -1250,5 +2451,68 @@
       ],
       "lensAgreement": []
     }
-  ]
+  ],
+  "sourceCalibration": {
+    "ledger": [
+      {
+        "timestamp": "2026-04-24T02:25:41Z",
+        "evidence_index": 0,
+        "confirming_index": 1,
+        "resolution": "CONFIRMED",
+        "source": "",
+        "confirming_source": "",
+        "trust_delta": 0.05,
+        "original_text_snippet": "LR MIGRATION RESET: posteriors reset to design priors; evidence log preserved.",
+        "confirming_text_snippet": "REPLAY BEGIN: 0 previously-fired indicators will be re-applied chronologically under current LR system. Posteriors reset"
+      },
+      {
+        "timestamp": "2026-04-24T02:25:41Z",
+        "evidence_index": 1,
+        "confirming_index": 2,
+        "resolution": "CONFIRMED",
+        "source": "",
+        "confirming_source": "",
+        "trust_delta": 0.05,
+        "original_text_snippet": "REPLAY BEGIN: 0 previously-fired indicators will be re-applied chronologically under current LR system. Posteriors reset",
+        "confirming_text_snippet": "REPLAY COMPLETE: 0 indicators applied, 0 skipped. Final posteriors: {'H1': 0.2, 'H2': 0.35, 'H3': 0.28, 'H4': 0.17}. Ind"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:50Z",
+        "evidence_index": 3,
+        "confirming_index": 13,
+        "resolution": "REFUTED",
+        "source": "PwC / Penn Wharton Budget Model",
+        "confirming_source": "Aldasoro et al. via CEPR VoxEU, PwC AI Jobs Barometer 2025/26, Singularity Hub",
+        "trust_delta": -0.1,
+        "original_text_snippet": "PwC 2025 Global AI Jobs Barometer: AI skills command 56% wage premium (up from 25%); productivity growth quadrupled in m",
+        "confirming_text_snippet": "Aldasoro et al. (2026) causal study of 12,000+ EU firms: AI adoption raises labour productivity 4% on average, no short-"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:50Z",
+        "evidence_index": 8,
+        "confirming_index": 13,
+        "resolution": "REFUTED",
+        "source": "PwC / WEF",
+        "confirming_source": "Aldasoro et al. via CEPR VoxEU, PwC AI Jobs Barometer 2025/26, Singularity Hub",
+        "trust_delta": -0.1,
+        "original_text_snippet": "PwC 2025 AI Jobs Barometer: productivity growth in AI-exposed industries 27% (vs 7% 2018-2022); AI-skill wage premium 56",
+        "confirming_text_snippet": "Aldasoro et al. (2026) causal study of 12,000+ EU firms: AI adoption raises labour productivity 4% on average, no short-"
+      }
+    ],
+    "effectiveTrust": {
+      "Penn Wharton Budget Model": 0.4118,
+      "PwC": 0.3289,
+      "Atlanta Fed": 0.5,
+      "NBER": 0.5,
+      "WEF": 0.4118,
+      "BLS": 0.5,
+      "Chicago Fed Letter 518": 0.5,
+      "Aldasoro et al.": 0.5,
+      "Fortune": 0.7,
+      "Goldman": 0.5,
+      "Penn Wharton": 0.5,
+      "St. Louis Fed": 0.5
+    },
+    "_last_scan_same_source_skipped": 7
+  }
 }

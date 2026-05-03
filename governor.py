@@ -290,7 +290,21 @@ def audit_evidence_freshness(topic: dict) -> dict:
     }
 
     for i, entry in enumerate(evidence):
-        tag = entry.get("tag", "MISC")
+        # Schema split: some entries store tag (singular string), others
+        # tags (plural array). Read either; prefer the longest TTL among
+        # array entries so a multi-tagged entry isn't punished by its
+        # shortest tag.
+        tag = entry.get("tag")
+        if not tag:
+            tags = entry.get("tags")
+            if isinstance(tags, list) and tags:
+                tag = max(
+                    (str(t) for t in tags if t),
+                    key=lambda t: EVIDENCE_TTL.get(t, 72),
+                    default="MISC",
+                )
+            else:
+                tag = "MISC"
         ttl_hours = EVIDENCE_TTL.get(tag, 72)
 
         entry_time = _parse_time(entry.get("time"))
@@ -929,13 +943,15 @@ def check_update_proposal(topic: dict, proposed_posteriors: dict[str, float],
     else:
         results["checks"]["no_evidence"] = {"passed": True}
 
-    # 2. Confidence Inflation
+    # 2. Confidence Inflation — HARD BLOCKER (sample-size discipline).
     if has_evidence and max_shift > 0.15 and len(evidence_refs) < 2:
         results["checks"]["confidence_inflation"] = {
             "passed": False,
-            "detail": f"Shift of {max_shift:.0%} from only {len(evidence_refs)} evidence ref(s)",
+            "detail": f"Shift of {max_shift:.0%} from only {len(evidence_refs)} evidence ref(s) — "
+                      f"large updates require ≥2 independent refs",
         }
-        results["warnings"].append("confidence_inflation")
+        results["failures"].append("confidence_inflation")
+        results["passed"] = False
     else:
         results["checks"]["confidence_inflation"] = {"passed": True}
 
@@ -968,9 +984,12 @@ def check_update_proposal(topic: dict, proposed_posteriors: dict[str, float],
                 detail_parts.append(f"{chain_dup_count} same-chain ref(s)")
             results["checks"]["repetition_as_validation"] = {
                 "passed": False,
-                "detail": f"{' + '.join(detail_parts)} used as independent evidence",
+                "detail": f"{' + '.join(detail_parts)} used as independent evidence — "
+                          f"Bayesian updates require independent observations; "
+                          f"deduplicate or use informationChain to flag correlation",
             }
-            results["warnings"].append("repetition_as_validation")
+            results["failures"].append("repetition_as_validation")
+            results["passed"] = False
         else:
             results["checks"]["repetition_as_validation"] = {"passed": True}
     else:
@@ -988,6 +1007,7 @@ def check_update_proposal(topic: dict, proposed_posteriors: dict[str, float],
 
     # 4b. Sensitivity analysis (populated by bayesian_update when lr_range used)
     sensitivity_meta = kwargs.get("sensitivity_meta", {})
+    is_replay = kwargs.get("is_replay", False)
     if sensitivity_meta:
         dominant_stable = sensitivity_meta.get("dominantHypothesisStable", True)
         width = sensitivity_meta.get("maxRangeWidth", 0.0)
@@ -995,12 +1015,12 @@ def check_update_proposal(topic: dict, proposed_posteriors: dict[str, float],
         topic_classification = topic.get("meta", {}).get("classification", "ROUTINE")
         if not dominant_stable:
             detail = "Dominant hypothesis flips across LR range — conclusion not robust"
-            # Hard block only when ALERT classification (conclusion drives decisions).
-            # LOW confidence on non-ALERT topics is a critical warning, not a block:
-            # uncertain evidence is still informative, just flagged.
-            if topic_classification == "ALERT":
+            # HARD BLOCK during replay (calibration tooling — strict by design)
+            # OR on ALERT topics (live conclusion drives decisions).
+            # On non-ALERT live updates, this stays a critical warning.
+            if is_replay or topic_classification == "ALERT":
                 results["checks"]["conclusion_sensitive"] = {
-                    "passed": False, "detail": detail,
+                    "passed": False, "detail": detail + (" [replay: hard block]" if is_replay else ""),
                 }
                 results["failures"].append("conclusion_sensitive")
                 results["passed"] = False
@@ -1178,25 +1198,74 @@ def check_update_proposal(topic: dict, proposed_posteriors: dict[str, float],
     else:
         results["checks"]["discredited_source"] = {"passed": True}
 
-    # 11. Red Team Override — warn if devil's advocate score is very high
-    # This is checked AFTER posteriors are applied (in engine.update_posteriors),
-    # so here we check the most recent red team result from history
+    # 11. Red Team Override / Saturation Gate — HARD BLOCKER on saturation path.
+    #
+    # Two distinct checks:
+    #   (a) If a red-team has been run AND devil-advocate score is high, the
+    #       proposed update is dishonest about the counter-evidence — block.
+    #   (b) If the proposed posterior would push max(H) past the saturation
+    #       threshold (0.85) on a non-RESOLVED topic, require that a redTeam
+    #       entry exists in the recent history (within 30 days). No red-team
+    #       on file → block. Forces the procedural step before any topic
+    #       claims near-certainty.
+    SATURATION_THRESHOLD = 0.85
+    REDTEAM_FRESHNESS_DAYS = 30
     try:
         history = topic["model"].get("posteriorHistory", [])
+        topic_status = topic.get("meta", {}).get("status", "ACTIVE")
+        proposed_max = max(proposed_posteriors.values()) if proposed_posteriors else 0.0
+
+        # (a) Existing red-team with high devil-advocate score
         if history and "redTeam" in history[-1]:
             rt_score = history[-1]["redTeam"].get("devil_advocate_score", 0)
             if rt_score > 0.7:
                 results["checks"]["red_team_override"] = {
                     "passed": False,
-                    "detail": f"Devil's advocate score {rt_score:.2f} — "
-                              f"strong counterevidence: "
-                              f"{history[-1]['redTeam'].get('challenge', '')[:100]}",
+                    "detail": (f"Devil's advocate score {rt_score:.2f} — "
+                               f"strong counterevidence: "
+                               f"{history[-1]['redTeam'].get('challenge', '')[:100]}"),
                 }
-                results["warnings"].append("red_team_override")
+                results["failures"].append("red_team_override")
+                results["passed"] = False
             else:
                 results["checks"]["red_team_override"] = {"passed": True}
         else:
             results["checks"]["red_team_override"] = {"passed": True}
+
+        # (b) Saturation gate — must have a recent red-team to push past 0.85
+        if (topic_status not in ("RESOLVED", "ARCHIVED")
+                and proposed_max > SATURATION_THRESHOLD):
+            recent_redteam = False
+            cutoff = datetime.now(timezone.utc).timestamp() - REDTEAM_FRESHNESS_DAYS * 86400
+            for entry in reversed(history):
+                rt = entry.get("redTeam")
+                if not rt:
+                    continue
+                ts = (entry.get("timestamp") or entry.get("time")
+                      or rt.get("timestamp") or entry.get("date"))
+                if not ts:
+                    continue
+                try:
+                    t = datetime.fromisoformat(str(ts).replace("Z", "+00:00")).timestamp()
+                except (ValueError, TypeError):
+                    continue
+                if t >= cutoff:
+                    recent_redteam = True
+                    break
+            if not recent_redteam:
+                results["checks"]["saturation_redteam_required"] = {
+                    "passed": False,
+                    "detail": (f"Proposed max posterior {proposed_max:.0%} > "
+                               f"{int(SATURATION_THRESHOLD*100)}% saturation "
+                               f"threshold, but no red-team result on file within "
+                               f"{REDTEAM_FRESHNESS_DAYS} days. "
+                               f"Run skills/red-team.md and record the result on "
+                               f"the next posteriorHistory entry before saturating."),
+                }
+                results["failures"].append("saturation_redteam_required")
+                results["passed"] = False
+            else:
+                results["checks"]["saturation_redteam_required"] = {"passed": True}
     except (KeyError, IndexError):
         results["checks"]["red_team_override"] = {"passed": True}
 
@@ -1349,9 +1418,19 @@ def governance_report(topic: dict) -> dict:
 
     health = "HEALTHY" if len(issues) == 0 else "DEGRADED" if len(issues) <= 2 else "CRITICAL"
 
+    alerts = build_actionable_alerts(
+        topic,
+        health=health,
+        uncertainty=uncertainty,
+        freshness=freshness,
+        rt=rt,
+        kl_prior=kl_prior,
+    )
+
     return {
         "health": health,
         "issues": issues,
+        "alerts": alerts,
         "rt": rt,
         "entropy": entropy,
         "max_entropy": max_entropy,
@@ -1362,6 +1441,215 @@ def governance_report(topic: dict) -> dict:
         "top_queries": queries[:5],
         "failure_modes": [m["id"] for m in FAILURE_MODES],
     }
+
+
+# ===========================================================================
+# 8b. ACTIONABLE ALERTS
+#
+#   Translate raw governance issues into human-legible alerts with a clear
+#   lead, a call-to-action, and supporting details. Also detects the
+#   "high-relevance evidence filed as NONE" pattern — a structural blind
+#   spot where the tier system has no indicator for a dimension the
+#   evidence is probing.
+# ===========================================================================
+
+_HIGH_RELEVANCE_TAGS = {"DATA", "EVENT", "INTEL", "ACTION", "KINETIC", "MIL", "MILITARY", "ECON", "DIPLO", "FORCE"}
+_NONE_WINDOW_DAYS = 7
+_NONE_ALERT_THRESHOLD = 3
+
+
+def _find_none_impact_high_relevance(topic: dict, days: int = _NONE_WINDOW_DAYS) -> list:
+    """Find recent high-relevance evidence filed with posteriorImpact=NONE."""
+    now = datetime.now(timezone.utc)
+    out = []
+    for e in topic.get("evidenceLog", []) or []:
+        if not isinstance(e, dict):
+            continue
+        imp = (e.get("posteriorImpact") or "").strip()
+        if not imp.upper().startswith("NONE"):
+            continue
+        # Schema split: read both tag (singular) and tags (plural).
+        tags = e.get("tags") or []
+        if isinstance(tags, str):
+            tags = [tags]
+        single = e.get("tag")
+        if single:
+            tags = list(tags) + [single]
+        if not any(t in _HIGH_RELEVANCE_TAGS for t in tags):
+            continue
+        ts = e.get("time") or ""
+        try:
+            t_dt = datetime.fromisoformat(str(ts).replace("Z", "+00:00"))
+            if t_dt.tzinfo is None:
+                t_dt = t_dt.replace(tzinfo=timezone.utc)
+        except Exception:
+            continue
+        age_days = (now - t_dt).total_seconds() / 86400.0
+        if 0 <= age_days <= days:
+            out.append({
+                "id": e.get("id"),
+                "age_days": round(age_days, 1),
+                "tags": tags,
+                "text": (e.get("text") or "")[:160],
+            })
+    return out
+
+
+def build_actionable_alerts(topic: dict, *, health: str, uncertainty: float,
+                            freshness: dict, rt: dict, kl_prior: dict) -> list:
+    """Translate governance signals into lead/action/details alerts."""
+    slug = topic.get("meta", {}).get("slug") or topic.get("meta", {}).get("title") or "?"
+    status = topic.get("meta", {}).get("status", "ACTIVE")
+    alerts = []
+
+    # Primary: high-relevance NONE-impact evidence on a saturated/overconfident topic.
+    # This is the structural blind spot: tier system has no indicator for the
+    # dimension the evidence is probing, so the signal gets filed as inert.
+    if status not in ("RESOLVED", "ARCHIVED"):
+        none_hits = _find_none_impact_high_relevance(topic)
+        saturated = uncertainty < 0.1
+        if len(none_hits) >= _NONE_ALERT_THRESHOLD and (saturated or health == "CRITICAL"):
+            ev_ids = [h["id"] for h in none_hits if h["id"]]
+            sample_ids = ", ".join(ev_ids[:5]) + (f" (+{len(ev_ids)-5} more)" if len(ev_ids) > 5 else "")
+            alerts.append({
+                "severity": "REVIEW_NEEDED",
+                "slug": slug,
+                "signature": f"none_impact_saturation:{slug}",
+                "lead": (
+                    f"High-relevance evidence is being logged but not changing the model. "
+                    f"{len(none_hits)} recent entries on {slug} are filed as \"no impact\" "
+                    f"because no pre-registered indicator matched them — "
+                    f"while the posterior is saturated (uncertainty ratio "
+                    f"{uncertainty:.2f}), meaning the model can't absorb further signal "
+                    f"even if warranted."
+                ),
+                "action": (
+                    "1. Read the listed evidence entries. Decide if they represent a "
+                    "dimension the current indicator tiers don't cover.\n"
+                    "2. If yes: run skills/topic-design.md to add the missing "
+                    "indicator(s) with pre-committed posteriorEffect, then replay.\n"
+                    "3. If no: mark them reviewed and move on; the flag will clear."
+                ),
+                "buttons": [
+                    {"label": "Review topic design", "action": "review_topic_design",
+                     "primary": True,
+                     "context": {"evidence_ids": ev_ids}},
+                    {"label": "Mark reviewed", "action": "mark_reviewed",
+                     "context": {"alert_signature": f"none_impact_saturation:{slug}"}},
+                ],
+                "details": {
+                    "evidence_ids": ev_ids,
+                    "evidence_sample": sample_ids,
+                    "window_days": _NONE_WINDOW_DAYS,
+                    "uncertainty_ratio": round(uncertainty, 3),
+                    "health": health,
+                },
+            })
+
+    # Secondary: overconfidence without the NONE-impact signal (rare, but possible).
+    if status not in ("RESOLVED", "ARCHIVED") and uncertainty < 0.1 and not alerts:
+        alerts.append({
+            "severity": "REVIEW_NEEDED",
+            "slug": slug,
+            "signature": f"overconfidence:{slug}",
+            "lead": (
+                f"Posterior on {slug} is saturated (uncertainty ratio "
+                f"{uncertainty:.2f}) but the topic is still ACTIVE. "
+                f"Model confidence exceeds what outstanding indicators and time "
+                f"horizons justify."
+            ),
+            "action": (
+                "Run skills/red-team.md against the current posterior. If no "
+                "genuine counter-evidence surfaces, consider whether the topic "
+                "is effectively resolved and should move to RESOLVED status via "
+                "skills/resolve.md."
+            ),
+            "buttons": [
+                {"label": "Run red-team", "action": "run_red_team", "primary": True, "context": {}},
+                {"label": "Mark reviewed", "action": "mark_reviewed",
+                 "context": {"alert_signature": f"overconfidence:{slug}"}},
+            ],
+            "details": {"uncertainty_ratio": round(uncertainty, 3), "health": health},
+        })
+
+    # Stale evidence dominance
+    if freshness.get("stale", 0) > freshness.get("fresh", 0) and freshness.get("total", 0) >= 20:
+        alerts.append({
+            "severity": "ATTENTION",
+            "slug": slug,
+            "signature": f"stale_evidence:{slug}",
+            "lead": (
+                f"Evidence base on {slug} is mostly stale "
+                f"({freshness['stale']}/{freshness['total']} past TTL). "
+                f"Posterior is increasingly based on aged observations."
+            ),
+            "action": (
+                "Run skills/triage.md on recent headlines to refresh the "
+                "evidence base, or run skills/news-scan.md for a sweep."
+            ),
+            "buttons": [
+                {"label": "Mark reviewed", "action": "mark_reviewed",
+                 "context": {"alert_signature": f"stale_evidence:{slug}"}},
+            ],
+            "details": {
+                "stale": freshness["stale"],
+                "fresh": freshness["fresh"],
+                "total": freshness["total"],
+            },
+        })
+
+    # R_t regime danger
+    regime = rt.get("regime", "")
+    if regime in ("DANGEROUS", "RUNAWAY"):
+        alerts.append({
+            "severity": "ATTENTION",
+            "slug": slug,
+            "signature": f"rt_regime:{slug}:{regime}",
+            "lead": (
+                f"R_t on {slug} is {regime} ({rt.get('rt', 0):.2f}). Evidence "
+                f"base is aging faster than it is being refreshed; posterior "
+                f"drift risk is elevated."
+            ),
+            "action": "Run skills/news-scan.md or skills/triage.md to add fresh observations.",
+            "buttons": [
+                {"label": "Mark reviewed", "action": "mark_reviewed",
+                 "context": {"alert_signature": f"rt_regime:{slug}:{regime}"}},
+            ],
+            "details": {"rt": rt.get("rt"), "regime": regime, "worst_hypothesis": rt.get("worst_hypothesis")},
+        })
+
+    # Filter against operator-reviewed suppressions. A suppression with a
+    # fingerprint only suppresses when the alert's current fingerprint matches
+    # — versioned alerts (e.g. none_impact_saturation) re-fire when underlying
+    # content changes. A suppression without a fingerprint suppresses
+    # unconditionally on signature match.
+    reviewed = topic.get("governance", {}).get("reviewed_alerts", []) or []
+    if reviewed and alerts:
+        from engine import compute_alert_fingerprint
+        suppressions = {r.get("signature"): r for r in reviewed if r.get("signature")}
+        kept = []
+        for a in alerts:
+            sup = suppressions.get(a.get("signature"))
+            if sup is None:
+                kept.append(a)
+                continue
+            sup_fp = sup.get("fingerprint")
+            if sup_fp is None:
+                # unconditional suppression
+                continue
+            cur_fp = compute_alert_fingerprint(a)
+            if cur_fp == sup_fp:
+                continue
+            # content drifted since review — re-fire
+            a = dict(a)
+            a["details"] = dict(a.get("details") or {})
+            a["details"]["suppression_drifted"] = True
+            a["details"]["reviewed_fingerprint"] = sup_fp
+            a["details"]["current_fingerprint"] = cur_fp
+            kept.append(a)
+        alerts = kept
+
+    return alerts
 
 
 # ===========================================================================

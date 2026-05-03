@@ -82,33 +82,34 @@ def process_evidence(
     likelihoods: dict[str, float] = None,
     fired_indicator_id: str = None,
     reason: str = None,
+    *,
+    lens: str = None,
 ) -> dict:
     """
-    Full evidence pipeline: information in, posteriors out.
+    Full evidence pipeline: information in, posteriors out (or parked).
+
+    Two outcomes:
+      - fired_indicator_id supplied → fire indicator, apply pre-committed LRs,
+        update posteriors normally
+      - no fired_indicator_id → park the evidence: log it with
+        posteriorImpact: NONE and append id to topic.governance.flagged_for_indicator_review
+        for later resolution via the indicator-cleanup workflow
 
     Args:
-        slug: topic slug (e.g. 'hormuz-closure')
+        slug: topic slug
         entry: evidence entry dict. Minimum: {tag, text, source}
-               Optional: time, claimState, tags, note, informationChain
-        likelihoods: P(E|H_i) for each hypothesis. If None and an indicator
-                     fired, suggest_likelihoods() derives them. If None and
-                     no indicator, the caller MUST supply them — this function
-                     will raise ValueError rather than silently skip the
-                     Bayesian update.
-        fired_indicator_id: if an indicator's observable threshold was met,
-                           pass its ID here. The indicator will be fired and
-                           likelihoods derived from its pre-committed effect.
+        likelihoods: only used when fired_indicator_id is set; otherwise ignored.
+                     Indicator-bound LRs come from pre-committed values.
+        fired_indicator_id: if the operator/skill identified a matching indicator,
+                           pass its id. The indicator fires and its LRs apply.
+                           Omit to park.
         reason: human-readable reason for the update. Auto-generated if None.
+        lens: explicit lens override; otherwise read from topic.meta.lens
 
     Returns:
         dict with:
-          topic: the updated topic dict
-          evidence_id: the ID of the added evidence entry
-          posteriors_before: dict of posteriors before update
-          posteriors_after: dict of posteriors after update
-          governance: governance report
-          calibration: source trust calibration results
-          downstream_alerts: list of stale dependency alerts
+          topic, evidence_id, posteriors_before, posteriors_after (== before if parked),
+          governance, calibration, downstream_alerts, parked: bool
     """
     topic = load_topic(slug)
     result = {
@@ -140,40 +141,73 @@ def process_evidence(
     except ImportError:
         pass
 
-    # 2. Fire indicator if specified
-    if fired_indicator_id:
-        topic = fire_indicator(
-            topic,
-            indicator_id=fired_indicator_id,
-            note=entry.get("note") or entry["text"][:100],
+    # 2. If no indicator was identified by the caller, park the evidence.
+    # This is the new default: posteriors do NOT update on unmatched evidence.
+    # Operator/skill must run cleanup-indicator-sweep to resolve parked entries.
+    if not fired_indicator_id:
+        # Mark the evidence entry's posterior impact and flag it for review
+        ev_entry = topic["evidenceLog"][-1]
+        ev_entry["posteriorImpact"] = (
+            "NONE — flagged for indicator review (no matching indicator at scan time)"
         )
+        gov = topic.setdefault("governance", {})
+        flagged = gov.setdefault("flagged_for_indicator_review", [])
+        if evidence_id not in flagged:
+            flagged.append(evidence_id)
 
-    # 3. Determine likelihoods
-    if likelihoods is None and fired_indicator_id:
-        # Derive from pre-committed indicator effects
+        save_topic(topic)
+
+        # Calibration / governance still run (they read evidenceLog and posteriorHistory)
+        try:
+            from framework.source_db import ingest_from_topic
+            _ingest_source_db(topic)
+        except Exception:
+            pass
+
+        gov_report = governance_report(topic)
+        before = result["posteriors_before"]
+        result.update({
+            "posteriors_after": before,  # unchanged — parked
+            "parked": True,
+            "flagged_for_review_count": len(flagged),
+            "governance": {
+                "health": gov_report["health"],
+                "issues": gov_report["issues"],
+                "rt_regime": gov_report["rt"]["regime"],
+                "rt_value": gov_report["rt"]["rt"],
+                "entropy": gov_report["entropy"],
+                "uncertainty_ratio": gov_report["uncertainty_ratio"],
+            },
+            "topic": topic,
+        })
+        return result
+
+    # 3. Indicator-bound path: fire the indicator and derive LRs
+    topic = fire_indicator(
+        topic,
+        indicator_id=fired_indicator_id,
+        note=entry.get("note") or entry["text"][:100],
+    )
+
+    if likelihoods is None:
         suggested = suggest_likelihoods(topic, [fired_indicator_id])
         likelihoods = suggested.get("likelihoods")
 
-    if likelihoods is None:
-        raise ValueError(
-            f"No likelihoods supplied and no indicator fired. "
-            f"The Bayesian update requires explicit likelihoods: "
-            f"P(E|H_i) for each hypothesis. Evidence was logged as {evidence_id} "
-            f"but posteriors were NOT updated. Call process_evidence() again "
-            f"with likelihoods={{H1: p1, H2: p2, ...}} to complete the update."
-        )
-
-    # 4. Bayesian update — mechanical, governor-gated
+    # 4. Bayesian update — engine-gated, indicator-bound only
     update_reason = reason or f"Evidence {evidence_id}: {entry['text'][:80]}"
-    if fired_indicator_id:
-        update_reason = f"Indicator {fired_indicator_id} FIRED. {update_reason}"
+    update_reason = f"Indicator {fired_indicator_id} FIRED. {update_reason}"
 
-    topic = bayesian_update(
-        topic,
-        likelihoods=likelihoods,
-        reason=update_reason,
-        evidence_refs=[evidence_id],
-    )
+    _bu_kwargs = {
+        "likelihoods": likelihoods,
+        "reason": update_reason,
+        "evidence_refs": [evidence_id],
+        "indicator_id": fired_indicator_id,
+    }
+    if lens is not None:
+        _bu_kwargs["lens"] = lens
+
+    topic = bayesian_update(topic, **_bu_kwargs)
+    result["parked"] = False
 
     result["posteriors_after"] = {k: v["posterior"] for k, v in topic["model"]["hypotheses"].items()}
 
@@ -226,71 +260,269 @@ def process_evidence(
     return result
 
 
-def process_headline(
+def get_headline_match_prompts(
     headline: str,
     source: str,
-    likelihoods_by_slug: dict[str, dict[str, float]] = None,
-) -> list[dict]:
+    *,
+    extra_context: str = None,
+) -> dict:
     """
-    Full triage-to-update pipeline for a headline.
+    Build per-topic subagent prompts for a headline's match decisions.
 
-    Triages the headline against all active topics, then runs
-    process_evidence() for each matched topic.
+    Caller (a skill conversation) dispatches each prompt via Claude Code's
+    Agent tool, captures responses, parses them via
+    `framework.indicator_match_subagent.parse_match_decision`, then feeds
+    the parsed decisions back to `process_headline_with_decisions`.
 
-    Args:
-        headline: the news headline or description
-        source: source name (e.g. 'Reuters', 'Al Jazeera')
-        likelihoods_by_slug: optional dict of {slug: {H1: p, H2: p, ...}}
-                            If not supplied, the caller must handle the
-                            ValueError from process_evidence for non-indicator
-                            matches.
+    Each subagent has fresh context — no anchoring across topics within
+    one scan.
 
     Returns:
-        list of process_evidence() results, one per matched topic
+        {
+            "headline": str,
+            "source": str,
+            "matched_topics": [<slug>, ...],  # topics the headline triaged to
+            "prompts": {<slug>: <prompt str>},
+            "triage_keyword_hits": {<slug>: <indicator_id>}  # triage already
+                detected an indicator-keyword match; caller can short-circuit
+                the subagent for these and fire directly.
+        }
     """
+    from framework.indicator_match import collect_topic_indicators
+    from framework.indicator_match_subagent import build_match_prompt
+
     triage = triage_headline(headline, source)
-    results = []
+    matched_topics = []
+    prompts = {}
+    keyword_hits = {}
 
     for match in triage.get("matches", []):
-        if match["action"] in ("IGNORE",):
+        if match["action"] == "IGNORE":
             continue
-
         slug = match["slug"]
+        matched_topics.append(slug)
 
-        # Build evidence entry from triage
+        # Triage's keyword-indicator match — operator/skill can shortcut
+        if match["action"] == "UPDATE_CYCLE" and match.get("matched_indicators"):
+            keyword_hits[slug] = match["matched_indicators"][0].get("id")
+
+        # Build subagent prompt for verification (or full match if no keyword hit)
+        try:
+            topic = load_topic(slug)
+            topic_meta = {
+                "slug": slug,
+                "title": topic["meta"].get("title", slug),
+                "question": topic["meta"].get("question", ""),
+                "hypotheses": topic["model"].get("hypotheses", {}),
+            }
+            indicators = collect_topic_indicators(topic)
+            prompts[slug] = build_match_prompt(
+                headline=headline,
+                source=source,
+                topic_meta=topic_meta,
+                indicators=indicators,
+                extra_context=extra_context,
+            )
+        except Exception as e:
+            prompts[slug] = f"# error building prompt: {e}"
+
+    return {
+        "headline": headline,
+        "source": source,
+        "matched_topics": matched_topics,
+        "prompts": prompts,
+        "triage_keyword_hits": keyword_hits,
+    }
+
+
+def process_headline_with_decisions(
+    headline: str,
+    source: str,
+    decisions: dict,
+    *,
+    tag: str = "EVENT",
+    extra_tags: list = None,
+) -> list:
+    """
+    Apply pre-computed match decisions (from subagent dispatch) per topic.
+
+    Args:
+        headline, source: as in get_headline_match_prompts
+        decisions: {<slug>: {action: 'fire'|'park'|'error',
+                             indicator_id?: str, reason?: str, raw?: str}}
+                   Produced by the AI dispatching subagents using
+                   get_headline_match_prompts and parsing each response via
+                   framework.indicator_match_subagent.parse_match_decision.
+
+    Returns: list of process_evidence results (one per topic in `decisions`).
+    """
+    results = []
+    tags = [tag] + (extra_tags or [])
+
+    for slug, decision in decisions.items():
         entry = {
             "text": headline,
             "source": source,
-            "tag": "EVENT",  # default; caller should override for RHETORIC etc.
-            "tags": ["EVENT"],
-            "note": match.get("explanation", ""),
+            "tag": tag,
+            "tags": tags,
+            "note": (decision.get("reason") or "")[:300],
         }
 
-        # Determine if an indicator fired
+        action = decision.get("action", "error")
         fired_id = None
-        if match["action"] == "UPDATE_CYCLE" and match.get("matched_indicators"):
-            fired_id = match["matched_indicators"][0].get("id")
-
-        # Get likelihoods for this slug
-        slug_likelihoods = None
-        if likelihoods_by_slug and slug in likelihoods_by_slug:
-            slug_likelihoods = likelihoods_by_slug[slug]
+        if action == "fire":
+            fired_id = decision.get("indicator_id")
+            if not fired_id:
+                action = "error"
 
         try:
             result = process_evidence(
                 slug=slug,
                 entry=entry,
-                likelihoods=slug_likelihoods,
                 fired_indicator_id=fired_id,
             )
+            result["match_decision"] = {
+                "path": "subagent",
+                "action": action,
+                "indicator_id": fired_id,
+                "reason": decision.get("reason"),
+            }
             results.append(result)
-        except ValueError as e:
-            # Likelihoods missing — evidence logged but posteriors not updated
+        except Exception as e:
+            results.append({
+                "slug": slug,
+                "evidence_id": None,
+                "error": str(e),
+                "match_decision": {
+                    "path": "subagent",
+                    "action": action,
+                    "indicator_id": fired_id,
+                    "reason": decision.get("reason"),
+                },
+            })
+
+    return results
+
+
+def process_headline(
+    headline: str,
+    source: str,
+    *,
+    match_decisions: dict = None,
+    fallback_to_embedding: bool = True,
+    auto_fire_threshold: float = 0.55,
+    tag: str = "EVENT",
+    extra_tags: list = None,
+) -> list:
+    """
+    Full triage-to-update pipeline for a headline. No freeform LRs.
+
+    Two paths for the per-topic match decision:
+      1. **Subagent (preferred, default in skill orchestration):** caller
+         provides `match_decisions` dict produced by dispatching
+         per-topic Agent subagents via `get_headline_match_prompts`.
+         Each subagent has fresh context (anti-anchoring) and LLM-quality
+         reasoning (catches negation, threshold, magnitude, direction).
+      2. **Embedding fallback (used only when match_decisions is None):**
+         deterministic cosine similarity between headline and indicator
+         descriptions. Faster, no Agent dispatch, but misses harder cases.
+         Useful for unattended/automated calls or testing.
+
+    Args:
+        headline, source: news content
+        match_decisions: {<slug>: parsed_decision} from subagent dispatch.
+                         If provided, used directly. If None, falls back to
+                         embedding (or triage-keyword-only if
+                         fallback_to_embedding=False).
+        fallback_to_embedding: when match_decisions is None, run
+                               embedding-based matching as fallback.
+                               Set False to require explicit decisions.
+        auto_fire_threshold: embedding cosine threshold (only used in
+                             fallback path)
+
+    Returns:
+        list of process_evidence results, one per matched topic.
+    """
+    if match_decisions is not None:
+        return process_headline_with_decisions(
+            headline, source, match_decisions, tag=tag, extra_tags=extra_tags,
+        )
+
+    # --- Fallback path: embedding-based matching ---
+    from framework.indicator_match import (
+        match_evidence_to_indicators, collect_topic_indicators,
+    )
+
+    triage = triage_headline(headline, source)
+    results = []
+    tags = [tag] + (extra_tags or [])
+
+    for match in triage.get("matches", []):
+        if match["action"] == "IGNORE":
+            continue
+        slug = match["slug"]
+        entry = {
+            "text": headline,
+            "source": source,
+            "tag": tag,
+            "tags": tags,
+            "note": match.get("explanation", ""),
+        }
+
+        fired_id = None
+        decision = {"path": "park_fallback",
+                    "reason": "no match in fallback path"}
+
+        if match["action"] == "UPDATE_CYCLE" and match.get("matched_indicators"):
+            keyword_hit = match["matched_indicators"][0].get("id")
+            if keyword_hit:
+                fired_id = keyword_hit
+                decision = {"path": "triage_keyword_match",
+                            "indicator_id": fired_id}
+
+        if not fired_id and fallback_to_embedding:
+            try:
+                topic = load_topic(slug)
+                indicators = collect_topic_indicators(topic)
+                eligible = [
+                    i for i in indicators
+                    if i.get("likelihoods")
+                ]
+                if eligible:
+                    matches = match_evidence_to_indicators(
+                        evidence_text=headline + " " + (match.get("explanation", "") or ""),
+                        indicators=eligible,
+                        top_n=1,
+                        score_threshold=auto_fire_threshold,
+                    )
+                    if matches:
+                        best = matches[0]
+                        fired_id = best["indicator_id"]
+                        decision = {
+                            "path": "embedding_fallback",
+                            "indicator_id": fired_id,
+                            "score": best["score"],
+                            "tier": best.get("tier"),
+                        }
+            except Exception as e:
+                decision = {"path": "park_fallback",
+                            "reason": f"match error: {str(e)[:100]}"}
+
+        try:
+            result = process_evidence(
+                slug=slug,
+                entry=entry,
+                fired_indicator_id=fired_id,
+            )
+            result["match_decision"] = decision
+            results.append(result)
+        except Exception as e:
             results.append({
                 "slug": slug,
                 "evidence_id": None,
                 "error": str(e),
                 "action": match["action"],
+                "match_decision": decision,
             })
 
     return results

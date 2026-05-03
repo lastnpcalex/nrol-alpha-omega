@@ -5,13 +5,16 @@
     "question": "By 2028-Q4, do the top-3 commercial generative-AI API providers hold ≥60% combined revenue share of the global commercial GenAI API market, as reported by at least one major market-research firm (Gartner, IDC, Bloomberg Intelligence, or equivalent)?",
     "resolution": "Resolved H1 (hyper-concentrated) if best available market-research data shows top-3 providers at ≥75% combined revenue share. H2 (concentrated) if 60-74%. H3 (fragmented) if 40-59%. H4 (commoditized) if <40%. Primary source: Gartner/IDC annual AI market report or Bloomberg Intelligence published before 2029-03-01. Fallback: consensus of ≥3 analyst firms. resolutionDate: 2028-12-31.",
     "created": "",
-    "lastUpdated": "2026-04-22T18:41:05+00:00",
+    "lastUpdated": "2026-04-29T02:30:58+00:00",
     "status": "ACTIVE",
     "dayCount": 0,
     "startDate": "2026-04-22",
     "classification": "CALIBRATION",
     "topicType": "tech",
-    "resolutionDate": "2028-12-31"
+    "resolutionDate": "2028-12-31",
+    "lens": "GREEN",
+    "lensSetAt": "2026-04-26T21:11:43+00:00",
+    "lensSetReason": ""
   },
   "tagConfig": {
     "_docs": "EARNINGS/BENCHMARK/SURVEY favor H1/H2 (concentration) or H3/H4 (fragmentation) per direction. REGULATORY always favors H3/H4.",
@@ -54,21 +57,21 @@
         "midpoint": 80,
         "unit": "% top-3 combined revenue share",
         "description": "OpenAI/Google/Anthropic maintain dominant moat. Open-weights models fail commercially. Infrastructure lock-in (contracts, fine-tuning, compliance) sustains oligopoly. Malone's local-models thesis fails at commercial scale.",
-        "posterior": 0.3935
+        "posterior": 0.9728
       },
       "H2": {
         "label": "Concentrated oligopoly: top-3 hold 60-74% GenAI API revenue share",
         "midpoint": 67,
         "unit": "% top-3 combined revenue share",
         "description": "Top-3 remain dominant but face meaningful competition from open-weights commercial deployments (Meta Llama, Mistral, Cohere) and regional providers. Significant moat persists via safety certs, RLHF quality, and enterprise SLAs.",
-        "posterior": 0.5383
+        "posterior": 0.0172
       },
       "H3": {
         "label": "Fragmented market: top-3 hold 40-59% GenAI API revenue share",
         "midpoint": 50,
         "unit": "% top-3 combined revenue share",
         "description": "Open-weights commercial adoption, regional providers, and enterprise self-hosting erode top-3 share. Llama commercial licensing, Mistral B2B, and self-hosted deployments collectively capture >40% of enterprise spend.",
-        "posterior": 0.0632
+        "posterior": 0.005
       },
       "H4": {
         "label": "Commoditized: top-3 hold <40% GenAI API revenue share",
@@ -78,7 +81,7 @@
         "posterior": 0.005
       }
     },
-    "expectedValue": 70.86,
+    "expectedValue": 79.38,
     "expectedUnit": "weeks",
     "posteriorHistory": [
       {
@@ -87,7 +90,13 @@
         "H1": 0.25,
         "H2": 0.35,
         "H3": 0.28,
-        "H4": 0.12
+        "H4": 0.12,
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        }
       },
       {
         "date": "2026-04-22",
@@ -103,7 +112,7 @@
           "H3": 0.28,
           "H4": 0.12
         },
-        "updateMethod": "bayesian_update",
+        "updateMethod": "bayesian_update_legacy",
         "evidenceRefs": [
           "ev_002"
         ],
@@ -123,7 +132,14 @@
           "devil_advocate_score": 0.0,
           "challenge": "No significant shifts proposed; no challenge needed.",
           "inference_mode": "text_heuristic"
-        }
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
       },
       {
         "date": "2026-04-22",
@@ -139,7 +155,7 @@
           "H3": 0.1968,
           "H4": 0.0211
         },
-        "updateMethod": "bayesian_update",
+        "updateMethod": "bayesian_update_legacy",
         "evidenceRefs": [
           "ev_003"
         ],
@@ -164,7 +180,14 @@
           "devil_advocate_score": 0.0,
           "challenge": "No significant shifts proposed; no challenge needed.",
           "inference_mode": "text_heuristic"
-        }
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
       },
       {
         "date": "2026-04-22",
@@ -180,7 +203,7 @@
           "H3": 0.1185,
           "H4": 0.005
         },
-        "updateMethod": "bayesian_update",
+        "updateMethod": "bayesian_update_legacy",
         "evidenceRefs": [
           "ev_003"
         ],
@@ -200,7 +223,14 @@
           "devil_advocate_score": 0.0,
           "challenge": "No significant shifts proposed; no challenge needed.",
           "inference_mode": "text_heuristic"
-        }
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
       },
       {
         "date": "2026-04-22",
@@ -216,7 +246,7 @@
           "H3": 0.081,
           "H4": 0.005
         },
-        "updateMethod": "bayesian_update",
+        "updateMethod": "bayesian_update_legacy",
         "evidenceRefs": [
           "ev_004"
         ],
@@ -242,7 +272,327 @@
           "devil_advocate_score": 0.0,
           "challenge": "No significant shifts proposed; no challenge needed.",
           "inference_mode": "text_heuristic"
-        }
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-24",
+        "posteriors": {
+          "H1": 0.6203,
+          "H2": 0.3655,
+          "H3": 0.0092,
+          "H4": 0.005
+        },
+        "priors": {
+          "H1": 0.3935,
+          "H2": 0.5383,
+          "H3": 0.0632,
+          "H4": 0.005
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_005"
+        ],
+        "likelihoods": {
+          "H1": 0.65,
+          "H2": 0.28,
+          "H3": 0.06,
+          "H4": 0.01
+        },
+        "note": "88% top-3 enterprise share directly supports H1 (hyper-concentrated >=75%); latest enterprise data substantially updates prior H2 lead.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "turningPoint": {
+          "type": "LEADING_CHANGED",
+          "from": "H2",
+          "to": "H1",
+          "fromProb": 0.5383,
+          "toProb": 0.6203
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-24",
+        "posteriors": {
+          "H1": 0.7703,
+          "H2": 0.2197,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "priors": {
+          "H1": 0.6203,
+          "H2": 0.3655,
+          "H3": 0.0092,
+          "H4": 0.005
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_006"
+        ],
+        "likelihoods": {
+          "H1": 0.62,
+          "H2": 0.3,
+          "H3": 0.06,
+          "H4": 0.02
+        },
+        "note": "Historic capital concentration reinforces top-3 GenAI revenue dominance trajectory.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "turningPoint": {
+          "type": "BRANCH_DEATH",
+          "hypothesis": "H3",
+          "lastPosterior": 0.005
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-24",
+        "posteriors": {
+          "H1": 0.8252,
+          "H2": 0.1648,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "priors": {
+          "H1": 0.7703,
+          "H2": 0.2197,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_007"
+        ],
+        "likelihoods": {
+          "H1": 1.0,
+          "H2": 0.7,
+          "H3": 0.1,
+          "H4": 0.02
+        },
+        "note": "Capital and revenue gap between top-3 and rest continues to widen — strongly consistent with hyper-concentration.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-25",
+        "posteriors": {
+          "H1": 0.8784,
+          "H2": 0.1116,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "priors": {
+          "H1": 0.8252,
+          "H2": 0.1648,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_008"
+        ],
+        "likelihoods": {
+          "H1": 0.55,
+          "H2": 0.35,
+          "H3": 0.08,
+          "H4": 0.02
+        },
+        "note": "Top-3 enterprise share at ~77% sits at H1 (>=75%) threshold; Google-Anthropic capital tie deepens oligopoly. Supports H1; weakens fragmentation (H3/H4).",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-25",
+        "posteriors": {
+          "H1": 0.8675,
+          "H2": 0.1225,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "priors": {
+          "H1": 0.8784,
+          "H2": 0.1116,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_009"
+        ],
+        "likelihoods": {
+          "H1": 0.9,
+          "H2": 1.0,
+          "H3": 0.4,
+          "H4": 0.1
+        },
+        "note": "Capital concentration evidence supports hyper-concentration; mid-tier reshuffling (Gemini gain, Anthropic enterprise lead) is consistent with top-3 concentration but with churn within the top-3 — slight tilt toward H2 vs H1.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-26",
+        "posteriors": {
+          "H1": 0.9779,
+          "H2": 0.0121,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "priors": {
+          "H1": 0.8675,
+          "H2": 0.1225,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_010"
+        ],
+        "likelihoods": {
+          "H1": 0.92,
+          "H2": 0.08,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "note": "Top-3 ~88% revenue share + $40B Google-Anthropic deal + 65% VC concentration strongly confirm H1 (>=75%).",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-26",
+        "posteriors": {
+          "H1": 0.9728,
+          "H2": 0.0172,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "priors": {
+          "H1": 0.9779,
+          "H2": 0.0121,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_011"
+        ],
+        "likelihoods": {
+          "H1": 0.7,
+          "H2": 1.0,
+          "H3": 0.4,
+          "H4": 0.1
+        },
+        "note": "Share-redistribution among 5+ vendors mildly pushes against H1 hyper-concentration toward H2 oligopoly.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
       }
     ]
   },
@@ -291,6 +641,14 @@
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null
+        },
+        {
+          "id": "t2_enterprise_survey_consensus_top3_75pct",
+          "desc": "At least 2 independent enterprise GenAI spending surveys (Menlo Ventures, Ramp AI Index, Similarweb, a16z State of AI, Stack Overflow Developer Survey, or equivalent) report top-3 GenAI providers at >=75% combined enterprise share for >=2 consecutive quarters before 2028-12-31. Observable via published survey reports.",
+          "posteriorEffect": "H1 +8pp, H2 +4pp, H3 -8pp, H4 -4pp",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
         }
       ],
       "tier3_suggestive": [
@@ -306,6 +664,14 @@
           "id": "t3_multivendor_enterprise_40pct",
           "desc": "Stack Overflow Developer Survey or State of AI shows ≥40% of enterprises regularly use ≥3 different AI providers (low lock-in signal).",
           "posteriorEffect": "H3 +3pp, H4 +3pp, H1 -3pp, H2 -3pp",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        },
+        {
+          "id": "t3_capital_concentration_top4_60pct",
+          "desc": "Top-4 frontier AI labs (by ARR or market cap) capture >=60% of global AI venture funding for >=2 consecutive quarters before 2028-12-31, per PitchBook, CB Insights, or Crunchbase quarterly reports. Observable via published VC funding aggregates.",
+          "posteriorEffect": "H1 +5pp, H2 +3pp, H3 -5pp, H4 -3pp",
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null
@@ -340,6 +706,14 @@
           "id": "anti_h4_persistent_dominance",
           "desc": "Top-3 maintain ≥70% combined share through 2027 with no regulatory challenge and no open-weights provider exceeding $1B commercial revenue — H4 commoditization implausible.",
           "posteriorEffect": "H4 -8pp (redistributed to H1+H2)",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        },
+        {
+          "id": "anti_h1_open_weights_benchmark_lead",
+          "desc": "An open-weights model holds #1 position on LMSYS Chatbot Arena ELO leaderboard or HELM aggregate score for >=1 calendar quarter before 2028-12-31. Capability-parity moat-erosion signal independent of commercial revenue thresholds.",
+          "posteriorEffect": "H1 -10pp (redistributed to H3 +6pp, H4 +4pp)",
           "status": "NOT_FIRED",
           "firedDate": null,
           "note": null
@@ -520,6 +894,261 @@
       "ledger": "DECISION",
       "claimState": "PROPOSED",
       "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_005",
+      "time": "2026-04-24T02:25:41+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "ECON"
+      ],
+      "text": "Menlo Ventures enterprise LLM spending data (published March 2026): Anthropic 40% share, OpenAI 27%, Google 21% — top-3 hold 88% of enterprise GenAI spend. Claude Code reached $2.5B annualized run-rate; OpenAI hit $19B annualized revenue March 2026.",
+      "provenance": "OBSERVED",
+      "source": "Axios / SaaStr",
+      "posteriorImpact": "NONE",
+      "url": "https://www.axios.com/2026/03/18/ai-enterprise-revenue-anthropic-openai",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-24T02:25:41+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-24T02:25:41+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: 88% top-3 enterprise share directly supports H1 (hyper-concentrated >=75%); latest enterprise data substantially updates prior H2 lead.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_006",
+      "time": "2026-04-24T13:49:15+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "ECON",
+        "AI"
+      ],
+      "text": "Q1 2026: OpenAI ($120B), Anthropic ($30B), xAI ($20B), Waymo ($16B) captured $186B of $297B global VC -- 64% concentrated in four labs. OpenAI+Anthropic account for over 90% of category valuation; top 20 AI companies hold over 80% of industry valuation. OpenAI enterprise now >40% of its revenue.",
+      "provenance": "OBSERVED",
+      "source": "Crunchbase / a16z / Stanford AI Index",
+      "posteriorImpact": "NONE",
+      "url": "https://news.crunchbase.com/venture/record-breaking-funding-ai-global-q1-2026/",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-24T13:49:15+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-24T13:49:15+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Historic capital concentration reinforces top-3 GenAI revenue dominance trajectory.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_007",
+      "time": "2026-04-24T19:30:14+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "AI",
+        "MARKET"
+      ],
+      "text": "Q1 2026 venture funding: OpenAI ($122B round), Anthropic ($30B round, $30B ARR), xAI ($20B) raised 65% of global VC. OpenAI valued ~$850B, Anthropic ~$380B. Anthropic $400M Coefficient Bio acquisition signals proprietary-data moat investment.",
+      "provenance": "OBSERVED",
+      "source": "Crunchbase / Finro",
+      "posteriorImpact": "NONE",
+      "url": "https://news.crunchbase.com/venture/record-breaking-funding-ai-global-q1-2026/",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-24T19:30:14+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_008",
+      "time": "2026-04-25T13:19:54+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "AI",
+        "ECON"
+      ],
+      "text": "Menlo Ventures enterprise survey: Anthropic ~32%, OpenAI ~25%, Google Gemini ~20% (top-3 ~77%). Google to invest up to $40B in Anthropic (April 24, 2026). Ramp AI Index Feb 2026: 47.6% of businesses using AI; Anthropic share 24.4%.",
+      "provenance": "OBSERVED",
+      "source": "Menlo Ventures / CNBC / Ramp AI Index",
+      "posteriorImpact": "NONE",
+      "url": "https://www.cnbc.com/2026/04/24/google-to-invest-up-to-40-billion-in-anthropic-as-search-giant-spreads-its-ai-bets.html",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-25T13:19:54+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_009",
+      "time": "2026-04-25T14:24:50+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "TECH",
+        "ECON"
+      ],
+      "text": "Q1 2026: OpenAI, Anthropic, xAI, Waymo together raised $188B (65% of all global VC). However, ChatGPT chatbot market share fell 87.2% to 68% YoY; Gemini surged from 5.4% to 18.2%. In enterprise, Anthropic now wins ~70% of head-to-head matchups vs OpenAI; OpenAI enterprise spend share fell 50%->27%, Anthropic rose to 40%.",
+      "provenance": "OBSERVED",
+      "source": "Similarweb via Vertu, Foundation Capital, TradingKey",
+      "posteriorImpact": "NONE",
+      "url": "https://vertu.com/lifestyle/ai-chatbot-market-share-2026-chatgpt-drops-to-68-as-google-gemini-surges-to-18-2/",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-25T14:24:50+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_010",
+      "time": "2026-04-26T16:59:07+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "ECON",
+        "AI"
+      ],
+      "text": "Apr 24, 2026: Google announces up to $40B Anthropic investment. Q1 2026 enterprise share (per Menlo and Similarweb-derived data): Anthropic 40%, OpenAI 27%, Google 21% — top-3 ~= 88% of measured GenAI API revenue. Anthropic ARR $30B (Apr 2026) up from $1B Jan 2025. Top 4 (Anthropic/OpenAI/xAI/Waymo) raised $188B = 65% of global VC in quarter.",
+      "provenance": "OBSERVED",
+      "source": "CNBC / Menlo Ventures / Similarweb",
+      "posteriorImpact": "NONE",
+      "url": "https://www.cnbc.com/2026/04/24/google-to-invest-up-to-40-billion-in-anthropic-as-search-giant-spreads-its-ai-bets.html",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.4555
+    },
+    {
+      "time": "2026-04-26T16:59:07+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-26T16:59:07+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Top-3 ~88% revenue share + $40B Google-Anthropic deal + 65% VC concentration strongly confirm H1 (>=75%).",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-26T19:19:09+00:00",
+      "tag": "INTEL",
+      "text": "INDICATOR ADDED: t2_enterprise_survey_consensus_top3_75pct (tier2_strong). posteriorEffect=H1 +8pp, H2 +4pp, H3 -8pp, H4 -4pp. Rationale: ev_002, ev_005, ev_006, ev_007, ev_008, ev_009, ev_010 all report top-3 enterprise share at 77-88% from Menlo/Ramp/Similarweb but cannot fire t1_top3_80pct_share_confirmed (which is restricted to Gartner/IDC/Bloomberg). Adds a tier-2 path for consensus survey evidence..",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-26T19:19:09+00:00",
+      "tag": "INTEL",
+      "text": "INDICATOR ADDED: t3_capital_concentration_top4_60pct (tier3_suggestive). posteriorEffect=H1 +5pp, H2 +3pp, H3 -5pp, H4 -3pp. Rationale: ev_006, ev_007, ev_009 document Q1 2026 capital concentration ($186-188B = 64-65% of global VC into 4 labs) with no indicator covering the capital-moat dimension. Filed as NONE-impact despite clear structural relevance..",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-26T19:19:09+00:00",
+      "tag": "INTEL",
+      "text": "INDICATOR ADDED: anti_h1_open_weights_benchmark_lead (anti_indicators). posteriorEffect=H1 -10pp (redistributed to H3 +6pp, H4 +4pp). Rationale: Existing anti_h1_open_commercial_revenue requires an open-weights provider to hit $5B revenue, which lags capability convergence. This anti-indicator fills a complementary gap — capability parity could erode the moat before commercial revenue catches up. Topic is currently at H1=0.978; without additional anti-H1 paths, the model cannot meaningfully respond to incremental open-weights capability gains..",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_011",
+      "time": "2026-04-26T19:27:11+00:00",
+      "tag": "ANALYSIS",
+      "tags": [
+        "ANALYSIS",
+        "AI",
+        "MARKET"
+      ],
+      "text": "PwC / France Épargne 2026 review: foundation-model market $12B in 2026 (CAGR 13%); top vendors Microsoft, Meta, Alibaba, AWS, Huawei. Industry analysts note 'OpenAI is still the leader, but no longer the default' — Gemini, Claude and open-weight models took share. Companies still spending on both open and closed models.",
+      "provenance": "OBSERVED",
+      "source": "PwC / France Épargne / Brookings",
+      "posteriorImpact": "NONE",
+      "url": "https://www.pwc.com/gx/en/news-room/press-releases/2026/pwc-2026-ai-performance-study.html",
+      "ledger": "DECISION",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-26T19:27:11+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
     }
   ],
   "dataFeeds": {
@@ -570,22 +1199,24 @@
     "upstream": []
   },
   "governance": {
-    "health": "HEALTHY",
+    "health": "DEGRADED",
     "issues": [
-      "Downstream alert: calibration-vram-price-reversion-2028 has 2 stale assumption(s) from this topic"
+      "Majority stale evidence (15/28)",
+      "Downstream alert: calibration-local-llm-usage-share-2028 has 3 stale assumption(s) from this topic",
+      "Downstream alert: calibration-vram-price-reversion-2028 has 3 stale assumption(s) from this topic"
     ],
     "rt": {
       "rt": 0.0,
       "regime": "SAFE",
       "worst_hypothesis": "H1"
     },
-    "entropy": 1.3005,
+    "entropy": 0.216,
     "maxEntropy": 2.0,
-    "uncertaintyRatio": 0.6502,
+    "uncertaintyRatio": 0.108,
     "evidenceFreshness": {
-      "fresh": 8,
-      "stale": 0,
-      "total": 8
+      "fresh": 13,
+      "stale": 15,
+      "total": 28
     },
     "hypothesisAdmissibility": {
       "H1": "ADMISSIBLE",
@@ -594,12 +1225,36 @@
       "H4": "ADMISSIBLE"
     },
     "klFromPrior": {
-      "kl_divergence": 0.3003,
-      "interpretation": "MODERATE"
+      "kl_divergence": 1.2339,
+      "interpretation": "WELL_EVIDENCED"
     },
-    "lastComputed": "2026-04-22T18:41:05+00:00",
+    "lastComputed": "2026-04-29T02:30:58+00:00",
     "staleDependencies": 0,
     "downstreamAlerts": [
+      {
+        "downstream_slug": "calibration-local-llm-usage-share-2028",
+        "downstream_title": "Local vs API LLM Inference Usage Share by 2028",
+        "stale_assumptions": [
+          {
+            "hypothesis": "H1",
+            "assumed": 0.25,
+            "actual": 0.9728,
+            "drift": 0.7228
+          },
+          {
+            "hypothesis": "H2",
+            "assumed": 0.35,
+            "actual": 0.0172,
+            "drift": 0.3328
+          },
+          {
+            "hypothesis": "H3",
+            "assumed": 0.28,
+            "actual": 0.005,
+            "drift": 0.275
+          }
+        ]
+      },
       {
         "downstream_slug": "calibration-vram-price-reversion-2028",
         "downstream_title": "Consumer GPU VRAM Price Reversion by 2028",
@@ -607,20 +1262,33 @@
           {
             "hypothesis": "H1",
             "assumed": 0.25,
-            "actual": 0.4207,
-            "drift": 0.1707
+            "actual": 0.9728,
+            "drift": 0.7228
+          },
+          {
+            "hypothesis": "H2",
+            "assumed": 0.35,
+            "actual": 0.0172,
+            "drift": 0.3328
           },
           {
             "hypothesis": "H3",
             "assumed": 0.28,
-            "actual": 0.081,
-            "drift": 0.199
+            "actual": 0.005,
+            "drift": 0.275
           }
         ]
       }
     ],
     "calibrationHealth": "ACCEPTABLE",
     "unresolvedContradictions": 0,
+    "reviewed_alerts": [
+      {
+        "signature": "none_impact_saturation:calibration-ai-corporate-moat-2028",
+        "timestamp": "2026-04-26T19:20:12+00:00",
+        "reason": "Design review complete: 3 indicators added (t2_enterprise_survey_consensus_top3_75pct, t3_capital_concentration_top4_60pct, anti_h1_open_weights_benchmark_lead) covering enterprise-survey-consensus, capital-concentration, and capability-parity dimensions that ev_002-ev_010 were probing."
+      }
+    ],
     "designGate": {
       "passed": true,
       "blockers": [],
@@ -633,24 +1301,24 @@
       ],
       "coverage": {
         "H1": {
-          "pos": 4,
-          "neg": 6
+          "pos": 6,
+          "neg": 7
         },
         "H2": {
-          "pos": 4,
+          "pos": 6,
           "neg": 8
         },
         "H3": {
-          "pos": 7,
-          "neg": 3
+          "pos": 8,
+          "neg": 5
         },
         "H4": {
-          "pos": 7,
-          "neg": 6
+          "pos": 8,
+          "neg": 8
         }
       },
       "indistinguishable": [],
-      "lastChecked": "2026-04-22T18:41:05+00:00"
+      "lastChecked": "2026-04-29T02:30:58+00:00"
     }
   },
   "predictionScoring": {
@@ -743,6 +1411,160 @@
           "H4": 0.005
         },
         "entropy": 1.3005
+      },
+      {
+        "timestamp": "2026-04-24T02:25:41+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.6203,
+          "H2": 0.3655,
+          "H3": 0.0092,
+          "H4": 0.005
+        },
+        "entropy": 1.0585
+      },
+      {
+        "timestamp": "2026-04-24T02:25:41+00:00",
+        "trigger": "pipeline:ev_005",
+        "posteriors": {
+          "H1": 0.6203,
+          "H2": 0.3655,
+          "H3": 0.0092,
+          "H4": 0.005
+        },
+        "entropy": 1.0585
+      },
+      {
+        "timestamp": "2026-04-24T13:49:15+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.7703,
+          "H2": 0.2197,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "entropy": 0.8468
+      },
+      {
+        "timestamp": "2026-04-24T13:49:15+00:00",
+        "trigger": "pipeline:ev_006",
+        "posteriors": {
+          "H1": 0.7703,
+          "H2": 0.2197,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "entropy": 0.8468
+      },
+      {
+        "timestamp": "2026-04-24T19:30:14+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.8252,
+          "H2": 0.1648,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "entropy": 0.7339
+      },
+      {
+        "timestamp": "2026-04-24T19:30:14+00:00",
+        "trigger": "pipeline:ev_007",
+        "posteriors": {
+          "H1": 0.8252,
+          "H2": 0.1648,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "entropy": 0.7339
+      },
+      {
+        "timestamp": "2026-04-25T13:19:54+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.8784,
+          "H2": 0.1116,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "entropy": 0.5938
+      },
+      {
+        "timestamp": "2026-04-25T13:19:54+00:00",
+        "trigger": "pipeline:ev_008",
+        "posteriors": {
+          "H1": 0.8784,
+          "H2": 0.1116,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "entropy": 0.5938
+      },
+      {
+        "timestamp": "2026-04-25T14:24:50+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.8675,
+          "H2": 0.1225,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "entropy": 0.6254
+      },
+      {
+        "timestamp": "2026-04-25T14:24:50+00:00",
+        "trigger": "pipeline:ev_009",
+        "posteriors": {
+          "H1": 0.8675,
+          "H2": 0.1225,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "entropy": 0.6254
+      },
+      {
+        "timestamp": "2026-04-26T16:59:07+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.9779,
+          "H2": 0.0121,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "entropy": 0.185
+      },
+      {
+        "timestamp": "2026-04-26T16:59:07+00:00",
+        "trigger": "pipeline:ev_010",
+        "posteriors": {
+          "H1": 0.9779,
+          "H2": 0.0121,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "entropy": 0.185
+      },
+      {
+        "timestamp": "2026-04-26T19:27:11+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.9728,
+          "H2": 0.0172,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "entropy": 0.216
+      },
+      {
+        "timestamp": "2026-04-26T19:27:11+00:00",
+        "trigger": "pipeline:ev_011",
+        "posteriors": {
+          "H1": 0.9728,
+          "H2": 0.0172,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "entropy": 0.216
       }
     ],
     "outcomes": [],
@@ -823,19 +1645,934 @@
         "detected": "2026-04-22T18:41:05Z",
         "resolution": "SUPERSEDED",
         "resolvedAt": "2026-04-22T18:41:05Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-22T18:41:05+00:00",
+        "entry_a_text": "EU Commission as of April 2026 has NOT designated AI as a core platform service under DMA. Commission hesitant due to lack of clarity on gatekeeper definition for AI. No structural remedy orders against AI providers. April 15 2026 DMA preliminary findings to Google concerned search, not AI.",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "Menlo Ventures enterprise LLM spending data (published March 2026): Anthropic 40% share, OpenAI 27%, Google 21% — top-3 hold 88% of enterprise GenAI spend. Claude Code reached $2.5B annualized run-rate; OpenAI hit $19B annualized revenue March 2026.",
+        "reason": "Numeric divergence 62.5% on metric (context: 2026): new=40.0, existing=15.0, threshold=10%",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-22T18:40:37+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Directional concentration signal: top-3 enterprise LLM share reported ~88%, consistent with H1/H2. Not Gartner/IDC annual — t1_top3_80pct_share_confirmed NOT FIRED. Likelihoods tilt toward concentration but conservative (analyst synthesis, not audited).",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "Menlo Ventures enterprise LLM spending data (published March 2026): Anthropic 40% share, OpenAI 27%, Google 21% — top-3 hold 88% of enterprise GenAI spend. Claude Code reached $2.5B annualized run-rate; OpenAI hit $19B annualized revenue March 2026.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: enterprise, llm, share, top",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-22T18:40:37+00:00",
+        "entry_a_text": "Analyst/press reports April 2026: Anthropic ARR ~$30B surpasses OpenAI ~$25B; enterprise LLM spend share reported as Anthropic 40%, OpenAI 27%, Google 21% (combined top-3 ~88%). Not yet confirmed by Gartner/IDC annual report.",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "Menlo Ventures enterprise LLM spending data (published March 2026): Anthropic 40% share, OpenAI 27%, Google 21% — top-3 hold 88% of enterprise GenAI spend. Claude Code reached $2.5B annualized run-rate; OpenAI hit $19B annualized revenue March 2026.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: anthropic, enterprise, google, llm, openai",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: 88% top-3 enterprise share directly supports H1 (hyper-concentrated >=75%); latest enterprise data substantially updates prior H2 lead.",
+        "entry_b_time": "2026-04-24T13:49:15+00:00",
+        "entry_b_text": "Q1 2026: OpenAI ($120B), Anthropic ($30B), xAI ($20B), Waymo ($16B) captured $186B of $297B global VC -- 64% concentrated in four labs. OpenAI+Anthropic account for over 90% of category valuation; top 20 AI companies hold over 80% of industry valuation. OpenAI enterprise now >40% of its revenue.",
+        "reason": "Numeric divergence 54.5% on metric (context: enterprise): new=40.0, existing=88.0, threshold=10%",
+        "detected": "2026-04-24T13:49:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "Menlo Ventures enterprise LLM spending data (published March 2026): Anthropic 40% share, OpenAI 27%, Google 21% — top-3 hold 88% of enterprise GenAI spend. Claude Code reached $2.5B annualized run-rate; OpenAI hit $19B annualized revenue March 2026.",
+        "entry_b_time": "2026-04-24T13:49:15+00:00",
+        "entry_b_text": "Q1 2026: OpenAI ($120B), Anthropic ($30B), xAI ($20B), Waymo ($16B) captured $186B of $297B global VC -- 64% concentrated in four labs. OpenAI+Anthropic account for over 90% of category valuation; top 20 AI companies hold over 80% of industry valuation. OpenAI enterprise now >40% of its revenue.",
+        "reason": "Numeric divergence 98.0% on metric (context: anthropic, openai): new=2026.0, existing=40.0, threshold=10%",
+        "detected": "2026-04-24T13:49:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-22T18:41:05+00:00",
+        "entry_a_text": "EU Commission as of April 2026 has NOT designated AI as a core platform service under DMA. Commission hesitant due to lack of clarity on gatekeeper definition for AI. No structural remedy orders against AI providers. April 15 2026 DMA preliminary findings to Google concerned search, not AI.",
+        "entry_b_time": "2026-04-24T13:49:15+00:00",
+        "entry_b_text": "Q1 2026: OpenAI ($120B), Anthropic ($30B), xAI ($20B), Waymo ($16B) captured $186B of $297B global VC -- 64% concentrated in four labs. OpenAI+Anthropic account for over 90% of category valuation; top 20 AI companies hold over 80% of industry valuation. OpenAI enterprise now >40% of its revenue.",
+        "reason": "Numeric divergence 95.6% on metric (context: of): new=90.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-24T13:49:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-22T18:41:05+00:00",
+        "entry_a_text": "Meta Superintelligence Labs released Muse Spark in April 2026 as a closed-source model, departing from Llama open-weights tradition. Raises questions about Meta commitment to open-weights releases. Llama 4 Scout/Maverick remain open.",
+        "entry_b_time": "2026-04-24T13:49:15+00:00",
+        "entry_b_text": "Q1 2026: OpenAI ($120B), Anthropic ($30B), xAI ($20B), Waymo ($16B) captured $186B of $297B global VC -- 64% concentrated in four labs. OpenAI+Anthropic account for over 90% of category valuation; top 20 AI companies hold over 80% of industry valuation. OpenAI enterprise now >40% of its revenue.",
+        "reason": "Numeric divergence 96.8% on metric (context: in): new=64.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-24T13:49:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:15Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-22T18:40:37+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Directional concentration signal: top-3 enterprise LLM share reported ~88%, consistent with H1/H2. Not Gartner/IDC annual — t1_top3_80pct_share_confirmed NOT FIRED. Likelihoods tilt toward concentration but conservative (analyst synthesis, not audited).",
+        "entry_b_time": "2026-04-24T13:49:15+00:00",
+        "entry_b_text": "Q1 2026: OpenAI ($120B), Anthropic ($30B), xAI ($20B), Waymo ($16B) captured $186B of $297B global VC -- 64% concentrated in four labs. OpenAI+Anthropic account for over 90% of category valuation; top 20 AI companies hold over 80% of industry valuation. OpenAI enterprise now >40% of its revenue.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: enterprise, top",
+        "detected": "2026-04-24T13:49:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:15Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-22T18:40:37+00:00",
+        "entry_a_text": "Analyst/press reports April 2026: Anthropic ARR ~$30B surpasses OpenAI ~$25B; enterprise LLM spend share reported as Anthropic 40%, OpenAI 27%, Google 21% (combined top-3 ~88%). Not yet confirmed by Gartner/IDC annual report.",
+        "entry_b_time": "2026-04-24T13:49:15+00:00",
+        "entry_b_text": "Q1 2026: OpenAI ($120B), Anthropic ($30B), xAI ($20B), Waymo ($16B) captured $186B of $297B global VC -- 64% concentrated in four labs. OpenAI+Anthropic account for over 90% of category valuation; top 20 AI companies hold over 80% of industry valuation. OpenAI enterprise now >40% of its revenue.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: anthropic, enterprise, openai, top",
+        "detected": "2026-04-24T13:49:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:15+00:00",
+        "entry_a_text": "Q1 2026: OpenAI ($120B), Anthropic ($30B), xAI ($20B), Waymo ($16B) captured $186B of $297B global VC -- 64% concentrated in four labs. OpenAI+Anthropic account for over 90% of category valuation; top 20 AI companies hold over 80% of industry valuation. OpenAI enterprise now >40% of its revenue.",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "Q1 2026 venture funding: OpenAI ($122B round), Anthropic ($30B round, $30B ARR), xAI ($20B) raised 65% of global VC. OpenAI valued ~$850B, Anthropic ~$380B. Anthropic $400M Coefficient Bio acquisition signals proprietary-data moat investment.",
+        "reason": "Numeric divergence 98.0% on metric (context: openai): new=2026.0, existing=40.0, threshold=10%",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "Menlo Ventures enterprise LLM spending data (published March 2026): Anthropic 40% share, OpenAI 27%, Google 21% — top-3 hold 88% of enterprise GenAI spend. Claude Code reached $2.5B annualized run-rate; OpenAI hit $19B annualized revenue March 2026.",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "Q1 2026 venture funding: OpenAI ($122B round), Anthropic ($30B round, $30B ARR), xAI ($20B) raised 65% of global VC. OpenAI valued ~$850B, Anthropic ~$380B. Anthropic $400M Coefficient Bio acquisition signals proprietary-data moat investment.",
+        "reason": "Numeric divergence 98.0% on metric (context: openai): new=2026.0, existing=40.0, threshold=10%",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-22T18:41:05+00:00",
+        "entry_a_text": "EU Commission as of April 2026 has NOT designated AI as a core platform service under DMA. Commission hesitant due to lack of clarity on gatekeeper definition for AI. No structural remedy orders against AI providers. April 15 2026 DMA preliminary findings to Google concerned search, not AI.",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "Q1 2026 venture funding: OpenAI ($122B round), Anthropic ($30B round, $30B ARR), xAI ($20B) raised 65% of global VC. OpenAI valued ~$850B, Anthropic ~$380B. Anthropic $400M Coefficient Bio acquisition signals proprietary-data moat investment.",
+        "reason": "Numeric divergence 96.8% on metric (context: of): new=65.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-22T18:40:37+00:00",
+        "entry_a_text": "Analyst/press reports April 2026: Anthropic ARR ~$30B surpasses OpenAI ~$25B; enterprise LLM spend share reported as Anthropic 40%, OpenAI 27%, Google 21% (combined top-3 ~88%). Not yet confirmed by Gartner/IDC annual report.",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "Q1 2026 venture funding: OpenAI ($122B round), Anthropic ($30B round, $30B ARR), xAI ($20B) raised 65% of global VC. OpenAI valued ~$850B, Anthropic ~$380B. Anthropic $400M Coefficient Bio acquisition signals proprietary-data moat investment.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: anthropic, arr, openai",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T19:30:14+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-25T13:19:54+00:00",
+        "entry_b_text": "Menlo Ventures enterprise survey: Anthropic ~32%, OpenAI ~25%, Google Gemini ~20% (top-3 ~77%). Google to invest up to $40B in Anthropic (April 24, 2026). Ramp AI Index Feb 2026: 47.6% of businesses using AI; Anthropic share 24.4%.",
+        "reason": "Numeric divergence 100.0% on metric (context: .): new=20.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-25T13:19:54Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:54Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T19:30:14+00:00",
+        "entry_a_text": "Q1 2026 venture funding: OpenAI ($122B round), Anthropic ($30B round, $30B ARR), xAI ($20B) raised 65% of global VC. OpenAI valued ~$850B, Anthropic ~$380B. Anthropic $400M Coefficient Bio acquisition signals proprietary-data moat investment.",
+        "entry_b_time": "2026-04-25T13:19:54+00:00",
+        "entry_b_text": "Menlo Ventures enterprise survey: Anthropic ~32%, OpenAI ~25%, Google Gemini ~20% (top-3 ~77%). Google to invest up to $40B in Anthropic (April 24, 2026). Ramp AI Index Feb 2026: 47.6% of businesses using AI; Anthropic share 24.4%.",
+        "reason": "Numeric divergence 98.4% on metric (context: openai): new=32.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-25T13:19:54Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:54Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:15+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-25T13:19:54+00:00",
+        "entry_b_text": "Menlo Ventures enterprise survey: Anthropic ~32%, OpenAI ~25%, Google Gemini ~20% (top-3 ~77%). Google to invest up to $40B in Anthropic (April 24, 2026). Ramp AI Index Feb 2026: 47.6% of businesses using AI; Anthropic share 24.4%.",
+        "reason": "Numeric divergence 100.0% on metric (context: .): new=20.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-25T13:19:54Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:54Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:15+00:00",
+        "entry_a_text": "Q1 2026: OpenAI ($120B), Anthropic ($30B), xAI ($20B), Waymo ($16B) captured $186B of $297B global VC -- 64% concentrated in four labs. OpenAI+Anthropic account for over 90% of category valuation; top 20 AI companies hold over 80% of industry valuation. OpenAI enterprise now >40% of its revenue.",
+        "entry_b_time": "2026-04-25T13:19:54+00:00",
+        "entry_b_text": "Menlo Ventures enterprise survey: Anthropic ~32%, OpenAI ~25%, Google Gemini ~20% (top-3 ~77%). Google to invest up to $40B in Anthropic (April 24, 2026). Ramp AI Index Feb 2026: 47.6% of businesses using AI; Anthropic share 24.4%.",
+        "reason": "Numeric divergence 98.4% on metric (context: anthropic, openai): new=32.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-25T13:19:54Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:54Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: 88% top-3 enterprise share directly supports H1 (hyper-concentrated >=75%); latest enterprise data substantially updates prior H2 lead.",
+        "entry_b_time": "2026-04-25T13:19:54+00:00",
+        "entry_b_text": "Menlo Ventures enterprise survey: Anthropic ~32%, OpenAI ~25%, Google Gemini ~20% (top-3 ~77%). Google to invest up to $40B in Anthropic (April 24, 2026). Ramp AI Index Feb 2026: 47.6% of businesses using AI; Anthropic share 24.4%.",
+        "reason": "Numeric divergence 63.6% on metric (context: enterprise): new=32.0, existing=88.0, threshold=10%",
+        "detected": "2026-04-25T13:19:54Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:54Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-25T13:19:54+00:00",
+        "entry_b_text": "Menlo Ventures enterprise survey: Anthropic ~32%, OpenAI ~25%, Google Gemini ~20% (top-3 ~77%). Google to invest up to $40B in Anthropic (April 24, 2026). Ramp AI Index Feb 2026: 47.6% of businesses using AI; Anthropic share 24.4%.",
+        "reason": "Numeric divergence 100.0% on metric (context: .): new=20.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-25T13:19:54Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:54Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "Menlo Ventures enterprise LLM spending data (published March 2026): Anthropic 40% share, OpenAI 27%, Google 21% — top-3 hold 88% of enterprise GenAI spend. Claude Code reached $2.5B annualized run-rate; OpenAI hit $19B annualized revenue March 2026.",
+        "entry_b_time": "2026-04-25T13:19:54+00:00",
+        "entry_b_text": "Menlo Ventures enterprise survey: Anthropic ~32%, OpenAI ~25%, Google Gemini ~20% (top-3 ~77%). Google to invest up to $40B in Anthropic (April 24, 2026). Ramp AI Index Feb 2026: 47.6% of businesses using AI; Anthropic share 24.4%.",
+        "reason": "Numeric divergence 98.4% on metric (context: anthropic): new=32.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-25T13:19:54Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:54Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-22T18:41:05+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-25T13:19:54+00:00",
+        "entry_b_text": "Menlo Ventures enterprise survey: Anthropic ~32%, OpenAI ~25%, Google Gemini ~20% (top-3 ~77%). Google to invest up to $40B in Anthropic (April 24, 2026). Ramp AI Index Feb 2026: 47.6% of businesses using AI; Anthropic share 24.4%.",
+        "reason": "Numeric divergence 100.0% on metric (context: .): new=20.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-25T13:19:54Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:54Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-22T18:41:05+00:00",
+        "entry_a_text": "EU Commission as of April 2026 has NOT designated AI as a core platform service under DMA. Commission hesitant due to lack of clarity on gatekeeper definition for AI. No structural remedy orders against AI providers. April 15 2026 DMA preliminary findings to Google concerned search, not AI.",
+        "entry_b_time": "2026-04-25T13:19:54+00:00",
+        "entry_b_text": "Menlo Ventures enterprise survey: Anthropic ~32%, OpenAI ~25%, Google Gemini ~20% (top-3 ~77%). Google to invest up to $40B in Anthropic (April 24, 2026). Ramp AI Index Feb 2026: 47.6% of businesses using AI; Anthropic share 24.4%.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: april, google",
+        "detected": "2026-04-25T13:19:54Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:54Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-22T18:41:05+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-25T13:19:54+00:00",
+        "entry_b_text": "Menlo Ventures enterprise survey: Anthropic ~32%, OpenAI ~25%, Google Gemini ~20% (top-3 ~77%). Google to invest up to $40B in Anthropic (April 24, 2026). Ramp AI Index Feb 2026: 47.6% of businesses using AI; Anthropic share 24.4%.",
+        "reason": "Numeric divergence 100.0% on metric (context: .): new=20.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-25T13:19:54Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:54Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-22T18:41:05+00:00",
+        "entry_a_text": "Meta Superintelligence Labs released Muse Spark in April 2026 as a closed-source model, departing from Llama open-weights tradition. Raises questions about Meta commitment to open-weights releases. Llama 4 Scout/Maverick remain open.",
+        "entry_b_time": "2026-04-25T13:19:54+00:00",
+        "entry_b_text": "Menlo Ventures enterprise survey: Anthropic ~32%, OpenAI ~25%, Google Gemini ~20% (top-3 ~77%). Google to invest up to $40B in Anthropic (April 24, 2026). Ramp AI Index Feb 2026: 47.6% of businesses using AI; Anthropic share 24.4%.",
+        "reason": "Numeric divergence 98.8% on metric (context: april, in): new=24.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-25T13:19:54Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:54Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-22T18:40:46+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-25T13:19:54+00:00",
+        "entry_b_text": "Menlo Ventures enterprise survey: Anthropic ~32%, OpenAI ~25%, Google Gemini ~20% (top-3 ~77%). Google to invest up to $40B in Anthropic (April 24, 2026). Ramp AI Index Feb 2026: 47.6% of businesses using AI; Anthropic share 24.4%.",
+        "reason": "Numeric divergence 100.0% on metric (context: .): new=20.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-25T13:19:54Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:54Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-22T18:40:37+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Directional concentration signal: top-3 enterprise LLM share reported ~88%, consistent with H1/H2. Not Gartner/IDC annual — t1_top3_80pct_share_confirmed NOT FIRED. Likelihoods tilt toward concentration but conservative (analyst synthesis, not audited).",
+        "entry_b_time": "2026-04-25T13:19:54+00:00",
+        "entry_b_text": "Menlo Ventures enterprise survey: Anthropic ~32%, OpenAI ~25%, Google Gemini ~20% (top-3 ~77%). Google to invest up to $40B in Anthropic (April 24, 2026). Ramp AI Index Feb 2026: 47.6% of businesses using AI; Anthropic share 24.4%.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: enterprise, share, top",
+        "detected": "2026-04-25T13:19:54Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:54Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-22T18:40:37+00:00",
+        "entry_a_text": "Analyst/press reports April 2026: Anthropic ARR ~$30B surpasses OpenAI ~$25B; enterprise LLM spend share reported as Anthropic 40%, OpenAI 27%, Google 21% (combined top-3 ~88%). Not yet confirmed by Gartner/IDC annual report.",
+        "entry_b_time": "2026-04-25T13:19:54+00:00",
+        "entry_b_text": "Menlo Ventures enterprise survey: Anthropic ~32%, OpenAI ~25%, Google Gemini ~20% (top-3 ~77%). Google to invest up to $40B in Anthropic (April 24, 2026). Ramp AI Index Feb 2026: 47.6% of businesses using AI; Anthropic share 24.4%.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: anthropic, april, enterprise, google, openai",
+        "detected": "2026-04-25T13:19:54Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:54Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T13:19:54+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Q1 2026: OpenAI, Anthropic, xAI, Waymo together raised $188B (65% of all global VC). However, ChatGPT chatbot market share fell 87.2% to 68% YoY; Gemini surged from 5.4% to 18.2%. In enterprise, Anthropic now wins ~70% of head-to-head matchups vs OpenAI; OpenAI enterprise spend share fell 50%->27%, Anthropic rose to 40%.",
+        "reason": "Numeric divergence 100.0% on metric (context: to): new=87.2, existing=0.005, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T13:19:54+00:00",
+        "entry_a_text": "Menlo Ventures enterprise survey: Anthropic ~32%, OpenAI ~25%, Google Gemini ~20% (top-3 ~77%). Google to invest up to $40B in Anthropic (April 24, 2026). Ramp AI Index Feb 2026: 47.6% of businesses using AI; Anthropic share 24.4%.",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Q1 2026: OpenAI, Anthropic, xAI, Waymo together raised $188B (65% of all global VC). However, ChatGPT chatbot market share fell 87.2% to 68% YoY; Gemini surged from 5.4% to 18.2%. In enterprise, Anthropic now wins ~70% of head-to-head matchups vs OpenAI; OpenAI enterprise spend share fell 50%->27%, Anthropic rose to 40%.",
+        "reason": "Numeric divergence 98.4% on metric (context: anthropic, openai): new=2026.0, existing=32.0, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T19:30:14+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Q1 2026: OpenAI, Anthropic, xAI, Waymo together raised $188B (65% of all global VC). However, ChatGPT chatbot market share fell 87.2% to 68% YoY; Gemini surged from 5.4% to 18.2%. In enterprise, Anthropic now wins ~70% of head-to-head matchups vs OpenAI; OpenAI enterprise spend share fell 50%->27%, Anthropic rose to 40%.",
+        "reason": "Numeric divergence 100.0% on metric (context: to): new=87.2, existing=0.005, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T19:30:14+00:00",
+        "entry_a_text": "Q1 2026 venture funding: OpenAI ($122B round), Anthropic ($30B round, $30B ARR), xAI ($20B) raised 65% of global VC. OpenAI valued ~$850B, Anthropic ~$380B. Anthropic $400M Coefficient Bio acquisition signals proprietary-data moat investment.",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Q1 2026: OpenAI, Anthropic, xAI, Waymo together raised $188B (65% of all global VC). However, ChatGPT chatbot market share fell 87.2% to 68% YoY; Gemini surged from 5.4% to 18.2%. In enterprise, Anthropic now wins ~70% of head-to-head matchups vs OpenAI; OpenAI enterprise spend share fell 50%->27%, Anthropic rose to 40%.",
+        "reason": "Numeric divergence 96.8% on metric (context: xai): new=2026.0, existing=65.0, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:15+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Q1 2026: OpenAI, Anthropic, xAI, Waymo together raised $188B (65% of all global VC). However, ChatGPT chatbot market share fell 87.2% to 68% YoY; Gemini surged from 5.4% to 18.2%. In enterprise, Anthropic now wins ~70% of head-to-head matchups vs OpenAI; OpenAI enterprise spend share fell 50%->27%, Anthropic rose to 40%.",
+        "reason": "Numeric divergence 100.0% on metric (context: to): new=87.2, existing=0.005, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:15+00:00",
+        "entry_a_text": "Q1 2026: OpenAI ($120B), Anthropic ($30B), xAI ($20B), Waymo ($16B) captured $186B of $297B global VC -- 64% concentrated in four labs. OpenAI+Anthropic account for over 90% of category valuation; top 20 AI companies hold over 80% of industry valuation. OpenAI enterprise now >40% of its revenue.",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Q1 2026: OpenAI, Anthropic, xAI, Waymo together raised $188B (65% of all global VC). However, ChatGPT chatbot market share fell 87.2% to 68% YoY; Gemini surged from 5.4% to 18.2%. In enterprise, Anthropic now wins ~70% of head-to-head matchups vs OpenAI; OpenAI enterprise spend share fell 50%->27%, Anthropic rose to 40%.",
+        "reason": "Numeric divergence 98.0% on metric (context: openai): new=2026.0, existing=40.0, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: 88% top-3 enterprise share directly supports H1 (hyper-concentrated >=75%); latest enterprise data substantially updates prior H2 lead.",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Q1 2026: OpenAI, Anthropic, xAI, Waymo together raised $188B (65% of all global VC). However, ChatGPT chatbot market share fell 87.2% to 68% YoY; Gemini surged from 5.4% to 18.2%. In enterprise, Anthropic now wins ~70% of head-to-head matchups vs OpenAI; OpenAI enterprise spend share fell 50%->27%, Anthropic rose to 40%.",
+        "reason": "Numeric divergence 79.3% on metric (context: enterprise): new=18.2, existing=88.0, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Q1 2026: OpenAI, Anthropic, xAI, Waymo together raised $188B (65% of all global VC). However, ChatGPT chatbot market share fell 87.2% to 68% YoY; Gemini surged from 5.4% to 18.2%. In enterprise, Anthropic now wins ~70% of head-to-head matchups vs OpenAI; OpenAI enterprise spend share fell 50%->27%, Anthropic rose to 40%.",
+        "reason": "Numeric divergence 100.0% on metric (context: to): new=87.2, existing=0.005, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "Menlo Ventures enterprise LLM spending data (published March 2026): Anthropic 40% share, OpenAI 27%, Google 21% — top-3 hold 88% of enterprise GenAI spend. Claude Code reached $2.5B annualized run-rate; OpenAI hit $19B annualized revenue March 2026.",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Q1 2026: OpenAI, Anthropic, xAI, Waymo together raised $188B (65% of all global VC). However, ChatGPT chatbot market share fell 87.2% to 68% YoY; Gemini surged from 5.4% to 18.2%. In enterprise, Anthropic now wins ~70% of head-to-head matchups vs OpenAI; OpenAI enterprise spend share fell 50%->27%, Anthropic rose to 40%.",
+        "reason": "Numeric divergence 98.0% on metric (context: anthropic, openai): new=2026.0, existing=40.0, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-22T18:41:05+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Q1 2026: OpenAI, Anthropic, xAI, Waymo together raised $188B (65% of all global VC). However, ChatGPT chatbot market share fell 87.2% to 68% YoY; Gemini surged from 5.4% to 18.2%. In enterprise, Anthropic now wins ~70% of head-to-head matchups vs OpenAI; OpenAI enterprise spend share fell 50%->27%, Anthropic rose to 40%.",
+        "reason": "Numeric divergence 100.0% on metric (context: to): new=87.2, existing=0.005, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-22T18:41:05+00:00",
+        "entry_a_text": "EU Commission as of April 2026 has NOT designated AI as a core platform service under DMA. Commission hesitant due to lack of clarity on gatekeeper definition for AI. No structural remedy orders against AI providers. April 15 2026 DMA preliminary findings to Google concerned search, not AI.",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Q1 2026: OpenAI, Anthropic, xAI, Waymo together raised $188B (65% of all global VC). However, ChatGPT chatbot market share fell 87.2% to 68% YoY; Gemini surged from 5.4% to 18.2%. In enterprise, Anthropic now wins ~70% of head-to-head matchups vs OpenAI; OpenAI enterprise spend share fell 50%->27%, Anthropic rose to 40%.",
+        "reason": "Numeric divergence 96.8% on metric (context: of): new=65.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-22T18:41:05+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Q1 2026: OpenAI, Anthropic, xAI, Waymo together raised $188B (65% of all global VC). However, ChatGPT chatbot market share fell 87.2% to 68% YoY; Gemini surged from 5.4% to 18.2%. In enterprise, Anthropic now wins ~70% of head-to-head matchups vs OpenAI; OpenAI enterprise spend share fell 50%->27%, Anthropic rose to 40%.",
+        "reason": "Numeric divergence 100.0% on metric (context: to): new=87.2, existing=0.005, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-22T18:41:05+00:00",
+        "entry_a_text": "Meta Superintelligence Labs released Muse Spark in April 2026 as a closed-source model, departing from Llama open-weights tradition. Raises questions about Meta commitment to open-weights releases. Llama 4 Scout/Maverick remain open.",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Q1 2026: OpenAI, Anthropic, xAI, Waymo together raised $188B (65% of all global VC). However, ChatGPT chatbot market share fell 87.2% to 68% YoY; Gemini surged from 5.4% to 18.2%. In enterprise, Anthropic now wins ~70% of head-to-head matchups vs OpenAI; OpenAI enterprise spend share fell 50%->27%, Anthropic rose to 40%.",
+        "reason": "Numeric divergence 99.1% on metric (context: in): new=18.2, existing=2026.0, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-22T18:40:46+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Q1 2026: OpenAI, Anthropic, xAI, Waymo together raised $188B (65% of all global VC). However, ChatGPT chatbot market share fell 87.2% to 68% YoY; Gemini surged from 5.4% to 18.2%. In enterprise, Anthropic now wins ~70% of head-to-head matchups vs OpenAI; OpenAI enterprise spend share fell 50%->27%, Anthropic rose to 40%.",
+        "reason": "Numeric divergence 100.0% on metric (context: to): new=87.2, existing=0.005, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-22T18:40:37+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Directional concentration signal: top-3 enterprise LLM share reported ~88%, consistent with H1/H2. Not Gartner/IDC annual — t1_top3_80pct_share_confirmed NOT FIRED. Likelihoods tilt toward concentration but conservative (analyst synthesis, not audited).",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Q1 2026: OpenAI, Anthropic, xAI, Waymo together raised $188B (65% of all global VC). However, ChatGPT chatbot market share fell 87.2% to 68% YoY; Gemini surged from 5.4% to 18.2%. In enterprise, Anthropic now wins ~70% of head-to-head matchups vs OpenAI; OpenAI enterprise spend share fell 50%->27%, Anthropic rose to 40%.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: enterprise, share",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-22T18:40:37+00:00",
+        "entry_a_text": "Analyst/press reports April 2026: Anthropic ARR ~$30B surpasses OpenAI ~$25B; enterprise LLM spend share reported as Anthropic 40%, OpenAI 27%, Google 21% (combined top-3 ~88%). Not yet confirmed by Gartner/IDC annual report.",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Q1 2026: OpenAI, Anthropic, xAI, Waymo together raised $188B (65% of all global VC). However, ChatGPT chatbot market share fell 87.2% to 68% YoY; Gemini surged from 5.4% to 18.2%. In enterprise, Anthropic now wins ~70% of head-to-head matchups vs OpenAI; OpenAI enterprise spend share fell 50%->27%, Anthropic rose to 40%.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: anthropic, enterprise, openai, share, spend",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T14:24:50+00:00",
+        "entry_a_text": "Q1 2026: OpenAI, Anthropic, xAI, Waymo together raised $188B (65% of all global VC). However, ChatGPT chatbot market share fell 87.2% to 68% YoY; Gemini surged from 5.4% to 18.2%. In enterprise, Anthropic now wins ~70% of head-to-head matchups vs OpenAI; OpenAI enterprise spend share fell 50%->27%, Anthropic rose to 40%.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "Apr 24, 2026: Google announces up to $40B Anthropic investment. Q1 2026 enterprise share (per Menlo and Similarweb-derived data): Anthropic 40%, OpenAI 27%, Google 21% — top-3 ~= 88% of measured GenAI API revenue. Anthropic ARR $30B (Apr 2026) up from $1B Jan 2025. Top 4 (Anthropic/OpenAI/xAI/Waymo) raised $188B = 65% of global VC in quarter.",
+        "reason": "Numeric divergence 95.7% on metric (context: share): new=2026.0, existing=87.2, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T13:19:54+00:00",
+        "entry_a_text": "Menlo Ventures enterprise survey: Anthropic ~32%, OpenAI ~25%, Google Gemini ~20% (top-3 ~77%). Google to invest up to $40B in Anthropic (April 24, 2026). Ramp AI Index Feb 2026: 47.6% of businesses using AI; Anthropic share 24.4%.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "Apr 24, 2026: Google announces up to $40B Anthropic investment. Q1 2026 enterprise share (per Menlo and Similarweb-derived data): Anthropic 40%, OpenAI 27%, Google 21% — top-3 ~= 88% of measured GenAI API revenue. Anthropic ARR $30B (Apr 2026) up from $1B Jan 2025. Top 4 (Anthropic/OpenAI/xAI/Waymo) raised $188B = 65% of global VC in quarter.",
+        "reason": "Numeric divergence 25.0% on metric (context: google): new=24.0, existing=32.0, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T19:30:14+00:00",
+        "entry_a_text": "Q1 2026 venture funding: OpenAI ($122B round), Anthropic ($30B round, $30B ARR), xAI ($20B) raised 65% of global VC. OpenAI valued ~$850B, Anthropic ~$380B. Anthropic $400M Coefficient Bio acquisition signals proprietary-data moat investment.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "Apr 24, 2026: Google announces up to $40B Anthropic investment. Q1 2026 enterprise share (per Menlo and Similarweb-derived data): Anthropic 40%, OpenAI 27%, Google 21% — top-3 ~= 88% of measured GenAI API revenue. Anthropic ARR $30B (Apr 2026) up from $1B Jan 2025. Top 4 (Anthropic/OpenAI/xAI/Waymo) raised $188B = 65% of global VC in quarter.",
+        "reason": "Numeric divergence 98.0% on metric (context: openai): new=40.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:15+00:00",
+        "entry_a_text": "Q1 2026: OpenAI ($120B), Anthropic ($30B), xAI ($20B), Waymo ($16B) captured $186B of $297B global VC -- 64% concentrated in four labs. OpenAI+Anthropic account for over 90% of category valuation; top 20 AI companies hold over 80% of industry valuation. OpenAI enterprise now >40% of its revenue.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "Apr 24, 2026: Google announces up to $40B Anthropic investment. Q1 2026 enterprise share (per Menlo and Similarweb-derived data): Anthropic 40%, OpenAI 27%, Google 21% — top-3 ~= 88% of measured GenAI API revenue. Anthropic ARR $30B (Apr 2026) up from $1B Jan 2025. Top 4 (Anthropic/OpenAI/xAI/Waymo) raised $188B = 65% of global VC in quarter.",
+        "reason": "Numeric divergence 98.0% on metric (context: enterprise): new=2026.0, existing=40.0, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: 88% top-3 enterprise share directly supports H1 (hyper-concentrated >=75%); latest enterprise data substantially updates prior H2 lead.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "Apr 24, 2026: Google announces up to $40B Anthropic investment. Q1 2026 enterprise share (per Menlo and Similarweb-derived data): Anthropic 40%, OpenAI 27%, Google 21% — top-3 ~= 88% of measured GenAI API revenue. Anthropic ARR $30B (Apr 2026) up from $1B Jan 2025. Top 4 (Anthropic/OpenAI/xAI/Waymo) raised $188B = 65% of global VC in quarter.",
+        "reason": "Numeric divergence 95.7% on metric (context: enterprise, share): new=2026.0, existing=88.0, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "Menlo Ventures enterprise LLM spending data (published March 2026): Anthropic 40% share, OpenAI 27%, Google 21% — top-3 hold 88% of enterprise GenAI spend. Claude Code reached $2.5B annualized run-rate; OpenAI hit $19B annualized revenue March 2026.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "Apr 24, 2026: Google announces up to $40B Anthropic investment. Q1 2026 enterprise share (per Menlo and Similarweb-derived data): Anthropic 40%, OpenAI 27%, Google 21% — top-3 ~= 88% of measured GenAI API revenue. Anthropic ARR $30B (Apr 2026) up from $1B Jan 2025. Top 4 (Anthropic/OpenAI/xAI/Waymo) raised $188B = 65% of global VC in quarter.",
+        "reason": "Numeric divergence 40.0% on metric (context: 2026): new=24.0, existing=40.0, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-22T18:41:05+00:00",
+        "entry_a_text": "EU Commission as of April 2026 has NOT designated AI as a core platform service under DMA. Commission hesitant due to lack of clarity on gatekeeper definition for AI. No structural remedy orders against AI providers. April 15 2026 DMA preliminary findings to Google concerned search, not AI.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "Apr 24, 2026: Google announces up to $40B Anthropic investment. Q1 2026 enterprise share (per Menlo and Similarweb-derived data): Anthropic 40%, OpenAI 27%, Google 21% — top-3 ~= 88% of measured GenAI API revenue. Anthropic ARR $30B (Apr 2026) up from $1B Jan 2025. Top 4 (Anthropic/OpenAI/xAI/Waymo) raised $188B = 65% of global VC in quarter.",
+        "reason": "Numeric divergence 37.5% on metric (context: 2026): new=24.0, existing=15.0, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-22T18:40:37+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Directional concentration signal: top-3 enterprise LLM share reported ~88%, consistent with H1/H2. Not Gartner/IDC annual — t1_top3_80pct_share_confirmed NOT FIRED. Likelihoods tilt toward concentration but conservative (analyst synthesis, not audited).",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "Apr 24, 2026: Google announces up to $40B Anthropic investment. Q1 2026 enterprise share (per Menlo and Similarweb-derived data): Anthropic 40%, OpenAI 27%, Google 21% — top-3 ~= 88% of measured GenAI API revenue. Anthropic ARR $30B (Apr 2026) up from $1B Jan 2025. Top 4 (Anthropic/OpenAI/xAI/Waymo) raised $188B = 65% of global VC in quarter.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: enterprise, share, top",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-22T18:40:37+00:00",
+        "entry_a_text": "Analyst/press reports April 2026: Anthropic ARR ~$30B surpasses OpenAI ~$25B; enterprise LLM spend share reported as Anthropic 40%, OpenAI 27%, Google 21% (combined top-3 ~88%). Not yet confirmed by Gartner/IDC annual report.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "Apr 24, 2026: Google announces up to $40B Anthropic investment. Q1 2026 enterprise share (per Menlo and Similarweb-derived data): Anthropic 40%, OpenAI 27%, Google 21% — top-3 ~= 88% of measured GenAI API revenue. Anthropic ARR $30B (Apr 2026) up from $1B Jan 2025. Top 4 (Anthropic/OpenAI/xAI/Waymo) raised $188B = 65% of global VC in quarter.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: anthropic, arr, enterprise, google, openai",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-26T19:19:09+00:00",
+        "entry_a_text": "INDICATOR ADDED: anti_h1_open_weights_benchmark_lead (anti_indicators). posteriorEffect=H1 -10pp (redistributed to H3 +6pp, H4 +4pp). Rationale: Existing anti_h1_open_commercial_revenue requires an open-weights provider to hit $5B revenue, which lags capability convergence. This anti-indicator fills a complementary gap — capability parity could erode the moat before commercial revenue catches up. Topic is currently at H1=0.978; without additional anti-H1 paths, the model cannot meaningfully respond to incremental open-weights capability gains..",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "PwC / France Épargne 2026 review: foundation-model market $12B in 2026 (CAGR 13%); top vendors Microsoft, Meta, Alibaba, AWS, Huawei. Industry analysts note 'OpenAI is still the leader, but no longer the default' — Gemini, Claude and open-weight models took share. Companies still spending on both open and closed models.",
+        "reason": "Antonym pair detected: new has 'closed', existing has 'open'",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-26T19:19:09+00:00",
+        "entry_a_text": "INDICATOR ADDED: t2_enterprise_survey_consensus_top3_75pct (tier2_strong). posteriorEffect=H1 +8pp, H2 +4pp, H3 -8pp, H4 -4pp. Rationale: ev_002, ev_005, ev_006, ev_007, ev_008, ev_009, ev_010 all report top-3 enterprise share at 77-88% from Menlo/Ramp/Similarweb but cannot fire t1_top3_80pct_share_confirmed (which is restricted to Gartner/IDC/Bloomberg). Adds a tier-2 path for consensus survey evidence..",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "PwC / France Épargne 2026 review: foundation-model market $12B in 2026 (CAGR 13%); top vendors Microsoft, Meta, Alibaba, AWS, Huawei. Industry analysts note 'OpenAI is still the leader, but no longer the default' — Gemini, Claude and open-weight models took share. Companies still spending on both open and closed models.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: share, top",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-26T16:59:07+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Top-3 ~88% revenue share + $40B Google-Anthropic deal + 65% VC concentration strongly confirm H1 (>=75%).",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "PwC / France Épargne 2026 review: foundation-model market $12B in 2026 (CAGR 13%); top vendors Microsoft, Meta, Alibaba, AWS, Huawei. Industry analysts note 'OpenAI is still the leader, but no longer the default' — Gemini, Claude and open-weight models took share. Companies still spending on both open and closed models.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: share, top",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-26T16:59:07+00:00",
+        "entry_a_text": "Apr 24, 2026: Google announces up to $40B Anthropic investment. Q1 2026 enterprise share (per Menlo and Similarweb-derived data): Anthropic 40%, OpenAI 27%, Google 21% — top-3 ~= 88% of measured GenAI API revenue. Anthropic ARR $30B (Apr 2026) up from $1B Jan 2025. Top 4 (Anthropic/OpenAI/xAI/Waymo) raised $188B = 65% of global VC in quarter.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "PwC / France Épargne 2026 review: foundation-model market $12B in 2026 (CAGR 13%); top vendors Microsoft, Meta, Alibaba, AWS, Huawei. Industry analysts note 'OpenAI is still the leader, but no longer the default' — Gemini, Claude and open-weight models took share. Companies still spending on both open and closed models.",
+        "reason": "Antonym pair detected: new has 'closed', existing has 'open'",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-25T14:24:50+00:00",
+        "entry_a_text": "Q1 2026: OpenAI, Anthropic, xAI, Waymo together raised $188B (65% of all global VC). However, ChatGPT chatbot market share fell 87.2% to 68% YoY; Gemini surged from 5.4% to 18.2%. In enterprise, Anthropic now wins ~70% of head-to-head matchups vs OpenAI; OpenAI enterprise spend share fell 50%->27%, Anthropic rose to 40%.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "PwC / France Épargne 2026 review: foundation-model market $12B in 2026 (CAGR 13%); top vendors Microsoft, Meta, Alibaba, AWS, Huawei. Industry analysts note 'OpenAI is still the leader, but no longer the default' — Gemini, Claude and open-weight models took share. Companies still spending on both open and closed models.",
+        "reason": "Antonym pair detected: new has 'closed', existing has 'open'",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-25T13:19:54+00:00",
+        "entry_a_text": "Menlo Ventures enterprise survey: Anthropic ~32%, OpenAI ~25%, Google Gemini ~20% (top-3 ~77%). Google to invest up to $40B in Anthropic (April 24, 2026). Ramp AI Index Feb 2026: 47.6% of businesses using AI; Anthropic share 24.4%.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "PwC / France Épargne 2026 review: foundation-model market $12B in 2026 (CAGR 13%); top vendors Microsoft, Meta, Alibaba, AWS, Huawei. Industry analysts note 'OpenAI is still the leader, but no longer the default' — Gemini, Claude and open-weight models took share. Companies still spending on both open and closed models.",
+        "reason": "Antonym pair detected: new has 'closed', existing has 'open'",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T13:49:15+00:00",
+        "entry_a_text": "Q1 2026: OpenAI ($120B), Anthropic ($30B), xAI ($20B), Waymo ($16B) captured $186B of $297B global VC -- 64% concentrated in four labs. OpenAI+Anthropic account for over 90% of category valuation; top 20 AI companies hold over 80% of industry valuation. OpenAI enterprise now >40% of its revenue.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "PwC / France Épargne 2026 review: foundation-model market $12B in 2026 (CAGR 13%); top vendors Microsoft, Meta, Alibaba, AWS, Huawei. Industry analysts note 'OpenAI is still the leader, but no longer the default' — Gemini, Claude and open-weight models took share. Companies still spending on both open and closed models.",
+        "reason": "Antonym pair detected: new has 'closed', existing has 'open'",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: 88% top-3 enterprise share directly supports H1 (hyper-concentrated >=75%); latest enterprise data substantially updates prior H2 lead.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "PwC / France Épargne 2026 review: foundation-model market $12B in 2026 (CAGR 13%); top vendors Microsoft, Meta, Alibaba, AWS, Huawei. Industry analysts note 'OpenAI is still the leader, but no longer the default' — Gemini, Claude and open-weight models took share. Companies still spending on both open and closed models.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: share, top",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "Menlo Ventures enterprise LLM spending data (published March 2026): Anthropic 40% share, OpenAI 27%, Google 21% — top-3 hold 88% of enterprise GenAI spend. Claude Code reached $2.5B annualized run-rate; OpenAI hit $19B annualized revenue March 2026.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "PwC / France Épargne 2026 review: foundation-model market $12B in 2026 (CAGR 13%); top vendors Microsoft, Meta, Alibaba, AWS, Huawei. Industry analysts note 'OpenAI is still the leader, but no longer the default' — Gemini, Claude and open-weight models took share. Companies still spending on both open and closed models.",
+        "reason": "Antonym pair detected: new has 'closed', existing has 'open'",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-22T18:41:05+00:00",
+        "entry_a_text": "EU Commission as of April 2026 has NOT designated AI as a core platform service under DMA. Commission hesitant due to lack of clarity on gatekeeper definition for AI. No structural remedy orders against AI providers. April 15 2026 DMA preliminary findings to Google concerned search, not AI.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "PwC / France Épargne 2026 review: foundation-model market $12B in 2026 (CAGR 13%); top vendors Microsoft, Meta, Alibaba, AWS, Huawei. Industry analysts note 'OpenAI is still the leader, but no longer the default' — Gemini, Claude and open-weight models took share. Companies still spending on both open and closed models.",
+        "reason": "Numeric divergence 13.3% on metric (context: 2026): new=13.0, existing=15.0, threshold=10%",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-22T18:41:05+00:00",
+        "entry_a_text": "Meta Superintelligence Labs released Muse Spark in April 2026 as a closed-source model, departing from Llama open-weights tradition. Raises questions about Meta commitment to open-weights releases. Llama 4 Scout/Maverick remain open.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "PwC / France Épargne 2026 review: foundation-model market $12B in 2026 (CAGR 13%); top vendors Microsoft, Meta, Alibaba, AWS, Huawei. Industry analysts note 'OpenAI is still the leader, but no longer the default' — Gemini, Claude and open-weight models took share. Companies still spending on both open and closed models.",
+        "reason": "Antonym pair detected: new has 'open', existing has 'closed'",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-22T18:40:37+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Directional concentration signal: top-3 enterprise LLM share reported ~88%, consistent with H1/H2. Not Gartner/IDC annual — t1_top3_80pct_share_confirmed NOT FIRED. Likelihoods tilt toward concentration but conservative (analyst synthesis, not audited).",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "PwC / France Épargne 2026 review: foundation-model market $12B in 2026 (CAGR 13%); top vendors Microsoft, Meta, Alibaba, AWS, Huawei. Industry analysts note 'OpenAI is still the leader, but no longer the default' — Gemini, Claude and open-weight models took share. Companies still spending on both open and closed models.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: share, top",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-22T18:40:37+00:00",
+        "entry_a_text": "Analyst/press reports April 2026: Anthropic ARR ~$30B surpasses OpenAI ~$25B; enterprise LLM spend share reported as Anthropic 40%, OpenAI 27%, Google 21% (combined top-3 ~88%). Not yet confirmed by Gartner/IDC annual report.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "PwC / France Épargne 2026 review: foundation-model market $12B in 2026 (CAGR 13%); top vendors Microsoft, Meta, Alibaba, AWS, Huawei. Industry analysts note 'OpenAI is still the leader, but no longer the default' — Gemini, Claude and open-weight models took share. Companies still spending on both open and closed models.",
+        "reason": "Antonym pair detected: new has 'closed', existing has 'open'",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
       }
     ]
   },
   "sourceCalibration": {
-    "ledger": [],
+    "ledger": [
+      {
+        "timestamp": "2026-04-24T02:25:41Z",
+        "evidence_index": 1,
+        "confirming_index": 8,
+        "resolution": "REFUTED",
+        "source": "Multiple (SaaStr, TradingKey, Menlo-style analyst syntheses)",
+        "confirming_source": "Axios / SaaStr",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Analyst/press reports April 2026: Anthropic ARR ~$30B surpasses OpenAI ~$25B; enterprise LLM spend share reported as Ant",
+        "confirming_text_snippet": "Menlo Ventures enterprise LLM spending data (published March 2026): Anthropic 40% share, OpenAI 27%, Google 21% — top-3 "
+      },
+      {
+        "timestamp": "2026-04-24T13:49:15Z",
+        "evidence_index": 8,
+        "confirming_index": 11,
+        "resolution": "REFUTED",
+        "source": "Axios / SaaStr",
+        "confirming_source": "Crunchbase / a16z / Stanford AI Index",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Menlo Ventures enterprise LLM spending data (published March 2026): Anthropic 40% share, OpenAI 27%, Google 21% — top-3 ",
+        "confirming_text_snippet": "Q1 2026: OpenAI ($120B), Anthropic ($30B), xAI ($20B), Waymo ($16B) captured $186B of $297B global VC -- 64% concentrate"
+      },
+      {
+        "timestamp": "2026-04-25T13:19:54Z",
+        "evidence_index": 1,
+        "confirming_index": 16,
+        "resolution": "REFUTED",
+        "source": "Multiple (SaaStr, TradingKey, Menlo-style analyst syntheses)",
+        "confirming_source": "Menlo Ventures / CNBC / Ramp AI Index",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Analyst/press reports April 2026: Anthropic ARR ~$30B surpasses OpenAI ~$25B; enterprise LLM spend share reported as Ant",
+        "confirming_text_snippet": "Menlo Ventures enterprise survey: Anthropic ~32%, OpenAI ~25%, Google Gemini ~20% (top-3 ~77%). Google to invest up to $"
+      },
+      {
+        "timestamp": "2026-04-25T13:19:54Z",
+        "evidence_index": 8,
+        "confirming_index": 16,
+        "resolution": "REFUTED",
+        "source": "Axios / SaaStr",
+        "confirming_source": "Menlo Ventures / CNBC / Ramp AI Index",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Menlo Ventures enterprise LLM spending data (published March 2026): Anthropic 40% share, OpenAI 27%, Google 21% — top-3 ",
+        "confirming_text_snippet": "Menlo Ventures enterprise survey: Anthropic ~32%, OpenAI ~25%, Google Gemini ~20% (top-3 ~77%). Google to invest up to $"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:50Z",
+        "evidence_index": 1,
+        "confirming_index": 18,
+        "resolution": "REFUTED",
+        "source": "Multiple (SaaStr, TradingKey, Menlo-style analyst syntheses)",
+        "confirming_source": "Similarweb via Vertu, Foundation Capital, TradingKey",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Analyst/press reports April 2026: Anthropic ARR ~$30B surpasses OpenAI ~$25B; enterprise LLM spend share reported as Ant",
+        "confirming_text_snippet": "Q1 2026: OpenAI, Anthropic, xAI, Waymo together raised $188B (65% of all global VC). However, ChatGPT chatbot market sha"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:50Z",
+        "evidence_index": 11,
+        "confirming_index": 18,
+        "resolution": "REFUTED",
+        "source": "Crunchbase / a16z / Stanford AI Index",
+        "confirming_source": "Similarweb via Vertu, Foundation Capital, TradingKey",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Q1 2026: OpenAI ($120B), Anthropic ($30B), xAI ($20B), Waymo ($16B) captured $186B of $297B global VC -- 64% concentrate",
+        "confirming_text_snippet": "Q1 2026: OpenAI, Anthropic, xAI, Waymo together raised $188B (65% of all global VC). However, ChatGPT chatbot market sha"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:50Z",
+        "evidence_index": 16,
+        "confirming_index": 18,
+        "resolution": "REFUTED",
+        "source": "Menlo Ventures / CNBC / Ramp AI Index",
+        "confirming_source": "Similarweb via Vertu, Foundation Capital, TradingKey",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Menlo Ventures enterprise survey: Anthropic ~32%, OpenAI ~25%, Google Gemini ~20% (top-3 ~77%). Google to invest up to $",
+        "confirming_text_snippet": "Q1 2026: OpenAI, Anthropic, xAI, Waymo together raised $188B (65% of all global VC). However, ChatGPT chatbot market sha"
+      },
+      {
+        "timestamp": "2026-04-26T16:59:07Z",
+        "evidence_index": 1,
+        "confirming_index": 20,
+        "resolution": "REFUTED",
+        "source": "Multiple (SaaStr, TradingKey, Menlo-style analyst syntheses)",
+        "confirming_source": "CNBC / Menlo Ventures / Similarweb",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Analyst/press reports April 2026: Anthropic ARR ~$30B surpasses OpenAI ~$25B; enterprise LLM spend share reported as Ant",
+        "confirming_text_snippet": "Apr 24, 2026: Google announces up to $40B Anthropic investment. Q1 2026 enterprise share (per Menlo and Similarweb-deriv"
+      },
+      {
+        "timestamp": "2026-04-26T16:59:07Z",
+        "evidence_index": 8,
+        "confirming_index": 20,
+        "resolution": "REFUTED",
+        "source": "Axios / SaaStr",
+        "confirming_source": "CNBC / Menlo Ventures / Similarweb",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Menlo Ventures enterprise LLM spending data (published March 2026): Anthropic 40% share, OpenAI 27%, Google 21% — top-3 ",
+        "confirming_text_snippet": "Apr 24, 2026: Google announces up to $40B Anthropic investment. Q1 2026 enterprise share (per Menlo and Similarweb-deriv"
+      },
+      {
+        "timestamp": "2026-04-26T16:59:07Z",
+        "evidence_index": 11,
+        "confirming_index": 20,
+        "resolution": "REFUTED",
+        "source": "Crunchbase / a16z / Stanford AI Index",
+        "confirming_source": "CNBC / Menlo Ventures / Similarweb",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Q1 2026: OpenAI ($120B), Anthropic ($30B), xAI ($20B), Waymo ($16B) captured $186B of $297B global VC -- 64% concentrate",
+        "confirming_text_snippet": "Apr 24, 2026: Google announces up to $40B Anthropic investment. Q1 2026 enterprise share (per Menlo and Similarweb-deriv"
+      },
+      {
+        "timestamp": "2026-04-26T16:59:07Z",
+        "evidence_index": 14,
+        "confirming_index": 20,
+        "resolution": "REFUTED",
+        "source": "Crunchbase / Finro",
+        "confirming_source": "CNBC / Menlo Ventures / Similarweb",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Q1 2026 venture funding: OpenAI ($122B round), Anthropic ($30B round, $30B ARR), xAI ($20B) raised 65% of global VC. Ope",
+        "confirming_text_snippet": "Apr 24, 2026: Google announces up to $40B Anthropic investment. Q1 2026 enterprise share (per Menlo and Similarweb-deriv"
+      }
+    ],
     "effectiveTrust": {
       "@proptermalone.bsky.social": 0.5,
-      "Multiple (SaaStr, TradingKey, Menlo-style analyst syntheses)": 0.5,
+      "Multiple (SaaStr, TradingKey, Menlo-style analyst syntheses)": 0.3289,
       "Neuronad coverage": 0.5,
       "TechTarget": 0.5,
       "TechPolicy.Press": 0.5,
-      "WilmerHale analysis": 0.5
+      "WilmerHale analysis": 0.5,
+      "Axios": 0.3693,
+      "SaaStr": 0.3693,
+      "Crunchbase": 0.3693,
+      "Stanford AI Index": 0.4118,
+      "a16z": 0.4118,
+      "Finro": 0.4555,
+      "CNBC": 0.6084,
+      "Menlo Ventures": 0.4555,
+      "Ramp AI Index": 0.4555,
+      "Similarweb": 0.5,
+      "Brookings": 0.5,
+      "France Épargne": 0.5,
+      "PwC": 0.5
     },
-    "_last_scan_same_source_skipped": 0
+    "_last_scan_same_source_skipped": 3
   }
 }

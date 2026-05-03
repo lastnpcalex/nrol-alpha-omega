@@ -6,7 +6,7 @@
     "question": "Is the ~750 GeV diphoton excess observed by ATLAS and CMS at the LHC a new particle or a statistical fluctuation?",
     "resolution": "Resolved when full Run 2 data (2016) confirms or excludes the excess at 5-sigma significance. If excess disappears with more data, H2 wins.",
     "created": "2015-12-15T00:00:00Z",
-    "lastUpdated": "2026-04-22T01:01:03+00:00",
+    "lastUpdated": "2026-04-29T02:30:58+00:00",
     "status": "RESOLVED",
     "dayCount": 240,
     "startDate": "2015-12-15T00:00:00Z",
@@ -66,7 +66,13 @@
         "H2": 0.55,
         "H3": 0.1,
         "H4": 0.2,
-        "note": "Initial priors after ATLAS/CMS December presentations. ~3.6 sigma local (ATLAS), ~2.6 sigma local (CMS). Skeptical — look-elsewhere effect not fully accounted for, and 2-sigma excesses appear and vanish regularly."
+        "note": "Initial priors after ATLAS/CMS December presentations. ~3.6 sigma local (ATLAS), ~2.6 sigma local (CMS). Skeptical — look-elsewhere effect not fully accounted for, and 2-sigma excesses appear and vanish regularly.",
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        }
       },
       {
         "date": "2026-04-22",
@@ -82,7 +88,7 @@
           "H3": 0.1,
           "H4": 0.2
         },
-        "updateMethod": "bayesian_update",
+        "updateMethod": "bayesian_update_legacy",
         "evidenceRefs": [
           "2015-12-15"
         ],
@@ -102,7 +108,14 @@
           "devil_advocate_score": 0.0,
           "challenge": "No significant shifts proposed; no challenge needed.",
           "inference_mode": "text_heuristic"
-        }
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
       },
       {
         "date": "2026-04-22",
@@ -118,7 +131,7 @@
           "H3": 0.05,
           "H4": 0.2
         },
-        "updateMethod": "bayesian_update",
+        "updateMethod": "bayesian_update_legacy",
         "evidenceRefs": [
           "2016-06-01"
         ],
@@ -138,7 +151,14 @@
           "devil_advocate_score": 0.0,
           "challenge": "No significant shifts proposed; no challenge needed.",
           "inference_mode": "text_heuristic"
-        }
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
       },
       {
         "date": "2026-04-22",
@@ -154,7 +174,7 @@
           "H3": 0.053,
           "H4": 0.212
         },
-        "updateMethod": "bayesian_update",
+        "updateMethod": "bayesian_update_legacy",
         "evidenceRefs": [
           "2016-08-05"
         ],
@@ -178,7 +198,14 @@
           "devil_advocate_score": 0.0,
           "challenge": "No significant shifts proposed; no challenge needed.",
           "inference_mode": "text_heuristic"
-        }
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
       },
       {
         "date": "2026-04-22",
@@ -189,7 +216,13 @@
           "H4": 0.0
         },
         "note": "RE-LOCK POST-REPLAY: winner=H2. ATLAS+CMS 2016 Moriond: excess vanished with full Run 2. Statistical fluctuation. (Re-locked after erroneous replay.)",
-        "updateMethod": "topic_resolved"
+        "updateMethod": "topic_resolved",
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        }
       }
     ]
   },
@@ -581,7 +614,7 @@
   "governance": {
     "health": "CRITICAL",
     "issues": [
-      "Majority stale evidence (8/14)",
+      "Majority stale evidence (14/14)",
       "Unfalsifiable hypotheses: H4",
       "Near-zero uncertainty — check for overconfidence"
     ],
@@ -594,8 +627,8 @@
     "maxEntropy": 2.0,
     "uncertaintyRatio": 0.0,
     "evidenceFreshness": {
-      "fresh": 6,
-      "stale": 8,
+      "fresh": 0,
+      "stale": 14,
       "total": 14
     },
     "hypothesisAdmissibility": {
@@ -608,7 +641,7 @@
       "kl_divergence": 0.5978,
       "interpretation": "WELL_EVIDENCED"
     },
-    "lastComputed": "2026-04-22T01:01:03+00:00",
+    "lastComputed": "2026-04-29T02:30:58+00:00",
     "staleDependencies": 0,
     "calibrationHealth": "WELL_CALIBRATED",
     "unresolvedContradictions": 0,
@@ -637,7 +670,7 @@
         }
       },
       "indistinguishable": [],
-      "lastChecked": "2026-04-22T01:01:03+00:00"
+      "lastChecked": "2026-04-29T02:30:58+00:00"
     }
   },
   "predictionScoring": {

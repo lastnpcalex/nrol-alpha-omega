@@ -131,6 +131,15 @@ def record_outcome(topic: dict, resolved_hypothesis: str, note: str = "") -> dic
     # Score all snapshots against this outcome
     score_all_snapshots(topic)
 
+    # Rebuild per-(lens, classification) Brier — this resolution may
+    # contribute new entries via lrSource on each posteriorHistory entry.
+    # Never raises; safe in the resolution path.
+    try:
+        from framework.lens_calibration import rebuild as _rebuild_lens_brier
+        _rebuild_lens_brier()
+    except Exception:
+        pass
+
     return outcome
 
 

@@ -1,0 +1,217 @@
+{
+  "meta": {
+    "slug": "test-deadline-autostamp",
+    "title": "Test: auto-stamp deadlines",
+    "question": "Does auto-stamping work on create_topic?",
+    "resolution": "Deadlines present on time-bounded hypotheses",
+    "created": "",
+    "lastUpdated": "2026-04-21T15:33:21+00:00",
+    "status": "ACTIVE",
+    "dayCount": 0,
+    "startDate": "2026-04-21T00:00:00Z",
+    "classification": "ROUTINE",
+    "topicType": "conflict"
+  },
+  "tagConfig": {
+    "_docs": "Tag configuration for this topic. topicType presets: conflict, science, election, tech. Override directionHints for custom tag-to-hypothesis mappings.",
+    "availableTags": [
+      "EVENT",
+      "DATA",
+      "RHETORIC",
+      "INTEL",
+      "ANALYSIS"
+    ],
+    "directionHints": {},
+    "escalationTags": [],
+    "deescalationTags": []
+  },
+  "model": {
+    "hypotheses": {
+      "H1": {
+        "label": "<3 months",
+        "midpoint": 45,
+        "unit": "days",
+        "posterior": 0.4,
+        "resolution_deadline": "2026-07-21"
+      },
+      "H2": {
+        "label": "3-12 months",
+        "midpoint": 180,
+        "unit": "days",
+        "posterior": 0.35,
+        "resolution_deadline": "2027-04-21"
+      },
+      "H3": {
+        "label": ">12 months",
+        "midpoint": 730,
+        "unit": "days",
+        "posterior": 0.25
+      }
+    },
+    "expectedValue": 0,
+    "expectedUnit": "weeks",
+    "posteriorHistory": []
+  },
+  "subModels": {},
+  "indicators": {
+    "tier1_critical": [],
+    "tier2_strong": [],
+    "tier3_suggestive": [],
+    "anti_indicators": []
+  },
+  "actorModel": {
+    "description": "Decision-theoretic framework: who makes the decisions that drive this outcome?",
+    "actors": {
+      "actor1": {
+        "name": "Key Decision Maker",
+        "role": "Primary actor whose decisions drive the outcome",
+        "decisionStyle": "How they decide (rational/impulsive/institutional/etc.)",
+        "biases": [
+          "Known bias 1"
+        ],
+        "filters": [
+          "Institutional constraint on behavior"
+        ],
+        "overrides": [
+          "Condition where filters get bypassed"
+        ]
+      }
+    },
+    "methodology": [
+      "ACTIONS OVER RHETORIC — only verified events move posteriors",
+      "TAG EVERYTHING — separate rhetoric from action in evidence log",
+      "DON'T FRONT-RUN — set tripwires and let news confirm",
+      "SOCIALIZATION DETECTION — recognize narrative prep patterns"
+    ]
+  },
+  "evidenceLog": [
+    {
+      "time": "2026-04-21T15:33:21+00:00",
+      "tag": "INTEL",
+      "text": "DEADLINE MIGRATION: resolution_deadline stamped on ['H1', 'H2'] based on topic startDate 2026-04-21.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 1.0
+    }
+  ],
+  "dataFeeds": {
+    "primary_metric": {
+      "label": "Primary Metric",
+      "value": 0,
+      "unit": "units",
+      "baseline": 0,
+      "asOf": ""
+    }
+  },
+  "watchpoints": [],
+  "searchQueries": [
+    "topic keyword latest {date}",
+    "specific search query {date}"
+  ],
+  "dependencies": {
+    "_docs": "Cross-topic dependency declarations. Upstream topics whose posteriors this topic's assumptions depend on. Checked mechanically on save — stale assumptions surface as governance issues.",
+    "upstream": []
+  },
+  "governance": {
+    "health": "DEGRADED",
+    "issues": [
+      "Unfalsifiable hypotheses: H1, H2, H3",
+      "Near-maximum uncertainty — model is not discriminating",
+      "DESIGN GATE BLOCKED: 5 blocker(s)"
+    ],
+    "rt": {
+      "rt": 0.0,
+      "regime": "SAFE",
+      "worst_hypothesis": "H1"
+    },
+    "entropy": 1.5589,
+    "maxEntropy": 1.585,
+    "uncertaintyRatio": 0.9835,
+    "evidenceFreshness": {
+      "fresh": 1,
+      "stale": 0,
+      "total": 1
+    },
+    "hypothesisAdmissibility": {
+      "H1": "ADMISSIBLE",
+      "H2": "ADMISSIBLE",
+      "H3": "ADMISSIBLE"
+    },
+    "klFromPrior": {
+      "kl_divergence": 0.0,
+      "interpretation": "INSUFFICIENT_HISTORY"
+    },
+    "lastComputed": "2026-04-21T15:33:21+00:00",
+    "staleDependencies": 0,
+    "calibrationHealth": "ACCEPTABLE",
+    "unresolvedContradictions": 0,
+    "designGate": {
+      "passed": false,
+      "blockers": [
+        "No indicators defined — the topic has no observable signals that would trigger posterior updates",
+        "COVERAGE GAP: H2 has no indicators for or against it — this hypothesis is permanently underdetermined",
+        "COVERAGE GAP: H1 has no indicators for or against it — this hypothesis is permanently underdetermined",
+        "COVERAGE GAP: H3 has no indicators for or against it — this hypothesis is permanently underdetermined",
+        "NON-UNIFORM PRIORS without justification — posteriors are {'H1': 0.4, 'H2': 0.35, 'H3': 0.25} but posteriorHistory has no initial note explaining the asymmetry. Add a posteriorHistory entry documenting why."
+      ],
+      "warnings": [
+        "meta.resolution may not be objectively observable — does it describe something a third party could verify?",
+        "No tier-1 (critical) indicators — what would it take to near-certainly resolve this question?",
+        "No anti-indicators defined — every hypothesis needs at least one indicator that would REDUCE its probability"
+      ],
+      "coverage": {
+        "H1": {
+          "pos": 0,
+          "neg": 0
+        },
+        "H2": {
+          "pos": 0,
+          "neg": 0
+        },
+        "H3": {
+          "pos": 0,
+          "neg": 0
+        }
+      },
+      "indistinguishable": [],
+      "lastChecked": "2026-04-21T15:33:21+00:00"
+    }
+  },
+  "predictionScoring": {
+    "_docs": "Calibration infrastructure. Snapshots are auto-created by engine on each posterior update. Record outcome when topic resolves, then compute_calibration_report() for Brier analysis.",
+    "snapshots": [],
+    "outcomes": [],
+    "brierScores": []
+  },
+  "slug": "test-deadline-autostamp",
+  "title": "Test: auto-stamp deadlines",
+  "question": "Does auto-stamping work on create_topic?",
+  "resolution": "Deadlines present on time-bounded hypotheses",
+  "startDate": "2026-04-21T00:00:00Z",
+  "hypotheses": {
+    "H1": {
+      "label": "<3 months",
+      "prior": 0.4,
+      "midpoint": 45,
+      "unit": "days"
+    },
+    "H2": {
+      "label": "3-12 months",
+      "prior": 0.35,
+      "midpoint": 180,
+      "unit": "days"
+    },
+    "H3": {
+      "label": ">12 months",
+      "prior": 0.25,
+      "midpoint": 730,
+      "unit": "days"
+    }
+  },
+  "contradictionTracker": {
+    "unresolved": [],
+    "resolved": []
+  }
+}

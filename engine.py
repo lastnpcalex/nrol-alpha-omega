@@ -16,6 +16,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Optional
 
+from framework.lint_indicators import propose_indicators_lint
 from governor import (
     check_update_proposal,
     classify_evidence,
@@ -52,6 +53,40 @@ class GovernanceError(Exception):
         self.warnings = warnings or []
 
 
+class IndicatorAddNotAllowed(Exception):
+    """
+    Raised when add_indicator is called without an active cleanup session.
+    Topic creation builds indicators directly via create_topic; mid-life
+    schema additions must go through start_indicator_cleanup_session +
+    commit_indicator_cleanup_session, which is the cyborgist cleanup
+    workflow's enforcement point.
+    """
+    pass
+
+
+class IndicatorShapeReviewRequired(Exception):
+    """
+    Raised by bayesian_update if an indicator is missing a shape review,
+    or if its shape review is stale (schema hash mismatch). Enforces that
+    all indicators pass the semantic resolution-disguise check via subagents.
+    """
+    pass
+
+
+def _collect_indicator_ids(topic: dict) -> set:
+    """Collect all indicator IDs from a topic across tiers and anti_indicators."""
+    ids = set()
+    inds = topic.get("indicators", {}) or {}
+    for tier_key in ("tier1_critical", "tier2_strong", "tier3_suggestive"):
+        for ind in inds.get("tiers", {}).get(tier_key, []) or []:
+            if isinstance(ind, dict) and ind.get("id"):
+                ids.add(ind["id"])
+    for ind in inds.get("anti_indicators", []) or []:
+        if isinstance(ind, dict) and ind.get("id"):
+            ids.add(ind["id"])
+    return ids
+
+
 # ---------------------------------------------------------------------------
 # Topic I/O
 # ---------------------------------------------------------------------------
@@ -69,9 +104,97 @@ def load_topic(slug: str) -> dict:
 
 
 def save_topic(topic: dict) -> None:
-    """Write topic state back to disk with embedded governance snapshot."""
+    """Write topic state back to disk with embedded governance snapshot.
+
+    Indicator-add gate: if new indicator IDs appear in this save vs the
+    on-disk version AND there's no active running_indicator_loop, the save
+    is refused. This catches direct-dict-manipulation bypasses of
+    add_indicator's gate. Topic creation (first save, no on-disk version)
+    skips this check.
+    """
     slug = topic["meta"]["slug"]
     topic["meta"]["lastUpdated"] = _now_iso()
+
+    # --- Indicator-add gate ---
+
+    # --- Indicator Shape Lint Gate ---
+    try:
+        from framework.lint_indicators import propose_indicators_lint
+        topic_path = TOPICS_DIR / f"{slug}.json"
+        all_inds = []
+        for t in ("tier1_critical", "tier2_strong", "tier3_suggestive"):
+            all_inds.extend(topic.get("indicators", {}).get("tiers", {}).get(t, []))
+        all_inds.extend(topic.get("indicators", {}).get("anti_indicators", []))
+        
+        inds_to_check = []
+        if topic_path.exists():
+            with open(topic_path, "r", encoding="utf-8") as _f:
+                _disk = json.load(_f)
+            _disk_ids = _collect_indicator_ids(_disk)
+            inds_to_check = [i for i in all_inds if i.get("id") not in _disk_ids]
+        else:
+            inds_to_check = all_inds
+            
+        if inds_to_check:
+            lint_res = propose_indicators_lint(topic, inds_to_check)
+            if not lint_res["passed"]:
+                blocker_msgs = [b["message"] for b in lint_res["blockers"]]
+                raise ValueError(
+                    f"save_topic({slug!r}) blocked by indicator shape lint. "
+                    f"Blockers: {blocker_msgs}"
+                )
+    except ValueError:
+        raise
+    except Exception:
+        pass
+
+    # Compare in-memory indicator IDs to on-disk. If new ids appeared and
+    # no cleanup session is active, refuse. Allows first-save (topic creation).
+    try:
+        topic_path = TOPICS_DIR / f"{slug}.json"
+        if topic_path.exists():
+            with open(topic_path, "r", encoding="utf-8") as _f:
+                _disk = json.load(_f)
+            _disk_ids = _collect_indicator_ids(_disk)
+            _new_ids = _collect_indicator_ids(topic)
+            _added = _new_ids - _disk_ids
+            if _added:
+                _is_active, _session_msg = _is_indicator_cleanup_session_active(topic)
+                if not _is_active:
+                    raise IndicatorAddNotAllowed(
+                        f"save_topic({slug!r}) blocked: indicator IDs added without "
+                        f"active cleanup session. Added: {sorted(_added)}. "
+                        f"Session status: {_session_msg}. "
+                        f"Open a session via start_indicator_cleanup_session before "
+                        f"adding indicators, or use add_indicator() which enforces "
+                        f"this gate at the function level."
+                    )
+    except IndicatorAddNotAllowed:
+        raise
+    except Exception:
+        # If the comparison itself fails (corrupt JSON, etc.) don't block save —
+        # the load failure is itself a separate problem.
+        pass
+
+    # Preserve operator-curated governance fields across the recompute below.
+    # save_topic re-derives governance.{health, issues, rt, freshness, ...} from
+    # the current topic state, but these fields are operator records that must
+    # survive: reviewed_alerts (suppressions), and dependencyHistory tracked at
+    # the governance level.
+    _preserved_governance = {}
+    _existing_gov = topic.get("governance") or {}
+    for _k in (
+        "reviewed_alerts",
+        # Cleanup-workflow fields (Phase 1+) — must survive the governance
+        # recompute below or sessions silently disappear and parked queues
+        # vanish.
+        "running_indicator_loop",
+        "flagged_for_indicator_review",
+        "indicator_cleanup_history",
+        "indicator_bypasses",
+    ):
+        if _k in _existing_gov:
+            _preserved_governance[_k] = _existing_gov[_k]
 
     # Guard: enrich any evidence entries that bypassed the governor
     _GOVERNOR_FIELDS = ("ledger", "claimState", "effectiveWeight")
@@ -236,6 +359,14 @@ def save_topic(topic: dict) -> None:
     except Exception:
         # Governor computation must never prevent saving state
         pass
+
+    # Restore operator-curated governance fields preserved at the top of this
+    # function. governance may not exist if the recompute block raised before
+    # creating it, so use setdefault.
+    if _preserved_governance:
+        gov = topic.setdefault("governance", {})
+        for _k, _v in _preserved_governance.items():
+            gov[_k] = _v
 
     # --- Design gate check (runs on every save, embeds results) ---
     try:
@@ -503,6 +634,459 @@ def scaffold_topic(slug: str) -> str:
         json.dump(topic, f, indent=2, ensure_ascii=False)
 
     return str(path)
+
+
+VALID_INDICATOR_TIERS = (
+    "tier1_critical",
+    "tier2_strong",
+    "tier3_suggestive",
+    "anti_indicators",
+)
+
+
+_INDICATOR_CLEANUP_SESSION_TTL_SECONDS = 60 * 60  # 1 hour
+
+
+def _is_indicator_cleanup_session_active(topic: dict) -> tuple[bool, str]:
+    """
+    Returns (is_active, reason). Session is active if
+    governance.running_indicator_loop is set AND not past TTL.
+    Past-TTL sessions auto-expire (caller can clear them via
+    commit/abort_indicator_cleanup_session).
+    """
+    from datetime import datetime, timezone, timedelta
+    loop = topic.get("governance", {}).get("running_indicator_loop")
+    if not loop:
+        return False, "no active session"
+    started = loop.get("started_at")
+    if not started:
+        return False, "session has no started_at"
+    try:
+        started_dt = datetime.fromisoformat(str(started).replace("Z", "+00:00"))
+        if started_dt.tzinfo is None:
+            started_dt = started_dt.replace(tzinfo=timezone.utc)
+    except Exception:
+        return False, "session has invalid started_at"
+    age = datetime.now(timezone.utc) - started_dt
+    ttl = timedelta(seconds=loop.get("ttl_seconds", _INDICATOR_CLEANUP_SESSION_TTL_SECONDS))
+    if age > ttl:
+        return False, f"session expired ({age.total_seconds():.0f}s old, ttl {ttl.total_seconds():.0f}s)"
+    return True, f"active session {loop.get('session_id', '?')}"
+
+
+def start_indicator_cleanup_session(slug: str, reason: str = "",
+                                    ttl_seconds: int = _INDICATOR_CLEANUP_SESSION_TTL_SECONDS) -> dict:
+    """
+    Open an indicator-cleanup session on a topic. Sets
+    governance.running_indicator_loop with session_id + started_at + ttl.
+    While the session is active, add_indicator() accepts new indicators on
+    this topic; outside a session, add_indicator() raises.
+
+    Returns the topic with the session set. Caller must save_topic.
+
+    Refuses if a session is already active and not expired.
+    """
+    import uuid
+    topic = load_topic(slug)
+    is_active, msg = _is_indicator_cleanup_session_active(topic)
+    if is_active:
+        raise ValueError(
+            f"Cannot start cleanup session on {slug!r}: another is already active "
+            f"({msg}). Run commit_indicator_cleanup_session or abort_indicator_cleanup_session first."
+        )
+    gov = topic.setdefault("governance", {})
+    gov["running_indicator_loop"] = {
+        "session_id": uuid.uuid4().hex[:12],
+        "started_at": _now_iso(),
+        "ttl_seconds": int(ttl_seconds),
+        "reason": reason or "",
+    }
+    save_topic(topic)
+    return topic
+
+
+def commit_indicator_cleanup_session(slug: str, summary: str = "") -> dict:
+    """
+    Close the indicator-cleanup session by clearing
+    governance.running_indicator_loop. Caller has already added indicators
+    and applied any cleanup commits — this just clears the gate.
+    """
+    topic = load_topic(slug)
+    gov = topic.setdefault("governance", {})
+    closed = gov.pop("running_indicator_loop", None)
+    if closed:
+        history = gov.setdefault("indicator_cleanup_history", [])
+        history.append({
+            "session_id": closed.get("session_id"),
+            "started_at": closed.get("started_at"),
+            "closed_at": _now_iso(),
+            "summary": summary or "",
+            "outcome": "committed",
+        })
+    save_topic(topic)
+    return topic
+
+
+def commit_indicator_cleanup(
+    slug: str,
+    proposal_envelope: dict,
+    canvas_receipt_path: str,
+    *,
+    receipt_max_age_seconds: int = 600,  # 10 min — receipt should be fresh
+) -> dict:
+    """
+    Apply a cleanup proposal: add new indicators, fire indicators against
+    matched parked evidence, clear those entries from the flagged queue,
+    close the cleanup session.
+
+    Hard gates (refuses unless ALL pass):
+      1. Active cleanup session exists on the topic
+      2. proposal_envelope.lint_result.passed is True (no blockers)
+      3. canvas_receipt_path exists and was written within receipt_max_age_seconds
+      4. proposal_envelope.session_id matches the current session
+
+    proposal_envelope structure:
+        {
+          "session_id": "<active session id>",
+          "topic_slug": "<slug>",
+          "created_at": "<iso8601>",
+          "proposed_indicators": [
+              {"id", "tier", "desc", "posteriorEffect", "likelihoods", ...}
+          ],
+          "indicator_firings": [
+              {"evidence_id": "ev_185", "indicator_id": "iran_reopen_proposal",
+               "rationale": "match found via indicator_match"}
+          ],
+          "lint_result": {"passed": bool, "blockers": [], "warnings": []},
+          "debate_envelope": {<red/blue team output>},
+          "operator_notes": "..."
+        }
+
+    Returns:
+        {
+          "slug", "session_id",
+          "indicators_added": [...],
+          "firings": [...],
+          "flagged_cleared": [...],
+          "topic": <updated topic>,
+        }
+
+    Raises:
+        IndicatorAddNotAllowed: no active session
+        ValueError: lint failed, receipt invalid, envelope malformed
+        FileNotFoundError: receipt file missing
+    """
+    import json as _json
+    from pathlib import Path as _Path
+    from datetime import datetime as _dt, timezone as _tz, timedelta as _td
+
+    topic = load_topic(slug)
+
+    # Gate 1: active session
+    is_active, session_msg = _is_indicator_cleanup_session_active(topic)
+    if not is_active:
+        raise IndicatorAddNotAllowed(
+            f"commit_indicator_cleanup({slug!r}) blocked: {session_msg}. "
+            f"Open a session via start_indicator_cleanup_session."
+        )
+    current_session_id = topic["governance"]["running_indicator_loop"].get("session_id")
+
+    # Gate 2: lint result
+    lint = (proposal_envelope or {}).get("lint_result") or {}
+    if not lint.get("passed"):
+        blockers = lint.get("blockers", [])
+        raise ValueError(
+            f"commit_indicator_cleanup({slug!r}) blocked: lint did not pass. "
+            f"{len(blockers)} blocker(s): "
+            + "; ".join(b.get("message", "?")[:120] for b in blockers[:3])
+        )
+
+    # Gate 3: canvas receipt
+    receipt_path = _Path(canvas_receipt_path)
+    if not receipt_path.exists():
+        raise FileNotFoundError(
+            f"Canvas approval receipt not found at {canvas_receipt_path}. "
+            f"The operator must click 'Approve & commit' on the canvas to "
+            f"generate this receipt before commit can proceed."
+        )
+    try:
+        with open(receipt_path, "r", encoding="utf-8") as f:
+            receipt = _json.load(f)
+    except Exception as e:
+        raise ValueError(f"Cannot parse canvas receipt: {e}")
+    receipt_ts = receipt.get("timestamp")
+    if not receipt_ts:
+        raise ValueError("Canvas receipt missing timestamp field.")
+    try:
+        receipt_dt = _dt.fromisoformat(str(receipt_ts).replace("Z", "+00:00"))
+        if receipt_dt.tzinfo is None:
+            receipt_dt = receipt_dt.replace(tzinfo=_tz.utc)
+    except Exception as e:
+        raise ValueError(f"Canvas receipt has invalid timestamp: {e}")
+    age = _dt.now(_tz.utc) - receipt_dt
+    if age > _td(seconds=receipt_max_age_seconds):
+        raise ValueError(
+            f"Canvas receipt is stale ({age.total_seconds():.0f}s old, "
+            f"max {receipt_max_age_seconds}s). Operator must re-approve."
+        )
+
+    # Gate 4: session_id match
+    envelope_session = (proposal_envelope or {}).get("session_id")
+    if envelope_session and envelope_session != current_session_id:
+        raise ValueError(
+            f"Envelope session_id ({envelope_session}) does not match active "
+            f"session ({current_session_id}). Stale envelope?"
+        )
+
+    # All gates pass. Apply changes.
+    indicators_added = []
+    firings = []
+    flagged_cleared = []
+
+    # Add new indicators
+    for ind in proposal_envelope.get("proposed_indicators", []) or []:
+        tier = ind.get("tier") or ind.get("_tier")
+        if not tier:
+            continue
+        # add_indicator will load_topic and save_topic itself; relies on
+        # the active session flag still being set (which it is — we won't
+        # close until the end)
+        indicator_payload = {
+            k: v for k, v in ind.items()
+            if k not in ("tier", "_tier")
+        }
+        result = add_indicator(
+            slug=slug,
+            tier=tier,
+            indicator=indicator_payload,
+            rationale=f"cleanup commit (session {current_session_id})",
+        )
+        indicators_added.append({
+            "id": indicator_payload.get("id"),
+            "tier": tier,
+            "added": result.get("added"),
+        })
+
+    # Reload topic after add_indicator's saves
+    topic = load_topic(slug)
+
+    # Fire indicators on matched evidence. Each firing goes through fire_indicator
+    # + bayesian_update via apply_indicator_effect (which already enforces the
+    # provenance gate).
+    for firing in proposal_envelope.get("indicator_firings", []) or []:
+        ev_id = firing.get("evidence_id")
+        ind_id = firing.get("indicator_id")
+        rationale = firing.get("rationale", "cleanup-matched")
+        if not ev_id or not ind_id:
+            continue
+        try:
+            topic = apply_indicator_effect(
+                topic,
+                indicator_id=ind_id,
+                evidence_refs=[ev_id],
+                note=f"Cleanup match: {rationale}",
+            )
+            firings.append({"evidence_id": ev_id, "indicator_id": ind_id, "applied": True})
+            # Clear from flagged queue
+            flagged = topic.setdefault("governance", {}).get("flagged_for_indicator_review", [])
+            if ev_id in flagged:
+                flagged.remove(ev_id)
+                flagged_cleared.append(ev_id)
+        except Exception as e:
+            firings.append({
+                "evidence_id": ev_id, "indicator_id": ind_id,
+                "applied": False, "error": str(e)[:200],
+            })
+
+    save_topic(topic)
+
+    # Close the session
+    summary = (
+        f"Cleanup commit: added {len(indicators_added)} indicator(s), "
+        f"fired {sum(1 for f in firings if f.get('applied'))} firing(s), "
+        f"cleared {len(flagged_cleared)} flagged evidence id(s). "
+        f"Lint passed with {len(lint.get('warnings', []))} warning(s)."
+    )
+    topic = commit_indicator_cleanup_session(slug, summary=summary)
+
+    return {
+        "slug": slug,
+        "session_id": current_session_id,
+        "indicators_added": indicators_added,
+        "firings": firings,
+        "flagged_cleared": flagged_cleared,
+        "summary": summary,
+        "topic": topic,
+    }
+
+
+def abort_indicator_cleanup_session(slug: str, reason: str = "") -> dict:
+    """
+    Cancel an active session without committing changes. Same as commit
+    but tags the outcome as aborted. Used when operator decides not to
+    apply the proposed indicators.
+    """
+    topic = load_topic(slug)
+    gov = topic.setdefault("governance", {})
+    closed = gov.pop("running_indicator_loop", None)
+    if closed:
+        history = gov.setdefault("indicator_cleanup_history", [])
+        history.append({
+            "session_id": closed.get("session_id"),
+            "started_at": closed.get("started_at"),
+            "closed_at": _now_iso(),
+            "summary": reason or "operator aborted",
+            "outcome": "aborted",
+        })
+    save_topic(topic)
+    return topic
+
+
+def add_indicator(
+    slug: str,
+    tier: str,
+    indicator: dict,
+    rationale: str = "",
+) -> dict:
+    """
+    Add a new indicator to an existing topic.
+
+    Gated: requires an active indicator-cleanup session
+    (governance.running_indicator_loop set and not expired). Topic creation
+    builds indicators directly via create_topic() and does not call this
+    function — this function is only for mid-life schema additions, which
+    must go through the cleanup workflow.
+
+    Args:
+        slug: topic slug
+        tier: one of tier1_critical, tier2_strong, tier3_suggestive,
+              anti_indicators
+        indicator: dict with required keys {id, desc, posteriorEffect}.
+                   Optional: status (default NOT_FIRED), firedDate, note,
+                   likelihoods, lr_decay, causal_event_id.
+        rationale: short note explaining why this indicator is being added.
+
+    Returns:
+        {slug, tier, indicator_id, added, tier_size_before, tier_size_after}
+
+    Raises:
+        IndicatorAddNotAllowed: no active cleanup session
+        ValueError: invalid tier, missing required fields, duplicate id
+        FileNotFoundError: topic doesn't exist
+    """
+    if tier not in VALID_INDICATOR_TIERS:
+        raise ValueError(
+            f"Invalid tier '{tier}'. Must be one of {VALID_INDICATOR_TIERS}."
+        )
+
+    required = {"id", "desc", "posteriorEffect"}
+    missing = required - set(indicator.keys())
+    if missing:
+        raise ValueError(
+            f"Indicator missing required fields: {sorted(missing)}. "
+            f"Required: {sorted(required)}."
+        )
+
+    new_id = indicator["id"]
+    if not isinstance(new_id, str) or not new_id.strip():
+        raise ValueError("Indicator 'id' must be a non-empty string.")
+
+    topic = load_topic(slug)
+
+    # --- Cleanup session gate ---
+    # add_indicator may only run inside an open indicator-cleanup session.
+    # The session is opened by start_indicator_cleanup_session() (typically
+    # via the cleanup-indicator-sweep skill) and closed by commit/abort.
+    # New topics should use create_topic() which builds indicators inline
+    # without calling this function.
+    is_active, session_msg = _is_indicator_cleanup_session_active(topic)
+    if not is_active:
+        raise IndicatorAddNotAllowed(
+            f"add_indicator on {slug!r} blocked: {session_msg}. "
+            f"Open a cleanup session first via "
+            f"engine.start_indicator_cleanup_session({slug!r}, reason=...). "
+            f"This gate prevents schema changes from being applied outside "
+            f"the audited cleanup workflow."
+        )
+
+    inds = topic.setdefault("indicators", {})
+    tiers = inds.setdefault("tiers", {})
+    for t in ("tier1_critical", "tier2_strong", "tier3_suggestive"):
+        tiers.setdefault(t, [])
+    inds.setdefault("anti_indicators", [])
+
+    existing_ids = set()
+    for t in ("tier1_critical", "tier2_strong", "tier3_suggestive"):
+        existing_ids.update(i.get("id") for i in tiers.get(t, []))
+    existing_ids.update(i.get("id") for i in inds.get("anti_indicators", []))
+    if new_id in existing_ids:
+        raise ValueError(
+            f"Indicator id '{new_id}' already exists on topic '{slug}'. "
+            "Use a unique id."
+        )
+
+    record = {
+        "id": new_id,
+        "desc": indicator["desc"],
+        "posteriorEffect": indicator["posteriorEffect"],
+        "status": indicator.get("status", "NOT_FIRED"),
+        "firedDate": indicator.get("firedDate"),
+        "note": indicator.get("note"),
+        "shape": indicator.get("shape"),
+        "causal_event_id": indicator.get("causal_event_id"),
+        "ladder_group": indicator.get("ladder_group"),
+        "ladder_step": indicator.get("ladder_step"),
+        "likelihoods": indicator.get("likelihoods"),
+        "lr_decay": indicator.get("lr_decay"),
+    }
+    # Remove None values so schema is clean
+    record = {k: v for k, v in record.items() if v is not None}
+
+    if tier == "anti_indicators":
+        target = inds["anti_indicators"]
+    else:
+        target = tiers[tier]
+        
+    # --- Shape Lint Gate ---
+    from framework.lint_indicators import propose_indicators_lint
+    lint_res = propose_indicators_lint(topic, [record])
+    if not lint_res["passed"]:
+        blocker_msgs = [b["message"] for b in lint_res["blockers"]]
+        raise ValueError(
+            f"add_indicator({new_id!r}) blocked by indicator shape lint. "
+            f"Blockers: {blocker_msgs}"
+        )
+        
+    size_before = len(target)
+    target.append(record)
+    size_after = len(target)
+
+    topic.setdefault("meta", {})["lastUpdated"] = _now_iso()
+    topic.setdefault("evidenceLog", []).append({
+        "time": _now_iso(),
+        "tag": "INTEL",
+        "text": (
+            f"INDICATOR ADDED: {new_id} ({tier}). "
+            f"posteriorEffect={record['posteriorEffect']}. "
+            f"Rationale: {rationale or 'not supplied'}."
+        ),
+        "provenance": "DERIVED",
+        "posteriorImpact": "NONE",
+        "ledger": "DECISION",
+        "claimState": "PROPOSED",
+        "effectiveWeight": 0.5,
+    })
+
+    save_topic(topic)
+
+    return {
+        "slug": slug,
+        "tier": tier,
+        "indicator_id": new_id,
+        "added": True,
+        "tier_size_before": size_before,
+        "tier_size_after": size_after,
+    }
 
 
 # ---------------------------------------------------------------------------
@@ -855,7 +1439,12 @@ def bayesian_update(topic: dict, likelihoods: dict[str, float] = None,
                     reason: str = "", evidence_refs: list[str] = None,
                     operator_posteriors: dict[str, float] = None,
                     lr_range: dict = None,
-                    lr_confidence: str = "MEDIUM") -> dict:
+                    lr_confidence: str = "MEDIUM",
+                    lens: str = None,
+                    is_replay: bool = False,
+                    *,
+                    indicator_id: str = None,
+                    legacy_unstamped: bool = False) -> dict:
     """
     Mechanistic Bayesian posterior update from explicit likelihood ratios.
 
@@ -866,11 +1455,178 @@ def bayesian_update(topic: dict, likelihoods: dict[str, float] = None,
 
     When lr_range is supplied the history entry gains posteriorRangeLo,
     posteriorRangeHi, sensitivityFlag, and dominantHypothesisStable.
+
+    Provenance gate: indicator_id is REQUIRED. The indicator must exist
+    on the topic and be in FIRED state. Anonymous / freeform updates are
+    no longer accepted — they were the failure mode that pegged 17 active
+    topics at clamp ceilings via context-anchored LR commitments. Evidence
+    that doesn't match an existing indicator must be parked via
+    pipeline.process_evidence (without fired_indicator_id) and resolved
+    later through the indicator-cleanup workflow.
+
+    Lens (required, no silent fallback):
+      Pass lens= explicitly OR set topic.meta.lens via set_topic_lens().
+      legacy_unstamped=True is a transition flag for retroactive
+      processing only — new code should not pass it.
     """
     import math as _math
 
+    # --- Provenance gate ---
+    # bayesian_update requires indicator_id, period. The freeform path was
+    # removed because it was systematically used to commit context-anchored
+    # LRs across topic sweeps, leading to compound saturation. New evidence
+    # without a matching indicator must be parked, not freeform-applied.
+    if not indicator_id:
+        raise ValueError(
+            "bayesian_update requires indicator_id. The freeform path was "
+            "removed to prevent context-anchored LR accumulation that pegged "
+            "17 topics at clamp ceilings.\n"
+            "If no existing indicator matches the evidence:\n"
+            "  - park it via pipeline.process_evidence (no fired_indicator_id)\n"
+            "  - run the indicator-cleanup workflow to author/match indicators\n"
+            "  - then fire the indicator and apply its pre-committed LRs"
+        )
+    if True:
+        # Indicator must exist on topic and be in FIRED state.
+        # Search tier1/tier2/tier3 + anti_indicators.
+        _found = None
+        _inds = topic.get("indicators", {})
+        for _tk in ("tier1_critical", "tier2_strong", "tier3_suggestive"):
+            for _i in _inds.get("tiers", {}).get(_tk, []):
+                if _i.get("id") == indicator_id:
+                    _found = _i
+                    break
+            if _found:
+                break
+        if not _found:
+            for _i in _inds.get("anti_indicators", []):
+                if _i.get("id") == indicator_id:
+                    _found = _i
+                    break
+        if not _found:
+            raise ValueError(
+                f"indicator_id={indicator_id!r} not found on topic. "
+                "Use add_indicator() to register it first."
+            )
+        if _found.get("status") != "FIRED":
+            raise ValueError(
+                f"Indicator {indicator_id!r} is not FIRED (status: "
+                f"{_found.get('status')!r}). fire_indicator() must succeed "
+                "before bayesian_update can apply its LRs."
+            )
+
+        # --- Indicator Shape Review Gate ---
+        try:
+            from framework.lint_indicator_shape import verify_shape_review
+            review_ok, review_msg = verify_shape_review(topic, indicator_id)
+            if not review_ok:
+                raise IndicatorShapeReviewRequired(
+                    f"bayesian_update({indicator_id!r}) blocked: {review_msg}. "
+                    f"All indicators must pass semantic shape review (resolution-disguise check) "
+                    f"before firing. Use the cleanup workflow to review it."
+                )
+        except ImportError:
+            pass  # skip if not yet implemented
+
+        # --- Causal de-correlation ---
+        # If this indicator declares a causal_event_id and other indicators
+        # with the same event_id have fired in the recent window, attenuate
+        # the LRs toward 1.0 by factor 1/(K+1). Prevents correlated evidence
+        # (multiple indicators on one underlying event) from being counted as
+        # independent observations. K is computed BEFORE this fire is logged.
+        _causal_event_id = _found.get("causal_event_id")
+        if _causal_event_id:
+            _causal_K = _causal_event_cluster_size(topic, _causal_event_id)
+            if _causal_K > 0:
+                if likelihoods is not None:
+                    likelihoods = _attenuate_lrs_for_cluster(likelihoods, _causal_K)
+                if lr_range is not None:
+                    lr_range = {
+                        k: [
+                            1.0 + (lr_range[k][0] - 1.0) / (_causal_K + 1),
+                            1.0 + (lr_range[k][1] - 1.0) / (_causal_K + 1),
+                        ]
+                        for k in lr_range
+                    }
+
+        # --- LR cap for indicator-bound calls ---
+        # Indicator likelihoods authored with H_max=1.0 are common (operator
+        # convention: "this hypothesis is most compatible with the evidence").
+        # The downstream sanity gate rejects LR >= 0.99. Proportionally scale
+        # to max=0.95 — this is mathematically a no-op on the posterior (Bayes
+        # is invariant to LR scaling) but keeps us under the gate threshold.
+        if likelihoods is not None:
+            _lr_max = max(likelihoods.values()) if likelihoods else 1.0
+            if _lr_max > 0.95:
+                _scale = 0.95 / _lr_max
+                likelihoods = {k: v * _scale for k, v in likelihoods.items()}
+        if lr_range is not None:
+            _hi_max = max(v[1] for v in lr_range.values())
+            if _hi_max > 0.95:
+                _scale = 0.95 / _hi_max
+                lr_range = {k: [v[0] * _scale, v[1] * _scale] for k, v in lr_range.items()}
+
+    _provenance = "indicator"
+
+    # --- Lens resolution (no silent OPERATOR_JUDGMENT fallback) ---
+    # Caller may pass `lens` explicitly; otherwise read from topic.meta.lens.
+    # If neither is set, raise unless legacy_unstamped=True (migration only).
+    _topic_lens = topic.get("meta", {}).get("lens")
+    _resolved_lens = lens or _topic_lens
+    if not _resolved_lens:
+        if legacy_unstamped:
+            _resolved_lens = "OPERATOR_JUDGMENT"
+        else:
+            raise ValueError(
+                "lens is required. Pass lens='GREEN'|'AMBER'|'BLUE'|'RED'|"
+                "'VIOLET'|'OCHRE'|'OPERATOR_JUDGMENT' explicitly, or set "
+                "topic.meta.lens via engine.set_topic_lens(). "
+                "Silent OPERATOR_JUDGMENT fallback was removed because it "
+                "left 39/41 hormuz entries un-Brier-scoreable."
+            )
+    if _resolved_lens not in VALID_LENSES:
+        raise ValueError(
+            f"Unknown lens {_resolved_lens!r} on bayesian_update. "
+            f"Valid: {sorted(VALID_LENSES)}."
+        )
+    _lens_set_at = topic.get("meta", {}).get("lensSetAt")
+    _lens_source = "explicit" if lens else (
+        "topic_meta" if _topic_lens else
+        ("legacy_unstamped" if legacy_unstamped else "fallback")
+    )
+
     if likelihoods is None and lr_range is None:
         raise ValueError("Either likelihoods or lr_range must be supplied.")
+
+    # --- LR sanity gate ---
+    # P(E|H) = 1.0 means "this evidence is observed with certainty if H is true,
+    # and never under any other hypothesis." That's a logical claim, almost
+    # never honest for an observation drawn from news. P(E|H) = 0 is its mirror.
+    # bayesian_update is the news/observation path; resolution uses a different
+    # function (update_posteriors) and is exempt by virtue of not calling here.
+    _LR_MIN = 0.01
+    _LR_MAX = 0.99
+    def _check_lr_value(k, v, label):
+        if not isinstance(v, (int, float)):
+            raise ValueError(f"Likelihood for {k} must be numeric, got {type(v).__name__}")
+        if v >= _LR_MAX or v <= _LR_MIN:
+            raise ValueError(
+                f"Dishonest likelihood: P(E|{k}) = {v} ({label}). "
+                f"bayesian_update rejects values >= {_LR_MAX} or <= {_LR_MIN}. "
+                f"P(E|H)=1.0 means the evidence is logically impossible under any "
+                f"other hypothesis — almost never true for a news observation. "
+                f"If you genuinely mean near-certain, use 0.95 / 0.05. "
+                f"If the topic is resolving, use update_posteriors() not bayesian_update()."
+            )
+    if likelihoods is not None:
+        for k, v in likelihoods.items():
+            _check_lr_value(k, v, "point LR")
+    if lr_range is not None:
+        for k, pair in lr_range.items():
+            if not (isinstance(pair, (list, tuple)) and len(pair) == 2):
+                raise ValueError(f"lr_range[{k}] must be a 2-element [lo, hi].")
+            _check_lr_value(k, pair[0], "lr_range lo")
+            _check_lr_value(k, pair[1], "lr_range hi")
 
     hypotheses = topic["model"]["hypotheses"]
     h_keys = list(hypotheses.keys())
@@ -996,7 +1752,7 @@ def bayesian_update(topic: dict, likelihoods: dict[str, float] = None,
         }
     proposal_check = check_update_proposal(
         topic, computed, evidence_refs=evidence_refs, reason=reason,
-        sensitivity_meta=_sens_meta,
+        sensitivity_meta=_sens_meta, is_replay=is_replay,
     )
 
     if not proposal_check["passed"]:
@@ -1091,15 +1847,25 @@ def bayesian_update(topic: dict, likelihoods: dict[str, float] = None,
 
     history_entry = {
         "date": _now_iso()[:10],
+        "timestamp": _now_iso(),
         "posteriors": dict(computed),
         "priors": priors,
-        "updateMethod": "bayesian_update",
+        "updateMethod": "bayesian_update_indicator",
+        "provenance": _provenance,
+        "indicatorId": indicator_id,
         "evidenceRefs": evidence_refs or [],
         "likelihoods": likelihoods,
         "note": reason,
         "dominantHypothesisStable": dominant_stable,
         "sensitivityFlag": sensitivity_flag,
+        "lrSource": {
+            "lens": _resolved_lens,
+            "lensSetAt": _lens_set_at,
+            "source": _lens_source,
+        },
     }
+    if legacy_unstamped:
+        history_entry["legacyUnstamped"] = True
     if computed_lo is not None:
         history_entry["posteriorRangeLo"] = computed_lo
         history_entry["posteriorRangeHi"] = computed_hi
@@ -1147,6 +1913,159 @@ def hold_posteriors(topic: dict, reason: str = "No new indicators") -> dict:
         "provenance": "DERIVED",
         "posteriorImpact": "NONE",
     })
+    return topic
+
+
+VALID_LENSES = {"GREEN", "AMBER", "BLUE", "RED", "VIOLET", "OCHRE", "OPERATOR_JUDGMENT"}
+
+
+def reset_to_design_priors(topic: dict) -> dict:
+    """
+    Return an in-memory copy of `topic` with posteriors reset to design priors
+    and posteriorHistory truncated to a single design-prior entry. Does NOT
+    mutate the input and does NOT save to disk — used for replay scaffolding.
+
+    Indicator state is reset (n_firings=0, status="NOT_FIRED", firedDate=None,
+    firedDates=[]) so the replay can refire indicators chronologically.
+    """
+    import copy as _copy
+    fresh = _copy.deepcopy(topic)
+    history = fresh.get("model", {}).get("posteriorHistory", [])
+    if not history:
+        raise ValueError(
+            f"Topic {fresh.get('meta', {}).get('slug', '?')} has no "
+            f"posteriorHistory; cannot derive design priors."
+        )
+    # First entry holds the design priors. Use extract_posteriors to handle
+    # the legacy {posteriors: {...}} vs flat {H1, H2, ...} formats.
+    h_keys = list(fresh["model"]["hypotheses"].keys())
+    design = extract_posteriors(history[0], h_keys)
+    if not design:
+        raise ValueError("Could not extract design priors from history[0].")
+    for k, v in design.items():
+        if k in fresh["model"]["hypotheses"]:
+            fresh["model"]["hypotheses"][k]["posterior"] = v
+    # Truncate history to the design-prior entry, refresh its timestamp.
+    seed_entry = dict(history[0])
+    seed_entry["note"] = "REPLAY SEED — design priors restored"
+    seed_entry["timestamp"] = _now_iso()
+    seed_entry["date"] = _now_iso()[:10]
+    fresh["model"]["posteriorHistory"] = [seed_entry]
+    # Reset indicator state
+    tiers = fresh.get("indicators", {}).get("tiers", {}) or {}
+    for tier_inds in tiers.values():
+        for ind in tier_inds:
+            ind["status"] = "NOT_FIRED"
+            ind["n_firings"] = 0
+            ind["firedDate"] = None
+            ind["firedDates"] = []
+    for ind in fresh.get("indicators", {}).get("anti_indicators", []) or []:
+        ind["status"] = "NOT_FIRED"
+        ind["n_firings"] = 0
+        ind["firedDate"] = None
+        ind["firedDates"] = []
+    return fresh
+
+
+def set_topic_lens(topic: dict, lens: str, reason: str = "") -> dict:
+    """
+    Set the active lens (persona) used to generate likelihood ratios for this
+    topic. Persists in topic.meta.lens with lensSetAt timestamp. Previous lens
+    (if any) is archived to topic.meta.lensHistory with its tenure.
+
+    Per-update Brier attribution reads `lrSource.lens` from each posteriorHistory
+    entry — the lens active at update time, not the topic's current lens.
+
+    `lens` must be one of VALID_LENSES, or empty string / None to clear (which
+    resolves to OPERATOR_JUDGMENT fallback at LR-generation time).
+    """
+    if lens and lens not in VALID_LENSES:
+        raise ValueError(f"Unknown lens {lens!r}. Valid: {sorted(VALID_LENSES)}")
+    meta = topic.setdefault("meta", {})
+    prior_lens = meta.get("lens")
+    prior_set_at = meta.get("lensSetAt")
+    prior_reason = meta.get("lensSetReason", "")
+    now = _now_iso()
+    if prior_lens and prior_lens != lens:
+        history = meta.setdefault("lensHistory", [])
+        history.append({
+            "lens": prior_lens,
+            "setAt": prior_set_at,
+            "removedAt": now,
+            "reason": prior_reason,
+            "removalReason": reason or "",
+        })
+    if lens:
+        meta["lens"] = lens
+        meta["lensSetAt"] = now
+        meta["lensSetReason"] = reason or ""
+    else:
+        meta.pop("lens", None)
+        meta.pop("lensSetAt", None)
+        meta.pop("lensSetReason", None)
+    return topic
+
+
+def compute_alert_fingerprint(alert: dict) -> str | None:
+    """
+    Compute a content fingerprint for an alert, used for versioned suppression.
+
+    For alerts whose substance can change between reports (e.g.
+    none_impact_saturation, where new high-relevance evidence_ids accumulate),
+    the fingerprint captures the suppressible content. If two alerts produce
+    the same signature but different fingerprints, the operator's prior
+    review did not cover the current content and the alert should re-fire.
+
+    Returns None for alerts with no meaningful versioning — those suppress
+    unconditionally on signature match.
+    """
+    if not isinstance(alert, dict):
+        return None
+    sig = alert.get("signature", "")
+    details = alert.get("details") or {}
+    if sig.startswith("none_impact_saturation:"):
+        ids = sorted(str(x) for x in (details.get("evidence_ids") or []))
+        if not ids:
+            return None
+        import hashlib
+        return hashlib.sha1(",".join(ids).encode()).hexdigest()[:16]
+    return None
+
+
+def mark_alert_reviewed(topic: dict, signature: str, reason: str = "",
+                        fingerprint: str | None = None) -> dict:
+    """
+    Suppress a governance alert by adding it to topic.governance.reviewed_alerts.
+
+    Idempotent: re-adding the same signature replaces the prior entry rather
+    than duplicating. The buildActionableAlerts logic (governor.py) skips any
+    alert whose signature is in this list AND whose current fingerprint matches
+    the suppressed fingerprint. If a suppression has no fingerprint, it
+    suppresses unconditionally on signature match.
+
+    fingerprint: pass the result of compute_alert_fingerprint(alert) when
+    suppressing a versioned alert (e.g. none_impact_saturation). If the
+    underlying content changes (new evidence_ids arrive), the alert will
+    re-fire under the same signature with a new fingerprint, signaling the
+    review is stale. Pass None for unconditional suppression.
+
+    The suppression survives save_topic — see the preserved-fields block at
+    the top of save_topic.
+    """
+    if not signature:
+        raise ValueError("signature required")
+    gov = topic.setdefault("governance", {})
+    reviewed = gov.setdefault("reviewed_alerts", [])
+    # Drop any existing entry with the same signature (re-review overrides)
+    reviewed[:] = [r for r in reviewed if r.get("signature") != signature]
+    entry = {
+        "signature": signature,
+        "timestamp": _now_iso(),
+        "reason": reason or "",
+    }
+    if fingerprint is not None:
+        entry["fingerprint"] = fingerprint
+    reviewed.append(entry)
     return topic
 
 
@@ -1527,11 +2446,62 @@ def suggest_likelihoods(topic: dict, fired_indicator_ids: list[str],
     h_keys = list(hypotheses.keys())
     priors = {k: h["posterior"] for k, h in hypotheses.items()}
 
-    # Find indicators by ID
+    # Find indicators by ID — across tiers AND anti_indicators
     all_indicators = {}
     for tier_key, indicators in topic["indicators"]["tiers"].items():
         for ind in indicators:
             all_indicators[ind["id"]] = (ind, tier_key)
+    for ind in topic.get("indicators", {}).get("anti_indicators", []) or []:
+        if isinstance(ind, dict) and ind.get("id"):
+            all_indicators[ind["id"]] = (ind, "anti_indicators")
+
+    # Modern pre-committed-LR path: if every fired indicator has an explicit
+    # likelihoods dict, use those directly without parsing posteriorEffect
+    # strings. Combine across indicators by multiplication (Bayesian
+    # independence assumption — same as multiple bayesian_update calls).
+    # Falls through to legacy pp-shift path if any indicator lacks likelihoods.
+    if (fired_indicator_ids
+            and not override_effects
+            and all(
+                ind_id in all_indicators
+                and all_indicators[ind_id][0].get("likelihoods")
+                for ind_id in fired_indicator_ids
+            )):
+        combined_lrs = {k: 1.0 for k in h_keys}
+        breakdown = []
+        for ind_id in fired_indicator_ids:
+            ind, tier_key = all_indicators[ind_id]
+            ind_lrs = ind["likelihoods"]
+            for k in h_keys:
+                combined_lrs[k] *= ind_lrs.get(k, 1.0)
+            breakdown.append({
+                "id": ind_id,
+                "tier": tier_key,
+                "source": "pre_committed_likelihoods",
+                "likelihoods": ind_lrs,
+            })
+        # Cap each LR at 0.95 max (proportional scale) — same as bayesian_update
+        # gate; mathematical no-op on posterior.
+        lr_max = max(combined_lrs.values()) if combined_lrs else 1.0
+        if lr_max > 0.95:
+            scale = 0.95 / lr_max
+            combined_lrs = {k: round(v * scale, 6) for k, v in combined_lrs.items()}
+        # Compute target posteriors (forward Bayes)
+        unnorm = {k: priors[k] * combined_lrs[k] for k in h_keys}
+        total = sum(unnorm.values())
+        target = ({k: round(v / total, 4) for k, v in unnorm.items()}
+                  if total > 0 else priors)
+        return {
+            "suggested_likelihoods": combined_lrs,
+            "target_posteriors": target,
+            "current_priors": priors,
+            "indicator_breakdown": breakdown,
+            "combined_shifts_pp": None,  # not applicable on this path
+            "unparseable": [],
+            "warnings": [],
+            "ready": True,
+            "_path": "pre_committed_likelihoods",
+        }
 
     indicator_breakdown = []
     combined_shifts = {k: 0.0 for k in h_keys}
@@ -1641,12 +2611,93 @@ def fire_indicator(topic: dict, indicator_id: str,
             break
 
     if not found:
+        for ind in topic.get("indicators", {}).get("anti_indicators", []) or []:
+            if isinstance(ind, dict) and ind.get("id") == indicator_id:
+                ind["status"] = "FIRED"
+                ind["firedDate"] = _now_iso()
+                if note:
+                    ind["note"] = note
+                found = True
+                tier = tier or "anti_indicators"
+                break
+
+    if not found:
         raise ValueError(f"Indicator not found: {indicator_id}")
 
     # Update classification
     topic["meta"]["classification"] = compute_classification(topic)
 
     return topic
+
+
+_CAUSAL_EVENT_WINDOW_DAYS = 5
+
+
+def _causal_event_cluster_size(topic: dict, event_id: str,
+                               window_days: int = _CAUSAL_EVENT_WINDOW_DAYS) -> int:
+    """
+    Count distinct indicator fires (within window) that share this causal_event_id.
+    Returns 0 if no prior fires of the same event in the window.
+    Used to attenuate compound LR effect when multiple indicators trace to the
+    same underlying event (correlation correction).
+    """
+    if not event_id:
+        return 0
+    from datetime import datetime, timezone, timedelta
+    now = datetime.now(timezone.utc)
+    cutoff = now - timedelta(days=window_days)
+    history = topic.get("model", {}).get("posteriorHistory", []) or []
+    # Build lookup: indicator_id -> causal_event_id
+    ind_event = {}
+    for tk in ("tier1_critical", "tier2_strong", "tier3_suggestive"):
+        for ind in topic.get("indicators", {}).get("tiers", {}).get(tk, []):
+            if ind.get("causal_event_id"):
+                ind_event[ind["id"]] = ind["causal_event_id"]
+    for ind in topic.get("indicators", {}).get("anti_indicators", []):
+        if ind.get("causal_event_id"):
+            ind_event[ind["id"]] = ind["causal_event_id"]
+    count = 0
+    seen_ids = set()
+    for entry in history:
+        ts = entry.get("timestamp") or entry.get("date")
+        if not ts:
+            continue
+        try:
+            t_dt = datetime.fromisoformat(str(ts).replace("Z", "+00:00"))
+            if t_dt.tzinfo is None:
+                t_dt = t_dt.replace(tzinfo=timezone.utc)
+        except Exception:
+            continue
+        if t_dt < cutoff:
+            continue
+        ind_id = entry.get("indicatorId")
+        if not ind_id:
+            continue
+        if ind_event.get(ind_id) != event_id:
+            continue
+        if ind_id in seen_ids:
+            continue
+        seen_ids.add(ind_id)
+        count += 1
+    return count
+
+
+def _attenuate_lrs_for_cluster(likelihoods: dict, cluster_prior_count: int) -> dict:
+    """
+    Attenuate likelihoods toward 1.0 based on how many same-event indicators
+    have already fired. The (k+1)th fire of a cluster contributes
+    log-LR / (k+1) — so after k+1 total fires the cumulative log-effect is
+    the harmonic-mean log-LR rather than the sum. This is the "correlated
+    evidence" correction: one underlying event should not produce k
+    independent updates.
+
+    cluster_prior_count = K (number of prior same-event fires already in
+    history). The current fire is the (K+1)th.
+    """
+    if cluster_prior_count <= 0:
+        return dict(likelihoods)
+    factor = 1.0 / (cluster_prior_count + 1)
+    return {k: 1.0 + (v - 1.0) * factor for k, v in likelihoods.items()}
 
 
 def apply_indicator_effect(topic: dict, indicator_id: str,
@@ -1662,6 +2713,13 @@ def apply_indicator_effect(topic: dict, indicator_id: str,
 
     LR decay: LR_effective = LR_base * lr_decay^n_firings
     Phantom precision guard: max(raw_lrs)/min(raw_lrs) > 20 blocks the update.
+
+    Causal de-correlation (NEW): if the indicator declares a causal_event_id
+    and other indicators with the same event_id have fired in the last
+    {_CAUSAL_EVENT_WINDOW_DAYS} days, the LRs are attenuated toward 1.0 by
+    factor 1/(K+1) where K = prior same-event fires in window. This prevents
+    correlated evidence (multiple indicators on one underlying event) from
+    being counted as independent observations.
     """
     # --- Find indicator ---
     ind = None
@@ -1677,6 +2735,9 @@ def apply_indicator_effect(topic: dict, indicator_id: str,
 
     if ind is None:
         raise ValueError(f"Indicator '{indicator_id}' not found in topic")
+    # Note: causal_event_id de-correlation lives in bayesian_update where
+    # the pipeline actually applies updates. apply_indicator_effect just
+    # passes indicator_id forward.
 
     hypotheses = topic["model"]["hypotheses"]
     h_keys = list(hypotheses.keys())
@@ -1764,9 +2825,10 @@ def apply_indicator_effect(topic: dict, indicator_id: str,
                 reason=(f"Indicator {indicator_id} fired "
                         f"(firing #{n_firings + 1}, decay={decay_factor:.3f}): {note}"),
                 evidence_refs=evidence_refs,
+                indicator_id=indicator_id,
             )
         else:
-            # Point likelihoods path (unchanged from before)
+            # Point likelihoods path
             base_lrs = ind["likelihoods"]
             raw_lrs = {k: max(0.0001, base_lrs.get(k, 1.0) * decay_factor) for k in h_keys}
             lr_min = min(raw_lrs.values())
@@ -1777,7 +2839,12 @@ def apply_indicator_effect(topic: dict, indicator_id: str,
                     "exceeds 20 (phantom_precision).",
                     failures=["phantom_precision"], warnings=[],
                 )
-            likelihoods = {k: round(v / lr_max, 6) for k, v in raw_lrs.items()}
+            # Normalize to max=0.95 (not 1.0) — proportional scaling preserves
+            # the posterior, but max=1.0 trips bayesian_update's sanity gate at
+            # >= 0.99. The 0.95 cap keeps us under the threshold while keeping
+            # the most-favored hypothesis at full weight relative to others.
+            scale = 0.95 / lr_max if lr_max > 0 else 1.0
+            likelihoods = {k: round(v * scale, 6) for k, v in raw_lrs.items()}
             ind["n_firings"] = n_firings + 1
             ind["status"] = "FIRED"
             ind["firedDate"] = _now_iso()
@@ -1789,6 +2856,7 @@ def apply_indicator_effect(topic: dict, indicator_id: str,
                 reason=(f"Indicator {indicator_id} fired "
                         f"(firing #{n_firings + 1}, decay={decay_factor:.3f}): {note}"),
                 evidence_refs=evidence_refs,
+                indicator_id=indicator_id,
             )
 
     # --- Path 3: legacy pp-shift fallback ---
@@ -1809,6 +2877,7 @@ def apply_indicator_effect(topic: dict, indicator_id: str,
         topic, result["suggested_likelihoods"],
         reason=f"Indicator {indicator_id} fired (legacy pp path): {note}",
         evidence_refs=evidence_refs,
+        indicator_id=indicator_id,
     )
 
 

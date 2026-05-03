@@ -5,13 +5,16 @@
     "question": "Will US software developer employment (BLS OES SOC 15-1252) decline by >=5% year-over-year in any BLS reporting period between Q1 2026 and Q4 2027?",
     "resolution": "Resolved H1 if BLS OEWS shows >=5% YoY decline in SOC 15-1252 in any period published before 2028-03-01. H2 if 2-5% decline. H3 if -2% to +2%. H4 if >=2% growth. Resolution date: 2027-12-31.",
     "created": "",
-    "lastUpdated": "2026-04-22T05:19:57+00:00",
+    "lastUpdated": "2026-04-29T02:30:58+00:00",
     "status": "ACTIVE",
     "dayCount": 0,
     "startDate": "2026-04-21",
     "classification": "CALIBRATION",
     "topicType": "conflict",
-    "resolutionDate": "2027-12-31"
+    "resolutionDate": "2027-12-31",
+    "lens": "GREEN",
+    "lensSetAt": "2026-04-26T21:11:27+00:00",
+    "lensSetReason": ""
   },
   "tagConfig": {
     "_docs": "LABOR/DATA toward displacement. POLICY neutral.",
@@ -49,32 +52,32 @@
         "label": "Structural displacement: >=5% YoY BLS headcount decline confirmed",
         "midpoint": -7.0,
         "unit": "% YoY change in SOC 15-1252 headcount",
-        "posterior": 0.18,
+        "posterior": 0.2236,
         "description": "AI coding automation crosses the net-destruction threshold. BLS reports >=5% annual headcount decline. Driven by enterprise AI coding tool adoption reducing junior developer hiring and enabling productivity-based headcount freezes."
       },
       "H2": {
         "label": "Measurable contraction 2-5% YoY -- below displacement threshold",
         "midpoint": -3.5,
         "unit": "% YoY change in SOC 15-1252 headcount",
-        "posterior": 0.3,
+        "posterior": 0.7664,
         "description": "Meaningful headcount reduction below 5% threshold. AI tools reduce junior/mid hiring while senior roles stay stable. Adjacent AI-ops roles offset some losses."
       },
       "H3": {
         "label": "Flat labor market -2% to +2% -- AI augments without net displacement",
         "midpoint": 0.5,
         "unit": "% YoY change in SOC 15-1252 headcount",
-        "posterior": 0.32,
+        "posterior": 0.005,
         "description": "AI increases developer productivity but demand grows to match. New developer-adjacent roles absorb displaced workers. BLS net headcount stays flat."
       },
       "H4": {
         "label": "Net growth >=2% YoY -- AI expands developer demand",
         "midpoint": 4.0,
         "unit": "% YoY change in SOC 15-1252 headcount",
-        "posterior": 0.2,
+        "posterior": 0.005,
         "description": "AI lowers development costs, expanding addressable market. Historical pattern: productivity tools create more jobs than they eliminate. BLS shows continued growth."
       }
     },
-    "expectedValue": -0.46,
+    "expectedValue": -4.23,
     "expectedUnit": "weeks",
     "posteriorHistory": [
       {
@@ -83,7 +86,337 @@
         "H1": 0.18,
         "H2": 0.3,
         "H3": 0.32,
-        "H4": 0.2
+        "H4": 0.2,
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        }
+      },
+      {
+        "date": "2026-04-24",
+        "posteriors": {
+          "H1": 0.1933,
+          "H2": 0.4601,
+          "H3": 0.2699,
+          "H4": 0.0767
+        },
+        "priors": {
+          "H1": 0.18,
+          "H2": 0.3,
+          "H3": 0.32,
+          "H4": 0.2
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_002"
+        ],
+        "likelihoods": {
+          "H1": 0.28,
+          "H2": 0.4,
+          "H3": 0.22,
+          "H4": 0.1
+        },
+        "note": "Large AI-attributed layoffs push toward H1/H2 contraction scenarios; rehiring countertrend keeps H3 plausible but weakened.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "turningPoint": {
+          "type": "LEADING_CHANGED",
+          "from": "H3",
+          "to": "H2",
+          "fromProb": 0.32,
+          "toProb": 0.4601
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-24",
+        "posteriors": {
+          "H1": 0.2121,
+          "H2": 0.649,
+          "H3": 0.1269,
+          "H4": 0.012
+        },
+        "priors": {
+          "H1": 0.1933,
+          "H2": 0.4601,
+          "H3": 0.2699,
+          "H4": 0.0767
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_003"
+        ],
+        "likelihoods": {
+          "H1": 0.35,
+          "H2": 0.45,
+          "H3": 0.15,
+          "H4": 0.05
+        },
+        "note": "Q1 layoff rate annualizes to consistent with 3-5% YoY contraction band -- supports H2 measurable contraction with upside risk to H1.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "turningPoint": {
+          "type": "THRESHOLD_CROSSED",
+          "hypothesis": "H2",
+          "from": 0.4601,
+          "to": 0.649
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-24",
+        "posteriors": {
+          "H1": 0.0816,
+          "H2": 0.7494,
+          "H3": 0.1628,
+          "H4": 0.0062
+        },
+        "priors": {
+          "H1": 0.2121,
+          "H2": 0.649,
+          "H3": 0.1269,
+          "H4": 0.012
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_004"
+        ],
+        "likelihoods": {
+          "H1": 0.3,
+          "H2": 0.9,
+          "H3": 1.0,
+          "H4": 0.4
+        },
+        "note": "Aggregate SWE headcount not in measurable 5%+ contraction; entry-level squeeze with net growth consistent with flat-to-modest-contraction bands.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-25",
+        "posteriors": {
+          "H1": 0.1395,
+          "H2": 0.815,
+          "H3": 0.0405,
+          "H4": 0.005
+        },
+        "priors": {
+          "H1": 0.0816,
+          "H2": 0.7494,
+          "H3": 0.1628,
+          "H4": 0.0062
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_005"
+        ],
+        "likelihoods": {
+          "H1": 0.55,
+          "H2": 0.35,
+          "H3": 0.08,
+          "H4": 0.02
+        },
+        "note": "Concentrated AI-attributed cuts at scale strengthen H1 (>=5% structural displacement) significantly; flat market (H3) and net growth (H4) become much less likely.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "turningPoint": {
+          "type": "BRANCH_DEATH",
+          "hypothesis": "H4",
+          "lastPosterior": 0.005
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-25",
+        "posteriors": {
+          "H1": 0.1736,
+          "H2": 0.8114,
+          "H3": 0.0101,
+          "H4": 0.005
+        },
+        "priors": {
+          "H1": 0.1395,
+          "H2": 0.815,
+          "H3": 0.0405,
+          "H4": 0.005
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_006"
+        ],
+        "likelihoods": {
+          "H1": 1.0,
+          "H2": 0.8,
+          "H3": 0.2,
+          "H4": 0.05
+        },
+        "note": "Aggregate tech layoffs with explicit AI attribution at scale push the distribution upward from H2 toward the >=5% YoY structural-displacement threshold (H1) — though developer-specific BLS data has not yet confirmed.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-26",
+        "posteriors": {
+          "H1": 0.1873,
+          "H2": 0.8027,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "priors": {
+          "H1": 0.1736,
+          "H2": 0.8114,
+          "H3": 0.0101,
+          "H4": 0.005
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_007"
+        ],
+        "likelihoods": {
+          "H1": 0.6,
+          "H2": 0.55,
+          "H3": 0.05,
+          "H4": 0.02
+        },
+        "note": "Tech unemp 5.8% + 78-90k Q1 layoffs with material AI attribution upweight H1 against H2 (bar is 5% YoY BLS headcount; awaiting BLS confirmation).",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "turningPoint": {
+          "type": "BRANCH_DEATH",
+          "hypothesis": "H3",
+          "lastPosterior": 0.005
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-26",
+        "posteriors": {
+          "H1": 0.2236,
+          "H2": 0.7664,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "priors": {
+          "H1": 0.1873,
+          "H2": 0.8027,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_008"
+        ],
+        "likelihoods": {
+          "H1": 1.0,
+          "H2": 0.8,
+          "H3": 0.3,
+          "H4": 0.1
+        },
+        "note": "Large AI-attributed cuts in Q1 lift probability of >=5% YoY BLS displacement, but attribution-noise keeps H2 alive.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
       }
     ]
   },
@@ -377,6 +710,210 @@
       "ledger": "DECISION",
       "claimState": "SUPPORTED",
       "effectiveWeight": 1.0
+    },
+    {
+      "id": "ev_002",
+      "time": "2026-04-24T02:25:41+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "ECON"
+      ],
+      "text": "Tech industry laid off ~78,557 workers Jan 1 to April 2026, with 47.9% of cuts explicitly attributed to AI/workflow automation; countertrend of companies quietly rehiring senior engineers; HBR notes layoffs based on AI potential not performance.",
+      "provenance": "OBSERVED",
+      "source": "Tom's Hardware / HBR",
+      "posteriorImpact": "NONE",
+      "url": "https://www.tomshardware.com/tech-industry/tech-industry-lays-off-nearly-80-000-employees-in-the-first-quarter-of-2026-almost-50-percent-of-affected-positions-cut-due-to-ai",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-24T02:25:41+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Large AI-attributed layoffs push toward H1/H2 contraction scenarios; rehiring countertrend keeps H3 plausible but weakened.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_003",
+      "time": "2026-04-24T13:49:15+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "ECON",
+        "AI"
+      ],
+      "text": "Q1 2026 tech layoffs: 78,557 positions (76%+ US). ~47.9% cite AI automation as primary or contributing factor. Oracle announced 20-30k cuts; Amazon 16k as part of AI restructure. Roles cut skew toward repetitive/process-heavy developer-adjacent functions. Senior+AI-fluent engineers earning premiums; juniors and mid-skill facing structural displacement.",
+      "provenance": "OBSERVED",
+      "source": "Tom's Hardware / InformationWeek",
+      "posteriorImpact": "NONE",
+      "url": "https://www.tomshardware.com/tech-industry/tech-industry-lays-off-nearly-80-000-employees-in-the-first-quarter-of-2026-almost-50-percent-of-affected-positions-cut-due-to-ai",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-24T13:49:15+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Q1 layoff rate annualizes to consistent with 3-5% YoY contraction band -- supports H2 measurable contraction with upside risk to H1.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_004",
+      "time": "2026-04-24T19:30:14+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "AI",
+        "LABOR"
+      ],
+      "text": "Indeed SWE postings up 11% YoY (faster than overall); but software developer employment age 22-25 down ~20% from late-2022 peak (Stack Overflow / Harvard). Net: no 5%+ aggregate BLS YoY decline observed.",
+      "provenance": "OBSERVED",
+      "source": "CNN Business / Stack Overflow",
+      "posteriorImpact": "NONE",
+      "url": "https://www.cnn.com/2026/04/08/tech/ai-software-developer-jobs",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-24T19:30:14+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Aggregate SWE headcount not in measurable 5%+ contraction; entry-level squeeze with net growth consistent with flat-to-modest-contraction bands.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_005",
+      "time": "2026-04-25T13:19:54+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "AI",
+        "ECON"
+      ],
+      "text": "Q1 2026: tech industry layoffs ~78,557 (47.9% AI-attributed per Toms Hardware/Crunchbase); Block 4,000 cuts (largest single AI-attributed action), Meta 8,000 (10% global workforce, effective May 20), Oracle 10,000-30,000. Median time-to-reemployment up to 4.7mo from 3.2mo in 2024.",
+      "provenance": "OBSERVED",
+      "source": "Tom's Hardware / Crunchbase / CNBC",
+      "posteriorImpact": "NONE",
+      "url": "https://www.tomshardware.com/tech-industry/tech-industry-lays-off-nearly-80-000-employees-in-the-first-quarter-of-2026-almost-50-percent-of-affected-positions-cut-due-to-ai",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-25T13:19:54+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-25T13:19:54+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Concentrated AI-attributed cuts at scale strengthen H1 (>=5% structural displacement) significantly; flat market (H3) and net growth (H4) become much less likely.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_006",
+      "time": "2026-04-25T14:24:50+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "ECON"
+      ],
+      "text": "Q1 2026 tech layoffs: 78,557 workers cut Jan 1-Apr 1, ~48% (~37,700) attributed to AI/automation. April announcements: Meta 8,000 cuts (~10% of workforce); Microsoft ~12,000; Oracle 10,000-30,000. Cumulative 150,000+ tech jobs cut YTD across 500+ companies.",
+      "provenance": "OBSERVED",
+      "source": "Tom's Hardware, CNBC, Crunchbase News",
+      "posteriorImpact": "NONE",
+      "url": "https://www.tomshardware.com/tech-industry/tech-industry-lays-off-nearly-80-000-employees-in-the-first-quarter-of-2026-almost-50-percent-of-affected-positions-cut-due-to-ai",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-25T14:24:50+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_007",
+      "time": "2026-04-26T16:59:07+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "LABOR",
+        "AI"
+      ],
+      "text": "Q1 2026: 78,000-90,000 tech sector layoffs globally (largest quarterly total since early 2024); Challenger attributes ~25% of March cuts (15,341) to AI/automation while industry trackers cite 47.9% across full Q1. Tech-sector unemployment 5.8% (highest since 2001-02 dot-com bust). Median time-to-reemployment 4.7 months (up from 3.2 in 2024). BLS still publishes 2026-Q1 employment for software developers in mid-May.",
+      "provenance": "OBSERVED",
+      "source": "Tom's Hardware / Challenger / Crunchbase / Fortune",
+      "posteriorImpact": "NONE",
+      "url": "https://www.tomshardware.com/tech-industry/tech-industry-lays-off-nearly-80-000-employees-in-the-first-quarter-of-2026-almost-50-percent-of-affected-positions-cut-due-to-ai",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.3693
+    },
+    {
+      "time": "2026-04-26T16:59:07+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_008",
+      "time": "2026-04-26T19:27:11+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "LABOR",
+        "AI"
+      ],
+      "text": "Q1 2026: 78,557 tech-industry layoffs reported (Tom's Hardware / Nikkei / Vucense), of which ~37,638 (47.9%) attributed by employers to AI/automation. Bifurcated labor market — senior+AI-fluent engineers earn premium; junior/mid roles face structural displacement. Caveat: 59% of hiring managers admit AI-attribution is partly narrative cover.",
+      "provenance": "OBSERVED",
+      "source": "Tom's Hardware / Nikkei Asia / HBR",
+      "posteriorImpact": "NONE",
+      "url": "https://www.tomshardware.com/tech-industry/tech-industry-lays-off-nearly-80-000-employees-in-the-first-quarter-of-2026-almost-50-percent-of-affected-positions-cut-due-to-ai",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.3693
+    },
+    {
+      "time": "2026-04-26T19:27:11+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
     }
   ],
   "dataFeeds": {
@@ -407,36 +944,38 @@
       {
         "slug": "calibration-llm-phd-2027",
         "assumptions": {
-          "H1": 0.005,
-          "H2": 0.9458,
-          "H3": 0.0442,
+          "H1": 0.1713,
+          "H2": 0.7323,
+          "H3": 0.0914,
           "H4": 0.005
         },
         "tolerance": 0.12,
-        "reason": "G3/G4 capability significantly accelerates coding automation. If llm-phd H1/H2 shift, displacement priors should be recalibrated upward."
+        "reason": "G3/G4 capability significantly accelerates coding automation. If llm-phd H1/H2 shift, displacement priors should be recalibrated upward.",
+        "lastRefreshed": "2026-04-24",
+        "refreshNote": "Drift review 2026-04-24: upstream G4 share rose (0.005->0.1713), G3 share fell (0.9458->0.7323). Combined G3-or-better ~0.90 (marginally down), but mass shifted upward into G4 -- consistent with the causal story that more capability amplifies displacement risk. Downstream has already moved toward H1/H2 via direct layoff evidence (ev_002, ev_003); no contradiction. Dependency retained, snapshot refreshed to current upstream posteriors. Tolerance unchanged (0.12)."
       }
     ]
   },
   "governance": {
     "health": "DEGRADED",
     "issues": [
-      "Near-maximum uncertainty — model is not discriminating",
-      "Stale dependency: calibration-llm-phd-2027.H1 assumed=0.005, actual=0.18, drift=17.50%",
-      "Stale dependency: calibration-llm-phd-2027.H2 assumed=0.9458, actual=0.38, drift=56.58%",
-      "Stale dependency: calibration-llm-phd-2027.H3 assumed=0.0442, actual=0.32, drift=27.58%"
+      "Majority stale evidence (11/20)",
+      "Stale dependency: calibration-llm-phd-2027.H1 assumed=0.1713, actual=0.0067, drift=16.46%",
+      "Stale dependency: calibration-llm-phd-2027.H2 assumed=0.7323, actual=0.98, drift=24.77%",
+      "Downstream alert: calibration-ai-workweek-2030 has 3 stale assumption(s) from this topic"
     ],
     "rt": {
       "rt": 0.0,
       "regime": "SAFE",
       "worst_hypothesis": "H1"
     },
-    "entropy": 1.9568,
+    "entropy": 0.8538,
     "maxEntropy": 2.0,
-    "uncertaintyRatio": 0.9784,
+    "uncertaintyRatio": 0.4269,
     "evidenceFreshness": {
-      "fresh": 5,
-      "stale": 0,
-      "total": 5
+      "fresh": 9,
+      "stale": 11,
+      "total": 20
     },
     "hypothesisAdmissibility": {
       "H1": "ADMISSIBLE",
@@ -445,38 +984,55 @@
       "H4": "ADMISSIBLE"
     },
     "klFromPrior": {
-      "kl_divergence": 0.0,
-      "interpretation": "MODERATE"
+      "kl_divergence": 0.7281,
+      "interpretation": "WELL_EVIDENCED"
     },
-    "lastComputed": "2026-04-22T05:19:57+00:00",
-    "staleDependencies": 3,
+    "lastComputed": "2026-04-29T02:30:58+00:00",
+    "staleDependencies": 2,
     "staleDependencyDetails": [
       {
         "upstream_slug": "calibration-llm-phd-2027",
         "hypothesis": "H1",
-        "assumed": 0.005,
-        "actual": 0.18,
-        "drift": 0.175,
+        "assumed": 0.1713,
+        "actual": 0.0067,
+        "drift": 0.1646,
         "tolerance": 0.12,
         "stale": true
       },
       {
         "upstream_slug": "calibration-llm-phd-2027",
         "hypothesis": "H2",
-        "assumed": 0.9458,
-        "actual": 0.38,
-        "drift": 0.5658,
+        "assumed": 0.7323,
+        "actual": 0.98,
+        "drift": 0.2477,
         "tolerance": 0.12,
         "stale": true
-      },
+      }
+    ],
+    "downstreamAlerts": [
       {
-        "upstream_slug": "calibration-llm-phd-2027",
-        "hypothesis": "H3",
-        "assumed": 0.0442,
-        "actual": 0.32,
-        "drift": 0.2758,
-        "tolerance": 0.12,
-        "stale": true
+        "downstream_slug": "calibration-ai-workweek-2030",
+        "downstream_title": "AI Agents and Average Work Week Reduction by 2030",
+        "stale_assumptions": [
+          {
+            "hypothesis": "H2",
+            "assumed": 0.3,
+            "actual": 0.7664,
+            "drift": 0.4664
+          },
+          {
+            "hypothesis": "H3",
+            "assumed": 0.32,
+            "actual": 0.005,
+            "drift": 0.315
+          },
+          {
+            "hypothesis": "H4",
+            "assumed": 0.2,
+            "actual": 0.005,
+            "drift": 0.195
+          }
+        ]
       }
     ],
     "calibrationHealth": "ACCEPTABLE",
@@ -504,7 +1060,7 @@
         }
       },
       "indistinguishable": [],
-      "lastChecked": "2026-04-22T05:19:57+00:00"
+      "lastChecked": "2026-04-29T02:30:58+00:00"
     }
   },
   "predictionScoring": {
@@ -531,6 +1087,160 @@
           "H4": 0.1778
         },
         "entropy": 1.7323
+      },
+      {
+        "timestamp": "2026-04-24T02:25:41+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.1933,
+          "H2": 0.4601,
+          "H3": 0.2699,
+          "H4": 0.0767
+        },
+        "entropy": 1.7678
+      },
+      {
+        "timestamp": "2026-04-24T02:25:41+00:00",
+        "trigger": "pipeline:ev_002",
+        "posteriors": {
+          "H1": 0.1933,
+          "H2": 0.4601,
+          "H3": 0.2699,
+          "H4": 0.0767
+        },
+        "entropy": 1.7678
+      },
+      {
+        "timestamp": "2026-04-24T13:49:15+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.2121,
+          "H2": 0.649,
+          "H3": 0.1269,
+          "H4": 0.012
+        },
+        "entropy": 1.3338
+      },
+      {
+        "timestamp": "2026-04-24T13:49:15+00:00",
+        "trigger": "pipeline:ev_003",
+        "posteriors": {
+          "H1": 0.2121,
+          "H2": 0.649,
+          "H3": 0.1269,
+          "H4": 0.012
+        },
+        "entropy": 1.3338
+      },
+      {
+        "timestamp": "2026-04-24T19:30:14+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0816,
+          "H2": 0.7494,
+          "H3": 0.1628,
+          "H4": 0.0062
+        },
+        "entropy": 1.0787
+      },
+      {
+        "timestamp": "2026-04-24T19:30:14+00:00",
+        "trigger": "pipeline:ev_004",
+        "posteriors": {
+          "H1": 0.0816,
+          "H2": 0.7494,
+          "H3": 0.1628,
+          "H4": 0.0062
+        },
+        "entropy": 1.0787
+      },
+      {
+        "timestamp": "2026-04-25T13:19:54+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.1395,
+          "H2": 0.815,
+          "H3": 0.0405,
+          "H4": 0.005
+        },
+        "entropy": 0.8625
+      },
+      {
+        "timestamp": "2026-04-25T13:19:54+00:00",
+        "trigger": "pipeline:ev_005",
+        "posteriors": {
+          "H1": 0.1395,
+          "H2": 0.815,
+          "H3": 0.0405,
+          "H4": 0.005
+        },
+        "entropy": 0.8625
+      },
+      {
+        "timestamp": "2026-04-25T14:24:50+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.1736,
+          "H2": 0.8114,
+          "H3": 0.0101,
+          "H4": 0.005
+        },
+        "entropy": 0.7884
+      },
+      {
+        "timestamp": "2026-04-25T14:24:50+00:00",
+        "trigger": "pipeline:ev_006",
+        "posteriors": {
+          "H1": 0.1736,
+          "H2": 0.8114,
+          "H3": 0.0101,
+          "H4": 0.005
+        },
+        "entropy": 0.7884
+      },
+      {
+        "timestamp": "2026-04-26T16:59:07+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.1873,
+          "H2": 0.8027,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "entropy": 0.7836
+      },
+      {
+        "timestamp": "2026-04-26T16:59:07+00:00",
+        "trigger": "pipeline:ev_007",
+        "posteriors": {
+          "H1": 0.1873,
+          "H2": 0.8027,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "entropy": 0.7836
+      },
+      {
+        "timestamp": "2026-04-26T19:27:11+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.2236,
+          "H2": 0.7664,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "entropy": 0.8538
+      },
+      {
+        "timestamp": "2026-04-26T19:27:11+00:00",
+        "trigger": "pipeline:ev_008",
+        "posteriors": {
+          "H1": 0.2236,
+          "H2": 0.7664,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "entropy": 0.8538
       }
     ],
     "outcomes": [],
@@ -538,17 +1248,563 @@
   },
   "contradictionTracker": {
     "unresolved": [],
-    "resolved": []
+    "resolved": [
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-21T05:34:26+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: 30% listings growth and IBM hiring ramp support H4 (net growth) or H3 (flat). But 52K layoffs (half AI-attributed) introduce H2 contraction signal. Net: H3 (flat) is most consistent with mixed job creation and layoff data. No BLS official YoY headcount confirmed yet.",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "Tech industry laid off ~78,557 workers Jan 1 to April 2026, with 47.9% of cuts explicitly attributed to AI/workflow automation; countertrend of companies quietly rehiring senior engineers; HBR notes layoffs based on AI potential not performance.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: attributed, layoffs",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-21T05:34:26+00:00",
+        "entry_a_text": "Software engineer job listings up 30% in 2026 with 67,000+ openings tracked, the highest demand in 3 years. However, 52,000 tech layoffs in Q1 2026 with ~half attributed to AI. BLS projections show 15% developer employment growth by 2034. IBM tripling US entry-level hiring. Indeed listings for software engineers up 11% annually. Net market is complex: AI both eliminating and creating roles.",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "Tech industry laid off ~78,557 workers Jan 1 to April 2026, with 47.9% of cuts explicitly attributed to AI/workflow automation; countertrend of companies quietly rehiring senior engineers; HBR notes layoffs based on AI potential not performance.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: attributed, engineers, layoffs, tech",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "Tech industry laid off ~78,557 workers Jan 1 to April 2026, with 47.9% of cuts explicitly attributed to AI/workflow automation; countertrend of companies quietly rehiring senior engineers; HBR notes layoffs based on AI potential not performance.",
+        "entry_b_time": "2026-04-24T13:49:15+00:00",
+        "entry_b_text": "Q1 2026 tech layoffs: 78,557 positions (76%+ US). ~47.9% cite AI automation as primary or contributing factor. Oracle announced 20-30k cuts; Amazon 16k as part of AI restructure. Roles cut skew toward repetitive/process-heavy developer-adjacent functions. Senior+AI-fluent engineers earning premiums; juniors and mid-skill facing structural displacement.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: automation, cuts, engineers, layoffs, senior",
+        "detected": "2026-04-24T13:49:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-22T01:00:36+00:00",
+        "entry_a_text": "REPLAY COMPLETE: 0 indicators applied, 0 skipped. Final posteriors: {'H1': 0.18, 'H2': 0.3, 'H3': 0.32, 'H4': 0.2}. Indicator firedDates restored to originals for audit.",
+        "entry_b_time": "2026-04-24T13:49:15+00:00",
+        "entry_b_text": "Q1 2026 tech layoffs: 78,557 positions (76%+ US). ~47.9% cite AI automation as primary or contributing factor. Oracle announced 20-30k cuts; Amazon 16k as part of AI restructure. Roles cut skew toward repetitive/process-heavy developer-adjacent functions. Senior+AI-fluent engineers earning premiums; juniors and mid-skill facing structural displacement.",
+        "reason": "Numeric divergence 99.6% on metric (context: .): new=76.0, existing=0.32, threshold=10%",
+        "detected": "2026-04-24T13:49:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T05:34:26+00:00",
+        "entry_a_text": "Software engineer job listings up 30% in 2026 with 67,000+ openings tracked, the highest demand in 3 years. However, 52,000 tech layoffs in Q1 2026 with ~half attributed to AI. BLS projections show 15% developer employment growth by 2034. IBM tripling US entry-level hiring. Indeed listings for software engineers up 11% annually. Net market is complex: AI both eliminating and creating roles.",
+        "entry_b_time": "2026-04-24T13:49:15+00:00",
+        "entry_b_text": "Q1 2026 tech layoffs: 78,557 positions (76%+ US). ~47.9% cite AI automation as primary or contributing factor. Oracle announced 20-30k cuts; Amazon 16k as part of AI restructure. Roles cut skew toward repetitive/process-heavy developer-adjacent functions. Senior+AI-fluent engineers earning premiums; juniors and mid-skill facing structural displacement.",
+        "reason": "Numeric divergence 97.4% on metric (context: layoffs, tech): new=2026.0, existing=52.0, threshold=10%",
+        "detected": "2026-04-24T13:49:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:15+00:00",
+        "entry_a_text": "Q1 2026 tech layoffs: 78,557 positions (76%+ US). ~47.9% cite AI automation as primary or contributing factor. Oracle announced 20-30k cuts; Amazon 16k as part of AI restructure. Roles cut skew toward repetitive/process-heavy developer-adjacent functions. Senior+AI-fluent engineers earning premiums; juniors and mid-skill facing structural displacement.",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "Indeed SWE postings up 11% YoY (faster than overall); but software developer employment age 22-25 down ~20% from late-2022 peak (Stack Overflow / Harvard). Net: no 5%+ aggregate BLS YoY decline observed.",
+        "reason": "Numeric divergence 93.4% on metric (context: .): new=5.0, existing=76.0, threshold=10%",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-22T01:00:36+00:00",
+        "entry_a_text": "REPLAY COMPLETE: 0 indicators applied, 0 skipped. Final posteriors: {'H1': 0.18, 'H2': 0.3, 'H3': 0.32, 'H4': 0.2}. Indicator firedDates restored to originals for audit.",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "Indeed SWE postings up 11% YoY (faster than overall); but software developer employment age 22-25 down ~20% from late-2022 peak (Stack Overflow / Harvard). Net: no 5%+ aggregate BLS YoY decline observed.",
+        "reason": "Numeric divergence 93.6% on metric (context: .): new=5.0, existing=0.32, threshold=10%",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-21T05:34:26+00:00",
+        "entry_a_text": "Software engineer job listings up 30% in 2026 with 67,000+ openings tracked, the highest demand in 3 years. However, 52,000 tech layoffs in Q1 2026 with ~half attributed to AI. BLS projections show 15% developer employment growth by 2034. IBM tripling US entry-level hiring. Indeed listings for software engineers up 11% annually. Net market is complex: AI both eliminating and creating roles.",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "Indeed SWE postings up 11% YoY (faster than overall); but software developer employment age 22-25 down ~20% from late-2022 peak (Stack Overflow / Harvard). Net: no 5%+ aggregate BLS YoY decline observed.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: bls, developer, employment, indeed, net",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T19:30:14+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Aggregate SWE headcount not in measurable 5%+ contraction; entry-level squeeze with net growth consistent with flat-to-modest-contraction bands.",
+        "entry_b_time": "2026-04-25T13:19:54+00:00",
+        "entry_b_text": "Q1 2026: tech industry layoffs ~78,557 (47.9% AI-attributed per Toms Hardware/Crunchbase); Block 4,000 cuts (largest single AI-attributed action), Meta 8,000 (10% global workforce, effective May 20), Oracle 10,000-30,000. Median time-to-reemployment up to 4.7mo from 3.2mo in 2024.",
+        "reason": "Numeric divergence 99.8% on metric (context: in): new=2024.0, existing=5.0, threshold=10%",
+        "detected": "2026-04-25T13:19:54Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:54Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T19:30:14+00:00",
+        "entry_a_text": "Indeed SWE postings up 11% YoY (faster than overall); but software developer employment age 22-25 down ~20% from late-2022 peak (Stack Overflow / Harvard). Net: no 5%+ aggregate BLS YoY decline observed.",
+        "entry_b_time": "2026-04-25T13:19:54+00:00",
+        "entry_b_text": "Q1 2026: tech industry layoffs ~78,557 (47.9% AI-attributed per Toms Hardware/Crunchbase); Block 4,000 cuts (largest single AI-attributed action), Meta 8,000 (10% global workforce, effective May 20), Oracle 10,000-30,000. Median time-to-reemployment up to 4.7mo from 3.2mo in 2024.",
+        "reason": "Numeric divergence 99.0% on metric (context: from): new=2024.0, existing=20.0, threshold=10%",
+        "detected": "2026-04-25T13:19:54Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:54Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:15+00:00",
+        "entry_a_text": "Q1 2026 tech layoffs: 78,557 positions (76%+ US). ~47.9% cite AI automation as primary or contributing factor. Oracle announced 20-30k cuts; Amazon 16k as part of AI restructure. Roles cut skew toward repetitive/process-heavy developer-adjacent functions. Senior+AI-fluent engineers earning premiums; juniors and mid-skill facing structural displacement.",
+        "entry_b_time": "2026-04-25T13:19:54+00:00",
+        "entry_b_text": "Q1 2026: tech industry layoffs ~78,557 (47.9% AI-attributed per Toms Hardware/Crunchbase); Block 4,000 cuts (largest single AI-attributed action), Meta 8,000 (10% global workforce, effective May 20), Oracle 10,000-30,000. Median time-to-reemployment up to 4.7mo from 3.2mo in 2024.",
+        "reason": "Numeric divergence 96.2% on metric (context: layoffs, tech): new=2026.0, existing=78.0, threshold=10%",
+        "detected": "2026-04-25T13:19:54Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:54Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "Tech industry laid off ~78,557 workers Jan 1 to April 2026, with 47.9% of cuts explicitly attributed to AI/workflow automation; countertrend of companies quietly rehiring senior engineers; HBR notes layoffs based on AI potential not performance.",
+        "entry_b_time": "2026-04-25T13:19:54+00:00",
+        "entry_b_text": "Q1 2026: tech industry layoffs ~78,557 (47.9% AI-attributed per Toms Hardware/Crunchbase); Block 4,000 cuts (largest single AI-attributed action), Meta 8,000 (10% global workforce, effective May 20), Oracle 10,000-30,000. Median time-to-reemployment up to 4.7mo from 3.2mo in 2024.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: attributed, cuts, industry, layoffs, tech",
+        "detected": "2026-04-25T13:19:54Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:54Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-21T05:34:26+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: 30% listings growth and IBM hiring ramp support H4 (net growth) or H3 (flat). But 52K layoffs (half AI-attributed) introduce H2 contraction signal. Net: H3 (flat) is most consistent with mixed job creation and layoff data. No BLS official YoY headcount confirmed yet.",
+        "entry_b_time": "2026-04-25T13:19:54+00:00",
+        "entry_b_text": "Q1 2026: tech industry layoffs ~78,557 (47.9% AI-attributed per Toms Hardware/Crunchbase); Block 4,000 cuts (largest single AI-attributed action), Meta 8,000 (10% global workforce, effective May 20), Oracle 10,000-30,000. Median time-to-reemployment up to 4.7mo from 3.2mo in 2024.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: attributed, layoffs",
+        "detected": "2026-04-25T13:19:54Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:54Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T05:34:26+00:00",
+        "entry_a_text": "Software engineer job listings up 30% in 2026 with 67,000+ openings tracked, the highest demand in 3 years. However, 52,000 tech layoffs in Q1 2026 with ~half attributed to AI. BLS projections show 15% developer employment growth by 2034. IBM tripling US entry-level hiring. Indeed listings for software engineers up 11% annually. Net market is complex: AI both eliminating and creating roles.",
+        "entry_b_time": "2026-04-25T13:19:54+00:00",
+        "entry_b_text": "Q1 2026: tech industry layoffs ~78,557 (47.9% AI-attributed per Toms Hardware/Crunchbase); Block 4,000 cuts (largest single AI-attributed action), Meta 8,000 (10% global workforce, effective May 20), Oracle 10,000-30,000. Median time-to-reemployment up to 4.7mo from 3.2mo in 2024.",
+        "reason": "Numeric divergence 97.4% on metric (context: layoffs, tech): new=2026.0, existing=52.0, threshold=10%",
+        "detected": "2026-04-25T13:19:54Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:54Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T13:19:54+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Q1 2026 tech layoffs: 78,557 workers cut Jan 1-Apr 1, ~48% (~37,700) attributed to AI/automation. April announcements: Meta 8,000 cuts (~10% of workforce); Microsoft ~12,000; Oracle 10,000-30,000. Cumulative 150,000+ tech jobs cut YTD across 500+ companies.",
+        "reason": "Numeric divergence 100.0% on metric (context: to): new=37.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T13:19:54+00:00",
+        "entry_a_text": "Q1 2026: tech industry layoffs ~78,557 (47.9% AI-attributed per Toms Hardware/Crunchbase); Block 4,000 cuts (largest single AI-attributed action), Meta 8,000 (10% global workforce, effective May 20), Oracle 10,000-30,000. Median time-to-reemployment up to 4.7mo from 3.2mo in 2024.",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Q1 2026 tech layoffs: 78,557 workers cut Jan 1-Apr 1, ~48% (~37,700) attributed to AI/automation. April announcements: Meta 8,000 cuts (~10% of workforce); Microsoft ~12,000; Oracle 10,000-30,000. Cumulative 150,000+ tech jobs cut YTD across 500+ companies.",
+        "reason": "Numeric divergence 96.2% on metric (context: layoffs, tech): new=2026.0, existing=78.0, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:15+00:00",
+        "entry_a_text": "Q1 2026 tech layoffs: 78,557 positions (76%+ US). ~47.9% cite AI automation as primary or contributing factor. Oracle announced 20-30k cuts; Amazon 16k as part of AI restructure. Roles cut skew toward repetitive/process-heavy developer-adjacent functions. Senior+AI-fluent engineers earning premiums; juniors and mid-skill facing structural displacement.",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Q1 2026 tech layoffs: 78,557 workers cut Jan 1-Apr 1, ~48% (~37,700) attributed to AI/automation. April announcements: Meta 8,000 cuts (~10% of workforce); Microsoft ~12,000; Oracle 10,000-30,000. Cumulative 150,000+ tech jobs cut YTD across 500+ companies.",
+        "reason": "Numeric divergence 96.2% on metric (context: layoffs, tech): new=2026.0, existing=78.0, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "Tech industry laid off ~78,557 workers Jan 1 to April 2026, with 47.9% of cuts explicitly attributed to AI/workflow automation; countertrend of companies quietly rehiring senior engineers; HBR notes layoffs based on AI potential not performance.",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Q1 2026 tech layoffs: 78,557 workers cut Jan 1-Apr 1, ~48% (~37,700) attributed to AI/automation. April announcements: Meta 8,000 cuts (~10% of workforce); Microsoft ~12,000; Oracle 10,000-30,000. Cumulative 150,000+ tech jobs cut YTD across 500+ companies.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: april, attributed, automation, companies, cuts",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-21T05:34:26+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: 30% listings growth and IBM hiring ramp support H4 (net growth) or H3 (flat). But 52K layoffs (half AI-attributed) introduce H2 contraction signal. Net: H3 (flat) is most consistent with mixed job creation and layoff data. No BLS official YoY headcount confirmed yet.",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Q1 2026 tech layoffs: 78,557 workers cut Jan 1-Apr 1, ~48% (~37,700) attributed to AI/automation. April announcements: Meta 8,000 cuts (~10% of workforce); Microsoft ~12,000; Oracle 10,000-30,000. Cumulative 150,000+ tech jobs cut YTD across 500+ companies.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: attributed, layoffs",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T05:34:26+00:00",
+        "entry_a_text": "Software engineer job listings up 30% in 2026 with 67,000+ openings tracked, the highest demand in 3 years. However, 52,000 tech layoffs in Q1 2026 with ~half attributed to AI. BLS projections show 15% developer employment growth by 2034. IBM tripling US entry-level hiring. Indeed listings for software engineers up 11% annually. Net market is complex: AI both eliminating and creating roles.",
+        "entry_b_time": "2026-04-25T14:24:50+00:00",
+        "entry_b_text": "Q1 2026 tech layoffs: 78,557 workers cut Jan 1-Apr 1, ~48% (~37,700) attributed to AI/automation. April announcements: Meta 8,000 cuts (~10% of workforce); Microsoft ~12,000; Oracle 10,000-30,000. Cumulative 150,000+ tech jobs cut YTD across 500+ companies.",
+        "reason": "Numeric divergence 97.4% on metric (context: layoffs, tech): new=2026.0, existing=52.0, threshold=10%",
+        "detected": "2026-04-25T14:24:50Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:50Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T14:24:50+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "Q1 2026: 78,000-90,000 tech sector layoffs globally (largest quarterly total since early 2024); Challenger attributes ~25% of March cuts (15,341) to AI/automation while industry trackers cite 47.9% across full Q1. Tech-sector unemployment 5.8% (highest since 2001-02 dot-com bust). Median time-to-reemployment 4.7 months (up from 3.2 in 2024). BLS still publishes 2026-Q1 employment for software developers in mid-May.",
+        "reason": "Numeric divergence 100.0% on metric (context: to): new=15.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T14:24:50+00:00",
+        "entry_a_text": "Q1 2026 tech layoffs: 78,557 workers cut Jan 1-Apr 1, ~48% (~37,700) attributed to AI/automation. April announcements: Meta 8,000 cuts (~10% of workforce); Microsoft ~12,000; Oracle 10,000-30,000. Cumulative 150,000+ tech jobs cut YTD across 500+ companies.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "Q1 2026: 78,000-90,000 tech sector layoffs globally (largest quarterly total since early 2024); Challenger attributes ~25% of March cuts (15,341) to AI/automation while industry trackers cite 47.9% across full Q1. Tech-sector unemployment 5.8% (highest since 2001-02 dot-com bust). Median time-to-reemployment 4.7 months (up from 3.2 in 2024). BLS still publishes 2026-Q1 employment for software developers in mid-May.",
+        "reason": "Numeric divergence 72.5% on metric (context: 78): new=2026.0, existing=557.0, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T13:19:54+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "Q1 2026: 78,000-90,000 tech sector layoffs globally (largest quarterly total since early 2024); Challenger attributes ~25% of March cuts (15,341) to AI/automation while industry trackers cite 47.9% across full Q1. Tech-sector unemployment 5.8% (highest since 2001-02 dot-com bust). Median time-to-reemployment 4.7 months (up from 3.2 in 2024). BLS still publishes 2026-Q1 employment for software developers in mid-May.",
+        "reason": "Numeric divergence 100.0% on metric (context: to): new=15.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T13:19:54+00:00",
+        "entry_a_text": "Q1 2026: tech industry layoffs ~78,557 (47.9% AI-attributed per Toms Hardware/Crunchbase); Block 4,000 cuts (largest single AI-attributed action), Meta 8,000 (10% global workforce, effective May 20), Oracle 10,000-30,000. Median time-to-reemployment up to 4.7mo from 3.2mo in 2024.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "Q1 2026: 78,000-90,000 tech sector layoffs globally (largest quarterly total since early 2024); Challenger attributes ~25% of March cuts (15,341) to AI/automation while industry trackers cite 47.9% across full Q1. Tech-sector unemployment 5.8% (highest since 2001-02 dot-com bust). Median time-to-reemployment 4.7 months (up from 3.2 in 2024). BLS still publishes 2026-Q1 employment for software developers in mid-May.",
+        "reason": "Numeric divergence 72.5% on metric (context: 78): new=2026.0, existing=557.0, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T19:30:14+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Aggregate SWE headcount not in measurable 5%+ contraction; entry-level squeeze with net growth consistent with flat-to-modest-contraction bands.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "Q1 2026: 78,000-90,000 tech sector layoffs globally (largest quarterly total since early 2024); Challenger attributes ~25% of March cuts (15,341) to AI/automation while industry trackers cite 47.9% across full Q1. Tech-sector unemployment 5.8% (highest since 2001-02 dot-com bust). Median time-to-reemployment 4.7 months (up from 3.2 in 2024). BLS still publishes 2026-Q1 employment for software developers in mid-May.",
+        "reason": "Numeric divergence 36.0% on metric (context: in): new=3.2, existing=5.0, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T19:30:14+00:00",
+        "entry_a_text": "Indeed SWE postings up 11% YoY (faster than overall); but software developer employment age 22-25 down ~20% from late-2022 peak (Stack Overflow / Harvard). Net: no 5%+ aggregate BLS YoY decline observed.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "Q1 2026: 78,000-90,000 tech sector layoffs globally (largest quarterly total since early 2024); Challenger attributes ~25% of March cuts (15,341) to AI/automation while industry trackers cite 47.9% across full Q1. Tech-sector unemployment 5.8% (highest since 2001-02 dot-com bust). Median time-to-reemployment 4.7 months (up from 3.2 in 2024). BLS still publishes 2026-Q1 employment for software developers in mid-May.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: bls, employment, software",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:15+00:00",
+        "entry_a_text": "Q1 2026 tech layoffs: 78,557 positions (76%+ US). ~47.9% cite AI automation as primary or contributing factor. Oracle announced 20-30k cuts; Amazon 16k as part of AI restructure. Roles cut skew toward repetitive/process-heavy developer-adjacent functions. Senior+AI-fluent engineers earning premiums; juniors and mid-skill facing structural displacement.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "Q1 2026: 78,000-90,000 tech sector layoffs globally (largest quarterly total since early 2024); Challenger attributes ~25% of March cuts (15,341) to AI/automation while industry trackers cite 47.9% across full Q1. Tech-sector unemployment 5.8% (highest since 2001-02 dot-com bust). Median time-to-reemployment 4.7 months (up from 3.2 in 2024). BLS still publishes 2026-Q1 employment for software developers in mid-May.",
+        "reason": "Numeric divergence 72.5% on metric (context: 78): new=2026.0, existing=557.0, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "Tech industry laid off ~78,557 workers Jan 1 to April 2026, with 47.9% of cuts explicitly attributed to AI/workflow automation; countertrend of companies quietly rehiring senior engineers; HBR notes layoffs based on AI potential not performance.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "Q1 2026: 78,000-90,000 tech sector layoffs globally (largest quarterly total since early 2024); Challenger attributes ~25% of March cuts (15,341) to AI/automation while industry trackers cite 47.9% across full Q1. Tech-sector unemployment 5.8% (highest since 2001-02 dot-com bust). Median time-to-reemployment 4.7 months (up from 3.2 in 2024). BLS still publishes 2026-Q1 employment for software developers in mid-May.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: automation, cuts, industry, layoffs, tech",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-22T01:00:36+00:00",
+        "entry_a_text": "REPLAY COMPLETE: 0 indicators applied, 0 skipped. Final posteriors: {'H1': 0.18, 'H2': 0.3, 'H3': 0.32, 'H4': 0.2}. Indicator firedDates restored to originals for audit.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "Q1 2026: 78,000-90,000 tech sector layoffs globally (largest quarterly total since early 2024); Challenger attributes ~25% of March cuts (15,341) to AI/automation while industry trackers cite 47.9% across full Q1. Tech-sector unemployment 5.8% (highest since 2001-02 dot-com bust). Median time-to-reemployment 4.7 months (up from 3.2 in 2024). BLS still publishes 2026-Q1 employment for software developers in mid-May.",
+        "reason": "Numeric divergence 93.2% on metric (context: .): new=4.7, existing=0.32, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-21T05:34:26+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: 30% listings growth and IBM hiring ramp support H4 (net growth) or H3 (flat). But 52K layoffs (half AI-attributed) introduce H2 contraction signal. Net: H3 (flat) is most consistent with mixed job creation and layoff data. No BLS official YoY headcount confirmed yet.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "Q1 2026: 78,000-90,000 tech sector layoffs globally (largest quarterly total since early 2024); Challenger attributes ~25% of March cuts (15,341) to AI/automation while industry trackers cite 47.9% across full Q1. Tech-sector unemployment 5.8% (highest since 2001-02 dot-com bust). Median time-to-reemployment 4.7 months (up from 3.2 in 2024). BLS still publishes 2026-Q1 employment for software developers in mid-May.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: bls, layoffs",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T05:34:26+00:00",
+        "entry_a_text": "Software engineer job listings up 30% in 2026 with 67,000+ openings tracked, the highest demand in 3 years. However, 52,000 tech layoffs in Q1 2026 with ~half attributed to AI. BLS projections show 15% developer employment growth by 2034. IBM tripling US entry-level hiring. Indeed listings for software engineers up 11% annually. Net market is complex: AI both eliminating and creating roles.",
+        "entry_b_time": "2026-04-26T16:59:07+00:00",
+        "entry_b_text": "Q1 2026: 78,000-90,000 tech sector layoffs globally (largest quarterly total since early 2024); Challenger attributes ~25% of March cuts (15,341) to AI/automation while industry trackers cite 47.9% across full Q1. Tech-sector unemployment 5.8% (highest since 2001-02 dot-com bust). Median time-to-reemployment 4.7 months (up from 3.2 in 2024). BLS still publishes 2026-Q1 employment for software developers in mid-May.",
+        "reason": "Numeric divergence 96.7% on metric (context: 000): new=2026.0, existing=67.0, threshold=10%",
+        "detected": "2026-04-26T16:59:07Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-26T16:59:07+00:00",
+        "entry_a_text": "Q1 2026: 78,000-90,000 tech sector layoffs globally (largest quarterly total since early 2024); Challenger attributes ~25% of March cuts (15,341) to AI/automation while industry trackers cite 47.9% across full Q1. Tech-sector unemployment 5.8% (highest since 2001-02 dot-com bust). Median time-to-reemployment 4.7 months (up from 3.2 in 2024). BLS still publishes 2026-Q1 employment for software developers in mid-May.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "Q1 2026: 78,557 tech-industry layoffs reported (Tom's Hardware / Nikkei / Vucense), of which ~37,638 (47.9%) attributed by employers to AI/automation. Bifurcated labor market — senior+AI-fluent engineers earn premium; junior/mid roles face structural displacement. Caveat: 59% of hiring managers admit AI-attribution is partly narrative cover.",
+        "reason": "Numeric divergence 96.2% on metric (context: q1): new=2026.0, existing=78.0, threshold=10%",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T14:24:50+00:00",
+        "entry_a_text": "Q1 2026 tech layoffs: 78,557 workers cut Jan 1-Apr 1, ~48% (~37,700) attributed to AI/automation. April announcements: Meta 8,000 cuts (~10% of workforce); Microsoft ~12,000; Oracle 10,000-30,000. Cumulative 150,000+ tech jobs cut YTD across 500+ companies.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "Q1 2026: 78,557 tech-industry layoffs reported (Tom's Hardware / Nikkei / Vucense), of which ~37,638 (47.9%) attributed by employers to AI/automation. Bifurcated labor market — senior+AI-fluent engineers earn premium; junior/mid roles face structural displacement. Caveat: 59% of hiring managers admit AI-attribution is partly narrative cover.",
+        "reason": "Numeric divergence 96.2% on metric (context: 557): new=2026.0, existing=78.0, threshold=10%",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T13:19:54+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Concentrated AI-attributed cuts at scale strengthen H1 (>=5% structural displacement) significantly; flat market (H3) and net growth (H4) become much less likely.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "Q1 2026: 78,557 tech-industry layoffs reported (Tom's Hardware / Nikkei / Vucense), of which ~37,638 (47.9%) attributed by employers to AI/automation. Bifurcated labor market — senior+AI-fluent engineers earn premium; junior/mid roles face structural displacement. Caveat: 59% of hiring managers admit AI-attribution is partly narrative cover.",
+        "reason": "Numeric divergence 91.5% on metric (context: structural): new=59.0, existing=5.0, threshold=10%",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T13:19:54+00:00",
+        "entry_a_text": "Q1 2026: tech industry layoffs ~78,557 (47.9% AI-attributed per Toms Hardware/Crunchbase); Block 4,000 cuts (largest single AI-attributed action), Meta 8,000 (10% global workforce, effective May 20), Oracle 10,000-30,000. Median time-to-reemployment up to 4.7mo from 3.2mo in 2024.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "Q1 2026: 78,557 tech-industry layoffs reported (Tom's Hardware / Nikkei / Vucense), of which ~37,638 (47.9%) attributed by employers to AI/automation. Bifurcated labor market — senior+AI-fluent engineers earn premium; junior/mid roles face structural displacement. Caveat: 59% of hiring managers admit AI-attribution is partly narrative cover.",
+        "reason": "Numeric divergence 96.2% on metric (context: 557): new=2026.0, existing=78.0, threshold=10%",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:15+00:00",
+        "entry_a_text": "Q1 2026 tech layoffs: 78,557 positions (76%+ US). ~47.9% cite AI automation as primary or contributing factor. Oracle announced 20-30k cuts; Amazon 16k as part of AI restructure. Roles cut skew toward repetitive/process-heavy developer-adjacent functions. Senior+AI-fluent engineers earning premiums; juniors and mid-skill facing structural displacement.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "Q1 2026: 78,557 tech-industry layoffs reported (Tom's Hardware / Nikkei / Vucense), of which ~37,638 (47.9%) attributed by employers to AI/automation. Bifurcated labor market — senior+AI-fluent engineers earn premium; junior/mid roles face structural displacement. Caveat: 59% of hiring managers admit AI-attribution is partly narrative cover.",
+        "reason": "Numeric divergence 96.2% on metric (context: 557): new=2026.0, existing=78.0, threshold=10%",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "Tech industry laid off ~78,557 workers Jan 1 to April 2026, with 47.9% of cuts explicitly attributed to AI/workflow automation; countertrend of companies quietly rehiring senior engineers; HBR notes layoffs based on AI potential not performance.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "Q1 2026: 78,557 tech-industry layoffs reported (Tom's Hardware / Nikkei / Vucense), of which ~37,638 (47.9%) attributed by employers to AI/automation. Bifurcated labor market — senior+AI-fluent engineers earn premium; junior/mid roles face structural displacement. Caveat: 59% of hiring managers admit AI-attribution is partly narrative cover.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: attributed, automation, engineers, industry, layoffs",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-21T05:34:26+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: 30% listings growth and IBM hiring ramp support H4 (net growth) or H3 (flat). But 52K layoffs (half AI-attributed) introduce H2 contraction signal. Net: H3 (flat) is most consistent with mixed job creation and layoff data. No BLS official YoY headcount confirmed yet.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "Q1 2026: 78,557 tech-industry layoffs reported (Tom's Hardware / Nikkei / Vucense), of which ~37,638 (47.9%) attributed by employers to AI/automation. Bifurcated labor market — senior+AI-fluent engineers earn premium; junior/mid roles face structural displacement. Caveat: 59% of hiring managers admit AI-attribution is partly narrative cover.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: attributed, hiring, layoffs",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T05:34:26+00:00",
+        "entry_a_text": "Software engineer job listings up 30% in 2026 with 67,000+ openings tracked, the highest demand in 3 years. However, 52,000 tech layoffs in Q1 2026 with ~half attributed to AI. BLS projections show 15% developer employment growth by 2034. IBM tripling US entry-level hiring. Indeed listings for software engineers up 11% annually. Net market is complex: AI both eliminating and creating roles.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "Q1 2026: 78,557 tech-industry layoffs reported (Tom's Hardware / Nikkei / Vucense), of which ~37,638 (47.9%) attributed by employers to AI/automation. Bifurcated labor market — senior+AI-fluent engineers earn premium; junior/mid roles face structural displacement. Caveat: 59% of hiring managers admit AI-attribution is partly narrative cover.",
+        "reason": "Numeric divergence 61.5% on metric (context: 2026): new=78.0, existing=30.0, threshold=10%",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      }
+    ]
   },
   "sourceCalibration": {
-    "ledger": [],
+    "ledger": [
+      {
+        "timestamp": "2026-04-24T02:25:41Z",
+        "evidence_index": 2,
+        "confirming_index": 3,
+        "resolution": "CONFIRMED",
+        "source": "",
+        "confirming_source": "",
+        "trust_delta": 0.05,
+        "original_text_snippet": "LR MIGRATION RESET: posteriors reset to design priors; evidence log preserved.",
+        "confirming_text_snippet": "REPLAY BEGIN: 0 previously-fired indicators will be re-applied chronologically under current LR system. Posteriors reset"
+      },
+      {
+        "timestamp": "2026-04-24T02:25:41Z",
+        "evidence_index": 3,
+        "confirming_index": 4,
+        "resolution": "CONFIRMED",
+        "source": "",
+        "confirming_source": "",
+        "trust_delta": 0.05,
+        "original_text_snippet": "REPLAY BEGIN: 0 previously-fired indicators will be re-applied chronologically under current LR system. Posteriors reset",
+        "confirming_text_snippet": "REPLAY COMPLETE: 0 indicators applied, 0 skipped. Final posteriors: {'H1': 0.18, 'H2': 0.3, 'H3': 0.32, 'H4': 0.2}. Indi"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:50Z",
+        "evidence_index": 5,
+        "confirming_index": 14,
+        "resolution": "REFUTED",
+        "source": "Tom's Hardware / HBR",
+        "confirming_source": "Tom's Hardware, CNBC, Crunchbase News",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Tech industry laid off ~78,557 workers Jan 1 to April 2026, with 47.9% of cuts explicitly attributed to AI/workflow auto",
+        "confirming_text_snippet": "Q1 2026 tech layoffs: 78,557 workers cut Jan 1-Apr 1, ~48% (~37,700) attributed to AI/automation. April announcements: M"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:50Z",
+        "evidence_index": 7,
+        "confirming_index": 14,
+        "resolution": "REFUTED",
+        "source": "Tom's Hardware / InformationWeek",
+        "confirming_source": "Tom's Hardware, CNBC, Crunchbase News",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Q1 2026 tech layoffs: 78,557 positions (76%+ US). ~47.9% cite AI automation as primary or contributing factor. Oracle an",
+        "confirming_text_snippet": "Q1 2026 tech layoffs: 78,557 workers cut Jan 1-Apr 1, ~48% (~37,700) attributed to AI/automation. April announcements: M"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:50Z",
+        "evidence_index": 11,
+        "confirming_index": 14,
+        "resolution": "REFUTED",
+        "source": "Tom's Hardware / Crunchbase / CNBC",
+        "confirming_source": "Tom's Hardware, CNBC, Crunchbase News",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Q1 2026: tech industry layoffs ~78,557 (47.9% AI-attributed per Toms Hardware/Crunchbase); Block 4,000 cuts (largest sin",
+        "confirming_text_snippet": "Q1 2026 tech layoffs: 78,557 workers cut Jan 1-Apr 1, ~48% (~37,700) attributed to AI/automation. April announcements: M"
+      },
+      {
+        "timestamp": "2026-04-26T16:59:07Z",
+        "evidence_index": 14,
+        "confirming_index": 16,
+        "resolution": "REFUTED",
+        "source": "Tom's Hardware, CNBC, Crunchbase News",
+        "confirming_source": "Tom's Hardware / Challenger / Crunchbase / Fortune",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Q1 2026 tech layoffs: 78,557 workers cut Jan 1-Apr 1, ~48% (~37,700) attributed to AI/automation. April announcements: M",
+        "confirming_text_snippet": "Q1 2026: 78,000-90,000 tech sector layoffs globally (largest quarterly total since early 2024); Challenger attributes ~2"
+      }
+    ],
     "effectiveTrust": {
       "CNN Business": 0.5,
       "Final Round AI": 0.5,
       "Metaintro": 0.5,
-      "Murray Resources": 0.5
+      "Murray Resources": 0.5,
+      "HBR": 0.4555,
+      "Tom's Hardware": 0.3693,
+      "InformationWeek": 0.4555,
+      "Stack Overflow": 0.5,
+      "CNBC": 0.6084,
+      "Crunchbase": 0.4555,
+      "Tom's Hardware, CNBC, Crunchbase News": 0.4555,
+      "Challenger": 0.5,
+      "Fortune": 0.7,
+      "Nikkei Asia": 0.5
     },
-    "_last_scan_same_source_skipped": 0
+    "_last_scan_same_source_skipped": 11
   },
   "schemaVersion": 2,
   "migratedAt": "2026-04-21T19:03:40+00:00",

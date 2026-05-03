@@ -13,55 +13,64 @@ the appropriate action. Then process it through the Bayesian pipeline.
 
 DO NOT manually edit JSON files. Use the pipeline.
 
-```python
-from framework.pipeline import process_headline, log_activity
+There are exactly two outcomes per (evidence, topic) pair:
 
-# process_headline does triage + evidence + Bayes + governance in one call.
-# You MUST supply likelihoods for each matched topic to get a Bayesian update.
-# If an indicator fires, likelihoods are derived automatically from its pre-committed effect.
-results = process_headline(
-    headline="headline text here",
-    source="Reuters",
-    likelihoods_by_slug={
-        "topic-slug": {"H1": 0.15, "H2": 0.45, "H3": 0.30, "H4": 0.10}
-    }
+1. **Indicator match** — fire the matching indicator with its pre-committed LRs
+2. **No match** — park the evidence; operator resolves later via `cleanup-indicator-sweep.md`
+
+There is no freeform-LR path. `bayesian_update` requires `indicator_id`.
+
+```python
+from framework.pipeline import process_evidence, log_activity
+
+# Indicator-match path: triage identified an indicator's observable threshold met
+result = process_evidence(
+    slug="topic-slug",
+    entry={"text": "...", "source": "Reuters", "tag": "EVENT"},
+    fired_indicator_id="t2_xxx",  # the matching indicator
 )
+# Indicator fires with pre-committed LRs. Posteriors update.
 
-for res in results:
-    log_activity(res, platform="triage")
+# Park path: no indicator matched at scan time
+result = process_evidence(
+    slug="topic-slug",
+    entry={"text": "...", "source": "Reuters", "tag": "EVENT"},
+    # no fired_indicator_id → evidence parks
+)
+# Evidence logged with posteriorImpact: NONE — flagged for indicator review.
+# Posteriors do NOT update. Topic accumulates parked entries until cleanup.
+
+log_activity(result, platform="triage")
 ```
 
-If you need triage results WITHOUT processing (read-only), use the engine directly:
+### Verifying an indicator match before firing
 
-```python
-from engine import triage_headline
-result = triage_headline("headline text here", source="Reuters")
-# Returns matches with relevance, action, matched_indicators, watchpoints, etc.
-```
+Triage matches on keywords. The indicator's *observable threshold* is a
+specific testable condition (e.g., "core CPI YoY ≥ 3.0% for 2 consecutive
+months"). Before passing `fired_indicator_id`, confirm the threshold is
+actually met. If you're not sure, park instead — the cleanup workflow can
+re-evaluate later with operator judgment.
 
-## Likelihood guidance
+### Subagent-mediated matching (forward-pipeline anti-anchoring)
 
-When supplying `likelihoods_by_slug`, ask: "How likely is this evidence if H_i is true?"
+When processing news headlines across multiple topics in one scan, **do not
+generate match decisions in your own context across all topics in sequence**.
+That's the cross-context anchoring failure mode that pegged 17 topics. Use
+the `Agent` tool to spawn a fresh subagent per (headline, topic) match
+decision, or per topic. The subagent has fresh context, no narrative
+inheritance from prior decisions in the sweep.
 
-- P(E|H) close to 1.0 = this evidence is exactly what you'd expect under H
-- P(E|H) close to 0.0 = this evidence would be very surprising under H
-- All likelihoods must be in (0, 1]. They do NOT need to sum to 1.
-- The pipeline attenuates likelihoods by source trust and claim state weight automatically.
+For multi-topic sweeps, see `skills/news-scan.md` for the orchestration
+pattern.
 
-Example: "3,000 vessels backed up, months to restore traffic"
-- P(E|H1 <6wk) = 0.02 — almost impossible if closure is short
-- P(E|H2 6wk-4mo) = 0.15 — unlikely but possible with fast resolution
-- P(E|H3 4-12mo) = 0.60 — very consistent with extended closure
-- P(E|H4 >12mo) = 0.50 — consistent but not more likely than H3
-
-## Action routing (for reference)
+## Action routing
 
 | Relevance | Action | Pipeline call |
 |-----------|--------|---------------|
 | INDICATOR_MATCH | UPDATE_CYCLE | `process_evidence(slug, entry, fired_indicator_id="t2_xxx")` |
-| TOPIC_RELEVANT | LOG_EVIDENCE | `process_evidence(slug, entry, likelihoods={...})` |
+| TOPIC_RELEVANT | PARK | `process_evidence(slug, entry)` — no fired_indicator_id, evidence parks |
 | TOPIC_RELEVANT | MONITOR | Note it — no pipeline call needed |
-| IRRELEVANT | IGNORE | No action needed |
+| IRRELEVANT | IGNORE | No action needed (cold storage logged automatically) |
 
 ## Constraints
 
@@ -70,3 +79,6 @@ Example: "3,000 vessels backed up, months to restore traffic"
 - If triage returns INDICATOR_MATCH, verify the indicator's observable criteria
   are actually met before passing `fired_indicator_id` to process_evidence.
   Triage matches on keywords, not on verified observations.
+- **Never invent likelihoods.** If no indicator covers the evidence, the
+  correct action is to park, not to commit operator-imagined LRs. Operator
+  resolves the parked queue via `cleanup-indicator-sweep.md`.

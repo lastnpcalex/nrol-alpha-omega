@@ -5,13 +5,16 @@
     "question": "Will AI agents cause average weekly hours worked to decline >=5% on a sustained basis (>=2 consecutive quarters) in any G7 country, as measured by official labor statistics, by December 31, 2030?",
     "resolution": "Resolved H1 if official G7 labor statistics (BLS CPS, ONS LFS, Eurostat LFS, or equivalent) show average weekly hours declining >=5% from 2024 baseline for >=2 consecutive quarters in any G7 country by 2030-12-31. H2 if 2-5% sustained reduction. H3 if flat (-2% to +2%). H4 if average hours increase. Legislated week reductions count only if legislative record cites AI-enabled productivity.",
     "created": "",
-    "lastUpdated": "2026-04-22T05:19:57+00:00",
+    "lastUpdated": "2026-04-29T02:30:58+00:00",
     "status": "ACTIVE",
     "dayCount": 0,
     "startDate": "2026-04-21",
     "classification": "CALIBRATION",
     "topicType": "conflict",
-    "resolutionDate": "2030-12-31"
+    "resolutionDate": "2030-12-31",
+    "lens": "GREEN",
+    "lensSetAt": "2026-04-26T21:21:52+00:00",
+    "lensSetReason": ""
   },
   "tagConfig": {
     "_docs": "LABOR/DATA toward reduction. RHETORIC = opinion about AI freeing time without data.",
@@ -57,32 +60,32 @@
         "label": "Major reduction: >=5% sustained weekly hours decline in >=1 G7 country",
         "midpoint": -7.0,
         "unit": "% change in average weekly hours from 2024 baseline",
-        "posterior": 0.1,
+        "posterior": 0.0067,
         "description": "AI agents reach sufficient autonomy to complete full work tasks independently. Combined with policy response (4-day week legislation) and labor market pressure, official statistics confirm the drop. Historically unprecedented pace of automation-driven leisure gain."
       },
       "H2": {
         "label": "Moderate reduction: 2-5% decline in average hours -- below 5% threshold",
         "midpoint": -3.0,
         "unit": "% change in average weekly hours from 2024 baseline",
-        "posterior": 0.25,
+        "posterior": 0.0067,
         "description": "AI tools measurably reduce workload in knowledge sectors but total hours decline is muted by employer preference for headcount reduction over hours reduction and always-on digital culture. Noticeable trend but below 5% threshold."
       },
       "H3": {
         "label": "Flat outcome: AI increases output not leisure; hours approximately constant",
         "midpoint": 0.5,
         "unit": "% change in average weekly hours from 2024 baseline",
-        "posterior": 0.42,
+        "posterior": 0.98,
         "description": "Productivity gains captured as output growth, not hour reduction. Historical pattern holds: technology increases demand for work rather than reducing it. AI creates new supervision and review tasks absorbing freed time."
       },
       "H4": {
         "label": "Hours increase: AI creates expectation creep and always-on pressure",
         "midpoint": 3.0,
         "unit": "% change in average weekly hours from 2024 baseline",
-        "posterior": 0.23,
+        "posterior": 0.0067,
         "description": "AI tools create perverse incentives. Always-available AI assistants make working outside business hours effortless, raising managerial expectations. Official statistics show modest increase in average hours."
       }
     },
-    "expectedValue": 0,
+    "expectedValue": 0.44,
     "expectedUnit": "weeks",
     "posteriorHistory": [
       {
@@ -91,7 +94,286 @@
         "H1": 0.1,
         "H2": 0.25,
         "H3": 0.42,
-        "H4": 0.23
+        "H4": 0.23,
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        }
+      },
+      {
+        "date": "2026-04-24",
+        "posteriors": {
+          "H1": 0.0623,
+          "H2": 0.2768,
+          "H3": 0.5813,
+          "H4": 0.0796
+        },
+        "priors": {
+          "H1": 0.1,
+          "H2": 0.25,
+          "H3": 0.42,
+          "H4": 0.23
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_001"
+        ],
+        "likelihoods": {
+          "H1": 0.18,
+          "H2": 0.32,
+          "H3": 0.4,
+          "H4": 0.1
+        },
+        "note": "Policy advocacy and pilot success improve H1/H2 odds but no G7 country-level sustained change yet; H3 still most likely.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "turningPoint": {
+          "type": "THRESHOLD_CROSSED",
+          "hypothesis": "H3",
+          "from": 0.42,
+          "to": 0.5813
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-24",
+        "posteriors": {
+          "H1": 0.0067,
+          "H2": 0.1071,
+          "H3": 0.8743,
+          "H4": 0.012
+        },
+        "priors": {
+          "H1": 0.0623,
+          "H2": 0.2768,
+          "H3": 0.5813,
+          "H4": 0.0796
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_002"
+        ],
+        "likelihoods": {
+          "H1": 0.05,
+          "H2": 0.18,
+          "H3": 0.7,
+          "H4": 0.07
+        },
+        "note": "Direct evidence that gains flow to output, not leisure, reinforces H3 flat-hours outcome.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "turningPoint": {
+          "type": "MAJOR_SHIFT",
+          "maxShift": 0.293
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-24",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.0463,
+          "H3": 0.9437,
+          "H4": 0.005
+        },
+        "priors": {
+          "H1": 0.0067,
+          "H2": 0.1071,
+          "H3": 0.8743,
+          "H4": 0.012
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_003"
+        ],
+        "likelihoods": {
+          "H1": 0.1,
+          "H2": 0.4,
+          "H3": 1.0,
+          "H4": 0.2
+        },
+        "note": "Proposals only; no measurable G7 hours decline — status quo flat-outcome most consistent.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "turningPoint": {
+          "type": "BRANCH_DEATH",
+          "hypothesis": "H1",
+          "lastPosterior": 0.005
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-25",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.0648,
+          "H3": 0.9252,
+          "H4": 0.005
+        },
+        "priors": {
+          "H1": 0.005,
+          "H2": 0.0463,
+          "H3": 0.9437,
+          "H4": 0.005
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_004"
+        ],
+        "likelihoods": {
+          "H1": 0.3,
+          "H2": 1.0,
+          "H3": 0.7,
+          "H4": 0.1
+        },
+        "note": "Bottom-up corporate trials are real but not yet visible at G7 country-level aggregate hours data — keeps H3 plausible while H2 mass grows modestly.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-26",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.0144,
+          "H3": 0.9756,
+          "H4": 0.005
+        },
+        "priors": {
+          "H1": 0.005,
+          "H2": 0.0648,
+          "H3": 0.9252,
+          "H4": 0.005
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_005"
+        ],
+        "likelihoods": {
+          "H1": 0.05,
+          "H2": 0.2,
+          "H3": 0.95,
+          "H4": 0.1
+        },
+        "note": "Productivity gains being reinvested into output not hours strongly fits H3 (flat outcome).",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-26",
+        "posteriors": {
+          "H1": 0.0067,
+          "H2": 0.0067,
+          "H3": 0.98,
+          "H4": 0.0067
+        },
+        "priors": {
+          "H1": 0.005,
+          "H2": 0.0144,
+          "H3": 0.9756,
+          "H4": 0.005
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_006"
+        ],
+        "likelihoods": {
+          "H1": 0.05,
+          "H2": 0.1,
+          "H3": 1.0,
+          "H4": 0.7
+        },
+        "note": "Empirical hours UP for AI-exposed workers — strong evidence against reduction (H1/H2), supports H3 with H4 tail.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
       }
     ]
   },
@@ -223,6 +505,14 @@
           "lr_decay": 0.65,
           "n_firings": 0,
           "resolution_class": false
+        },
+        {
+          "id": "t3_pilot_retention_global",
+          "desc": "An independent multi-country 4-day workweek pilot covering >=2,000 workers across >=100 firms (with G7-domiciled firm participation) reports >=85% post-trial retention of the reduced schedule, confirmed by published trial report (e.g., 4 Day Week Foundation, Boston College, Henley Business School).",
+          "posteriorEffect": "H1 +3pp, H2 +5pp, H3 -6pp, H4 -2pp.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
         }
       ],
       "anti_indicators": [
@@ -277,6 +567,14 @@
           "n_firings": 0,
           "resolution_class": false,
           "lr_migration_warning": "design prior drift >30% — review before next firing"
+        },
+        {
+          "id": "anti_h1_h2_productivity_diversion",
+          "desc": "Federal Reserve, BLS, OECD, ECB, or peer-reviewed study (sample >=10,000 workers across >=2 G7 countries) quantifies AI-driven time savings of >=5% of work hours AND documents that >=70% of firms (or workers) are redirecting that saved time to incremental output rather than reduced hours.",
+          "posteriorEffect": "H3 +12pp, H4 +3pp, H1 -10pp, H2 -5pp.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
         }
       ]
     }
@@ -362,6 +660,192 @@
       "ledger": "DECISION",
       "claimState": "SUPPORTED",
       "effectiveWeight": 1.0
+    },
+    {
+      "id": "ev_001",
+      "time": "2026-04-24T02:25:42+00:00",
+      "tag": "POLICY",
+      "tags": [
+        "POLICY",
+        "ECON"
+      ],
+      "text": "HBR April 2026 article 'What's Stopping the 4-Day Workweek?'; OpenAI policy paper suggests companies pilot 4-day workweek as 'efficiency dividend'; Boston College 3000-worker trial shows 90% of companies retained 4-day workweek post-pilot.",
+      "provenance": "OBSERVED",
+      "source": "HBR / McKinsey / OpenAI",
+      "posteriorImpact": "NONE",
+      "url": "https://hbr.org/2026/04/whats-stopping-the-4-day-workweek",
+      "ledger": "DECISION",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-24T02:25:42+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Policy advocacy and pilot success improve H1/H2 odds but no G7 country-level sustained change yet; H3 still most likely.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_002",
+      "time": "2026-04-24T13:49:16+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "ECON",
+        "AI"
+      ],
+      "text": "HBR Feb 2026: 'AI doesn't reduce work -- it intensifies it.' Survey data: AI saves ~7.5 hr/week per user, but companies redirect to output not hours. Zoom CEO (Apr 9) predicts 3-day week by 2031; JPM Dimon references 3.5-day. No G7 country yet showing sustained weekly-hours decline attributable to AI; four-day trials remain limited to opt-in firms.",
+      "provenance": "OBSERVED",
+      "source": "HBR / Fortune / NBER",
+      "posteriorImpact": "NONE",
+      "url": "https://hbr.org/2026/02/ai-doesnt-reduce-work-it-intensifies-it",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.25
+    },
+    {
+      "time": "2026-04-24T13:49:16+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Direct evidence that gains flow to output, not leisure, reinforces H3 flat-hours outcome.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_003",
+      "time": "2026-04-24T19:30:15+00:00",
+      "tag": "RHETORIC",
+      "tags": [
+        "RHETORIC",
+        "AI",
+        "LABOR"
+      ],
+      "text": "OpenAI policy paper 4/6/2026 advocates 4-day workweek w/ no pay loss as 'efficiency dividend'; HBR 4/2026: structural barriers remain; UK 4-day trials cover a few hundred firms (not millions). No G7 country showing sustained 5%+ decline in weekly hours.",
+      "provenance": "OBSERVED",
+      "source": "TechCrunch / HBR",
+      "posteriorImpact": "NONE",
+      "url": "https://techcrunch.com/2026/04/06/openais-vision-for-the-ai-economy-public-wealth-funds-robot-taxes-and-a-four-day-work-week/",
+      "ledger": "DECISION",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-24T19:30:15+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_004",
+      "time": "2026-04-25T14:24:51+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "ECON"
+      ],
+      "text": "OpenAI policy paper recommends 4-day workweek as 'efficiency dividend.' 4 Day Week Foundation trial (~3,000 workers, 141 companies, 6 countries) found 90% retained the 4-day schedule post-trial. Microsoft Japan reported 40% productivity gain at 20% hours cut. AI productivity gains 5-25% in customer support, software dev, consulting. Frontline sectors face limits.",
+      "provenance": "OBSERVED",
+      "source": "HBR, OpenAI policy paper, SHRM",
+      "posteriorImpact": "NONE",
+      "url": "https://hbr.org/2026/04/whats-stopping-the-4-day-workweek",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-25T14:24:51+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_005",
+      "time": "2026-04-26T16:59:08+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "LABOR",
+        "AI"
+      ],
+      "text": "AI users save ~7.5 hours/week per industry studies; Federal Reserve research quantified time savings at 5.4% of work hours (~2.2h on 40h week). 80% of companies see no measurable bottom-line change; firms reinvesting saved time into output rather than hour cuts. Microsoft Japan precedent shows reduction is feasible but requires deliberate org redesign.",
+      "provenance": "OBSERVED",
+      "source": "Federal Reserve / Industry studies",
+      "posteriorImpact": "NONE",
+      "url": "https://techcrunch.com/2025/12/31/investors-predict-ai-is-coming-for-labor-in-2026/",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-26T16:59:08+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-26T18:23:05+00:00",
+      "tag": "INTEL",
+      "text": "INDICATOR ADDED: t3_pilot_retention_global (tier3_suggestive). posteriorEffect=H1 +3pp, H2 +5pp, H3 -6pp, H4 -2pp.. Rationale: Closes coverage gap surfaced by review_topic_design over ev_001/ev_002/ev_004/ev_005: existing t3_4day_pilots_50k threshold (50k employees in one G7 country) excludes the active multi-country 4DW Foundation/Boston College trials with 90% retention. Calibrated as suggestive (not strong) because pilot firms are opt-in/self-selected; trial-firm retention does not generalize directly to G7 country-level labor statistics. Effect intentionally small..",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-26T18:23:05+00:00",
+      "tag": "INTEL",
+      "text": "INDICATOR ADDED: anti_h1_h2_productivity_diversion (anti_indicators). posteriorEffect=H3 +12pp, H4 +3pp, H1 -10pp, H2 -5pp.. Rationale: Closes the largest coverage gap identified in review_topic_design over ev_001/ev_002/ev_004/ev_005: ev_002 and ev_005 are textbook H3 mechanism evidence (Fed Reserve 5.4% time savings, 80% of firms no bottom-line change, output reinvestment) and currently no anti-indicator fires on this. Threshold is strict (institutional source + dual-country sample + explicit firm-behavior measurement) so rhetoric and single-firm anecdotes will not trigger. Per operator decision: do NOT replay ev_001/ev_002/ev_004/ev_005 retroactively -- let the indicator fire prospectively to avoid backfitting..",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_006",
+      "time": "2026-04-26T19:27:11+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "LABOR",
+        "AI"
+      ],
+      "text": "CEPR April 2026 study: workers in AI-intensive occupations show INCREASED weekly hours; +2.2 hours per week between 25th-75th percentile of AI exposure. WEF Future of Jobs 2025: 92M roles displaced / 170M created by 2030. Takano 32-Hour Workweek Act reintroduced but no G7 country has legislated reduction.",
+      "provenance": "OBSERVED",
+      "source": "CEPR / WEF / Hill",
+      "posteriorImpact": "NONE",
+      "url": "https://cepr.org/voxeu/columns/ais-power-grows-so-does-our-workday",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-26T19:27:11+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
     }
   ],
   "dataFeeds": {
@@ -405,20 +889,23 @@
   "governance": {
     "health": "DEGRADED",
     "issues": [
-      "Near-maximum uncertainty — model is not discriminating"
+      "Near-zero uncertainty — check for overconfidence",
+      "Stale dependency: calibration-ai-developer-displacement-2027.H2 assumed=0.3, actual=0.7664, drift=46.64%",
+      "Stale dependency: calibration-ai-developer-displacement-2027.H3 assumed=0.32, actual=0.005, drift=31.50%",
+      "Stale dependency: calibration-ai-developer-displacement-2027.H4 assumed=0.2, actual=0.005, drift=19.50%"
     ],
     "rt": {
       "rt": 0.0,
       "regime": "SAFE",
       "worst_hypothesis": "H1"
     },
-    "entropy": 1.8455,
+    "entropy": 0.1737,
     "maxEntropy": 2.0,
-    "uncertaintyRatio": 0.9227,
+    "uncertaintyRatio": 0.0868,
     "evidenceFreshness": {
-      "fresh": 3,
-      "stale": 0,
-      "total": 3
+      "fresh": 9,
+      "stale": 8,
+      "total": 17
     },
     "hypothesisAdmissibility": {
       "H1": "ADMISSIBLE",
@@ -427,48 +914,494 @@
       "H4": "ADMISSIBLE"
     },
     "klFromPrior": {
-      "kl_divergence": 0.0,
-      "interpretation": "MODERATE"
+      "kl_divergence": 0.7643,
+      "interpretation": "WELL_EVIDENCED"
     },
-    "lastComputed": "2026-04-22T05:19:57+00:00",
-    "staleDependencies": 0,
+    "lastComputed": "2026-04-29T02:30:58+00:00",
+    "staleDependencies": 3,
+    "staleDependencyDetails": [
+      {
+        "upstream_slug": "calibration-ai-developer-displacement-2027",
+        "hypothesis": "H2",
+        "assumed": 0.3,
+        "actual": 0.7664,
+        "drift": 0.4664,
+        "tolerance": 0.12,
+        "stale": true
+      },
+      {
+        "upstream_slug": "calibration-ai-developer-displacement-2027",
+        "hypothesis": "H3",
+        "assumed": 0.32,
+        "actual": 0.005,
+        "drift": 0.315,
+        "tolerance": 0.12,
+        "stale": true
+      },
+      {
+        "upstream_slug": "calibration-ai-developer-displacement-2027",
+        "hypothesis": "H4",
+        "assumed": 0.2,
+        "actual": 0.005,
+        "drift": 0.195,
+        "tolerance": 0.12,
+        "stale": true
+      }
+    ],
     "calibrationHealth": "ACCEPTABLE",
     "unresolvedContradictions": 0,
+    "reviewed_alerts": [
+      {
+        "signature": "none_impact_saturation:calibration-ai-workweek-2030",
+        "timestamp": "2026-04-26T17:50:37+00:00",
+        "reason": "Design review complete: 2 new indicators proposed (t3_pilot_retention_global, anti_h1_h2_productivity_diversion). Awaiting operator approval before engine.add_indicator() call."
+      }
+    ],
     "designGate": {
       "passed": true,
       "blockers": [],
       "warnings": [],
       "coverage": {
         "H1": {
-          "pos": 6,
-          "neg": 4
-        },
-        "H2": {
-          "pos": 5,
+          "pos": 7,
           "neg": 5
         },
+        "H2": {
+          "pos": 6,
+          "neg": 6
+        },
         "H3": {
-          "pos": 3,
-          "neg": 7
+          "pos": 4,
+          "neg": 8
         },
         "H4": {
-          "pos": 4,
-          "neg": 6
+          "pos": 5,
+          "neg": 7
         }
       },
       "indistinguishable": [],
-      "lastChecked": "2026-04-22T05:19:57+00:00"
+      "lastChecked": "2026-04-29T02:30:58+00:00"
     }
   },
   "predictionScoring": {
     "_docs": "Calibration infrastructure. Snapshots are auto-created by engine on each posterior update. Record outcome when topic resolves, then compute_calibration_report() for Brier analysis.",
-    "snapshots": [],
+    "snapshots": [
+      {
+        "timestamp": "2026-04-24T02:25:42+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0623,
+          "H2": 0.2768,
+          "H3": 0.5813,
+          "H4": 0.0796
+        },
+        "entropy": 1.508
+      },
+      {
+        "timestamp": "2026-04-24T02:25:42+00:00",
+        "trigger": "pipeline:ev_001",
+        "posteriors": {
+          "H1": 0.0623,
+          "H2": 0.2768,
+          "H3": 0.5813,
+          "H4": 0.0796
+        },
+        "entropy": 1.508
+      },
+      {
+        "timestamp": "2026-04-24T13:49:16+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0067,
+          "H2": 0.1071,
+          "H3": 0.8743,
+          "H4": 0.012
+        },
+        "entropy": 0.6396
+      },
+      {
+        "timestamp": "2026-04-24T13:49:16+00:00",
+        "trigger": "pipeline:ev_002",
+        "posteriors": {
+          "H1": 0.0067,
+          "H2": 0.1071,
+          "H3": 0.8743,
+          "H4": 0.012
+        },
+        "entropy": 0.6396
+      },
+      {
+        "timestamp": "2026-04-24T19:30:15+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.0463,
+          "H3": 0.9437,
+          "H4": 0.005
+        },
+        "entropy": 0.3606
+      },
+      {
+        "timestamp": "2026-04-24T19:30:15+00:00",
+        "trigger": "pipeline:ev_003",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.0463,
+          "H3": 0.9437,
+          "H4": 0.005
+        },
+        "entropy": 0.3606
+      },
+      {
+        "timestamp": "2026-04-25T14:24:51+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.0648,
+          "H3": 0.9252,
+          "H4": 0.005
+        },
+        "entropy": 0.436
+      },
+      {
+        "timestamp": "2026-04-25T14:24:51+00:00",
+        "trigger": "pipeline:ev_004",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.0648,
+          "H3": 0.9252,
+          "H4": 0.005
+        },
+        "entropy": 0.436
+      },
+      {
+        "timestamp": "2026-04-26T16:59:08+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.0144,
+          "H3": 0.9756,
+          "H4": 0.005
+        },
+        "entropy": 0.1993
+      },
+      {
+        "timestamp": "2026-04-26T16:59:08+00:00",
+        "trigger": "pipeline:ev_005",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.0144,
+          "H3": 0.9756,
+          "H4": 0.005
+        },
+        "entropy": 0.1993
+      },
+      {
+        "timestamp": "2026-04-26T19:27:11+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0067,
+          "H2": 0.0067,
+          "H3": 0.98,
+          "H4": 0.0067
+        },
+        "entropy": 0.1737
+      },
+      {
+        "timestamp": "2026-04-26T19:27:11+00:00",
+        "trigger": "pipeline:ev_006",
+        "posteriors": {
+          "H1": 0.0067,
+          "H2": 0.0067,
+          "H3": 0.98,
+          "H4": 0.0067
+        },
+        "entropy": 0.1737
+      }
+    ],
     "outcomes": [],
     "brierScores": []
   },
   "contradictionTracker": {
     "unresolved": [],
-    "resolved": []
+    "resolved": [
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T02:25:42+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Policy advocacy and pilot success improve H1/H2 odds but no G7 country-level sustained change yet; H3 still most likely.",
+        "entry_b_time": "2026-04-24T13:49:16+00:00",
+        "entry_b_text": "HBR Feb 2026: 'AI doesn't reduce work -- it intensifies it.' Survey data: AI saves ~7.5 hr/week per user, but companies redirect to output not hours. Zoom CEO (Apr 9) predicts 3-day week by 2031; JPM Dimon references 3.5-day. No G7 country yet showing sustained weekly-hours decline attributable to AI; four-day trials remain limited to opt-in firms.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: country, sustained, yet",
+        "detected": "2026-04-24T13:49:16Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:16Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T02:25:42+00:00",
+        "entry_a_text": "HBR April 2026 article 'What's Stopping the 4-Day Workweek?'; OpenAI policy paper suggests companies pilot 4-day workweek as 'efficiency dividend'; Boston College 3000-worker trial shows 90% of companies retained 4-day workweek post-pilot.",
+        "entry_b_time": "2026-04-24T13:49:16+00:00",
+        "entry_b_text": "HBR Feb 2026: 'AI doesn't reduce work -- it intensifies it.' Survey data: AI saves ~7.5 hr/week per user, but companies redirect to output not hours. Zoom CEO (Apr 9) predicts 3-day week by 2031; JPM Dimon references 3.5-day. No G7 country yet showing sustained weekly-hours decline attributable to AI; four-day trials remain limited to opt-in firms.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: companies, day, hbr",
+        "detected": "2026-04-24T13:49:16Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:16Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:16+00:00",
+        "entry_a_text": "HBR Feb 2026: 'AI doesn't reduce work -- it intensifies it.' Survey data: AI saves ~7.5 hr/week per user, but companies redirect to output not hours. Zoom CEO (Apr 9) predicts 3-day week by 2031; JPM Dimon references 3.5-day. No G7 country yet showing sustained weekly-hours decline attributable to AI; four-day trials remain limited to opt-in firms.",
+        "entry_b_time": "2026-04-24T19:30:15+00:00",
+        "entry_b_text": "OpenAI policy paper 4/6/2026 advocates 4-day workweek w/ no pay loss as 'efficiency dividend'; HBR 4/2026: structural barriers remain; UK 4-day trials cover a few hundred firms (not millions). No G7 country showing sustained 5%+ decline in weekly hours.",
+        "reason": "Numeric divergence 99.8% on metric (context: hbr): new=4.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-24T19:30:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:15Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T02:25:42+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Policy advocacy and pilot success improve H1/H2 odds but no G7 country-level sustained change yet; H3 still most likely.",
+        "entry_b_time": "2026-04-24T19:30:15+00:00",
+        "entry_b_text": "OpenAI policy paper 4/6/2026 advocates 4-day workweek w/ no pay loss as 'efficiency dividend'; HBR 4/2026: structural barriers remain; UK 4-day trials cover a few hundred firms (not millions). No G7 country showing sustained 5%+ decline in weekly hours.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: country, policy, sustained",
+        "detected": "2026-04-24T19:30:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:15Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T02:25:42+00:00",
+        "entry_a_text": "HBR April 2026 article 'What's Stopping the 4-Day Workweek?'; OpenAI policy paper suggests companies pilot 4-day workweek as 'efficiency dividend'; Boston College 3000-worker trial shows 90% of companies retained 4-day workweek post-pilot.",
+        "entry_b_time": "2026-04-24T19:30:15+00:00",
+        "entry_b_text": "OpenAI policy paper 4/6/2026 advocates 4-day workweek w/ no pay loss as 'efficiency dividend'; HBR 4/2026: structural barriers remain; UK 4-day trials cover a few hundred firms (not millions). No G7 country showing sustained 5%+ decline in weekly hours.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: day, dividend, efficiency, hbr, openai",
+        "detected": "2026-04-24T19:30:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:15Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T19:30:15+00:00",
+        "entry_a_text": "OpenAI policy paper 4/6/2026 advocates 4-day workweek w/ no pay loss as 'efficiency dividend'; HBR 4/2026: structural barriers remain; UK 4-day trials cover a few hundred firms (not millions). No G7 country showing sustained 5%+ decline in weekly hours.",
+        "entry_b_time": "2026-04-25T14:24:51+00:00",
+        "entry_b_text": "OpenAI policy paper recommends 4-day workweek as 'efficiency dividend.' 4 Day Week Foundation trial (~3,000 workers, 141 companies, 6 countries) found 90% retained the 4-day schedule post-trial. Microsoft Japan reported 40% productivity gain at 20% hours cut. AI productivity gains 5-25% in customer support, software dev, consulting. Frontline sectors face limits.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: day, dividend, efficiency, hours, openai",
+        "detected": "2026-04-25T14:24:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:51Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T13:49:16+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Direct evidence that gains flow to output, not leisure, reinforces H3 flat-hours outcome.",
+        "entry_b_time": "2026-04-25T14:24:51+00:00",
+        "entry_b_text": "OpenAI policy paper recommends 4-day workweek as 'efficiency dividend.' 4 Day Week Foundation trial (~3,000 workers, 141 companies, 6 countries) found 90% retained the 4-day schedule post-trial. Microsoft Japan reported 40% productivity gain at 20% hours cut. AI productivity gains 5-25% in customer support, software dev, consulting. Frontline sectors face limits.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: gains, hours",
+        "detected": "2026-04-25T14:24:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:51Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T13:49:16+00:00",
+        "entry_a_text": "HBR Feb 2026: 'AI doesn't reduce work -- it intensifies it.' Survey data: AI saves ~7.5 hr/week per user, but companies redirect to output not hours. Zoom CEO (Apr 9) predicts 3-day week by 2031; JPM Dimon references 3.5-day. No G7 country yet showing sustained weekly-hours decline attributable to AI; four-day trials remain limited to opt-in firms.",
+        "entry_b_time": "2026-04-25T14:24:51+00:00",
+        "entry_b_text": "OpenAI policy paper recommends 4-day workweek as 'efficiency dividend.' 4 Day Week Foundation trial (~3,000 workers, 141 companies, 6 countries) found 90% retained the 4-day schedule post-trial. Microsoft Japan reported 40% productivity gain at 20% hours cut. AI productivity gains 5-25% in customer support, software dev, consulting. Frontline sectors face limits.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: companies, day, hours, week",
+        "detected": "2026-04-25T14:24:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:51Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:42+00:00",
+        "entry_a_text": "HBR April 2026 article 'What's Stopping the 4-Day Workweek?'; OpenAI policy paper suggests companies pilot 4-day workweek as 'efficiency dividend'; Boston College 3000-worker trial shows 90% of companies retained 4-day workweek post-pilot.",
+        "entry_b_time": "2026-04-25T14:24:51+00:00",
+        "entry_b_text": "OpenAI policy paper recommends 4-day workweek as 'efficiency dividend.' 4 Day Week Foundation trial (~3,000 workers, 141 companies, 6 countries) found 90% retained the 4-day schedule post-trial. Microsoft Japan reported 40% productivity gain at 20% hours cut. AI productivity gains 5-25% in customer support, software dev, consulting. Frontline sectors face limits.",
+        "reason": "Numeric divergence 96.7% on metric (context: trial): new=3.0, existing=90.0, threshold=10%",
+        "detected": "2026-04-25T14:24:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:51Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T14:24:51+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "AI users save ~7.5 hours/week per industry studies; Federal Reserve research quantified time savings at 5.4% of work hours (~2.2h on 40h week). 80% of companies see no measurable bottom-line change; firms reinvesting saved time into output rather than hour cuts. Microsoft Japan precedent shows reduction is feasible but requires deliberate org redesign.",
+        "reason": "Numeric divergence 100.0% on metric (context: .): new=80.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-25T14:24:51+00:00",
+        "entry_a_text": "OpenAI policy paper recommends 4-day workweek as 'efficiency dividend.' 4 Day Week Foundation trial (~3,000 workers, 141 companies, 6 countries) found 90% retained the 4-day schedule post-trial. Microsoft Japan reported 40% productivity gain at 20% hours cut. AI productivity gains 5-25% in customer support, software dev, consulting. Frontline sectors face limits.",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "AI users save ~7.5 hours/week per industry studies; Federal Reserve research quantified time savings at 5.4% of work hours (~2.2h on 40h week). 80% of companies see no measurable bottom-line change; firms reinvesting saved time into output rather than hour cuts. Microsoft Japan precedent shows reduction is feasible but requires deliberate org redesign.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: companies, hours, japan, microsoft, week",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T19:30:15+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "AI users save ~7.5 hours/week per industry studies; Federal Reserve research quantified time savings at 5.4% of work hours (~2.2h on 40h week). 80% of companies see no measurable bottom-line change; firms reinvesting saved time into output rather than hour cuts. Microsoft Japan precedent shows reduction is feasible but requires deliberate org redesign.",
+        "reason": "Numeric divergence 100.0% on metric (context: .): new=80.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T19:30:15+00:00",
+        "entry_a_text": "OpenAI policy paper 4/6/2026 advocates 4-day workweek w/ no pay loss as 'efficiency dividend'; HBR 4/2026: structural barriers remain; UK 4-day trials cover a few hundred firms (not millions). No G7 country showing sustained 5%+ decline in weekly hours.",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "AI users save ~7.5 hours/week per industry studies; Federal Reserve research quantified time savings at 5.4% of work hours (~2.2h on 40h week). 80% of companies see no measurable bottom-line change; firms reinvesting saved time into output rather than hour cuts. Microsoft Japan precedent shows reduction is feasible but requires deliberate org redesign.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: firms, hours",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T13:49:16+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Direct evidence that gains flow to output, not leisure, reinforces H3 flat-hours outcome.",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "AI users save ~7.5 hours/week per industry studies; Federal Reserve research quantified time savings at 5.4% of work hours (~2.2h on 40h week). 80% of companies see no measurable bottom-line change; firms reinvesting saved time into output rather than hour cuts. Microsoft Japan precedent shows reduction is feasible but requires deliberate org redesign.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: hours, output",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T13:49:16+00:00",
+        "entry_a_text": "HBR Feb 2026: 'AI doesn't reduce work -- it intensifies it.' Survey data: AI saves ~7.5 hr/week per user, but companies redirect to output not hours. Zoom CEO (Apr 9) predicts 3-day week by 2031; JPM Dimon references 3.5-day. No G7 country yet showing sustained weekly-hours decline attributable to AI; four-day trials remain limited to opt-in firms.",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "AI users save ~7.5 hours/week per industry studies; Federal Reserve research quantified time savings at 5.4% of work hours (~2.2h on 40h week). 80% of companies see no measurable bottom-line change; firms reinvesting saved time into output rather than hour cuts. Microsoft Japan precedent shows reduction is feasible but requires deliberate org redesign.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: companies, firms, hours, output, week",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T02:25:42+00:00",
+        "entry_a_text": "HBR April 2026 article 'What's Stopping the 4-Day Workweek?'; OpenAI policy paper suggests companies pilot 4-day workweek as 'efficiency dividend'; Boston College 3000-worker trial shows 90% of companies retained 4-day workweek post-pilot.",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "AI users save ~7.5 hours/week per industry studies; Federal Reserve research quantified time savings at 5.4% of work hours (~2.2h on 40h week). 80% of companies see no measurable bottom-line change; firms reinvesting saved time into output rather than hour cuts. Microsoft Japan precedent shows reduction is feasible but requires deliberate org redesign.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: companies, shows",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-22T01:00:37+00:00",
+        "entry_a_text": "REPLAY COMPLETE: 0 indicators applied, 0 skipped. Final posteriors: {'H1': 0.1, 'H2': 0.25, 'H3': 0.42, 'H4': 0.23}. Indicator firedDates restored to originals for audit.",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "AI users save ~7.5 hours/week per industry studies; Federal Reserve research quantified time savings at 5.4% of work hours (~2.2h on 40h week). 80% of companies see no measurable bottom-line change; firms reinvesting saved time into output rather than hour cuts. Microsoft Japan precedent shows reduction is feasible but requires deliberate org redesign.",
+        "reason": "Numeric divergence 99.5% on metric (context: .): new=80.0, existing=0.42, threshold=10%",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-26T18:23:05+00:00",
+        "entry_a_text": "INDICATOR ADDED: anti_h1_h2_productivity_diversion (anti_indicators). posteriorEffect=H3 +12pp, H4 +3pp, H1 -10pp, H2 -5pp.. Rationale: Closes the largest coverage gap identified in review_topic_design over ev_001/ev_002/ev_004/ev_005: ev_002 and ev_005 are textbook H3 mechanism evidence (Fed Reserve 5.4% time savings, 80% of firms no bottom-line change, output reinvestment) and currently no anti-indicator fires on this. Threshold is strict (institutional source + dual-country sample + explicit firm-behavior measurement) so rhetoric and single-firm anecdotes will not trigger. Per operator decision: do NOT replay ev_001/ev_002/ev_004/ev_005 retroactively -- let the indicator fire prospectively to avoid backfitting..",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "CEPR April 2026 study: workers in AI-intensive occupations show INCREASED weekly hours; +2.2 hours per week between 25th-75th percentile of AI exposure. WEF Future of Jobs 2025: 92M roles displaced / 170M created by 2030. Takano 32-Hour Workweek Act reintroduced but no G7 country has legislated reduction.",
+        "reason": "Numeric divergence 96.0% on metric (context: of): new=2025.0, existing=80.0, threshold=10%",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-26T16:59:08+00:00",
+        "entry_a_text": "AI users save ~7.5 hours/week per industry studies; Federal Reserve research quantified time savings at 5.4% of work hours (~2.2h on 40h week). 80% of companies see no measurable bottom-line change; firms reinvesting saved time into output rather than hour cuts. Microsoft Japan precedent shows reduction is feasible but requires deliberate org redesign.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "CEPR April 2026 study: workers in AI-intensive occupations show INCREASED weekly hours; +2.2 hours per week between 25th-75th percentile of AI exposure. WEF Future of Jobs 2025: 92M roles displaced / 170M created by 2030. Takano 32-Hour Workweek Act reintroduced but no G7 country has legislated reduction.",
+        "reason": "Numeric divergence 70.7% on metric (context: hours, per, week): new=2.2, existing=7.5, threshold=10%",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-25T14:24:51+00:00",
+        "entry_a_text": "OpenAI policy paper recommends 4-day workweek as 'efficiency dividend.' 4 Day Week Foundation trial (~3,000 workers, 141 companies, 6 countries) found 90% retained the 4-day schedule post-trial. Microsoft Japan reported 40% productivity gain at 20% hours cut. AI productivity gains 5-25% in customer support, software dev, consulting. Frontline sectors face limits.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "CEPR April 2026 study: workers in AI-intensive occupations show INCREASED weekly hours; +2.2 hours per week between 25th-75th percentile of AI exposure. WEF Future of Jobs 2025: 92M roles displaced / 170M created by 2030. Takano 32-Hour Workweek Act reintroduced but no G7 country has legislated reduction.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: hours, week, workers, workweek",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T19:30:15+00:00",
+        "entry_a_text": "OpenAI policy paper 4/6/2026 advocates 4-day workweek w/ no pay loss as 'efficiency dividend'; HBR 4/2026: structural barriers remain; UK 4-day trials cover a few hundred firms (not millions). No G7 country showing sustained 5%+ decline in weekly hours.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "CEPR April 2026 study: workers in AI-intensive occupations show INCREASED weekly hours; +2.2 hours per week between 25th-75th percentile of AI exposure. WEF Future of Jobs 2025: 92M roles displaced / 170M created by 2030. Takano 32-Hour Workweek Act reintroduced but no G7 country has legislated reduction.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: country, hours, weekly, workweek",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T13:49:16+00:00",
+        "entry_a_text": "HBR Feb 2026: 'AI doesn't reduce work -- it intensifies it.' Survey data: AI saves ~7.5 hr/week per user, but companies redirect to output not hours. Zoom CEO (Apr 9) predicts 3-day week by 2031; JPM Dimon references 3.5-day. No G7 country yet showing sustained weekly-hours decline attributable to AI; four-day trials remain limited to opt-in firms.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "CEPR April 2026 study: workers in AI-intensive occupations show INCREASED weekly hours; +2.2 hours per week between 25th-75th percentile of AI exposure. WEF Future of Jobs 2025: 92M roles displaced / 170M created by 2030. Takano 32-Hour Workweek Act reintroduced but no G7 country has legislated reduction.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: country, hours, week, weekly",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T02:25:42+00:00",
+        "entry_a_text": "HBR April 2026 article 'What's Stopping the 4-Day Workweek?'; OpenAI policy paper suggests companies pilot 4-day workweek as 'efficiency dividend'; Boston College 3000-worker trial shows 90% of companies retained 4-day workweek post-pilot.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "CEPR April 2026 study: workers in AI-intensive occupations show INCREASED weekly hours; +2.2 hours per week between 25th-75th percentile of AI exposure. WEF Future of Jobs 2025: 92M roles displaced / 170M created by 2030. Takano 32-Hour Workweek Act reintroduced but no G7 country has legislated reduction.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: april, workweek",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      }
+    ]
   },
   "schemaVersion": 2,
   "migratedAt": "2026-04-21T19:03:40+00:00",
@@ -1013,5 +1946,68 @@
       ],
       "lensAgreement": []
     }
-  ]
+  ],
+  "sourceCalibration": {
+    "ledger": [
+      {
+        "timestamp": "2026-04-24T02:25:42Z",
+        "evidence_index": 0,
+        "confirming_index": 1,
+        "resolution": "CONFIRMED",
+        "source": "",
+        "confirming_source": "",
+        "trust_delta": 0.05,
+        "original_text_snippet": "LR MIGRATION RESET: posteriors reset to design priors; evidence log preserved.",
+        "confirming_text_snippet": "REPLAY BEGIN: 0 previously-fired indicators will be re-applied chronologically under current LR system. Posteriors reset"
+      },
+      {
+        "timestamp": "2026-04-24T02:25:42Z",
+        "evidence_index": 1,
+        "confirming_index": 2,
+        "resolution": "CONFIRMED",
+        "source": "",
+        "confirming_source": "",
+        "trust_delta": 0.05,
+        "original_text_snippet": "REPLAY BEGIN: 0 previously-fired indicators will be re-applied chronologically under current LR system. Posteriors reset",
+        "confirming_text_snippet": "REPLAY COMPLETE: 0 indicators applied, 0 skipped. Final posteriors: {'H1': 0.1, 'H2': 0.25, 'H3': 0.42, 'H4': 0.23}. Ind"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:51Z",
+        "evidence_index": 3,
+        "confirming_index": 9,
+        "resolution": "REFUTED",
+        "source": "HBR / McKinsey / OpenAI",
+        "confirming_source": "HBR, OpenAI policy paper, SHRM",
+        "trust_delta": -0.1,
+        "original_text_snippet": "HBR April 2026 article 'What's Stopping the 4-Day Workweek?'; OpenAI policy paper suggests companies pilot 4-day workwee",
+        "confirming_text_snippet": "OpenAI policy paper recommends 4-day workweek as 'efficiency dividend.' 4 Day Week Foundation trial (~3,000 workers, 141"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:51Z",
+        "evidence_index": 7,
+        "confirming_index": 9,
+        "resolution": "REFUTED",
+        "source": "TechCrunch / HBR",
+        "confirming_source": "HBR, OpenAI policy paper, SHRM",
+        "trust_delta": -0.1,
+        "original_text_snippet": "OpenAI policy paper 4/6/2026 advocates 4-day workweek w/ no pay loss as 'efficiency dividend'; HBR 4/2026: structural ba",
+        "confirming_text_snippet": "OpenAI policy paper recommends 4-day workweek as 'efficiency dividend.' 4 Day Week Foundation trial (~3,000 workers, 141"
+      }
+    ],
+    "effectiveTrust": {
+      "HBR": 0.3289,
+      "McKinsey": 0.4118,
+      "OpenAI": 0.4118,
+      "Fortune": 0.7,
+      "NBER": 0.5,
+      "TechCrunch": 0.4118,
+      "HBR, OpenAI policy paper, SHRM": 0.5,
+      "Federal Reserve": 0.5,
+      "Industry studies": 0.5,
+      "CEPR": 0.5,
+      "Hill": 0.5,
+      "WEF": 0.5
+    },
+    "_last_scan_same_source_skipped": 3
+  }
 }

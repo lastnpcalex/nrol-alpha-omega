@@ -6,7 +6,7 @@
     "question": "What happens to the Trump administration's Section 122 10% universal tariff when it reaches its 150-day statutory limit in late July 2026?",
     "resolution": "Observable: White House action or documented inaction by July 23, 2026 (150 days from Feb 24 effective date). Resolution criteria: (a) tariff expires with no successor = H1; (b) new proclamation issues at ~10% using different authority = H2; (c) new proclamation/action at higher rate or expanded scope = H3; (d) bilateral deal(s) announced covering >=30% of affected import value with reduced rates = H4. Partial-deal-plus-continuation counts as H4 if rollback is material.",
     "created": "2026-04-11T00:00:00Z",
-    "lastUpdated": "2026-04-22T05:19:58+00:00",
+    "lastUpdated": "2026-04-29T02:30:59+00:00",
     "status": "ACTIVE",
     "dayCount": 47,
     "startDate": "2026-02-24T00:00:00Z",
@@ -64,7 +64,7 @@
         "label": "Expires as scheduled — no replacement, no extension",
         "midpoint": 0,
         "unit": "weeks",
-        "posterior": 0.07,
+        "posterior": 0.006,
         "description": "The tariff lapses on ~July 23, 2026 with no successor action. Administration makes no new proclamation, Congress does not authorize extension, Section 301 investigations have not yet produced usable tariff authority. Politically very costly — would be framed as capitulation. Requires either a court order forcing expiry or a deliberate policy reversal. Base rate for clean expiry given current posture: low.",
         "_prior_note": "7% reflects near-impossibility of deliberate no-action given political signaling. Only fires if legal constraint (court order) or unexpected political reversal."
       },
@@ -72,7 +72,7 @@
         "label": "Maintained at same ~10% rate via new authority",
         "midpoint": 0,
         "unit": "weeks",
-        "posterior": 0.18,
+        "posterior": 0.248,
         "description": "Administration issues a new proclamation at roughly the same 10% rate using a different statutory basis — most likely Section 301 authority once investigations conclude, or a Section 232 national security finding, or a new IEEPA invocation with a different legal framing. Rate stays flat, scope roughly unchanged. This is the 'hold the line' outcome: no escalation, no deal, but tariffs continue.",
         "_prior_note": "18% reflects plausibility as a fallback if deals stall and escalation seems risky, but narrower than H3/H4 because straight-rate maintenance is strategically inert and doesn't match the administration's pattern of using expiry moments for leverage."
       },
@@ -80,7 +80,7 @@
         "label": "Expanded — higher rate and/or broader product scope",
         "midpoint": 0,
         "unit": "weeks",
-        "posterior": 0.33,
+        "posterior": 0.3055,
         "description": "At or before expiry, administration announces escalation: higher tariff rate (above 10%), expanded country coverage, expanded product scope, or a new Section 301 tariff regime (historically 25%+ on targeted categories) that replaces the universal surcharge with a more aggressive targeted structure. New Section 301 investigations into EU, Mexico, and China are the most direct pipeline. A 25% targeted tariff on EU autos or Chinese tech goods would qualify as H3 even if the universal 10% lapses.",
         "_prior_note": "33% reflects the administration's track record of using tariff deadlines as escalation moments rather than resolution moments, plus active Section 301 pipeline. H3 is the modal outcome if bilateral deals fail to materialize."
       },
@@ -88,7 +88,7 @@
         "label": "Partial rollback — bilateral deal(s) reduce tariffs on >=30% of affected import value",
         "midpoint": 0,
         "unit": "weeks",
-        "posterior": 0.42,
+        "posterior": 0.4405,
         "description": "One or more bilateral trade agreements or framework deals (EU, Mexico, Japan, UK, Canada, or others) are announced before or at the July 23 deadline, resulting in materially reduced tariff rates on a significant share of the ~$1.2T import base. Does not require a comprehensive agreement — sector deals (e.g., EU autos, Mexican agricultural goods) that cover >=30% of affected volume qualify. May be accompanied by continuation of tariffs on non-deal partners. This is the stated preferred outcome of the administration and trading partners.",
         "_prior_note": "42% reflects: (1) bilateral deal framing as stated policy goal; (2) three active negotiating tracks (EU, Mexico/Canada, China-adjacent); (3) both sides have economic incentives before US midterm season; BUT (4) discount heavily because 3.5 months is tight for complex deals, and partial-deal announcements often get classified as 'framework' without tariff relief. Set as modal outcome but note high uncertainty."
       }
@@ -108,7 +108,296 @@
         "H1": 0.07,
         "H2": 0.18,
         "H3": 0.33,
-        "H4": 0.42
+        "H4": 0.42,
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        }
+      },
+      {
+        "date": "2026-04-24",
+        "posteriors": {
+          "H1": 0.0515,
+          "H2": 0.1654,
+          "H3": 0.2426,
+          "H4": 0.5404
+        },
+        "priors": {
+          "H1": 0.07,
+          "H2": 0.18,
+          "H3": 0.33,
+          "H4": 0.42
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_019"
+        ],
+        "likelihoods": {
+          "H1": 0.2,
+          "H2": 0.25,
+          "H3": 0.2,
+          "H4": 0.35
+        },
+        "note": "Legal challenge plus 150-day statutory sunset raises odds of expiration (H1) and partial rollback (H4); no evidence of expansion.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "turningPoint": {
+          "type": "THRESHOLD_CROSSED",
+          "hypothesis": "H4",
+          "from": 0.42,
+          "to": 0.5404
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-24",
+        "posteriors": {
+          "H1": 0.0136,
+          "H2": 0.1363,
+          "H3": 0.2799,
+          "H4": 0.5701
+        },
+        "priors": {
+          "H1": 0.0515,
+          "H2": 0.1654,
+          "H3": 0.2426,
+          "H4": 0.5404
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_020"
+        ],
+        "likelihoods": {
+          "H1": 0.08,
+          "H2": 0.25,
+          "H3": 0.35,
+          "H4": 0.32
+        },
+        "note": "Admin explicit plan to replace with Section 301/232 argues against H1 clean expiry; plausible replacement rates typically higher than 10%, lifting H3. Active bilateral talks keep H4 alive.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-24",
+        "posteriors": {
+          "H1": 0.008,
+          "H2": 0.1277,
+          "H3": 0.1967,
+          "H4": 0.6677
+        },
+        "priors": {
+          "H1": 0.0136,
+          "H2": 0.1363,
+          "H3": 0.2799,
+          "H4": 0.5701
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_021"
+        ],
+        "likelihoods": {
+          "H1": 0.5,
+          "H2": 0.8,
+          "H3": 0.6,
+          "H4": 1.0
+        },
+        "note": "Active bilateral deal-making environment and legal pressure mildly favor partial rollback paths while keeping replacement authority live.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-25",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.1524,
+          "H3": 0.3912,
+          "H4": 0.4514
+        },
+        "priors": {
+          "H1": 0.008,
+          "H2": 0.1277,
+          "H3": 0.1967,
+          "H4": 0.6677
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_022"
+        ],
+        "likelihoods": {
+          "H1": 0.03,
+          "H2": 0.3,
+          "H3": 0.5,
+          "H4": 0.17
+        },
+        "note": "Section 301 prep is a structured replacement path (favors H2/H3); rate already at 15% maximum and broad scope discourages H1 (clean expiry); active investigations slow bilateral rollback (H4 weaker).",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "turningPoint": {
+          "type": "BRANCH_DEATH",
+          "hypothesis": "H1",
+          "lastPosterior": 0.005
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-25",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.2475,
+          "H3": 0.3811,
+          "H4": 0.3664
+        },
+        "priors": {
+          "H1": 0.005,
+          "H2": 0.1524,
+          "H3": 0.3912,
+          "H4": 0.4514
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_023"
+        ],
+        "likelihoods": {
+          "H1": 0.4,
+          "H2": 1.0,
+          "H3": 0.6,
+          "H4": 0.5
+        },
+        "note": "Status quo at 10% with active legal challenge but no rollback — supports H2; expansion-to-15% threat keeps H3 alive; bilateral-deal H4 path neither advanced nor closed.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "turningPoint": {
+          "type": "LEADING_CHANGED",
+          "from": "H4",
+          "to": "H3",
+          "fromProb": 0.4514,
+          "toProb": 0.3811
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-26",
+        "posteriors": {
+          "H1": 0.006,
+          "H2": 0.248,
+          "H3": 0.3055,
+          "H4": 0.4405
+        },
+        "priors": {
+          "H1": 0.005,
+          "H2": 0.2475,
+          "H3": 0.3811,
+          "H4": 0.3664
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_024"
+        ],
+        "likelihoods": {
+          "H1": 0.3,
+          "H2": 0.25,
+          "H3": 0.2,
+          "H4": 0.3
+        },
+        "note": "Pending CIT lawsuit + absent extension bill + weak legal grounds elevate the expiry hypothesis above its current 0.005 floor.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "turningPoint": {
+          "type": "LEADING_CHANGED",
+          "from": "H3",
+          "to": "H4",
+          "fromProb": 0.3811,
+          "toProb": 0.4405
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
       }
     ]
   },
@@ -1071,6 +1360,180 @@
       "ledger": "DECISION",
       "claimState": "SUPPORTED",
       "effectiveWeight": 1.0
+    },
+    {
+      "id": "ev_019",
+      "time": "2026-04-24T02:25:41+00:00",
+      "tag": "POLICY",
+      "tags": [
+        "POLICY",
+        "LEGAL"
+      ],
+      "text": "US Court of International Trade heard oral argument 2026-04-10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Section 122 tariffs; 10% surcharge expires 2026-07-24 absent Congressional extension; CBP launched CAPE IEEPA refund processing 2026-04-20.",
+      "provenance": "OBSERVED",
+      "source": "Law Offices of Snell & Wilmer / Time / USTR",
+      "posteriorImpact": "NONE",
+      "url": "https://www.swlaw.com/publication/tariffs-redux-what-importers-should-know-about-ieepa-refunds-and-section-122/",
+      "ledger": "DECISION",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.4555
+    },
+    {
+      "time": "2026-04-24T02:25:41+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: stale_evidence, quorum_failure. Reason: Legal challenge plus 150-day statutory sunset raises odds of expiration (H1) and partial rollback (H4); no evidence of expansion.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_020",
+      "time": "2026-04-24T13:49:14+00:00",
+      "tag": "POLICY",
+      "tags": [
+        "POLICY",
+        "ECON"
+      ],
+      "text": "Section 122 10% tariff in effect Feb 24 2026 through statutory 150-day expiry July 24 2026. USTR Greer announced new Section 301 investigations on major trading partners; administration previewed Section 232 sectoral actions as replacements. IEEPA refund processing began April 20. No congressional extension indicated.",
+      "provenance": "OBSERVED",
+      "source": "White & Case / Wiley / Time",
+      "posteriorImpact": "NONE",
+      "url": "https://www.whitecase.com/insight-alert/trump-administration-imposes-10-section-122-tariff-plan-replace-ieepa-tariffs",
+      "ledger": "DECISION",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.2908
+    },
+    {
+      "id": "ev_021",
+      "time": "2026-04-24T19:30:14+00:00",
+      "tag": "EVENT",
+      "tags": [
+        "EVENT",
+        "POL"
+      ],
+      "text": "ITC public hearings on Sec 122 tariffs begin 4/28; 24-state lawsuit filed 3/5 challenging legality; tariff statutorily expires 7/24/2026 absent new authority.",
+      "provenance": "OBSERVED",
+      "source": "White & Case / Duane Morris",
+      "posteriorImpact": "NONE",
+      "url": "https://www.whitecase.com/insight-alert/trump-administration-imposes-10-section-122-tariff-plan-replace-ieepa-tariffs",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.2908
+    },
+    {
+      "time": "2026-04-24T19:30:14+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: stale_evidence. Reason: Active bilateral deal-making environment and legal pressure mildly favor partial rollback paths while keeping replacement authority live.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_022",
+      "time": "2026-04-25T13:19:53+00:00",
+      "tag": "POLICY",
+      "tags": [
+        "POLICY",
+        "EVENT"
+      ],
+      "text": "Section 122 rate raised to 15% statutory maximum effective Feb 22-24, 2026; USTR initiated Section 301 investigations March 11 targeting 16 economies for excess capacity and 60+ for forced labor as durable replacement track. Hard sunset July 24, 2026.",
+      "provenance": "OBSERVED",
+      "source": "Covington & Burling / GlobalTradeAlert / USTR",
+      "posteriorImpact": "NONE",
+      "url": "https://www.cov.com/en/news-and-insights/insights/2026/02/ieepa-tariffs-terminated-replacement-section-122-tariffs-take-effect",
+      "ledger": "DECISION",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.4118
+    },
+    {
+      "time": "2026-04-25T13:19:53+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-25T13:19:53+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, stale_evidence, quorum_failure. Reason: Section 301 prep is a structured replacement path (favors H2/H3); rate already at 15% maximum and broad scope discourages H1 (clean expiry); active investigations slow bilateral rollback (H4 weaker).",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_023",
+      "time": "2026-04-25T14:24:49+00:00",
+      "tag": "EVENT",
+      "tags": [
+        "EVENT",
+        "ECON",
+        "POLICY"
+      ],
+      "text": "Section 122 tariffs effective Feb 24, 2026 at 10% remain in force; statutory expiration July 24, 2026 unless Congress extends. Court of International Trade heard oral arguments April 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging the tariffs. Trump's Feb 21 signal to raise to 15% has not been executed.",
+      "provenance": "OBSERVED",
+      "source": "Duane Morris, Customs and International Trade Law Blog",
+      "posteriorImpact": "NONE",
+      "url": "https://customsandinternationaltradelaw.com/2026/04/17/breaking-trade-news-ieepa-refunds-update-section-122-hearing-upcoming-301-tariffs/",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-25T14:24:49+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-25T14:24:49+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: stale_evidence. Reason: Status quo at 10% with active legal challenge but no rollback — supports H2; expansion-to-15% threat keeps H3 alive; bilateral-deal H4 path neither advanced nor closed.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_024",
+      "time": "2026-04-26T16:59:06+00:00",
+      "tag": "EVENT",
+      "tags": [
+        "EVENT",
+        "POLICY",
+        "LEGAL"
+      ],
+      "text": "Section 122 tariffs effective Feb 24, 2026 expire July 24, 2026 absent congressional extension; 24 AGs and governors filed CIT challenge Mar 5; trade experts argue legal grounds for invocation are weak. No congressional extension legislation has advanced as of late April.",
+      "provenance": "OBSERVED",
+      "source": "Covington / CIT / Bradley",
+      "posteriorImpact": "NONE",
+      "url": "https://www.cov.com/en/news-and-insights/insights/2026/02/ieepa-tariffs-terminated-replacement-section-122-tariffs-take-effect",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-26T16:59:06+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: stale_evidence. Reason: Pending CIT lawsuit + absent extension bill + weak legal grounds elevate the expiry hypothesis above its current 0.005 floor.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
     }
   ],
   "dataFeeds": {
@@ -1221,20 +1684,23 @@
   "governance": {
     "health": "DEGRADED",
     "issues": [
-      "Majority stale evidence (19/32)"
+      "Majority stale evidence (36/45)",
+      "Stale dependency: calibration-us-recession-2026.H1 assumed=0.55, actual=0.882, drift=33.20%",
+      "Stale dependency: calibration-us-recession-2026.H2 assumed=0.22, actual=0.0804, drift=13.96%",
+      "Stale dependency: calibration-us-recession-2026.H3 assumed=0.14, actual=0.0193, drift=12.07%"
     ],
     "rt": {
       "rt": 0.0,
       "regime": "SAFE",
       "worst_hypothesis": "H1"
     },
-    "entropy": 1.7673,
+    "entropy": 1.5868,
     "maxEntropy": 2.0,
-    "uncertaintyRatio": 0.8837,
+    "uncertaintyRatio": 0.7934,
     "evidenceFreshness": {
-      "fresh": 13,
-      "stale": 19,
-      "total": 32
+      "fresh": 9,
+      "stale": 36,
+      "total": 45
     },
     "hypothesisAdmissibility": {
       "H1": "ADMISSIBLE",
@@ -1243,11 +1709,40 @@
       "H4": "ADMISSIBLE"
     },
     "klFromPrior": {
-      "kl_divergence": 0.0,
+      "kl_divergence": 0.0622,
       "interpretation": "MODERATE"
     },
-    "lastComputed": "2026-04-22T05:19:58+00:00",
-    "staleDependencies": 0,
+    "lastComputed": "2026-04-29T02:30:59+00:00",
+    "staleDependencies": 3,
+    "staleDependencyDetails": [
+      {
+        "upstream_slug": "calibration-us-recession-2026",
+        "hypothesis": "H1",
+        "assumed": 0.55,
+        "actual": 0.882,
+        "drift": 0.332,
+        "tolerance": 0.1,
+        "stale": true
+      },
+      {
+        "upstream_slug": "calibration-us-recession-2026",
+        "hypothesis": "H2",
+        "assumed": 0.22,
+        "actual": 0.0804,
+        "drift": 0.1396,
+        "tolerance": 0.1,
+        "stale": true
+      },
+      {
+        "upstream_slug": "calibration-us-recession-2026",
+        "hypothesis": "H3",
+        "assumed": 0.14,
+        "actual": 0.0193,
+        "drift": 0.1207,
+        "tolerance": 0.1,
+        "stale": true
+      }
+    ],
     "calibrationHealth": "ACCEPTABLE",
     "unresolvedContradictions": 0,
     "expiredHypotheses": [
@@ -1295,7 +1790,7 @@
         }
       },
       "indistinguishable": [],
-      "lastChecked": "2026-04-22T05:19:58+00:00"
+      "lastChecked": "2026-04-29T02:30:59+00:00"
     }
   },
   "dependencies": {
@@ -1514,6 +2009,138 @@
           "H4": 0.9407
         },
         "entropy": 0.3735
+      },
+      {
+        "timestamp": "2026-04-24T02:25:41+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0515,
+          "H2": 0.1654,
+          "H3": 0.2426,
+          "H4": 0.5404
+        },
+        "entropy": 1.6253
+      },
+      {
+        "timestamp": "2026-04-24T02:25:41+00:00",
+        "trigger": "pipeline:ev_019",
+        "posteriors": {
+          "H1": 0.0515,
+          "H2": 0.1654,
+          "H3": 0.2426,
+          "H4": 0.5404
+        },
+        "entropy": 1.6253
+      },
+      {
+        "timestamp": "2026-04-24T13:49:14+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0136,
+          "H2": 0.1363,
+          "H3": 0.2799,
+          "H4": 0.5701
+        },
+        "entropy": 1.4526
+      },
+      {
+        "timestamp": "2026-04-24T13:49:14+00:00",
+        "trigger": "pipeline:ev_020",
+        "posteriors": {
+          "H1": 0.0136,
+          "H2": 0.1363,
+          "H3": 0.2799,
+          "H4": 0.5701
+        },
+        "entropy": 1.4526
+      },
+      {
+        "timestamp": "2026-04-24T19:30:14+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.008,
+          "H2": 0.1277,
+          "H3": 0.1967,
+          "H4": 0.6677
+        },
+        "entropy": 1.2854
+      },
+      {
+        "timestamp": "2026-04-24T19:30:14+00:00",
+        "trigger": "pipeline:ev_021",
+        "posteriors": {
+          "H1": 0.008,
+          "H2": 0.1277,
+          "H3": 0.1967,
+          "H4": 0.6677
+        },
+        "entropy": 1.2854
+      },
+      {
+        "timestamp": "2026-04-25T13:19:53+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.1524,
+          "H3": 0.3912,
+          "H4": 0.4514
+        },
+        "entropy": 1.4995
+      },
+      {
+        "timestamp": "2026-04-25T13:19:53+00:00",
+        "trigger": "pipeline:ev_022",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.1524,
+          "H3": 0.3912,
+          "H4": 0.4514
+        },
+        "entropy": 1.4995
+      },
+      {
+        "timestamp": "2026-04-25T14:24:49+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.2475,
+          "H3": 0.3811,
+          "H4": 0.3664
+        },
+        "entropy": 1.5979
+      },
+      {
+        "timestamp": "2026-04-25T14:24:49+00:00",
+        "trigger": "pipeline:ev_023",
+        "posteriors": {
+          "H1": 0.005,
+          "H2": 0.2475,
+          "H3": 0.3811,
+          "H4": 0.3664
+        },
+        "entropy": 1.5979
+      },
+      {
+        "timestamp": "2026-04-26T16:59:06+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.006,
+          "H2": 0.248,
+          "H3": 0.3055,
+          "H4": 0.4405
+        },
+        "entropy": 1.5868
+      },
+      {
+        "timestamp": "2026-04-26T16:59:06+00:00",
+        "trigger": "pipeline:ev_024",
+        "posteriors": {
+          "H1": 0.006,
+          "H2": 0.248,
+          "H3": 0.3055,
+          "H4": 0.4405
+        },
+        "entropy": 1.5868
       }
     ],
     "outcomes": [
@@ -2976,6 +3603,1698 @@
         "detected": "2026-04-21T05:33:07Z",
         "resolution": "SUPERSEDED",
         "resolvedAt": "2026-04-21T05:33:07Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T05:33:07+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: stale_evidence, quorum_failure. Reason: USMCA talks launch is H4-directional (bilateral deal progress). Section 301 investigations are H3 pipeline risk. Net: H4 remains modal but H3 threat elevated by Section 301 activity.",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "US Court of International Trade heard oral argument 2026-04-10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Section 122 tariffs; 10% surcharge expires 2026-07-24 absent Congressional extension; CBP launched CAPE IEEPA refund processing 2026-04-20.",
+        "reason": "Numeric divergence 59.5% on metric (context: section): new=122.0, existing=301.0, threshold=10%",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T05:33:07+00:00",
+        "entry_a_text": "US and Mexico formally launched USMCA bilateral review discussions on March 19, 2026, focusing on rules of origin, supply chain security, and tariff alignment. Two sweeping Section 301 investigations targeting structural excess manufacturing capacity were running as of mid-March against 16 major trading partners. Approximately 20 bilateral trade frameworks previously reported.",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "US Court of International Trade heard oral argument 2026-04-10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Section 122 tariffs; 10% surcharge expires 2026-07-24 absent Congressional extension; CBP launched CAPE IEEPA refund processing 2026-04-20.",
+        "reason": "Numeric divergence 59.5% on metric (context: section): new=122.0, existing=301.0, threshold=10%",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "Court of International Trade heard oral arguments Apr 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Section 122 tariffs. No ruling yet; tariff set to terminate 12:01am EDT July 24, 2026.",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "US Court of International Trade heard oral argument 2026-04-10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Section 122 tariffs; 10% surcharge expires 2026-07-24 absent Congressional extension; CBP launched CAPE IEEPA refund processing 2026-04-20.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: barrel, burlap, challenging, court, heard",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-20T14:03:51+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, stale_evidence, quorum_failure. Reason: Rate hike from 10 to 15 percent at statutory max signals expansion posture not rollback; legal challenge raises scheduled-expiry probability H1; CIT challenge complicates H4 bilateral-deal timeline before July 23 deadline.",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "US Court of International Trade heard oral argument 2026-04-10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Section 122 tariffs; 10% surcharge expires 2026-07-24 absent Congressional extension; CBP launched CAPE IEEPA refund processing 2026-04-20.",
+        "reason": "Numeric divergence 87.7% on metric (context: 10): new=122.0, existing=15.0, threshold=10%",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-20T14:03:51+00:00",
+        "entry_a_text": "Following SCOTUS IEEPA ruling Feb 20, 2026, administration imposed Section 122 tariffs at 10% then boosted to 15% (statutory max). Section 122 surcharge expires July 23, 2026 (150-day limit). Twenty state AGs plus two governors filed challenge in Court of International Trade arguing statute does not apply to current US balance-of-payments position.",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "US Court of International Trade heard oral argument 2026-04-10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Section 122 tariffs; 10% surcharge expires 2026-07-24 absent Congressional extension; CBP launched CAPE IEEPA refund processing 2026-04-20.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: court, expires, ieepa, international, section",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-19T00:57:11+00:00",
+        "entry_a_text": "Section 122 10% import surcharge proclaimed Feb 20, 2026 (following Feb 2026 SCOTUS ruling against IEEPA tariffs) took effect Feb 24, 2026; statutory 150-day limit expires July 24, 2026. No bilateral deals announced as of April 18. Revenue estimate ~$35B over 150 days.",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "US Court of International Trade heard oral argument 2026-04-10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Section 122 tariffs; 10% surcharge expires 2026-07-24 absent Congressional extension; CBP launched CAPE IEEPA refund processing 2026-04-20.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: expires, ieepa, section, surcharge, tariffs",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T23:08:31+00:00",
+        "entry_a_text": "Court of International Trade held oral argument Apr 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Proclamation 11012 Section 122 surcharge. Rate currently 15% (raised from 10% after SCOTUS struck IEEPA tariffs Feb 20). Statutory expiry July 24, 2026.",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "US Court of International Trade heard oral argument 2026-04-10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Section 122 tariffs; 10% surcharge expires 2026-07-24 absent Congressional extension; CBP launched CAPE IEEPA refund processing 2026-04-20.",
+        "reason": "Numeric divergence 98.9% on metric (context: challenging, section, trump): new=122.0, existing=11012.0, threshold=10%",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T15:21:52+00:00",
+        "entry_a_text": "Section 122 tariffs face court challenge: CIT heard oral argument Apr 10 in Oregon v. Trump and Burlap & Barrel v. Trump. Trump modified Section 232 tariff regime for steel/aluminum/copper effective Apr 6. 15% rate increase announced but not yet implemented. 150-day expiry on Jul 24, 2026 unless Congress extends.",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "US Court of International Trade heard oral argument 2026-04-10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Section 122 tariffs; 10% surcharge expires 2026-07-24 absent Congressional extension; CBP launched CAPE IEEPA refund processing 2026-04-20.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: argument, barrel, burlap, court, heard",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T14:18:28+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: stale_evidence, quorum_failure. Reason: Evidence ev_012: 18 bilateral trade frameworks reported as of Apr 16; Section 122 rate remains 10",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "US Court of International Trade heard oral argument 2026-04-10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Section 122 tariffs; 10% surcharge expires 2026-07-24 absent Congressional extension; CBP launched CAPE IEEPA refund processing 2026-04-20.",
+        "reason": "Numeric divergence 86.9% on metric (context: section): new=122.0, existing=16.0, threshold=10%",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T14:01:37+00:00",
+        "entry_a_text": "18 bilateral trade frameworks reported as of Apr 16; Section 122 rate remains 10% (15% announced but no formal order); two active lawsuits at CIT (oral args Apr 10-11); July 24 expiry firm at 150 days",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "US Court of International Trade heard oral argument 2026-04-10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Section 122 tariffs; 10% surcharge expires 2026-07-24 absent Congressional extension; CBP launched CAPE IEEPA refund processing 2026-04-20.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: oral, section, trade",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-16T03:43:52+00:00",
+        "entry_a_text": "White House reports 18 bilateral framework trade agreements completed covering more than half of global GDP as result of Section 122 tariffs. CIT three-judge panel heard oral arguments April 10-11 on 23-state legal challenge.",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "US Court of International Trade heard oral argument 2026-04-10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Section 122 tariffs; 10% surcharge expires 2026-07-24 absent Congressional extension; CBP launched CAPE IEEPA refund processing 2026-04-20.",
+        "reason": "Numeric divergence 91.8% on metric (context: section): new=10.0, existing=122.0, threshold=10%",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-02T00:00:00Z",
+        "entry_a_text": "One-year anniversary of 'Liberation Day' tariffs. NPR/CNBC assessments: tariffs have not produced promised economic boom. Tax Foundation estimates average household cost $700/year. Trade deficit not meaningfully altered.",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "US Court of International Trade heard oral argument 2026-04-10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Section 122 tariffs; 10% surcharge expires 2026-07-24 absent Congressional extension; CBP launched CAPE IEEPA refund processing 2026-04-20.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: tariffs, trade",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-10T00:00:00Z",
+        "entry_a_text": "CIT oral arguments held April 10-11. Three-judge panel (Barnett, Kelly, Stanceu) sharply questioned both sides for 3+ hours. Key issue: whether 'balance-of-payments deficits' in 1974 statute covers trade deficits. Awkward for government: DOJ argued last year Section 122 had 'no obvious application' to trade deficits. Awkward for challengers: CIT itself wrote Section 122 was available when striking IEEPA tariffs.",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "US Court of International Trade heard oral argument 2026-04-10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Section 122 tariffs; 10% surcharge expires 2026-07-24 absent Congressional extension; CBP launched CAPE IEEPA refund processing 2026-04-20.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: ieepa, oral, section, tariffs, trade",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-06T00:00:00Z",
+        "entry_a_text": "Reuters reports Trump-Xi summit planned for mid-May in Beijing. Trade war framing: China responded with reciprocal investigations. Prior Busan meeting produced truce (tariff trim + fentanyl + soybean purchases). May summit is highest-level bilateral trade engagement since Section 122.",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "US Court of International Trade heard oral argument 2026-04-10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Section 122 tariffs; 10% surcharge expires 2026-07-24 absent Congressional extension; CBP launched CAPE IEEPA refund processing 2026-04-20.",
+        "reason": "Numeric divergence 91.8% on metric (context: section): new=10.0, existing=122.0, threshold=10%",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-03-30T00:00:00Z",
+        "entry_a_text": "As of March 30, rate remains 10%. No formal proclamation raising to 15% has been issued despite repeated announcements. 15% rhetoric has not translated to Federal Register action.",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "US Court of International Trade heard oral argument 2026-04-10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Section 122 tariffs; 10% surcharge expires 2026-07-24 absent Congressional extension; CBP launched CAPE IEEPA refund processing 2026-04-20.",
+        "reason": "Numeric divergence 75.4% on metric (context: 10): new=122.0, existing=30.0, threshold=10%",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-03-09T00:00:00Z",
+        "entry_a_text": "Liberty Justice Center files second suit (Burlap and Barrel v. Trump, Case No. 1:26-cv-01606) on behalf of spice importer and toy company. Assigned to same 3-judge CIT panel (Barnett, Kelly, Stanceu).",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "US Court of International Trade heard oral argument 2026-04-10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Section 122 tariffs; 10% surcharge expires 2026-07-24 absent Congressional extension; CBP launched CAPE IEEPA refund processing 2026-04-20.",
+        "reason": "Numeric divergence 99.2% on metric (context: trump): new=122.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-03-05T00:00:00Z",
+        "entry_a_text": "24 state attorneys general (led by Oregon, Arizona, California, New York, Vermont) file suit at US Court of International Trade challenging Section 122 surcharge. Case No. 1:26-cv-01472. States argue balance-of-payments requirement not met.",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "US Court of International Trade heard oral argument 2026-04-10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Section 122 tariffs; 10% surcharge expires 2026-07-24 absent Congressional extension; CBP launched CAPE IEEPA refund processing 2026-04-20.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: challenging, court, international, oregon, section",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-03-04T00:00:00Z",
+        "entry_a_text": "Treasury Secretary Bessent confirms intent to raise to 15% on CNBC. Also references ongoing Section 301 investigations and Section 232 studies as successor frameworks during 150-day window.",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "US Court of International Trade heard oral argument 2026-04-10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Section 122 tariffs; 10% surcharge expires 2026-07-24 absent Congressional extension; CBP launched CAPE IEEPA refund processing 2026-04-20.",
+        "reason": "Numeric divergence 59.5% on metric (context: section): new=122.0, existing=301.0, threshold=10%",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-02-21T00:00:00Z",
+        "entry_a_text": "Trump announces via social media intent to raise Section 122 rate to 15% (statutory maximum). No formal proclamation issued.",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "US Court of International Trade heard oral argument 2026-04-10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Section 122 tariffs; 10% surcharge expires 2026-07-24 absent Congressional extension; CBP launched CAPE IEEPA refund processing 2026-04-20.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: section, trump",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-02-20T00:00:00Z",
+        "entry_a_text": "SCOTUS strikes IEEPA-based tariffs (Learning Resources v. Trump). Same day, Trump issues Section 122 proclamation: 10% universal import surcharge effective Feb 24. 150-day clock starts.",
+        "entry_b_time": "2026-04-24T02:25:41+00:00",
+        "entry_b_text": "US Court of International Trade heard oral argument 2026-04-10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Section 122 tariffs; 10% surcharge expires 2026-07-24 absent Congressional extension; CBP launched CAPE IEEPA refund processing 2026-04-20.",
+        "reason": "Numeric divergence 91.8% on metric (context: section, surcharge): new=122.0, existing=10.0, threshold=10%",
+        "detected": "2026-04-24T02:25:41Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:41Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "US Court of International Trade heard oral argument 2026-04-10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Section 122 tariffs; 10% surcharge expires 2026-07-24 absent Congressional extension; CBP launched CAPE IEEPA refund processing 2026-04-20.",
+        "entry_b_time": "2026-04-24T13:49:14+00:00",
+        "entry_b_text": "Section 122 10% tariff in effect Feb 24 2026 through statutory 150-day expiry July 24 2026. USTR Greer announced new Section 301 investigations on major trading partners; administration previewed Section 232 sectoral actions as replacements. IEEPA refund processing began April 20. No congressional extension indicated.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: congressional, extension, ieepa, processing, refund",
+        "detected": "2026-04-24T13:49:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:14Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-21T05:33:07+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: stale_evidence, quorum_failure. Reason: USMCA talks launch is H4-directional (bilateral deal progress). Section 301 investigations are H3 pipeline risk. Net: H4 remains modal but H3 threat elevated by Section 301 activity.",
+        "entry_b_time": "2026-04-24T13:49:14+00:00",
+        "entry_b_text": "Section 122 10% tariff in effect Feb 24 2026 through statutory 150-day expiry July 24 2026. USTR Greer announced new Section 301 investigations on major trading partners; administration previewed Section 232 sectoral actions as replacements. IEEPA refund processing began April 20. No congressional extension indicated.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: investigations, section",
+        "detected": "2026-04-24T13:49:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:14Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-21T05:33:07+00:00",
+        "entry_a_text": "US and Mexico formally launched USMCA bilateral review discussions on March 19, 2026, focusing on rules of origin, supply chain security, and tariff alignment. Two sweeping Section 301 investigations targeting structural excess manufacturing capacity were running as of mid-March against 16 major trading partners. Approximately 20 bilateral trade frameworks previously reported.",
+        "entry_b_time": "2026-04-24T13:49:14+00:00",
+        "entry_b_text": "Section 122 10% tariff in effect Feb 24 2026 through statutory 150-day expiry July 24 2026. USTR Greer announced new Section 301 investigations on major trading partners; administration previewed Section 232 sectoral actions as replacements. IEEPA refund processing began April 20. No congressional extension indicated.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: investigations, major, partners, section, tariff",
+        "detected": "2026-04-24T13:49:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "Court of International Trade heard oral arguments Apr 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Section 122 tariffs. No ruling yet; tariff set to terminate 12:01am EDT July 24, 2026.",
+        "entry_b_time": "2026-04-24T13:49:14+00:00",
+        "entry_b_text": "Section 122 10% tariff in effect Feb 24 2026 through statutory 150-day expiry July 24 2026. USTR Greer announced new Section 301 investigations on major trading partners; administration previewed Section 232 sectoral actions as replacements. IEEPA refund processing began April 20. No congressional extension indicated.",
+        "reason": "Numeric divergence 91.8% on metric (context: in): new=122.0, existing=10.0, threshold=10%",
+        "detected": "2026-04-24T13:49:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:14Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-20T14:03:51+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, stale_evidence, quorum_failure. Reason: Rate hike from 10 to 15 percent at statutory max signals expansion posture not rollback; legal challenge raises scheduled-expiry probability H1; CIT challenge complicates H4 bilateral-deal timeline before July 23 deadline.",
+        "entry_b_time": "2026-04-24T13:49:14+00:00",
+        "entry_b_text": "Section 122 10% tariff in effect Feb 24 2026 through statutory 150-day expiry July 24 2026. USTR Greer announced new Section 301 investigations on major trading partners; administration previewed Section 232 sectoral actions as replacements. IEEPA refund processing began April 20. No congressional extension indicated.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: expiry, july, statutory",
+        "detected": "2026-04-24T13:49:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:14Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-20T14:03:51+00:00",
+        "entry_a_text": "Following SCOTUS IEEPA ruling Feb 20, 2026, administration imposed Section 122 tariffs at 10% then boosted to 15% (statutory max). Section 122 surcharge expires July 23, 2026 (150-day limit). Twenty state AGs plus two governors filed challenge in Court of International Trade arguing statute does not apply to current US balance-of-payments position.",
+        "entry_b_time": "2026-04-24T13:49:14+00:00",
+        "entry_b_text": "Section 122 10% tariff in effect Feb 24 2026 through statutory 150-day expiry July 24 2026. USTR Greer announced new Section 301 investigations on major trading partners; administration previewed Section 232 sectoral actions as replacements. IEEPA refund processing began April 20. No congressional extension indicated.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: administration, day, feb, ieepa, july",
+        "detected": "2026-04-24T13:49:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-19T00:57:11+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: stale_evidence. Reason: No replacement authority yet announced and no bilateral deals ~3 months from expiry keeps H4 partial-rollback as median with rising H3 expansion tail.",
+        "entry_b_time": "2026-04-24T13:49:14+00:00",
+        "entry_b_text": "Section 122 10% tariff in effect Feb 24 2026 through statutory 150-day expiry July 24 2026. USTR Greer announced new Section 301 investigations on major trading partners; administration previewed Section 232 sectoral actions as replacements. IEEPA refund processing began April 20. No congressional extension indicated.",
+        "reason": "Numeric divergence 87.5% on metric (context: expiry): new=24.0, existing=3.0, threshold=10%",
+        "detected": "2026-04-24T13:49:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-19T00:57:11+00:00",
+        "entry_a_text": "Section 122 10% import surcharge proclaimed Feb 20, 2026 (following Feb 2026 SCOTUS ruling against IEEPA tariffs) took effect Feb 24, 2026; statutory 150-day limit expires July 24, 2026. No bilateral deals announced as of April 18. Revenue estimate ~$35B over 150 days.",
+        "entry_b_time": "2026-04-24T13:49:14+00:00",
+        "entry_b_text": "Section 122 10% tariff in effect Feb 24 2026 through statutory 150-day expiry July 24 2026. USTR Greer announced new Section 301 investigations on major trading partners; administration previewed Section 232 sectoral actions as replacements. IEEPA refund processing began April 20. No congressional extension indicated.",
+        "reason": "Numeric divergence 91.8% on metric (context: section): new=122.0, existing=10.0, threshold=10%",
+        "detected": "2026-04-24T13:49:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:14Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T23:08:31+00:00",
+        "entry_a_text": "Court of International Trade held oral argument Apr 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Proclamation 11012 Section 122 surcharge. Rate currently 15% (raised from 10% after SCOTUS struck IEEPA tariffs Feb 20). Statutory expiry July 24, 2026.",
+        "entry_b_time": "2026-04-24T13:49:14+00:00",
+        "entry_b_text": "Section 122 10% tariff in effect Feb 24 2026 through statutory 150-day expiry July 24 2026. USTR Greer announced new Section 301 investigations on major trading partners; administration previewed Section 232 sectoral actions as replacements. IEEPA refund processing began April 20. No congressional extension indicated.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: expiry, feb, ieepa, july, section",
+        "detected": "2026-04-24T13:49:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:14Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T15:21:52+00:00",
+        "entry_a_text": "Section 122 tariffs face court challenge: CIT heard oral argument Apr 10 in Oregon v. Trump and Burlap & Barrel v. Trump. Trump modified Section 232 tariff regime for steel/aluminum/copper effective Apr 6. 15% rate increase announced but not yet implemented. 150-day expiry on Jul 24, 2026 unless Congress extends.",
+        "entry_b_time": "2026-04-24T13:49:14+00:00",
+        "entry_b_text": "Section 122 10% tariff in effect Feb 24 2026 through statutory 150-day expiry July 24 2026. USTR Greer announced new Section 301 investigations on major trading partners; administration previewed Section 232 sectoral actions as replacements. IEEPA refund processing began April 20. No congressional extension indicated.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: announced, day, expiry, section, tariff",
+        "detected": "2026-04-24T13:49:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T14:18:28+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: stale_evidence, quorum_failure. Reason: Evidence ev_012: 18 bilateral trade frameworks reported as of Apr 16; Section 122 rate remains 10",
+        "entry_b_time": "2026-04-24T13:49:14+00:00",
+        "entry_b_text": "Section 122 10% tariff in effect Feb 24 2026 through statutory 150-day expiry July 24 2026. USTR Greer announced new Section 301 investigations on major trading partners; administration previewed Section 232 sectoral actions as replacements. IEEPA refund processing began April 20. No congressional extension indicated.",
+        "reason": "Numeric divergence 86.9% on metric (context: section): new=122.0, existing=16.0, threshold=10%",
+        "detected": "2026-04-24T13:49:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T14:01:37+00:00",
+        "entry_a_text": "18 bilateral trade frameworks reported as of Apr 16; Section 122 rate remains 10% (15% announced but no formal order); two active lawsuits at CIT (oral args Apr 10-11); July 24 expiry firm at 150 days",
+        "entry_b_time": "2026-04-24T13:49:14+00:00",
+        "entry_b_text": "Section 122 10% tariff in effect Feb 24 2026 through statutory 150-day expiry July 24 2026. USTR Greer announced new Section 301 investigations on major trading partners; administration previewed Section 232 sectoral actions as replacements. IEEPA refund processing began April 20. No congressional extension indicated.",
+        "reason": "Numeric divergence 86.9% on metric (context: section): new=122.0, existing=16.0, threshold=10%",
+        "detected": "2026-04-24T13:49:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:14Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-16T03:43:52+00:00",
+        "entry_a_text": "White House reports 18 bilateral framework trade agreements completed covering more than half of global GDP as result of Section 122 tariffs. CIT three-judge panel heard oral arguments April 10-11 on 23-state legal challenge.",
+        "entry_b_time": "2026-04-24T13:49:14+00:00",
+        "entry_b_text": "Section 122 10% tariff in effect Feb 24 2026 through statutory 150-day expiry July 24 2026. USTR Greer announced new Section 301 investigations on major trading partners; administration previewed Section 232 sectoral actions as replacements. IEEPA refund processing began April 20. No congressional extension indicated.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: april, section",
+        "detected": "2026-04-24T13:49:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:14Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-10T00:00:00Z",
+        "entry_a_text": "March 2026 CPI: headline +0.9% m/m, 3.3% annual (highest since April 2024). Energy +10.9% (Iran war driven). But core CPI +0.2% m/m, 2.6% annual — both below forecast. Tariff impact visible in apparel (+1%) and airline fares (+2.7%).",
+        "entry_b_time": "2026-04-24T13:49:14+00:00",
+        "entry_b_text": "Section 122 10% tariff in effect Feb 24 2026 through statutory 150-day expiry July 24 2026. USTR Greer announced new Section 301 investigations on major trading partners; administration previewed Section 232 sectoral actions as replacements. IEEPA refund processing began April 20. No congressional extension indicated.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: april, tariff",
+        "detected": "2026-04-24T13:49:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-10T00:00:00Z",
+        "entry_a_text": "CIT oral arguments held April 10-11. Three-judge panel (Barnett, Kelly, Stanceu) sharply questioned both sides for 3+ hours. Key issue: whether 'balance-of-payments deficits' in 1974 statute covers trade deficits. Awkward for government: DOJ argued last year Section 122 had 'no obvious application' to trade deficits. Awkward for challengers: CIT itself wrote Section 122 was available when striking IEEPA tariffs.",
+        "entry_b_time": "2026-04-24T13:49:14+00:00",
+        "entry_b_text": "Section 122 10% tariff in effect Feb 24 2026 through statutory 150-day expiry July 24 2026. USTR Greer announced new Section 301 investigations on major trading partners; administration previewed Section 232 sectoral actions as replacements. IEEPA refund processing began April 20. No congressional extension indicated.",
+        "reason": "Numeric divergence 93.8% on metric (context: in): new=122.0, existing=1974.0, threshold=10%",
+        "detected": "2026-04-24T13:49:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:14Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-06T00:00:00Z",
+        "entry_a_text": "Reuters reports Trump-Xi summit planned for mid-May in Beijing. Trade war framing: China responded with reciprocal investigations. Prior Busan meeting produced truce (tariff trim + fentanyl + soybean purchases). May summit is highest-level bilateral trade engagement since Section 122.",
+        "entry_b_time": "2026-04-24T13:49:14+00:00",
+        "entry_b_text": "Section 122 10% tariff in effect Feb 24 2026 through statutory 150-day expiry July 24 2026. USTR Greer announced new Section 301 investigations on major trading partners; administration previewed Section 232 sectoral actions as replacements. IEEPA refund processing began April 20. No congressional extension indicated.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: investigations, section, tariff",
+        "detected": "2026-04-24T13:49:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-03-30T00:00:00Z",
+        "entry_a_text": "As of March 30, rate remains 10%. No formal proclamation raising to 15% has been issued despite repeated announcements. 15% rhetoric has not translated to Federal Register action.",
+        "entry_b_time": "2026-04-24T13:49:14+00:00",
+        "entry_b_text": "Section 122 10% tariff in effect Feb 24 2026 through statutory 150-day expiry July 24 2026. USTR Greer announced new Section 301 investigations on major trading partners; administration previewed Section 232 sectoral actions as replacements. IEEPA refund processing began April 20. No congressional extension indicated.",
+        "reason": "Numeric divergence 75.4% on metric (context: 10): new=122.0, existing=30.0, threshold=10%",
+        "detected": "2026-04-24T13:49:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-03-09T00:00:00Z",
+        "entry_a_text": "Liberty Justice Center files second suit (Burlap and Barrel v. Trump, Case No. 1:26-cv-01606) on behalf of spice importer and toy company. Assigned to same 3-judge CIT panel (Barnett, Kelly, Stanceu).",
+        "entry_b_time": "2026-04-24T13:49:14+00:00",
+        "entry_b_text": "Section 122 10% tariff in effect Feb 24 2026 through statutory 150-day expiry July 24 2026. USTR Greer announced new Section 301 investigations on major trading partners; administration previewed Section 232 sectoral actions as replacements. IEEPA refund processing began April 20. No congressional extension indicated.",
+        "reason": "Numeric divergence 99.7% on metric (context: on): new=301.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-24T13:49:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-03-05T00:00:00Z",
+        "entry_a_text": "24 state attorneys general (led by Oregon, Arizona, California, New York, Vermont) file suit at US Court of International Trade challenging Section 122 surcharge. Case No. 1:26-cv-01472. States argue balance-of-payments requirement not met.",
+        "entry_b_time": "2026-04-24T13:49:14+00:00",
+        "entry_b_text": "Section 122 10% tariff in effect Feb 24 2026 through statutory 150-day expiry July 24 2026. USTR Greer announced new Section 301 investigations on major trading partners; administration previewed Section 232 sectoral actions as replacements. IEEPA refund processing began April 20. No congressional extension indicated.",
+        "reason": "Numeric divergence 91.8% on metric (context: section): new=10.0, existing=122.0, threshold=10%",
+        "detected": "2026-04-24T13:49:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:14Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-03-04T00:00:00Z",
+        "entry_a_text": "Treasury Secretary Bessent confirms intent to raise to 15% on CNBC. Also references ongoing Section 301 investigations and Section 232 studies as successor frameworks during 150-day window.",
+        "entry_b_time": "2026-04-24T13:49:14+00:00",
+        "entry_b_text": "Section 122 10% tariff in effect Feb 24 2026 through statutory 150-day expiry July 24 2026. USTR Greer announced new Section 301 investigations on major trading partners; administration previewed Section 232 sectoral actions as replacements. IEEPA refund processing began April 20. No congressional extension indicated.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: day, investigations, section",
+        "detected": "2026-04-24T13:49:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-02-21T00:00:00Z",
+        "entry_a_text": "Trump announces via social media intent to raise Section 122 rate to 15% (statutory maximum). No formal proclamation issued.",
+        "entry_b_time": "2026-04-24T13:49:14+00:00",
+        "entry_b_text": "Section 122 10% tariff in effect Feb 24 2026 through statutory 150-day expiry July 24 2026. USTR Greer announced new Section 301 investigations on major trading partners; administration previewed Section 232 sectoral actions as replacements. IEEPA refund processing began April 20. No congressional extension indicated.",
+        "reason": "Numeric divergence 91.8% on metric (context: section): new=10.0, existing=122.0, threshold=10%",
+        "detected": "2026-04-24T13:49:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:14Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-02-20T00:00:00Z",
+        "entry_a_text": "SCOTUS strikes IEEPA-based tariffs (Learning Resources v. Trump). Same day, Trump issues Section 122 proclamation: 10% universal import surcharge effective Feb 24. 150-day clock starts.",
+        "entry_b_time": "2026-04-24T13:49:14+00:00",
+        "entry_b_text": "Section 122 10% tariff in effect Feb 24 2026 through statutory 150-day expiry July 24 2026. USTR Greer announced new Section 301 investigations on major trading partners; administration previewed Section 232 sectoral actions as replacements. IEEPA refund processing began April 20. No congressional extension indicated.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: day, feb, ieepa, section",
+        "detected": "2026-04-24T13:49:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:14+00:00",
+        "entry_a_text": "Section 122 10% tariff in effect Feb 24 2026 through statutory 150-day expiry July 24 2026. USTR Greer announced new Section 301 investigations on major trading partners; administration previewed Section 232 sectoral actions as replacements. IEEPA refund processing began April 20. No congressional extension indicated.",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "ITC public hearings on Sec 122 tariffs begin 4/28; 24-state lawsuit filed 3/5 challenging legality; tariff statutorily expires 7/24/2026 absent new authority.",
+        "reason": "Numeric divergence 59.5% on metric (context: on): new=122.0, existing=301.0, threshold=10%",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "US Court of International Trade heard oral argument 2026-04-10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Section 122 tariffs; 10% surcharge expires 2026-07-24 absent Congressional extension; CBP launched CAPE IEEPA refund processing 2026-04-20.",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "ITC public hearings on Sec 122 tariffs begin 4/28; 24-state lawsuit filed 3/5 challenging legality; tariff statutorily expires 7/24/2026 absent new authority.",
+        "reason": "Numeric divergence 91.8% on metric (context: tariffs): new=122.0, existing=10.0, threshold=10%",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T05:33:07+00:00",
+        "entry_a_text": "US and Mexico formally launched USMCA bilateral review discussions on March 19, 2026, focusing on rules of origin, supply chain security, and tariff alignment. Two sweeping Section 301 investigations targeting structural excess manufacturing capacity were running as of mid-March against 16 major trading partners. Approximately 20 bilateral trade frameworks previously reported.",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "ITC public hearings on Sec 122 tariffs begin 4/28; 24-state lawsuit filed 3/5 challenging legality; tariff statutorily expires 7/24/2026 absent new authority.",
+        "reason": "Numeric divergence 84.4% on metric (context: on): new=122.0, existing=19.0, threshold=10%",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "Court of International Trade heard oral arguments Apr 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Section 122 tariffs. No ruling yet; tariff set to terminate 12:01am EDT July 24, 2026.",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "ITC public hearings on Sec 122 tariffs begin 4/28; 24-state lawsuit filed 3/5 challenging legality; tariff statutorily expires 7/24/2026 absent new authority.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: challenging, tariff, tariffs",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-20T14:03:51+00:00",
+        "entry_a_text": "Following SCOTUS IEEPA ruling Feb 20, 2026, administration imposed Section 122 tariffs at 10% then boosted to 15% (statutory max). Section 122 surcharge expires July 23, 2026 (150-day limit). Twenty state AGs plus two governors filed challenge in Court of International Trade arguing statute does not apply to current US balance-of-payments position.",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "ITC public hearings on Sec 122 tariffs begin 4/28; 24-state lawsuit filed 3/5 challenging legality; tariff statutorily expires 7/24/2026 absent new authority.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: expires, filed, state, tariffs",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-19T00:57:11+00:00",
+        "entry_a_text": "Section 122 10% import surcharge proclaimed Feb 20, 2026 (following Feb 2026 SCOTUS ruling against IEEPA tariffs) took effect Feb 24, 2026; statutory 150-day limit expires July 24, 2026. No bilateral deals announced as of April 18. Revenue estimate ~$35B over 150 days.",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "ITC public hearings on Sec 122 tariffs begin 4/28; 24-state lawsuit filed 3/5 challenging legality; tariff statutorily expires 7/24/2026 absent new authority.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: expires, tariffs",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T23:08:31+00:00",
+        "entry_a_text": "Court of International Trade held oral argument Apr 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Proclamation 11012 Section 122 surcharge. Rate currently 15% (raised from 10% after SCOTUS struck IEEPA tariffs Feb 20). Statutory expiry July 24, 2026.",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "ITC public hearings on Sec 122 tariffs begin 4/28; 24-state lawsuit filed 3/5 challenging legality; tariff statutorily expires 7/24/2026 absent new authority.",
+        "reason": "Numeric divergence 83.6% on metric (context: tariffs): new=122.0, existing=20.0, threshold=10%",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T15:21:52+00:00",
+        "entry_a_text": "Section 122 tariffs face court challenge: CIT heard oral argument Apr 10 in Oregon v. Trump and Burlap & Barrel v. Trump. Trump modified Section 232 tariff regime for steel/aluminum/copper effective Apr 6. 15% rate increase announced but not yet implemented. 150-day expiry on Jul 24, 2026 unless Congress extends.",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "ITC public hearings on Sec 122 tariffs begin 4/28; 24-state lawsuit filed 3/5 challenging legality; tariff statutorily expires 7/24/2026 absent new authority.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: tariff, tariffs",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T14:18:28+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: stale_evidence, quorum_failure. Reason: Evidence ev_012: 18 bilateral trade frameworks reported as of Apr 16; Section 122 rate remains 10",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "ITC public hearings on Sec 122 tariffs begin 4/28; 24-state lawsuit filed 3/5 challenging legality; tariff statutorily expires 7/24/2026 absent new authority.",
+        "reason": "Numeric divergence 75.0% on metric (context: 122): new=4.0, existing=16.0, threshold=10%",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T14:01:37+00:00",
+        "entry_a_text": "18 bilateral trade frameworks reported as of Apr 16; Section 122 rate remains 10% (15% announced but no formal order); two active lawsuits at CIT (oral args Apr 10-11); July 24 expiry firm at 150 days",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "ITC public hearings on Sec 122 tariffs begin 4/28; 24-state lawsuit filed 3/5 challenging legality; tariff statutorily expires 7/24/2026 absent new authority.",
+        "reason": "Numeric divergence 75.0% on metric (context: 122): new=4.0, existing=16.0, threshold=10%",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-10T00:00:00Z",
+        "entry_a_text": "March 2026 CPI: headline +0.9% m/m, 3.3% annual (highest since April 2024). Energy +10.9% (Iran war driven). But core CPI +0.2% m/m, 2.6% annual — both below forecast. Tariff impact visible in apparel (+1%) and airline fares (+2.7%).",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "ITC public hearings on Sec 122 tariffs begin 4/28; 24-state lawsuit filed 3/5 challenging legality; tariff statutorily expires 7/24/2026 absent new authority.",
+        "reason": "Numeric divergence 87.1% on metric (context: 2026): new=7.0, existing=0.9, threshold=10%",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-03-09T00:00:00Z",
+        "entry_a_text": "Liberty Justice Center files second suit (Burlap and Barrel v. Trump, Case No. 1:26-cv-01606) on behalf of spice importer and toy company. Assigned to same 3-judge CIT panel (Barnett, Kelly, Stanceu).",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "ITC public hearings on Sec 122 tariffs begin 4/28; 24-state lawsuit filed 3/5 challenging legality; tariff statutorily expires 7/24/2026 absent new authority.",
+        "reason": "Numeric divergence 99.2% on metric (context: on): new=122.0, existing=1.0, threshold=10%",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-03-05T00:00:00Z",
+        "entry_a_text": "24 state attorneys general (led by Oregon, Arizona, California, New York, Vermont) file suit at US Court of International Trade challenging Section 122 surcharge. Case No. 1:26-cv-01472. States argue balance-of-payments requirement not met.",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "ITC public hearings on Sec 122 tariffs begin 4/28; 24-state lawsuit filed 3/5 challenging legality; tariff statutorily expires 7/24/2026 absent new authority.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: challenging, state",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-03-04T00:00:00Z",
+        "entry_a_text": "Treasury Secretary Bessent confirms intent to raise to 15% on CNBC. Also references ongoing Section 301 investigations and Section 232 studies as successor frameworks during 150-day window.",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "ITC public hearings on Sec 122 tariffs begin 4/28; 24-state lawsuit filed 3/5 challenging legality; tariff statutorily expires 7/24/2026 absent new authority.",
+        "reason": "Numeric divergence 87.7% on metric (context: on): new=122.0, existing=15.0, threshold=10%",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-02-21T00:00:00Z",
+        "entry_a_text": "Trump announces via social media intent to raise Section 122 rate to 15% (statutory maximum). No formal proclamation issued.",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "ITC public hearings on Sec 122 tariffs begin 4/28; 24-state lawsuit filed 3/5 challenging legality; tariff statutorily expires 7/24/2026 absent new authority.",
+        "reason": "Numeric divergence 73.3% on metric (context: 122): new=4.0, existing=15.0, threshold=10%",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-02-20T00:00:00Z",
+        "entry_a_text": "SCOTUS strikes IEEPA-based tariffs (Learning Resources v. Trump). Same day, Trump issues Section 122 proclamation: 10% universal import surcharge effective Feb 24. 150-day clock starts.",
+        "entry_b_time": "2026-04-24T19:30:14+00:00",
+        "entry_b_text": "ITC public hearings on Sec 122 tariffs begin 4/28; 24-state lawsuit filed 3/5 challenging legality; tariff statutorily expires 7/24/2026 absent new authority.",
+        "reason": "Numeric divergence 60.0% on metric (context: 122): new=4.0, existing=10.0, threshold=10%",
+        "detected": "2026-04-24T19:30:14Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:14Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T19:30:14+00:00",
+        "entry_a_text": "ITC public hearings on Sec 122 tariffs begin 4/28; 24-state lawsuit filed 3/5 challenging legality; tariff statutorily expires 7/24/2026 absent new authority.",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Section 122 rate raised to 15% statutory maximum effective Feb 22-24, 2026; USTR initiated Section 301 investigations March 11 targeting 16 economies for excess capacity and 60+ for forced labor as durable replacement track. Hard sunset July 24, 2026.",
+        "reason": "Numeric divergence 99.7% on metric (context: 24): new=2026.0, existing=7.0, threshold=10%",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T13:49:14+00:00",
+        "entry_a_text": "Section 122 10% tariff in effect Feb 24 2026 through statutory 150-day expiry July 24 2026. USTR Greer announced new Section 301 investigations on major trading partners; administration previewed Section 232 sectoral actions as replacements. IEEPA refund processing began April 20. No congressional extension indicated.",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Section 122 rate raised to 15% statutory maximum effective Feb 22-24, 2026; USTR initiated Section 301 investigations March 11 targeting 16 economies for excess capacity and 60+ for forced labor as durable replacement track. Hard sunset July 24, 2026.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: feb, investigations, july, section, statutory",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: stale_evidence, quorum_failure. Reason: Legal challenge plus 150-day statutory sunset raises odds of expiration (H1) and partial rollback (H4); no evidence of expansion.",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Section 122 rate raised to 15% statutory maximum effective Feb 22-24, 2026; USTR initiated Section 301 investigations March 11 targeting 16 economies for excess capacity and 60+ for forced labor as durable replacement track. Hard sunset July 24, 2026.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: statutory, sunset",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "US Court of International Trade heard oral argument 2026-04-10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Section 122 tariffs; 10% surcharge expires 2026-07-24 absent Congressional extension; CBP launched CAPE IEEPA refund processing 2026-04-20.",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Section 122 rate raised to 15% statutory maximum effective Feb 22-24, 2026; USTR initiated Section 301 investigations March 11 targeting 16 economies for excess capacity and 60+ for forced labor as durable replacement track. Hard sunset July 24, 2026.",
+        "reason": "Numeric divergence 91.8% on metric (context: section): new=122.0, existing=10.0, threshold=10%",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T05:33:07+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: stale_evidence, quorum_failure. Reason: USMCA talks launch is H4-directional (bilateral deal progress). Section 301 investigations are H3 pipeline risk. Net: H4 remains modal but H3 threat elevated by Section 301 activity.",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Section 122 rate raised to 15% statutory maximum effective Feb 22-24, 2026; USTR initiated Section 301 investigations March 11 targeting 16 economies for excess capacity and 60+ for forced labor as durable replacement track. Hard sunset July 24, 2026.",
+        "reason": "Numeric divergence 59.5% on metric (context: section): new=122.0, existing=301.0, threshold=10%",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T05:33:07+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Section 122 rate raised to 15% statutory maximum effective Feb 22-24, 2026; USTR initiated Section 301 investigations March 11 targeting 16 economies for excess capacity and 60+ for forced labor as durable replacement track. Hard sunset July 24, 2026.",
+        "reason": "Numeric divergence 100.0% on metric (context: to): new=122.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T05:33:07+00:00",
+        "entry_a_text": "US and Mexico formally launched USMCA bilateral review discussions on March 19, 2026, focusing on rules of origin, supply chain security, and tariff alignment. Two sweeping Section 301 investigations targeting structural excess manufacturing capacity were running as of mid-March against 16 major trading partners. Approximately 20 bilateral trade frameworks previously reported.",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Section 122 rate raised to 15% statutory maximum effective Feb 22-24, 2026; USTR initiated Section 301 investigations March 11 targeting 16 economies for excess capacity and 60+ for forced labor as durable replacement track. Hard sunset July 24, 2026.",
+        "reason": "Numeric divergence 59.5% on metric (context: section): new=122.0, existing=301.0, threshold=10%",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Section 122 rate raised to 15% statutory maximum effective Feb 22-24, 2026; USTR initiated Section 301 investigations March 11 targeting 16 economies for excess capacity and 60+ for forced labor as durable replacement track. Hard sunset July 24, 2026.",
+        "reason": "Numeric divergence 100.0% on metric (context: to): new=122.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "Court of International Trade heard oral arguments Apr 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Section 122 tariffs. No ruling yet; tariff set to terminate 12:01am EDT July 24, 2026.",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Section 122 rate raised to 15% statutory maximum effective Feb 22-24, 2026; USTR initiated Section 301 investigations March 11 targeting 16 economies for excess capacity and 60+ for forced labor as durable replacement track. Hard sunset July 24, 2026.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: july, section",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-20T14:03:51+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, stale_evidence, quorum_failure. Reason: Rate hike from 10 to 15 percent at statutory max signals expansion posture not rollback; legal challenge raises scheduled-expiry probability H1; CIT challenge complicates H4 bilateral-deal timeline before July 23 deadline.",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Section 122 rate raised to 15% statutory maximum effective Feb 22-24, 2026; USTR initiated Section 301 investigations March 11 targeting 16 economies for excess capacity and 60+ for forced labor as durable replacement track. Hard sunset July 24, 2026.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: july, rate, statutory",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-20T14:03:51+00:00",
+        "entry_a_text": "Following SCOTUS IEEPA ruling Feb 20, 2026, administration imposed Section 122 tariffs at 10% then boosted to 15% (statutory max). Section 122 surcharge expires July 23, 2026 (150-day limit). Twenty state AGs plus two governors filed challenge in Court of International Trade arguing statute does not apply to current US balance-of-payments position.",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Section 122 rate raised to 15% statutory maximum effective Feb 22-24, 2026; USTR initiated Section 301 investigations March 11 targeting 16 economies for excess capacity and 60+ for forced labor as durable replacement track. Hard sunset July 24, 2026.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: feb, july, section, statutory",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-19T00:57:11+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Section 122 rate raised to 15% statutory maximum effective Feb 22-24, 2026; USTR initiated Section 301 investigations March 11 targeting 16 economies for excess capacity and 60+ for forced labor as durable replacement track. Hard sunset July 24, 2026.",
+        "reason": "Numeric divergence 100.0% on metric (context: to): new=122.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-19T00:57:11+00:00",
+        "entry_a_text": "Section 122 10% import surcharge proclaimed Feb 20, 2026 (following Feb 2026 SCOTUS ruling against IEEPA tariffs) took effect Feb 24, 2026; statutory 150-day limit expires July 24, 2026. No bilateral deals announced as of April 18. Revenue estimate ~$35B over 150 days.",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Section 122 rate raised to 15% statutory maximum effective Feb 22-24, 2026; USTR initiated Section 301 investigations March 11 targeting 16 economies for excess capacity and 60+ for forced labor as durable replacement track. Hard sunset July 24, 2026.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: feb, july, section, statutory",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T23:08:31+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range — topic is ACTIVE, certainty requires resolution. Pre-clamp values triggered floor/ceiling.",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Section 122 rate raised to 15% statutory maximum effective Feb 22-24, 2026; USTR initiated Section 301 investigations March 11 targeting 16 economies for excess capacity and 60+ for forced labor as durable replacement track. Hard sunset July 24, 2026.",
+        "reason": "Numeric divergence 100.0% on metric (context: to): new=122.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T23:08:31+00:00",
+        "entry_a_text": "Court of International Trade held oral argument Apr 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Proclamation 11012 Section 122 surcharge. Rate currently 15% (raised from 10% after SCOTUS struck IEEPA tariffs Feb 20). Statutory expiry July 24, 2026.",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Section 122 rate raised to 15% statutory maximum effective Feb 22-24, 2026; USTR initiated Section 301 investigations March 11 targeting 16 economies for excess capacity and 60+ for forced labor as durable replacement track. Hard sunset July 24, 2026.",
+        "reason": "Numeric divergence 98.9% on metric (context: section): new=122.0, existing=11012.0, threshold=10%",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T15:21:52+00:00",
+        "entry_a_text": "Section 122 tariffs face court challenge: CIT heard oral argument Apr 10 in Oregon v. Trump and Burlap & Barrel v. Trump. Trump modified Section 232 tariff regime for steel/aluminum/copper effective Apr 6. 15% rate increase announced but not yet implemented. 150-day expiry on Jul 24, 2026 unless Congress extends.",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Section 122 rate raised to 15% statutory maximum effective Feb 22-24, 2026; USTR initiated Section 301 investigations March 11 targeting 16 economies for excess capacity and 60+ for forced labor as durable replacement track. Hard sunset July 24, 2026.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: effective, rate, section",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T14:18:28+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: stale_evidence, quorum_failure. Reason: Evidence ev_012: 18 bilateral trade frameworks reported as of Apr 16; Section 122 rate remains 10",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Section 122 rate raised to 15% statutory maximum effective Feb 22-24, 2026; USTR initiated Section 301 investigations March 11 targeting 16 economies for excess capacity and 60+ for forced labor as durable replacement track. Hard sunset July 24, 2026.",
+        "reason": "Numeric divergence 86.9% on metric (context: rate, section): new=122.0, existing=16.0, threshold=10%",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T14:01:37+00:00",
+        "entry_a_text": "18 bilateral trade frameworks reported as of Apr 16; Section 122 rate remains 10% (15% announced but no formal order); two active lawsuits at CIT (oral args Apr 10-11); July 24 expiry firm at 150 days",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Section 122 rate raised to 15% statutory maximum effective Feb 22-24, 2026; USTR initiated Section 301 investigations March 11 targeting 16 economies for excess capacity and 60+ for forced labor as durable replacement track. Hard sunset July 24, 2026.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: july, rate, section",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-16T03:43:52+00:00",
+        "entry_a_text": "White House reports 18 bilateral framework trade agreements completed covering more than half of global GDP as result of Section 122 tariffs. CIT three-judge panel heard oral arguments April 10-11 on 23-state legal challenge.",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Section 122 rate raised to 15% statutory maximum effective Feb 22-24, 2026; USTR initiated Section 301 investigations March 11 targeting 16 economies for excess capacity and 60+ for forced labor as durable replacement track. Hard sunset July 24, 2026.",
+        "reason": "Numeric divergence 94.0% on metric (context: section): new=2026.0, existing=122.0, threshold=10%",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-10T00:00:00Z",
+        "entry_a_text": "March 2026 CPI: headline +0.9% m/m, 3.3% annual (highest since April 2024). Energy +10.9% (Iran war driven). But core CPI +0.2% m/m, 2.6% annual — both below forecast. Tariff impact visible in apparel (+1%) and airline fares (+2.7%).",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Section 122 rate raised to 15% statutory maximum effective Feb 22-24, 2026; USTR initiated Section 301 investigations March 11 targeting 16 economies for excess capacity and 60+ for forced labor as durable replacement track. Hard sunset July 24, 2026.",
+        "reason": "Numeric divergence 85.1% on metric (context: march): new=301.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-10T00:00:00Z",
+        "entry_a_text": "CIT oral arguments held April 10-11. Three-judge panel (Barnett, Kelly, Stanceu) sharply questioned both sides for 3+ hours. Key issue: whether 'balance-of-payments deficits' in 1974 statute covers trade deficits. Awkward for government: DOJ argued last year Section 122 had 'no obvious application' to trade deficits. Awkward for challengers: CIT itself wrote Section 122 was available when striking IEEPA tariffs.",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Section 122 rate raised to 15% statutory maximum effective Feb 22-24, 2026; USTR initiated Section 301 investigations March 11 targeting 16 economies for excess capacity and 60+ for forced labor as durable replacement track. Hard sunset July 24, 2026.",
+        "reason": "Numeric divergence 94.0% on metric (context: section): new=2026.0, existing=122.0, threshold=10%",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-06T00:00:00Z",
+        "entry_a_text": "Reuters reports Trump-Xi summit planned for mid-May in Beijing. Trade war framing: China responded with reciprocal investigations. Prior Busan meeting produced truce (tariff trim + fentanyl + soybean purchases). May summit is highest-level bilateral trade engagement since Section 122.",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Section 122 rate raised to 15% statutory maximum effective Feb 22-24, 2026; USTR initiated Section 301 investigations March 11 targeting 16 economies for excess capacity and 60+ for forced labor as durable replacement track. Hard sunset July 24, 2026.",
+        "reason": "Numeric divergence 94.0% on metric (context: section): new=2026.0, existing=122.0, threshold=10%",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-03-30T00:00:00Z",
+        "entry_a_text": "As of March 30, rate remains 10%. No formal proclamation raising to 15% has been issued despite repeated announcements. 15% rhetoric has not translated to Federal Register action.",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Section 122 rate raised to 15% statutory maximum effective Feb 22-24, 2026; USTR initiated Section 301 investigations March 11 targeting 16 economies for excess capacity and 60+ for forced labor as durable replacement track. Hard sunset July 24, 2026.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: march, rate",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-03-05T00:00:00Z",
+        "entry_a_text": "24 state attorneys general (led by Oregon, Arizona, California, New York, Vermont) file suit at US Court of International Trade challenging Section 122 surcharge. Case No. 1:26-cv-01472. States argue balance-of-payments requirement not met.",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Section 122 rate raised to 15% statutory maximum effective Feb 22-24, 2026; USTR initiated Section 301 investigations March 11 targeting 16 economies for excess capacity and 60+ for forced labor as durable replacement track. Hard sunset July 24, 2026.",
+        "reason": "Numeric divergence 94.0% on metric (context: section): new=2026.0, existing=122.0, threshold=10%",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-03-04T00:00:00Z",
+        "entry_a_text": "Treasury Secretary Bessent confirms intent to raise to 15% on CNBC. Also references ongoing Section 301 investigations and Section 232 studies as successor frameworks during 150-day window.",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Section 122 rate raised to 15% statutory maximum effective Feb 22-24, 2026; USTR initiated Section 301 investigations March 11 targeting 16 economies for excess capacity and 60+ for forced labor as durable replacement track. Hard sunset July 24, 2026.",
+        "reason": "Numeric divergence 87.7% on metric (context: to): new=122.0, existing=15.0, threshold=10%",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-02-21T00:00:00Z",
+        "entry_a_text": "Trump announces via social media intent to raise Section 122 rate to 15% (statutory maximum). No formal proclamation issued.",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Section 122 rate raised to 15% statutory maximum effective Feb 22-24, 2026; USTR initiated Section 301 investigations March 11 targeting 16 economies for excess capacity and 60+ for forced labor as durable replacement track. Hard sunset July 24, 2026.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: maximum, rate, section, statutory",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-02-20T00:00:00Z",
+        "entry_a_text": "SCOTUS strikes IEEPA-based tariffs (Learning Resources v. Trump). Same day, Trump issues Section 122 proclamation: 10% universal import surcharge effective Feb 24. 150-day clock starts.",
+        "entry_b_time": "2026-04-25T13:19:53+00:00",
+        "entry_b_text": "Section 122 rate raised to 15% statutory maximum effective Feb 22-24, 2026; USTR initiated Section 301 investigations March 11 targeting 16 economies for excess capacity and 60+ for forced labor as durable replacement track. Hard sunset July 24, 2026.",
+        "reason": "Numeric divergence 91.8% on metric (context: section): new=122.0, existing=10.0, threshold=10%",
+        "detected": "2026-04-25T13:19:53Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T13:19:53Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T13:19:53+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, stale_evidence, quorum_failure. Reason: Section 301 prep is a structured replacement path (favors H2/H3); rate already at 15% maximum and broad scope discourages H1 (clean expiry); active investigations slow bilateral rollback (H4 weaker).",
+        "entry_b_time": "2026-04-25T14:24:49+00:00",
+        "entry_b_text": "Section 122 tariffs effective Feb 24, 2026 at 10% remain in force; statutory expiration July 24, 2026 unless Congress extends. Court of International Trade heard oral arguments April 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging the tariffs. Trump's Feb 21 signal to raise to 15% has not been executed.",
+        "reason": "Numeric divergence 59.5% on metric (context: section): new=122.0, existing=301.0, threshold=10%",
+        "detected": "2026-04-25T14:24:49Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:49Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T13:19:53+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-25T14:24:49+00:00",
+        "entry_b_text": "Section 122 tariffs effective Feb 24, 2026 at 10% remain in force; statutory expiration July 24, 2026 unless Congress extends. Court of International Trade heard oral arguments April 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging the tariffs. Trump's Feb 21 signal to raise to 15% has not been executed.",
+        "reason": "Numeric divergence 100.0% on metric (context: to): new=21.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-25T14:24:49Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:49Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-25T13:19:53+00:00",
+        "entry_a_text": "Section 122 rate raised to 15% statutory maximum effective Feb 22-24, 2026; USTR initiated Section 301 investigations March 11 targeting 16 economies for excess capacity and 60+ for forced labor as durable replacement track. Hard sunset July 24, 2026.",
+        "entry_b_time": "2026-04-25T14:24:49+00:00",
+        "entry_b_text": "Section 122 tariffs effective Feb 24, 2026 at 10% remain in force; statutory expiration July 24, 2026 unless Congress extends. Court of International Trade heard oral arguments April 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging the tariffs. Trump's Feb 21 signal to raise to 15% has not been executed.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: effective, feb, july, section, statutory",
+        "detected": "2026-04-25T14:24:49Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:49Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T19:30:14+00:00",
+        "entry_a_text": "ITC public hearings on Sec 122 tariffs begin 4/28; 24-state lawsuit filed 3/5 challenging legality; tariff statutorily expires 7/24/2026 absent new authority.",
+        "entry_b_time": "2026-04-25T14:24:49+00:00",
+        "entry_b_text": "Section 122 tariffs effective Feb 24, 2026 at 10% remain in force; statutory expiration July 24, 2026 unless Congress extends. Court of International Trade heard oral arguments April 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging the tariffs. Trump's Feb 21 signal to raise to 15% has not been executed.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: challenging, tariffs",
+        "detected": "2026-04-25T14:24:49Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:49Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T13:49:14+00:00",
+        "entry_a_text": "Section 122 10% tariff in effect Feb 24 2026 through statutory 150-day expiry July 24 2026. USTR Greer announced new Section 301 investigations on major trading partners; administration previewed Section 232 sectoral actions as replacements. IEEPA refund processing began April 20. No congressional extension indicated.",
+        "entry_b_time": "2026-04-25T14:24:49+00:00",
+        "entry_b_text": "Section 122 tariffs effective Feb 24, 2026 at 10% remain in force; statutory expiration July 24, 2026 unless Congress extends. Court of International Trade heard oral arguments April 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging the tariffs. Trump's Feb 21 signal to raise to 15% has not been executed.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: april, feb, july, section, statutory",
+        "detected": "2026-04-25T14:24:49Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:49Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: stale_evidence, quorum_failure. Reason: Legal challenge plus 150-day statutory sunset raises odds of expiration (H1) and partial rollback (H4); no evidence of expansion.",
+        "entry_b_time": "2026-04-25T14:24:49+00:00",
+        "entry_b_text": "Section 122 tariffs effective Feb 24, 2026 at 10% remain in force; statutory expiration July 24, 2026 unless Congress extends. Court of International Trade heard oral arguments April 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging the tariffs. Trump's Feb 21 signal to raise to 15% has not been executed.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: expiration, statutory",
+        "detected": "2026-04-25T14:24:49Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:49Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "US Court of International Trade heard oral argument 2026-04-10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Section 122 tariffs; 10% surcharge expires 2026-07-24 absent Congressional extension; CBP launched CAPE IEEPA refund processing 2026-04-20.",
+        "entry_b_time": "2026-04-25T14:24:49+00:00",
+        "entry_b_text": "Section 122 tariffs effective Feb 24, 2026 at 10% remain in force; statutory expiration July 24, 2026 unless Congress extends. Court of International Trade heard oral arguments April 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging the tariffs. Trump's Feb 21 signal to raise to 15% has not been executed.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: barrel, burlap, challenging, court, heard",
+        "detected": "2026-04-25T14:24:49Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:49Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T05:33:07+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: stale_evidence, quorum_failure. Reason: USMCA talks launch is H4-directional (bilateral deal progress). Section 301 investigations are H3 pipeline risk. Net: H4 remains modal but H3 threat elevated by Section 301 activity.",
+        "entry_b_time": "2026-04-25T14:24:49+00:00",
+        "entry_b_text": "Section 122 tariffs effective Feb 24, 2026 at 10% remain in force; statutory expiration July 24, 2026 unless Congress extends. Court of International Trade heard oral arguments April 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging the tariffs. Trump's Feb 21 signal to raise to 15% has not been executed.",
+        "reason": "Numeric divergence 59.5% on metric (context: section): new=122.0, existing=301.0, threshold=10%",
+        "detected": "2026-04-25T14:24:49Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:49Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T05:33:07+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+        "entry_b_time": "2026-04-25T14:24:49+00:00",
+        "entry_b_text": "Section 122 tariffs effective Feb 24, 2026 at 10% remain in force; statutory expiration July 24, 2026 unless Congress extends. Court of International Trade heard oral arguments April 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging the tariffs. Trump's Feb 21 signal to raise to 15% has not been executed.",
+        "reason": "Numeric divergence 100.0% on metric (context: to): new=21.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-25T14:24:49Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:49Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-21T05:33:07+00:00",
+        "entry_a_text": "US and Mexico formally launched USMCA bilateral review discussions on March 19, 2026, focusing on rules of origin, supply chain security, and tariff alignment. Two sweeping Section 301 investigations targeting structural excess manufacturing capacity were running as of mid-March against 16 major trading partners. Approximately 20 bilateral trade frameworks previously reported.",
+        "entry_b_time": "2026-04-25T14:24:49+00:00",
+        "entry_b_text": "Section 122 tariffs effective Feb 24, 2026 at 10% remain in force; statutory expiration July 24, 2026 unless Congress extends. Court of International Trade heard oral arguments April 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging the tariffs. Trump's Feb 21 signal to raise to 15% has not been executed.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: section, trade",
+        "detected": "2026-04-25T14:24:49Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:49Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+        "entry_b_time": "2026-04-25T14:24:49+00:00",
+        "entry_b_text": "Section 122 tariffs effective Feb 24, 2026 at 10% remain in force; statutory expiration July 24, 2026 unless Congress extends. Court of International Trade heard oral arguments April 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging the tariffs. Trump's Feb 21 signal to raise to 15% has not been executed.",
+        "reason": "Numeric divergence 100.0% on metric (context: to): new=21.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-25T14:24:49Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:49Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "Court of International Trade heard oral arguments Apr 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Section 122 tariffs. No ruling yet; tariff set to terminate 12:01am EDT July 24, 2026.",
+        "entry_b_time": "2026-04-25T14:24:49+00:00",
+        "entry_b_text": "Section 122 tariffs effective Feb 24, 2026 at 10% remain in force; statutory expiration July 24, 2026 unless Congress extends. Court of International Trade heard oral arguments April 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging the tariffs. Trump's Feb 21 signal to raise to 15% has not been executed.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: arguments, barrel, burlap, challenging, court",
+        "detected": "2026-04-25T14:24:49Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:49Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-20T14:03:51+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, stale_evidence, quorum_failure. Reason: Rate hike from 10 to 15 percent at statutory max signals expansion posture not rollback; legal challenge raises scheduled-expiry probability H1; CIT challenge complicates H4 bilateral-deal timeline before July 23 deadline.",
+        "entry_b_time": "2026-04-25T14:24:49+00:00",
+        "entry_b_text": "Section 122 tariffs effective Feb 24, 2026 at 10% remain in force; statutory expiration July 24, 2026 unless Congress extends. Court of International Trade heard oral arguments April 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging the tariffs. Trump's Feb 21 signal to raise to 15% has not been executed.",
+        "reason": "Numeric divergence 37.5% on metric (context: 10, at): new=24.0, existing=15.0, threshold=10%",
+        "detected": "2026-04-25T14:24:49Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:49Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-20T14:03:51+00:00",
+        "entry_a_text": "Following SCOTUS IEEPA ruling Feb 20, 2026, administration imposed Section 122 tariffs at 10% then boosted to 15% (statutory max). Section 122 surcharge expires July 23, 2026 (150-day limit). Twenty state AGs plus two governors filed challenge in Court of International Trade arguing statute does not apply to current US balance-of-payments position.",
+        "entry_b_time": "2026-04-25T14:24:49+00:00",
+        "entry_b_text": "Section 122 tariffs effective Feb 24, 2026 at 10% remain in force; statutory expiration July 24, 2026 unless Congress extends. Court of International Trade heard oral arguments April 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging the tariffs. Trump's Feb 21 signal to raise to 15% has not been executed.",
+        "reason": "Numeric divergence 83.6% on metric (context: feb): new=122.0, existing=20.0, threshold=10%",
+        "detected": "2026-04-25T14:24:49Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:49Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-19T00:57:11+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range with redistribution — topic is ACTIVE, certainty requires resolution. Bounds enforced strictly via adjustable-mass redistribution.",
+        "entry_b_time": "2026-04-25T14:24:49+00:00",
+        "entry_b_text": "Section 122 tariffs effective Feb 24, 2026 at 10% remain in force; statutory expiration July 24, 2026 unless Congress extends. Court of International Trade heard oral arguments April 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging the tariffs. Trump's Feb 21 signal to raise to 15% has not been executed.",
+        "reason": "Numeric divergence 100.0% on metric (context: to): new=21.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-25T14:24:49Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:49Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-19T00:57:11+00:00",
+        "entry_a_text": "Section 122 10% import surcharge proclaimed Feb 20, 2026 (following Feb 2026 SCOTUS ruling against IEEPA tariffs) took effect Feb 24, 2026; statutory 150-day limit expires July 24, 2026. No bilateral deals announced as of April 18. Revenue estimate ~$35B over 150 days.",
+        "entry_b_time": "2026-04-25T14:24:49+00:00",
+        "entry_b_text": "Section 122 tariffs effective Feb 24, 2026 at 10% remain in force; statutory expiration July 24, 2026 unless Congress extends. Court of International Trade heard oral arguments April 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging the tariffs. Trump's Feb 21 signal to raise to 15% has not been executed.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: april, feb, july, section, statutory",
+        "detected": "2026-04-25T14:24:49Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:49Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T23:08:31+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: posteriors clamped to [0.005, 0.98] range — topic is ACTIVE, certainty requires resolution. Pre-clamp values triggered floor/ceiling.",
+        "entry_b_time": "2026-04-25T14:24:49+00:00",
+        "entry_b_text": "Section 122 tariffs effective Feb 24, 2026 at 10% remain in force; statutory expiration July 24, 2026 unless Congress extends. Court of International Trade heard oral arguments April 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging the tariffs. Trump's Feb 21 signal to raise to 15% has not been executed.",
+        "reason": "Numeric divergence 100.0% on metric (context: to): new=21.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-25T14:24:49Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:49Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T23:08:31+00:00",
+        "entry_a_text": "Court of International Trade held oral argument Apr 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Proclamation 11012 Section 122 surcharge. Rate currently 15% (raised from 10% after SCOTUS struck IEEPA tariffs Feb 20). Statutory expiry July 24, 2026.",
+        "entry_b_time": "2026-04-25T14:24:49+00:00",
+        "entry_b_text": "Section 122 tariffs effective Feb 24, 2026 at 10% remain in force; statutory expiration July 24, 2026 unless Congress extends. Court of International Trade heard oral arguments April 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging the tariffs. Trump's Feb 21 signal to raise to 15% has not been executed.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: barrel, burlap, challenging, court, feb",
+        "detected": "2026-04-25T14:24:49Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:49Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T15:21:52+00:00",
+        "entry_a_text": "Section 122 tariffs face court challenge: CIT heard oral argument Apr 10 in Oregon v. Trump and Burlap & Barrel v. Trump. Trump modified Section 232 tariff regime for steel/aluminum/copper effective Apr 6. 15% rate increase announced but not yet implemented. 150-day expiry on Jul 24, 2026 unless Congress extends.",
+        "entry_b_time": "2026-04-25T14:24:49+00:00",
+        "entry_b_text": "Section 122 tariffs effective Feb 24, 2026 at 10% remain in force; statutory expiration July 24, 2026 unless Congress extends. Court of International Trade heard oral arguments April 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging the tariffs. Trump's Feb 21 signal to raise to 15% has not been executed.",
+        "reason": "Numeric divergence 47.4% on metric (context: section): new=122.0, existing=232.0, threshold=10%",
+        "detected": "2026-04-25T14:24:49Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:49Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T14:18:28+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: stale_evidence, quorum_failure. Reason: Evidence ev_012: 18 bilateral trade frameworks reported as of Apr 16; Section 122 rate remains 10",
+        "entry_b_time": "2026-04-25T14:24:49+00:00",
+        "entry_b_text": "Section 122 tariffs effective Feb 24, 2026 at 10% remain in force; statutory expiration July 24, 2026 unless Congress extends. Court of International Trade heard oral arguments April 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging the tariffs. Trump's Feb 21 signal to raise to 15% has not been executed.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: section, trade",
+        "detected": "2026-04-25T14:24:49Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:49Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T14:01:37+00:00",
+        "entry_a_text": "18 bilateral trade frameworks reported as of Apr 16; Section 122 rate remains 10% (15% announced but no formal order); two active lawsuits at CIT (oral args Apr 10-11); July 24 expiry firm at 150 days",
+        "entry_b_time": "2026-04-25T14:24:49+00:00",
+        "entry_b_text": "Section 122 tariffs effective Feb 24, 2026 at 10% remain in force; statutory expiration July 24, 2026 unless Congress extends. Court of International Trade heard oral arguments April 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging the tariffs. Trump's Feb 21 signal to raise to 15% has not been executed.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: july, oral, section, trade",
+        "detected": "2026-04-25T14:24:49Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:49Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-16T03:43:52+00:00",
+        "entry_a_text": "White House reports 18 bilateral framework trade agreements completed covering more than half of global GDP as result of Section 122 tariffs. CIT three-judge panel heard oral arguments April 10-11 on 23-state legal challenge.",
+        "entry_b_time": "2026-04-25T14:24:49+00:00",
+        "entry_b_text": "Section 122 tariffs effective Feb 24, 2026 at 10% remain in force; statutory expiration July 24, 2026 unless Congress extends. Court of International Trade heard oral arguments April 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging the tariffs. Trump's Feb 21 signal to raise to 15% has not been executed.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: april, arguments, heard, oral, section",
+        "detected": "2026-04-25T14:24:49Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:49Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-10T00:00:00Z",
+        "entry_a_text": "March 2026 CPI: headline +0.9% m/m, 3.3% annual (highest since April 2024). Energy +10.9% (Iran war driven). But core CPI +0.2% m/m, 2.6% annual — both below forecast. Tariff impact visible in apparel (+1%) and airline fares (+2.7%).",
+        "entry_b_time": "2026-04-25T14:24:49+00:00",
+        "entry_b_text": "Section 122 tariffs effective Feb 24, 2026 at 10% remain in force; statutory expiration July 24, 2026 unless Congress extends. Court of International Trade heard oral arguments April 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging the tariffs. Trump's Feb 21 signal to raise to 15% has not been executed.",
+        "reason": "Numeric divergence 96.2% on metric (context: 2026): new=24.0, existing=0.9, threshold=10%",
+        "detected": "2026-04-25T14:24:49Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:49Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-10T00:00:00Z",
+        "entry_a_text": "CIT oral arguments held April 10-11. Three-judge panel (Barnett, Kelly, Stanceu) sharply questioned both sides for 3+ hours. Key issue: whether 'balance-of-payments deficits' in 1974 statute covers trade deficits. Awkward for government: DOJ argued last year Section 122 had 'no obvious application' to trade deficits. Awkward for challengers: CIT itself wrote Section 122 was available when striking IEEPA tariffs.",
+        "entry_b_time": "2026-04-25T14:24:49+00:00",
+        "entry_b_text": "Section 122 tariffs effective Feb 24, 2026 at 10% remain in force; statutory expiration July 24, 2026 unless Congress extends. Court of International Trade heard oral arguments April 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging the tariffs. Trump's Feb 21 signal to raise to 15% has not been executed.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: april, arguments, oral, section, tariffs",
+        "detected": "2026-04-25T14:24:49Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:49Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-06T00:00:00Z",
+        "entry_a_text": "Reuters reports Trump-Xi summit planned for mid-May in Beijing. Trade war framing: China responded with reciprocal investigations. Prior Busan meeting produced truce (tariff trim + fentanyl + soybean purchases). May summit is highest-level bilateral trade engagement since Section 122.",
+        "entry_b_time": "2026-04-25T14:24:49+00:00",
+        "entry_b_text": "Section 122 tariffs effective Feb 24, 2026 at 10% remain in force; statutory expiration July 24, 2026 unless Congress extends. Court of International Trade heard oral arguments April 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging the tariffs. Trump's Feb 21 signal to raise to 15% has not been executed.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: section, trade, trump",
+        "detected": "2026-04-25T14:24:49Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:49Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-03-30T00:00:00Z",
+        "entry_a_text": "As of March 30, rate remains 10%. No formal proclamation raising to 15% has been issued despite repeated announcements. 15% rhetoric has not translated to Federal Register action.",
+        "entry_b_time": "2026-04-25T14:24:49+00:00",
+        "entry_b_text": "Section 122 tariffs effective Feb 24, 2026 at 10% remain in force; statutory expiration July 24, 2026 unless Congress extends. Court of International Trade heard oral arguments April 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging the tariffs. Trump's Feb 21 signal to raise to 15% has not been executed.",
+        "reason": "Numeric divergence 20.0% on metric (context: 10): new=24.0, existing=30.0, threshold=10%",
+        "detected": "2026-04-25T14:24:49Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:49Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-03-09T00:00:00Z",
+        "entry_a_text": "Liberty Justice Center files second suit (Burlap and Barrel v. Trump, Case No. 1:26-cv-01606) on behalf of spice importer and toy company. Assigned to same 3-judge CIT panel (Barnett, Kelly, Stanceu).",
+        "entry_b_time": "2026-04-25T14:24:49+00:00",
+        "entry_b_text": "Section 122 tariffs effective Feb 24, 2026 at 10% remain in force; statutory expiration July 24, 2026 unless Congress extends. Court of International Trade heard oral arguments April 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging the tariffs. Trump's Feb 21 signal to raise to 15% has not been executed.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: barrel, burlap, trump",
+        "detected": "2026-04-25T14:24:49Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:49Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-03-04T00:00:00Z",
+        "entry_a_text": "Treasury Secretary Bessent confirms intent to raise to 15% on CNBC. Also references ongoing Section 301 investigations and Section 232 studies as successor frameworks during 150-day window.",
+        "entry_b_time": "2026-04-25T14:24:49+00:00",
+        "entry_b_text": "Section 122 tariffs effective Feb 24, 2026 at 10% remain in force; statutory expiration July 24, 2026 unless Congress extends. Court of International Trade heard oral arguments April 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging the tariffs. Trump's Feb 21 signal to raise to 15% has not been executed.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: raise, section",
+        "detected": "2026-04-25T14:24:49Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:49Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-02-21T00:00:00Z",
+        "entry_a_text": "Trump announces via social media intent to raise Section 122 rate to 15% (statutory maximum). No formal proclamation issued.",
+        "entry_b_time": "2026-04-25T14:24:49+00:00",
+        "entry_b_text": "Section 122 tariffs effective Feb 24, 2026 at 10% remain in force; statutory expiration July 24, 2026 unless Congress extends. Court of International Trade heard oral arguments April 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging the tariffs. Trump's Feb 21 signal to raise to 15% has not been executed.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: raise, section, statutory, trump",
+        "detected": "2026-04-25T14:24:49Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:49Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-02-20T00:00:00Z",
+        "entry_a_text": "SCOTUS strikes IEEPA-based tariffs (Learning Resources v. Trump). Same day, Trump issues Section 122 proclamation: 10% universal import surcharge effective Feb 24. 150-day clock starts.",
+        "entry_b_time": "2026-04-25T14:24:49+00:00",
+        "entry_b_text": "Section 122 tariffs effective Feb 24, 2026 at 10% remain in force; statutory expiration July 24, 2026 unless Congress extends. Court of International Trade heard oral arguments April 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging the tariffs. Trump's Feb 21 signal to raise to 15% has not been executed.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: effective, feb, section, tariffs, trump",
+        "detected": "2026-04-25T14:24:49Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:49Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-25T14:24:49+00:00",
+        "entry_a_text": "Section 122 tariffs effective Feb 24, 2026 at 10% remain in force; statutory expiration July 24, 2026 unless Congress extends. Court of International Trade heard oral arguments April 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging the tariffs. Trump's Feb 21 signal to raise to 15% has not been executed.",
+        "entry_b_time": "2026-04-26T16:59:06+00:00",
+        "entry_b_text": "Section 122 tariffs effective Feb 24, 2026 expire July 24, 2026 absent congressional extension; 24 AGs and governors filed CIT challenge Mar 5; trade experts argue legal grounds for invocation are weak. No congressional extension legislation has advanced as of late April.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: april, effective, feb, july, section",
+        "detected": "2026-04-26T16:59:06Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:06Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T13:19:53+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, stale_evidence, quorum_failure. Reason: Section 301 prep is a structured replacement path (favors H2/H3); rate already at 15% maximum and broad scope discourages H1 (clean expiry); active investigations slow bilateral rollback (H4 weaker).",
+        "entry_b_time": "2026-04-26T16:59:06+00:00",
+        "entry_b_text": "Section 122 tariffs effective Feb 24, 2026 expire July 24, 2026 absent congressional extension; 24 AGs and governors filed CIT challenge Mar 5; trade experts argue legal grounds for invocation are weak. No congressional extension legislation has advanced as of late April.",
+        "reason": "Numeric divergence 59.5% on metric (context: section): new=122.0, existing=301.0, threshold=10%",
+        "detected": "2026-04-26T16:59:06Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:06Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-25T13:19:53+00:00",
+        "entry_a_text": "Section 122 rate raised to 15% statutory maximum effective Feb 22-24, 2026; USTR initiated Section 301 investigations March 11 targeting 16 economies for excess capacity and 60+ for forced labor as durable replacement track. Hard sunset July 24, 2026.",
+        "entry_b_time": "2026-04-26T16:59:06+00:00",
+        "entry_b_text": "Section 122 tariffs effective Feb 24, 2026 expire July 24, 2026 absent congressional extension; 24 AGs and governors filed CIT challenge Mar 5; trade experts argue legal grounds for invocation are weak. No congressional extension legislation has advanced as of late April.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: effective, feb, july, section",
+        "detected": "2026-04-26T16:59:06Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:06Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T19:30:14+00:00",
+        "entry_a_text": "ITC public hearings on Sec 122 tariffs begin 4/28; 24-state lawsuit filed 3/5 challenging legality; tariff statutorily expires 7/24/2026 absent new authority.",
+        "entry_b_time": "2026-04-26T16:59:06+00:00",
+        "entry_b_text": "Section 122 tariffs effective Feb 24, 2026 expire July 24, 2026 absent congressional extension; 24 AGs and governors filed CIT challenge Mar 5; trade experts argue legal grounds for invocation are weak. No congressional extension legislation has advanced as of late April.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: absent, filed, tariffs",
+        "detected": "2026-04-26T16:59:06Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:06Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:14+00:00",
+        "entry_a_text": "Section 122 10% tariff in effect Feb 24 2026 through statutory 150-day expiry July 24 2026. USTR Greer announced new Section 301 investigations on major trading partners; administration previewed Section 232 sectoral actions as replacements. IEEPA refund processing began April 20. No congressional extension indicated.",
+        "entry_b_time": "2026-04-26T16:59:06+00:00",
+        "entry_b_text": "Section 122 tariffs effective Feb 24, 2026 expire July 24, 2026 absent congressional extension; 24 AGs and governors filed CIT challenge Mar 5; trade experts argue legal grounds for invocation are weak. No congressional extension legislation has advanced as of late April.",
+        "reason": "Numeric divergence 91.8% on metric (context: section): new=122.0, existing=10.0, threshold=10%",
+        "detected": "2026-04-26T16:59:06Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:06Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T02:25:41+00:00",
+        "entry_a_text": "US Court of International Trade heard oral argument 2026-04-10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Section 122 tariffs; 10% surcharge expires 2026-07-24 absent Congressional extension; CBP launched CAPE IEEPA refund processing 2026-04-20.",
+        "entry_b_time": "2026-04-26T16:59:06+00:00",
+        "entry_b_text": "Section 122 tariffs effective Feb 24, 2026 expire July 24, 2026 absent congressional extension; 24 AGs and governors filed CIT challenge Mar 5; trade experts argue legal grounds for invocation are weak. No congressional extension legislation has advanced as of late April.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: absent, congressional, extension, section, tariffs",
+        "detected": "2026-04-26T16:59:06Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:06Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T05:33:07+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: stale_evidence, quorum_failure. Reason: USMCA talks launch is H4-directional (bilateral deal progress). Section 301 investigations are H3 pipeline risk. Net: H4 remains modal but H3 threat elevated by Section 301 activity.",
+        "entry_b_time": "2026-04-26T16:59:06+00:00",
+        "entry_b_text": "Section 122 tariffs effective Feb 24, 2026 expire July 24, 2026 absent congressional extension; 24 AGs and governors filed CIT challenge Mar 5; trade experts argue legal grounds for invocation are weak. No congressional extension legislation has advanced as of late April.",
+        "reason": "Numeric divergence 59.5% on metric (context: section): new=122.0, existing=301.0, threshold=10%",
+        "detected": "2026-04-26T16:59:06Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:06Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-21T05:33:07+00:00",
+        "entry_a_text": "US and Mexico formally launched USMCA bilateral review discussions on March 19, 2026, focusing on rules of origin, supply chain security, and tariff alignment. Two sweeping Section 301 investigations targeting structural excess manufacturing capacity were running as of mid-March against 16 major trading partners. Approximately 20 bilateral trade frameworks previously reported.",
+        "entry_b_time": "2026-04-26T16:59:06+00:00",
+        "entry_b_text": "Section 122 tariffs effective Feb 24, 2026 expire July 24, 2026 absent congressional extension; 24 AGs and governors filed CIT challenge Mar 5; trade experts argue legal grounds for invocation are weak. No congressional extension legislation has advanced as of late April.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: section, trade",
+        "detected": "2026-04-26T16:59:06Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:06Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: stale_evidence. Reason: Legal challenge increases probability of expiry/rollback paths (H1/H4) vs expansion; mild update.",
+        "entry_b_time": "2026-04-26T16:59:06+00:00",
+        "entry_b_text": "Section 122 tariffs effective Feb 24, 2026 expire July 24, 2026 absent congressional extension; 24 AGs and governors filed CIT challenge Mar 5; trade experts argue legal grounds for invocation are weak. No congressional extension legislation has advanced as of late April.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: challenge, legal",
+        "detected": "2026-04-26T16:59:06Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:06Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-21T03:51:21+00:00",
+        "entry_a_text": "Court of International Trade heard oral arguments Apr 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Section 122 tariffs. No ruling yet; tariff set to terminate 12:01am EDT July 24, 2026.",
+        "entry_b_time": "2026-04-26T16:59:06+00:00",
+        "entry_b_text": "Section 122 tariffs effective Feb 24, 2026 expire July 24, 2026 absent congressional extension; 24 AGs and governors filed CIT challenge Mar 5; trade experts argue legal grounds for invocation are weak. No congressional extension legislation has advanced as of late April.",
+        "reason": "Numeric divergence 50.0% on metric (context: july): new=24.0, existing=12.0, threshold=10%",
+        "detected": "2026-04-26T16:59:06Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:06Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-20T14:03:51+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, stale_evidence, quorum_failure. Reason: Rate hike from 10 to 15 percent at statutory max signals expansion posture not rollback; legal challenge raises scheduled-expiry probability H1; CIT challenge complicates H4 bilateral-deal timeline before July 23 deadline.",
+        "entry_b_time": "2026-04-26T16:59:06+00:00",
+        "entry_b_text": "Section 122 tariffs effective Feb 24, 2026 expire July 24, 2026 absent congressional extension; 24 AGs and governors filed CIT challenge Mar 5; trade experts argue legal grounds for invocation are weak. No congressional extension legislation has advanced as of late April.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: challenge, cit, july, legal",
+        "detected": "2026-04-26T16:59:06Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:06Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-20T14:03:51+00:00",
+        "entry_a_text": "Following SCOTUS IEEPA ruling Feb 20, 2026, administration imposed Section 122 tariffs at 10% then boosted to 15% (statutory max). Section 122 surcharge expires July 23, 2026 (150-day limit). Twenty state AGs plus two governors filed challenge in Court of International Trade arguing statute does not apply to current US balance-of-payments position.",
+        "entry_b_time": "2026-04-26T16:59:06+00:00",
+        "entry_b_text": "Section 122 tariffs effective Feb 24, 2026 expire July 24, 2026 absent congressional extension; 24 AGs and governors filed CIT challenge Mar 5; trade experts argue legal grounds for invocation are weak. No congressional extension legislation has advanced as of late April.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: ags, challenge, feb, filed, governors",
+        "detected": "2026-04-26T16:59:06Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:06Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-19T00:57:11+00:00",
+        "entry_a_text": "Section 122 10% import surcharge proclaimed Feb 20, 2026 (following Feb 2026 SCOTUS ruling against IEEPA tariffs) took effect Feb 24, 2026; statutory 150-day limit expires July 24, 2026. No bilateral deals announced as of April 18. Revenue estimate ~$35B over 150 days.",
+        "entry_b_time": "2026-04-26T16:59:06+00:00",
+        "entry_b_text": "Section 122 tariffs effective Feb 24, 2026 expire July 24, 2026 absent congressional extension; 24 AGs and governors filed CIT challenge Mar 5; trade experts argue legal grounds for invocation are weak. No congressional extension legislation has advanced as of late April.",
+        "reason": "Numeric divergence 91.8% on metric (context: section): new=122.0, existing=10.0, threshold=10%",
+        "detected": "2026-04-26T16:59:06Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:06Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T23:08:31+00:00",
+        "entry_a_text": "Court of International Trade held oral argument Apr 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Proclamation 11012 Section 122 surcharge. Rate currently 15% (raised from 10% after SCOTUS struck IEEPA tariffs Feb 20). Statutory expiry July 24, 2026.",
+        "entry_b_time": "2026-04-26T16:59:06+00:00",
+        "entry_b_text": "Section 122 tariffs effective Feb 24, 2026 expire July 24, 2026 absent congressional extension; 24 AGs and governors filed CIT challenge Mar 5; trade experts argue legal grounds for invocation are weak. No congressional extension legislation has advanced as of late April.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: feb, july, section, tariffs, trade",
+        "detected": "2026-04-26T16:59:06Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:06Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T15:21:52+00:00",
+        "entry_a_text": "Section 122 tariffs face court challenge: CIT heard oral argument Apr 10 in Oregon v. Trump and Burlap & Barrel v. Trump. Trump modified Section 232 tariff regime for steel/aluminum/copper effective Apr 6. 15% rate increase announced but not yet implemented. 150-day expiry on Jul 24, 2026 unless Congress extends.",
+        "entry_b_time": "2026-04-26T16:59:06+00:00",
+        "entry_b_text": "Section 122 tariffs effective Feb 24, 2026 expire July 24, 2026 absent congressional extension; 24 AGs and governors filed CIT challenge Mar 5; trade experts argue legal grounds for invocation are weak. No congressional extension legislation has advanced as of late April.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: challenge, cit, effective, section, tariffs",
+        "detected": "2026-04-26T16:59:06Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:06Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-17T14:18:28+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: stale_evidence, quorum_failure. Reason: Evidence ev_012: 18 bilateral trade frameworks reported as of Apr 16; Section 122 rate remains 10",
+        "entry_b_time": "2026-04-26T16:59:06+00:00",
+        "entry_b_text": "Section 122 tariffs effective Feb 24, 2026 expire July 24, 2026 absent congressional extension; 24 AGs and governors filed CIT challenge Mar 5; trade experts argue legal grounds for invocation are weak. No congressional extension legislation has advanced as of late April.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: section, trade",
+        "detected": "2026-04-26T16:59:06Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:06Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-17T14:01:37+00:00",
+        "entry_a_text": "18 bilateral trade frameworks reported as of Apr 16; Section 122 rate remains 10% (15% announced but no formal order); two active lawsuits at CIT (oral args Apr 10-11); July 24 expiry firm at 150 days",
+        "entry_b_time": "2026-04-26T16:59:06+00:00",
+        "entry_b_text": "Section 122 tariffs effective Feb 24, 2026 expire July 24, 2026 absent congressional extension; 24 AGs and governors filed CIT challenge Mar 5; trade experts argue legal grounds for invocation are weak. No congressional extension legislation has advanced as of late April.",
+        "reason": "Numeric divergence 86.9% on metric (context: section): new=122.0, existing=16.0, threshold=10%",
+        "detected": "2026-04-26T16:59:06Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:06Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-16T03:43:52+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, stale_evidence, quorum_failure. Reason: Evidence ev_011: White House reports 18 bilateral framework trade agreements completed covering m",
+        "entry_b_time": "2026-04-26T16:59:06+00:00",
+        "entry_b_text": "Section 122 tariffs effective Feb 24, 2026 expire July 24, 2026 absent congressional extension; 24 AGs and governors filed CIT challenge Mar 5; trade experts argue legal grounds for invocation are weak. No congressional extension legislation has advanced as of late April.",
+        "reason": "Numeric divergence 72.2% on metric (context: trade): new=5.0, existing=18.0, threshold=10%",
+        "detected": "2026-04-26T16:59:06Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:06Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-16T03:43:52+00:00",
+        "entry_a_text": "White House reports 18 bilateral framework trade agreements completed covering more than half of global GDP as result of Section 122 tariffs. CIT three-judge panel heard oral arguments April 10-11 on 23-state legal challenge.",
+        "entry_b_time": "2026-04-26T16:59:06+00:00",
+        "entry_b_text": "Section 122 tariffs effective Feb 24, 2026 expire July 24, 2026 absent congressional extension; 24 AGs and governors filed CIT challenge Mar 5; trade experts argue legal grounds for invocation are weak. No congressional extension legislation has advanced as of late April.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: april, challenge, cit, legal, section",
+        "detected": "2026-04-26T16:59:06Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:06Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-02T00:00:00Z",
+        "entry_a_text": "One-year anniversary of 'Liberation Day' tariffs. NPR/CNBC assessments: tariffs have not produced promised economic boom. Tax Foundation estimates average household cost $700/year. Trade deficit not meaningfully altered.",
+        "entry_b_time": "2026-04-26T16:59:06+00:00",
+        "entry_b_text": "Section 122 tariffs effective Feb 24, 2026 expire July 24, 2026 absent congressional extension; 24 AGs and governors filed CIT challenge Mar 5; trade experts argue legal grounds for invocation are weak. No congressional extension legislation has advanced as of late April.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: tariffs, trade",
+        "detected": "2026-04-26T16:59:06Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:06Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-10T00:00:00Z",
+        "entry_a_text": "March 2026 CPI: headline +0.9% m/m, 3.3% annual (highest since April 2024). Energy +10.9% (Iran war driven). But core CPI +0.2% m/m, 2.6% annual — both below forecast. Tariff impact visible in apparel (+1%) and airline fares (+2.7%).",
+        "entry_b_time": "2026-04-26T16:59:06+00:00",
+        "entry_b_text": "Section 122 tariffs effective Feb 24, 2026 expire July 24, 2026 absent congressional extension; 24 AGs and governors filed CIT challenge Mar 5; trade experts argue legal grounds for invocation are weak. No congressional extension legislation has advanced as of late April.",
+        "reason": "Numeric divergence 96.2% on metric (context: 2026): new=24.0, existing=0.9, threshold=10%",
+        "detected": "2026-04-26T16:59:06Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:06Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-10T00:00:00Z",
+        "entry_a_text": "CIT oral arguments held April 10-11. Three-judge panel (Barnett, Kelly, Stanceu) sharply questioned both sides for 3+ hours. Key issue: whether 'balance-of-payments deficits' in 1974 statute covers trade deficits. Awkward for government: DOJ argued last year Section 122 had 'no obvious application' to trade deficits. Awkward for challengers: CIT itself wrote Section 122 was available when striking IEEPA tariffs.",
+        "entry_b_time": "2026-04-26T16:59:06+00:00",
+        "entry_b_text": "Section 122 tariffs effective Feb 24, 2026 expire July 24, 2026 absent congressional extension; 24 AGs and governors filed CIT challenge Mar 5; trade experts argue legal grounds for invocation are weak. No congressional extension legislation has advanced as of late April.",
+        "reason": "Numeric divergence 99.7% on metric (context: trade): new=5.0, existing=1974.0, threshold=10%",
+        "detected": "2026-04-26T16:59:06Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:06Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-06T00:00:00Z",
+        "entry_a_text": "Reuters reports Trump-Xi summit planned for mid-May in Beijing. Trade war framing: China responded with reciprocal investigations. Prior Busan meeting produced truce (tariff trim + fentanyl + soybean purchases). May summit is highest-level bilateral trade engagement since Section 122.",
+        "entry_b_time": "2026-04-26T16:59:06+00:00",
+        "entry_b_text": "Section 122 tariffs effective Feb 24, 2026 expire July 24, 2026 absent congressional extension; 24 AGs and governors filed CIT challenge Mar 5; trade experts argue legal grounds for invocation are weak. No congressional extension legislation has advanced as of late April.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: section, trade",
+        "detected": "2026-04-26T16:59:06Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:06Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-03-05T00:00:00Z",
+        "entry_a_text": "24 state attorneys general (led by Oregon, Arizona, California, New York, Vermont) file suit at US Court of International Trade challenging Section 122 surcharge. Case No. 1:26-cv-01472. States argue balance-of-payments requirement not met.",
+        "entry_b_time": "2026-04-26T16:59:06+00:00",
+        "entry_b_text": "Section 122 tariffs effective Feb 24, 2026 expire July 24, 2026 absent congressional extension; 24 AGs and governors filed CIT challenge Mar 5; trade experts argue legal grounds for invocation are weak. No congressional extension legislation has advanced as of late April.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: argue, section, trade",
+        "detected": "2026-04-26T16:59:06Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:06Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-03-04T00:00:00Z",
+        "entry_a_text": "Treasury Secretary Bessent confirms intent to raise to 15% on CNBC. Also references ongoing Section 301 investigations and Section 232 studies as successor frameworks during 150-day window.",
+        "entry_b_time": "2026-04-26T16:59:06+00:00",
+        "entry_b_text": "Section 122 tariffs effective Feb 24, 2026 expire July 24, 2026 absent congressional extension; 24 AGs and governors filed CIT challenge Mar 5; trade experts argue legal grounds for invocation are weak. No congressional extension legislation has advanced as of late April.",
+        "reason": "Numeric divergence 59.5% on metric (context: section): new=122.0, existing=301.0, threshold=10%",
+        "detected": "2026-04-26T16:59:06Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:06Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-02-20T00:00:00Z",
+        "entry_a_text": "SCOTUS strikes IEEPA-based tariffs (Learning Resources v. Trump). Same day, Trump issues Section 122 proclamation: 10% universal import surcharge effective Feb 24. 150-day clock starts.",
+        "entry_b_time": "2026-04-26T16:59:06+00:00",
+        "entry_b_text": "Section 122 tariffs effective Feb 24, 2026 expire July 24, 2026 absent congressional extension; 24 AGs and governors filed CIT challenge Mar 5; trade experts argue legal grounds for invocation are weak. No congressional extension legislation has advanced as of late April.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: effective, feb, section, tariffs",
+        "detected": "2026-04-26T16:59:06Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:06Z"
       }
     ]
   },
@@ -3156,36 +5475,219 @@
         "trust_delta": -0.1,
         "original_text_snippet": "GOVERNANCE WARNING on bayesian_update: stale_evidence, quorum_failure. Reason: Evidence ev_012: 18 bilateral trade frame",
         "confirming_text_snippet": "US and Mexico formally launched USMCA bilateral review discussions on March 19, 2026, focusing on rules of origin, suppl"
+      },
+      {
+        "timestamp": "2026-04-24T02:25:41Z",
+        "evidence_index": 3,
+        "confirming_index": 32,
+        "resolution": "REFUTED",
+        "source": "CIT filing, Oregon et al. v. Trump, March 5 2026",
+        "confirming_source": "Law Offices of Snell & Wilmer / Time / USTR",
+        "trust_delta": -0.1,
+        "original_text_snippet": "24 state attorneys general (led by Oregon, Arizona, California, New York, Vermont) file suit at US Court of Internationa",
+        "confirming_text_snippet": "US Court of International Trade heard oral argument 2026-04-10 in Oregon v. Trump and Burlap & Barrel v. Trump challengi"
+      },
+      {
+        "timestamp": "2026-04-24T02:25:41Z",
+        "evidence_index": 14,
+        "confirming_index": 32,
+        "resolution": "REFUTED",
+        "source": "Reason / National Law Review",
+        "confirming_source": "Law Offices of Snell & Wilmer / Time / USTR",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Section 122 tariffs face court challenge: CIT heard oral argument Apr 10 in Oregon v. Trump and Burlap & Barrel v. Trump",
+        "confirming_text_snippet": "US Court of International Trade heard oral argument 2026-04-10 in Oregon v. Trump and Burlap & Barrel v. Trump challengi"
+      },
+      {
+        "timestamp": "2026-04-24T02:25:41Z",
+        "evidence_index": 15,
+        "confirming_index": 32,
+        "resolution": "REFUTED",
+        "source": "White & Case/Trade Compliance Resource Hub",
+        "confirming_source": "Law Offices of Snell & Wilmer / Time / USTR",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Court of International Trade held oral argument Apr 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Procl",
+        "confirming_text_snippet": "US Court of International Trade heard oral argument 2026-04-10 in Oregon v. Trump and Burlap & Barrel v. Trump challengi"
+      },
+      {
+        "timestamp": "2026-04-24T02:25:41Z",
+        "evidence_index": 20,
+        "confirming_index": 32,
+        "resolution": "REFUTED",
+        "source": "PIIE",
+        "confirming_source": "Law Offices of Snell & Wilmer / Time / USTR",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Following SCOTUS IEEPA ruling Feb 20, 2026, administration imposed Section 122 tariffs at 10% then boosted to 15% (statu",
+        "confirming_text_snippet": "US Court of International Trade heard oral argument 2026-04-10 in Oregon v. Trump and Burlap & Barrel v. Trump challengi"
+      },
+      {
+        "timestamp": "2026-04-24T02:25:41Z",
+        "evidence_index": 22,
+        "confirming_index": 32,
+        "resolution": "REFUTED",
+        "source": "Covington & Burling / White & Case",
+        "confirming_source": "Law Offices of Snell & Wilmer / Time / USTR",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Court of International Trade heard oral arguments Apr 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Sec",
+        "confirming_text_snippet": "US Court of International Trade heard oral argument 2026-04-10 in Oregon v. Trump and Burlap & Barrel v. Trump challengi"
+      },
+      {
+        "timestamp": "2026-04-24T02:25:41Z",
+        "evidence_index": 28,
+        "confirming_index": 30,
+        "resolution": "CONFIRMED",
+        "source": "",
+        "confirming_source": "",
+        "trust_delta": 0.05,
+        "original_text_snippet": "LR MIGRATION RESET: posteriors reset to design priors; evidence log preserved.",
+        "confirming_text_snippet": "REPLAY BEGIN: 0 previously-fired indicators will be re-applied chronologically under current LR system. Posteriors reset"
+      },
+      {
+        "timestamp": "2026-04-24T02:25:41Z",
+        "evidence_index": 30,
+        "confirming_index": 31,
+        "resolution": "CONFIRMED",
+        "source": "",
+        "confirming_source": "",
+        "trust_delta": 0.05,
+        "original_text_snippet": "REPLAY BEGIN: 0 previously-fired indicators will be re-applied chronologically under current LR system. Posteriors reset",
+        "confirming_text_snippet": "REPLAY COMPLETE: 0 indicators applied, 0 skipped. Final posteriors: {'H1': 0.07, 'H2': 0.18, 'H3': 0.33, 'H4': 0.42}. In"
+      },
+      {
+        "timestamp": "2026-04-24T13:49:14Z",
+        "evidence_index": 17,
+        "confirming_index": 34,
+        "resolution": "REFUTED",
+        "source": "White House / White and Case / Axios",
+        "confirming_source": "White & Case / Wiley / Time",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Section 122 10% import surcharge proclaimed Feb 20, 2026 (following Feb 2026 SCOTUS ruling against IEEPA tariffs) took e",
+        "confirming_text_snippet": "Section 122 10% tariff in effect Feb 24 2026 through statutory 150-day expiry July 24 2026. USTR Greer announced new Sec"
+      },
+      {
+        "timestamp": "2026-04-25T13:19:53Z",
+        "evidence_index": 1,
+        "confirming_index": 37,
+        "resolution": "REFUTED",
+        "source": "Trump social media post, Feb 21 2026",
+        "confirming_source": "Covington & Burling / GlobalTradeAlert / USTR",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Trump announces via social media intent to raise Section 122 rate to 15% (statutory maximum). No formal proclamation iss",
+        "confirming_text_snippet": "Section 122 rate raised to 15% statutory maximum effective Feb 22-24, 2026; USTR initiated Section 301 investigations Ma"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:49Z",
+        "evidence_index": 1,
+        "confirming_index": 40,
+        "resolution": "REFUTED",
+        "source": "Trump social media post, Feb 21 2026",
+        "confirming_source": "Duane Morris, Customs and International Trade Law Blog",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Trump announces via social media intent to raise Section 122 rate to 15% (statutory maximum). No formal proclamation iss",
+        "confirming_text_snippet": "Section 122 tariffs effective Feb 24, 2026 at 10% remain in force; statutory expiration July 24, 2026 unless Congress ex"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:49Z",
+        "evidence_index": 10,
+        "confirming_index": 40,
+        "resolution": "REFUTED",
+        "source": "White House / USTR",
+        "confirming_source": "Duane Morris, Customs and International Trade Law Blog",
+        "trust_delta": -0.1,
+        "original_text_snippet": "White House reports 18 bilateral framework trade agreements completed covering more than half of global GDP as result of",
+        "confirming_text_snippet": "Section 122 tariffs effective Feb 24, 2026 at 10% remain in force; statutory expiration July 24, 2026 unless Congress ex"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:49Z",
+        "evidence_index": 14,
+        "confirming_index": 40,
+        "resolution": "REFUTED",
+        "source": "Reason / National Law Review",
+        "confirming_source": "Duane Morris, Customs and International Trade Law Blog",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Section 122 tariffs face court challenge: CIT heard oral argument Apr 10 in Oregon v. Trump and Burlap & Barrel v. Trump",
+        "confirming_text_snippet": "Section 122 tariffs effective Feb 24, 2026 at 10% remain in force; statutory expiration July 24, 2026 unless Congress ex"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:49Z",
+        "evidence_index": 15,
+        "confirming_index": 40,
+        "resolution": "REFUTED",
+        "source": "White & Case/Trade Compliance Resource Hub",
+        "confirming_source": "Duane Morris, Customs and International Trade Law Blog",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Court of International Trade held oral argument Apr 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Procl",
+        "confirming_text_snippet": "Section 122 tariffs effective Feb 24, 2026 at 10% remain in force; statutory expiration July 24, 2026 unless Congress ex"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:49Z",
+        "evidence_index": 22,
+        "confirming_index": 40,
+        "resolution": "REFUTED",
+        "source": "Covington & Burling / White & Case",
+        "confirming_source": "Duane Morris, Customs and International Trade Law Blog",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Court of International Trade heard oral arguments Apr 10 in Oregon v. Trump and Burlap & Barrel v. Trump challenging Sec",
+        "confirming_text_snippet": "Section 122 tariffs effective Feb 24, 2026 at 10% remain in force; statutory expiration July 24, 2026 unless Congress ex"
+      },
+      {
+        "timestamp": "2026-04-25T14:24:49Z",
+        "evidence_index": 32,
+        "confirming_index": 40,
+        "resolution": "REFUTED",
+        "source": "Law Offices of Snell & Wilmer / Time / USTR",
+        "confirming_source": "Duane Morris, Customs and International Trade Law Blog",
+        "trust_delta": -0.1,
+        "original_text_snippet": "US Court of International Trade heard oral argument 2026-04-10 in Oregon v. Trump and Burlap & Barrel v. Trump challengi",
+        "confirming_text_snippet": "Section 122 tariffs effective Feb 24, 2026 at 10% remain in force; statutory expiration July 24, 2026 unless Congress ex"
+      },
+      {
+        "timestamp": "2026-04-26T16:59:06Z",
+        "evidence_index": 20,
+        "confirming_index": 43,
+        "resolution": "REFUTED",
+        "source": "PIIE",
+        "confirming_source": "Covington / CIT / Bradley",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Following SCOTUS IEEPA ruling Feb 20, 2026, administration imposed Section 122 tariffs at 10% then boosted to 15% (statu",
+        "confirming_text_snippet": "Section 122 tariffs effective Feb 24, 2026 expire July 24, 2026 absent congressional extension; 24 AGs and governors fil"
       }
     ],
     "effectiveTrust": {
       "AP (Paul Wiseman), Chicago Tribune, April 11 2026": 0.4118,
       "BLS CPI release": 0.5,
       "CIT filing, Burlap and Barrel v. Trump, March 9 2026": 0.5,
-      "CIT filing, Oregon et al. v. Trump, March 5 2026": 0.2554,
+      "CIT filing, Oregon et al. v. Trump, March 5 2026": 0.1936,
       "CNBC interview, Bessent, March 4 2026": 0.5,
       "Fleischer CHB trade advisory, March 30 2026": 0.5,
       "NPR, CNBC, Tax Foundation, April 2-3 2026": 0.5,
       "Reuters, April 6 2026": 0.5,
       "Supreme Court ruling": 0.3289,
-      "Trump social media post, Feb 21 2026": 0.4118,
-      "USTR": 0.4555,
-      "White House": 0.4118,
+      "Trump social media post, Feb 21 2026": 0.2554,
+      "USTR": 0.3693,
+      "White House": 0.3289,
       "White House Proclamation, Feb 20 2026": 0.3289,
-      "Fleischer Group": 0.4118,
-      "Global Trade Alert": 0.4118,
-      "National Law Review": 0.4118,
-      "Reason": 0.4118,
-      "Trade Compliance Resource Hub": 0.4118,
-      "White & Case": 0.4118,
-      "Axios": 0.4555,
-      "White and Case": 0.4555,
-      "PIIE": 0.4118,
-      "Covington & Burling": 0.5,
+      "Fleischer Group": 0.4555,
+      "Global Trade Alert": 0.4555,
+      "National Law Review": 0.3289,
+      "Reason": 0.3289,
+      "Trade Compliance Resource Hub": 0.3289,
+      "White & Case": 0.1936,
+      "Axios": 0.4118,
+      "White and Case": 0.4118,
+      "PIIE": 0.3693,
+      "Covington & Burling": 0.3289,
       "Covington": 0.5,
-      "Duane Morris": 0.5
+      "Duane Morris": 0.5,
+      "Law Offices of Snell & Wilmer": 0.4555,
+      "Time": 0.4555,
+      "Wiley": 0.5,
+      "GlobalTradeAlert": 0.5,
+      "Duane Morris, Customs and International Trade Law Blog": 0.5,
+      "Bradley": 0.5,
+      "CIT": 0.5
     },
-    "_last_scan_same_source_skipped": 3
+    "_last_scan_same_source_skipped": 15
   },
   "conditionalPredictions": [
     {

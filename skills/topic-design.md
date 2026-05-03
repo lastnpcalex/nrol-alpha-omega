@@ -102,6 +102,12 @@ result = run_design_gate(topic)
 - [ ] Each has clear fired/not-fired threshold
 - [ ] posteriorEffect is pre-committed (declared now, not at fire time)
 - [ ] Indicators span multiple evidence categories
+- [ ] **Shape declared**: Every indicator MUST declare a `shape` field. Valid shapes:
+  - `single_observation`: One observable, fires once
+  - `per_event_member`: One of N iid events (requires shared `causal_event_id` across siblings)
+  - `ladder_rung`: One rung of a duration/magnitude ladder (requires `ladder_group` and `ladder_step`)
+- [ ] **No resolution-disguised indicators**: Firing an indicator must provide marginal evidence, not end the question. (If an event resolves the topic, don't author an indicator for it — let `predictionScoring` handle it).
+- [ ] **Shape review passed**: Run the subagent-mediated shape review on all new indicators before saving. Unreviewed indicators will cause `bayesian_update` to crash via `IndicatorShapeReviewRequired`.
 
 ### Phase 4: Actor model
 - [ ] Key decision-makers identified
