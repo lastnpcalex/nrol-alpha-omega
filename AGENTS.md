@@ -85,6 +85,9 @@ dispatch via Agent tool.
   `posteriorHistory` within 30 days** (`saturation_redteam_required`).
 - **Missing or invalid `meta.calibrationStatus`** (Phase 3.5 gate). Topic
   must declare one of `VALIDATED`, `VALIDATED_WITH_FLAGS`,
+  `VALIDATED_VIA_REFERENCE_CLASS_REVIEWED`,
+  `VALIDATED_SOURCED_OPERATOR_JUDGMENT` (5+red+5 pragmatic protocol —
+  both require the `framework/backtest_data/<slug>.json` fixture),
   `UN_BACKTESTABLE`, `PENDING_DATA_INGESTION`, or
   `SKIPPED_OPERATOR_JUDGMENT` (the last requires
   `meta.calibrationSkipReason` filled). The status is produced by

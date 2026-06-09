@@ -29,6 +29,7 @@ Usage:
     python framework/update.py --topic hormuz-closure --orient
 """
 
+import os
 import sys
 import json
 import argparse
@@ -176,6 +177,33 @@ def run_update(topic_name: str, *,
     prev_brief = _most_recent_brief(topic_name)
     print(f"[LOAD] {topic_name} | lastUpdated={t['meta']['lastUpdated']}")
 
+    # AUTHORITY GATE: operator-supplied posteriors are not a runtime
+    # transition. On ACTIVE topics, beliefs move only through indicator-bound
+    # paths (pipeline.process_evidence / apply_observation). Direct
+    # posteriors here are reserved for resolution/backfill/admin, which must
+    # be signed via NROL_AO_ADMIN_POSTERIORS_REASON (recorded in the
+    # evidence log). This closes the legacy freeform-posterior loophole the
+    # MCP migration spec calls the biggest authority leak.
+    if posteriors and t.get("meta", {}).get("status") == "ACTIVE":
+        _admin_reason = os.environ.get("NROL_AO_ADMIN_POSTERIORS_REASON", "").strip()
+        if not _admin_reason:
+            raise GovernanceError(
+                "run_update refused: explicit posteriors on an ACTIVE topic are "
+                "not a runtime operation. Route evidence through "
+                "pipeline.process_evidence (FIRE/PARK) or apply_observation "
+                "(OBSERVE). For resolution/backfill/admin, set "
+                "NROL_AO_ADMIN_POSTERIORS_REASON to a substantive justification "
+                "— it will be written to the evidence log.",
+                failures=["operator_posteriors_on_active_topic"], warnings=[],
+            )
+        _add_evidence_raw(t, {
+            "time": _now_iso(), "tag": "INTEL",
+            "text": (f"ADMIN POSTERIOR OVERRIDE on ACTIVE topic: {_admin_reason}. "
+                     f"Proposed: {posteriors}"),
+            "provenance": "USER_PROVIDED", "posteriorImpact": "ADMIN_OVERRIDE",
+            "ledger": "DECISION", "claimState": "PROPOSED", "effectiveWeight": 0.5,
+        })
+
     results = {"added": 0, "rejected": 0, "feeds_updated": [], "errors": []}
 
     # 2. Add evidence (governor-gated via engine.add_evidence)
@@ -232,32 +260,12 @@ def run_update(topic_name: str, *,
             update_posteriors(t, posteriors,
                               reason=posterior_reason,
                               evidence_refs=[_now_iso()])
-        except GovernanceError as e:
-            if force and "unresolved_contradiction" in getattr(e, "failures", []):
-                # Force override — create audit trail and apply manually
-                print(f"[FORCE] Governance block overridden: {e}")
-                _add_evidence_raw(t, {
-                    "time": _now_iso(),
-                    "tag": "INTEL",
-                    "text": (f"GOVERNANCE FORCE OVERRIDE: {e}. "
-                             f"Operator acknowledged unresolved contradictions."),
-                    "provenance": "USER_PROVIDED",
-                    "posteriorImpact": "NONE",
-                    "ledger": "DECISION",
-                    "claimState": "PROPOSED",
-                    "effectiveWeight": 0.5,
-                })
-                # Apply posteriors directly (bypass governor)
-                hypotheses = t["model"]["hypotheses"]
-                total = sum(posteriors.values())
-                for k in posteriors:
-                    hypotheses[k]["posterior"] = round(posteriors[k] / total, 4)
-                t["model"]["expectedValue"] = round(
-                    sum(h["midpoint"] * h["posterior"] for h in hypotheses.values()), 2
-                )
-                results["force_override"] = True
-            else:
-                raise  # Re-raise non-forceable failures
+        except GovernanceError:
+            # No soft path: the force branch that wrote normalized posteriors
+            # manually after a governance block was removed — it let one flag
+            # bypass every gate the engine enforces. Resolve the underlying
+            # contradiction (framework.contradictions) and re-run instead.
+            raise
 
         ev = t["model"]["expectedValue"]
         print(f"[POST] Updated | E[weeks]={ev}")
