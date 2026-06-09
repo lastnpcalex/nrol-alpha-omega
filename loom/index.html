@@ -56,7 +56,11 @@
   .card-title { font-size: 12px; font-weight: bold; letter-spacing: 0.5px; line-height: 1.3; }
   .card-badges { display: flex; gap: 4px; flex-shrink: 0; flex-wrap: wrap; }
   .badge { display: inline-block; padding: 2px 6px; border-radius: 3px; font-size: 9px; font-weight: bold; letter-spacing: 0.5px; white-space: nowrap; }
-  .badge.ALERT { background: var(--red); color: #fff; animation: pulse 1.5s infinite; }
+  /* Topic-class ALERT badge: distinct from health-alert pins (which are also red+pulsing).
+     Uses outlined treatment with priority chevron prefix. NO pulse — prevents
+     conflation with the OPEN ALERTS section's REVIEW_NEEDED pins. */
+  .badge.ALERT { background: transparent; color: var(--red); border: 1.5px solid var(--red); padding: 1px 6px; font-weight: 600; }
+  .badge.ALERT::before { content: "▲ "; font-size: 9px; }
   .badge.ELEVATED { background: var(--amber); color: #000; }
   .badge.ROUTINE { background: rgba(59,130,246,0.15); color: var(--accent); }
   .badge.ACTIVE { background: rgba(34,197,94,0.15); color: var(--green); }
@@ -93,7 +97,11 @@
   .classification { display: inline-block; padding: 2px 8px; border-radius: 3px; font-weight: bold; font-size: 10px; letter-spacing: 1px; }
   .classification.ROUTINE { background: var(--green); color: #000; }
   .classification.ELEVATED { background: var(--amber); color: #000; }
-  .classification.ALERT { background: var(--red); color: #fff; animation: pulse 1.5s infinite; }
+  /* Topic-class ALERT classification (priority level "ALERT" — NOT a health alert).
+     Outlined red badge with priority chevron prefix. Visually distinct from
+     health-alert pins (.alert-pin / .alert-sev) which use solid red + pulse. */
+  .classification.ALERT { background: transparent; color: var(--red); border: 1.5px solid var(--red); padding: 1px 7px; font-weight: 700; }
+  .classification.ALERT::before { content: "▲ "; font-size: 9px; }
   .status-badge { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: 10px; letter-spacing: 1px; }
   .status-badge.ACTIVE { background: var(--green); color: #000; }
   .status-badge.RESOLVED { background: var(--dim); color: #000; }

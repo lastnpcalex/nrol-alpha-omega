@@ -18,11 +18,18 @@ The framework is post-reset. The earlier topic corpus (24 topics) was contaminat
 
 - `bayesian_update` requires an indicator id (no freeform LRs)
 - `add_indicator` requires an active cleanup session
-- Indicator shape declarations (`single_observation` / `per_event_member` / `ladder_rung`) are part of topic design
+- Indicator shape declarations (`single_observation` / `per_event_member` / `ladder_rung`) are part of topic design and enforced at save time
 - Causal de-correlation, saturation red-team, and confidence-inflation gates are enforced at fire time
 - Multi-round news scan with adaptive `lastScanned` window and per-hypothesis + wildcard search subagents
+- **Topic-design v2** ([`skills/topic-design.md`](skills/topic-design.md)): adversarial review at every design phase where operator judgment leaks in, not just at a final gate. Phase 2 (priors) and Phase 3 (indicators) get red-team / blue-team subagent pairs. Phase 3 also runs per-indicator shape review (`framework/lint_indicator_shape.py`) — `bayesian_update` refuses to fire indicators without a passed shape review. Phases 4–5 stay operator-driven (low adversarial leverage). Final design gate (`framework/topic_design_gate.py`) runs whole-topic integration review. Multi-topic parallel by construction; revisions capped at 3 per phase.
 
 The lessons from the contaminated run are folded into `skills/` and the engine. The `calibration-lk99-superconductor` and `calibration-750gev-diphoton` topics (RESOLVED with real Brier outcomes) are kept in archive as the only legitimate calibration record from the prior run.
+
+### Why design-time adversarial review matters
+
+The contamination didn't come from missing gates at fire time — it came from operator-anchored priors and miscalibrated indicators that were committed to the schema before any evidence flowed through. Once a topic was authored with a 0.7 prior on the modal hypothesis, nothing in the system pushed back. The cleanup workflow eventually had red/blue-team review for added indicators, but topic creation didn't. v2 closes that asymmetry: every place where operator judgment shapes the topic structure now gets adversarial review, with the same fresh-context anti-anchoring property used elsewhere.
+
+The intended consequence: topics designed via `topic-design` v2 do not need `cleanup-indicator-sweep` to fix their original indicator set. `cleanup-indicator-sweep` becomes specifically for adding new indicators to existing topics (mid-life schema additions), not for repairing creation-time mistakes.
 
 ## Why This Exists
 

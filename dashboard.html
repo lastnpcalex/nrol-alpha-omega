@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NROL-αΩ</title>
+<title>NROL-&alpha;&Omega;</title>
 <style>
   :root {
     --bg: #0a0e17; --surface: #111827; --surface2: #1e293b;
@@ -32,7 +32,8 @@
   .classification { display: inline-block; padding: 2px 10px; border-radius: 3px; font-weight: bold; font-size: 11px; letter-spacing: 1px; }
   .classification.ROUTINE { background: var(--green); color: #000; }
   .classification.ELEVATED { background: var(--amber); color: #000; }
-  .classification.ALERT { background: var(--red); color: #fff; animation: pulse 1s infinite; }
+  .classification.ALERT { background: transparent; color: var(--red); border: 1.5px solid var(--red); padding: 1px 9px; font-weight: 700; }
+  .classification.ALERT::before { content: "\25B2 "; font-size: 9px; }
   @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.6; } }
   .status-badge { display: inline-block; padding: 1px 8px; border-radius: 3px; font-size: 10px; letter-spacing: 1px; }
   .status-badge.ACTIVE { background: var(--green); color: #000; }
@@ -43,6 +44,19 @@
   .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 16px 24px; max-width: 1400px; margin: 0 auto; }
   .panel { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 16px; }
   .panel h2 { font-size: 11px; letter-spacing: 2px; color: var(--accent); margin-bottom: 12px; text-transform: uppercase; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+  .mcp-job { border-bottom: 1px solid var(--border); padding: 8px 0; font-size: 12px; }
+  .mcp-job:last-child { border-bottom: 0; }
+  .mcp-row { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+  .mcp-status { font-size: 10px; letter-spacing: 1px; text-transform: uppercase; }
+  .mcp-status.running, .mcp-status.queued { color: var(--amber); }
+  .mcp-status.completed { color: var(--green); }
+  .mcp-status.failed, .mcp-status.denied { color: var(--red); }
+  .mcp-meta { color: var(--dim); font-size: 11px; margin-top: 3px; line-height: 1.4; }
+  .scan-row { border-bottom: 1px solid var(--border); padding: 7px 0; font-size: 12px; }
+  .scan-row:last-child { border-bottom: 0; }
+  .scan-status { font-size: 10px; letter-spacing: 1px; text-transform: uppercase; }
+  .scan-status.stale { color: var(--amber); }
+  .scan-status.fresh { color: var(--green); }
   .full-width { grid-column: 1 / -1; }
 
   /* Posteriors */
@@ -180,9 +194,9 @@
 
 <div class="header">
   <div class="header-left">
-    <img src="NROLAO.svg" alt="NROL-αΩ" class="logo">
+    <img src="NROLAO.svg" alt="NROL-&alpha;&Omega;" class="logo">
     <div>
-    <h1>NROL-αΩ</h1>
+    <h1>NROL-&alpha;&Omega;</h1>
     <div class="subtitle">NECRO RATIONALIST OPERATIONS LABORATORY</div>
     </div>
   </div>
@@ -226,10 +240,21 @@
 
   <!-- VoI Queries -->
   <div class="panel" id="voiPanel">
-    <h2>Value of Information — Priority Queries</h2>
+    <h2>Value of Information &mdash; Priority Queries</h2>
     <div id="voiQueries"></div>
   </div>
 
+  <!-- Topic Scan Status -->
+  <div class="panel" id="topicStatusPanel">
+    <h2>Topic Scan Status</h2>
+    <div id="topicStatusContent"><div style="color:var(--dim);font-size:12px;">No topic status loaded.</div></div>
+  </div>
+
+  <!-- MCP / Model Activity -->
+  <div class="panel" id="mcpPanel">
+    <h2>MCP / Model Activity</h2>
+    <div id="mcpContent"><div style="color:var(--dim);font-size:12px;">No activity loaded.</div></div>
+  </div>
   <!-- Indicators -->
   <div class="panel full-width">
     <h2>Indicator Status</h2>
@@ -267,6 +292,71 @@ let govData = null;
 let currentSlug = null;
 
 // --- Topic loading ---
+function escapeHtml(value) {
+  return String(value ?? '').replace(/[&<>"']/g, ch => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+  }[ch]));
+}
+
+async function loadTopicStatus() {
+  try {
+    const res = await fetch('/topic-status?' + Date.now());
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    renderTopicStatus(data);
+  } catch (e) {
+    const el = document.getElementById('topicStatusContent');
+    if (el) el.innerHTML = `<div style="color:var(--red);font-size:12px;">Topic status unavailable: ${escapeHtml(String(e.message || e))}</div>`;
+  }
+}
+
+function renderTopicStatus(data) {
+  const el = document.getElementById('topicStatusContent');
+  if (!el) return;
+  const topics = data.topics || [];
+  if (!topics.length) {
+    el.innerHTML = '<div class="mcp-meta">No active topics found.</div>';
+    return;
+  }
+  el.innerHTML = topics.slice(0, 8).map(t => {
+    const stale = t.scanStale ? 'stale' : 'fresh';
+    const age = t.scanAgeHours == null ? 'never scanned' : `${t.scanAgeHours}h old`;
+    const queues = `review ${t.flaggedForIndicatorReview || 0} | gaps ${t.flaggedSchemaGaps || 0} | ext ${t.proposedSchemaExtensions || 0}`;
+    return `<div class="scan-row"><div class="mcp-row"><strong>${escapeHtml(t.slug || t.title || 'topic')}</strong><span class="scan-status ${stale}">${stale}</span></div><div class="mcp-meta">${escapeHtml(t.classification || '')} | ${escapeHtml(t.governanceHealth || 'unknown')} | ${escapeHtml(age)}</div><div class="mcp-meta">${escapeHtml(queues)}</div></div>`;
+  }).join('');
+}
+async function loadMcpActivity() {
+  try {
+    const res = await fetch('/mcp-activity?' + Date.now());
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    renderMcpActivity(data);
+  } catch (e) {
+    const el = document.getElementById('mcpContent');
+    if (el) el.innerHTML = `<div style="color:var(--red);font-size:12px;">Activity unavailable: ${escapeHtml(String(e.message || e))}</div>`;
+  }
+}
+
+function renderMcpActivity(data) {
+  const el = document.getElementById('mcpContent');
+  if (!el) return;
+  const llama = data.llama || {};
+  const jobs = data.jobs || [];
+  const header = `<div class="mcp-meta">model endpoint: ${llama.ok ? 'online' : 'offline'} ${llama.host ? '(' + escapeHtml(llama.host) + ')' : ''}${data.active ? ' | active jobs: ' + data.active : ''}</div>`;
+  if (!jobs.length) {
+    el.innerHTML = header + '<div class="mcp-meta" style="margin-top:8px;">No MCP jobs recorded.</div>';
+    return;
+  }
+  el.innerHTML = header + jobs.slice(0, 8).map(j => {
+    const status = escapeHtml(j.status || 'unknown');
+    const title = escapeHtml([j.task, j.slug].filter(Boolean).join(' | ') || j.job_id || 'job');
+    const model = j.model ? `model: ${escapeHtml(j.model)}` : '';
+    const timing = j.duration_ms ? `${j.duration_ms} ms` : (j.updated_at || '');
+    const err = j.error ? `<div class="mcp-meta" style="color:var(--red);">${escapeHtml(j.error)}</div>` : '';
+    const summary = j.summary ? `<div class="mcp-meta">${escapeHtml(JSON.stringify(j.summary)).slice(0, 220)}</div>` : '';
+    return `<div class="mcp-job"><div class="mcp-row"><strong>${title}</strong><span class="mcp-status ${status}">${status}</span></div><div class="mcp-meta">${[model, timing].filter(Boolean).join(' | ')}</div>${err}${summary}</div>`;
+  }).join('');
+}
 async function loadTopics() {
   try {
     const res = await fetch('/topics?' + Date.now());
@@ -454,9 +544,9 @@ function renderIndicators() {
   const el = document.getElementById('indicators');
   el.innerHTML = '';
   const tierLabels = {
-    tier1_critical: 'TIER 1 — CRITICAL',
-    tier2_strong: 'TIER 2 — STRONG SIGNAL',
-    tier3_suggestive: 'TIER 3 — SUGGESTIVE',
+    tier1_critical: 'TIER 1 &mdash; CRITICAL',
+    tier2_strong: 'TIER 2 &mdash; STRONG SIGNAL',
+    tier3_suggestive: 'TIER 3 &mdash; SUGGESTIVE',
     anti_indicators: 'ANTI-INDICATORS'
   };
 
@@ -553,7 +643,7 @@ function renderActorModel() {
 
   if (am.actors) {
     for (const [aid, actor] of Object.entries(am.actors)) {
-      html += `<div class="actor-card"><h3>${actor.name} — ${actor.role}</h3>`;
+      html += `<div class="actor-card"><h3>${actor.name} &mdash; ${actor.role}</h3>`;
       if (actor.decisionStyle) html += `<div class="actor-detail"><span class="val">${actor.decisionStyle}</span></div>`;
       if (actor.biases && actor.biases.length) {
         html += '<div style="margin-top:4px;">' + actor.biases.map(b => `<span class="actor-bias">${b}</span>`).join('') + '</div>';
@@ -589,7 +679,7 @@ function renderWatchpoints() {
     }
     return `
       <div class="watchpoint">
-        ${w.time ? `<span class="wp-time">${w.time}</span> — ` : ''}<strong>${w.event || w}</strong>
+        ${w.time ? `<span class="wp-time">${w.time}</span> &mdash; ` : ''}<strong>${w.event || w}</strong>
         ${w.watch ? `<div style="color:var(--dim);margin-left:16px;">${w.watch}</div>` : ''}
       </div>
     `;
@@ -757,6 +847,10 @@ function toggleCollapse(headerEl) {
 
 // --- Init ---
 loadTopics();
+loadMcpActivity();
+loadTopicStatus();
+setInterval(loadMcpActivity, 5000);
+setInterval(loadTopicStatus, 30000);
 // Auto-refresh every 60s
 setInterval(() => { if (currentSlug) switchTopic(currentSlug); }, 60000);
 // Update deadlines every second
@@ -773,8 +867,11 @@ if (window.location.hash) {
 </script>
 
 <div style="text-align:center; padding:16px 24px; color:var(--dim); font-size:10px; border-top:1px solid var(--border); margin-top:16px;">
-  NROL-αΩ — Epistemic governance patterns from <a href="https://github.com/unpingable/agent_governor" style="color:var(--accent);" target="_blank">@unpingable/agent_governor</a>
+  NROL-&alpha;&Omega; &mdash; Epistemic governance patterns from <a href="https://github.com/unpingable/agent_governor" style="color:var(--accent);" target="_blank">@unpingable/agent_governor</a>
   &nbsp;|&nbsp; <em>Current Thing delenda est</em>
 </div>
 </body>
 </html>
+
+
+

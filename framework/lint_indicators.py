@@ -381,6 +381,97 @@ def _check_ladder_coherence(topic: dict, proposed: list) -> list:
                 
     return out
 
+def _check_directional_coverage_news_flow(topic: dict, proposed: list) -> list:
+    """
+    Per-hypothesis news-flow fireability coverage check.
+
+    For each hypothesis in the topic, verify that at least ONE indicator
+    with an `observable` block has an LR vector that pushes posterior
+    toward that H when fired. Without this, news flow can update only
+    *some* hypotheses — and the topic structurally drifts in a single
+    direction over time even when reality is mixed.
+
+    This is the check that would have caught the original hormuz schema:
+    H1/H2 had only binary high-threshold indicators, no observable
+    coverage, so news-flow recovery signals couldn't update them.
+
+    Args:
+        topic: existing topic dict (may have prior indicators)
+        proposed: newly proposed indicators (typically [] when checking
+                  an existing topic at design-finalization)
+
+    Returns:
+        list of issue dicts. Empty if all hypotheses have observable
+        coverage. Otherwise blockers naming each uncovered H.
+
+    Operator escape: an indicator may declare
+        observable: {"family": "binary_event", "_no_news_flow_observable_justification": "<reason>"}
+    to opt out (e.g., "this indicator's underlying event genuinely has no
+    continuous metric — only formal decree counts"). Such opt-outs do not
+    contribute to coverage but also do not trigger the blocker on the H
+    they would have covered, IF some other indicator covers it.
+    """
+    issues = []
+
+    hypotheses = topic.get("model", {}).get("hypotheses", {}) or {}
+    if not hypotheses:
+        return issues  # topic is mid-design; check runs later
+
+    # Gather all indicators (existing + proposed)
+    existing = []
+    inds_block = topic.get("indicators") or {}
+    for tier_list in (inds_block.get("tiers") or {}).values():
+        if isinstance(tier_list, list):
+            existing.extend(i for i in tier_list if isinstance(i, dict))
+    existing.extend(i for i in (inds_block.get("anti_indicators") or []) if isinstance(i, dict))
+    all_inds = existing + [p for p in proposed if isinstance(p, dict)]
+
+    # Per-H "pushes toward" coverage from indicators with observables
+    coverage_toward_h = {h: 0 for h in hypotheses}
+    coverage_away_from_h = {h: 0 for h in hypotheses}
+    for ind in all_inds:
+        ob = ind.get("observable")
+        if not ob:
+            continue
+        family = ob.get("family")
+        if family == "binary_event":
+            continue  # not news-flow-fireable as continuous
+        lrs = ind.get("likelihoods")
+        if not lrs or not isinstance(lrs, dict):
+            continue
+        # Identify favored / disfavored H
+        try:
+            favored_h = max(lrs.items(), key=lambda kv: float(kv[1]))[0]
+            disfavored_h = min(lrs.items(), key=lambda kv: float(kv[1]))[0]
+        except (TypeError, ValueError):
+            continue
+        if favored_h in coverage_toward_h:
+            coverage_toward_h[favored_h] += 1
+        if disfavored_h in coverage_away_from_h:
+            coverage_away_from_h[disfavored_h] += 1
+
+    # Report uncovered hypotheses
+    uncovered = [h for h, c in coverage_toward_h.items() if c == 0]
+    if uncovered:
+        issues.append({
+            "id": "directional_coverage_news_flow",
+            "severity": BLOCKER,
+            "indicator": "<set-level>",
+            "msg": (
+                f"Hypotheses with NO observable indicator pushing posterior "
+                f"toward them: {uncovered}. News flow cannot move these "
+                f"hypotheses up; topic will structurally drift away from "
+                f"them. Add at least one indicator with an `observable` "
+                f"block (family != binary_event) whose LR vector favors "
+                f"each uncovered H."
+            ),
+            "coverage_toward": coverage_toward_h,
+            "coverage_away_from": coverage_away_from_h,
+        })
+
+    return issues
+
+
 def propose_indicators_lint(
     topic: dict,
     proposed_indicators: list,
@@ -432,13 +523,17 @@ def propose_indicators_lint(
     # Set-level checks
     for issue in _check_ladder_coherence(topic, proposed_indicators):
         (blockers if issue["severity"] == BLOCKER else warnings).append(issue)
-        
+
     for issue in _check_compound_projection(topic, proposed_indicators):
         (blockers if issue["severity"] == BLOCKER else warnings).append(issue)
     if (issue := _check_direction_drift(proposed_indicators)):
         warnings.append(issue)
     if (issue := _check_cluster_suspicion(proposed_indicators)):
         warnings.append(issue)
+    for issue in _check_directional_coverage_news_flow(topic, proposed_indicators):
+        (blockers if issue["severity"] == BLOCKER else warnings).append(issue)
+        if "directional_coverage" not in checks_run:
+            checks_run.append("directional_coverage")
 
     passed = len(blockers) == 0
     summary = (

@@ -1,0 +1,1958 @@
+{
+  "meta": {
+    "slug": "calibration-local-llm-usage-share-2028",
+    "title": "Local vs API LLM Inference Usage Share by 2028",
+    "question": "By 2028-12-31, what share of global LLM inference (measured in tokens processed per rolling 30-day window) runs on user-controlled compute â€” on-device plus self-hosted servers operated by the end-user or their organization â€” versus third-party hosted APIs?",
+    "resolution": "Resolved by the State of AI Report 2028 annual local-vs-hosted inference-tokens breakdown (published typically Oct-Nov 2028). Fallback hierarchy if SotAI does not publish the metric: (a) Stanford AI Index 2029 deployment chapter; (b) Cloudflare AI Radar + HuggingFace Inference telemetry composite; (c) consensus of the three most recent developer surveys (Stack Overflow, State of AI, DevOps Research). Resolved H1 (<15% local), H2 (15-35% local), H3 (35-55% local), H4 (over 55% local) by the most authoritative available figure at resolution date. Robustness rule: if the headline figure falls within 2 percentage points of a hypothesis boundary, require corroboration from at least one fallback source or defer resolution 6 months. 'Local' = user-controlled compute: on-device (phone/laptop/desktop) plus self-hosted servers on infrastructure the user or their organization operates. Explicitly excludes BYO-cloud with third-party model API (that is API). Private-cloud self-hosted open-weights deployments count as local. resolutionDate: 2028-12-31.",
+    "created": "",
+    "lastUpdated": "2026-04-29T02:30:59+00:00",
+    "status": "ACTIVE",
+    "dayCount": 0,
+    "startDate": "2026-04-22",
+    "classification": "CALIBRATION",
+    "topicType": "tech",
+    "resolutionDate": "2028-12-31",
+    "lens": "GREEN",
+    "lensSetAt": "2026-04-26T21:22:00+00:00",
+    "lensSetReason": ""
+  },
+  "tagConfig": {
+    "_docs": "SURVEY/BENCHMARK track local share; HARDWARE favors H2/H3; EARNINGS (top-3 API growth) favors H1; REGULATORY (sovereignty mandates) favors H2/H3.",
+    "availableTags": [
+      "EVENT",
+      "DATA",
+      "RHETORIC",
+      "SURVEY",
+      "HARDWARE",
+      "EARNINGS",
+      "REGULATORY",
+      "BENCHMARK",
+      "PREDICTION"
+    ],
+    "directionHints": {
+      "HARDWARE": {
+        "H2": 1,
+        "H3": 1,
+        "H1": -1
+      },
+      "REGULATORY": {
+        "H2": 1,
+        "H3": 1,
+        "H1": -1
+      }
+    },
+    "escalationTags": [],
+    "deescalationTags": []
+  },
+  "model": {
+    "hypotheses": {
+      "H1": {
+        "label": "Dominant API: local inference under 15% of total tokens",
+        "midpoint": 8,
+        "unit": "% of global LLM inference tokens running on user-controlled compute",
+        "description": "Hosted APIs retain decisive dominance. Developer ergonomics, latest-frontier access, and enterprise liability/compliance contracts keep the vast majority of workloads on OpenAI/Google/Anthropic/AWS-Bedrock-style hosted services. On-device inference grows but remains niche (privacy-sensitive / offline / experimentation). Consistent with moat-topic H1.",
+        "posterior": 0.0067
+      },
+      "H2": {
+        "label": "Minority local: 15 to 35% of total tokens on user-controlled compute",
+        "midpoint": 25,
+        "unit": "% of global LLM inference tokens running on user-controlled compute",
+        "description": "Self-hosted open-weights deployments at enterprise and mobile on-device inference collectively capture meaningful but minority share. Privacy/sovereignty-driven enterprises go self-hosted; consumer apps embed small models on-device for latency and cost. Hosted API still handles majority of workload.",
+        "posterior": 0.98
+      },
+      "H3": {
+        "label": "Co-dominant: 35 to 55% of total tokens on user-controlled compute",
+        "midpoint": 45,
+        "unit": "% of global LLM inference tokens running on user-controlled compute",
+        "description": "Genuine split emerges. Small/medium models (1B-30B) handle a large fraction of everyday tasks on-device or self-hosted; hosted APIs retain complex reasoning and frontier capabilities. Cost arbitrage drives enterprise split deployment.",
+        "posterior": 0.0067
+      },
+      "H4": {
+        "label": "Majority local: over 55% of total tokens on user-controlled compute",
+        "midpoint": 70,
+        "unit": "% of global LLM inference tokens running on user-controlled compute",
+        "description": "Malone's thesis realized. Capability gap closes enough (and local inference cost/latency advantages compound) that most LLM inference runs outside hosted APIs. Implies strong correlation with moat-topic H3/H4 outcomes.",
+        "posterior": 0.0067
+      }
+    },
+    "expectedValue": 25.32,
+    "expectedUnit": "weeks",
+    "posteriorHistory": [
+      {
+        "date": "2026-04-22",
+        "note": "Initial priors. Current state (2026-Q1): estimated ~90%+ of LLM inference tokens flow through hosted APIs. 3-year momentum: Apple on-device push (M-series NPUs, Gemini Nano), enterprise self-hosting of Llama/Mistral, sovereignty regulation (EU AI Act). H1 (35%): base rate â€” hosted API infrastructure lock-in plus frontier-capability gap sustains dominance; partial local adoption but under 15% threshold. H2 (38%): modal prior â€” realistic trajectory assuming on-device defaults reach consumer scale for routine tasks AND meaningful enterprise self-hosting. H3 (20%): requires both consumer-scale on-device default AND enterprise self-host majority â€” plausible but requires multiple catalysts. H4 (7%): Malone thesis â€” requires capability parity + cost advantage + enterprise migration all within ~2.5 years. Tail. Priors informed by Bsky thread 2026-04-22 (proptermalone moat debate) and moat-topic priors.",
+        "H1": 0.35,
+        "H2": 0.38,
+        "H3": 0.2,
+        "H4": 0.07,
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        }
+      },
+      {
+        "date": "2026-04-22",
+        "posteriors": {
+          "H1": 0.2661,
+          "H2": 0.5252,
+          "H3": 0.1797,
+          "H4": 0.029
+        },
+        "priors": {
+          "H1": 0.35,
+          "H2": 0.38,
+          "H3": 0.2,
+          "H4": 0.07
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_001"
+        ],
+        "likelihoods": {
+          "H1": 0.22,
+          "H2": 0.4,
+          "H3": 0.26,
+          "H4": 0.12
+        },
+        "note": "Directional signal toward on-device default for OS AI features. Does not meet t2_apple_on_device_default threshold (requires WWDC/I/O keynote plus developer documentation with no cloud fallback for standard queries). Trade-press pre-confirmation only â€” modest tilt toward H2/H3.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "turningPoint": {
+          "type": "THRESHOLD_CROSSED",
+          "hypothesis": "H2",
+          "from": 0.38,
+          "to": 0.5252
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-22",
+        "posteriors": {
+          "H1": 0.2661,
+          "H2": 0.5252,
+          "H3": 0.1797,
+          "H4": 0.029
+        },
+        "priors": {
+          "H1": 0.2661,
+          "H2": 0.5252,
+          "H3": 0.1797,
+          "H4": 0.029
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_002"
+        ],
+        "likelihoods": {
+          "H1": 0.25,
+          "H2": 0.25,
+          "H3": 0.25,
+          "H4": 0.25
+        },
+        "note": "test",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-22",
+        "posteriors": {
+          "H1": 0.1678,
+          "H2": 0.6625,
+          "H3": 0.1587,
+          "H4": 0.011
+        },
+        "priors": {
+          "H1": 0.2661,
+          "H2": 0.5252,
+          "H3": 0.1797,
+          "H4": 0.029
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_002"
+        ],
+        "likelihoods": {
+          "H1": 0.2,
+          "H2": 0.4,
+          "H3": 0.28,
+          "H4": 0.12
+        },
+        "note": "Enterprise engagement with open-weights ecosystem is suggestive but does not equal self-hosting majority share. Modest directional support for H2/H3.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-24",
+        "posteriors": {
+          "H1": 0.0855,
+          "H2": 0.8434,
+          "H3": 0.0661,
+          "H4": 0.005
+        },
+        "priors": {
+          "H1": 0.1678,
+          "H2": 0.6625,
+          "H3": 0.1587,
+          "H4": 0.011
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_003"
+        ],
+        "likelihoods": {
+          "H1": 0.22,
+          "H2": 0.55,
+          "H3": 0.18,
+          "H4": 0.05
+        },
+        "note": "Local adoption growing but cloud still dominant for majority of tokens; supports H2 (15-35% local token share).",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "turningPoint": {
+          "type": "BRANCH_DEATH",
+          "hypothesis": "H4",
+          "lastPosterior": 0.005
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-24",
+        "posteriors": {
+          "H1": 0.0159,
+          "H2": 0.9668,
+          "H3": 0.0122,
+          "H4": 0.005
+        },
+        "priors": {
+          "H1": 0.0855,
+          "H2": 0.8434,
+          "H3": 0.0661,
+          "H4": 0.005
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_004"
+        ],
+        "likelihoods": {
+          "H1": 0.12,
+          "H2": 0.74,
+          "H3": 0.12,
+          "H4": 0.02
+        },
+        "note": "Rising local adoption indicators without quantitative share data sustain H2 minority-local modal.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-24",
+        "posteriors": {
+          "H1": 0.0114,
+          "H2": 0.9786,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "priors": {
+          "H1": 0.0159,
+          "H2": 0.9668,
+          "H3": 0.0122,
+          "H4": 0.005
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_005"
+        ],
+        "likelihoods": {
+          "H1": 0.7,
+          "H2": 1.0,
+          "H3": 0.2,
+          "H4": 0.02
+        },
+        "note": "Hardware viable, ecosystem growing, but no sign of >15% token share yet — borderline H1/H2 consistent with existing posterior.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "turningPoint": {
+          "type": "BRANCH_DEATH",
+          "hypothesis": "H3",
+          "lastPosterior": 0.005
+        },
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-25",
+        "posteriors": {
+          "H1": 0.0067,
+          "H2": 0.98,
+          "H3": 0.0067,
+          "H4": 0.0067
+        },
+        "priors": {
+          "H1": 0.0114,
+          "H2": 0.9786,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_006"
+        ],
+        "likelihoods": {
+          "H1": 0.4,
+          "H2": 1.0,
+          "H3": 0.4,
+          "H4": 0.05
+        },
+        "note": "Adoption-side metrics consistent with 15-35% local-token-share trajectory (H2); usage telemetry remains the missing piece that would push toward H3.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-26",
+        "posteriors": {
+          "H1": 0.0067,
+          "H2": 0.98,
+          "H3": 0.0067,
+          "H4": 0.0067
+        },
+        "priors": {
+          "H1": 0.0067,
+          "H2": 0.98,
+          "H3": 0.0067,
+          "H4": 0.0067
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_007"
+        ],
+        "likelihoods": {
+          "H1": 0.3,
+          "H2": 0.85,
+          "H3": 0.1,
+          "H4": 0.02
+        },
+        "note": "Enterprise API spend doubling YoY weakly pulls toward H1; local-capability research keeps H2 dominant.",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      },
+      {
+        "date": "2026-04-26",
+        "posteriors": {
+          "H1": 0.0067,
+          "H2": 0.98,
+          "H3": 0.0067,
+          "H4": 0.0067
+        },
+        "priors": {
+          "H1": 0.0067,
+          "H2": 0.98,
+          "H3": 0.0067,
+          "H4": 0.0067
+        },
+        "updateMethod": "bayesian_update_legacy",
+        "evidenceRefs": [
+          "ev_008"
+        ],
+        "likelihoods": {
+          "H1": 0.3,
+          "H2": 1.0,
+          "H3": 0.5,
+          "H4": 0.2
+        },
+        "note": "Maturing tooling and dual-spend pattern fit 15-35% local-share band (H2).",
+        "dominantHypothesisStable": true,
+        "sensitivityFlag": false,
+        "redTeam": {
+          "contrarian_direction": {},
+          "counterevidence": [],
+          "unfired_indicators": [],
+          "devil_advocate_score": 0.0,
+          "challenge": "No significant shifts proposed; no challenge needed.",
+          "inference_mode": "text_heuristic"
+        },
+        "lrSource": {
+          "lens": "OPERATOR_JUDGMENT",
+          "lensSetAt": null,
+          "source": "legacy_migration",
+          "legacy": true
+        },
+        "legacyMethod": true
+      }
+    ]
+  },
+  "subModels": {},
+  "indicators": {
+    "tiers": {
+      "tier1_critical": [
+        {
+          "id": "t1_sotai_under15pct_local",
+          "desc": "State of AI Report 2028 (or 2027) publishes inference-tokens breakdown showing user-controlled compute under 15% of total LLM inference tokens for â‰¥2 consecutive quarterly/half-year updates.",
+          "posteriorEffect": "H1 +28pp, H2 +5pp, H3 -22pp, H4 -11pp",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        },
+        {
+          "id": "t1_sotai_over55pct_local",
+          "desc": "State of AI Report 2028 (or 2027) publishes inference-tokens breakdown showing user-controlled compute over 55% of total LLM inference tokens for â‰¥2 consecutive quarterly/half-year updates.",
+          "posteriorEffect": "H4 +30pp, H3 +8pp, H1 -25pp, H2 -13pp",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        }
+      ],
+      "tier2_strong": [
+        {
+          "id": "t2_apple_on_device_default",
+          "desc": "Apple/Google ship on-device LLM as default for core OS features (Siri/Assistant/Gmail writing assistance) with no cloud fallback for standard queries â€” confirmed by WWDC/Google I/O keynote plus developer documentation.",
+          "posteriorEffect": "H2 +10pp, H3 +8pp, H1 -12pp, H4 -6pp",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        },
+        {
+          "id": "t2_enterprise_self_host_30pct",
+          "desc": "Gartner or SotAI enterprise survey confirms â‰¥30% of Fortune 500 run their primary LLM workload on self-hosted open-weights infrastructure (not API).",
+          "posteriorEffect": "H2 +12pp, H3 +8pp, H1 -15pp, H4 -5pp",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        },
+        {
+          "id": "t2_openai_api_revenue_growth_sustains",
+          "desc": "OpenAI + Google Gemini API + Anthropic combined API token volume grows â‰¥40% YoY through 2027-Q4 (outpacing estimated on-device/self-hosted growth).",
+          "posteriorEffect": "H1 +12pp, H2 +5pp, H3 -10pp, H4 -7pp",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        }
+      ],
+      "tier3_suggestive": [
+        {
+          "id": "t3_huggingface_inference_share",
+          "desc": "HuggingFace reports self-hosted open-weights inference volume (via tracked endpoints + telemetry) at >25% of their ecosystem total for â‰¥6 months.",
+          "posteriorEffect": "H2 +5pp, H3 +4pp, H1 -6pp, H4 -3pp",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        },
+        {
+          "id": "t3_phone_llm_default_apps",
+          "desc": "Major consumer apps (â‰¥3 of: WhatsApp, Instagram, Gmail, Notes, Siri, Gemini app) perform LLM inference on-device by default with opt-in cloud fallback.",
+          "posteriorEffect": "H2 +5pp, H3 +3pp, H1 -5pp, H4 -3pp",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        },
+        {
+          "id": "t3_sovereignty_regulation_local",
+          "desc": "EU AI Act or similar regulation mandates local/self-hosted inference for specified sensitive use cases (medical, legal, gov), driving enterprise adoption.",
+          "posteriorEffect": "H2 +4pp, H3 +4pp, H1 -5pp, H4 -3pp",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        },
+        {
+          "id": "t3_open_runtime_ecosystem_scale",
+          "desc": "Sustained open-runtime ecosystem scale for >=6 months: (a) Ollama or equivalent local-runtime exceeds 50M monthly model pulls (Llama+Mistral+Phi-family combined) AND (b) HuggingFace hosts >=100k quantized/GGUF model variants. Adoption proxy — does NOT measure token-share directly, hence tier3 weight.",
+          "posteriorEffect": "H2 +4pp, H3 +3pp, H1 -5pp, H4 -2pp",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        },
+        {
+          "id": "t3_compliance_local_deployments",
+          "desc": ">=3 documented enterprise case studies (Gartner/Forrester/IDC briefings or peer-reviewed) of regulated-industry organisations (healthcare, legal, gov, finance) deploying their primary LLM workload on self-hosted infrastructure to satisfy HIPAA/GDPR/SOC2/FedRAMP, with seat-counts or dollar figures. Distinct from t3_sovereignty_regulation_local (which requires a regulatory mandate); this fires on observed compliance-driven adoption without a mandate.",
+          "posteriorEffect": "H2 +3pp, H3 +3pp, H1 -4pp, H4 -2pp",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        },
+        {
+          "id": "t3_on_device_default_pre_keynote",
+          "desc": "Pre-keynote on-device-default signal: trade-press confirmation plus developer-preview SDK or beta documentation indicating Apple/Google/Microsoft will ship on-device LLM as the default for at least one core OS feature (Siri/Assistant/Copilot/writing). Softer threshold than t2_apple_on_device_default; fires on the leading signal, t2 fires on the confirmed shipping decision.",
+          "posteriorEffect": "H2 +3pp, H3 +2pp, H1 -4pp, H4 -1pp",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        }
+      ],
+      "anti_indicators": [
+        {
+          "id": "anti_h1_local_takeoff",
+          "desc": "Authoritative survey (SotAI/Stanford AI Index) reports user-controlled compute â‰¥30% of total LLM inference tokens in any period before resolution â€” contradicts 'dominant API' hypothesis.",
+          "posteriorEffect": "H1 -15pp (redistributed to H2+H3)",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        },
+        {
+          "id": "anti_h2_api_consolidation",
+          "desc": "Self-hosted open-weights share flat or declining through 2027 per â‰¥2 tracking sources; hosted API share growing â€” contradicts minority-local hypothesis.",
+          "posteriorEffect": "H2 -12pp (redistributed to H1)",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        },
+        {
+          "id": "anti_h3_clear_majority_one_side",
+          "desc": "Any authoritative source reports user-controlled compute either <20% or >60% of total inference tokens â€” contradicts co-dominant split.",
+          "posteriorEffect": "H3 -15pp (redistributed to H1+H2 or H4 per direction)",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        },
+        {
+          "id": "anti_h4_api_dominance_confirmed",
+          "desc": "Top-3 hosted API providers retain combined â‰¥70% of measured inference tokens through 2027 per â‰¥2 independent sources â€” majority-local thesis implausible.",
+          "posteriorEffect": "H4 -7pp (redistributed to H1+H2)",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null
+        }
+      ]
+    },
+    "anti_indicators": []
+  },
+  "actorModel": {
+    "description": "Usage share between local and API inference driven by: chipmakers (on-device capability), platform vendors (Apple/Google default-inference choices), enterprise buyers (self-hosting decisions), hosted providers (pricing pressure), regulators (sovereignty mandates).",
+    "actors": {
+      "apple_google_platforms": {
+        "name": "Apple / Google (mobile OS)",
+        "role": "Default-inference gatekeepers â€” their choice of on-device vs. cloud for OS-integrated AI drives consumer-scale share",
+        "decisionStyle": "Strategic â€” Apple biased to on-device (privacy branding); Google hybrid (Gemini Nano for on-device, hosted for complex). Hardware depreciation cycles drive when new on-device models ship.",
+        "biases": [
+          "Apple: privacy-first framing",
+          "Google: cloud-side revenue protection"
+        ],
+        "filters": [
+          "Battery/thermal envelope on mobile",
+          "Model size vs. RAM constraints"
+        ],
+        "overrides": [
+          "Regulatory pressure (EU AI Act) can force on-device defaults"
+        ]
+      },
+      "enterprise_buyers": {
+        "name": "Enterprise buyers (Fortune 500, regulated verticals)",
+        "role": "Drive self-hosted open-weights adoption for sovereignty/compliance/cost reasons",
+        "decisionStyle": "Institutional â€” procurement cycles favor multi-vendor strategies; CIO concerns about AI provider lock-in.",
+        "biases": [
+          "Vendor diversification as risk management",
+          "TCO focus (self-host cheaper at scale)"
+        ],
+        "filters": [
+          "Compliance: HIPAA, GDPR, SOC2, FedRAMP require data residency control"
+        ],
+        "overrides": [
+          "Talent shortage in MLOps can slow self-hosting adoption"
+        ]
+      },
+      "hosted_providers": {
+        "name": "OpenAI / Google Gemini API / Anthropic / AWS Bedrock",
+        "role": "Defend API share via frontier capability + enterprise features",
+        "decisionStyle": "Rational â€” respond to self-hosting threat with price cuts, fine-tuning tools, enterprise agreements.",
+        "biases": [
+          "Reluctance to commoditize API pricing"
+        ],
+        "filters": [
+          "Margin requirements on GPU capex"
+        ],
+        "overrides": [
+          "Competitive pressure from open-weights can force aggressive pricing"
+        ]
+      },
+      "chipmakers": {
+        "name": "Apple Silicon / Qualcomm / NVIDIA / AMD",
+        "role": "Supply-side â€” NPU/GPU capability determines what's feasible on-device",
+        "decisionStyle": "Roadmap-driven. On-device AI capability grows ~2x per generation; memory bandwidth is the bottleneck.",
+        "biases": [
+          "NVIDIA: prefers data-center margins (push for API)",
+          "Apple/Qualcomm: on-device NPU as differentiator"
+        ],
+        "filters": [
+          "Memory bandwidth scaling limits",
+          "Thermal envelope on mobile"
+        ],
+        "overrides": [
+          "HBM supply crunch can accelerate on-device push (hosted providers can't scale)"
+        ]
+      },
+      "regulators_sovereignty": {
+        "name": "EU (AI Act), China (regulatory), US (sector-specific)",
+        "role": "Can mandate local/sovereign inference for specific use cases",
+        "decisionStyle": "Institutional, precedent-bound. EU already moving on data residency.",
+        "biases": [
+          "Slow to legislate; reactive to incidents"
+        ],
+        "filters": [
+          "Industry lobbying"
+        ],
+        "overrides": [
+          "High-profile AI incident can accelerate local-only mandates"
+        ]
+      }
+    },
+    "methodology": [
+      "ACTIONS OVER RHETORIC â€” only verified deployment data and survey figures move posteriors",
+      "WATCH APPLE/GOOGLE WWDC+I/O â€” default-inference choices for OS features drive consumer scale",
+      "ENTERPRISE SURVEYS ARE DOWNSTREAM â€” they confirm trends already visible in product launches and hiring",
+      "CROSS-CHECK: if moat-2028 posteriors shift toward fragmentation, this topic's local-share priors should rise"
+    ]
+  },
+  "evidenceLog": [
+    {
+      "id": "ev_001",
+      "time": "2026-04-22T19:49:01+00:00",
+      "tag": "EVENT",
+      "tags": [
+        "EVENT",
+        "HARDWARE"
+      ],
+      "text": "Reporting indicates iOS 27 embeds a distilled Gemini Nano (1.3B quantized) directly into the Neural Engine of A17 Pro and M4 chips, replacing the legacy Siri stack with an on-device Apple Intelligence Core. Not yet confirmed via WWDC keynote or developer docs â€” pre-announcement trade press.",
+      "provenance": "OBSERVED",
+      "source": "Archyde (iOS 27 preview)",
+      "posteriorImpact": "NONE",
+      "url": "https://www.archyde.com/ios-27-new-features-gemini-ai-and-device-compatibility/",
+      "ledger": "FACT",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-22T19:49:01+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Directional signal toward on-device default for OS AI features. Does not meet t2_apple_on_device_default threshold (requires WWDC/I/O keynote plus developer documentation with no cloud fallback for standard queries). Trade-press pre-confirmation only â€” modest tilt toward H2/H3.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_002",
+      "time": "2026-04-22T19:50:21+00:00",
+      "tag": "SURVEY",
+      "tags": [
+        "SURVEY",
+        "DATA"
+      ],
+      "text": "HuggingFace State of Open Source Spring 2026 report: over 30% of Fortune 500 now maintain verified accounts on Hugging Face. Indicates enterprise engagement with open-weights ecosystem but does NOT measure share of primary LLM workload run on self-hosted infrastructure (t2_enterprise_self_host_30pct threshold not met).",
+      "provenance": "OBSERVED",
+      "source": "HuggingFace Blog",
+      "posteriorImpact": "NONE",
+      "url": "https://huggingface.co/blog/huggingface/state-of-os-hf-spring-2026",
+      "ledger": "DECISION",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-22T19:50:21+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Enterprise engagement with open-weights ecosystem is suggestive but does not equal self-hosting majority share. Modest directional support for H2/H3.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_003",
+      "time": "2026-04-24T02:25:42+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "TECH"
+      ],
+      "text": "Ollama accumulated over 112M model pulls for Llama 3.1 alone; r/LocalLLaMA community over 266,500 members; hybrid pattern emerging where developers use frontier cloud models for planning and local models for execution.",
+      "provenance": "OBSERVED",
+      "source": "Ollama GitHub / Reddit stats",
+      "posteriorImpact": "NONE",
+      "url": "https://github.com/ollama/ollama",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-24T02:25:42+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-24T02:25:42+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Local adoption growing but cloud still dominant for majority of tokens; supports H2 (15-35% local token share).",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_004",
+      "time": "2026-04-24T13:49:16+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "TECH",
+        "AI"
+      ],
+      "text": "Ollama accumulated >112M pulls of Llama 3.1 alone; 100+ model library; dominant local-LLM runtime. Developer break-even vs API pricing at ~10M tokens/month. No 2026 market-share telemetry reconciling local vs API token volumes; trend directional only.",
+      "provenance": "OBSERVED",
+      "source": "Ollama / Starmorph / SitePoint",
+      "posteriorImpact": "NONE",
+      "url": "https://blog.starmorph.com/blog/local-llm-inference-tools-guide",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-24T13:49:16+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-24T13:49:16+00:00",
+      "tag": "INTEL",
+      "text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Rising local adoption indicators without quantitative share data sustain H2 minority-local modal.",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_005",
+      "time": "2026-04-24T19:30:15+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "AI",
+        "HARDWARE"
+      ],
+      "text": "July Simon Apr 2026 local LLM guide documents strong viability on laptops (Phi-4-mini 15-20 t/s on M1 Air; Llama 3.3 8B / Mistral Small 3 ~30-50 t/s on mid-range NVIDIA). 65% of orgs use GenAI tools (McKinsey). No public figure for local share of global tokens — API-dominant pattern persists.",
+      "provenance": "OBSERVED",
+      "source": "Julien Simon / McKinsey via Hostinger",
+      "posteriorImpact": "NONE",
+      "url": "https://julsimon.medium.com/what-to-buy-for-local-llms-april-2026-a4946a381a6a",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-24T19:30:15+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_006",
+      "time": "2026-04-25T14:24:51+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "TECH"
+      ],
+      "text": "Q1 2026 metrics: Ollama 52M monthly downloads (520x vs Q1 2023's 100k). Hugging Face hosts 135,000 GGUF models (vs 200 three years ago). Consumer GPU + Apple Silicon achieves 20+ tok/s with 2K+ context windows. Enterprise drivers: HIPAA/GDPR/SOC2 compliance forcing healthcare, legal, government to local inference.",
+      "provenance": "OBSERVED",
+      "source": "Ollama, Hugging Face, dev.to local AI 2026 survey",
+      "posteriorImpact": "NONE",
+      "url": "https://github.com/ollama/ollama",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-25T14:24:51+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-26T16:26:23+00:00",
+      "tag": "INTEL",
+      "text": "INDICATOR ADDED: t3_open_runtime_ecosystem_scale (tier3_suggestive). posteriorEffect=H2 +4pp, H3 +3pp, H1 -5pp, H4 -2pp. Rationale: review_topic_design — ev_001-ev_006 all logged with NONE impact while H2 saturated to 0.98 via likelihood updates alone. Existing indicators gate on definitive token-share figures or full WWDC confirmations; observed evidence is dominated by adoption proxies, pre-keynote trade-press, and compliance case studies. Three tier3 indicators added to give those dimensions a fired-or-not gate with modest pre-committed posterior effects..",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-26T16:26:23+00:00",
+      "tag": "INTEL",
+      "text": "INDICATOR ADDED: t3_compliance_local_deployments (tier3_suggestive). posteriorEffect=H2 +3pp, H3 +3pp, H1 -4pp, H4 -2pp. Rationale: review_topic_design — ev_001-ev_006 all logged with NONE impact while H2 saturated to 0.98 via likelihood updates alone. Existing indicators gate on definitive token-share figures or full WWDC confirmations; observed evidence is dominated by adoption proxies, pre-keynote trade-press, and compliance case studies. Three tier3 indicators added to give those dimensions a fired-or-not gate with modest pre-committed posterior effects..",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-26T16:26:23+00:00",
+      "tag": "INTEL",
+      "text": "INDICATOR ADDED: t3_on_device_default_pre_keynote (tier3_suggestive). posteriorEffect=H2 +3pp, H3 +2pp, H1 -4pp, H4 -1pp. Rationale: review_topic_design — ev_001-ev_006 all logged with NONE impact while H2 saturated to 0.98 via likelihood updates alone. Existing indicators gate on definitive token-share figures or full WWDC confirmations; observed evidence is dominated by adoption proxies, pre-keynote trade-press, and compliance case studies. Three tier3 indicators added to give those dimensions a fired-or-not gate with modest pre-committed posterior effects..",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_007",
+      "time": "2026-04-26T16:59:08+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA",
+        "AI",
+        "ECON"
+      ],
+      "text": "Mid-2025 enterprise LLM API spend $8.4B (doubling from $3.5B late 2024); 80%+ enterprises projected to deploy GenAI APIs by end-2026 (vs <5% in 2023). Menlo Q2-2025: Anthropic 32% / OpenAI 25% / Google 20% enterprise share. Inference-optimization research suggests 80.7% of LLM workloads CAN run on <20B models locally with 77.1% energy savings. Cloud still dominant for production.",
+      "provenance": "OBSERVED",
+      "source": "Menlo / Sitepoint / DEV",
+      "posteriorImpact": "NONE",
+      "url": "https://shareai.now/blog/insights/llm-api-providers/",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-26T16:59:08+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_008",
+      "time": "2026-04-26T19:27:11+00:00",
+      "tag": "ANALYSIS",
+      "tags": [
+        "ANALYSIS",
+        "AI"
+      ],
+      "text": "April 2026 (SitePoint / OpenXcell / Daily.dev): Ollama widely cited as default local LLM tool; payback for hardware vs API at 50k tokens/day is 3-6 months. Most enterprises still pay for both local and closed-source APIs simultaneously. No published share-of-tokens metric yet.",
+      "provenance": "OBSERVED",
+      "source": "SitePoint / OpenXcell / Daily.dev",
+      "posteriorImpact": "NONE",
+      "url": "https://www.sitepoint.com/best-local-llm-models-2026/",
+      "ledger": "DECISION",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "time": "2026-04-26T19:27:11+00:00",
+      "tag": "INTEL",
+      "text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+      "provenance": "DERIVED",
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "PROPOSED",
+      "effectiveWeight": 0.5
+    }
+  ],
+  "dataFeeds": {
+    "sotai_local_inference_share": {
+      "label": "State of AI Report: user-controlled compute share of inference tokens",
+      "value": null,
+      "unit": "% of global LLM inference tokens on user-controlled compute",
+      "baseline": null,
+      "asOf": "2026-04-22",
+      "source": "State of AI Report (annual, typically Oct-Nov)",
+      "note": "Primary resolution source. If SotAI 2026 does not publish this exact metric, fall back to survey composite."
+    },
+    "huggingface_self_host_volume": {
+      "label": "HuggingFace self-hosted inference endpoint volume",
+      "value": null,
+      "unit": "tokens/day tracked via HF telemetry + endpoint counters",
+      "baseline": null,
+      "asOf": "2026-04-22",
+      "source": "HuggingFace Inference endpoints + Hub download telemetry (indirect)"
+    },
+    "top3_api_token_volume": {
+      "label": "Top-3 hosted API combined token volume",
+      "value": null,
+      "unit": "tokens/day (aggregate)",
+      "baseline": null,
+      "asOf": "2026-04-22",
+      "source": "OpenAI/Google/Anthropic public disclosures, Bloomberg estimates"
+    },
+    "on_device_llm_shipments": {
+      "label": "Consumer devices shipped with â‰¥3B-param on-device LLM default",
+      "value": null,
+      "unit": "million units/year",
+      "baseline": null,
+      "asOf": "2026-04-22",
+      "source": "IDC / Canalys smartphone + laptop AI chip shipment reports"
+    }
+  },
+  "watchpoints": [
+    "State of AI Report annual release (Oct-Nov each year) â€” primary resolution instrument",
+    "Stanford AI Index annual â€” fallback resolution source (deployment chapter)",
+    "Apple WWDC + Google I/O keynotes â€” default-inference architectural choices for OS AI",
+    "HuggingFace ecosystem metrics (self-hosted endpoints, Hub downloads)",
+    "OpenAI/Google/Anthropic quarterly API token volume disclosures (where published)",
+    "EU AI Act implementation milestones (data residency / sovereignty clauses)",
+    "Gartner / Forrester / IDC enterprise AI deployment surveys"
+  ],
+  "searchQueries": [
+    "State of AI Report local vs hosted inference 2027",
+    "enterprise self-hosted LLM vs API 2027 Gartner",
+    "on-device LLM smartphone share 2027 IDC",
+    "Apple Gemini Nano default on-device 2027",
+    "HuggingFace inference volume 2027",
+    "EU AI Act data residency LLM"
+  ],
+  "dependencies": {
+    "_docs": "Upstream: calibration-local-frontier-inference-2030 (capability parity on smartphones) and calibration-ai-corporate-moat-2028 (API market concentration). Local-frontier H1/H2 imply consumer-scale on-device capability â†’ supports this topic H2/H3/H4. Moat H3/H4 (fragmented/commoditized API market) imply enterprise shift to self-hosting â†’ supports this topic H2/H3. Downstream: none â€” this is a mid-term observable used by both upstream topics' indicators.",
+    "upstream": [
+      {
+        "slug": "calibration-local-frontier-inference-2030",
+        "assumptions": {
+          "H1": 0.25,
+          "H2": 0.25,
+          "H3": 0.25,
+          "H4": 0.25
+        },
+        "tolerance": 0.2,
+        "reason": "Local-frontier capability is upstream of usage. If smartphones run frontier-class models by 2030, expect usage share to shift toward H3/H4 well before resolution. If local capability stays far behind frontier, H1/H2 dominate."
+      },
+      {
+        "slug": "calibration-ai-corporate-moat-2028",
+        "assumptions": {
+          "H1": 0.25,
+          "H2": 0.35,
+          "H3": 0.28,
+          "H4": 0.12
+        },
+        "tolerance": 0.15,
+        "reason": "Moat posteriors proxy enterprise willingness to self-host. Moat H1 strongly implies this topic H1 (API lock-in â†’ low local share). Moat H3/H4 implies this topic H2+."
+      }
+    ]
+  },
+  "governance": {
+    "health": "DEGRADED",
+    "issues": [
+      "Near-zero uncertainty — check for overconfidence",
+      "Stale dependency: calibration-local-frontier-inference-2030.H1 assumed=0.25, actual=0.005, drift=24.50%",
+      "Stale dependency: calibration-local-frontier-inference-2030.H2 assumed=0.25, actual=0.8667, drift=61.67%",
+      "Stale dependency: calibration-local-frontier-inference-2030.H4 assumed=0.25, actual=0.005, drift=24.50%",
+      "Stale dependency: calibration-ai-corporate-moat-2028.H1 assumed=0.25, actual=0.9728, drift=72.28%",
+      "Stale dependency: calibration-ai-corporate-moat-2028.H2 assumed=0.35, actual=0.0172, drift=33.28%",
+      "Stale dependency: calibration-ai-corporate-moat-2028.H3 assumed=0.28, actual=0.005, drift=27.50%"
+    ],
+    "rt": {
+      "rt": 0.0,
+      "regime": "SAFE",
+      "worst_hypothesis": "H1"
+    },
+    "entropy": 0.1737,
+    "maxEntropy": 2.0,
+    "uncertaintyRatio": 0.0868,
+    "evidenceFreshness": {
+      "fresh": 11,
+      "stale": 10,
+      "total": 21
+    },
+    "hypothesisAdmissibility": {
+      "H1": "ADMISSIBLE",
+      "H2": "ADMISSIBLE",
+      "H3": "ADMISSIBLE",
+      "H4": "ADMISSIBLE"
+    },
+    "klFromPrior": {
+      "kl_divergence": 0.8635,
+      "interpretation": "WELL_EVIDENCED"
+    },
+    "lastComputed": "2026-04-29T02:30:59+00:00",
+    "staleDependencies": 6,
+    "staleDependencyDetails": [
+      {
+        "upstream_slug": "calibration-local-frontier-inference-2030",
+        "hypothesis": "H1",
+        "assumed": 0.25,
+        "actual": 0.005,
+        "drift": 0.245,
+        "tolerance": 0.2,
+        "stale": true
+      },
+      {
+        "upstream_slug": "calibration-local-frontier-inference-2030",
+        "hypothesis": "H2",
+        "assumed": 0.25,
+        "actual": 0.8667,
+        "drift": 0.6167,
+        "tolerance": 0.2,
+        "stale": true
+      },
+      {
+        "upstream_slug": "calibration-local-frontier-inference-2030",
+        "hypothesis": "H4",
+        "assumed": 0.25,
+        "actual": 0.005,
+        "drift": 0.245,
+        "tolerance": 0.2,
+        "stale": true
+      },
+      {
+        "upstream_slug": "calibration-ai-corporate-moat-2028",
+        "hypothesis": "H1",
+        "assumed": 0.25,
+        "actual": 0.9728,
+        "drift": 0.7228,
+        "tolerance": 0.15,
+        "stale": true
+      },
+      {
+        "upstream_slug": "calibration-ai-corporate-moat-2028",
+        "hypothesis": "H2",
+        "assumed": 0.35,
+        "actual": 0.0172,
+        "drift": 0.3328,
+        "tolerance": 0.15,
+        "stale": true
+      },
+      {
+        "upstream_slug": "calibration-ai-corporate-moat-2028",
+        "hypothesis": "H3",
+        "assumed": 0.28,
+        "actual": 0.005,
+        "drift": 0.275,
+        "tolerance": 0.15,
+        "stale": true
+      }
+    ],
+    "calibrationHealth": "ACCEPTABLE",
+    "unresolvedContradictions": 0,
+    "reviewed_alerts": [
+      {
+        "signature": "none_impact_saturation:calibration-local-llm-usage-share-2028",
+        "timestamp": "2026-04-26T16:26:23+00:00",
+        "reason": "Design review complete — added t3_open_runtime_ecosystem_scale, t3_compliance_local_deployments, t3_on_device_default_pre_keynote covering adoption-proxy, compliance-case, and pre-keynote dimensions revealed by ev_001-ev_006."
+      }
+    ],
+    "designGate": {
+      "passed": true,
+      "blockers": [],
+      "warnings": [],
+      "coverage": {
+        "H1": {
+          "pos": 5,
+          "neg": 11
+        },
+        "H2": {
+          "pos": 13,
+          "neg": 4
+        },
+        "H3": {
+          "pos": 10,
+          "neg": 4
+        },
+        "H4": {
+          "pos": 2,
+          "neg": 12
+        }
+      },
+      "indistinguishable": [],
+      "lastChecked": "2026-04-29T02:30:59+00:00"
+    }
+  },
+  "predictionScoring": {
+    "_docs": "Calibration infrastructure. Snapshots are auto-created by engine on each posterior update. Record outcome when topic resolves, then compute_calibration_report() for Brier analysis.",
+    "snapshots": [
+      {
+        "timestamp": "2026-04-22T19:49:01+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.2661,
+          "H2": 0.5252,
+          "H3": 0.1797,
+          "H4": 0.029
+        },
+        "entropy": 1.5893
+      },
+      {
+        "timestamp": "2026-04-22T19:49:01+00:00",
+        "trigger": "pipeline:ev_001",
+        "posteriors": {
+          "H1": 0.2661,
+          "H2": 0.5252,
+          "H3": 0.1797,
+          "H4": 0.029
+        },
+        "entropy": 1.5893
+      },
+      {
+        "timestamp": "2026-04-22T19:49:09+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.2661,
+          "H2": 0.5252,
+          "H3": 0.1797,
+          "H4": 0.029
+        },
+        "entropy": 1.5893
+      },
+      {
+        "timestamp": "2026-04-22T19:49:09+00:00",
+        "trigger": "pipeline:ev_002",
+        "posteriors": {
+          "H1": 0.2661,
+          "H2": 0.5252,
+          "H3": 0.1797,
+          "H4": 0.029
+        },
+        "entropy": 1.5893
+      },
+      {
+        "timestamp": "2026-04-22T19:50:21+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.1678,
+          "H2": 0.6625,
+          "H3": 0.1587,
+          "H4": 0.011
+        },
+        "entropy": 1.3187
+      },
+      {
+        "timestamp": "2026-04-22T19:50:21+00:00",
+        "trigger": "pipeline:ev_002",
+        "posteriors": {
+          "H1": 0.1678,
+          "H2": 0.6625,
+          "H3": 0.1587,
+          "H4": 0.011
+        },
+        "entropy": 1.3187
+      },
+      {
+        "timestamp": "2026-04-24T02:25:42+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0855,
+          "H2": 0.8434,
+          "H3": 0.0661,
+          "H4": 0.005
+        },
+        "entropy": 0.8079
+      },
+      {
+        "timestamp": "2026-04-24T02:25:42+00:00",
+        "trigger": "pipeline:ev_003",
+        "posteriors": {
+          "H1": 0.0855,
+          "H2": 0.8434,
+          "H3": 0.0661,
+          "H4": 0.005
+        },
+        "entropy": 0.8079
+      },
+      {
+        "timestamp": "2026-04-24T13:49:16+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0159,
+          "H2": 0.9668,
+          "H3": 0.0122,
+          "H4": 0.005
+        },
+        "entropy": 0.2579
+      },
+      {
+        "timestamp": "2026-04-24T13:49:16+00:00",
+        "trigger": "pipeline:ev_004",
+        "posteriors": {
+          "H1": 0.0159,
+          "H2": 0.9668,
+          "H3": 0.0122,
+          "H4": 0.005
+        },
+        "entropy": 0.2579
+      },
+      {
+        "timestamp": "2026-04-24T19:30:15+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0114,
+          "H2": 0.9786,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "entropy": 0.1806
+      },
+      {
+        "timestamp": "2026-04-24T19:30:15+00:00",
+        "trigger": "pipeline:ev_005",
+        "posteriors": {
+          "H1": 0.0114,
+          "H2": 0.9786,
+          "H3": 0.005,
+          "H4": 0.005
+        },
+        "entropy": 0.1806
+      },
+      {
+        "timestamp": "2026-04-25T14:24:51+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0067,
+          "H2": 0.98,
+          "H3": 0.0067,
+          "H4": 0.0067
+        },
+        "entropy": 0.1737
+      },
+      {
+        "timestamp": "2026-04-25T14:24:51+00:00",
+        "trigger": "pipeline:ev_006",
+        "posteriors": {
+          "H1": 0.0067,
+          "H2": 0.98,
+          "H3": 0.0067,
+          "H4": 0.0067
+        },
+        "entropy": 0.1737
+      },
+      {
+        "timestamp": "2026-04-26T16:59:08+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0067,
+          "H2": 0.98,
+          "H3": 0.0067,
+          "H4": 0.0067
+        },
+        "entropy": 0.1737
+      },
+      {
+        "timestamp": "2026-04-26T16:59:08+00:00",
+        "trigger": "pipeline:ev_007",
+        "posteriors": {
+          "H1": 0.0067,
+          "H2": 0.98,
+          "H3": 0.0067,
+          "H4": 0.0067
+        },
+        "entropy": 0.1737
+      },
+      {
+        "timestamp": "2026-04-26T19:27:11+00:00",
+        "trigger": "bayesian_update",
+        "posteriors": {
+          "H1": 0.0067,
+          "H2": 0.98,
+          "H3": 0.0067,
+          "H4": 0.0067
+        },
+        "entropy": 0.1737
+      },
+      {
+        "timestamp": "2026-04-26T19:27:11+00:00",
+        "trigger": "pipeline:ev_008",
+        "posteriors": {
+          "H1": 0.0067,
+          "H2": 0.98,
+          "H3": 0.0067,
+          "H4": 0.0067
+        },
+        "entropy": 0.1737
+      }
+    ],
+    "outcomes": [],
+    "brierScores": []
+  },
+  "slug": "calibration-local-llm-usage-share-2028",
+  "title": "Local vs API LLM Inference Usage Share by 2028",
+  "question": "By 2028-12-31, what share of global LLM inference (measured in tokens processed per rolling 30-day window) runs on user-controlled compute â€” on-device plus self-hosted servers operated by the end-user or their organization â€” versus third-party hosted APIs?",
+  "resolution": "Resolved by the State of AI Report 2028 annual local-vs-hosted inference-tokens breakdown (published typically Oct-Nov 2028). Fallback hierarchy if SotAI does not publish the metric: (a) Stanford AI Index 2029 deployment chapter; (b) Cloudflare AI Radar + HuggingFace Inference telemetry composite; (c) consensus of the three most recent developer surveys (Stack Overflow, State of AI, DevOps Research). Resolved H1 (<15% local), H2 (15-35% local), H3 (35-55% local), H4 (over 55% local) by the most authoritative available figure at resolution date. Robustness rule: if the headline figure falls within 2 percentage points of a hypothesis boundary, require corroboration from at least one fallback source or defer resolution 6 months. 'Local' = user-controlled compute: on-device (phone/laptop/desktop) plus self-hosted servers on infrastructure the user or their organization operates. Explicitly excludes BYO-cloud with third-party model API (that is API). Private-cloud self-hosted open-weights deployments count as local. resolutionDate: 2028-12-31.",
+  "classification": "CALIBRATION",
+  "startDate": "2026-04-22",
+  "resolutionDate": "2028-12-31",
+  "hypotheses": {
+    "H1": {
+      "label": "Dominant API: local inference under 15% of total tokens",
+      "prior": 0.35,
+      "midpoint": 8,
+      "unit": "% of global LLM inference tokens running on user-controlled compute",
+      "description": "Hosted APIs retain decisive dominance. Developer ergonomics, latest-frontier access, and enterprise liability/compliance contracts keep the vast majority of workloads on OpenAI/Google/Anthropic/AWS-Bedrock-style hosted services. On-device inference grows but remains niche (privacy-sensitive / offline / experimentation). Consistent with moat-topic H1."
+    },
+    "H2": {
+      "label": "Minority local: 15 to 35% of total tokens on user-controlled compute",
+      "prior": 0.38,
+      "midpoint": 25,
+      "unit": "% of global LLM inference tokens running on user-controlled compute",
+      "description": "Self-hosted open-weights deployments at enterprise and mobile on-device inference collectively capture meaningful but minority share. Privacy/sovereignty-driven enterprises go self-hosted; consumer apps embed small models on-device for latency and cost. Hosted API still handles majority of workload."
+    },
+    "H3": {
+      "label": "Co-dominant: 35 to 55% of total tokens on user-controlled compute",
+      "prior": 0.2,
+      "midpoint": 45,
+      "unit": "% of global LLM inference tokens running on user-controlled compute",
+      "description": "Genuine split emerges. Small/medium models (1B-30B) handle a large fraction of everyday tasks on-device or self-hosted; hosted APIs retain complex reasoning and frontier capabilities. Cost arbitrage drives enterprise split deployment."
+    },
+    "H4": {
+      "label": "Majority local: over 55% of total tokens on user-controlled compute",
+      "prior": 0.07,
+      "midpoint": 70,
+      "unit": "% of global LLM inference tokens running on user-controlled compute",
+      "description": "Malone's thesis realized. Capability gap closes enough (and local inference cost/latency advantages compound) that most LLM inference runs outside hosted APIs. Implies strong correlation with moat-topic H3/H4 outcomes."
+    }
+  },
+  "contradictionTracker": {
+    "unresolved": [],
+    "resolved": [
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-22T19:49:01+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Directional signal toward on-device default for OS AI features. Does not meet t2_apple_on_device_default threshold (requires WWDC/I/O keynote plus developer documentation with no cloud fallback for standard queries). Trade-press pre-confirmation only â€” modest tilt toward H2/H3.",
+        "entry_b_time": "2026-04-22T19:50:21+00:00",
+        "entry_b_text": "HuggingFace State of Open Source Spring 2026 report: over 30% of Fortune 500 now maintain verified accounts on Hugging Face. Indicates enterprise engagement with open-weights ecosystem but does NOT measure share of primary LLM workload run on self-hosted infrastructure (t2_enterprise_self_host_30pct threshold not met).",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: does, threshold",
+        "detected": "2026-04-22T19:50:21Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-22T19:50:21Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-22T19:50:21+00:00",
+        "entry_a_text": "HuggingFace State of Open Source Spring 2026 report: over 30% of Fortune 500 now maintain verified accounts on Hugging Face. Indicates enterprise engagement with open-weights ecosystem but does NOT measure share of primary LLM workload run on self-hosted infrastructure (t2_enterprise_self_host_30pct threshold not met).",
+        "entry_b_time": "2026-04-24T02:25:42+00:00",
+        "entry_b_text": "Ollama accumulated over 112M model pulls for Llama 3.1 alone; r/LocalLLaMA community over 266,500 members; hybrid pattern emerging where developers use frontier cloud models for planning and local models for execution.",
+        "reason": "Numeric divergence 86.9% on metric (context: over): new=266.0, existing=2026.0, threshold=10%",
+        "detected": "2026-04-24T02:25:42Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T02:25:42Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T02:25:42+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Local adoption growing but cloud still dominant for majority of tokens; supports H2 (15-35% local token share).",
+        "entry_b_time": "2026-04-24T13:49:16+00:00",
+        "entry_b_text": "Ollama accumulated >112M pulls of Llama 3.1 alone; 100+ model library; dominant local-LLM runtime. Developer break-even vs API pricing at ~10M tokens/month. No 2026 market-share telemetry reconciling local vs API token volumes; trend directional only.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: dominant, local, share, token, tokens",
+        "detected": "2026-04-24T13:49:16Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:16Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T02:25:42+00:00",
+        "entry_a_text": "Ollama accumulated over 112M model pulls for Llama 3.1 alone; r/LocalLLaMA community over 266,500 members; hybrid pattern emerging where developers use frontier cloud models for planning and local models for execution.",
+        "entry_b_time": "2026-04-24T13:49:16+00:00",
+        "entry_b_text": "Ollama accumulated >112M pulls of Llama 3.1 alone; 100+ model library; dominant local-LLM runtime. Developer break-even vs API pricing at ~10M tokens/month. No 2026 market-share telemetry reconciling local vs API token volumes; trend directional only.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: accumulated, alone, llama, local, model",
+        "detected": "2026-04-24T13:49:16Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:16Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-22T19:50:21+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Enterprise engagement with open-weights ecosystem is suggestive but does not equal self-hosting majority share. Modest directional support for H2/H3.",
+        "entry_b_time": "2026-04-24T13:49:16+00:00",
+        "entry_b_text": "Ollama accumulated >112M pulls of Llama 3.1 alone; 100+ model library; dominant local-LLM runtime. Developer break-even vs API pricing at ~10M tokens/month. No 2026 market-share telemetry reconciling local vs API token volumes; trend directional only.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: directional, share",
+        "detected": "2026-04-24T13:49:16Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:16Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-22T19:50:21+00:00",
+        "entry_a_text": "HuggingFace State of Open Source Spring 2026 report: over 30% of Fortune 500 now maintain verified accounts on Hugging Face. Indicates enterprise engagement with open-weights ecosystem but does NOT measure share of primary LLM workload run on self-hosted infrastructure (t2_enterprise_self_host_30pct threshold not met).",
+        "entry_b_time": "2026-04-24T13:49:16+00:00",
+        "entry_b_text": "Ollama accumulated >112M pulls of Llama 3.1 alone; 100+ model library; dominant local-LLM runtime. Developer break-even vs API pricing at ~10M tokens/month. No 2026 market-share telemetry reconciling local vs API token volumes; trend directional only.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: llm, share",
+        "detected": "2026-04-24T13:49:16Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:16Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-22T19:49:01+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Directional signal toward on-device default for OS AI features. Does not meet t2_apple_on_device_default threshold (requires WWDC/I/O keynote plus developer documentation with no cloud fallback for standard queries). Trade-press pre-confirmation only â€” modest tilt toward H2/H3.",
+        "entry_b_time": "2026-04-24T13:49:16+00:00",
+        "entry_b_text": "Ollama accumulated >112M pulls of Llama 3.1 alone; 100+ model library; dominant local-LLM runtime. Developer break-even vs API pricing at ~10M tokens/month. No 2026 market-share telemetry reconciling local vs API token volumes; trend directional only.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: developer, directional, only",
+        "detected": "2026-04-24T13:49:16Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T13:49:16Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T13:49:16+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Rising local adoption indicators without quantitative share data sustain H2 minority-local modal.",
+        "entry_b_time": "2026-04-24T19:30:15+00:00",
+        "entry_b_text": "July Simon Apr 2026 local LLM guide documents strong viability on laptops (Phi-4-mini 15-20 t/s on M1 Air; Llama 3.3 8B / Mistral Small 3 ~30-50 t/s on mid-range NVIDIA). 65% of orgs use GenAI tools (McKinsey). No public figure for local share of global tokens — API-dominant pattern persists.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: local, share",
+        "detected": "2026-04-24T19:30:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:16+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-24T19:30:15+00:00",
+        "entry_b_text": "July Simon Apr 2026 local LLM guide documents strong viability on laptops (Phi-4-mini 15-20 t/s on M1 Air; Llama 3.3 8B / Mistral Small 3 ~30-50 t/s on mid-range NVIDIA). 65% of orgs use GenAI tools (McKinsey). No public figure for local share of global tokens — API-dominant pattern persists.",
+        "reason": "Numeric divergence 100.0% on metric (context: .): new=65.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-24T19:30:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:16+00:00",
+        "entry_a_text": "Ollama accumulated >112M pulls of Llama 3.1 alone; 100+ model library; dominant local-LLM runtime. Developer break-even vs API pricing at ~10M tokens/month. No 2026 market-share telemetry reconciling local vs API token volumes; trend directional only.",
+        "entry_b_time": "2026-04-24T19:30:15+00:00",
+        "entry_b_text": "July Simon Apr 2026 local LLM guide documents strong viability on laptops (Phi-4-mini 15-20 t/s on M1 Air; Llama 3.3 8B / Mistral Small 3 ~30-50 t/s on mid-range NVIDIA). 65% of orgs use GenAI tools (McKinsey). No public figure for local share of global tokens — API-dominant pattern persists.",
+        "reason": "Numeric divergence 96.7% on metric (context: llama): new=3.3, existing=100.0, threshold=10%",
+        "detected": "2026-04-24T19:30:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:15Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T02:25:42+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Local adoption growing but cloud still dominant for majority of tokens; supports H2 (15-35% local token share).",
+        "entry_b_time": "2026-04-24T19:30:15+00:00",
+        "entry_b_text": "July Simon Apr 2026 local LLM guide documents strong viability on laptops (Phi-4-mini 15-20 t/s on M1 Air; Llama 3.3 8B / Mistral Small 3 ~30-50 t/s on mid-range NVIDIA). 65% of orgs use GenAI tools (McKinsey). No public figure for local share of global tokens — API-dominant pattern persists.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: dominant, local, share, tokens",
+        "detected": "2026-04-24T19:30:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:42+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-24T19:30:15+00:00",
+        "entry_b_text": "July Simon Apr 2026 local LLM guide documents strong viability on laptops (Phi-4-mini 15-20 t/s on M1 Air; Llama 3.3 8B / Mistral Small 3 ~30-50 t/s on mid-range NVIDIA). 65% of orgs use GenAI tools (McKinsey). No public figure for local share of global tokens — API-dominant pattern persists.",
+        "reason": "Numeric divergence 100.0% on metric (context: .): new=65.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-24T19:30:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:15Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T02:25:42+00:00",
+        "entry_a_text": "Ollama accumulated over 112M model pulls for Llama 3.1 alone; r/LocalLLaMA community over 266,500 members; hybrid pattern emerging where developers use frontier cloud models for planning and local models for execution.",
+        "entry_b_time": "2026-04-24T19:30:15+00:00",
+        "entry_b_text": "July Simon Apr 2026 local LLM guide documents strong viability on laptops (Phi-4-mini 15-20 t/s on M1 Air; Llama 3.3 8B / Mistral Small 3 ~30-50 t/s on mid-range NVIDIA). 65% of orgs use GenAI tools (McKinsey). No public figure for local share of global tokens — API-dominant pattern persists.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: llama, local, pattern, use",
+        "detected": "2026-04-24T19:30:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:15Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-22T19:50:21+00:00",
+        "entry_a_text": "HuggingFace State of Open Source Spring 2026 report: over 30% of Fortune 500 now maintain verified accounts on Hugging Face. Indicates enterprise engagement with open-weights ecosystem but does NOT measure share of primary LLM workload run on self-hosted infrastructure (t2_enterprise_self_host_30pct threshold not met).",
+        "entry_b_time": "2026-04-24T19:30:15+00:00",
+        "entry_b_text": "July Simon Apr 2026 local LLM guide documents strong viability on laptops (Phi-4-mini 15-20 t/s on M1 Air; Llama 3.3 8B / Mistral Small 3 ~30-50 t/s on mid-range NVIDIA). 65% of orgs use GenAI tools (McKinsey). No public figure for local share of global tokens — API-dominant pattern persists.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: llm, share",
+        "detected": "2026-04-24T19:30:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-24T19:30:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T19:30:15+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-25T14:24:51+00:00",
+        "entry_b_text": "Q1 2026 metrics: Ollama 52M monthly downloads (520x vs Q1 2023's 100k). Hugging Face hosts 135,000 GGUF models (vs 200 three years ago). Consumer GPU + Apple Silicon achieves 20+ tok/s with 2K+ context windows. Enterprise drivers: HIPAA/GDPR/SOC2 compliance forcing healthcare, legal, government to local inference.",
+        "reason": "Numeric divergence 100.0% on metric (context: .): new=2023.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-25T14:24:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:51Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T19:30:15+00:00",
+        "entry_a_text": "July Simon Apr 2026 local LLM guide documents strong viability on laptops (Phi-4-mini 15-20 t/s on M1 Air; Llama 3.3 8B / Mistral Small 3 ~30-50 t/s on mid-range NVIDIA). 65% of orgs use GenAI tools (McKinsey). No public figure for local share of global tokens — API-dominant pattern persists.",
+        "entry_b_time": "2026-04-25T14:24:51+00:00",
+        "entry_b_text": "Q1 2026 metrics: Ollama 52M monthly downloads (520x vs Q1 2023's 100k). Hugging Face hosts 135,000 GGUF models (vs 200 three years ago). Consumer GPU + Apple Silicon achieves 20+ tok/s with 2K+ context windows. Enterprise drivers: HIPAA/GDPR/SOC2 compliance forcing healthcare, legal, government to local inference.",
+        "reason": "Numeric divergence 99.9% on metric (context: s): new=2023.0, existing=3.0, threshold=10%",
+        "detected": "2026-04-25T14:24:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:51Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:16+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-25T14:24:51+00:00",
+        "entry_b_text": "Q1 2026 metrics: Ollama 52M monthly downloads (520x vs Q1 2023's 100k). Hugging Face hosts 135,000 GGUF models (vs 200 three years ago). Consumer GPU + Apple Silicon achieves 20+ tok/s with 2K+ context windows. Enterprise drivers: HIPAA/GDPR/SOC2 compliance forcing healthcare, legal, government to local inference.",
+        "reason": "Numeric divergence 100.0% on metric (context: .): new=2023.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-25T14:24:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:51Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T13:49:16+00:00",
+        "entry_a_text": "Ollama accumulated >112M pulls of Llama 3.1 alone; 100+ model library; dominant local-LLM runtime. Developer break-even vs API pricing at ~10M tokens/month. No 2026 market-share telemetry reconciling local vs API token volumes; trend directional only.",
+        "entry_b_time": "2026-04-25T14:24:51+00:00",
+        "entry_b_text": "Q1 2026 metrics: Ollama 52M monthly downloads (520x vs Q1 2023's 100k). Hugging Face hosts 135,000 GGUF models (vs 200 three years ago). Consumer GPU + Apple Silicon achieves 20+ tok/s with 2K+ context windows. Enterprise drivers: HIPAA/GDPR/SOC2 compliance forcing healthcare, legal, government to local inference.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: local, ollama",
+        "detected": "2026-04-25T14:24:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:51Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:42+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-25T14:24:51+00:00",
+        "entry_b_text": "Q1 2026 metrics: Ollama 52M monthly downloads (520x vs Q1 2023's 100k). Hugging Face hosts 135,000 GGUF models (vs 200 three years ago). Consumer GPU + Apple Silicon achieves 20+ tok/s with 2K+ context windows. Enterprise drivers: HIPAA/GDPR/SOC2 compliance forcing healthcare, legal, government to local inference.",
+        "reason": "Numeric divergence 100.0% on metric (context: .): new=2023.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-25T14:24:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:51Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-22T19:50:21+00:00",
+        "entry_a_text": "HuggingFace State of Open Source Spring 2026 report: over 30% of Fortune 500 now maintain verified accounts on Hugging Face. Indicates enterprise engagement with open-weights ecosystem but does NOT measure share of primary LLM workload run on self-hosted infrastructure (t2_enterprise_self_host_30pct threshold not met).",
+        "entry_b_time": "2026-04-25T14:24:51+00:00",
+        "entry_b_text": "Q1 2026 metrics: Ollama 52M monthly downloads (520x vs Q1 2023's 100k). Hugging Face hosts 135,000 GGUF models (vs 200 three years ago). Consumer GPU + Apple Silicon achieves 20+ tok/s with 2K+ context windows. Enterprise drivers: HIPAA/GDPR/SOC2 compliance forcing healthcare, legal, government to local inference.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: enterprise, face, hugging",
+        "detected": "2026-04-25T14:24:51Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-25T14:24:51Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-26T16:26:23+00:00",
+        "entry_a_text": "INDICATOR ADDED: t3_on_device_default_pre_keynote (tier3_suggestive). posteriorEffect=H2 +3pp, H3 +2pp, H1 -4pp, H4 -1pp. Rationale: review_topic_design — ev_001-ev_006 all logged with NONE impact while H2 saturated to 0.98 via likelihood updates alone. Existing indicators gate on definitive token-share figures or full WWDC confirmations; observed evidence is dominated by adoption proxies, pre-keynote trade-press, and compliance case studies. Three tier3 indicators added to give those dimensions a fired-or-not gate with modest pre-committed posterior effects..",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "Mid-2025 enterprise LLM API spend $8.4B (doubling from $3.5B late 2024); 80%+ enterprises projected to deploy GenAI APIs by end-2026 (vs <5% in 2023). Menlo Q2-2025: Anthropic 32% / OpenAI 25% / Google 20% enterprise share. Inference-optimization research suggests 80.7% of LLM workloads CAN run on <20B models locally with 77.1% energy savings. Cloud still dominant for production.",
+        "reason": "Numeric divergence 98.8% on metric (context: to): new=80.0, existing=0.98, threshold=10%",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-26T16:26:23+00:00",
+        "entry_a_text": "INDICATOR ADDED: t3_compliance_local_deployments (tier3_suggestive). posteriorEffect=H2 +3pp, H3 +3pp, H1 -4pp, H4 -2pp. Rationale: review_topic_design — ev_001-ev_006 all logged with NONE impact while H2 saturated to 0.98 via likelihood updates alone. Existing indicators gate on definitive token-share figures or full WWDC confirmations; observed evidence is dominated by adoption proxies, pre-keynote trade-press, and compliance case studies. Three tier3 indicators added to give those dimensions a fired-or-not gate with modest pre-committed posterior effects..",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "Mid-2025 enterprise LLM API spend $8.4B (doubling from $3.5B late 2024); 80%+ enterprises projected to deploy GenAI APIs by end-2026 (vs <5% in 2023). Menlo Q2-2025: Anthropic 32% / OpenAI 25% / Google 20% enterprise share. Inference-optimization research suggests 80.7% of LLM workloads CAN run on <20B models locally with 77.1% energy savings. Cloud still dominant for production.",
+        "reason": "Numeric divergence 98.8% on metric (context: to): new=80.0, existing=0.98, threshold=10%",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-26T16:26:23+00:00",
+        "entry_a_text": "INDICATOR ADDED: t3_open_runtime_ecosystem_scale (tier3_suggestive). posteriorEffect=H2 +4pp, H3 +3pp, H1 -5pp, H4 -2pp. Rationale: review_topic_design — ev_001-ev_006 all logged with NONE impact while H2 saturated to 0.98 via likelihood updates alone. Existing indicators gate on definitive token-share figures or full WWDC confirmations; observed evidence is dominated by adoption proxies, pre-keynote trade-press, and compliance case studies. Three tier3 indicators added to give those dimensions a fired-or-not gate with modest pre-committed posterior effects..",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "Mid-2025 enterprise LLM API spend $8.4B (doubling from $3.5B late 2024); 80%+ enterprises projected to deploy GenAI APIs by end-2026 (vs <5% in 2023). Menlo Q2-2025: Anthropic 32% / OpenAI 25% / Google 20% enterprise share. Inference-optimization research suggests 80.7% of LLM workloads CAN run on <20B models locally with 77.1% energy savings. Cloud still dominant for production.",
+        "reason": "Numeric divergence 98.8% on metric (context: to): new=80.0, existing=0.98, threshold=10%",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T14:24:51+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "Mid-2025 enterprise LLM API spend $8.4B (doubling from $3.5B late 2024); 80%+ enterprises projected to deploy GenAI APIs by end-2026 (vs <5% in 2023). Menlo Q2-2025: Anthropic 32% / OpenAI 25% / Google 20% enterprise share. Inference-optimization research suggests 80.7% of LLM workloads CAN run on <20B models locally with 77.1% energy savings. Cloud still dominant for production.",
+        "reason": "Numeric divergence 100.0% on metric (context: to): new=80.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-25T14:24:51+00:00",
+        "entry_a_text": "Q1 2026 metrics: Ollama 52M monthly downloads (520x vs Q1 2023's 100k). Hugging Face hosts 135,000 GGUF models (vs 200 three years ago). Consumer GPU + Apple Silicon achieves 20+ tok/s with 2K+ context windows. Enterprise drivers: HIPAA/GDPR/SOC2 compliance forcing healthcare, legal, government to local inference.",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "Mid-2025 enterprise LLM API spend $8.4B (doubling from $3.5B late 2024); 80%+ enterprises projected to deploy GenAI APIs by end-2026 (vs <5% in 2023). Menlo Q2-2025: Anthropic 32% / OpenAI 25% / Google 20% enterprise share. Inference-optimization research suggests 80.7% of LLM workloads CAN run on <20B models locally with 77.1% energy savings. Cloud still dominant for production.",
+        "reason": "Numeric divergence 99.8% on metric (context: ., vs): new=5.0, existing=2023.0, threshold=10%",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T19:30:15+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "Mid-2025 enterprise LLM API spend $8.4B (doubling from $3.5B late 2024); 80%+ enterprises projected to deploy GenAI APIs by end-2026 (vs <5% in 2023). Menlo Q2-2025: Anthropic 32% / OpenAI 25% / Google 20% enterprise share. Inference-optimization research suggests 80.7% of LLM workloads CAN run on <20B models locally with 77.1% energy savings. Cloud still dominant for production.",
+        "reason": "Numeric divergence 100.0% on metric (context: to): new=80.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T19:30:15+00:00",
+        "entry_a_text": "July Simon Apr 2026 local LLM guide documents strong viability on laptops (Phi-4-mini 15-20 t/s on M1 Air; Llama 3.3 8B / Mistral Small 3 ~30-50 t/s on mid-range NVIDIA). 65% of orgs use GenAI tools (McKinsey). No public figure for local share of global tokens — API-dominant pattern persists.",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "Mid-2025 enterprise LLM API spend $8.4B (doubling from $3.5B late 2024); 80%+ enterprises projected to deploy GenAI APIs by end-2026 (vs <5% in 2023). Menlo Q2-2025: Anthropic 32% / OpenAI 25% / Google 20% enterprise share. Inference-optimization research suggests 80.7% of LLM workloads CAN run on <20B models locally with 77.1% energy savings. Cloud still dominant for production.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: api, dominant, genai, llm, mid",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T13:49:16+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "Mid-2025 enterprise LLM API spend $8.4B (doubling from $3.5B late 2024); 80%+ enterprises projected to deploy GenAI APIs by end-2026 (vs <5% in 2023). Menlo Q2-2025: Anthropic 32% / OpenAI 25% / Google 20% enterprise share. Inference-optimization research suggests 80.7% of LLM workloads CAN run on <20B models locally with 77.1% energy savings. Cloud still dominant for production.",
+        "reason": "Numeric divergence 100.0% on metric (context: to): new=80.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T13:49:16+00:00",
+        "entry_a_text": "Ollama accumulated >112M pulls of Llama 3.1 alone; 100+ model library; dominant local-LLM runtime. Developer break-even vs API pricing at ~10M tokens/month. No 2026 market-share telemetry reconciling local vs API token volumes; trend directional only.",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "Mid-2025 enterprise LLM API spend $8.4B (doubling from $3.5B late 2024); 80%+ enterprises projected to deploy GenAI APIs by end-2026 (vs <5% in 2023). Menlo Q2-2025: Anthropic 32% / OpenAI 25% / Google 20% enterprise share. Inference-optimization research suggests 80.7% of LLM workloads CAN run on <20B models locally with 77.1% energy savings. Cloud still dominant for production.",
+        "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: api, dominant, llm, share",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-04-24T02:25:42+00:00",
+        "entry_a_text": "EPISTEMIC CLAMP: point-estimate posteriors clamped to [0.005, 0.98].",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "Mid-2025 enterprise LLM API spend $8.4B (doubling from $3.5B late 2024); 80%+ enterprises projected to deploy GenAI APIs by end-2026 (vs <5% in 2023). Menlo Q2-2025: Anthropic 32% / OpenAI 25% / Google 20% enterprise share. Inference-optimization research suggests 80.7% of LLM workloads CAN run on <20B models locally with 77.1% energy savings. Cloud still dominant for production.",
+        "reason": "Numeric divergence 100.0% on metric (context: to): new=80.0, existing=0.005, threshold=10%",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-22T19:50:21+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Enterprise engagement with open-weights ecosystem is suggestive but does not equal self-hosting majority share. Modest directional support for H2/H3.",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "Mid-2025 enterprise LLM API spend $8.4B (doubling from $3.5B late 2024); 80%+ enterprises projected to deploy GenAI APIs by end-2026 (vs <5% in 2023). Menlo Q2-2025: Anthropic 32% / OpenAI 25% / Google 20% enterprise share. Inference-optimization research suggests 80.7% of LLM workloads CAN run on <20B models locally with 77.1% energy savings. Cloud still dominant for production.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: enterprise, share",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-22T19:50:21+00:00",
+        "entry_a_text": "HuggingFace State of Open Source Spring 2026 report: over 30% of Fortune 500 now maintain verified accounts on Hugging Face. Indicates enterprise engagement with open-weights ecosystem but does NOT measure share of primary LLM workload run on self-hosted infrastructure (t2_enterprise_self_host_30pct threshold not met).",
+        "entry_b_time": "2026-04-26T16:59:08+00:00",
+        "entry_b_text": "Mid-2025 enterprise LLM API spend $8.4B (doubling from $3.5B late 2024); 80%+ enterprises projected to deploy GenAI APIs by end-2026 (vs <5% in 2023). Menlo Q2-2025: Anthropic 32% / OpenAI 25% / Google 20% enterprise share. Inference-optimization research suggests 80.7% of LLM workloads CAN run on <20B models locally with 77.1% energy savings. Cloud still dominant for production.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: enterprise, llm, run, share",
+        "detected": "2026-04-26T16:59:08Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T16:59:08Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-26T16:59:08+00:00",
+        "entry_a_text": "Mid-2025 enterprise LLM API spend $8.4B (doubling from $3.5B late 2024); 80%+ enterprises projected to deploy GenAI APIs by end-2026 (vs <5% in 2023). Menlo Q2-2025: Anthropic 32% / OpenAI 25% / Google 20% enterprise share. Inference-optimization research suggests 80.7% of LLM workloads CAN run on <20B models locally with 77.1% energy savings. Cloud still dominant for production.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "April 2026 (SitePoint / OpenXcell / Daily.dev): Ollama widely cited as default local LLM tool; payback for hardware vs API at 50k tokens/day is 3-6 months. Most enterprises still pay for both local and closed-source APIs simultaneously. No published share-of-tokens metric yet.",
+        "reason": "Antonym pair detected: new has 'closed', existing has 'open'",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-26T16:26:23+00:00",
+        "entry_a_text": "INDICATOR ADDED: t3_on_device_default_pre_keynote (tier3_suggestive). posteriorEffect=H2 +3pp, H3 +2pp, H1 -4pp, H4 -1pp. Rationale: review_topic_design — ev_001-ev_006 all logged with NONE impact while H2 saturated to 0.98 via likelihood updates alone. Existing indicators gate on definitive token-share figures or full WWDC confirmations; observed evidence is dominated by adoption proxies, pre-keynote trade-press, and compliance case studies. Three tier3 indicators added to give those dimensions a fired-or-not gate with modest pre-committed posterior effects..",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "April 2026 (SitePoint / OpenXcell / Daily.dev): Ollama widely cited as default local LLM tool; payback for hardware vs API at 50k tokens/day is 3-6 months. Most enterprises still pay for both local and closed-source APIs simultaneously. No published share-of-tokens metric yet.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: default, share",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-26T16:26:23+00:00",
+        "entry_a_text": "INDICATOR ADDED: t3_compliance_local_deployments (tier3_suggestive). posteriorEffect=H2 +3pp, H3 +3pp, H1 -4pp, H4 -2pp. Rationale: review_topic_design — ev_001-ev_006 all logged with NONE impact while H2 saturated to 0.98 via likelihood updates alone. Existing indicators gate on definitive token-share figures or full WWDC confirmations; observed evidence is dominated by adoption proxies, pre-keynote trade-press, and compliance case studies. Three tier3 indicators added to give those dimensions a fired-or-not gate with modest pre-committed posterior effects..",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "April 2026 (SitePoint / OpenXcell / Daily.dev): Ollama widely cited as default local LLM tool; payback for hardware vs API at 50k tokens/day is 3-6 months. Most enterprises still pay for both local and closed-source APIs simultaneously. No published share-of-tokens metric yet.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: local, share",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-25T14:24:51+00:00",
+        "entry_a_text": "Q1 2026 metrics: Ollama 52M monthly downloads (520x vs Q1 2023's 100k). Hugging Face hosts 135,000 GGUF models (vs 200 three years ago). Consumer GPU + Apple Silicon achieves 20+ tok/s with 2K+ context windows. Enterprise drivers: HIPAA/GDPR/SOC2 compliance forcing healthcare, legal, government to local inference.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "April 2026 (SitePoint / OpenXcell / Daily.dev): Ollama widely cited as default local LLM tool; payback for hardware vs API at 50k tokens/day is 3-6 months. Most enterprises still pay for both local and closed-source APIs simultaneously. No published share-of-tokens metric yet.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: local, ollama",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T13:49:16+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Rising local adoption indicators without quantitative share data sustain H2 minority-local modal.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "April 2026 (SitePoint / OpenXcell / Daily.dev): Ollama widely cited as default local LLM tool; payback for hardware vs API at 50k tokens/day is 3-6 months. Most enterprises still pay for both local and closed-source APIs simultaneously. No published share-of-tokens metric yet.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: local, share",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T02:25:42+00:00",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: confidence_inflation, quorum_failure. Reason: Local adoption growing but cloud still dominant for majority of tokens; supports H2 (15-35% local token share).",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "April 2026 (SitePoint / OpenXcell / Daily.dev): Ollama widely cited as default local LLM tool; payback for hardware vs API at 50k tokens/day is 3-6 months. Most enterprises still pay for both local and closed-source APIs simultaneously. No published share-of-tokens metric yet.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: local, share, tokens",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-24T02:25:42+00:00",
+        "entry_a_text": "Ollama accumulated over 112M model pulls for Llama 3.1 alone; r/LocalLLaMA community over 266,500 members; hybrid pattern emerging where developers use frontier cloud models for planning and local models for execution.",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "April 2026 (SitePoint / OpenXcell / Daily.dev): Ollama widely cited as default local LLM tool; payback for hardware vs API at 50k tokens/day is 3-6 months. Most enterprises still pay for both local and closed-source APIs simultaneously. No published share-of-tokens metric yet.",
+        "reason": "Negation marker 'no' in new entry, absent from existing. Shared subjects: local, ollama",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-04-22T19:50:21+00:00",
+        "entry_a_text": "HuggingFace State of Open Source Spring 2026 report: over 30% of Fortune 500 now maintain verified accounts on Hugging Face. Indicates enterprise engagement with open-weights ecosystem but does NOT measure share of primary LLM workload run on self-hosted infrastructure (t2_enterprise_self_host_30pct threshold not met).",
+        "entry_b_time": "2026-04-26T19:27:11+00:00",
+        "entry_b_text": "April 2026 (SitePoint / OpenXcell / Daily.dev): Ollama widely cited as default local LLM tool; payback for hardware vs API at 50k tokens/day is 3-6 months. Most enterprises still pay for both local and closed-source APIs simultaneously. No published share-of-tokens metric yet.",
+        "reason": "Antonym pair detected: new has 'closed', existing has 'open'",
+        "detected": "2026-04-26T19:27:11Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-04-26T19:27:11Z"
+      }
+    ]
+  },
+  "sourceCalibration": {
+    "ledger": [
+      {
+        "timestamp": "2026-04-24T13:49:16Z",
+        "evidence_index": 4,
+        "confirming_index": 7,
+        "resolution": "REFUTED",
+        "source": "Ollama GitHub / Reddit stats",
+        "confirming_source": "Ollama / Starmorph / SitePoint",
+        "trust_delta": -0.1,
+        "original_text_snippet": "Ollama accumulated over 112M model pulls for Llama 3.1 alone; r/LocalLLaMA community over 266,500 members; hybrid patter",
+        "confirming_text_snippet": "Ollama accumulated >112M pulls of Llama 3.1 alone; 100+ model library; dominant local-LLM runtime. Developer break-even "
+      }
+    ],
+    "effectiveTrust": {
+      "Archyde (iOS 27 preview)": 0.5,
+      "x": 0.5,
+      "HuggingFace Blog": 0.5,
+      "Ollama GitHub": 0.4118,
+      "Reddit stats": 0.4118,
+      "Ollama": 0.5,
+      "SitePoint": 0.5,
+      "Starmorph": 0.5,
+      "Julien Simon": 0.5,
+      "McKinsey": 0.5,
+      "Ollama, Hugging Face, dev.to local AI 2026 survey": 0.5,
+      "DEV": 0.5,
+      "Menlo": 0.5,
+      "Sitepoint": 0.5,
+      "Daily.dev": 0.5,
+      "OpenXcell": 0.5
+    },
+    "_last_scan_same_source_skipped": 1
+  }
+}

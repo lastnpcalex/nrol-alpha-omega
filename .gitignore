@@ -61,4 +61,13 @@ skills/ochre-predictions.json
 7e004f2d922e49a79c994d9e061e9a0a.png
 add_evidence.py
 bc12c685cc194151ad6f16eeaac69c15.md
-"C\357\200\272UsersexastOneDriveDocumentsHormuzNRL-Alpha"
+
+# MCP activity ledger (per-session prompts/responses, never committed)
+loom/mcp_activity/
+
+# Topic-design workshop artifacts (local working data, not framework)
+.design_prompts/
+
+# Pre-design snapshots and test fixtures (local working data)
+topics/_predesign_*/
+topics/_fixtures/

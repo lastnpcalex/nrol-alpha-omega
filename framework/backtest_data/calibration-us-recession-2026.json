@@ -1,0 +1,307 @@
+{
+  "_schema": "phase3_5_backtest_fixture_v2",
+  "_topic_slug": "calibration-us-recession-2026",
+  "_provenance": {
+    "fetched_via": "WebFetch / WebSearch on authoritative sources, including FRED via ivo-welch.info gateway (which proxies FRED's CSV API)",
+    "sources": [
+      {
+        "key": "nber_recession_dates",
+        "url": "https://www.nber.org/research/data/us-business-cycle-expansions-and-contractions",
+        "fetched_at": "2026-05-04",
+        "scope": "Peak/trough dates 1948-2020"
+      },
+      {
+        "key": "wikipedia_recession_gdp_declines",
+        "url": "https://en.wikipedia.org/wiki/List_of_recessions_in_the_United_States",
+        "fetched_at": "2026-05-04",
+        "scope": "Peak-to-trough real GDP decline percentages, citing BEA"
+      },
+      {
+        "key": "wikipedia_sahm_rule_history",
+        "url": "https://en.wikipedia.org/wiki/Sahm_rule",
+        "fetched_at": "2026-05-04",
+        "scope": "Curated trigger events 1953-2024 with outcome labels"
+      },
+      {
+        "key": "fred_unrate_gateway",
+        "url": "https://www.ivo-welch.info/cgi-bin/fredwrap?symbol=UNRATE",
+        "fetched_at": "2026-05-04",
+        "scope": "Monthly U-3 unemployment rate, used to derive Sahm rule trigger events; gateway returned 15 distinct trigger events 1948-2020 (more granular than Wikipedia's curated 12; multiple triggers within single recession periods)"
+      },
+      {
+        "key": "fred_payems_gateway",
+        "url": "https://www.ivo-welch.info/cgi-bin/fredwrap?symbol=PAYEMS",
+        "fetched_at": "2026-05-04",
+        "scope": "Monthly nonfarm payrolls; identified all months with negative MoM change 1948-2020"
+      },
+      {
+        "key": "fred_icsa_gateway",
+        "url": "https://www.ivo-welch.info/cgi-bin/fredwrap?symbol=ICSA",
+        "fetched_at": "2026-05-04",
+        "scope": "Weekly initial claims, 4-week moving avg crossings of 400k threshold (1967-2020) and below 200k (2018-2022)"
+      },
+      {
+        "key": "fred_t10y3m_gateway",
+        "url": "https://www.ivo-welch.info/cgi-bin/fredwrap?symbol=T10Y3M",
+        "fetched_at": "2026-05-04",
+        "scope": "10y-3m Treasury spread, distinct inversion periods 1982-2025 (data starts 1982)"
+      }
+    ],
+    "_known_limitations": [
+      "WebFetch on FRED direct CSV endpoints returns 403; ivo-welch gateway is the working path",
+      "WebFetch responses pass through internal LLM summarization layer; first-pass T10Y3M response missed 2019 and 2022-24 inversions, caught on re-prompt with explicit cross-check",
+      "Sahm rule: UNRATE-derived data showed 15 trigger events vs Wikipedia's curated 12; the discrepancy is multiple intra-recession threshold crossings being collapsed in Wikipedia's table. UNRATE-data does NOT show 2024-08 trigger that Wikipedia documents; suspect the UNRATE response truncated around 2020 spike",
+      "ICSA series starts 1967, no data for pre-1967 recessions",
+      "T10Y3M series starts 1982, no data for pre-1982 recessions"
+    ]
+  },
+
+  "hypothesis_classification_rule": {
+    "H1": "no recession (no NBER peak in calendar year, OR NBER recession with peak-to-trough real GDP decline shallower than 0.5%)",
+    "H2": "mild recession (-0.5% to -2.0% peak-to-trough real GDP)",
+    "H3": "moderate recession (-2.0% to -5.0% peak-to-trough real GDP)",
+    "H4": "severe recession (worse than -5.0% peak-to-trough real GDP)"
+  },
+
+  "historical_recessions": [
+    {"peak_yyyy_mm": "1948_11", "trough_yyyy_mm": "1949_10", "gdp_decline_pct": -1.7, "class": "H2"},
+    {"peak_yyyy_mm": "1953_07", "trough_yyyy_mm": "1954_05", "gdp_decline_pct": -2.6, "class": "H3"},
+    {"peak_yyyy_mm": "1957_08", "trough_yyyy_mm": "1958_04", "gdp_decline_pct": -3.7, "class": "H3"},
+    {"peak_yyyy_mm": "1960_04", "trough_yyyy_mm": "1961_02", "gdp_decline_pct": -1.6, "class": "H2"},
+    {"peak_yyyy_mm": "1969_12", "trough_yyyy_mm": "1970_11", "gdp_decline_pct": -0.6, "class": "H2"},
+    {"peak_yyyy_mm": "1973_11", "trough_yyyy_mm": "1975_03", "gdp_decline_pct": -3.2, "class": "H3"},
+    {"peak_yyyy_mm": "1980_01", "trough_yyyy_mm": "1980_07", "gdp_decline_pct": -2.2, "class": "H3"},
+    {"peak_yyyy_mm": "1981_07", "trough_yyyy_mm": "1982_11", "gdp_decline_pct": -2.7, "class": "H3"},
+    {"peak_yyyy_mm": "1990_07", "trough_yyyy_mm": "1991_03", "gdp_decline_pct": -1.4, "class": "H2"},
+    {"peak_yyyy_mm": "2001_03", "trough_yyyy_mm": "2001_11", "gdp_decline_pct": -0.3, "class": "H1_TECHNICAL_ONLY", "_note": "NBER-called but below H2 threshold per topic def"},
+    {"peak_yyyy_mm": "2007_12", "trough_yyyy_mm": "2009_06", "gdp_decline_pct": -5.1, "class": "H4"},
+    {"peak_yyyy_mm": "2020_02", "trough_yyyy_mm": "2020_04", "gdp_decline_pct": -19.2, "class": "H4"}
+  ],
+
+  "_class_counts": {
+    "H1_calendar_years_no_recession_1948_2025": 66,
+    "H2_recessions": 4,
+    "H3_recessions": 5,
+    "H4_recessions": 2,
+    "H1_technical_only_2001": 1
+  },
+
+  "indicator_firings": {
+
+    "t1_sahm_rule_triggered": {
+      "_provenance": "Wikipedia Sahm_rule table cross-referenced with FRED UNRATE-derived triggers",
+      "_definition": "3-month avg U-3 rises >=0.5pp above 12-month low",
+      "_per_recession_fired_at_least_once": {
+        "1948_11_H2": "MISSING_DATA_PRE_1953",
+        "1953_07_H3": true,
+        "1957_08_H3": true,
+        "1960_04_H2": true,
+        "1969_12_H2": true,
+        "1973_11_H3": true,
+        "1980_01_H3": true,
+        "1981_07_H3": true,
+        "1990_07_H2": true,
+        "2001_03_H1_TECHNICAL_ONLY": true,
+        "2007_12_H4": true,
+        "2020_02_H4": true
+      },
+      "_false_positives_in_h1_years": [
+        {"trigger_yyyy_mm": "1959_11", "_note": "1960 recession started 5mo later — borderline; Wikipedia classifies false positive"},
+        {"trigger_yyyy_mm": "2024_08", "_note": "No recession through 2025 per current data"}
+      ]
+    },
+
+    "t1_payrolls_negative_2mo": {
+      "_provenance": "FRED PAYEMS-derived analysis identifying 2+ consecutive negative-MoM months",
+      "_definition": "Headline NFP prints negative for 2 consecutive months",
+      "_per_recession_fired_at_least_once": {
+        "1948_11_H2": true,
+        "1953_07_H3": "NO_DATA_2MO_CONSECUTIVE_VERIFIED",
+        "1957_08_H3": true,
+        "1960_04_H2": true,
+        "1969_12_H2": true,
+        "1973_11_H3": true,
+        "1980_01_H3": true,
+        "1981_07_H3": true,
+        "1990_07_H2": true,
+        "2001_03_H1_TECHNICAL_ONLY": true,
+        "2007_12_H4": true,
+        "2020_02_H4": "RECESSION_WAS_TOO_SHORT_FOR_2MO_CONSECUTIVE_BUT_FIRED_LATER_DURING_RECOVERY"
+      },
+      "_false_positives_in_h1_years": [],
+      "_note": "Sources: PAYEMS data shows that in EVERY full recession of length >=4 months, NFP printed 2+ consecutive negative months. The 2020 H4 was so abrupt (Feb peak / Apr trough) that the 2-consecutive-month window arguably didn't fire until recovery; debatable. Treating as fired conservatively."
+    },
+
+    "t1_initial_claims_400k": {
+      "_provenance": "FRED ICSA gateway, 4-week MA crossings",
+      "_definition": "4-week moving average of initial claims breaches 400k",
+      "_per_recession_fired_at_least_once": {
+        "1948_11_H2": "PRE_1967_NO_DATA",
+        "1953_07_H3": "PRE_1967_NO_DATA",
+        "1957_08_H3": "PRE_1967_NO_DATA",
+        "1960_04_H2": "PRE_1967_NO_DATA",
+        "1969_12_H2": false,
+        "1973_11_H3": true,
+        "1980_01_H3": true,
+        "1981_07_H3": true,
+        "1990_07_H2": true,
+        "2001_03_H1_TECHNICAL_ONLY": false,
+        "2007_12_H4": true,
+        "2020_02_H4": true
+      },
+      "_false_positives_in_h1_years": [],
+      "_note": "Of recessions in the data window (1969-present), claims-400k fired in 6/8. The 1969-70 H2 and 2001 H1_TECHNICAL did not breach 400k — both shallow recessions."
+    },
+
+    "anti_initial_claims_under_200k": {
+      "_provenance": "FRED ICSA gateway",
+      "_definition": "4-week moving avg falls below 200k",
+      "_per_h1_year_fired": "Multiple 2018-2019 weeks with 4wk avg under 200k; brief 2022 instance. ZERO firings in any recession year per ICSA data window. Effectively a clean H1 anti-indicator.",
+      "_per_recession_fired_at_least_once": {
+        "all_recessions_in_data_window": false
+      },
+      "_h1_year_firing_rate": "Approx 2 calendar years (2018, 2019) out of ~57 H1 years in 1967-2025 window (~3.5%); 0 false positives during recessions",
+      "_note": "Discriminates H1 from recession years strongly: rate ~0.04 in H1 vs ~0 in H2/H3/H4."
+    },
+
+    "t2_yield_curve_re_inverts": {
+      "_provenance": "FRED T10Y3M gateway (verified after re-prompt to confirm 2019 and 2022-24 inversions)",
+      "_definition": "10y-3m Treasury spread inverts (negative) sustained 5 trading days. Topic frames as RE-inversion after un-inversion; for backtest, treat each historical inversion onset within 24mo lead of recession as the firing event for that recession class.",
+      "_per_recession_fired_at_least_once": {
+        "1948_11_H2": "PRE_1982_NO_DATA",
+        "1953_07_H3": "PRE_1982_NO_DATA",
+        "1957_08_H3": "PRE_1982_NO_DATA",
+        "1960_04_H2": "PRE_1982_NO_DATA",
+        "1969_12_H2": "PRE_1982_NO_DATA",
+        "1973_11_H3": "PRE_1982_NO_DATA",
+        "1980_01_H3": "PRE_1982_NO_DATA",
+        "1981_07_H3": "PRE_1982_NO_DATA",
+        "1990_07_H2": true,
+        "2001_03_H1_TECHNICAL_ONLY": true,
+        "2007_12_H4": true,
+        "2020_02_H4": true
+      },
+      "_false_positives_in_h1_years": [
+        {"trigger_yyyy_mm": "1998_08", "_note": "Inversion 1998-08 to 1998-10, no recession followed within 24mo"},
+        {"trigger_yyyy_mm": "2022_06", "_note": "Deep, sustained inversion 2022-06 to 2024-11; no recession through 2025"}
+      ],
+      "_inversions_raw_data": [
+        {"start": "1989_02", "end": "1989_05", "min": -0.05, "preceded_recession": "1990_07_H2"},
+        {"start": "1998_08", "end": "1998_10", "min": -0.67, "preceded_recession": "no"},
+        {"start": "2000_02", "end": "2000_06", "min": -1.10, "preceded_recession": "2001_03_H1_TECHNICAL"},
+        {"start": "2006_12", "end": "2007_07", "min": -0.04, "preceded_recession": "2007_12_H4"},
+        {"start": "2019_11", "end": "2019_12", "min": -0.02, "preceded_recession": "2020_02_H4"},
+        {"start": "2022_06", "end": "2024_11", "min": -1.13, "preceded_recession": "no"}
+      ],
+      "_note": "T10Y3M data starts 1982. Of 4 NBER recessions in the data window: 1990 H2, 2001 H1_TECHNICAL, 2007-09 H4, 2020 H4 — all 4 had preceding yield curve inversion within 24mo. The 1989 inversion preceded the 1990 H2 (so 1990_07_H2 marked true). H1 false positives: 1998 and 2022-24 inversions had no recession follow."
+    },
+
+    "t2_brent_120_to_h3": {
+      "_provenance": "FRED POILBREUSDM (Brent monthly avg, ICE) via ivo-welch gateway",
+      "_definition": "Brent crude breaches $120/bbl spot, sustained 30 calendar days",
+      "_per_recession_fired_at_least_once": {
+        "1948_11_H2": "PRE_1988_NO_DATA",
+        "1953_07_H3": "PRE_1988_NO_DATA",
+        "1957_08_H3": "PRE_1988_NO_DATA",
+        "1960_04_H2": "PRE_1988_NO_DATA",
+        "1969_12_H2": "PRE_1988_NO_DATA",
+        "1973_11_H3": "PRE_1988_NO_DATA",
+        "1980_01_H3": "PRE_1988_NO_DATA",
+        "1981_07_H3": "PRE_1988_NO_DATA",
+        "1990_07_H2": false,
+        "2001_03_H1_TECHNICAL_ONLY": false,
+        "2007_12_H4": true,
+        "2020_02_H4": false
+      },
+      "_false_positives_in_h1_years": [
+        {"trigger_yyyy_mm": "2011_03", "_note": "Sustained March 2011 - March 2012, no recession"},
+        {"trigger_yyyy_mm": "2022_03", "_note": "Sustained Q1-Q2 2022, no recession through 2025"}
+      ],
+      "_brent_above_120_episodes": [
+        {"start": "2008_05", "end": "2008_07", "peak": 133.59, "during_recession": "2007_12_H4"},
+        {"start": "2011_03", "end": "2012_03", "peak": 124.70, "during_recession": "no"},
+        {"start": "2022_03", "end": "2022_06", "peak": 117.69, "during_recession": "no", "_note": "Peak 117.69 borderline below $120 — re-checked"}
+      ],
+      "_note": "Brent data starts 1988. In window: H4 2007-09 fired (2008 peak); H4 2020 did NOT fire (oil prices crashed during COVID); H2 1990-91 didn't fire; H1_TECHNICAL 2001 didn't fire. False positives 2011-12 and 2022."
+    },
+
+    "t3_slos_tightening": {
+      "_provenance": "FRED DRTSCILM (Fed SLOOS net % tightening C&I) via ivo-welch gateway",
+      "_definition": ">50% net tightening of C&I lending standards in quarterly Senior Loan Officer Survey",
+      "_per_recession_fired_at_least_once": {
+        "1948_11_H2": "PRE_1990_NO_DATA",
+        "1953_07_H3": "PRE_1990_NO_DATA",
+        "1957_08_H3": "PRE_1990_NO_DATA",
+        "1960_04_H2": "PRE_1990_NO_DATA",
+        "1969_12_H2": "PRE_1990_NO_DATA",
+        "1973_11_H3": "PRE_1990_NO_DATA",
+        "1980_01_H3": "PRE_1990_NO_DATA",
+        "1981_07_H3": "PRE_1990_NO_DATA",
+        "1990_07_H2": "DATA_AMBIGUOUS_NEEDS_VERIFICATION",
+        "2001_03_H1_TECHNICAL_ONLY": true,
+        "2007_12_H4": true,
+        "2020_02_H4": "DATA_AMBIGUOUS_NEEDS_VERIFICATION"
+      },
+      "_false_positives_in_h1_years": [
+        {"trigger_yyyy_mm": "2023_Q3", "_note": "50.8% borderline crossing; no recession through 2025"}
+      ],
+      "_quarters_above_50pct": [
+        {"q": "2001_Q1", "value": 59.6, "context": "preceded 2001 recession"},
+        {"q": "2008_Q2", "value": 55.4, "context": "during 2007-09 H4"},
+        {"q": "2008_Q3", "value": 57.7, "context": "during 2007-09 H4"},
+        {"q": "2008_Q4", "value": 83.6, "context": "during 2007-09 H4"},
+        {"q": "2009_Q1", "value": 64.2, "context": "during 2007-09 H4"},
+        {"q": "2023_Q3", "value": 50.8, "context": "no recession (so far)"}
+      ],
+      "_note": "DRTSCILM appears to start ~1990 in this gateway. SLOOS itself goes back to 1968 but the FRED-published Net Tightening % series starts 1990. Per data: 1 H1_TECHNICAL fire (2001), 4 quarters fired during 2007-09 H4, 1 H1 false positive (2023_Q3 borderline). 1990-91 H2 and 2020 H4 outcomes ambiguous in this fetch — need verification."
+    }
+  },
+
+  "_indicators_with_data_quality_issues_pending_retry": {
+    "t2_credit_spread_blowout_h4": {
+      "issue": "ivo-welch gateway returned only 2023-2026 data for BAMLH0A0HYM2 series across multiple fetches; full 1996-present history not accessible via this path. Authoritative cross-references confirm peaks: 2008-12 at 21.82%, 2020-03 at 10.87%. Need alternate data path.",
+      "partial_known_firings_above_8pct": ["2008_12 (H4)", "2020_03 (H4)", "possibly 2001_10-11 (H1_TECHNICAL)", "possibly 2011 (false positive)"]
+    },
+    "anti_credit_spreads_compressed": {
+      "issue": "Same BAMLH0A0HYM2 gateway truncation. Period <300bp sustained 60d empirically rare. Gateway showed only recent 2024-2025 cases.",
+      "partial_known": ["2024-2025 sustained <300bp"]
+    },
+    "anti_decoupling_consumer_strong_post_trigger": {
+      "issue": "FRED PCEC96 gateway returned only 2007-onward data; can't analyze pre-2007 Sahm triggers. Post-2007: only 2008 (recession), 2020 (recession) — no clean 'Sahm fired AND PCE growth held' historical episodes outside the 2024 case which is itself the inspiration for this indicator.",
+      "fallback_for_this_session": "Use 2024 case as single observation; with N=1 the LR is essentially uninformative; flag as small-N"
+    },
+    "t3_consumer_confidence_55": {
+      "issue": "Fetcher used USACSCICP02STSAM (OECD US Consumer Confidence) which is normalized differently than Conference Board CCI. The Conference Board CCI is the indicator's actual source. OECD-normalized series shows CCI<55 only in 2022_06 (53.8) and 2025_11 (54.9). Conference Board CCI hit ~25 in 2008 and similarly low in 2020. CORRECT FRED CODE FOR CONFERENCE BOARD: needs verification; possibly CSCICP02USM665S or similar.",
+      "implication_for_lrs": "Threshold is too extreme on OECD scale (almost never fires). On Conference Board scale, threshold of 55 corresponds to severe recession periods. Need to either re-thresh or refetch."
+    },
+    "t2_ism_manuf_below_45": {
+      "issue": "ISM PMI not directly fetched yet; not on FRED via standard codes. Pending alternate source (e.g., Wikipedia 'ISM Report on Business' historical table)."
+    },
+    "t2_ism_services_below_50": {
+      "issue": "ISM Services PMI starts 1997. Not yet fetched."
+    },
+    "t2_systemic_bank_event": {
+      "issue": "Web search returned: WaMu 2008 ($307B), SVB 2023 ($209B), Signature 2023 ($110B). FDIC discrete events.",
+      "known_50b_plus_failures": ["2008_09 WaMu (H4 recession)", "2023_03 SVB (H1 false positive)", "2023_03 Signature (H1 false positive)", "2023_05 First Republic ($229B, H1)"],
+      "_plus_fed_liquidity_facilities": ["2008_09 various (TARP/AIG)", "2020_03 PPPLF/MMLF (H4)", "2023_03 BTFP (H1)"],
+      "fallback_for_this_session": "Treat as 1 H4 event in 2008 + 1 H4 event in 2020 (BTFP analog) + multiple H1 false positives in 2023. Compute empirical from this."
+    },
+    "anti_sahm_un_triggers": {
+      "issue": "Derivable from existing UNRATE data + Sahm triggers. Need to identify cases where Sahm fired then un-fired within 12mo. Historical occurrence: rare; potentially the 1976 case mentioned in earlier search; the 2024 case is the primary modern instance and the inspiration. With n=1-2 historical instances, LR will be small-sample-uncertain.",
+      "fallback_for_this_session": "Mark as small-sample, conservative LRs"
+    },
+    "anti_payrolls_strong_3mo_tight": {
+      "issue": "Derivable from PAYEMS already fetched. Need to count 3-month windows with NFP avg >250k in non-recession years (any year 1948-2025). Similar logic: many H1 years post-1990s had this; recession years rarely.",
+      "fallback_for_this_session": "Approximate H1 firing rate from common-knowledge: roughly 50-70% of post-1990s H1 years had at least one 3-month window above 250k average. Conservative empirical."
+    },
+    "anti_h4_credit_no_blowout_through_2026": {
+      "issue": "Forward-looking joint condition (HY OAS<600bp AND no bank failure). Backtest equivalent: 'in non-H4 years, was it the case that OAS stayed <600 AND no $50B+ bank failure?' Mostly yes for H1 years; for H2/H3, depends. Same data quality issue as t2_credit_spread_blowout (BAMLH0A0HYM2 gateway truncation)."
+    }
+  },
+
+  "_smoothing_method": {
+    "type": "Beta(1,1) Laplace smoothing",
+    "rationale": "Small-sample H4 (n=2) and H2 (n=4) class counts. Without smoothing, raw rates of 2/2 or 5/5 produce engine LRs at 1.0 which trigger phantom_precision blockers. Beta(1,1) adds 1 success and 1 failure as pseudo-observations.",
+    "formula_per_h": "P(E|H) = (firings_in_H + 1) / (total_H_periods + 2)"
+  }
+}

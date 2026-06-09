@@ -166,66 +166,152 @@ deduped, _surf = dedupe_articles(parsed)
 novel = filter_novel_articles(deduped, prior_articles)
 prior_articles.extend(novel)
 
-# For each novel article, dispatch a fresh match subagent against the
-# topic's indicator schema. This is the existing per-(article, topic)
-# match flow — see framework.indicator_match_subagent.
-from framework.indicator_match import collect_topic_indicators
-from framework.indicator_match_subagent import (
-    build_match_prompt, parse_match_decision,
+# Build the OBSERVE-aware matcher prompt. Indicators with `observable`
+# blocks accept OBSERVE actions (continuous partial-LR derivation);
+# indicators without remain binary (FIRE on literal threshold match).
+from framework.news_observation_pipeline import (
+    build_matcher_prompt, parse_matcher_output,
+    build_advocate_prompt, parse_advocate_output,
+    build_rebut_prompt, parse_rebut_output,
+    build_jury_prompt, parse_jury_output,
+    apply_decisions, get_parks_with_reasons, get_strict_reasons_map,
+    filter_advocate_moves,
 )
 
-indicators = collect_topic_indicators(topic)
-match_prompts = {
-    a["url"] or a["headline"]: build_match_prompt(
-        headline=a["headline"], source=a["source"],
-        topic_meta={
-            "slug": slug,
-            "title": topic["meta"].get("title", slug),
-            "question": topic["meta"].get("question", ""),
-            "hypotheses": topic["model"]["hypotheses"],
-        },
-        indicators=indicators,
-    )
-    for a in novel
-}
+# Single matcher prompt per topic, batched over all novel articles for
+# the topic. (Replaces the per-article match dispatch — fewer subagents,
+# same fresh-context isolation since each topic gets its own subagent.)
+matcher_prompt = build_matcher_prompt(topic, novel)
 
-# Dispatch all match subagents in parallel (one Agent call per article).
-# Each gets fresh context — no anchoring across articles in the round.
-# Collect responses into match_responses[key].
+# Dispatch one matcher subagent per topic in parallel. Each emits
+# DECISION blocks for all articles in its topic. Collect into
+# matcher_responses[slug] = response_text.
 ```
 
-#### Stage 3: Apply decisions via process_evidence
+#### Stage 3: Apply decisions via the engine
 
 ```python
-from framework.pipeline import process_evidence, log_activity
+from framework.news_observation_pipeline import (
+    parse_matcher_output, apply_decisions,
+)
 
-fires_this_round = 0
-parks_this_round = 0
-schema_gap_parks = 0  # wildcard-only parked entries
+decisions = parse_matcher_output(matcher_responses[slug])
 
-for article in novel:
-    key = article["url"] or article["headline"]
-    decision = parse_match_decision(match_responses[key])
-
-    entry = article_to_evidence_entry(article, round_num=round_num)
-    fired_id = decision.get("indicator_id") if decision.get("action") == "INDICATOR" else None
-
-    result = process_evidence(
-        slug=slug,
-        entry=entry,
-        fired_indicator_id=fired_id,
-        reason=decision.get("reason") or entry["queryProvenance"],
-    )
-
-    if fired_id:
-        fires_this_round += 1
-    else:
-        parks_this_round += 1
-        if article.get("surfaced_via") == ["wildcard"]:
-            schema_gap_parks += 1
-
-    log_activity(result, platform="news-scan")
+# Apply each decision through the engine. Routing per kind:
+#   OBSERVE  -> apply_observation (mechanical likelihood derivation)
+#   FIRE     -> process_evidence(fired_indicator_id=...)
+#   PARK     -> process_evidence(fired_indicator_id=None) — flagged for review
+#   IGNORE   -> skip
+# All existing engine gates apply (clamp, decorrelation, evidence_refs,
+# calibrationStatus, lens, lr_decay, confidence_inflation).
+summary = apply_decisions(slug=slug, articles=novel, decisions=decisions)
+fires_this_round = summary["observe"] + summary["fire"]
+parks_this_round = summary["park"]
 ```
+
+#### Stage 2.5 (optional): Debate cycle on parks
+
+If the strict matcher's PARK count is high relative to the surfaced
+article count, an adversarial debate cycle can recover signal that the
+strict pass missed without re-introducing vibes-LR. Three fresh-context
+subagents per topic — advocate, rebut, jury — operate only on the
+PARKed articles. The jury's standing instructions enforce the
+framework's burden-of-proof discipline (defaults to KEEP_PARK; advocate
+must cite from article, sound inference, value in correct units).
+
+```python
+parks = get_parks_with_reasons(decisions)
+strict_reasons = get_strict_reasons_map(decisions)
+
+# Round 1 — advocate
+advocate_prompt = build_advocate_prompt(topic, novel, parks)
+# Dispatch advocate subagent → advocate_response
+
+advocate_blocks = parse_advocate_output(advocate_response)
+moves = filter_advocate_moves(advocate_blocks)
+
+# Round 2 — rebut (only if any ARGUE_MOVE)
+if moves:
+    rebut_prompt = build_rebut_prompt(topic, novel, moves, strict_reasons)
+    # Dispatch rebut subagent → rebut_response
+    rebuts = parse_rebut_output(rebut_response)
+
+    # Round 3 — jury
+    jury_prompt = build_jury_prompt(topic, novel, moves, rebuts)
+    # Dispatch jury subagent → jury_response
+    jury_verdicts = parse_jury_output(jury_response)
+
+    # Build override map for apply_decisions: only verdicts that MOVE_TO
+    # OBSERVE/FIRE supersede the original PARK
+    jury_overrides = {
+        idx: v["action"]
+        for idx, v in jury_verdicts.items()
+        if v["action"]["kind"] in ("OBSERVE", "FIRE")
+    }
+
+    # Re-apply with overrides: jury-validated OBSERVEs go through the
+    # engine; KEEP_PARK verdicts stay parked.
+    summary = apply_decisions(
+        slug=slug, articles=novel, decisions=decisions,
+        jury_overrides=jury_overrides,
+    )
+```
+
+The debate cycle adds 1-3 dispatches per topic (advocate, rebut, jury)
+on top of the matcher. Skip when PARK count is low (e.g., < 5) or for
+cost-sensitive scans. The engine's confidence_inflation gate still
+applies — debate-validated OBSERVEs at full strength still need ≥ 2
+evidence_refs for shifts > 15pp; otherwise the engine refuses, and the
+parked entry waits for corroboration in a future scan.
+
+#### Stage 4 (auto-trigger): schema-gap closing loop
+
+After Stage 3 apply, the summary returned by `apply_decisions` includes:
+
+```python
+summary["resolver_should_dispatch"]  # bool
+summary["resolver_reason"]           # str
+```
+
+If True, accumulated `flagged_schema_gaps` on the topic exceeds the
+auto-dispatch threshold (default 3). Without intervention, the same
+gaps keep recurring scan after scan.
+
+Run the resolver to convert gaps into actionable proposals:
+
+```python
+from framework.schema_gap_resolver import (
+    cluster_gaps, build_resolver_prompt,
+    parse_resolver_proposals, persist_proposals,
+)
+
+if summary["resolver_should_dispatch"]:
+    topic = load_topic(slug)
+    clusters = cluster_gaps(topic)
+    if clusters:
+        prompt = build_resolver_prompt(topic, clusters)
+        # Dispatch fresh-context subagent via Agent tool — the prompt
+        # includes per-H coverage and explicitly forbids one-direction
+        # bias amplification.
+        # response = Agent(description=f"schema-gap resolver {slug}",
+        #                  prompt=prompt, subagent_type="general-purpose")
+        proposals = parse_resolver_proposals(response)
+        # persist with mechanical balance validation; asymmetric_warning
+        # proposals get flagged status that requires explicit operator
+        # override to apply.
+        persist_proposals(slug, proposals, validated=True)
+```
+
+Output goes to `topic.governance.proposed_schema_extensions` for
+operator review. Approved proposals get applied via the
+cleanup-indicator-sweep workflow (cleanup-session opens, indicators
+added or observables extended, lint+shape-review run, session closes).
+
+Auto-dispatch threshold (default 3) is configurable per scan. The
+intent: known recurring gaps converge over multiple scans rather than
+accumulating indefinitely. New unanticipated patterns will always
+emerge — that's the world, not the framework — but the framework's
+job is to converge on known ones.
 
 **Engine gates still apply**: `bayesian_update` refuses LR ≤ 0.01 / ≥ 0.99,
 shifts > 15% need ≥ 2 evidence refs, duplicate text/informationChain

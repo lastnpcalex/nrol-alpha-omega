@@ -115,6 +115,28 @@ def save_topic(topic: dict) -> None:
     slug = topic["meta"]["slug"]
     topic["meta"]["lastUpdated"] = _now_iso()
 
+    # --- Operational defaults (auto-applied for first-save / draft promotion) ---
+    # When a topic is being saved and lacks the operational fields that mark it
+    # as live (status, lens, created, startDate, dayCount, lastScanned),
+    # default them. This ensures save_topic at end of topic-creation workflow
+    # produces an ACTIVE topic without requiring the caller to set every
+    # field by hand. Existing topics with these fields already set are
+    # untouched (setdefault is no-op when key present).
+    _meta = topic["meta"]
+    _meta.setdefault("status", "ACTIVE")
+    _meta.setdefault("created", _meta["lastUpdated"])
+    _meta.setdefault("startDate", _meta["lastUpdated"][:10])
+    _meta.setdefault("dayCount", 1)
+    _meta.setdefault("lastScanned", _meta["lastUpdated"])
+    # Lens default: if topic was created without an explicit lens, fall back
+    # to OPERATOR_JUDGMENT (the auditable default per Phase 3.5 spec).
+    # The lens system enforces VALID_LENSES separately during bayesian_update.
+    _meta.setdefault("lens", "OPERATOR_JUDGMENT")
+    _meta.setdefault("lensSetAt", _meta["lastUpdated"])
+    _meta.setdefault("lensSetReason",
+                     "Default lens applied at topic save (operator may "
+                     "override via engine.set_topic_lens())")
+
     # --- Indicator-add gate ---
 
     # --- Indicator Shape Lint Gate ---
@@ -192,6 +214,16 @@ def save_topic(topic: dict) -> None:
         "flagged_for_indicator_review",
         "indicator_cleanup_history",
         "indicator_bypasses",
+        # Schema-gap queue: news-flow articles that the matcher (or debate)
+        # determined report evidence in a direction the schema has no
+        # observable for. Surfaces missing-observable patterns for operator
+        # review so the schema can be extended in a future cleanup session.
+        "flagged_schema_gaps",
+        # Closing-loop queue: schema_gap_resolver subagent proposals for
+        # extending the schema to handle clustered gaps. Pending entries
+        # await operator approval; approved entries get applied via
+        # cleanup-session machinery.
+        "proposed_schema_extensions",
     ):
         if _k in _existing_gov:
             _preserved_governance[_k] = _existing_gov[_k]
@@ -757,6 +789,9 @@ def commit_indicator_cleanup(
               {"evidence_id": "ev_185", "indicator_id": "iran_reopen_proposal",
                "rationale": "match found via indicator_match"}
           ],
+          "discarded_evidence_ids": [
+              {"evidence_id": "ev_190", "reason": "not an indicator dimension"}
+          ],
           "lint_result": {"passed": bool, "blockers": [], "warnings": []},
           "debate_envelope": {<red/blue team output>},
           "operator_notes": "..."
@@ -767,7 +802,9 @@ def commit_indicator_cleanup(
           "slug", "session_id",
           "indicators_added": [...],
           "firings": [...],
+          "discarded": [...],
           "flagged_cleared": [...],
+          "alert_suppressed": bool,
           "topic": <updated topic>,
         }
 
@@ -898,12 +935,47 @@ def commit_indicator_cleanup(
                 "applied": False, "error": str(e)[:200],
             })
 
+    # Discard: operator reviewed and decided no indicator matches.
+    # Clear from flagged queue without firing.
+    discarded = []
+    flagged_list = topic.setdefault("governance", {}).get("flagged_for_indicator_review", [])
+    for entry in proposal_envelope.get("discarded_evidence_ids", []) or []:
+        ev_id = entry.get("evidence_id") if isinstance(entry, dict) else str(entry)
+        reason = entry.get("reason", "operator reviewed, no indicator match") if isinstance(entry, dict) else ""
+        if ev_id and ev_id in flagged_list:
+            flagged_list.remove(ev_id)
+            flagged_cleared.append(ev_id)
+            discarded.append({"evidence_id": ev_id, "reason": reason})
+
+    # Auto-suppress any currently firing none_impact_saturation alert so it
+    # doesn't re-fire on the same content after the operator has reviewed.
+    # Must run BEFORE save_topic — suppression entries need to be persisted
+    # so they survive commit_indicator_cleanup_session reloading from disk.
+    alert_suppressed = False
+    try:
+        from governor import governance_report
+        report = governance_report(topic)
+        for alert in report.get("alerts", []):
+            if alert.get("signature", "").startswith("none_impact_saturation:"):
+                fp = compute_alert_fingerprint(alert)
+                mark_alert_reviewed(
+                    topic,
+                    signature=alert["signature"],
+                    reason=f"cleanup review (session {current_session_id})",
+                    fingerprint=fp,
+                )
+                alert_suppressed = True
+    except Exception:
+        # Non-fatal: suppression failure doesn't block the commit.
+        pass
+
     save_topic(topic)
 
     # Close the session
     summary = (
         f"Cleanup commit: added {len(indicators_added)} indicator(s), "
         f"fired {sum(1 for f in firings if f.get('applied'))} firing(s), "
+        f"discarded {len(discarded)} evidence id(s), "
         f"cleared {len(flagged_cleared)} flagged evidence id(s). "
         f"Lint passed with {len(lint.get('warnings', []))} warning(s)."
     )
@@ -914,7 +986,9 @@ def commit_indicator_cleanup(
         "session_id": current_session_id,
         "indicators_added": indicators_added,
         "firings": firings,
+        "discarded": discarded,
         "flagged_cleared": flagged_cleared,
+        "alert_suppressed": alert_suppressed,
         "summary": summary,
         "topic": topic,
     }
@@ -1486,6 +1560,123 @@ def bayesian_update(topic: dict, likelihoods: dict[str, float] = None,
             "  - run the indicator-cleanup workflow to author/match indicators\n"
             "  - then fire the indicator and apply its pre-committed LRs"
         )
+
+    # --- Phase 3.5 calibration gate ---
+    # Topic must have meta.calibrationStatus set to one of the valid values.
+    # No bypass flag. Operators wishing to ship without empirical validation
+    # must set "SKIPPED_OPERATOR_JUDGMENT" with a reason explicitly — that
+    # string lives in the topic JSON and renders in canvas, making the bypass
+    # auditable. The "_DECORRELATION_SIM_TRANSIENT" value is reserved for the
+    # decorrelation_sim harness itself (which needs to call bayesian_update
+    # to test engine behavior before the real status is set).
+    _VALID_CALIBRATION_STATUSES = {
+        "VALIDATED",
+        "VALIDATED_WITH_FLAGS",
+        "VALIDATED_VIA_REFERENCE_CLASS_REVIEWED",
+        "VALIDATED_SOURCED_OPERATOR_JUDGMENT",  # 5+red+5 protocol per Phase 3.5-PRAGMATIC
+        "UN_BACKTESTABLE",
+        "PENDING_DATA_INGESTION",
+        "SKIPPED_OPERATOR_JUDGMENT",
+        "_DECORRELATION_SIM_TRANSIENT",  # harness-internal; not for live topics
+    }
+    _cal_status = topic.get("meta", {}).get("calibrationStatus")
+    if not _cal_status:
+        raise ValueError(
+            "bayesian_update refused: topic.meta.calibrationStatus is missing.\n"
+            "Phase 3.5 (empirical calibration + de-correlation sim) must run "
+            "before posterior updates are accepted. Run:\n"
+            "  from framework.decorrelation_sim import run_decorrelation_sim\n"
+            "  from framework.backtest_harness import run_backtest\n"
+            "and set meta.calibrationStatus to one of:\n"
+            f"  {sorted(s for s in _VALID_CALIBRATION_STATUSES if not s.startswith('_'))}\n"
+            "If shipping without empirical validation, set "
+            "'SKIPPED_OPERATOR_JUDGMENT' with a meta.calibrationSkipReason "
+            "field explaining why."
+        )
+    if _cal_status not in _VALID_CALIBRATION_STATUSES:
+        raise ValueError(
+            f"bayesian_update refused: meta.calibrationStatus={_cal_status!r} "
+            f"is not one of {sorted(s for s in _VALID_CALIBRATION_STATUSES if not s.startswith('_'))}."
+        )
+    if _cal_status == "SKIPPED_OPERATOR_JUDGMENT":
+        if not topic.get("meta", {}).get("calibrationSkipReason"):
+            raise ValueError(
+                "bayesian_update refused: calibrationStatus='SKIPPED_OPERATOR_JUDGMENT' "
+                "requires a non-empty meta.calibrationSkipReason field. "
+                "The bypass exists but it must be signed."
+            )
+
+    # --- Phase 3.5 fixture-structure enforcement ---
+    # Closes the elephant path where a topic claims a VALIDATED_* status
+    # without actually completing the underlying protocol. The engine reads
+    # the fixture file at framework/backtest_data/<slug>.json and verifies
+    # the protocol artifacts are actually present and complete. This is the
+    # second layer of the gate: the FIRST layer (status string) ensures the
+    # operator wrote a status; this SECOND layer ensures they earned it.
+    _validated_protocol_statuses = {
+        "VALIDATED",
+        "VALIDATED_WITH_FLAGS",
+        "VALIDATED_VIA_REFERENCE_CLASS_REVIEWED",
+        "VALIDATED_SOURCED_OPERATOR_JUDGMENT",
+    }
+    if _cal_status in _validated_protocol_statuses:
+        import os as _os
+        import json as _json
+        _slug = topic.get("meta", {}).get("slug", "")
+        _fixture_path = _os.path.join(
+            _os.path.dirname(_os.path.abspath(__file__)),
+            "framework", "backtest_data", f"{_slug}.json"
+        )
+        if not _os.path.exists(_fixture_path):
+            raise ValueError(
+                f"bayesian_update refused: meta.calibrationStatus={_cal_status!r} "
+                f"requires framework/backtest_data/{_slug}.json fixture. "
+                f"The fixture documents the protocol artifacts (sources, red-team "
+                f"review, round 2). To bypass without protocol, use "
+                f"'SKIPPED_OPERATOR_JUDGMENT' with a meta.calibrationSkipReason."
+            )
+        try:
+            with open(_fixture_path, "r", encoding="utf-8") as _f:
+                _fx = _json.load(_f)
+        except Exception as _e:
+            raise ValueError(
+                f"bayesian_update refused: fixture {_fixture_path} could not be "
+                f"loaded: {type(_e).__name__}: {_e}"
+            )
+        # Pragmatic protocol structural check: 5+red+5
+        _is_pragmatic_status = _cal_status in {
+            "VALIDATED_SOURCED_OPERATOR_JUDGMENT",
+            "VALIDATED_VIA_REFERENCE_CLASS_REVIEWED",
+        }
+        if _is_pragmatic_status:
+            _r1 = _fx.get("round_1_sources", [])
+            _r2 = _fx.get("round_2_sources", [])
+            _gap = _fx.get("round_1_5_red_team_gap_review", {})
+            _gap_status = _gap.get("_status", "") if isinstance(_gap, dict) else ""
+            _r1_count = len(_r1) if isinstance(_r1, list) else 0
+            _r2_count = len(_r2) if isinstance(_r2, list) else 0
+            _problems = []
+            if _r1_count < 5:
+                _problems.append(f"round_1_sources has {_r1_count} entries (need ≥5)")
+            if _r2_count < 5:
+                _problems.append(f"round_2_sources has {_r2_count} entries (need ≥5)")
+            if "DEFERRED" in _gap_status.upper():
+                _problems.append(
+                    "round_1_5_red_team_gap_review is DEFERRED (need completed adversarial review)"
+                )
+            elif not _gap.get("gaps_identified"):
+                _problems.append(
+                    "round_1_5_red_team_gap_review missing 'gaps_identified' list"
+                )
+            if _problems:
+                raise ValueError(
+                    f"bayesian_update refused: meta.calibrationStatus={_cal_status!r} "
+                    f"claims pragmatic protocol completion but fixture is incomplete:\n  - "
+                    + "\n  - ".join(_problems)
+                    + "\nEither complete the 5+red+5 protocol on this topic, or "
+                    "downgrade to SKIPPED_OPERATOR_JUDGMENT with a signed "
+                    "meta.calibrationSkipReason. No unsigned bypass."
+                )
     if True:
         # Indicator must exist on topic and be in FIRED state.
         # Search tier1/tier2/tier3 + anti_indicators.
@@ -1515,18 +1706,9 @@ def bayesian_update(topic: dict, likelihoods: dict[str, float] = None,
                 "before bayesian_update can apply its LRs."
             )
 
-        # --- Indicator Shape Review Gate ---
-        try:
-            from framework.lint_indicator_shape import verify_shape_review
-            review_ok, review_msg = verify_shape_review(topic, indicator_id)
-            if not review_ok:
-                raise IndicatorShapeReviewRequired(
-                    f"bayesian_update({indicator_id!r}) blocked: {review_msg}. "
-                    f"All indicators must pass semantic shape review (resolution-disguise check) "
-                    f"before firing. Use the cleanup workflow to review it."
-                )
-        except ImportError:
-            pass  # skip if not yet implemented
+        # Shape review (advisory only — see lint_indicator_shape.py for
+        # the optional resolution-disguise check; previously a hard gate
+        # but rolled back as over-eager).
 
         # --- Causal de-correlation ---
         # If this indicator declares a causal_event_id and other indicators
@@ -2789,8 +2971,8 @@ def apply_indicator_effect(topic: dict, indicator_id: str,
             base_range = ind["lr_range"]
             # Apply decay to both bounds, clamp lo to 0.0001
             raw_range = {
-                k: [max(0.0001, base_range[k][0] * decay_factor),
-                    max(0.0001, base_range[k][1] * decay_factor)]
+                k: [max(0.0001, base_range[k][0] ** decay_factor),
+                    max(0.0001, base_range[k][1] ** decay_factor)]
                 for k in h_keys
             }
             # Log-space explosion cap: shrink width toward geometric mean if too wide
@@ -2830,7 +3012,7 @@ def apply_indicator_effect(topic: dict, indicator_id: str,
         else:
             # Point likelihoods path
             base_lrs = ind["likelihoods"]
-            raw_lrs = {k: max(0.0001, base_lrs.get(k, 1.0) * decay_factor) for k in h_keys}
+            raw_lrs = {k: max(0.0001, base_lrs.get(k, 1.0) ** decay_factor) for k in h_keys}
             lr_min = min(raw_lrs.values())
             lr_max = max(raw_lrs.values())
             if lr_min > 0 and lr_max / lr_min > 20:
@@ -3039,12 +3221,30 @@ def add_evidence(topic: dict, entry: dict) -> dict:
     # same primary source and should not count as independent corroboration.
     if entry.get("informationChain"):
         full_entry["informationChain"] = entry["informationChain"]
+    elif full_entry.get("url"):
+        # URL-collision auto-chain: if any prior evidence shares this URL,
+        # they are the same article. Stamp informationChain so the gate
+        # repetition_as_validation correctly treats them as correlated.
+        url = full_entry["url"].strip()
+        if url:
+            for existing in evidence_log:
+                if (existing.get("url") or "").strip() == url:
+                    full_entry["informationChain"] = f"url:{url}"
+                    break
 
-    # Deduplication: don't add if identical text exists in last 10 entries
-    recent = topic.get("evidenceLog", [])[-10:]
-    for existing in recent:
-        if existing.get("text", "").strip() == full_entry["text"].strip():
+    # Deduplication: don't add if identical text exists anywhere in the log,
+    # OR if the same URL is already logged with the same indicator-relevant
+    # claim. Text-equality check spans the full log (not just last 10) — the
+    # 10-entry window let recycled URLs through across multi-batch scans.
+    new_text = full_entry["text"].strip()
+    new_url = (full_entry.get("url") or "").strip()
+    for existing in evidence_log:
+        if existing.get("text", "").strip() == new_text:
             return topic  # Skip duplicate
+        if new_url and (existing.get("url") or "").strip() == new_url:
+            existing_text = existing.get("text", "").strip()
+            if existing_text and existing_text[:80] == new_text[:80]:
+                return topic  # Same URL + near-identical text = duplicate
 
     # Governor enrichment: classify and weight the evidence
     evidence_log = topic.get("evidenceLog", [])

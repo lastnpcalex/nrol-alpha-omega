@@ -1,0 +1,153 @@
+{
+  "_schema": "phase3_5_pragmatic_sources_v1",
+  "_topic_slug": "calibration-fed-rate-2026",
+  "_protocol": "Phase 3.5-PRAGMATIC: 5+red+5 fetches with adversarial gap review, then operator LR commit with per-LR citations",
+
+  "round_1_sources": [
+    {
+      "key": "fomc_sep_dec_2025",
+      "url": "https://www.federalreserve.gov/monetarypolicy/files/fomcprojtabl20251210.pdf",
+      "fetched_at": "2026-05-04",
+      "extracted": {
+        "median_dot_end_2026": 3.4,
+        "current_target_range": "3.50-3.75%",
+        "implied_path": "1 cut from current to end-2026",
+        "dot_range_end_2026": "2.1-3.9%",
+        "range_widening_vs_sep_2025": "from 2.6-3.9 to 2.1-3.9 — increased disagreement"
+      }
+    },
+    {
+      "key": "cme_fedwatch_dec_2026",
+      "url": "https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html",
+      "fetched_at": "2026-05-04",
+      "extracted": {
+        "p_hold_at_dec_2026": 0.513,
+        "p_one_cut_at_dec_2026": 0.357,
+        "p_hike_at_dec_2026": "near zero",
+        "p_two_or_more_cuts": "implied ~0.13"
+      }
+    },
+    {
+      "key": "powell_stance_2025_2026",
+      "url": "https://www.federalreserve.gov/mediacenter/files/FOMCpresconf20251210.pdf",
+      "fetched_at": "2026-05-04",
+      "extracted": {
+        "current_stance": "neutral or mildly restrictive",
+        "tariff_view": "one-time price-level increase, fades over ~2 quarters",
+        "labor_view": "expanding solidly but job gains subdued; U-3 stable",
+        "reaction_function_acknowledgment": "Powell explicitly acknowledged market's interpretation of Fed reaction function is broadly accurate"
+      }
+    },
+    {
+      "key": "sf_fed_tariff_passthrough_2026",
+      "url": "https://www.federalreserve.gov/econres/notes/feds-notes/detecting-tariff-effects-on-consumer-prices-in-real-time-part-II-20260408.html",
+      "fetched_at": "2026-05-04",
+      "extracted": {
+        "tariff_impact_core_goods_pce": "+3.1pp through Feb 2026",
+        "tariff_impact_core_pce_overall": "+0.8pp",
+        "passthrough_timing": "cumulative effects 7 months post-implementation; full dollar-for-dollar pass-through",
+        "historical_lesson_40yr_intl_data": "tariffs initially raise unemployment + lower inflation, then unemployment normalizes while inflation increases"
+      }
+    },
+    {
+      "key": "fomc_2026_composition",
+      "url": "https://www.employamerica.org/fomc-meetings/march-2026-fomc-preview-public/",
+      "fetched_at": "2026-05-04",
+      "extracted": {
+        "voting_count": 12,
+        "ideological_split": "4 hawks / 5 centrists / 3 doves",
+        "hawks": ["Hammack", "Schmid", "Logan"],
+        "centrists": ["Collins", "Jefferson", "Barkin", "Cook", "Miran"],
+        "doves": ["Bowman", "Waller"],
+        "political_context": "Trump-nominated members (Bowman, Waller, Miran) lean dovish; Trump attempting to fire some Biden nominees (Cook); slight hawkish tilt overall but with significant internal divisions",
+        "april_2026_dissents": "see source for dissent counts"
+      }
+    }
+  ],
+
+  "round_1_5_red_team_gap_review": {
+    "subagent_id": "aa93b657a6adcbefc",
+    "gaps_identified": [
+      "Current labor market state (U-3, NFP, JOLTS) needed to anchor H3 base rate",
+      "Current core PCE level + 3m/6m trajectory needed to anchor H1/H2 split",
+      "Powell succession / May 2026 Chair transition is structural regime-change risk for all hypotheses",
+      "Treasury issuance + 10y term premium + financial conditions index — non-Fed channel that forces Fed's hand",
+      "SEP dot historical accuracy — Goodhart check on Source 1's predictive weight"
+    ]
+  },
+
+  "round_2_sources": [
+    {
+      "key": "bls_employment_situation_mar_2026",
+      "url": "https://www.bls.gov/news.release/pdf/empsit.pdf",
+      "fetched_at": "2026-05-04",
+      "extracted": {
+        "march_2026_nfp_change": 178000,
+        "march_2026_u3": 4.3,
+        "u3_trend": "decreased 0.1pp from prior month",
+        "april_2026_release_date": "2026-05-08 (not yet available at fetch date)"
+      }
+    },
+    {
+      "key": "bea_core_pce_march_2026",
+      "url": "https://www.cnbc.com/2026/04/30/pce-inflation-rate-march-2026.html",
+      "fetched_at": "2026-05-04",
+      "extracted": {
+        "march_2026_core_pce_yoy": 3.2,
+        "march_2026_core_pce_mom_sa": 0.3,
+        "trend_vs_2pct_target": "PERSISTENTLY ELEVATED — 3.2% above 3.0% threshold of t2_core_pce_above_3 indicator (effectively already firing)",
+        "_key_implication": "Currently in core_pce_above_3 zone, NOT in sticky 2.5-3.0 band; H2 cut path requires PCE cooling first"
+      }
+    },
+    {
+      "key": "powell_succession_warsh_nomination_2026",
+      "url": "https://www.cnbc.com/2026/01/30/trump-nominates-kevin-warsh-for-federal-reserve-chair-to-succeed-jerome-powell.html",
+      "fetched_at": "2026-05-04",
+      "extracted": {
+        "successor_nominee": "Kevin Warsh",
+        "powell_term_expires": "2026-05-15",
+        "senate_banking_committee_vote": "13-11 along party lines, advanced 2026-04-29",
+        "warsh_historical_orientation": "Fed governor 2006-2011, historically hawkish, dissented from QE",
+        "current_political_alignment": "Trump-nominated, expected to be more responsive to political pressure for cuts than Powell",
+        "_key_implication": "Mid-year Chair regime change. From May 15 onward, FOMC reaction function shifts. H4 (hike) becomes much less likely under Trump-aligned Chair; H3 (>=2 cuts) becomes more likely if Trump pressure dominates",
+        "powell_remains_on_board": "yes — for unspecified period; continuing voting member"
+      }
+    },
+    {
+      "key": "treasury_qra_term_premium_may_2026",
+      "url": "https://home.treasury.gov/policy-issues/financing-the-government/quarterly-refunding/most-recent-quarterly-refunding-documents",
+      "fetched_at": "2026-05-04",
+      "extracted": {
+        "qra_release_date": "2026-05-04 to 2026-05-06 window",
+        "fed_h15_release_date": "2026-05-01 (most recent Federal Reserve H.15 selected interest rates)",
+        "acm_term_premium_data_freshness": "FRED THREEFYTP10 series; ACM model from NY Fed; most recent visible value April 2025",
+        "_key_implication": "Specific term premium / NFCI level not extracted in this fetch — requires direct FRED query in next session for clean numerical anchor"
+      }
+    },
+    {
+      "key": "sep_dot_accuracy_research",
+      "url": "https://www.bondsavvy.com/fixed-income-investments-blog/fed-dot-plot",
+      "fetched_at": "2026-05-04",
+      "extracted": {
+        "1yr_horizon_accuracy": "minimally accurate",
+        "2yr_plus_horizon_accuracy": "not accurate",
+        "powell_self_assessment": "'The dots are not a great forecaster of future rate moves'",
+        "limitations_cited": ["Fed influences but doesn't control economy", "tariffs/conflicts can swift change short-term policy", "dot plot showcases internal disagreements"],
+        "_key_implication": "SEP dot evidence should be weighted MODERATELY, not heavily. Indicators t3_sep_dot_plot_revised_lower and t3_sep_dots_unchanged should have modest LRs."
+      }
+    }
+  ],
+
+  "_lr_commit_summary": {
+    "status": "VALIDATED_SOURCED_OPERATOR_JUDGMENT",
+    "key_revisions_from_priors": {
+      "topic_priors": {
+        "old": {"H1": 0.48, "H2": 0.31, "H3": 0.16, "H4": 0.05},
+        "new": {"H1": 0.45, "H2": 0.35, "H3": 0.17, "H4": 0.03},
+        "rationale": "Source 3 (Warsh succession) shifts H4 down (hike unlikely under Trump-aligned chair) and H2/H3 up (Trump pressure for cuts). Source 2 (current core PCE 3.2%) still constrains aggressive cutting in near term — moderating the H2/H3 increase. Source 1 (SEP median = 1 cut, range widened) supports H2 as modal."
+      },
+      "powell_tone_indicators": "DESCRIPTIONS UPDATED: now apply to current Chair (Powell through 2026-05-15, Warsh after). Both interpret on-record cut/hold/hawkish language. Warsh-era language likely more political-economy-aware than Powell-era technocratic neutrality."
+    },
+    "per_indicator_citations": "see indicator desc fields in build_phase3.py"
+  }
+}

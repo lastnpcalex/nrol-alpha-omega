@@ -5,7 +5,7 @@
     "question": "What will Lake Mead water surface elevation (feet above sea level) be on December 31, 2027?",
     "resolution": "USBR official daily reservoir elevation reading for Lake Mead for December 31, 2027, as published on the Bureau of Reclamation Lower Colorado Region daily reservoir data portal. Fallback (in order): December 30 reading if Dec 31 is missing; SNWA published Lake Mead intake elevation for the same date; Western Area Power Administration Hoover Dam daily operations report. Reading is the end-of-day elevation in feet above sea level.",
     "created": "2026-04-13T18:38:33+00:00",
-    "lastUpdated": "2026-04-29T02:31:00+00:00",
+    "lastUpdated": "2026-05-05T21:21:50+00:00",
     "status": "ACTIVE",
     "dayCount": 0,
     "startDate": "2026-04-13",
@@ -14,7 +14,8 @@
     "resolutionDate": "2027-12-31",
     "lens": "GREEN",
     "lensSetAt": "2026-04-26T21:22:38+00:00",
-    "lensSetReason": ""
+    "lensSetReason": "",
+    "lastScanned": "2026-05-05T21:21:46+00:00"
   },
   "tagConfig": {
     "_docs": "Tag configuration for this topic. topicType presets: conflict, science, election, tech. Override directionHints for custom tag-to-hypothesis mappings.",
@@ -1505,7 +1506,7 @@
   "governance": {
     "health": "DEGRADED",
     "issues": [
-      "Majority stale evidence (23/33)"
+      "Majority stale evidence (33/33)"
     ],
     "rt": {
       "rt": 0.0,
@@ -1516,8 +1517,8 @@
     "maxEntropy": 2.0,
     "uncertaintyRatio": 0.5042,
     "evidenceFreshness": {
-      "fresh": 10,
-      "stale": 23,
+      "fresh": 0,
+      "stale": 33,
       "total": 33
     },
     "hypothesisAdmissibility": {
@@ -1530,7 +1531,7 @@
       "kl_divergence": 0.0493,
       "interpretation": "MODERATE"
     },
-    "lastComputed": "2026-04-29T02:31:00+00:00",
+    "lastComputed": "2026-05-05T21:21:50+00:00",
     "staleDependencies": 0,
     "calibrationHealth": "ACCEPTABLE",
     "unresolvedContradictions": 0,
@@ -1557,7 +1558,7 @@
         }
       },
       "indistinguishable": [],
-      "lastChecked": "2026-04-29T02:31:00+00:00"
+      "lastChecked": "2026-05-05T21:21:50+00:00"
     }
   },
   "predictionScoring": {
@@ -5254,6 +5255,722 @@
           "verdict": "MODIFY",
           "reasoning": "Resolution criteria (Interior + 3 state agencies publishing frameworks) describes normal bureaucratic activity that would occur regardless of Lake Mead elevation. 25% YoY ecosystem restoration appropriations increase is the only meaningful distinguishing bar.",
           "modified_suggestion": "Sharpen: require Interior Department formally lifts Tier 1 shortage designation AND at least 2 state legislatures pass updated water-use statutes explicitly referencing post-shortage conditions by Q3 2028."
+        }
+      ],
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_022",
+      "createdAt": "2026-05-05T21:21:46+00:00",
+      "conditionTopic": "lake-mead-elevation-2027",
+      "conditionHypothesis": "H2",
+      "conditionProbAtCreation": 0.2877,
+      "prediction": "IF H2 (Mead 1,050-1,075 ft, Tier 1), THEN BOR announces continued Tier 1 shortage operations for 2028 water year",
+      "resolutionCriteria": "BOR official announcement specifies Tier 1 (not Tier 2) shortage declaration for water year 2028",
+      "deadline": "2027-12-31",
+      "conditionalProbability": 0.85,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-green",
+      "lens": "GREEN",
+      "criticVerdicts": [
+        {
+          "critic": "AMBER",
+          "verdict": "NEUTRAL",
+          "reasoning": "BOR announces Tier 1 given Tier 1 elevation is a near-definitional institutional outcome.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "BLUE",
+          "verdict": "APPROVE",
+          "reasoning": "BOR Tier 1 continuation is institutional resolution within the existing framework.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "VIOLET",
+          "verdict": "APPROVE",
+          "reasoning": "Names at least one specific decision-maker controlling the outcome; incentive is implicit but traceable.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "RED",
+          "verdict": "APPROVE",
+          "reasoning": "BOR Tier 1 continuation under H2 is mechanically required. OK.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "GRAY",
+          "verdict": "APPROVE",
+          "reasoning": "BOR tier declaration is clean.",
+          "modified_suggestion": null
+        }
+      ],
+      "lensAgreement": [
+        "GREEN",
+        "OCHRE"
+      ]
+    },
+    {
+      "id": "cp_023",
+      "createdAt": "2026-05-05T21:21:46+00:00",
+      "conditionTopic": "lake-mead-elevation-2027",
+      "conditionHypothesis": "H2",
+      "conditionProbAtCreation": 0.2877,
+      "prediction": "IF H2, THEN monthly average inflow to Lake Mead for 2027 exceeds 800,000 acre-feet",
+      "resolutionCriteria": "USGS/BOR monthly streamflow cumulates >800k acre-feet for Jan 1-Dec 31 2027",
+      "deadline": "2027-12-31",
+      "conditionalProbability": 0.68,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-green",
+      "lens": "GREEN",
+      "criticVerdicts": [
+        {
+          "critic": "AMBER",
+          "verdict": "NEUTRAL",
+          "reasoning": "Inflow volume is physical and well-suited to smooth-trend estimation.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "BLUE",
+          "verdict": "NEUTRAL",
+          "reasoning": "Inflow volume is pure physical/hydrological.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "VIOLET",
+          "verdict": "NEUTRAL",
+          "reasoning": "Pure hydrological/physical aggregate (precipitation, snowmelt, runoff, streamflow, aquifer). No named decision-maker controls the measured variable; VIOLET lens offers no actor-incentive leverage.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "RED",
+          "verdict": "DROP",
+          "reasoning": "800 kAF/mo inflow is a narrow hydrological assumption. RED: climate variance makes this a coin flip masked as 0.68.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "GRAY",
+          "verdict": "APPROVE",
+          "reasoning": "Inflow 800k AF threshold is specific.",
+          "modified_suggestion": null
+        }
+      ],
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_024",
+      "createdAt": "2026-05-05T21:21:46+00:00",
+      "conditionTopic": "lake-mead-elevation-2027",
+      "conditionHypothesis": "H2",
+      "conditionProbAtCreation": 0.2877,
+      "prediction": "IF H2, THEN Hoover Dam power generation capacity does not fall below 70% for >2 consecutive months in 2027",
+      "resolutionCriteria": "Monthly BOR reports show capacity utilization ≥70% for ≥10 of 12 months in 2027",
+      "deadline": "2027-12-31",
+      "conditionalProbability": 0.75,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-green",
+      "lens": "GREEN",
+      "criticVerdicts": [
+        {
+          "critic": "AMBER",
+          "verdict": "NEUTRAL",
+          "reasoning": "Hoover capacity given elevation band is a near-mechanical relationship.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "BLUE",
+          "verdict": "APPROVE",
+          "reasoning": "Hoover capacity staying above threshold reflects operational management (institutional absorption).",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "VIOLET",
+          "verdict": "APPROVE",
+          "reasoning": "Names multiple specific decision-makers (agencies, officials, firms, states) and ties the outcome to their choices. Actor-incentive traceability strong.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "RED",
+          "verdict": "APPROVE",
+          "reasoning": "Hoover capacity >=70% for 10 of 12 months captures infrastructure brittleness threshold. Good.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "GRAY",
+          "verdict": "APPROVE",
+          "reasoning": "Hoover capacity 70% is clean.",
+          "modified_suggestion": null
+        }
+      ],
+      "lensAgreement": [
+        "GREEN",
+        "OCHRE"
+      ]
+    },
+    {
+      "id": "cp_025",
+      "createdAt": "2026-05-05T21:21:46+00:00",
+      "conditionTopic": "lake-mead-elevation-2027",
+      "conditionHypothesis": "H3",
+      "conditionProbAtCreation": 0.6932,
+      "prediction": "IF H3 (Mead 1,025-1,050 ft, Tier 2), THEN BOR announces Tier 2 shortage operations mandatory for 2028 water year",
+      "resolutionCriteria": "BOR official announcement specifies Tier 2 (or lower) shortage declaration for water year 2028",
+      "deadline": "2027-12-31",
+      "conditionalProbability": 0.89,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-green",
+      "lens": "GREEN",
+      "criticVerdicts": [
+        {
+          "critic": "AMBER",
+          "verdict": "APPROVE",
+          "reasoning": "Tier 2 declaration given Tier 2 elevation is the prescribed institutional regime change.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "BLUE",
+          "verdict": "APPROVE",
+          "reasoning": "Tier 2 declaration is institutional escalation within the existing framework; not breakdown.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "VIOLET",
+          "verdict": "APPROVE",
+          "reasoning": "Names at least one specific decision-maker controlling the outcome; incentive is implicit but traceable.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "RED",
+          "verdict": "APPROVE",
+          "reasoning": "Tier 2 declaration under Tier 2 elevations is mechanically enforced. OK with vetter's MODIFY.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "GRAY",
+          "verdict": "APPROVE",
+          "reasoning": "BOR Tier 2 declaration clean.",
+          "modified_suggestion": null
+        }
+      ],
+      "lensAgreement": [
+        "GREEN",
+        "OCHRE"
+      ]
+    },
+    {
+      "id": "cp_026",
+      "createdAt": "2026-05-05T21:21:46+00:00",
+      "conditionTopic": "lake-mead-elevation-2027",
+      "conditionHypothesis": "H3",
+      "conditionProbAtCreation": 0.6932,
+      "prediction": "IF H3, THEN Arizona enforces mandatory agricultural water cuts (10-20% beyond 2026 baseline) for 2028",
+      "resolutionCriteria": "ADWR issues formal order reducing agricultural allocations 10-20% from Tier 1 baseline for water year 2028",
+      "deadline": "2027-12-31",
+      "conditionalProbability": 0.88,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-green",
+      "lens": "GREEN",
+      "criticVerdicts": [
+        {
+          "critic": "AMBER",
+          "verdict": "APPROVE",
+          "reasoning": "Mandatory ag cuts under Tier 2 capture the forced institutional discontinuity.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "BLUE",
+          "verdict": "APPROVE",
+          "reasoning": "ADWR formal order is institutional absorption of shortage.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "VIOLET",
+          "verdict": "APPROVE",
+          "reasoning": "Names at least one specific decision-maker controlling the outcome; incentive is implicit but traceable.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "RED",
+          "verdict": "APPROVE",
+          "reasoning": "AZ 10-20% ag cuts under Tier 2 is the correct institutional fire response. Good.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "GRAY",
+          "verdict": "APPROVE",
+          "reasoning": "AZ mandatory cuts 10-20% specific.",
+          "modified_suggestion": null
+        }
+      ],
+      "lensAgreement": [
+        "GREEN",
+        "OCHRE"
+      ]
+    },
+    {
+      "id": "cp_027",
+      "createdAt": "2026-05-05T21:21:46+00:00",
+      "conditionTopic": "lake-mead-elevation-2027",
+      "conditionHypothesis": "H3",
+      "conditionProbAtCreation": 0.6932,
+      "prediction": "IF H3, THEN Lake Mead elevation falls below 1,040 feet at some point during 2027",
+      "resolutionCriteria": "USGS real-time records show elevation <1,040 ft on ≥1 day between Jan 1 and Aug 15, 2027",
+      "deadline": "2027-08-15",
+      "conditionalProbability": 0.79,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-green",
+      "lens": "GREEN",
+      "criticVerdicts": [
+        {
+          "critic": "AMBER",
+          "verdict": "NEUTRAL",
+          "reasoning": "Sub-1040 ft elevation excursion is a physical threshold, smooth-trend consistent with H3 framing.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "BLUE",
+          "verdict": "NEUTRAL",
+          "reasoning": "Elevation below threshold is pure physical outcome.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "VIOLET",
+          "verdict": "NEUTRAL",
+          "reasoning": "Reservoir elevation / dam generation read-out is a physical aggregate. VIOLET lens neutral: no single decision-maker controls the gauge reading.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "RED",
+          "verdict": "APPROVE",
+          "reasoning": "Mead <1,040 ft during 2027 under Tier 2 pathway. Mechanically consistent. OK.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "GRAY",
+          "verdict": "APPROVE",
+          "reasoning": "Mead <1040 day specific.",
+          "modified_suggestion": null
+        }
+      ],
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_028",
+      "createdAt": "2026-05-05T21:21:46+00:00",
+      "conditionTopic": "lake-mead-elevation-2027",
+      "conditionHypothesis": "H3",
+      "conditionProbAtCreation": 0.6932,
+      "prediction": "IF H3, THEN Nevada limits Lake Mead groundwater discharge permits for ≥1 municipal water district in southern Nevada",
+      "resolutionCriteria": "NDWR denies or significantly reduces (>15%) a groundwater discharge permit application from Clark County or nearby district",
+      "deadline": "2027-12-31",
+      "conditionalProbability": 0.71,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-green",
+      "lens": "GREEN",
+      "criticVerdicts": [
+        {
+          "critic": "AMBER",
+          "verdict": "APPROVE",
+          "reasoning": "Nevada groundwater-permit denial under Tier 2 is the institutional spillover capturing regime tightening.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "BLUE",
+          "verdict": "APPROVE",
+          "reasoning": "NDWR permit restriction is a regulatory absorption mechanism.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "VIOLET",
+          "verdict": "APPROVE",
+          "reasoning": "Names multiple specific decision-makers (agencies, officials, firms, states) and ties the outcome to their choices. Actor-incentive traceability strong.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "RED",
+          "verdict": "APPROVE",
+          "reasoning": "NV groundwater permit restriction under Tier 2 is a second-order institutional action. Good â€” captures cascading stress.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "GRAY",
+          "verdict": "APPROVE",
+          "reasoning": "NV groundwater permit denial is a sharp specific trigger.",
+          "modified_suggestion": null
+        }
+      ],
+      "lensAgreement": [
+        "GREEN",
+        "OCHRE"
+      ]
+    },
+    {
+      "id": "cp_029",
+      "createdAt": "2026-05-05T21:21:50+00:00",
+      "conditionTopic": "lake-mead-elevation-2027",
+      "conditionHypothesis": "H2",
+      "conditionProbAtCreation": 0.2877,
+      "prediction": "IF H2 (Mead 1,050-1,075 ft, Tier 1), THEN Colorado River basin precipitation anomaly for WY2027 reaches +15% to +25% above 1981-2010 mean",
+      "resolutionCriteria": "NRCS/USGS basin-wide cumulative precipitation Oct 2026-Sep 2027 at +15% to +25% vs 30-year climatological mean",
+      "deadline": "2027-09-30",
+      "conditionalProbability": 0.58,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-ochre",
+      "lens": "OCHRE",
+      "criticVerdicts": [
+        {
+          "critic": "AMBER",
+          "verdict": "NEUTRAL",
+          "reasoning": "Precipitation anomaly is a meteorological smooth-trend outcome; framing is physical not institutional.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "BLUE",
+          "verdict": "NEUTRAL",
+          "reasoning": "Precipitation anomaly is a pure physical outcome.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "VIOLET",
+          "verdict": "NEUTRAL",
+          "reasoning": "Pure hydrological/physical aggregate (precipitation, snowmelt, runoff, streamflow, aquifer). No named decision-maker controls the measured variable; VIOLET lens offers no actor-incentive leverage.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "RED",
+          "verdict": "DROP",
+          "reasoning": "Precipitation anomaly +15-25% above mean to sustain Tier 1 is a straight climatological optimism bet. RED: SW drought regime is the base rate; this is wishful.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "GRAY",
+          "verdict": "APPROVE",
+          "reasoning": "Precipitation band is clean.",
+          "modified_suggestion": null
+        }
+      ],
+      "lensAgreement": [
+        "GREEN",
+        "OCHRE"
+      ]
+    },
+    {
+      "id": "cp_030",
+      "createdAt": "2026-05-05T21:21:50+00:00",
+      "conditionTopic": "lake-mead-elevation-2027",
+      "conditionHypothesis": "H2",
+      "conditionProbAtCreation": 0.2877,
+      "prediction": "IF H2, THEN municipal water demand in Las Vegas metropolitan area does NOT exceed 2024 levels by more than 3% YoY in 2027",
+      "resolutionCriteria": "Southern Nevada Water Authority reports 2027 total water deliveries within 103% of 2024 total demand",
+      "deadline": "2027-12-31",
+      "conditionalProbability": 0.64,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-ochre",
+      "lens": "OCHRE",
+      "criticVerdicts": [
+        {
+          "critic": "AMBER",
+          "verdict": "NEUTRAL",
+          "reasoning": "Las Vegas demand staying within 3% of baseline is consistent with SNWA conservation regime already in place.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "BLUE",
+          "verdict": "APPROVE",
+          "reasoning": "Municipal demand flat reflects SNWA's conservation-institution absorption of stress.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "VIOLET",
+          "verdict": "APPROVE",
+          "reasoning": "Names multiple specific decision-makers (agencies, officials, firms, states) and ties the outcome to their choices. Actor-incentive traceability strong.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "RED",
+          "verdict": "APPROVE",
+          "reasoning": "Las Vegas demand within 103% of 2024 is a reasonable institutional-restraint indicator given conservation regs. OK.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "GRAY",
+          "verdict": "APPROVE",
+          "reasoning": "Las Vegas demand threshold clean.",
+          "modified_suggestion": null
+        }
+      ],
+      "lensAgreement": [
+        "GREEN",
+        "OCHRE"
+      ]
+    },
+    {
+      "id": "cp_031",
+      "createdAt": "2026-05-05T21:21:50+00:00",
+      "conditionTopic": "lake-mead-elevation-2027",
+      "conditionHypothesis": "H3",
+      "conditionProbAtCreation": 0.6932,
+      "prediction": "IF H3 (Mead 1,025-1,050 ft, Tier 2), THEN Colorado River basin precipitation for WY2027 remains 5-15% below 1981-2010 mean",
+      "resolutionCriteria": "NRCS/USGS basin-wide precipitation Oct 2026-Sep 2027 at -5% to -15% vs climatological mean",
+      "deadline": "2027-09-30",
+      "conditionalProbability": 0.73,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-ochre",
+      "lens": "OCHRE",
+      "criticVerdicts": [
+        {
+          "critic": "AMBER",
+          "verdict": "NEUTRAL",
+          "reasoning": "Precipitation band under Tier 2 elevation is a physical consistency claim.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "BLUE",
+          "verdict": "NEUTRAL",
+          "reasoning": "Precipitation anomaly is pure physical.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "VIOLET",
+          "verdict": "NEUTRAL",
+          "reasoning": "Pure hydrological/physical aggregate (precipitation, snowmelt, runoff, streamflow, aquifer). No named decision-maker controls the measured variable; VIOLET lens offers no actor-incentive leverage.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "RED",
+          "verdict": "APPROVE",
+          "reasoning": "Precip 5-15% below mean driving Tier 2 is hydrology-consistent and captures the drought-regime base case. Good.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "GRAY",
+          "verdict": "APPROVE",
+          "reasoning": "Precipitation -5 to -15% specific.",
+          "modified_suggestion": null
+        }
+      ],
+      "lensAgreement": [
+        "GREEN",
+        "OCHRE"
+      ]
+    },
+    {
+      "id": "cp_032",
+      "createdAt": "2026-05-05T21:21:50+00:00",
+      "conditionTopic": "lake-mead-elevation-2027",
+      "conditionHypothesis": "H3",
+      "conditionProbAtCreation": 0.6932,
+      "prediction": "IF H3, THEN agricultural water allocations show structural demand consolidation: >10% reduction in active water rights holders in AZ+NV+CA tri-state region by Dec 2027",
+      "resolutionCriteria": "Agricultural census or ADWR data shows >10% reduction in number of active agricultural water rights holders in tri-state region by Dec 2027",
+      "deadline": "2027-12-31",
+      "conditionalProbability": 0.69,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-ochre",
+      "lens": "OCHRE",
+      "criticVerdicts": [
+        {
+          "critic": "AMBER",
+          "verdict": "APPROVE",
+          "reasoning": ">10% reduction in active water-rights holders is structural consolidation, a regime-shift outcome.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "BLUE",
+          "verdict": "APPROVE",
+          "reasoning": "Consolidation of water-rights holders via markets/retirement is absorption through water-market mechanisms.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "VIOLET",
+          "verdict": "APPROVE",
+          "reasoning": "Names at least one specific decision-maker controlling the outcome; incentive is implicit but traceable.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "RED",
+          "verdict": "APPROVE",
+          "reasoning": "10%+ ag water-rights holder consolidation is a structural-loss indicator. Strong.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "GRAY",
+          "verdict": "APPROVE",
+          "reasoning": "Water-rights-holder reduction is a sharp structural test.",
+          "modified_suggestion": null
+        }
+      ],
+      "lensAgreement": []
+    },
+    {
+      "id": "cp_033",
+      "createdAt": "2026-05-05T21:21:50+00:00",
+      "conditionTopic": "lake-mead-elevation-2027",
+      "conditionHypothesis": "H3",
+      "conditionProbAtCreation": 0.6932,
+      "prediction": "IF H3, THEN pumping depth in western Arizona groundwater basins increases 50-150 feet as farmers respond to surface allocation cuts",
+      "resolutionCriteria": "USGS water level monitoring wells in Harquahala and Avra basins show average drawdown increase of 50+ feet between Jan 2027 and Dec 2027",
+      "deadline": "2027-12-31",
+      "conditionalProbability": 0.76,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-ochre",
+      "lens": "OCHRE",
+      "criticVerdicts": [
+        {
+          "critic": "AMBER",
+          "verdict": "APPROVE",
+          "reasoning": "50-150 ft groundwater drawdown captures aquifer-regime cascade from surface cuts.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "BLUE",
+          "verdict": "NEUTRAL",
+          "reasoning": "Pumping depth is pure physical hydrological response.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "VIOLET",
+          "verdict": "NEUTRAL",
+          "reasoning": "Pure hydrological/physical aggregate (precipitation, snowmelt, runoff, streamflow, aquifer). No named decision-maker controls the measured variable; VIOLET lens offers no actor-incentive leverage.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "RED",
+          "verdict": "APPROVE",
+          "reasoning": "Groundwater drawdown 50-150 ft in western AZ basins captures the exact compensatory-pumping failure mode missed in 266. Good.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "GRAY",
+          "verdict": "APPROVE",
+          "reasoning": "Pumping depth 50-150 ft is measurable.",
+          "modified_suggestion": null
+        }
+      ],
+      "lensAgreement": [
+        "GREEN",
+        "OCHRE"
+      ]
+    },
+    {
+      "id": "cp_034",
+      "createdAt": "2026-05-05T21:21:50+00:00",
+      "conditionTopic": "lake-mead-elevation-2027",
+      "conditionHypothesis": "H3",
+      "conditionProbAtCreation": 0.6932,
+      "prediction": "IF H3, THEN California reduces Colorado River intake below 4.4 MAF QSA baseline to comply with Tier 2 apportionment",
+      "resolutionCriteria": "CDWR official accounting shows 2027 annual Colorado River diversions <4.3 MAF; structural compliance documented in USBR annual report",
+      "deadline": "2027-12-31",
+      "conditionalProbability": 0.81,
+      "status": "ACTIVE",
+      "resolvedAt": null,
+      "outcome": null,
+      "brierComponent": null,
+      "linkedTopicSlug": null,
+      "linkedHypothesis": null,
+      "tags": [],
+      "source": "agent-ochre",
+      "lens": "OCHRE",
+      "criticVerdicts": [
+        {
+          "critic": "AMBER",
+          "verdict": "APPROVE",
+          "reasoning": "California dipping below 4.4 MAF QSA is a long-sacrosanct threshold crossing; captures legal-regime break.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "BLUE",
+          "verdict": "APPROVE",
+          "reasoning": "CA compliance with QSA/Tier 2 is California institutional absorption of shortage through its existing water-rights hierarchy; textbook BLUE outcome.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "VIOLET",
+          "verdict": "APPROVE",
+          "reasoning": "Names multiple specific decision-makers (agencies, officials, firms, states) and ties the outcome to their choices. Actor-incentive traceability strong.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "RED",
+          "verdict": "APPROVE",
+          "reasoning": "CA cutting below 4.4 MAF QSA baseline under Tier 2 is the mandatory-compliance fire. Good.",
+          "modified_suggestion": null
+        },
+        {
+          "critic": "GRAY",
+          "verdict": "APPROVE",
+          "reasoning": "CA <4.3 MAF diversion is clean.",
+          "modified_suggestion": null
         }
       ],
       "lensAgreement": []

@@ -1,12 +1,12 @@
-"""
-NRL-Alpha Omega — Multi-Topic Dashboard Server
+﻿"""
+NRL-Alpha Omega -- Multi-Topic Dashboard Server
 
 Serves the generalized dashboard and topic state files.
 Routes:
-  GET /              → dashboard.html
-  GET /topics        → JSON list of active topics
-  GET /topics/{slug}/state.json → topic state file
-  GET /topics/{slug}/briefs/    → list of briefs for topic
+  GET /              -> dashboard.html
+  GET /topics        -> JSON list of active topics
+  GET /topics/{slug}/state.json -> topic state file
+  GET /topics/{slug}/briefs/    -> list of briefs for topic
 """
 
 import http.server
@@ -19,6 +19,7 @@ DIR = Path(__file__).parent
 TOPICS_DIR = DIR / "topics"
 BRIEFS_DIR = DIR / "briefs"
 DASHBOARDS_DIR = DIR / "dashboards"
+MCP_ACTIVITY_DIR = Path(os.environ.get("NROL_AO_ACTIVITY_DIR", str(DIR / "loom" / "mcp_activity")))
 
 
 class Handler(http.server.SimpleHTTPRequestHandler):
@@ -41,11 +42,11 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         Queue an action-alert trigger for Claude to process.
 
         Body: {action, slug, severity, context}
-            action    — one of: fire_indicator, run_red_team,
+            action    -- one of: fire_indicator, run_red_team,
                          review_topic_design, mark_reviewed
-            slug      — topic slug
-            severity  — alert severity (REVIEW_NEEDED | ATTENTION)
-            context   — dict with action-specific fields (indicator_id,
+            slug      -- topic slug
+            severity  -- alert severity (REVIEW_NEEDED | ATTENTION)
+            context   -- dict with action-specific fields (indicator_id,
                          evidence_id, evidence_ids, alert_signature, reason)
 
         Writes a filled-in copy of canvas/triggers/review-action.md to
@@ -166,6 +167,13 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         if path == "/dependencies":
             return self._serve_dependencies()
 
+        # MCP / model job activity
+        if path == "/mcp-activity":
+            return self._serve_mcp_activity()
+
+        # Cross-topic scan/freshness status
+        if path == "/topic-status":
+            return self._serve_topic_status()
         # Topic list
         if path == "/topics":
             return self._serve_topic_list()
@@ -248,6 +256,55 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(json.dumps(topics, ensure_ascii=False).encode("utf-8"))
 
+    def _topic_scan_status(self, topic):
+        from datetime import datetime, timezone
+        meta = topic.get("meta", {}) or {}
+        gov = topic.get("governance", {}) or {}
+        evidence = topic.get("evidenceLog", []) or []
+        last_scanned = meta.get("lastScanned") or ""
+        age_hours = None
+        stale = True
+        if last_scanned:
+            try:
+                ts = datetime.fromisoformat(str(last_scanned).replace("Z", "+00:00"))
+                if ts.tzinfo is None:
+                    ts = ts.replace(tzinfo=timezone.utc)
+                age_hours = round((datetime.now(timezone.utc) - ts).total_seconds() / 3600, 1)
+                classification = (meta.get("classification") or "ROUTINE").upper()
+                threshold = 12 if classification == "ALERT" else (7 * 24 if classification == "CALIBRATION" else 72)
+                stale = age_hours >= threshold
+            except Exception:
+                pass
+        return {
+            "slug": meta.get("slug"),
+            "title": meta.get("title"),
+            "status": meta.get("status"),
+            "classification": meta.get("classification"),
+            "governanceHealth": gov.get("health"),
+            "lastUpdated": meta.get("lastUpdated"),
+            "lastScanned": last_scanned,
+            "scanAgeHours": age_hours,
+            "scanStale": stale,
+            "evidenceCount": len(evidence),
+            "flaggedForIndicatorReview": len(gov.get("flagged_for_indicator_review", []) or []),
+            "flaggedSchemaGaps": len(gov.get("flagged_schema_gaps", []) or []),
+            "proposedSchemaExtensions": len(gov.get("proposed_schema_extensions", []) or []),
+        }
+
+    def _serve_topic_status(self):
+        topics = []
+        if TOPICS_DIR.exists():
+            for p in sorted(TOPICS_DIR.glob("*.json")):
+                if p.stem.startswith("_"):
+                    continue
+                try:
+                    topic = json.loads(p.read_text(encoding="utf-8"))
+                    if topic.get("meta", {}).get("status") == "ACTIVE":
+                        topics.append(self._topic_scan_status(topic))
+                except Exception:
+                    continue
+        topics.sort(key=lambda row: (not row.get("scanStale", True), -(row.get("scanAgeHours") or 999999)))
+        self._send_json({"count": len(topics), "topics": topics})
     def _serve_topic_state(self, slug):
         path = TOPICS_DIR / f"{slug}.json"
         if not path.exists():
@@ -308,6 +365,40 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         except Exception as e:
             self.send_error(500, str(e))
 
+    def _serve_mcp_activity(self):
+        snapshot_path = MCP_ACTIVITY_DIR / "snapshot.json"
+        if not snapshot_path.exists():
+            self._send_json({
+                "updated_at": None,
+                "active": 0,
+                "jobs": [],
+                "snapshot_path": str(snapshot_path),
+                "llama": self._probe_llama_server(),
+            })
+            return
+        try:
+            data = json.loads(snapshot_path.read_text(encoding="utf-8"))
+            if not isinstance(data, dict):
+                data = {"updated_at": None, "active": 0, "jobs": []}
+            data["snapshot_path"] = str(snapshot_path)
+            data["llama"] = self._probe_llama_server()
+            self._send_json(data)
+        except Exception as e:
+            self.send_error(500, str(e))
+
+    def _probe_llama_server(self):
+        import urllib.request
+        host = os.environ.get("NROL_AO_LLAMA_HOST") or os.environ.get("LLAMA_HOST") or "http://localhost:8000"
+        if not host.startswith(("http://", "https://")):
+            host = "http://" + host
+        host = host.rstrip("/")
+        try:
+            with urllib.request.urlopen(host + "/v1/models", timeout=2) as resp:
+                payload = json.loads(resp.read().decode("utf-8"))
+            models = [m.get("id") for m in payload.get("data", []) if m.get("id")]
+            return {"ok": True, "host": host, "models": models}
+        except Exception as e:
+            return {"ok": False, "host": host, "error": str(e)}
     def _serve_briefs_list(self, slug):
         brief_dir = BRIEFS_DIR / slug
         briefs = []
@@ -362,3 +453,4 @@ if __name__ == "__main__":
         print(f"  Tailscale: http://{ts_ip}:{PORT}")
     print()
     server.serve_forever()
+

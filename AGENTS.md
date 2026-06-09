@@ -83,6 +83,17 @@ dispatch via Agent tool.
 - **Duplicate text or shared `informationChain`** (`repetition_as_validation`).
 - **`max(proposed_posterior) > 0.85` without a `redTeam` entry on
   `posteriorHistory` within 30 days** (`saturation_redteam_required`).
+- **Missing or invalid `meta.calibrationStatus`** (Phase 3.5 gate). Topic
+  must declare one of `VALIDATED`, `VALIDATED_WITH_FLAGS`,
+  `UN_BACKTESTABLE`, `PENDING_DATA_INGESTION`, or
+  `SKIPPED_OPERATOR_JUDGMENT` (the last requires
+  `meta.calibrationSkipReason` filled). The status is produced by
+  `framework.backtest_harness.run_backtest()` +
+  `framework.decorrelation_sim.run_decorrelation_sim()` during
+  Phase 3.5 of topic-design. There is no bypass flag — the only way
+  to ship without empirical validation is the explicit signed
+  `SKIPPED_OPERATOR_JUDGMENT` status, which renders in canvas and is
+  auditable.
 
 `add_indicator` will raise on:
 

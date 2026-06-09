@@ -1,0 +1,36 @@
+{
+  "_schema": "phase3_5_pragmatic_sources_v1",
+  "_topic_slug": "calibration-us-recession-2026",
+  "_protocol": "Phase 3.5-PRAGMATIC: This topic ALREADY went through full empirical backtest (see calibration-us-recession-2026.json with v2 schema). 7 indicators VALIDATED with real FRED data + provenance trail. This pragmatic fixture is a wrapper documenting the 10+ sources that were used during empirical calibration.",
+
+  "round_1_sources": [
+    {"key": "nber_recession_dates", "url": "https://www.nber.org/research/data/us-business-cycle-expansions-and-contractions", "fetched_at": "2026-05-04", "extracted": {"recessions_1948_2020": 12}},
+    {"key": "wikipedia_recession_gdp_declines", "url": "https://en.wikipedia.org/wiki/List_of_recessions_in_the_United_States", "fetched_at": "2026-05-04", "extracted": {"gdp_decline_per_recession": "documented for all 12"}},
+    {"key": "wikipedia_sahm_rule_history", "url": "https://en.wikipedia.org/wiki/Sahm_rule", "fetched_at": "2026-05-04", "extracted": {"trigger_events_documented": "12 with outcome labels"}},
+    {"key": "fred_unrate_gateway", "url": "https://www.ivo-welch.info/cgi-bin/fredwrap?symbol=UNRATE", "fetched_at": "2026-05-04", "extracted": {"sahm_triggers_derived": 15}},
+    {"key": "fred_payems_gateway", "url": "https://www.ivo-welch.info/cgi-bin/fredwrap?symbol=PAYEMS", "fetched_at": "2026-05-04", "extracted": {"negative_mom_periods": "all identified 1948-2020"}},
+    {"key": "fred_icsa_gateway", "url": "https://www.ivo-welch.info/cgi-bin/fredwrap?symbol=ICSA", "fetched_at": "2026-05-04", "extracted": {"above_400k_events": 15, "below_200k_events": "2018-19 + brief 2022"}},
+    {"key": "fred_t10y3m_gateway", "url": "https://www.ivo-welch.info/cgi-bin/fredwrap?symbol=T10Y3M", "fetched_at": "2026-05-04", "extracted": {"distinct_inversions_1982_2025": 6}}
+  ],
+
+  "round_2_sources": [
+    {"key": "fred_dr_tscilm_sloos", "url": "https://www.ivo-welch.info/cgi-bin/fredwrap?symbol=DRTSCILM", "fetched_at": "2026-05-04", "extracted": {"above_50pct_quarters": 6}},
+    {"key": "fred_poilbreusdm_brent", "url": "https://www.ivo-welch.info/cgi-bin/fredwrap?symbol=POILBREUSDM", "fetched_at": "2026-05-04", "extracted": {"above_120_episodes": 3}},
+    {"key": "search_bank_failures_50b", "url": "https://www.fdic.gov/bank-failures/failed-bank-list", "fetched_at": "2026-05-04", "extracted": {"large_failures": ["WaMu 2008", "SVB 2023", "Signature 2023", "First Republic 2023"]}}
+  ],
+
+  "round_1_5_red_team_gap_review": {
+    "_status": "DEFERRED — operator continuation; Phase 3 already had multiple red+blue team rounds",
+    "_known_remaining_gaps": [
+      "10 of 17 indicators still in PENDING_DATA_INGESTION (HY OAS truncated, ISM PMI not on FRED gateway, BEA real PCE truncated, etc.)"
+    ]
+  },
+
+  "_lr_commit_summary": {
+    "status": "VALIDATED_WITH_FLAGS",
+    "_note": "7 indicators VALIDATED at full empirical backtest standard (max_dev <30% AND <0.05 absolute). 10 indicators PENDING_DATA_INGESTION (data path issues). Topic shippable per engine gate.",
+    "validated_indicators_count": 7,
+    "pending_indicators_count": 10,
+    "key_revisions_already_applied": "see calibration-us-recession-2026.json fixture v2 + build_phase3.py REV5+ comments. Material LRs revised on 7 indicators based on real FRED data."
+  }
+}

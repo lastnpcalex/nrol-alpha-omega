@@ -1,0 +1,1736 @@
+{
+  "meta": {
+    "slug": "calibration-gpu-vram-prices-2030",
+    "title": "Consumer GPU/VRAM Prices vs Q4 2025 Baseline (5yr)",
+    "question": "At Q4 2030, how will the inflation-adjusted price of a reference consumer GPU basket compare to its Q4 2025 baseline? Intermediate checkpoints at Q4 2026 and Q4 2027 update the trajectory.",
+    "resolution": "BLS CPI-U-deflated mean retail price of (a) NVIDIA flagship consumer GPU MSRP and (b) median street price for $500-$800 mid-tier consumer GPU class, vs Q4 2025 baseline. Intermediate readings fire as per_event_member indicators.",
+    "resolutionDate": "2030-12-31",
+    "classification": "CALIBRATION",
+    "priorJustifications": {
+      "H1": "Sustained premium reflects scenario where AI demand outpaces capacity buildouts through 2030.",
+      "H2": "Rough parity reflects capacity catching up to demand by 2030 — consensus expectation.",
+      "H3": "Modest decline reflects capacity overshooting demand if AI demand normalizes earlier.",
+      "H4": "Substantial catch-up reflects paradigm shift (efficient inference, alternate hardware, demand collapse); tail risk."
+    },
+    "structuralNote": "H1 upper tail compressed (+15% to +∞ in one bucket). Midpoint raised from +30% to +40% to reflect AI-shock right-skew. Revisit at Q4 2026 checkpoint — split H1 if upside trajectory materializes (>+50% real).",
+    "calibrationStatus": "VALIDATED_VIA_REFERENCE_CLASS_REVIEWED",
+    "sourceAnchors": [
+      {
+        "round": 1,
+        "key": "gpu_pricing_q1_q2_2026",
+        "url": "https://www.techspot.com/article/3115-gpu-pricing-q2-2026/",
+        "fetched_at": "2026-05-04"
+      },
+      {
+        "round": 1,
+        "key": "tsmc_capacity_2026_2027",
+        "url": "https://www.trendforce.com/news/2026/04/27/news-tsmc-3nm-monthly-capacity-may-hit-180k-wafers-by-2026-up-over-40-yoy-on-ai-demand/",
+        "fetched_at": "2026-05-04"
+      },
+      {
+        "round": 1,
+        "key": "hyperscaler_capex_2026",
+        "url": "https://www.tomshardware.com/tech-industry/big-tech/big-techs-ai-spending-plans-reach-725-billion",
+        "fetched_at": "2026-05-04"
+      },
+      {
+        "round": 1,
+        "key": "alt_accelerator_market_share_2026",
+        "url": "https://patentpc.com/blog/the-ai-chip-market-explosion-key-stats-on-nvidia-amd-and-intels-ai-dominance",
+        "fetched_at": "2026-05-04"
+      },
+      {
+        "round": 1,
+        "key": "nvidia_q1_fy26_earnings",
+        "url": "https://nvidianews.nvidia.com/_gallery/download_pdf/6837703d3d63320fddb3a9ee/",
+        "fetched_at": "2026-05-04"
+      },
+      {
+        "round": 2,
+        "key": "used_gpu_market_history_2024_2025",
+        "url": "https://bestvaluegpu.com/history/new-and-used-rtx-3080-price-history-and-specs/",
+        "fetched_at": "2026-05-04"
+      },
+      {
+        "round": 2,
+        "key": "hbm_dram_2027_2028_supply_outlook",
+        "url": "https://www.trendforce.com/news/2025/12/26/news-ai-reportedly-to-consume-20-of-global-dram-wafer-capacity-in-2026-hbm-gddr7-lead-demand/",
+        "fetched_at": "2026-05-04"
+      },
+      {
+        "round": 2,
+        "key": "amd_intel_2027_2030_roadmap",
+        "url": "https://wccftech.com/amd-to-battle-nvidia-ai-dominance-instinct-mi400-accelerators-2026-mi500-2027/",
+        "fetched_at": "2026-05-04"
+      },
+      {
+        "round": 2,
+        "key": "deepseek_v4_inference_efficiency",
+        "url": "https://www.theregister.com/2026/04/24/deepseek_v4/",
+        "fetched_at": "2026-05-04"
+      },
+      {
+        "round": 2,
+        "key": "current_memory_supply_crisis_2026",
+        "url": "https://moderndiplomacy.eu/2025/12/03/global-ai-boom-triggers-new-memory-chip-supply-chain-crisis/",
+        "fetched_at": "2026-05-04"
+      }
+    ],
+    "redTeamGapsAddressed": [
+      "Used GPU 5-7yr post-peak: 1080 Ti $150-200 vs $700 MSRP — strong analog for H3/H4 by 2030",
+      "HBM/DRAM supply inflection 2027-Q4 earliest; oversupply scenario in 2027-28 plausible",
+      "AMD MI500 (2027) + Intel roadmap supports alt-accelerator share growth toward 15%",
+      "DeepSeek V4 73% per-token FLOPs reduction Q1 2026 — major inference efficiency breakthrough",
+      "Q1 2026 DRAM contract +55-60% QoQ — sustained tightness through 2027 H1"
+    ],
+    "redTeamSubagentId": null,
+    "priorRevisionRationale": "Round 2 anchored H3/H4 trajectories with: (a) 1080 Ti precedent showing real-price decline 5-7yr post-peak (analog for H3/H4); (b) Memory supply inflection 2027-2028; (c) AMD/Intel roadmap supports alt-accelerator threshold. Net: H1 down 10pp (current premium less likely to sustain to 2030), H2 up 2pp, H3 up 5pp, H4 up 3pp. By 2030: H3 modal as memory glut + alt-accelerators + efficiency gains compound.",
+    "status": "ACTIVE",
+    "created": "2026-05-04T00:00:00Z",
+    "startDate": "2026-05-04",
+    "dayCount": 1,
+    "lens": "GREEN",
+    "lensSetAt": "2026-05-04T00:00:00Z",
+    "lensSetReason": "Initial lens set during topic creation per skills/news-scan.md mapping",
+    "lastScanned": "2026-05-05T19:03:15.667267+00:00",
+    "lastUpdated": "2026-05-05T19:03:15+00:00"
+  },
+  "model": {
+    "hypotheses": {
+      "H1": {
+        "label": "Sustained premium (≥+15%)",
+        "midpoint": 40.0,
+        "unit": "% real change vs Q4 2025",
+        "posterior": 0.2
+      },
+      "H2": {
+        "label": "Rough parity (-15% to +15%)",
+        "midpoint": 0.0,
+        "unit": "% real change vs Q4 2025",
+        "posterior": 0.3
+      },
+      "H3": {
+        "label": "Modest decline (-40% to -15%)",
+        "midpoint": -25.0,
+        "unit": "% real change vs Q4 2025",
+        "posterior": 0.32
+      },
+      "H4": {
+        "label": "Substantial catch-up (worse than -40%)",
+        "midpoint": -50.0,
+        "unit": "% real change vs Q4 2025",
+        "posterior": 0.18
+      }
+    }
+  },
+  "governance": {
+    "health": "DEGRADED",
+    "issues": [
+      "Unfalsifiable hypotheses: H1, H2, H3, H4",
+      "Near-maximum uncertainty — model is not discriminating",
+      "DESIGN GATE BLOCKED: 1 blocker(s)"
+    ],
+    "rt": {
+      "rt": 0.0,
+      "regime": "SAFE",
+      "worst_hypothesis": "H1"
+    },
+    "entropy": 1.9568,
+    "maxEntropy": 2.0,
+    "uncertaintyRatio": 0.9784,
+    "evidenceFreshness": {
+      "fresh": 16,
+      "stale": 0,
+      "total": 16
+    },
+    "hypothesisAdmissibility": {
+      "H1": "ADMISSIBLE",
+      "H2": "ADMISSIBLE",
+      "H3": "ADMISSIBLE",
+      "H4": "ADMISSIBLE"
+    },
+    "klFromPrior": {
+      "kl_divergence": 0.0,
+      "interpretation": "INSUFFICIENT_HISTORY"
+    },
+    "lastComputed": "2026-05-05T19:03:15+00:00",
+    "staleDependencies": 0,
+    "calibrationHealth": "ACCEPTABLE",
+    "unresolvedContradictions": 0,
+    "flagged_for_indicator_review": [
+      "ev_001",
+      "ev_002",
+      "ev_003",
+      "ev_004",
+      "ev_005",
+      "ev_006",
+      "ev_007",
+      "ev_008",
+      "ev_009",
+      "ev_010",
+      "ev_011",
+      "ev_012",
+      "ev_013",
+      "ev_014",
+      "ev_015",
+      "ev_016"
+    ],
+    "designGate": {
+      "passed": false,
+      "blockers": [
+        "NON-UNIFORM PRIORS without justification — posteriors are {'H1': 0.2, 'H2': 0.3, 'H3': 0.32, 'H4': 0.18} but posteriorHistory has no initial note explaining the asymmetry. Add a posteriorHistory entry documenting why."
+      ],
+      "warnings": [
+        "meta.resolution may not be objectively observable — does it describe something a third party could verify?",
+        "No anti-indicators defined — every hypothesis needs at least one indicator that would REDUCE its probability",
+        "INDISTINGUISHABLE: H3 and H4 share 13/13 indicators (overlap 100%) with 0 directional discriminators — consider merging or adding an indicator that moves them in opposite directions"
+      ],
+      "coverage": {
+        "H1": {
+          "pos": 3,
+          "neg": 10
+        },
+        "H2": {
+          "pos": 7,
+          "neg": 6
+        },
+        "H3": {
+          "pos": 8,
+          "neg": 5
+        },
+        "H4": {
+          "pos": 8,
+          "neg": 5
+        }
+      },
+      "indistinguishable": [
+        {
+          "h1": "H3",
+          "h2": "H4",
+          "overlap": 1.0
+        }
+      ],
+      "lastChecked": "2026-05-05T19:03:15+00:00"
+    }
+  },
+  "indicators": {
+    "_design_rules": [
+      "Each indicator must be OBSERVABLE — actions, not opinions",
+      "Each must have a clear fired/not-fired threshold",
+      "Every hypothesis needs at least one pro AND one anti indicator",
+      "Governor flags unfalsifiable hypotheses as DEGRADED"
+    ],
+    "tiers": {
+      "tier1_critical": [
+        {
+          "id": "t1_q4_2027_real_premium_above_15",
+          "desc": "Q4 2027 real GPU basket index >=+15% vs Q4 2025 (premium persistence into year 2). Source: BLS + retail trackers.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 +10pp; H2 -3pp; H3 -4pp; H4 -3pp.",
+          "likelihoods": {
+            "H1": 0.9,
+            "H2": 0.48,
+            "H3": 0.22,
+            "H4": 0.1
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false,
+          "shape": "per_event_member",
+          "causal_event_id": "gpu_real_price_q4_2027"
+        },
+        {
+          "id": "t1_q4_2027_real_parity_minus15_to_plus15",
+          "desc": "Q4 2027 real GPU basket index sits in -15% to +15% band vs Q4 2025 (parity trajectory).",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 -3pp; H2 +12pp; H3 -5pp; H4 -4pp.",
+          "likelihoods": {
+            "H1": 0.45,
+            "H2": 0.92,
+            "H3": 0.55,
+            "H4": 0.3
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false,
+          "shape": "per_event_member",
+          "causal_event_id": "gpu_real_price_q4_2027"
+        },
+        {
+          "id": "t1_q4_2027_real_below_minus30",
+          "desc": "Q4 2027 real GPU basket index <=-30% vs Q4 2025 (substantial real-price decline by year 2).",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 -3pp; H2 -3pp; H3 +5pp; H4 +5pp.",
+          "likelihoods": {
+            "H1": 0.08,
+            "H2": 0.18,
+            "H3": 0.65,
+            "H4": 0.92
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false,
+          "shape": "per_event_member",
+          "causal_event_id": "gpu_real_price_q4_2027"
+        },
+        {
+          "id": "t1_q4_2026_real_premium_above_15_emem",
+          "desc": "Q4 2026 real GPU basket index >=+15% vs Q4 2025 (Q4 2026 measurement — per_event_member with t1_q4_2026_real_below_minus15).",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 +8pp; H2 -2pp; H3 -4pp; H4 -2pp.",
+          "likelihoods": {
+            "H1": 0.88,
+            "H2": 0.5,
+            "H3": 0.25,
+            "H4": 0.1
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false,
+          "shape": "per_event_member",
+          "causal_event_id": "gpu_real_price_q4_2026"
+        },
+        {
+          "id": "t1_q4_2026_real_below_minus15",
+          "desc": "Q4 2026 real GPU basket index <=-15% vs Q4 2025 baseline (early capacity catch-up). Source: BLS + retail trackers.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 -3pp; H2 -3pp; H3 +8pp; H4 +3pp.",
+          "likelihoods": {
+            "H1": 0.1,
+            "H2": 0.3,
+            "H3": 0.88,
+            "H4": 0.72
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false,
+          "shape": "per_event_member",
+          "causal_event_id": "gpu_real_price_q4_2026"
+        }
+      ],
+      "tier2_strong": [
+        {
+          "id": "t2_tsmc_n2_n3_capacity_doubles_2027",
+          "desc": "TSMC public capacity disclosure shows N2+N3 monthly wafer starts >=2x Q4 2025 by end Q4 2027. Source: TSMC quarterly earnings + TrendForce.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 -7pp; H2 +3pp; H3 +5pp; H4 +4pp.",
+          "likelihoods": {
+            "H1": 0.2,
+            "H2": 0.62,
+            "H3": 0.82,
+            "H4": 0.85
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false,
+          "shape": "single_observation",
+          "causal_event_id": "ai_supply_demand_inflection"
+        },
+        {
+          "id": "t2_hyperscaler_capex_yoy_negative",
+          "desc": "Combined Q4 hyperscaler (MSFT+GOOG+AMZN+META) AI infra capex prints <=YoY -5% for any FY 2026-2029. Source: company 10-Ks + Bloomberg breakouts.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 -8pp; H2 +2pp; H3 +5pp; H4 +5pp.",
+          "likelihoods": {
+            "H1": 0.15,
+            "H2": 0.55,
+            "H3": 0.78,
+            "H4": 0.88
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false,
+          "shape": "single_observation",
+          "causal_event_id": "ai_supply_demand_inflection"
+        },
+        {
+          "id": "t2_hyperscaler_capex_above_25_3of4",
+          "desc": "Combined hyperscaler AI infra capex YoY >=+25% in 3 of 4 years 2026-2029 (REV4: softened from 'every year' resolution-disguise; can be evaluated rolling). Source: company 10-Ks.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 +8pp; H2 -2pp; H3 -5pp; H4 -3pp.",
+          "likelihoods": {
+            "H1": 0.88,
+            "H2": 0.55,
+            "H3": 0.25,
+            "H4": 0.12
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false,
+          "shape": "single_observation"
+        },
+        {
+          "id": "t2_china_export_controls_relaxed",
+          "desc": "US Commerce Dept formally relaxes BIS rule on consumer-class GPU exports to China (or equivalent rollback) before 2030. LR cap reduced in REV4 — first-order effect is bullish via Chinese demand redirect. Source: BIS.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 -3pp; H2 +2pp; H3 +2pp; H4 +1pp.",
+          "likelihoods": {
+            "H1": 0.4,
+            "H2": 0.6,
+            "H3": 0.62,
+            "H4": 0.65
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false,
+          "shape": "single_observation"
+        },
+        {
+          "id": "t2_alt_inference_hardware_share_15pct",
+          "desc": "Non-NVIDIA inference accelerators (AMD Instinct + Intel Gaudi + custom ASIC like TPU/Trainium when sold externally) reach >=15% of inference compute share globally by Q4 2028. Source: IDC accelerator tracker.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 -5pp; H2 +3pp; H3 +4pp; H4 +3pp.",
+          "likelihoods": {
+            "H1": 0.25,
+            "H2": 0.65,
+            "H3": 0.7,
+            "H4": 0.72
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false,
+          "shape": "single_observation",
+          "causal_event_id": "ai_supply_demand_inflection"
+        },
+        {
+          "id": "t2_nvidia_gross_margin_compresses",
+          "desc": "NVIDIA gross margin compresses to 55-65% range for any 2 consecutive fiscal quarters by FY2028 (parity = competitive normalization without supply collapse). Source: NVDA 10-Q.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 -4pp; H2 +9pp; H3 -2pp; H4 -3pp.",
+          "likelihoods": {
+            "H1": 0.3,
+            "H2": 0.85,
+            "H3": 0.55,
+            "H4": 0.4
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false,
+          "shape": "single_observation"
+        },
+        {
+          "id": "t2_used_gpu_market_index_decline",
+          "desc": "Used/refurbished consumer GPU market index >=-25% real vs Q4 2025 by Q4 2028 (modest decline mechanism distinct from primary index check). Source: eBay sold-listings + Newegg refurb tracker.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 -3pp; H2 -2pp; H3 +9pp; H4 +1pp.",
+          "likelihoods": {
+            "H1": 0.3,
+            "H2": 0.45,
+            "H3": 0.85,
+            "H4": 0.62
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false,
+          "shape": "single_observation"
+        }
+      ],
+      "tier3_suggestive": [
+        {
+          "id": "t3_inference_efficiency_breakthrough",
+          "desc": "Published peer-reviewed paper or major-lab disclosure demonstrating >=10x reduction in inference FLOPs per equivalent-quality token vs Q4 2025 baseline. LR cap reduced REV4 — multi-step inference to consumer pricing. Source: arXiv / NeurIPS / ICLR.",
+          "status": "NOT_FIRED",
+          "firedDate": null,
+          "note": null,
+          "posteriorEffect": "H1 -2pp; H2 +1pp; H3 +2pp; H4 +1pp.",
+          "likelihoods": {
+            "H1": 0.5,
+            "H2": 0.62,
+            "H3": 0.65,
+            "H4": 0.62
+          },
+          "lr_decay": 0.65,
+          "n_firings": 0,
+          "resolution_class": false,
+          "shape": "single_observation",
+          "causal_event_id": "ai_supply_demand_inflection"
+        }
+      ]
+    },
+    "anti_indicators": [
+      {
+        "id": "anti_nvidia_pricing_power_extends",
+        "desc": "NVIDIA flagship consumer GPU MSRP rises >=20% nominal at any product refresh between 2025 and 2030. Source: NVIDIA product launch announcements.",
+        "status": "NOT_FIRED",
+        "firedDate": null,
+        "note": null,
+        "posteriorEffect": "H1 +8pp; H2 -2pp; H3 -4pp; H4 -2pp.",
+        "likelihoods": {
+          "H1": 0.88,
+          "H2": 0.5,
+          "H3": 0.22,
+          "H4": 0.1
+        },
+        "lr_decay": 0.65,
+        "n_firings": 0,
+        "resolution_class": false,
+        "shape": "single_observation"
+      },
+      {
+        "id": "anti_ai_demand_doubles_2027",
+        "desc": "Aggregate inference compute demand (token-volume proxy across major cloud providers) doubles YoY in any year 2026-2027 as reported in IDC/a16z/Sequoia infra updates.",
+        "status": "NOT_FIRED",
+        "firedDate": null,
+        "note": null,
+        "posteriorEffect": "H1 +6pp; H2 -2pp; H3 -3pp; H4 -1pp.",
+        "likelihoods": {
+          "H1": 0.82,
+          "H2": 0.5,
+          "H3": 0.25,
+          "H4": 0.12
+        },
+        "lr_decay": 0.65,
+        "n_firings": 0,
+        "resolution_class": false,
+        "shape": "single_observation"
+      }
+    ]
+  },
+  "actorModel": {
+    "description": "Real consumer GPU basket index at Q4 2030 emerges from: NVIDIA pricing power vs alternative-accelerator entry, TSMC capacity expansion, hyperscaler capex trajectory, China export-control regime, and inference-efficiency progress.",
+    "actors": {
+      "nvidia": {
+        "name": "NVIDIA",
+        "role": "Sets reference flagship MSRP. Pricing power constrained only by supply (TSMC) and substitute viability (AMD/Intel/ASIC).",
+        "decisionStyle": "Aggressive on margin; willing to gate consumer SKU supply to favor datacenter.",
+        "biases": [
+          "Anchored to 70%+ gross margin floor",
+          "Underweight long-tail substitution by hyperscaler in-house silicon"
+        ],
+        "filters": [
+          "Datacenter demand, TSMC allocation, channel inventory"
+        ],
+        "overrides": [
+          "Antitrust action OR major hyperscaler defection forces pricing reset"
+        ]
+      },
+      "tsmc": {
+        "name": "TSMC (manufacturing supply)",
+        "role": "Sole leading-edge fab with sufficient capacity. N2/N3 monthly wafer starts cap total system supply.",
+        "decisionStyle": "Cautious on capex; long lead times on capacity decisions; geographic diversification reluctant.",
+        "biases": [
+          "Anchored to customer-mix stability (Apple + NVIDIA dominate)",
+          "Taiwan geopolitical risk underweighted in capex pacing"
+        ],
+        "filters": [
+          "Customer pre-orders, semiconductor cycle position",
+          "US/Japan/EU subsidy programs"
+        ],
+        "overrides": []
+      },
+      "hyperscalers": {
+        "name": "Hyperscalers (MSFT, GOOG, AMZN, META) — capex side",
+        "role": "Largest GPU buyers. Combined capex trajectory determines whether NVIDIA premium sustains or compresses.",
+        "decisionStyle": "Capacity-arms-race driven through 2026; potential pivot if inference revenue lags capex.",
+        "biases": [
+          "Anchored to AI growth narrative",
+          "Slow to throttle capex even as ROI questioned"
+        ],
+        "filters": [
+          "AI revenue growth, training/inference demand, custom-silicon roadmaps"
+        ],
+        "overrides": [
+          "Earnings miss attributed to AI capex forces visible deceleration"
+        ]
+      },
+      "alt_accelerators": {
+        "name": "Alt-Accelerator Vendors (AMD Instinct, Intel Gaudi, Trainium/TPU when external)",
+        "role": "Combined market share crossing ~15% would meaningfully erode NVIDIA premium.",
+        "decisionStyle": "Slowly catching up on software ecosystem; varying execution quality.",
+        "biases": [
+          "Underweight CUDA ecosystem stickiness",
+          "Repeated execution slips (Intel Gaudi)"
+        ],
+        "filters": [
+          "Customer wins, software stack maturity, MLPerf benchmarks"
+        ],
+        "overrides": []
+      },
+      "us_china_policy": {
+        "name": "US BIS + Chinese Cyberspace Admin",
+        "role": "Export-control regime determines whether Chinese demand redirects GPU supply or stays disjoint.",
+        "decisionStyle": "Tightening trajectory under Biden; uncertain under Trump (could relax for trade-deal leverage).",
+        "biases": [
+          "Anchored to AI-race national security framing"
+        ],
+        "filters": [
+          "Geopolitical posture, US-China trade negotiations, Taiwan tensions"
+        ],
+        "overrides": [
+          "Major Taiwan crisis forces broad export-control rollback or expansion"
+        ]
+      }
+    },
+    "methodology": [
+      "ACTIONS OVER RHETORIC — NVIDIA earnings call commentary is RHETORIC; product launch MSRP is EVENT; BLS basket index is DATA.",
+      "Q4 CHECKPOINTS PER_EVENT_MEMBER — Q4 2026 and Q4 2027 each have mutually-exclusive bands. Only one fires per measurement; engine enforces via per_event_member shape.",
+      "AI-DEMAND-SUPPLY INFLECTION CLUSTER — TSMC, hyperscaler-capex-negative, alt-inference-share, and efficiency-breakthrough share causal_event_id=ai_supply_demand_inflection. One macro inflection should not triple-update.",
+      "CONJUNCTION SOFTENING — t2_hyperscaler_capex_above_25 was 'every year 2026-2029'; REV4 softened to '3 of 4 years' — observable mid-horizon, not resolution-disguised.",
+      "CHINA POLICY AMBIGUITY — Export-control relaxation has ambiguous first-order effect (redirects vs frees domestic supply). LR magnitude capped accordingly in REV4."
+    ]
+  },
+  "dataFeeds": {
+    "bls_cpi_u": {
+      "label": "BLS CPI-U (deflator for real GPU basket)",
+      "source": "Bureau of Labor Statistics",
+      "cadence": "monthly",
+      "note": "Used to deflate retail GPU prices to real terms vs Q4 2025 baseline."
+    },
+    "retail_gpu_trackers": {
+      "label": "Consumer GPU retail price trackers (PCPartPicker, Newegg)",
+      "source": "PCPartPicker + Newegg + retail aggregators",
+      "cadence": "continuous",
+      "note": "Q4 2026 + Q4 2027 real-index measurements. Per_event_member partitions."
+    },
+    "nvidia_msrp_announcements": {
+      "label": "NVIDIA flagship consumer GPU MSRP at product launches",
+      "source": "NVIDIA product launch press releases",
+      "cadence": "ad-hoc per refresh cycle (~18-24mo)",
+      "note": "anti_nvidia_pricing_power_extends. Public MSRP only — channel/scalper prices excluded."
+    },
+    "nvidia_10q_gross_margin": {
+      "label": "NVIDIA 10-Q gross margin",
+      "source": "NVDA SEC filings",
+      "cadence": "quarterly",
+      "note": "t2_nvidia_gross_margin_compresses (NEW REV4 H2 indicator)."
+    },
+    "tsmc_capacity_disclosure": {
+      "label": "TSMC quarterly earnings + TrendForce capacity tracking (N2/N3 wafer starts)",
+      "source": "TSMC + TrendForce",
+      "cadence": "quarterly + monthly tracking",
+      "note": "t2_tsmc_n2_n3_capacity_doubles_2027. Causal_event_id=ai_supply_demand_inflection."
+    },
+    "hyperscaler_capex_10k": {
+      "label": "Combined MSFT+GOOG+AMZN+META AI infra capex (10-K segments + Bloomberg breakouts)",
+      "source": "SEC 10-K filings + Bloomberg",
+      "cadence": "annual + quarterly hints",
+      "note": "t2_hyperscaler_capex_yoy_negative + t2_hyperscaler_capex_above_25_3of4 (softened in REV4 from 'every year'). Negative leg shares ai_supply_demand_inflection causal_event_id."
+    },
+    "bis_export_controls": {
+      "label": "BIS Federal Register notices on consumer-class GPU export controls to China",
+      "source": "Bureau of Industry and Security",
+      "cadence": "ad-hoc",
+      "note": "t2_china_export_controls_relaxed. LR cap reduced in REV4 (ambiguous first-order effect)."
+    },
+    "idc_accelerator_tracker": {
+      "label": "IDC accelerator tracker (alt-NVIDIA inference compute share)",
+      "source": "IDC",
+      "cadence": "annual + quarterly revisions",
+      "note": "t2_alt_inference_hardware_share_15pct."
+    },
+    "arxiv_neurips_iclr": {
+      "label": "arXiv preprints + NeurIPS/ICLR proceedings on inference efficiency",
+      "source": "arXiv + NeurIPS + ICLR",
+      "cadence": "continuous + annual conferences",
+      "note": "t3_inference_efficiency_breakthrough. LR cap reduced REV4."
+    },
+    "ebay_newegg_refurb": {
+      "label": "eBay sold-listings + Newegg refurb tracker (used GPU market index)",
+      "source": "eBay + Newegg refurbished",
+      "cadence": "continuous",
+      "note": "t2_used_gpu_market_index_decline (NEW REV4 H3 indicator)."
+    },
+    "ai_demand_reports": {
+      "label": "Aggregate inference compute demand (a16z + Sequoia + IDC)",
+      "source": "a16z + Sequoia + IDC AI infra reports",
+      "cadence": "annual + ad-hoc",
+      "note": "anti_ai_demand_doubles_2027."
+    }
+  },
+  "predictionScoring": {
+    "snapshots": [],
+    "outcomes": [],
+    "brierScores": []
+  },
+  "contradictionTracker": {
+    "unresolved": [],
+    "resolved": [
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "AMD to allegedly raise graphics card prices by at least 10% in 2026 — price surge attributed to ongoing AI-related DRAM supply crisis — Quantifies the near-term step change in consumer GPU prices off the Q4 2025 baseline.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "Nvidia plans heavy cuts to GPU supply in early 2026 — Supply cuts of 30–40% will directly tighten consumer GPU street prices vs the Q4 2025 reference.",
+        "reason": "Numeric divergence 99.5% on metric (context: in): new=2026.0, existing=10.0, threshold=10%",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "AMD to allegedly raise graphics card prices by at least 10% in 2026 — price surge attributed to ongoing AI-related DRAM supply crisis — Quantifies the near-term step change in consumer GPU prices off the Q4 2025 baseline.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "GPU price tracking 2026: Lowest price on every graphics card from Nvidia, AMD, and Intel today — best deals during the AI-driven pricing crisis — Live street-price tracker provides current observed price levels relative to Q4 2025 baseline.",
+        "reason": "Numeric divergence 99.5% on metric (context: price): new=2026.0, existing=10.0, threshold=10%",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "GPU price tracking 2026: Lowest price on every graphics card from Nvidia, AMD, and Intel today — best deals during the AI-driven pricing crisis — Live street-price tracker provides current observed price levels relative to Q4 2025 baseline.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "Nvidia is reportedly looking to cut gaming GPU production by up to 40% in 2026 due to VRAM supply issues — Production cuts driven by VRAM scarcity tighten supply and pressure consumer GPU prices upward.",
+        "reason": "Numeric divergence 98.0% on metric (context: to): new=40.0, existing=2025.0, threshold=10%",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "Nvidia plans heavy cuts to GPU supply in early 2026 — Supply cuts of 30–40% will directly tighten consumer GPU street prices vs the Q4 2025 reference.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "Nvidia is reportedly looking to cut gaming GPU production by up to 40% in 2026 due to VRAM supply issues — Production cuts driven by VRAM scarcity tighten supply and pressure consumer GPU prices upward.",
+        "reason": "Numeric divergence 98.0% on metric (context: in): new=40.0, existing=2026.0, threshold=10%",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "AMD to allegedly raise graphics card prices by at least 10% in 2026 — price surge attributed to ongoing AI-related DRAM supply crisis — Quantifies the near-term step change in consumer GPU prices off the Q4 2025 baseline.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "Nvidia is reportedly looking to cut gaming GPU production by up to 40% in 2026 due to VRAM supply issues — Production cuts driven by VRAM scarcity tighten supply and pressure consumer GPU prices upward.",
+        "reason": "Numeric divergence 75.0% on metric (context: 2026, by, in): new=40.0, existing=10.0, threshold=10%",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "Nvidia is reportedly looking to cut gaming GPU production by up to 40% in 2026 due to VRAM supply issues — Production cuts driven by VRAM scarcity tighten supply and pressure consumer GPU prices upward.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "Leaks Predict $5000 RTX 5090 GPUs in 2026 Thanks to AI Industry Demand — Concrete flagship price-point forecast informs the upper bound on basket prices vs Q4 2025 baseline.",
+        "reason": "Numeric divergence 99.2% on metric (context: 2026, in): new=5090.0, existing=40.0, threshold=10%",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "Nvidia plans heavy cuts to GPU supply in early 2026 — Supply cuts of 30–40% will directly tighten consumer GPU street prices vs the Q4 2025 reference.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "Leaks Predict $5000 RTX 5090 GPUs in 2026 Thanks to AI Industry Demand — Concrete flagship price-point forecast informs the upper bound on basket prices vs Q4 2025 baseline.",
+        "reason": "Numeric divergence 60.2% on metric (context: in): new=5090.0, existing=2026.0, threshold=10%",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "AMD to allegedly raise graphics card prices by at least 10% in 2026 — price surge attributed to ongoing AI-related DRAM supply crisis — Quantifies the near-term step change in consumer GPU prices off the Q4 2025 baseline.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "Leaks Predict $5000 RTX 5090 GPUs in 2026 Thanks to AI Industry Demand — Concrete flagship price-point forecast informs the upper bound on basket prices vs Q4 2025 baseline.",
+        "reason": "Numeric divergence 99.8% on metric (context: 2026, in): new=5090.0, existing=10.0, threshold=10%",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "Leaks Predict $5000 RTX 5090 GPUs in 2026 Thanks to AI Industry Demand — Concrete flagship price-point forecast informs the upper bound on basket prices vs Q4 2025 baseline.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "GPU Market Price Update Q1 2026 tracking Nvidia RTX 50 Series and AMD RX 9000 price hikes — Q1 2026 market data quantifies near-term deviation from the Q4 2025 baseline.",
+        "reason": "Numeric divergence 59.5% on metric (context: rtx): new=2026.0, existing=5000.0, threshold=10%",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "GPU price tracking 2026: Lowest price on every graphics card from Nvidia, AMD, and Intel today — best deals during the AI-driven pricing crisis — Live street-price tracker provides current observed price levels relative to Q4 2025 baseline.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "GPU Market Price Update Q1 2026 tracking Nvidia RTX 50 Series and AMD RX 9000 price hikes — Q1 2026 market data quantifies near-term deviation from the Q4 2025 baseline.",
+        "reason": "Numeric divergence 97.5% on metric (context: tracking): new=50.0, existing=2026.0, threshold=10%",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "AMD to allegedly raise graphics card prices by at least 10% in 2026 — price surge attributed to ongoing AI-related DRAM supply crisis — Quantifies the near-term step change in consumer GPU prices off the Q4 2025 baseline.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "GPU Market Price Update Q1 2026 tracking Nvidia RTX 50 Series and AMD RX 9000 price hikes — Q1 2026 market data quantifies near-term deviation from the Q4 2025 baseline.",
+        "reason": "Numeric divergence 99.5% on metric (context: price): new=2026.0, existing=10.0, threshold=10%",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "GPU Market Price Update Q1 2026 tracking Nvidia RTX 50 Series and AMD RX 9000 price hikes — Q1 2026 market data quantifies near-term deviation from the Q4 2025 baseline.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "Finally, a GPU price drop: Retailers slash AMD Radeon RX 9000 series by 15-20% — Reports a 15-20% retail price cut on a current-generation consumer GPU line, directly bearing on whether consumer GPU prices could trend toward H3's modest decline range by 2030.",
+        "reason": "Numeric divergence 99.4% on metric (context: amd, series): new=9000.0, existing=50.0, threshold=10%",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "Nvidia is reportedly looking to cut gaming GPU production by up to 40% in 2026 due to VRAM supply issues — Production cuts driven by VRAM scarcity tighten supply and pressure consumer GPU prices upward.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "Finally, a GPU price drop: Retailers slash AMD Radeon RX 9000 series by 15-20% — Reports a 15-20% retail price cut on a current-generation consumer GPU line, directly bearing on whether consumer GPU prices could trend toward H3's modest decline range by 2030.",
+        "reason": "Numeric divergence 99.6% on metric (context: by): new=9000.0, existing=40.0, threshold=10%",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "AMD to allegedly raise graphics card prices by at least 10% in 2026 — price surge attributed to ongoing AI-related DRAM supply crisis — Quantifies the near-term step change in consumer GPU prices off the Q4 2025 baseline.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "Finally, a GPU price drop: Retailers slash AMD Radeon RX 9000 series by 15-20% — Reports a 15-20% retail price cut on a current-generation consumer GPU line, directly bearing on whether consumer GPU prices could trend toward H3's modest decline range by 2030.",
+        "reason": "Numeric divergence 99.9% on metric (context: by): new=9000.0, existing=10.0, threshold=10%",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "Leaks Predict $5000 RTX 5090 GPUs in 2026 Thanks to AI Industry Demand — Concrete flagship price-point forecast informs the upper bound on basket prices vs Q4 2025 baseline.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "GPU prices continue to rise in 2026, up to 20% claims report, but Nvidia and AMD won't be changing MSRP — Reports a 20% street-price rise in 2026, evidence against H3's modest-decline scenario by anchoring the near-term trajectory upward.",
+        "reason": "Numeric divergence 60.2% on metric (context: in): new=2026.0, existing=5090.0, threshold=10%",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "Nvidia is reportedly looking to cut gaming GPU production by up to 40% in 2026 due to VRAM supply issues — Production cuts driven by VRAM scarcity tighten supply and pressure consumer GPU prices upward.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "GPU prices continue to rise in 2026, up to 20% claims report, but Nvidia and AMD won't be changing MSRP — Reports a 20% street-price rise in 2026, evidence against H3's modest-decline scenario by anchoring the near-term trajectory upward.",
+        "reason": "Numeric divergence 98.0% on metric (context: in, to, up): new=2026.0, existing=40.0, threshold=10%",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "GPU price tracking 2026: Lowest price on every graphics card from Nvidia, AMD, and Intel today — best deals during the AI-driven pricing crisis — Live street-price tracker provides current observed price levels relative to Q4 2025 baseline.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "GPU prices continue to rise in 2026, up to 20% claims report, but Nvidia and AMD won't be changing MSRP — Reports a 20% street-price rise in 2026, evidence against H3's modest-decline scenario by anchoring the near-term trajectory upward.",
+        "reason": "Numeric divergence 99.0% on metric (context: to): new=20.0, existing=2025.0, threshold=10%",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "Nvidia plans heavy cuts to GPU supply in early 2026 — Supply cuts of 30–40% will directly tighten consumer GPU street prices vs the Q4 2025 reference.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "GPU prices continue to rise in 2026, up to 20% claims report, but Nvidia and AMD won't be changing MSRP — Reports a 20% street-price rise in 2026, evidence against H3's modest-decline scenario by anchoring the near-term trajectory upward.",
+        "reason": "Numeric divergence 99.0% on metric (context: in): new=20.0, existing=2026.0, threshold=10%",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "AMD to allegedly raise graphics card prices by at least 10% in 2026 — price surge attributed to ongoing AI-related DRAM supply crisis — Quantifies the near-term step change in consumer GPU prices off the Q4 2025 baseline.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "GPU prices continue to rise in 2026, up to 20% claims report, but Nvidia and AMD won't be changing MSRP — Reports a 20% street-price rise in 2026, evidence against H3's modest-decline scenario by anchoring the near-term trajectory upward.",
+        "reason": "Numeric divergence 99.5% on metric (context: in): new=2026.0, existing=10.0, threshold=10%",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "GPU prices continue to rise in 2026, up to 20% claims report, but Nvidia and AMD won't be changing MSRP — Reports a 20% street-price rise in 2026, evidence against H3's modest-decline scenario by anchoring the near-term trajectory upward.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "Absurd GPU Pricing Update: Q1 2026 Edition — Documents RTX 50-series street prices running 30%+ above MSRP in early-mid 2026, contradicting H2's rough-parity hypothesis by showing real-price escalation early in the 5-year window.",
+        "reason": "Numeric divergence 98.5% on metric (context: in): new=30.0, existing=2026.0, threshold=10%",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "GPU Market Price Update Q1 2026 tracking Nvidia RTX 50 Series and AMD RX 9000 price hikes — Q1 2026 market data quantifies near-term deviation from the Q4 2025 baseline.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "Absurd GPU Pricing Update: Q1 2026 Edition — Documents RTX 50-series street prices running 30%+ above MSRP in early-mid 2026, contradicting H2's rough-parity hypothesis by showing real-price escalation early in the 5-year window.",
+        "reason": "Numeric divergence 97.5% on metric (context: rtx): new=2026.0, existing=50.0, threshold=10%",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "Leaks Predict $5000 RTX 5090 GPUs in 2026 Thanks to AI Industry Demand — Concrete flagship price-point forecast informs the upper bound on basket prices vs Q4 2025 baseline.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "Absurd GPU Pricing Update: Q1 2026 Edition — Documents RTX 50-series street prices running 30%+ above MSRP in early-mid 2026, contradicting H2's rough-parity hypothesis by showing real-price escalation early in the 5-year window.",
+        "reason": "Numeric divergence 59.5% on metric (context: rtx): new=2026.0, existing=5000.0, threshold=10%",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "Nvidia is reportedly looking to cut gaming GPU production by up to 40% in 2026 due to VRAM supply issues — Production cuts driven by VRAM scarcity tighten supply and pressure consumer GPU prices upward.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "Absurd GPU Pricing Update: Q1 2026 Edition — Documents RTX 50-series street prices running 30%+ above MSRP in early-mid 2026, contradicting H2's rough-parity hypothesis by showing real-price escalation early in the 5-year window.",
+        "reason": "Numeric divergence 25.0% on metric (context: in): new=30.0, existing=40.0, threshold=10%",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "Nvidia plans heavy cuts to GPU supply in early 2026 — Supply cuts of 30–40% will directly tighten consumer GPU street prices vs the Q4 2025 reference.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "Absurd GPU Pricing Update: Q1 2026 Edition — Documents RTX 50-series street prices running 30%+ above MSRP in early-mid 2026, contradicting H2's rough-parity hypothesis by showing real-price escalation early in the 5-year window.",
+        "reason": "Numeric divergence 98.5% on metric (context: in): new=30.0, existing=2026.0, threshold=10%",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "AMD to allegedly raise graphics card prices by at least 10% in 2026 — price surge attributed to ongoing AI-related DRAM supply crisis — Quantifies the near-term step change in consumer GPU prices off the Q4 2025 baseline.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "Absurd GPU Pricing Update: Q1 2026 Edition — Documents RTX 50-series street prices running 30%+ above MSRP in early-mid 2026, contradicting H2's rough-parity hypothesis by showing real-price escalation early in the 5-year window.",
+        "reason": "Numeric divergence 66.7% on metric (context: in): new=30.0, existing=10.0, threshold=10%",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "GPU prices continue to rise in 2026, up to 20% claims report, but Nvidia and AMD won't be changing MSRP — Reports a 20% street-price rise in 2026, evidence against H3's modest-decline scenario by anchoring the near-term trajectory upward.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "March 2026 RAM Price Update: DDR5 Spot Prices Dip While GDDR6 Stays Firm — Memory cost is the dominant GPU BOM driver; mixed signal of DDR5 softening but GDDR6 firm informs whether GPU prices revert to parity by 2030.",
+        "reason": "Numeric divergence 99.0% on metric (context: to): new=2030.0, existing=20.0, threshold=10%",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "Finally, a GPU price drop: Retailers slash AMD Radeon RX 9000 series by 15-20% — Reports a 15-20% retail price cut on a current-generation consumer GPU line, directly bearing on whether consumer GPU prices could trend toward H3's modest decline range by 2030.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "March 2026 RAM Price Update: DDR5 Spot Prices Dip While GDDR6 Stays Firm — Memory cost is the dominant GPU BOM driver; mixed signal of DDR5 softening but GDDR6 firm informs whether GPU prices revert to parity by 2030.",
+        "reason": "Numeric divergence 77.4% on metric (context: by): new=2030.0, existing=9000.0, threshold=10%",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "GPU Market Price Update Q1 2026 tracking Nvidia RTX 50 Series and AMD RX 9000 price hikes — Q1 2026 market data quantifies near-term deviation from the Q4 2025 baseline.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "March 2026 RAM Price Update: DDR5 Spot Prices Dip While GDDR6 Stays Firm — Memory cost is the dominant GPU BOM driver; mixed signal of DDR5 softening but GDDR6 firm informs whether GPU prices revert to parity by 2030.",
+        "reason": "Numeric divergence 77.5% on metric (context: price): new=2026.0, existing=9000.0, threshold=10%",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "Nvidia is reportedly looking to cut gaming GPU production by up to 40% in 2026 due to VRAM supply issues — Production cuts driven by VRAM scarcity tighten supply and pressure consumer GPU prices upward.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "March 2026 RAM Price Update: DDR5 Spot Prices Dip While GDDR6 Stays Firm — Memory cost is the dominant GPU BOM driver; mixed signal of DDR5 softening but GDDR6 firm informs whether GPU prices revert to parity by 2030.",
+        "reason": "Numeric divergence 98.0% on metric (context: by, to): new=2030.0, existing=40.0, threshold=10%",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "AMD to allegedly raise graphics card prices by at least 10% in 2026 — price surge attributed to ongoing AI-related DRAM supply crisis — Quantifies the near-term step change in consumer GPU prices off the Q4 2025 baseline.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "March 2026 RAM Price Update: DDR5 Spot Prices Dip While GDDR6 Stays Firm — Memory cost is the dominant GPU BOM driver; mixed signal of DDR5 softening but GDDR6 firm informs whether GPU prices revert to parity by 2030.",
+        "reason": "Numeric divergence 99.5% on metric (context: price): new=2026.0, existing=10.0, threshold=10%",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "March 2026 RAM Price Update: DDR5 Spot Prices Dip While GDDR6 Stays Firm — Memory cost is the dominant GPU BOM driver; mixed signal of DDR5 softening but GDDR6 firm informs whether GPU prices revert to parity by 2030.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "MSI Calls 2026 The \"Most Difficult\" Year, Plans To Increase GPU Prices By 15–30% — A major AIB partner announcing 15-30% price increases in 2026 directly contradicts H4 (substantial catch-up worse than -40%) and pushes the trajectory toward higher, not lower, real prices.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: gpu, price, prices",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "Absurd GPU Pricing Update: Q1 2026 Edition — Documents RTX 50-series street prices running 30%+ above MSRP in early-mid 2026, contradicting H2's rough-parity hypothesis by showing real-price escalation early in the 5-year window.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "MSI Calls 2026 The \"Most Difficult\" Year, Plans To Increase GPU Prices By 15–30% — A major AIB partner announcing 15-30% price increases in 2026 directly contradicts H4 (substantial catch-up worse than -40%) and pushes the trajectory toward higher, not lower, real prices.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: gpu, price, prices, real, year",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "GPU prices continue to rise in 2026, up to 20% claims report, but Nvidia and AMD won't be changing MSRP — Reports a 20% street-price rise in 2026, evidence against H3's modest-decline scenario by anchoring the near-term trajectory upward.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "MSI Calls 2026 The \"Most Difficult\" Year, Plans To Increase GPU Prices By 15–30% — A major AIB partner announcing 15-30% price increases in 2026 directly contradicts H4 (substantial catch-up worse than -40%) and pushes the trajectory toward higher, not lower, real prices.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: gpu, price, prices, trajectory",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "GPU Pricing Remains Broken, Even if It Has Stopped Getting Worse — Q2 2026 pricing snapshot showing stagnation with high-end cards still well above MSRP, contradicting H3's modest-decline trajectory.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "MSI Calls 2026 The \"Most Difficult\" Year, Plans To Increase GPU Prices By 15–30% — A major AIB partner announcing 15-30% price increases in 2026 directly contradicts H4 (substantial catch-up worse than -40%) and pushes the trajectory toward higher, not lower, real prices.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: gpu, trajectory, worse",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "Finally, a GPU price drop: Retailers slash AMD Radeon RX 9000 series by 15-20% — Reports a 15-20% retail price cut on a current-generation consumer GPU line, directly bearing on whether consumer GPU prices could trend toward H3's modest decline range by 2030.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "MSI Calls 2026 The \"Most Difficult\" Year, Plans To Increase GPU Prices By 15–30% — A major AIB partner announcing 15-30% price increases in 2026 directly contradicts H4 (substantial catch-up worse than -40%) and pushes the trajectory toward higher, not lower, real prices.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: directly, gpu, price, prices, toward",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "GPU Market Price Update Q1 2026 tracking Nvidia RTX 50 Series and AMD RX 9000 price hikes — Q1 2026 market data quantifies near-term deviation from the Q4 2025 baseline.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "MSI Calls 2026 The \"Most Difficult\" Year, Plans To Increase GPU Prices By 15–30% — A major AIB partner announcing 15-30% price increases in 2026 directly contradicts H4 (substantial catch-up worse than -40%) and pushes the trajectory toward higher, not lower, real prices.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: gpu, price",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "Leaks Predict $5000 RTX 5090 GPUs in 2026 Thanks to AI Industry Demand — Concrete flagship price-point forecast informs the upper bound on basket prices vs Q4 2025 baseline.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "MSI Calls 2026 The \"Most Difficult\" Year, Plans To Increase GPU Prices By 15–30% — A major AIB partner announcing 15-30% price increases in 2026 directly contradicts H4 (substantial catch-up worse than -40%) and pushes the trajectory toward higher, not lower, real prices.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: price, prices",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "Nvidia is reportedly looking to cut gaming GPU production by up to 40% in 2026 due to VRAM supply issues — Production cuts driven by VRAM scarcity tighten supply and pressure consumer GPU prices upward.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "MSI Calls 2026 The \"Most Difficult\" Year, Plans To Increase GPU Prices By 15–30% — A major AIB partner announcing 15-30% price increases in 2026 directly contradicts H4 (substantial catch-up worse than -40%) and pushes the trajectory toward higher, not lower, real prices.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: gpu, prices",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "GPU price tracking 2026: Lowest price on every graphics card from Nvidia, AMD, and Intel today — best deals during the AI-driven pricing crisis — Live street-price tracker provides current observed price levels relative to Q4 2025 baseline.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "MSI Calls 2026 The \"Most Difficult\" Year, Plans To Increase GPU Prices By 15–30% — A major AIB partner announcing 15-30% price increases in 2026 directly contradicts H4 (substantial catch-up worse than -40%) and pushes the trajectory toward higher, not lower, real prices.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: gpu, price",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "Nvidia plans heavy cuts to GPU supply in early 2026 — Supply cuts of 30–40% will directly tighten consumer GPU street prices vs the Q4 2025 reference.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "MSI Calls 2026 The \"Most Difficult\" Year, Plans To Increase GPU Prices By 15–30% — A major AIB partner announcing 15-30% price increases in 2026 directly contradicts H4 (substantial catch-up worse than -40%) and pushes the trajectory toward higher, not lower, real prices.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: directly, gpu, plans, prices",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "AMD to allegedly raise graphics card prices by at least 10% in 2026 — price surge attributed to ongoing AI-related DRAM supply crisis — Quantifies the near-term step change in consumer GPU prices off the Q4 2025 baseline.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "MSI Calls 2026 The \"Most Difficult\" Year, Plans To Increase GPU Prices By 15–30% — A major AIB partner announcing 15-30% price increases in 2026 directly contradicts H4 (substantial catch-up worse than -40%) and pushes the trajectory toward higher, not lower, real prices.",
+        "reason": "Negation marker 'not' in new entry, absent from existing. Shared subjects: gpu, price, prices",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "MSI Calls 2026 The \"Most Difficult\" Year, Plans To Increase GPU Prices By 15–30% — A major AIB partner announcing 15-30% price increases in 2026 directly contradicts H4 (substantial catch-up worse than -40%) and pushes the trajectory toward higher, not lower, real prices.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "Nvidia has reportedly scrapped its program to sell GPUs at MSRP — Termination of MSRP enforcement program signals structural upward price pressure, contradicting any path to a -40%-or-worse real price drop by Q4 2030.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: price, real, worse",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "March 2026 RAM Price Update: DDR5 Spot Prices Dip While GDDR6 Stays Firm — Memory cost is the dominant GPU BOM driver; mixed signal of DDR5 softening but GDDR6 firm informs whether GPU prices revert to parity by 2030.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "Nvidia has reportedly scrapped its program to sell GPUs at MSRP — Termination of MSRP enforcement program signals structural upward price pressure, contradicting any path to a -40%-or-worse real price drop by Q4 2030.",
+        "reason": "Numeric divergence 102.0% on metric (context: price): new=-40.0, existing=2026.0, threshold=10%",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "GPU prices continue to rise in 2026, up to 20% claims report, but Nvidia and AMD won't be changing MSRP — Reports a 20% street-price rise in 2026, evidence against H3's modest-decline scenario by anchoring the near-term trajectory upward.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "Nvidia has reportedly scrapped its program to sell GPUs at MSRP — Termination of MSRP enforcement program signals structural upward price pressure, contradicting any path to a -40%-or-worse real price drop by Q4 2030.",
+        "reason": "Numeric divergence 102.0% on metric (context: to): new=-40.0, existing=2026.0, threshold=10%",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "Finally, a GPU price drop: Retailers slash AMD Radeon RX 9000 series by 15-20% — Reports a 15-20% retail price cut on a current-generation consumer GPU line, directly bearing on whether consumer GPU prices could trend toward H3's modest decline range by 2030.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "Nvidia has reportedly scrapped its program to sell GPUs at MSRP — Termination of MSRP enforcement program signals structural upward price pressure, contradicting any path to a -40%-or-worse real price drop by Q4 2030.",
+        "reason": "Numeric divergence 77.4% on metric (context: by): new=2030.0, existing=9000.0, threshold=10%",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "GPU Market Price Update Q1 2026 tracking Nvidia RTX 50 Series and AMD RX 9000 price hikes — Q1 2026 market data quantifies near-term deviation from the Q4 2025 baseline.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "Nvidia has reportedly scrapped its program to sell GPUs at MSRP — Termination of MSRP enforcement program signals structural upward price pressure, contradicting any path to a -40%-or-worse real price drop by Q4 2030.",
+        "reason": "Numeric divergence 102.0% on metric (context: price): new=-40.0, existing=2026.0, threshold=10%",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "Leaks Predict $5000 RTX 5090 GPUs in 2026 Thanks to AI Industry Demand — Concrete flagship price-point forecast informs the upper bound on basket prices vs Q4 2025 baseline.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "Nvidia has reportedly scrapped its program to sell GPUs at MSRP — Termination of MSRP enforcement program signals structural upward price pressure, contradicting any path to a -40%-or-worse real price drop by Q4 2030.",
+        "reason": "Numeric divergence 102.0% on metric (context: to): new=-40.0, existing=2026.0, threshold=10%",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "Nvidia is reportedly looking to cut gaming GPU production by up to 40% in 2026 due to VRAM supply issues — Production cuts driven by VRAM scarcity tighten supply and pressure consumer GPU prices upward.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "Nvidia has reportedly scrapped its program to sell GPUs at MSRP — Termination of MSRP enforcement program signals structural upward price pressure, contradicting any path to a -40%-or-worse real price drop by Q4 2030.",
+        "reason": "Numeric divergence 200.0% on metric (context: to): new=-40.0, existing=40.0, threshold=10%",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "GPU price tracking 2026: Lowest price on every graphics card from Nvidia, AMD, and Intel today — best deals during the AI-driven pricing crisis — Live street-price tracker provides current observed price levels relative to Q4 2025 baseline.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "Nvidia has reportedly scrapped its program to sell GPUs at MSRP — Termination of MSRP enforcement program signals structural upward price pressure, contradicting any path to a -40%-or-worse real price drop by Q4 2030.",
+        "reason": "Numeric divergence 102.0% on metric (context: price): new=-40.0, existing=2026.0, threshold=10%",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "AMD to allegedly raise graphics card prices by at least 10% in 2026 — price surge attributed to ongoing AI-related DRAM supply crisis — Quantifies the near-term step change in consumer GPU prices off the Q4 2025 baseline.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "Nvidia has reportedly scrapped its program to sell GPUs at MSRP — Termination of MSRP enforcement program signals structural upward price pressure, contradicting any path to a -40%-or-worse real price drop by Q4 2030.",
+        "reason": "Numeric divergence 125.0% on metric (context: price): new=-40.0, existing=10.0, threshold=10%",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "DIRECT",
+        "severity": "HIGH",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "MSI Calls 2026 The \"Most Difficult\" Year, Plans To Increase GPU Prices By 15–30% — A major AIB partner announcing 15-30% price increases in 2026 directly contradicts H4 (substantial catch-up worse than -40%) and pushes the trajectory toward higher, not lower, real prices.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "IDC — Global Memory Shortage Crisis: Potential Impact on Smartphone and PC Markets in 2026 — Tier-1 analyst confirmation that HBM/DRAM allocation to AI is structurally constraining consumer GPU memory supply argues against H4 over the 5-year horizon.",
+        "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: gpu, year",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "Absurd GPU Pricing Update: Q1 2026 Edition — Documents RTX 50-series street prices running 30%+ above MSRP in early-mid 2026, contradicting H2's rough-parity hypothesis by showing real-price escalation early in the 5-year window.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "IDC — Global Memory Shortage Crisis: Potential Impact on Smartphone and PC Markets in 2026 — Tier-1 analyst confirmation that HBM/DRAM allocation to AI is structurally constraining consumer GPU memory supply argues against H4 over the 5-year horizon.",
+        "reason": "Numeric divergence 98.5% on metric (context: in): new=2026.0, existing=30.0, threshold=10%",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "GPU prices continue to rise in 2026, up to 20% claims report, but Nvidia and AMD won't be changing MSRP — Reports a 20% street-price rise in 2026, evidence against H3's modest-decline scenario by anchoring the near-term trajectory upward.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "IDC — Global Memory Shortage Crisis: Potential Impact on Smartphone and PC Markets in 2026 — Tier-1 analyst confirmation that HBM/DRAM allocation to AI is structurally constraining consumer GPU memory supply argues against H4 over the 5-year horizon.",
+        "reason": "Numeric divergence 99.0% on metric (context: in): new=2026.0, existing=20.0, threshold=10%",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "Leaks Predict $5000 RTX 5090 GPUs in 2026 Thanks to AI Industry Demand — Concrete flagship price-point forecast informs the upper bound on basket prices vs Q4 2025 baseline.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "IDC — Global Memory Shortage Crisis: Potential Impact on Smartphone and PC Markets in 2026 — Tier-1 analyst confirmation that HBM/DRAM allocation to AI is structurally constraining consumer GPU memory supply argues against H4 over the 5-year horizon.",
+        "reason": "Numeric divergence 60.2% on metric (context: in): new=2026.0, existing=5090.0, threshold=10%",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "Nvidia is reportedly looking to cut gaming GPU production by up to 40% in 2026 due to VRAM supply issues — Production cuts driven by VRAM scarcity tighten supply and pressure consumer GPU prices upward.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "IDC — Global Memory Shortage Crisis: Potential Impact on Smartphone and PC Markets in 2026 — Tier-1 analyst confirmation that HBM/DRAM allocation to AI is structurally constraining consumer GPU memory supply argues against H4 over the 5-year horizon.",
+        "reason": "Numeric divergence 98.0% on metric (context: in): new=2026.0, existing=40.0, threshold=10%",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "AMD to allegedly raise graphics card prices by at least 10% in 2026 — price surge attributed to ongoing AI-related DRAM supply crisis — Quantifies the near-term step change in consumer GPU prices off the Q4 2025 baseline.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "IDC — Global Memory Shortage Crisis: Potential Impact on Smartphone and PC Markets in 2026 — Tier-1 analyst confirmation that HBM/DRAM allocation to AI is structurally constraining consumer GPU memory supply argues against H4 over the 5-year horizon.",
+        "reason": "Numeric divergence 99.5% on metric (context: in): new=2026.0, existing=10.0, threshold=10%",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "Nvidia has reportedly scrapped its program to sell GPUs at MSRP — Termination of MSRP enforcement program signals structural upward price pressure, contradicting any path to a -40%-or-worse real price drop by Q4 2030.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "NVIDIA, AMD Reportedly Plan Price Hikes Starting 1Q26; GeForce RTX 5090 May Reach $5,000 — Analyst-grade source on coordinated vendor price hikes, material to whether the +15% premium threshold is sustained through the resolution horizon.",
+        "reason": "Numeric divergence 137.5% on metric (context: to): new=15.0, existing=-40.0, threshold=10%",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "MSI Calls 2026 The \"Most Difficult\" Year, Plans To Increase GPU Prices By 15–30% — A major AIB partner announcing 15-30% price increases in 2026 directly contradicts H4 (substantial catch-up worse than -40%) and pushes the trajectory toward higher, not lower, real prices.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "NVIDIA, AMD Reportedly Plan Price Hikes Starting 1Q26; GeForce RTX 5090 May Reach $5,000 — Analyst-grade source on coordinated vendor price hikes, material to whether the +15% premium threshold is sustained through the resolution horizon.",
+        "reason": "Numeric divergence 99.3% on metric (context: the): new=15.0, existing=2026.0, threshold=10%",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "March 2026 RAM Price Update: DDR5 Spot Prices Dip While GDDR6 Stays Firm — Memory cost is the dominant GPU BOM driver; mixed signal of DDR5 softening but GDDR6 firm informs whether GPU prices revert to parity by 2030.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "NVIDIA, AMD Reportedly Plan Price Hikes Starting 1Q26; GeForce RTX 5090 May Reach $5,000 — Analyst-grade source on coordinated vendor price hikes, material to whether the +15% premium threshold is sustained through the resolution horizon.",
+        "reason": "Numeric divergence 99.3% on metric (context: to): new=15.0, existing=2030.0, threshold=10%",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "Absurd GPU Pricing Update: Q1 2026 Edition — Documents RTX 50-series street prices running 30%+ above MSRP in early-mid 2026, contradicting H2's rough-parity hypothesis by showing real-price escalation early in the 5-year window.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "NVIDIA, AMD Reportedly Plan Price Hikes Starting 1Q26; GeForce RTX 5090 May Reach $5,000 — Analyst-grade source on coordinated vendor price hikes, material to whether the +15% premium threshold is sustained through the resolution horizon.",
+        "reason": "Numeric divergence 60.2% on metric (context: rtx): new=5090.0, existing=2026.0, threshold=10%",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "GPU prices continue to rise in 2026, up to 20% claims report, but Nvidia and AMD won't be changing MSRP — Reports a 20% street-price rise in 2026, evidence against H3's modest-decline scenario by anchoring the near-term trajectory upward.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "NVIDIA, AMD Reportedly Plan Price Hikes Starting 1Q26; GeForce RTX 5090 May Reach $5,000 — Analyst-grade source on coordinated vendor price hikes, material to whether the +15% premium threshold is sustained through the resolution horizon.",
+        "reason": "Numeric divergence 99.3% on metric (context: to): new=15.0, existing=2026.0, threshold=10%",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "GPU Market Price Update Q1 2026 tracking Nvidia RTX 50 Series and AMD RX 9000 price hikes — Q1 2026 market data quantifies near-term deviation from the Q4 2025 baseline.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "NVIDIA, AMD Reportedly Plan Price Hikes Starting 1Q26; GeForce RTX 5090 May Reach $5,000 — Analyst-grade source on coordinated vendor price hikes, material to whether the +15% premium threshold is sustained through the resolution horizon.",
+        "reason": "Numeric divergence 60.2% on metric (context: rtx): new=5090.0, existing=2026.0, threshold=10%",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "Leaks Predict $5000 RTX 5090 GPUs in 2026 Thanks to AI Industry Demand — Concrete flagship price-point forecast informs the upper bound on basket prices vs Q4 2025 baseline.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "NVIDIA, AMD Reportedly Plan Price Hikes Starting 1Q26; GeForce RTX 5090 May Reach $5,000 — Analyst-grade source on coordinated vendor price hikes, material to whether the +15% premium threshold is sustained through the resolution horizon.",
+        "reason": "Numeric divergence 99.9% on metric (context: 5090): new=5.0, existing=5000.0, threshold=10%",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "Nvidia is reportedly looking to cut gaming GPU production by up to 40% in 2026 due to VRAM supply issues — Production cuts driven by VRAM scarcity tighten supply and pressure consumer GPU prices upward.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "NVIDIA, AMD Reportedly Plan Price Hikes Starting 1Q26; GeForce RTX 5090 May Reach $5,000 — Analyst-grade source on coordinated vendor price hikes, material to whether the +15% premium threshold is sustained through the resolution horizon.",
+        "reason": "Numeric divergence 62.5% on metric (context: to): new=15.0, existing=40.0, threshold=10%",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "GPU price tracking 2026: Lowest price on every graphics card from Nvidia, AMD, and Intel today — best deals during the AI-driven pricing crisis — Live street-price tracker provides current observed price levels relative to Q4 2025 baseline.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "NVIDIA, AMD Reportedly Plan Price Hikes Starting 1Q26; GeForce RTX 5090 May Reach $5,000 — Analyst-grade source on coordinated vendor price hikes, material to whether the +15% premium threshold is sustained through the resolution horizon.",
+        "reason": "Numeric divergence 99.3% on metric (context: to): new=15.0, existing=2025.0, threshold=10%",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "Nvidia plans heavy cuts to GPU supply in early 2026 — Supply cuts of 30–40% will directly tighten consumer GPU street prices vs the Q4 2025 reference.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "NVIDIA, AMD Reportedly Plan Price Hikes Starting 1Q26; GeForce RTX 5090 May Reach $5,000 — Analyst-grade source on coordinated vendor price hikes, material to whether the +15% premium threshold is sustained through the resolution horizon.",
+        "reason": "Numeric divergence 99.3% on metric (context: the): new=15.0, existing=2025.0, threshold=10%",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      },
+      {
+        "type": "MAGNITUDE",
+        "severity": "MEDIUM",
+        "entry_a_time": "2026-05-05T19:03:15+00:00",
+        "entry_a_text": "AMD to allegedly raise graphics card prices by at least 10% in 2026 — price surge attributed to ongoing AI-related DRAM supply crisis — Quantifies the near-term step change in consumer GPU prices off the Q4 2025 baseline.",
+        "entry_b_time": "2026-05-05T19:03:15+00:00",
+        "entry_b_text": "NVIDIA, AMD Reportedly Plan Price Hikes Starting 1Q26; GeForce RTX 5090 May Reach $5,000 — Analyst-grade source on coordinated vendor price hikes, material to whether the +15% premium threshold is sustained through the resolution horizon.",
+        "reason": "Numeric divergence 99.3% on metric (context: the): new=15.0, existing=2025.0, threshold=10%",
+        "detected": "2026-05-05T19:03:15Z",
+        "resolution": "SUPERSEDED",
+        "resolvedAt": "2026-05-05T19:03:15Z"
+      }
+    ]
+  },
+  "evidenceLog": [
+    {
+      "id": "ev_001",
+      "time": "2026-05-05T19:03:15+00:00",
+      "tag": "RHETORIC",
+      "tags": [
+        "RHETORIC"
+      ],
+      "text": "AMD to allegedly raise graphics card prices by at least 10% in 2026 — price surge attributed to ongoing AI-related DRAM supply crisis — Quantifies the near-term step change in consumer GPU prices off the Q4 2025 baseline.",
+      "provenance": "OBSERVED",
+      "source": "Tom's Hardware",
+      "posteriorImpact": "NONE — flagged for indicator review (no matching indicator at scan time)",
+      "url": "https://www.tomshardware.com/pc-components/gpus/amd-to-raise-graphics-card-prices-by-at-least-10-percent-in-2026-price-surge-attributed-to-ongoing-ai-related-dram-supply-crisis",
+      "ledger": "DECISION",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_002",
+      "time": "2026-05-05T19:03:15+00:00",
+      "tag": "RHETORIC",
+      "tags": [
+        "RHETORIC"
+      ],
+      "text": "Nvidia plans heavy cuts to GPU supply in early 2026 — Supply cuts of 30–40% will directly tighten consumer GPU street prices vs the Q4 2025 reference.",
+      "provenance": "OBSERVED",
+      "source": "OC3D",
+      "posteriorImpact": "NONE — flagged for indicator review (no matching indicator at scan time)",
+      "url": "https://overclock3d.net/news/gpu-displays/nvidia-plans-heavy-cuts-to-gpu-supply-in-early-2026/",
+      "ledger": "DECISION",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_003",
+      "time": "2026-05-05T19:03:15+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA"
+      ],
+      "text": "GPU price tracking 2026: Lowest price on every graphics card from Nvidia, AMD, and Intel today — best deals during the AI-driven pricing crisis — Live street-price tracker provides current observed price levels relative to Q4 2025 baseline.",
+      "provenance": "OBSERVED",
+      "source": "Tom's Hardware",
+      "posteriorImpact": "NONE — flagged for indicator review (no matching indicator at scan time)",
+      "url": "https://www.tomshardware.com/pc-components/gpus/lowest-gpu-prices-tracking",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_004",
+      "time": "2026-05-05T19:03:15+00:00",
+      "tag": "RHETORIC",
+      "tags": [
+        "RHETORIC"
+      ],
+      "text": "Nvidia is reportedly looking to cut gaming GPU production by up to 40% in 2026 due to VRAM supply issues — Production cuts driven by VRAM scarcity tighten supply and pressure consumer GPU prices upward.",
+      "provenance": "OBSERVED",
+      "source": "PC Gamer",
+      "posteriorImpact": "NONE — flagged for indicator review (no matching indicator at scan time)",
+      "url": "https://www.pcgamer.com/hardware/graphics-cards/nvidia-is-reportedly-looking-to-cut-gaming-gpu-production-by-up-to-40-percent-in-2026-due-to-vram-supply-issues-but-its-not-as-bad-news-as-you-might-think-not-yet-at-least/",
+      "ledger": "DECISION",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_005",
+      "time": "2026-05-05T19:03:15+00:00",
+      "tag": "RHETORIC",
+      "tags": [
+        "RHETORIC"
+      ],
+      "text": "Leaks Predict $5000 RTX 5090 GPUs in 2026 Thanks to AI Industry Demand — Concrete flagship price-point forecast informs the upper bound on basket prices vs Q4 2025 baseline.",
+      "provenance": "OBSERVED",
+      "source": "TechPowerUp",
+      "posteriorImpact": "NONE — flagged for indicator review (no matching indicator at scan time)",
+      "url": "https://www.techpowerup.com/344578/leaks-predict-usd-5000-rtx-5090-gpus-in-2026-thanks-to-ai-industry-demand",
+      "ledger": "DECISION",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.25
+    },
+    {
+      "id": "ev_006",
+      "time": "2026-05-05T19:03:15+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA"
+      ],
+      "text": "GPU Market Price Update Q1 2026 tracking Nvidia RTX 50 Series and AMD RX 9000 price hikes — Q1 2026 market data quantifies near-term deviation from the Q4 2025 baseline.",
+      "provenance": "OBSERVED",
+      "source": "Technetbook",
+      "posteriorImpact": "NONE — flagged for indicator review (no matching indicator at scan time)",
+      "url": "https://www.technetbooks.com/2026/02/gpu-market-price-update-q1-2026.html",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_007",
+      "time": "2026-05-05T19:03:15+00:00",
+      "tag": "MARKET",
+      "tags": [
+        "MARKET"
+      ],
+      "text": "Finally, a GPU price drop: Retailers slash AMD Radeon RX 9000 series by 15-20% — Reports a 15-20% retail price cut on a current-generation consumer GPU line, directly bearing on whether consumer GPU prices could trend toward H3's modest decline range by 2030.",
+      "provenance": "OBSERVED",
+      "source": "Neowin",
+      "posteriorImpact": "NONE — flagged for indicator review (no matching indicator at scan time)",
+      "url": "https://www.neowin.net/news/finally-a-gpu-price-drop-retailers-slash-amd-radeon-rx-9000-series-by-15-20/",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_008",
+      "time": "2026-05-05T19:03:15+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA"
+      ],
+      "text": "GPU Pricing Remains Broken, Even if It Has Stopped Getting Worse — Q2 2026 pricing snapshot showing stagnation with high-end cards still well above MSRP, contradicting H3's modest-decline trajectory.",
+      "provenance": "OBSERVED",
+      "source": "TechSpot",
+      "posteriorImpact": "NONE — flagged for indicator review (no matching indicator at scan time)",
+      "url": "https://www.techspot.com/article/3115-gpu-pricing-q2-2026/",
+      "ledger": "FACT",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_009",
+      "time": "2026-05-05T19:03:15+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA"
+      ],
+      "text": "GPU prices continue to rise in 2026, up to 20% claims report, but Nvidia and AMD won't be changing MSRP — Reports a 20% street-price rise in 2026, evidence against H3's modest-decline scenario by anchoring the near-term trajectory upward.",
+      "provenance": "OBSERVED",
+      "source": "PC Guide",
+      "posteriorImpact": "NONE — flagged for indicator review (no matching indicator at scan time)",
+      "url": "https://www.pcguide.com/news/gpu-prices-continue-to-rise-in-2026-up-to-20-claims-report-but-nvidia-and-amd-wont-be-changing-msrp/",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_010",
+      "time": "2026-05-05T19:03:15+00:00",
+      "tag": "EVENT",
+      "tags": [
+        "EVENT"
+      ],
+      "text": "Nvidia reportedly cuts program designed to keep gaming GPUs near MSRP pricing — End of Nvidia's OPP MSRP-support scheme is a structural change reducing downward price pressure, evidence against H3.",
+      "provenance": "OBSERVED",
+      "source": "Tom's Hardware",
+      "posteriorImpact": "NONE — flagged for indicator review (no matching indicator at scan time)",
+      "url": "https://www.tomshardware.com/pc-components/gpus/nvidia-reportedly-cuts-program-designed-to-keep-gaming-gpus-near-msrp-pricing-end-of-opp-pricing-support-scheme-does-not-bode-well-for-gamers",
+      "ledger": "FACT",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_011",
+      "time": "2026-05-05T19:03:15+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA"
+      ],
+      "text": "Absurd GPU Pricing Update: Q1 2026 Edition — Documents RTX 50-series street prices running 30%+ above MSRP in early-mid 2026, contradicting H2's rough-parity hypothesis by showing real-price escalation early in the 5-year window.",
+      "provenance": "OBSERVED",
+      "source": "TechSpot",
+      "posteriorImpact": "NONE — flagged for indicator review (no matching indicator at scan time)",
+      "url": "https://www.techspot.com/article/3088-gpu-pricing-q1-2026/",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_012",
+      "time": "2026-05-05T19:03:15+00:00",
+      "tag": "DATA",
+      "tags": [
+        "DATA"
+      ],
+      "text": "March 2026 RAM Price Update: DDR5 Spot Prices Dip While GDDR6 Stays Firm — Memory cost is the dominant GPU BOM driver; mixed signal of DDR5 softening but GDDR6 firm informs whether GPU prices revert to parity by 2030.",
+      "provenance": "OBSERVED",
+      "source": "Silicon Data",
+      "posteriorImpact": "NONE — flagged for indicator review (no matching indicator at scan time)",
+      "url": "https://www.silicondata.com/blog/march-2026-ram-price-update",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_013",
+      "time": "2026-05-05T19:03:15+00:00",
+      "tag": "RHETORIC",
+      "tags": [
+        "RHETORIC"
+      ],
+      "text": "MSI Calls 2026 The \"Most Difficult\" Year, Plans To Increase GPU Prices By 15–30% — A major AIB partner announcing 15-30% price increases in 2026 directly contradicts H4 (substantial catch-up worse than -40%) and pushes the trajectory toward higher, not lower, real prices.",
+      "provenance": "OBSERVED",
+      "source": "Wccftech",
+      "posteriorImpact": "NONE — flagged for indicator review (no matching indicator at scan time)",
+      "url": "https://wccftech.com/msi-calls-2026-the-most-difficult-year-as-it-faces-severe-memory-and-gpu-shortages/",
+      "ledger": "DECISION",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_014",
+      "time": "2026-05-05T19:03:15+00:00",
+      "tag": "EVENT",
+      "tags": [
+        "EVENT"
+      ],
+      "text": "Nvidia has reportedly scrapped its program to sell GPUs at MSRP — Termination of MSRP enforcement program signals structural upward price pressure, contradicting any path to a -40%-or-worse real price drop by Q4 2030.",
+      "provenance": "OBSERVED",
+      "source": "XDA Developers",
+      "posteriorImpact": "NONE — flagged for indicator review (no matching indicator at scan time)",
+      "url": "https://www.xda-developers.com/nvidia-reportedly-scrapped-program-sell-gpus-msrp/",
+      "ledger": "FACT",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_015",
+      "time": "2026-05-05T19:03:15+00:00",
+      "tag": "RHETORIC",
+      "tags": [
+        "RHETORIC"
+      ],
+      "text": "IDC — Global Memory Shortage Crisis: Potential Impact on Smartphone and PC Markets in 2026 — Tier-1 analyst confirmation that HBM/DRAM allocation to AI is structurally constraining consumer GPU memory supply argues against H4 over the 5-year horizon.",
+      "provenance": "OBSERVED",
+      "source": "IDC",
+      "posteriorImpact": "NONE — flagged for indicator review (no matching indicator at scan time)",
+      "url": "https://www.idc.com/resource-center/blog/global-memory-shortage-crisis-market-analysis-and-the-potential-impact-on-the-smartphone-and-pc-markets-in-2026/",
+      "ledger": "DECISION",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    },
+    {
+      "id": "ev_016",
+      "time": "2026-05-05T19:03:15+00:00",
+      "tag": "RHETORIC",
+      "tags": [
+        "RHETORIC"
+      ],
+      "text": "NVIDIA, AMD Reportedly Plan Price Hikes Starting 1Q26; GeForce RTX 5090 May Reach $5,000 — Analyst-grade source on coordinated vendor price hikes, material to whether the +15% premium threshold is sustained through the resolution horizon.",
+      "provenance": "OBSERVED",
+      "source": "TrendForce",
+      "posteriorImpact": "NONE — flagged for indicator review (no matching indicator at scan time)",
+      "url": "https://www.trendforce.com/news/2026/01/05/news-nvidia-amd-reportedly-plan-price-hikes-starting-1q26-geforce-rtx-5090-may-reach-5000/",
+      "ledger": "DECISION",
+      "claimState": "CONTESTED",
+      "effectiveWeight": 0.5
+    }
+  ]
+}

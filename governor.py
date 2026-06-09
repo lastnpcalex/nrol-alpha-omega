@@ -956,32 +956,75 @@ def check_update_proposal(topic: dict, proposed_posteriors: dict[str, float],
         results["checks"]["confidence_inflation"] = {"passed": True}
 
     # 3. Repetition as Validation
+    #
+    # Each evidence_ref is resolved to a canonical content key:
+    #   - URL refs → ("url", url)
+    #   - ev_id refs → look up entry, prefer its url, fall back to text[:100]
+    #   - legacy refs (time / text-prefix) → fall back to text[:100]
+    # Plus informationChain tracking. Repeated canonical keys = repetition.
+    #
+    # This is the gate that catches "same article cited twice via different
+    # ev_ids" — exactly the failure mode that lets one news source appear
+    # to corroborate itself in a multi-scan window.
     if has_evidence:
-        unique_texts = set()
-        dup_count = 0
-        # Also check information chains: refs sharing a chain are one unit
-        seen_chains = set()
-        chain_dup_count = 0
-        for ref in evidence_refs:
+        from collections import Counter
+
+        def _resolve_ref(ref):
+            """Return list of (kind, key) tuples for one ref's canonical content."""
+            if not ref:
+                return []
+            keys = []
+            ref_str = str(ref).strip()
+            # Direct URL ref
+            if ref_str.startswith("http://") or ref_str.startswith("https://"):
+                keys.append(("url", ref_str))
+                return keys
+            # Try ev_id lookup first (most common path)
+            matched = None
             for e in evidence_log:
-                if e.get("time") == ref or e.get("text", "")[:50] == ref[:50]:
-                    text_key = e.get("text", "")[:100]
-                    if text_key in unique_texts:
-                        dup_count += 1
-                    unique_texts.add(text_key)
-                    # Information chain check
-                    chain = e.get("informationChain")
-                    if chain:
-                        if chain in seen_chains:
-                            chain_dup_count += 1
-                        seen_chains.add(chain)
-        total_dups = dup_count + chain_dup_count
+                if e.get("id") == ref_str:
+                    matched = e
+                    break
+            # Legacy fallback: time-equality or text-prefix match
+            if matched is None:
+                for e in evidence_log:
+                    if (e.get("time") == ref_str
+                            or (e.get("text") or "")[:50] == ref_str[:50]):
+                        matched = e
+                        break
+            if matched is None:
+                return keys  # Unresolved ref; can't dedup, skip
+            url = (matched.get("url") or "").strip()
+            if url:
+                keys.append(("url", url))
+            else:
+                keys.append(("text", (matched.get("text") or "")[:100]))
+            chain = matched.get("informationChain")
+            if chain:
+                keys.append(("chain", chain))
+            return keys
+
+        canonical = []
+        for ref in evidence_refs:
+            canonical.extend(_resolve_ref(ref))
+
+        counts = Counter(canonical)
+        url_dups = sum(c - 1 for (kind, _), c in counts.items()
+                       if kind == "url" and c > 1)
+        text_dups = sum(c - 1 for (kind, _), c in counts.items()
+                        if kind == "text" and c > 1)
+        chain_dups = sum(c - 1 for (kind, _), c in counts.items()
+                         if kind == "chain" and c > 1)
+        total_dups = url_dups + text_dups + chain_dups
+
         if total_dups > 0:
             detail_parts = []
-            if dup_count > 0:
-                detail_parts.append(f"{dup_count} duplicate text(s)")
-            if chain_dup_count > 0:
-                detail_parts.append(f"{chain_dup_count} same-chain ref(s)")
+            if url_dups > 0:
+                detail_parts.append(f"{url_dups} same-URL ref(s)")
+            if text_dups > 0:
+                detail_parts.append(f"{text_dups} duplicate text(s)")
+            if chain_dups > 0:
+                detail_parts.append(f"{chain_dups} same-chain ref(s)")
             results["checks"]["repetition_as_validation"] = {
                 "passed": False,
                 "detail": f"{' + '.join(detail_parts)} used as independent evidence — "

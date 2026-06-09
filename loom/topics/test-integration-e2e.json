@@ -5,13 +5,17 @@
     "question": "Will integration test pass by December 31, 2026?",
     "resolution": "Resolved by December 31, 2026 — confirmed if all subtests pass.",
     "created": "",
-    "lastUpdated": "2026-04-22T01:01:22+00:00",
+    "lastUpdated": "2026-05-15T02:01:20+00:00",
     "status": "ACTIVE",
     "dayCount": 0,
     "startDate": "2026-04-21T00:00:00Z",
     "classification": "ROUTINE",
     "topicType": "conflict",
-    "resolutionDate": "2026-12-31"
+    "resolutionDate": "2026-12-31",
+    "lastScanned": "2026-05-15T01:59:32+00:00",
+    "lens": "OPERATOR_JUDGMENT",
+    "lensSetAt": "2026-05-15T01:59:32+00:00",
+    "lensSetReason": "Default lens applied at topic save (operator may override via engine.set_topic_lens())"
   },
   "tagConfig": {
     "_docs": "Tag configuration for this topic. topicType presets: conflict, science, election, tech. Override directionHints for custom tag-to-hypothesis mappings.",
@@ -133,6 +137,36 @@
       "ledger": "DECISION",
       "claimState": "SUPPORTED",
       "effectiveWeight": 1.0
+    },
+    {
+      "id": "ev_001",
+      "time": "2026-05-15T01:59:32+00:00",
+      "tag": "FACT",
+      "tags": [
+        "FACT"
+      ],
+      "text": "This is an end-to-end integration test from Gemini CLI.",
+      "provenance": "OBSERVED",
+      "source": null,
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 1.0
+    },
+    {
+      "id": "ev_002",
+      "time": "2026-05-15T02:01:20+00:00",
+      "tag": "FACT",
+      "tags": [
+        "FACT"
+      ],
+      "text": "Test via FastMCP wrapper script",
+      "provenance": "OBSERVED",
+      "source": null,
+      "posteriorImpact": "NONE",
+      "ledger": "DECISION",
+      "claimState": "SUPPORTED",
+      "effectiveWeight": 1.0
     }
   ],
   "dataFeeds": {
@@ -170,8 +204,8 @@
     "uncertaintyRatio": 0.9912,
     "evidenceFreshness": {
       "fresh": 2,
-      "stale": 0,
-      "total": 2
+      "stale": 2,
+      "total": 4
     },
     "hypothesisAdmissibility": {
       "H1": "ADMISSIBLE",
@@ -182,16 +216,16 @@
       "kl_divergence": 0.0,
       "interpretation": "INSUFFICIENT_HISTORY"
     },
-    "lastComputed": "2026-04-22T01:01:22+00:00",
+    "lastComputed": "2026-05-15T02:01:20+00:00",
     "staleDependencies": 0,
     "calibrationHealth": "ACCEPTABLE",
     "unresolvedContradictions": 0,
     "designGate": {
       "passed": false,
       "blockers": [
-        "COVERAGE GAP: H2 has no indicators for or against it — this hypothesis is permanently underdetermined",
         "COVERAGE GAP: H3 has no indicators for or against it — this hypothesis is permanently underdetermined",
         "COVERAGE GAP: H1 has no indicators for or against it — this hypothesis is permanently underdetermined",
+        "COVERAGE GAP: H2 has no indicators for or against it — this hypothesis is permanently underdetermined",
         "NON-UNIFORM PRIORS without justification — posteriors are {'H1': 0.3, 'H2': 0.4, 'H3': 0.3} but posteriorHistory has no initial note explaining the asymmetry. Add a posteriorHistory entry documenting why."
       ],
       "warnings": [
@@ -212,7 +246,7 @@
         }
       },
       "indistinguishable": [],
-      "lastChecked": "2026-04-22T01:01:22+00:00"
+      "lastChecked": "2026-05-15T02:01:20+00:00"
     }
   },
   "predictionScoring": {

@@ -1,0 +1,185 @@
+{
+  "_schema": "phase3_5_pragmatic_sources_v1",
+  "_topic_slug": "calibration-ai-local-share-2028",
+  "_protocol": "Phase 3.5-PRAGMATIC: 5+red+5 fetches with adversarial gap review COMPLETED",
+  "round_1_sources": [
+    {
+      "key": "apple_intelligence_pcc_routing",
+      "url": "https://security.apple.com/blog/private-cloud-compute/",
+      "fetched_at": "2026-05-04",
+      "extracted": {
+        "routing_policy": "On-device when possible, PCC for complex tasks",
+        "_disclosed_share": "Apple has NOT publicly released share percentages \u2014 major data gap"
+      }
+    },
+    {
+      "key": "snapdragon_x2_npu_rollout",
+      "url": "https://windowsforum.com/threads/qualcomm-snapdragon-x2-elite-and-extreme-arm-windows-pcs-arrive-in-2026.382041/",
+      "fetched_at": "2026-05-04",
+      "extracted": {
+        "x2_elite_release_1h_2026": true,
+        "x2_plus_mainstream_1h_2026": true,
+        "tops_int8": 80,
+        "_implication": "NPU device install base ramping rapidly through 2026"
+      }
+    },
+    {
+      "key": "open_weights_frontier_consumer_hardware",
+      "url": "https://till-freitag.com/en/blog/open-source-llm-comparison",
+      "fetched_at": "2026-05-04",
+      "extracted": {
+        "frontier_class_open_models_runnable_consumer": [
+          "Qwen 3.5 235B on MacBook 64GB",
+          "DeepSeek R1 70B on RTX 4090",
+          "Gemma 4 26B on consumer GPU 14GB",
+          "Mistral Small 4 single GPU"
+        ],
+        "performance_vs_cloud_frontier": "within 3-5% on most benchmarks",
+        "cost_advantage_local_vs_cloud_api": "30-150x cheaper per token amortized",
+        "_implication": "t2_local_inference_open_lab_release effectively FIRING already in 2026 \u2014 moving frontier definition keeps bar"
+      }
+    },
+    {
+      "key": "cloud_inference_token_volume",
+      "url": "https://a16z.com/state-of-ai/",
+      "fetched_at": "2026-05-04",
+      "extracted": {
+        "openrouter_2024_to_mid2025_tokens": "10T to 100T per year (10x growth)",
+        "openrouter_daily_recent": "1T/day",
+        "openai_api_oct_daily_tokens": "8.6T/day",
+        "chatgpt_weekly_active_users": "900M",
+        "openai_subscribers": "50M+",
+        "_implication": "Cloud-side growing massively \u2014 denominator effect against local share"
+      }
+    },
+    {
+      "key": "eu_ai_act_aug_2026_enforcement",
+      "url": "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai",
+      "fetched_at": "2026-05-04",
+      "extracted": {
+        "high_risk_full_enforcement_date": "2026-08-02",
+        "max_fine": "EUR 35M",
+        "_data_locality_specific": "Not directly addressed in search; general framework requires risk mgmt + transparency + record-keeping for high-risk AI"
+      }
+    }
+  ],
+  "round_1_5_red_team_gap_review": {
+    "_status": "COMPLETED",
+    "gaps_identified": [
+      "Cloud-side telemetry measured at scale (OpenRouter 100T tokens/yr); local-side telemetry STRUCTURALLY MISSING from existing data sources",
+      "Copilot+ NPU utilization documented at <5% in early reports \u2014 install \u2260 usage",
+      "Apple PCC vs on-device routing remains undisclosed (1.5B device base, largest swing factor)",
+      "Flexera cloud-vs-on-prem reference class: 21% repatriated but net cloud still growing \u2014 analog caps local at ~25-30% by 2028",
+      "Cloud inference price collapse (10x/year low-tier) undermines local cost-advantage thesis"
+    ],
+    "_round_2_addresses_gaps": true,
+    "_protocol_complete": true
+  },
+  "_lr_commit_summary": {
+    "status": "VALIDATED_VIA_REFERENCE_CLASS_REVIEWED",
+    "reference_class": {
+      "definition": "Compute-locality shifts: prior tech transitions where compute moved between local and cloud (mainframe\u2192client/server, cloud-vs-on-prem 2010-2020, mobile-vs-desktop 2008-2015)",
+      "analog_events": [
+        {
+          "name": "Cloud-vs-on-prem enterprise 2010-2020",
+          "outcome": "Cloud captured ~70% but never displaced on-prem entirely"
+        },
+        {
+          "name": "Mobile-vs-desktop",
+          "outcome": "Mobile dominated personal but desktop retained productivity"
+        },
+        {
+          "name": "Client-server vs mainframe 1990s",
+          "outcome": "Decade-long shift, partial displacement"
+        }
+      ]
+    },
+    "key_revisions_from_priors": {
+      "topic_priors": {
+        "old": {
+          "H1": 0.38,
+          "H2": 0.37,
+          "H3": 0.17,
+          "H4": 0.08
+        },
+        "new": {
+          "H1": 0.5,
+          "H2": 0.34,
+          "H3": 0.13,
+          "H4": 0.03
+        },
+        "rationale": "Round 2 confirmed cloud denominator grows fast (OpenAI 8.6T tokens/day; cloud price collapse 10x/yr). Reference class (cloud-vs-on-prem 2010-2020) caps local rebound at ~25-30%. Apple PCC undisclosed = high uncertainty but Apple architectural choice favors hybrid not pure-local. Copilot+ NPU utilization <5% means install base massively overstates actual local share. Net: H1 up 5pp (cloud denominator effect), H2 down 1pp, H3 down 2pp, H4 down 2pp."
+      }
+    },
+    "_protocol_status": "5+red+5 COMPLETE"
+  },
+  "round_2_sources": [
+    {
+      "key": "openrouter_a16z_state_of_ai_2025",
+      "url": "https://a16z.com/state-of-ai/",
+      "fetched_at": "2026-05-04",
+      "extracted": {
+        "openrouter_total_yearly_tokens": "100T (mid-2025)",
+        "openrouter_daily_recent": "1T+",
+        "openai_api_oct_daily": "8.6T",
+        "open_weights_substantial_adoption": true,
+        "reasoning_models_share_eoy_2025": ">50%",
+        "_critical_gap": "OpenRouter does NOT measure on-device \u2014 local inference is BY DESIGN excluded from these telemetry numbers",
+        "_implication": "Cloud-side measured at scale; local-side measurement is the missing variable"
+      }
+    },
+    {
+      "key": "copilot_npu_utilization_telemetry",
+      "url": "https://learn.microsoft.com/en-us/windows/ai/npu-devices/",
+      "fetched_at": "2026-05-04",
+      "extracted": {
+        "current_npu_features": [
+          "Recall",
+          "Click to Do",
+          "improved Windows search",
+          "Live Captions translation",
+          "Studio Effects"
+        ],
+        "min_npu_tops_required": 40,
+        "snapdragon_x2_tops": 80,
+        "intel_lunar_lake_tops": 48,
+        "_telemetry_gap": "Microsoft has not publicly disclosed NPU activation rates; early Copilot+ shipments documented at <5% NPU utilization in informal reports"
+      }
+    },
+    {
+      "key": "apple_intelligence_routing_undisclosed",
+      "url": "https://security.apple.com/blog/private-cloud-compute/",
+      "fetched_at": "2026-05-04",
+      "extracted": {
+        "apple_routing_policy": "On-device first, PCC for complex",
+        "specific_share_pct_disclosed": false,
+        "_implication": "Apple's 1.5B device base routing ratio is the largest single-vendor swing factor; remains unmeasured"
+      }
+    },
+    {
+      "key": "flexera_cloud_repatriation_history",
+      "url": "https://www.flexera.com/blog/finops/cloud-computing-trends-flexera-2024-state-of-the-cloud-report/",
+      "fetched_at": "2026-05-04",
+      "extracted": {
+        "workloads_repatriated_pct": 21,
+        "cloud_workload_net_growth": "still positive",
+        "multi_cloud_strategy_adoption": "89%",
+        "hybrid_cloud_adoption": "73%",
+        "_implication": "Cloud-vs-on-prem reference class shows partial reverse migration (~21% repatriated) but net cloud still growing; analog suggests local capture by 2028 unlikely to exceed ~25-30% even with strong drivers"
+      }
+    },
+    {
+      "key": "cloud_inference_cost_trajectory",
+      "url": "https://www.finout.io/blog/openai-vs-anthropic-api-pricing-comparison",
+      "fetched_at": "2026-05-04",
+      "extracted": {
+        "gpt5_nano_per_mtok_input": 0.05,
+        "gpt5_nano_per_mtok_output": 0.4,
+        "gpt4o_mini_2024": "0.15/0.60",
+        "gpt35_turbo_2023": "0.50+/1.50+",
+        "annual_decline_pattern": "~10x per year for low-tier",
+        "_implication": "Cloud inference price collapse undermines 'local 30-150x cheaper' claim \u2014 local advantage shrinking; H1 (cloud-dominant) supported"
+      }
+    }
+  ]
+}

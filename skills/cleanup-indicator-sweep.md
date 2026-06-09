@@ -89,7 +89,11 @@ for ev in parked:
 For each parked entry, the operator decides:
 - **Match existing X** → record `(ev_id, indicator_id)` for the firings list
 - **Need new indicator** → enter the authoring sub-flow (Step 4)
-- **Discard / no impact** → just clear from flagged queue, log reason
+- **Discard / no impact** → record `ev_id` for the `discarded_evidence_ids` list
+
+Discarded entries are cleared from the flagged queue without firing an
+indicator. After commit, the `none_impact_saturation` alert is auto-suppressed
+(via `mark_alert_reviewed` with a fingerprint of all reviewed evidence IDs).
 
 ### Step 4: Author new indicators (only if no existing match)
 
@@ -185,6 +189,9 @@ envelope = {
         {"evidence_id": "ev_185", "indicator_id": "iran_reopen_proposal",
          "rationale": "matched via indicator_match (score 0.74, direction-agree)"}
     ],
+    "discarded_evidence_ids": [
+        {"evidence_id": "ev_190", "reason": "not an indicator dimension"}
+    ],
     "lint_result": lint_result,  # combined from Step 4
     "debate_envelope": debate,   # combined from Step 5
     "operator_notes": "<operator's summary>",
@@ -223,6 +230,17 @@ The engine validates:
 - Receipt file exists, fresh (within 10 min by default), session_id matches
 - Each firing goes through `apply_indicator_effect` (existing governor checks)
 - Flagged evidence ids are removed from the queue as their firings succeed
+- Discarded evidence ids are cleared from the flagged queue without firing
+
+After all evidence is processed, the engine auto-suppresses the
+`none_impact_saturation` alert by calling `mark_alert_reviewed` with a
+fingerprint of all reviewed evidence IDs. This prevents the alert from
+re-firing on the same content. If new evidence arrives later (changing
+the fingerprint), the alert re-fires — correct behavior, new evidence
+needs reviewing.
+
+The return value includes `discarded` (list of discarded entries),
+`flagged_cleared` (all cleared ids), and `alert_suppressed` (bool).
 
 Session closes automatically on success. Activity logged.
 

@@ -1,0 +1,186 @@
+{
+  "_schema": "phase3_5_pragmatic_sources_v1",
+  "_topic_slug": "calibration-hormuz-reopen-2027",
+  "_protocol": "Phase 3.5-PRAGMATIC for UN_BACKTESTABLE topic: 5+red+5 fetches with reference-class analogs + adversarial gap review",
+
+  "_critical_state_change_since_topic_design": "Topic was designed assuming Hormuz would still be open or partially open with reopening as the question. As of Round 1 fetch May 2026, Hormuz CLOSED since Feb 28 2026 after US+Israel strikes against Iran killed Khamenei. Transit ~10% of normal. US blockade of Iranian ports. Ground truth has shifted dramatically — topic priors require major revision.",
+
+  "round_1_sources": [
+    {
+      "key": "wiki_hormuz_crisis_2026",
+      "url": "https://en.wikipedia.org/wiki/2026_Strait_of_Hormuz_crisis",
+      "fetched_at": "2026-05-04",
+      "extracted": {
+        "closure_start": "2026-02-28",
+        "trigger": "US+Israel strikes against Iran; Khamenei assassinated",
+        "current_transit_volume": "~10% of normal (12 crossings May 2 vs ~120/day pre-crisis)",
+        "us_blockade_iranian_ports_since": "2026-04-13",
+        "iran_april_8_ceasefire_status": "conditional ceasefire declared but unclear hold",
+        "ships_stranded_in_gulf": 2000,
+        "pre_crisis_share_global_oil_seaborne": "25%",
+        "pre_crisis_share_global_lng": "20%"
+      }
+    },
+    {
+      "key": "chokepoint_historical_reference_class",
+      "url": "https://en.wikipedia.org/wiki/Bab-el-Mandeb",
+      "fetched_at": "2026-05-04",
+      "extracted": {
+        "suez_1956": "~5 months closure during Suez Crisis",
+        "suez_1967_1975": "8 YEARS — Egypt closed in war with Israel; reopened only after political settlement",
+        "bab_el_mandeb_2023_2025": "~24 months Houthi disruption; ceasefire late 2025",
+        "_pattern": "Wide bimodal distribution — quick reopens (months) when political settlement quick, very long closures (years) when entrenched conflict"
+      }
+    },
+    {
+      "key": "us_iran_negotiations_2025_2026",
+      "url": "https://en.wikipedia.org/wiki/2025%E2%80%932026_Iran%E2%80%93United_States_negotiations",
+      "fetched_at": "2026-05-04",
+      "extracted": {
+        "april_2025_initial_negotiations_60_day_deadline": "Trump letter to Khamenei; missed deadline → Israel strikes",
+        "april_11_2026_islamabad_talks_failed": "VP Vance announced no agreement",
+        "april_12_us_blockade_announced": "Pentagon announces blockade of Iranian ports",
+        "april_27_iran_offered_hormuz_for_postponed_nuclear": "Mediated via Pakistan",
+        "may_3_iran_14_point_proposal": "released; Trump 'not acceptable'"
+      }
+    },
+    {
+      "key": "iran_economy_collapse_2026",
+      "url": "https://en.wikipedia.org/wiki/Economic_impact_of_the_2026_Iran_war",
+      "fetched_at": "2026-05-04",
+      "extracted": {
+        "rial_to_usd_apr_29": "1,810,000:1 record low",
+        "imf_2026_gdp_forecast": "-6.1%",
+        "imf_2026_inflation_forecast": "68.9%",
+        "food_inflation": "105% YoY",
+        "oil_exports_jan_2026": "1.39 mbpd (-26% YoY)",
+        "china_share_iranian_oil_imports": "90%",
+        "_implication": "Severe economic pressure on Iran for resolution; regime survival pressure"
+      }
+    },
+    {
+      "key": "lloyds_war_risk_premiums_2026",
+      "url": "https://lmalloyds.com/safety-concerns-not-insurance-availability-driving-reduced-vessel-traffic-in-the-strait-of-hormuz/",
+      "fetched_at": "2026-05-04",
+      "extracted": {
+        "pre_crisis_premium": "0.15-0.25% of hull value",
+        "current_premium": "1.5-3% (peaks 5-10%); easing to 0.8-1% recently",
+        "us_uk_israeli_ships_premium": "3x rate of others",
+        "lloyds_high_risk_designation": "Entire Persian Gulf",
+        "_implication": "Premium has eased 50% from peaks but remains 5-15x pre-crisis"
+      }
+    }
+  ],
+
+  "round_1_5_red_team_gap_review": {
+    "subagent_id": "ad381346caf3920a1",
+    "gaps_identified": [
+      "Chokepoint reference class N=3 too narrow — missing Shatt al-Arab 1980-88 (closely analogous)",
+      "Post-Khamenei IRGC decision-making structure not characterized — Powell-analog empty",
+      "Iran 14-point proposal contents not extracted — H2 trajectory unscored",
+      "Israeli operational posture / war aims not covered",
+      "China leverage / strategic appetite for fast vs slow reopen unquantified"
+    ]
+  },
+
+  "round_2_sources": [
+    {
+      "key": "shatt_al_arab_1980_1988",
+      "url": "https://en.wikipedia.org/wiki/Shatt_al-Arab_dispute",
+      "fetched_at": "2026-05-04",
+      "extracted": {
+        "closure_period": "1980-1988 — 8 years",
+        "trigger": "Saddam invaded Iran Sep 22 1980 abrogating Algiers Protocol",
+        "reopening": "Pre-1980 status quo restored after war ended 1988",
+        "navigability": "Cluttered with sunken ship hulks for entire war",
+        "_analog_relevance_to_hormuz": "Strong structural analog: Iran party, regime survival, Gulf chokepoint, Western intervention. CLOSURE LASTED ENTIRE WAR DURATION — heavy H4 evidence if Iran-US/Israel conflict drags. BUT: Hormuz is not a battleground waterway like Shatt al-Arab was, China demands transit, and Iran economy more pressured now"
+      }
+    },
+    {
+      "key": "iran_succession_irgc_post_khamenei",
+      "url": "https://carnegieendowment.org/emissary/2026/03/iran-supreme-leader-succession-khamenei-mojtaba-arafi",
+      "fetched_at": "2026-05-04",
+      "extracted": {
+        "new_supreme_leader": "Mojtaba Khamenei (chosen by IRGC pressure on Assembly of Experts)",
+        "actual_decision_authority": "Collective IRGC military council; Mojtaba 'coordinating figure not sole authority'",
+        "irgc_blocks_president_appointments": true,
+        "mojtaba_described_as": "more pliant than father; backs IRGC hardline",
+        "_implication_for_de_escalation": "Decision authority diffuse — no single 'Khomeini drinks poison' figure. Could shorten reopen timeline (collective pragmatism on economic pressure) OR lengthen it (no single decision-maker can override hardliners)"
+      }
+    },
+    {
+      "key": "iran_14_point_plan_text_may_3",
+      "url": "https://www.aljazeera.com/news/2026/5/3/whats-irans-14-point-proposal-to-end-the-war-and-will-trump-accept-it",
+      "fetched_at": "2026-05-04",
+      "extracted": {
+        "core_demands": [
+          "30-day deadline to resolve issues (not 2-month US ceasefire)",
+          "Guarantees against future military aggression",
+          "US troop withdrawal from Iran's periphery",
+          "End to US naval blockade",
+          "Release of frozen Iranian assets",
+          "Reparations payment",
+          "Lifting of sanctions",
+          "End to fighting in Lebanon",
+          "New mechanism governing Strait of Hormuz"
+        ],
+        "nuclear_issues": "EXCLUDED from this proposal — deferred to post-war negotiations",
+        "trump_response": "'not acceptable'; threatened resumed strikes if Iran 'misbehaves'",
+        "_implication_for_h2": "Realistic dealing-track exists but core distance between sides remains large; H2 (by Q1 2027) requires substantial give from BOTH sides in next ~10 months"
+      }
+    },
+    {
+      "key": "israeli_war_aims_2026",
+      "url": "https://www.aljazeera.com/news/2026/3/3/as-bombing-continues-israels-war-aim-in-iran-becomes-clear-regime-change",
+      "fetched_at": "2026-05-04",
+      "extracted": {
+        "stated_war_aim": "Regime change / 'state collapse' (per Daniel Levy quote)",
+        "netanyahu_position": "Continues strikes in Iran AND Lebanon; coalition depends on hard-right",
+        "april_8_ceasefire_status": "Conditional; Netanyahu reserves right to strike",
+        "_implication": "Israeli veto/spoiler risk for any reopen deal. Israel less constrained by US than typical alliance dynamic. Major H4 driver if Israeli strikes continue."
+      }
+    },
+    {
+      "key": "china_pakistan_five_point_plan",
+      "url": "https://www.axios.com/2026/03/31/china-pakistan-iran-peace-deal-strait-ceasefire",
+      "fetched_at": "2026-05-04",
+      "extracted": {
+        "five_point_plan_date": "2026-03-31",
+        "key_points": [
+          "Immediate ceasefire",
+          "Reopening Strait of Hormuz",
+          "Halt attacks on civilian/critical infrastructure",
+          "Resume diplomatic engagement",
+          "(5th point not extracted)"
+        ],
+        "china_dependency_on_iranian_oil": "~half of Chinese seaborne oil imports through Hormuz; 90% of Iranian oil to China",
+        "iran_selective_transit_announcement_mar_26": "China, Russia, India, Iraq, Pakistan ships allowed to transit",
+        "_china_appetite": "Strong incentive for fast reopen — energy security + economic"
+      }
+    }
+  ],
+
+  "_lr_commit_summary": {
+    "status": "VALIDATED_VIA_REFERENCE_CLASS_REVIEWED",
+    "reference_class": {
+      "definition": "Military-induced maritime chokepoint closures with at least partial closure and external power involvement",
+      "analog_events": [
+        {"name": "Suez 1956", "closure_duration_months": 5, "context": "Quick political settlement (Anglo-French withdrawal)"},
+        {"name": "Suez 1967-1975", "closure_duration_months": 96, "context": "Egypt-Israel war + occupied Sinai; required political settlement"},
+        {"name": "Shatt al-Arab 1980-1988", "closure_duration_months": 96, "context": "Iran-Iraq war; closed entire war duration"},
+        {"name": "Bab-el-Mandeb 2023-2025", "closure_duration_months": 24, "context": "Houthi disruption; resolved by ceasefire late 2025"}
+      ],
+      "exclusions": [
+        {"event": "Strait of Tiran 1967", "reason": "Brief (days); not appropriate analog for 30-day-baseline reopen criterion"},
+        {"event": "Persian Gulf tanker war 1984-88", "reason": "High-intensity disruption but not full closure"}
+      ]
+    },
+    "key_revisions_from_priors": {
+      "topic_priors": {
+        "old": {"H1": 0.13, "H2": 0.30, "H3": 0.35, "H4": 0.22},
+        "new": {"H1": 0.10, "H2": 0.30, "H3": 0.40, "H4": 0.20},
+        "rationale": "10-source corpus shows: (a) Active war ongoing despite April 8 conditional ceasefire — H1 (full reopen by Sep 2026) constrained by Israeli regime-change posture and US blockade. (b) Iran economic pressure (rial 1.81M, IMF -6.1% GDP, 68.9% inflation, food 105%) creates strong incentive for resolution within 6-12 months supporting H2/H3. (c) China+Pakistan mediation active; China economic pressure for reopen. (d) Iran 14-point plan offers realistic deal trajectory but Trump rejected; substantial give needed from both sides. (e) Reference class bimodal: Suez 1956 (5mo), Bab-el-Mandeb (24mo), vs Suez 1967 (8yr), Shatt al-Arab (8yr). Modal-prior closures resolved by political settlement. Net: H1 down 3pp (Israel/US blockade headwind), H3 up 5pp (more time helps if H2 deal slips), H4 down 2pp (Iran economic pressure makes 8-year-Shatt-analog less likely than otherwise)."
+      }
+    }
+  }
+}

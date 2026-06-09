@@ -33,7 +33,7 @@ if _REPO not in sys.path:
 from engine import (
     load_topic, add_evidence, save_topic,
     fire_indicator, suggest_likelihoods, bayesian_update,
-    triage_headline,
+    triage_headline, _now_iso,
 )
 from governor import governance_report, check_update_proposal
 from framework.scoring import (
@@ -189,18 +189,59 @@ def process_evidence(
         note=entry.get("note") or entry["text"][:100],
     )
 
+    # Increment n_firings on the fired indicator. This counter was only
+    # being maintained by apply_indicator_effect, which the news pipeline
+    # bypasses — so on this path n_firings stayed at 0 forever. That kept
+    # both the lr_decay attenuation AND the sustained-observation guard
+    # silently disabled. fire_indicator only sets status/firedDate; the
+    # firing-count is a separate counter that needs to advance every time.
+    _ind = _find_indicator(topic, fired_indicator_id)
+    if _ind is not None:
+        _ind["n_firings"] = (_ind.get("n_firings") or 0) + 1
+
     if likelihoods is None:
         suggested = suggest_likelihoods(topic, [fired_indicator_id])
-        likelihoods = suggested.get("likelihoods")
+        # suggest_likelihoods returns the LR vector as "suggested_likelihoods";
+        # reading the wrong key here silently broke every indicator-bound FIRE
+        # that relied on pre-committed LRs (bayesian_update then refused with
+        # "Either likelihoods or lr_range must be supplied").
+        likelihoods = suggested.get("suggested_likelihoods")
+        if not likelihoods:
+            raise ValueError(
+                f"Indicator {fired_indicator_id!r} fired but no likelihoods could "
+                f"be derived: {suggested.get('warnings') or suggested.get('unparseable')}"
+            )
+        # Repeat-firing decay, same semantics as apply_indicator_effect:
+        # LR_eff = LR_base ** (lr_decay ** prior_firings). n_firings was
+        # already incremented above for THIS fire, so prior count is n-1.
+        # The increment was added here precisely so decay could work on this
+        # path, but the attenuation itself was never wired in.
+        if _ind is not None:
+            prior_firings = max(0, (_ind.get("n_firings") or 1) - 1)
+            if prior_firings > 0:
+                _decay = _ind.get("lr_decay") or 0.65
+                _factor = _decay ** prior_firings
+                likelihoods = {
+                    k: max(0.0001, v ** _factor) for k, v in likelihoods.items()
+                }
 
     # 4. Bayesian update — engine-gated, indicator-bound only
     update_reason = reason or f"Evidence {evidence_id}: {entry['text'][:80]}"
     update_reason = f"Indicator {fired_indicator_id} FIRED. {update_reason}"
 
+    # If the entry was bundled (multiple articles reporting the same
+    # underlying event), the caller may have stamped extra refs on the
+    # entry. Forward them so the engine's confidence_inflation gate can see
+    # the full evidence base. Without this, a bundled OBSERVE looks to the
+    # gate like "1 ref → big shift → REJECT" even when 6 articles back the
+    # underlying event.
+    extra_refs = list(entry.get("evidence_refs") or [])
+    bundled_refs = [r for r in extra_refs if r and r != evidence_id]
+
     _bu_kwargs = {
         "likelihoods": likelihoods,
         "reason": update_reason,
-        "evidence_refs": [evidence_id],
+        "evidence_refs": [evidence_id] + bundled_refs,
         "indicator_id": fired_indicator_id,
     }
     if lens is not None:
@@ -258,6 +299,200 @@ def process_evidence(
 
     result["topic"] = topic
     return result
+
+
+def log_schema_gap(slug: str, record: dict) -> dict:
+    """
+    SCHEMA_GAP transition: relevant evidence with no valid observable.
+
+    Appends to topic.governance.flagged_schema_gaps and persists through
+    save_topic. No posterior movement and no evidenceLog entry — the
+    article has no place to land in the current schema, by the matcher's
+    own admission. Operator resolves accumulated gaps via the schema-gap
+    resolver / indicator-cleanup workflow.
+    """
+    topic = load_topic(slug)
+    gov = topic.setdefault("governance", {})
+    gaps = gov.setdefault("flagged_schema_gaps", [])
+    entry = dict(record)
+    entry.setdefault(
+        "logged_at",
+        datetime.now(timezone.utc).isoformat(timespec="seconds"),
+    )
+    gaps.append(entry)
+    save_topic(topic)
+    posteriors = {
+        k: v.get("posterior")
+        for k, v in (topic.get("model", {}).get("hypotheses", {}) or {}).items()
+    }
+    return {
+        "slug": slug,
+        "schema_gap": entry,
+        "posteriors": posteriors,
+        "gap_count": len(gaps),
+        "topic": topic,
+    }
+
+
+def _find_indicator(topic: dict, indicator_id: str) -> dict:
+    """Walk topic.indicators (tiered + anti) and return the matching dict."""
+    inds = topic.get("indicators") or {}
+    # Tiered
+    tiers = inds.get("tiers") or {}
+    for tier_list in tiers.values():
+        if isinstance(tier_list, list):
+            for ind in tier_list:
+                if isinstance(ind, dict) and ind.get("id") == indicator_id:
+                    return ind
+    # Anti-indicators
+    for ind in inds.get("anti_indicators") or []:
+        if isinstance(ind, dict) and ind.get("id") == indicator_id:
+            return ind
+    return None
+
+
+def apply_observation(
+    slug: str,
+    entry: dict,
+    indicator_id: str,
+    observed_value,
+    *,
+    lens: str = None,
+) -> dict:
+    """
+    Apply a partial-strength observation to an indicator.
+
+    Looks up the indicator's `observable` block + `likelihoods`, mechanically
+    derives a per-H LR vector via likelihood_models.evaluate(), and routes
+    through process_evidence. All existing engine gates apply (LR clamp
+    [0.01, 0.99], evidence_refs requirement, decorrelation via
+    causal_event_id, calibrationStatus, lens, dup detection, lr_decay).
+
+    Args:
+        slug: topic slug
+        entry: evidence entry dict (as accepted by process_evidence). The
+               observation is stamped onto entry["observation"] for audit.
+        indicator_id: indicator whose `observable` block to evaluate against.
+        observed_value: numeric value extracted from the article by the
+                        matcher subagent.
+        lens: optional explicit lens override (otherwise topic.meta.lens
+              applies, then OPERATOR_JUDGMENT fallback).
+
+    Returns:
+        Same shape as process_evidence — dict with topic, evidence_id,
+        posteriors_before, posteriors_after, governance, downstream_alerts.
+
+    Raises:
+        ValueError if indicator missing, has no observable block, has no
+        likelihoods, or observable is malformed.
+    """
+    from framework.likelihood_models import evaluate
+
+    topic = load_topic(slug)
+    indicator = _find_indicator(topic, indicator_id)
+    if indicator is None:
+        raise ValueError(
+            f"indicator {indicator_id!r} not found in topic {slug!r}"
+        )
+
+    observable = indicator.get("observable")
+    if not observable:
+        raise ValueError(
+            f"indicator {indicator_id!r} has no observable block; "
+            f"use process_evidence(fired_indicator_id=...) for binary firing"
+        )
+
+    committed_lr = indicator.get("likelihoods")
+    if not committed_lr:
+        raise ValueError(
+            f"indicator {indicator_id!r} has no likelihoods dict"
+        )
+
+    derived_lrs = evaluate(observable, committed_lr, observed_value)
+
+    # Stamp observation provenance into entry for audit
+    entry = dict(entry)
+    entry.setdefault("tag", "DATA")
+    entry.setdefault("tags", [entry["tag"]] if entry.get("tag") else ["DATA"])
+    entry["observation"] = {
+        "metric": observable.get("metric"),
+        "value": observed_value,
+        "threshold": observable.get("threshold_value"),
+        "baseline": observable.get("baseline"),
+        "direction": observable.get("direction"),
+        "family": observable.get("family"),
+        "committed_lr": dict(committed_lr),
+        "derived_lr": dict(derived_lrs),
+    }
+
+    # Observable-stability guard: if the indicator is already FIRED and the
+    # observable value has not moved since the last firing, this is the same
+    # underlying fact still being true, not a new independent observation.
+    # Park as "sustained" rather than re-firing. This prevents news cascades
+    # from re-firing the same indicator on unchanged observable values across
+    # multiple scans within a short window (the failure mode that drove
+    # calibration-hormuz-reopen-2027 from H3=0.44 to H3=0.80 in 21 minutes).
+    if (indicator.get("status") == "FIRED"
+            and indicator.get("n_firings", 0) > 0
+            and "lastObservedValue" in indicator
+            and _observable_values_equal(
+                indicator.get("lastObservedValue"), observed_value)):
+        entry.setdefault(
+            "posteriorImpact",
+            f"NONE — sustained observation: {indicator_id} already FIRED at "
+            f"value={indicator.get('lastObservedValue')}; underlying observable "
+            f"unchanged, not a new firing")
+        return process_evidence(
+            slug=slug,
+            entry=entry,
+            fired_indicator_id=None,
+            reason=(
+                f"Sustained observation for {indicator_id}: "
+                f"{observable.get('metric')}={observed_value} unchanged from "
+                f"last firing — parked, not re-fired"),
+            lens=lens,
+        )
+
+    result = process_evidence(
+        slug=slug,
+        entry=entry,
+        fired_indicator_id=indicator_id,
+        likelihoods=derived_lrs,
+        reason=(
+            f"Observation: {observable.get('metric')}={observed_value} "
+            f"vs threshold={observable.get('threshold_value')}, "
+            f"baseline={observable.get('baseline')} "
+            f"({observable.get('family')}/{observable.get('direction')}) "
+            f"-> derived_lr={derived_lrs}"
+        ),
+        lens=lens,
+    )
+
+    # Stamp lastObservedValue/lastObservedAt on the indicator after a
+    # successful firing so the next observation can compare against it.
+    if not result.get("parked"):
+        topic_after = result.get("topic") or load_topic(slug)
+        ind_after = _find_indicator(topic_after, indicator_id)
+        if ind_after is not None:
+            ind_after["lastObservedValue"] = observed_value
+            ind_after["lastObservedAt"] = _now_iso()
+            save_topic(topic_after)
+            result["topic"] = topic_after
+
+    return result
+
+
+def _observable_values_equal(a, b, *, tol: float = 1e-9) -> bool:
+    """Compare two observable values with appropriate tolerance.
+    Numerics use absolute tolerance; everything else uses equality."""
+    if a is None or b is None:
+        return False
+    if isinstance(a, bool) or isinstance(b, bool):
+        return a == b
+    try:
+        return abs(float(a) - float(b)) <= tol
+    except (TypeError, ValueError):
+        return a == b
 
 
 def get_headline_match_prompts(
