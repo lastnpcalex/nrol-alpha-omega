@@ -221,6 +221,10 @@ def save_topic(topic: dict) -> None:
         # vanish.
         "running_indicator_loop",
         "flagged_for_indicator_review",
+        # Kept-but-timestamped review records for the parked queue — the
+        # reverse staleness detector's bookkeeping (record_parked_reviews /
+        # parked_review_status). Dropping these silently resets review debt.
+        "parked_reviews",
         "indicator_cleanup_history",
         "indicator_bypasses",
         # Schema-gap queue: news-flow articles that the matcher (or debate)
@@ -1023,6 +1027,161 @@ def abort_indicator_cleanup_session(slug: str, reason: str = "") -> dict:
         })
     save_topic(topic)
     return topic
+
+
+def compute_schema_fingerprint(topic: dict) -> str:
+    """
+    Stable hash of the indicator schema a PARK judgment is conditioned on.
+
+    A PARK means "no indicator can extract this article" — a judgment that
+    is only valid for the schema that existed when it was made. When
+    indicator ids, descriptions, statuses, or observable blocks change,
+    every earlier PARK is stale by definition. The fingerprint makes that
+    mechanical: parked reviews stamped under an old fingerprint show up as
+    due again (see parked_review_status).
+    """
+    import hashlib
+    try:
+        from framework.news_observation_pipeline import walk_indicators
+        inds = walk_indicators(topic)
+    except Exception:
+        inds = []
+    parts = []
+    for ind in sorted(inds, key=lambda i: str(i.get("id"))):
+        parts.append(json.dumps(
+            {
+                "id": ind.get("id"),
+                "status": ind.get("status"),
+                "desc": ind.get("desc"),
+                "observable": ind.get("observable"),
+            },
+            sort_keys=True, ensure_ascii=True, default=str,
+        ))
+    return hashlib.sha256("\n".join(parts).encode("utf-8")).hexdigest()[:16]
+
+
+def record_parked_reviews(slug: str, reviews: list, reviewer: str = "") -> dict:
+    """
+    Timestamp re-reviews of parked evidence (kept-but-timestamped policy).
+
+    Items NEVER leave flagged_for_indicator_review here — clearing remains
+    the indicator-cleanup session's job (commit_indicator_cleanup, with its
+    lint/receipt gates). This only records that the queue was attended to,
+    so review debt is measurable instead of silent.
+
+    reviews: [{"evidence_id": "ev_002",
+               "decision": "PARK|IGNORE|OBSERVE|FIRE|SCHEMA_GAP",
+               "note": "...", "escalated_proposal_id": "..."}]
+
+    Returns {"slug", "recorded", "skipped", "schema_fingerprint", "reviewed_at"}.
+    """
+    topic = load_topic(slug)
+    gov = topic.setdefault("governance", {})
+    flagged = set(gov.get("flagged_for_indicator_review", []) or [])
+    book = gov.setdefault("parked_reviews", {})
+    fingerprint = compute_schema_fingerprint(topic)
+    now = _now_iso()
+    recorded = []
+    skipped = []
+    for review in reviews or []:
+        ev_id = str(review.get("evidence_id") or "")
+        if ev_id not in flagged:
+            skipped.append({"evidence_id": ev_id, "reason": "not in flagged queue"})
+            continue
+        rec = book.setdefault(ev_id, {"review_count": 0, "history": []})
+        rec["review_count"] = int(rec.get("review_count", 0)) + 1
+        rec["last_reviewed"] = now
+        rec["last_decision"] = str(review.get("decision") or "")
+        rec["schema_fingerprint"] = fingerprint
+        entry = {
+            "at": now,
+            "decision": str(review.get("decision") or ""),
+            "note": str(review.get("note") or "")[:300],
+            "reviewer": reviewer or "",
+            "schema_fingerprint": fingerprint,
+        }
+        if review.get("escalated_proposal_id"):
+            entry["escalated_proposal_id"] = str(review["escalated_proposal_id"])
+        rec["history"] = (rec.get("history") or [])[-9:] + [entry]
+        recorded.append(ev_id)
+    save_topic(topic)
+    return {
+        "slug": slug,
+        "recorded": recorded,
+        "skipped": skipped,
+        "schema_fingerprint": fingerprint,
+        "reviewed_at": now,
+    }
+
+
+def parked_review_status(topic: dict, review_interval_days: float = 14.0) -> dict:
+    """
+    Reverse staleness detector for the parked queue.
+
+    Scan staleness asks "have we looked for NEW evidence lately?". Review
+    debt asks "have we re-examined what we already shelved?". A parked item
+    is DUE when:
+      - it has never been reviewed since parking, or
+      - its last review was stamped under a different schema fingerprint
+        (the PARK's conditional changed), or
+      - more than review_interval_days have passed since its last review
+        (with the interval acting as a refractory period the other way:
+        recently-reviewed items are NOT due, which caps multiple-comparisons
+        noise mining from re-rolling the matcher).
+
+    The accountability number is review_debt_ratio = due / parked_total —
+    an attended-to backlog is a schema signal, a neglected one is rot.
+    """
+    gov = topic.get("governance", {}) or {}
+    flagged = list(gov.get("flagged_for_indicator_review", []) or [])
+    book = gov.get("parked_reviews", {}) or {}
+    fingerprint = compute_schema_fingerprint(topic)
+    now = datetime.now(timezone.utc)
+
+    def _parse(ts: str):
+        if not ts:
+            return None
+        try:
+            return datetime.fromisoformat(str(ts).replace("Z", "+00:00"))
+        except Exception:
+            return None
+
+    parked_times = {}
+    for entry in topic.get("evidenceLog", []) or []:
+        if isinstance(entry, dict) and entry.get("id"):
+            parked_times[entry["id"]] = _parse(entry.get("time"))
+
+    due = []
+    fresh = 0
+    for ev_id in flagged:
+        rec = book.get(ev_id) or {}
+        last = _parse(rec.get("last_reviewed"))
+        if last is None:
+            anchor = parked_times.get(ev_id)
+            age_days = ((now - anchor).total_seconds() / 86400.0) if anchor else None
+            due.append({"evidence_id": ev_id, "reason": "never_reviewed",
+                        "age_days": round(age_days, 1) if age_days is not None else None})
+        elif rec.get("schema_fingerprint") != fingerprint:
+            due.append({"evidence_id": ev_id, "reason": "schema_changed",
+                        "age_days": round((now - last).total_seconds() / 86400.0, 1)})
+        elif (now - last).total_seconds() > review_interval_days * 86400.0:
+            due.append({"evidence_id": ev_id, "reason": "interval_elapsed",
+                        "age_days": round((now - last).total_seconds() / 86400.0, 1)})
+        else:
+            fresh += 1
+
+    ages = [d["age_days"] for d in due if d.get("age_days") is not None]
+    total = len(flagged)
+    return {
+        "parked_total": total,
+        "due_count": len(due),
+        "fresh_count": fresh,
+        "review_debt_ratio": round(len(due) / total, 3) if total else 0.0,
+        "oldest_due_days": max(ages) if ages else 0.0,
+        "schema_fingerprint": fingerprint,
+        "review_interval_days": review_interval_days,
+        "due": due,
+    }
 
 
 def add_indicator(
