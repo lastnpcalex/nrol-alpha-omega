@@ -455,33 +455,33 @@ _DECISION_BLOCK = re.compile(
 )
 _OBSERVE_RE = re.compile(r"^OBSERVE\s+(\S+)\s+AT\s+(-?\d+(?:\.\d+)?)\s*$", re.IGNORECASE)
 _FIRE_RE = re.compile(r"^FIRE\s+(\S+)\s*$", re.IGNORECASE)
+# Like _DECISION_BLOCK: line-based, END terminator optional. Models that
+# separate blocks with blank lines emit no END; requiring it made every
+# block silently unparseable and the whole debate stage a no-op.
 _ADV_BLOCK = re.compile(
     r"ADVOCATE\s*\n"
     r"ARTICLE:\s*A(\d+)\s*\n"
-    r"VERDICT:\s*([A-Z_]+)\s*\n"
-    r"(?:PROPOSED_ACTION:\s*([^\n]+)\n)?"
-    r"(?:CITE:\s*([^\n]+)\n)?"
-    r"(?:INFERENCE:\s*([^\n]+)\n)?"
-    r"(?:REASON:\s*([^\n]+)\n)?"
-    r"END",
+    r"VERDICT:\s*([A-Z_]+)\s*\n?"
+    r"(?:PROPOSED_ACTION:\s*([^\n]+)\n?)?"
+    r"(?:CITE:\s*([^\n]+)\n?)?"
+    r"(?:INFERENCE:\s*([^\n]+)\n?)?"
+    r"(?:REASON:\s*([^\n]+)\n?)?",
     re.MULTILINE,
 )
 _REB_BLOCK = re.compile(
     r"REBUT\s*\n"
     r"ARTICLE:\s*A(\d+)\s*\n"
-    r"VERDICT:\s*([A-Z_]+)\s*\n"
-    r"(?:OBJECTION:\s*([^\n]+)\n)?"
-    r"(?:CORRECTED_ACTION:\s*([^\n]+)\n)?"
-    r"(?:REASON:\s*([^\n]+)\n)?"
-    r"END",
+    r"VERDICT:\s*([A-Z_]+)\s*\n?"
+    r"(?:OBJECTION:\s*([^\n]+)\n?)?"
+    r"(?:CORRECTED_ACTION:\s*([^\n]+)\n?)?"
+    r"(?:REASON:\s*([^\n]+)\n?)?",
     re.MULTILINE,
 )
 _JURY_BLOCK = re.compile(
     r"JURY\s*\n"
     r"ARTICLE:\s*A(\d+)\s*\n"
-    r"VERDICT:\s*([^\n]+)\n"
-    r"(?:RATIONALE:\s*([^\n]+)\n)?"
-    r"END",
+    r"VERDICT:\s*([^\n]+)\n?"
+    r"(?:RATIONALE:\s*([^\n]+)\n?)?",
     re.MULTILINE,
 )
 
