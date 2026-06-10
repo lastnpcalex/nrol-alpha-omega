@@ -84,6 +84,7 @@ def process_evidence(
     reason: str = None,
     *,
     lens: str = None,
+    existing_evidence_id: str = None,
 ) -> dict:
     """
     Full evidence pipeline: information in, posteriors out (or parked).
@@ -117,9 +118,28 @@ def process_evidence(
         "posteriors_before": {k: v["posterior"] for k, v in topic["model"]["hypotheses"].items()},
     }
 
-    # 1. Add evidence with governor enrichment
-    topic = add_evidence(topic, entry)
-    evidence_id = topic["evidenceLog"][-1].get("id", f"ev_{len(topic['evidenceLog']):03d}")
+    # 1. Add evidence with governor enrichment — or REBIND to an existing
+    # entry. Rebind is how parked evidence gets resolved: the article is
+    # already in the ledger (that is what parked MEANS), so re-adjudication
+    # must bind the indicator to the existing entry instead of inserting a
+    # duplicate the URL-dedup gate would (correctly) refuse.
+    if existing_evidence_id:
+        located = next(
+            (e for e in topic.get("evidenceLog", []) or []
+             if isinstance(e, dict) and e.get("id") == existing_evidence_id),
+            None,
+        )
+        if located is None:
+            raise ValueError(
+                f"existing_evidence_id {existing_evidence_id!r} not found in "
+                f"evidence log of {slug!r}"
+            )
+        entry = located
+        evidence_id = existing_evidence_id
+        result["rebound"] = True
+    else:
+        topic = add_evidence(topic, entry)
+        evidence_id = topic["evidenceLog"][-1].get("id", f"ev_{len(topic['evidenceLog']):03d}")
     result["evidence_id"] = evidence_id
     result["evidence_text"] = entry.get("text", "")
     result["url"] = entry.get("url")
@@ -146,7 +166,7 @@ def process_evidence(
     # Operator/skill must run cleanup-indicator-sweep to resolve parked entries.
     if not fired_indicator_id:
         # Mark the evidence entry's posterior impact and flag it for review
-        ev_entry = topic["evidenceLog"][-1]
+        ev_entry = entry if existing_evidence_id else topic["evidenceLog"][-1]
         ev_entry["posteriorImpact"] = (
             "NONE — flagged for indicator review (no matching indicator at scan time)"
         )
@@ -254,6 +274,20 @@ def process_evidence(
 
     topic = bayesian_update(topic, **_bu_kwargs)
     result["parked"] = False
+
+    # A successfully bound (fired) item is RESOLVED: remove it from the
+    # indicator-review queue, same semantics as the cleanup session. The
+    # posteriorImpact note is updated so the entry no longer reads as parked.
+    _gov_flagged = topic.setdefault("governance", {}).get(
+        "flagged_for_indicator_review", []
+    )
+    if evidence_id in _gov_flagged:
+        _gov_flagged.remove(evidence_id)
+        result["flag_cleared"] = True
+        if existing_evidence_id:
+            entry["posteriorImpact"] = (
+                f"FIRED via rebind: {fired_indicator_id} ({reason or 're-adjudication'})"
+            )
 
     result["posteriors_after"] = {k: v["posterior"] for k, v in topic["model"]["hypotheses"].items()}
 
@@ -363,6 +397,7 @@ def apply_observation(
     observed_value,
     *,
     lens: str = None,
+    existing_evidence_id: str = None,
 ) -> dict:
     """
     Apply a partial-strength observation to an indicator.
@@ -456,6 +491,7 @@ def apply_observation(
                 f"{observable.get('metric')}={observed_value} unchanged from "
                 f"last firing — parked, not re-fired"),
             lens=lens,
+            existing_evidence_id=existing_evidence_id,
         )
 
     result = process_evidence(
@@ -471,6 +507,7 @@ def apply_observation(
             f"-> derived_lr={derived_lrs}"
         ),
         lens=lens,
+        existing_evidence_id=existing_evidence_id,
     )
 
     # Stamp lastObservedValue/lastObservedAt on the indicator after a
