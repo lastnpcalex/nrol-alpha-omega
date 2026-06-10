@@ -169,6 +169,11 @@ def process_evidence(
         result.update({
             "posteriors_after": before,  # unchanged — parked
             "parked": True,
+            # Surface WHY loudly: a park with a buried reason reads as silent
+            # failure to the operator (observed live: a correctly-bound
+            # sustained observation parked with the explanation visible only
+            # in the evidence entry's posteriorImpact).
+            "parked_reason": reason or str(entry.get("posteriorImpact") or "no matching indicator"),
             "flagged_for_review_count": len(flagged),
             "governance": {
                 "health": gov_report["health"],
