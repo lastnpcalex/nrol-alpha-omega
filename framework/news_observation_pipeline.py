@@ -164,6 +164,11 @@ def build_matcher_prompt(topic: dict, articles: list) -> str:
         lines.append(f"  CHANNELS: {item.get('channels', [])}")
         if art.get("relevance"):
             lines.append(f"  RELEVANCE: {art.get('relevance', '')}")
+        if art.get("excerpt"):
+            # Extracted article body (bounded upstream). Snippets alone rarely
+            # carry the numeric values OBSERVE needs — the excerpt is where
+            # threshold data actually lives.
+            lines.append(f"  EXCERPT: {art.get('excerpt', '')}")
         lines.append("")
     lines.append("## TASK")
     lines.append("")
