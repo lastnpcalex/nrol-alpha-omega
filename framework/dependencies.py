@@ -19,10 +19,14 @@ Key concepts:
 """
 
 import json
+import os
 from pathlib import Path
 from typing import Optional
 
-TOPICS_DIR = Path(__file__).parent.parent / "topics"
+# Follows the engine's state root (NROL_AO_STATE_DIR) — see engine.py.
+TOPICS_DIR = Path(
+    os.environ.get("NROL_AO_STATE_DIR", "").strip() or Path(__file__).parent.parent
+) / "topics"
 
 
 def get_dependencies(topic: dict) -> dict:

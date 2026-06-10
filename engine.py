@@ -31,11 +31,20 @@ from governor import (
     audit_evidence_freshness,
 )
 
-TOPICS_DIR = Path(__file__).parent / "topics"
-BRIEFS_DIR = Path(__file__).parent / "briefs"
-DASHBOARDS_DIR = Path(__file__).parent / "dashboards"
+# Operational state root. By default state lives in the repo (historical
+# layout). Setting NROL_AO_STATE_DIR relocates the canonical belief state
+# (topics) and derived outputs (briefs, dashboards) outside the repo so the
+# repo is code/config and state is data with a single writer (the MCP
+# server / engine I/O). NOTE: several standalone maintenance scripts under
+# framework/ still hardcode repo-local topic paths — convert them before
+# flipping this in production (see a-shadow-loom mcp_servers/nrol_ao/ROADMAP.md).
+_STATE_ROOT = Path(os.environ.get("NROL_AO_STATE_DIR", "").strip() or Path(__file__).parent)
+TOPICS_DIR = _STATE_ROOT / "topics"
+BRIEFS_DIR = _STATE_ROOT / "briefs"
+DASHBOARDS_DIR = _STATE_ROOT / "dashboards"
 
-# Canvas directories for auto-sync (dashboard reads from these)
+# Canvas/loom mirrors are UI projections, not canonical state — they stay
+# repo-local because the dashboard serves them from the repo.
 _REPO_ROOT = Path(__file__).parent.parent
 CANVAS_TOPICS_DIR = _REPO_ROOT / "canvas" / "topics"
 LOOM_TOPICS_DIR = Path(__file__).parent / "loom" / "topics"

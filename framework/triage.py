@@ -23,12 +23,16 @@ events that touch a topic's domain without matching a specific indicator.
 """
 
 import json
+import os
 import re
 from pathlib import Path
 from datetime import datetime, timezone
 from typing import Optional
 
-TOPICS_DIR = Path(__file__).parent.parent / "topics"
+# Follows the engine's state root (NROL_AO_STATE_DIR) — see engine.py.
+TOPICS_DIR = Path(
+    os.environ.get("NROL_AO_STATE_DIR", "").strip() or Path(__file__).parent.parent
+) / "topics"
 
 
 def triage(headline: str, source: str = None, topic_loader=None) -> dict:

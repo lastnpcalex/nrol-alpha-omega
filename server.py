@@ -16,9 +16,11 @@ from pathlib import Path
 
 PORT = int(os.environ.get("ALPHA_OMEGA_PORT", 8098))
 DIR = Path(__file__).parent
-TOPICS_DIR = DIR / "topics"
-BRIEFS_DIR = DIR / "briefs"
-DASHBOARDS_DIR = DIR / "dashboards"
+# Dashboard follows the engine's state root (see engine.py _STATE_ROOT).
+_STATE_ROOT = Path(os.environ.get("NROL_AO_STATE_DIR", "").strip() or DIR)
+TOPICS_DIR = _STATE_ROOT / "topics"
+BRIEFS_DIR = _STATE_ROOT / "briefs"
+DASHBOARDS_DIR = _STATE_ROOT / "dashboards"
 MCP_ACTIVITY_DIR = Path(os.environ.get("NROL_AO_ACTIVITY_DIR", str(DIR / "loom" / "mcp_activity")))
 
 
