@@ -438,15 +438,20 @@ def build_jury_prompt(topic: dict, articles: list, advocate_moves: list,
 
 # ------------------------ PARSERS ----------------------------
 
+# Line-based: a block ends after its REASON line. The older pattern required
+# a literal END terminator (".*?END" with DOTALL|IGNORECASE) — models that
+# separate blocks with blank lines instead emit no END, and the lazy scan
+# then swallowed entire subsequent blocks until it hit "end" as a substring
+# of ordinary words ("depending", "ended"). Observed live: 12 blocks emitted,
+# 1 parsed. END lines, when present, are simply ignored between blocks.
 _DECISION_BLOCK = re.compile(
     r"DECISION\s*\n"
     r"ARTICLE:\s*A(\d+)\s*\n"
-    r"ACTION:\s*([^\n]+)\n"
-    r"(?:TAG:\s*([^\n]*)\n)?"
-    r"(?:CLAIM:\s*([^\n]*)\n)?"
-    r"(?:REASON:\s*([^\n]*)\n)?"
-    r".*?END",
-    re.IGNORECASE | re.DOTALL,
+    r"ACTION:\s*([^\n]+)\n?"
+    r"(?:TAG:\s*([^\n]*)\n?)?"
+    r"(?:CLAIM:\s*([^\n]*)\n?)?"
+    r"(?:REASON:\s*([^\n]*)\n?)?",
+    re.IGNORECASE,
 )
 _OBSERVE_RE = re.compile(r"^OBSERVE\s+(\S+)\s+AT\s+(-?\d+(?:\.\d+)?)\s*$", re.IGNORECASE)
 _FIRE_RE = re.compile(r"^FIRE\s+(\S+)\s*$", re.IGNORECASE)
