@@ -1,0 +1,34 @@
+{
+  "slug": "calibration-hormuz-reopen-2027",
+  "_doc": "Pre-committed dynamics spec for the shadow first-passage model (framework/dynamics_shadow.py). SHADOW MODE: no authority. Regimes: E entrenched closure, R ramping/normalization, O reopen (>=80% baseline reached, then 30-day sustain). Priors are Gamma(alpha, beta_days) on exponential rates; 'no exit for dt days' updates beta_days exactly (conjugacy). Edit only with a rationale — the lint gate enforces it.",
+  "entrenched_since": "2026-04-23",
+  "_entrenched_since_rationale": "Iran briefly declared the strait open in April 2026, then reinstated restrictions by April 19-23 (evidence ev_003 era). Conservative anchor at the reinstatement.",
+  "sustain_days": 30,
+  "sustain_hazard_factor": 0.5,
+  "_sustain_rationale": "Resolution requires >=80% of 2024-25 baseline sustained 30 consecutive days (topic question). Relapse hazard during sustain set at half the ramp-phase relapse rate: a reopen that got to 80% has already absorbed most of the political risk.",
+  "residual_hypothesis": "H4",
+  "hypothesis_windows": {
+    "H1": "2026-09-30",
+    "H2": "2027-03-31",
+    "H3": "2027-12-31"
+  },
+  "priors": {
+    "lam_exit": {
+      "alpha": 2.0,
+      "beta_days": 480,
+      "rationale": "Mean residence in formalized entrenched closure ~8 months before a credible ramp begins. Reference class: Suez 1956 closure ~5 months under superpower pressure; Suez 1967 closed 8 years (tail risk kept via alpha=2 dispersion); Tanker War harassment regime persisted years without full closure; modern sanctions standoffs 6-18 months to first de-escalation. Iran has formalized the closure (strategic-zone redefinition, draft legislation), arguing for the longer end; active US reopening operation and mediation pressure argue shorter."
+    },
+    "lam_ramp": {
+      "alpha": 3.0,
+      "beta_days": 225,
+      "rationale": "Mean ~75 days from political breakthrough to >=80% transit: demining (weeks; UK MCMV ops in 1980s cleared lanes in 4-8 weeks), war-risk insurance re-entry (Lloyd's repriced Red Sea lanes over ~1-2 months in 2024-25), carrier route re-commitment (Maersk-class majors take weeks after halt). alpha=3 narrows dispersion: ramps are operationally similar across cases."
+    },
+    "lam_relapse": {
+      "alpha": 2.0,
+      "beta_days": 240,
+      "rationale": "One relapse per ~4 months during ramp: fragile-ceasefire base rate. The current ceasefire already produced one failed reopen (April 2026); t2_fragile_ceasefire_h3 fired 2026-05-07. Gaza/Lebanon 2024-25 and Iran-Israel 2024-26 ceasefire-violation cadence is months-scale."
+    }
+  },
+  "evidence_nudges": [],
+  "_evidence_nudges_doc": "Bounded conjugate nudges proposed by the matcher/jury and committed by the human: {date, parameter, pseudo_events (alpha), pseudo_days (beta), max_pseudo_events, rationale}. Example: a credible US-Iran direct channel opening would be pseudo_events +0.5 on lam_exit. Empty in v1 — time-only shadow, so the committed-vs-shadow divergence isolates exactly what the idle month was worth."
+}
