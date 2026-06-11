@@ -21,9 +21,25 @@ Thank you to unpingable for making the framework public.
 """
 
 import math
+import os
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from typing import Optional
+
+
+def _now_dt() -> datetime:
+    """Aware UTC now, honoring the NROL_AO_AS_OF simulation clock.
+
+    Mirrors engine._now_dt (governor cannot import engine — engine imports
+    governor). Unset = wall clock; invalid values raise.
+    """
+    as_of = os.environ.get("NROL_AO_AS_OF", "").strip()
+    if as_of:
+        dt = datetime.fromisoformat(as_of)
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=timezone.utc)
+        return dt.astimezone(timezone.utc)
+    return datetime.now(timezone.utc)
 
 
 # ===========================================================================
@@ -91,15 +107,16 @@ def compute_rt(topic: dict) -> dict:
     t_elastic = rt_config.get("elastic", _RT_DEFAULTS["elastic"])
     t_dangerous = rt_config.get("dangerous", _RT_DEFAULTS["dangerous"])
 
-    # Hours since last update
-    delay_hours = _hours_since(last_updated) if last_updated else 168
+    # Hours since last update. Clamp at 0: a future-dated lastUpdated (clock
+    # skew, hand-edited state) must read as "fresh", not crash the log below.
+    delay_hours = max(0.0, _hours_since(last_updated)) if last_updated else 168
 
     # Logarithmic time scaling — prevents R_t from blowing up linearly
     # for topics that are simply slow-moving
     time_decay = math.log2(1.0 + delay_hours / 24.0)
 
     # Count evidence entries in last 24h, 72h
-    now = datetime.now(timezone.utc)
+    now = _now_dt()
     evidence_24h = sum(1 for e in evidence_log
                        if _parse_time(e.get("time")) and
                        (now - _parse_time(e["time"])).total_seconds() < 86400)
@@ -277,7 +294,7 @@ def audit_evidence_freshness(topic: dict) -> dict:
       STALE:       past TTL, may no longer be accurate
       INVALIDATED: explicitly contradicted by newer evidence
     """
-    now = datetime.now(timezone.utc)
+    now = _now_dt()
     evidence = topic.get("evidenceLog", [])
 
     report = {
@@ -1279,7 +1296,7 @@ def check_update_proposal(topic: dict, proposed_posteriors: dict[str, float],
         if (topic_status not in ("RESOLVED", "ARCHIVED")
                 and proposed_max > SATURATION_THRESHOLD):
             recent_redteam = False
-            cutoff = datetime.now(timezone.utc).timestamp() - REDTEAM_FRESHNESS_DAYS * 86400
+            cutoff = _now_dt().timestamp() - REDTEAM_FRESHNESS_DAYS * 86400
             for entry in reversed(history):
                 rt = entry.get("redTeam")
                 if not rt:
@@ -1451,7 +1468,7 @@ def governance_report(topic: dict) -> dict:
     # Does NOT auto-resolve; operator must run skills/resolve.md to pick a winner.
     resolution_date = topic.get("meta", {}).get("resolutionDate")
     if resolution_date and topic_status not in ("RESOLVED", "ARCHIVED"):
-        now_str = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+        now_str = _now_dt().strftime("%Y-%m-%d")
         if str(resolution_date)[:10] < now_str:
             issues.append(
                 f"CRITICAL: Topic past resolutionDate ({resolution_date}) but still "
@@ -1503,7 +1520,7 @@ _NONE_ALERT_THRESHOLD = 3
 
 def _find_none_impact_high_relevance(topic: dict, days: int = _NONE_WINDOW_DAYS) -> list:
     """Find recent high-relevance evidence filed with posteriorImpact=NONE."""
-    now = datetime.now(timezone.utc)
+    now = _now_dt()
     out = []
     for e in topic.get("evidenceLog", []) or []:
         if not isinstance(e, dict):
@@ -1746,7 +1763,7 @@ def _hours_since(iso_str: str) -> float:
     try:
         dt = _parse_time(iso_str)
         if dt:
-            delta = datetime.now(timezone.utc) - dt
+            delta = _now_dt() - dt
             return delta.total_seconds() / 3600
     except (ValueError, TypeError):
         pass
