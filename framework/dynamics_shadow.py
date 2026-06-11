@@ -218,6 +218,18 @@ def shadow_posteriors(
     }
 
 
+def write_spec(repo_root: str | Path, slug: str, spec: dict) -> str:
+    """Lint-then-write a dynamics spec. The only sanctioned write path —
+    a spec that fails lint never reaches disk."""
+    spec = dict(spec)
+    spec.setdefault("slug", slug)
+    lint_spec(spec)
+    path = _spec_path(Path(repo_root), slug)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(spec, indent=2), encoding="utf-8")
+    return str(path)
+
+
 def run(repo_root: str | Path, slug: str, asof: str = "", **kw) -> dict:
     spec = load_spec(Path(repo_root), slug)
     asof_d = _parse_date(asof) if asof else None
