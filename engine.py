@@ -712,7 +712,7 @@ def _is_indicator_cleanup_session_active(topic: dict) -> tuple[bool, str]:
             started_dt = started_dt.replace(tzinfo=timezone.utc)
     except Exception:
         return False, "session has invalid started_at"
-    age = datetime.now(timezone.utc) - started_dt
+    age = _now_dt() - started_dt
     ttl = timedelta(seconds=loop.get("ttl_seconds", _INDICATOR_CLEANUP_SESSION_TTL_SECONDS))
     if age > ttl:
         return False, f"session expired ({age.total_seconds():.0f}s old, ttl {ttl.total_seconds():.0f}s)"
@@ -1136,7 +1136,7 @@ def parked_review_status(topic: dict, review_interval_days: float = 14.0) -> dic
     flagged = list(gov.get("flagged_for_indicator_review", []) or [])
     book = gov.get("parked_reviews", {}) or {}
     fingerprint = compute_schema_fingerprint(topic)
-    now = datetime.now(timezone.utc)
+    now = _now_dt()
 
     def _parse(ts: str):
         if not ts:
@@ -2993,8 +2993,8 @@ def _causal_event_cluster_size(topic: dict, event_id: str,
     """
     if not event_id:
         return 0
-    from datetime import datetime, timezone, timedelta
-    now = datetime.now(timezone.utc)
+    from datetime import timedelta
+    now = _now_dt()
     cutoff = now - timedelta(days=window_days)
     history = topic.get("model", {}).get("posteriorHistory", []) or []
     # Build lookup: indicator_id -> causal_event_id
@@ -3472,7 +3472,7 @@ def generate_brief(topic: dict, mode: str = "routine",
     model = topic["model"]
     hypotheses = model["hypotheses"]
 
-    now = datetime.now(timezone.utc)
+    now = _now_dt()
     timestamp = now.strftime("%Y-%m-%d %H%M UTC")
 
     # Header
@@ -3617,7 +3617,7 @@ def save_brief(topic: dict, brief_text: str) -> str:
     brief_dir = BRIEFS_DIR / slug
     brief_dir.mkdir(parents=True, exist_ok=True)
 
-    now = datetime.now(timezone.utc)
+    now = _now_dt()
     filename = now.strftime("%Y-%m-%d-%H%M") + ".md"
     path = brief_dir / filename
     with open(path, "w", encoding="utf-8") as f:
@@ -3689,7 +3689,7 @@ def update_day_count(topic: dict) -> dict:
     start = topic["meta"].get("startDate")
     if start:
         start_date = datetime.fromisoformat(start).date()
-        today = datetime.now(timezone.utc).date()
+        today = _now_dt().date()
         topic["meta"]["dayCount"] = (today - start_date).days
     return topic
 
@@ -3912,8 +3912,24 @@ def get_state_at(target_date: str, topic_loader=None) -> dict:
     return result
 
 
+def _now_dt() -> datetime:
+    """Aware UTC now, honoring the NROL_AO_AS_OF simulation clock.
+
+    NROL_AO_AS_OF (ISO-8601, e.g. "2026-07-03" or "2026-07-03T12:00:00+00:00")
+    pins "now" for synthetic-topic replay; unset = wall clock. Invalid values
+    raise — a replay must never fall back to the real clock silently.
+    """
+    as_of = os.environ.get("NROL_AO_AS_OF", "").strip()
+    if as_of:
+        dt = datetime.fromisoformat(as_of)
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=timezone.utc)
+        return dt.astimezone(timezone.utc)
+    return datetime.now(timezone.utc)
+
+
 def _now_iso() -> str:
-    return datetime.now(timezone.utc).isoformat(timespec="seconds")
+    return _now_dt().isoformat(timespec="seconds")
 
 
 def _deep_merge(base: dict, overlay: dict) -> dict:
@@ -3982,7 +3998,7 @@ def generate_dashboard(topic: dict, event_label: str = None) -> str:
     Returns the saved file path.
     """
     slug = topic["meta"]["slug"]
-    now = datetime.now(timezone.utc)
+    now = _now_dt()
     timestamp = now.strftime("%Y-%m-%d-%H%M")
     label = event_label or "snapshot"
     safe_label = "".join(c if c.isalnum() or c in "-_" else "-" for c in label)

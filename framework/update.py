@@ -42,7 +42,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 from engine import (
     load_topic, add_evidence, update_posteriors, update_submodel,
     update_feed, save_topic, generate_brief, save_brief,
-    GovernanceError, _add_evidence_raw,
+    GovernanceError, _add_evidence_raw, _now_dt,
 )
 from governor import (
     check_update_proposal, audit_evidence_freshness,
@@ -67,7 +67,8 @@ SOURCE_TRUST = {
 
 
 def _now_iso():
-    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%S+00:00")
+    # _now_dt honors the NROL_AO_AS_OF simulation clock (synthetic replay).
+    return _now_dt().strftime("%Y-%m-%dT%H:%M:%S+00:00")
 
 
 def _most_recent_brief(topic_name: str) -> str | None:
