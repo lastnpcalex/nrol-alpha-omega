@@ -597,6 +597,13 @@ def apply_decisions(slug: str, articles: list, decisions: list,
     # about Project Freedom would attempt six separate updates and trip the
     # confidence_inflation gate (>15pp shift with <2 evidence_refs).
     observe_groups = {}  # key: (indicator_id, value_rounded) -> list of (idx, decision, art)
+    # Same-batch FIREs on one indicator are duplicate coverage of one causal
+    # event until proven otherwise: they must corroborate ONE firing, not
+    # refire per article. (Measured in the synthetic Meridia replay: three
+    # duplicate articles -> three FIREs of t2_blockade_reinforcement on day 1,
+    # the same failure observed live on hormuz. Cross-day repeats remain the
+    # province of lr_decay and operator review.)
+    fire_groups = {}  # key: indicator_id -> list of (idx, decision, art)
     for i, art in enumerate(articles, start=1):
         d = by_idx.get(i)
         if d is None:
@@ -607,57 +614,42 @@ def apply_decisions(slug: str, articles: list, decisions: list,
         if action["kind"] == "OBSERVE":
             key = (action["indicator_id"], round(float(action["value"]), 2))
             observe_groups.setdefault(key, []).append((i, d, art, action))
+        elif action["kind"] == "FIRE":
+            fire_groups.setdefault(action["indicator_id"], []).append((i, d, art, action))
 
-    # Track which idxs were applied as part of bundled OBSERVE
+    # Track which idxs were applied as part of a bundle
     bundled_idxs = set()
 
-    # Apply bundled OBSERVE groups first.
-    # Pre-park secondary articles (each gets its own evidenceLog entry +
-    # evidence_id), then run apply_observation on the canonical first
-    # article passing the secondary evidence_ids as refs. This way the
-    # engine's confidence_inflation gate sees a multi-ref evidence base
-    # made of REAL evidence_ids that resolve to log entries — and any
-    # repetition_as_validation dedup runs correctly across them.
-    for (ind_id, value), group in observe_groups.items():
-        if len(group) == 1:
-            continue  # singleton — let per-article loop handle it normally
+    def _park_secondaries(group, why):
+        """Park the N-1 secondary articles of a bundle; return their evidence_ids.
 
-        # Step 1: park the N-1 secondary articles, collect their evidence_ids
-        secondary_evidence_ids = []
-        try:
-            for sec_idx, sec_d, sec_art, _ in group[1:]:
-                sec_inner = sec_art.get("article", sec_art)
-                sec_inner.setdefault("surfaced_via", sec_art.get("channels", []))
-                sec_entry = article_to_evidence_entry(
-                    sec_inner, round_num=1,
-                    default_tag=sec_d.get("tag", "EVENT") or "EVENT",
-                )
-                sec_entry["claim"] = sec_d.get("claim") or sec_entry.get("text", "")
-                # Park this secondary article (no firing). It gets logged with
-                # impact NONE — flagged for indicator review — that's fine; its
-                # purpose here is providing an evidence_id for the bundle.
-                sec_result = process_evidence(
-                    slug=slug, entry=sec_entry,
-                    fired_indicator_id=None,
-                    reason=f"Secondary article in bundled OBSERVE for {ind_id}",
-                )
-                log_activity(sec_result, platform="news-scan")
-                summary["park"] += 1
-                if sec_result.get("evidence_id"):
-                    secondary_evidence_ids.append(sec_result["evidence_id"])
-        except Exception as e:
-            summary["engine_rejections"] += 1
-            summary["rejection_msgs"].append(
-                f"BUNDLE-PARK({len(group)}) {ind_id}: "
-                f"{type(e).__name__}: {str(e)[:200]}"
+        Each secondary gets its own evidenceLog entry + evidence_id (logged
+        with impact NONE — flagged for indicator review — that's fine; its
+        purpose here is providing a ref for the bundle).
+        """
+        evidence_ids = []
+        for _sec_idx, sec_d, sec_art, _ in group[1:]:
+            sec_inner = sec_art.get("article", sec_art)
+            sec_inner.setdefault("surfaced_via", sec_art.get("channels", []))
+            sec_entry = article_to_evidence_entry(
+                sec_inner, round_num=1,
+                default_tag=sec_d.get("tag", "EVENT") or "EVENT",
             )
-            for idx, _, _, _ in group:
-                bundled_idxs.add(idx)
-            continue
+            sec_entry["claim"] = sec_d.get("claim") or sec_entry.get("text", "")
+            sec_result = process_evidence(
+                slug=slug, entry=sec_entry,
+                fired_indicator_id=None,
+                reason=why,
+            )
+            log_activity(sec_result, platform="news-scan")
+            summary["park"] += 1
+            if sec_result.get("evidence_id"):
+                evidence_ids.append(sec_result["evidence_id"])
+        return evidence_ids
 
-        # Step 2: apply_observation on canonical first article, passing the
-        # secondary evidence_ids as refs (they resolve in evidenceLog now).
-        first_idx, first_d, first_art, _ = group[0]
+    def _bundle_entry(group, secondary_evidence_ids):
+        """Evidence entry for a bundle's canonical first article."""
+        _first_idx, first_d, first_art, _ = group[0]
         inner = first_art.get("article", first_art)
         inner.setdefault("surfaced_via", first_art.get("channels", []))
         entry = article_to_evidence_entry(
@@ -668,7 +660,33 @@ def apply_decisions(slug: str, articles: list, decisions: list,
         entry["claim"] = combined_claim or entry.get("text", "")
         entry["evidence_refs"] = list(secondary_evidence_ids)  # real evidence_ids
         entry["bundled_articles"] = [f"A{idx}" for idx, _, _, _ in group]
+        return entry
 
+    # Apply bundled OBSERVE groups first.
+    # Pre-park secondary articles, then run apply_observation on the
+    # canonical first article passing the secondary evidence_ids as refs.
+    # This way the engine's confidence_inflation gate sees a multi-ref
+    # evidence base made of REAL evidence_ids that resolve to log entries —
+    # and any repetition_as_validation dedup runs correctly across them.
+    for (ind_id, value), group in observe_groups.items():
+        if len(group) == 1:
+            continue  # singleton — let per-article loop handle it normally
+
+        try:
+            secondary_evidence_ids = _park_secondaries(
+                group, f"Secondary article in bundled OBSERVE for {ind_id}"
+            )
+        except Exception as e:
+            summary["engine_rejections"] += 1
+            summary["rejection_msgs"].append(
+                f"BUNDLE-PARK({len(group)}) {ind_id}: "
+                f"{type(e).__name__}: {str(e)[:200]}"
+            )
+            for idx, _, _, _ in group:
+                bundled_idxs.add(idx)
+            continue
+
+        entry = _bundle_entry(group, secondary_evidence_ids)
         try:
             result = apply_observation(
                 slug=slug, entry=entry,
@@ -678,6 +696,7 @@ def apply_decisions(slug: str, articles: list, decisions: list,
             log_activity(result, platform="news-scan")
             summary["observe"] += 1
             summary["bundled_groups"].append({
+                "kind": "OBSERVE",
                 "indicator_id": ind_id,
                 "value": value,
                 "n_articles": len(group),
@@ -692,6 +711,58 @@ def apply_decisions(slug: str, articles: list, decisions: list,
             summary["engine_rejections"] += 1
             summary["rejection_msgs"].append(
                 f"BUNDLED({len(group)}) {ind_id}={value}: "
+                f"{type(e).__name__}: {str(e)[:200]}"
+            )
+            for idx, _, _, _ in group:
+                bundled_idxs.add(idx)
+
+    # Apply bundled FIRE groups: ONE firing on the canonical first article,
+    # the duplicates parked as corroborating evidence_refs. Without this,
+    # n duplicate articles fire the indicator n times — overconfidence when
+    # lr_decay is high, premature refire fatigue when it is low.
+    for ind_id, group in fire_groups.items():
+        if len(group) == 1:
+            continue  # singleton — let per-article loop handle it normally
+
+        try:
+            secondary_evidence_ids = _park_secondaries(
+                group, f"Duplicate coverage of one causal event; corroborates FIRE {ind_id}"
+            )
+        except Exception as e:
+            summary["engine_rejections"] += 1
+            summary["rejection_msgs"].append(
+                f"BUNDLE-PARK({len(group)}) {ind_id}: "
+                f"{type(e).__name__}: {str(e)[:200]}"
+            )
+            for idx, _, _, _ in group:
+                bundled_idxs.add(idx)
+            continue
+
+        entry = _bundle_entry(group, secondary_evidence_ids)
+        _first_idx, first_d, _first_art, _ = group[0]
+        try:
+            result = process_evidence(
+                slug=slug, entry=entry,
+                fired_indicator_id=ind_id,
+                reason=first_d.get("reason"),
+            )
+            log_activity(result, platform="news-scan")
+            summary["fire"] += 1
+            summary["bundled_groups"].append({
+                "kind": "FIRE",
+                "indicator_id": ind_id,
+                "n_articles": len(group),
+                "articles": [f"A{idx}" for idx, _, _, _ in group],
+                "secondary_refs": secondary_evidence_ids,
+                "before": result.get("posteriors_before"),
+                "after": result.get("posteriors_after"),
+            })
+            for idx, _, _, _ in group:
+                bundled_idxs.add(idx)
+        except Exception as e:
+            summary["engine_rejections"] += 1
+            summary["rejection_msgs"].append(
+                f"BUNDLED-FIRE({len(group)}) {ind_id}: "
                 f"{type(e).__name__}: {str(e)[:200]}"
             )
             for idx, _, _, _ in group:

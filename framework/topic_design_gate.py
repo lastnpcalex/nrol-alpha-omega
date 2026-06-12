@@ -172,6 +172,23 @@ def run_mechanical_checks(topic: dict) -> dict:
                 f"'{ind.get('desc', '')[:60]}...'"
             )
 
+    # Duplicate amplifiers: an explicit lr_decay >= 1.0 disables refire
+    # attenuation, so every duplicate filing or refire applies the full LR
+    # again. Measured in the synthetic Meridia replay: a triple-filed
+    # decree at lr_decay 1.0 triple-applies its LR — 20-30pp of unearned
+    # confidence when it lands mid-trajectory. A binary event that can
+    # genuinely only happen once should fire once; a repeatable one needs
+    # decay (engine defaults: tier1 0.70 / tier2 0.65 / tier3 0.50).
+    for ind in all_indicators + anti_indicators:
+        if "lr_decay" in ind and float(ind.get("lr_decay") or 0) >= 1.0:
+            warnings.append(
+                f"DUPLICATE AMPLIFIER: indicator '{ind.get('id', '?')}' has "
+                f"explicit lr_decay {ind['lr_decay']} — refires and duplicate "
+                "filings apply the full LR every time. Use decay < 1.0, or "
+                "resolution_class/fire-once semantics if the event can only "
+                "happen once."
+            )
+
     # --- Coverage Matrix (hypothesis × indicator) ---
     # For each indicator, parse which hypotheses it references in posteriorEffect.
     # Build a matrix: which hypotheses can be POSITIVELY updated and which can be
