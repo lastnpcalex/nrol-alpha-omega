@@ -335,7 +335,7 @@ def article_to_evidence_entry(
     headline = (article.get("headline") or "").strip()
     relevance = (article.get("relevance") or "").strip()
     text = headline if not relevance else f"{headline} — {relevance}"
-    return {
+    entry = {
         "tag": default_tag,
         "tags": [default_tag],
         "text": text,
@@ -345,6 +345,13 @@ def article_to_evidence_entry(
         "scanRound": round_num,
         "queryProvenance": prov,
     }
+    # Evidence is dated by publication, not by when we got around to
+    # committing it (same rule commit_match already applies). add_evidence
+    # falls back to now() when absent.
+    published = (article.get("published") or article.get("date") or "").strip()
+    if published:
+        entry["time"] = published
+    return entry
 
 
 def round_should_continue(
