@@ -1293,7 +1293,10 @@ def add_indicator(
     from framework.lint_indicators import propose_indicators_lint
     lint_res = propose_indicators_lint(topic, [record])
     if not lint_res["passed"]:
-        blocker_msgs = [b["message"] for b in lint_res["blockers"]]
+        blocker_msgs = [
+            b.get("message") or b.get("msg") or str(b)
+            for b in lint_res["blockers"]
+        ]
         raise ValueError(
             f"add_indicator({new_id!r}) blocked by indicator shape lint. "
             f"Blockers: {blocker_msgs}"
