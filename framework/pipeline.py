@@ -118,11 +118,15 @@ def process_evidence(
         "posteriors_before": {k: v["posterior"] for k, v in topic["model"]["hypotheses"].items()},
     }
 
+    # Preserve original evidence_refs from entry dict before it gets rebound
+    original_evidence_refs = list(entry.get("evidence_refs") or [])
+
     # 1. Add evidence with governor enrichment — or REBIND to an existing
     # entry. Rebind is how parked evidence gets resolved: the article is
     # already in the ledger (that is what parked MEANS), so re-adjudication
     # must bind the indicator to the existing entry instead of inserting a
     # duplicate the URL-dedup gate would (correctly) refuse.
+    dup_entry = None
     if existing_evidence_id:
         located = next(
             (e for e in topic.get("evidenceLog", []) or []
@@ -138,8 +142,26 @@ def process_evidence(
         evidence_id = existing_evidence_id
         result["rebound"] = True
     else:
-        topic = add_evidence(topic, entry)
-        evidence_id = topic["evidenceLog"][-1].get("id", f"ev_{len(topic['evidenceLog']):03d}")
+        # Check for duplicates first to avoid the add_evidence skip bug
+        new_text = entry.get("text", "").strip()
+        new_url = (entry.get("url") or "").strip()
+        for existing in topic.get("evidenceLog", []) or []:
+            if existing.get("text", "").strip() == new_text:
+                dup_entry = existing
+                break
+            if new_url and (existing.get("url") or "").strip() == new_url:
+                existing_text = existing.get("text", "").strip()
+                if existing_text and existing_text[:80] == new_text[:80]:
+                    dup_entry = existing
+                    break
+        
+        if dup_entry:
+            entry = dup_entry
+            evidence_id = dup_entry.get("id")
+        else:
+            topic = add_evidence(topic, entry)
+            entry = topic["evidenceLog"][-1]
+            evidence_id = entry.get("id", f"ev_{len(topic['evidenceLog']):03d}")
     result["evidence_id"] = evidence_id
     result["evidence_text"] = entry.get("text", "")
     result["url"] = entry.get("url")
@@ -166,7 +188,7 @@ def process_evidence(
     # Operator/skill must run cleanup-indicator-sweep to resolve parked entries.
     if not fired_indicator_id:
         # Mark the evidence entry's posterior impact and flag it for review
-        ev_entry = entry if existing_evidence_id else topic["evidenceLog"][-1]
+        ev_entry = entry
         ev_entry["posteriorImpact"] = (
             "NONE — flagged for indicator review (no matching indicator at scan time)"
         )
@@ -260,7 +282,7 @@ def process_evidence(
     # the full evidence base. Without this, a bundled OBSERVE looks to the
     # gate like "1 ref → big shift → REJECT" even when 6 articles back the
     # underlying event.
-    extra_refs = list(entry.get("evidence_refs") or [])
+    extra_refs = original_evidence_refs
     bundled_refs = [r for r in extra_refs if r and r != evidence_id]
 
     _bu_kwargs = {
@@ -284,7 +306,7 @@ def process_evidence(
     if evidence_id in _gov_flagged:
         _gov_flagged.remove(evidence_id)
         result["flag_cleared"] = True
-        if existing_evidence_id:
+        if existing_evidence_id or dup_entry:
             entry["posteriorImpact"] = (
                 f"FIRED via rebind: {fired_indicator_id} ({reason or 're-adjudication'})"
             )

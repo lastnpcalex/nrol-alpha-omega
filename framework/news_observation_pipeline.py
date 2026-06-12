@@ -210,25 +210,22 @@ def build_matcher_prompt(topic: dict, articles: list) -> str:
     lines.append("TAG: RHETORIC | EVENT | DATA | POLICY | MARKET")
     lines.append("CLAIM: <one factual sentence>")
     lines.append("REASON: <one sentence; cite metric/value if OBSERVE; for SCHEMA_GAP describe the missing observable direction>")
-    lines.append("END")
     return "\n".join(lines)
 
 
-def build_advocate_prompt(topic: dict, articles: list, parks: list) -> str:
+def build_advocate_prompt(topic: dict, articles: list, candidates: list) -> str:
     """
-    Round-1 advocate prompt. `parks` is a list of dicts:
-        [{idx: int, claim: str, park_reason: str}, ...]
-    The advocate may only propose OBSERVE on indicators with observable blocks.
+    Round-1 advocate prompt. `candidates` is a list of dicts:
+        [{idx: int, claim: str, action_raw: str, reason: str}, ...]
+    The advocate argues for the best action for each article.
     """
     slug = topic["meta"]["slug"]
     inds = walk_indicators(topic)
-    inds_with_obs = [i for i in inds if "observable" in i]
     lines = [SYSTEM_PURPOSE_FRAMING]
-    lines.append("YOUR ROLE: ADVOCATE for evidence integration. You argue for moving PARKed")
-    lines.append("articles INTO posterior updates — but only when directional alignment holds.")
+    lines.append("YOUR ROLE: ADVOCATE for evidence integration. You argue for integrating")
+    lines.append("evidence into posterior updates — but only when directional alignment holds.")
     lines.append("If an article reports evidence in a direction the schema has no observable")
-    lines.append("for, your correct verdict is SCHEMA_GAP, not ARGUE_MOVE through a wrong-")
-    lines.append("direction observable.")
+    lines.append("for, your correct verdict is SCHEMA_GAP, not force-fitting.")
     lines.append("")
     lines.append("CONTEXT")
     lines.append(f"Topic: {slug}")
@@ -240,49 +237,46 @@ def build_advocate_prompt(topic: dict, articles: list, parks: list) -> str:
         lines.append(f"  {hk}: {label[:120]} (current posterior {hv.get('posterior')})")
     lines.append("")
     lines.append("YOUR JOB")
-    lines.append("These articles were PARK'd by a strict matcher. For EACH article, present")
-    lines.append("the strongest defensible case to MOVE it OUT of PARK by proposing OBSERVE,")
-    lines.append("IF such a case exists. Single-step inference is allowed (e.g., weekly→monthly")
-    lines.append("conversion) as long as you state the conversion. No defensible case → PARK_OK.")
+    lines.append("These articles were evaluated by a strict matcher. For EACH article, present")
+    lines.append("the strongest case for its final action. You can propose to:")
+    lines.append("  - COMMIT: confirm the matcher's proposed OBSERVE or FIRE action is correct.")
+    lines.append("  - PARK: park the article (keep it parked, or demote an OBSERVE/FIRE to PARK).")
+    lines.append("  - WITHDRAW: ignore the article as irrelevant or pure rhetoric.")
+    lines.append("  - DUPLICATE_OF A<n>: flag that this article is duplicate coverage of the exact same event as A<n>.")
+    lines.append("  - SCHEMA_GAP <description>: flag that there is a schema gap.")
     lines.append("")
-    lines.append("RULES")
-    lines.append("- Only propose OBSERVE on indicators with `observable` blocks (listed below).")
-    lines.append("  Binary indicators were already correctly evaluated.")
-    lines.append("- Your proposed value MUST be CITABLE — reference a phrase or number from the")
-    lines.append("  article. The value must be in the metric's native units (matching threshold")
-    lines.append("  and baseline units in the observable block).")
-    lines.append("- If no defensible case, output PARK_OK.")
-    lines.append("")
-    lines.append("INDICATORS WITH OBSERVABLE BLOCKS")
-    for ind in inds_with_obs:
-        ob = ind["observable"]
+    lines.append("INDICATORS (reference)")
+    for ind in inds:
         lines.append(f"  {ind['id']}")
         lines.append(f"    desc: {ind['desc'][:200]}")
-        lines.append(f"    metric: {ob['metric']}")
-        lines.append(f"    family: {ob['family']}")
-        lines.append(f"    threshold_value: {ob['threshold_value']}; baseline: {ob['baseline']}; direction: {ob['direction']}")
-        lines.append(f"    LR_at_threshold: {ind['likelihoods']}")
+        if "observable" in ind:
+            ob = ind["observable"]
+            lines.append(f"    OBSERVABLE: metric={ob['metric']}; threshold={ob['threshold_value']}; baseline={ob['baseline']}; direction={ob['direction']}")
+        lines.append(f"    LR: {ind['likelihoods']}")
     lines.append("")
-    lines.append("PARKED ARTICLES")
+    lines.append("CANDIDATE ARTICLES")
     lines.append("")
-    for p in parks:
-        art = articles[p["idx"] - 1].get("article", articles[p["idx"] - 1])
-        lines.append(f"[A{p['idx']}] {art.get('headline', '')}")
+    for c in candidates:
+        idx = c["idx"]
+        art = articles[idx - 1].get("article", articles[idx - 1])
+        act_raw = c["action_raw"]
+        lines.append(f"[A{idx}] {art.get('headline', '')}")
         lines.append(f"  URL: {art.get('url', '')}")
         lines.append(f"  SOURCE: {art.get('source', '')}")
-        lines.append(f"  CLAIM: {p['claim']}")
-        lines.append(f"  STRICT_PARK_REASON: {p['park_reason']}")
+        lines.append(f"  CANDIDATE_ACTION: {act_raw}")
+        lines.append(f"  CLAIM: {c['claim']}")
+        lines.append(f"  MATCHER_REASON: {c['reason']}")
         if art.get("relevance"):
             lines.append(f"  RELEVANCE: {art.get('relevance', '')}")
         lines.append("")
-    lines.append("OUTPUT (one block per parked article, no preamble):")
+    lines.append("OUTPUT (one block per candidate article, no preamble):")
     lines.append("ADVOCATE")
     lines.append("ARTICLE: A<n>")
-    lines.append("VERDICT: ARGUE_MOVE | PARK_OK")
-    lines.append("PROPOSED_ACTION: OBSERVE <indicator_id> AT <value>     # only ARGUE_MOVE")
-    lines.append("CITE: <exact phrase or number from the article>          # only ARGUE_MOVE")
-    lines.append("INFERENCE: <one sentence stating any conversion done>    # only ARGUE_MOVE")
-    lines.append("REASON: <one sentence>")
+    lines.append("VERDICT: COMMIT | PARK | WITHDRAW | DUPLICATE_OF A<n> | SCHEMA_GAP <description>")
+    lines.append("PROPOSED_ACTION: <e.g. OBSERVE indicator_id AT value, or FIRE indicator_id, or PARK, or IGNORE>")
+    lines.append("CITE: <exact phrase or number from the article if proposing COMMIT/OBSERVE/FIRE>")
+    lines.append("INFERENCE: <one sentence stating any conversion done>")
+    lines.append("REASON: <one sentence case for this verdict>")
     lines.append("END")
     return "\n".join(lines)
 
@@ -290,19 +284,16 @@ def build_advocate_prompt(topic: dict, articles: list, parks: list) -> str:
 def build_rebut_prompt(topic: dict, articles: list, advocate_moves: list,
                        strict_reasons: dict) -> str:
     """
-    Round-2 rebut prompt. `advocate_moves` is the list of ARGUE_MOVE
-    proposals from advocate output. `strict_reasons` maps idx -> {claim,
-    reason} from the original strict matcher output.
+    Round-2 rebut prompt. `advocate_moves` is the list of ADVOCATE
+    proposals. `strict_reasons` maps idx -> {claim, reason, action_raw}
+    from the original strict matcher output.
     """
     slug = topic["meta"]["slug"]
     inds = walk_indicators(topic)
-    inds_with_obs = [i for i in inds if "observable" in i]
     lines = [SYSTEM_PURPOSE_FRAMING]
-    lines.append("YOUR ROLE: REBUT. Skeptically scrutinize the advocate's proposed moves.")
-    lines.append("Beyond inference quality, you specifically check directional alignment: does")
-    lines.append("the advocate's proposed update push posterior in a direction consistent with")
-    lines.append("the article's actual content? An update that's technically clean but pushes")
-    lines.append("the wrong direction is a failure mode you must catch.")
+    lines.append("YOUR ROLE: REBUT. Skeptically scrutinize the advocate's proposed actions.")
+    lines.append("Beyond inference quality, you specifically check duplicate-event grouping and directional alignment:")
+    lines.append("does the advocate's proposed update push posterior in a direction consistent with the article's actual content?")
     lines.append("")
     lines.append("CONTEXT")
     lines.append(f"Topic: {slug}")
@@ -314,33 +305,28 @@ def build_rebut_prompt(topic: dict, articles: list, advocate_moves: list,
         lines.append(f"  {hk}: {label[:120]} (current posterior {hv.get('posterior')})")
     lines.append("")
     lines.append("YOUR JOB")
-    lines.append("An ADVOCATE has argued these PARKed articles should be moved to OBSERVE.")
-    lines.append("Skeptically scrutinize each. Specifically check:")
-    lines.append("1. Is the CITED phrase actually in the article (not invented)?")
-    lines.append("2. Is the INFERENCE valid (baseline conversion, units, metric)?")
-    lines.append("3. Is the proposed VALUE in the right ballpark, or wildly off?")
-    lines.append("4. Is the proposed INDICATOR the correct one for the observation?")
-    lines.append("5. Did the advocate over-interpret? (e.g., 'X transits on day-1' may not generalize)")
+    lines.append("An ADVOCATE has proposed actions for these candidate articles. Skeptically scrutinize each.")
+    lines.append("Check for: directional alignment, factual citation, correct metrics/units, over-interpretation, and duplicates.")
     lines.append("")
-    lines.append("RULES")
-    lines.append("- Be skeptical but fair. Sound advocate arguments → NO_REBUT.")
-    lines.append("- Real flaws → REBUT with specific objection.")
-    lines.append("- Indicator right but number off → CORRECT_VALUE with corrected number.")
+    lines.append("INDICATORS (reference)")
+    for ind in inds:
+        lines.append(f"  {ind['id']}")
+        if "observable" in ind:
+            ob = ind["observable"]
+            lines.append(f"    OBSERVABLE: metric={ob['metric']}; threshold={ob['threshold_value']}; baseline={ob['baseline']}; direction={ob['direction']}")
     lines.append("")
-    lines.append("INDICATORS WITH OBSERVABLE BLOCKS (reference)")
-    for ind in inds_with_obs:
-        ob = ind["observable"]
-        lines.append(f"  {ind['id']} | metric={ob['metric']} | family={ob['family']} | threshold={ob['threshold_value']} | baseline={ob['baseline']} | direction={ob['direction']}")
-    lines.append("")
-    lines.append("ADVOCATE'S ARGUMENTS")
+    lines.append("ADVOCATE'S PROPOSALS")
     lines.append("")
     for mv in advocate_moves:
-        art = articles[mv["idx"] - 1].get("article", articles[mv["idx"] - 1])
-        sr = strict_reasons.get(mv["idx"], {})
-        lines.append(f"[A{mv['idx']}] {art.get('headline', '')}")
+        idx = mv["idx"]
+        art = articles[idx - 1].get("article", articles[idx - 1])
+        sr = strict_reasons.get(idx, {})
+        lines.append(f"[A{idx}] {art.get('headline', '')}")
         lines.append(f"  URL: {art.get('url', '')}")
         lines.append(f"  SOURCE: {art.get('source', '')}")
-        lines.append(f"  STRICT_PARK_REASON: {sr.get('reason', '')}")
+        lines.append(f"  MATCHER_CANDIDATE: {sr.get('action_raw', '')}")
+        lines.append(f"  MATCHER_REASON: {sr.get('reason', '')}")
+        lines.append(f"  ADVOCATE_VERDICT: {mv['verdict']}")
         lines.append(f"  ADVOCATE_PROPOSED: {mv['proposed_action']}")
         lines.append(f"  ADVOCATE_CITE: {mv['cite']}")
         lines.append(f"  ADVOCATE_INFERENCE: {mv['inference']}")
@@ -349,9 +335,9 @@ def build_rebut_prompt(topic: dict, articles: list, advocate_moves: list,
     lines.append("OUTPUT (one block per article above):")
     lines.append("REBUT")
     lines.append("ARTICLE: A<n>")
-    lines.append("VERDICT: REBUT | NO_REBUT | CORRECT_VALUE")
-    lines.append("OBJECTION: <one specific flaw>           # REBUT or CORRECT_VALUE only")
-    lines.append("CORRECTED_ACTION: OBSERVE <indicator_id> AT <value>          # CORRECT_VALUE only")
+    lines.append("VERDICT: COMMIT | PARK | WITHDRAW | DUPLICATE_OF A<n> | SCHEMA_GAP <description>")
+    lines.append("OBJECTION: <one specific flaw or objection, if disagreeing with advocate>")
+    lines.append("CORRECTED_ACTION: <e.g. OBSERVE indicator AT value, or FIRE indicator if correcting action>")
     lines.append("REASON: <one sentence>")
     lines.append("END")
     return "\n".join(lines)
@@ -365,34 +351,15 @@ def build_jury_prompt(topic: dict, articles: list, advocate_moves: list,
     """
     slug = topic["meta"]["slug"]
     inds = walk_indicators(topic)
-    inds_with_obs = [i for i in inds if "observable" in i]
     lines = [SYSTEM_PURPOSE_FRAMING]
     lines.append("YOUR ROLE: JURY. Render final per-article verdict. You did not participate")
     lines.append("in advocate or rebut rounds — fresh, calibrated voter.")
     lines.append("")
-    lines.append("=== JUDGE'S STANDING INSTRUCTIONS — READ FIRST ===")
-    lines.append("")
-    lines.append("1. THE POINT OF THIS SYSTEM. Pre-committed indicators with pre-committed LRs")
-    lines.append("   PREVENT context-anchored vibes-LR — the failure mode that previously pegged")
-    lines.append("   17 topics at clamp ceilings. Inference QUALITY is what you judge here;")
-    lines.append("   evidence QUANTITY is enforced by separate engine gates.")
-    lines.append("")
-    lines.append("2. WEIGHT OF VOTES. Accepting an OBSERVE applies a real LR shift via")
-    lines.append("   mechanical engine evaluation. Engine clamps, decorrelation, and")
-    lines.append("   confidence_inflation gates protect against runaway, but small wrong shifts")
-    lines.append("   accumulate. Rejecting keeps PARK; that signal is missed for THIS scan, but")
-    lines.append("   if the world-state persists the next scan can recover.")
-    lines.append("")
-    lines.append("3. DEFAULT IS PARK. In genuine doubt, KEEP_PARK. Advocate carries burden of")
-    lines.append("   proof: cite from article, sound inference, value in correct ballpark/units.")
-    lines.append("   Any of these shaky → KEEP_PARK.")
-    lines.append("")
-    lines.append("4. IF REBUT RAISED A SPECIFIC FLAW (phase-transition artifact, invented")
-    lines.append("   baseline, unit mismatch, wrong indicator), that flaw must be addressed.")
-    lines.append("")
-    lines.append("5. CORRECT_VALUE proposals from rebut: use them if better-grounded than")
-    lines.append("   advocate's number; otherwise stick to advocate's value or KEEP_PARK.")
-    lines.append("")
+    lines.append("=== JUDGE'S STANDING INSTRUCTIONS ===")
+    lines.append("1. DIRECTIONAL ALIGNMENT IS NON-NEGOTIABLE. Reject wrong-direction updates.")
+    lines.append("2. DEFAULT IS PARK. In genuine doubt, PARK.")
+    lines.append("3. DUPLICATES. If this article covers the exact same event as another, select DUPLICATE_OF A<n>.")
+    lines.append("4. SCHEMA GAPS. If evidence doesn't fit existing indicators, select SCHEMA_GAP.")
     lines.append("=== END STANDING INSTRUCTIONS ===")
     lines.append("")
     lines.append(f"TOPIC: {slug}")
@@ -403,20 +370,24 @@ def build_jury_prompt(topic: dict, articles: list, advocate_moves: list,
         label = hv.get("label") or hv.get("desc") or ""
         lines.append(f"  {hk}: {label[:120]} (current posterior {hv.get('posterior')})")
     lines.append("")
-    lines.append("INDICATORS WITH OBSERVABLE BLOCKS")
-    for ind in inds_with_obs:
-        ob = ind["observable"]
-        lines.append(f"  {ind['id']} | metric={ob['metric']} | family={ob['family']} | threshold={ob['threshold_value']} | baseline={ob['baseline']} | direction={ob['direction']}")
+    lines.append("INDICATORS (reference)")
+    for ind in inds:
+        lines.append(f"  {ind['id']}")
+        if "observable" in ind:
+            ob = ind["observable"]
+            lines.append(f"    OBSERVABLE: metric={ob['metric']}; threshold={ob['threshold_value']}; baseline={ob['baseline']}; direction={ob['direction']}")
     lines.append("")
     lines.append("CASES")
     lines.append("")
     for mv in advocate_moves:
-        art = articles[mv["idx"] - 1].get("article", articles[mv["idx"] - 1])
-        rb = rebuts.get(mv["idx"], {})
-        lines.append(f"=== A{mv['idx']} ===")
+        idx = mv["idx"]
+        art = articles[idx - 1].get("article", articles[idx - 1])
+        rb = rebuts.get(idx, {})
+        lines.append(f"=== A{idx} ===")
         lines.append(f"  HEADLINE: {art.get('headline', '')}")
         lines.append(f"  SOURCE: {art.get('source', '')}")
         lines.append(f"  ADVOCATE_PROPOSED: {mv['proposed_action']}")
+        lines.append(f"  ADVOCATE_VERDICT: {mv['verdict']}")
         lines.append(f"  ADVOCATE_CITE: {mv['cite']}")
         lines.append(f"  ADVOCATE_INFERENCE: {mv['inference']}")
         lines.append(f"  ADVOCATE_REASON: {mv['reason']}")
@@ -430,7 +401,7 @@ def build_jury_prompt(topic: dict, articles: list, advocate_moves: list,
     lines.append("OUTPUT (one block per case):")
     lines.append("JURY")
     lines.append("ARTICLE: A<n>")
-    lines.append("VERDICT: MOVE_TO OBSERVE <indicator_id> AT <value> | KEEP_PARK")
+    lines.append("VERDICT: COMMIT | PARK | WITHDRAW | DUPLICATE_OF A<n> | SCHEMA_GAP <description>")
     lines.append("RATIONALE: <one sentence reflecting how you weighed advocate vs rebut>")
     lines.append("END")
     return "\n".join(lines)
@@ -461,28 +432,28 @@ _FIRE_RE = re.compile(r"^FIRE\s+(\S+)\s*$", re.IGNORECASE)
 _ADV_BLOCK = re.compile(
     r"ADVOCATE\s*\n"
     r"ARTICLE:\s*A(\d+)\s*\n"
-    r"VERDICT:\s*([A-Z_]+)\s*\n?"
+    r"VERDICT:\s*([^\n]+)\s*\n?"
     r"(?:PROPOSED_ACTION:\s*([^\n]+)\n?)?"
     r"(?:CITE:\s*([^\n]+)\n?)?"
     r"(?:INFERENCE:\s*([^\n]+)\n?)?"
     r"(?:REASON:\s*([^\n]+)\n?)?",
-    re.MULTILINE,
+    re.MULTILINE | re.IGNORECASE,
 )
 _REB_BLOCK = re.compile(
     r"REBUT\s*\n"
     r"ARTICLE:\s*A(\d+)\s*\n"
-    r"VERDICT:\s*([A-Z_]+)\s*\n?"
+    r"VERDICT:\s*([^\n]+)\s*\n?"
     r"(?:OBJECTION:\s*([^\n]+)\n?)?"
     r"(?:CORRECTED_ACTION:\s*([^\n]+)\n?)?"
     r"(?:REASON:\s*([^\n]+)\n?)?",
-    re.MULTILINE,
+    re.MULTILINE | re.IGNORECASE,
 )
 _JURY_BLOCK = re.compile(
     r"JURY\s*\n"
     r"ARTICLE:\s*A(\d+)\s*\n"
     r"VERDICT:\s*([^\n]+)\n?"
     r"(?:RATIONALE:\s*([^\n]+)\n?)?",
-    re.MULTILINE,
+    re.MULTILINE | re.IGNORECASE,
 )
 
 
@@ -555,11 +526,34 @@ def parse_jury_output(text: str) -> dict:
     out = {}
     for m in _JURY_BLOCK.finditer(text):
         verdict_raw = m.group(2).strip()
-        if verdict_raw.upper().startswith("MOVE_TO"):
+        verdict_upper = verdict_raw.upper()
+        
+        if verdict_upper.startswith("COMMIT"):
+            inner = verdict_raw[len("COMMIT"):].strip()
+            if inner:
+                action = parse_action(inner)
+            else:
+                action = {"kind": "COMMIT"}
+        elif verdict_upper.startswith("DUPLICATE_OF"):
+            parent = verdict_upper[len("DUPLICATE_OF"):].strip().lstrip("A")
+            try:
+                parent_idx = int(parent)
+            except ValueError:
+                parent_idx = 0
+            action = {"kind": "DUPLICATE_OF", "parent_idx": parent_idx}
+        elif verdict_upper.startswith("SCHEMA_GAP"):
+            desc = verdict_raw[len("SCHEMA_GAP"):].strip()
+            action = {"kind": "SCHEMA_GAP", "description": desc}
+        elif verdict_upper.startswith("WITHDRAW") or verdict_upper.startswith("IGNORE"):
+            action = {"kind": "IGNORE"}
+        elif verdict_upper.startswith("PARK"):
+            action = {"kind": "PARK"}
+        elif verdict_upper.startswith("MOVE_TO"):
             inner = verdict_raw[len("MOVE_TO"):].strip()
             action = parse_action(inner)
         else:
-            action = {"kind": "PARK"}  # KEEP_PARK
+            action = {"kind": "PARK"}  # Default fallback
+            
         out[int(m.group(1))] = {
             "verdict_raw": verdict_raw,
             "action": action,
@@ -570,17 +564,91 @@ def parse_jury_output(text: str) -> dict:
 
 # ------------------------ APPLY DRIVER ----------------------------
 
+def group_decisions_by_duplicates(articles: list, decisions: list) -> tuple[list[dict], dict[int, list[dict]]]:
+    """
+    Group same-batch decisions by duplicates.
+    Returns (canonical_decisions, duplicate_map) where duplicate_map maps canonical idx -> list of duplicate decisions.
+    """
+    by_idx = {d["idx"]: d for d in decisions}
+    canonical_decisions = []
+    duplicate_map = {}
+    
+    dup_idxs = set()
+    
+    # 1. Process explicit DUPLICATE_OF relationships from the deliberator
+    for d in decisions:
+        action = d["action"]
+        if action["kind"] == "DUPLICATE_OF":
+            parent_idx = action.get("parent_idx")
+            if parent_idx in by_idx:
+                parent_d = by_idx[parent_idx]
+                if parent_d["action"]["kind"] in {"FIRE", "OBSERVE"}:
+                    duplicate_map.setdefault(parent_idx, []).append(d)
+                    dup_idxs.add(d["idx"])
+                    
+    # 2. Process implicit same-batch duplicates (indicator/value similarity fallback)
+    observe_groups = {}  # key: (indicator_id, value_rounded) -> list of decisions
+    fire_groups = {}     # key: indicator_id -> list of decisions
+    
+    for d in decisions:
+        if d["idx"] in dup_idxs:
+            continue
+        action = d["action"]
+        if action["kind"] == "OBSERVE":
+            key = (action["indicator_id"], round(float(action["value"]), 2))
+            observe_groups.setdefault(key, []).append(d)
+        elif action["kind"] == "FIRE":
+            fire_groups.setdefault(action["indicator_id"], []).append(d)
+            
+    # For each group, the first one is canonical, others are duplicates of it
+    for key, group in observe_groups.items():
+        canonical = group[0]
+        canonical_decisions.append(canonical)
+        if len(group) > 1:
+            for dup in group[1:]:
+                duplicate_map.setdefault(canonical["idx"], []).append(dup)
+                dup_idxs.add(dup["idx"])
+                
+    for key, group in fire_groups.items():
+        canonical = group[0]
+        canonical_decisions.append(canonical)
+        if len(group) > 1:
+            for dup in group[1:]:
+                duplicate_map.setdefault(canonical["idx"], []).append(dup)
+                dup_idxs.add(dup["idx"])
+                
+    # Add all other non-duplicate, non-observe, non-fire decisions
+    for d in decisions:
+        if d["idx"] not in dup_idxs and d["action"]["kind"] not in {"OBSERVE", "FIRE"}:
+            canonical_decisions.append(d)
+            
+    canonical_decisions.sort(key=lambda d: d["idx"])
+    return canonical_decisions, duplicate_map
+
+
 def apply_decisions(slug: str, articles: list, decisions: list,
                     *, jury_overrides: dict = None) -> dict:
     """
-    Apply per-article decisions through the engine. `jury_overrides` is an
-    optional {idx: action_dict} map from the debate stage that supersedes
-    PARK decisions where the jury voted MOVE_TO.
-
-    Returns a summary dict with counts per outcome and per-article results.
+    Apply per-article decisions through the engine, resolving duplicates.
     """
     by_idx = {d["idx"]: d for d in decisions}
     jury_overrides = jury_overrides or {}
+    
+    # Fold overrides into the decisions list before grouping
+    for i in range(1, len(articles) + 1):
+        if i in jury_overrides:
+            d = by_idx.get(i)
+            if d:
+                action = jury_overrides[i]["action"]
+                if action["kind"] == "COMMIT":
+                    pass  # keep original action
+                else:
+                    d["action"] = action
+                d["jury_override"] = True
+                d["reason"] = f"jury: {jury_overrides[i].get('rationale') or 'override'}"
+
+    # Group by duplicates
+    canonical_decisions, duplicate_map = group_decisions_by_duplicates(articles, decisions)
 
     summary = {
         "observe": 0, "fire": 0, "park": 0, "ignore": 0,
@@ -591,206 +659,17 @@ def apply_decisions(slug: str, articles: list, decisions: list,
         "bundled_groups": [],
     }
 
-    # Bundle OBSERVE actions on the same (indicator_id, rounded value) so
-    # multiple articles reporting the SAME underlying event become ONE
-    # evidence entry with multiple evidence_refs. Without this, six articles
-    # about Project Freedom would attempt six separate updates and trip the
-    # confidence_inflation gate (>15pp shift with <2 evidence_refs).
-    observe_groups = {}  # key: (indicator_id, value_rounded) -> list of (idx, decision, art)
-    # Same-batch FIREs on one indicator are duplicate coverage of one causal
-    # event until proven otherwise: they must corroborate ONE firing, not
-    # refire per article. (Measured in the synthetic Meridia replay: three
-    # duplicate articles -> three FIREs of t2_blockade_reinforcement on day 1,
-    # the same failure observed live on hormuz. Cross-day repeats remain the
-    # province of lr_decay and operator review.)
-    fire_groups = {}  # key: indicator_id -> list of (idx, decision, art)
-    for i, art in enumerate(articles, start=1):
-        d = by_idx.get(i)
-        if d is None:
-            continue
+    for d in canonical_decisions:
+        idx = d["idx"]
+        art = articles[idx - 1]
         action = d["action"]
-        if i in jury_overrides and action["kind"] == "PARK":
-            action = jury_overrides[i]
-        if action["kind"] == "OBSERVE":
-            key = (action["indicator_id"], round(float(action["value"]), 2))
-            observe_groups.setdefault(key, []).append((i, d, art, action))
-        elif action["kind"] == "FIRE":
-            fire_groups.setdefault(action["indicator_id"], []).append((i, d, art, action))
-
-    # Track which idxs were applied as part of a bundle
-    bundled_idxs = set()
-
-    def _park_secondaries(group, why):
-        """Park the N-1 secondary articles of a bundle; return their evidence_ids.
-
-        Each secondary gets its own evidenceLog entry + evidence_id (logged
-        with impact NONE — flagged for indicator review — that's fine; its
-        purpose here is providing a ref for the bundle).
-        """
-        evidence_ids = []
-        for _sec_idx, sec_d, sec_art, _ in group[1:]:
-            sec_inner = sec_art.get("article", sec_art)
-            sec_inner.setdefault("surfaced_via", sec_art.get("channels", []))
-            sec_entry = article_to_evidence_entry(
-                sec_inner, round_num=1,
-                default_tag=sec_d.get("tag", "EVENT") or "EVENT",
-            )
-            sec_entry["claim"] = sec_d.get("claim") or sec_entry.get("text", "")
-            sec_result = process_evidence(
-                slug=slug, entry=sec_entry,
-                fired_indicator_id=None,
-                reason=why,
-            )
-            log_activity(sec_result, platform="news-scan")
-            summary["park"] += 1
-            if sec_result.get("evidence_id"):
-                evidence_ids.append(sec_result["evidence_id"])
-        return evidence_ids
-
-    def _bundle_entry(group, secondary_evidence_ids):
-        """Evidence entry for a bundle's canonical first article."""
-        _first_idx, first_d, first_art, _ = group[0]
-        inner = first_art.get("article", first_art)
-        inner.setdefault("surfaced_via", first_art.get("channels", []))
-        entry = article_to_evidence_entry(
-            inner, round_num=1,
-            default_tag=first_d.get("tag", "EVENT") or "EVENT",
-        )
-        combined_claim = " | ".join(d.get("claim", "") for _, d, _, _ in group if d.get("claim"))
-        entry["claim"] = combined_claim or entry.get("text", "")
-        entry["evidence_refs"] = list(secondary_evidence_ids)  # real evidence_ids
-        entry["bundled_articles"] = [f"A{idx}" for idx, _, _, _ in group]
-        return entry
-
-    # Apply bundled OBSERVE groups first.
-    # Pre-park secondary articles, then run apply_observation on the
-    # canonical first article passing the secondary evidence_ids as refs.
-    # This way the engine's confidence_inflation gate sees a multi-ref
-    # evidence base made of REAL evidence_ids that resolve to log entries —
-    # and any repetition_as_validation dedup runs correctly across them.
-    for (ind_id, value), group in observe_groups.items():
-        if len(group) == 1:
-            continue  # singleton — let per-article loop handle it normally
-
-        try:
-            secondary_evidence_ids = _park_secondaries(
-                group, f"Secondary article in bundled OBSERVE for {ind_id}"
-            )
-        except Exception as e:
-            summary["engine_rejections"] += 1
-            summary["rejection_msgs"].append(
-                f"BUNDLE-PARK({len(group)}) {ind_id}: "
-                f"{type(e).__name__}: {str(e)[:200]}"
-            )
-            for idx, _, _, _ in group:
-                bundled_idxs.add(idx)
-            continue
-
-        entry = _bundle_entry(group, secondary_evidence_ids)
-        try:
-            result = apply_observation(
-                slug=slug, entry=entry,
-                indicator_id=ind_id,
-                observed_value=value,
-            )
-            log_activity(result, platform="news-scan")
-            summary["observe"] += 1
-            summary["bundled_groups"].append({
-                "kind": "OBSERVE",
-                "indicator_id": ind_id,
-                "value": value,
-                "n_articles": len(group),
-                "articles": [f"A{idx}" for idx, _, _, _ in group],
-                "secondary_refs": secondary_evidence_ids,
-                "before": result.get("posteriors_before"),
-                "after": result.get("posteriors_after"),
-            })
-            for idx, _, _, _ in group:
-                bundled_idxs.add(idx)
-        except Exception as e:
-            summary["engine_rejections"] += 1
-            summary["rejection_msgs"].append(
-                f"BUNDLED({len(group)}) {ind_id}={value}: "
-                f"{type(e).__name__}: {str(e)[:200]}"
-            )
-            for idx, _, _, _ in group:
-                bundled_idxs.add(idx)
-
-    # Apply bundled FIRE groups: ONE firing on the canonical first article,
-    # the duplicates parked as corroborating evidence_refs. Without this,
-    # n duplicate articles fire the indicator n times — overconfidence when
-    # lr_decay is high, premature refire fatigue when it is low.
-    for ind_id, group in fire_groups.items():
-        if len(group) == 1:
-            continue  # singleton — let per-article loop handle it normally
-
-        try:
-            secondary_evidence_ids = _park_secondaries(
-                group, f"Duplicate coverage of one causal event; corroborates FIRE {ind_id}"
-            )
-        except Exception as e:
-            summary["engine_rejections"] += 1
-            summary["rejection_msgs"].append(
-                f"BUNDLE-PARK({len(group)}) {ind_id}: "
-                f"{type(e).__name__}: {str(e)[:200]}"
-            )
-            for idx, _, _, _ in group:
-                bundled_idxs.add(idx)
-            continue
-
-        entry = _bundle_entry(group, secondary_evidence_ids)
-        _first_idx, first_d, _first_art, _ = group[0]
-        try:
-            result = process_evidence(
-                slug=slug, entry=entry,
-                fired_indicator_id=ind_id,
-                reason=first_d.get("reason"),
-            )
-            log_activity(result, platform="news-scan")
-            summary["fire"] += 1
-            summary["bundled_groups"].append({
-                "kind": "FIRE",
-                "indicator_id": ind_id,
-                "n_articles": len(group),
-                "articles": [f"A{idx}" for idx, _, _, _ in group],
-                "secondary_refs": secondary_evidence_ids,
-                "before": result.get("posteriors_before"),
-                "after": result.get("posteriors_after"),
-            })
-            for idx, _, _, _ in group:
-                bundled_idxs.add(idx)
-        except Exception as e:
-            summary["engine_rejections"] += 1
-            summary["rejection_msgs"].append(
-                f"BUNDLED-FIRE({len(group)}) {ind_id}: "
-                f"{type(e).__name__}: {str(e)[:200]}"
-            )
-            for idx, _, _, _ in group:
-                bundled_idxs.add(idx)
-
-    for i, art in enumerate(articles, start=1):
-        if i in bundled_idxs:
-            continue  # already handled in bundle loop above
-        d = by_idx.get(i)
-        if d is None:
-            summary["missing"] += 1
-            continue
-
-        action = d["action"]
-        # If jury voted MOVE_TO on this idx, override the original PARK
-        if i in jury_overrides and action["kind"] == "PARK":
-            action = jury_overrides[i]
-
         kind = action["kind"]
+        
         if kind == "IGNORE":
             summary["ignore"] += 1
             continue
+            
         if kind == "SCHEMA_GAP":
-            # Article reports topic-relevant evidence in a direction the schema
-            # has no observable for. Log to topic.governance.flagged_schema_gaps
-            # for operator review. Do NOT add to evidenceLog — the article
-            # doesn't have a place to land in the current schema, by the
-            # matcher's own admission.
             inner = art.get("article", art)
             from framework.pipeline import log_schema_gap
             log_schema_gap(slug, {
@@ -803,71 +682,149 @@ def apply_decisions(slug: str, articles: list, decisions: list,
             })
             summary["schema_gap"] += 1
             summary["schema_gaps"].append({
-                "article": f"A{i}",
+                "article": f"A{idx}",
                 "headline": inner.get("headline", ""),
                 "missing_direction": action.get("description", ""),
             })
             continue
 
-        inner = art.get("article", art)
-        inner.setdefault("surfaced_via", art.get("channels", []))
-        entry = article_to_evidence_entry(inner, round_num=1,
-                                          default_tag=d.get("tag", "EVENT") or "EVENT")
-        entry["claim"] = d.get("claim") or entry.get("text", "")
-        if inner.get("url") or inner.get("headline"):
-            entry["evidence_refs"] = [inner.get("url") or inner.get("headline")]
-
-        try:
-            if kind == "OBSERVE":
-                result = apply_observation(
-                    slug=slug, entry=entry,
-                    indicator_id=action["indicator_id"],
-                    observed_value=action["value"],
+        # Check if there are duplicates for this canonical decision
+        dups = duplicate_map.get(idx, [])
+        if dups:
+            try:
+                why = f"Duplicate coverage of canonical article A{idx}"
+                secondary_evidence_ids = []
+                for dup_d in dups:
+                    sec_idx = dup_d["idx"]
+                    sec_art = articles[sec_idx - 1]
+                    sec_inner = sec_art.get("article", sec_art)
+                    sec_inner.setdefault("surfaced_via", sec_art.get("channels", []))
+                    sec_entry = article_to_evidence_entry(
+                        sec_inner, round_num=1,
+                        default_tag=dup_d.get("tag", "EVENT") or "EVENT",
+                    )
+                    sec_entry["claim"] = dup_d.get("claim") or sec_entry.get("text", "")
+                    sec_result = process_evidence(
+                        slug=slug, entry=sec_entry,
+                        fired_indicator_id=None,
+                        reason=why,
+                    )
+                    log_activity(sec_result, platform="news-scan")
+                    summary["park"] += 1
+                    if sec_result.get("evidence_id"):
+                        secondary_evidence_ids.append(sec_result["evidence_id"])
+            except Exception as e:
+                summary["engine_rejections"] += 1
+                summary["rejection_msgs"].append(
+                    f"BUNDLE-PARK({len(dups)+1}) {action.get('indicator_id')}: {type(e).__name__}: {str(e)[:200]}"
                 )
-                log_activity(result, platform="news-scan")
-                summary["observe"] += 1
-            elif kind == "FIRE":
-                result = process_evidence(
-                    slug=slug, entry=entry,
-                    fired_indicator_id=action["indicator_id"],
-                    reason=d.get("reason"),
-                )
-                log_activity(result, platform="news-scan")
-                summary["fire"] += 1
-            elif kind == "PARK":
-                result = process_evidence(
-                    slug=slug, entry=entry,
-                    fired_indicator_id=None,
-                    reason=d.get("reason"),
-                )
-                log_activity(result, platform="news-scan")
-                summary["park"] += 1
-            else:
-                summary["errors"] += 1
                 continue
-            summary["results"].append({
-                "article": f"A{i}", "kind": kind,
-                "indicator_id": action.get("indicator_id"),
-                "value": action.get("value"),
-                "before": result.get("posteriors_before"),
-                "after": result.get("posteriors_after"),
-            })
-        except Exception as e:
-            summary["engine_rejections"] += 1
-            summary["rejection_msgs"].append(
-                f"A{i} {kind} {action.get('indicator_id', '?')}: "
-                f"{type(e).__name__}: {str(e)[:200]}"
+
+            inner = art.get("article", art)
+            inner.setdefault("surfaced_via", art.get("channels", []))
+            entry = article_to_evidence_entry(
+                inner, round_num=1,
+                default_tag=d.get("tag", "EVENT") or "EVENT",
             )
+            combined_claim = " | ".join([d.get("claim", "")] + [dup_d.get("claim", "") for dup_d in dups if dup_d.get("claim")])
+            entry["claim"] = combined_claim or entry.get("text", "")
+            entry["evidence_refs"] = list(secondary_evidence_ids)
+            entry["bundled_articles"] = [f"A{idx}"] + [f"A{dup_d['idx']}" for dup_d in dups]
+
+            try:
+                if kind == "OBSERVE":
+                    result = apply_observation(
+                        slug=slug, entry=entry,
+                        indicator_id=action["indicator_id"],
+                        observed_value=action["value"],
+                    )
+                    summary["observe"] += 1
+                elif kind == "FIRE":
+                    result = process_evidence(
+                        slug=slug, entry=entry,
+                        fired_indicator_id=action["indicator_id"],
+                        reason=d.get("reason"),
+                    )
+                    summary["fire"] += 1
+                else:
+                    result = process_evidence(
+                        slug=slug, entry=entry,
+                        fired_indicator_id=None,
+                        reason=d.get("reason"),
+                    )
+                    summary["park"] += 1
+
+                log_activity(result, platform="news-scan")
+                summary["bundled_groups"].append({
+                    "kind": kind,
+                    "indicator_id": action.get("indicator_id"),
+                    "value": action.get("value"),
+                    "n_articles": len(dups) + 1,
+                    "articles": entry["bundled_articles"],
+                    "secondary_refs": secondary_evidence_ids,
+                    "before": result.get("posteriors_before"),
+                    "after": result.get("posteriors_after"),
+                })
+            except Exception as e:
+                summary["engine_rejections"] += 1
+                summary["rejection_msgs"].append(
+                    f"BUNDLED({len(dups)+1}) {action.get('indicator_id')}: {type(e).__name__}: {str(e)[:200]}"
+                )
+        else:
+            inner = art.get("article", art)
+            inner.setdefault("surfaced_via", art.get("channels", []))
+            entry = article_to_evidence_entry(inner, round_num=1,
+                                              default_tag=d.get("tag", "EVENT") or "EVENT")
+            entry["claim"] = d.get("claim") or entry.get("text", "")
+            if inner.get("url") or inner.get("headline"):
+                entry["evidence_refs"] = [inner.get("url") or inner.get("headline")]
+
+            try:
+                if kind == "OBSERVE":
+                    result = apply_observation(
+                        slug=slug, entry=entry,
+                        indicator_id=action["indicator_id"],
+                        observed_value=action["value"],
+                    )
+                    log_activity(result, platform="news-scan")
+                    summary["observe"] += 1
+                elif kind == "FIRE":
+                    result = process_evidence(
+                        slug=slug, entry=entry,
+                        fired_indicator_id=action["indicator_id"],
+                        reason=d.get("reason"),
+                    )
+                    log_activity(result, platform="news-scan")
+                    summary["fire"] += 1
+                elif kind == "PARK":
+                    result = process_evidence(
+                        slug=slug, entry=entry,
+                        fired_indicator_id=None,
+                        reason=d.get("reason"),
+                    )
+                    log_activity(result, platform="news-scan")
+                    summary["park"] += 1
+                else:
+                    summary["errors"] += 1
+                    continue
+                summary["results"].append({
+                    "article": f"A{idx}", "kind": kind,
+                    "indicator_id": action.get("indicator_id"),
+                    "value": action.get("value"),
+                    "before": result.get("posteriors_before"),
+                    "after": result.get("posteriors_after"),
+                })
+            except Exception as e:
+                summary["engine_rejections"] += 1
+                summary["rejection_msgs"].append(
+                    f"A{idx} {kind} {action.get('indicator_id', '?')}: {type(e).__name__}: {str(e)[:200]}"
+                )
 
     try:
         stamp_last_scanned(slug)
     except Exception:
         pass
 
-    # Closing-loop signal: should the news-scan caller dispatch the
-    # schema_gap_resolver? Decided by current accumulated gaps + whether
-    # proposals already pending review. Exposed in summary so the skill
-    # workflow can branch.
     try:
         from framework.schema_gap_resolver import should_dispatch_resolver
         from engine import load_topic
@@ -892,14 +849,46 @@ def get_parks_with_reasons(matcher_decisions: list) -> list:
     ]
 
 
+def get_candidates_with_reasons(matcher_decisions: list) -> list:
+    """Extract candidate entries (FIRE, OBSERVE, PARK) for advocate prompt."""
+    out = []
+    for d in matcher_decisions:
+        kind = d["action"]["kind"]
+        if kind in {"FIRE", "OBSERVE", "PARK"}:
+            if kind == "OBSERVE":
+                act_str = f"OBSERVE {d['action']['indicator_id']} AT {d['action']['value']}"
+            elif kind == "FIRE":
+                act_str = f"FIRE {d['action']['indicator_id']}"
+            else:
+                act_str = "PARK"
+            out.append({
+                "idx": d["idx"],
+                "claim": d["claim"],
+                "action_raw": act_str,
+                "reason": d["reason"],
+            })
+    return out
+
+
 def get_strict_reasons_map(matcher_decisions: list) -> dict:
-    """{idx: {claim, reason}} for rebut/jury context."""
-    return {
-        d["idx"]: {"claim": d["claim"], "reason": d["reason"]}
-        for d in matcher_decisions
-    }
+    """{idx: {claim, reason, action_raw}} for rebut/jury context."""
+    out = {}
+    for d in matcher_decisions:
+        kind = d["action"]["kind"]
+        if kind == "OBSERVE":
+            act_str = f"OBSERVE {d['action']['indicator_id']} AT {d['action']['value']}"
+        elif kind == "FIRE":
+            act_str = f"FIRE {d['action']['indicator_id']}"
+        else:
+            act_str = kind
+        out[d["idx"]] = {
+            "claim": d["claim"],
+            "reason": d["reason"],
+            "action_raw": act_str,
+        }
+    return out
 
 
 def filter_advocate_moves(advocate_blocks: list) -> list:
-    """Just the ARGUE_MOVE entries from advocate output."""
-    return [a for a in advocate_blocks if a["verdict"] == "ARGUE_MOVE"]
+    """Just the ADVOCATE entries that propose a COMMIT verdict (acting as moves or confirmations)."""
+    return [a for a in advocate_blocks if a["verdict"] == "COMMIT"]
