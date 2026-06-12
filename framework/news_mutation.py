@@ -324,8 +324,12 @@ def article_to_evidence_entry(
       - scanRound: int round number
       - queryProvenance: short string tagging the search-stage origin
 
-    These ride along in the evidence entry. add_evidence() preserves
-    unrecognized fields, so they survive into evidenceLog for audit.
+    CORRECTION (2026-06-12): add_evidence() does NOT preserve unrecognized
+    fields — it builds the stored entry from an explicit whitelist, so these
+    provenance fields are currently dropped at the ledger (verified against
+    engine.add_evidence; the prior claim here was design intent, not
+    implementation). Fields that must survive need explicit carryover in
+    add_evidence, as deliberation/deliberationWaiver now have.
     """
     surfaced = list(article.get("surfaced_via") or [])
     if surfaced:

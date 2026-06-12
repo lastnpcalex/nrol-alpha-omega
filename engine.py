@@ -3384,6 +3384,13 @@ def add_evidence(topic: dict, entry: dict) -> dict:
         full_entry["note"] = entry["note"]
     if entry.get("url"):
         full_entry["url"] = entry["url"]
+    # Deliberation audit trail: the debate record (or explicit waiver) a
+    # posterior-moving transition carried through the MCP gate. Authority
+    # fields — they must survive into the ledger.
+    if entry.get("deliberation"):
+        full_entry["deliberation"] = entry["deliberation"]
+    if entry.get("deliberationWaiver"):
+        full_entry["deliberationWaiver"] = entry["deliberationWaiver"]
 
     # Information-chain tracking: entries sharing a chain ID trace to the
     # same primary source and should not count as independent corroboration.
