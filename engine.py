@@ -17,6 +17,7 @@ from pathlib import Path
 from typing import Optional
 
 from framework.lint_indicators import propose_indicators_lint
+from framework.indicator_schema import anti_indicators_for_topic
 from governor import (
     check_update_proposal,
     classify_evidence,
@@ -90,7 +91,7 @@ def _collect_indicator_ids(topic: dict) -> set:
         for ind in inds.get("tiers", {}).get(tier_key, []) or []:
             if isinstance(ind, dict) and ind.get("id"):
                 ids.add(ind["id"])
-    for ind in inds.get("anti_indicators", []) or []:
+    for ind in anti_indicators_for_topic(topic):
         if isinstance(ind, dict) and ind.get("id"):
             ids.add(ind["id"])
     return ids
@@ -155,7 +156,7 @@ def save_topic(topic: dict) -> None:
         all_inds = []
         for t in ("tier1_critical", "tier2_strong", "tier3_suggestive"):
             all_inds.extend(topic.get("indicators", {}).get("tiers", {}).get(t, []))
-        all_inds.extend(topic.get("indicators", {}).get("anti_indicators", []))
+        all_inds.extend(anti_indicators_for_topic(topic))
         
         inds_to_check = []
         if topic_path.exists():
@@ -3394,6 +3395,11 @@ def add_evidence(topic: dict, entry: dict) -> dict:
         full_entry["deliberation"] = entry["deliberation"]
     if entry.get("deliberationWaiver"):
         full_entry["deliberationWaiver"] = entry["deliberationWaiver"]
+
+    # Carriage of duplicate tracking and provenance fields
+    for key in ("evidence_refs", "causal_event_id", "surfaced_via", "scanRound", "queryProvenance"):
+        if key in entry:
+            full_entry[key] = entry[key]
 
     # Information-chain tracking: entries sharing a chain ID trace to the
     # same primary source and should not count as independent corroboration.

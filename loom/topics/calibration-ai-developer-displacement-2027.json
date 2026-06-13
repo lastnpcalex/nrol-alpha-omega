@@ -547,61 +547,61 @@
           "n_firings": 0,
           "resolution_class": false
         }
-      ],
-      "anti_indicators": [
-        {
-          "id": "anti_h1_bls_growth_2pct",
-          "desc": "BLS OEWS shows net developer job growth >=2% YoY in SOC 15-1252 in any reporting period through 2028-Q1.",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": null,
-          "posteriorEffect": "H4 +30pp, H3 +15pp. H1 -38pp, H2 -7pp.",
-          "likelihoods": {
-            "H1": 0.011111,
-            "H2": 0.306667,
-            "H3": 0.5875,
-            "H4": 1.0
-          },
-          "lr_decay": 0.65,
-          "n_firings": 0,
-          "resolution_class": false
-        },
-        {
-          "id": "anti_h1_h2_new_roles_absorb",
-          "desc": "BLS creates a new SOC classification for AI-adjacent developer roles AND reports headcount >=200,000 within 18 months, indicating absorption of displaced workers.",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": null,
-          "posteriorEffect": "H1 -15pp, H2 -10pp. H3 +15pp, H4 +10pp.",
-          "likelihoods": {
-            "H1": 0.111111,
-            "H2": 0.444444,
-            "H3": 0.979167,
-            "H4": 1.0
-          },
-          "lr_decay": 0.65,
-          "n_firings": 0,
-          "resolution_class": false
-        },
-        {
-          "id": "anti_h3_h4_junior_unemployment",
-          "desc": "BLS CPS shows unemployment rate for developers with <5 years experience rises >=3pp above overall tech unemployment rate, signaling structural junior displacement.",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": null,
-          "posteriorEffect": "H3 -20pp, H4 -15pp. H1 +25pp, H2 +10pp.",
-          "likelihoods": {
-            "H1": 1.0,
-            "H2": 0.55814,
-            "H3": 0.156977,
-            "H4": 0.104651
-          },
-          "lr_decay": 0.65,
-          "n_firings": 0,
-          "resolution_class": false
-        }
       ]
-    }
+    },
+    "anti_indicators": [
+      {
+        "id": "anti_h1_bls_growth_2pct",
+        "desc": "BLS OEWS shows net developer job growth >=2% YoY in SOC 15-1252 in any reporting period through 2028-Q1.",
+        "status": "NOT_FIRED",
+        "firedDate": null,
+        "note": null,
+        "posteriorEffect": "H4 +30pp, H3 +15pp. H1 -38pp, H2 -7pp.",
+        "likelihoods": {
+          "H1": 0.011111,
+          "H2": 0.306667,
+          "H3": 0.5875,
+          "H4": 1.0
+        },
+        "lr_decay": 0.65,
+        "n_firings": 0,
+        "resolution_class": false
+      },
+      {
+        "id": "anti_h1_h2_new_roles_absorb",
+        "desc": "BLS creates a new SOC classification for AI-adjacent developer roles AND reports headcount >=200,000 within 18 months, indicating absorption of displaced workers.",
+        "status": "NOT_FIRED",
+        "firedDate": null,
+        "note": null,
+        "posteriorEffect": "H1 -15pp, H2 -10pp. H3 +15pp, H4 +10pp.",
+        "likelihoods": {
+          "H1": 0.111111,
+          "H2": 0.444444,
+          "H3": 0.979167,
+          "H4": 1.0
+        },
+        "lr_decay": 0.65,
+        "n_firings": 0,
+        "resolution_class": false
+      },
+      {
+        "id": "anti_h3_h4_junior_unemployment",
+        "desc": "BLS CPS shows unemployment rate for developers with <5 years experience rises >=3pp above overall tech unemployment rate, signaling structural junior displacement.",
+        "status": "NOT_FIRED",
+        "firedDate": null,
+        "note": null,
+        "posteriorEffect": "H3 -20pp, H4 -15pp. H1 +25pp, H2 +10pp.",
+        "likelihoods": {
+          "H1": 1.0,
+          "H2": 0.55814,
+          "H3": 0.156977,
+          "H4": 0.104651
+        },
+        "lr_decay": 0.65,
+        "n_firings": 0,
+        "resolution_class": false
+      }
+    ]
   },
   "actorModel": {
     "description": "AI lab capability and enterprise CTO adoption decisions drive the outcome. BLS is the resolution authority.",

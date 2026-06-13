@@ -889,79 +889,79 @@
           "n_firings": 0,
           "resolution_class": false
         }
-      ],
-      "anti_indicators": [
-        {
-          "id": "anti_h2_formal_hotline",
-          "desc": "PRC and Philippines establish a functioning military-to-military hotline with documented first use during an incident. Reduces likelihood of miscalculation escalating to injuries.",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": null,
-          "posteriorEffect": "H2 -8pp, H3 -4pp",
-          "likelihoods": {
-            "H1": 1.0,
-            "H2": 0.68,
-            "H3": 0.692308,
-            "H4": 1.0
-          },
-          "lr_decay": 0.65,
-          "n_firings": 0,
-          "resolution_class": false
-        },
-        {
-          "id": "anti_h3_prc_pullback_contested",
-          "desc": "PRC withdraws PCG or PLAN vessels from immediate vicinity of Second Thomas Shoal or Scarborough Shoal for 30+ consecutive days. Observable via AIS and satellite.",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": null,
-          "posteriorEffect": "H3 -8pp, H4 -4pp, H1 +10pp, H2 +2pp",
-          "likelihoods": {
-            "H1": 1.0,
-            "H2": 0.913846,
-            "H3": 0.325444,
-            "H4": 0.362637
-          },
-          "lr_decay": 0.65,
-          "n_firings": 0,
-          "resolution_class": false
-        },
-        {
-          "id": "anti_h4_marcos_political_constraint",
-          "desc": "Marcos administration explicitly states it will NOT invoke MDT even if lethal incident occurs (hedging statement). Or: Philippine Congress passes resolution limiting president's MDT invocation authority.",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": "PH executive currently maintains ambiguity. An explicit de-escalatory statement would reduce H4 materially.",
-          "posteriorEffect": "H4 -15pp",
-          "likelihoods": {
-            "H1": 1.0,
-            "H2": 1.0,
-            "H3": 1.0,
-            "H4": 0.071429
-          },
-          "lr_decay": 0.65,
-          "n_firings": 0,
-          "resolution_class": false,
-          "lr_migration_warning": "design prior drift >30% — review before next firing"
-        },
-        {
-          "id": "anti_h1_escalation_pattern",
-          "desc": "Three or more distinct water cannon or physical intercept incidents within any 30-day window, indicating normalized escalation above current baseline.",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": null,
-          "posteriorEffect": "H1 -15pp, H2 +10pp, H3 +5pp",
-          "likelihoods": {
-            "H1": 0.519481,
-            "H2": 1.0,
-            "H3": 0.989011,
-            "H4": 0.714286
-          },
-          "lr_decay": 0.65,
-          "n_firings": 0,
-          "resolution_class": false
-        }
       ]
-    }
+    },
+    "anti_indicators": [
+      {
+        "id": "anti_h2_formal_hotline",
+        "desc": "PRC and Philippines establish a functioning military-to-military hotline with documented first use during an incident. Reduces likelihood of miscalculation escalating to injuries.",
+        "status": "NOT_FIRED",
+        "firedDate": null,
+        "note": null,
+        "posteriorEffect": "H2 -8pp, H3 -4pp",
+        "likelihoods": {
+          "H1": 1.0,
+          "H2": 0.68,
+          "H3": 0.692308,
+          "H4": 1.0
+        },
+        "lr_decay": 0.65,
+        "n_firings": 0,
+        "resolution_class": false
+      },
+      {
+        "id": "anti_h3_prc_pullback_contested",
+        "desc": "PRC withdraws PCG or PLAN vessels from immediate vicinity of Second Thomas Shoal or Scarborough Shoal for 30+ consecutive days. Observable via AIS and satellite.",
+        "status": "NOT_FIRED",
+        "firedDate": null,
+        "note": null,
+        "posteriorEffect": "H3 -8pp, H4 -4pp, H1 +10pp, H2 +2pp",
+        "likelihoods": {
+          "H1": 1.0,
+          "H2": 0.913846,
+          "H3": 0.325444,
+          "H4": 0.362637
+        },
+        "lr_decay": 0.65,
+        "n_firings": 0,
+        "resolution_class": false
+      },
+      {
+        "id": "anti_h4_marcos_political_constraint",
+        "desc": "Marcos administration explicitly states it will NOT invoke MDT even if lethal incident occurs (hedging statement). Or: Philippine Congress passes resolution limiting president's MDT invocation authority.",
+        "status": "NOT_FIRED",
+        "firedDate": null,
+        "note": "PH executive currently maintains ambiguity. An explicit de-escalatory statement would reduce H4 materially.",
+        "posteriorEffect": "H4 -15pp",
+        "likelihoods": {
+          "H1": 1.0,
+          "H2": 1.0,
+          "H3": 1.0,
+          "H4": 0.071429
+        },
+        "lr_decay": 0.65,
+        "n_firings": 0,
+        "resolution_class": false,
+        "lr_migration_warning": "design prior drift >30% — review before next firing"
+      },
+      {
+        "id": "anti_h1_escalation_pattern",
+        "desc": "Three or more distinct water cannon or physical intercept incidents within any 30-day window, indicating normalized escalation above current baseline.",
+        "status": "NOT_FIRED",
+        "firedDate": null,
+        "note": null,
+        "posteriorEffect": "H1 -15pp, H2 +10pp, H3 +5pp",
+        "likelihoods": {
+          "H1": 0.519481,
+          "H2": 1.0,
+          "H3": 0.989011,
+          "H4": 0.714286
+        },
+        "lr_decay": 0.65,
+        "n_firings": 0,
+        "resolution_class": false
+      }
+    ]
   },
   "actorModel": {
     "description": "Five key decision-makers shape the escalation path. PRC controls the primary levers; Philippines the response; US the deterrence architecture; Xi and Marcos hold political override authority.",

@@ -676,50 +676,50 @@
           "firedDate": null,
           "note": null
         }
-      ],
-      "anti_indicators": [
-        {
-          "id": "anti_h1_open_commercial_revenue",
-          "desc": "Open-weights provider reports >$5B annual commercial revenue — contradicts hyper-concentrated moat.",
-          "posteriorEffect": "H1 -15pp (redistributed to H3+H4)",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": null
-        },
-        {
-          "id": "anti_h2_sub50_fragmentation",
-          "desc": "Major research firm publishes top-3 combined revenue share below 50% — contradicts oligopoly.",
-          "posteriorEffect": "H2 -15pp (redistributed to H3+H4)",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": null
-        },
-        {
-          "id": "anti_h3_mega_acquisition",
-          "desc": "Top-3 provider acquires leading open-weights competitor (Meta AI, Mistral, Cohere, or equivalent with >$3B valuation) — market reconsolidates.",
-          "posteriorEffect": "H3 -12pp, H4 -8pp (redistributed to H1+H2)",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": null
-        },
-        {
-          "id": "anti_h4_persistent_dominance",
-          "desc": "Top-3 maintain ≥70% combined share through 2027 with no regulatory challenge and no open-weights provider exceeding $1B commercial revenue — H4 commoditization implausible.",
-          "posteriorEffect": "H4 -8pp (redistributed to H1+H2)",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": null
-        },
-        {
-          "id": "anti_h1_open_weights_benchmark_lead",
-          "desc": "An open-weights model holds #1 position on LMSYS Chatbot Arena ELO leaderboard or HELM aggregate score for >=1 calendar quarter before 2028-12-31. Capability-parity moat-erosion signal independent of commercial revenue thresholds.",
-          "posteriorEffect": "H1 -10pp (redistributed to H3 +6pp, H4 +4pp)",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": null
-        }
       ]
-    }
+    },
+    "anti_indicators": [
+      {
+        "id": "anti_h1_open_commercial_revenue",
+        "desc": "Open-weights provider reports >$5B annual commercial revenue — contradicts hyper-concentrated moat.",
+        "posteriorEffect": "H1 -15pp (redistributed to H3+H4)",
+        "status": "NOT_FIRED",
+        "firedDate": null,
+        "note": null
+      },
+      {
+        "id": "anti_h2_sub50_fragmentation",
+        "desc": "Major research firm publishes top-3 combined revenue share below 50% — contradicts oligopoly.",
+        "posteriorEffect": "H2 -15pp (redistributed to H3+H4)",
+        "status": "NOT_FIRED",
+        "firedDate": null,
+        "note": null
+      },
+      {
+        "id": "anti_h3_mega_acquisition",
+        "desc": "Top-3 provider acquires leading open-weights competitor (Meta AI, Mistral, Cohere, or equivalent with >$3B valuation) — market reconsolidates.",
+        "posteriorEffect": "H3 -12pp, H4 -8pp (redistributed to H1+H2)",
+        "status": "NOT_FIRED",
+        "firedDate": null,
+        "note": null
+      },
+      {
+        "id": "anti_h4_persistent_dominance",
+        "desc": "Top-3 maintain ≥70% combined share through 2027 with no regulatory challenge and no open-weights provider exceeding $1B commercial revenue — H4 commoditization implausible.",
+        "posteriorEffect": "H4 -8pp (redistributed to H1+H2)",
+        "status": "NOT_FIRED",
+        "firedDate": null,
+        "note": null
+      },
+      {
+        "id": "anti_h1_open_weights_benchmark_lead",
+        "desc": "An open-weights model holds #1 position on LMSYS Chatbot Arena ELO leaderboard or HELM aggregate score for >=1 calendar quarter before 2028-12-31. Capability-parity moat-erosion signal independent of commercial revenue thresholds.",
+        "posteriorEffect": "H1 -10pp (redistributed to H3 +6pp, H4 +4pp)",
+        "status": "NOT_FIRED",
+        "firedDate": null,
+        "note": null
+      }
+    ]
   },
   "actorModel": {
     "description": "Commercial AI market concentration driven by provider pricing, open-source release strategy, hyperscaler lock-in, and regulatory intervention.",

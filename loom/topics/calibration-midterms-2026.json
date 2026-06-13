@@ -480,119 +480,119 @@
           "resolution_class": false,
           "shape": "single_observation"
         }
-      ],
-      "anti_indicators": [
-        {
-          "id": "anti_h1_generic_ballot_narrows_parity",
-          "desc": "Generic ballot average narrows to Dems +1pp or less (or Republicans lead) in two consecutive monthly averages before October 2026. Observable: RCP average.",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": null,
-          "posteriorEffect": "H1 -15pp, H2 -5pp. At generic ballot parity, historical models show GOP holds majority with districting advantage.",
-          "likelihoods": {
-            "H1": 0.642857,
-            "H2": 0.821429,
-            "H3": 0.85,
-            "H4": 0.85
-          },
-          "lr_decay": 0.65,
-          "n_firings": 0,
-          "resolution_class": false,
-          "shape": "single_observation"
-        },
-        {
-          "id": "anti_h1_special_election_gop_outperforms",
-          "desc": "Republican outperforms 2024 presidential baseline by +3pp or more in a special election held in a competitive or swing district. Observable: certified results.",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": null,
-          "posteriorEffect": "H1 -10pp, H2 -5pp, H3 +10pp, H4 +5pp.",
-          "likelihoods": {
-            "H1": 0.489796,
-            "H2": 0.528061,
-            "H3": 0.85,
-            "H4": 0.85
-          },
-          "lr_decay": 0.65,
-          "n_firings": 0,
-          "resolution_class": false,
-          "shape": "single_observation"
-        },
-        {
-          "id": "anti_h2_generic_ballot_sustained_plus6",
-          "desc": "Generic ballot reaches and holds Dems +6pp or more through October. At this level, historical models predict a full flip, making H2 (gains/fall short) less likely. Observable: RCP average.",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": null,
-          "posteriorEffect": "H2 -8pp (probability mass moves to H1). H2 is squeezed from above when the environment is strong enough for a flip.",
-          "likelihoods": {
-            "H1": 0.85,
-            "H2": 0.714286,
-            "H3": 0.85,
-            "H4": 0.85
-          },
-          "lr_decay": 0.65,
-          "n_firings": 0,
-          "resolution_class": false,
-          "shape": "single_observation"
-        },
-        {
-          "id": "anti_h3_approval_remains_sub42",
-          "desc": "If Trump approval remains below 42% through Q3 2026 without recovery, status-quo hold becomes historically implausible. Observable: monthly tracking.",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": null,
-          "posteriorEffect": "H3 -8pp, H4 -5pp. Historical GOP hold cycles (2002) required approval 60%+; 2002 Bush had 63% approval.",
-          "likelihoods": {
-            "H1": 0.85,
-            "H2": 0.85,
-            "H3": 0.555556,
-            "H4": 0.583333
-          },
-          "lr_decay": 0.65,
-          "n_firings": 0,
-          "resolution_class": false,
-          "shape": "single_observation"
-        },
-        {
-          "id": "anti_h4_no_structural_approval_recovery",
-          "desc": "Trump economy approval fails to recover above 40% by September 2026. Observable: September 2026 economy approval in major polls.",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": null,
-          "posteriorEffect": "H4 -8pp. Republican seat gains at sub-40% economic approval are historically unprecedented in the modern era.",
-          "likelihoods": {
-            "H1": 0.85,
-            "H2": 0.85,
-            "H3": 0.85,
-            "H4": 0.333333
-          },
-          "lr_decay": 0.65,
-          "n_firings": 0,
-          "resolution_class": false,
-          "lr_migration_warning": "design prior drift >30% — review before next firing",
-          "shape": "single_observation"
-        },
-        {
-          "id": "anti_h4_no_dem_scandal_or_collapse",
-          "desc": "No major Democratic Party-wide scandal or national candidate quality collapse materializes by October. Observable: absence of event. Fire this as 'CONFIRMED_ABSENT' if October passes with no such event.",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": "This is a null-event indicator — fire it if the event definitively does NOT occur by October 15, 2026.",
-          "posteriorEffect": "H4 -5pp, H3 -3pp. H4 essentially requires a Dem self-immolation event.",
-          "likelihoods": {
-            "H1": 0.85,
-            "H2": 0.85,
-            "H3": 0.833333,
-            "H4": 0.583333
-          },
-          "lr_decay": 0.65,
-          "n_firings": 0,
-          "resolution_class": false,
-          "shape": "single_observation"
-        }
       ]
-    }
+    },
+    "anti_indicators": [
+      {
+        "id": "anti_h1_generic_ballot_narrows_parity",
+        "desc": "Generic ballot average narrows to Dems +1pp or less (or Republicans lead) in two consecutive monthly averages before October 2026. Observable: RCP average.",
+        "status": "NOT_FIRED",
+        "firedDate": null,
+        "note": null,
+        "posteriorEffect": "H1 -15pp, H2 -5pp. At generic ballot parity, historical models show GOP holds majority with districting advantage.",
+        "likelihoods": {
+          "H1": 0.642857,
+          "H2": 0.821429,
+          "H3": 0.85,
+          "H4": 0.85
+        },
+        "lr_decay": 0.65,
+        "n_firings": 0,
+        "resolution_class": false,
+        "shape": "single_observation"
+      },
+      {
+        "id": "anti_h1_special_election_gop_outperforms",
+        "desc": "Republican outperforms 2024 presidential baseline by +3pp or more in a special election held in a competitive or swing district. Observable: certified results.",
+        "status": "NOT_FIRED",
+        "firedDate": null,
+        "note": null,
+        "posteriorEffect": "H1 -10pp, H2 -5pp, H3 +10pp, H4 +5pp.",
+        "likelihoods": {
+          "H1": 0.489796,
+          "H2": 0.528061,
+          "H3": 0.85,
+          "H4": 0.85
+        },
+        "lr_decay": 0.65,
+        "n_firings": 0,
+        "resolution_class": false,
+        "shape": "single_observation"
+      },
+      {
+        "id": "anti_h2_generic_ballot_sustained_plus6",
+        "desc": "Generic ballot reaches and holds Dems +6pp or more through October. At this level, historical models predict a full flip, making H2 (gains/fall short) less likely. Observable: RCP average.",
+        "status": "NOT_FIRED",
+        "firedDate": null,
+        "note": null,
+        "posteriorEffect": "H2 -8pp (probability mass moves to H1). H2 is squeezed from above when the environment is strong enough for a flip.",
+        "likelihoods": {
+          "H1": 0.85,
+          "H2": 0.714286,
+          "H3": 0.85,
+          "H4": 0.85
+        },
+        "lr_decay": 0.65,
+        "n_firings": 0,
+        "resolution_class": false,
+        "shape": "single_observation"
+      },
+      {
+        "id": "anti_h3_approval_remains_sub42",
+        "desc": "If Trump approval remains below 42% through Q3 2026 without recovery, status-quo hold becomes historically implausible. Observable: monthly tracking.",
+        "status": "NOT_FIRED",
+        "firedDate": null,
+        "note": null,
+        "posteriorEffect": "H3 -8pp, H4 -5pp. Historical GOP hold cycles (2002) required approval 60%+; 2002 Bush had 63% approval.",
+        "likelihoods": {
+          "H1": 0.85,
+          "H2": 0.85,
+          "H3": 0.555556,
+          "H4": 0.583333
+        },
+        "lr_decay": 0.65,
+        "n_firings": 0,
+        "resolution_class": false,
+        "shape": "single_observation"
+      },
+      {
+        "id": "anti_h4_no_structural_approval_recovery",
+        "desc": "Trump economy approval fails to recover above 40% by September 2026. Observable: September 2026 economy approval in major polls.",
+        "status": "NOT_FIRED",
+        "firedDate": null,
+        "note": null,
+        "posteriorEffect": "H4 -8pp. Republican seat gains at sub-40% economic approval are historically unprecedented in the modern era.",
+        "likelihoods": {
+          "H1": 0.85,
+          "H2": 0.85,
+          "H3": 0.85,
+          "H4": 0.333333
+        },
+        "lr_decay": 0.65,
+        "n_firings": 0,
+        "resolution_class": false,
+        "lr_migration_warning": "design prior drift >30% — review before next firing",
+        "shape": "single_observation"
+      },
+      {
+        "id": "anti_h4_no_dem_scandal_or_collapse",
+        "desc": "No major Democratic Party-wide scandal or national candidate quality collapse materializes by October. Observable: absence of event. Fire this as 'CONFIRMED_ABSENT' if October passes with no such event.",
+        "status": "NOT_FIRED",
+        "firedDate": null,
+        "note": "This is a null-event indicator — fire it if the event definitively does NOT occur by October 15, 2026.",
+        "posteriorEffect": "H4 -5pp, H3 -3pp. H4 essentially requires a Dem self-immolation event.",
+        "likelihoods": {
+          "H1": 0.85,
+          "H2": 0.85,
+          "H3": 0.833333,
+          "H4": 0.583333
+        },
+        "lr_decay": 0.65,
+        "n_firings": 0,
+        "resolution_class": false,
+        "shape": "single_observation"
+      }
+    ]
   },
   "actorModel": {
     "description": "Election outcomes are driven by structural environment (approval, economy, war) and by specific actor decisions that shift recruitment, enthusiasm, and turnout. Five primary actors.",

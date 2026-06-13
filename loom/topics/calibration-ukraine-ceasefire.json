@@ -994,96 +994,96 @@
             "H4": 0.299401
           }
         }
-      ],
-      "anti_indicators": [
-        {
-          "id": "anti_h1_russia_maximalism",
-          "desc": "Russia reaffirms demand for full Donbas/Zaporizhzhia/Kherson/Mykolaiv oblasts in official MFA or Kremlin statement within 60 days.",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": "This is the background baseline — fire only if a NEW, emphatic restatement after talks progress.",
-          "posteriorEffect": "H1 -10pp",
-          "likelihoods": {
-            "H1": 0.071429,
-            "H2": 1.0,
-            "H3": 1.0,
-            "H4": 1.0
-          },
-          "lr_decay": 0.65,
-          "n_firings": 0,
-          "resolution_class": false,
-          "lr_migration_warning": "design prior drift >30% — review before next firing"
-        },
-        {
-          "id": "anti_h1_talks_collapse",
-          "desc": "Any formal or mediated talks (Abu Dhabi, Geneva, Paris) collapse publicly with both sides issuing blame statements.",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": null,
-          "posteriorEffect": "H1 -15pp; H3 +5pp; H4 +5pp",
-          "likelihoods": {
-            "H1": 0.059113,
-            "H2": 0.827586,
-            "H3": 0.915627,
-            "H4": 1.0
-          },
-          "lr_decay": 0.65,
-          "n_firings": 0,
-          "resolution_class": false
-        },
-        {
-          "id": "anti_h2_new_offensive",
-          "desc": "Russia launches a new offensive that advances significantly (10km+) before any ceasefire talks begin, eliminating frozen-line stability.",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": null,
-          "posteriorEffect": "H2 -10pp; H4 +10pp",
-          "likelihoods": {
-            "H1": 0.705882,
-            "H2": 0.385027,
-            "H3": 0.705882,
-            "H4": 1.0
-          },
-          "lr_decay": 0.65,
-          "n_firings": 0,
-          "resolution_class": false
-        },
-        {
-          "id": "anti_h3_sustained_halt",
-          "desc": "Fighting halts for >14 consecutive days across the entire front (H3 requires episodic truces, not sustained halt).",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": null,
-          "posteriorEffect": "H3 -10pp; H2 +8pp; H1 +2pp",
-          "likelihoods": {
-            "H1": 0.942857,
-            "H2": 1.0,
-            "H3": 0.577305,
-            "H4": 0.733333
-          },
-          "lr_decay": 0.65,
-          "n_firings": 0,
-          "resolution_class": false
-        },
-        {
-          "id": "anti_h4_russia_defensive",
-          "desc": "Russia publicly announces a shift to 'defensive posture' and halts cross-border shelling for >7 days (verified by OSCE or OSINT).",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": null,
-          "posteriorEffect": "H4 -15pp; H2 +8pp; H3 +5pp",
-          "likelihoods": {
-            "H1": 0.733333,
-            "H2": 1.0,
-            "H3": 0.811348,
-            "H4": 0.275
-          },
-          "lr_decay": 0.65,
-          "n_firings": 0,
-          "resolution_class": false
-        }
       ]
-    }
+    },
+    "anti_indicators": [
+      {
+        "id": "anti_h1_russia_maximalism",
+        "desc": "Russia reaffirms demand for full Donbas/Zaporizhzhia/Kherson/Mykolaiv oblasts in official MFA or Kremlin statement within 60 days.",
+        "status": "NOT_FIRED",
+        "firedDate": null,
+        "note": "This is the background baseline — fire only if a NEW, emphatic restatement after talks progress.",
+        "posteriorEffect": "H1 -10pp",
+        "likelihoods": {
+          "H1": 0.071429,
+          "H2": 1.0,
+          "H3": 1.0,
+          "H4": 1.0
+        },
+        "lr_decay": 0.65,
+        "n_firings": 0,
+        "resolution_class": false,
+        "lr_migration_warning": "design prior drift >30% — review before next firing"
+      },
+      {
+        "id": "anti_h1_talks_collapse",
+        "desc": "Any formal or mediated talks (Abu Dhabi, Geneva, Paris) collapse publicly with both sides issuing blame statements.",
+        "status": "NOT_FIRED",
+        "firedDate": null,
+        "note": null,
+        "posteriorEffect": "H1 -15pp; H3 +5pp; H4 +5pp",
+        "likelihoods": {
+          "H1": 0.059113,
+          "H2": 0.827586,
+          "H3": 0.915627,
+          "H4": 1.0
+        },
+        "lr_decay": 0.65,
+        "n_firings": 0,
+        "resolution_class": false
+      },
+      {
+        "id": "anti_h2_new_offensive",
+        "desc": "Russia launches a new offensive that advances significantly (10km+) before any ceasefire talks begin, eliminating frozen-line stability.",
+        "status": "NOT_FIRED",
+        "firedDate": null,
+        "note": null,
+        "posteriorEffect": "H2 -10pp; H4 +10pp",
+        "likelihoods": {
+          "H1": 0.705882,
+          "H2": 0.385027,
+          "H3": 0.705882,
+          "H4": 1.0
+        },
+        "lr_decay": 0.65,
+        "n_firings": 0,
+        "resolution_class": false
+      },
+      {
+        "id": "anti_h3_sustained_halt",
+        "desc": "Fighting halts for >14 consecutive days across the entire front (H3 requires episodic truces, not sustained halt).",
+        "status": "NOT_FIRED",
+        "firedDate": null,
+        "note": null,
+        "posteriorEffect": "H3 -10pp; H2 +8pp; H1 +2pp",
+        "likelihoods": {
+          "H1": 0.942857,
+          "H2": 1.0,
+          "H3": 0.577305,
+          "H4": 0.733333
+        },
+        "lr_decay": 0.65,
+        "n_firings": 0,
+        "resolution_class": false
+      },
+      {
+        "id": "anti_h4_russia_defensive",
+        "desc": "Russia publicly announces a shift to 'defensive posture' and halts cross-border shelling for >7 days (verified by OSCE or OSINT).",
+        "status": "NOT_FIRED",
+        "firedDate": null,
+        "note": null,
+        "posteriorEffect": "H4 -15pp; H2 +8pp; H3 +5pp",
+        "likelihoods": {
+          "H1": 0.733333,
+          "H2": 1.0,
+          "H3": 0.811348,
+          "H4": 0.275
+        },
+        "lr_decay": 0.65,
+        "n_firings": 0,
+        "resolution_class": false
+      }
+    ]
   },
   "actorModel": {
     "description": "Five actors whose decisions are necessary and sufficient to drive outcomes. H1 requires Putin + Zelenskyy both accepting a deal. H4 requires only Putin (or a NATO actor) to escalate. This asymmetry explains why H4 has similar probability to H1 despite being the 'extreme' outcome.",

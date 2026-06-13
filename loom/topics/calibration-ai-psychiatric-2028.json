@@ -515,48 +515,6 @@
           "firedDate": null,
           "note": null
         }
-      ],
-      "anti_indicators": [
-        {
-          "id": "anti_h1",
-          "desc": "Two or more large (n>10k) peer-reviewed epidemiological reviews by 2028 find no population-level AI-psychiatric signal after controlling for social media / screen time / isolation.",
-          "posteriorEffect": "H1 -10-15pp, H4 +10pp",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": null
-        },
-        {
-          "id": "anti_h2",
-          "desc": "Peer-reviewed systematic review of case series finds no plausible causal mechanism beyond base rate + confounding.",
-          "posteriorEffect": "H2 -10-15pp, H4 +8pp",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": null
-        },
-        {
-          "id": "anti_h3",
-          "desc": "Two or more preregistered RCTs (n>=200 each) find null effect of extended AI use on belief calibration.",
-          "posteriorEffect": "H3 -10-15pp, H4 +10pp",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": null
-        },
-        {
-          "id": "anti_h4",
-          "desc": "Any tier1 indicator fires, OR two or more tier2 indicators fire from different evidence types.",
-          "posteriorEffect": "H4 -15-25pp",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": null
-        },
-        {
-          "id": "anti_h2_discriminator",
-          "desc": "Preregistered cohort study in vulnerable population (bipolar/schizotypal) finds NO elevated episode risk with heavy AI use despite RCT-confirmed belief-calibration effects — separates H2 from H3 by showing the weak effect does not escalate clinically.",
-          "posteriorEffect": "H2 -8-12pp, H3 +5-8pp",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": null
-        }
       ]
     },
     "anti_indicators": []

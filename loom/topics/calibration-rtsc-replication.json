@@ -687,76 +687,76 @@
           "n_firings": 0,
           "resolution_class": false
         }
-      ],
-      "anti_indicators": [
-        {
-          "id": "anti_h1_no_replication_6mo",
-          "desc": "Six months pass since a credible claim with no independent replication of both properties from any lab.",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": "Temporal decay: H1 probability should compress further after 6-month silence. LK-99 debunked within 4 weeks.",
-          "posteriorEffect": "H1 -10pp, H2 -5pp, H3 +10pp, H4 +5pp.",
-          "requiresActiveClaim": true,
-          "likelihoods": {
-            "H1": 0.160714,
-            "H2": 0.064286,
-            "H3": 1.0,
-            "H4": 0.685714
-          },
-          "lr_decay": 0.65,
-          "n_firings": 0,
-          "resolution_class": false,
-          "lr_migration_warning": "design prior drift >30% — review before next firing"
-        },
-        {
-          "id": "anti_h1_author_misconduct",
-          "desc": "Investigation opened or finding published by journal or institution regarding data integrity of the original claim's authors.",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": "Mirrors Dias (Rochester) trajectory. Misconduct finding is strong H1/H2 anti-indicator.",
-          "posteriorEffect": "H1 -15pp, H2 -8pp, H3 +15pp.",
-          "requiresActiveClaim": true,
-          "likelihoods": {
-            "H1": 0.136364,
-            "H2": 0.054545,
-            "H3": 1.0,
-            "H4": 0.545455
-          },
-          "lr_decay": 0.65,
-          "n_firings": 0,
-          "resolution_class": false,
-          "lr_migration_warning": "design prior drift >30% — review before next firing"
-        },
-        {
-          "id": "anti_h4_credible_claim_posted",
-          "desc": "A claim clears the credibility bar (t1_claim_credibility_threshold fires). H4 can no longer resolve as the outcome.",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": null,
-          "posteriorEffect": "H4 set to 0 (topic restructures to H1/H2/H3 contest).",
-          "requiresActiveClaim": false,
-          "n_firings": 0
-        },
-        {
-          "id": "anti_h3_no_claim_24mo",
-          "desc": "24 months pass from topic creation (April 2028) with no credible RTSC claim published. H3 cannot resolve without an active claim.",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": "Temporal: if H4 persists to April 2028, topic resolves as H4. H3 requires a published claim.",
-          "posteriorEffect": "H3 set to 0, H4 +18pp (terminal H4 resolution signal).",
-          "requiresActiveClaim": false,
-          "likelihoods": {
-            "H1": 0.806452,
-            "H2": 0.806452,
-            "H3": 0.806452,
-            "H4": 1.0
-          },
-          "lr_decay": 0.65,
-          "n_firings": 0,
-          "resolution_class": false
-        }
       ]
-    }
+    },
+    "anti_indicators": [
+      {
+        "id": "anti_h1_no_replication_6mo",
+        "desc": "Six months pass since a credible claim with no independent replication of both properties from any lab.",
+        "status": "NOT_FIRED",
+        "firedDate": null,
+        "note": "Temporal decay: H1 probability should compress further after 6-month silence. LK-99 debunked within 4 weeks.",
+        "posteriorEffect": "H1 -10pp, H2 -5pp, H3 +10pp, H4 +5pp.",
+        "requiresActiveClaim": true,
+        "likelihoods": {
+          "H1": 0.160714,
+          "H2": 0.064286,
+          "H3": 1.0,
+          "H4": 0.685714
+        },
+        "lr_decay": 0.65,
+        "n_firings": 0,
+        "resolution_class": false,
+        "lr_migration_warning": "design prior drift >30% — review before next firing"
+      },
+      {
+        "id": "anti_h1_author_misconduct",
+        "desc": "Investigation opened or finding published by journal or institution regarding data integrity of the original claim's authors.",
+        "status": "NOT_FIRED",
+        "firedDate": null,
+        "note": "Mirrors Dias (Rochester) trajectory. Misconduct finding is strong H1/H2 anti-indicator.",
+        "posteriorEffect": "H1 -15pp, H2 -8pp, H3 +15pp.",
+        "requiresActiveClaim": true,
+        "likelihoods": {
+          "H1": 0.136364,
+          "H2": 0.054545,
+          "H3": 1.0,
+          "H4": 0.545455
+        },
+        "lr_decay": 0.65,
+        "n_firings": 0,
+        "resolution_class": false,
+        "lr_migration_warning": "design prior drift >30% — review before next firing"
+      },
+      {
+        "id": "anti_h4_credible_claim_posted",
+        "desc": "A claim clears the credibility bar (t1_claim_credibility_threshold fires). H4 can no longer resolve as the outcome.",
+        "status": "NOT_FIRED",
+        "firedDate": null,
+        "note": null,
+        "posteriorEffect": "H4 set to 0 (topic restructures to H1/H2/H3 contest).",
+        "requiresActiveClaim": false,
+        "n_firings": 0
+      },
+      {
+        "id": "anti_h3_no_claim_24mo",
+        "desc": "24 months pass from topic creation (April 2028) with no credible RTSC claim published. H3 cannot resolve without an active claim.",
+        "status": "NOT_FIRED",
+        "firedDate": null,
+        "note": "Temporal: if H4 persists to April 2028, topic resolves as H4. H3 requires a published claim.",
+        "posteriorEffect": "H3 set to 0, H4 +18pp (terminal H4 resolution signal).",
+        "requiresActiveClaim": false,
+        "likelihoods": {
+          "H1": 0.806452,
+          "H2": 0.806452,
+          "H3": 0.806452,
+          "H4": 1.0
+        },
+        "lr_decay": 0.65,
+        "n_firings": 0,
+        "resolution_class": false
+      }
+    ]
   },
   "actorModel": {
     "description": "The outcome is determined by the collective behavior of condensed matter labs, preprint infrastructure, and the replication ecosystem — not a single decision-maker. Key actors operate on reputational and funding incentives.",

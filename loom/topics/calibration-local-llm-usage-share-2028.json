@@ -593,40 +593,6 @@
           "firedDate": null,
           "note": null
         }
-      ],
-      "anti_indicators": [
-        {
-          "id": "anti_h1_local_takeoff",
-          "desc": "Authoritative survey (SotAI/Stanford AI Index) reports user-controlled compute â‰¥30% of total LLM inference tokens in any period before resolution â€” contradicts 'dominant API' hypothesis.",
-          "posteriorEffect": "H1 -15pp (redistributed to H2+H3)",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": null
-        },
-        {
-          "id": "anti_h2_api_consolidation",
-          "desc": "Self-hosted open-weights share flat or declining through 2027 per â‰¥2 tracking sources; hosted API share growing â€” contradicts minority-local hypothesis.",
-          "posteriorEffect": "H2 -12pp (redistributed to H1)",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": null
-        },
-        {
-          "id": "anti_h3_clear_majority_one_side",
-          "desc": "Any authoritative source reports user-controlled compute either <20% or >60% of total inference tokens â€” contradicts co-dominant split.",
-          "posteriorEffect": "H3 -15pp (redistributed to H1+H2 or H4 per direction)",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": null
-        },
-        {
-          "id": "anti_h4_api_dominance_confirmed",
-          "desc": "Top-3 hosted API providers retain combined â‰¥70% of measured inference tokens through 2027 per â‰¥2 independent sources â€” majority-local thesis implausible.",
-          "posteriorEffect": "H4 -7pp (redistributed to H1+H2)",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": null
-        }
       ]
     },
     "anti_indicators": []

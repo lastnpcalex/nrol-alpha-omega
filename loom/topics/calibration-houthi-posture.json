@@ -933,97 +933,97 @@
           "n_firings": 0,
           "resolution_class": false
         }
-      ],
-      "anti_indicators": [
-        {
-          "id": "anti_h1_screening_confirmed",
-          "desc": "For two consecutive months, all UKMTO-confirmed attacks are against vessels with verified Israeli/US/UK links, with zero neutral-flag confirmed incidents and no Houthi statements abandoning political criteria.",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": "Sustained screening discipline for 60+ days makes H1 (indiscriminate) implausible as a July 2026 state.",
-          "posteriorEffect": "H1 -20pp",
-          "likelihoods": {
-            "H1": 0.033333,
-            "H2": 1.0,
-            "H3": 1.0,
-            "H4": 1.0
-          },
-          "lr_decay": 0.65,
-          "n_firings": 0,
-          "resolution_class": false
-        },
-        {
-          "id": "anti_h2_zero_attacks_60d",
-          "desc": "Zero verified anti-ship attacks of any kind for 60+ consecutive days, confirmed by UKMTO silence and AIS data showing no evasive routing by vessels that would be H2 targets.",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": "If even Israeli-linked vessels transit unmolested for 60 days, selective targeting is no longer the operative posture — H3 has replaced it.",
-          "posteriorEffect": "H2 -25pp, H3 +20pp",
-          "likelihoods": {
-            "H1": 0.6,
-            "H2": 0.266667,
-            "H3": 1.0,
-            "H4": 0.6
-          },
-          "lr_decay": 0.65,
-          "n_firings": 0,
-          "resolution_class": false
-        },
-        {
-          "id": "anti_h3_any_attack_after_60d_peace",
-          "desc": "Any verified anti-ship attack occurs after a 60+ day quiet period that had appeared to confirm H3.",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": "Ceasefires with Houthis have historically been fragile. An attack after a sustained quiet period resets the assessment toward H2.",
-          "posteriorEffect": "H3 -20pp, H2 +15pp",
-          "likelihoods": {
-            "H1": 0.75,
-            "H2": 1.0,
-            "H3": 0.25,
-            "H4": 0.75
-          },
-          "lr_decay": 0.65,
-          "n_firings": 0,
-          "resolution_class": false
-        },
-        {
-          "id": "anti_h4_rough_rider_sustained",
-          "desc": "Operation Rough Rider continues at ≥5 sorties/week through June 2026, and Houthi missile/drone infrastructure assessments indicate significant degradation (>40% reduction in estimated stockpile).",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": "H4 (full closure) requires offensive capacity. Sustained Rough Rider attrition makes full-closure attempt operationally implausible without major resupply.",
-          "posteriorEffect": "H4 -15pp",
-          "likelihoods": {
-            "H1": 1.0,
-            "H2": 1.0,
-            "H3": 1.0,
-            "H4": 0.05
-          },
-          "lr_decay": 0.65,
-          "n_firings": 0,
-          "resolution_class": false,
-          "lr_migration_warning": "design prior drift >30% — review before next firing"
-        },
-        {
-          "id": "anti_h4_iran_capacity_constrained",
-          "desc": "Two or more credible intelligence reports indicate Iranian ballistic missile/drone production is entirely consumed by the Iran war effort, with no surplus for Houthi resupply.",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": "H4 requires Iranian resupply. If Iran is fully capacity-constrained, Houthis cannot sustain a closure campaign against US/Saudi air power.",
-          "posteriorEffect": "H4 -12pp, H1 -5pp",
-          "likelihoods": {
-            "H1": 0.666667,
-            "H2": 1.0,
-            "H3": 1.0,
-            "H4": 0.05
-          },
-          "lr_decay": 0.65,
-          "n_firings": 0,
-          "resolution_class": false,
-          "lr_migration_warning": "design prior drift >30% — review before next firing"
-        }
       ]
-    }
+    },
+    "anti_indicators": [
+      {
+        "id": "anti_h1_screening_confirmed",
+        "desc": "For two consecutive months, all UKMTO-confirmed attacks are against vessels with verified Israeli/US/UK links, with zero neutral-flag confirmed incidents and no Houthi statements abandoning political criteria.",
+        "status": "NOT_FIRED",
+        "firedDate": null,
+        "note": "Sustained screening discipline for 60+ days makes H1 (indiscriminate) implausible as a July 2026 state.",
+        "posteriorEffect": "H1 -20pp",
+        "likelihoods": {
+          "H1": 0.033333,
+          "H2": 1.0,
+          "H3": 1.0,
+          "H4": 1.0
+        },
+        "lr_decay": 0.65,
+        "n_firings": 0,
+        "resolution_class": false
+      },
+      {
+        "id": "anti_h2_zero_attacks_60d",
+        "desc": "Zero verified anti-ship attacks of any kind for 60+ consecutive days, confirmed by UKMTO silence and AIS data showing no evasive routing by vessels that would be H2 targets.",
+        "status": "NOT_FIRED",
+        "firedDate": null,
+        "note": "If even Israeli-linked vessels transit unmolested for 60 days, selective targeting is no longer the operative posture — H3 has replaced it.",
+        "posteriorEffect": "H2 -25pp, H3 +20pp",
+        "likelihoods": {
+          "H1": 0.6,
+          "H2": 0.266667,
+          "H3": 1.0,
+          "H4": 0.6
+        },
+        "lr_decay": 0.65,
+        "n_firings": 0,
+        "resolution_class": false
+      },
+      {
+        "id": "anti_h3_any_attack_after_60d_peace",
+        "desc": "Any verified anti-ship attack occurs after a 60+ day quiet period that had appeared to confirm H3.",
+        "status": "NOT_FIRED",
+        "firedDate": null,
+        "note": "Ceasefires with Houthis have historically been fragile. An attack after a sustained quiet period resets the assessment toward H2.",
+        "posteriorEffect": "H3 -20pp, H2 +15pp",
+        "likelihoods": {
+          "H1": 0.75,
+          "H2": 1.0,
+          "H3": 0.25,
+          "H4": 0.75
+        },
+        "lr_decay": 0.65,
+        "n_firings": 0,
+        "resolution_class": false
+      },
+      {
+        "id": "anti_h4_rough_rider_sustained",
+        "desc": "Operation Rough Rider continues at ≥5 sorties/week through June 2026, and Houthi missile/drone infrastructure assessments indicate significant degradation (>40% reduction in estimated stockpile).",
+        "status": "NOT_FIRED",
+        "firedDate": null,
+        "note": "H4 (full closure) requires offensive capacity. Sustained Rough Rider attrition makes full-closure attempt operationally implausible without major resupply.",
+        "posteriorEffect": "H4 -15pp",
+        "likelihoods": {
+          "H1": 1.0,
+          "H2": 1.0,
+          "H3": 1.0,
+          "H4": 0.05
+        },
+        "lr_decay": 0.65,
+        "n_firings": 0,
+        "resolution_class": false,
+        "lr_migration_warning": "design prior drift >30% — review before next firing"
+      },
+      {
+        "id": "anti_h4_iran_capacity_constrained",
+        "desc": "Two or more credible intelligence reports indicate Iranian ballistic missile/drone production is entirely consumed by the Iran war effort, with no surplus for Houthi resupply.",
+        "status": "NOT_FIRED",
+        "firedDate": null,
+        "note": "H4 requires Iranian resupply. If Iran is fully capacity-constrained, Houthis cannot sustain a closure campaign against US/Saudi air power.",
+        "posteriorEffect": "H4 -12pp, H1 -5pp",
+        "likelihoods": {
+          "H1": 0.666667,
+          "H2": 1.0,
+          "H3": 1.0,
+          "H4": 0.05
+        },
+        "lr_decay": 0.65,
+        "n_firings": 0,
+        "resolution_class": false,
+        "lr_migration_warning": "design prior drift >30% — review before next firing"
+      }
+    ]
   },
   "actorModel": {
     "description": "Five key actors whose interactions determine Houthi posture. Houthis are not fully autonomous — Iranian patron relationship and US deterrence are the two binding constraints. Saudi Arabia matters as a potential off-ramp provider. Shipping companies operationalize the outcome through routing decisions.",

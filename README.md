@@ -110,7 +110,7 @@ The system is designed to be operated through [A Shadow Loom](https://github.com
 
 The `loom/` directory contains a standalone canvas deployment — copy it into your Claude Code project's `canvas/` folder. The canvas renders the dashboard and mirror views in-browser, and uses the Canvas SDK (`Loom.send()`) to send triage results, URLs, and social media posts directly to Claude for full pipeline processing. No `server.py` required.
 
-The pipeline is governor-enforced end-to-end: paste a URL → Claude fetches content → triages against active topics → looks up source trust via the 5-tier calibration chain → logs evidence → updates posteriors → calibrates source trust → writes an activity log entry. The canvas auto-refreshes. See [`LOOM.md`](LOOM.md) for architecture details, setup instructions, and the trigger template system.
+The pipeline is governor-enforced end-to-end: paste a URL → Claude fetches content → triages against active topics → looks up source trust via the 5-tier calibration chain → logs evidence → proposes or applies gated posterior updates → runs best-effort source calibration when confirmation/refutation pairs are available → writes an activity log entry. The canvas auto-refreshes. Source calibration is a trust-ledger system, not a per-source Brier table: topic-local `sourceCalibration` is authoritative for the topic, and the optional cross-topic `sources/source_db.json` must be populated with the expected `sources/meta` schema before cross-topic trust contributes. See [`LOOM.md`](LOOM.md) for architecture details, setup instructions, and the trigger template system.
 
 The tree structure maps to analytical branching: explore “what if we fire this indicator” on one branch and “what if we hold” on another. Each branch preserves the reasoning. The topic's posteriorHistory is linear, but the loom captures the *deliberation* that produced it — the part no other system preserves.
 
@@ -120,7 +120,7 @@ The mirror is the read surface (what does the system know). The loom is the writ
 
 This engine is honest about what it is and what it isn't.
 
-**What it is**: a Bayesian estimation engine where the update mechanics are principled and the governance layer enforces epistemic discipline. Posteriors are computed via Bayes' theorem from explicit likelihoods. Evidence weight feeds back into the update via a probabilistic mixture model — contested evidence is treated as a mixture of signal and noise, not discarded or blindly trusted. Source trust is Bayesian-updated per domain with surprisal-weighted likelihood ratios, so a source correctly predicting something surprising earns more trust than one confirming the obvious. Calibration is tracked via Brier scores and fed back into governance health.
+**What it is**: a Bayesian estimation engine where the update mechanics are principled and the governance layer enforces epistemic discipline. Posteriors are computed via Bayes' theorem from explicit likelihoods. Evidence weight feeds back into the update via a probabilistic mixture model — contested evidence is treated as a mixture of signal and noise, not discarded or blindly trusted. Source trust is Bayesian-updated per topic and, when the cross-topic database is healthy, per domain with surprisal-weighted likelihood ratios, so a source correctly predicting something surprising earns more trust than one confirming the obvious. Forecast calibration is tracked via Brier scores and fed back into governance health.
 
 **What it isn't**: a parametric generative model with closed-form likelihood functions. You can't call `P(evidence | H3)` and get a number from a distribution. But the system does contain a **distributed qualitative generative model** — the topic state file encodes a structured causal story about how the world produces evidence under each hypothesis:
 
@@ -231,7 +231,7 @@ flowchart TD
         direction TB
         Enrich["**Governor Enrichment**\nClassify FACT or DECISION\nAssess claim state: PROPOSED / SUPPORTED\nCompute weight = claim state x source trust\nDetect rhetoric, predictions, duplicates"]
         Contra["**Contradiction Check**\nDIRECT (HIGH) · FEED_MISMATCH (HIGH)\nMAGNITUDE (MEDIUM) · TEMPORAL (LOW)"]
-        SrcCal["**Source Calibration**\nTrack claim by source x domain tag\nBayesian update on confirmation/refutation\nDomain > source identity (ECON 99% vs RHETORIC 0%)"]
+        SrcCal["**Source Calibration**\nTopic-local trust ledger\nBayesian update on confirmation/refutation\nOptional cross-topic source_db ingest"]
         Enrich --> Contra --> SrcCal
     end
 
@@ -273,7 +273,9 @@ flowchart TD
 
 The engine uses principled Bayesian inference throughout: posterior updates via Bayes' theorem with explicit likelihoods, evidence weight attenuation through a probabilistic mixture model (contested or low-trust evidence produces proportionally weaker updates), inverse Bayes for deriving likelihoods from pre-committed indicator effects, KL divergence for prior-domination detection and operator-vs-mechanical divergence tracking, Shannon entropy driving R_t staleness scoring and VoI query prioritization, and Brier score calibration with partial scoring for expired hypotheses.
 
-Source trust is Bayesian-updated per source per domain with surprisal-weighted likelihood ratios — a source correctly predicting something surprising earns more trust than one confirming the obvious. Trust is queried through a 5-tier chain: per-topic calibration, cross-topic domain, cross-topic overall, static base prior, 0.50 fallback.
+Source trust is queried through a 5-tier chain: per-topic `sourceCalibration.effectiveTrust`, cross-topic `source_db` domain trust, cross-topic overall trust, static base prior, and 0.50 fallback. The per-topic ledger is stored in the topic JSON and is updated from confirmation/refutation records. Cross-topic domain trust is stored separately in `sources/source_db.json`; it is optional and must retain the `sources/meta` schema expected by `framework/source_db.py`.
+
+Source trust is not the same thing as Brier scoring. Brier scores evaluate posterior forecasts against eventual outcomes. Source calibration evaluates source claim records and produces trust multipliers used by evidence weighting. Future additions for source calibration, dry-run future casts, and MCP operator red-team review are specified in [`specs/source-calibration-future-casts.md`](specs/source-calibration-future-casts.md).
 
 For the full mathematical treatment including formulas, mixture model derivation, and source trust update diagrams, see **[MATH.md](MATH.md)**.
 
@@ -464,6 +466,7 @@ python framework/scoring.py hormuz-closure --report
 
 # Ingest source data into the cross-topic database
 python framework/source_db.py ingest --topic hormuz-closure
+# Expects sources/source_db.json to use the sources/meta schema; rebuild first if malformed.
 
 # Triage a headline
 python -c "
@@ -522,7 +525,7 @@ The longitudinal surface — how your beliefs have actually evolved across all t
 
 - **Triage input**: drop a headline + source, get instant routing across all active topics (client-side indicator/watchpoint/keyword matching)
 - **Cross-topic overview**: all topics at a glance with posterior bars, health badges, R_t regime, staleness — searchable and sortable
-- **Source trust leaderboard**: all registered sources ranked by domain trust with visual meters and claim records
+- **Source trust leaderboard**: registered sources ranked by domain trust when `source_db` is populated; otherwise topic-local source calibration remains available inside topic state
 - **Drift alerts**: stale dependencies, DANGEROUS/RUNAWAY R_t, downstream propagation warnings
 - **Posterior trajectories**: time-series charts per topic showing how each hypothesis moved
 - **Dependency graph**: upstream/downstream edges with stale edge highlighting and drift magnitude
@@ -538,7 +541,7 @@ Additional features over the server dashboards:
 - **URL pipeline**: paste a URL into the triage input, it's sent to Claude who fetches, triages, logs evidence, and updates posteriors automatically
 - **Social media routing**: Twitter/X, Bluesky, Reddit, YouTube links are detected and routed through a platform-aware trigger with appropriate source trust handling and a 3-filter prediction gate (specific, testable, time-bounded)
 - **Evidence drop zone**: drag files or screenshots onto the mirror page for processing
-- **Source trust leaderboard**: searchable, sortable panel showing all registered sources with per-domain Bayesian trust scores, meter bars, and record counts
+- **Source trust leaderboard**: searchable, sortable panel for populated cross-topic source records, with per-domain Bayesian trust scores, meter bars, and record counts
 - **Topic search and sort**: filter topics by name, sort by Health/R_t/A-Z/Updated
 - **Prediction tracking**: evidence entries with PREDICTION tags carry structured claims with resolution criteria and deadlines; the `/resolve` skill sweeps expired predictions and fires source calibration with minimum-sample guards
 - **Cold storage**: IGNORE'd pipeline evidence is written to `evidence-cold.json` with full provenance (claims, domains, actors, regions, keywords) for retroactive matching when new topics are created
@@ -758,6 +761,8 @@ Ten calibration topics have been designed spanning geopolitics, economics, domes
 
 For the full calibration plan including all 10 proposed topics, selection rationale, and phased timeline, see **[CALIBRATION.md](CALIBRATION.md)**.
 
+For planned source-calibration extensions, non-mutating future-cast dry runs, and MCP red-team review of proposed operator actions, see **[specs/source-calibration-future-casts.md](specs/source-calibration-future-casts.md)**.
+
 ## Acknowledgments
 
 The epistemic governance layer builds on patterns from **[@unpingable](https://github.com/unpingable)**'s **[Agent Governor](https://github.com/unpingable/agent_governor)** framework:
@@ -775,3 +780,4 @@ Agent Governor's core insight — "natural language is a proposal, not an author
 ## License
 
 Do what you want with it. *Current Thing delenda est.*
+

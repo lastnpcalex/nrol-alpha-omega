@@ -592,48 +592,6 @@
           "firedDate": null,
           "note": null
         }
-      ],
-      "anti_indicators": [
-        {
-          "id": "anti_h1_persistent_waitlist",
-          "desc": "Consumer GPU waitlists >4 weeks at MSRP persist into 2028-Q2 per NowInStock tracking — demand structurally exceeds supply, full reversion implausible.",
-          "posteriorEffect": "H1 -15pp (redistributed to H2+H3)",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": null
-        },
-        {
-          "id": "anti_h2_extreme_escalation",
-          "desc": "RTX 5090-class (or equivalent top-tier consumer GPU) street price exceeds 200% of MSRP for ≥1 month — moderate plateau trajectory no longer credible.",
-          "posteriorEffect": "H2 -15pp (redistributed to H3+H4)",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": null
-        },
-        {
-          "id": "anti_h3_full_normalization",
-          "desc": "RTX 5080-class GPU street price within 10% of MSRP for ≥6 consecutive months per TechPowerUp — sustained high elevation thesis falsified.",
-          "posteriorEffect": "H3 -15pp (redistributed to H1+H2)",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": null
-        },
-        {
-          "id": "anti_h4_consumer_line_confirmed",
-          "desc": "NVIDIA launches new consumer-specific GPU series with ≥xx70-class at ≤$800 MSRP before 2028 — confirms continued commitment to consumer discrete GPU market.",
-          "posteriorEffect": "H4 -15pp (redistributed to H1+H2+H3)",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": null
-        },
-        {
-          "id": "anti_h1_extended_premium_2026",
-          "desc": "Consumer GPU street prices remain >40% above inflation-adjusted Q4-2024 baseline through end of 2026-Q4 across major SKUs and trackers. Earlier-firing companion to anti_h1_persistent_waitlist (which requires 2028-Q2 persistence).",
-          "posteriorEffect": "H1 -8pp (redistributed to H2+H3+H4 proportionally)",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": null
-        }
       ]
     },
     "anti_indicators": []

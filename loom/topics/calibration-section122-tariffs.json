@@ -750,80 +750,80 @@
           "n_firings": 0,
           "resolution_class": false
         }
-      ],
-      "anti_indicators": [
-        {
-          "id": "anti_h1",
-          "desc": "Trump or senior official makes unambiguous public statement that tariffs WILL continue past July 23 in some form (renewal, escalation, or deal). Observable: White House press release or on-record quote.",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": "Any positive statement about post-July tariff policy reduces H1 probability. H1 requires near-total absence of successor action.",
-          "posteriorEffect": "H1 -15pp",
-          "likelihoods": {
-            "H1": 0.071429,
-            "H2": 1.0,
-            "H3": 1.0,
-            "H4": 1.0
-          },
-          "lr_decay": 0.65,
-          "n_firings": 0,
-          "resolution_class": false,
-          "lr_migration_warning": "design prior drift >30% — review before next firing"
-        },
-        {
-          "id": "anti_h2",
-          "desc": "Formal bilateral deal announced OR new tariff proclamation at rate substantially different from 10%. H2 requires rate continuity; any material rate change (up or down) removes H2.",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": null,
-          "posteriorEffect": "H2 -20pp if rate changes materially",
-          "likelihoods": {
-            "H1": 1.0,
-            "H2": 0.027778,
-            "H3": 1.0,
-            "H4": 1.0
-          },
-          "lr_decay": 0.65,
-          "n_firings": 0,
-          "resolution_class": false
-        },
-        {
-          "id": "anti_h3",
-          "desc": "Bilateral deal covering >=30% of affected import volume announced, AND no new escalation proclamation issued. Successful deal-making forecloses the escalation track.",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": null,
-          "posteriorEffect": "H3 -20pp if material deal closes",
-          "likelihoods": {
-            "H1": 1.0,
-            "H2": 1.0,
-            "H3": 0.393939,
-            "H4": 1.0
-          },
-          "lr_decay": 0.65,
-          "n_firings": 0,
-          "resolution_class": false
-        },
-        {
-          "id": "anti_h4",
-          "desc": "New tariff proclamation at higher rate (>12%) issued, explicitly on products covered by active Section 301 investigations, WITHOUT parallel deal announcement. Escalation proclamation without deal component forecloses H4.",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": null,
-          "posteriorEffect": "H4 -25pp",
-          "likelihoods": {
-            "H1": 1.0,
-            "H2": 1.0,
-            "H3": 1.0,
-            "H4": 0.404762
-          },
-          "lr_decay": 0.65,
-          "n_firings": 0,
-          "resolution_class": false,
-          "lr_migration_warning": "design prior drift >30% — review before next firing"
-        }
       ]
-    }
+    },
+    "anti_indicators": [
+      {
+        "id": "anti_h1",
+        "desc": "Trump or senior official makes unambiguous public statement that tariffs WILL continue past July 23 in some form (renewal, escalation, or deal). Observable: White House press release or on-record quote.",
+        "status": "NOT_FIRED",
+        "firedDate": null,
+        "note": "Any positive statement about post-July tariff policy reduces H1 probability. H1 requires near-total absence of successor action.",
+        "posteriorEffect": "H1 -15pp",
+        "likelihoods": {
+          "H1": 0.071429,
+          "H2": 1.0,
+          "H3": 1.0,
+          "H4": 1.0
+        },
+        "lr_decay": 0.65,
+        "n_firings": 0,
+        "resolution_class": false,
+        "lr_migration_warning": "design prior drift >30% — review before next firing"
+      },
+      {
+        "id": "anti_h2",
+        "desc": "Formal bilateral deal announced OR new tariff proclamation at rate substantially different from 10%. H2 requires rate continuity; any material rate change (up or down) removes H2.",
+        "status": "NOT_FIRED",
+        "firedDate": null,
+        "note": null,
+        "posteriorEffect": "H2 -20pp if rate changes materially",
+        "likelihoods": {
+          "H1": 1.0,
+          "H2": 0.027778,
+          "H3": 1.0,
+          "H4": 1.0
+        },
+        "lr_decay": 0.65,
+        "n_firings": 0,
+        "resolution_class": false
+      },
+      {
+        "id": "anti_h3",
+        "desc": "Bilateral deal covering >=30% of affected import volume announced, AND no new escalation proclamation issued. Successful deal-making forecloses the escalation track.",
+        "status": "NOT_FIRED",
+        "firedDate": null,
+        "note": null,
+        "posteriorEffect": "H3 -20pp if material deal closes",
+        "likelihoods": {
+          "H1": 1.0,
+          "H2": 1.0,
+          "H3": 0.393939,
+          "H4": 1.0
+        },
+        "lr_decay": 0.65,
+        "n_firings": 0,
+        "resolution_class": false
+      },
+      {
+        "id": "anti_h4",
+        "desc": "New tariff proclamation at higher rate (>12%) issued, explicitly on products covered by active Section 301 investigations, WITHOUT parallel deal announcement. Escalation proclamation without deal component forecloses H4.",
+        "status": "NOT_FIRED",
+        "firedDate": null,
+        "note": null,
+        "posteriorEffect": "H4 -25pp",
+        "likelihoods": {
+          "H1": 1.0,
+          "H2": 1.0,
+          "H3": 1.0,
+          "H4": 0.404762
+        },
+        "lr_decay": 0.65,
+        "n_firings": 0,
+        "resolution_class": false,
+        "lr_migration_warning": "design prior drift >30% — review before next firing"
+      }
+    ]
   },
   "actorModel": {
     "description": "Decision-theoretic framework: who makes the decisions that drive the Section 122 expiry outcome?",

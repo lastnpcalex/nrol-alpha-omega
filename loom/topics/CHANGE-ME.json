@@ -88,46 +88,12 @@
           "note": null,
           "posteriorEffect": "Minor shift: [which H] +1-5pp"
         }
-      ],
-      "anti_indicators": [
-        {
-          "id": "anti_h1",
-          "desc": "Evidence that would REDUCE H1 probability",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": null,
-          "posteriorEffect": "H1 -Xpp"
-        },
-        {
-          "id": "anti_h2",
-          "desc": "Evidence that would REDUCE H2 probability",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": null,
-          "posteriorEffect": "H2 -Xpp"
-        },
-        {
-          "id": "anti_h3",
-          "desc": "Evidence that would REDUCE H3 probability",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": null,
-          "posteriorEffect": "H3 -Xpp"
-        },
-        {
-          "id": "anti_h4",
-          "desc": "Evidence that would REDUCE H4 probability",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": null,
-          "posteriorEffect": "H4 -Xpp"
-        }
       ]
     },
+    "anti_indicators": [],
     "tier1_critical": [],
     "tier2_strong": [],
-    "tier3_suggestive": [],
-    "anti_indicators": []
+    "tier3_suggestive": []
   },
   "actorModel": {
     "description": "Decision-theoretic framework: who makes the decisions that drive this outcome?",

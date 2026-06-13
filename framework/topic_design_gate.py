@@ -45,6 +45,12 @@ from datetime import datetime
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
+from framework.indicator_schema import (
+    anti_indicators_for_topic,
+    build_effect_coverage_matrix,
+    tier_indicators_for_topic,
+)
+
 
 # ============================================================================
 # 1. Mechanical Checks (no LLM required)
@@ -122,12 +128,8 @@ def run_mechanical_checks(topic: dict) -> dict:
                         )
 
     # --- Indicators ---
-    all_indicators = []
-    for tier_name in ["tier1_critical", "tier2_strong", "tier3_suggestive"]:
-        tier_indicators = tiers.get(tier_name, [])
-        all_indicators.extend(tier_indicators)
-
-    anti_indicators = tiers.get("anti_indicators", [])
+    all_indicators = tier_indicators_for_topic(topic)
+    anti_indicators = anti_indicators_for_topic(topic)
 
     if not all_indicators:
         blockers.append(
@@ -147,18 +149,14 @@ def run_mechanical_checks(topic: dict) -> dict:
             "one indicator that would REDUCE its probability"
         )
 
-    # Check which hypotheses have anti-indicators
+    # Check which hypotheses have genuine contrary anti-indicators.
     h_keys = set(hypotheses.keys())
-    covered_by_anti = set()
-    for ai in anti_indicators:
-        effect = ai.get("posteriorEffect", "")
-        for hk in h_keys:
-            if hk in effect:
-                covered_by_anti.add(hk)
+    anti_coverage = build_effect_coverage_matrix(hypotheses, [], anti_indicators)
+    covered_by_anti = {hk for hk in h_keys if anti_coverage["negative"].get(hk)}
     uncovered = h_keys - covered_by_anti
     if uncovered and anti_indicators:  # only warn if they tried but missed some
         warnings.append(
-            f"Hypotheses {uncovered} have no anti-indicator — "
+            f"Hypotheses {uncovered} have no negative anti-indicator - "
             "what evidence would make these LESS likely?"
         )
 
@@ -193,7 +191,7 @@ def run_mechanical_checks(topic: dict) -> dict:
     # For each indicator, parse which hypotheses it references in posteriorEffect.
     # Build a matrix: which hypotheses can be POSITIVELY updated and which can be
     # NEGATIVELY updated by the indicator set? Gaps are structural flaws.
-    coverage = _build_coverage_matrix(hypotheses, all_indicators, anti_indicators)
+    coverage = build_effect_coverage_matrix(hypotheses, all_indicators, anti_indicators)
     info.append(f"COVERAGE_MATRIX: {json.dumps(coverage['matrix'])}")
 
     for hk in h_keys:
@@ -283,68 +281,8 @@ def run_mechanical_checks(topic: dict) -> dict:
 
 def _build_coverage_matrix(hypotheses: dict, indicators: list,
                            anti_indicators: list) -> dict:
-    """
-    Build a hypothesis × indicator coverage matrix.
-
-    For each indicator, parse posteriorEffect to determine which hypotheses
-    it affects and in which direction (positive = increases probability,
-    negative = decreases probability).
-
-    Returns dict with:
-        matrix: {H1: {pos: [ind_ids], neg: [ind_ids]}, ...}
-        positive: {H1: [ind_ids that can increase H1], ...}
-        negative: {H1: [ind_ids that can decrease H1], ...}
-        indicator_reach: {ind_id: [hypothesis_keys it affects]}
-    """
-    import re as _re
-
-    h_keys = list(hypotheses.keys())
-    matrix = {hk: {"pos": [], "neg": []} for hk in h_keys}
-    indicator_reach = {}
-
-    for ind in indicators + anti_indicators:
-        ind_id = ind.get("id", "?")
-        effect = ind.get("posteriorEffect", "")
-        reached = []
-
-        for hk in h_keys:
-            if hk in effect:
-                reached.append(hk)
-                # Determine direction from effect string
-                # Patterns: "H1 +15pp", "H3 surge", "H2 -5pp", "H1 collapse"
-                # Look for the hypothesis mention and its nearby context
-                pattern = _re.compile(
-                    rf'{hk}\s*([+-])?\s*(\d+)?\s*(?:pp|%)?|'
-                    rf'{hk}.*?(surge|increase|up|gain|rise|confirm)|'
-                    rf'{hk}.*?(collapse|decrease|down|drop|reduce|decline)',
-                    _re.IGNORECASE
-                )
-                match = pattern.search(effect)
-                if match:
-                    if match.group(1) == '+' or match.group(3):  # +Npp or surge/increase
-                        matrix[hk]["pos"].append(ind_id)
-                    elif match.group(1) == '-' or match.group(4):  # -Npp or collapse/decrease
-                        matrix[hk]["neg"].append(ind_id)
-                    else:
-                        # Ambiguous — count as both
-                        matrix[hk]["pos"].append(ind_id)
-                        matrix[hk]["neg"].append(ind_id)
-                else:
-                    # H mentioned but no clear direction — count as affecting
-                    matrix[hk]["pos"].append(ind_id)
-
-        indicator_reach[ind_id] = reached
-
-    positive = {hk: matrix[hk]["pos"] for hk in h_keys}
-    negative = {hk: matrix[hk]["neg"] for hk in h_keys}
-
-    return {
-        "matrix": {hk: {"pos": len(v["pos"]), "neg": len(v["neg"])}
-                   for hk, v in matrix.items()},
-        "positive": positive,
-        "negative": negative,
-        "indicator_reach": indicator_reach,
-    }
+    """Backward-compatible wrapper for callers that import this private helper."""
+    return build_effect_coverage_matrix(hypotheses, indicators, anti_indicators)
 
 
 def _check_distinguishability(coverage: dict) -> dict:

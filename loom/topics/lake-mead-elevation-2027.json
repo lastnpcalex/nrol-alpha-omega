@@ -836,79 +836,79 @@
           "n_firings": 0,
           "resolution_class": false
         }
-      ],
-      "anti_indicators": [
-        {
-          "id": "anti_h1",
-          "desc": "Lake Mead end-of-month USBR elevation reading is lower than the start-of-month reading for two consecutive months during snowmelt season (Apr-Jul). Measured as: last daily reading of month N minus first daily reading of month N.",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": null,
-          "posteriorEffect": "H1 -5pp, H3 +3pp, H4 +2pp",
-          "likelihoods": {
-            "H1": 0.330882,
-            "H2": 0.882353,
-            "H3": 0.941176,
-            "H4": 1.0
-          },
-          "lr_decay": 0.65,
-          "n_firings": 0,
-          "resolution_class": false,
-          "lr_migration_warning": "design prior drift >30% — review before next firing"
-        },
-        {
-          "id": "anti_h2",
-          "desc": "BOR 24-month study projects elevation below 1,050 ft by end of 2027.",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": null,
-          "posteriorEffect": "H2 -8pp, H3 +6pp, H4 +2pp",
-          "likelihoods": {
-            "H1": 0.882353,
-            "H2": 0.661765,
-            "H3": 1.0,
-            "H4": 1.0
-          },
-          "lr_decay": 0.65,
-          "n_firings": 0,
-          "resolution_class": false
-        },
-        {
-          "id": "anti_h3",
-          "desc": "Lake Mead elevation rises more than 5 ft in a single calendar month, as measured by USBR daily readings (month-start vs month-end).",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": null,
-          "posteriorEffect": "H3 -8pp, H1 +3pp, H2 +5pp",
-          "likelihoods": {
-            "H1": 1.0,
-            "H2": 0.840909,
-            "H3": 0.59798,
-            "H4": 0.727273
-          },
-          "lr_decay": 0.65,
-          "n_firings": 0,
-          "resolution_class": false
-        },
-        {
-          "id": "anti_h4",
-          "desc": "Combined Colorado River system reservoir storage (Powell + Mead + Flaming Gorge + Navajo + Blue Mesa) rises above 40% of total capacity as reported in the BOR monthly operations summary.",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": null,
-          "posteriorEffect": "H4 -8pp, H2 +5pp, H3 +3pp",
-          "likelihoods": {
-            "H1": 0.864865,
-            "H2": 1.0,
-            "H3": 0.922523,
-            "H4": 0.403604
-          },
-          "lr_decay": 0.65,
-          "n_firings": 0,
-          "resolution_class": false
-        }
       ]
-    }
+    },
+    "anti_indicators": [
+      {
+        "id": "anti_h1",
+        "desc": "Lake Mead end-of-month USBR elevation reading is lower than the start-of-month reading for two consecutive months during snowmelt season (Apr-Jul). Measured as: last daily reading of month N minus first daily reading of month N.",
+        "status": "NOT_FIRED",
+        "firedDate": null,
+        "note": null,
+        "posteriorEffect": "H1 -5pp, H3 +3pp, H4 +2pp",
+        "likelihoods": {
+          "H1": 0.330882,
+          "H2": 0.882353,
+          "H3": 0.941176,
+          "H4": 1.0
+        },
+        "lr_decay": 0.65,
+        "n_firings": 0,
+        "resolution_class": false,
+        "lr_migration_warning": "design prior drift >30% — review before next firing"
+      },
+      {
+        "id": "anti_h2",
+        "desc": "BOR 24-month study projects elevation below 1,050 ft by end of 2027.",
+        "status": "NOT_FIRED",
+        "firedDate": null,
+        "note": null,
+        "posteriorEffect": "H2 -8pp, H3 +6pp, H4 +2pp",
+        "likelihoods": {
+          "H1": 0.882353,
+          "H2": 0.661765,
+          "H3": 1.0,
+          "H4": 1.0
+        },
+        "lr_decay": 0.65,
+        "n_firings": 0,
+        "resolution_class": false
+      },
+      {
+        "id": "anti_h3",
+        "desc": "Lake Mead elevation rises more than 5 ft in a single calendar month, as measured by USBR daily readings (month-start vs month-end).",
+        "status": "NOT_FIRED",
+        "firedDate": null,
+        "note": null,
+        "posteriorEffect": "H3 -8pp, H1 +3pp, H2 +5pp",
+        "likelihoods": {
+          "H1": 1.0,
+          "H2": 0.840909,
+          "H3": 0.59798,
+          "H4": 0.727273
+        },
+        "lr_decay": 0.65,
+        "n_firings": 0,
+        "resolution_class": false
+      },
+      {
+        "id": "anti_h4",
+        "desc": "Combined Colorado River system reservoir storage (Powell + Mead + Flaming Gorge + Navajo + Blue Mesa) rises above 40% of total capacity as reported in the BOR monthly operations summary.",
+        "status": "NOT_FIRED",
+        "firedDate": null,
+        "note": null,
+        "posteriorEffect": "H4 -8pp, H2 +5pp, H3 +3pp",
+        "likelihoods": {
+          "H1": 0.864865,
+          "H2": 1.0,
+          "H3": 0.922523,
+          "H4": 0.403604
+        },
+        "lr_decay": 0.65,
+        "n_firings": 0,
+        "resolution_class": false
+      }
+    ]
   },
   "actorModel": {
     "description": "Institutional actors managing allocation within a physically driven system. Climate/snowpack is the primary driver (see physicalDrivers); actors manage the policy response but cannot override hydrology.",

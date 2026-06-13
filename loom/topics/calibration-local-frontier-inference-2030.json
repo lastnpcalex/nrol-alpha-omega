@@ -440,78 +440,78 @@
             "H4": 0.59893
           }
         }
-      ],
-      "anti_indicators": [
-        {
-          "id": "anti_h1_thermal_analysis",
-          "desc": "Anthropic, OpenAI, or Google publish technical analysis concluding frontier-class capability requires compute budgets incompatible with consumer smartphone thermal/power constraints through 2028.",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": null,
-          "posteriorEffect": "H1 -25pp, H2 -5pp. H3 +20pp, H4 +10pp.",
-          "likelihoods": {
-            "H1": 0.039352,
-            "H2": 0.544545,
-            "H3": 0.961014,
-            "H4": 1.0
-          },
-          "lr_decay": 0.65,
-          "n_firings": 0,
-          "resolution_class": false
-        },
-        {
-          "id": "anti_h1_h2_hardware_stall",
-          "desc": "Three consecutive Apple/Qualcomm flagship generations ship without >=12GB unified memory accessible to on-device inference.",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": null,
-          "posteriorEffect": "H1 -15pp, H2 -10pp. H3 +15pp, H4 +10pp.",
-          "likelihoods": {
-            "H1": 0.039352,
-            "H2": 0.459459,
-            "H3": 0.878168,
-            "H4": 1.0
-          },
-          "lr_decay": 0.65,
-          "n_firings": 0,
-          "resolution_class": false
-        },
-        {
-          "id": "anti_h3_h4_gap_closing",
-          "desc": "Published research confirms on-device models (any hardware, no cloud offload) have closed to within 20% of cloud frontier on contemporaneous evaluations.",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": null,
-          "posteriorEffect": "H3 -10pp, H4 -15pp. H1 +5pp, H2 +20pp.",
-          "likelihoods": {
-            "H1": 1.0,
-            "H2": 0.948025,
-            "H3": 0.453441,
-            "H4": 0.072398
-          },
-          "lr_decay": 0.65,
-          "n_firings": 0,
-          "resolution_class": false
-        },
-        {
-          "id": "anti_smartphone_gap_stagnant",
-          "desc": "Three consecutive flagship smartphone generations show <10pp improvement in best on-device % of contemporaneous frontier.",
-          "posteriorEffect": "H1 -10pp, H2 -10pp, H3 +12pp, H4 +8pp.",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": null,
-          "lr_decay": 0.65,
-          "n_firings": 0,
-          "resolution_class": false,
-          "likelihoods": {
-            "H1": 0.0425,
-            "H2": 0.496216,
-            "H3": 0.894737,
-            "H4": 1.0
-          }
-        }
       ]
-    }
+    },
+    "anti_indicators": [
+      {
+        "id": "anti_h1_thermal_analysis",
+        "desc": "Anthropic, OpenAI, or Google publish technical analysis concluding frontier-class capability requires compute budgets incompatible with consumer smartphone thermal/power constraints through 2028.",
+        "status": "NOT_FIRED",
+        "firedDate": null,
+        "note": null,
+        "posteriorEffect": "H1 -25pp, H2 -5pp. H3 +20pp, H4 +10pp.",
+        "likelihoods": {
+          "H1": 0.039352,
+          "H2": 0.544545,
+          "H3": 0.961014,
+          "H4": 1.0
+        },
+        "lr_decay": 0.65,
+        "n_firings": 0,
+        "resolution_class": false
+      },
+      {
+        "id": "anti_h1_h2_hardware_stall",
+        "desc": "Three consecutive Apple/Qualcomm flagship generations ship without >=12GB unified memory accessible to on-device inference.",
+        "status": "NOT_FIRED",
+        "firedDate": null,
+        "note": null,
+        "posteriorEffect": "H1 -15pp, H2 -10pp. H3 +15pp, H4 +10pp.",
+        "likelihoods": {
+          "H1": 0.039352,
+          "H2": 0.459459,
+          "H3": 0.878168,
+          "H4": 1.0
+        },
+        "lr_decay": 0.65,
+        "n_firings": 0,
+        "resolution_class": false
+      },
+      {
+        "id": "anti_h3_h4_gap_closing",
+        "desc": "Published research confirms on-device models (any hardware, no cloud offload) have closed to within 20% of cloud frontier on contemporaneous evaluations.",
+        "status": "NOT_FIRED",
+        "firedDate": null,
+        "note": null,
+        "posteriorEffect": "H3 -10pp, H4 -15pp. H1 +5pp, H2 +20pp.",
+        "likelihoods": {
+          "H1": 1.0,
+          "H2": 0.948025,
+          "H3": 0.453441,
+          "H4": 0.072398
+        },
+        "lr_decay": 0.65,
+        "n_firings": 0,
+        "resolution_class": false
+      },
+      {
+        "id": "anti_smartphone_gap_stagnant",
+        "desc": "Three consecutive flagship smartphone generations show <10pp improvement in best on-device % of contemporaneous frontier.",
+        "posteriorEffect": "H1 -10pp, H2 -10pp, H3 +12pp, H4 +8pp.",
+        "status": "NOT_FIRED",
+        "firedDate": null,
+        "note": null,
+        "lr_decay": 0.65,
+        "n_firings": 0,
+        "resolution_class": false,
+        "likelihoods": {
+          "H1": 0.0425,
+          "H2": 0.496216,
+          "H3": 0.894737,
+          "H4": 1.0
+        }
+      }
+    ]
   },
   "actorModel": {
     "description": "Hardware OEMs and AI labs drive the outcome. Model efficiency researchers are the key wildcard.",

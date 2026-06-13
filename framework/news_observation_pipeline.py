@@ -25,22 +25,43 @@ from pathlib import Path
 from engine import load_topic
 from framework.pipeline import apply_observation, process_evidence, log_activity
 from framework.news_mutation import article_to_evidence_entry, stamp_last_scanned
+from framework.indicator_schema import iter_indicators_for_topic
+
+
+def _to_int_idx(idx) -> int:
+    if isinstance(idx, (int, float)):
+        return int(idx)
+    try:
+        if isinstance(idx, str) and "." in idx:
+            return int(float(idx))
+        return int(idx)
+    except (ValueError, TypeError):
+        return 0
+
+
+def _sort_key(idx):
+    if isinstance(idx, (int, float)):
+        return (int(idx), 0.0)
+    if isinstance(idx, str):
+        if "." in idx:
+            parts = idx.split(".")
+            try:
+                return (int(parts[0]), float(f"0.{parts[1]}"))
+            except ValueError:
+                return (0, 0.0)
+        try:
+            return (int(idx), 0.0)
+        except ValueError:
+            return (0, 0.0)
+    return (0, 0.0)
 
 
 def walk_indicators(topic: dict) -> list:
     """Return a flat list of every indicator dict in the topic schema."""
-    out = []
-    inds = topic.get("indicators") or {}
-    tiers = inds.get("tiers") or {}
-    for tier_list in tiers.values():
-        if isinstance(tier_list, list):
-            for ind in tier_list:
-                if isinstance(ind, dict) and "id" in ind and "likelihoods" in ind:
-                    out.append(ind)
-    for ind in inds.get("anti_indicators") or []:
-        if isinstance(ind, dict) and "id" in ind and "likelihoods" in ind:
-            out.append(ind)
-    return out
+    return [
+        ind for _tier, ind in iter_indicators_for_topic(topic)
+        if isinstance(ind, dict) and "id" in ind and "likelihoods" in ind
+    ]
 
 
 # Full system purpose framing — included in every agent's standing instructions.
@@ -258,7 +279,7 @@ def build_advocate_prompt(topic: dict, articles: list, candidates: list) -> str:
     lines.append("")
     for c in candidates:
         idx = c["idx"]
-        art = articles[idx - 1].get("article", articles[idx - 1])
+        art = articles[_to_int_idx(idx) - 1].get("article", articles[_to_int_idx(idx) - 1])
         act_raw = c["action_raw"]
         lines.append(f"[A{idx}] {art.get('headline', '')}")
         lines.append(f"  URL: {art.get('url', '')}")
@@ -319,8 +340,8 @@ def build_rebut_prompt(topic: dict, articles: list, advocate_moves: list,
     lines.append("")
     for mv in advocate_moves:
         idx = mv["idx"]
-        art = articles[idx - 1].get("article", articles[idx - 1])
-        sr = strict_reasons.get(idx, {})
+        art = articles[_to_int_idx(idx) - 1].get("article", articles[_to_int_idx(idx) - 1])
+        sr = strict_reasons.get(idx) or strict_reasons.get(str(idx)) or {}
         lines.append(f"[A{idx}] {art.get('headline', '')}")
         lines.append(f"  URL: {art.get('url', '')}")
         lines.append(f"  SOURCE: {art.get('source', '')}")
@@ -381,8 +402,8 @@ def build_jury_prompt(topic: dict, articles: list, advocate_moves: list,
     lines.append("")
     for mv in advocate_moves:
         idx = mv["idx"]
-        art = articles[idx - 1].get("article", articles[idx - 1])
-        rb = rebuts.get(idx, {})
+        art = articles[_to_int_idx(idx) - 1].get("article", articles[_to_int_idx(idx) - 1])
+        rb = rebuts.get(idx) or rebuts.get(str(idx)) or {}
         lines.append(f"=== A{idx} ===")
         lines.append(f"  HEADLINE: {art.get('headline', '')}")
         lines.append(f"  SOURCE: {art.get('source', '')}")
@@ -417,7 +438,7 @@ def build_jury_prompt(topic: dict, articles: list, advocate_moves: list,
 # 1 parsed. END lines, when present, are simply ignored between blocks.
 _DECISION_BLOCK = re.compile(
     r"DECISION\s*\n"
-    r"ARTICLE:\s*A(\d+)\s*\n"
+    r"ARTICLE:\s*A(\d+(?:\.\d+)?)\s*\n"
     r"ACTION:\s*([^\n]+)\n?"
     r"(?:TAG:\s*([^\n]*)\n?)?"
     r"(?:CLAIM:\s*([^\n]*)\n?)?"
@@ -431,7 +452,7 @@ _FIRE_RE = re.compile(r"^FIRE\s+(\S+)\s*$", re.IGNORECASE)
 # block silently unparseable and the whole debate stage a no-op.
 _ADV_BLOCK = re.compile(
     r"ADVOCATE\s*\n"
-    r"ARTICLE:\s*A(\d+)\s*\n"
+    r"ARTICLE:\s*A(\d+(?:\.\d+)?)\s*\n"
     r"VERDICT:\s*([^\n]+)\s*\n?"
     r"(?:PROPOSED_ACTION:\s*([^\n]+)\n?)?"
     r"(?:CITE:\s*([^\n]+)\n?)?"
@@ -441,7 +462,7 @@ _ADV_BLOCK = re.compile(
 )
 _REB_BLOCK = re.compile(
     r"REBUT\s*\n"
-    r"ARTICLE:\s*A(\d+)\s*\n"
+    r"ARTICLE:\s*A(\d+(?:\.\d+)?)\s*\n"
     r"VERDICT:\s*([^\n]+)\s*\n?"
     r"(?:OBJECTION:\s*([^\n]+)\n?)?"
     r"(?:CORRECTED_ACTION:\s*([^\n]+)\n?)?"
@@ -450,7 +471,7 @@ _REB_BLOCK = re.compile(
 )
 _JURY_BLOCK = re.compile(
     r"JURY\s*\n"
-    r"ARTICLE:\s*A(\d+)\s*\n"
+    r"ARTICLE:\s*A(\d+(?:\.\d+)?)\s*\n"
     r"VERDICT:\s*([^\n]+)\n?"
     r"(?:RATIONALE:\s*([^\n]+)\n?)?",
     re.MULTILINE | re.IGNORECASE,
@@ -483,22 +504,40 @@ def parse_matcher_output(text: str) -> list:
     """Parse strict-matcher DECISION blocks. Returns list of dicts."""
     out = []
     for m in _DECISION_BLOCK.finditer(text):
+        idx_str = m.group(1)
+        idx = idx_str if "." in idx_str else int(idx_str)
         out.append({
-            "idx": int(m.group(1)),
+            "idx": idx,
             "action": parse_action(m.group(2)),
             "tag": (m.group(3) or "EVENT").strip().upper().split()[0]
                    if m.group(3) else "EVENT",
             "claim": (m.group(4) or "").strip(),
             "reason": (m.group(5) or "").strip(),
         })
+
+    # Uniquify idx for multiple decisions on the same article
+    counts = {}
+    for d in out:
+        idx = d["idx"]
+        counts[idx] = counts.get(idx, 0) + 1
+        
+    seen = {}
+    for d in out:
+        idx = d["idx"]
+        if counts[idx] > 1:
+            seen[idx] = seen.get(idx, 0) + 1
+            d["idx"] = f"{idx}.{seen[idx] - 1}"
+
     return out
 
 
 def parse_advocate_output(text: str) -> list:
     out = []
     for m in _ADV_BLOCK.finditer(text):
+        idx_str = m.group(1)
+        idx = idx_str if "." in idx_str else int(idx_str)
         out.append({
-            "idx": int(m.group(1)),
+            "idx": idx,
             "verdict": m.group(2).strip().upper(),
             "proposed_action": (m.group(3) or "").strip(),
             "cite": (m.group(4) or "").strip(),
@@ -512,7 +551,9 @@ def parse_rebut_output(text: str) -> dict:
     """Returns {idx: {verdict, objection, corrected_action, reason}}."""
     out = {}
     for m in _REB_BLOCK.finditer(text):
-        out[int(m.group(1))] = {
+        idx_str = m.group(1)
+        idx = idx_str if "." in idx_str else int(idx_str)
+        out[idx] = {
             "verdict": m.group(2).strip().upper(),
             "objection": (m.group(3) or "").strip(),
             "corrected_action": (m.group(4) or "").strip(),
@@ -525,6 +566,8 @@ def parse_jury_output(text: str) -> dict:
     """Returns {idx: {verdict_raw, action_dict, rationale}}."""
     out = {}
     for m in _JURY_BLOCK.finditer(text):
+        idx_str = m.group(1)
+        idx = idx_str if "." in idx_str else int(idx_str)
         verdict_raw = m.group(2).strip()
         verdict_upper = verdict_raw.upper()
         
@@ -536,10 +579,13 @@ def parse_jury_output(text: str) -> dict:
                 action = {"kind": "COMMIT"}
         elif verdict_upper.startswith("DUPLICATE_OF"):
             parent = verdict_upper[len("DUPLICATE_OF"):].strip().lstrip("A")
-            try:
-                parent_idx = int(parent)
-            except ValueError:
-                parent_idx = 0
+            if "." in parent:
+                parent_idx = parent
+            else:
+                try:
+                    parent_idx = int(parent)
+                except ValueError:
+                    parent_idx = 0
             action = {"kind": "DUPLICATE_OF", "parent_idx": parent_idx}
         elif verdict_upper.startswith("SCHEMA_GAP"):
             desc = verdict_raw[len("SCHEMA_GAP"):].strip()
@@ -554,7 +600,7 @@ def parse_jury_output(text: str) -> dict:
         else:
             action = {"kind": "PARK"}  # Default fallback
             
-        out[int(m.group(1))] = {
+        out[idx] = {
             "verdict_raw": verdict_raw,
             "action": action,
             "rationale": (m.group(3) or "").strip(),
@@ -580,11 +626,28 @@ def group_decisions_by_duplicates(articles: list, decisions: list) -> tuple[list
         action = d["action"]
         if action["kind"] == "DUPLICATE_OF":
             parent_idx = action.get("parent_idx")
-            if parent_idx in by_idx:
-                parent_d = by_idx[parent_idx]
-                if parent_d["action"]["kind"] in {"FIRE", "OBSERVE"}:
-                    duplicate_map.setdefault(parent_idx, []).append(d)
-                    dup_idxs.add(d["idx"])
+            # Lookup parent_d robustly
+            parent_d = by_idx.get(parent_idx)
+            if parent_d is None:
+                if isinstance(parent_idx, int):
+                    # Try string representations like "2.0"
+                    for k in by_idx:
+                        if isinstance(k, str) and k.startswith(f"{parent_idx}."):
+                            parent_d = by_idx[k]
+                            parent_idx = k
+                            break
+                elif isinstance(parent_idx, str):
+                    try:
+                        parent_int = int(float(parent_idx))
+                        parent_d = by_idx.get(parent_int)
+                        if parent_d:
+                            parent_idx = parent_int
+                    except (ValueError, TypeError):
+                        pass
+            
+            if parent_d and parent_d["action"]["kind"] in {"FIRE", "OBSERVE"}:
+                duplicate_map.setdefault(parent_idx, []).append(d)
+                dup_idxs.add(d["idx"])
                     
     # 2. Process implicit same-batch duplicates (indicator/value similarity fallback)
     observe_groups = {}  # key: (indicator_id, value_rounded) -> list of decisions
@@ -622,7 +685,7 @@ def group_decisions_by_duplicates(articles: list, decisions: list) -> tuple[list
         if d["idx"] not in dup_idxs and d["action"]["kind"] not in {"OBSERVE", "FIRE"}:
             canonical_decisions.append(d)
             
-    canonical_decisions.sort(key=lambda d: d["idx"])
+    canonical_decisions.sort(key=lambda d: _sort_key(d["idx"]))
     return canonical_decisions, duplicate_map
 
 
@@ -631,21 +694,20 @@ def apply_decisions(slug: str, articles: list, decisions: list,
     """
     Apply per-article decisions through the engine, resolving duplicates.
     """
-    by_idx = {d["idx"]: d for d in decisions}
     jury_overrides = jury_overrides or {}
     
     # Fold overrides into the decisions list before grouping
-    for i in range(1, len(articles) + 1):
-        if i in jury_overrides:
-            d = by_idx.get(i)
-            if d:
-                action = jury_overrides[i]["action"]
-                if action["kind"] == "COMMIT":
-                    pass  # keep original action
-                else:
-                    d["action"] = action
-                d["jury_override"] = True
-                d["reason"] = f"jury: {jury_overrides[i].get('rationale') or 'override'}"
+    for d in decisions:
+        idx = d.get("idx")
+        override = jury_overrides.get(idx) or jury_overrides.get(str(idx))
+        if override:
+            action = override["action"]
+            if action["kind"] == "COMMIT":
+                pass  # keep original action
+            else:
+                d["action"] = action
+            d["jury_override"] = True
+            d["reason"] = f"jury: {override.get('rationale') or 'override'}"
 
     # Group by duplicates
     canonical_decisions, duplicate_map = group_decisions_by_duplicates(articles, decisions)
@@ -661,7 +723,7 @@ def apply_decisions(slug: str, articles: list, decisions: list,
 
     for d in canonical_decisions:
         idx = d["idx"]
-        art = articles[idx - 1]
+        art = articles[_to_int_idx(idx) - 1]
         action = d["action"]
         kind = action["kind"]
         
@@ -696,7 +758,7 @@ def apply_decisions(slug: str, articles: list, decisions: list,
                 secondary_evidence_ids = []
                 for dup_d in dups:
                     sec_idx = dup_d["idx"]
-                    sec_art = articles[sec_idx - 1]
+                    sec_art = articles[_to_int_idx(sec_idx) - 1]
                     sec_inner = sec_art.get("article", sec_art)
                     sec_inner.setdefault("surfaced_via", sec_art.get("channels", []))
                     sec_entry = article_to_evidence_entry(

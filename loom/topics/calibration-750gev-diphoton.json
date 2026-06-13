@@ -336,44 +336,44 @@
           "n_firings": 0,
           "resolution_class": false
         }
-      ],
-      "anti_indicators": [
-        {
-          "id": "anti_h1_no_corroboration",
-          "desc": "No corroborating excess in any other channel after 6+ months",
-          "status": "FIRED",
-          "firedDate": "2016-06-01",
-          "note": "REPLAY: Fired. No ZZ, Zh, WW, or fermionic channels showed anything at 750 GeV.",
-          "posteriorEffect": "H1 -5pp per quarter without corroboration",
-          "likelihoods": {
-            "H1": 0.666667,
-            "H2": 1.0,
-            "H3": 1.0,
-            "H4": 1.0
-          },
-          "lr_decay": 0.65,
-          "n_firings": 1,
-          "resolution_class": false
-        },
-        {
-          "id": "anti_h3_consistent_mass",
-          "desc": "Both ATLAS and CMS report the excess at consistent mass and width within statistical uncertainties. Observable: comparison of fitted mass peaks and width parameters in published results.",
-          "status": "FIRED",
-          "firedDate": "2015-12-15",
-          "note": "REPLAY: Fired at initial presentation. Both experiments saw excess at ~750 GeV. This arg",
-          "posteriorEffect": "H3 -5pp, H2 +3pp, H1 +2pp",
-          "likelihoods": {
-            "H1": 1.0,
-            "H2": 0.930481,
-            "H3": 0.441176,
-            "H4": 0.882353
-          },
-          "lr_decay": 0.65,
-          "n_firings": 1,
-          "resolution_class": false
-        }
       ]
-    }
+    },
+    "anti_indicators": [
+      {
+        "id": "anti_h1_no_corroboration",
+        "desc": "No corroborating excess in any other channel after 6+ months",
+        "status": "FIRED",
+        "firedDate": "2016-06-01",
+        "note": "REPLAY: Fired. No ZZ, Zh, WW, or fermionic channels showed anything at 750 GeV.",
+        "posteriorEffect": "H1 -5pp per quarter without corroboration",
+        "likelihoods": {
+          "H1": 0.666667,
+          "H2": 1.0,
+          "H3": 1.0,
+          "H4": 1.0
+        },
+        "lr_decay": 0.65,
+        "n_firings": 1,
+        "resolution_class": false
+      },
+      {
+        "id": "anti_h3_consistent_mass",
+        "desc": "Both ATLAS and CMS report the excess at consistent mass and width within statistical uncertainties. Observable: comparison of fitted mass peaks and width parameters in published results.",
+        "status": "FIRED",
+        "firedDate": "2015-12-15",
+        "note": "REPLAY: Fired at initial presentation. Both experiments saw excess at ~750 GeV. This arg",
+        "posteriorEffect": "H3 -5pp, H2 +3pp, H1 +2pp",
+        "likelihoods": {
+          "H1": 1.0,
+          "H2": 0.930481,
+          "H3": 0.441176,
+          "H4": 0.882353
+        },
+        "lr_decay": 0.65,
+        "n_firings": 1,
+        "resolution_class": false
+      }
+    ]
   },
   "actorModel": {
     "description": "Physics experiment dynamics — no geopolitical actors, but institutional incentives matter",

@@ -514,70 +514,70 @@
           "firedDate": null,
           "note": null
         }
-      ],
-      "anti_indicators": [
-        {
-          "id": "anti_h1_h2_hours_stable",
-          "desc": "BLS CPS data shows no statistically significant change in average weekly hours (private sector) in any 4-quarter rolling window through 2028.",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": null,
-          "posteriorEffect": "H1 -25pp, H2 -15pp. H3 +25pp, H4 +15pp.",
-          "likelihoods": {
-            "H1": 0.030263,
-            "H2": 0.242105,
-            "H3": 0.965539,
-            "H4": 1.0
-          },
-          "lr_decay": 0.65,
-          "n_firings": 0,
-          "resolution_class": false
-        },
-        {
-          "id": "anti_h1_expectation_creep_confirmed",
-          "desc": "BLS ATUS or equivalent shows knowledge-sector workers reporting longer effective work time vs 2023 baseline in >=2 consecutive annual surveys.",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": null,
-          "posteriorEffect": "H4 +25pp, H3 +15pp. H1 -28pp, H2 -12pp.",
-          "likelihoods": {
-            "H1": 0.023958,
-            "H2": 0.249167,
-            "H3": 0.650298,
-            "H4": 1.0
-          },
-          "lr_decay": 0.65,
-          "n_firings": 0,
-          "resolution_class": false
-        },
-        {
-          "id": "anti_h3_h4_hours_reduction_trend",
-          "desc": "BLS or Eurostat data shows consistent downward trend in average weekly hours (>=1% YoY for >=2 consecutive years) in any G7 knowledge sector, with AI adoption cited in official or peer-reviewed analysis.",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": null,
-          "posteriorEffect": "H3 -20pp, H4 -15pp. H1 +20pp, H2 +15pp.",
-          "likelihoods": {
-            "H1": 1.0,
-            "H2": 0.533333,
-            "H3": 0.174603,
-            "H4": 0.115942
-          },
-          "lr_decay": 0.65,
-          "n_firings": 0,
-          "resolution_class": false,
-          "lr_migration_warning": "design prior drift >30% — review before next firing"
-        },
-        {
-          "id": "anti_h1_h2_productivity_diversion",
-          "desc": "Federal Reserve, BLS, OECD, ECB, or peer-reviewed study (sample >=10,000 workers across >=2 G7 countries) quantifies AI-driven time savings of >=5% of work hours AND documents that >=70% of firms (or workers) are redirecting that saved time to incremental output rather than reduced hours.",
-          "posteriorEffect": "H3 +12pp, H4 +3pp, H1 -10pp, H2 -5pp.",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": null
-        }
       ]
-    }
+    },
+    "anti_indicators": [
+      {
+        "id": "anti_h1_h2_hours_stable",
+        "desc": "BLS CPS data shows no statistically significant change in average weekly hours (private sector) in any 4-quarter rolling window through 2028.",
+        "status": "NOT_FIRED",
+        "firedDate": null,
+        "note": null,
+        "posteriorEffect": "H1 -25pp, H2 -15pp. H3 +25pp, H4 +15pp.",
+        "likelihoods": {
+          "H1": 0.030263,
+          "H2": 0.242105,
+          "H3": 0.965539,
+          "H4": 1.0
+        },
+        "lr_decay": 0.65,
+        "n_firings": 0,
+        "resolution_class": false
+      },
+      {
+        "id": "anti_h1_expectation_creep_confirmed",
+        "desc": "BLS ATUS or equivalent shows knowledge-sector workers reporting longer effective work time vs 2023 baseline in >=2 consecutive annual surveys.",
+        "status": "NOT_FIRED",
+        "firedDate": null,
+        "note": null,
+        "posteriorEffect": "H4 +25pp, H3 +15pp. H1 -28pp, H2 -12pp.",
+        "likelihoods": {
+          "H1": 0.023958,
+          "H2": 0.249167,
+          "H3": 0.650298,
+          "H4": 1.0
+        },
+        "lr_decay": 0.65,
+        "n_firings": 0,
+        "resolution_class": false
+      },
+      {
+        "id": "anti_h3_h4_hours_reduction_trend",
+        "desc": "BLS or Eurostat data shows consistent downward trend in average weekly hours (>=1% YoY for >=2 consecutive years) in any G7 knowledge sector, with AI adoption cited in official or peer-reviewed analysis.",
+        "status": "NOT_FIRED",
+        "firedDate": null,
+        "note": null,
+        "posteriorEffect": "H3 -20pp, H4 -15pp. H1 +20pp, H2 +15pp.",
+        "likelihoods": {
+          "H1": 1.0,
+          "H2": 0.533333,
+          "H3": 0.174603,
+          "H4": 0.115942
+        },
+        "lr_decay": 0.65,
+        "n_firings": 0,
+        "resolution_class": false,
+        "lr_migration_warning": "design prior drift >30% — review before next firing"
+      },
+      {
+        "id": "anti_h1_h2_productivity_diversion",
+        "desc": "Federal Reserve, BLS, OECD, ECB, or peer-reviewed study (sample >=10,000 workers across >=2 G7 countries) quantifies AI-driven time savings of >=5% of work hours AND documents that >=70% of firms (or workers) are redirecting that saved time to incremental output rather than reduced hours.",
+        "posteriorEffect": "H3 +12pp, H4 +3pp, H1 -10pp, H2 -5pp.",
+        "status": "NOT_FIRED",
+        "firedDate": null,
+        "note": null
+      }
+    ]
   },
   "actorModel": {
     "description": "Employer behavior and policy response determine whether AI productivity gains translate to hours reduction or output expansion.",

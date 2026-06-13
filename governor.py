@@ -26,6 +26,12 @@ from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from typing import Optional
 
+from framework.indicator_schema import (
+    anti_indicators_for_topic,
+    build_effect_coverage_matrix,
+    tier_indicators_for_topic,
+)
+
 
 def _now_dt() -> datetime:
     """Aware UTC now, honoring the NROL_AO_AS_OF simulation clock.
@@ -564,14 +570,9 @@ def validate_hypotheses(topic: dict) -> dict:
     """
     hypotheses = topic["model"]["hypotheses"]
     resolution = topic["meta"].get("resolution", "")
-    indicators = topic.get("indicators", {}).get("tiers", {})
-
-    # Flatten all indicators
-    all_indicators = []
-    for tier_inds in indicators.values():
-        all_indicators.extend(tier_inds)
-
-    anti_indicators = indicators.get("anti_indicators", [])
+    all_indicators = tier_indicators_for_topic(topic)
+    anti_indicators = anti_indicators_for_topic(topic)
+    coverage = build_effect_coverage_matrix(hypotheses, all_indicators, anti_indicators)
 
     report = {}
 
@@ -588,19 +589,10 @@ def validate_hypotheses(topic: dict) -> dict:
             "prior_not_certain": h.get("posterior", 0) < 0.99,
         }
 
-        # Check if any indicator specifically mentions this hypothesis or its range
-        label_lower = h.get("label", "").lower()
-        for ind in all_indicators:
-            effect = (ind.get("posteriorEffect") or "").lower()
-            if k.lower() in effect or label_lower in effect:
-                checks["has_supporting_indicators"] = True
-                break
-
-        for ind in anti_indicators:
-            effect = (ind.get("posteriorEffect") or "").lower()
-            if k.lower() in effect or label_lower in effect:
-                checks["has_contrary_indicators"] = True
-                break
+        # Structural coverage: supporting means some indicator can raise Hk;
+        # contrary/falsifying means some indicator can lower Hk.
+        checks["has_supporting_indicators"] = bool(coverage["positive"].get(k))
+        checks["has_contrary_indicators"] = bool(coverage["negative"].get(k))
 
         # Distinguishability: midpoints should be >20% apart
         for k2, h2 in hypotheses.items():
@@ -766,6 +758,7 @@ def prioritize_queries(topic: dict) -> list[dict]:
     """
     queries = topic.get("searchQueries", [])
     indicators = topic.get("indicators", {}).get("tiers", {})
+    anti_indicators = anti_indicators_for_topic(topic)
     uncertainty = compute_uncertainty_ratio(topic)
 
     # Score unfired indicators by tier
@@ -813,7 +806,7 @@ def prioritize_queries(topic: dict) -> list[dict]:
     hypotheses = topic["model"]["hypotheses"]
     max_posterior = max((h["posterior"] for h in hypotheses.values()), default=0)
     if max_posterior > 0.5:
-        for ind in indicators.get("anti_indicators", []):
+        for ind in anti_indicators:
             if ind["status"] == "NOT_FIRED":
                 prioritized.append({
                     "query": f"Evidence against: {ind['desc']}",

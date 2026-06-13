@@ -428,80 +428,80 @@
           "n_firings": 1,
           "resolution_class": false
         }
-      ],
-      "anti_indicators": [
-        {
-          "id": "anti_h1",
-          "desc": "Failed replication by well-resourced lab (e.g., Argonne, Max Planck)",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": "6+ well-resourced labs failed replication",
-          "posteriorEffect": "H1 -10pp per failure",
-          "likelihoods": {
-            "H1": 0.05,
-            "H2": 1.0,
-            "H3": 1.0,
-            "H4": 1.0
-          },
-          "lr_decay": 0.65,
-          "n_firings": 0,
-          "resolution_class": false,
-          "lr_migration_warning": "design prior drift >30% — review before next firing"
-        },
-        {
-          "id": "anti_h2",
-          "desc": "Diamagnetic signal fully explained by ferromagnetic impurity (Cu2S or similar)",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": "Diamagnetic signal fully explained by ferromagnetic Cu2S impurity",
-          "posteriorEffect": "H2 -15pp",
-          "likelihoods": {
-            "H1": 1.0,
-            "H2": 0.25,
-            "H3": 1.0,
-            "H4": 1.0
-          },
-          "lr_decay": 0.65,
-          "n_firings": 0,
-          "resolution_class": false
-        },
-        {
-          "id": "anti_h3",
-          "desc": "Clean single-crystal LK-99 shows any SC signature",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": null,
-          "posteriorEffect": "H3 -20pp",
-          "likelihoods": {
-            "H1": 1.0,
-            "H2": 1.0,
-            "H3": 0.6,
-            "H4": 1.0
-          },
-          "lr_decay": 0.65,
-          "n_firings": 0,
-          "resolution_class": false,
-          "lr_migration_warning": "design prior drift >30% — review before next firing"
-        },
-        {
-          "id": "anti_h4",
-          "desc": "Original authors publish detailed methods allowing reproduction",
-          "status": "NOT_FIRED",
-          "firedDate": null,
-          "note": null,
-          "posteriorEffect": "H4 -10pp",
-          "likelihoods": {
-            "H1": 1.0,
-            "H2": 1.0,
-            "H3": 1.0,
-            "H4": 0.5
-          },
-          "lr_decay": 0.65,
-          "n_firings": 0,
-          "resolution_class": false
-        }
       ]
-    }
+    },
+    "anti_indicators": [
+      {
+        "id": "anti_h1",
+        "desc": "Failed replication by well-resourced lab (e.g., Argonne, Max Planck)",
+        "status": "NOT_FIRED",
+        "firedDate": null,
+        "note": "6+ well-resourced labs failed replication",
+        "posteriorEffect": "H1 -10pp per failure",
+        "likelihoods": {
+          "H1": 0.05,
+          "H2": 1.0,
+          "H3": 1.0,
+          "H4": 1.0
+        },
+        "lr_decay": 0.65,
+        "n_firings": 0,
+        "resolution_class": false,
+        "lr_migration_warning": "design prior drift >30% — review before next firing"
+      },
+      {
+        "id": "anti_h2",
+        "desc": "Diamagnetic signal fully explained by ferromagnetic impurity (Cu2S or similar)",
+        "status": "NOT_FIRED",
+        "firedDate": null,
+        "note": "Diamagnetic signal fully explained by ferromagnetic Cu2S impurity",
+        "posteriorEffect": "H2 -15pp",
+        "likelihoods": {
+          "H1": 1.0,
+          "H2": 0.25,
+          "H3": 1.0,
+          "H4": 1.0
+        },
+        "lr_decay": 0.65,
+        "n_firings": 0,
+        "resolution_class": false
+      },
+      {
+        "id": "anti_h3",
+        "desc": "Clean single-crystal LK-99 shows any SC signature",
+        "status": "NOT_FIRED",
+        "firedDate": null,
+        "note": null,
+        "posteriorEffect": "H3 -20pp",
+        "likelihoods": {
+          "H1": 1.0,
+          "H2": 1.0,
+          "H3": 0.6,
+          "H4": 1.0
+        },
+        "lr_decay": 0.65,
+        "n_firings": 0,
+        "resolution_class": false,
+        "lr_migration_warning": "design prior drift >30% — review before next firing"
+      },
+      {
+        "id": "anti_h4",
+        "desc": "Original authors publish detailed methods allowing reproduction",
+        "status": "NOT_FIRED",
+        "firedDate": null,
+        "note": null,
+        "posteriorEffect": "H4 -10pp",
+        "likelihoods": {
+          "H1": 1.0,
+          "H2": 1.0,
+          "H3": 1.0,
+          "H4": 0.5
+        },
+        "lr_decay": 0.65,
+        "n_firings": 0,
+        "resolution_class": false
+      }
+    ]
   },
   "actorModel": {
     "description": "Scientific claim evaluation: who are the key actors and what drives their behavior?",
