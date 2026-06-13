@@ -71,3 +71,19 @@ loom/mcp_activity/
 # Pre-design snapshots and test fixtures (local working data)
 topics/_predesign_*/
 topics/_fixtures/
+# --- Deprecated prototype docs/scripts kept locally only ---
+CALIBRATION_SYSTEM.md
+METHODOLOGY_EXTRAPOLATE.md
+OPERATOR_MODEL_DESIGN.md
+apply_matcher.py
+matcher_hormuz_may12.py
+run_matcher.py
+loom/methodology.html
+skills/calibration.md
+skills/extrapolate.md
+skills/extrapolation-tuning.md
+skills/source-trust.md
+specs/lr-migration-spec.md
+specs/lr-range-sensitivity-spec.md
+specs/mcp-server-migration-plan.md
+specs/source-calibration-future-casts.md
