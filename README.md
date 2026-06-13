@@ -1,4 +1,10 @@
-﻿# NROL-AO
+<p align="center">
+  <img src="logo.png" width="320" alt="NROL-AO embroidered mission patch" />
+  <br />
+  <sub>Patch assets: embroidered render (<code>logo.png</code>) and flat mark (<code>NROLAO.png</code>).</sub>
+</p>
+
+# NROL-AO
 
 **NROL-AO** is a governor-gated Bayesian estimation engine for structured
 belief updates. It is designed for a human + LLM operator pair: the LLM handles
