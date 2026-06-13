@@ -12,16 +12,18 @@ Governor-gated Bayesian estimation engine that scaffolds the human-LLM pair so n
 
 Not a forecasting tool. A framework for navigating uncertainty across every domain that matters to your life — geopolitics, economics, AI, climate, finance — with tracked beliefs, auditable reasoning, and calibration feedback that tells you where you're actually wrong.
 
-## State (May 2026 reset)
+## State (June 2026 operating state)
 
-The framework is post-reset. The earlier topic corpus (24 topics) was contaminated by a freeform-LR loophole that let operators commit context-anchored likelihood ratios outside the indicator schema; the resulting saturated posteriors couldn't be cleanly recovered. Those topics are archived locally (gitignored) and the project starts over with fresh topics authored under the current gates:
+The framework is post-reset. The earlier topic corpus (24 topics) was contaminated by a freeform-LR loophole that let operators commit context-anchored likelihood ratios outside the indicator schema; the resulting saturated posteriors could not be cleanly recovered. Those topics are archived locally (gitignored) and the project starts over with fresh topics authored under the current gates:
 
-- `bayesian_update` requires an indicator id (no freeform LRs)
-- `add_indicator` requires an active cleanup session
-- Indicator shape declarations (`single_observation` / `per_event_member` / `ladder_rung`) are part of topic design and enforced at save time
-- Causal de-correlation, saturation red-team, and confidence-inflation gates are enforced at fire time
-- Multi-round news scan with adaptive `lastScanned` window and per-hypothesis + wildcard search subagents
-- **Topic-design v2** ([`skills/topic-design.md`](skills/topic-design.md)): adversarial review at every design phase where operator judgment leaks in, not just at a final gate. Phase 2 (priors) and Phase 3 (indicators) get red-team / blue-team subagent pairs. Phase 3 also runs per-indicator shape review (`framework/lint_indicator_shape.py`) — `bayesian_update` refuses to fire indicators without a passed shape review. Phases 4–5 stay operator-driven (low adversarial leverage). Final design gate (`framework/topic_design_gate.py`) runs whole-topic integration review. Multi-topic parallel by construction; revisions capped at 3 per phase.
+- `bayesian_update` requires an indicator id; no freeform LRs or target-posterior commits.
+- Indicator shape declarations (`single_observation` / `per_event_member` / `ladder_rung`) are part of topic design and enforced before firing.
+- Causal de-correlation, saturation red-team, confidence-inflation, and duplicate-event gates are enforced at fire/observe time.
+- Anti-indicators are canonical at top-level `indicators.anti_indicators`; validators and engine readers treat that location as authoritative.
+- MCP news scans use curated `searchQueries`, actor/wildcard queries, tracker-stripped URL dedupe, adaptive freshness windows, and full-article metadata dates when available.
+- `commit_policy="safe"` is review-first: PARK/SCHEMA_GAP may auto-apply because they cannot move posteriors; FIRE/OBSERVE become pending proposals even if `commit=true` is accidentally supplied.
+- Source calibration infrastructure exists, but active topic updates should not be described as being driven by per-source Brier scores. Future source-calibration and future-cast features are specified in [`specs/source-calibration-future-casts.md`](specs/source-calibration-future-casts.md).
+- **Topic-design v2** ([`skills/topic-design.md`](skills/topic-design.md)): adversarial review at every design phase where operator judgment leaks in, not just at a final gate. Phase 2 (priors) and Phase 3 (indicators) get red-team / blue-team subagent pairs. Phase 3 also runs per-indicator shape review (`framework/lint_indicator_shape.py`) -- `bayesian_update` refuses to fire indicators without a passed shape review. Phases 4-5 stay operator-driven (low adversarial leverage). Final design gate (`framework/topic_design_gate.py`) runs whole-topic integration review. Multi-topic parallel by construction; revisions capped at 3 per phase.
 
 The lessons from the contaminated run are folded into `skills/` and the engine. The `calibration-lk99-superconductor` and `calibration-750gev-diphoton` topics (RESOLVED with real Brier outcomes) are kept in archive as the only legitimate calibration record from the prior run.
 
@@ -71,9 +73,9 @@ r = triage_headline("CENTCOM announces new phase of operations in Persian Gulf",
 # → Action: UPDATE_CYCLE
 ```
 
-### Weekly (30 minutes): Update cycle
+### Weekly (30 minutes): Evidence loop
 
-Pick the topic with the worst R_t (evidence staleness score). Run a full governed update — intel search, evidence ingestion, indicator check, posterior update or hold, brief generation. The governor enforces the full OODA loop: search for genuinely new information, validate before ingesting, cite evidence for every shift, and pass the 14-point hallucination checklist before posteriors move.
+Pick the topic with the worst staleness or governance debt. From Loom, run the NROL-AO MCP `run_news_scan` path with `commit_policy="safe"`. The scan searches, dedupes, fetches article text, freshness-gates results, runs matcher deliberation, and produces an operator packet. PARK/SCHEMA_GAP can be recorded as non-moving evidence; FIRE/OBSERVE are proposals that must be briefed, duplicate-checked, and explicitly committed by the operator before any posterior moves.
 
 ### Ongoing: The Mirror
 
@@ -110,7 +112,7 @@ The system is designed to be operated through [A Shadow Loom](https://github.com
 
 The `loom/` directory contains a standalone canvas deployment — copy it into your Claude Code project's `canvas/` folder. The canvas renders the dashboard and mirror views in-browser, and uses the Canvas SDK (`Loom.send()`) to send triage results, URLs, and social media posts directly to Claude for full pipeline processing. No `server.py` required.
 
-The pipeline is governor-enforced end-to-end: paste a URL → Claude fetches content → triages against active topics → looks up source trust via the 5-tier calibration chain → logs evidence → proposes or applies gated posterior updates → runs best-effort source calibration when confirmation/refutation pairs are available → writes an activity log entry. The canvas auto-refreshes. Source calibration is a trust-ledger system, not a per-source Brier table: topic-local `sourceCalibration` is authoritative for the topic, and the optional cross-topic `sources/source_db.json` must be populated with the expected `sources/meta` schema before cross-topic trust contributes. See [`LOOM.md`](LOOM.md) for architecture details, setup instructions, and the trigger template system.
+The current operational pipeline is MCP-mediated: the Loom-side operator calls NROL-AO tools, the MCP server performs scan/search/matcher work, and posterior-moving actions are forced through typed proposals plus browser approval. `run_news_scan(..., commit_policy="safe")` is the default evidence loop. Direct URL/headline triage remains useful for routing, but source trust and source calibration should be treated as audit context unless the topic-local/cross-topic source ledgers are explicitly populated and healthy. See [`LOOM.md`](LOOM.md) for architecture details, setup instructions, and the trigger template system.
 
 The tree structure maps to analytical branching: explore “what if we fire this indicator” on one branch and “what if we hold” on another. Each branch preserves the reasoning. The topic's posteriorHistory is linear, but the loom captures the *deliberation* that produced it — the part no other system preserves.
 
@@ -120,7 +122,7 @@ The mirror is the read surface (what does the system know). The loom is the writ
 
 This engine is honest about what it is and what it isn't.
 
-**What it is**: a Bayesian estimation engine where the update mechanics are principled and the governance layer enforces epistemic discipline. Posteriors are computed via Bayes' theorem from explicit likelihoods. Evidence weight feeds back into the update via a probabilistic mixture model — contested evidence is treated as a mixture of signal and noise, not discarded or blindly trusted. Source trust is Bayesian-updated per topic and, when the cross-topic database is healthy, per domain with surprisal-weighted likelihood ratios, so a source correctly predicting something surprising earns more trust than one confirming the obvious. Forecast calibration is tracked via Brier scores and fed back into governance health.
+**What it is**: a Bayesian estimation engine where the update mechanics are principled and the governance layer enforces epistemic discipline. Posteriors are computed via Bayes' theorem from explicit likelihoods bound to indicators. Evidence weight can attenuate updates through a probabilistic mixture model -- contested evidence is treated as a mixture of signal and noise, not discarded or blindly trusted. Forecast calibration is tracked with Brier scores for resolved topics. Source-trust calibration is infrastructure, not a blanket active weighting guarantee; use it only when the relevant source records are present and schema-healthy.
 
 **What it isn't**: a parametric generative model with closed-form likelihood functions. You can't call `P(evidence | H3)` and get a number from a distribution. But the system does contain a **distributed qualitative generative model** — the topic state file encodes a structured causal story about how the world produces evidence under each hypothesis:
 
@@ -273,9 +275,7 @@ flowchart TD
 
 The engine uses principled Bayesian inference throughout: posterior updates via Bayes' theorem with explicit likelihoods, evidence weight attenuation through a probabilistic mixture model (contested or low-trust evidence produces proportionally weaker updates), inverse Bayes for deriving likelihoods from pre-committed indicator effects, KL divergence for prior-domination detection and operator-vs-mechanical divergence tracking, Shannon entropy driving R_t staleness scoring and VoI query prioritization, and Brier score calibration with partial scoring for expired hypotheses.
 
-Source trust is queried through a 5-tier chain: per-topic `sourceCalibration.effectiveTrust`, cross-topic `source_db` domain trust, cross-topic overall trust, static base prior, and 0.50 fallback. The per-topic ledger is stored in the topic JSON and is updated from confirmation/refutation records. Cross-topic domain trust is stored separately in `sources/source_db.json`; it is optional and must retain the `sources/meta` schema expected by `framework/source_db.py`.
-
-Source trust is not the same thing as Brier scoring. Brier scores evaluate posterior forecasts against eventual outcomes. Source calibration evaluates source claim records and produces trust multipliers used by evidence weighting. Future additions for source calibration, dry-run future casts, and MCP operator red-team review are specified in [`specs/source-calibration-future-casts.md`](specs/source-calibration-future-casts.md).
+Source trust is not the same thing as Brier scoring. Brier scores evaluate posterior forecasts against eventual outcomes. Source calibration evaluates source claim records and may later produce trust multipliers for evidence weighting. The codebase still contains source-ledger and cross-topic source-db pieces, but the current live operator loop should not assume a populated per-source Brier table or automatic source-score weighting. Future additions for source calibration, dry-run future casts, and MCP operator red-team review are specified in [`specs/source-calibration-future-casts.md`](specs/source-calibration-future-casts.md).
 
 For the full mathematical treatment including formulas, mixture model derivation, and source trust update diagrams, see **[MATH.md](MATH.md)**.
 
@@ -405,7 +405,7 @@ The system is designed to be operated through [A Shadow Loom](https://github.com
 5. Pipeline intake auto-initializes on first canvas load — no server required
 6. Use the **SCAN ALL** / **SCAN TOPIC** buttons in the mirror dashboard to run multi-topic news sweeps
 
-The pipeline is governor-enforced end-to-end: paste a URL into the canvas triage input, Claude fetches content, triages against active topics, looks up source trust, logs evidence, updates posteriors, calibrates source trust, and writes an activity log entry. See [`LOOM.md`](LOOM.md) for architecture details and the trigger template system.
+The current Loom-facing evidence loop is review-first through the MCP server: scan or triage, inspect the operator packet, brief pending FIRE/OBSERVE proposals, then commit or withdraw proposals explicitly. Safe scans do not directly move posteriors. See [`LOOM.md`](LOOM.md) and the Loom repo's `mcp_servers/nrol_ao/OPERATOR.md` for the live operator protocol.
 
 ### Standalone (No Loom)
 
@@ -538,16 +538,16 @@ Standalone version of both dashboards that runs inside [A Shadow Loom](https://g
 
 Additional features over the server dashboards:
 
-- **URL pipeline**: paste a URL into the triage input, it's sent to Claude who fetches, triages, logs evidence, and updates posteriors automatically
-- **Social media routing**: Twitter/X, Bluesky, Reddit, YouTube links are detected and routed through a platform-aware trigger with appropriate source trust handling and a 3-filter prediction gate (specific, testable, time-bounded)
-- **Evidence drop zone**: drag files or screenshots onto the mirror page for processing
-- **Source trust leaderboard**: searchable, sortable panel for populated cross-topic source records, with per-domain Bayesian trust scores, meter bars, and record counts
-- **Topic search and sort**: filter topics by name, sort by Health/R_t/A-Z/Updated
-- **Prediction tracking**: evidence entries with PREDICTION tags carry structured claims with resolution criteria and deadlines; the `/resolve` skill sweeps expired predictions and fires source calibration with minimum-sample guards
-- **Cold storage**: IGNORE'd pipeline evidence is written to `evidence-cold.json` with full provenance (claims, domains, actors, regions, keywords) for retroactive matching when new topics are created
-- **Activity feed**: real-time audit trail of all pipeline actions (evidence logged, posteriors shifted, sources calibrated, predictions resolved)
-- **Mandatory loom branching**: all triggers create a loom branch before modifying files — no exceptions, regardless of invocation context
-- **Governor-enforced triggers**: prompt templates in `loom/triggers/` that enforce the 5-tier trust chain, rhetoric-vs-evidence lint, claim lifecycle weights, and branch isolation
+- **URL/headline routing**: send candidate material to the operator for triage and topic matching.
+- **Safe scan workflow**: MCP-side scans fetch full article text, freshness-gate results, strip tracker query params for dedupe, and file FIRE/OBSERVE as proposals under `commit_policy="safe"`.
+- **Proposal queue**: posterior-moving candidates are briefed, duplicate-reviewed, and committed or withdrawn explicitly.
+- **Evidence drop zone**: drag files or screenshots onto the mirror page for operator processing.
+- **Topic search and sort**: filter topics by name, sort by Health/R_t/A-Z/Updated.
+- **Prediction tracking**: evidence entries with PREDICTION tags carry structured claims with resolution criteria and deadlines; source-calibration extensions remain future-facing unless ledgers are populated.
+- **Cold storage**: IGNORE'd pipeline evidence is written to `evidence-cold.json` with full provenance for retroactive matching when new topics are created.
+- **Activity feed**: audit trail of scan runs, proposal filing, evidence logging, and committed transitions.
+- **Mandatory loom branching**: all triggers create a loom branch before modifying files.
+- **Governor-enforced triggers**: prompt templates in `loom/triggers/` that enforce rhetoric-vs-evidence lint, claim lifecycle discipline, and branch isolation.
 
 Setup: `cp -r loom/* canvas/` then copy topic files and `sources/source_db.json` into the canvas. See [`LOOM.md`](LOOM.md).
 
