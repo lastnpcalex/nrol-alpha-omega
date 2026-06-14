@@ -6,6 +6,14 @@
 
 # NROL-AO
 
+> **Status: experimental, WIP.** NROL-AO is an active research project, not a
+> production tool. The topic schema, indicator semantics, governor checks,
+> proposal lifecycle, dashboards, and on-disk state layout are still changing.
+> Expect breaking changes between commits, occasional schema migrations, and
+> calibration work that has not yet stabilized. Do not rely on the engine,
+> the MCP surface, or the dashboards as fixed contracts. Run it in
+> sandboxed/local state directories and assume manual cleanup may be needed.
+
 **NROL-AO** is a governor-gated Bayesian estimation engine for structured
 belief updates. It is designed for a human + LLM operator pair: the LLM handles
 perception and retrieval, the human authorizes consequential actions, and the
