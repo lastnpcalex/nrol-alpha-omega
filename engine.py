@@ -1035,12 +1035,38 @@ def compute_schema_fingerprint(topic: dict) -> str:
     Stable hash of the indicator schema a PARK judgment is conditioned on.
 
     A PARK means "no indicator can extract this article" — a judgment that
-    is only valid for the schema that existed when it was made. When
-    indicator ids, descriptions, statuses, or observable blocks change,
-    every earlier PARK is stale by definition. The fingerprint makes that
-    mechanical: parked reviews stamped under an old fingerprint show up as
-    due again (see parked_review_status).
+    is only valid for the extraction schema that existed when it was made.
+    Indicator status/firing state is deliberately excluded: applying evidence
+    should not make already-reviewed PARK items stale. Structural edits such
+    as indicator ids, descriptions, likelihoods, or observable blocks do make
+    earlier PARK judgments due again.
     """
+    import hashlib
+    try:
+        from framework.news_observation_pipeline import walk_indicators
+        inds = walk_indicators(topic)
+    except Exception:
+        inds = []
+    parts = []
+    for ind in sorted(inds, key=lambda i: str(i.get("id"))):
+        parts.append(json.dumps(
+            {
+                "id": ind.get("id"),
+                "desc": ind.get("desc"),
+                "posteriorEffect": ind.get("posteriorEffect"),
+                "likelihoods": ind.get("likelihoods"),
+                "lr_range": ind.get("lr_range"),
+                "observable": ind.get("observable"),
+            },
+            sort_keys=True, ensure_ascii=True, default=str,
+        ))
+    return hashlib.sha256("\n".join(parts).encode("utf-8")).hexdigest()[:16]
+
+
+
+
+def _legacy_schema_fingerprint_with_status(topic: dict) -> str:
+    """Compatibility hash for review records stamped before status was excluded."""
     import hashlib
     try:
         from framework.news_observation_pipeline import walk_indicators
@@ -1137,15 +1163,23 @@ def parked_review_status(topic: dict, review_interval_days: float = 14.0) -> dic
     flagged = list(gov.get("flagged_for_indicator_review", []) or [])
     book = gov.get("parked_reviews", {}) or {}
     fingerprint = compute_schema_fingerprint(topic)
+    valid_fingerprints = {fingerprint}
+    try:
+        valid_fingerprints.add(_legacy_schema_fingerprint_with_status(topic))
+    except Exception:
+        pass
     now = _now_dt()
 
     def _parse(ts: str):
         if not ts:
             return None
         try:
-            return datetime.fromisoformat(str(ts).replace("Z", "+00:00"))
+            dt = datetime.fromisoformat(str(ts).replace("Z", "+00:00"))
         except Exception:
             return None
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=timezone.utc)
+        return dt.astimezone(timezone.utc)
 
     parked_times = {}
     for entry in topic.get("evidenceLog", []) or []:
@@ -1162,7 +1196,7 @@ def parked_review_status(topic: dict, review_interval_days: float = 14.0) -> dic
             age_days = ((now - anchor).total_seconds() / 86400.0) if anchor else None
             due.append({"evidence_id": ev_id, "reason": "never_reviewed",
                         "age_days": round(age_days, 1) if age_days is not None else None})
-        elif rec.get("schema_fingerprint") != fingerprint:
+        elif rec.get("schema_fingerprint") not in valid_fingerprints:
             due.append({"evidence_id": ev_id, "reason": "schema_changed",
                         "age_days": round((now - last).total_seconds() / 86400.0, 1)})
         elif (now - last).total_seconds() > review_interval_days * 86400.0:

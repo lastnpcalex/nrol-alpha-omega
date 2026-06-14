@@ -585,7 +585,8 @@ function renderTopicCard({ slug, data, gov }) {
   // Expected value
   const ev = data.model.expectedValue;
   const eu = data.model.expectedUnit || '';
-  const evHtml = (ev != null) ? `<div class="card-expected">E[${eu}] = ${ev}</div>` : '';
+  const resolvedText = getEVResolvedText(ev, eu, data.meta);
+  const evHtml = (ev != null) ? `<div class="card-expected">E[${eu}] = ${ev}${resolvedText}</div>` : '';
 
   // Governance badges
   const health = gov.health || 'HEALTHY';
@@ -697,7 +698,8 @@ function renderPosteriors() {
   });
   const ev = state.model.expectedValue;
   const eu = state.model.expectedUnit || '';
-  document.getElementById('expectedValue').textContent = ev != null ? `E[${eu}] = ${ev}` : '';
+  const resolvedText = getEVResolvedText(ev, eu, state.meta);
+  document.getElementById('expectedValue').textContent = ev != null ? `E[${eu}] = ${ev}${resolvedText}` : '';
 }
 
 function renderSubModels() {
@@ -960,6 +962,47 @@ async function loadActivityTicker() {
       </div>`;
     }).join('');
   } catch(e) { /* not available */ }
+}
+
+function getEVResolvedText(ev, eu, meta) {
+  if (ev == null || isNaN(ev) || !eu) return "";
+  let type = "days";
+  let baseDateStr = null;
+  const match = eu.match(/(days|weeks|months|years)?\s*(?:from|since)\s*(\d{4}-\d{2}-\d{2})/i);
+  if (match) {
+    type = (match[1] || "days").toLowerCase();
+    baseDateStr = match[2];
+  } else if (meta && meta.startDate) {
+    const isDateTopic = (meta.question && /date|when|reopen/i.test(meta.question)) || (meta.title && /date|when|reopen/i.test(meta.title));
+    if (isDateTopic) {
+      baseDateStr = meta.startDate.slice(0, 10);
+      if (eu.toLowerCase().includes("day")) type = "days";
+      else if (eu.toLowerCase().includes("week")) type = "weeks";
+      else if (eu.toLowerCase().includes("month")) type = "months";
+      else if (eu.toLowerCase().includes("year")) type = "years";
+      else baseDateStr = null;
+    }
+  }
+
+  if (baseDateStr) {
+    const baseDate = new Date(baseDateStr + "T12:00:00");
+    if (!isNaN(baseDate.getTime())) {
+      let offsetMs = 0;
+      if (type === "days") offsetMs = ev * 24 * 60 * 60 * 1000;
+      else if (type === "weeks") offsetMs = ev * 7 * 24 * 60 * 60 * 1000;
+      else if (type === "months") offsetMs = ev * 30.4375 * 24 * 60 * 60 * 1000;
+      else if (type === "years") offsetMs = ev * 365.25 * 24 * 60 * 60 * 1000;
+
+      const resolvedDate = new Date(baseDate.getTime() + offsetMs);
+      if (!isNaN(resolvedDate.getTime())) {
+        const y = resolvedDate.getFullYear();
+        const m = String(resolvedDate.getMonth() + 1).padStart(2, '0');
+        const d = String(resolvedDate.getDate()).padStart(2, '0');
+        return ` (${y}-${m}-${d})`;
+      }
+    }
+  }
+  return "";
 }
 
 // ========== INIT ==========

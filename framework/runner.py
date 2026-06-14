@@ -25,7 +25,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from update import run_update, run_epistemic_audit, _generate_search_queries
+from update import run_update, run_epistemic_audit
 from lint import run_lint, SOURCE_TRUST
 from calibrate import verify_claim, calibrate_source_trust, detect_source_drift, register_source, SOURCE_TRUST as CALIBRATE_SOURCE_TRUST
 
