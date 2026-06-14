@@ -1640,7 +1640,7 @@ def _resolve_evidence_weight(topic: dict, evidence_refs: list[str]) -> tuple[flo
     Resolve evidence_refs to log entries and compute aggregate effectiveWeight.
 
     Returns (aggregate_weight, resolved_entries_detail) where detail is for
-    audit logging. Falls back to 1.0 if no refs resolve.
+    audit logging. Falls back to 0.5 if no refs resolve.
 
     Uses the same matching pattern as governor.check_update_proposal():
     match by entry's `time` field or first 50 chars of `text`.
@@ -1662,7 +1662,7 @@ def _resolve_evidence_weight(topic: dict, evidence_refs: list[str]) -> tuple[flo
                 break  # first match per ref
 
     if not weights:
-        return 1.0, detail
+        return 0.5, detail
 
     return round(sum(weights) / len(weights), 4), detail
 
@@ -3099,7 +3099,7 @@ def apply_indicator_effect(topic: dict, indicator_id: str,
       2. schemaVersion 2 indicators with 'likelihoods' dict: LR path with decay
       3. Legacy indicators with 'posteriorEffect' string: pp-shift fallback
 
-    LR decay: LR_effective = LR_base * lr_decay^n_firings
+    LR decay: LR_effective = LR_base ** (lr_decay ** n_firings)
     Phantom precision guard: max(raw_lrs)/min(raw_lrs) > 20 blocks the update.
 
     Causal de-correlation (NEW): if the indicator declares a causal_event_id
