@@ -101,13 +101,18 @@ def _collect_indicator_ids(topic: dict) -> set:
 # Topic I/O
 # ---------------------------------------------------------------------------
 
+def _read_json_file(path: Path) -> dict:
+    """Read JSON files as UTF-8, tolerating a UTF-8 BOM."""
+    with open(path, "r", encoding="utf-8-sig") as f:
+        return json.load(f)
+
+
 def load_topic(slug: str) -> dict:
     """Load a topic state file. Raises if malformed."""
     path = TOPICS_DIR / f"{slug}.json"
     if not path.exists():
         raise FileNotFoundError(f"Topic not found: {slug}")
-    with open(path, "r", encoding="utf-8") as f:
-        topic = json.load(f)
+    topic = _read_json_file(path)
     validate_topic(topic)
     _eliminate_expired_hypotheses(topic)
     return topic
@@ -160,8 +165,7 @@ def save_topic(topic: dict) -> None:
         
         inds_to_check = []
         if topic_path.exists():
-            with open(topic_path, "r", encoding="utf-8") as _f:
-                _disk = json.load(_f)
+            _disk = _read_json_file(topic_path)
             _disk_ids = _collect_indicator_ids(_disk)
             inds_to_check = [i for i in all_inds if i.get("id") not in _disk_ids]
         else:
@@ -185,8 +189,7 @@ def save_topic(topic: dict) -> None:
     try:
         topic_path = TOPICS_DIR / f"{slug}.json"
         if topic_path.exists():
-            with open(topic_path, "r", encoding="utf-8") as _f:
-                _disk = json.load(_f)
+            _disk = _read_json_file(topic_path)
             _disk_ids = _collect_indicator_ids(_disk)
             _new_ids = _collect_indicator_ids(topic)
             _added = _new_ids - _disk_ids
@@ -238,6 +241,10 @@ def save_topic(topic: dict) -> None:
         # await operator approval; approved entries get applied via
         # cleanup-session machinery.
         "proposed_schema_extensions",
+        # Durable retrieval-query governance: proposal/apply history for
+        # topic.searchQueries updates. This is operator audit state and must
+        # survive governance recomputation on save.
+        "search_query_history",
     ):
         if _k in _existing_gov:
             _preserved_governance[_k] = _existing_gov[_k]
@@ -499,7 +506,7 @@ def _regenerate_manifest() -> None:
 
 
 def list_topics() -> list[dict]:
-    """Return list of {slug, title, status, classification} for all topics."""
+    """Return list of topic summaries, including explicit load errors."""
     results = []
     if not TOPICS_DIR.exists():
         return results
@@ -507,9 +514,10 @@ def list_topics() -> list[dict]:
         if p.stem.startswith("_"):
             continue
         try:
-            with open(p, "r", encoding="utf-8") as f:
-                t = json.load(f)
-            meta = t.get("meta", {})
+            t = _read_json_file(p)
+            meta = t.get("meta")
+            if not isinstance(meta, dict):
+                raise KeyError("Topic missing 'meta' section")
             gov = t.get("governance", {})
             results.append({
                 "slug": meta.get("slug", p.stem),
@@ -520,8 +528,17 @@ def list_topics() -> list[dict]:
                 "lastUpdated": meta.get("lastUpdated", ""),
                 "governanceHealth": gov.get("health") if gov else None,
             })
-        except (json.JSONDecodeError, KeyError):
-            continue
+        except (json.JSONDecodeError, KeyError, OSError) as exc:
+            results.append({
+                "slug": p.stem,
+                "title": p.stem,
+                "status": "LOAD_ERROR",
+                "classification": "ERROR",
+                "question": "",
+                "lastUpdated": "",
+                "governanceHealth": None,
+                "loadError": str(exc),
+            })
     return results
 
 
@@ -534,8 +551,7 @@ def create_topic(config: dict) -> dict:
     """
     template_path = TOPICS_DIR / "_template.json"
     if template_path.exists():
-        with open(template_path, "r", encoding="utf-8") as f:
-            topic = json.load(f)
+        topic = _read_json_file(template_path)
     else:
         topic = _empty_topic()
 
@@ -654,8 +670,7 @@ def scaffold_topic(slug: str) -> str:
     """
     template_path = TOPICS_DIR / "_template.json"
     if template_path.exists():
-        with open(template_path, "r", encoding="utf-8") as f:
-            topic = json.load(f)
+        topic = _read_json_file(template_path)
     else:
         topic = _empty_topic()
 
@@ -1842,8 +1857,7 @@ def bayesian_update(topic: dict, likelihoods: dict[str, float] = None,
                 f"'SKIPPED_OPERATOR_JUDGMENT' with a meta.calibrationSkipReason."
             )
         try:
-            with open(_fixture_path, "r", encoding="utf-8") as _f:
-                _fx = _json.load(_f)
+            _fx = _read_json_file(_fixture_path)
         except Exception as _e:
             raise ValueError(
                 f"bayesian_update refused: fixture {_fixture_path} could not be "
@@ -3929,7 +3943,7 @@ def get_state_at(target_date: str, topic_loader=None) -> dict:
         if path.stem.startswith("_"):
             continue
         try:
-            t = json.loads(path.read_text(encoding="utf-8"))
+            t = _read_json_file(path)
         except (json.JSONDecodeError, OSError):
             continue
 
@@ -4237,7 +4251,7 @@ def what_happens_next(topic: dict, topic_loader=None) -> dict:
             if path.stem.startswith("_"):
                 continue
             try:
-                dt = json.loads(path.read_text(encoding="utf-8"))
+                dt = _read_json_file(path)
                 for dep in dt.get("dependencies", {}).get("upstream", []):
                     if dep.get("slug") == slug and dep.get("conditionals"):
                         # Compute what leading hypothesis implies
@@ -4343,7 +4357,7 @@ def compute_model_flags(topic: dict) -> list[str]:
             if path.stem.startswith("_") or path.stem == slug:
                 continue
             try:
-                t = json.loads(path.read_text(encoding="utf-8"))
+                t = _read_json_file(path)
                 for d in t.get("dependencies", {}).get("upstream", []):
                     if d.get("slug") == slug:
                         has_downstream = True

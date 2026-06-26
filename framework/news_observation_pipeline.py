@@ -190,6 +190,63 @@ def build_matcher_prompt(topic: dict, articles: list) -> str:
             # carry the numeric values OBSERVE needs — the excerpt is where
             # threshold data actually lives.
             lines.append(f"  EXCERPT: {art.get('excerpt', '')}")
+        
+        # Candidate list selection
+        matched_strict = []
+        matched_soft = []
+        matched_anti = []
+        
+        art_body = (art.get("headline", "") + " " + art.get("excerpt", "") + " " + art.get("relevance", "")).lower()
+        stop_words = {"the", "and", "for", "with", "this", "that", "are", "was", "were", "has", "had", "been", "from", "its", "not", "but", "who", "they", "will"}
+        
+        for tier, ind in iter_indicators_for_topic(topic):
+            id_parts = re.split(r"[-_\s]", ind.get("id", "").lower())
+            desc_words = re.findall(r"\b\w{3,}\b", ind.get("desc", "").lower())
+            search_terms = set(id_parts + desc_words) - stop_words
+            
+            is_match = False
+            for term in search_terms:
+                if len(term) >= 3 and term in art_body:
+                    is_match = True
+                    break
+            
+            if is_match:
+                if tier == "anti_indicators":
+                    matched_anti.append(ind)
+                elif "observable" in ind:
+                    matched_soft.append(ind)
+                else:
+                    matched_strict.append(ind)
+                    
+        # Fallbacks to list all if no keywords matched (to ensure completeness)
+        all_strict = []
+        all_soft = []
+        all_anti = []
+        for tier, ind in iter_indicators_for_topic(topic):
+            if tier == "anti_indicators":
+                all_anti.append(ind)
+            elif "observable" in ind:
+                all_soft.append(ind)
+            else:
+                all_strict.append(ind)
+                
+        display_strict = matched_strict if matched_strict else all_strict
+        display_soft = matched_soft if matched_soft else all_soft
+        display_anti = matched_anti if matched_anti else all_anti
+        
+        lines.append("  CANDIDATE INDICATORS FOR THIS ARTICLE:")
+        lines.append("    * Strict Indicators:")
+        for ind in display_strict:
+            lines.append(f"      - {ind['id']}: {ind['desc']}")
+        lines.append("    * Soft Observables:")
+        for ind in display_soft:
+            ob = ind["observable"]
+            lines.append(f"      - {ind['id']}: {ind['desc']} (metric: {ob['metric']}, threshold: {ob['threshold_value']}, baseline: {ob['baseline']}, direction: {ob['direction']})")
+        lines.append("    * Anti-Indicators:")
+        for ind in display_anti:
+            lines.append(f"      - {ind['id']}: {ind['desc']}")
+        lines.append("    * Unmatched Directional Evidence:")
+        lines.append("      - If the article contains real evidence that does not fit any indicator above, recommend SCHEMA_GAP with a description of the missing indicator direction.")
         lines.append("")
     lines.append("## TASK")
     lines.append("")
@@ -330,12 +387,15 @@ def build_rebut_prompt(topic: dict, articles: list, advocate_moves: list,
     lines.append("Check for: directional alignment, factual citation, correct metrics/units, over-interpretation, and duplicates.")
     lines.append("")
     lines.append("INDICATORS (reference)")
-    for ind in inds:
-        lines.append(f"  {ind['id']}")
+    for tier, ind in iter_indicators_for_topic(topic):
+        lines.append(f"  ID: {ind['id']}")
+        lines.append(f"    desc: {ind['desc']}")
+        lines.append(f"    type: {'anti-indicator' if tier == 'anti_indicators' else 'tier indicator'}")
         if "observable" in ind:
             ob = ind["observable"]
             lines.append(f"    OBSERVABLE: metric={ob['metric']}; threshold={ob['threshold_value']}; baseline={ob['baseline']}; direction={ob['direction']}")
-    lines.append("")
+        lines.append(f"    LR: {ind['likelihoods']}")
+        lines.append("")
     lines.append("ADVOCATE'S PROPOSALS")
     lines.append("")
     for mv in advocate_moves:
@@ -378,9 +438,15 @@ def build_jury_prompt(topic: dict, articles: list, advocate_moves: list,
     lines.append("")
     lines.append("=== JUDGE'S STANDING INSTRUCTIONS ===")
     lines.append("1. DIRECTIONAL ALIGNMENT IS NON-NEGOTIABLE. Reject wrong-direction updates.")
-    lines.append("2. DEFAULT IS PARK. In genuine doubt, PARK.")
-    lines.append("3. DUPLICATES. If this article covers the exact same event as another, select DUPLICATE_OF A<n>.")
-    lines.append("4. SCHEMA GAPS. If evidence doesn't fit existing indicators, select SCHEMA_GAP.")
+    lines.append("2. JURY IS NOT LIMITED TO THE ADVOCATE'S PROPOSED INDICATOR. If the advocate proposed")
+    lines.append("   a wrong or suboptimal indicator, but another listed observable or anti-indicator")
+    lines.append("   clearly matches, you may verdict OBSERVE <indicator_id> AT <value> or FIRE <indicator_id>")
+    lines.append("   using that existing precommitted indicator.")
+    lines.append("3. SCHEMA GAPS. If the evidence direction is real but no listed indicator captures it at all,")
+    lines.append("   return SCHEMA_GAP <description_of_gap> (not a force-fit).")
+    lines.append("4. DEFAULT IS PARK. If strict thresholds fail and no other listed observable/anti-indicator matches,")
+    lines.append("   or in genuine doubt, return PARK (this remains the default reviewable outcome).")
+    lines.append("5. DUPLICATES. If this article covers the exact same event as another, select DUPLICATE_OF A<n>.")
     lines.append("=== END STANDING INSTRUCTIONS ===")
     lines.append("")
     lines.append(f"TOPIC: {slug}")
@@ -392,12 +458,15 @@ def build_jury_prompt(topic: dict, articles: list, advocate_moves: list,
         lines.append(f"  {hk}: {label[:120]} (current posterior {hv.get('posterior')})")
     lines.append("")
     lines.append("INDICATORS (reference)")
-    for ind in inds:
-        lines.append(f"  {ind['id']}")
+    for tier, ind in iter_indicators_for_topic(topic):
+        lines.append(f"  ID: {ind['id']}")
+        lines.append(f"    desc: {ind['desc']}")
+        lines.append(f"    type: {'anti-indicator' if tier == 'anti_indicators' else 'tier indicator'}")
         if "observable" in ind:
             ob = ind["observable"]
             lines.append(f"    OBSERVABLE: metric={ob['metric']}; threshold={ob['threshold_value']}; baseline={ob['baseline']}; direction={ob['direction']}")
-    lines.append("")
+        lines.append(f"    LR: {ind['likelihoods']}")
+        lines.append("")
     lines.append("CASES")
     lines.append("")
     for mv in advocate_moves:
@@ -422,8 +491,8 @@ def build_jury_prompt(topic: dict, articles: list, advocate_moves: list,
     lines.append("OUTPUT (one block per case):")
     lines.append("JURY")
     lines.append("ARTICLE: A<n>")
-    lines.append("VERDICT: COMMIT | PARK | WITHDRAW | DUPLICATE_OF A<n> | SCHEMA_GAP <description>")
-    lines.append("RATIONALE: <one sentence reflecting how you weighed advocate vs rebut>")
+    lines.append("VERDICT: COMMIT | PARK | WITHDRAW | DUPLICATE_OF A<n> | SCHEMA_GAP <description> | OBSERVE <indicator_id> AT <value> | FIRE <indicator_id>")
+    lines.append("RATIONALE: <one sentence reflecting how you weighed advocate vs rebut or selected an alternative indicator>")
     lines.append("END")
     return "\n".join(lines)
 
@@ -597,6 +666,8 @@ def parse_jury_output(text: str) -> dict:
         elif verdict_upper.startswith("MOVE_TO"):
             inner = verdict_raw[len("MOVE_TO"):].strip()
             action = parse_action(inner)
+        elif verdict_upper.startswith("OBSERVE") or verdict_upper.startswith("FIRE"):
+            action = parse_action(verdict_raw)
         else:
             action = {"kind": "PARK"}  # Default fallback
             

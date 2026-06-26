@@ -190,6 +190,12 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             slug = path.split("/")[2]
             return self._serve_governance(slug)
 
+        # Topic shadow posteriors (dynamics-derived; guide, not authoritative)
+        if path.startswith("/topics/") and path.endswith("/shadow.json"):
+            slug = path.split("/")[2]
+            asof = self.path.split("asof=")[-1].split("&")[0] if "asof=" in self.path else ""
+            return self._serve_shadow(slug, asof)
+
         # Topic briefs list
         if path.startswith("/topics/") and path.endswith("/briefs/"):
             slug = path.split("/")[2]
@@ -334,6 +340,23 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             self.wfile.write(json.dumps(report, ensure_ascii=False).encode("utf-8"))
         except Exception as e:
             self.send_error(500, str(e))
+
+    def _serve_shadow(self, slug, asof=""):
+        """Serve the dynamics-derived SHADOW posteriors for a topic.
+
+        Zero authority — never writes topic state. asof=YYYY-MM-DD (query
+        string) for a counterfactual run. Mirrors the nrol-ao MCP
+        shadow_posteriors tool: imports framework.dynamics_shadow and calls
+        run(). A missing or lint-failing spec returns an error JSON (200)
+        rather than 500, so the dashboard can render it as 'unavailable'."""
+        try:
+            from framework.dynamics_shadow import run
+            result = run(DIR, slug, asof=asof)
+            self._send_json(result)
+        except Exception as exc:
+            # Return 200 with an error body so the frontend's fetch+json
+            # parse succeeds and can show a friendly 'unavailable' message.
+            self._send_json({"error": str(exc)})
 
     def _serve_dashboards_list(self):
         from engine import list_dashboards

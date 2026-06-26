@@ -188,13 +188,50 @@
 
   /* Responsive */
   @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } .feed-grid { grid-template-columns: repeat(2, 1fr); } }
+
+  /* Shadow vs Active comparison panel (guide, not authoritative) */
+  .shadow-panel { border: 1px dashed var(--purple); }
+  .shadow-panel h2 { color: var(--purple); }
+  .shadow-panel .shadow-note { font-size: 10px; color: var(--dim); font-style: italic; margin-bottom: 8px; }
+  .shadow-row { display: grid; grid-template-columns: 60px 1fr 1fr 70px; gap: 8px; align-items: center; padding: 4px 0; font-size: 11px; }
+  .shadow-row .shadow-h { color: var(--text); font-weight: bold; }
+  .shadow-bar { height: 14px; border-radius: 3px; overflow: hidden; display: flex; }
+  .shadow-bar div { height: 100%; }
+  .shadow-delta { font-size: 11px; font-weight: bold; text-align: right; }
+  .shadow-delta.up { color: var(--amber); }   /* shadow higher than committed */
+  .shadow-delta.down { color: var(--cyan); }  /* shadow lower than committed */
+  .shadow-legend { display: flex; gap: 14px; font-size: 10px; color: var(--dim); margin-bottom: 6px; }
+  .shadow-legend span { display: flex; align-items: center; gap: 4px; }
+  .shadow-legend .sw { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+  .shadow-loading, .shadow-error { font-size: 11px; color: var(--dim); padding: 12px 0; }
+
+  /* Mobile: legibility + tap targets + declutter. Additive below 640px. */
+  @media (max-width: 640px) {
+    body { font-size: 14px; line-height: 1.6; }
+    .header { padding: 10px 14px; }
+    .header-left h1 { font-size: 14px; }
+    .header-left .logo { width: 36px; height: 36px; }
+    .grid { grid-template-columns: 1fr; padding: 10px 12px; gap: 10px; }
+    .panel { padding: 12px; }
+    .panel h2 { font-size: 12px; }
+    .topic-title { font-size: 15px; }
+    .topic-meta { gap: 10px; font-size: 10px; }
+    .btn { padding: 8px 14px; font-size: 12px; min-height: 36px; } /* tap target */
+    .topic-select { padding: 8px 10px; font-size: 12px; min-height: 36px; }
+    .feed-grid { grid-template-columns: 1fr 1fr; }
+    .shadow-row { grid-template-columns: 44px 1fr 1fr 54px; gap: 6px; }
+    /* Secondary panels collapse by default on mobile to declutter. */
+    #actorPanel, #watchpointsPanel, #mcpPanel, #voiPanel { display: none; }
+    #actorPanel.expanded, #watchpointsPanel.expanded, #mcpPanel.expanded, #voiPanel.expanded { display: block; }
+    .panel.collapsible-header { cursor: pointer; }
+  }
 </style>
 </head>
 <body>
 
 <div class="header">
   <div class="header-left">
-    <img src="NROLAO.svg" alt="NROL-&alpha;&Omega;" class="logo">
+    <img src="NROLAO.png" alt="NROL-&alpha;&Omega;" class="logo">
     <div>
     <h1>NROL-&alpha;&Omega;</h1>
     <div class="subtitle">NECRO RATIONALIST OPERATIONS LABORATORY</div>
@@ -224,6 +261,17 @@
     <div class="posterior-labels" id="posteriorLabels"></div>
     <div class="expected" id="expectedValue"></div>
     <div class="chart-container"><canvas id="historyChart"></canvas></div>
+  </div>
+
+  <!-- Shadow vs Active (dynamics-derived guide, not authoritative) -->
+  <div class="panel shadow-panel" id="shadowPanel">
+    <h2>Shadow vs Active</h2>
+    <div class="shadow-note">SHADOW — dynamics-derived guide. Not authoritative; divergence is a calibration conversation.</div>
+    <div class="shadow-legend">
+      <span><span class="sw" style="background:var(--accent)"></span>Committed</span>
+      <span><span class="sw" style="background:var(--purple)"></span>Shadow</span>
+    </div>
+    <div id="shadowBody"><div class="shadow-loading">Loading shadow posteriors…</div></div>
   </div>
 
   <!-- Sub-Models -->
@@ -417,6 +465,7 @@ function render() {
   if (!state) return;
   renderTopicHeader();
   renderPosteriors();
+  renderShadow();
   renderSubModels();
   renderIndicators();
   renderDataFeeds();
@@ -465,6 +514,54 @@ function renderPosteriors() {
   const eu = state.model.expectedUnit || '';
   const resolvedText = getEVResolvedText(ev, eu, state.meta);
   document.getElementById('expectedValue').textContent = `E[${eu}] = ${ev}${resolvedText}`;
+}
+
+// Shadow vs Active: fetch the dynamics-derived shadow posterior and render a
+// per-hypothesis comparison against the committed posterior. Shadow is a guide;
+// divergence is the calibration conversation, not an error.
+async function renderShadow() {
+  const body = document.getElementById('shadowBody');
+  if (!currentSlug) { body.innerHTML = ''; return; }
+  body.innerHTML = '<div class="shadow-loading">Loading shadow posteriors…</div>';
+  try {
+    const res = await fetch(`/topics/${currentSlug}/shadow.json?` + Date.now());
+    const data = await res.json();
+    if (data.error) {
+      body.innerHTML = `<div class="shadow-error">Shadow unavailable: ${data.error}</div>`;
+      return;
+    }
+    const shadow = data.shadow_posteriors || {};
+    const committed = state.model.hypotheses;
+    const hKeys = Object.keys(committed);
+    // Shadow may carry a residual (e.g. H_never) absent from committed; fold
+    // it out and renormalize so the lanes are comparable.
+    let total = 0;
+    hKeys.forEach(k => { total += (shadow[k] || 0); });
+    const norm = (v) => total > 0 ? (v / total) : 0;
+    const palette = generatePalette(hKeys.length);
+    let html = '';
+    hKeys.forEach((k, i) => {
+      const cPct = (committed[k].posterior * 100);
+      const sRaw = shadow[k] !== undefined ? shadow[k] : 0;
+      const sPct = (norm(sRaw) * 100);
+      const delta = sPct - cPct;
+      const dCls = delta >= 0 ? 'up' : 'down';
+      const dSign = delta >= 0 ? '+' : '';
+      const color = palette[i];
+      html += `<div class="shadow-row">
+        <span class="shadow-h">${k}</span>
+        <div class="shadow-bar"><div style="width:${cPct.toFixed(1)}%;background:var(--accent)"></div></div>
+        <div class="shadow-bar"><div style="width:${sPct.toFixed(1)}%;background:var(--purple)"></div></div>
+        <span class="shadow-delta ${dCls}">${dSign}${delta.toFixed(1)}pp</span>
+      </div>`;
+    });
+    if (data.elapsed_in_entrenched_days !== undefined) {
+      html += `<div class="shadow-note">Elapsed in entrenched regime: ${data.elapsed_in_entrenched_days} days (Gamma-conjugacy time-as-evidence).</div>`;
+    }
+    body.innerHTML = html;
+  } catch(e) {
+    body.innerHTML = `<div class="shadow-error">Shadow endpoint unavailable: ${e}</div>`;
+  }
 }
 
 function renderSubModels() {
