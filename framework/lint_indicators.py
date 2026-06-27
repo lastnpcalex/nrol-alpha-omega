@@ -194,19 +194,25 @@ def _check_direction_drift(proposed: list) -> Optional[dict]:
 
 def _check_anti_indicator_inversion(ind: dict) -> Optional[dict]:
     """An anti-indicator's likelihoods must point AGAINST its targeted
-    hypothesis — i.e., the target H should have the LOWEST LR, so firing
+    hypothesis(es) — i.e., each target H should have a LOW LR, so firing
     moves that H's posterior DOWN.
 
-    The target H is read from an explicit `target_hypothesis` field if
-    present; otherwise inferred from the id (e.g. anti_h4_... -> H4). If
-    neither yields a target, warn (can't verify) and do not block.
+    `target_hypothesis` may be a single H key ("H4") or a list
+    (["H1","H2","H3"]) for multi-target anti-indicators (e.g. an escalation
+    that suppresses all reopen hypotheses). If the field is absent, the target
+    is inferred from the id (anti_h4_... -> H4). If neither yields a target,
+    warn (can't verify) and do not block.
 
-    A mis-authored anti-indicator (LRs that would move the target H UP on
+    Inversion rule:
+      - single target: the target H must carry the LOWEST LR.
+      - multi target (list): every target H must be at or below the median LR
+        (i.e., in the suppress-half), so firing moves every target down. This
+        correctly handles anti-indicators like `anti_iran_formal_blockade_decree`
+        (suppresses H1/H2/H3, lifts H4) without forcing a single target.
+
+    A mis-authored anti-indicator (LRs that would move a target H UP on
     firing) is a BLOCKER: it silently moves posteriors the wrong way — the
-    dangerous direction. See audit 2026-06-27: 10/11 hormuz+calibration
-    anti-indicators were correctly inverted; `anti_iran_formal_blockade_decree`
-    had no machine-checkable target (id didn't encode it) — this check
-    demands an explicit target_hypothesis to close that gap.
+    dangerous direction.
     """
     if ind.get("_tier") != "anti_indicators":
         return None
@@ -215,14 +221,18 @@ def _check_anti_indicator_inversion(ind: dict) -> Optional[dict]:
         return None
     aid = ind.get("id", "?")
 
-    # Resolve target H: explicit field > id heuristic.
-    target = ind.get("target_hypothesis")
-    if not target:
+    # Resolve targets: explicit field (str or list) > id heuristic.
+    raw = ind.get("target_hypothesis")
+    if isinstance(raw, list):
+        targets = [str(t).upper() for t in raw if t]
+    elif isinstance(raw, str) and raw:
+        targets = [raw.upper()]
+    else:
         import re as _re
         m = _re.search(r"anti[_-]?(h\d+)", str(aid).lower())
-        target = m.group(1).upper() if m else None
+        targets = [m.group(1).upper()] if m else []
 
-    if not target:
+    if not targets:
         return {
             "severity": WARNING,
             "check": "anti_indicator_no_target",
@@ -230,34 +240,79 @@ def _check_anti_indicator_inversion(ind: dict) -> Optional[dict]:
             "message": (
                 f"Anti-indicator {aid!r} has no machine-checkable target hypothesis "
                 f"(no `target_hypothesis` field and id does not encode one). Its "
-                f"inversion cannot be verified — add a `target_hypothesis` field so "
-                f"firing is confirmed to move the right H down."
+                f"inversion cannot be verified — add a `target_hypothesis` field "
+                f"(single H or list for multi-target) so firing is confirmed to "
+                f"move the right H(s) down."
             ),
         }
-    if target not in lrs:
+
+    missing = [t for t in targets if t not in lrs]
+    if missing:
         return {
             "severity": WARNING,
             "check": "anti_indicator_target_missing_from_lrs",
             "indicator": aid,
+            "missing": missing,
             "message": (
-                f"Anti-indicator {aid!r} targets {target} but {target} is absent from "
-                f"its likelihoods {lrs}. The target H must carry an LR (the lowest) "
+                f"Anti-indicator {aid!r} targets {missing} but those H are absent "
+                f"from its likelihoods {lrs}. Each target H must carry an LR (low) "
                 f"so firing moves it down."
             ),
         }
-    min_h = min(lrs, key=lambda k: lrs[k])
-    if min_h != target:
+
+    if len(targets) == 1:
+        target = targets[0]
+        min_h = min(lrs, key=lambda k: lrs[k])
+        if min_h != target:
+            return {
+                "severity": BLOCKER,
+                "check": "anti_indicator_wrong_inversion",
+                "indicator": aid,
+                "target": target,
+                "lowest_lr_h": min_h,
+                "message": (
+                    f"Anti-indicator {aid!r} targets {target} but its lowest LR is "
+                    f"on {min_h} (LRs={lrs}). Firing would move {target} UP, not down "
+                    f"— this is the wrong direction. Invert the likelihoods so "
+                    f"{target} carries the lowest value, or fix target_hypothesis."
+                ),
+            }
+        return None
+
+    # Multi-target: every target H must be lower than every non-target H, so
+    # firing suppresses all targets and lifts at least one non-target. A target
+    # with an LR higher than a non-target would mean firing lifts that target
+    # relative to a non-target — wrong direction.
+    non_targets = [h for h in lrs if h not in targets]
+    if not non_targets:
+        # All H are targets — can't verify suppression direction; warn, don't block.
+        return {
+            "severity": WARNING,
+            "check": "anti_indicator_all_targets",
+            "indicator": aid,
+            "message": (
+                f"Anti-indicator {aid!r} lists every hypothesis as a target "
+                f"({targets}). With no non-target to suppress toward, inversion "
+                f"direction can't be verified — confirm firing is intended to lower "
+                f"all of them, or drop a target."
+            ),
+        }
+    max_target_lr = max(lrs[t] for t in targets)
+    min_non_target_lr = min(lrs[h] for h in non_targets)
+    if max_target_lr >= min_non_target_lr:
         return {
             "severity": BLOCKER,
             "check": "anti_indicator_wrong_inversion",
             "indicator": aid,
-            "target": target,
-            "lowest_lr_h": min_h,
+            "targets": targets,
+            "max_target_lr": max_target_lr,
+            "min_non_target_lr": min_non_target_lr,
             "message": (
-                f"Anti-indicator {aid!r} targets {target} but its lowest LR is on "
-                f"{min_h} (LRs={lrs}). Firing would move {target} UP, not down — "
-                f"this is the wrong direction. Invert the likelihoods so {target} "
-                f"carries the lowest value, or fix target_hypothesis."
+                f"Anti-indicator {aid!r} targets {targets} but its highest target LR "
+                f"({max_target_lr}) is not below its lowest non-target LR "
+                f"({min_non_target_lr}). Firing would not cleanly suppress the targets "
+                f"— the wrong direction. Every target H must carry a lower LR than "
+                f"every non-target H so firing moves all targets down."
             ),
         }
     return None
