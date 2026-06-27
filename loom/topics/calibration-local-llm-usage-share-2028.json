@@ -2,7 +2,7 @@
   "meta": {
     "slug": "calibration-local-llm-usage-share-2028",
     "title": "Local vs API LLM Inference Usage Share by 2028",
-    "question": "By 2028-12-31, what share of global LLM inference (measured in tokens processed per rolling 30-day window) runs on user-controlled compute â€” on-device plus self-hosted servers operated by the end-user or their organization â€” versus third-party hosted APIs?",
+    "question": "By 2028-12-31, what share of global LLM inference (measured in tokens processed per rolling 30-day window) runs on user-controlled compute — on-device plus self-hosted servers operated by the end-user or their organization — versus third-party hosted APIs?",
     "resolution": "Resolved by the State of AI Report 2028 annual local-vs-hosted inference-tokens breakdown (published typically Oct-Nov 2028). Fallback hierarchy if SotAI does not publish the metric: (a) Stanford AI Index 2029 deployment chapter; (b) Cloudflare AI Radar + HuggingFace Inference telemetry composite; (c) consensus of the three most recent developer surveys (Stack Overflow, State of AI, DevOps Research). Resolved H1 (<15% local), H2 (15-35% local), H3 (35-55% local), H4 (over 55% local) by the most authoritative available figure at resolution date. Robustness rule: if the headline figure falls within 2 percentage points of a hypothesis boundary, require corroboration from at least one fallback source or defer resolution 6 months. 'Local' = user-controlled compute: on-device (phone/laptop/desktop) plus self-hosted servers on infrastructure the user or their organization operates. Explicitly excludes BYO-cloud with third-party model API (that is API). Private-cloud self-hosted open-weights deployments count as local. resolutionDate: 2028-12-31.",
     "created": "",
     "lastUpdated": "2026-04-29T02:30:59+00:00",
@@ -80,7 +80,7 @@
     "posteriorHistory": [
       {
         "date": "2026-04-22",
-        "note": "Initial priors. Current state (2026-Q1): estimated ~90%+ of LLM inference tokens flow through hosted APIs. 3-year momentum: Apple on-device push (M-series NPUs, Gemini Nano), enterprise self-hosting of Llama/Mistral, sovereignty regulation (EU AI Act). H1 (35%): base rate â€” hosted API infrastructure lock-in plus frontier-capability gap sustains dominance; partial local adoption but under 15% threshold. H2 (38%): modal prior â€” realistic trajectory assuming on-device defaults reach consumer scale for routine tasks AND meaningful enterprise self-hosting. H3 (20%): requires both consumer-scale on-device default AND enterprise self-host majority â€” plausible but requires multiple catalysts. H4 (7%): Malone thesis â€” requires capability parity + cost advantage + enterprise migration all within ~2.5 years. Tail. Priors informed by Bsky thread 2026-04-22 (proptermalone moat debate) and moat-topic priors.",
+        "note": "Initial priors. Current state (2026-Q1): estimated ~90%+ of LLM inference tokens flow through hosted APIs. 3-year momentum: Apple on-device push (M-series NPUs, Gemini Nano), enterprise self-hosting of Llama/Mistral, sovereignty regulation (EU AI Act). H1 (35%): base rate — hosted API infrastructure lock-in plus frontier-capability gap sustains dominance; partial local adoption but under 15% threshold. H2 (38%): modal prior — realistic trajectory assuming on-device defaults reach consumer scale for routine tasks AND meaningful enterprise self-hosting. H3 (20%): requires both consumer-scale on-device default AND enterprise self-host majority — plausible but requires multiple catalysts. H4 (7%): Malone thesis — requires capability parity + cost advantage + enterprise migration all within ~2.5 years. Tail. Priors informed by Bsky thread 2026-04-22 (proptermalone moat debate) and moat-topic priors.",
         "H1": 0.35,
         "H2": 0.38,
         "H3": 0.2,
@@ -116,7 +116,7 @@
           "H3": 0.26,
           "H4": 0.12
         },
-        "note": "Directional signal toward on-device default for OS AI features. Does not meet t2_apple_on_device_default threshold (requires WWDC/I/O keynote plus developer documentation with no cloud fallback for standard queries). Trade-press pre-confirmation only â€” modest tilt toward H2/H3.",
+        "note": "Directional signal toward on-device default for OS AI features. Does not meet t2_apple_on_device_default threshold (requires WWDC/I/O keynote plus developer documentation with no cloud fallback for standard queries). Trade-press pre-confirmation only — modest tilt toward H2/H3.",
         "dominantHypothesisStable": true,
         "sensitivityFlag": false,
         "turningPoint": {
@@ -503,7 +503,7 @@
       "tier1_critical": [
         {
           "id": "t1_sotai_under15pct_local",
-          "desc": "State of AI Report 2028 (or 2027) publishes inference-tokens breakdown showing user-controlled compute under 15% of total LLM inference tokens for â‰¥2 consecutive quarterly/half-year updates.",
+          "desc": "State of AI Report 2028 (or 2027) publishes inference-tokens breakdown showing user-controlled compute under 15% of total LLM inference tokens for ≥2 consecutive quarterly/half-year updates.",
           "posteriorEffect": "H1 +28pp, H2 +5pp, H3 -22pp, H4 -11pp",
           "status": "NOT_FIRED",
           "firedDate": null,
@@ -511,7 +511,7 @@
         },
         {
           "id": "t1_sotai_over55pct_local",
-          "desc": "State of AI Report 2028 (or 2027) publishes inference-tokens breakdown showing user-controlled compute over 55% of total LLM inference tokens for â‰¥2 consecutive quarterly/half-year updates.",
+          "desc": "State of AI Report 2028 (or 2027) publishes inference-tokens breakdown showing user-controlled compute over 55% of total LLM inference tokens for ≥2 consecutive quarterly/half-year updates.",
           "posteriorEffect": "H4 +30pp, H3 +8pp, H1 -25pp, H2 -13pp",
           "status": "NOT_FIRED",
           "firedDate": null,
@@ -521,7 +521,7 @@
       "tier2_strong": [
         {
           "id": "t2_apple_on_device_default",
-          "desc": "Apple/Google ship on-device LLM as default for core OS features (Siri/Assistant/Gmail writing assistance) with no cloud fallback for standard queries â€” confirmed by WWDC/Google I/O keynote plus developer documentation.",
+          "desc": "Apple/Google ship on-device LLM as default for core OS features (Siri/Assistant/Gmail writing assistance) with no cloud fallback for standard queries — confirmed by WWDC/Google I/O keynote plus developer documentation.",
           "posteriorEffect": "H2 +10pp, H3 +8pp, H1 -12pp, H4 -6pp",
           "status": "NOT_FIRED",
           "firedDate": null,
@@ -529,7 +529,7 @@
         },
         {
           "id": "t2_enterprise_self_host_30pct",
-          "desc": "Gartner or SotAI enterprise survey confirms â‰¥30% of Fortune 500 run their primary LLM workload on self-hosted open-weights infrastructure (not API).",
+          "desc": "Gartner or SotAI enterprise survey confirms ≥30% of Fortune 500 run their primary LLM workload on self-hosted open-weights infrastructure (not API).",
           "posteriorEffect": "H2 +12pp, H3 +8pp, H1 -15pp, H4 -5pp",
           "status": "NOT_FIRED",
           "firedDate": null,
@@ -537,7 +537,7 @@
         },
         {
           "id": "t2_openai_api_revenue_growth_sustains",
-          "desc": "OpenAI + Google Gemini API + Anthropic combined API token volume grows â‰¥40% YoY through 2027-Q4 (outpacing estimated on-device/self-hosted growth).",
+          "desc": "OpenAI + Google Gemini API + Anthropic combined API token volume grows ≥40% YoY through 2027-Q4 (outpacing estimated on-device/self-hosted growth).",
           "posteriorEffect": "H1 +12pp, H2 +5pp, H3 -10pp, H4 -7pp",
           "status": "NOT_FIRED",
           "firedDate": null,
@@ -547,7 +547,7 @@
       "tier3_suggestive": [
         {
           "id": "t3_huggingface_inference_share",
-          "desc": "HuggingFace reports self-hosted open-weights inference volume (via tracked endpoints + telemetry) at >25% of their ecosystem total for â‰¥6 months.",
+          "desc": "HuggingFace reports self-hosted open-weights inference volume (via tracked endpoints + telemetry) at >25% of their ecosystem total for ≥6 months.",
           "posteriorEffect": "H2 +5pp, H3 +4pp, H1 -6pp, H4 -3pp",
           "status": "NOT_FIRED",
           "firedDate": null,
@@ -555,7 +555,7 @@
         },
         {
           "id": "t3_phone_llm_default_apps",
-          "desc": "Major consumer apps (â‰¥3 of: WhatsApp, Instagram, Gmail, Notes, Siri, Gemini app) perform LLM inference on-device by default with opt-in cloud fallback.",
+          "desc": "Major consumer apps (≥3 of: WhatsApp, Instagram, Gmail, Notes, Siri, Gemini app) perform LLM inference on-device by default with opt-in cloud fallback.",
           "posteriorEffect": "H2 +5pp, H3 +3pp, H1 -5pp, H4 -3pp",
           "status": "NOT_FIRED",
           "firedDate": null,
@@ -602,8 +602,8 @@
     "actors": {
       "apple_google_platforms": {
         "name": "Apple / Google (mobile OS)",
-        "role": "Default-inference gatekeepers â€” their choice of on-device vs. cloud for OS-integrated AI drives consumer-scale share",
-        "decisionStyle": "Strategic â€” Apple biased to on-device (privacy branding); Google hybrid (Gemini Nano for on-device, hosted for complex). Hardware depreciation cycles drive when new on-device models ship.",
+        "role": "Default-inference gatekeepers — their choice of on-device vs. cloud for OS-integrated AI drives consumer-scale share",
+        "decisionStyle": "Strategic — Apple biased to on-device (privacy branding); Google hybrid (Gemini Nano for on-device, hosted for complex). Hardware depreciation cycles drive when new on-device models ship.",
         "biases": [
           "Apple: privacy-first framing",
           "Google: cloud-side revenue protection"
@@ -619,7 +619,7 @@
       "enterprise_buyers": {
         "name": "Enterprise buyers (Fortune 500, regulated verticals)",
         "role": "Drive self-hosted open-weights adoption for sovereignty/compliance/cost reasons",
-        "decisionStyle": "Institutional â€” procurement cycles favor multi-vendor strategies; CIO concerns about AI provider lock-in.",
+        "decisionStyle": "Institutional — procurement cycles favor multi-vendor strategies; CIO concerns about AI provider lock-in.",
         "biases": [
           "Vendor diversification as risk management",
           "TCO focus (self-host cheaper at scale)"
@@ -634,7 +634,7 @@
       "hosted_providers": {
         "name": "OpenAI / Google Gemini API / Anthropic / AWS Bedrock",
         "role": "Defend API share via frontier capability + enterprise features",
-        "decisionStyle": "Rational â€” respond to self-hosting threat with price cuts, fine-tuning tools, enterprise agreements.",
+        "decisionStyle": "Rational — respond to self-hosting threat with price cuts, fine-tuning tools, enterprise agreements.",
         "biases": [
           "Reluctance to commoditize API pricing"
         ],
@@ -647,7 +647,7 @@
       },
       "chipmakers": {
         "name": "Apple Silicon / Qualcomm / NVIDIA / AMD",
-        "role": "Supply-side â€” NPU/GPU capability determines what's feasible on-device",
+        "role": "Supply-side — NPU/GPU capability determines what's feasible on-device",
         "decisionStyle": "Roadmap-driven. On-device AI capability grows ~2x per generation; memory bandwidth is the bottleneck.",
         "biases": [
           "NVIDIA: prefers data-center margins (push for API)",
@@ -677,9 +677,9 @@
       }
     },
     "methodology": [
-      "ACTIONS OVER RHETORIC â€” only verified deployment data and survey figures move posteriors",
-      "WATCH APPLE/GOOGLE WWDC+I/O â€” default-inference choices for OS features drive consumer scale",
-      "ENTERPRISE SURVEYS ARE DOWNSTREAM â€” they confirm trends already visible in product launches and hiring",
+      "ACTIONS OVER RHETORIC — only verified deployment data and survey figures move posteriors",
+      "WATCH APPLE/GOOGLE WWDC+I/O — default-inference choices for OS features drive consumer scale",
+      "ENTERPRISE SURVEYS ARE DOWNSTREAM — they confirm trends already visible in product launches and hiring",
       "CROSS-CHECK: if moat-2028 posteriors shift toward fragmentation, this topic's local-share priors should rise"
     ]
   },
@@ -692,7 +692,7 @@
         "EVENT",
         "HARDWARE"
       ],
-      "text": "Reporting indicates iOS 27 embeds a distilled Gemini Nano (1.3B quantized) directly into the Neural Engine of A17 Pro and M4 chips, replacing the legacy Siri stack with an on-device Apple Intelligence Core. Not yet confirmed via WWDC keynote or developer docs â€” pre-announcement trade press.",
+      "text": "Reporting indicates iOS 27 embeds a distilled Gemini Nano (1.3B quantized) directly into the Neural Engine of A17 Pro and M4 chips, replacing the legacy Siri stack with an on-device Apple Intelligence Core. Not yet confirmed via WWDC keynote or developer docs — pre-announcement trade press.",
       "provenance": "OBSERVED",
       "source": "Archyde (iOS 27 preview)",
       "posteriorImpact": "NONE",
@@ -704,7 +704,7 @@
     {
       "time": "2026-04-22T19:49:01+00:00",
       "tag": "INTEL",
-      "text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Directional signal toward on-device default for OS AI features. Does not meet t2_apple_on_device_default threshold (requires WWDC/I/O keynote plus developer documentation with no cloud fallback for standard queries). Trade-press pre-confirmation only â€” modest tilt toward H2/H3.",
+      "text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Directional signal toward on-device default for OS AI features. Does not meet t2_apple_on_device_default threshold (requires WWDC/I/O keynote plus developer documentation with no cloud fallback for standard queries). Trade-press pre-confirmation only — modest tilt toward H2/H3.",
       "provenance": "DERIVED",
       "posteriorImpact": "NONE",
       "ledger": "DECISION",
@@ -981,7 +981,7 @@
       "source": "OpenAI/Google/Anthropic public disclosures, Bloomberg estimates"
     },
     "on_device_llm_shipments": {
-      "label": "Consumer devices shipped with â‰¥3B-param on-device LLM default",
+      "label": "Consumer devices shipped with ≥3B-param on-device LLM default",
       "value": null,
       "unit": "million units/year",
       "baseline": null,
@@ -990,9 +990,9 @@
     }
   },
   "watchpoints": [
-    "State of AI Report annual release (Oct-Nov each year) â€” primary resolution instrument",
-    "Stanford AI Index annual â€” fallback resolution source (deployment chapter)",
-    "Apple WWDC + Google I/O keynotes â€” default-inference architectural choices for OS AI",
+    "State of AI Report annual release (Oct-Nov each year) — primary resolution instrument",
+    "Stanford AI Index annual — fallback resolution source (deployment chapter)",
+    "Apple WWDC + Google I/O keynotes — default-inference architectural choices for OS AI",
     "HuggingFace ecosystem metrics (self-hosted endpoints, Hub downloads)",
     "OpenAI/Google/Anthropic quarterly API token volume disclosures (where published)",
     "EU AI Act implementation milestones (data residency / sovereignty clauses)",
@@ -1007,7 +1007,7 @@
     "EU AI Act data residency LLM"
   ],
   "dependencies": {
-    "_docs": "Upstream: calibration-local-frontier-inference-2030 (capability parity on smartphones) and calibration-ai-corporate-moat-2028 (API market concentration). Local-frontier H1/H2 imply consumer-scale on-device capability â†’ supports this topic H2/H3/H4. Moat H3/H4 (fragmented/commoditized API market) imply enterprise shift to self-hosting â†’ supports this topic H2/H3. Downstream: none â€” this is a mid-term observable used by both upstream topics' indicators.",
+    "_docs": "Upstream: calibration-local-frontier-inference-2030 (capability parity on smartphones) and calibration-ai-corporate-moat-2028 (API market concentration). Local-frontier H1/H2 imply consumer-scale on-device capability → supports this topic H2/H3/H4. Moat H3/H4 (fragmented/commoditized API market) imply enterprise shift to self-hosting → supports this topic H2/H3. Downstream: none — this is a mid-term observable used by both upstream topics' indicators.",
     "upstream": [
       {
         "slug": "calibration-local-frontier-inference-2030",
@@ -1029,7 +1029,7 @@
           "H4": 0.12
         },
         "tolerance": 0.15,
-        "reason": "Moat posteriors proxy enterprise willingness to self-host. Moat H1 strongly implies this topic H1 (API lock-in â†’ low local share). Moat H3/H4 implies this topic H2+."
+        "reason": "Moat posteriors proxy enterprise willingness to self-host. Moat H1 strongly implies this topic H1 (API lock-in → low local share). Moat H3/H4 implies this topic H2+."
       }
     ]
   },
@@ -1367,7 +1367,7 @@
   },
   "slug": "calibration-local-llm-usage-share-2028",
   "title": "Local vs API LLM Inference Usage Share by 2028",
-  "question": "By 2028-12-31, what share of global LLM inference (measured in tokens processed per rolling 30-day window) runs on user-controlled compute â€” on-device plus self-hosted servers operated by the end-user or their organization â€” versus third-party hosted APIs?",
+  "question": "By 2028-12-31, what share of global LLM inference (measured in tokens processed per rolling 30-day window) runs on user-controlled compute — on-device plus self-hosted servers operated by the end-user or their organization — versus third-party hosted APIs?",
   "resolution": "Resolved by the State of AI Report 2028 annual local-vs-hosted inference-tokens breakdown (published typically Oct-Nov 2028). Fallback hierarchy if SotAI does not publish the metric: (a) Stanford AI Index 2029 deployment chapter; (b) Cloudflare AI Radar + HuggingFace Inference telemetry composite; (c) consensus of the three most recent developer surveys (Stack Overflow, State of AI, DevOps Research). Resolved H1 (<15% local), H2 (15-35% local), H3 (35-55% local), H4 (over 55% local) by the most authoritative available figure at resolution date. Robustness rule: if the headline figure falls within 2 percentage points of a hypothesis boundary, require corroboration from at least one fallback source or defer resolution 6 months. 'Local' = user-controlled compute: on-device (phone/laptop/desktop) plus self-hosted servers on infrastructure the user or their organization operates. Explicitly excludes BYO-cloud with third-party model API (that is API). Private-cloud self-hosted open-weights deployments count as local. resolutionDate: 2028-12-31.",
   "classification": "CALIBRATION",
   "startDate": "2026-04-22",
@@ -1409,7 +1409,7 @@
         "type": "DIRECT",
         "severity": "HIGH",
         "entry_a_time": "2026-04-22T19:49:01+00:00",
-        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Directional signal toward on-device default for OS AI features. Does not meet t2_apple_on_device_default threshold (requires WWDC/I/O keynote plus developer documentation with no cloud fallback for standard queries). Trade-press pre-confirmation only â€” modest tilt toward H2/H3.",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Directional signal toward on-device default for OS AI features. Does not meet t2_apple_on_device_default threshold (requires WWDC/I/O keynote plus developer documentation with no cloud fallback for standard queries). Trade-press pre-confirmation only — modest tilt toward H2/H3.",
         "entry_b_time": "2026-04-22T19:50:21+00:00",
         "entry_b_text": "HuggingFace State of Open Source Spring 2026 report: over 30% of Fortune 500 now maintain verified accounts on Hugging Face. Indicates enterprise engagement with open-weights ecosystem but does NOT measure share of primary LLM workload run on self-hosted infrastructure (t2_enterprise_self_host_30pct threshold not met).",
         "reason": "Negation marker 'no' in existing entry, absent from new. Shared subjects: does, threshold",
@@ -1481,7 +1481,7 @@
         "type": "DIRECT",
         "severity": "HIGH",
         "entry_a_time": "2026-04-22T19:49:01+00:00",
-        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Directional signal toward on-device default for OS AI features. Does not meet t2_apple_on_device_default threshold (requires WWDC/I/O keynote plus developer documentation with no cloud fallback for standard queries). Trade-press pre-confirmation only â€” modest tilt toward H2/H3.",
+        "entry_a_text": "GOVERNANCE WARNING on bayesian_update: quorum_failure. Reason: Directional signal toward on-device default for OS AI features. Does not meet t2_apple_on_device_default threshold (requires WWDC/I/O keynote plus developer documentation with no cloud fallback for standard queries). Trade-press pre-confirmation only — modest tilt toward H2/H3.",
         "entry_b_time": "2026-04-24T13:49:16+00:00",
         "entry_b_text": "Ollama accumulated >112M pulls of Llama 3.1 alone; 100+ model library; dominant local-LLM runtime. Developer break-even vs API pricing at ~10M tokens/month. No 2026 market-share telemetry reconciling local vs API token volumes; trend directional only.",
         "reason": "Negation marker 'not' in existing entry, absent from new. Shared subjects: developer, directional, only",
