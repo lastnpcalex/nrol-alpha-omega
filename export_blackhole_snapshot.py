@@ -37,6 +37,34 @@ def _shadow_for(slug: str) -> dict | None:
         return None
 
 
+def _governance_for(slug: str) -> dict | None:
+    """Sanitized governance slice for a topic — structure + counts, no evidence text.
+
+    Strips raw evidence text from evidence_freshness.stale_entries (keeps index,
+    tag, age, ledger) so the public surface never leaks article/source content.
+    Other fields (alerts, issues, entropy, rt, failure_modes, hypothesis_admissibility,
+    kl_from_prior, uncertainty_ratio, top_queries) are governance summaries / metadata,
+    not evidence, so they pass through.
+    """
+    try:
+        from governor import governance_report
+        from engine import load_topic
+        gov = governance_report(load_topic(slug))
+    except Exception:
+        return None
+    # Sanitize: drop evidence text from stale_entries.
+    ef = gov.get("evidence_freshness") or {}
+    stale = ef.get("stale_entries") or []
+    if isinstance(stale, list):
+        ef = dict(ef)
+        ef["stale_entries"] = [
+            {k: v for k, v in e.items() if k != "text"}
+            for e in stale if isinstance(e, dict)
+        ]
+        gov["evidence_freshness"] = ef
+    return gov
+
+
 def _aligned_shadow(shadow_post: dict, h_keys: list[str]) -> dict[str, float]:
     """Fold the shadow's residual hypothesis out + renormalize to committed keys."""
     total = sum(shadow_post.get(k, 0.0) for k in h_keys)
@@ -60,6 +88,7 @@ def build_snapshot() -> dict:
         if shadow_raw and "shadow_posteriors" in shadow_raw:
             shadow = _aligned_shadow(shadow_raw["shadow_posteriors"], h_keys)
             delta = {k: round(shadow.get(k, 0.0) - committed.get(k, 0.0), 4) for k in h_keys}
+        governance = _governance_for(slug)
         # Topic description fields for the surface (question, resolution, hypothesis labels).
         # Loaded directly from the topic JSON — get_overview omits these.
         question = ""
@@ -92,6 +121,7 @@ def build_snapshot() -> dict:
             "health": t.get("health", "UNKNOWN"),
             "expectedValue": t.get("expectedValue"),
             "expectedUnit": t.get("expectedUnit"),
+            "governance": governance,
         })
     return {
         "generated_at": _now_iso(),
