@@ -192,6 +192,77 @@ def _check_direction_drift(proposed: list) -> Optional[dict]:
     return None
 
 
+def _check_anti_indicator_inversion(ind: dict) -> Optional[dict]:
+    """An anti-indicator's likelihoods must point AGAINST its targeted
+    hypothesis — i.e., the target H should have the LOWEST LR, so firing
+    moves that H's posterior DOWN.
+
+    The target H is read from an explicit `target_hypothesis` field if
+    present; otherwise inferred from the id (e.g. anti_h4_... -> H4). If
+    neither yields a target, warn (can't verify) and do not block.
+
+    A mis-authored anti-indicator (LRs that would move the target H UP on
+    firing) is a BLOCKER: it silently moves posteriors the wrong way — the
+    dangerous direction. See audit 2026-06-27: 10/11 hormuz+calibration
+    anti-indicators were correctly inverted; `anti_iran_formal_blockade_decree`
+    had no machine-checkable target (id didn't encode it) — this check
+    demands an explicit target_hypothesis to close that gap.
+    """
+    if ind.get("_tier") != "anti_indicators":
+        return None
+    lrs = ind.get("likelihoods")
+    if not lrs or not isinstance(lrs, dict):
+        return None
+    aid = ind.get("id", "?")
+
+    # Resolve target H: explicit field > id heuristic.
+    target = ind.get("target_hypothesis")
+    if not target:
+        import re as _re
+        m = _re.search(r"anti[_-]?(h\d+)", str(aid).lower())
+        target = m.group(1).upper() if m else None
+
+    if not target:
+        return {
+            "severity": WARNING,
+            "check": "anti_indicator_no_target",
+            "indicator": aid,
+            "message": (
+                f"Anti-indicator {aid!r} has no machine-checkable target hypothesis "
+                f"(no `target_hypothesis` field and id does not encode one). Its "
+                f"inversion cannot be verified — add a `target_hypothesis` field so "
+                f"firing is confirmed to move the right H down."
+            ),
+        }
+    if target not in lrs:
+        return {
+            "severity": WARNING,
+            "check": "anti_indicator_target_missing_from_lrs",
+            "indicator": aid,
+            "message": (
+                f"Anti-indicator {aid!r} targets {target} but {target} is absent from "
+                f"its likelihoods {lrs}. The target H must carry an LR (the lowest) "
+                f"so firing moves it down."
+            ),
+        }
+    min_h = min(lrs, key=lambda k: lrs[k])
+    if min_h != target:
+        return {
+            "severity": BLOCKER,
+            "check": "anti_indicator_wrong_inversion",
+            "indicator": aid,
+            "target": target,
+            "lowest_lr_h": min_h,
+            "message": (
+                f"Anti-indicator {aid!r} targets {target} but its lowest LR is on "
+                f"{min_h} (LRs={lrs}). Firing would move {target} UP, not down — "
+                f"this is the wrong direction. Invert the likelihoods so {target} "
+                f"carries the lowest value, or fix target_hypothesis."
+            ),
+        }
+    return None
+
+
 def _check_cluster_suspicion(proposed: list) -> Optional[dict]:
     """If multiple indicators look thematically similar (text overlap), suggest causal_event_id."""
     if len(proposed) < 2:
@@ -501,24 +572,27 @@ def propose_indicators_lint(
     checks_run = [
         "phantom_precision", "lr_too_certain", "lr_normalized_max_too_high",
         "compound_projection", "direction_drift", "cluster_suspicion",
-        "shape_field_required", "ladder_coherence"
+        "shape_field_required", "ladder_coherence", "anti_indicator_inversion"
     ]
 
     # Per-indicator checks
     for ind in proposed_indicators:
         if not isinstance(ind, dict):
             continue
-            
+
         # Shape fields
         for issue in _check_shape_fields(ind):
             (blockers if issue["severity"] == BLOCKER else warnings).append(issue)
-            
+
         if (issue := _check_phantom_precision(ind)):
             (blockers if issue["severity"] == BLOCKER else warnings).append(issue)
         for issue in _check_lr_too_certain(ind):
             (blockers if issue["severity"] == BLOCKER else warnings).append(issue)
         if (issue := _check_lr_normalized_max_too_high(ind)):
             warnings.append(issue)
+        # Anti-indicator LR-inversion guard (only fires on _tier=="anti_indicators").
+        if (issue := _check_anti_indicator_inversion(ind)):
+            (blockers if issue["severity"] == BLOCKER else warnings).append(issue)
 
     # Set-level checks
     for issue in _check_ladder_coherence(topic, proposed_indicators):
