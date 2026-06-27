@@ -47,7 +47,7 @@ def _aligned_shadow(shadow_post: dict, h_keys: list[str]) -> dict[str, float]:
 
 def build_snapshot() -> dict:
     """Build the sanitized snapshot dict. No PII, no evidence text."""
-    from engine import get_overview
+    from engine import get_overview, load_topic
     overview = get_overview()
     topics_out: list[dict] = []
     for t in overview.get("topics", []):
@@ -60,12 +60,31 @@ def build_snapshot() -> dict:
         if shadow_raw and "shadow_posteriors" in shadow_raw:
             shadow = _aligned_shadow(shadow_raw["shadow_posteriors"], h_keys)
             delta = {k: round(shadow.get(k, 0.0) - committed.get(k, 0.0), 4) for k in h_keys}
+        # Topic description fields for the surface (question, resolution, hypothesis labels).
+        # Loaded directly from the topic JSON — get_overview omits these.
+        question = ""
+        resolution = ""
+        h_labels: dict[str, str] = {}
+        try:
+            topic = load_topic(slug)
+            meta = topic.get("meta") or {}
+            question = meta.get("question", "")
+            resolution = meta.get("resolution", "")
+            for hk, hv in (topic.get("model", {}).get("hypotheses") or {}).items():
+                label = (hv.get("label") or hv.get("desc") or "").strip()
+                if label:
+                    h_labels[hk] = label
+        except Exception:
+            pass
         topics_out.append({
             "slug": slug,
             "title": t.get("title", slug),
             "status": t.get("status", "UNKNOWN"),
             "classification": t.get("classification", "ROUTINE"),
             "lastUpdated": t.get("lastUpdated", ""),
+            "question": question,
+            "resolution": resolution,
+            "hypothesis_labels": h_labels,
             "posteriors": committed,
             "shadow_posteriors": shadow,
             "shadow_delta": delta,
