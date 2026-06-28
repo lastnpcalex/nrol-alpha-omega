@@ -940,10 +940,16 @@ def apply_decisions(slug: str, articles: list, decisions: list,
                 else:
                     summary["errors"] += 1
                     continue
+                # evidence_id is surfaced so the MCP safe-policy brief can
+                # give operators a row handle for a freshness-downgraded
+                # PARK, instead of a downgrade marker they can only act on
+                # by re-reading the full on-disk digest packet (the sandbox
+                # break-out bait brief=true exists to keep them out of).
                 summary["results"].append({
                     "article": f"A{idx}", "kind": kind,
                     "indicator_id": action.get("indicator_id"),
                     "value": action.get("value"),
+                    "evidence_id": result.get("evidence_id"),
                     "before": result.get("posteriors_before"),
                     "after": result.get("posteriors_after"),
                 })
