@@ -170,21 +170,30 @@ def run_mechanical_checks(topic: dict) -> dict:
                 f"'{ind.get('desc', '')[:60]}...'"
             )
 
-    # Duplicate amplifiers: an explicit lr_decay >= 1.0 disables refire
-    # attenuation, so every duplicate filing or refire applies the full LR
-    # again. Measured in the synthetic Meridia replay: a triple-filed
-    # decree at lr_decay 1.0 triple-applies its LR — 20-30pp of unearned
-    # confidence when it lands mid-trajectory. A binary event that can
-    # genuinely only happen once should fire once; a repeatable one needs
-    # decay (engine defaults: tier1 0.70 / tier2 0.65 / tier3 0.50).
+    # Explicit lr_decay >= 1.0 lint. NOTE (2026-06-29): runtime lr_decay
+    # attenuation is DISABLED (see engine.apply_indicator_effect) — a direct
+    # simulation verified posterior saturation + the [0.005, 0.98] clamp bound
+    # stacked firings without blowout (13 full-strength firings plateaued at
+    # H4≈0.35), while any lr_decay < 1.0 deafened indicators at high n_firings.
+    # The blowout premise this lint was originally built on ("20-30pp of
+    # unearned confidence") is therefore disproven. The lint is RETAINED as a
+    # schema-design signal: an explicit lr_decay >= 1.0 declares operator
+    # intent that refires apply full LR — which is correct only for fire-once
+    # events. If the indicator describes a repeatable event, this signals the
+    # operator may have intended attenuation that the (now-disabled) decay
+    # would have provided. Use resolution_class / fire-once semantics for
+    # genuinely once-only events. The lr_decay field is dead metadata at
+    # runtime regardless of its value.
     for ind in all_indicators + anti_indicators:
         if "lr_decay" in ind and float(ind.get("lr_decay") or 0) >= 1.0:
             warnings.append(
                 f"DUPLICATE AMPLIFIER: indicator '{ind.get('id', '?')}' has "
-                f"explicit lr_decay {ind['lr_decay']} — refires and duplicate "
-                "filings apply the full LR every time. Use decay < 1.0, or "
-                "resolution_class/fire-once semantics if the event can only "
-                "happen once."
+                f"explicit lr_decay {ind['lr_decay']} — declares intent that "
+                "refires apply the full LR. Correct only for fire-once events; "
+                "for repeatable events use resolution_class / fire-once "
+                "semantics. (Runtime decay is disabled; this field is dead "
+                "metadata — the warning flags design intent, not runtime "
+                "behavior.)"
             )
 
     # --- Coverage Matrix (hypothesis × indicator) ---

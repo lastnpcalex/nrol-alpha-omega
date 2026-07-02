@@ -258,19 +258,21 @@ def process_evidence(
                 f"Indicator {fired_indicator_id!r} fired but no likelihoods could "
                 f"be derived: {suggested.get('warnings') or suggested.get('unparseable')}"
             )
-        # Repeat-firing decay, same semantics as apply_indicator_effect:
-        # LR_eff = LR_base ** (lr_decay ** prior_firings). n_firings was
-        # already incremented above for THIS fire, so prior count is n-1.
-        # The increment was added here precisely so decay could work on this
-        # path, but the attenuation itself was never wired in.
-        if _ind is not None:
-            prior_firings = max(0, (_ind.get("n_firings") or 1) - 1)
-            if prior_firings > 0:
-                _decay = _ind.get("lr_decay") or 0.65
-                _factor = _decay ** prior_firings
-                likelihoods = {
-                    k: max(0.0001, v ** _factor) for k, v in likelihoods.items()
-                }
+        # Repeat-firing decay DISABLED 2026-06-29 (see engine.py
+        # apply_indicator_effect): direct simulation verified posterior
+        # saturation + the [0.005, 0.98] clamp bound stacked firings without
+        # blowout, while any lr_decay < 1.0 deafens indicators at high
+        # n_firings (hormuz t2_preparatory_kinetic_or_blockade at n=13).
+        # n_firings accounting is retained as metadata; the dynamics track
+        # replaces decay structurally. lr_decay field intentionally unused.
+        # if _ind is not None:
+        #     prior_firings = max(0, (_ind.get("n_firings") or 1) - 1)
+        #     if prior_firings > 0:
+        #         _decay = _ind.get("lr_decay") or 0.65
+        #         _factor = _decay ** prior_firings
+        #         likelihoods = {
+        #             k: max(0.0001, v ** _factor) for k, v in likelihoods.items()
+        #         }
 
     # 4. Bayesian update — engine-gated, indicator-bound only
     update_reason = reason or f"Evidence {evidence_id}: {entry['text'][:80]}"

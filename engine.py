@@ -1330,6 +1330,9 @@ def add_indicator(
         "ladder_step": indicator.get("ladder_step"),
         "likelihoods": indicator.get("likelihoods"),
         "lr_decay": indicator.get("lr_decay"),
+        # target_hypothesis is a persisted field on anti-indicators (the design
+        # flow writes it; existing topics carry it on disk). Keep it through save.
+        "target_hypothesis": indicator.get("target_hypothesis"),
     }
     # Remove None values so schema is clean
     record = {k: v for k, v in record.items() if v is not None}
@@ -1340,8 +1343,15 @@ def add_indicator(
         target = tiers[tier]
         
     # --- Shape Lint Gate ---
+    # Stamp _tier onto a lint-only copy so _check_anti_indicator_inversion fires
+    # (it gates on _tier == "anti_indicators"). _tier is a transient lint
+    # annotation — never persisted — so it lives on `lint_record`, not `record`.
+    # Without this, the inversion lint silently no-ops for mid-life anti-indicator
+    # adds (the design flow stamps it in-memory via design_workflow.py; this path
+    # is the only other entry point and previously didn't).
     from framework.lint_indicators import propose_indicators_lint
-    lint_res = propose_indicators_lint(topic, [record])
+    lint_record = {**record, "_tier": tier}
+    lint_res = propose_indicators_lint(topic, [lint_record])
     if not lint_res["passed"]:
         blocker_msgs = [
             b.get("message") or b.get("msg") or str(b)
@@ -3180,9 +3190,15 @@ def apply_indicator_effect(topic: dict, indicator_id: str,
     if "likelihoods" in ind or "lr_range" in ind:
         import math as _math
         n_firings = ind.get("n_firings", 0)
-        tier_decay_defaults = {"tier1": 0.70, "tier2": 0.65, "tier3": 0.50}
-        lr_decay = ind.get("lr_decay", tier_decay_defaults.get(tier_key, 0.65))
-        decay_factor = lr_decay ** n_firings
+        # Decay disabled 2026-06-29: a direct simulation (13 stacked
+        # firings of t2_preparatory_kinetic_or_blockade from n_firings=13,
+        # run through engine.bayesian_update) verified that posterior
+        # saturation + the [0.005, 0.98] clamp bound stacked firings —
+        # H4 plateaus at ~0.35, no blowout. At any lr_decay < 1.0 the
+        # indicator goes deaf (n=13 -> 0.65^13 = 0.4% strength). The
+        # lr_decay field is retained as dead metadata; the dynamics track
+        # replaces it structurally with rate-based updating.
+        decay_factor = 1.0
 
         # MAX_LOG_WIDTH: log-space range width cap (= log(20), same as phantom_precision)
         MAX_LOG_WIDTH = _math.log(20)
